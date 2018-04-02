@@ -30,7 +30,7 @@ import stepDefination.Hooks.*;
                 "junit:target/cucumber-results/cucumber-results.xml", "json:target/cucumber-results/cucumber.json",
                 "com.cucumber.listener.ExtentCucumberFormatter:target/vimalSelvam-cucumberReport/report.html"},
 
-        features = { "src/test/Features/UA2/C - Downstream Provider" },
+        features = { "src/test/Features/UA2/D - Bulk Upload" },
 
         //glue = { "./src/test/java/stepDefination" },
         tags = {}

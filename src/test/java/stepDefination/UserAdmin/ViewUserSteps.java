@@ -14,6 +14,11 @@ public class ViewUserSteps extends DriverScript{
 		objViewUserPage.searchForUserRole(userRole);
 	}
 
+	@Then("^I search for bulk user with role \"([^\"]*)\"$")
+	public void i_search_for_bulk_user_with_role(String userRole) throws Throwable {
+		objViewUserPage.searchForBulkUserRole(userRole);
+	}
+	
 	@Then("^I select user with role \"([^\"]*)\"$")
 	public void i_select_user_with_role(String userRole) throws Throwable {
 		objViewUserPage.selectUserRole(userRole);
@@ -77,6 +82,11 @@ public class ViewUserSteps extends DriverScript{
 	@Then("^I verify email \"([^\"]*)\" for \"([^\"]*)\"$")
 	public void i_verify_Email(String email, String userRole) throws Throwable {
 		objViewUserPage.verifyEmail(email, userRole);
+	}
+	
+	@Then("^I verify bulk email for \"([^\"]*)\"$")
+	public void i_verify_Bulk_Email(String userRole) throws Throwable {
+		objViewUserPage.verifyBulkEmail(userRole);
 	}
 
 	@Then("^I verify phone \"([^\"]*)\"$")

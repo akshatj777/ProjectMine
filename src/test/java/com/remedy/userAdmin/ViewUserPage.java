@@ -24,9 +24,17 @@ public class ViewUserPage extends BaseClass {
 		iFillInText(driver.findElement(By.xpath("//input[@placeholder='Search']")), email);
 		Thread.sleep(3000);
 	}
+	
+	public void searchForBulkUserRole(String userRole) throws Throwable {
+		driver.navigate().refresh();
+		iWillWaitToSee(By.xpath("//tr[@class='component-user-table-row']"));
+		Thread.sleep(3000);
+		String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
+		iFillInText(driver.findElement(By.xpath("//input[@placeholder='Search']")), email);
+		Thread.sleep(3000);
+	}
 
 	public void selectUserRole(String userRole) throws Throwable {
-		String email = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
 		iWillWaitToSee(By.xpath("//tr[@class='component-user-table-row']"));
 		clickElement(driver.findElement(By.xpath("//tr[@class='component-user-table-row']")));
 		Thread.sleep(3000);
@@ -63,6 +71,11 @@ public class ViewUserPage extends BaseClass {
 	
 	public void verifyEmail(String email, String userRole) throws Throwable {
 		String emailUser = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[@title='"+emailUser+"']")));
+	}
+	
+	public void verifyBulkEmail(String userRole) throws Throwable {
+		String emailUser = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[@title='"+emailUser+"']")));
 	}
 
