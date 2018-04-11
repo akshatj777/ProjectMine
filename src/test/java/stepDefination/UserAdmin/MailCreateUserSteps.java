@@ -19,6 +19,16 @@ public class MailCreateUserSteps extends DriverScript {
 		mailcreateuser.iEnterUserNameToLoginMailAccount(username);
 	}
 	
+	@Then("^I enter username \"([^\"]*)\" to login mail account for bulk delete$") 
+	public void i_Enter_UserName_To_LoginMailForBulkDelete(String username) throws Throwable {
+		mailcreateuser.iEnterUserNameToLoginMailAccountForBulkDelete(username);
+	}
+	
+	@Then("^I enter username \"([^\"]*)\" to login bulk mail account$") 
+	public void i_Enter_UserName_To_LoginBulkMail(String username) throws Throwable {
+		mailcreateuser.iEnterUserNameToLoginBulkMailAccount(username);
+	}
+	
 	@Then("^I enter password \"([^\"]*)\" to login mail account$") 
 	public void i_Enter_Password_To_LoginMail(String password) throws Throwable {
 		mailcreateuser.iEnterPasswordToLoginMailAccount(password);
@@ -87,6 +97,11 @@ public class MailCreateUserSteps extends DriverScript {
 	@Then("^I enter email to generate password link$") 
 	public void i_Enter_Email_To_GeneratePassword_Link() throws Throwable {
 		mailcreateuser.iEnterEmailToGeneratePasswordLink();
+	}
+	
+	@Then("^I enter email \"([^\"]*)\" to generate password link for bulk users$") 
+	public void i_Enter_Email_To_GeneratePassword_Link_ForBulkUsers(String bulkUserEmail) throws Throwable {
+		mailcreateuser.iEnterEmailToGeneratePasswordLinkForBulkUsers(bulkUserEmail);
 	}
 	
 	@And("^I click on send mail button$") 

@@ -41,7 +41,20 @@ public class MailCreateUser extends BaseClass{
 		driver.navigate().to("https://accounts.google.com");
 	}
 	
-	public void iEnterUserNameToLoginMailAccount(String username) {
+	public void iEnterUserNameToLoginMailAccount(String role) {
+		iWillWaitToSee(By.xpath("//input[@type='email']"));
+		String emailVal = CreateUserPage.usersEmailPerRole.get(role).get(role.substring((role.indexOf("-")+1)).trim());
+		driver.findElement(By.xpath("//input[@type='email']")).sendKeys(emailVal);
+		clickElement(driver.findElement(By.xpath("//span[text()='Next']")));
+	}
+	
+	public void iEnterUserNameToLoginMailAccountForBulkDelete(String username) {
+		iWillWaitToSee(By.xpath("//input[@type='email']"));
+		driver.findElement(By.xpath("//input[@type='email']")).sendKeys(username);
+		clickElement(driver.findElement(By.xpath("//span[text()='Next']")));
+	}
+	
+	public void iEnterUserNameToLoginBulkMailAccount(String username) {
 		iWillWaitToSee(By.xpath("//input[@type='email']"));
 		driver.findElement(By.xpath("//input[@type='email']")).sendKeys(username);
 		clickElement(driver.findElement(By.xpath("//span[text()='Next']")));
@@ -164,6 +177,12 @@ public class MailCreateUser extends BaseClass{
 	public void iEnterEmailToGeneratePasswordLink() {
 		iWillWaitToSee(By.xpath("//input[@name='email']"));
 		driver.findElement(By.xpath("//input[@name='email']")).sendKeys(email);
+	}
+	
+	public void iEnterEmailToGeneratePasswordLinkForBulkUsers(String role) {
+		String emailVal = CreateUserPage.usersEmailPerRole.get(role).get(role.substring((role.indexOf("-")+1)).trim());
+		iWillWaitToSee(By.xpath("//input[@name='email']"));
+		driver.findElement(By.xpath("//input[@name='email']")).sendKeys(emailVal);
 	}
 	
 	public void iClickOnSendEmailButton() {
