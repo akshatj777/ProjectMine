@@ -42,8 +42,8 @@ Feature: Verification of Landing Page for PTA User
     Then I verify "1" text on landing page
     Then I select any user
     And I verify that I am navigated to view user page
-    And I click on the top user link
-    Then I select "Log Out" option from the dropdown list
+    And I click on the top user account link
+    Then I click on "Log Out" button
     And I should see Log in widget
 
   Scenario Outline: <Description>

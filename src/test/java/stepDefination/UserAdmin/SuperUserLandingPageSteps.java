@@ -211,6 +211,10 @@ public class SuperUserLandingPageSteps extends DriverScript {
 	public void iSelectTileFromManagementDropDown(String text){
 		ua2LandingPage.iSelectTileFromManagementDropDown(text);
 	}
+	@Then("^I verify page tile for reports page$")
+	public void iVerifyReportsPage(){
+	ua2LandingPage.iVerifyReportsPage();
+	}
 }
 
 

@@ -40,8 +40,8 @@ Feature: Super Admin Landing page verification
     Then I verify "1" text on landing page
     Then I select any user
     And I verify that I am navigated to view user page
-    And I click on the top user link
-    Then I select "Log Out" option from the dropdown list
+    And I click on the top user account link
+    Then I click on "Log Out" button
     And I should see Log in widget
 
   Scenario Outline: <Description>
@@ -123,12 +123,12 @@ Feature: Super Admin Landing page verification
     When I log in as super user
     Then I should see Tile text Episodes 2.0
     And I click on the "Reports" tile
-    Then I verify current page "Reports" title
+    Then I verify page tile for reports page
     And I click on "User Admin" tile from menu
     Then I should see header text "Users"
     Then I click on "Reports" from Management dropdown
     And I switch to new window
-    Then I verify current page "Reports" title
+    Then I verify page tile for reports page
     And I click on "User Admin" tile from menu
     Then I should see header text "Users"
 
@@ -138,8 +138,8 @@ Feature: Super Admin Landing page verification
     Then I should see Tile text User Adming
     And I click on the "User Admin" tile
     Then I should see header text "Users"
-    And I click on the top user link
-    Then I select "Log Out" option from the dropdown list
+   	And I click on the top user account link
+    Then I click on "Log Out" button
     And I should see Log in widget
     Given I am on the login page
     Then I click on "Log Out" button again

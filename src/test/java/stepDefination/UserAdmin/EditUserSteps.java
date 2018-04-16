@@ -236,4 +236,8 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	public void iCheckErrMsgIsNotShown(String text){
 		editUser.iCheckErrMsgIsNotShown(text);
 	}
+	@Then("^I enter \"([^\"]*)\" in Learning Pathway$")
+	public void iEnterLearningPathway(String text){
+		iEnterLearningPathway(text);
+	}
 }

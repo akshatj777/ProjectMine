@@ -648,4 +648,8 @@ public void iVerifyLocationNotDisplayedWithFacilityKey(String key, String text){
 public void iCheckErrMsgIsNotShown(String text){
 	Assert.assertTrue(isElementNotPresentOnPage(text));
 }
+public void iEnterLearningPathway(String text){
+	clickElement(driver.findElement(By.cssSelector("div.ui.selection.dropdown")));
+	 iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), text);
+}
 }

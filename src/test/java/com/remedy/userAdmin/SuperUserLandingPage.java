@@ -269,6 +269,7 @@ public class SuperUserLandingPage extends BaseClass {
 	}
 
 	public void iClickOnTopUserDropDown() {
+		iWillWaitToSee(By.id("lastName"));
 		iWillWaitToSee(By.cssSelector("i.dropdown.icon"));
 		clickElement(driver.findElements(By.cssSelector("i.dropdown.icon")).get(1));
 	}
@@ -479,8 +480,8 @@ public void iClickOnTileFromEC(String text){
 }
 public void iSelectTileFromManagementDropDown(String text){
 
-	iWillWaitToSee(By.xpath("//div[text()='Management']"));
-	clickElement(driver.findElement(By.xpath("//div[text()='Management']")));
+	
+	clickElement(driver.findElement(By.cssSelector(".ui.dropdown.remedy-connect-title"))); 	
 iWillWaitToSee(By.xpath("//span[contains(text(),'"+text+"')]"));
 clickElement(driver.findElement(By.xpath("//span[contains(text(),'"+text+"')]")));
 
@@ -488,7 +489,11 @@ clickElement(driver.findElement(By.xpath("//span[contains(text(),'"+text+"')]"))
 
 		
 }
-		
+public void iVerifyReportsPage(){
+	iWillWaitToSee(By.cssSelector(".dropdown-tile-head"));
+	System.out.println(driver.getCurrentUrl());
+	Assert.assertTrue(driver.getCurrentUrl().contains("reports"));
+}	
 		
 
 }

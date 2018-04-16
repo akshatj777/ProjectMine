@@ -145,9 +145,8 @@ public class LandingPage extends BaseClass{
     }
     
     public void IClickTopUserAccountLink() {
-    	iWillWaitToSee(By.xpath("//div[contains(text(),'.com')]/parent::div/i[@class='dropdown icon']"));
-		clickElement(driver.findElement(By.xpath("//div[contains(text(),'.com')]/parent::div/i[@class='dropdown icon']")));
-
+    	iWillWaitToSee(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']"));
+		clickElement(driver.findElement(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']")));
     }
 
     public void iSelectFromTopUserAccountDropDown(String link) throws InterruptedException{
