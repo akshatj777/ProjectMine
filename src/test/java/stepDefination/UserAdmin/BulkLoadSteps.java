@@ -41,6 +41,11 @@ public class BulkLoadSteps extends DriverScript{
         bulkUser.enterData();
     }
     
+    @Then("^I enter user data for all application access$")
+    public void enterUserDataForAllApp() throws Throwable {
+        bulkUser.enterDataForAllApp();
+    }
+    
     @Then("^I click on submit button on bulk user upload page$")
     public void clickSubmitButtonOnBulkUpload() throws Throwable {
         bulkUser.clickSubmit();
