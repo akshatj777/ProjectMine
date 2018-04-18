@@ -4,6 +4,9 @@ import com.remedy.baseClass.BaseClass;
 
 import junit.framework.Assert;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -56,28 +59,24 @@ public class BulkUserCreationPage extends BaseClass{
     	clickElement(driver.findElement(By.xpath("//button[text()='Try Again']")));
     }
 
-    public void enterData()
+    public void enterData() throws IOException
     {
-    	String strUserData = "ExecutiveFirstName | ExecutiveLastName | EXECUTIVEMAIL | | Executive | NA | 776109:2070-005:HUMC,441364:3056-k60:365973,441364:3056-k61:365860,439241:2070-a07:ALL_FACILITIES,439241:3056-a53:ALL_FACILITIES | | | False | True | False | True | False |  |  | | False"
-+"\nManagerFirstName | ManagerLastName | MANAGERMAIL | 9876545678 | Manager | NA | 809047:2053-000:450058-1,809047:2053-000:450058-2,809047:2053-000:450058,626076:3056-x52:315182,439245:2070-a12:160047,439245:2070-a12:280129,439245:2070-a12:280003,439245:2070-a12:280040,439245:3056-a58:160028,439245:3056-a58:280133 | | | False | False | False | True | False |  | False | | False"
-+"\nCaseManagerFirstName | CaseManagerLastName | CASEMGRMAIL |9879800980 | Case Manager | NA | 776109:2070-005:HUMC,626076:3056-x52:315182, | | | False | False | False | False | True |  | False | | False"
-+"\nPhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL | | Physicians | NPI | 776109:2070-005:HUMC,809047:2053-000:450058-1,809047:2053-000:450058-2,809047:2053-000:450058 | | | False | True | False | False | False |  |  | | True"
-+"\nRTCSFirstName | RTCSLastName | RTCSMAIL | 5465465655| Remedy TCS | NA | 809047:2053-000:450058-1,809047:2053-000:450058-2,809047:2053-000:450058,441364:3056-k60:365973,441364:3056-k61:365860 | | | False | True | True | False | False | True | False | |False" 
-+"\nRLPNFirstName | RLPNLastName | RLPNMAIL | 9898989898| Remedy LPN | NA | 439180:3056-370:525441 | | | False | False | True | True | True | False | False | | False"
-+"\nRRNFirstName | RRNLastName | RRNMAIL | 9878909878| Remedy RN | NA | 441444:2070-g15:ALL_FACILITIES,441444:3056-q91:441310,441444:3056-q91:181318 || | False | False | False | True | True | True | False | | False"
-+"\nRFRNFirstName | RFRNLastName | RFRNMAIL | | Remedy Field RN | NA | 441321:2070-c80:190064,441321:2070-c80:190065,441321:2070-c80:190266,441321:2070-c80:300003,441321:3056-c86:ALL_FACILITIES | | | False | False | False | True | False | True | False | | False"
-+"\nRPMFirstName | RPMLastName | RPMMAIL | | Remedy PM | NA | 439241:2070-a07:ALL_FACILITIES,439241:3056-a53:100062,439241:3056-a53:100113,439241:3056-a53:100122,439241:3056-a53:100209 | | | False | True | False | False | False | True | False | | False"
-+"\nRSTFirstName | RSTLastName | RSTMAIL | 8989898787| Remedy Sales Team | NA | 439245:2070-a12:160047,439245:2070-a12:280129,439245:2070-a12:280003,439245:2070-a12:280040,439245:3056-a58:160028,439245:3056-a58:280133 | | | False | False | False | False | True | False | False | | False"
-+"\nREFirstName | RELastName | REMAIL | | Remedy Executive | NA | 514022:ALL_BPIDS:ALL_FACILITIES | | | False | True | True | False | False | False | False | | False"
-+"\nPPEFirstName | PPELastName | PPEMAIL | | Prospective Partner Executive | NA | 441447:ALL_BPIDS:ALL_FACILITIES | | | False | False | False | True | False | False | False | | False"
-+"\nROFirstName | ROLastName | ROMAIL | 7676878998| Remedy Other | NA | 441364:3056-k60:365973,441364:3056-k61:365860 | | | False | True | False | False | False | False | False | | False"
-+"\nPPAFirstName | PPALastName | PPAMAIL | | Partner Program Administrator | NA | 809047:2053-000:450058-1,809047:2053-000:450058-2,809047:2053-000:450058 | | | False | True | False | False | False | False | False | | True"
-+"\nRPAFirstName | RPALastName | RPAMAIL | 9877766666| Remedy Program Administrator | NA | 626076:3056-x52:315182 | | | False | False | True | False | False | True | False | | False"
-+"\nPTAFirstName | PTALastName | PTAMAIL | | Partner Technical Administrator | NA | 776109:2070-005:HUMC | | | False | False | False | True | False | False | True | | False"
-+"\nRTAFirstName | RTALastName | RTAMAIL | 3456765432| Remedy Technical Administrator | NA | 441372:3056-m78:385072 | | | False | False | False | False | False | True | True | | True"
-+"\nTCMFirstName | TCMLastName | TCMMAIL | | Transitional Case Manager | NA | 441324:6005-080:490005-1 | | | False | False | False | True | False | False | False | | False"
-+"\nDPFirstName | DPLastName | DPMAIL | 9998887770| Downstream Provider | NA | 555469 | | | False | True | False | False | False | False | False | | False";
-    	
+    	String strUserData;
+    	BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir")+ "//src//test//Imports//BulkUpload-LimitedAccess.txt"));
+        try {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append("\n");
+                line = br.readLine();
+            }
+            strUserData = sb.toString();
+        }
+        finally {
+            br.close();
+        }
     	String randomString = RandomStringUtils.randomAlphabetic(8);
     	strUserData = strUserData.replace("EXECUTIVEMAIL", "test.automatemail+"+randomString+"@gmail.com");
     	HashMap<String,String> bulkEmailPerRole=new HashMap<String,String>();
