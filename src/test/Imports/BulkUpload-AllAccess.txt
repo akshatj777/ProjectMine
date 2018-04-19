@@ -15,5 +15,5 @@ PPAFirstName | PPALastName | PPAMAIL | | Partner Program Administrator | NA |441
 RPAFirstName | RPALastName | RPAMAIL | 9877766666| Remedy Program Administrator | NA | 441364:3056-k60:365973,441364:3056-k61:365860,441371:ALL_BPIDS:ALL_FACILITIES  | | | True | False | True | False | False | True | False | | False
 PTAFirstName | PTALastName | PTAMAIL | | Partner Technical Administrator | NA |572091:3056-r30:075278  | | | True | False | False | True | False | False | True | | False
 RTAFirstName | RTALastName | RTAMAIL | 3456765432| Remedy Technical Administrator | NA | 441448:3056-r31:075244,572091:3056-r30:075278,439104:2070-a48:070003 | | | True | False | False | False | False | True | True | | True
-TCMFirstName | TCMLastName | TCMMAIL | | Transitional Case Manager | NA | 439104:2070-a48:070003 | | | True | False | False | True | False | False | False | | False
+TCMFirstName | TCMLastName | TCMMAIL | | Transitional Case Manager | NA | 514029:ALL_BPIDS:ALL_FACILITIES | | | True | False | False | True | False | False | False | | False
 DPFirstName | DPLastName | DPMAIL | 9998887770| Downstream Provider | NA | 015174 | | | True | True | False | False | False | False | False | | False
