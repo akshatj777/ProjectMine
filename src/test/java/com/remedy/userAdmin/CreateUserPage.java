@@ -409,16 +409,16 @@ public class CreateUserPage extends BaseClass{
 	   while(st.hasMoreTokens())
 	   {
 		   if(st.nextToken().trim().equals("Episodes 2.0")){
-			   if(role.substring((role.indexOf("-")+1)).equals("Remedy Technical Administrator"))
-			   {
-				   iWillWaitToSee(By.xpath("//h2[text()='BPCI Performance']"));
-				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//h2[text()='BPCI Performance']")));
-			   }
-			   else
-			   {
+//			   if(role.substring((role.indexOf("-")+1)).equals("Remedy Technical Administrator"))
+//			   {
+//				   iWillWaitToSee(By.xpath("//h2[text()='BPCI Performance']"));
+//				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//h2[text()='BPCI Performance']")));
+//			   }
+//			   else
+//			   {
 				   iWillWaitToSee(By.xpath("//div[@class='patient-card']"));
 				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
-			   }
+//			   }
 		   }
 	   }   
    }
