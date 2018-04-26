@@ -2,7 +2,7 @@ package com.remedy.userAdmin;
 
 import com.remedy.baseClass.BaseClass;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -507,5 +507,36 @@ public class BulkUserCreationPage extends BaseClass{
     		System.out.println(e);
     	}
 		return data;
+    }
+    
+    public void verifyHeaderText()
+    {
+    	Assert.assertTrue(isElementPresentOnPage(By.xpath("//h2/span[text()='Import Users']")));
+    }
+    
+    public void verifyCrossButton()
+    {
+    	Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[name()='svg' and @fill='#48677b']//*[name()='g' and @id='iCons']")));
+    }
+    
+    public void verifyDownloadButton()
+    {
+    	Assert.assertTrue(isElementPresentOnPage(By.xpath("//button[text()='Download Log']")));
+    }
+    
+    public void verifyTryAgainButton()
+    {
+    	Assert.assertTrue(isElementPresentOnPage(By.xpath("//button[text()='Try Again']")));
+    }
+    
+    public void verifyHideButton()
+    {
+    	Assert.assertTrue(isElementPresentOnPage(By.xpath("//button[text()='Hide']")));
+    }
+    
+    public void clickHideButton()
+    {
+    	iWillWaitToSee(By.xpath("//button[text()='Hide']"));
+    	driver.findElement(By.xpath("//button[text()='Hide']")).click();
     }
 }

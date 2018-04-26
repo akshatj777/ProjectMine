@@ -5,6 +5,7 @@ import com.remedy.userAdmin.BulkUserCreationPage;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 /**
  * Created by salam on 10/30/16.
@@ -54,5 +55,35 @@ public class BulkLoadSteps extends DriverScript{
     @Then("^I verify \"([^\"]*)\" message$")
     public void verifyMessage(String text) throws Throwable {
         bulkUser.verifySuccessfulMessage(text);
+    }
+    
+    @Then("^I verify header text \"([^\"]*)\"$")
+    public void verifyHeaderText(String arg1) throws Throwable {
+    	bulkUser.verifyHeaderText();
+    }
+
+    @Then("^I verify availability of cross button$")
+    public void verifyCrossButton() throws Throwable {
+    	bulkUser.verifyCrossButton();
+    }
+
+    @Then("^I verify availability of Download Log button$")
+    public void verifyDownloadButton() throws Throwable {
+    	bulkUser.verifyDownloadButton();
+    }
+
+    @Then("^I verify availability of Try Again button$")
+    public void verifyTryAgainButton() throws Throwable {
+    	bulkUser.verifyTryAgainButton();
+    }
+
+    @Then("^I verify availability of Hide button$")
+    public void verifyHideButton() throws Throwable {
+    	bulkUser.verifyHideButton();
+    }
+
+    @When("^I click on Hide button$")
+    public void clickHideButton() throws Throwable {
+    	bulkUser.clickHideButton();
     }
 }
