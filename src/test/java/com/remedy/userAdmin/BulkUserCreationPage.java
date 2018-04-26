@@ -64,15 +64,9 @@ public class BulkUserCreationPage extends BaseClass{
     public void enterData() throws IOException
     {
     	String strUserData = null;
-        StringBuilder line = new StringBuilder();
     	try 
     	{
-    		for(int i=24;i<43;i++) 
-    		{  
-                line.append(Files.readAllLines(Paths.get(System.getProperty("user.dir")+ "//src//test//Imports//BulkUpload-AllAccess.txt")).get(i)) ;
-                line.append("\n");
-    		}
-    		strUserData = line.toString();
+    		strUserData = readContentForBulkUpload(24, 43);
         }
         catch(Exception e)
     	{
@@ -277,15 +271,9 @@ public class BulkUserCreationPage extends BaseClass{
     public void enterDataForAllApp() throws IOException
     {
     	String strUserData = null;
-    	StringBuilder line = new StringBuilder();
         try 
         {
-            for(int i=0;i<19;i++) 
-            {  
-            	line.append(Files.readAllLines(Paths.get(System.getProperty("user.dir")+ "//src//test//Imports//BulkUpload-AllAccess.txt")).get(i)) ;
-            	line.append("\n");
-            }
-            strUserData = line.toString();
+            strUserData = readContentForBulkUpload(2, 21);
         }
         catch(Exception e)
         {
@@ -498,5 +486,26 @@ public class BulkUserCreationPage extends BaseClass{
     	iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
     	waitTo().until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
     	Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[@class='successCountLabel'][text()='"+text+"']")));
+    }
+    
+    public String readContentForBulkUpload(int from, int to)
+    {
+    	String data = null;
+    	StringBuilder line = new StringBuilder();
+    	try
+    	{
+    		for(int i=from;i<to;i++) 
+            {  
+            	line.append(Files.readAllLines(Paths.get(System.getProperty("user.dir")+ "//src//test//Imports//BulkUpload.txt")).get(i)) ;
+            	line.append("\n");
+            }
+            data = line.toString();
+            return data;
+    	}
+    	catch(Exception e)
+    	{
+    		System.out.println(e);
+    	}
+		return data;
     }
 }
