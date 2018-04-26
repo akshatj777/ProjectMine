@@ -1,3 +1,27 @@
+####################Data Permissions for Bulk Upload User having all application Access########################
+
+ExecutiveFirstName | ExecutiveLastName | EXECUTIVEMAIL | | Executive | NA | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False
+ManagerFirstName | ManagerLastName | MANAGERMAIL | 9876545678 | Manager | NA | 441447:3056-r29:075296 | | | True | False | False | True | False |  | False | | False
+CaseManagerFirstName | CaseManagerLastName | CASEMGRMAIL |9879800980 | Case Manager | NA |776109:2070-005:HUMC | | | True| False | False | False | True |  | False | | False
+PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL | | Physicians | NPI | 514026:2070-046:H | | | True | True | False | False | False |  |  | | True
+RTCSFirstName | RTCSLastName | RTCSMAIL | 5465465655| Remedy TCS | NA | 514025:2070-047:001 | | | True | True | True | False | False | True | False | |False 
+RLPNFirstName | RLPNLastName | RLPNMAIL | 9898989898| Remedy LPN | NA |439245:ALL_BPIDS:ALL_FACILITIES   | | | True | False | True | True | True | False | False | | False
+RRNFirstName | RRNLastName | RRNMAIL | 9878909878| Remedy RN | NA | 441348:ALL_BPIDS:ALL_FACILITIES  || | True | False | False | True | True | True | False | | False
+RFRNFirstName | RFRNLastName | RFRNMAIL | | Remedy Field RN | NA | 441448:3056-r31:075244 | | | True | False | False | True | False | True | False | | False
+RPMFirstName | RPMLastName | RPMMAIL | | Remedy PM | NA | 441364:3056-k60:365973,441364:3056-k61:365860 | | | True| True | False | False | False | True | False | | False
+RSTFirstName | RSTLastName | RSTMAIL | 8989898787| Remedy Sales Team | NA |441371:ALL_BPIDS:ALL_FACILITIES   | | | True | False | False | False | True | False | False | | False
+REFirstName | RELastName | REMAIL | | Remedy Executive | NA | 439108:ALL_BPIDS:ALL_FACILITIES  | | | True | True | True | False | False | False | False | | False
+PPEFirstName | PPELastName | PPEMAIL | | Prospective Partner Executive | NA |442503:ALL_BPIDS:ALL_FACILITIES   | | | True | False | False | True | False | False | False | | False
+ROFirstName | ROLastName | ROMAIL | 7676878998| Remedy Other | NA | 514022:2070-007:J | | | True | True | False | False | False | False | False | | False
+PPAFirstName | PPALastName | PPAMAIL | | Partner Program Administrator | NA |441445:3056-r26:1481  | | | True | True | False | False | False | False | False | | True
+RPAFirstName | RPALastName | RPAMAIL | 9877766666| Remedy Program Administrator | NA | 441364:3056-k60:365973,441364:3056-k61:365860,441371:ALL_BPIDS:ALL_FACILITIES  | | | True | False | True | False | False | True | False | | False
+PTAFirstName | PTALastName | PTAMAIL | | Partner Technical Administrator | NA |572091:3056-r30:075278  | | | True | False | False | True | False | False | True | | False
+RTAFirstName | RTALastName | RTAMAIL | 3456765432| Remedy Technical Administrator | NA | 441448:3056-r31:075244,572091:3056-r30:075278,439104:2070-a48:070003 | | | True | False | False | False | False | True | True | | True
+TCMFirstName | TCMLastName | TCMMAIL | | Transitional Case Manager | NA | 514029:ALL_BPIDS:ALL_FACILITIES | | | True | False | False | True | False | False | False | | False
+DPFirstName | DPLastName | DPMAIL | 9998887770| Downstream Provider | NA | 015174 | | | True | True | False | False | False | False | False | | False
+
+####################Data Permissions for Bulk Upload User having limited application Access########################
+
 ExecutiveFirstName | ExecutiveLastName | EXECUTIVEMAIL | | Executive | NA | 776109:2070-005:HUMC,441364:3056-k60:365973,441364:3056-k61:365860,439241:2070-a07:ALL_FACILITIES,439241:3056-a53:ALL_FACILITIES | | | False | True | False | True | False |  |  | | False
 ManagerFirstName | ManagerLastName | MANAGERMAIL | 9876545678 | Manager | NA | 809047:2053-000:450058-1,809047:2053-000:450058-2,809047:2053-000:450058,626076:3056-x52:315182,439245:2070-a12:160047,439245:2070-a12:280129,439245:2070-a12:280003,439245:2070-a12:280040,439245:3056-a58:160028,439245:3056-a58:280133 | | | False | False | False | True | False |  | False | | False
 CaseManagerFirstName | CaseManagerLastName | CASEMGRMAIL |9879800980 | Case Manager | NA | 776109:2070-005:HUMC,626076:3056-x52:315182, | | | False | False | False | False | True |  | False | | False

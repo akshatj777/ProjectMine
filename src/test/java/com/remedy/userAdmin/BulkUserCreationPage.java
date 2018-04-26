@@ -7,6 +7,8 @@ import junit.framework.Assert;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -61,22 +63,21 @@ public class BulkUserCreationPage extends BaseClass{
 
     public void enterData() throws IOException
     {
-    	String strUserData;
-    	BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir")+ "//src//test//Imports//BulkUpload-LimitedAccess.txt"));
-        try {
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-
-            while (line != null) {
-                sb.append(line);
-                sb.append("\n");
-                line = br.readLine();
-            }
-            strUserData = sb.toString();
+    	String strUserData = null;
+        StringBuilder line = new StringBuilder();
+    	try 
+    	{
+    		for(int i=24;i<43;i++) 
+    		{  
+                line.append(Files.readAllLines(Paths.get(System.getProperty("user.dir")+ "//src//test//Imports//BulkUpload-AllAccess.txt")).get(i)) ;
+                line.append("\n");
+    		}
+    		strUserData = line.toString();
         }
-        finally {
-            br.close();
-        }
+        catch(Exception e)
+    	{
+        	System.out.println(e);
+    	}
     	String randomString = RandomStringUtils.randomAlphabetic(8);
     	strUserData = strUserData.replace("EXECUTIVEMAIL", "test.automatemail+"+randomString+"@gmail.com");
     	HashMap<String,String> bulkEmailPerRole=new HashMap<String,String>();
@@ -275,21 +276,20 @@ public class BulkUserCreationPage extends BaseClass{
     
     public void enterDataForAllApp() throws IOException
     {
-    	String strUserData;
-    	BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir")+ "//src//test//Imports//BulkUpload-AllAccess.txt"));
-        try {
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-
-            while (line != null) {
-                sb.append(line);
-                sb.append("\n");
-                line = br.readLine();
+    	String strUserData = null;
+    	StringBuilder line = new StringBuilder();
+        try 
+        {
+            for(int i=0;i<19;i++) 
+            {  
+            	line.append(Files.readAllLines(Paths.get(System.getProperty("user.dir")+ "//src//test//Imports//BulkUpload-AllAccess.txt")).get(i)) ;
+            	line.append("\n");
             }
-            strUserData = sb.toString();
+            strUserData = line.toString();
         }
-        finally {
-            br.close();
+        catch(Exception e)
+        {
+        	System.out.println(e);
         }
     	String randomString = RandomStringUtils.randomAlphabetic(8);
     	strUserData = strUserData.replace("EXECUTIVEMAIL", "test.automatemail+"+randomString+"@gmail.com");
