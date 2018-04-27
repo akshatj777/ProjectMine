@@ -122,4 +122,13 @@ public class ViewUserSteps extends DriverScript{
 	public void iRefreshViewUserPage() {
 		objViewUserPage.iRefreshViewUserPage();
 	}
+	@Then("^I click on \"([^\"]*)\" icon on view user page$")
+	public void iClickOnLockUnlockIcon(String text){
+		objViewUserPage.iClickOnLockUnlockIcon(text);
+	}
+	@Then("^I verify that user is \"([^\"]*)\" on view user page$")
+	public void iVerifyLockedAndUnlockedUsers(String text){
+		objViewUserPage.iVerifyLockedAndUnlockedUsers(text);
+	}
+
 }

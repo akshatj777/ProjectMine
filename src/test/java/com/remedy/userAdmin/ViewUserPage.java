@@ -244,4 +244,20 @@ public class ViewUserPage extends BaseClass {
 public void iRefreshViewUserPage() {
 	driver.navigate().refresh();
 	}
+public void iClickOnLockUnlockIcon(String text){
+	if(text.equals("Lock"))
+	clickElement(driver.findElement(By.cssSelector(".component-lock-icon.unlocked")));
+else
+clickElement(driver.findElement(By.cssSelector(".component-lock-icon.locked")));
+}
+public void iVerifyLockedAndUnlockedUsers(String text){
+	if(text.equals("Locked")){
+		iWillWaitToSee(By.xpath("//span[@class='component-lock-icon locked']"));
+	Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".component-lock-icon.locked")));
+	}else{
+		iWillWaitToSee(By.xpath("//span[@class='component-lock-icon unlocked']"));
+	Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".component-lock-icon.unlocked")));
+}
+}
+
 }
