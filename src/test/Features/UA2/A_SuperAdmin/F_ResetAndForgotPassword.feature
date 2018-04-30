@@ -52,6 +52,7 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I select "<Programs3>" programs
     Then I select "<Locations3>" locations
     Then I click on Submit button for "<User>"
+    And I verify that email for "<User>-<Role>" is reflected in same case in landing page
     And I click on the top user account link
     Then I click on "Log Out" button
     And I should see Log in widget
@@ -97,7 +98,6 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I enter password "Intel@01" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
-    And I wait for 3000 milli seconds
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
@@ -125,7 +125,6 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I enter password "Intel@01" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
-    And I wait for 3000 milli seconds
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
@@ -153,7 +152,6 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I enter password "Intel@01" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
-    And I wait for 3000 milli seconds
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox

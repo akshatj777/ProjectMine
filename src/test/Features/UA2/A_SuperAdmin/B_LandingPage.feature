@@ -16,6 +16,7 @@ Feature: Super Admin Landing page verification
     And I verify "User Role Column" on landing page
     And I verify "User Email Column" on landing page
     And I verify "Date Created Column" on landing page
+    And I verify "Release version" on landing page
     And I verify "Next Page Icon" on landing page
     And I verify "Last Page Icon" on landing page
     And I click on Last Page Icon on landing page
