@@ -18,6 +18,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.remedy.baseClass.BaseClass;
+import com.remedy.resources.DriverScript;
 
 /**
  * Created by salam on 7/30/15.
@@ -215,14 +216,29 @@ public class CreateUserPage extends BaseClass{
 
     public void iEnterHealthSystemSerachText(String text) throws InterruptedException 
     {
-    	if(!(text.equals("")))
+    	if(DriverScript.Config.getProperty("Browser").equals("chrome"))
     	{
-    		iWillWaitToSee(By.xpath("//div[text()='Select']"));
-    		clickElement(driver.findElement(By.xpath("//div[text()='Select']")));
-    		iWillWaitToSee(By.xpath("//div[text()='Select']/parent::div/following-sibling::div/div/div/input"));
-            driver.findElement(By.xpath("//div[text()='Select']/parent::div/following-sibling::div/div/div/input")).sendKeys(text);
-            Thread.sleep(4000);
+    		if(!(text.equals("")))
+        	{
+        		iWillWaitToSee(By.xpath("//div[text()='Select']"));
+        		clickElement(driver.findElement(By.xpath("//div[text()='Select']")));
+        		iWillWaitToSee(By.xpath("//div[text()='Select']/parent::div/following-sibling::div/div/div/input"));
+                driver.findElement(By.xpath("//div[text()='Select']/parent::div/following-sibling::div/div/div/input")).sendKeys(text);
+                Thread.sleep(4000);
+        	}
     	}
+    	else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+    	{
+    		if(!(text.equals("")))
+        	{
+        		iWillWaitToSee(By.xpath("//div[text()='Select']"));
+        		((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Select']")));
+        		iWillWaitToSee(By.xpath("//div[text()='Select']/parent::div/following-sibling::div/div/div/input"));
+        		((JavascriptExecutor)driver).executeScript("arguments[0].value='"+text+"';", driver.findElement(By.xpath("//div[text()='Select']/parent::div/following-sibling::div/div/div/input")));
+                Thread.sleep(4000);
+        	}
+    	}
+    	
     }
 
     public void iSelectHealthSystem(String desc) throws InterruptedException 
@@ -916,8 +932,16 @@ public class CreateUserPage extends BaseClass{
    }
    
    public void clickNextButton() throws Throwable {
-	   iWillWaitToSee(By.xpath("//button[text()='Next ']"));
-	   clickElement(driver.findElement(By.xpath("//button[text()='Next ']")));  
+	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+	   {
+		   iWillWaitToSee(By.xpath("//button[text()='Next ']"));
+		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//button[text()='Next ']")));
+	   }
+	   else
+	   {
+		   iWillWaitToSee(By.xpath("//button[text()='Next ']"));
+		   clickElement(driver.findElement(By.xpath("//button[text()='Next ']")));
+	   }
    }
    
    public void clickBackButton() throws Throwable {
@@ -1173,20 +1197,50 @@ public class CreateUserPage extends BaseClass{
 	   if(programList.contains(","))
 	   {
 		   StringTokenizer st = new StringTokenizer(programList,",");
-		   driver.findElement(By.xpath("//div[text()='Select']")).click();
+		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		   {
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Select']")));
+		   }
+		   else
+		   {
+			   driver.findElement(By.xpath("//div[text()='Select']")).click();
+		   }
 		   while (st.hasMoreTokens()) {
 	    	   String programs = st.nextToken().trim();
 	    	   iWillWaitToSee(By.xpath("//label[text()='"+programs+"']"));
-	           driver.findElement(By.xpath("//label[text()='"+programs+"']")).click();
+	    	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+			   {
+				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//label[text()='"+programs+"']")));
+			   }
+	    	   else
+	    	   {
+	    		   driver.findElement(By.xpath("//label[text()='"+programs+"']")).click();
+	    	   }
+	    	   
 	           //Thread.sleep(2000);
 	       }   
 	   }
 	   else
 	   {
 		   longDelay();
-		   driver.findElement(By.xpath("//div[text()='Select']")).click();
+		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		   {
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Select']")));
+		   }
+		   else
+		   {
+			   driver.findElement(By.xpath("//div[text()='Select']")).click();  
+		   }
 		   longDelay();
-		   driver.findElement(By.xpath("//label[text()='"+programList+"']")).click();
+		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		   {
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//label[text()='"+programList+"']")));
+		   }
+		   else
+		   {
+			   driver.findElement(By.xpath("//label[text()='"+programList+"']")).click();  
+		   }
+		   
 		   longDelay();
 	   }
    	}
