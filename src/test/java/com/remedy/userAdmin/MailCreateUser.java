@@ -194,17 +194,8 @@ public class MailCreateUser extends BaseClass{
 	}
 	
 	public void iEnterEmailToGeneratePasswordLink() {
-		if(DriverScript.Config.getProperty("Browser").equals("ie"))
-		{
-			iWillWaitToSee(By.xpath("//input[@name='email']"));
-			((JavascriptExecutor)driver).executeScript("arguments[0].value='"+email+"';", driver.findElement(By.xpath("//input[@name='email']")));
-		}
-		else
-		{
 			iWillWaitToSee(By.xpath("//input[@name='email']"));
 			driver.findElement(By.xpath("//input[@name='email']")).sendKeys(email);
-		}
-		
 	}
 	
 	public void iClickOnSendEmailButton() {

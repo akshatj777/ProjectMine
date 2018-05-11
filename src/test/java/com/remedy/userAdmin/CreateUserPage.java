@@ -169,14 +169,7 @@ public class CreateUserPage extends BaseClass{
 
     		iWillWaitToSee(By.xpath("//input[@placeholder='First Name']"));
         	driver.findElement(By.xpath("//input[@placeholder='First Name']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
-            if(DriverScript.Config.getProperty("Browser").equals("ie"))
-            {
-            	((JavascriptExecutor)driver).executeScript("arguments[0].value='"+text+"';", driver.findElement(By.xpath("//input[@placeholder='First Name']")));
-            }
-            else
-            {
-            	iFillInText(driver.findElement(By.xpath("//input[@placeholder='First Name']")), text);
-            }
+        	iFillInText(driver.findElement(By.xpath("//input[@placeholder='First Name']")), text);
     }
 
     public void iEnterLasttName(String text) 
@@ -184,14 +177,7 @@ public class CreateUserPage extends BaseClass{
 
         	iWillWaitToSee(By.xpath("//input[@placeholder='Last Name']"));
             driver.findElement(By.xpath("//input[@placeholder='Last Name']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
-        	if(DriverScript.Config.getProperty("Browser").equals("ie"))
-        	{
-        		((JavascriptExecutor)driver).executeScript("arguments[0].value='"+text+"';", driver.findElement(By.xpath("//input[@placeholder='Last Name']")));
-        	}
-        	else
-        	{
-        		iFillInText(driver.findElement(By.xpath("//input[@placeholder='Last Name']")), text);
-        	}
+        	iFillInText(driver.findElement(By.xpath("//input[@placeholder='Last Name']")), text);
     }
 
     public final static String iGenerateEmail(String text) 
@@ -1482,14 +1468,7 @@ public class CreateUserPage extends BaseClass{
 //		    	   }
 		    	   delay();
 	    		   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))));
-		    	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
-		    	   {
-		    		   ((JavascriptExecutor)driver).executeScript("arguments[0].value='"+BPID+"';", driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")));
-		    	   }
-		    	   else
-		    	   {
-		    		   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID);  
-		    	   }
+	    		   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID);  
 		    	   iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
 		    	   Thread.sleep(3000);
 		    	   driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")).click();
@@ -1504,14 +1483,7 @@ public class CreateUserPage extends BaseClass{
 //		    	   }
 		    	   delay();
 	    		   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))));
-		    	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
-		    	   {
-		    		   ((JavascriptExecutor)driver).executeScript("arguments[0].value='"+location+"';", driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")));
-		    	   }
-		    	   else
-		    	   {
-		    		   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), location);  
-		    	   }
+	    		   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), location);  
 		    	   iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
 		    	   Thread.sleep(3000);
 		    	   driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")).click();
@@ -1533,14 +1505,7 @@ public class CreateUserPage extends BaseClass{
 //	    	   }
         	   delay();
     		   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))));
-        	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
-        	   {
-        		   ((JavascriptExecutor)driver).executeScript("arguments[0].value='"+BPID+"';", driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")));
-        	   }
-        	   else
-        	   {
-        		   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID);  
-        	   }
+    		   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID);  
         	   iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
         	   Thread.sleep(3000);
         	   driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")).click();
@@ -1555,14 +1520,7 @@ public class CreateUserPage extends BaseClass{
 //	    	   }
         	   delay();
     		   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))));
-        	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
-        	   {
-        		   ((JavascriptExecutor)driver).executeScript("arguments[0].value='"+location+"';", driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")));
-        	   }
-        	   else
-        	   {
-        		   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), location);
-        	   }
+    		   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), location);
         	   iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
         	   Thread.sleep(3000);
         	   driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")).click();
