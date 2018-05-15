@@ -16,11 +16,11 @@ Feature: Remove the default filters from Readmission Report
     And I wait until refresh button is disappeared
     When I click on show all filters icon button
     Then I remove "Anchor Month" field filter under "Anchor Month" filter field from default filters
-    Then I remove "Model" field filter under "Model" filter field from default filters
+    #Then I remove "Model" field filter under "Model" filter field from default filters
     When I click on field-panel-icon button
-    When I click to "Anchor Discharge Month" field filter under "Anchor Discharge Date" filter field
+    When I click to "Anchor Hospital Discharge Month" field filter under "Anchor Hospital Discharge Date" filter field
     And I choose "Filter" option from select options of filter field
-    And I should see "Anchor Discharge Month" in the header text of filter page
+    And I should see "Anchor Hospital Discharge Month" in the header text of filter page
     Then I select "PREVIOUS" discharge month in anchor discharge month filter
     And I click on ok button from filter
     And I wait until refresh button is disappeared

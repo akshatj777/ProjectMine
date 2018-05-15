@@ -28,8 +28,8 @@ Feature: Verification of Program Overview data after selecting facility filter
     Then I wait until loading icon disappears in program overview report
     Then I click on skilled nursing "SNF" ec graph point under post acute utilization of program overview report
     And I switch to new window
-    And I will wait to see "Next Site of Care Summary" is appearing after clicking graph point
-    Then I verify "Next Site of Care Summary" in the new window after clicking on the graph point
+    And I will wait to see "Next Site Of Care Summary" is appearing after clicking graph point
+    Then I verify "Next Site Of Care Summary" in the new window after clicking on the graph point
     And I switch back to old window
 
     Examples: 

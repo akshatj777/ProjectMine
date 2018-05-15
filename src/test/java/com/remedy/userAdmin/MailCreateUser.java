@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
@@ -16,10 +17,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 
 import com.remedy.baseClass.BaseClass;
@@ -49,16 +50,16 @@ public class MailCreateUser extends BaseClass{
 	
 	public void iEnterPasswordToLoginMailAccount(String password) throws InterruptedException {	
 		Thread.sleep(4000);
-		if(driver.findElement(By.xpath("//input[@type='email']")).isDisplayed())
-		{
-			driver.findElement(By.xpath("//input[@type='email']")).sendKeys("test.automatemail");
-			clickElement(driver.findElement(By.xpath("//span[text()='Next']")));
-			iWillWaitToSee(By.xpath("//input[@type='password']"));
-			driver.findElement(By.xpath("//input[@type='password']")).sendKeys(password);
-			clickElement(driver.findElement(By.xpath("//span[text()='Next']")));
-		}
-		else
-		{
+//		if(driver.findElement(By.xpath("//input[@type='email']")).isDisplayed())
+//		{
+//			driver.findElement(By.xpath("//input[@type='email']")).sendKeys("test.automatemail");
+//			clickElement(driver.findElement(By.xpath("//span[text()='Next']")));
+//			iWillWaitToSee(By.xpath("//input[@type='password']"));
+//			driver.findElement(By.xpath("//input[@type='password']")).sendKeys(password);
+//			clickElement(driver.findElement(By.xpath("//span[text()='Next']")));
+//		}
+//		else
+//		{
 			iWillWaitToSee(By.xpath("//input[@type='password']"));
 			driver.findElement(By.xpath("//input[@type='password']")).sendKeys(password);
 			if(driver.findElements(By.xpath("//span[text()='Next']")).size()>0)
@@ -69,7 +70,7 @@ public class MailCreateUser extends BaseClass{
 			{
 				clickElement(driver.findElement(By.xpath("//span[text()='Sign in']")));
 			}
-		}
+//		}
 	}
 	
 	public void iClickOnMailIconOnMyAccount() {	
@@ -166,9 +167,10 @@ public class MailCreateUser extends BaseClass{
 		driver.findElement(By.xpath("//input[@name='email']")).sendKeys(email);
 	}
 	
-	public void iClickOnSendEmailButton() {
+	public void iClickOnSendEmailButton() throws InterruptedException {
 		iWillWaitToSee(By.xpath("//button[@type='submit']"));
 		clickElement(driver.findElement(By.xpath("//button[@type='submit']")));
+		Thread.sleep(3000);
 	}
 	
 	public void i_Verify_The_Unread_Mail_In_Inbox_In_My_Account(){

@@ -143,4 +143,9 @@ public class CommonSteps extends DriverScript {
             selected.perform();
     	}
     }
+    
+    @And("^I switch back to old window in reports$")
+    public void iSwitchBackToOLDWindowInReports(){
+    	baseClass.switchBacktoOldWindow();
+    }
 }

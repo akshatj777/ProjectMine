@@ -58,8 +58,8 @@ public class EditUser extends BaseClass {
 	}
 
 	public void iClickOnRoleFieldToEdit() {
-		iWillWaitToSee(By.cssSelector(".ui.fluid.selection.dropdown"));
-		clickElement(driver.findElement(By.cssSelector(".ui.fluid.selection.dropdown")));
+		iWillWaitToSee(By.cssSelector(".ui.selection.dropdown"));
+		clickElement(driver.findElement(By.cssSelector(".ui.selection.dropdown")));
 	}
 
 	public void iClickOnTab(String text) {
@@ -506,7 +506,7 @@ public class EditUser extends BaseClass {
 	public void selectProgramsForExistingOrg(String programList) throws Throwable {
 		if (!(programList.equals(""))) {
 			longDelay();
-			if (!(driver.findElements(By.xpath("//div[text()='Select']")).size() > 0)) {
+			if (!(driver.findElements(By.xpath("//span[text()='Select']")).size() > 0)) {
 				longDelay();
 				if (programList.contains(",")) {
 					StringTokenizer st = new StringTokenizer(programList, ",");
@@ -530,7 +530,7 @@ public class EditUser extends BaseClass {
 			} else {
 				if (programList.contains(",")) {
 					StringTokenizer st = new StringTokenizer(programList, ",");
-					driver.findElement(By.xpath("//div[text()='Select']")).click();
+					driver.findElement(By.xpath("//span[text()='Select']")).click();
 					while (st.hasMoreTokens()) {
 						String programs = st.nextToken().trim();
 						iWillWaitToSee(By.xpath("//label[text()='" + programs + "']"));
@@ -540,7 +540,7 @@ public class EditUser extends BaseClass {
 				} else {
 
 					longDelay();
-					driver.findElement(By.xpath("//div[text()='Select']")).click();
+					driver.findElement(By.xpath("//span[text()='Select']")).click();
 					longDelay();
 					driver.findElement(By.xpath("//label[text()='" + programList + "']")).click();
 					longDelay();
@@ -556,32 +556,24 @@ public class EditUser extends BaseClass {
 	}
 
 	public void iClickOnLearningPathwayDropdown() {
-		iWillWaitToSee(By.xpath("//div[@class='ui label']/../following-sibling::i[@class='dropdown icon']"));
-		clickElement(driver
-				.findElement(By.xpath("//div[@class='ui label']/../following-sibling::i[@class='dropdown icon']")));
+		iWillWaitToSee(By.xpath("//i[@class='select-dropdown-icon']"));
+		clickElement(driver.findElement(By.xpath("//i[@class='select-dropdown-icon']")));
 	}
 
 	public void iVerifyMessageForInvalidHealthSystem() throws InterruptedException {
 		Thread.sleep(3000);
-		waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector(".message.empty>div"))));
-		String actual = getTextForElement(driver.findElement(By.cssSelector(".message.empty>div")));
-		Assert.assertEquals("No results found.", actual.trim());
+		iWillWaitToSee(By.xpath("//div[text()='0 Results']/following-sibling::span[text()='Try refining your search criteria']"));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='0 Results']/following-sibling::span[text()='Try refining your search criteria']")));
 	}
 
 	public void iVerifyMessageForInvalidLocation(String text) throws InterruptedException {
 		if (text.equalsIgnoreCase("second")) {
-			waitTo().until(ExpectedConditions
-					.visibilityOf(driver.findElements(By.xpath("//h3[text()=' No Results Found ']")).get(1)));
-			String actual = getTextForElement(
-					driver.findElements(By.xpath("//h3[text()=' No Results Found ']")).get(1));
-			Assert.assertEquals("No Results Found", actual.trim());
+			iWillWaitToSee(By.xpath("//h3[contains(text(),'No Results Found')]"));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//h3[contains(text(),'No Results Found')]")));
 		} else if (text.equalsIgnoreCase("first")) {
-			waitTo().until(
-					ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h3[text()=' No Results Found ']"))));
-			String actual = getTextForElement(driver.findElement(By.xpath("//h3[text()=' No Results Found ']")));
-			Assert.assertEquals("No Results Found", actual.trim());
+			iWillWaitToSee(By.xpath("//h3[contains(text(),'No Results Found')]"));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//h3[contains(text(),'No Results Found')]")));
 		}
-
 	}
 
 	public void iVerifyIncompleteOrganisation() {
