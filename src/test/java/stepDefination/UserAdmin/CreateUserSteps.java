@@ -860,4 +860,5 @@ public class CreateUserSteps extends DriverScript {
 	 public void iVerifyAllLocationsPresence(String text) {
 		 createUser.iVerifyAllLocationsPresence(text);
 	 }
+	
 }
