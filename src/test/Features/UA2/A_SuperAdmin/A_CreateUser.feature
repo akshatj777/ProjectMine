@@ -810,8 +810,8 @@ Feature: Create User - Super Admin User
     Then I should see error message for duplicate value "Account with this email already exists"
 
     Examples: 
-      | User        | UserName                               | Password | FirstName | LastName | Email             | Role       | Applications | NPI | Health System     | Programs    | Locations                   |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | test.automatemail | Physicians | Reports      | NPI | Stamford Hospital | BPCI-Model2 | 2070-015--Stamford Hospital |
+      | User        | UserName                               | Password | FirstName | LastName | Email             | Role       | Applications | NPI | Health System | Programs    | Locations                            |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | test.automatemail | Physicians | Reports      | NPI |        441324 | BPCI-Model2 | 6005-064--Abington Memorial Hospital |
 
   Scenario Outline: Validating that BPID with one location does not have All locations under BPID
     Given I am on the login page
@@ -845,7 +845,8 @@ Feature: Create User - Super Admin User
     Examples: 
       | User        | UserName                               | Password | FirstName | LastName | Email             | Role       | Applications | NPI | Health System     | Programs    | Locations    |
       | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | test.automatemail | Physicians | Reports      | NPI | Stamford Hospital | BPCI-Model2 | All 2070-015 |
-Scenario Outline: validating Learning Pathway on edit role
+
+  Scenario Outline: validating Learning Pathway on edit role
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -883,4 +884,3 @@ Scenario Outline: validating Learning Pathway on edit role
     Examples: 
       | User        | UserName                               | Password | FirstName | LastName | Email             | Role1      | Applications     | NPI | LearningPathwaySearchParameter                      | Role2     |
       | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | test.automatemail | Physicians | Reports, Lessons | NPI | Learning Pathway 2, jusUV22erpk1, Remedy University | Executive |
-      

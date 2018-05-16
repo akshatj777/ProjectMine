@@ -207,6 +207,7 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 		editUser.iVerifyIncompleteOrganisation();
 	}
 	
+	
 	@Then("^I verify facility key \"([^\"]*)\" is displayed with location name \"([^\"]*)\"$")
 	public void iVerifyLocationDisplayedWithFacilityKey(String key, String text){
 		editUser.iVerifyLocationDisplayedWithFacilityKey(key, text);
