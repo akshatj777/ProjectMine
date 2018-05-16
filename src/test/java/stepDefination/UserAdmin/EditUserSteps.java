@@ -206,6 +206,10 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	public void iVerifyIncompleteOrganisation(){
 		editUser.iVerifyIncompleteOrganisation();
 	}
+	@Then("^I verify incomplete status is not shown for health system$")
+	public void iVerifyIncompleteStatusNotShown(){
+		editUser.iVerifyIncompleteStatusNotShown();
+	}
 	
 	@Then("^I verify facility key \"([^\"]*)\" is displayed with location name \"([^\"]*)\"$")
 	public void iVerifyLocationDisplayedWithFacilityKey(String key, String text){

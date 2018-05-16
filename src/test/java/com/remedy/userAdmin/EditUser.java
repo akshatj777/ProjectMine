@@ -589,7 +589,10 @@ public class EditUser extends BaseClass {
 		String actual = getTextForElement(driver.findElement(By.cssSelector("span.participant-title-status")));
 		Assert.assertEquals("(incomplete)", actual.trim());
 	}
-
+public void iVerifyIncompleteStatusNotShown() {
+		
+		Assert.assertFalse(isElementVisible(driver.findElement(By.cssSelector("span.participant-title-status"))));
+	}
 	public void iClickOnSelectOrgDropdown() {
 		clickElement(driver.findElement(By.cssSelector("div.ui.selection.dropdown")));
 	}

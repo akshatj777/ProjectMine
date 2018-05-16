@@ -846,4 +846,25 @@ Feature: Create User - Super Admin User
       | User        | UserName                               | Password | FirstName | LastName | Email             | Role       | Applications | NPI | Health System     | Programs    | Locations    |
       | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | test.automatemail | Physicians | Reports      | NPI | Stamford Hospital | BPCI-Model2 | All 2070-015 |
 
-  
+  Scenario Outline: Validating that on removing the organization and selecting it again, "incomplete" error message is not displayed
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    And I click on Edit button
+    Then I select "Permissions" tab
+    Then I remove health system "<Remove HealthSystem>"
+    And I click on "Remove" button on permissions tab
+    And I search for health system with <Health System>
+    And I select a <Health System>
+    Then I select "<Programs>" programs
+    Then I select "<Locations>" locations
+    Then I click on existing organisation "<Health System>"
+    Then I verify incomplete status is not shown for health system
+
+    Examples: 
+      | User        | Role      | Remove HealthSystem | Health System     | Programs    | Locations                   |
+      | Super Admin | Executive | Stamford Hospital   | Stamford Hospital | BPCI-Model2 | 2070-015--Stamford Hospital |
