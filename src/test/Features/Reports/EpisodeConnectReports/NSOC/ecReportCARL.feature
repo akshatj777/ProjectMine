@@ -244,10 +244,10 @@ Feature: Verification of CARL EC Report
     Examples: 
       | email                              |
       | shutestaug231132a@yopmail.com      |
-      | shutestaug221130a@yopmail.com      |
+      #| shutestaug221130a@yopmail.com      |
       | reptestachmodel2opsfin@yopmail.com |
-      | shutestaug15240p@yopmail.com       |
-      | shutestaug221145a@yopmail.com      |
+      #| shutestaug15240p@yopmail.com       |
+      #| shutestaug221145a@yopmail.com      |
 
   Scenario Outline: User should be able to see onboarding status and patient risk values in available fields in carl report under next site of care summary
     Given I am on the login page
@@ -275,10 +275,10 @@ Feature: Verification of CARL EC Report
     Examples: 
       | email                              |
       | shutestaug231132a@yopmail.com      |
-      | shutestaug221130a@yopmail.com      |
+      #| shutestaug221130a@yopmail.com      |
       | reptestachmodel2opsfin@yopmail.com |
-      | shutestaug15240p@yopmail.com       |
-      | shutestaug221145a@yopmail.com      |
+      #| shutestaug15240p@yopmail.com       |
+      #| shutestaug221145a@yopmail.com      |
       
   Scenario Outline: User should be able to verify YYYY-MM-DD format for DOB field column for carl report under nsoc
     Given I am on the login page

@@ -940,7 +940,7 @@ public class ReportHomePageSteps extends DriverScript {
     	reportHomePage.iClickOnFindButtonAfterEnteringAnchorAdmissionQuarter();
     }
     
-    @Then("^I verify \"([^\"]*)\" is appearing under preselected anchor admission year filter$")
+    @Then("^I verify \"([^\"]*)\" is appearing under preselected anchor admission date filter$")
     public void i_verify_anchor_admission_year_appearing_under_preselected_filter(String text) throws Throwable{
     	reportHomePage.iVerifyAnchorAdmissionYearPreSelectedFilter(text);
     }
@@ -1251,6 +1251,7 @@ public class ReportHomePageSteps extends DriverScript {
     }
     
     @Then("^I verify \"([^\"]*)\" is appearing under filter options in newly opened scorecard page$")
+    @And("^I verify \"([^\"]*)\" is appearing under filter options in newly opened overall performance page$")
     public void i_verify_is_appearing_under_filter_options_in_newly_opened_scorecard_page(String text) throws Throwable{
     	reportHomePage.iVerifyFilternameAppearingInScorecardPage(text);
     }
@@ -1439,6 +1440,7 @@ public class ReportHomePageSteps extends DriverScript {
     	reportHomePage.iShouldNotSeeElementInTheFilterValueList(text);
     }
     
+    @And("^I verify \"([^\"]*)\" column is already present on the reports$")
     @Then("^I verify \"([^\"]*)\" column is added to report after selecting add to report option$")
     public void i_velrify_column_is_added_to_report_after_selecting_add_to_report_option(String text) throws Throwable{
     	reportHomePage.iShouldSeeColumnAfterClickingAddToReport(text);
@@ -1662,6 +1664,61 @@ public class ReportHomePageSteps extends DriverScript {
     	reportHomePage.iVerifyNetworkTierAnchorDischargeTextInSelectedFilter(text);
     }
     
+    @When("^I click to \"([^\"]*)\" filter field under available fields$")
+    public void i_click_to_filter_field_under_available_fields(String text) throws Throwable{
+    	reportHomePage.iClickOnDashboardAnchorCCNFilterField(text);
+    }
+    
+    @When("^I click on \"([^\"]*)\" field in the layout section to open the list$")
+    public void i_click_on_field_in_the_layout_section_to_open_the_list(String text) throws Throwable{
+    	reportHomePage.iClickOnFieldInLayoutSectionToOpenList(text);
+    }
+    
+    @Then("I click on remove from report option in the list")
+    public void i_click_on_remove_from_report_option_in_the_list() throws Throwable{
+    	reportHomePage.iClickOnRemoveFromReportInTheList();
+    }
+    
+    @And("I verify \"([^\"]*)\" column is not present in the reports")
+    public void i_verify_column_is_not_present_in_the_reports(String text) throws Throwable{
+    	reportHomePage.iVerifyTextNotPresentInTheReportsTable(text);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" is appearing under preselected anchor hospital admission year filter$")
+    public void i_verify_is_appearing_under_preselected_anchor_hospital_admission_year_filter(String text) throws Throwable{
+    	reportHomePage.iSeeAnchorHospitalAdmissionYearFilterPreselected(text);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" is appearing under preselected filters for anchor Discharge Date Key$")
+    public void i_verify_is_appearing_under_preselected_filters_for_anchor_Discharge_Date_Key(String text) throws Throwable{
+    	reportHomePage.iSeeAnchorDischargeDateKeyFilterPreselected(text);
+    }
+    
+    @When("^I click on Episodes field in the default measures to open the list$")
+    public void i_click_on_Episodes_field_in_the_default_measures_to_open_the_list() throws Throwable{
+    	reportHomePage.iClickonEpisodesFieldUnderDefaultMeasuresToOpenList();
+    }
+    
+    @Then("^I should verify \"([^\"]*)\" is appearing under Episodes drill through columns popup$")
+    public void i_should_verify_is_appearing_under_episode_drill_through_columns_popup(String text) throws Throwable{
+    	reportHomePage.iShouldVerifyInEpisodesDrillThroughColumnsPopUp(text);
+    }
+    
+    @And ("^I choose remove report option from select options of filter field$")
+    public void i_choose_remove_report_option_from_select_option_of_filter_field(){
+    	reportHomePage.ichooseremovereportoptionfromselectoptionoffilterfield();
+    }
+    
+    @Then ("^I search for the field \"([^\"]*)\" from the available fields$") 
+    public void i_search_for_the_field_from_available_field(String text){
+    	reportHomePage.isearchforthefieldfromavailablefield(text);
+    }
+    
+    @When ("^I click to \"([^\"]*)\" field filter under \"([^\"]*)\" filter field in layout section$")
+    public void i_click_filter_field_in_layout_section(String filterTitle,String filterField){
+    	reportHomePage.iclickfilterfieldinlayoutsection(filterTitle,filterField);
+    }
+
     @Then("^I verify \"([^\"]*)\" text is appearing in the FAQ page$")
     public void i_verify_text_is_appearing_in_the_FAQ_page(String text) throws Throwable{
     	reportHomePage.iVerifyTextOnTheFAQPage(text);
@@ -1672,8 +1729,255 @@ public class ReportHomePageSteps extends DriverScript {
     	reportHomePage.iShouldSeeFAQListOnFAQPage();
     }
     
+    @Then("^I should see \"([^\"]*)\" is present under preselected anchor discharge date key filter$")
+    public void i_should_see_is_present_under_preselected_anchor_discharge_date_key_filter(String text) throws Throwable{
+    	reportHomePage.iSeeAnchorDischargeDateKeyFilterPreselected(text);
+    }
+
+    @And("^I verify search field is appearing below the count on performance evaluation by physician page$")
+    public void i_verify_search_field_is_appearing_below_the_count_on_peformance_evaluation_by_physician_page() throws Throwable{
+    	reportHomePage.iVerifySeachFieldOnPerformanceEvaluationByPhysicianPage();
+    }
+    
+    @Then("^I verify Attributed Physician filter is appearing on physician dashboard page$")
+    public void i_verify_attributed_physician_filter_is_appearing_on_physician_dashboard_page() throws Throwable{
+    	reportHomePage.iVerifyAttributedPhysicianFilterOnPhysicianPage();
+    }
+    
+    @And("^I verify \"([^\"]*)\" filter is not having \"([^\"]*)\" in the filter$")
+    public void i_verify_attributed_filter_is_not_having_in_the_filter(String filter,String text) throws Throwable{
+    	reportHomePage.iVerifyFilterNotHavingTheTextOnScoreCardPage(filter, text);
+    }
+    
+    @And("I click on the attributed physician having \"([^\"]*)\" dot in the chart of physician dashboard report")
+    public void i_click_on_the_attributed_physician_having_dot_in_the_chart_of_physician_dashboard_report(String color) throws Throwable{
+    	reportHomePage.iClickOnAttributedPhyisicanCorrespondingToColor(color);
+    }
+    
+    @And("^I verify text with \"([^\"]*)\" is appearing inside the scorecards on performance scorecard page$")
+    public void i_verify_text_with_is_appearing_inside_the_scorecards_on_performance_scorecard_page(String color) throws Throwable{
+    	reportHomePage.iVerifyTextColorOnScorecardsOnPerformanceScorecardPage(color);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" is appearing on the scorecard corresponding to the \"([^\"]*)\" color$")
+    public void i_verify_is_appearing_on_the_scorecard_corresonding_to_the_color(String message,String color) throws Throwable{
+    	reportHomePage.iVerifyMessageAsPerColorOnScorecards(message, color);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" text is appearing beside the search field on physician dashboard report$")
+    public void i_verify_text_is_appearing_beside_the_search_field_on_physician_dashboard_report(String text) throws Throwable{
+    	reportHomePage.iVerifyTextBesideTheSearchBoxOnPhysicianDashboardReport(text);
+    }
+    
+    @When("^I should not see \"([^\"]*)\" report after clicking on dashboard$")
+    public void i_should_not_see_report_after_clicking_on_dashboard(String report) throws Throwable{
+    	reportHomePage.iShouldNotSeeReportName(report);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" section is not appearing on the performance scorecard page$")
+    public void i_verify_section_not_appearing_on_the_performance_scorecard_page(String text) throws Throwable{
+    	reportHomePage.iVerifyTextNotAppearingUnderPhysicianScoreCard(text);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" filter is not appearing in the filters section on scorecard page$")
+    public void i_verify_filter_is_not_appearing_in_the_filter_section(String text) throws Throwable{
+    	reportHomePage.iVerifyTextNotPresentInFilterSections(text);
+    }
+
     @Then("^I wait untill page loading message disappears$")
     public void i_wait_untill_page_loading_message_disappears() throws Throwable{
     	reportHomePage.iWillWaitUntillLoadingMessageDisappears();
     }
+    
+    @And("^I verify apply button is not clickable for ([^\"]*) in the filters after unchecking all option$")
+    public void i_verify_apply_button_is_not_clickable_in_the_filters_after_unchecking_all_option(String text) throws Throwable{
+    	reportHomePage.iVerifyApPlyButtonIsNotClickableAfterDesectingAll(text);
+    }
+    
+    @And("^I select a \"([^\"]*)\" name in filter and verify the same name is appearing on scorecard page$")
+    public void i_select_a_name_in_filter_and_verify_the_same_name_is_appearing_on_scorecard_page(String text) throws Throwable{
+    	reportHomePage.iSelectNameInFilterAndVerifySmeNameOnScoreCardPage(text);
+    }
+    
+    @And("^I click on \"([^\"]*)\" link on the performance scorecard page$")
+    public void i_click_on_link_on_the_performance_scorecard_page(String text) throws Throwable{
+    	reportHomePage.iClickOnLinkUnderPerformanceScoreCardPage(text);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" toggle button is appearing beside \"([^\"]*)\"$")
+    public void i_verify_toggle_button_is_appearing_beside(String text,String value) throws Throwable{
+    	reportHomePage.iVerifyToggleButtonOnPhysicianDashboard(text,value);
+    }
+    
+    @And("^I click on \"([^\"]*)\" radio button beside \"([^\"]*)\"$")
+    public void i_click_on_radio_button_beside_cost_metric(String text,String value) throws Throwable{
+    	reportHomePage.iClickOnRadioButtonOnPhysicianDashboard(text,value);
+    }
+    
+    @And("^I verify column name \"([^\"]*)\" is appearing on the scorecard page$")
+    @Then("^I verify column name \"([^\"]*)\" is appearing on the overall performance page$")
+    public void i_verify_column_name_is_appearing_on_the_scorecard_page(String text) throws Throwable{
+    	reportHomePage.iVerifyColumnNameOnScoreCardPage(text);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" column name is appearing under quaterly performance table$")
+    public void i_verify_column_name_is_appearing_under_quaterly_performance_table(String text) throws Throwable{
+    	reportHomePage.iVerifyColumnAppearingUnderQuaterlyPerformanceTable(text);
+    }
+    
+    @And("^I verify \"([^\"]*)\" column name is appearing under episodes volume table$")
+    public void i_verify_column_name_is_appearing_under_episodes_volume_table(String text) throws Throwable{
+    	reportHomePage.iverifyColumnNameAppearingUnderEpisodesVolume(text);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" column is not appearing on performance scorecard page$")
+    public void i_verify_column_is_not_appearing_on_performance_scorecard_page(String text) throws Throwable{
+    	reportHomePage.iVerifyColumnNotPresentOnThePerformanceScoreCardPage(text);
+    }
+    
+    @And("^I verify \"([^\"]*)\" column is appearing under \"([^\"]*)\" column on scorecard page$")
+    public void i_verify_column_is_appearing_under_columns_on_scorecard(String text,String table) throws Throwable{
+    	reportHomePage.iVerifyColumnUnderTableOnScoreCardPage(text, table);
+    }
+    
+    @And("^I verify \"([^\"]*)\" is appearing on clicking on lmj link$")
+    public void i_verify_is_appearing_on_clicking_on_lmj_link(String text) throws Throwable{
+    	reportHomePage.iVerifyElementOnNewWindowOnClickingLMJLink(text);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" section is appearing on overall performance page$")
+    public void i_verify_section_is_appearing_on_overall_performance_page(String text) throws Throwable{
+    	reportHomePage.iVerifySectionOnOverallPerformancePage(text);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" is appearing on the overall performance page$")
+    public void i_verify_is_appearing_on_the_overall_performance_page(String text) throws Throwable{
+    	reportHomePage.iVerifyIsAppearingOnOverallPerformancePage(text);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" column name is appearing under major joint replacement of the lower extremity table$")
+    public void i_verify_column_name_is_appearing_under_major_joint_replacement_of_lower_extremity(String text) throws Throwable{
+    	reportHomePage.iVerifyColumnAppearingUnderQuaterlyPerformanceTable(text);
+    }
+    
+    @And("^I verify \"([^\"]*)\" column name is appearing under performance comparison DRG \"([^\"]*)\" table$")
+    public void i_verify_column_name_is_appearing_under_performance_comparison_table(String text,String drg) throws Throwable{
+    	reportHomePage.iVerifyTextInPerformanceComaprisonTable(text,drg);
+    }
+    
+    @Then("^I verify column name \"([^\"]*)\" is appearing in performance comparison drg \"([^\"]*)\" table$")
+    public void i_verify_column_name_is_appearing_in_performance_comparison_drg_table(String text,String drg) throws Throwable{
+    	reportHomePage.iVerifyNamesOnPerformanceComparisonTable(text,drg);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" is appearing inside the performance comparison drg \"([^\"]*)\" table$")
+    public void i_verify_is_appearing_inside_the_performance_comaprison_drg_table(String text,String drg) throws Throwable{
+    	reportHomePage.iVerifyTheNamesInsideTheComaprisonTables(text, drg);
+    }
+    
+    @And("^I verify \"([^\"]*)\" is appearing inside drg \"([^\"]*)\" performance comparison table$")
+    public void i_verify_is_appearing_inside_drg_performance_comparison_table(String text,String drg) throws Throwable{
+    	reportHomePage.iVerifyCurrentAndSystemInsidePerformanceComparison(text, drg);
+    }
+    
+    @Then("^I verify the data under fracture and non fracture is only \"([^\"]*)\" in the rows under drg table \"([^\"]*)\"$")
+    public void i_verify_the_data_under_fracture_and_non_fracture_is_only_blank_under_drg_tables(String text,String drg) throws Throwable{
+    	reportHomePage.iVerifyDataUnderFractureAndNonFractureColumns(text,drg);
+    }
+    
+    @And("^I fetch the value of episodes present beside first physician$")
+    public void i_fetch_the_value_of_episodes_present_beside_first_physician() throws Throwable{
+    	reportHomePage.iFetchValueOfEpisodesFromFirstPhysician();
+    }
+    
+    @And("^I verify fetched episodes data is appearing inside the kpi box of episodes$")
+    public void i_verify_fetched_episodes_data_is_appearing_inside_the_kpi_box_of_episodes() throws Throwable{
+    	reportHomePage.iVerifyFetchedEpisodeIsSameInEpisodesKPIBox();
+    }
+    
+    @Then("^I verify same episodes data is appearing under overall performance column in quaterly performance table$")
+    public void i_verify_same_episodes_data_is_appearing_under_overall_performance_column_in_quaterly_performance_table() throws Throwable{
+    	reportHomePage.iVerifySameEpisodesDataIsAppearingUnderOverallPerformanceInQuaterlyPerformanceTable();
+    }
+    
+    @And("^I click on \"([^\"]*)\" report under ([^\"]*) in reports$")
+    public void i_click_on_report_text_for_module_report(String report,String module) throws Throwable{
+    	reportHomePage.iClickOnReportUnderModuleInReports(report, module);
+    }
+    
+    @And("^I verify there is no \"([^\"]*)\" value appearing inside report in the column \"([^\"]*)\"$")
+    public void i_verify_there_is_no_value_appearing_inside_report_in_the_column(String value,String field) throws Throwable{
+    	reportHomePage.iVerifyNotAppearingInsideColumnsInReports(value, field);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" is appearing under selected drgcode filter$")
+    public void i_verify_is_appearing_under_selected_grdcode_filter(String text) throws Throwable{
+    	reportHomePage.iVerifyDRGCodeTextInSelectedFilter(text);
+    }
+    
+    @Then("^I remove the field \"([^\"]*)\" from the report column$")
+    public void i_remove_the_field_from_the_report_column(String text) throws Throwable{
+    	reportHomePage.iRemoveTheTheFieldFromReportColumn(text);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" is not appearing in the added field \"([^\"]*)\"$")
+    public void i_verify_is_not_appearing_in_the_added_field(String text,String field) throws Throwable{
+    	reportHomePage.iVerifyIsNoTAppearinGInTheAddedField(text, field);
+    }
+    
+    @Then("^I should not see \"([^\"]*)\" report after clicking on dashboards$")
+    public void i_should_not_see_report_after_clicking_on_dashboards(String report) throws Throwable{
+    	reportHomePage.iShouldNotSeeReportName(report);	
+    }
+    
+    @Then("^I verify \"([^\"]*)\" is appearing under preselected anchor admission year filter$")
+    public void i_verify_anchor_hospital_admission_year_appearing_under_preselected_filter(String text) throws Throwable{
+    	reportHomePage.iVerifyAnchorAdmissionYearPreSelectedFilter(text);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" column is appearing in report after selecting add to report option$")
+    public void i_velrify_column_is_appearing_in_report_after_selecting_add_to_report_option(String text) throws Throwable{
+    	reportHomePage.iVerifyColumnAfterClickingAddToReport(text);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" is appearing under selected anchor discharge care setting filter in snf los report$")
+    public void i_verify_is_appearing_under_selected_anchor_discharge_care_setting_filter_in_snf_los_report(String text) throws Throwable{
+    	reportHomePage.iVerifyAnchorDischrgeCareSettingFilterTextInSelectedFiltersInSNFLOSReport(text);
+    }
+    
+    @Then("^I verify \"([^\"]*)\" is appearing under selected network tier anchor discharge filter under snf los report$")
+    public void i_verify_is_appearing_under_selected_network_tier_anchor_discharge_filter_under_snf_los_report(String text) throws Throwable{
+    	reportHomePage.iVerifyNetworkTierAnchorDischargeTextInSelectedFilterUnderSNFLOSReport(text);
+    }
+    
+    @And("^I click on \"([^\"]*)\" in the filter value list for anchor hospital facility$")
+    public void i_click_on_in_the_filter_value_list_for_anchor_hospital_facility(String filterText) throws Throwable {
+         reportHomePage.iClickOnFilterTextFormFilterValueListForAnchorHospitalFacility(filterText);
+    }
+    
+    @And("^I click on \"([^\"]*)\" button under the ([^\"]*) in filter options$")
+    public void iClickOnApplyButtonForTheFilterField(String button,String text) throws Throwable{
+    	reportHomePage.iClickOnApplyButtonUnderFilterNameInFilterOptions(button, text);
+    }
+    
+    @Then("^I verify data is appearing after opening report$")
+    public void i_verify_data_is_appearing_after_opening_report() throws Throwable{
+    	reportHomePage.iVerifyDataAppearingAfterOpeningReport();
+    }
+    
+    @Then("^I verify \"([^\"]*)\" is appearing under default filter anchor admission year$")
+    public void i_verify_anchor_hospital_admission_year_appearing_under_default_filter_anchor_admission_year(String text) throws Throwable{
+    	reportHomePage.iVerifyAnchorAdmissionYearDefaultFilter(text);
+    }
+    
+    @Then("^I verify anchor post acute admission year \"([^\"]*)\" is preselected under episode drg issues model3 report$")
+    public void i_verify_anchor_post_acute_admission_year_is_preselected_under_episode_drg_issues_model3_report(String text) throws Throwable{
+    	reportHomePage.iSeeAnchorPostAcuteAdmissionYearFilterPreselectedUnderEpisodeDrgIssuesReport(text);
+    }
+    
+    @Then("^I verify anchor post acute admission year \"([^\"]*)\" is preselected under ipec model3 report$")
+    public void i_verify_anchor_post_acute_admission_year_is_preselected_under_ipec_model3_report(String text) throws Throwable{
+    	reportHomePage.iSeeAnchorPostAcuteAdmissionYearFilterPreselectedInIPECModel3(text);
+    }
 }
+

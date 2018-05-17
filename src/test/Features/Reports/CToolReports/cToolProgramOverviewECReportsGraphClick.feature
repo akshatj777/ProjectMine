@@ -28,39 +28,39 @@ Feature: Clicking on Program Overview report graphs for EPisode Connect reports
     And I will wait to see "Overall Program" under program overview report in iframe
     Then I click on skilled nursing "SNF" claims graph point under post acute utilization of program overview report
     And I switch to new window
-    And I will wait to see "Next Site of Care Summary" is appearing after clicking graph point
-    Then I verify "Next Site of Care Summary" in the new window after clicking on the graph point
+    And I will wait to see "Next Site Of Care Summary" is appearing after clicking graph point
+    Then I verify "Next Site Of Care Summary" in the new window after clicking on the graph point
     And I switch back to old window
     And I switch to reports embedded iframe
     Then I click on long term acute care "LTCH" claims graph point under post acute utilization of program overview report
     And I switch to new window
-    And I will wait to see "Next Site of Care Summary" is appearing after clicking graph point
-    Then I verify "Next Site of Care Summary" in the new window after clicking on the graph point
+    And I will wait to see "Next Site Of Care Summary" is appearing after clicking graph point
+    Then I verify "Next Site Of Care Summary" in the new window after clicking on the graph point
     And I switch back to old window
     And I switch to reports embedded iframe
     Then I click on inpatient rehab "IRF" claims graph point under post acute utilization of program overview report
     And I switch to new window
-    And I will wait to see "Next Site of Care Summary" is appearing after clicking graph point
-    Then I verify "Next Site of Care Summary" in the new window after clicking on the graph point
+    And I will wait to see "Next Site Of Care Summary" is appearing after clicking graph point
+    Then I verify "Next Site Of Care Summary" in the new window after clicking on the graph point
     And I switch back to old window
     And I switch to reports embedded iframe
     Then I click on home health "HHA" claims graph point under post acute utilization of program overview report
     And I switch to new window
-    And I will wait to see "Next Site of Care Summary" is appearing after clicking graph point
-    Then I verify "Next Site of Care Summary" in the new window after clicking on the graph point
+    And I will wait to see "Next Site Of Care Summary" is appearing after clicking graph point
+    Then I verify "Next Site Of Care Summary" in the new window after clicking on the graph point
     And I switch back to old window
     And I switch to reports embedded iframe
     Then I scroll the page to bottom by "100"
     Then I click on "home" claims graph point under post acute utilization of program overview report
     And I switch to new window
-    And I will wait to see "Next Site of Care Summary" is appearing after clicking graph point
-    Then I verify "Next Site of Care Summary" in the new window after clicking on the graph point
+    And I will wait to see "Next Site Of Care Summary" is appearing after clicking graph point
+    Then I verify "Next Site Of Care Summary" in the new window after clicking on the graph point
     And I switch back to old window
     And I switch to reports embedded iframe
     Then I click on "other" graph point of claims under post acute utilization of program overview report
     And I switch to new window
-    And I will wait to see "Next Site of Care Summary" is appearing after clicking graph point
-    Then I verify "Next Site of Care Summary" in the new window after clicking on the graph point
+    And I will wait to see "Next Site Of Care Summary" is appearing after clicking graph point
+    Then I verify "Next Site Of Care Summary" in the new window after clicking on the graph point
     And I switch back to old window
 
     Examples: 

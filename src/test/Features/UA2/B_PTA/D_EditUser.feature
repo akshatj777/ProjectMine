@@ -86,9 +86,9 @@ Feature: Edit user page for PTA
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
     And I redirect to Remedy connect page
-    And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    And I redirect to Remedy connect page
+    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
+    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
+    #And I redirect to Remedy connect page
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
@@ -105,8 +105,8 @@ Feature: Edit user page for PTA
     And I should see Log in widget
 
     Examples: 
-      | User                            | FirstName        | LastName        | Email             | Phone        | NPI | Role       | RemoveApplications | Applications                         | ApplicationsNotVisible                | LearningPathwayID | RemoveLearningPathwaySearchParameter  | Roletext       | ReportCategory | ReportName                   | BPID | Facilities                                                                                                                                                       | LearningPathway                                 |
-      | Partner Technical Administrator | FirstName'Edited | LastName'Edited | test.automatemail | 996-385-2451 | NPI | Physicians | Reports            | Episodes, Physician Connect, Lessons | Reports, Episodes 2.0, Administration | p11D0Vl2FSg1      | Executive Acute Care Hospital Model 2 | ROLE_CLINICIAN | Patient ID     | Episode DRG Issues [Model 3] |      | Pacific Coast Manor, Sunrise Skilled Nursing & Rehabilitation Center, Pyramid Point Post-Acute Rehabilitation Center, Hilltop Skilled Nursing, McCormick's Creek | Clinical Operations Acute Care Hospital Model 2 |
+      | User                            | FirstName        | LastName        | Email             | Phone        | NPI | Role       | RemoveApplications | Applications      | ApplicationsNotVisible                | LearningPathwayID | RemoveLearningPathwaySearchParameter  | Roletext       | ReportCategory | ReportName                   | BPID | Facilities                                                                                                                                                       | LearningPathway                                 |
+      | Partner Technical Administrator | FirstName'Edited | LastName'Edited | test.automatemail | 996-385-2451 | NPI | Physicians | Reports            | Episodes, Lessons | Reports, Episodes 2.0, Administration | p11D0Vl2FSg1      | Executive Acute Care Hospital Model 2 | ROLE_CLINICIAN | Patient ID     | Episode DRG Issues [Model 3] |      | Pacific Coast Manor, Sunrise Skilled Nursing & Rehabilitation Center, Pyramid Point Post-Acute Rehabilitation Center, Hilltop Skilled Nursing, McCormick's Creek | Clinical Operations Acute Care Hospital Model 2 |
 
   Scenario: Verify NPI on the EC1 tile
     Given I am on the login page
@@ -315,9 +315,9 @@ Feature: Edit user page for PTA
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
     And I redirect to Remedy connect page
-    And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    And I redirect to Remedy connect page
+    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
+    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
+    #And I redirect to Remedy connect page
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
@@ -421,9 +421,9 @@ Feature: Edit user page for PTA
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
     And I redirect to Remedy connect page
-    And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    And I redirect to Remedy connect page
+    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
+    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
+    #And I redirect to Remedy connect page
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
@@ -440,8 +440,8 @@ Feature: Edit user page for PTA
     And I should see Log in widget
 
     Examples: 
-      | User                            | FirstName       | LastName       | Email             | Phone        | NPI | PreviousRole | Role       | EnableApplications | Applications                                  | ApplicationsNotVisible       | Health System | Programs    | invalidLocations | RemoveLocations                                                                                                             | AddLocations                   | LearningPathwaySearchParameter | Roletext       | ReportCategory | ReportName                   | BPID | Facilities           | ProgramsValidation     | LocationsValidation                      | LearningPathway                                                                                                    |
-      | Partner Technical Administrator | FirstNameEdited | LastNameEdited | test.automatemail | 996-385-2451 | NPI | Executive    | Physicians | Physician Connect  | Episodes, Reports, Physician Connect, Lessons | Episodes 2.0, Administration | Covenant      | BPCI-Model3 | hkfj             | 3056-804--Catered Manor Nursing Center, 3056-805--Downey Care Center, 3056-806--Encinitas Nursing And Rehabilitation Center | 3056-808--Arbor Nursing Center |                                | ROLE_CLINICIAN | Patient ID     | Episode DRG Issues [Model 3] |      | Arbor Nursing Center | Covenant--BPCI Model 3 | Covenant--3056-808--Arbor Nursing Center | Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2 |
+      | User                            | FirstName       | LastName       | Email             | Phone        | NPI | PreviousRole | Role       | EnableApplications | Applications               | ApplicationsNotVisible       | Health System | Programs    | invalidLocations | RemoveLocations                                                                                                             | AddLocations                   | LearningPathwaySearchParameter | Roletext       | ReportCategory | ReportName                   | BPID | Facilities           | ProgramsValidation     | LocationsValidation                      | LearningPathway                                                                                                    |
+      | Partner Technical Administrator | FirstNameEdited | LastNameEdited | test.automatemail | 996-385-2451 | NPI | Executive    | Physicians | Physician Connect  | Episodes, Reports, Lessons | Episodes 2.0, Administration | Covenant      | BPCI-Model3 | hkfj             | 3056-804--Catered Manor Nursing Center, 3056-805--Downey Care Center, 3056-806--Encinitas Nursing And Rehabilitation Center | 3056-808--Arbor Nursing Center |                                | ROLE_CLINICIAN | Patient ID     | Episode DRG Issues [Model 3] |      | Arbor Nursing Center | Covenant--BPCI Model 3 | Covenant--3056-808--Arbor Nursing Center | Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2 |
 
   Scenario Outline: Verify the search functionality in selected locations and delete a location
     Given I am on the login page
@@ -727,9 +727,9 @@ Feature: Edit user page for PTA
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
     And I redirect to Remedy connect page
-    And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    And I redirect to Remedy connect page
+    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
+    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
+    #And I redirect to Remedy connect page
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
@@ -824,9 +824,9 @@ Feature: Edit user page for PTA
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
     And I redirect to Remedy connect page
-    And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    And I redirect to Remedy connect page
+    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
+    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
+    #And I redirect to Remedy connect page
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
@@ -1101,9 +1101,9 @@ Feature: Edit user page for PTA
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
     And I redirect to Remedy connect page
-    And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    And I redirect to Remedy connect page
+    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
+    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
+    #And I redirect to Remedy connect page
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page

@@ -521,7 +521,10 @@ public class CreateUserSteps extends DriverScript {
 		createUser.clickSubmitButtonForDifferentUsers(user);
 	}
 
-
+	@Then("^I click on Submit button$")
+	public void clickSubmitButton() throws Throwable {
+		createUser.clickSubmitButton();
+	}
 	
 	@Then("^I click on Submit button to check for error message$")
 	public void clickSubmitButtonToCheckError() throws Throwable {
@@ -860,9 +863,9 @@ public class CreateUserSteps extends DriverScript {
 	 public void iVerifyAllLocationsPresence(String text) {
 		 createUser.iVerifyAllLocationsPresence(text);
 	 }
-	 @Then("^I click on > to navigate to next page$")
-	 public void iNavigateToNextLocationsPage(){
-		 createUser.iNavigateToNextLocationsPage();
+	 @Then("^I click on > to navigate to next page while \"([^\"]*)\" the user$")
+	 public void iNavigateToNextLocationsPage(String text){
+		 createUser.iNavigateToNextLocationsPage(text);
 	 }
 	 @Then("^I search \"([^\"]*)\" locations for Downstream Provider role$")
 	 public void iSearchDPLocations(String locationList){
@@ -872,5 +875,13 @@ public class CreateUserSteps extends DriverScript {
 	 @Then("^I should not see any error message on searching any downstream provider location less than 5 alphabets$")
 	 public void iShouldNotSeeAnyErrorMessageForDPLocations(){
 		 createUser.iShouldNotSeeAnyErrorMessageForDPLocations();
+	 }
+	 @Then("^I should not get error message- \"([^\"]*)\"$")
+	 public void validateErrorMsg(String text){
+		 createUser.validateErrorMsg(text);
+	 }
+	 @Then("^I select created user$")
+	 public void iSelectCreatedUser() throws InterruptedException{
+		 createUser.iSelectCreatedUser();
 	 }
 }

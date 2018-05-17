@@ -27,3 +27,4 @@ Feature: Verification of DOB Date format for Claims Reports
     Examples: 
       | email                         |
       | shutestaug231132a@yopmail.com |
+      | reptestachmodel2opsfin@yopmail.com |

@@ -67,10 +67,10 @@ Feature: Readmission Model3 report verification
     Examples: 
       | email                              | role   | facility    |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
 
   Scenario Outline: <role> role user with <facility> facility should see default measures and dimensions as per the requirement under readmissions model3 report
     Given I am on the login page
@@ -102,10 +102,10 @@ Feature: Readmission Model3 report verification
     Examples: 
       | email                              | role   | facility    |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
 
   Scenario Outline: Verify that the Model field in Readmissions [Model 3] report is draggable and should not see model2 and filter the values for model3 for user with <role> role for <facility> facility
     Given I am on the login page
@@ -145,10 +145,10 @@ Feature: Readmission Model3 report verification
     Examples: 
       | email                              | role   | facility    |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
 
   Scenario Outline: User with <model> and having <facility> facility should not see Readmissions Model3 report under nsoc
     Given I am on the login page
@@ -158,7 +158,8 @@ Feature: Readmission Model3 report verification
     And I wait to see "Reports" tile
     When I click on the "Reports" tile
     And I wait to see "Patient ID" under reports tile text
-    And I should not see Reports Tile text as "Readmissions"
+    When I click on the Reports Tile with text "Readmissions"
+    Then I should not see "Readmissions [Model 3]" report after clicking on readmissions
 
     Examples: 
       | email                         | facility | model  |
@@ -224,10 +225,10 @@ Feature: Readmission Model3 report verification
     Examples: 
       | email                              | role   | facility    | participant1                                 | episode initiator1                           | anchor facility1                     | participantid1 | bpid1    | ccn1   | payer1   |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | Saber Health                                 | Amberwood Manor                              | Amberwood Manor                      |         442527 | 3056-y63 | 366253 | Medicare |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Visiting Nurse Service of New York Home Care | Visiting Nurse Service of New York Home Care | Vns Of Ny Home Care Chha (manhattan) |         789001 | 3056-003 | 337008 | Medicare |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Visiting Nurse Service of New York Home Care | Visiting Nurse Service of New York Home Care | Vns Of Ny Home Care Chha (manhattan) |         789001 | 3056-003 | 337008 | Medicare |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | Saber Health                                 | Amberwood Manor                              | Amberwood Manor                      |         442527 | 3056-y63 | 366253 | Medicare |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Visiting Nurse Service of New York Home Care | Visiting Nurse Service of New York Home Care | Vns Of Ny Home Care Chha (manhattan) |         789001 | 3056-003 | 337008 | Medicare |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Saber Health                                 | Amberwood Manor                              | Amberwood Manor                      |         442527 | 3056-y63 | 366253 | Medicare |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Visiting Nurse Service of New York Home Care | Visiting Nurse Service of New York Home Care | Vns Of Ny Home Care Chha (manhattan) |         789001 | 3056-003 | 337008 | Medicare |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Saber Health                                 | Amberwood Manor                              | Amberwood Manor                      |         442527 | 3056-y63 | 366253 | Medicare |
 
   Scenario Outline: Validate the On-boarding status field values on the Readmissions [Model 3] report and filters for user with <role> role for <facility> facility
     Given I am on the login page
@@ -268,10 +269,10 @@ Feature: Readmission Model3 report verification
     Examples: 
       | email                               | role   | facility    | onboardingstatus1 | onboardingstatus2 | onboardingstatus3 | onboardingstatus4 |
       | M3RPFINOnboardingStatus@yopmail.com | RPFIN  | SNF         | Needs Onboarding  | Onboarded         | Unknown           | Not Onboarded     |
-      | RPFINM3HHAVisitingQA@yopmail.com    | RPFIN  | HHA         | Unknown           |                   |                   |                   |
+      #| RPFINM3HHAVisitingQA@yopmail.com    | RPFIN  | HHA         | Unknown           |                   |                   |                   |
       | OPSFINM3SNFSaberHealth@yopmail.com  | OPSFIN | SNF         | Needs Onboarding  | Onboarded         | Unknown           |                   |
-      | OPSFINM3HHAVisiting@yopmail.com     | OPSFIN | HHA         | Unknown           |                   |                   |                   |
-      | RPFINM3HHASNFVisitQA@yopmail.com    | RPFIN  | SNF and HHA | Needs Onboarding  | Onboarded         | Unknown           |                   |
+      #| OPSFINM3HHAVisiting@yopmail.com     | OPSFIN | HHA         | Unknown           |                   |                   |                   |
+      #| RPFINM3HHASNFVisitQA@yopmail.com    | RPFIN  | SNF and HHA | Needs Onboarding  | Onboarded         | Unknown           |                   |
 
   Scenario Outline: User with <role> role and having <facillity> facility should be able to validate participant field value for readmissions Model3 report
     Given I am on the login page
@@ -302,10 +303,10 @@ Feature: Readmission Model3 report verification
     Examples: 
       | email                              | role   | facility    | participant1                           | participant2                           |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | Saber Health                           |                                        |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Visiting Nurse Service of NY Home Care |                                        |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Visiting Nurse Service of NY Home Care |                                        |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | Saber Health                           |                                        |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Visiting Nurse Service of NY Home Care |                                        |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Saber Health                           | Visiting Nurse Service of NY Home Care |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Visiting Nurse Service of NY Home Care |                                        |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Saber Health                           | Visiting Nurse Service of NY Home Care |
 
   Scenario Outline: User with <role> role and having <facillity> facility should be able to validate bpid field value for Readmissions Model3 report
     Given I am on the login page
@@ -349,10 +350,10 @@ Feature: Readmission Model3 report verification
     Examples: 
       | email                              | role   | facility    | BPID1    | BPID2    | BPID3    | BPID4    | BPID5    | BPID6    | BPID7    |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | 3056-y63 | 3056-y67 | 3056-y68 | 3056-y85 | 3056-y95 | 3056-y98 | 3056-z13 |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | 3056-003 |          |          |          |          |          |          |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | 3056-003 |          |          |          |          |          |          |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | 3056-y63 | 3056-y67 | 3056-y95 | 3056-z13 |          |          |          |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | 3056-003 |          |          |          |          |          |          |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | 3056-003 | 3056-y63 | 3056-y67 | 3056-y95 | 3056-z13 |          |          |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | 3056-003 |          |          |          |          |          |          |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | 3056-003 | 3056-y63 | 3056-y67 | 3056-y95 | 3056-z13 |          |          |
 
   Scenario Outline: User with <role> role and having <facillity> facility should be able to validate anchor post acute provider ccn field value for Readmissions Model3 report
     Given I am on the login page
@@ -396,10 +397,10 @@ Feature: Readmission Model3 report verification
     Examples: 
       | email                              | role   | facility    | anchorpostacuteproviderccn1 | anchorpostacuteproviderccn2 | anchorpostacuteproviderccn3 | anchorpostacuteproviderccn4 | anchorpostacuteproviderccn5 | anchorpostacuteproviderccn6 | anchorpostacuteproviderccn7 |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         |                      345557 |                      366253 |                      366395 |                      366403 |                      495401 |                      495407 |                      495411 |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |                      337008 |                             |                             |                             |                             |                             |                             |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |                      337008 |                             |                             |                             |                             |                             |                             |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         |                      345557 |                      366253 |                      495401 |                      495411 |                             |                             |                             |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |                      337008 |                             |                             |                             |                             |                             |                             |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |                      337008 |                      345557 |                      366253 |                      495401 |                      495411 |                             |                             |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |                      337008 |                             |                             |                             |                             |                             |                             |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |                      337008 |                      345557 |                      366253 |                      495401 |                      495411 |                             |                             |
 
   Scenario Outline: User with <role> role and having <facillity> facility should be able to validate episode initiator field value for NSOC Model3 report in frontend and database
     Given I am on the login page
@@ -429,10 +430,10 @@ Feature: Readmission Model3 report verification
     Examples: 
       | email                              | role   | facility    | episodeInitiators                                                                                                                        | episodeInitiator                             |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | Amberwood Manor,Azalea Health,Bath Creek Health,Falls Run Nursing,Liberty Ridge Health,Brecksville Health,Tyler's Retreat At Iron Bridge | Amberwood Manor                              |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Visiting Nurse Service Of New York Home Care                                                                                             | Visiting Nurse Service Of New York Home Care |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Visiting Nurse Service Of New York Home Care                                                                                             | Visiting Nurse Service Of New York Home Care |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | Amberwood Manor,Azalea Health,Liberty Ridge Health,Tyler's Retreat At Iron Bridge                                                        | Amberwood Manor                              |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Visiting Nurse Service Of New York Home Care                                                                                             | Visiting Nurse Service Of New York Home Care |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Visiting Nurse Service Of New York Home Care,Amberwood Manor,Azalea Health,Liberty Ridge Health,Tyler's Retreat At Iron Bridge           | Amberwood Manor                              |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Visiting Nurse Service Of New York Home Care                                                                                             | Visiting Nurse Service Of New York Home Care |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Visiting Nurse Service Of New York Home Care,Amberwood Manor,Azalea Health,Liberty Ridge Health,Tyler's Retreat At Iron Bridge           | Amberwood Manor                              |
 
   Scenario Outline: Validate bundle list values field for Readmissions [Model 3] report and filters for user with <role> role for <facility> facility
     Given I am on the login page
@@ -490,10 +491,10 @@ Feature: Readmission Model3 report verification
     Examples: 
       | email                              | role   | facility    | bundle1                          | bundle2                          | bundle3                  | bundle4                | bundle5                  | bundle6    | bundle7                                     | bundle8                                  | bundle9                                     | bundle10                                  | bundle11                      | bundle12                                      | bundle13                                  | bundle14                            | bundle15                                      | bundle16              | bundle17                          | bundle18                            | bundle19                                    | bundle20                     | bundle21                    | bundle22           | bundle23                                    | bundle24                      | bundle25                | bundle26           | bundle27           | bundle28                      | bundle29                |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | Acute myocardial infarction      | Back & neck except spinal fusion | COPD, bronchitis, asthma | Cellulitis             | Cervical spinal fusion   | Chest pain | Congestive heart failure                    | Diabetes                                 | Double joint replacement, lower extremities | Fractures of the femur and hip or pelvis  | Gastrointestinal hemorrhage   | Gastrointestinal obstruction                  | Hip & femur procedures except major joint | Lower Major joint replacement       | Lower extrem, humerus except hip, foot, femur | Major bowel procedure | Medical non-infectious orthopedic | Nutritional and metabolic disorders | Other knee procedures                       | Other respiratory            | Revision of the hip or knee | Sepsis             | Simple pneumonia and respiratory infections | Spinal fusion (non-cervical)  | Stroke                  | Syncope & collapse | Transient ischemia | Upper Major joint replacement | Urinary tract infection |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Congestive heart failure         |                                  |                          |                        |                          |            |                                             |                                          |                                             |                                           |                               |                                               |                                           |                                     |                                               |                       |                                   |                                     |                                             |                              |                             |                    |                                             |                               |                         |                    |                    |                               |                         |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Congestive heart failure         |                                  |                          |                        |                          |            |                                             |                                          |                                             |                                           |                               |                                               |                                           |                                     |                                               |                       |                                   |                                     |                                             |                              |                             |                    |                                             |                               |                         |                    |                    |                               |                         |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | Back & neck except spinal fusion | COPD, bronchitis, asthma         | Cellulitis               | Cervical spinal fusion | Congestive heart failure | Diabetes   | Double joint replacement, lower extremities | Fractures of the femur and hip or pelvis | Gastrointestinal hemorrhage                 | Hip & femur procedures except major joint | Lower Major joint replacement | Lower extrem, humerus except hip, foot, femur | Medical non-infectious orthopedic         | Nutritional and metabolic disorders | Other knee procedures                         | Other respiratory     | Revision of the hip or knee       | Sepsis                              | Simple pneumonia and respiratory infections | Spinal fusion (non-cervical) | Stroke                      | Syncope & collapse | Transient ischemia                          | Upper Major joint replacement | Urinary tract infection |                    |                    |                               |                         |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Congestive heart failure         |                                  |                          |                        |                          |            |                                             |                                          |                                             |                                           |                               |                                               |                                           |                                     |                                               |                       |                                   |                                     |                                             |                              |                             |                    |                                             |                               |                         |                    |                    |                               |                         |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Back & neck except spinal fusion | COPD, bronchitis, asthma         | Cellulitis               | Cervical spinal fusion | Congestive heart failure | Diabetes   | Double joint replacement, lower extremities | Fractures of the femur and hip or pelvis | Gastrointestinal hemorrhage                 | Hip & femur procedures except major joint | Lower Major joint replacement | Lower extrem, humerus except hip, foot, femur | Medical non-infectious orthopedic         | Nutritional and metabolic disorders | Other knee procedures                         | Other respiratory     | Revision of the hip or knee       | Sepsis                              | Simple pneumonia and respiratory infections | Spinal fusion (non-cervical) | Stroke                      | Syncope & collapse | Transient ischemia                          | Upper Major joint replacement | Urinary tract infection |                    |                    |                               |                         |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Congestive heart failure         |                                  |                          |                        |                          |            |                                             |                                          |                                             |                                           |                               |                                               |                                           |                                     |                                               |                       |                                   |                                     |                                             |                              |                             |                    |                                             |                               |                         |                    |                    |                               |                         |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Back & neck except spinal fusion | COPD, bronchitis, asthma         | Cellulitis               | Cervical spinal fusion | Congestive heart failure | Diabetes   | Double joint replacement, lower extremities | Fractures of the femur and hip or pelvis | Gastrointestinal hemorrhage                 | Hip & femur procedures except major joint | Lower Major joint replacement | Lower extrem, humerus except hip, foot, femur | Medical non-infectious orthopedic         | Nutritional and metabolic disorders | Other knee procedures                         | Other respiratory     | Revision of the hip or knee       | Sepsis                              | Simple pneumonia and respiratory infections | Spinal fusion (non-cervical) | Stroke                      | Syncope & collapse | Transient ischemia                          | Upper Major joint replacement | Urinary tract infection |                    |                    |                               |                         |
 
   Scenario Outline: Validate Anchor Post Acute Discharge Month drag and drop and filtering in Readmissions Model 3 report for user with <role> role for <facility> facility
     Given I am on the login page
@@ -540,10 +541,10 @@ Feature: Readmission Model3 report verification
     Examples: 
       | email                              | role   | facility    | postacutedischargemonth1 | postacutedischargemonth2 | postacutedischargemonth3 | postacutedischargemonth4 | postacutedischargemonth5 | postacutedischargemonth6 |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | 2017-05                  | 2017-06                  | 2017-07                  | 2017-08                  | 2017-09                  | 2017-10                  |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | 2016-01                  | 2016-02                  | 2016-03                  |                          |                          |                          |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | 2016-01                  | 2016-02                  | 2016-03                  |                          |                          |                          |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | 2017-05                  | 2017-06                  | 2017-07                  | 2017-08                  | 2017-09                  | 2017-10                  |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | 2016-01                  | 2016-02                  | 2016-03                  |                          |                          |                          |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | 2017-05                  | 2017-06                  | 2017-07                  | 2017-08                  | 2017-09                  | 2017-10                  |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | 2016-01                  | 2016-02                  | 2016-03                  |                          |                          |                          |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | 2017-05                  | 2017-06                  | 2017-07                  | 2017-08                  | 2017-09                  | 2017-10                  |
 
   Scenario Outline: Validate Payer is draggable and apply filter in Readmissions Model 3 report for user with <role> role for <facility> facility
     Given I am on the login page
@@ -581,10 +582,10 @@ Feature: Readmission Model3 report verification
     Examples: 
       | email                              | role   | facility    | payer1   |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | Medicare |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Medicare |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Medicare |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | Medicare |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Medicare |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Medicare |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Medicare |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Medicare |
 
   Scenario Outline: Validate DOB field is draggable for Readmissions Model 3 report user with <role> role for <facility> facility
     Given I am on the login page
@@ -611,10 +612,10 @@ Feature: Readmission Model3 report verification
     Examples: 
       | email                              | role   | facility    |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
 
   Scenario Outline: Validate the Patient Risk field values on the Readmissions M3 report and filters for user with <role> role for <facility> facility
     Given I am on the login page
@@ -654,10 +655,10 @@ Feature: Readmission Model3 report verification
     Examples: 
       | email                              | role   | facility    | patientrisk1     | patientrisk2 | patientrisk3 |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | Calculating Risk | High         | Low          |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Calculating Risk |              |              |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Calculating Risk |              |              |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | Calculating Risk | Low          | High         |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Calculating Risk |              |              |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Calculating Risk | High         | Low          |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Calculating Risk |              |              |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Calculating Risk | High         | Low          |
 
   Scenario Outline: Validate that the no. of Episodes on the drill through page with no. of episodes count on readmissions model3 report page for user with <role> role for <facility> facility
     Given I am on the login page
@@ -678,10 +679,10 @@ Feature: Readmission Model3 report verification
     Examples: 
       | email                              | role   | facility    |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
 
   Scenario Outline: <role> role user with <facility> facility should see all columns as per the requirement should be there in drill through under readmissions model3 report
     Given I am on the login page
@@ -752,10 +753,10 @@ Feature: Readmission Model3 report verification
     Examples: 
       | email                              | role   | facility    |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
 
   Scenario Outline: User should be able to see eligibilty field in available fields and check the filter values and apply filter in readmissions model3 report under readmissions
     Given I am on the login page
@@ -797,7 +798,7 @@ Feature: Readmission Model3 report verification
     Examples: 
       | email                              | role   | facility    | eligibility1 | eligilibilty2 | eligilibilty3 | eligilibilty4 |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | ELIGIBLE     | ERROR         | EXPIRED       | NOT_ELIGIBLE  |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | ELIGIBLE     | ERROR         | EXPIRED       |               |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | ELIGIBLE     | ERROR         | EXPIRED       |               |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | ELIGIBLE     | ERROR         | EXPIRED       | NOT_ELIGIBLE  |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | ELIGIBLE     | ERROR         | EXPIRED       |               |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | ELIGIBLE     | ERROR         | EXPIRED       | NOT_ELIGIBLE  |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | ELIGIBLE     | ERROR         | EXPIRED       |               |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | ELIGIBLE     | ERROR         | EXPIRED       | NOT_ELIGIBLE  |

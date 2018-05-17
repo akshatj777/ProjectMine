@@ -42,14 +42,14 @@ public class CreateUserPage extends BaseClass{
 
     public void iClickOrganizationalField() 
     {
-        iWillWaitToSee(By.xpath("//div[text()='Select Role']"));
-    	clickElement(driver.findElement(By.xpath("//div[text()='Select Role']")));
+        iWillWaitToSee(By.xpath("//div[text()='Select']"));
+    	clickElement(driver.findElement(By.xpath("//div[text()='Select']")));
     }
     
     public void iClickAlreadySelectedOrganizationalField() 
     {
-        iWillWaitToSee(By.xpath("//div[@class='ui fluid selection dropdown']/div[@class='text']"));
-    	clickElement(driver.findElement(By.xpath("//div[@class='ui fluid selection dropdown']/div[@class='text']")));
+        iWillWaitToSee(By.xpath("//div[@class='ui selection dropdown']/div[@class='text']"));
+    	clickElement(driver.findElement(By.xpath("//div[@class='ui selection dropdown']/div[@class='text']")));
     }
 
     public void iTurnOffShareFile()
@@ -219,8 +219,8 @@ public class CreateUserPage extends BaseClass{
     	{
     		iWillWaitToSee(By.xpath("//div[text()='Select']"));
     		clickElement(driver.findElement(By.xpath("//div[text()='Select']")));
-    		iWillWaitToSee(By.xpath("//div[text()='Select']/parent::div/following-sibling::div/div/div/input"));
-            driver.findElement(By.xpath("//div[text()='Select']/parent::div/following-sibling::div/div/div/input")).sendKeys(text);
+    		iWillWaitToSee(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input"));
+            driver.findElement(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input")).sendKeys(text);
             Thread.sleep(4000);
     	}
     }
@@ -229,8 +229,8 @@ public class CreateUserPage extends BaseClass{
     {
     	if(!(desc.equals("")))
     	{
-    	iWillWaitToSee(By.xpath("//div[text()='"+desc+"']"));
-        clickElement(driver.findElement(By.xpath("//div[text()='"+desc+"']")));
+    	iWillWaitToSee(By.xpath("//span[text()='"+desc+"']"));
+        clickElement(driver.findElement(By.xpath("//span[text()='"+desc+"']")));
         Thread.sleep(3000);
     	}
     }
@@ -403,6 +403,7 @@ public class CreateUserPage extends BaseClass{
    }
    
    public void iVerifyNavigationOnEpisodes2HomePage(String role){
+	   driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
@@ -731,6 +732,7 @@ public class CreateUserPage extends BaseClass{
    }
    
    public void iVerifyNavigationOnRemedyUHomePage(String role){
+	   driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   if(application.contains("Lessons")){
 		   String user = role.substring(role.indexOf("-")+1);
@@ -1011,6 +1013,7 @@ public class CreateUserPage extends BaseClass{
 		clickElement(driver.findElement(By.xpath("//button[.='Submit']")));
    }
    
+ 
    
    
 	public void clickSubmitButtonForDifferentUsers(String user) throws Throwable {
@@ -1046,6 +1049,7 @@ public class CreateUserPage extends BaseClass{
 	public void clickSubmitButton() throws Throwable {
 		iWillWaitToSee(By.xpath("//button[.='Submit']"));
 		clickElement(driver.findElement(By.xpath("//button[.='Submit']")));
+		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ui.modal.transition.visible.active.component-add-user-form")));
 	}
    public void verifyAppUnchecked(String fieldName) throws Throwable {
 	   if(fieldName.contains(","))
@@ -1101,8 +1105,8 @@ public class CreateUserPage extends BaseClass{
    public void clickLessonsSelectButton() throws Throwable {
        if(userApplications.contains("Lessons"))
        {
-    	   iWillWaitToSee(By.xpath("//div[text()='Select']"));
-    	   clickElement(driver.findElement(By.xpath("//div[text()='Select']")));  
+    	   iWillWaitToSee(By.xpath("//span[text()='Select']"));
+    	   clickElement(driver.findElement(By.xpath("//span[text()='Select']")));  
        }
    }
    
@@ -1165,7 +1169,7 @@ public class CreateUserPage extends BaseClass{
 	   if(!(programList.equals("")))
    	{
 		   delay();
-	   if(!(driver.findElements(By.xpath("//div[text()='Select']")).size()>0))
+	   if(!(driver.findElements(By.xpath("//span[text()='Select']")).size()>0))
 		 {
 			return;
 		 }
@@ -1173,7 +1177,7 @@ public class CreateUserPage extends BaseClass{
 	   if(programList.contains(","))
 	   {
 		   StringTokenizer st = new StringTokenizer(programList,",");
-		   driver.findElement(By.xpath("//div[text()='Select']")).click();
+		   driver.findElement(By.xpath("//span[text()='Select']")).click();
 		   while (st.hasMoreTokens()) {
 	    	   String programs = st.nextToken().trim();
 	    	   iWillWaitToSee(By.xpath("//label[text()='"+programs+"']"));
@@ -1184,7 +1188,7 @@ public class CreateUserPage extends BaseClass{
 	   else
 	   {
 		   longDelay();
-		   driver.findElement(By.xpath("//div[text()='Select']")).click();
+		   driver.findElement(By.xpath("//span[text()='Select']")).click();
 		   longDelay();
 		   driver.findElement(By.xpath("//label[text()='"+programList+"']")).click();
 		   longDelay();
@@ -1220,6 +1224,7 @@ public class CreateUserPage extends BaseClass{
 	   if(!(locationList.equals("")))
 	   	{
 	   if(locationList.equalsIgnoreCase("All Locations")){
+		   iWillWaitToSee(By.xpath("//div[@class='content active']//label[text()='All Locations']"));
 		   clickElement(driver.findElement(By.xpath("//div[@class='content active']//label[text()='All Locations']")));
 		   delay();
 	   }
@@ -1881,7 +1886,6 @@ public class CreateUserPage extends BaseClass{
 		 driver.findElement(By.xpath("//i[@class='close icon']")).click();
 	 }
 	 public void iVerifyTheSelectedLocationsAreNotPresentInSelectLocationsSection (String text){
-		 iWillWaitToSee(By.xpath("//h5[text()='Selected Locations:']"));
 		 if(text.contains(",")){
 			 StringTokenizer st = new StringTokenizer(text, ",");
 			   while(st.hasMoreTokens())
@@ -1969,11 +1973,27 @@ public class CreateUserPage extends BaseClass{
 	 delay();
 	Assert.assertFalse(driver.findElements(By.cssSelector("tr.component-bpid-row")).get(0).getAttribute("innerText").toString().contains(text));
 	 }
- public void iNavigateToNextLocationsPage(){
+ public void iNavigateToNextLocationsPage(String text){
+	 if(text.equals("creating")){
 	 isElementVisible(driver.findElements(By.cssSelector(".icon.chevron.right")).get(3));
-	 clickElement(driver.findElements(By.cssSelector(".icon.chevron.right")).get(3));
+	 clickElement(driver.findElements(By.cssSelector(".icon.chevron.right")).get(3));}
+	 else{
+		 isElementVisible(driver.findElement(By.cssSelector(".icon.chevron.right")));
+		 clickElement(driver.findElement(By.cssSelector(".icon.chevron.right")));
+		 
+	 }
+		 
  }
  public void iShouldNotSeeAnyErrorMessageForDPLocations(){
-	 isElementVisible(driver.findElement(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),' ')]")));
+	 iWillWaitToSee(By.xpath("//tr[@class='component-bpid-row']"));
+	 Assert.assertTrue(driver.findElements(By.xpath("//tr[@class='component-bpid-row']")).size()>0);
+ }
+ public void validateErrorMsg(String text){
+	 Assert.assertFalse(isElementPresentOnPage(By.xpath("//*[contains(text(),'"+text+"')]")));
+ }
+ public void iSelectCreatedUser() throws InterruptedException{
+	 iWillWaitToSee(By.xpath("//tr[@class='component-user-table-row']"));
+		clickElement(driver.findElement(By.xpath("//tr[@class='component-user-table-row']")));
+		Thread.sleep(3000);
  }
 }

@@ -93,6 +93,7 @@ Feature: Verification Claims Report For Financial Performance Claims Report
       | email                          |
       #| Medicare Payer Users          |
       | shutestaug231132a@yopmail.com  |
+      | reptestachmodel2opsfin@yopmail.com |
       #| Emblem Payer Users            |
       #| emblemachrpfin@yopmail.com     |
       #| Multiple Payer Users          |
@@ -120,6 +121,7 @@ Feature: Verification Claims Report For Financial Performance Claims Report
       | email                          |
       #| Medicare Payer Users          |
       | shutestaug231132a@yopmail.com  |
+      | reptestachmodel2opsfin@yopmail.com |
       #| Emblem Payer Users            |
       #| emblemachrpfin@yopmail.com     |
       #| Multiple Payer Users          |
@@ -289,10 +291,10 @@ Feature: Verification Claims Report For Financial Performance Claims Report
     Examples: 
       | email                              | BPID1    | BPID2    | DRG Code1 | anchor admission quarter1 | anchor admission quarter2 | anchor admission quarter3 | DRG                                                                |
       | shutestaug231132a@yopmail.com      | 2070-021 | 2070-022 |       469 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W MCC   |
-      | shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       469 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W MCC   |
+      #| shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       469 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W MCC   |
       | reptestachmodel2opsfin@yopmail.com | 2070-021 | 2070-022 |       469 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W MCC   |
       | shutestaug231132a@yopmail.com      | 2070-021 | 2070-022 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W/O MCC |
-      | shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W/O MCC |
+      #| shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W/O MCC |
       | reptestachmodel2opsfin@yopmail.com | 2070-021 | 2070-022 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W/O MCC |
 
   Scenario Outline: Remedy awardee convener whose BPID starting with 2070 with model2 and drg 469,470 is able to see fracture/non fracture values when anchor admission quarter >= 2016Q4 in financial performance claims report under overall program
@@ -355,7 +357,7 @@ Feature: Verification Claims Report For Financial Performance Claims Report
     Examples: 
       | email                              | BPID1    | BPID2    | DRG Code1 | DRG Code2 | anchor admission quarter1 | anchor admission quarter2 | anchor admission quarter3 |
       | shutestaug231132a@yopmail.com      | 2070-021 | 2070-022 |       469 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
-      | shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       469 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
+      #| shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       469 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
       | reptestachmodel2opsfin@yopmail.com | 2070-021 | 2070-022 |       469 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
 
   Scenario Outline: Remedy awardee convener whose BPID starting with 2070 with model2 and drg 469 and 470 should see only not-applicable in fracture/non fracture filters when anchor admission quarter is < 2016Q4 in financial performance claims report under overall program
@@ -418,10 +420,10 @@ Feature: Verification Claims Report For Financial Performance Claims Report
     Examples: 
       | email                              | BPID1    | BPID2    | DRG Code1 | anchor admission quarter1 | anchor admission quarter2 |
       | shutestaug231132a@yopmail.com      | 2070-021 | 2070-022 |       469 | 2016Q3                    | 2016Q2                    |
-      | shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       469 | 2016Q3                    | 2016Q2                    |
+      #| shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       469 | 2016Q3                    | 2016Q2                    |
       | reptestachmodel2opsfin@yopmail.com | 2070-021 | 2070-022 |       469 | 2016Q3                    | 2016Q2                    |
       | shutestaug231132a@yopmail.com      | 2070-021 | 2070-022 |       470 | 2016Q3                    | 2016Q2                    |
-      | shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       470 | 2016Q3                    | 2016Q2                    |
+      #| shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       470 | 2016Q3                    | 2016Q2                    |
       | reptestachmodel2opsfin@yopmail.com | 2070-021 | 2070-022 |       470 | 2016Q3                    | 2016Q2                    |
 
   Scenario Outline: Remedy awardee convener whose BPID starting with 2070 with model2 should see only not-applicable in fracture/non fracture filters when anchor admission quarter is >= 2016Q4 and drg is not 469 and 470 in financial performance claims report under overall program
@@ -484,7 +486,7 @@ Feature: Verification Claims Report For Financial Performance Claims Report
     Examples: 
       | email                              | BPID1    | BPID2    | DRG Code1 | DRG Code2 | anchor admission quarter1 |
       | shutestaug231132a@yopmail.com      | 2070-021 | 2070-022 |       216 |       217 | 2016Q4                    |
-      | shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       216 |       217 | 2016Q4                    |
+      #| shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       216 |       217 | 2016Q4                    |
       | reptestachmodel2opsfin@yopmail.com | 2070-021 | 2070-022 |       216 |       217 | 2016Q4                    |
 
   Scenario Outline: Non-Remedy awardee convener whose BPID not starting with 2070 with model2 should see only not-applicable in fracture/non fracture filters when anchor admission quarter is < 2016Q4 and drg code not equal to 469 and 470 in financial performance claims report under overall program
@@ -550,7 +552,7 @@ Feature: Verification Claims Report For Financial Performance Claims Report
     Examples: 
       | email                        | BPID1    | DRG Code1 | DRG Code2 | anchor admission quarter1 | anchor admission quarter2 | anchor admission quarter3 |
       | shutestaug15252p@yopmail.com | 6005-169 |       177 |       178 | 2016Q3                    | 2016Q2                    | 2016Q1                    |
-      | shutestaug15220p@yopmail.com | 6005-169 |       177 |       178 | 2016Q3                    | 2016Q2                    | 2016Q1                    |
+      #| shutestaug15220p@yopmail.com | 6005-169 |       177 |       178 | 2016Q3                    | 2016Q2                    | 2016Q1                    |
       | shutestaug26212p@yopmail.com | 6005-063 |       065 |       066 | 2016Q3                    | 2016Q2                    | 2016Q1                    |
 
   Scenario Outline: Non-Remedy awardee convener whose BPID not starting with 2070 with model2 should see only not-applicable in fracture/non fracture filters when anchor admission quarter is >= 2016Q4 and drg code not equal to 469 and 470 in financial performance claims report under overall program
@@ -616,7 +618,7 @@ Feature: Verification Claims Report For Financial Performance Claims Report
     Examples: 
       | email                        | BPID1    | DRG Code1 | DRG Code2 | anchor admission quarter1 | anchor admission quarter2 | anchor admission quarter3 |
       | shutestaug15252p@yopmail.com | 6005-169 |       242 |       243 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
-      | shutestaug15220p@yopmail.com | 6005-169 |       242 |       243 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
+      #| shutestaug15220p@yopmail.com | 6005-169 |       242 |       243 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
       | shutestaug26212p@yopmail.com | 6005-063 |       065 |       066 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
 
   Scenario Outline: User should only see anchor admission values >= 2016Q4 when drg code selected are 469,470 and fracture and non-fracture both filters in financial performance claims report under overall program
@@ -669,7 +671,7 @@ Feature: Verification Claims Report For Financial Performance Claims Report
     Examples: 
       | email                              | DRG Code1 | DRG Code2 |
       | shutestaug231132a@yopmail.com      |       469 |       470 |
-      | shutestaug221130a@yopmail.com      |       469 |       470 |
+      #| shutestaug221130a@yopmail.com      |       469 |       470 |
       | reptestachmodel2opsfin@yopmail.com |       469 |       470 |
 
   Scenario Outline: User should not see patient risk and onboarding status level fields in the availble fields in financial performance claims report under overall program
@@ -697,6 +699,7 @@ Feature: Verification Claims Report For Financial Performance Claims Report
     Examples: 
       | email                         |
       | shutestaug231132a@yopmail.com |
+      | reptestachmodel2opsfin@yopmail.com |
 
   Scenario Outline: User should click on one of the link under episodes and verify episode list columns
     Given I am on the login page
@@ -743,6 +746,7 @@ Feature: Verification Claims Report For Financial Performance Claims Report
     Examples: 
       | email                         |
       | shutestaug231132a@yopmail.com |
+      | reptestachmodel2opsfin@yopmail.com |
       
   Scenario Outline: User should be able to search and drag drop for ccn and post acute ccn fields for financial performance claims report under overall program
     Given I am on the login page

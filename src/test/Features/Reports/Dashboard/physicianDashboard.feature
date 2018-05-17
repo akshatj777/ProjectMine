@@ -1,6 +1,6 @@
 Feature: Verification of physician report under dashboard
 
-  Scenario Outline: User should be able to verify physician report appearing under dashboard
+  Scenario Outline: User should see physician dashboard report for the role user RPFIN,RPNOFIN
     Given I am on the login page
     When I enter email field <email> for login
     And I enter password field Testing1 for Login
@@ -10,6 +10,8 @@ Feature: Verification of physician report under dashboard
     And I wait to see "Dashboards" under reports tile text
     Then I verify current page "Reports" title
     When I click on the Reports Tile with text "Dashboards"
+    Then I should see following Reports text for Dashboards reports
+      | Physician |
     When I click on "Physician" reports text for "Dashboards" report tile
     And I wait for the reports embedded iframe to load
     When I switch to reports embedded iframe
@@ -17,10 +19,30 @@ Feature: Verification of physician report under dashboard
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
 
     Examples: 
-      | email                         |
-      | shutestaug231132a@yopmail.com |
+      | email                         | Role    |
+      | shutestaug231132a@yopmail.com | RPFIN   |
+      | shutestaug221130a@yopmail.com | RPNOFIN |
 
-  Scenario Outline: Verify clicking on attributed physician name is opening scorecard dashboard
+  Scenario Outline: Except internal roles (RPFIN, RPNOFIN) external roles should not have access to Physician dashboard
+    Given I am on the login page
+    When I enter email field <email> for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    And I wait to see "Reports" tile
+    When I click on the "Reports" tile
+    And I wait to see "Dashboards" under reports tile text
+    Then I verify current page "Reports" title
+    When I click on the Reports Tile with text "Dashboards"
+    Then I should not see "Physician" report after clicking on dashboards
+
+    Examples: 
+      | email                              | Role     |
+      | reptestachmodel2opsfin@yopmail.com | OPSFIN   |
+      | shutestaug15240p@yopmail.com       | OPSNOFIN |
+      | shutestaug221145a@yopmail.com      | OPSSPEND |
+      | repopsnofintest@yopmail.com        | ECREPORT |
+
+  Scenario Outline: User should be able to verify physician report appearing under dashboard and clicking on attributed physician name is opening scorecard dashboard and verify drill through
     Given I am on the login page
     When I enter email field <email> for login
     And I enter password field Testing1 for Login
@@ -47,8 +69,9 @@ Feature: Verification of physician report under dashboard
     Then I verify "% Eps w Readmit" scorecard is appearing under performance scorecard
 
     Examples: 
-      | email                         |
-      | shutestaug231132a@yopmail.com |
+      | email                         | Role  | Facility |
+      | shutestaug231132a@yopmail.com | RPFIN | ACH      |
+      | shutestaug15252p@yopmail.com  | RPFIN | PGP      |
 
   Scenario Outline: Verify top hundread,count,three sections and pagination on physicain dashboard report
     Given I am on the login page
@@ -87,7 +110,7 @@ Feature: Verification of physician report under dashboard
       | email                         |
       | shutestaug231132a@yopmail.com |
 
-  Scenario Outline: Verify attributed physician appearing in performance scorecard page
+  Scenario Outline: Verify attributed physician appearing in performance evalution and scorecard page
     Given I am on the login page
     When I enter email field <email> for login
     And I enter password field Testing1 for Login
@@ -102,13 +125,15 @@ Feature: Verification of physician report under dashboard
     When I switch to reports embedded iframe
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
+    Then I verify Attributed Physician filter is appearing on physician dashboard page
+    And I verify search field is appearing below the count on performance evaluation by physician page
+    Then I verify "Search within selected data set" text is appearing beside the search field on physician dashboard report
     When I click the first name under attributed physican column
     And I switch to new window
     Then I verify current page "Performance Scorecard Dashboard" title
     And I will wait to see "Performance Scorecard" in the newly opened tab after clicking attributed physician
     Then I verify scorecards appearing on performance scorecard dashboard page
     Then I verify "Attributed Physician" is appearing under filter options in newly opened scorecard page
-    Then I verify "physician" filter is appearing under filter options under scorecard page
 
     Examples: 
       | email                         |
@@ -156,6 +181,12 @@ Feature: Verification of physician report under dashboard
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     And I should verify spotlights are not appearing on the physician dashboard page
+    And I verify "Attributed Physician" header name is center alligned on physician dashboard report
+    And I verify "Episodes (Eps)" header name is center alligned on physician dashboard report
+    And I verify "Avg Episode Cost" header name is center alligned on physician dashboard report
+    And I verify "% Disch to SNF" header name is center alligned on physician dashboard report
+    And I verify "SNF Days" header name is center alligned on physician dashboard report
+    And I verify "% Eps with Readmit" header name is center alligned on physician dashboard report
     Then I should verify "$" is appearing before the count under "Avg Episode Cost" column
     Then I should verify "%" is appearing before the count under "% Disch to SNF" column
     Then I should verify "%" is appearing before the count under "% Eps with Readmit" column
@@ -170,45 +201,16 @@ Feature: Verification of physician report under dashboard
       | email                         |
       | shutestaug231132a@yopmail.com |
 
-  Scenario Outline: Verify physician report under dashboard is appearing for RPFIN role user for medicare,emblem and multiple payer users
+  Scenario: Verify dashboard category is not appearing for model 3 pgp users
     Given I am on the login page
-    When I enter email field <email> for login
-    And I enter password field Testing1 for Login
-    Then I click Access button
-    And I wait to see "Reports" tile
-    When I click on the "Reports" tile
-    And I wait to see "Dashboards" under reports tile text
-    Then I verify current page "Reports" title
-    When I click on the Reports Tile with text "Dashboards"
-    When I click on "Physician" reports text for "Dashboards" report tile
-    And I wait for the reports embedded iframe to load
-    When I switch to reports embedded iframe
-    Then I wait until loading icon disappears in physician dashboard report
-    Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
-
-    Examples: 
-      | email                          |
-      #| Medicare                      |
-      | shutestaug231132a@yopmail.com  |
-      #| Emblem                        |
-      | emblemachrpfin@yopmail.com     |
-      #| Multiple Payer User           |
-      | multipayerachrpfin@yopmail.com |
-
-  Scenario Outline: Verify dashboard category is not appearing for model 3 users
-    Given I am on the login page
-    When I enter email field <email> for login
+    When I enter email field shutestauf171115a@yopmail.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
     And I wait to see "Reports" tile
     When I click on the "Reports" tile
     And I wait to see "Patient ID" under reports tile text
     Then I verify current page "Reports" title
-    And I should not see Reports Tile text as "<Menu 1>"
-
-    Examples: 
-      | email                         | Menu 1     |
-      | shutestauf171115a@yopmail.com | Dashboards |
+    And I should not see Reports Tile text as "Dashboards"
 
   Scenario Outline: Verify user has the ability to scan the performance of particular attributed physician
     Given I am on the login page
@@ -240,7 +242,7 @@ Feature: Verification of physician report under dashboard
       | email                         |
       | shutestaug231132a@yopmail.com |
 
-  Scenario Outline: Verify user should see kpi boxes,tabular view and disposition graphs in performance scorecard dashboard page
+  Scenario Outline: Verify user should see kpi boxes,tabular view in performance scorecard dashboard page
     Given I am on the login page
     When I enter email field <email> for login
     And I enter password field Testing1 for Login
@@ -266,12 +268,11 @@ Feature: Verification of physician report under dashboard
     And I verify "% Disch to SNF" KPI is appearing under performance scorecard
     And I verify "SNF Days" KPI is appearing under performance scorecard
     And I verify "% Eps w Readmit" KPI is appearing under performance scorecard
-    Then I verify "Top 5 Bundle Performance" section is appearing on the performance scorecard dashboard page
-    Then I verify "Top 5 Facility Performance" section is appearing on the performance scorecard dashboard page
-    Then I verify "Post-Acute Care Discharge Disposition" section is appearing on the performance scorecard dashboard page
+    Then I verify "Top 5 Bundles by Episode Volume (2016Q4 - 2017Q3)" section is appearing on the performance scorecard dashboard page
+    Then I verify "Quarterly Performance (2016Q4 - 2017Q3)" section is appearing on the performance scorecard dashboard page
+    Then I verify "Top 5 SNFs by Episode Volume (2016Q4 - 2017Q3)" section is appearing on the performance scorecard dashboard page
     And I verify Top 5 "Bundle" performance table is appearing on the performance scorecard dashboard page
-    And I verify Top 5 "Facility" performance table is appearing on the performance scorecard dashboard page
-    Then I verify bar containers appearing under post acute care discharge disposition on the performance scorecard dashboard page
+    And I verify Top 5 "SNF" performance table is appearing on the performance scorecard dashboard page
 
     Examples: 
       | email                         |
@@ -297,7 +298,6 @@ Feature: Verification of physician report under dashboard
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     And I will wait to see "Performance Scorecard" in the newly opened tab after clicking attributed physician
-    And I verify "All" is appearing under "physician" filter field in performance scorecard dashboard page
     And I verify "All" is appearing under "payer" filter field in performance scorecard dashboard page
     And I verify "All" is appearing under "participant" filter field in performance scorecard dashboard page
     And I verify "All" is appearing under "initiator" filter field in performance scorecard dashboard page
@@ -341,19 +341,19 @@ Feature: Verification of physician report under dashboard
     Then I wait until loading message disappears in the new window after clicking on element
     Then I verify current page "Spending" title
     Then I will wait to see "Spending" is appearing in the new window
-    And I switch back to old window
+    And I switch back to old window in reports
     And I click on "% Disch to SNF" is kpi box on the performance scorecard dashboard page
     And I switch to new window
     Then I wait until loading message disappears in the new window after clicking on element
     Then I verify current page "Performance" title
     Then I will wait to see "Performance" is appearing in the new window
-    And I switch back to old window
+    And I switch back to old window in reports
     And I click on "SNF Days" is kpi box on the performance scorecard dashboard page
     And I switch to new window
     Then I wait until loading message disappears in the new window after clicking on element
     Then I verify current page "Performance" title
     Then I will wait to see "Performance" is appearing in the new window
-    And I switch back to old window
+    And I switch back to old window in reports
     And I click on "% Eps w Readmit" is kpi box on the performance scorecard dashboard page
     And I switch to new window
     Then I wait until loading message disappears in the new window after clicking on element
@@ -365,7 +365,7 @@ Feature: Verification of physician report under dashboard
       | email                         |
       | shutestaug231132a@yopmail.com |
 
-  Scenario Outline: Verify user should be able to drill through top 5 bundle performance values
+  Scenario Outline: Verify user should be able to drill through top 5 bundles by episodes volume
     Given I am on the login page
     When I enter email field <email> for login
     And I enter password field Testing1 for Login
@@ -384,7 +384,7 @@ Feature: Verification of physician report under dashboard
     And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
-    Then I verify "Top 5 Bundle Performance" section is appearing on the performance scorecard dashboard page
+    Then I verify "Top 5 Bundles by Episode Volume (2016Q4 - 2017Q3)" section is appearing on the performance scorecard dashboard page
     And I click on a row under top 5 "Bundle" performance table
     And I switch to new window
     Then I wait until loading message disappears in the new window after clicking on element
@@ -396,7 +396,7 @@ Feature: Verification of physician report under dashboard
       | email                         |
       | shutestaug231132a@yopmail.com |
 
-  Scenario Outline: Verify user should be able to drill through top 5 bundle performance values
+  Scenario Outline: Verify attributed physician filter is preselected in the physician scorecard page
     Given I am on the login page
     When I enter email field <email> for login
     And I enter password field Testing1 for Login
@@ -414,20 +414,13 @@ Feature: Verification of physician report under dashboard
     When I click the first name under attributed physican column
     And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
-    Then I verify current page "Performance Scorecard Dashboard" title
-    Then I verify "Top 5 Facility Performance" section is appearing on the performance scorecard dashboard page
-    And I click on a row under top 5 "Facility" performance table
-    And I switch to new window
-    Then I wait until loading message disappears in the new window after clicking on element
-    Then I verify current page "Spending" title
-    Then I will wait to see "Spending" is appearing in the new window
-    And I switch back to old window
+    And I verify "physician" filter is not having "All" in the filter
 
     Examples: 
       | email                         |
       | shutestaug231132a@yopmail.com |
 
-  Scenario Outline: Verify user should be able to drill through post acute care discharge disposition graphs
+  Scenario Outline: Verify the <color> and click on corresponding <color> physician and verify <message> on scorecards as per the color
     Given I am on the login page
     When I enter email field <email> for login
     And I enter password field Testing1 for Login
@@ -442,23 +435,20 @@ Feature: Verification of physician report under dashboard
     When I switch to reports embedded iframe
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
-    When I click the first name under attributed physican column
+    And I click on the attributed physician having "<color>" dot in the chart of physician dashboard report
     And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
-    Then I verify "Post-Acute Care Discharge Disposition" section is appearing on the performance scorecard dashboard page
-    Then I click on one of the bar graph present under post acute care discharge disposition section
-    And I switch to new window
-    Then I wait until loading message disappears in the new window after clicking on element
-    Then I verify current page "Performance" title
-    Then I will wait to see "Performance" is appearing in the new window
-    And I switch back to old window
+    And I verify text with "<color>" is appearing inside the scorecards on performance scorecard page
+    Then I verify "<message>" is appearing on the scorecard corresponding to the "<color>" color
 
     Examples: 
-      | email                         |
-      | shutestaug231132a@yopmail.com |
+      | email                         | color  | messsage             |
+      | shutestaug231132a@yopmail.com | red    | Above the benchmark  |
+      | shutestaug231132a@yopmail.com | green  | Below the benchmark  |
+      | shutestaug231132a@yopmail.com | yellow | Within the benchmark |
 
-  Scenario Outline: Verify the user should be able to see actual values appearing appearing on the kpi boxesw in in performance scorecard page
+  Scenario Outline: Verify filters should not be clickable without selecting any value in the filter
     Given I am on the login page
     When I enter email field <email> for login
     And I enter password field Testing1 for Login
@@ -473,33 +463,438 @@ Feature: Verification of physician report under dashboard
     When I switch to reports embedded iframe
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
+    Then I uncheck All option under "<filtername>" filter in the filter options
+    And I verify apply button is not clickable for <filtername> in the filters after unchecking all option
+    Then I enter <filtertext> under the "<filtername>" field searchbox
+    Then I click the <filtertext> appearing under "<filtername>" field filter under filter options
+    And I click on "Apply" button under the <filtername> in filter options
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
+    Then I verify "<selectedfilter>" is appearing under "<filtername>" filter field after applying filter
     When I click the first name under attributed physican column
     And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
-    Then I wait until loading icon disappears in physician dashboard report
     And I will wait to see "Performance Scorecard" in the newly opened tab after clicking attributed physician
+
+    Examples: 
+      | email                         | filtername  | filtertext                       | selectedfilter                   |
+      | shutestaug231132a@yopmail.com | payer       | Medicare                         | All                              |
+      | shutestaug231132a@yopmail.com | participant | Penn                             | All                              |
+      | shutestaug231132a@yopmail.com | initiator   | Penn Presbyterian Medical Center | Penn Presbyterian Medical Center |
+      | shutestaug231132a@yopmail.com | facility    | Penn Presbyterian Medical Center | All                              |
+      | shutestaug231132a@yopmail.com | bundle      | Coronary artery bypass graft     | Coronary artery bypass graft     |
+
+  Scenario Outline: Verify the fields are no longer availble on the performance scorecard page
+    Given I am on the login page
+    When I enter email field <email> for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    And I wait to see "Reports" tile
+    When I click on the "Reports" tile
+    And I wait to see "Dashboards" under reports tile text
+    Then I verify current page "Reports" title
+    When I click on the Reports Tile with text "Dashboards"
+    When I click on "Physician" reports text for "Dashboards" report tile
+    And I wait for the reports embedded iframe to load
+    When I switch to reports embedded iframe
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
+    When I click the first name under attributed physican column
+    And I switch to new window
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I verify current page "Performance Scorecard Dashboard" title
+    Then I verify "Top 5 Facility Performance" section is not appearing on the performance scorecard page
+    Then I verify "Post Acute Discharge Disposition" section is not appearing on the performance scorecard page
+    And I verify "Date Range" filter is not appearing in the filters section on scorecard page
+    Then I verify "Top 5 Bundles by Episode Volume (2016Q4 - 2017Q3)" section is appearing on the performance scorecard dashboard page
+
+    Examples: 
+      | email                         |
+      | shutestaug231132a@yopmail.com |
+
+  Scenario Outline: Verify user can change physician from the scorecard page
+    Given I am on the login page
+    When I enter email field <email> for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    And I wait to see "Reports" tile
+    When I click on the "Reports" tile
+    And I wait to see "Dashboards" under reports tile text
+    Then I verify current page "Reports" title
+    When I click on the Reports Tile with text "Dashboards"
+    When I click on "Physician" reports text for "Dashboards" report tile
+    And I wait for the reports embedded iframe to load
+    When I switch to reports embedded iframe
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I wait for 40000 milli seconds
+    Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
+    When I click the first name under attributed physican column
+    And I switch to new window
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I verify current page "Performance Scorecard Dashboard" title
+    Then I click on "physician" filter in the filter options
+    And I select a "physician" name in filter and verify the same name is appearing on scorecard page
+
+    Examples: 
+      | email                         |
+      | shutestaug231132a@yopmail.com |
+
+  Scenario Outline: Verify Avg Episode Cost and Avg NPRA per episode values
+    Given I am on the login page
+    When I enter email field <email> for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    And I wait to see "Reports" tile
+    When I click on the "Reports" tile
+    And I wait to see "Dashboards" under reports tile text
+    Then I verify current page "Reports" title
+    When I click on the Reports Tile with text "Dashboards"
+    When I click on "Physician" reports text for "Dashboards" report tile
+    And I wait for the reports embedded iframe to load
+    When I switch to reports embedded iframe
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
+    Then I verify "Avg Episode Cost" toggle button is appearing beside "cost metric"
+    And I verify "Avg Episode Cost" header name is center alligned on physician dashboard report
+    And I click on "Avg NPRA per Episode" radio button beside "cost metric"
+    Then I verify "Avg NPRA per Episode" toggle button is appearing beside "cost metric"
+    And I verify "Avg NPRA per Episode" header name is center alligned on physician dashboard report
+    When I click the first name under attributed physican column
+    And I switch to new window
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I verify current page "Performance Scorecard Dashboard" title
+    And I click on "Avg Episode Cost" radio button beside "cost metric"
+    Then I verify "Avg Episode Cost" toggle button is appearing beside "cost metric"
+    Then I verify "Avg Episode Cost" scorecard is appearing under performance scorecard
+    And I verify column name "Episodes (Eps)" is appearing on the scorecard page
+    And I verify column name "% Disch to Home" is appearing on the scorecard page
+    And I verify column name "% Disch to HHA" is appearing on the scorecard page
+    And I verify column name "% Disch to SNF" is appearing on the scorecard page
+    And I verify column name "% Disch to IRF" is appearing on the scorecard page
+    And I verify column name "% Eps w Readmit" is appearing on the scorecard page
+    And I verify column name "Initial SNF LOS" is appearing on the scorecard page
+    And I verify column name "SNF Days" is appearing on the scorecard page
+    And I verify column name "SNF PN Utilization" is appearing on the scorecard page
+    And I verify column name "Avg Episode Cost" is appearing on the scorecard page
+    And I click on "Avg NPRA per Episode" radio button beside "cost metric"
+    Then I verify "Avg NPRA per Episode" toggle button is appearing beside "cost metric"
+    Then I verify "Avg NPRA per Episode" scorecard is appearing under performance scorecard
+    And I verify column name "Episodes (Eps)" is appearing on the scorecard page
+    And I verify column name "% Disch to Home" is appearing on the scorecard page
+    And I verify column name "% Disch to HHA" is appearing on the scorecard page
+    And I verify column name "% Disch to SNF" is appearing on the scorecard page
+    And I verify column name "% Disch to IRF" is appearing on the scorecard page
+    And I verify column name "% Eps w Readmit" is appearing on the scorecard page
+    And I verify column name "Initial SNF LOS" is appearing on the scorecard page
+    And I verify column name "SNF Days" is appearing on the scorecard page
+    And I verify column name "SNF PN Utilization" is appearing on the scorecard page
+    And I verify column name "Avg NPRA per Episode" is appearing on the scorecard page
+    And I click on "Avg NPRA per Episode" is kpi box on the performance scorecard dashboard page
+    And I switch to new window
+    Then I wait until loading message disappears in the new window after clicking on element
+    Then I verify current page "Financial Performance" title
+    Then I will wait to see "Financial Performance" is appearing in the new window
+    And I switch back to old window
+
+    Examples: 
+      | email                         |
+      | shutestaug231132a@yopmail.com |
+
+  Scenario Outline: Verify  system and adj historic radio buttons beside benchmark
+    Given I am on the login page
+    When I enter email field <email> for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    And I wait to see "Reports" tile
+    When I click on the "Reports" tile
+    And I wait to see "Dashboards" under reports tile text
+    Then I verify current page "Reports" title
+    When I click on the Reports Tile with text "Dashboards"
+    When I click on "Physician" reports text for "Dashboards" report tile
+    And I wait for the reports embedded iframe to load
+    When I switch to reports embedded iframe
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I wait for 40000 milli seconds
+    Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
+    Then I verify "Adj Historic" toggle button is appearing beside "Benchmark"
+    And I click on "System" radio button beside "cost metric"
+    Then I verify "System" toggle button is appearing beside "Benchmark"
+    When I click the first name under attributed physican column
+    And I switch to new window
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I verify current page "Performance Scorecard Dashboard" title
+    And I click on "Adj Historic" radio button beside "Benchmark"
+    Then I verify "Adj Historic" column name is appearing under quaterly performance table
+    And I verify "Adj Historic" column name is appearing under episodes volume table
+    Then I verify "System" column is not appearing on performance scorecard page
+    And I click on "System" radio button beside "Benchmark"
+    Then I verify "System" column name is appearing under quaterly performance table
+    And I verify "System" column name is appearing under episodes volume table
+    Then I verify "Adj Historic" column is not appearing on performance scorecard page
+
+    Examples: 
+      | email                         |
+      | shutestaug231132a@yopmail.com |
+
+  Scenario Outline: Verify top 5 snf table values under physician scorecard page
+    Given I am on the login page
+    When I enter email field <email> for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    And I wait to see "Reports" tile
+    When I click on the "Reports" tile
+    And I wait to see "Dashboards" under reports tile text
+    Then I verify current page "Reports" title
+    When I click on the Reports Tile with text "Dashboards"
+    When I click on "Physician" reports text for "Dashboards" report tile
+    And I wait for the reports embedded iframe to load
+    When I switch to reports embedded iframe
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
+    When I click the first name under attributed physican column
+    And I switch to new window
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I verify current page "Performance Scorecard Dashboard" title
+    Then I verify "Top 5 SNFs by Episode Volume (2016Q4 - 2017Q3)" section is appearing on the performance scorecard dashboard page
+    And I verify "PAC CCN" column is appearing under "top5SNFTable" column on scorecard page
+    And I verify "Post Acute Facility" column is appearing under "top5SNFTable" column on scorecard page
+    And I verify "Network Tier" column is appearing under "top5SNFTable" column on scorecard page
+    And I verify "Episodes (Eps)" column is appearing under "top5SNFTable" column on scorecard page
+    And I verify "SNF Days" column is appearing under "top5SNFTable" column on scorecard page
+    And I verify "% Eps w Readmit" column is appearing under "top5SNFTable" column on scorecard page
+
+    Examples: 
+      | email                         |
+      | shutestaug231132a@yopmail.com |
+
+  Scenario Outline: Verify the overall performance page on clicking LMJ bundle link
+    Given I am on the login page
+    When I enter email field <email> for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    And I wait to see "Reports" tile
+    When I click on the "Reports" tile
+    And I wait to see "Dashboards" under reports tile text
+    Then I verify current page "Reports" title
+    When I click on the Reports Tile with text "Dashboards"
+    When I click on "Physician" reports text for "Dashboards" report tile
+    And I wait for the reports embedded iframe to load
+    When I switch to reports embedded iframe
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
+    When I click the first name under attributed physican column
+    And I switch to new window
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I verify current page "Performance Scorecard Dashboard" title
+    And I click on "LMJ Bundle Details" link on the performance scorecard page
+    And I switch to new window
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I verify current page "Performance Scorecard Dashboard" title
+    And I verify "Performance Scorecard" is appearing on clicking on lmj link
+    Then I verify "Major Joint Replacement of the Lower Extremity" section is appearing on overall performance page
+    Then I verify "Attributed Physician" is appearing under filter options in newly opened overall performance page
+    And I verify "physician" filter is not having "All" in the filter
+    Then I verify "Avg Episode Cost" toggle button is appearing beside "cost metric"
+    #Then I verify "Avg Episode Cost" scorecard is appearing under performance scorecard
+    And I verify column name "Episodes (Eps)" is appearing on the overall performance page
+    And I verify column name "% Disch to Home" is appearing on the overall performance page
+    And I verify column name "% Disch to HHA" is appearing on the overall performance page
+    And I verify column name "% Disch to SNF" is appearing on the overall performance page
+    And I verify column name "% Disch to IRF" is appearing on the overall performance page
+    And I verify column name "% Eps w Readmit" is appearing on the overall performance page
+    And I verify column name "Initial SNF LOS" is appearing on the overall performance page
+    And I verify column name "SNF Days" is appearing on the overall performance page
+    And I verify column name "SNF PN Utilization" is appearing on the overall performance page
+    And I verify column name "Avg Episode Cost" is appearing on the overall performance page
+    And I click on "Avg NPRA per Episode" radio button beside "cost metric"
+    Then I verify "Avg NPRA per Episode" toggle button is appearing beside "cost metric"
+    #Then I verify "Avg NPRA per Episode" scorecard is appearing under performance scorecard
+    And I verify column name "Episodes (Eps)" is appearing on the overall performance page
+    And I verify column name "% Disch to Home" is appearing on the overall performance page
+    And I verify column name "% Disch to HHA" is appearing on the overall performance page
+    And I verify column name "% Disch to SNF" is appearing on the overall performance page
+    And I verify column name "% Disch to IRF" is appearing on the overall performance page
+    And I verify column name "% Eps w Readmit" is appearing on the overall performance page
+    And I verify column name "Initial SNF LOS" is appearing on the overall performance page
+    And I verify column name "SNF Days" is appearing on the overall performance page
+    And I verify column name "SNF PN Utilization" is appearing on the overall performance page
+    And I verify column name "Avg NPRA per Episode" is appearing on the overall performance page
+    And I click on "Avg Episode Cost" radio button beside "cost metric"
+    Then I verify "<fourth most recent quarter>" is appearing on the overall performance page
+    Then I verify "<third most recent quarter>" is appearing on the overall performance page
+    Then I verify "<second most recent quarter>" is appearing on the overall performance page
+    Then I verify "<most recent quarter>" is appearing on the overall performance page
+    Then I verify "Overall Perf (2016Q4-2017Q3)" is appearing on the overall performance page
+    Then I verify "Adj Historic" toggle button is appearing beside "Benchmark"
+    Then I verify "Adj Historic" column name is appearing under major joint replacement of the lower extremity table
+    And I verify "Adj Historic" column name is appearing under performance comparison DRG "469" table
+    And I verify "Adj Historic" column name is appearing under performance comparison DRG "470" table
+    Then I verify "System" column is not appearing on performance scorecard page
+    And I click on "System" radio button beside "cost metric"
+    Then I verify "System" toggle button is appearing beside "Benchmark"
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I verify current page "Performance Scorecard Dashboard" title
+    Then I verify "System" column name is appearing under major joint replacement of the lower extremity table
+    And I verify "System" column name is appearing under performance comparison DRG "469" table
+    And I verify "System" column name is appearing under performance comparison DRG "470" table
+    Then I verify "Adj Historic" column is not appearing on performance scorecard page
+    And I verify column name "Episodes (Eps)" is appearing in performance comparison drg "469" table
+    And I verify column name "% Disch to Home" is appearing in performance comparison drg "469" table
+    And I verify column name "% Disch to HHA" is appearing in performance comparison drg "469" table
+    And I verify column name "% Disch to SNF" is appearing in performance comparison drg "469" table
+    And I verify column name "% Disch to IRF" is appearing in performance comparison drg "469" table
+    And I verify column name "% Eps w Readmit" is appearing in performance comparison drg "469" table
+    And I verify column name "Initial SNF LOS" is appearing in performance comparison drg "469" table
+    And I verify column name "SNF Days" is appearing in performance comparison drg "469" table
+    And I verify column name "SNF PN Utilization" is appearing in performance comparison drg "469" table
+    And I verify column name "Avg Episode Cost" is appearing in performance comparison drg "469" table
+    And I verify column name "Episodes (Eps)" is appearing in performance comparison drg "470" table
+    And I verify column name "% Disch to Home" is appearing in performance comparison drg "470" table
+    And I verify column name "% Disch to HHA" is appearing in performance comparison drg "470" table
+    And I verify column name "% Disch to SNF" is appearing in performance comparison drg "470" table
+    And I verify column name "% Disch to IRF" is appearing in performance comparison drg "470" table
+    And I verify column name "% Eps w Readmit" is appearing in performance comparison drg "470" table
+    And I verify column name "Initial SNF LOS" is appearing in performance comparison drg "470" table
+    And I verify column name "SNF Days" is appearing in performance comparison drg "470" table
+    And I verify column name "SNF PN Utilization" is appearing in performance comparison drg "470" table
+    And I verify column name "Avg Episode Cost" is appearing in performance comparison drg "470" table
+    Then I verify "Non Fracture" is appearing inside the performance comparison drg "469" table
+    Then I verify "Fracture" is appearing inside the performance comparison drg "469" table
+    Then I verify "Not Applicable" is appearing inside the performance comparison drg "469" table
+    Then I verify "Non Fracture" is appearing inside the performance comparison drg "470" table
+    Then I verify "Fracture" is appearing inside the performance comparison drg "470" table
+    Then I verify "Not Applicable" is appearing inside the performance comparison drg "470" table
+    And I verify "Current" is appearing inside drg "469" performance comparison table
+    And I verify "System" is appearing inside drg "469" performance comparison table
+    And I verify "Current" is appearing inside drg "470" performance comparison table
+    And I verify "System" is appearing inside drg "470" performance comparison table
+
+    Examples: 
+      | email                         | fourth most recent quarter | third most recent quarter | second most recent quarter | most recent quarter |
+      | shutestaug231132a@yopmail.com | 2016Q4                     | 2017Q1                    | 2017Q2                     | 2017Q3              |
+
+  Scenario Outline: User should see only not applicable when logged in with non remedy award convener user
+    Given I am on the login page
+    When I enter email field <email> for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    And I wait to see "Reports" tile
+    When I click on the "Reports" tile
+    And I wait to see "Dashboards" under reports tile text
+    Then I verify current page "Reports" title
+    When I click on the Reports Tile with text "Dashboards"
+    When I click on "Physician" reports text for "Dashboards" report tile
+    And I wait for the reports embedded iframe to load
+    When I switch to reports embedded iframe
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
+    When I click the first name under attributed physican column
+    And I switch to new window
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I verify current page "Performance Scorecard Dashboard" title
+    And I click on "LMJ Bundle Details" link on the performance scorecard page
+    And I switch to new window
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I verify current page "Performance Scorecard Dashboard" title
+    And I verify "Performance Scorecard" is appearing on clicking on lmj link
+    Then I verify "Not Applicable" is appearing inside the performance comparison drg "469" table
+    Then I verify "Not Applicable" is appearing inside the performance comparison drg "470" table
+    Then I verify the data under fracture and non fracture is only "-" in the rows under drg table "469"
+    Then I verify the data under fracture and non fracture is only "-" in the rows under drg table "470"
+
+    Examples: 
+      | email                              |
+      | RPFINnonremedywardy469@yopmail.com |
+
+  Scenario Outline: Verify the same episodes column should be available on all the places for particular physician
+    Given I am on the login page
+    When I enter email field <email> for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    And I wait to see "Reports" tile
+    When I click on the "Reports" tile
+    And I wait to see "Dashboards" under reports tile text
+    Then I verify current page "Reports" title
+    When I click on the Reports Tile with text "Dashboards"
+    When I click on "Physician" reports text for "Dashboards" report tile
+    And I wait for the reports embedded iframe to load
+    When I switch to reports embedded iframe
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
+    And I fetch the value of episodes present beside first physician
+    When I click the first name under attributed physican column
+    And I switch to new window
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I verify current page "Performance Scorecard Dashboard" title
+    And I verify fetched episodes data is appearing inside the kpi box of episodes
+    Then I verify same episodes data is appearing under overall performance column in quaterly performance table
+
+    Examples: 
+      | email                         |
+      | shutestaug231132a@yopmail.com |
+
+  Scenario Outline: Verify the metrics are changes when changed the filters on physician scorecard page
+    Given I am on the login page
+    When I enter email field <email> for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    And I wait to see "Reports" tile
+    When I click on the "Reports" tile
+    And I wait to see "Dashboards" under reports tile text
+    Then I verify current page "Reports" title
+    When I click on the Reports Tile with text "Dashboards"
+    When I click on "Physician" reports text for "Dashboards" report tile
+    And I wait for the reports embedded iframe to load
+    When I switch to reports embedded iframe
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
+    When I click the first name under attributed physican column
+    And I switch to new window
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I verify current page "Performance Scorecard Dashboard" title
+    And I will wait to see "Performance Scorecard" in the newly opened tab after clicking attributed physician
+    Then I uncheck All option under "payer" filter in the filter options
+    Then I enter Medicare under the "payer" field searchbox
+    Then I click the Medicare appearing under "payer" field filter under filter options
+    And I click on apply button under the filter in filter options
+    Then I wait until loading icon disappears in physician dashboard report
     Then I verify scorecards appearing on performance scorecard dashboard page
-    And I verify "Episodes (Eps)" KPI is appearing under performance scorecard
-    And I verify "Avg Episode Cost" KPI is appearing under performance scorecard
-    And I verify "% Disch to SNF" KPI is appearing under performance scorecard
-    And I verify "SNF Days" KPI is appearing under performance scorecard
-    And I verify "% Eps w Readmit" KPI is appearing under performance scorecard
-    Then I verify actual calculation is appearing on the "Episodes (Eps)" kpi box
-    Then I verify actual calculation is appearing on the "Avg Episode Cost" kpi box
-    Then I verify actual calculation is appearing on the "% Disch to SNF" kpi box
-    Then I verify actual calculation is appearing on the "SNF Days" kpi box
-    Then I verify actual calculation is appearing on the "% Eps w Readmit" kpi box
-    And I verify adjusted calculation is appearing on the "Avg Episode Cost" kpi box
-    And I verify adjusted calculation is appearing on the "% Disch to SNF" kpi box
-    And I verify adjusted calculation is appearing on the "SNF Days" kpi box
-    And I verify adjusted calculation is appearing on the "% Eps w Readmit" kpi box
+    Then I verify "All" is appearing under "payer" filter field after applying filter
+    Then I uncheck All option under "participant" filter in the filter options
+    Then I enter Penn under the "participant" field searchbox
+    Then I click the Penn appearing under "participant" field filter under filter options
+    And I click on "Apply" button under the participant in filter options
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I verify scorecards appearing on performance scorecard dashboard page
+    Then I verify "All" is appearing under "participant" filter field after applying filter
+    Then I uncheck All option under "initiator" filter in the filter options
+    Then I enter Penn Presbyterian Medical Center under the "initiator" field searchbox
+    Then I click the Penn Presbyterian Medical Center appearing under "initiator" field filter under filter options
+    And I click on "Apply" button under the initiator in filter options
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I verify scorecards appearing on performance scorecard dashboard page
+    Then I verify "Penn Presbyterian Medical Center" is appearing under "initiator" filter field after applying filter
+    Then I uncheck All option under "facility" filter in the filter options
+    Then I enter Penn Presbyterian Medical Center under the "facility" field searchbox
+    Then I click the Penn Presbyterian Medical Center appearing under "facility" field filter under filter options
+    And I click on "Apply" button under the facility in filter options
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I verify scorecards appearing on performance scorecard dashboard page
+    Then I verify "Penn Presbyterian Medical Center" is appearing under "facility" filter field after applying filter
+    Then I uncheck All option under "bundle" filter in the filter options
+    Then I enter Amputation under the "bundle" field searchbox
+    Then I click the Amputation appearing under "bundle" field filter under filter options
+    And I click on "Apply" button under the bundle in filter options
+    Then I wait until loading icon disappears in physician dashboard report
+    Then I verify scorecards appearing on performance scorecard dashboard page
+    Then I verify "Amputation" is appearing under "bundle" filter field after applying filter
 
     Examples: 
       | email                         |
       | shutestaug231132a@yopmail.com |
 
-  Scenario Outline: Verify user should be able to verify the column names in the financial performance tables
+  Scenario Outline: Verify the metrics are changes when changed the filters in the newly opened tab after clicking lmj bundle link
     Given I am on the login page
     When I enter email field <email> for login
     And I enter password field Testing1 for Login
@@ -518,154 +913,47 @@ Feature: Verification of physician report under dashboard
     And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
-    Then I verify "Top 5 Bundle Performance" section is appearing on the performance scorecard dashboard page
-    And I verify "Bundle" column is appearing under top 5 "Bundle" performance table
-    And I verify "Episode Volume" column is appearing under top 5 "Bundle" performance table
-    And I verify "Avg. Episode Cost" column is appearing under top 5 "Bundle" performance table
-    And I verify "Avg Target Price" column is appearing under top 5 "Bundle" performance table
-    Then I verify "Top 5 Facility Performance" section is appearing on the performance scorecard dashboard page
-    And I verify "Facility" column is appearing under top 5 "Facility" performance table
-    And I verify "Episode Volume" column is appearing under top 5 "Facility" performance table
-    And I verify "Avg. Episode Cost" column is appearing under top 5 "Facility" performance table
-    And I verify "Avg Target Price" column is appearing under top 5 "Facility" performance table
-
-    Examples: 
-      | email                         |
-      | shutestaug231132a@yopmail.com |
-
-  Scenario Outline: Verify user is able to see $ symbol before the value in average episode cost in performance score card page
-    Given I am on the login page
-    When I enter email field <email> for login
-    And I enter password field Testing1 for Login
-    Then I click Access button
-    And I wait to see "Reports" tile
-    When I click on the "Reports" tile
-    And I wait to see "Dashboards" under reports tile text
-    Then I verify current page "Reports" title
-    When I click on the Reports Tile with text "Dashboards"
-    When I click on "Physician" reports text for "Dashboards" report tile
-    And I wait for the reports embedded iframe to load
-    When I switch to reports embedded iframe
-    Then I wait until loading icon disappears in physician dashboard report
-    Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
-    When I click the first name under attributed physican column
+    And I will wait to see "Performance Scorecard" in the newly opened tab after clicking attributed physician
+    And I click on "LMJ Bundle Details" link on the performance scorecard page
     And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
-    Then I verify "$" is appearing on the actual value of "Avg Episode Cost" kpi box
-    Then I verify "%" is appearing on the actual value of "% Disch to SNF" kpi box
-    Then I verify "%" is appearing on the actual value of "% Eps w Readmit" kpi box
-    Then I verify "$" is appearing on the adjusted value of "Avg Episode Cost" kpi box
-    Then I verify "%" is appearing on the adjusted value of "% Disch to SNF" kpi box
-    Then I verify "%" is appearing on the adjusted value of "% Eps w Readmit" kpi box
-    Then I verify "$" symbol is appearing in the values under avg episode cost and avg target price in "Bundle" table
-    Then I verify "$" symbol is appearing in the values under avg episode cost and avg target price in "Facility" table
-
-    Examples: 
-      | email                         |
-      | shutestaug231132a@yopmail.com |
-
-  Scenario Outline: Verify the values under performance evaluation by physician table values are center alligned
-    Given I am on the login page
-    When I enter email field <email> for login
-    And I enter password field Testing1 for Login
-    Then I click Access button
-    And I wait to see "Reports" tile
-    When I click on the "Reports" tile
-    And I wait to see "Dashboards" under reports tile text
-    Then I verify current page "Reports" title
-    When I click on the Reports Tile with text "Dashboards"
-    When I click on "Physician" reports text for "Dashboards" report tile
-    And I wait for the reports embedded iframe to load
-    When I switch to reports embedded iframe
+    And I verify "Performance Scorecard" is appearing on clicking on lmj link
+    Then I uncheck All option under "payer" filter in the filter options
+    Then I enter Medicare under the "payer" field searchbox
+    Then I click the Medicare appearing under "payer" field filter under filter options
+    And I click on "Apply" button under the payer in filter options
     Then I wait until loading icon disappears in physician dashboard report
-    Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
-    Then I verify attributed physician names are center alligned
-    Then I verify episode eps column values are center alligned
-    Then I verify avg episode cost column spotlights are center alligned
-    Then I verify disch to snf column spotlights are center alligned
-    Then I verify snf days column spotlights are center alligned
-    Then I verify eps with readmit column spotlights are center alligned
-
-    Examples: 
-      | email                         |
-      | shutestaug231132a@yopmail.com |
-
-  Scenario Outline: Verify the values in kpi boxes are center alligned under performance scorecard dashboard page
-    Given I am on the login page
-    When I enter email field <email> for login
-    And I enter password field Testing1 for Login
-    Then I click Access button
-    And I wait to see "Reports" tile
-    When I click on the "Reports" tile
-    And I wait to see "Dashboards" under reports tile text
-    Then I verify current page "Reports" title
-    When I click on the Reports Tile with text "Dashboards"
-    When I click on "Physician" reports text for "Dashboards" report tile
-    And I wait for the reports embedded iframe to load
-    When I switch to reports embedded iframe
+    Then I verify "Major Joint Replacement of the Lower Extremity" section is appearing on overall performance page
+    Then I verify "All" is appearing under "payer" filter field after applying filter
+    Then I uncheck All option under "participant" filter in the filter options
+    Then I enter Penn under the "participant" field searchbox
+    Then I click the Penn appearing under "participant" field filter under filter options
+    And I click on "Apply" button under the participant in filter options
     Then I wait until loading icon disappears in physician dashboard report
-    Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
-    When I click the first name under attributed physican column
-    And I switch to new window
+    Then I verify "Major Joint Replacement of the Lower Extremity" section is appearing on overall performance page
+    Then I verify "All" is appearing under "participant" filter field after applying filter
+    Then I uncheck All option under "initiator" filter in the filter options
+    Then I enter Penn Presbyterian Medical Center under the "initiator" field searchbox
+    Then I click the Penn Presbyterian Medical Center appearing under "initiator" field filter under filter options
+    And I click on "Apply" button under the initiator in filter options
     Then I wait until loading icon disappears in physician dashboard report
-    Then I verify current page "Performance Scorecard Dashboard" title
-    Then I verify actual values in kpi boxes are center alligned in performance scorecard page
-    Then I verify episode volume column values under "Bundle" performance table are center alligned
-    Then I verify avg episode cost column values under "Bundle" performance table are center alligned
-    Then I verify avg target price column values under "Bundle" performance table are center alligned
-    Then I verify episode volume column values under "Facility" performance table are center alligned
-    Then I verify avg episode cost column values under "Facility" performance table are center alligned
-    Then I verify avg target price column values under "Facility" performance table are center alligned
-
-    Examples: 
-      | email                         |
-      | shutestaug231132a@yopmail.com |
-
-  Scenario Outline: Verify adjusted historic button is visible beside benchmark on the physician dashboard page and performance scorecard page
-    Given I am on the login page
-    When I enter email field <email> for login
-    And I enter password field Testing1 for Login
-    Then I click Access button
-    And I wait to see "Reports" tile
-    When I click on the "Reports" tile
-    And I wait to see "Dashboards" under reports tile text
-    Then I verify current page "Reports" title
-    When I click on the Reports Tile with text "Dashboards"
-    When I click on "Physician" reports text for "Dashboards" report tile
-    And I wait for the reports embedded iframe to load
-    When I switch to reports embedded iframe
+    Then I verify "Major Joint Replacement of the Lower Extremity" section is appearing on overall performance page
+    Then I verify "Penn Presbyterian Medical Center" is appearing under "initiator" filter field after applying filter
+    Then I uncheck All option under "facility" filter in the filter options
+    Then I enter Penn Presbyterian Medical Center under the "facility" field searchbox
+    Then I click the Penn Presbyterian Medical Center appearing under "facility" field filter under filter options
+    And I click on "Apply" button under the facility in filter options
     Then I wait until loading icon disappears in physician dashboard report
-    Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
-    Then I verify Adjusted Historic button is appearing beside benchmark option on physician dashboard page
-    When I click the first name under attributed physican column
-    And I switch to new window
+    Then I verify "Major Joint Replacement of the Lower Extremity" section is appearing on overall performance page
+    Then I verify "Penn Presbyterian Medical Center" is appearing under "facility" filter field after applying filter
+    Then I uncheck All option under "bundle" filter in the filter options
+    Then I enter Amputation under the "bundle" field searchbox
+    Then I click the Amputation appearing under "bundle" field filter under filter options
+    And I click on "Apply" button under the bundle in filter options
     Then I wait until loading icon disappears in physician dashboard report
-    Then I verify current page "Performance Scorecard Dashboard" title
-    And I verify Adjusted Historic button is appearing beside benchmark option on performance scorecard page
-
-    Examples: 
-      | email                         |
-      | shutestaug231132a@yopmail.com |
-
-  Scenario Outline: Verify claims option is appearing under data source
-    Given I am on the login page
-    When I enter email field <email> for login
-    And I enter password field Testing1 for Login
-    Then I click Access button
-    And I wait to see "Reports" tile
-    When I click on the "Reports" tile
-    And I wait to see "Dashboards" under reports tile text
-    Then I verify current page "Reports" title
-    When I click on the Reports Tile with text "Dashboards"
-    When I click on "Physician" reports text for "Dashboards" report tile
-    And I wait for the reports embedded iframe to load
-    When I switch to reports embedded iframe
-    Then I wait until loading icon disappears in physician dashboard report
-    Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
-    Then I verify "Claims" option is appearing beside data source on the physician dashboard report page
-    Then I verify "Claims" option is appearing beside data source on the physician dashboard report page
-    And I verify "Claims" option is appearing beside data source on the performance scorecard page
+    Then I verify "Major Joint Replacement of the Lower Extremity" section is appearing on overall performance page
+    Then I verify "Amputation" is appearing under "bundle" filter field after applying filter
 
     Examples: 
       | email                         |
@@ -694,36 +982,7 @@ Feature: Verification of physician report under dashboard
     Then I verify "Episode Initiator" filter is appearing under global filters
     Then I verify "Anchor Facility" filter is appearing under global filters
     And I verify apply button is appearing under global filters
-    Then I see <payer> appearing under payer filter of global filters
-    Then I see <participant> appearing under participant filter of global filters
 
     Examples: 
       | email                         | payer    | participant |
       | shutestaug231132a@yopmail.com | Medicare | Penn        |
-
-  Scenario Outline: Verify the headers of the columns are center alligned
-    Given I am on the login page
-    When I enter email field <email> for login
-    And I enter password field Testing1 for Login
-    Then I click Access button
-    And I wait to see "Reports" tile
-    When I click on the "Reports" tile
-    And I wait to see "Dashboards" under reports tile text
-    Then I verify current page "Reports" title
-    When I click on the Reports Tile with text "Dashboards"
-    When I click on "Physician" reports text for "Dashboards" report tile
-    And I wait for the reports embedded iframe to load
-    When I switch to reports embedded iframe
-    Then I wait until loading icon disappears in physician dashboard report
-    Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
-    And I verify "Attributed Physician" header name is center alligned on physician dashboard report
-    And I verify "Episodes (Eps)" header name is center alligned on physician dashboard report
-    And I verify "Avg Episode Cost" header name is center alligned on physician dashboard report
-    And I verify "% Disch to SNF" header name is center alligned on physician dashboard report
-    And I verify "SNF Days" header name is center alligned on physician dashboard report
-    And I verify "% Eps with Readmit" header name is center alligned on physician dashboard report
-    
-    Examples: 
-      | email                         |
-      | shutestaug231132a@yopmail.com |
-    

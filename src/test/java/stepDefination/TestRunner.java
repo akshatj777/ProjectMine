@@ -20,7 +20,12 @@ import stepDefination.Hooks.*;
                 "junit:target/cucumber-results/cucumber-results.xml", "json:target/cucumber-results/cucumber.json"},
         features = { "src/test/Features/"},
         //glue = { "./src/test/java/stepDefination" },
+<<<<<<< HEAD
+        tags = {} 
+<<<<<<< HEAD
+=======
         tags = {}
+>>>>>>> 27d2aadbfc8be4003c8619a3e677b08dffc52540
 
 )*/
 
@@ -30,7 +35,9 @@ import stepDefination.Hooks.*;
                 "junit:target/cucumber-results/cucumber-results.xml", "json:target/cucumber-results/cucumber.json",
                 "com.cucumber.listener.ExtentCucumberFormatter:target/vimalSelvam-cucumberReport/report.html"},
 
-        features = { "src/test/Features/UA2/A_SuperAdmin/test.feature" },
+
+        features = { "src/test/Features/" },
+
 
         //glue = { "./src/test/java/stepDefination" },
         tags = {}
