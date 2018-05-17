@@ -1329,7 +1329,27 @@ public class CreateUserPage extends BaseClass{
 		   		}
 		   	}
 	   	}
-   
+   public void iSearchDPLocations(String locationList){
+	   if(!(locationList.equals("")))
+	   	{
+			   StringTokenizer st = new StringTokenizer(locationList,",");
+		       while (st.hasMoreTokens()) 
+		       {
+		    	   String token = st.nextToken().trim();
+//		    	   delay();
+//		    	   while(!(driver.findElement(By.xpath("//p[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")).getText().equals("")))
+//			    	   {
+//			    		   driver.findElement(By.xpath("//p[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);  
+//			    	   }
+//		    	   delay();
+		    	   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']"))));
+		    	   driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
+		    	   iFillInText(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), token);
+		    	   iWillWaitToSee(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),\""+token+"\")]"));
+		    	
+	 }
+	   	}
+   }
    public void selectLocationsForPTAUser(String locationList) throws Throwable {
 	   if(!(locationList.equals("")))
 	   	{
@@ -1949,4 +1969,11 @@ public class CreateUserPage extends BaseClass{
 	 delay();
 	Assert.assertFalse(driver.findElements(By.cssSelector("tr.component-bpid-row")).get(0).getAttribute("innerText").toString().contains(text));
 	 }
+ public void iNavigateToNextLocationsPage(){
+	 isElementVisible(driver.findElements(By.cssSelector(".icon.chevron.right")).get(3));
+	 clickElement(driver.findElements(By.cssSelector(".icon.chevron.right")).get(3));
+ }
+ public void iShouldNotSeeAnyErrorMessageForDPLocations(){
+	 isElementVisible(driver.findElement(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),' ')]")));
+ }
 }

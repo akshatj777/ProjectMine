@@ -856,8 +856,21 @@ public class CreateUserSteps extends DriverScript {
 	 public void iEnterExistingEmail(String userRole){
 		 createUser.iEnterExistingEmail(userRole);
 	 }
-	 @Then("^I verify that \\\"([^\\\"]*)\\\" is not present under the bpid$")
+	 @Then("^I verify that \"([^\"]*)\" is not present under the bpid$")
 	 public void iVerifyAllLocationsPresence(String text) {
 		 createUser.iVerifyAllLocationsPresence(text);
+	 }
+	 @Then("^I click on > to navigate to next page$")
+	 public void iNavigateToNextLocationsPage(){
+		 createUser.iNavigateToNextLocationsPage();
+	 }
+	 @Then("^I search \"([^\"]*)\" locations for Downstream Provider role$")
+	 public void iSearchDPLocations(String locationList){
+		 createUser.iSearchDPLocations(locationList);
+	 }
+	 
+	 @Then("^I should not see any error message on searching any downstream provider location less than 5 alphabets$")
+	 public void iShouldNotSeeAnyErrorMessageForDPLocations(){
+		 createUser.iShouldNotSeeAnyErrorMessageForDPLocations();
 	 }
 }
