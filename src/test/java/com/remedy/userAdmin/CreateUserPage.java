@@ -2005,7 +2005,7 @@ public class CreateUserPage extends BaseClass{
 		 
 		 int size =driver.findElements(By.xpath("//div[@class='scrolling menu transition']/div[@class='item']/span")).size();
 		 Assert.assertTrue(size==5);
-		 for(int i=0;i<=size;i++){
+		 for(int i=0;i<size;i++){
 			text=driver.findElements(By.xpath("//div[@class='scrolling menu transition']/div[@class='item']/span")).get(i).getAttribute("innerText").toString().trim();
 			 Assert.assertTrue(text.equals("Executive")|| text.equals("Manager") || text.equals("Case Manager") ||text.equals("Physicians") ||text.equals("Transitional Case Manager"));
 		
