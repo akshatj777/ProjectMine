@@ -884,4 +884,8 @@ public class CreateUserSteps extends DriverScript {
 	 public void iSelectCreatedUser() throws InterruptedException{
 		 createUser.iSelectCreatedUser();
 	 }
+	 @Then("^I verify that roles are reflected as per the \"([^\"]*)\"$")
+	 public void iVerifyRolesAsPerUser(String user){
+		 createUser.iVerifyRolesAsPerUser(user);
+	 }
 }
