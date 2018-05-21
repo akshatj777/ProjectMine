@@ -243,6 +243,10 @@ public class CreateUserSteps extends DriverScript {
 	public void iSelectTileForTheRole(String appList) throws Throwable {
 		createUser.iSelectTileForTheRole(appList);
 	}
+	@Then("^I unselect all selected applications$")
+	public void iUnselectAllSelectedApps(){
+		createUser.iUnselectAllSelectedApps();
+	}
 	
 	@Then("^I verify \"([^\"]*)\" is not visible on Applications tab$")
 	public void verifyProductNotPresentOnApplicationsTab(String products) throws Throwable {
@@ -594,6 +598,10 @@ public class CreateUserSteps extends DriverScript {
 	public void selectPrograms(String programList) throws Throwable {
 		createUser.selectPrograms(programList);
 	}
+	@Then("^I verify that \"([^\"]*)\" model is not present under Programs$")
+		public void iVerifyModel(String text){
+			createUser.iVerifyModel(text);
+		}
 	
 	@Then("^I select \"([^\"]*)\" locations$")
 	public void selectLocations(String locationList) throws Throwable {

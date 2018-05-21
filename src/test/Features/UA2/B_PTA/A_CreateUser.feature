@@ -1147,3 +1147,42 @@ Feature: Create User - PTA User
     Then I should see "Add New User" on the user creation page
     When I click the Organizational Role Field
     Then I verify that roles are reflected as per the "PTA"
+
+  Scenario Outline: validating Learning Pathway on edit role
+    Given I am on the login page
+    Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
+    Then I enter newuser password for login to Remedy
+    Then I click Access button
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    When I click on Add User button
+    Then I should see "Add New User" on the user creation page
+    Then I verify the header "General Information"
+    And I fill in First Name with "<FirstName>"
+    Then I fill in Last Name with <LastName>
+    And I enter Email "<Email>" to Create user
+    When I click the Organizational Role Field
+    Then I pick a Organizational <Role1>
+    Then I enter NPI field with "<NPI>" for role "<Role1>"
+    Then I click on Next button
+    Then I verify the header "Applications"
+    Then I verify applications "<Applications>" are unchecked
+    Then I verify Learning Pathway search box is not available
+    Then I select "<Applications>" product
+    Then I verify applications "<Applications>" are checked
+    Then I click on Select button
+    Then I verify Learning Pathway search box is available
+    Then I select "<LearningPathwaySearchParameter>" from the results
+    Then I click on Back button
+    Then I verify the header "General Information"
+    When I click the Organizational Role Field to edit
+    Then I pick a Organizational <Role2>
+    Then I enter NPI field with "<NPI>" for role "<Role2>"
+    Then I click on Next button
+    Then I verify the header "Applications"
+    Then I verify Learning Pathway search box is not available
+
+    Examples: 
+      | User                            | UserName                               | Password | FirstName | LastName | Email             | Role1      | Applications     | NPI | LearningPathwaySearchParameter                         | Role2     |
+      | Partner Technical Administrator | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | test.automatemail | Physicians | Reports, Lessons | NPI | p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81, n9yn5n0Qa581 | Executive |

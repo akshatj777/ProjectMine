@@ -52,7 +52,7 @@ Feature: Edit user page for SA
     And I verify "Dashboard" after redirection to EC1 for "Super Admin-Physicians" user
     And I verify NPI on ECI for "Super Admin-Physicians" user
 
-  Scenario Outline: Editing user role from <PreviousRole> to <Role>
+  Scenario Outline: Editing user role from <PreviousRole> to <Role> and validating Next button
     Given I am on the login page
     When I log in as super user
     Then I should see Tile text User Admin
@@ -66,9 +66,12 @@ Feature: Edit user page for SA
     Then I pick a Organizational <Role>
     Then I enter NPI field with "<NPI>" for role "<Role>"
     Then I click on Next button
+    Then I unselect all selected applications
+    Then I verify that Next button is "disabled"
     Then I select "<EnableApplications>" product
     Then I enter "<LearningPathwaySearchParameter>" in Learning Pathway search box
     Then I select "<LearningPathwaySearchParameter>" from the results
+    Then I verify that Next button is "enabled"
     Then I click on Next button
     Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
     Then I verify role "<Role>"
@@ -141,8 +144,8 @@ Feature: Edit user page for SA
     And I should see Log in widget
 
     Examples: 
-      | User        | UserName                               | Password | Email             | NPI | PreviousRole | Role                          | EnableApplications | Applications                                                     | ApplicationsVisible        | ApplicationsNotVisible       | LearningPathwaySearchParameter | Roletext | ReportCategory | ReportName                   | BPID | LearningPathway                                                                                                                       | FirstName | LastName | Facilities        |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | test.automatemail |     | Manager      | Partner Program Administrator | Physician Connect  | Episodes, Reports, Physician Connect, Lessons, Physician Connect | Episodes, Reports, Lessons | Administration, Episodes 2.0 |                                | ROLE_PRM | Patient ID     | Episode DRG Issues [Model 3] |      | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | FirstName | LastName | Apple - Watertown |
+      | User        | UserName                               | Password | Email             | NPI | PreviousRole | Role                          | EnableApplications                            | Applications                                  | ApplicationsVisible        | ApplicationsNotVisible       | LearningPathwaySearchParameter                                                                                                        | Roletext | ReportCategory | ReportName                   | BPID | LearningPathway                                                                                                                       | FirstName | LastName | Facilities        |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | test.automatemail |     | Manager      | Partner Program Administrator | Physician Connect, Episodes, Reports, Lessons | Episodes, Reports, Physician Connect, Lessons | Episodes, Reports, Lessons | Administration, Episodes 2.0 | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | ROLE_PRM | Patient ID     | Episode DRG Issues [Model 3] |      | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | FirstName | LastName | Apple - Watertown |
 
   Scenario Outline: Changing the products and general details for <Role> and verifying product tile
     Given I am on the login page
@@ -324,8 +327,8 @@ Feature: Edit user page for SA
     And I should see Log in widget
 
     Examples: 
-      | Description                          | User        | Role      | Email             | Applications                    | ApplicationsNotVisible                          | Remove HealthSystem1 | Remove HealthSystem2 |Health System id| Health System    | Programs    | Locations                                                                               | Facilities                                                          | ProgramsValidation             | LocationsValidation                                                                                                         | LearningPathway                                           | FirstName                                 | LastName                                 | Roletext | ReportCategory | ReportName         |
-      | Remove Existing org and add new org1 | Super Admin | Executive | test.automatemail | Reports, Episodes, TCI, Lessons | Episodes 2.0, Administration, Physician Connect | Stamford Hospital    | Penn                 |441324| Sound Physicians | BPCI-Model2 | 6005-080--Winchester Medical Center - Rehab Unit, 6005-063--Fairbanks Memorial Hospital | Winchester Medical Center - Rehab Unit, Fairbanks Memorial Hospital | Sound Physicians--BPCI Model 2 | Sound Physicians--6005-080--Winchester Medical Center - Rehab Unit, Sound Physicians--6005-063--Fairbanks Memorial Hospital | i am learning path, Learning Pathway 2, Remedy University | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | ROLE_PRM | Patient ID     | Episode DRG Issues |
+      | Description                          | User        | Role      | Email             | Applications                    | ApplicationsNotVisible                          | Remove HealthSystem1 | Remove HealthSystem2 | Health System id | Health System    | Programs    | Locations                                                                               | Facilities                                                          | ProgramsValidation             | LocationsValidation                                                                                                         | LearningPathway                                           | FirstName                                 | LastName                                 | Roletext | ReportCategory | ReportName         |
+      | Remove Existing org and add new org1 | Super Admin | Executive | test.automatemail | Reports, Episodes, TCI, Lessons | Episodes 2.0, Administration, Physician Connect | Stamford Hospital    | Penn                 |           441324 | Sound Physicians | BPCI-Model2 | 6005-080--Winchester Medical Center - Rehab Unit, 6005-063--Fairbanks Memorial Hospital | Winchester Medical Center - Rehab Unit, Fairbanks Memorial Hospital | Sound Physicians--BPCI Model 2 | Sound Physicians--6005-080--Winchester Medical Center - Rehab Unit, Sound Physicians--6005-063--Fairbanks Memorial Hospital | i am learning path, Learning Pathway 2, Remedy University | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | ROLE_PRM | Patient ID     | Episode DRG Issues |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -1312,11 +1315,12 @@ Feature: Edit user page for SA
     And I click on "Remove" button on permissions tab
     And I search for health system with <Health System>
     And I select a <Health System>
+    And I verify that "<ModelNotPresent>" model is not present under Programs
     Then I select "<Programs>" programs
     Then I select "<Locations>" locations
     Then I click on Submit button while edit for "<User>-<Role>"
     Then I verify error message "User does not exist. Please go back to the users list page." is not displayed
 
     Examples: 
-      | Description                                                                                         | User        | Role      | Remove HealthSystem | Health System                                                          | Programs    | Locations     |
-      | Error message "User does not exist. Please go back to the users list page." should not be displayed | Super Admin | Executive | Sound Physicians    | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI-Model2 | All Locations |
+      | Description                                                                                         | User        | Role      | Remove HealthSystem | Health System                                                          | Programs  | ModelNotPresent | Locations     |
+      | Error message "User does not exist. Please go back to the users list page." should not be displayed | Super Admin | Executive | Sound Physicians    | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI-Model2 |BPCI-Model3 | All Locations |

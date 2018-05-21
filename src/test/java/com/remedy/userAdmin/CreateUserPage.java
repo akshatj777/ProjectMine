@@ -381,7 +381,11 @@ public class CreateUserPage extends BaseClass{
     	apps = apps.substring(0, apps.length()-1);
     	userApplications = apps;
     }
-    
+public void iUnselectAllSelectedApps(){
+	iWillWaitToSee(By.xpath("//div[@class='ui checked checkbox']"));
+			clickAllElementofAlistbyXpath("//div[@class='ui checked checkbox']");
+		
+	}
     public void iClickOnContinueToDashboardMessage() {
         clickElement(driver.findElement(By.xpath("//button[text()='Continue to my dashboard']")));
     }
@@ -1164,7 +1168,13 @@ public class CreateUserPage extends BaseClass{
    public void verifyLoginButton() throws Throwable {
 	   Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[contains(text(),'Log In')]")));
    }
-   
+   public void iVerifyModel(String text){
+	   delay();
+	   driver.findElement(By.cssSelector(".ui.selection.dropdown")).click();
+	   iWillWaitToSee(By.xpath("//label[contains(text(),'BPCI-Model')]"));
+	  Assert.assertFalse( isElementNotPresentOnPage(By.xpath("//label[text()='"+text+"']")));
+	  driver.findElement(By.cssSelector(".ui.selection.dropdown")).click();
+	}
    public void selectPrograms(String programList) throws Throwable {
 	   if(!(programList.equals("")))
    	{
