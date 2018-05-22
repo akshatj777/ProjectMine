@@ -229,6 +229,10 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	}
 	@Then("^I enter \"([^\"]*)\" in Learning Pathway$")
 	public void iEnterLearningPathway(String text){
-		iEnterLearningPathway(text);
+		editUser.iEnterLearningPathway(text);
+	}
+	@Then("^I verify \"([^\"]*)\" while editing the user$")
+	public void validateLearningPathwayWhileEdit(String pathways){
+		editUser.validateLearningPathwayWhileEdit(pathways);
 	}
 }

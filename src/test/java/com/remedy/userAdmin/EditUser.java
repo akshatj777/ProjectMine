@@ -647,4 +647,19 @@ public void iEnterLearningPathway(String text){
 	clickElement(driver.findElement(By.cssSelector("div.ui.selection.dropdown")));
 	 iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), text);
 }
+public void validateLearningPathwayWhileEdit(String pathways){
+	if (pathways.contains(",")) {
+		StringTokenizer st = new StringTokenizer(pathways, ",");
+		while(st.hasMoreTokens())
+		{
+			String pathway = st.nextToken().trim();
+			iWillWaitToSee(By.xpath("//span[contains(text(),'"+pathway+"')]"));
+		isElementVisible(driver.findElement(By.xpath("//span[contains(text(),'"+pathway+"')]")));
+		}
+	}
+	else{
+		iWillWaitToSee(By.xpath("//span[contains(text(),'"+pathways+"')]"));
+		isElementVisible(driver.findElement(By.xpath("//span[contains(text(),'"+pathways+"')]")));
+	}
+}
 }

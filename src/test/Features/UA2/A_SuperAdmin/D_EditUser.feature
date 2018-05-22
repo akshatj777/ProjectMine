@@ -1322,5 +1322,64 @@ Feature: Edit user page for SA
     Then I verify error message "User does not exist. Please go back to the users list page." is not displayed
 
     Examples: 
-      | Description                                                                                         | User        | Role      | Remove HealthSystem | Health System                                                          | Programs  | ModelNotPresent | Locations     |
-      | Error message "User does not exist. Please go back to the users list page." should not be displayed | Super Admin | Executive | Sound Physicians    | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI-Model2 |BPCI-Model3 | All Locations |
+      | Description                                                                                         | User        | Role      | Remove HealthSystem | Health System                                                          | Programs    | ModelNotPresent | Locations     |
+      | Error message "User does not exist. Please go back to the users list page." should not be displayed | Super Admin | Executive | Sound Physicians    | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI-Model2 | BPCI-Model3     | All Locations |
+
+  Scenario Outline: Validating Learning Pathway ID on edit role and reload the page again
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<PreviousRole>"
+    Then I select user with role "<User>-<PreviousRole>"
+    And I verify that I am navigated to user page
+    Then I verify learning pathway "<LearningPathway>"
+    And I click on Edit button
+    When I click the Organizational Role Field to edit
+    Then I pick a Organizational <Role>
+    Then I enter NPI field with "<NPI>" for role "<Role>"
+    Then I click on Next button
+    Then I verify the header "Applications"
+    Then I verify "<LearningPathway>" while editing the user
+    Then I click on Next button
+    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    And I verify that I am navigated to user page
+    Then I verify learning pathway "<LearningPathway>"
+    Then I refresh the page
+    And I verify that I am navigated to user page
+    Then I verify learning pathway "<LearningPathway>"
+    Then I refresh the page
+    And I verify that I am navigated to user page
+    Then I verify learning pathway "<LearningPathway>"
+
+    Examples: 
+      | User        | PreviousRole | Role    | NPI | LearningPathway                                           |
+      | Super Admin | Executive    | Manager |     | i am learning path, Learning Pathway 2, Remedy University |
+
+  Scenario Outline: "Next" button is enabled without having any selection to application on editing any role to "Prospective Partner Executive"
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<PreviousRole>"
+    Then I select user with role "<User>-<PreviousRole>"
+    And I verify that I am navigated to user page
+    And I click on Edit button
+    When I click the Organizational Role Field to edit
+    Then I pick a Organizational <Role>
+    Then I enter NPI field with "<NPI>" for role "<Role>"
+    Then I click on Next button
+    Then I unselect all selected applications
+    Then I verify that Next button is "disabled"
+    Then I select "<EnableApplications>" product
+    Then I verify that Next button is "enabled"
+    Then I click on Next button
+    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I verify role "<Role>"
+    Then I verify enabled "<Applications>"
+
+    Examples: 
+      | User        | NPI | PreviousRole     | Role                          | EnableApplications | LearningPathwaySearchParameter |
+      | Super Admin |     | Remedy Executive | Prospective Partner Executive | Lessons            | i am learning path             |
