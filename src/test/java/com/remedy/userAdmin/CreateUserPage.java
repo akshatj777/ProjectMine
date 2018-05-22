@@ -324,30 +324,30 @@ public class CreateUserPage extends BaseClass{
 
     public void iEnterHealthSystemSerachText(String text) throws InterruptedException 
     {
-    	if(DriverScript.Config.getProperty("Browser").equals("chrome"))
-    	{
-    		if(!(text.equals("")))
-        	{
-        		iWillWaitToSee(By.xpath("//div[text()='Select']"));
-        		clickElement(driver.findElement(By.xpath("//div[text()='Select']")));
-        		iWillWaitToSee(By.xpath("//div[text()='Select']/parent::div/following-sibling::div/div/div/input"));
-                driver.findElement(By.xpath("//div[text()='Select']/parent::div/following-sibling::div/div/div/input")).sendKeys(text);
-                Thread.sleep(4000);
-        	}
-    	}
-    	else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+    	if(DriverScript.Config.getProperty("Browser").equals("ie"))
     	{
     		if(!(text.equals("")))
         	{
         		iWillWaitToSee(By.xpath("//div[text()='Select']"));
         		((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Select']")));
-        		iWillWaitToSee(By.xpath("//div[text()='Select']/parent::div/following-sibling::div/div/div/input"));
-        		((JavascriptExecutor)driver).executeScript("arguments[0].value='"+text+"';", driver.findElement(By.xpath("//div[text()='Select']/parent::div/following-sibling::div/div/div/input")));
+        		iWillWaitToSee(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input"));
+        		((JavascriptExecutor)driver).executeScript("arguments[0].value='"+text+"';", driver.findElement(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input")));
                 Thread.sleep(4000);
         	}
     	}
-    	
+    	else
+    	{
+    		if(!(text.equals("")))
+        	{
+    		iWillWaitToSee(By.xpath("//div[text()='Select']"));
+    		clickElement(driver.findElement(By.xpath("//div[text()='Select']")));
+    		iWillWaitToSee(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input"));
+            driver.findElement(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input")).sendKeys(text);
+            Thread.sleep(4000);
+    	}
+    	}
     }
+    	
 
     public void iSelectHealthSystem(String desc) throws InterruptedException 
     {
@@ -593,6 +593,7 @@ public class CreateUserPage extends BaseClass{
    }
    
    public void iVerifyNavigationOnEpisodes2HomePage(String role){
+	   driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
@@ -921,6 +922,7 @@ public class CreateUserPage extends BaseClass{
    }
    
    public void iVerifyNavigationOnRemedyUHomePage(String role){
+	   driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   if(application.contains("Lessons")){
 		   String user = role.substring(role.indexOf("-")+1);
@@ -1299,8 +1301,8 @@ public class CreateUserPage extends BaseClass{
    public void clickLessonsSelectButton() throws Throwable {
        if(userApplications.contains("Lessons"))
        {
-    	   iWillWaitToSee(By.xpath("//div[text()='Select']"));
-    	   clickElement(driver.findElement(By.xpath("//div[text()='Select']")));  
+    	   iWillWaitToSee(By.xpath("//span[text()='Select']"));
+    	   clickElement(driver.findElement(By.xpath("//span[text()='Select']")));  
        }
    }
    
@@ -1363,7 +1365,7 @@ public class CreateUserPage extends BaseClass{
 	   if(!(programList.equals("")))
    	{
 		   delay();
-	   if(!(driver.findElements(By.xpath("//div[text()='Select']")).size()>0))
+	   if(!(driver.findElements(By.xpath("//span[text()='Select']")).size()>0))
 		 {
 			return;
 		 }
@@ -1448,6 +1450,7 @@ public class CreateUserPage extends BaseClass{
 	   if(!(locationList.equals("")))
 	   	{
 	   if(locationList.equalsIgnoreCase("All Locations")){
+		   iWillWaitToSee(By.xpath("//div[@class='content active']//label[text()='All Locations']"));
 		   clickElement(driver.findElement(By.xpath("//div[@class='content active']//label[text()='All Locations']")));
 		   delay();
 	   }
@@ -2089,7 +2092,6 @@ public class CreateUserPage extends BaseClass{
 		 driver.findElement(By.xpath("//i[@class='close icon']")).click();
 	 }
 	 public void iVerifyTheSelectedLocationsAreNotPresentInSelectLocationsSection (String text){
-		 iWillWaitToSee(By.xpath("//h5[text()='Selected Locations:']"));
 		 if(text.contains(",")){
 			 StringTokenizer st = new StringTokenizer(text, ",");
 			   while(st.hasMoreTokens())

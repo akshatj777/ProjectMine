@@ -69,10 +69,10 @@ Feature: M3 EC Next site of care summary report verification.
     Examples: 
       | email                              | role   | facility    |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
 
   Scenario Outline: <role> role user with <facility> facility should see default measures,columns and dimensions as per the requirement under nsoc model3 report
     Given I am on the login page
@@ -99,10 +99,10 @@ Feature: M3 EC Next site of care summary report verification.
     Examples: 
       | email                              | role   | facility    |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
 
   Scenario Outline: <role> role user with <facility> facility verify drag and drop for model filter and should see only Model 3 value under model filter in nsoc model3 report
     Given I am on the login page
@@ -138,10 +138,10 @@ Feature: M3 EC Next site of care summary report verification.
     Examples: 
       | email                              | role   | facility    |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
 
   Scenario Outline: <role> role user with <facility> facility should see all columns as per the requirement should be there in drill through under nsoc model3 report
     Given I am on the login page
@@ -186,10 +186,10 @@ Feature: M3 EC Next site of care summary report verification.
     Examples: 
       | email                              | role   | facility    |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
 
   Scenario Outline: User with <model> and having <facility> facility should not see Nsoc Model3 report under nsoc
     Given I am on the login page
@@ -239,10 +239,10 @@ Feature: M3 EC Next site of care summary report verification.
     Examples: 
       | email                              | role   | facility    | participant1                           | participant2                           |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | Saber Health                           |                                        |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Visiting Nurse Service of NY Home Care |                                        |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Visiting Nurse Service of NY Home Care |                                        |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | Saber Health                           |                                        |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Visiting Nurse Service of NY Home Care |                                        |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Saber Health                           | Visiting Nurse Service of NY Home Care |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Visiting Nurse Service of NY Home Care |                                        |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Saber Health                           | Visiting Nurse Service of NY Home Care |
 
   Scenario Outline: User with <role> role and having <facillity> facility should be able to validate bpid field value with drag and drop and filter verification for NSOC Model3 report
     Given I am on the login page
@@ -286,10 +286,10 @@ Feature: M3 EC Next site of care summary report verification.
     Examples: 
       | email                              | role   | facility    | BPID1    | BPID2    | BPID3    | BPID4    | BPID5    | BPID6    | BPID7    |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | 3056-y63 | 3056-y67 | 3056-y68 | 3056-y85 | 3056-y95 | 3056-y98 | 3056-z13 |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | 3056-003 |          |          |          |          |          |          |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | 3056-003 |          |          |          |          |          |          |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | 3056-y63 | 3056-y67 | 3056-y95 | 3056-z13 |          |          |          |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | 3056-003 |          |          |          |          |          |          |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | 3056-003 | 3056-y63 | 3056-y67 | 3056-y95 | 3056-z13 |          |          |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | 3056-003 |          |          |          |          |          |          |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | 3056-003 | 3056-y63 | 3056-y67 | 3056-y95 | 3056-z13 |          |          |
 
   Scenario Outline: User with <role> role and having <facillity> facility should be able to validate dashboard-anchor ccn field value with drag and drop and filter verification for NSOC Model3 report in frontend and database
     Given I am on the login page
@@ -327,10 +327,10 @@ Feature: M3 EC Next site of care summary report verification.
     Examples: 
       | email                              | role   | facility    | Dashboard Anchor ccn                             | Dashboard Anchor CCN1 |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | 366253,495401,345557,495411,495407,366403,366395 |                366253 |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |                                           337008 |                337008 |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |                                           337008 |                337008 |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         |                      345557,366253,495401,495411 |                366253 |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |                                           337008 |                337008 |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |               337008,345557,366253,495401,495411 |                366253 |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |                                           337008 |                337008 |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |               337008,345557,366253,495401,495411 |                366253 |
 
   Scenario Outline: User with <role> role and having <facillity> facility should be able to validate episode initiator field value for NSOC Model3 report in frontend and database
     Given I am on the login page
@@ -360,10 +360,10 @@ Feature: M3 EC Next site of care summary report verification.
     Examples: 
       | email                              | role   | facility    | episodeInitiators                                                                                                                        | BPID                                                                       | episodeInitiator                             |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | Amberwood Manor,Azalea Health,Bath Creek Health,Falls Run Nursing,Liberty Ridge Health,Brecksville Health,Tyler's Retreat At Iron Bridge | 3056-y63','3056-y67','3056-y68','3056-y85','3056-y95','3056-y98','3056-z13 | Amberwood Manor                              |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Visiting Nurse Service Of New York Home Care                                                                                             | 3056-003                                                                   | Visiting Nurse Service Of New York Home Care |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Visiting Nurse Service Of New York Home Care                                                                                             | 3056-003                                                                   | Visiting Nurse Service Of New York Home Care |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | Amberwood Manor,Azalea Health,Liberty Ridge Health,Tyler's Retreat At Iron Bridge                                                        | 3056-y63','3056-y67','3056-y95','3056-z13                                  | Amberwood Manor                              |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Visiting Nurse Service Of New York Home Care                                                                                             | 3056-003                                                                   | Visiting Nurse Service Of New York Home Care |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Visiting Nurse Service Of New York Home Care,Amberwood Manor,Azalea Health,Liberty Ridge Health,Tyler's Retreat At Iron Bridge           | 3056-003','3056-y63','3056-y67','3056-y95','3056-z13                       | Amberwood Manor                              |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Visiting Nurse Service Of New York Home Care                                                                                             | 3056-003                                                                   | Visiting Nurse Service Of New York Home Care |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Visiting Nurse Service Of New York Home Care,Amberwood Manor,Azalea Health,Liberty Ridge Health,Tyler's Retreat At Iron Bridge           | 3056-003','3056-y63','3056-y67','3056-y95','3056-z13                       | Amberwood Manor                              |
 
   Scenario Outline: Validate that the changes made to the Global Filters are reflected and applied to the NSOC  [Model 3] report for user with <role> role for <facility> facility
     Given I am on the login page
@@ -409,10 +409,10 @@ Feature: M3 EC Next site of care summary report verification.
     Examples: 
       | email                              | role   | facility    | participant1                                 | episode initiator1                           | anchor facility1                     | participantid1 | bpid1    | ccn1   | payer1   |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | Saber Health                                 | Amberwood Manor                              | Amberwood Manor                      |         442527 | 3056-y63 | 366253 | Medicare |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Visiting Nurse Service of New York Home Care | Visiting Nurse Service of New York Home Care | Vns Of Ny Home Care Chha (manhattan) |         789001 | 3056-003 | 337008 | Medicare |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Visiting Nurse Service of New York Home Care | Visiting Nurse Service of New York Home Care | Vns Of Ny Home Care Chha (manhattan) |         789001 | 3056-003 | 337008 | Medicare |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | Saber Health                                 | Amberwood Manor                              | Amberwood Manor                      |         442527 | 3056-y63 | 366253 | Medicare |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Visiting Nurse Service of New York Home Care | Visiting Nurse Service of New York Home Care | Vns Of Ny Home Care Chha (manhattan) |         789001 | 3056-003 | 337008 | Medicare |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Saber Health                                 | Amberwood Manor                              | Amberwood Manor                      |         442527 | 3056-y63 | 366253 | Medicare |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Visiting Nurse Service of New York Home Care | Visiting Nurse Service of New York Home Care | Vns Of Ny Home Care Chha (manhattan) |         789001 | 3056-003 | 337008 | Medicare |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Saber Health                                 | Amberwood Manor                              | Amberwood Manor                      |         442527 | 3056-y63 | 366253 | Medicare |
 
   Scenario Outline: Validate Bundle code is draggable in NSOC  [Model 3] report for user with <role> role for <facility> facility
     Given I am on the login page
@@ -450,10 +450,10 @@ Feature: M3 EC Next site of care summary report verification.
     Examples: 
       | email                              | role   | facility    | BundleCode |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | CELLULITIS |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | CHF        |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | CHF        |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | CELLULITIS |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | CHF        |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | CELLULITIS |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | CHF        |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | CELLULITIS |
 
   Scenario Outline: Validate Payer is draggable in NSOC  [Model 3] report for user with <role> role for <facility> facility
     Given I am on the login page
@@ -491,10 +491,10 @@ Feature: M3 EC Next site of care summary report verification.
     Examples: 
       | email                              | role   | facility    | payer1   |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | Medicare |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Medicare |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Medicare |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | Medicare |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Medicare |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Medicare |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Medicare |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Medicare |
 
   Scenario Outline: Validate DOB field drag and drop for NSOC [Model 3] report for user with <role> role for <facility> facility
     Given I am on the login page
@@ -521,10 +521,10 @@ Feature: M3 EC Next site of care summary report verification.
     Examples: 
       | email                              | role   | facility    |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
 
   Scenario Outline: Validate the On-boarding status field values on the NSOC  [Model 3] report and filters for user with <role> role for <facility> facility
     Given I am on the login page
@@ -564,10 +564,10 @@ Feature: M3 EC Next site of care summary report verification.
     Examples: 
       | email                              | role   | facility    | onboardingstatus1 | onboardingstatus2 | onboardingstatus3 |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | Needs Onboarding  | Onboarded         | Unknown           |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Unknown           |                   |                   |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Unknown           |                   |                   |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | Needs Onboarding  | Onboarded         | Unknown           |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Unknown           |                   |                   |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Needs Onboarding  | Onboarded         | Unknown           |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Unknown           |                   |                   |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Needs Onboarding  | Onboarded         | Unknown           |
 
   Scenario Outline: Validate the patient risk field values on the NSOC  [Model 3] report and filters for user with <role> role for <facility> facility
     Given I am on the login page
@@ -607,10 +607,10 @@ Feature: M3 EC Next site of care summary report verification.
     Examples: 
       | email                              | role   | facility    | patientrisk1     | patientrisk2 | patientrisk3 |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | Calculating Risk | High         | Low          |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Calculating Risk |              |              |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Calculating Risk |              |              |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | Calculating Risk | Low          | High         |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Calculating Risk |              |              |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Calculating Risk | High         | Low          |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Calculating Risk |              |              |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Calculating Risk | High         | Low          |
 
   Scenario Outline: Validate that the no. of Episodes on the drill through page with no. of episodes count on the report page for user with <role> role for <facility> facility
     Given I am on the login page
@@ -631,10 +631,10 @@ Feature: M3 EC Next site of care summary report verification.
     Examples: 
       | email                              | role   | facility    |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA |
 
   Scenario Outline: Validate bundle list values field for NSOC  [Model 3] report and filters for user with <role> role for <facility> facility
     Given I am on the login page
@@ -691,10 +691,10 @@ Feature: M3 EC Next site of care summary report verification.
     Examples: 
       | email                              | role   | facility    | bundle1                          | bundle2                          | bundle3                  | bundle4                | bundle5                  | bundle6    | bundle7                                     | bundle8                                  | bundle9                                     | bundle10                                  | bundle11                      | bundle12                                      | bundle13                                  | bundle14                            | bundle15                                      | bundle16                | bundle17                          | bundle18                            | bundle19                                    | bundle20                     | bundle21                    | bundle22           | bundle23                                    | bundle24                      | bundle25                | bundle26           | bundle27           | bundle28                      |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | Acute myocardial infarction      | Back & neck except spinal fusion | COPD, bronchitis, asthma | Cellulitis             | Cervical spinal fusion   | Chest pain | Congestive heart failure                    | Diabetes                                 | Double joint replacement, lower extremities | Fractures of the femur and hip or pelvis  | Gastrointestinal hemorrhage   | Gastrointestinal obstruction                  | Hip & femur procedures except major joint | Lower Major joint replacement       | Lower extrem, humerus except hip, foot, femur | Urinary tract infection | Medical non-infectious orthopedic | Nutritional and metabolic disorders | Other knee procedures                       | Other respiratory            | Revision of the hip or knee | Sepsis             | Simple pneumonia and respiratory infections | Spinal fusion (non-cervical)  | Stroke                  | Syncope & collapse | Transient ischemia | Upper Major joint replacement |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Congestive heart failure         |                                  |                          |                        |                          |            |                                             |                                          |                                             |                                           |                               |                                               |                                           |                                     |                                               |                         |                                   |                                     |                                             |                              |                             |                    |                                             |                               |                         |                    |                    |                               |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | Congestive heart failure         |                                  |                          |                        |                          |            |                                             |                                          |                                             |                                           |                               |                                               |                                           |                                     |                                               |                         |                                   |                                     |                                             |                              |                             |                    |                                             |                               |                         |                    |                    |                               |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | Back & neck except spinal fusion | COPD, bronchitis, asthma         | Cellulitis               | Cervical spinal fusion | Congestive heart failure | Diabetes   | Double joint replacement, lower extremities | Fractures of the femur and hip or pelvis | Gastrointestinal hemorrhage                 | Hip & femur procedures except major joint | Lower Major joint replacement | Lower extrem, humerus except hip, foot, femur | Medical non-infectious orthopedic         | Nutritional and metabolic disorders | Other knee procedures                         | Other respiratory       | Revision of the hip or knee       | Sepsis                              | Simple pneumonia and respiratory infections | Spinal fusion (non-cervical) | Stroke                      | Syncope & collapse | Transient ischemia                          | Upper Major joint replacement | Urinary tract infection |                    |                    |                               |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Congestive heart failure         |                                  |                          |                        |                          |            |                                             |                                          |                                             |                                           |                               |                                               |                                           |                                     |                                               |                         |                                   |                                     |                                             |                              |                             |                    |                                             |                               |                         |                    |                    |                               |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Back & neck except spinal fusion | COPD, bronchitis, asthma         | Cellulitis               | Cervical spinal fusion | Congestive heart failure | Diabetes   | Double joint replacement, lower extremities | Fractures of the femur and hip or pelvis | Gastrointestinal hemorrhage                 | Hip & femur procedures except major joint | Lower Major joint replacement | Lower extrem, humerus except hip, foot, femur | Medical non-infectious orthopedic         | Nutritional and metabolic disorders | Other knee procedures                         | Other respiratory       | Revision of the hip or knee       | Sepsis                              | Simple pneumonia and respiratory infections | Spinal fusion (non-cervical) | Stroke                      | Syncope & collapse | Transient ischemia                          | Upper Major joint replacement | Urinary tract infection |                    |                    |                               |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | Congestive heart failure         |                                  |                          |                        |                          |            |                                             |                                          |                                             |                                           |                               |                                               |                                           |                                     |                                               |                         |                                   |                                     |                                             |                              |                             |                    |                                             |                               |                         |                    |                    |                               |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | Back & neck except spinal fusion | COPD, bronchitis, asthma         | Cellulitis               | Cervical spinal fusion | Congestive heart failure | Diabetes   | Double joint replacement, lower extremities | Fractures of the femur and hip or pelvis | Gastrointestinal hemorrhage                 | Hip & femur procedures except major joint | Lower Major joint replacement | Lower extrem, humerus except hip, foot, femur | Medical non-infectious orthopedic         | Nutritional and metabolic disorders | Other knee procedures                         | Other respiratory       | Revision of the hip or knee       | Sepsis                              | Simple pneumonia and respiratory infections | Spinal fusion (non-cervical) | Stroke                      | Syncope & collapse | Transient ischemia                          | Upper Major joint replacement | Urinary tract infection |                    |                    |                               |
 
   Scenario Outline: User should be able to see eligibilty field in available fields and check the filter values and apply filter in next site of care summary model3 report under NSOC
     Given I am on the login page
@@ -737,7 +737,7 @@ Feature: M3 EC Next site of care summary report verification.
     Examples: 
       | email                              | role   | facility    | eligibility1 | eligilibilty2 | eligilibilty3 | eligilibilty4 |
       | RPFINM3SNFSaberHealth@yopmail.com  | RPFIN  | SNF         | ELIGIBLE     | ERROR         | EXPIRED       | NOT_ELIGIBLE  |
-      | RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | ELIGIBLE     | ERROR         | EXPIRED       |               |
+      #| RPFINM3HHAVisitingQA@yopmail.com   | RPFIN  | HHA         | ELIGIBLE     | ERROR         | EXPIRED       |               |
       | OPSFINM3SNFSaberHealth@yopmail.com | OPSFIN | SNF         | ELIGIBLE     | ERROR         | EXPIRED       | NOT_ELIGIBLE  |
-      | OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | ELIGIBLE     | ERROR         | EXPIRED       |               |
-      | RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | ELIGIBLE     | ERROR         | EXPIRED       | NOT_ELIGIBLE  |
+      #| OPSFINM3HHAVisiting@yopmail.com    | OPSFIN | HHA         | ELIGIBLE     | ERROR         | EXPIRED       |               |
+      #| RPFINM3HHASNFVisitQA@yopmail.com   | RPFIN  | SNF and HHA | ELIGIBLE     | ERROR         | EXPIRED       | NOT_ELIGIBLE  |

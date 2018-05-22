@@ -19,13 +19,15 @@ Feature: EC Reports Verification
     And I wait until refresh button is disappeared
     Then I should see "Episode DRG Issues" in the Patient ID report page header
     When I click on field-panel-icon button
+    When I click on show all filters icon button
     When I click to "Model" field filter under "Model" filter field
     And I choose "Filter" option from select options of filter field
     And I should see "Model" in the header text of filter page
     And I should see "2" in the filter value list
+    And I click on "2" in the filter value list
+    And I click on add selected in the filter model
     And I click on ok button from filter
     And I wait until refresh button is disappeared
-    When I click on filter count label to see preselected filters
     Then I verify "Model" filter is preselected under the filter
     Then I should see "Model includes 2" is present under preselected model filter
 

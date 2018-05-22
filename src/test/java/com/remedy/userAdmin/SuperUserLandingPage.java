@@ -397,8 +397,8 @@ public void iSelectAUser(){
 }
 public void iVerifyViewUserPage()
 {
-	iWillWaitToSee(By.xpath("//a[text()='All Users /']"));
-	Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[text()='All Users /']")));
+	iWillWaitToSee(By.xpath("//a[contains(text(),'All Users /')]"));
+	Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[contains(text(),'All Users /')]")));
 }
 public void iShouldNotSeeErrorMsgOnUsersPage(String text){
 	Assert.assertFalse(isElementNotPresentOnPage(By.xpath("//*[contains(text(),'"+text+"')]")));

@@ -174,11 +174,11 @@ public class ViewUserPage extends BaseClass {
 	}
 	
 	public void verifyAllUsersButton() throws Throwable {
-		Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[text()='All Users /']")));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[contains(text(),'All Users /')]")));
 	}
 	
 	public void clickAllUserButton() {
-		driver.findElement(By.xpath("//a[text()='All Users /']")).click();
+		driver.findElement(By.xpath("//a[contains(text(),'All Users /')]")).click();
 	}
 	
 	public void verifyLockUnlockIcon() throws Throwable {

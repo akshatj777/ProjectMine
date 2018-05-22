@@ -2,9 +2,14 @@ package com.remedy.Reports;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import com.remedy.baseClass.BaseClass;
 
 public class ReportsGlobalFilters extends BaseClass{
+	
+	WebDriverWait wait = new WebDriverWait(driver, 600);
+	
 	public ReportsGlobalFilters(WebDriver driver){
 		super(driver);
 	}
@@ -175,5 +180,9 @@ public class ReportsGlobalFilters extends BaseClass{
 	
 	public void iShouldNotSeeHideSummaryAppearingInGlobalFilters(String text){
 		verifyTextNotPresentForElementFromList(".toggle-page-summary.ng-binding",text);
+	}
+	
+	public void iWaitUntillTheFieldIsAppearingInTheReport(String text){
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='gem dojoDndItem']/div[text()='"+text+"']"))));
 	}
 }

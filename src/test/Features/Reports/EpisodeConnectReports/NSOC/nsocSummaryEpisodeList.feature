@@ -14,23 +14,22 @@ Feature: Episode List verification under next site of care summary report
     When I switch to reports embedded iframe
     And I will wait to see "Next Site Of Care Summary" is appearing inside the iframe
     And I wait until refresh button is disappeared
-    Then I click on a number under episodes column of next site of care summary report
+    Then I click on a number under episodes column
     Then I switch to new window
     And I wait for the elements to load in new window after clicking one of the episode
     Then I should verify "Participant" is appearing under Episodes table
     Then I should verify "Episode Initiator" is appearing under Episodes table
-    Then I should verify "DRG Code" is appearing under Episodes table
-    Then I should verify "Bundle Code" is appearing under Episodes table
+    Then I should verify "Bundle DRG Code" is appearing under Episodes table
+    Then I should verify "Bundle DRG Status" is appearing under Episodes table
     Then I should verify "Bundle" is appearing under Episodes table
-    Then I should verify "Anchor Begin Date" is appearing under Episodes table
-    Then I should verify "Anchor Discharge Date" is appearing under Episodes table
-    Then I should verify "Anchor Discharge Care Setting" is appearing under Episodes table
-    Then I should verify "Anchor Discharge Care Type" is appearing under Episodes table
-    Then I should verify "Anchor Discharge Care Setting Code (EC)" is appearing under Episodes table
-    Then I should verify "Anchor Discharge Care Type Code (EC)" is appearing under Episodes table
-    Then I should verify "Anchor Discharge Care Type Detail (EC)" is appearing under Episodes table
+    Then I should verify "Anchor Hospital Admit Date" is appearing under Episodes table
+    Then I should verify "Anchor Hospital Discharge Date" is appearing under Episodes table
+    Then I should verify "Anchor Hospital Discharge Care Setting" is appearing under Episodes table
+    Then I should verify "Anchor Hospital Discharge Care Type" is appearing under Episodes table
+    Then I should verify "Anchor Hospital Discharge Care Setting Code (EC)" is appearing under Episodes table
+    Then I should verify "Anchor Hospital Discharge Care Type Code (EC)" is appearing under Episodes table
+    Then I should verify "Anchor Hospital Discharge Care Type Detail (EC)" is appearing under Episodes table
     Then I should verify "Anchor Month" is appearing under Episodes table
-    Then I should verify "# Episodes" is appearing under Episodes table
 
     Examples: 
       | email                         |

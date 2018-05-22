@@ -91,6 +91,7 @@ Feature: Verification Claims Report For Spending
       | email                          |
       #| Medicare Payer Users          |
       | shutestaug231132a@yopmail.com  |
+      | reptestachmodel2opsfin@yopmail.com |
       #| Emblem Payer Users            |
       #| emblemachrpfin@yopmail.com     |
       #| Multiple Payer Users          |
@@ -164,13 +165,13 @@ Feature: Verification Claims Report For Spending
     Examples: 
       | email                              | BPID1    | BPID2    | DRG Code1 | anchor admission quarter1 | anchor admission quarter2 | anchor admission quarter3 | DRG                                                                |
       | shutestaug231132a@yopmail.com      | 2070-021 | 2070-022 |       469 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W MCC   |
-      | shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       469 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W MCC   |
+      #| shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       469 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W MCC   |
       | reptestachmodel2opsfin@yopmail.com | 2070-021 | 2070-022 |       469 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W MCC   |
-      | shutestaug221145a@yopmail.com      | 2070-021 | 2070-022 |       469 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W MCC   |
+      #| shutestaug221145a@yopmail.com      | 2070-021 | 2070-022 |       469 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W MCC   |
       | shutestaug231132a@yopmail.com      | 2070-021 | 2070-022 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W/O MCC |
-      | shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W/O MCC |
+      #| shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W/O MCC |
       | reptestachmodel2opsfin@yopmail.com | 2070-021 | 2070-022 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W/O MCC |
-      | shutestaug221145a@yopmail.com      | 2070-021 | 2070-022 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W/O MCC |
+      #| shutestaug221145a@yopmail.com      | 2070-021 | 2070-022 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    | MAJOR JOINT REPLACEMENT OR REATTACHMENT OF LOWER EXTREMITY W/O MCC |
 
   Scenario Outline: Remedy awardee convener whose BPID starting with 2070 with model2 and drg 469,470 is able to see fracture/non fracture values when anchor admission quarter >= 2016Q4 in volume claims report under overall program
     Given I am on the login page
@@ -238,9 +239,9 @@ Feature: Verification Claims Report For Spending
     Examples: 
       | email                              | BPID1    | BPID2    | DRG Code1 | DRG Code2 | anchor admission quarter1 | anchor admission quarter2 | anchor admission quarter3 |
       | shutestaug231132a@yopmail.com      | 2070-021 | 2070-022 |       469 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
-      | shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       469 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
+      #| shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       469 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
       | reptestachmodel2opsfin@yopmail.com | 2070-021 | 2070-022 |       469 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
-      | shutestaug221145a@yopmail.com      | 2070-021 | 2070-022 |       469 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
+      #| shutestaug221145a@yopmail.com      | 2070-021 | 2070-022 |       469 |       470 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
 
   Scenario Outline: Remedy awardee convener whose BPID starting with 2070 with model2 and drg <DRG Code1> is able to see only not-applicable in fracture/non fracture filters when anchor admission quarter is < 2016Q4 in volume claims report under overall program
     Given I am on the login page
@@ -302,13 +303,13 @@ Feature: Verification Claims Report For Spending
     Examples: 
       | email                              | BPID1    | BPID2    | DRG Code1 | anchor admission quarter1 | anchor admission quarter2 |
       | shutestaug231132a@yopmail.com      | 2070-021 | 2070-022 |       469 | 2016Q3                    | 2016Q2                    |
-      | shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       469 | 2016Q3                    | 2016Q2                    |
+      #| shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       469 | 2016Q3                    | 2016Q2                    |
       | reptestachmodel2opsfin@yopmail.com | 2070-021 | 2070-022 |       469 | 2016Q3                    | 2016Q2                    |
-      | shutestaug221145a@yopmail.com      | 2070-021 | 2070-022 |       469 | 2016Q3                    | 2016Q2                    |
+      #| shutestaug221145a@yopmail.com      | 2070-021 | 2070-022 |       469 | 2016Q3                    | 2016Q2                    |
       | shutestaug231132a@yopmail.com      | 2070-021 | 2070-022 |       470 | 2016Q3                    | 2016Q2                    |
-      | shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       470 | 2016Q3                    | 2016Q2                    |
+      #| shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       470 | 2016Q3                    | 2016Q2                    |
       | reptestachmodel2opsfin@yopmail.com | 2070-021 | 2070-022 |       470 | 2016Q3                    | 2016Q2                    |
-      | shutestaug221145a@yopmail.com      | 2070-021 | 2070-022 |       470 | 2016Q3                    | 2016Q2                    |
+      #| shutestaug221145a@yopmail.com      | 2070-021 | 2070-022 |       470 | 2016Q3                    | 2016Q2                    |
 
   Scenario Outline: Remedy awardee convener whose BPID starting with 2070 with model2 is able to see fracture/non fracture values when anchor admission quarter >= 2016Q4 and drg code not equal to 469 and 470 in volume claims report under overall program
     Given I am on the login page
@@ -370,9 +371,9 @@ Feature: Verification Claims Report For Spending
     Examples: 
       | email                              | BPID1    | BPID2    | DRG Code1 | DRG Code2 | anchor admission quarter1 |
       | shutestaug231132a@yopmail.com      | 2070-021 | 2070-022 |       216 |       217 | 2016Q4                    |
-      | shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       216 |       217 | 2016Q4                    |
+      #| shutestaug221130a@yopmail.com      | 2070-021 | 2070-022 |       216 |       217 | 2016Q4                    |
       | reptestachmodel2opsfin@yopmail.com | 2070-021 | 2070-022 |       216 |       217 | 2016Q4                    |
-      | shutestaug221145a@yopmail.com      | 2070-021 | 2070-022 |       216 |       217 | 2016Q4                    |
+      #| shutestaug221145a@yopmail.com      | 2070-021 | 2070-022 |       216 |       217 | 2016Q4                    |
 
   Scenario Outline: Non-Remedy awardee convener whose BPID not starting with 2070 with model2 should see only not-applicable in fracture/non fracture filters when anchor admission quarter is >= 2016Q4 and drg code is not equal to 469 and 470 in spending claims report under overall program
     Given I am on the login page
@@ -437,9 +438,9 @@ Feature: Verification Claims Report For Spending
     Examples: 
       | email                        | BPID1    | DRG Code1 | DRG Code2 | anchor admission quarter1 | anchor admission quarter2 | anchor admission quarter3 |
       | shutestaug15252p@yopmail.com | 6005-169 |       242 |       243 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
-      | shutestaug15220p@yopmail.com | 6005-169 |       242 |       243 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
+      #| shutestaug15220p@yopmail.com | 6005-169 |       242 |       243 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
       | shutestaug26212p@yopmail.com | 6005-063 |       065 |       066 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
-      | shutestjul26415@yopmail.com  | 6005-169 |       242 |       243 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
+      #| shutestjul26415@yopmail.com  | 6005-169 |       242 |       243 | 2016Q4                    | 2017Q1                    | 2017Q2                    |
 
   Scenario Outline: Non-Remedy awardee convener whose BPID not starting with 2070 with model2 should see only not-applicable in fracture/non fracture filters when anchor admission quarter is < 2016Q4 and drg code is not equal to 469 and 470 in spending claims report under overall program
     Given I am on the login page
@@ -504,9 +505,9 @@ Feature: Verification Claims Report For Spending
     Examples: 
       | email                        | BPID1    | DRG Code1 | DRG Code2 | anchor admission quarter1 | anchor admission quarter2 | anchor admission quarter3 |
       | shutestaug15252p@yopmail.com | 6005-169 |       177 |       178 | 2016Q3                    | 2016Q2                    | 2016Q1                    |
-      | shutestaug15220p@yopmail.com | 6005-169 |       177 |       178 | 2016Q3                    | 2016Q2                    | 2016Q1                    |
+      #| shutestaug15220p@yopmail.com | 6005-169 |       177 |       178 | 2016Q3                    | 2016Q2                    | 2016Q1                    |
       | shutestaug26212p@yopmail.com | 6005-063 |       065 |       066 | 2016Q3                    | 2016Q2                    | 2016Q1                    |
-      | shutestjul26415@yopmail.com  | 6005-169 |       177 |       178 | 2016Q3                    | 2016Q2                    | 2016Q1                    |
+      #| shutestjul26415@yopmail.com  | 6005-169 |       177 |       178 | 2016Q3                    | 2016Q2                    | 2016Q1                    |
 
   Scenario Outline: User should only see anchor admission values >= 2016Q4 when drg code selected are 469,470 and fracture and non-fracture both filters in spending claims report under overall program
     Given I am on the login page
@@ -558,9 +559,9 @@ Feature: Verification Claims Report For Spending
     Examples: 
       | email                              | DRG Code1 | DRG Code2 |
       | shutestaug231132a@yopmail.com      |       469 |       470 |
-      | shutestaug221130a@yopmail.com      |       469 |       470 |
+      #| shutestaug221130a@yopmail.com      |       469 |       470 |
       | reptestachmodel2opsfin@yopmail.com |       469 |       470 |
-      | shutestaug221145a@yopmail.com      |       469 |       470 |
+      #| shutestaug221145a@yopmail.com      |       469 |       470 |
 
   Scenario Outline: User should not see patient risk and onboarding status level fields in the availble fields in spending claims report under overall program
     Given I am on the login page
@@ -587,6 +588,7 @@ Feature: Verification Claims Report For Spending
     Examples: 
       | email                         |
       | shutestaug231132a@yopmail.com |
+      | reptestachmodel2opsfin@yopmail.com |
 
   Scenario Outline: User should be click on one of the link under episodes and verify episode list columns
     Given I am on the login page
@@ -626,6 +628,7 @@ Feature: Verification Claims Report For Spending
     Examples: 
       | email                         |
       | shutestaug231132a@yopmail.com |
+      | reptestachmodel2opsfin@yopmail.com |
 
   Scenario Outline: User should remove the existing default filters
     Given I am on the login page
@@ -650,6 +653,7 @@ Feature: Verification Claims Report For Spending
       | email                          |
       #| Medicare Payer Users          |
       | shutestaug231132a@yopmail.com  |
+      | reptestachmodel2opsfin@yopmail.com |
       #| Emblem Payer Users            |
       #| emblemachrpfin@yopmail.com     |
       #| Multiple Payer Users          |
@@ -681,11 +685,13 @@ Feature: Verification Claims Report For Spending
     When I click to "Post Acute CCN" field filter under "Post Acute Facility" filter field
     And I choose add to report option from select options of filter field
     And I wait until refresh button is disappeared
+    And I wait untill the field "Post Acute CCN" is appearing in the report
     And I verify "Post Acute CCN" field is appearing in the layout section after selecting add to report
     Then I verify "Post Acute CCN" column is added to report after selecting add to report option
     
     Examples: 
       | email                              |
+      | RPFINClaimsSNFHHATier1@yopmail.com |
       | OPSFINTier1_2@yopmail.com          |
       
   Scenario Outline: User should be able to verify Tier1,Tier2 and Out of Network when user is having post acute type as snf and hha for spending claims report under overall program

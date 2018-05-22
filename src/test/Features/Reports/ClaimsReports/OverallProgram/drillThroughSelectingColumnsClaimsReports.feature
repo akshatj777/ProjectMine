@@ -29,3 +29,4 @@ Feature: Selecting columns in drill through for claims reports
     Examples: 
       | email                         |
       | shutestaug231132a@yopmail.com |
+      | reptestachmodel2opsfin@yopmail.com |
