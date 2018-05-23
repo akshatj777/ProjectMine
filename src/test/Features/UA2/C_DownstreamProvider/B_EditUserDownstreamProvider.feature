@@ -194,6 +194,7 @@ Feature: Edit page for Downstream provider
     Then I verify that Next button is "enabled"
     Then I click on Next button
     Then I verify the header "Permissions"
+     Then I verify cross icon
     Then I click on existing organisation "<Health System>"
     Then I deselect "<DeselectLocations>" locations for Downstream Provider role
     #Then I select "<Locations>" locations for Downstream Provider role
@@ -278,6 +279,7 @@ Feature: Edit page for Downstream provider
     Then I click on Next button
     Then I unselect "<EnableApplication>" product
     Then I click on Next button
+     
     Then I remove health system "<Remove HealthSystem>"
     And I click on "Remove" button on permissions tab
     Then I click Add Model3 Organization button for "<HasHealthSystem1>" flag for Downstream Provider role

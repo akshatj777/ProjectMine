@@ -662,4 +662,8 @@ public void validateLearningPathwayWhileEdit(String pathways){
 		isElementVisible(driver.findElement(By.xpath("//span[contains(text(),'"+pathways+"')]")));
 	}
 }
+public void iVerifyCrossIcon(){
+	isElementVisible(driver.findElement(By.xpath("//*[name()='svg' and @fill='#48677b']//*[name()='g' and @id='iCons']")));
+	
+}
 }

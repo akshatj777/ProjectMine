@@ -235,4 +235,9 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	public void validateLearningPathwayWhileEdit(String pathways){
 		editUser.validateLearningPathwayWhileEdit(pathways);
 	}
+	@Then("^I verify cross icon$")
+		public void iVerifyCrossIcon(){
+		editUser.iVerifyCrossIcon();
+		
+	}
 }

@@ -1383,3 +1383,70 @@ Feature: Edit user page for SA
     Examples: 
       | User        | NPI | PreviousRole     | Role                          | EnableApplications | LearningPathwaySearchParameter |
       | Super Admin |     | Remedy Executive | Prospective Partner Executive | Lessons            | i am learning path             |
+
+  Scenario Outline: Validating organization on editing any role to downstream provider (without saving) and back to same role/other role
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<PreviousRole>"
+    Then I select user with role "<User>-<PreviousRole>"
+    And I verify that I am navigated to user page
+    And I click on Edit button
+    When I click the Organizational Role Field to edit
+    Then I pick a Organizational <Role>
+    Then I enter NPI field with "<NPI>" for role "<Role>"
+    Then I click on Next button
+    Then I unselect all selected applications
+    Then I select "<EnableApplications>" product
+    Then I click on Next button
+    Then I click on Back button
+    Then I click on Back button
+    Then I verify the header "General Information"
+    When I click the Organizational Role Field to edit
+    Then I pick a Organizational <PreviousRole>
+    Then I enter NPI field with "<NPI>" for role "<PreviousRole>"
+    Then I click on Next button
+    Then I click on Next button
+    Then I click Add Organization button for "<HasHealthSystem2>" flag
+    And I search for health system with <Health System2>
+    And I select a <Health System2>
+    Then I select "<Programs2>" programs
+    Then I select "<Locations2>" locations
+    Then I click on Submit button
+    Then I verify role "<PreviousRole>"
+    Then I verify enabled "<EnableApplications2>"
+    Then I verify health system "<Health System2>"
+
+    Examples: 
+      | User        | UserName                               | Password | Email             | NPI | PreviousRole                  | Role                | EnableApplications | LearningPathwaySearchParameter         | HasHealthSystem2 | Health System2 | Programs2   | Locations2                              |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | test.automatemail |     | Prospective Partner Executive | Downstream Provider | Episodes           | i am learning path, Learning Pathway 2 | Yes              | Penn           | BPCI-Model2 | 2070-022--Upenn - Pennsylvania Hospital |
+
+  Scenario Outline: Editing any role to Physicians (without saving) and back to same role/other role
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<PreviousRole>"
+    Then I select user with role "<User>-<PreviousRole>"
+    And I verify that I am navigated to user page
+    And I click on Edit button
+    When I click the Organizational Role Field to edit
+    Then I pick a Organizational <Role>
+    Then I enter NPI field with "<NPI>" for role "<Role>"
+    Then I click on Next button
+    Then I click on Back button
+    Then I verify the header "General Information"
+    When I click the Organizational Role Field to edit
+    Then I pick a Organizational <Role2>
+    Then I enter NPI field with "<NPI>" for role "<Role2>"
+    Then I click on Next button
+    Then I click on Next button
+    Then I click on Submit button
+    Then I verify role "<Role2>"
+
+    Examples: 
+      | User        | UserName                               | Password | Email             | NPI | PreviousRole                  | Role       | Role2   |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | test.automatemail | NPI | Prospective Partner Executive | Physicians | Manager |
