@@ -15,6 +15,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -106,7 +107,14 @@ public class CreateUserPage extends BaseClass{
     	{
     		WebElement element = driver.findElement(By.xpath("//span[text()='"+desc+"']"));
         	scrollIntoViewByJS(element);
-        	element.click();
+        	if(DriverScript.Config.getProperty("Browser").equals("ie"))
+        	{
+        		((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='"+desc+"']")));
+        	}
+        	else
+        	{
+        		element.click();
+        	}
         	userRole = desc;
     	}
     }
@@ -166,7 +174,6 @@ public class CreateUserPage extends BaseClass{
 
     public void iEnterFirstName(String text)
     {
-
     		iWillWaitToSee(By.xpath("//input[@placeholder='First Name']"));
         	driver.findElement(By.xpath("//input[@placeholder='First Name']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
         	iFillInText(driver.findElement(By.xpath("//input[@placeholder='First Name']")), text);
@@ -174,8 +181,7 @@ public class CreateUserPage extends BaseClass{
 
     public void iEnterLasttName(String text) 
     {
-
-        	iWillWaitToSee(By.xpath("//input[@placeholder='Last Name']"));
+    		iWillWaitToSee(By.xpath("//input[@placeholder='Last Name']"));
             driver.findElement(By.xpath("//input[@placeholder='Last Name']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
         	iFillInText(driver.findElement(By.xpath("//input[@placeholder='Last Name']")), text);
     }
@@ -324,27 +330,22 @@ public class CreateUserPage extends BaseClass{
 
     public void iEnterHealthSystemSerachText(String text) throws InterruptedException 
     {
-    	if(DriverScript.Config.getProperty("Browser").equals("ie"))
-    	{
-    		if(!(text.equals("")))
-        	{
-        		iWillWaitToSee(By.xpath("//div[text()='Select']"));
-        		((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Select']")));
-        		iWillWaitToSee(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input"));
-        		((JavascriptExecutor)driver).executeScript("arguments[0].value='"+text+"';", driver.findElement(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input")));
-                Thread.sleep(4000);
-        	}
-    	}
-    	else
-    	{
     		if(!(text.equals("")))
         	{
     		iWillWaitToSee(By.xpath("//div[text()='Select']"));
-    		clickElement(driver.findElement(By.xpath("//div[text()='Select']")));
-    		iWillWaitToSee(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input"));
-            driver.findElement(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input")).sendKeys(text);
+    		if(DriverScript.Config.getProperty("Browser").equals("ie"))
+    		{
+    			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Select']")));
+    			iWillWaitToSee(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input"));
+    			driver.findElement(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input")).sendKeys(text);
+    		}
+    		else
+    		{
+    			clickElement(driver.findElement(By.xpath("//div[text()='Select']")));
+    			iWillWaitToSee(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input"));
+    			driver.findElement(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input")).sendKeys(text);
+    		}
             Thread.sleep(4000);
-    	}
     	}
     }
     	
@@ -353,14 +354,14 @@ public class CreateUserPage extends BaseClass{
     {
     	if(!(desc.equals("")))
     	{
-    	iWillWaitToSee(By.xpath("//div[text()='"+desc+"']"));
+    	iWillWaitToSee(By.xpath("//span[text()='"+desc+"']"));
         if(DriverScript.Config.getProperty("Browser").equals("ie"))
         {
-        	((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='"+desc+"']")));
+        	((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='"+desc+"']")));
         }
         else
         {
-        	clickElement(driver.findElement(By.xpath("//div[text()='"+desc+"']")));
+        	clickElement(driver.findElement(By.xpath("//span[text()='"+desc+"']")));
         }
         Thread.sleep(3000);
     	}
@@ -552,7 +553,14 @@ public class CreateUserPage extends BaseClass{
             while (st.hasMoreTokens()) {
             	String a = st.nextToken().trim();
             	iWillWaitToSee(By.xpath("//label[.='"+a+"']"));
-            	clickElement(driver.findElement(By.xpath("//label[.='"+a+"']")));
+            	if(DriverScript.Config.getProperty("Browser").equals("ie"))
+            	{
+            		((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//label[.='"+a+"']")));
+            	}
+            	else
+            	{
+            		clickElement(driver.findElement(By.xpath("//label[.='"+a+"']")));
+            	}
             }
     	}
     	else
@@ -1215,7 +1223,14 @@ public class CreateUserPage extends BaseClass{
    
 	public void clickSubmitButtonForDifferentUsers(String user) throws Throwable {
 		iWillWaitToSee(By.xpath("//button[.='Submit']"));
-		clickElement(driver.findElement(By.xpath("//button[.='Submit']")));
+		if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		{
+			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//button[.='Submit']")));
+		}
+		else
+		{
+			clickElement(driver.findElement(By.xpath("//button[.='Submit']")));
+		}
 		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ui.modal.transition.visible.active.component-add-user-form")));
 		HashMap<String,String> emailList = new HashMap<String,String>();
 		HashMap<String,String> applicationsList = new HashMap<String,String>();
@@ -1301,8 +1316,15 @@ public class CreateUserPage extends BaseClass{
    public void clickLessonsSelectButton() throws Throwable {
        if(userApplications.contains("Lessons"))
        {
-    	   iWillWaitToSee(By.xpath("//span[text()='Select']"));
-    	   clickElement(driver.findElement(By.xpath("//span[text()='Select']")));  
+    	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+    	   {
+    		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='Select']")));
+    	   }
+    	   else
+    	   {
+    		   iWillWaitToSee(By.xpath("//span[text()='Select']"));
+        	   clickElement(driver.findElement(By.xpath("//span[text()='Select']")));  
+    	   }
        }
    }
    
@@ -1375,11 +1397,11 @@ public class CreateUserPage extends BaseClass{
 		   StringTokenizer st = new StringTokenizer(programList,",");
 		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		   {
-			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Select']")));
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='Select']")));
 		   }
 		   else
 		   {
-			   driver.findElement(By.xpath("//div[text()='Select']")).click();
+			   driver.findElement(By.xpath("//span[text()='Select']")).click();
 		   }
 		   while (st.hasMoreTokens()) {
 	    	   String programs = st.nextToken().trim();
@@ -1401,11 +1423,11 @@ public class CreateUserPage extends BaseClass{
 		   longDelay();
 		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		   {
-			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Select']")));
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='Select']")));
 		   }
 		   else
 		   {
-			   driver.findElement(By.xpath("//div[text()='Select']")).click();  
+			   driver.findElement(By.xpath("//span[text()='Select']")).click();  
 		   }
 		   longDelay();
 		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
@@ -1471,6 +1493,7 @@ public class CreateUserPage extends BaseClass{
 //		    	   }
 		    	   delay();
 	    		   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))));
+	    		   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), "");
 	    		   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID);  
 		    	   iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
 		    	   Thread.sleep(3000);
@@ -1486,6 +1509,7 @@ public class CreateUserPage extends BaseClass{
 //		    	   }
 		    	   delay();
 	    		   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))));
+	    		   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), "");
 	    		   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), location);  
 		    	   iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
 		    	   Thread.sleep(3000);
@@ -1508,6 +1532,7 @@ public class CreateUserPage extends BaseClass{
 //	    	   }
         	   delay();
     		   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))));
+    		   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), "");
     		   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID);  
         	   iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
         	   Thread.sleep(3000);
@@ -1523,6 +1548,7 @@ public class CreateUserPage extends BaseClass{
 //	    	   }
         	   delay();
     		   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))));
+    		   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), "");
     		   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), location);
         	   iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
         	   Thread.sleep(3000);
@@ -1662,9 +1688,18 @@ public class CreateUserPage extends BaseClass{
    public void clickAddHealthSystemButton(String flag) throws Throwable {
        if(flag.equals("Yes"))
        {
-    	   scrollIntoViewByJS(driver.findElement(By.xpath("//button[text()='Add Another Organization']")));
-    	   iWillWaitToSee(By.xpath("//button[text()='Add Another Organization']"));
-    	   driver.findElement(By.xpath("//button[text()='Add Another Organization']")).click();
+    	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+    	   {
+    		   scrollIntoViewByJS(driver.findElement(By.xpath("//button[text()='Add Another Organization']")));
+        	   iWillWaitToSee(By.xpath("//button[text()='Add Another Organization']"));
+        	   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//button[text()='Add Another Organization']")));
+    	   }
+    	   else
+    	   {
+    		   scrollIntoViewByJS(driver.findElement(By.xpath("//button[text()='Add Another Organization']")));
+        	   iWillWaitToSee(By.xpath("//button[text()='Add Another Organization']"));
+        	   driver.findElement(By.xpath("//button[text()='Add Another Organization']")).click(); 
+    	   }
        }
    }
    
@@ -1700,18 +1735,36 @@ public class CreateUserPage extends BaseClass{
    }
    
    public void clickLogOutButton(String arg1) throws Throwable {
-	   iWillWaitToSee(By.xpath("//span[text()='Log Out']"));
-       clickElement(driver.findElement(By.xpath("//span[text()='Log Out']")));
+	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+	   {
+		   iWillWaitToSee(By.xpath("//span[text()='Log Out']"));
+		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='Log Out']")));  
+	   }
+	   else
+	   {
+		   iWillWaitToSee(By.xpath("//span[text()='Log Out']"));
+	       clickElement(driver.findElement(By.xpath("//span[text()='Log Out']")));  
+	   }
    }
    
    public void clickLogOutButtonAgain(String arg1) throws Throwable {
 	   Thread.sleep(2000);
 	   if(driver.findElements(By.cssSelector(".title>p")).size()>0)
 	   {
-		   iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
-	      driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")).click();
-	      delay();
-	      driver.findElement(By.xpath("//a[@ng-click='user.logout()']")).click();
+		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		   {
+			   iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")));
+			      delay();
+			      ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[@ng-click='user.logout()']")));
+		   }
+		   else
+		   {
+			   iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
+			      driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")).click();
+			      delay();
+			      driver.findElement(By.xpath("//a[@ng-click='user.logout()']")).click();  
+		   }
 	   }
    }
    

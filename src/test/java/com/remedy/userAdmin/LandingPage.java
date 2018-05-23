@@ -35,8 +35,16 @@ public class LandingPage extends BaseClass{
     }
        
     public void iClickOnApplicateTile(String tile){
-        iWillWaitToSee(By.xpath(tile));
-        clickElement(driver.findElement(By.xpath(tile)));
+        if(DriverScript.Config.getProperty("Browser").equals("ie"))
+        {
+        	iWillWaitToSee(By.xpath(tile));
+        	((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath(tile)));
+        }
+        else
+        {
+        	iWillWaitToSee(By.xpath(tile));
+            clickElement(driver.findElement(By.xpath(tile)));
+        }
     }
 
     public void iSwitchToNewWindow(){
@@ -145,8 +153,16 @@ public class LandingPage extends BaseClass{
     }
     
     public void IClickTopUserAccountLink() {
-    	iWillWaitToSee(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']"));
-		clickElement(driver.findElement(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']")));
+    	if(DriverScript.Config.getProperty("Browser").equals("ie"))
+    	{
+    		iWillWaitToSee(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']"));
+    		((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']")));
+    	}
+    	else
+    	{
+    		iWillWaitToSee(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']"));
+    		clickElement(driver.findElement(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']")));
+    	}
     }
 
     public void iSelectFromTopUserAccountDropDown(String link) throws InterruptedException{
