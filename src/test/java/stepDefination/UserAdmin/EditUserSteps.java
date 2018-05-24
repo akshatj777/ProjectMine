@@ -240,4 +240,8 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 		editUser.iVerifyCrossIcon();
 		
 	}
+	@Then("^I verify that submit button is disabled when data permission is not selected$")
+	public void verifySubmitButtonStatus() {
+		editUser.verifySubmitButtonStatus();
+	}
 }

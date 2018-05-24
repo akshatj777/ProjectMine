@@ -101,6 +101,7 @@ Feature: Edit page for Downstream provider
     Then I select "<EnableApplications>" product
     Then I click on Next button
     Then I verify the header "Permissions"
+    Then I verify that submit button is disabled when data permission is not selected
     Then I verify unavailability of organization drop down
     Then I verify text "Which location(s) does this user have access to?" is "Present" in Permission tab
     Then I select "<Locations>" locations for Downstream Provider role

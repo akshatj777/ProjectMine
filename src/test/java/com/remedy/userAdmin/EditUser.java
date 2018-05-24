@@ -666,4 +666,10 @@ public void iVerifyCrossIcon(){
 	isElementVisible(driver.findElement(By.xpath("//*[name()='svg' and @fill='#48677b']//*[name()='g' and @id='iCons']")));
 	
 }
+public void verifySubmitButtonStatus() {
+	WebElement el = driver.findElement(By.xpath("//button[.='Submit']"));
+	
+		Assert.assertFalse(el.isEnabled());
+	
+}
 }

@@ -825,6 +825,26 @@ Feature: Edit user page for SA
       | User        | UserName                               | Password | FirstName       | LastName       | Email             | Phone        | NPI | PreviousRole              | Role              | EnableApplications | RemoveApplications | Applications | ApplicationsNotVisible                     | Health System                      | RemovePrograms           | Programs    | Locations                                                     | LearningPathwaySearchParameter | Roletext | ReportCategory | ReportName         | BPID | Facilities                                | ProgramsValidation                               | LocationsValidation                                                                                                                   | LearningPathway                                                                                                                                                                                                                                          |
       | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameEdited | LastNameEdited | test.automatemail | 996-385-2451 |     | Transitional Case Manager | Remedy Sales Team | TCI                | Reports            | TCI, Lessons | Administration, Physician Connect, Reports | United Health Services of New York | BPCI-Model3, BPCI-Model2 | BPCI-Model2 | 6005-197--United Health Services, 6005-200--Cape Cod Hospital |                                | ROLE_TCS | Patient ID     | Episode DRG Issues |      | United Health Services, Cape Cod Hospital | United Health Services of New York--BPCI Model 2 | United Health Services of New York--6005-197--United Health Services, United Health Services of New York--6005-200--Cape Cod Hospital | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University |
 
+  Scenario Outline: Selected locations for Model-2 are not getting displayed as selected after unchecking Model-2 from program drop down while editing the user
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    And I click on Edit button
+    Then I select "Permissions" tab
+    Then I click on existing organisation "<Health System>"
+    Then I deselect "<RemovePrograms>" programs
+    Then I search the "<Locations>" in the Selected Locations section
+    Then I verify No results found for invalid Location for "first" organisation
+
+    Examples: 
+      | User        | Email             | Role       | Health System | RemovePrograms | Locations                        |
+      | Super Admin | test.automatemail | Physicians | TeamHealth    | BPCI-Model2    | 2070-g14--North Shore Med Center |
+
   Scenario Outline: Remove phone, Role from <PreviousRole> to <Role> add new org
     Given I am on the login page
     When I log in as super user
@@ -1300,6 +1320,7 @@ Feature: Edit user page for SA
       | User        | Role      | Health System    | AddLocations  | SelectedLocations                  |
       | Super Admin | Executive | Sound Physicians | All Locations | Advocate Trinity Hospital (140048) |
 
+  
   Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
@@ -1325,6 +1346,25 @@ Feature: Edit user page for SA
       | Description                                                                                         | User        | Role      | Remove HealthSystem | Health System                                                          | Programs    | ModelNotPresent | Locations     |
       | Error message "User does not exist. Please go back to the users list page." should not be displayed | Super Admin | Executive | Sound Physicians    | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI-Model2 | BPCI-Model3     | All Locations |
 
+  Scenario Outline: Learning pathway retained on unchecking and again checking Lessons on Editing any user
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    And I click on Edit button
+    Then I select "Applications" tab
+    Then I unselect "<DisableApplications>" product
+    Then I select "<EnableApplications>" product
+    Then I verify "<LearningPathway>" while editing the user
+
+    Examples: 
+      | User        | Email             | Role      | DisableApplications | EnableApplications | LearningPathway                                           |
+      | Super Admin | test.automatemail | Executive | Lessons             | Lessons            | i am learning path, Learning Pathway 2, Remedy University |
+  
   Scenario Outline: Validating Learning Pathway ID on edit role and reload the page again
     Given I am on the login page
     When I log in as super user
