@@ -7,16 +7,20 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
+
 import stepDefination.CommonSteps;
 
 public class MailCreateUser extends BaseClass{
@@ -287,7 +291,8 @@ public class MailCreateUser extends BaseClass{
 		driver.findElement(By.xpath("//input[@name='email']")).sendKeys(emailVal);
 	}
 	
-	public void iEnterEmailToGeneratePasswordLink() {
+	public void iEnterEmailToGeneratePasswordLink() throws InterruptedException {
+			Thread.sleep(2000);
 			iWillWaitToSee(By.xpath("//input[@name='email']"));
 			driver.findElement(By.xpath("//input[@name='email']")).sendKeys(email);
 	}
@@ -335,14 +340,33 @@ public class MailCreateUser extends BaseClass{
 		}
 	}
 	
-	public void iEnterNewPasswordToSetNewPassword(String text) {
+	public void iEnterNewPasswordToSetNewPassword(String text) throws InterruptedException {
+		if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		{
+			Thread.sleep(3000);
+			iWillWaitToSee(By.name("password"));
+			System.out.println("Hello");
+			new Actions(driver).sendKeys(driver.findElement(By.xpath("//input[@placeholder='your new password']")), text).build().perform();
+		}
+		else
+		{
 			iWillWaitToSee(By.name("password"));
 			iFillInText(driver.findElement(By.name("password")), text);
+		}
 	}
 	
 	public void iEnterConfirmNewPasswordToSetNewPassword(String text) {
+		if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		{
+			iWillWaitToSee(By.xpath("//input[@placeholder='confirm your new password']"));
+			new Actions(driver).sendKeys(driver.findElement(By.xpath("//input[@placeholder='confirm your new password']")), text).build().perform();
+		}
+		else
+		{
 			iWillWaitToSee(By.xpath("//input[@placeholder='confirm your new password']"));
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='confirm your new password']")), text);
+		}
+		
 	}
 	
 	public void iEnterNewUserEmailForLoginToRemedy(String role) {
