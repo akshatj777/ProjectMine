@@ -1484,7 +1484,7 @@ Feature: Edit user page for SA
     Then I enter NPI field with "<NPI>" for role "<Role2>"
     Then I click on Next button
     Then I click on Next button
-    Then I click on Submit button
+    Then I click on Submit button while edit for "<User>-<Role2>--<PreviousRole>"
     Then I verify role "<Role2>"
 
     Examples: 
