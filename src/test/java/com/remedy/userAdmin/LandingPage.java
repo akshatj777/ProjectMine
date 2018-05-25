@@ -171,16 +171,8 @@ public class LandingPage extends BaseClass{
     	}
     }
     public void iClickOnTheTopUserAccountIconOnRemedyConnectPage (){
-    	if(DriverScript.Config.getProperty("Browser").equals("ie"))
-    	{
-    		iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
-    		((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")));	
-    	}
-    	else
-    	{
     		iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
     		clickElement(driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")));
-    	}
     }
     
     public void IClickTopUserAccountLink() {

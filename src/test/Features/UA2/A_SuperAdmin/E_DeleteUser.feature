@@ -77,8 +77,8 @@ Feature: Delete a user from SA
     Then I verify "Change my password" link in mail content
     Then I click on "Change my password" link in mail content
     And I switch to new window
-    And I enter new password "Testing1" to set new password
-    And I enter confirm new password "Testing1" to set new password
+    And I enter new password "Testing1@" to set new password
+    And I enter confirm new password "Testing1@" to set new password
     And I click on submit button to set new password
 
     Examples: 
@@ -216,8 +216,8 @@ Feature: Delete a user from SA
     Then I verify "Change my password" link in mail content
     Then I click on "Change my password" link in mail content
     And I switch to new window
-    And I enter new password "Testing1" to set new password
-    And I enter confirm new password "Testing1" to set new password
+    And I enter new password "Testing1@" to set new password
+    And I enter confirm new password "Testing1@" to set new password
     And I click on submit button to set new password
     Given I am on the login page
     Then I enter newuser email for "<User>-<Role>" login to Remedy
