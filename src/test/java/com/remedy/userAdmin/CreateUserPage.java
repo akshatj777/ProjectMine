@@ -62,13 +62,13 @@ public class CreateUserPage extends BaseClass{
     {
         if(DriverScript.Config.getProperty("Browser").equals("ie"))
         {
-        	iWillWaitToSee(By.xpath("//div[@class='ui fluid selection dropdown']/div[@class='text']"));
-        	((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='ui fluid selection dropdown']/div[@class='text']")));
+        	iWillWaitToSee(By.xpath("//div[@class='ui selection dropdown']/div[@class='text']"));
+        	((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='ui selection dropdown']/div[@class='text']")));
         }
         else
         {
-        	iWillWaitToSee(By.xpath("//div[@class='ui fluid selection dropdown']/div[@class='text']"));
-        	clickElement(driver.findElement(By.xpath("//div[@class='ui fluid selection dropdown']/div[@class='text']")));
+        	iWillWaitToSee(By.xpath("//div[@class='ui selection dropdown']/div[@class='text']"));
+        	clickElement(driver.findElement(By.xpath("//div[@class='ui selection dropdown']/div[@class='text']")));
         }
     }
 
@@ -222,7 +222,7 @@ public class CreateUserPage extends BaseClass{
     	iWillWaitToSee(By.xpath("//input[@placeholder='Phone']"));
         if(DriverScript.Config.getProperty("Browser").equals("ie"))
         {
-        	((JavascriptExecutor)driver).executeScript("arguments[0].value='"+text+"';", driver.findElement(By.xpath("//input[@placeholder='Phone']")));
+        	new Actions(driver).sendKeys(driver.findElement(By.xpath("//input[@placeholder='Phone']")), text).build().perform();
         }
         else
         {
@@ -605,23 +605,23 @@ public class CreateUserPage extends BaseClass{
 	   while(st.hasMoreTokens())
 	   {
 		   if(st.nextToken().trim().equals("Episodes 2.0")){
-			   if(role.substring((role.indexOf("-")+1)).equals("Remedy Technical Administrator"))
-			   {
-				   iWillWaitToSee(By.xpath("//h2[text()='BPCI Performance']"));
-				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//h2[text()='BPCI Performance']")));
-			   }
-			   else
-			   {
+//			   if(role.substring((role.indexOf("-")+1)).equals("Remedy Technical Administrator"))
+//			   {
+//				   iWillWaitToSee(By.xpath("//h2[text()='BPCI Performance']"));
+//				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//h2[text()='BPCI Performance']")));
+//			   }
+//			   else
+//			   {
 				   for(int i=0;i<5;i++)
 				   {
 					   driver.navigate().refresh();
 					   longDelay();
-					   if(driver.findElement(By.xpath("//div[@class='patient-card']")).isDisplayed())
+					   if(driver.findElements(By.xpath("//div[@class='patient-card']")).size()>0)
 					   {
 						   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
 						   break;
 					   }
-				   }
+//				   }
 //				   iWillWaitToSee(By.xpath("//div[@class='patient-card']"));
 //				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
 				   
@@ -659,20 +659,20 @@ public class CreateUserPage extends BaseClass{
 	   while(st.hasMoreTokens())
 	   {
 		   if(st.nextToken().trim().equals("Episodes 2.0")){
-			   if(role.substring((role.indexOf("-")+1)).equals("Remedy Technical Administrator"))
-			   {
-				   iWillWaitToSee(By.xpath("//button[contains(text(),'View All Patients')]"));
-				 driver.findElement(By.xpath("//button[contains(text(),'View All Patients')]")).click();
-				 iWillWaitToSee(By.xpath("//div[@class='patient-card']"));
-				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
-				 driver.navigate().back();
-			   }
-			   else
-			   {
+//			   if(role.substring((role.indexOf("-")+1)).equals("Remedy Technical Administrator"))
+//			   {
+//				   iWillWaitToSee(By.xpath("//button[contains(text(),'View All Patients')]"));
+//				 driver.findElement(By.xpath("//button[contains(text(),'View All Patients')]")).click();
+//				 iWillWaitToSee(By.xpath("//div[@class='patient-card']"));
+//				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
+//				 driver.navigate().back();
+//			   }
+//			   else
+//			   {
 				   iWillWaitToSee(By.xpath("//div[@class='patient-card']"));
 				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
 				   driver.navigate().back();
-			   }
+//			   }
 		   }
 	   }   
    }
@@ -912,19 +912,32 @@ public class CreateUserPage extends BaseClass{
 		   if(st.nextToken().trim().equals("Episodes")){
 			   if(role.substring((role.indexOf("-")+1)).equals("Physicians"))
 			   {
-//				   scrollIntoViewByJS(driver.findElement(By.xpath("//span[text()='Admin Center']")));
-				   driver.findElement(By.xpath("//span[text()='Admin Center']")).click();
-				   delay();
-				   driver.findElement(By.xpath("//a[@href='/secure/admin/clinician/']")).click();
-				   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h1[text()='Clinicians List']"))));
-//				   scrollIntoViewByJS(driver.findElement(By.id("filters_bpprovider_email")));
-				   String emailForEC1 = CreateUserPage.usersEmailPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-				   driver.findElement(By.id("filters_bpprovider_email")).sendKeys(emailForEC1.substring(emailForEC1.indexOf("+")+1));
-//				   scrollIntoViewByJS(driver.findElement(By.xpath("//button[@class='btn btn-sm btn-primary']")));
-				   driver.findElement(By.xpath("//button[@class='btn btn-sm btn-primary']")).click();
-				   longDelay();
-				   String NPI = CreateUserPage.usersNPIPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-				   Assert.assertEquals(NPI, driver.findElement(By.xpath("//td[@class='td_string td_npi']")).getText().trim());
+				   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+				   {
+					   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='Admin Center']")));
+					   delay();
+					   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[@href='/secure/admin/clinician/']")));
+					   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h1[text()='Clinicians List']"))));
+					   String emailForEC1 = CreateUserPage.usersEmailPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
+					   new Actions(driver).sendKeys(driver.findElement(By.id("filters_bpprovider_email")), emailForEC1.substring(emailForEC1.indexOf("+")+1)).build().perform();
+					   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//button[@class='btn btn-sm btn-primary']")));
+					   longDelay();
+					   String NPI = CreateUserPage.usersNPIPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
+					   Assert.assertEquals(NPI, driver.findElement(By.xpath("//td[@class='td_string td_npi']")).getText().trim());
+				   }
+				   else
+				   {
+					   driver.findElement(By.xpath("//span[text()='Admin Center']")).click();
+					   delay();
+					   driver.findElement(By.xpath("//a[@href='/secure/admin/clinician/']")).click();
+					   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h1[text()='Clinicians List']"))));
+					   String emailForEC1 = CreateUserPage.usersEmailPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
+					   driver.findElement(By.id("filters_bpprovider_email")).sendKeys(emailForEC1.substring(emailForEC1.indexOf("+")+1));
+					   driver.findElement(By.xpath("//button[@class='btn btn-sm btn-primary']")).click();
+					   longDelay();
+					   String NPI = CreateUserPage.usersNPIPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
+					   Assert.assertEquals(NPI, driver.findElement(By.xpath("//td[@class='td_string td_npi']")).getText().trim());				   
+				   }
 			   }
 		   } 
 	   }   
@@ -1003,8 +1016,6 @@ public class CreateUserPage extends BaseClass{
 		   {
 			   clickElement(driver.findElement(By.xpath("//p[text()='RemedyU']")));
 		   }
-		   delay();
-		   objLandingPage.iSwitchToNewWindow();
    	}
    }
    
@@ -1087,7 +1098,6 @@ public class CreateUserPage extends BaseClass{
 			   {
 				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[contains(text(),\""+pathway+"\")]")));
 			   }
-			   objLandingPage.iSwitchBackToOldWindow(); 
 		   }  
 	   }
    }
@@ -1606,7 +1616,7 @@ public class CreateUserPage extends BaseClass{
 	    			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID).build().perform();
 	    			   while(!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).getAttribute("value").equals(BPID)))
 	    			   {
-	    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+	    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//i[@class='remove link icon remove-icon']")));
 	    				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID).build().perform();  
 	    			   }
 	    		   }
@@ -1641,7 +1651,7 @@ public class CreateUserPage extends BaseClass{
 	    			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), location).build().perform();
 	    			   while(!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).getAttribute("value").equals(location)))
 	    			   {
-	    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+	    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//i[@class='remove link icon remove-icon']")));
 	    				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), location).build().perform(); 
 	    			   }
 	    		   }
@@ -1683,7 +1693,7 @@ public class CreateUserPage extends BaseClass{
     			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID).build().perform();
     			   while(!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).getAttribute("value").equals(BPID)))
     			   {
-    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//i[@class='remove link icon remove-icon']")));
     				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID).build().perform();
     			   }
     		   }
@@ -1713,7 +1723,7 @@ public class CreateUserPage extends BaseClass{
     			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), location).build().perform();
     			   while(!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).getAttribute("value").equals(location)))
     			   {
-    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//i[@class='remove link icon remove-icon']")));
     				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), location).build().perform();
     			   }
     		   }
@@ -1748,19 +1758,28 @@ public class CreateUserPage extends BaseClass{
 			   StringTokenizer st = new StringTokenizer(locationList,",");
 		       while (st.hasMoreTokens()) 
 		       {
-		    	   String token = st.nextToken().trim();
-//		    	   delay();
-//		    	   while(!(driver.findElement(By.xpath("//p[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")).getText().equals("")))
-//			    	   {
-//			    		   driver.findElement(By.xpath("//p[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);  
-//			    	   }
-//		    	   delay();
-		    	   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']"))));
-		    	   driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
-		    	   iFillInText(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), token);
-		    	   iWillWaitToSee(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),\""+token+"\")]"));
-		    	   driver.findElement(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),\""+token+"\")]")).click();
-//		    	   Thread.sleep(3000); 
+		    	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		    	   {
+		    		   String token = st.nextToken().trim();
+			    	   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']"))));
+			    	   new Actions(driver).sendKeys(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), token).build().perform();
+			    	   while(!(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")).getAttribute("value")).equals(token))
+			    	   {
+			    		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//i[@class='remove link icon remove-icon']")));
+			    		   new Actions(driver).sendKeys(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), token).build().perform();
+			    	   }
+			    	   iWillWaitToSee(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),\""+token+"\")]"));
+			    	   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),\""+token+"\")]")));
+		    	   }
+		    	   else
+		    	   {
+		    		   String token = st.nextToken().trim();
+			    	   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']"))));
+			    	   driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
+			    	   iFillInText(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), token);
+			    	   iWillWaitToSee(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),\""+token+"\")]"));
+			    	   driver.findElement(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),\""+token+"\")]")).click();  
+		    	   }
 		   		}
 		   	}
 	   	}
@@ -1787,7 +1806,7 @@ public class CreateUserPage extends BaseClass{
 		    			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), BPID).build().perform();
 		    			   while(!(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")).getAttribute("value").equals(BPID)))
 		    			   {
-		    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+		    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//i[@class='remove link icon remove-icon']")));
 		    				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), BPID).build().perform();
 		    			   }
 		    			   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
@@ -1810,7 +1829,7 @@ public class CreateUserPage extends BaseClass{
 		    			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), location).build().perform();
 		    			   while(!(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")).getAttribute("value").equals(location)))
 		    			   {
-		    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+		    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//i[@class='remove link icon remove-icon']")));
 		    				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), location).build().perform();
 		    			   }
 		    			   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
@@ -1840,7 +1859,7 @@ public class CreateUserPage extends BaseClass{
 	    			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), location).build().perform();
 	    			   while(!(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")).getAttribute("value").equals(location)))
 	    			   {
-	    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+	    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//i[@class='remove link icon remove-icon']")));
 	    				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), location).build().perform();
 	    			   }
 	    			   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
@@ -1863,7 +1882,7 @@ public class CreateUserPage extends BaseClass{
 	    			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), location).build().perform();
 	    			   while(!(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")).getAttribute("value").equals(location)))
 	    			   {
-	    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+	    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//i[@class='remove link icon remove-icon']")));
 	    				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), location).build().perform();
 	    			   }
 	    			   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));

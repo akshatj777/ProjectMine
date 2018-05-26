@@ -437,37 +437,28 @@ public class EditUser extends BaseClass {
 			while (st.hasMoreTokens()) {
 				String token = st.nextToken().trim();
 				String facToken = "(" + token + ")";
-				while (!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))
-						.getText().equals(""))) {
-					driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))
-							.clear();
+				while (!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).getText().equals(""))) 
+				{
+					driver.findElement(By.xpath("//div[@class='content active']//i[@class='remove link icon remove-icon']")).click();
 				}
 				delay();
-				iFillInText(
-						driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")),
-						token);
-				iWillWaitToSee(
-						By.xpath("//div[@class='content active']//label[contains(text(),\"" + facToken + "\")]"));
-				driver.findElement(
-						By.xpath("//div[@class='content active']//label[contains(text(),\"" + facToken + "\")]"))
-						.click();
+				iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")),token);
+				iWillWaitToSee(By.xpath("//div[@class='content active']//label[contains(text(),\"" + facToken + "\")]"));
+				driver.findElement(By.xpath("//div[@class='content active']//label[contains(text(),\"" + facToken + "\")]")).click();
 				Thread.sleep(3000);
 			}
-
-		} else {
+		} 
+		else 
+		{
 			String facilityKey = "(" + key + ")";
-			while (!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))
-					.getText().equals(""))) {
-				driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).clear();
+			while (!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).getText().equals(""))) 
+			{
+				driver.findElement(By.xpath("//div[@class='content active']//i[@class='remove link icon remove-icon']")).click();
 			}
 			delay();
-			iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")),
-					key);
+			iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")),key);
 			iWillWaitToSee(By.xpath("//div[@class='content active']//label[contains(text(),\"" + facilityKey + "\")]"));
-			driver.findElement(
-					By.xpath("//div[@class='content active']//label[contains(text(),\"" + facilityKey + "\")]"))
-					.click();
-
+			driver.findElement(By.xpath("//div[@class='content active']//label[contains(text(),\"" + facilityKey + "\")]")).click();
 			Thread.sleep(3000);
 		}
 	}
