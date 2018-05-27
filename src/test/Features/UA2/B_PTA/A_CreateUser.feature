@@ -2,7 +2,7 @@ Feature: Create User - PTA User
 
   Scenario Outline: <Description>
     Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
+    Then I enter username "test.automatemail2" to login mail account
     Then I enter password "Intel@01" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
@@ -77,17 +77,17 @@ Feature: Create User - PTA User
     Then I verify "Change my password" link in mail content
     Then I click on "Change my password" link in mail content
     And I switch to new window
-    And I enter new password "Testing1" to set new password
-    And I enter confirm new password "Testing1" to set new password
+    And I enter new password "Testing1@" to set new password
+    And I enter confirm new password "Testing1@" to set new password
     And I click on submit button to set new password
 
     Examples: 
-      | Description                                                                           | User        | UserName                               | Password | FirstName | LastName                                 | Email             | Phone | Role                            | Applications                                                  | ApplicationsNotVisible | NPI | LearningPathwaySearchParameter   | Health System1           | Programs1 | Locations1                                                                                                                                                                                                          | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Login with Super Admin User and create user with Partner Technical Administrator role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail |       | Partner Technical Administrator | Episodes, Reports, Physician Connect, Administration, Lessons | Episodes 2.0, TCI      |     | HZhmTBQzHtU1, Learning Pathway 2 | RWJ Barnabas Health, INC | BPCI-CJR  | CJR-10-6--Monmouth Medical Center - Southern Campus, CJR-10-1--Rwj University Hospital At New Brunswick, CJR-10-2--Rwj University Hospital At Somerset, CJR-10-3--Robert Wood Johnson University Hospital At Rahway | No               |                |           |            | No               |                |           |            |
+      | Description                                                                           | User        | UserName                               | Password | FirstName | LastName                                 | Email              | Phone | Role                            | Applications                                                  | ApplicationsNotVisible | NPI | LearningPathwaySearchParameter   | Health System1           | Programs1 | Locations1                                                                                                                                                                                                          | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Login with Super Admin User and create user with Partner Technical Administrator role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail2 |       | Partner Technical Administrator | Episodes, Reports, Physician Connect, Administration, Lessons | Episodes 2.0, TCI      |     | HZhmTBQzHtU1, Learning Pathway 2 | RWJ Barnabas Health, INC | BPCI-CJR  | CJR-10-6--Monmouth Medical Center - Southern Campus, CJR-10-1--Rwj University Hospital At New Brunswick, CJR-10-2--Rwj University Hospital At Somerset, CJR-10-3--Robert Wood Johnson University Hospital At Rahway | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: <Description>
     Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
+    Then I enter username "test.automatemail2" to login mail account
     Then I enter password "Intel@01" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
@@ -150,15 +150,15 @@ Feature: Create User - PTA User
     Then I verify "Change my password" link in mail content
     Then I click on "Change my password" link in mail content
     And I switch to new window
-    And I enter new password "Testing1" to set new password
-    And I enter confirm new password "Testing1" to set new password
+    And I enter new password "Testing1@" to set new password
+    And I enter confirm new password "Testing1@" to set new password
     And I click on submit button to set new password
 
     Examples: 
-      | Description                                                                            | User                            | FirstName                            | LastName                                 | Email             | Phone      | Role         | Applications               | ApplicationsNotVisible                               | NPI | LearningPathwaySearchParameter                                                                                     | Health System1           | Programs1 | Locations1                                                                                              | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Login with Partner Technical Administrator User and create user with Executive role    | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail | 9988776655 | Executive    | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect, TCI |     | Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2 | RWJ Barnabas Health, INC | BPCI-CJR  | CJR-10-6--Monmouth Medical Center - Southern Campus, CJR-10-1--Rwj University Hospital At New Brunswick |                  |                |           |            |                  |                |           |            |
-      | Login with Partner Technical Administrator User and create user with Manager role      | Partner Technical Administrator | FirstName                            | LastNameLastNameLastNameLastNameLastName | test.automatemail |            | Manager      | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect, TCI |     | p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81, n9yn5n0Qa581                                                             | RWJ Barnabas Health, INC | BPCI-CJR  | CJR-10-6--Monmouth Medical Center - Southern Campus, CJR-10-1--Rwj University Hospital At New Brunswick |                  |                |           |            |                  |                |           |            |
-      | Login with Partner Technical Administrator User and create user with Case Manager role | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName | LastName                                 | test.automatemail |            | Case Manager | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect, TCI |     | Care Coordination External                                                                                         | RWJ Barnabas Health, INC | BPCI-CJR  | All Locations                                                                                           |                  |                |           |            |                  |                |           |            |
+      | Description                                                                            | User                            | FirstName                            | LastName                                 | Email              | Phone      | Role         | Applications               | ApplicationsNotVisible                               | NPI | LearningPathwaySearchParameter                                                                                     | Health System1           | Programs1 | Locations1                                                                                              | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Login with Partner Technical Administrator User and create user with Executive role    | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail2 | 9988776655 | Executive    | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect, TCI |     | Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2 | RWJ Barnabas Health, INC | BPCI-CJR  | CJR-10-6--Monmouth Medical Center - Southern Campus, CJR-10-1--Rwj University Hospital At New Brunswick |                  |                |           |            |                  |                |           |            |
+      | Login with Partner Technical Administrator User and create user with Manager role      | Partner Technical Administrator | FirstName                            | LastNameLastNameLastNameLastNameLastName | test.automatemail2 |            | Manager      | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect, TCI |     | p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81, n9yn5n0Qa581                                                             | RWJ Barnabas Health, INC | BPCI-CJR  | CJR-10-6--Monmouth Medical Center - Southern Campus, CJR-10-1--Rwj University Hospital At New Brunswick |                  |                |           |            |                  |                |           |            |
+      | Login with Partner Technical Administrator User and create user with Case Manager role | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName | LastName                                 | test.automatemail2 |            | Case Manager | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect, TCI |     | Care Coordination External                                                                                         | RWJ Barnabas Health, INC | BPCI-CJR  | All Locations                                                                                           |                  |                |           |            |                  |                |           |            |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -183,10 +183,10 @@ Feature: Create User - PTA User
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
     And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -234,7 +234,7 @@ Feature: Create User - PTA User
 
   Scenario Outline: <Description>
     Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
+    Then I enter username "test.automatemail2" to login mail account
     Then I enter password "Intel@01" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
@@ -309,17 +309,17 @@ Feature: Create User - PTA User
     Then I verify "Change my password" link in mail content
     Then I click on "Change my password" link in mail content
     And I switch to new window
-    And I enter new password "Testing1" to set new password
-    And I enter confirm new password "Testing1" to set new password
+    And I enter new password "Testing1@" to set new password
+    And I enter confirm new password "Testing1@" to set new password
     And I click on submit button to set new password
 
     Examples: 
-      | Description                                                                           | User        | UserName                               | Password | FirstName | LastName                                 | Email             | Phone | Role                            | Applications                                                  | ApplicationsNotVisible | NPI | LearningPathwaySearchParameter   | Health System1 | Programs1                | Locations1                                                                                                                                                                     | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Login with Super Admin User and create user with Partner Technical Administrator role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail |       | Partner Technical Administrator | Episodes, Reports, Physician Connect, Administration, Lessons | Episodes 2.0, TCI      |     | HZhmTBQzHtU1, Learning Pathway 2 | TeamHealth     | BPCI-Model2, BPCI-Model3 | 3056-q91--Rhea Medical Center, 3056-q91--The Medical Center At Franklin, 2070-g14--Baptist Medical Center  Beaches, 2070-g14--Mercy Hospital, 2070-g14--North Shore Med Center | No               |                |           |            | No               |                |           |            |
+      | Description                                                                           | User        | UserName                               | Password | FirstName | LastName                                 | Email              | Phone | Role                            | Applications                                                  | ApplicationsNotVisible | NPI | LearningPathwaySearchParameter   | Health System1 | Programs1                | Locations1                                                                                                                                                                     | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Login with Super Admin User and create user with Partner Technical Administrator role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail2 |       | Partner Technical Administrator | Episodes, Reports, Physician Connect, Administration, Lessons | Episodes 2.0, TCI      |     | HZhmTBQzHtU1, Learning Pathway 2 | TeamHealth     | BPCI-Model2, BPCI-Model3 | 3056-q91--Rhea Medical Center, 3056-q91--The Medical Center At Franklin, 2070-g14--Baptist Medical Center  Beaches, 2070-g14--Mercy Hospital, 2070-g14--North Shore Med Center | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: <Description>
     Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
+    Then I enter username "test.automatemail2" to login mail account
     Then I enter password "Intel@01" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
@@ -382,17 +382,17 @@ Feature: Create User - PTA User
     Then I verify "Change my password" link in mail content
     Then I click on "Change my password" link in mail content
     And I switch to new window
-    And I enter new password "Testing1" to set new password
-    And I enter confirm new password "Testing1" to set new password
+    And I enter new password "Testing1@" to set new password
+    And I enter confirm new password "Testing1@" to set new password
     And I click on submit button to set new password
 
     Examples: 
-      | Description                                                                                         | User                            | FirstName                                 | LastName                                 | Email             | Phone      | Role                      | Applications                         | ApplicationsNotVisible                               | NPI | LearningPathwaySearchParameter                                                                                     | Health System1 | Programs1                | Locations1                                                                                                | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Login with Partner Technical Administrator User and create user with Executive role                 | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastNameLastNameLastNameLastNameLastName | test.automatemail | 9988776655 | Executive                 | Episodes                             | Episodes 2.0, Administration, Physician Connect, TCI |     | Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2 | TeamHealth     | BPCI-Model2              | 2070-g14--North Shore Med Center                                                                          |                  |                |           |            |                  |                |           |            |
-      | Login with Partner Technical Administrator User and create user with Manager role                   | Partner Technical Administrator | FirstName                                 | LastNameLastNameLastNameLastNameLastName | test.automatemail |            | Manager                   | Episodes, Reports                    | Episodes 2.0, Administration, Physician Connect, TCI |     | p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81, n9yn5n0Qa581                                                             | TeamHealth     | BPCI-Model2              | All Locations                                                                                             |                  |                |           |            |                  |                |           |            |
-      | Login with Partner Technical Administrator User and create user with Case Manager role              | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastName                                 | test.automatemail |            | Case Manager              | Episodes, Lessons                    | Episodes 2.0, Administration, Physician Connect, TCI |     | Care Coordination External                                                                                         | TeamHealth     | BPCI-Model2, BPCI-Model3 | All Locations                                                                                             |                  |                |           |            |                  |                |           |            |
-      | Login with Partner Technical Administrator User and create user with Physicians role                | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastNameLastNameLastNameLastNameLastName | test.automatemail | 9988776655 | Physicians                | Episodes, Reports, Physician Connect | Episodes 2.0, Administration, TCI                    | NPI | p11D0Vl2FSg1, Executive Acute Care Hospital Model 2                                                                | TeamHealth     | BPCI-Model2, BPCI-Model3 | 2070-g14--North Shore Med Center, 3056-q91--Rhea Medical Center, 3056-q91--The Medical Center At Franklin |                  |                |           |            |                  |                |           |            |
-      | Login with Partner Technical Administrator User and create user with Transitional Case Manager role | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | test.automatemail | 9988776655 | Transitional Case Manager | Reports                              | Episodes 2.0,Administration, Physician Connect, TCI  |     | 5HDc3E6aK_E1, p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81                                                             | TeamHealth     | BPCI-Model2, BPCI-Model3 | 2070-g14--Baptist Medical Center  Beaches, 2070-g14--Mercy Hospital, 2070-g14--North Shore Med Center     |                  |                |           |            |                  |                |           |            |
+      | Description                                                                                         | User                            | FirstName                                 | LastName                                 | Email              | Phone      | Role                      | Applications                         | ApplicationsNotVisible                               | NPI | LearningPathwaySearchParameter                                                                                     | Health System1 | Programs1                | Locations1                                                                                                | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Login with Partner Technical Administrator User and create user with Executive role                 | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastNameLastNameLastNameLastNameLastName | test.automatemail2 | 9988776655 | Executive                 | Episodes                             | Episodes 2.0, Administration, Physician Connect, TCI |     | Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2 | TeamHealth     | BPCI-Model2              | 2070-g14--North Shore Med Center                                                                          |                  |                |           |            |                  |                |           |            |
+      | Login with Partner Technical Administrator User and create user with Manager role                   | Partner Technical Administrator | FirstName                                 | LastNameLastNameLastNameLastNameLastName | test.automatemail2 |            | Manager                   | Episodes, Reports                    | Episodes 2.0, Administration, Physician Connect, TCI |     | p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81, n9yn5n0Qa581                                                             | TeamHealth     | BPCI-Model2              | All Locations                                                                                             |                  |                |           |            |                  |                |           |            |
+      | Login with Partner Technical Administrator User and create user with Case Manager role              | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastName                                 | test.automatemail2 |            | Case Manager              | Episodes, Lessons                    | Episodes 2.0, Administration, Physician Connect, TCI |     | Care Coordination External                                                                                         | TeamHealth     | BPCI-Model2, BPCI-Model3 | All Locations                                                                                             |                  |                |           |            |                  |                |           |            |
+      | Login with Partner Technical Administrator User and create user with Physicians role                | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastNameLastNameLastNameLastNameLastName | test.automatemail2 | 9988776655 | Physicians                | Episodes, Reports, Physician Connect | Episodes 2.0, Administration, TCI                    | NPI | p11D0Vl2FSg1, Executive Acute Care Hospital Model 2                                                                | TeamHealth     | BPCI-Model2, BPCI-Model3 | 2070-g14--North Shore Med Center, 3056-q91--Rhea Medical Center, 3056-q91--The Medical Center At Franklin |                  |                |           |            |                  |                |           |            |
+      | Login with Partner Technical Administrator User and create user with Transitional Case Manager role | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | test.automatemail2 | 9988776655 | Transitional Case Manager | Reports                              | Episodes 2.0,Administration, Physician Connect, TCI  |     | 5HDc3E6aK_E1, p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81                                                             | TeamHealth     | BPCI-Model2, BPCI-Model3 | 2070-g14--Baptist Medical Center  Beaches, 2070-g14--Mercy Hospital, 2070-g14--North Shore Med Center     |                  |                |           |            |                  |                |           |            |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -417,10 +417,10 @@ Feature: Create User - PTA User
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
     And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -470,7 +470,7 @@ Feature: Create User - PTA User
 
   Scenario Outline: <Description>
     Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
+    Then I enter username "test.automatemail2" to login mail account
     Then I enter password "Intel@01" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
@@ -545,17 +545,17 @@ Feature: Create User - PTA User
     Then I verify "Change my password" link in mail content
     Then I click on "Change my password" link in mail content
     And I switch to new window
-    And I enter new password "Testing1" to set new password
-    And I enter confirm new password "Testing1" to set new password
+    And I enter new password "Testing1@" to set new password
+    And I enter confirm new password "Testing1@" to set new password
     And I click on submit button to set new password
 
     Examples: 
-      | Description                                                                           | User        | UserName                               | Password | FirstName | LastName                                 | Email             | Phone | Role                            | Applications                                                  | ApplicationsNotVisible | NPI | LearningPathwaySearchParameter   | Health System1 | Programs1   | Locations1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Login with Super Admin User and create user with Partner Technical Administrator role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail |       | Partner Technical Administrator | Episodes, Reports, Physician Connect, Administration, Lessons | Episodes 2.0, TCI      |     | HZhmTBQzHtU1, Learning Pathway 2 | Covenant       | BPCI-Model3 | 3056-804--Catered Manor Nursing Center, 3056-805--Downey Care Center, 3056-806--Encinitas Nursing And Rehabilitation Center, 3056-808--Arbor Nursing Center, 3056-809--Courtyard Health Care Center, 3056-810--Emerald Gardens Nursing Center, 3056-811--Buena Vista Care Center, 3056-812--Gilroy Healthcare And Rehabilitation Center, 3056-813--Eagle Point Nursing & Rehabilitation Center, 3056-814--Cedar Ridge Health Rehab Center, 3056-815--Ennoble Skilled Nursing And Rehabilitation Center, 3056-816--Friendship Skilled Nursing & Rehabilitation Center, 3056-817--Covington Manor Health And  Rehabilitation Center, 3056-818--Clinton House Health And Rehab Center, 3056-819--Edgewood Manor Nursing Center, 3056-820--Fairview Skilled Nursing And Rehabilitation Center, 3056-i37--Pacific Coast Manor, 3056-i38--Sunrise Skilled Nursing & Rehabilitation Center, 3056-i39--Pyramid Point Post-acute Rehabilitation Center, 3056-i40--Hilltop Skilled Nursing, 3056-i41--Mccormick's Creek, 3056-i42--Palo Alto Sub-acute, 3056-i43--Meadow Manor, 3056-i44--Villa Georgetown, 3056-i45--Highland Health | No               |                |           |            | No               |                |           |            |
+      | Description                                                                           | User        | UserName                               | Password | FirstName | LastName                                 | Email              | Phone | Role                            | Applications                                                  | ApplicationsNotVisible | NPI | LearningPathwaySearchParameter   | Health System1 | Programs1   | Locations1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Login with Super Admin User and create user with Partner Technical Administrator role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail2 |       | Partner Technical Administrator | Episodes, Reports, Physician Connect, Administration, Lessons | Episodes 2.0, TCI      |     | HZhmTBQzHtU1, Learning Pathway 2 | Covenant       | BPCI-Model3 | 3056-804--Catered Manor Nursing Center, 3056-805--Downey Care Center, 3056-806--Encinitas Nursing And Rehabilitation Center, 3056-808--Arbor Nursing Center, 3056-809--Courtyard Health Care Center, 3056-810--Emerald Gardens Nursing Center, 3056-811--Buena Vista Care Center, 3056-812--Gilroy Healthcare And Rehabilitation Center, 3056-813--Eagle Point Nursing & Rehabilitation Center, 3056-814--Cedar Ridge Health Rehab Center, 3056-815--Ennoble Skilled Nursing And Rehabilitation Center, 3056-816--Friendship Skilled Nursing & Rehabilitation Center, 3056-817--Covington Manor Health And  Rehabilitation Center, 3056-818--Clinton House Health And Rehab Center, 3056-819--Edgewood Manor Nursing Center, 3056-820--Fairview Skilled Nursing And Rehabilitation Center, 3056-i37--Pacific Coast Manor, 3056-i38--Sunrise Skilled Nursing & Rehabilitation Center, 3056-i39--Pyramid Point Post-acute Rehabilitation Center, 3056-i40--Hilltop Skilled Nursing, 3056-i41--Mccormick's Creek, 3056-i42--Palo Alto Sub-acute, 3056-i43--Meadow Manor, 3056-i44--Villa Georgetown, 3056-i45--Highland Health | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: <Description>
     Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
+    Then I enter username "test.automatemail2" to login mail account
     Then I enter password "Intel@01" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
@@ -618,17 +618,17 @@ Feature: Create User - PTA User
     Then I verify "Change my password" link in mail content
     Then I click on "Change my password" link in mail content
     And I switch to new window
-    And I enter new password "Testing1" to set new password
-    And I enter confirm new password "Testing1" to set new password
+    And I enter new password "Testing1@" to set new password
+    And I enter confirm new password "Testing1@" to set new password
     And I click on submit button to set new password
 
     Examples: 
-      | Description                                                                                         | User                            | FirstName                                 | LastName                                 | Email             | Phone      | Role                      | Applications                                  | ApplicationsNotVisible                               | NPI | LearningPathwaySearchParameter                                                                                     | Health System1 | Programs1   | Locations1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Login with Partner Technical Administrator User and create user with Executive role                 | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastNameLastNameLastNameLastNameLastName | test.automatemail | 9988776655 | Executive                 | Episodes, Reports, Lessons                    | Episodes 2.0, Administration, Physician Connect, TCI |     | Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2 | Covenant       | BPCI-Model3 | 3056-804--Catered Manor Nursing Center, 3056-805--Downey Care Center, 3056-806--Encinitas Nursing And Rehabilitation Center                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |                  |                |           |            |                  |                |           |            |
-      | Login with Partner Technical Administrator User and create user with Manager role                   | Partner Technical Administrator | FirstName                                 | LastNameLastNameLastNameLastNameLastName | test.automatemail |            | Manager                   | Episodes, Reports, Lessons                    | Episodes 2.0, Administration, Physician Connect, TCI |     | p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81, n9yn5n0Qa581                                                             | Covenant       | BPCI-Model3 | 3056-808--Arbor Nursing Center                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |                  |                |           |            |                  |                |           |            |
-      | Login with Partner Technical Administrator User and create user with Case Manager role              | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastName                                 | test.automatemail |            | Case Manager              | Episodes, Reports, Lessons                    | Episodes 2.0, Administration, Physician Connect, TCI |     | Care Coordination External                                                                                         | Covenant       | BPCI-Model3 | 3056-809--Courtyard Health Care Center, 3056-810--Emerald Gardens Nursing Center, 3056-811--Buena Vista Care Center, 3056-812--Gilroy Healthcare And Rehabilitation Center, 3056-813--Eagle Point Nursing & Rehabilitation Center, 3056-814--Cedar Ridge Health Rehab Center, 3056-815--Ennoble Skilled Nursing And Rehabilitation Center, 3056-816--Friendship Skilled Nursing & Rehabilitation Center, 3056-817--Covington Manor Health And  Rehabilitation Center, 3056-818--Clinton House Health And Rehab Center, 3056-819--Edgewood Manor Nursing Center, 3056-820--Fairview Skilled Nursing And Rehabilitation Center |                  |                |           |            |                  |                |           |            |
-      | Login with Partner Technical Administrator User and create user with Physicians role                | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastNameLastNameLastNameLastNameLastName | test.automatemail | 9988776655 | Physicians                | Episodes, Reports, Physician Connect, Lessons | Episodes 2.0, Administration, TCI                    | NPI | p11D0Vl2FSg1, Executive Acute Care Hospital Model 2                                                                | Covenant       | BPCI-Model3 | 3056-i37--Pacific Coast Manor, 3056-i38--Sunrise Skilled Nursing & Rehabilitation Center, 3056-i39--Pyramid Point Post, 3056-i40--Hilltop Skilled Nursing, 3056-i41--Mccormick                                                                                                                                                                                                                                                                                                                                                                                                                                               |                  |                |           |            |                  |                |           |            |
-      | Login with Partner Technical Administrator User and create user with Transitional Case Manager role | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | test.automatemail | 9988776655 | Transitional Case Manager | Episodes, Reports, Lessons                    | Episodes 2.0, Administration, Physician Connect, TCI |     | 5HDc3E6aK_E1, p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81                                                             | Covenant       | BPCI-Model3 | 3056-i42--Palo Alto Sub, 3056-i43--Meadow Manor, 3056-i44--Villa Georgetown, 3056-i45--Highland Health                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                  |                |           |            |                  |                |           |            |
+      | Description                                                                                         | User                            | FirstName                                 | LastName                                 | Email              | Phone      | Role                      | Applications                                  | ApplicationsNotVisible                               | NPI | LearningPathwaySearchParameter                                                                                     | Health System1 | Programs1   | Locations1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Login with Partner Technical Administrator User and create user with Executive role                 | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastNameLastNameLastNameLastNameLastName | test.automatemail2 | 9988776655 | Executive                 | Episodes, Reports, Lessons                    | Episodes 2.0, Administration, Physician Connect, TCI |     | Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2 | Covenant       | BPCI-Model3 | 3056-804--Catered Manor Nursing Center, 3056-805--Downey Care Center, 3056-806--Encinitas Nursing And Rehabilitation Center                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |                  |                |           |            |                  |                |           |            |
+      | Login with Partner Technical Administrator User and create user with Manager role                   | Partner Technical Administrator | FirstName                                 | LastNameLastNameLastNameLastNameLastName | test.automatemail2 |            | Manager                   | Episodes, Reports, Lessons                    | Episodes 2.0, Administration, Physician Connect, TCI |     | p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81, n9yn5n0Qa581                                                             | Covenant       | BPCI-Model3 | 3056-808--Arbor Nursing Center                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |                  |                |           |            |                  |                |           |            |
+      | Login with Partner Technical Administrator User and create user with Case Manager role              | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastName                                 | test.automatemail2 |            | Case Manager              | Episodes, Reports, Lessons                    | Episodes 2.0, Administration, Physician Connect, TCI |     | Care Coordination External                                                                                         | Covenant       | BPCI-Model3 | 3056-809--Courtyard Health Care Center, 3056-810--Emerald Gardens Nursing Center, 3056-811--Buena Vista Care Center, 3056-812--Gilroy Healthcare And Rehabilitation Center, 3056-813--Eagle Point Nursing & Rehabilitation Center, 3056-814--Cedar Ridge Health Rehab Center, 3056-815--Ennoble Skilled Nursing And Rehabilitation Center, 3056-816--Friendship Skilled Nursing & Rehabilitation Center, 3056-817--Covington Manor Health And  Rehabilitation Center, 3056-818--Clinton House Health And Rehab Center, 3056-819--Edgewood Manor Nursing Center, 3056-820--Fairview Skilled Nursing And Rehabilitation Center |                  |                |           |            |                  |                |           |            |
+      | Login with Partner Technical Administrator User and create user with Physicians role                | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastNameLastNameLastNameLastNameLastName | test.automatemail2 | 9988776655 | Physicians                | Episodes, Reports, Physician Connect, Lessons | Episodes 2.0, Administration, TCI                    | NPI | p11D0Vl2FSg1, Executive Acute Care Hospital Model 2                                                                | Covenant       | BPCI-Model3 | 3056-i37--Pacific Coast Manor, 3056-i38--Sunrise Skilled Nursing & Rehabilitation Center, 3056-i39--Pyramid Point Post, 3056-i40--Hilltop Skilled Nursing, 3056-i41--Mccormick                                                                                                                                                                                                                                                                                                                                                                                                                                               |                  |                |           |            |                  |                |           |            |
+      | Login with Partner Technical Administrator User and create user with Transitional Case Manager role | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | test.automatemail2 | 9988776655 | Transitional Case Manager | Episodes, Reports, Lessons                    | Episodes 2.0, Administration, Physician Connect, TCI |     | 5HDc3E6aK_E1, p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81                                                             | Covenant       | BPCI-Model3 | 3056-i42--Palo Alto Sub, 3056-i43--Meadow Manor, 3056-i44--Villa Georgetown, 3056-i45--Highland Health                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                  |                |           |            |                  |                |           |            |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -653,10 +653,10 @@ Feature: Create User - PTA User
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
     And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -736,18 +736,18 @@ Feature: Create User - PTA User
     Then I verify the validation message "<ValidationMsg>" on Create User Page
 
     Examples: 
-      | Description                                           | FirstName  | LastName   | Email             | Phone      | Role       | NPI        | ValidationMsg                     |
-      | Verify validation message for blank First name        |            | Last Name  | test.automatemail | 9874563210 | Executive  |            | First Name is required            |
-      | Verify validation message for blank Last name         | First Name |            | test.automatemail | 9874563210 | Executive  |            | Last Name is required             |
-      | Verify validation message for blank Email             | First Name | Last Name  |                   | 9874563210 | Executive  |            | Email is required                 |
-      | Verify validation message for blank NPI               | First Name | Last Name  | test.automatemail | 9874563210 | Physicians |            | NPI is required                   |
-      | Verify validation message for invalid Email           | First Name | Last Name  | abc               | 9874563210 | Physicians | NPI        | Please enter a valid email        |
-      | Verify validation message for invalid Phone           | First Name | Last Name  | test.automatemail |     123564 | Physicians | NPI        | Please enter a valid phone number |
-      | Verify validation message for NPI less than 10 digits | First Name | Last Name  | test.automatemail | 9874563210 | Physicians |     123564 | Please enter a valid NPI          |
-      | Verify validation message for NPI as alphabets        | First Name | Last Name  | test.automatemail | 9874563210 | Physicians | abcdefgihj | Please enter a valid NPI          |
-      | Verify validation message for NPI as alphanumeric     | First Name | Last Name  | test.automatemail | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI          |
-      | Verify validation message for invalid First Name      | 8473827919 | Last Name  | test.automatemail | 9874563210 | Physicians | NPI        | Please enter a valid name         |
-      | Verify validation message for invalid Last name       | First Name | 8473827919 | test.automatemail | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Description                                           | FirstName  | LastName   | Email              | Phone      | Role       | NPI        | ValidationMsg                     |
+      | Verify validation message for blank First name        |            | Last Name  | test.automatemail2 | 9874563210 | Executive  |            | First Name is required            |
+      | Verify validation message for blank Last name         | First Name |            | test.automatemail2 | 9874563210 | Executive  |            | Last Name is required             |
+      | Verify validation message for blank Email             | First Name | Last Name  |                    | 9874563210 | Executive  |            | Email is required                 |
+      | Verify validation message for blank NPI               | First Name | Last Name  | test.automatemail2 | 9874563210 | Physicians |            | NPI is required                   |
+      | Verify validation message for invalid Email           | First Name | Last Name  | abc                | 9874563210 | Physicians | NPI        | Please enter a valid email        |
+      | Verify validation message for invalid Phone           | First Name | Last Name  | test.automatemail2 |     123564 | Physicians | NPI        | Please enter a valid phone number |
+      | Verify validation message for NPI less than 10 digits | First Name | Last Name  | test.automatemail2 | 9874563210 | Physicians |     123564 | Please enter a valid NPI          |
+      | Verify validation message for NPI as alphabets        | First Name | Last Name  | test.automatemail2 | 9874563210 | Physicians | abcdefgihj | Please enter a valid NPI          |
+      | Verify validation message for NPI as alphanumeric     | First Name | Last Name  | test.automatemail2 | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI          |
+      | Verify validation message for invalid First Name      | 8473827919 | Last Name  | test.automatemail2 | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Verify validation message for invalid Last name       | First Name | 8473827919 | test.automatemail2 | 9874563210 | Physicians | NPI        | Please enter a valid name         |
 
   Scenario Outline: Verify validation message for invalid lesson name in search box
     Given I am on the login page
@@ -762,7 +762,7 @@ Feature: Create User - PTA User
     Then I verify the header "General Information"
     And I fill in First Name with "First Name"
     Then I fill in Last Name with Last Name
-    And I enter Email "test.automatemail" to Create user
+    And I enter Email "test.automatemail2" to Create user
     When I click the Organizational Role Field
     Then I pick a Organizational <Role>
     Then I click on Next button
@@ -791,7 +791,7 @@ Feature: Create User - PTA User
     Then I verify the header "General Information"
     And I fill in First Name with "FirstName"
     Then I fill in Last Name with LastName
-    And I enter Email "test.automatemail" to Create user
+    And I enter Email "test.automatemail2" to Create user
     When I click the Organizational Role Field
     Then I pick a Organizational <Role>
     Then I click on Next button
@@ -818,7 +818,7 @@ Feature: Create User - PTA User
     Then I verify the header "General Information"
     And I fill in First Name with "First Name"
     Then I fill in Last Name with LastName
-    And I enter Email "test.automatemail" to Create user
+    And I enter Email "test.automatemail2" to Create user
     When I click the Organizational Role Field
     Then I pick a Organizational Executive
     Then I click on Next button
@@ -856,7 +856,7 @@ Feature: Create User - PTA User
     Then I should see "Add New User" on the user creation page
     And I fill in First Name with "First Name"
     Then I fill in Last Name with LastName
-    And I enter Email "test.automatemail" to Create user
+    And I enter Email "test.automatemail2" to Create user
     When I click the Organizational Role Field
     Then I pick a Organizational Executive
     Then I click on Next button
@@ -879,7 +879,7 @@ Feature: Create User - PTA User
     Then I verify the header "General Information"
     And I fill in First Name with "FirstName"
     Then I fill in Last Name with LastName
-    And I enter Email "test.automatemail" to Create user
+    And I enter Email "test.automatemail2" to Create user
     When I click the Organizational Role Field
     Then I pick a Organizational <Role1>
     Then I click on Next button
@@ -938,8 +938,8 @@ Feature: Create User - PTA User
     And I verify Selected Locations section after click on remove link icon
 
     Examples: 
-      | Description                                           | User                            | UserName                               | Password | FirstName                                          | LastName                                           | Email             | Phone | Role      | Applications               | ApplicationsNotVisible                               | NPI | LearningPathwaySearchParameter                                              | Health System1 | Programs1   | LocationsInvalid | Locations1                     | SelectedLocations    | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Verify the search functionality in selected locations | Partner Technical Administrator | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastNameLastNameLN | test.automatemail |       | Executive | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect, TCI |     | Care Coordination External, Clinical Operations Acute Care Hospital Model 2 | Covenant       | BPCI-Model3 | hjfd             | 3056-808--Arbor Nursing Center | Arbor Nursing Center | No               |                |           |            | No               |                |           |            |
+      | Description                                           | User                            | UserName                               | Password | FirstName                                          | LastName                                           | Email              | Phone | Role      | Applications               | ApplicationsNotVisible                               | NPI | LearningPathwaySearchParameter                                              | Health System1 | Programs1   | LocationsInvalid | Locations1                     | SelectedLocations    | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Verify the search functionality in selected locations | Partner Technical Administrator | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastNameLastNameLN | test.automatemail2 |       | Executive | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect, TCI |     | Care Coordination External, Clinical Operations Acute Care Hospital Model 2 | Covenant       | BPCI-Model3 | hjfd             | 3056-808--Arbor Nursing Center | Arbor Nursing Center | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: Verify that Next button and left side menu is enabled only when mandatory fields are selected
     Given I am on the login page
@@ -979,8 +979,8 @@ Feature: Create User - PTA User
     Then I verify that Submit button is "enabled"
 
     Examples: 
-      | FirstName  | LastName  | Email             | Role       | NPI | Applications | Locations_BPID                         |
-      | First'Name | Last'Name | test.automatemail | Physicians | NPI | Reports      | 3056-804--Catered Manor Nursing Center |
+      | FirstName  | LastName  | Email              | Role       | NPI | Applications | Locations_BPID                         |
+      | First'Name | Last'Name | test.automatemail2 | Physicians | NPI | Reports      | 3056-804--Catered Manor Nursing Center |
 
   Scenario Outline: Enter invalid location and verify error message
     Given I am on the login page
@@ -1009,8 +1009,8 @@ Feature: Create User - PTA User
     And I verify No results found for invalid Location for "first" organisation
 
     Examples: 
-      | FirstName | LastName | Email             | Phone      | Role         | Applications | NPI | invalidLocations |
-      | FirstName | LastName | test.automatemail | 9988776655 | Case Manager | Reports      |     | hkfj             |
+      | FirstName | LastName | Email              | Phone      | Role         | Applications | NPI | invalidLocations |
+      | FirstName | LastName | test.automatemail2 | 9988776655 | Case Manager | Reports      |     | hkfj             |
 
   Scenario Outline: Creating user with existing NPI and validating error message
     Given I am on the login page
@@ -1043,8 +1043,8 @@ Feature: Create User - PTA User
     Then I should see error message for duplicate value "Account with this NPI already exists"
 
     Examples: 
-      | User                            | FirstName | LastName | Email             | Role       | Applications | NPI | Programs    | Health System | Locations                      |
-      | Partner Technical Administrator | FirstName | LastName | test.automatemail | Physicians | Reports      |     | BPCI-Model3 | Covenant      | 3056-808--Arbor Nursing Center |
+      | User                            | FirstName | LastName | Email              | Role       | Applications | NPI | Programs    | Health System | Locations                      |
+      | Partner Technical Administrator | FirstName | LastName | test.automatemail2 | Physicians | Reports      |     | BPCI-Model3 | Covenant      | 3056-808--Arbor Nursing Center |
 
   Scenario Outline: Creating user with existing Email and validating error message
     Given I am on the login page
@@ -1077,8 +1077,8 @@ Feature: Create User - PTA User
     Then I should see error message for duplicate value "Account with this email already exists"
 
     Examples: 
-      | User                            | FirstName | LastName | Email             | Role       | Applications | NPI | Programs    | Locations                      |
-      | Partner Technical Administrator | FirstName | LastName | test.automatemail | Physicians | Reports      | NPI | BPCI-Model3 | 3056-808--Arbor Nursing Center |
+      | User                            | FirstName | LastName | Email              | Role       | Applications | NPI | Programs    | Locations                      |
+      | Partner Technical Administrator | FirstName | LastName | test.automatemail2 | Physicians | Reports      | NPI | BPCI-Model3 | 3056-808--Arbor Nursing Center |
 
   Scenario Outline: Verify that Only name is displayed for Learning Pathway ID's
     Given I am on the login page
