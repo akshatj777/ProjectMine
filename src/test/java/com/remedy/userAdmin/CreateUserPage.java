@@ -612,23 +612,24 @@ public class CreateUserPage extends BaseClass{
 //			   }
 //			   else
 //			   {
-				   for(int i=0;i<5;i++)
-				   {
-					   driver.navigate().refresh();
-					   longDelay();
-					   if(driver.findElements(By.xpath("//div[@class='patient-card']")).size()>0)
-					   {
-						   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
-						   break;
-					   }
+//				   for(int i=0;i<5;i++)
+//				   {
+//					   driver.navigate().refresh();
+//					   driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
+//					   longDelay();
+//					   if(driver.findElements(By.xpath("//div[@class='patient-card']")).size()>0)
+//					   {
+//						   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
+//						   break;
+//					   }
 //				   }
-//				   iWillWaitToSee(By.xpath("//div[@class='patient-card']"));
-//				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
+				   iWillWaitToSee(By.xpath("//div[@class='patient-card']"));
+				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
 				   
 			   }
 		   }
 	   }   
-   }
+   
    
    public void iVerifyNavigationOnPhysicianHomePage(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
