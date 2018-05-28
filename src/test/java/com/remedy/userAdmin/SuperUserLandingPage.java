@@ -3,9 +3,12 @@ package com.remedy.userAdmin;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
 import com.remedy.baseClass.BaseClass;
+import com.remedy.resources.DriverScript;
 import com.remedy.userAdmin.CreateUserPage;
 
 public class SuperUserLandingPage extends BaseClass {
@@ -222,7 +225,19 @@ public class SuperUserLandingPage extends BaseClass {
 		if(searchParam.equals("FetchFromHM"))
 		{
 			String email = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
-			driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys(email);
+			if(DriverScript.Config.getProperty("Browser").equals("ie"))
+			{
+				new Actions(driver).sendKeys(driver.findElement(By.xpath("//input[@placeholder='Search']")), email).build().perform();
+				while(!(driver.findElement(By.xpath("//input[@placeholder='Search']")).getAttribute("value").equals(email)))
+				{
+					((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+					new Actions(driver).sendKeys(driver.findElement(By.xpath("//input[@placeholder='Search']")), email).build().perform();
+				}
+			}
+			else
+			{
+				driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys(email);
+			}
 			longDelay();
 		}
 		else

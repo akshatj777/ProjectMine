@@ -8,7 +8,7 @@ Feature: Patient status on Post Acute Facility Work List
     And I wait for 2000 milli seconds
     Then I should see Tile text Episodes
     And I click on the "Episodes" tile
-    And I switch to new window
+    #And I switch to new window
     Then I should see Episode header text "Dashboard"
     Then I should see Alerts present on the top-nav bar present on the episode dashboard page
     Then I should see Messeges present on the top-nav bar present on the episode dashboard page

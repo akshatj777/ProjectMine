@@ -9,7 +9,14 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.jayway.restassured.response.Response;
+import com.remedy.programManagement.CreateBundleAPI;
 import com.remedy.programManagement.CreateManagingOrganization;
+import com.remedy.programManagement.CreatePractictionerAPI;
 import com.remedy.resources.DriverScript;
 
 import java.io.FileInputStream;
@@ -51,7 +58,10 @@ public class BaseClass {
 	static InputStream inPropFile = null;
 	FileInputStream fisCache;
 	OutputStream outPropFile;
+	static protected String jsonString;
 	public static String parentWindow = null;
+	private static Gson gson = new Gson();
+	protected static Response response;
 	public BaseClass(final WebDriver driver) {
 		this.driver = driver;
 	}
@@ -549,5 +559,66 @@ public class BaseClass {
 	
 	public void scrollToTopOfThePage(){
 		((JavascriptExecutor)driver).executeScript("window.scrollTo(0, -document.body.scrollHeight)");	
+	}
+	
+	public static String generateJson(Object object) {
+
+        return gson.toJson(object).toString();
+    }
+	
+	public JsonObject getJsonObject(String jsonString) {
+		  JsonParser jsonParser = new JsonParser();
+		  JsonElement element = jsonParser.parse(jsonString);
+		  return element.getAsJsonObject();
+		 }
+	
+	public static List<Long> getId(String type) {
+
+		List<Long> idList = new ArrayList<>();
+
+//		if (type.equals("snf") || type.equals("hospital") || type.equals("ltch")) {
+//			idList.addAll(CreateSnfOrgStepDef.returnIdList());
+//		} else if (type.equals("pgp")) {
+//			idList.addAll(PM77CreatePGPOrgStepDef.returnIdList());
+//		} else if (type.equals("management")) {
+//			idList.addAll(CreateManagementOrgStepDef.returnIdList());
+//		} else if (type.equals("payor")) {
+//			idList.addAll(CreatePayorStepDef.returnIdList());
+//		}
+	if (type.equals("bundle")) {
+			idList.addAll(CreateBundleAPI.idList);
+			CreateBundleAPI.idList.clear();
+//		} else if (type.equals("program")) {
+//			idList.addAll(CreateProgramStepDef.returnIdList());
+//		} else if (type.equals("contract")) {
+//			idList.addAll(CreateContractStepDef.returnIdList());
+//		} else if (type.equals("hha")) {
+//			idList.addAll(PM705CreateHHAOrgStepDef.returnIdList());
+//		} else if (type.equals("attributionrule")) {
+//			idList.addAll(PM621PostAttributionRulesStepDef.returnIdList());
+//		} else if (type.equals("classification")) {
+//			idList.addAll(PM487CreateProviderTaxForClassGroupSpecilizationStepDef.returnClassificationIdList());
+//		} else if (type.equals("grouping")) {
+//			idList.addAll(PM487CreateProviderTaxForClassGroupSpecilizationStepDef.returnGroupingIdList());
+//		} else if (type.equals("specialization")) {
+//			idList.addAll(PM487CreateProviderTaxForClassGroupSpecilizationStepDef.returnSpecializationIdList());
+//		} else if (type.equals("providertaxonomy")) {
+//			idList.addAll(PM429CreateProviderTaxonomyStepDef.returnIdList());
+		} else if (type.equals("practitioner")) {
+			idList.addAll(CreatePractictionerAPI.idList);
+			CreatePractictionerAPI.idList.clear();
+		}
+		return idList;
+	}
+	
+	public static void storeName(String type, JsonObject jsonObject) {
+		if(type.equals("practitioner"))
+		{
+			CreatePractictionerAPI.practitionerNameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
+		}
+		else if(type.equals("bundle"))
+		{
+			CreateBundleAPI.bundleNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+		}
 	}
 }

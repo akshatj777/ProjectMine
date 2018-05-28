@@ -63,9 +63,14 @@ public class CreateManagingOrganizationStepDef extends DriverScript{
 		 createMO.iSelectStateFromDropDownOnCreateOrganizationPage(text);
 	 }
 	 
-	 @And("^I verify \"([^\"]*)\" after submitting the \"([^\"]*)\" organization page$")
-	  public void i_Verify_Message_After_Submitting_Create_Organization_Page(String text, String org) throws Throwable {
-		 createMO.iVerifyMessageAfterSubmittingCreateOrganizationPage(text, org);
+	 @Then("^I verify \"([^\"]*)\" after submitting the \"([^\"]*)\" organization page$")
+	  public void i_Verify_Message_After_Submitting_Create_Organization_Page(String msg, String org) throws Throwable {
+		 createMO.iVerifyMessageAfterSubmittingCreateOrganizationPage(msg, org);
+	 }
+	 
+	 @Then("^I verify duplicate \"([^\"]*)\" after submitting the \"([^\"]*)\" organization page$")
+	  public void i_Verify_Duplicate_Message_After_Submitting_Create_Organization_Page(String msg, String org) throws Throwable {
+		 createMO.iVerifyDuplicateMessageAfterSubmittingCreateOrganizationPage(msg, org);
 	 }
 	 
 	 @And("^I switch the focus to \"([^\"]*)\" button$")

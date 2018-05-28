@@ -47,6 +47,7 @@ public class LandingPage extends BaseClass{
         	iWillWaitToSee(By.xpath(tile));
             clickElement(driver.findElement(By.xpath(tile)));
         }
+        longDelay();
     }
 
     public void iSwitchToNewWindow(){

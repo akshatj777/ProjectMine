@@ -20,7 +20,8 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import stepDefination.Hooks.InitialSetup;
-
+import static com.jayway.restassured.RestAssured.basePath;
+import static com.jayway.restassured.RestAssured.baseURI;
 
 /**
  * Created by salam on 8/5/15.
@@ -65,6 +66,10 @@ public class DriverScript {
 		if (driver == null)
 			
 			createNewDriverInstance();
+		
+		baseURI = Config.getProperty("baseURI", Config.getProperty("programmanagement.baseURI"));
+        // port = Integer.valueOf(getProperty("port", properties.getProperty("programmanagement.port")));
+        basePath = Config.getProperty("path", Config.getProperty("programmanagement.basePath"));
 	}
 
 	private void createNewDriverInstance() throws Exception {
