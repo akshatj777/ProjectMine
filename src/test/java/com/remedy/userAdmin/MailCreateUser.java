@@ -180,7 +180,7 @@ public class MailCreateUser extends BaseClass{
 	}
 	
 	public void iEnterEmailToCreateUser(String emailName) {
-		if(emailName.equalsIgnoreCase("test.automatemail2"))
+		if(emailName.equalsIgnoreCase("test.automatemail"))
 			{
 			email = emailName+"+"+RandomStringUtils.randomAlphabetic(8)+"@gmail.com";
 			iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
