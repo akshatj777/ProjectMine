@@ -11,7 +11,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -114,7 +114,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -132,7 +132,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -151,7 +151,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -168,7 +168,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -185,7 +185,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -203,7 +203,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -220,7 +220,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -237,7 +237,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -255,7 +255,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -272,7 +272,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -289,7 +289,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -307,7 +307,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -325,7 +325,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -342,7 +342,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -360,7 +360,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -378,7 +378,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -395,7 +395,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -413,7 +413,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -443,7 +443,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -460,7 +460,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -477,7 +477,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -494,7 +494,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page
@@ -511,7 +511,7 @@ Feature: Reporting Help Center
     Then I click on avatar symbol to see the menu
     And I verify "Help Center" is appearing in the list after clicking on avatar
     Then I click on "Help Center" tab after clicking on avatar symbol to redirect to reporting help center page
-    And I switch to new window
+    #And I switch to new window
     Then I wait to see "Reports Help Center" in the new tab after clicking on help center
     And I should not see login widget after switching to a new tab
     Then I verify "Using Reports" tab is appearing in the reporting help center page

@@ -136,7 +136,8 @@ public class ViewACHOrganization  extends BaseClass{
 		}
 	}
 	
-	public void iVerifyRegionNameInVeiwProfileOfSelectedOrganization(String region) {
+	public void iVerifyRegionNameInVeiwProfileOfSelectedOrganization(String region)
+	{
 		if(isElementPresentOnPage(By.cssSelector(".region-name"))) 
 		{	
 			String actual = getTextForElement(driver.findElement(By.cssSelector(".region-name"))); 
@@ -145,7 +146,8 @@ public class ViewACHOrganization  extends BaseClass{
 		}
 	}
 	
-	public void iVerifyMarketNameInVeiwProfileOfSelectedOrganization(String market) {
+	public void iVerifyMarketNameInVeiwProfileOfSelectedOrganization(String market) 
+	{
 		if(isElementPresentOnPage(By.cssSelector(".region-market-view>.id.market-name"))) 
 		{	
 			String actual = getTextForElement(driver.findElement(By.cssSelector(".region-market-view>.id.market-name"))); 
@@ -276,7 +278,8 @@ public class ViewACHOrganization  extends BaseClass{
 			}
 	}
 	
-	public void iVerifyMORadioButtonChecked(String name){
+	public void iVerifyMORadioButtonChecked(String name)
+	{
 		if(name.contains("Has"))
 		{
 			boolean bol = driver.findElement(By.cssSelector(".radio-button->input[value='true']")).isSelected();
@@ -289,7 +292,8 @@ public class ViewACHOrganization  extends BaseClass{
 		}
 	}
 	
-	public void iVerifyManagingOrganizationOnAutoFilledOnOrganizationPage(String org){
+	public void iVerifyManagingOrganizationOnAutoFilledOnOrganizationPage(String org)
+	{
 		List<WebElement> listItems = driver.findElements(By.cssSelector("span[aria-selected='true']"));
 		for (WebElement item : listItems) 
 		{
@@ -305,10 +309,12 @@ public class ViewACHOrganization  extends BaseClass{
 		{
 			if(name.contains("ACHNAME"))
 			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateACHOrganization.achOrg.get("ACHNAME")+"']"));
 				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganization.achOrg.get("ACHNAME")+"']")));
 			}
 			else if(name.contains("CCN"))
 			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateACHOrganization.achOrg.get("CCN")+"']"));
 				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganization.achOrg.get("CCN")+"']")));
 			}
 		}
@@ -316,10 +322,12 @@ public class ViewACHOrganization  extends BaseClass{
 		{
 			if(name.contains("PGPNAME"))
 			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg.get("PGPNAME")+"']"));
 				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg.get("PGPNAME")+"']")));
 			}
 			else if(name.contains("EIN"))
 			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg.get("EIN")+"']"));
 				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg.get("EIN")+"']")));
 			}
 		}
@@ -327,27 +335,45 @@ public class ViewACHOrganization  extends BaseClass{
 		{
 			if(name.contains("SNFNAME"))
 			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateSNFOrganization.SNFOrg.get("SNFNAME")+"']"));
 				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganization.SNFOrg.get("SNFNAME")+"']")));
 			}
 			else if(name.contains("CCN"))
 			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateSNFOrganization.SNFOrg.get("CCN")+"']"));
 				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganization.SNFOrg.get("CCN")+"']")));
+			}
+		}
+		else if(org.contains("HHA"))
+		{
+			if(name.contains("HHANAME"))
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateHHAOrganization.HHAOrg.get("HHANAME")+"']"));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateHHAOrganization.HHAOrg.get("HHANAME")+"']")));
+			}
+			else if(name.contains("CCN"))
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateHHAOrganization.HHAOrg.get("CCN")+"']"));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateHHAOrganization.HHAOrg.get("CCN")+"']")));
 			}
 		}
 		else
 		{
+			iWillWaitToSee(By.xpath("//div[text()='"+name+"']"));
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+name+"']")));
 		}
 	}
 	
 	public void iGetCountOfAssociatedOrganization(String org)
 	{
+		iWillWaitToSee(By.cssSelector(".fixed-data-table.noselect>div"));
 		orgCount = getTextForElement(driver.findElement(By.cssSelector(".fixed-data-table.noselect>div")));
 		orgCount = orgCount.replaceAll("Organization|s", "").trim();
 	}
 	
 	public void iVerifyCountOfAssociatedOrgIncreasedBy1(String org)
 	{
+		iWillWaitToSee(By.cssSelector(".fixed-data-table.noselect>div"));
 		String count= getTextForElement(driver.findElement(By.cssSelector(".fixed-data-table.noselect>div")));
 		count = count.replaceAll("Organization|s", "").trim();
 		orgCount = Integer.toString(Integer.parseInt(orgCount)+1);

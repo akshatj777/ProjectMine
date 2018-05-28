@@ -734,8 +734,6 @@ public class CreateUserPage extends BaseClass{
 	   String javaScript = "var evObj = document.createEvent('MouseEvents');" +
                "evObj.initMouseEvent(\"mouseover\",true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);" +
                "arguments[0].dispatchEvent(evObj);";
-//
-//	   ((JavascriptExecutor)driver).executeScript(javaScript, HoverElement);
 	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 	   {
 		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
@@ -749,8 +747,8 @@ public class CreateUserPage extends BaseClass{
 		   iWillWaitToSee(By.cssSelector("#navbar-dropdown-menu-myprofile"));
 		   clickElement(driver.findElement(By.cssSelector("#navbar-dropdown-menu-myprofile")));  
 	   }
-		   }
-	   }   
+	   }
+	   }
    }
    
    public void iClickOnEpisode1TileUnderSpecificUserLoginPage(String role){

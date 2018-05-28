@@ -90,8 +90,8 @@ public class CommonSteps extends DriverScript {
     @And("^I verify current page \"([^\"]*)\" title$")
     public void iVerifyCurrentPageTitle(String pageTitle) {
     	 WebDriverWait wait = new WebDriverWait(driver, 120);
-    	 wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='flex-item order-2 btn logo valentino-icon-reports']"))));
-         Assert.assertTrue(driver.findElement(By.xpath("//div[@class='flex-item order-2 btn logo valentino-icon-reports']")).isDisplayed());
+    	 wait.until(ExpectedConditions.titleContains(pageTitle));
+         Assert.assertEquals(driver.getTitle(), pageTitle);
     }
 
     @And("^I wait for ([^\"]*) milli seconds$")

@@ -19,73 +19,93 @@ public class EditManagingOrganization extends BaseClass {
 	public void iClickFieldInSearchListOnOrganizationPage(String field) {
 		if(field.contains("MONAME"))
 		{
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateManagingOrganization.moOrg.get("MONAME")+"']"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateManagingOrganization.moOrg.get("MONAME")+"']")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(field.contains("ACHNAME - YES"))
 		{
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateACHOrganization.achOrg.get("ACHNAME")+"']"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateACHOrganization.achOrg.get("ACHNAME")+"']")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(field.contains("ACHNAME - NO"))
 		{
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateACHOrganization.achOrg_noMO.get("ACHNAME")+"']"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateACHOrganization.achOrg_noMO.get("ACHNAME")+"']")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(field.contains("PGPNAME - YES"))
 		{
+			iWillWaitToSee(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg.get("PGPNAME")+"']"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg.get("PGPNAME")+"']")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(field.contains("PGPNAME - NO"))
 		{
+			iWillWaitToSee(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg_noMO.get("PGPNAME")+"']"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg_noMO.get("PGPNAME")+"']")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(field.contains("PAYORNAME"))
 		{
+			iWillWaitToSee(By.xpath("//div[text()='"+CreatePayorOrganization.payorOrg.get("PAYORNAME")+"']"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+CreatePayorOrganization.payorOrg.get("PAYORNAME")+"']")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(field.contains("SNFNAME - YES"))
 		{
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateSNFOrganization.SNFOrg.get("SNFNAME")+"']"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateSNFOrganization.SNFOrg.get("SNFNAME")+"']")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(field.contains("SNFNAME - NO"))
 		{
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateSNFOrganization.SNFOrg_noMO.get("SNFNAME")+"']"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateSNFOrganization.SNFOrg_noMO.get("SNFNAME")+"']")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(field.contains("HHANAME - YES"))
 		{
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateHHAOrganization.HHAOrg.get("HHANAME")+"']"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateHHAOrganization.HHAOrg.get("HHANAME")+"']")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(field.contains("HHANAME - NO"))
 		{
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateHHAOrganization.HHAOrg_noMO.get("HHANAME")+"']"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateHHAOrganization.HHAOrg_noMO.get("HHANAME")+"']")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(field.contains("PROGRAMNAME"))
+		{
+			iWillWaitToSee(By.xpath("//div[text()='"+CreatePrograms.programs.get(1)+"']"));
+			clickElement(driver.findElement(By.xpath("//div[text()='"+CreatePrograms.programs.get(1)+"']")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else
 		{
+			iWillWaitToSee(By.xpath("//div[text()='"+field+"']"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+field+"']")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 	}
 	
-	public void iClickOnButtonOnParticularOrganization(String button) throws IOException {
+	public void iClickOnButtonOnParticularOrganization(String button) throws IOException 
+	{
+		iWillWaitToSee(By.xpath("//button[text()='"+button+"']"));
 		clickElement(driver.findElement(By.xpath("//button[text()='"+button+"']")));
 		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 	}
 	
-	public void iEditAllFieldsOFOrganization(String field1, String field2) {
+	public void iEditAllFieldsOFOrganization(String field1, String field2) 
+	{
 		if(field2.contains("MONAME")){
 			CreateManagingOrganization.moName = CreateManagingOrganization.moOrg.get("MONAME");
 			CreateManagingOrganization.tempMoOrg.put("MONAME",createRandomName(field2));
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateManagingOrganization.tempMoOrg.get("MONAME"));
-			}
+		}
 		else if(field2.equalsIgnoreCase("ACHNAME - YES")){
 			CreateACHOrganization.oldACH_WithMO = CreateACHOrganization.achOrg.get("ACHNAME");
 			CreateACHOrganization.tempAchOrg.put("ACHNAME",createRandomName(field2));
@@ -120,11 +140,11 @@ public class EditManagingOrganization extends BaseClass {
 		}
 		else if(field2.equalsIgnoreCase("DUPLICATE_PGP - YES")){
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
-			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePGPOrganization.pgpOrg_noMO.get("ACHNAME"));
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePGPOrganization.pgpOrg_noMO.get("PGPNAME"));
 		}
 		else if(field2.equalsIgnoreCase("DUPLICATE_PGP - NO")){
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
-			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePGPOrganization.pgpOrg.get("ACHNAME"));
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePGPOrganization.pgpOrg.get("PGPNAME"));
 		}
 		else if(field2.equals("PAYORNAME")){
 			CreatePayorOrganization.oldPayorOrg = CreatePayorOrganization.payorOrg.get("PAYORNAME");
@@ -162,16 +182,14 @@ public class EditManagingOrganization extends BaseClass {
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateSNFOrganization.SNFOrg.get("SNFNAME"));
 		}
+		else if(field2.contains("PROGRAMNAME")){
+			CreatePrograms.programName = CreatePrograms.programs.get(1);
+			CreatePrograms.tempPrograms.put(1,createRandomName(field2));
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePrograms.tempPrograms.get(1));
+		}
 		else if(field2.equalsIgnoreCase("equalsTo75Characters - NO")){
-			if(field1.contains("Managing"))
-			{
-				scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
-				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
-				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
-				CreateManagingOrganization.tempMoOrg.put("MONAME",RandomStringUtils.randomAlphabetic(75));
-				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateManagingOrganization.tempMoOrg.get("MONAME"));
-			}
-			else if(field1.contains("Hospital"))
+			if(field1.contains("Hospital"))
 			{
 				scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
 				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
@@ -187,20 +205,12 @@ public class EditManagingOrganization extends BaseClass {
 				CreatePGPOrganization.tempPGPOrg.put("PGPNAME",RandomStringUtils.randomAlphabetic(75));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePGPOrganization.tempPGPOrg.get("PGPNAME"));
 			}
-			else if(field1.contains("Payor"))
-			{
-				scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
-				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
-				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
-				CreatePayorOrganization.tempPayorOrg.put("PAYORNAME",RandomStringUtils.randomAlphabetic(75));
-				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePayorOrganization.tempPayorOrg.get("PAYORNAME"));
-			}
 			else if(field1.contains("SNF"))
 			{
 				scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
 				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
 				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
-				CreateSNFOrganization.tempSNFOrg.put("SNFNAME",RandomStringUtils.randomAlphabetic(75));
+				CreateSNFOrganization.tempSNFOrg.put("SNFNAME",RandomStringUtils.randomAlphabetic(74));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateSNFOrganization.tempSNFOrg.get("SNFNAME"));
 			}
 			else if(field1.contains("HHA"))
@@ -229,14 +239,6 @@ public class EditManagingOrganization extends BaseClass {
 				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
 				CreatePGPOrganization.tempPGPOrg.put("PGPNAME",str+RandomStringUtils.randomAlphabetic(7));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePGPOrganization.tempPGPOrg.get("PGPNAME"));
-			}
-			else if(field1.contains("Payor"))
-			{
-				scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
-				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
-				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
-				CreatePayorOrganization.tempPayorOrg.put("PAYORNAME",str+RandomStringUtils.randomAlphabetic(7));
-				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePayorOrganization.tempPayorOrg.get("PAYORNAME"));
 			}
 			else if(field1.contains("SNF"))
 			{
@@ -277,12 +279,12 @@ public class EditManagingOrganization extends BaseClass {
 			CreateManagingOrganization.tempMoOrg.put("MONAME",str+RandomStringUtils.randomAlphabetic(15));
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateManagingOrganization.tempMoOrg.get("MONAME"));
 		}
-		else if(field2.contains("AllowedCharatcters")){
+		else if(field2.equals("AllowedCharatctersForPayorNAMEField")){
 			String str="a~`@!#$%^&*()-+_={}|;'[]<>,.?/Testing120";
 			scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
-			CreateManagingOrganization.tempMoOrg.put("PAYORNAME",str+RandomStringUtils.randomAlphabetic(7));
+			CreateManagingOrganization.tempMoOrg.put("PAYORNAME",str+RandomStringUtils.randomAlphabetic(5));
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePayorOrganization.tempPayorOrg.get("PAYORNAME"));
 		}
 		else if(field2.equalsIgnoreCase("HHANAME - YES")){

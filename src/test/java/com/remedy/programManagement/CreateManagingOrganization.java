@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,8 +34,10 @@ public class CreateManagingOrganization extends BaseClass {
 	}
 	
 	public void iVerifyHeaderTextOnCreateOrganizationPage(String text) {
+		delay();
 		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		iVerifyTextFromListOfElement(By.cssSelector(".row.headline"), text);
+		longDelay();
 	}
 	
 	public void iVerifyLabelFieldsOnCreateOrganizationPage(String text) {
@@ -46,11 +49,11 @@ public class CreateManagingOrganization extends BaseClass {
 	}
 	
 	public void iClickOnButtonOnCreateOrganizationPage(String text) {
-		WebElement element = driver.findElement(By.xpath("//button[text()='"+text+"']"));
-		scrollIntoViewByJS(element);
-		delay();
-		clickElement(element);
-		delay();
+		 delay();
+		 WebElement element = driver.findElement(By.xpath("//button[text()='"+text+"']"));
+		 JavascriptExecutor executor = (JavascriptExecutor)driver;
+		 executor.executeScript("arguments[0].click();", element);
+		 waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 	}
 
 	public void iVerifyOnButtonOnCreateOrganizationPage(String text) {
@@ -129,6 +132,18 @@ public class CreateManagingOrganization extends BaseClass {
 		{
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHHAOrganization.HHAOrg.get("HHANAME"));
 		}
+		else if(text.equals("PROGRAMNAME")) {
+			CreatePrograms.tempPrograms.put(1, createRandomName(text));
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreatePrograms.tempPrograms.get(1));
+		}
+		else if(text.equals("equalsTo45Characters")){
+				CreatePrograms.tempPrograms.put(1,RandomStringUtils.randomAlphabetic(45));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreatePrograms.tempPrograms.get(1));
+		}
+		else if(text.equals("DUPLICATE_PROGRAMNAME"))
+		{
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreatePrograms.programs.get(1));
+		}
 		else if(text.equals("equalsTo75Characters")){
 			if(field.contains("Managing"))
 			{
@@ -162,7 +177,7 @@ public class CreateManagingOrganization extends BaseClass {
 			}
 		}
 		else if(text.equals("AllowedCharatcters")){
-			String str="a~`@!#$%^&*()-+_={}|;'[]<>,.?/Testing120";
+			String str="a~`@!#$%^&*()-+_={}|;'[]<>,.?/Test120";
 			if(field.contains("Managing")){
 			CreateManagingOrganization.tempMoOrg.put("MONAME",str+RandomStringUtils.randomAlphabetic(7));
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateManagingOrganization.tempMoOrg.get("MONAME"));
@@ -192,6 +207,11 @@ public class CreateManagingOrganization extends BaseClass {
 				CreateHHAOrganization.tempHHAOrg.put("HHANAME",str+RandomStringUtils.randomAlphabetic(7));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
 			}
+			else if(field.contains("Program"))
+			{
+				CreatePrograms.tempPrograms.put(1,str+RandomStringUtils.randomAlphabetic(7));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreatePrograms.tempPrograms.get(1));
+			}
 		}
 		else 	
 		{
@@ -207,12 +227,13 @@ public class CreateManagingOrganization extends BaseClass {
 		}
 	}
 	
-	public void iVerifyMessageAfterSubmittingCreateOrganizationPage(String msg, String org) {
-				
-		if(driver.findElements(By.cssSelector(".alert.alert-dismissible.alert-success>a")).size() > 0)	
-		{
-				if(org.contains("MO"))
+	public void iVerifyMessageAfterSubmittingCreateOrganizationPage(String msg, String org) 
+	{
+//		if(driver.findElements(By.cssSelector(".alert.alert-dismissible.alert-success>a")).size()>0)	
+//		{
+			if(org.contains("MO"))
 				{
+				iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
 					verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
 					moOrg.clear();
 					moOrg.putAll(tempMoOrg);
@@ -266,6 +287,7 @@ public class CreateManagingOrganization extends BaseClass {
 					}
 				else if(org.contains("Payor"))
 				{
+					
 					iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
 					verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
 					if(!CreatePayorOrganization.tempPayorOrg.isEmpty())
@@ -323,7 +345,18 @@ public class CreateManagingOrganization extends BaseClass {
 					}
 					waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 				}
-			}
+				else if(org.contains("Programs"))
+				{
+					iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>div"));
+					verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>div")), msg);
+					if(!CreatePrograms.tempPrograms.isEmpty())
+					{
+						CreatePrograms.programs.putAll(CreatePrograms.tempPrograms);
+						CreatePrograms.tempPrograms.clear();
+					}
+					waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				}
+			//}
 	    	else 
 	    	{
 	    		iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-danger>div"));
@@ -332,8 +365,25 @@ public class CreateManagingOrganization extends BaseClass {
 	    	}	
 	}
 	
+	public void iVerifyDuplicateMessageAfterSubmittingCreateOrganizationPage(String msg, String org)
+	{
+		if(org.equals("Create_Network_Contract")){
+			iWillWaitToSee(By.xpath("//div[@class='alert alert-dismissible alert-danger']//div[contains(text(),'"+msg+"')]"));
+			//verifyTextForElement(driver.findElement(By.xpath("//div[@class='alert alert-dismissible alert-danger']//div[contains(text(),'"+msg+"')]")), msg);
+			Assert.assertTrue(isElementPresent(By.cssSelector(".alert.alert-dismissible.alert-danger>div")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else{
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-danger>div"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-danger>div")), msg);
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+	}
+	
 	public void iSwitchFocusToButton(String text) {
 		driver.findElement(By.xpath("//button[@type='"+text+"']")).sendKeys(Keys.TAB);
 		delay();
 	}
+	
+	
 }

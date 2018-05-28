@@ -10,7 +10,7 @@ Feature: Episode Connect Alerts
     Then I should see Tile text Episodes
 
     And I click on the "Episodes" tile
-    And I switch to new window
+    #And I switch to new window
     Then I should see Episode header text "Dashboard"
     Then I should see alerts icon present on the top-nav bar present on the episode dashboard page
     When I click on alerts icon present on the top-nav bar present on the episode dashboard page
@@ -33,7 +33,7 @@ Feature: Episode Connect Alerts
     Then I should see Tile text Episodes
 
     And I click on the "Episodes" tile
-    And I switch to new window
+    #And I switch to new window
     Then I should see Episode header text "Dashboard"
     When I click on alerts icon present on the top-nav bar present on the episode dashboard page
     Then I click on dismiss all button present on the notification drop down menu
