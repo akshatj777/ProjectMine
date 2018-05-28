@@ -244,4 +244,8 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	public void verifySubmitButtonStatus() {
 		editUser.verifySubmitButtonStatus();
 	}
+	@Then("^I verify that \"([^\"]*)\" is not reflected as selected in edit user page$")
+	public void iVerifyRemovedProgramInEditPage(String program){
+		editUser.iVerifyRemovedProgramInEditPage(program);
+	}
 }

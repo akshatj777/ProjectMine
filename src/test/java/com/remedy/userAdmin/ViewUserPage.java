@@ -26,7 +26,7 @@ public class ViewUserPage extends BaseClass {
 	}
 
 	public void selectUserRole(String userRole) throws Throwable {
-		String email = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
+		//String email = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
 		iWillWaitToSee(By.xpath("//tr[@class='component-user-table-row']"));
 		clickElement(driver.findElement(By.xpath("//tr[@class='component-user-table-row']")));
 		Thread.sleep(3000);
@@ -244,4 +244,25 @@ public class ViewUserPage extends BaseClass {
 public void iRefreshViewUserPage() {
 	driver.navigate().refresh();
 	}
+public void iVerifyRemovedProgramInViewPage(String programs){
+	if(programs.contains(","))
+	{
+		StringTokenizer st = new StringTokenizer(programs, ",");
+		while(st.hasMoreTokens())
+		{
+			String token = st.nextToken().trim();
+	    	String program = token.substring(token.indexOf("--")+2, token.length());
+	    	String healthSystem = token.substring(0, token.indexOf("--"));
+	    	iWillWaitToSee(By.xpath("//div[@class='title accordion-title']"));
+	    	Assert.assertFalse(isElementPresentOnPage(By.xpath("//div[@class='title accordion-title']//span[contains(text(),'"+healthSystem+"')]//span[contains(text(),'"+program+"')]")));
+		}
+	}
+	else
+	{
+		String program = programs.substring(programs.indexOf("--")+2, programs.length());
+    	String healthSystem = programs.substring(0, programs.indexOf("--"));
+    	iWillWaitToSee(By.xpath("//div[@class='title accordion-title']"));
+    	Assert.assertFalse(isElementPresentOnPage(By.xpath("//div[@class='title accordion-title']//span[contains(text(),'"+healthSystem+"')]//span[contains(text(),'"+program+"')]")));
+	}
+}
 }

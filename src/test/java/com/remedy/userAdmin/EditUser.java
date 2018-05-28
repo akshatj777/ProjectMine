@@ -672,4 +672,7 @@ public void verifySubmitButtonStatus() {
 		Assert.assertFalse(el.isEnabled());
 	
 }
+public void iVerifyRemovedProgramInEditPage(String program){
+	Assert.assertFalse(driver.findElement(By.xpath("//div[@class='ui label']/span")).getAttribute("innerText").toString().trim().equals(program));
+}
 }

@@ -122,4 +122,8 @@ public class ViewUserSteps extends DriverScript{
 	public void iRefreshViewUserPage() {
 		objViewUserPage.iRefreshViewUserPage();
 	}
+	@Then("^I verify Program \"([^\"]*)\" is not present in view user page$")
+	public void iVerifyRemovedProgramInViewPage(String programs){
+		objViewUserPage.iVerifyRemovedProgramInViewPage(programs);
+	}
 }
