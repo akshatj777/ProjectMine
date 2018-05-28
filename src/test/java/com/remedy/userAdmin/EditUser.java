@@ -8,12 +8,15 @@ import java.util.StringTokenizer;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.server.handler.ClickElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.remedy.baseClass.BaseClass;
+import com.remedy.resources.DriverScript;
 import com.remedy.userAdmin.CreateUserPage;
 
 public class EditUser extends BaseClass {
@@ -349,69 +352,72 @@ public class EditUser extends BaseClass {
 
 	public void iSearchLocByBPIDForPTA(String locationList) throws InterruptedException {
 
-		if (locationList.contains(",")) {
+		if (locationList.contains(",")) 
+		{
 			StringTokenizer st = new StringTokenizer(locationList, ",");
-			while (st.hasMoreTokens()) {
+			while (st.hasMoreTokens()) 
+			{
 				String token = st.nextToken().trim();
 				String location = token.substring(token.indexOf("--") + 2, token.length());
 				String BPID = token.substring(0, token.indexOf("--"));
-
 				delay();
-				while (!(driver
-						.findElement(By
-								.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']"))
-						.getText().equals(""))) {
-					driver.findElement(By
-							.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']"))
-							.clear();
+				if(DriverScript.Config.getProperty("Browser").equals("ie"))
+				{
+					new Actions(driver).sendKeys(driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")), BPID).build().perform();
+					while(!(driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")).getAttribute("value").equals(BPID)))
+					{
+						((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+						new Actions(driver).sendKeys(driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")), BPID).build().perform();
+					}
+					iWillWaitToSee(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//th[contains(text(),\""+ BPID + "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location+ "\")]"));
+					((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//th[contains(text(),\""+ BPID + "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location+ "\")]")));
+					Thread.sleep(3000);
 				}
-				delay();
-				iFillInText(
-						driver.findElement(By
-								.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")),
-						BPID);
-				iWillWaitToSee(By
-						.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//th[contains(text(),\""
-								+ BPID + "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location
-								+ "\")]"));
-				driver.findElement(By
-						.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//th[contains(text(),\""
-								+ BPID + "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location
-								+ "\")]"))
-						.click();
-				Thread.sleep(3000);
-
+				else
+				{
+					while (!(driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")).getText().equals("")))
+					{
+						driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")).clear();
+					}
+					delay();
+					iFillInText(driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")),BPID);
+					iWillWaitToSee(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//th[contains(text(),\""+ BPID + "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location+ "\")]"));
+					driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//th[contains(text(),\""+ BPID + "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location+ "\")]")).click();
+					Thread.sleep(3000);
+				}
 			}
-		} else {
+		} 
+		else 
+		{
 			String token = locationList;
 			String location = token.substring(token.indexOf("--") + 2, token.length());
 			String BPID = token.substring(0, token.indexOf("--"));
 			delay();
-			while (!(driver
-					.findElement(By
-							.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']"))
-					.getText().equals(""))) {
-				driver.findElement(By
-						.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']"))
-						.clear();
+			if(DriverScript.Config.getProperty("Browser").equals("ie"))
+			{
+				new Actions(driver).sendKeys(driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")), BPID).build().perform();
+				while(!(driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")).getAttribute("value").equals(BPID)))
+				{
+					((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+					new Actions(driver).sendKeys(driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")), BPID).build().perform();
+				}
+				iWillWaitToSee(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//th[contains(text(),\""+ BPID + "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location+ "\")]"));
+				((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//th[contains(text(),\""+ BPID + "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location+ "\")]")));
+				Thread.sleep(3000);
 			}
-			delay();
-			iFillInText(
-					driver.findElement(By
-							.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")),
-					BPID);
-			iWillWaitToSee(By
-					.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//th[contains(text(),\""
-							+ BPID + "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location
-							+ "\")]"));
-			driver.findElement(By
-					.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//th[contains(text(),\""
-							+ BPID + "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location
-							+ "\")]"))
-					.click();
-			Thread.sleep(3000);
+			else
+			{
+				while (!(driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")).getText().equals(""))) 
+				{
+					driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")).clear();
+				}
+				delay();
+				iFillInText(driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")),BPID);
+				iWillWaitToSee(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//th[contains(text(),\""+ BPID + "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location+ "\")]"));
+				driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//th[contains(text(),\""+ BPID + "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location+ "\")]")).click();
+				Thread.sleep(3000);
+			}
 		}
-
 	}
 
 	public void iVerifyFacilityKey(String key) {
