@@ -19,8 +19,8 @@ public class EditManagingOrganization extends BaseClass {
 	public void iClickFieldInSearchListOnOrganizationPage(String field) {
 		if(field.contains("MONAME"))
 		{
-			iWillWaitToSee(By.xpath("//div[text()='"+CreateManagingOrganization.moOrg.get("MONAME")+"']"));
-			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateManagingOrganization.moOrg.get("MONAME")+"']")));
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"']"));
+			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"']")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(field.contains("ACHNAME - YES"))

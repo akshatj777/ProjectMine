@@ -260,15 +260,15 @@ public class ViewACHOrganization  extends BaseClass{
 				{
 					result = getTextForElement(driver.findElement(By.xpath("//span[contains(text(),'Managing Organization:')]")));
 					result = result.substring(result.indexOf(":")+1, result.indexOf("|")).trim();
-					Assert.assertEquals(result,CreateManagingOrganization.moOrg.get("MONAME"));
+					Assert.assertEquals(result,CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1));
 				}
 				else if(text.contains("Participant Id"))
 				{
-					String query = "SELECT participant_id from program_management.organization where name = '"+CreateManagingOrganization.moOrg.get("MONAME")+"'";
+					//String query = "SELECT participant_id from program_management.organization where name = '"+CreateManagingOrganization.moOrg.get("MONAME")+"'";
 					result = getTextForElement(driver.findElement(By.cssSelector(".id.participant-id")));
 					result = result.substring(result.indexOf(":")+1).trim();
-					String queryResult = fetchParticipantID(query);
-					Assert.assertEquals(result,queryResult);
+					String result1 = CreateManagingOrganizationAPI.participantidList.get(0);
+					Assert.assertEquals(result,result1);
 				}
 			}
 			else
@@ -297,9 +297,9 @@ public class ViewACHOrganization  extends BaseClass{
 		List<WebElement> listItems = driver.findElements(By.cssSelector("span[aria-selected='true']"));
 		for (WebElement item : listItems) 
 		{
-			  if (item.getText().trim().contains(CreateManagingOrganization.moOrg.get("MONAME")))
+			  if (item.getText().trim().contains(CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)))
 			  {
-				  Assert.assertTrue(item.getText().trim().contains(CreateManagingOrganization.moOrg.get("MONAME")));  
+				  Assert.assertTrue(item.getText().trim().contains(CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)));  
 			  } 
 		}
 	}
