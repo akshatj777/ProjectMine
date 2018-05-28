@@ -316,11 +316,13 @@ public class CreateUserPage extends BaseClass{
 
     public void iEnterHealthSystemSerachText(String text) throws InterruptedException 
     {
-    		if(!(text.equals("")))
+        	if(!text.equals(""))
         	{
     		iWillWaitToSee(By.xpath("//div[text()='Select']"));
+    		
     		if(DriverScript.Config.getProperty("Browser").equals("ie"))
     		{
+    			Thread.sleep(5000);
     			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Select']")));
     			iWillWaitToSee(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input"));
     			new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input")), text).build().perform();
@@ -1926,6 +1928,7 @@ public class CreateUserPage extends BaseClass{
     	   scrollIntoViewByJS(driver.findElement(By.xpath("//button[text()='Add Model 3 Organization(s)']")));
     	   iWillWaitToSee(By.xpath("//button[text()='Add Model 3 Organization(s)']"));
     	   driver.findElement(By.xpath("//button[text()='Add Model 3 Organization(s)']")).click();
+    	   longDelay();
        }
    }
    
