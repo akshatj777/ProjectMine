@@ -37,7 +37,6 @@ public class LandingPage extends BaseClass{
     }
        
     public void iClickOnApplicateTile(String tile){
-<<<<<<< HEAD
         if(DriverScript.Config.getProperty("Browser").equals("ie"))
         {
         	iWillWaitToSee(By.xpath(tile));
@@ -48,11 +47,7 @@ public class LandingPage extends BaseClass{
         	iWillWaitToSee(By.xpath(tile));
             clickElement(driver.findElement(By.xpath(tile)));
         }
-=======
-        iWillWaitToSee(By.xpath(tile));
-        clickElement(driver.findElement(By.xpath(tile)));
         longDelay();
->>>>>>> 9af420ea2021123945385bd970bc48eae26fb6a8
     }
 
     public void iSwitchToNewWindow(){
