@@ -149,7 +149,14 @@ public class CreateUserPage extends BaseClass{
 				{
 					iWillWaitToSee(By.xpath("//input[@placeholder='NPI']"));
 					((JavascriptExecutor) driver).executeScript("arguments[0].value=''", driver.findElement(By.xpath("//input[@placeholder='NPI']")));
-					new Actions(driver).sendKeys(driver.findElement(By.xpath("//input[@placeholder='NPI']")), userNPI);
+					delay();
+					new Actions(driver).sendKeys(driver.findElement(By.xpath("//input[@placeholder='NPI']")), userNPI).build().perform();
+					while(!(driver.findElement(By.xpath("//input[@placeholder='NPI']")).getAttribute("value").equals(userNPI)))
+					{
+						((JavascriptExecutor) driver).executeScript("arguments[0].value=''", driver.findElement(By.xpath("//input[@placeholder='NPI']")));
+						delay();
+						new Actions(driver).sendKeys(driver.findElement(By.xpath("//input[@placeholder='NPI']")), userNPI).build().perform();
+					}
 				}
 				else
 				{
@@ -358,9 +365,11 @@ public class CreateUserPage extends BaseClass{
     		iWillWaitToSee(By.xpath("//div[text()='Select']"));
     		if(DriverScript.Config.getProperty("Browser").equals("ie"))
     		{
-    			Thread.sleep(5000);
+    			Thread.sleep(3000);
+    			waitTo().until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='Select']")));
     			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Select']")));
     			iWillWaitToSee(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input"));
+    			Thread.sleep(3000);
     			new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input")), text).build().perform();
     			while(!(driver.findElement(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input")).getAttribute("value").equals(text)))
     			{
@@ -1650,6 +1659,7 @@ public class CreateUserPage extends BaseClass{
 	    		   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))));
 	    		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 	    		   {
+	    			   scrollIntoViewByJS(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")));
 	    			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID).build().perform();
 	    			   while(!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).getAttribute("value").equals(BPID)))
 	    			   {
@@ -1685,6 +1695,7 @@ public class CreateUserPage extends BaseClass{
 	    		   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))));
 	    		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 	    		   {
+	    			   scrollIntoViewByJS(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")));
 	    			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), location).build().perform();
 	    			   while(!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).getAttribute("value").equals(location)))
 	    			   {
@@ -1727,6 +1738,7 @@ public class CreateUserPage extends BaseClass{
     		   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))));
     		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
     		   {
+    			   scrollIntoViewByJS(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")));
     			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID).build().perform();
     			   while(!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).getAttribute("value").equals(BPID)))
     			   {
@@ -1757,6 +1769,7 @@ public class CreateUserPage extends BaseClass{
     		   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))));
     		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
     		   {
+    			   scrollIntoViewByJS(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")));
     			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), location).build().perform();
     			   while(!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).getAttribute("value").equals(location)))
     			   {
