@@ -178,7 +178,7 @@ public class CreatePractictionerAPI extends BaseClass{
 	        Long id;
 	        if (idToGet != 0L) {
 	            id = idToGet;
-	        } 
+	        }
 	        else {
 	            id = getId(type).get(0);
 	        }

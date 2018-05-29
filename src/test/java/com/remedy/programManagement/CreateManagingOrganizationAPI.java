@@ -14,6 +14,7 @@ public class CreateManagingOrganizationAPI extends BaseClass {
 	public static List<String> MONameList = new ArrayList<>();
 	public static List<Long> idList = new ArrayList<>();
 	public static List<String> participantidList = new ArrayList<>();
+	public static Long managingOrgID = null;
 	
 	public CreateManagingOrganizationAPI(WebDriver driver) {
 		super(driver);

@@ -135,7 +135,7 @@ Feature: Edit the Managing organization functionality test
     And I edit <State> field for organization
     And I edit "Postal Code" field to "<Postal_Code>" for organization
     Then I click on "Submit" button on "Edit" organization page
-    #Then I verify "<Message>" after submitting the "edit MO" organization page
+    Then I verify "<Message>" after submitting the "FETCHFROMAPI" organization page
 
     Examples: 
       | Description                                                                                    | MO_Name | Edited_MO_Name                    | Contact_Person                                | Contact_Email                                                                                                                                                                                                                                                  | Contact_Phone  | Address1                                                | Address2                                                | City                                          | State    | Postal_Code | Message                                     |

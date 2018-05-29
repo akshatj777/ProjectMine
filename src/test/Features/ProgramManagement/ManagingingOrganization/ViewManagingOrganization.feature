@@ -6,7 +6,7 @@ Feature: Verification of Managing Organization details with no ACH/PGP/HHA/SNF a
     Then I should see Tile text Program Management
     And I click on the "Program Management" tile
 
- Scenario Outline: Create MO using API calls
+  Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
     Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
@@ -15,8 +15,7 @@ Feature: Verification of Managing Organization details with no ACH/PGP/HHA/SNF a
     Examples: 
       | desc      | particpantId | name   | contactPerson | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type       |
       | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
- 
- 
+
   Scenario Outline: Verification of details on view profile of Managing Organization
     When I click on Organization link on Program Management page
     When I search with "<MO_Name>" on organization in search box
@@ -73,5 +72,5 @@ Feature: Verification of Managing Organization details with no ACH/PGP/HHA/SNF a
     And I verify the count "0 Organizations" for the associated organization
 
     Examples: 
-      | Description                          | MO_Name | Contact_Person    | Contact_Email      | Contact_Phone | Address1 | Address2 | City | State    | Postal_Code | StateInitials |
-      | View details on Managing Org profile | MONAME  | contactPerson | Sample@yopmail.com |    212-567-8970 | Address1 | Address2 | City | New York |       10001 | NY            |
+      | Description                          | MO_Name | Contact_Person | Contact_Email      | Contact_Phone | Address1 | Address2 | City | State    | Postal_Code | StateInitials |
+      | View details on Managing Org profile | MONAME  | contactPerson  | Sample@yopmail.com | 212-567-8970  | Address1 | Address2 | City | New York |       10001 | NY            |

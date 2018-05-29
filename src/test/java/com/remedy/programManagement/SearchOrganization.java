@@ -19,7 +19,14 @@ public class SearchOrganization extends BaseClass{
 		if(text.contains("MONAME"))
 		{
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1));
+			if(CreateManagingOrganizationAPI.MONameList.get(0).contains("\""))
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateManagingOrganizationAPI.MONameList.get(0));
+			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(text.contains("ACHNAME - YES"))
@@ -322,7 +329,14 @@ public class SearchOrganization extends BaseClass{
 		if(text.contains("MONAME"))
 		{
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
-			isElementPresentOnPage(By.xpath("//div[text()='"+CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"']"));
+			if(CreateManagingOrganizationAPI.MONameList.get(0).contains("\""))
+			{
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateManagingOrganizationAPI.MONameList.get(0).substring(0, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"']"));
+			}
+			else
+			{
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateManagingOrganizationAPI.MONameList.get(0)+"']"));
+			}
 		}
 		else if(text.contains("ACHNAME - YES")){
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
@@ -361,7 +375,7 @@ public class SearchOrganization extends BaseClass{
 		driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")).clear();
 		if (org.equals("MONAME"))
 		{
-			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1));
+			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateManagingOrganization.moName);
 		}
 		else if(org.equals("ACHNAME - YES"))
 		{

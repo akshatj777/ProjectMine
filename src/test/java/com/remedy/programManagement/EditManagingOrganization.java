@@ -19,9 +19,18 @@ public class EditManagingOrganization extends BaseClass {
 	public void iClickFieldInSearchListOnOrganizationPage(String field) {
 		if(field.contains("MONAME"))
 		{
-			iWillWaitToSee(By.xpath("//div[text()='"+CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"']"));
-			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"']")));
-			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			if(CreateManagingOrganizationAPI.MONameList.get(0).contains("\""))
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			}
+			else
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateManagingOrganizationAPI.MONameList.get(0)+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateManagingOrganizationAPI.MONameList.get(0)+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			}
 		}
 		else if(field.contains("ACHNAME - YES"))
 		{
@@ -100,8 +109,9 @@ public class EditManagingOrganization extends BaseClass {
 	
 	public void iEditAllFieldsOFOrganization(String field1, String field2) 
 	{
+		
 		if(field2.contains("MONAME")){
-			CreateManagingOrganization.moName = CreateManagingOrganization.moOrg.get("MONAME");
+			CreateManagingOrganization.moName = CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1);
 			CreateManagingOrganization.tempMoOrg.put("MONAME",createRandomName(field2));
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateManagingOrganization.tempMoOrg.get("MONAME"));

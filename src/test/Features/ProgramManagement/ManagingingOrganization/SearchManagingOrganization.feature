@@ -37,16 +37,15 @@ Feature: Search the Managing organization functionality test
     And I click on "Edit" button on particular organization
     And I edit "Managing Organization Name" field to "<Edited_MO_Name>" for organization
     Then I click on "Submit" button on "edit" organization page
-    Then I verify "Managing Organization Successfully Updated." after submitting the "edit MO" organization page
-    #When Get by id <id> and <type>
-    #Then I search "<Edited_MO_Name>" and verify with search list options on "Managing" organization search box
+    Then I verify "Managing Organization Successfully Updated." after submitting the "FETCHFROMAPI" organization page
+    Then I search "<Edited_MO_Name>" and verify with search list options on "Managing" organization search box
     Then I search with "<MO_Name>" old name in organization search box
     Then I verify the "No matches" message for invalid search in Organization
     And I verify the "Create New Managing Organization" link under No matches
 
     Examples: 
-      | Description                                                                     | MO_Name | Edited_MO_Name | type       |
-      | Search for a managing organization after editing the Managing organization name | MONAME  | MONAME         | management |
+      | Description                                                                     | MO_Name | Edited_MO_Name | type       | id |
+      | Search for a managing organization after editing the Managing organization name | MONAME  | MONAME         | management |  0 |
 
   Scenario Outline: Verification of error message if an organization is not found in search box
     When I click on Organization link on Program Management page
