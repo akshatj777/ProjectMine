@@ -1072,7 +1072,7 @@ Feature: Edit user page for SA
       | Verify validation message for NPI as alphanumeric     | Super Admin | First Name | Last Name  | test.automatemail | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI          |
       | Verify validation message for invalid First Name      | Super Admin | 84738&7919 | Last Name  | test.automatemail | 9874563210 | Physicians | NPI        | Please enter a valid name         |
       | Verify validation message for invalid Last name       | Super Admin | First Name | 847382&919 | test.automatemail | 9874563210 | Physicians | NPI        | Please enter a valid name         |
-
+ | Verify validation message for NPI as .     | Super Admin | First Name | Last Name  | test.automatemail | 9874563210 | Physicians | .........1 | Please enter a valid NPI          |
   Scenario Outline: Verify auto selected programs in Organizations
     Given I am on the login page
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login

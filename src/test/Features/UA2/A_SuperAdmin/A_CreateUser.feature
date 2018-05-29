@@ -496,18 +496,19 @@ Feature: Create User - Super Admin User
     Then I verify the validation message "<ValidationMsg>" on Create User Page
 
     Examples: 
-      | Description                                           | FirstName  | LastName   | Email             | Phone      | Role       | NPI        | ValidationMsg                     |
-      | Verify validation message for blank First name        |            | Last Name  | test.automatemail | 9874563210 | Executive  |            | First Name is required            |
-      | Verify validation message for blank Last name         | First Name |            | test.automatemail | 9874563210 | Executive  |            | Last Name is required             |
-      | Verify validation message for blank Email             | First Name | Last Name  |                   | 9874563210 | Executive  |            | Email is required                 |
-      | Verify validation message for blank NPI               | First Name | Last Name  | test.automatemail | 9874563210 | Physicians |            | NPI is required                   |
-      | Verify validation message for invalid Email           | First Name | Last Name  | abc               | 9874563210 | Physicians | NPI        | Please enter a valid email        |
-      | Verify validation message for invalid Phone           | First Name | Last Name  | test.automatemail |     123564 | Physicians | NPI        | Please enter a valid phone number |
-      | Verify validation message for NPI less than 10 digits | First Name | Last Name  | test.automatemail | 9874563210 | Physicians |     123564 | Please enter a valid NPI          |
-      | Verify validation message for NPI as alphabets        | First Name | Last Name  | test.automatemail | 9874563210 | Physicians | abcdefgihj | Please enter a valid NPI          |
-      | Verify validation message for NPI as alphanumeric     | First Name | Last Name  | test.automatemail | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI          |
-      | Verify validation message for invalid First Name      | 8473827919 | Last Name  | test.automatemail | 9874563210 | Physicians | NPI        | Please enter a valid name         |
-      | Verify validation message for invalid Last name       | First Name | 8473827919 | test.automatemail | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Description                                           | FirstName   | LastName    | Email             | Phone      | Role       | NPI        | ValidationMsg                     |
+      | Verify validation message for blank First name        |             | Last Name   | test.automatemail | 9874563210 | Executive  |            | First Name is required            |
+      | Verify validation message for blank Last name         | First Name  |             | test.automatemail | 9874563210 | Executive  |            | Last Name is required             |
+      | Verify validation message for blank Email             | First Name  | Last Name   |                   | 9874563210 | Executive  |            | Email is required                 |
+      | Verify validation message for blank NPI               | First Name  | Last Name   | test.automatemail | 9874563210 | Physicians |            | NPI is required                   |
+      | Verify validation message for invalid Email           | First Name  | Last Name   | abc               | 9874563210 | Physicians | NPI        | Please enter a valid email        |
+      | Verify validation message for invalid Phone           | First Name  | Last Name   | test.automatemail |     123564 | Physicians | NPI        | Please enter a valid phone number |
+      | Verify validation message for NPI less than 10 digits | First Name  | Last Name   | test.automatemail | 9874563210 | Physicians |     123564 | Please enter a valid NPI          |
+      | Verify validation message for NPI as alphabets        | First Name  | Last Name   | test.automatemail | 9874563210 | Physicians | abcdefgihj | Please enter a valid NPI          |
+      | Verify validation message for NPI as alphanumeric     | First Name  | Last Name   | test.automatemail | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI          |
+      | Verify validation message for invalid First Name      | 84738&27919 | Last Name   | test.automatemail | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Verify validation message for invalid Last name       | First Name  | 84738&27919 | test.automatemail | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Verify validation message for NPI as .                | First Name  | Last Name   | test.automatemail | 9874563210 | Physicians | .........1 | Please enter a valid NPI          |
 
   Scenario Outline: Verify validation message for invalid lesson name in search box
     Given I am on the login page
