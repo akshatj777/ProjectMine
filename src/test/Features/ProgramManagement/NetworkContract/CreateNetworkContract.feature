@@ -7,25 +7,15 @@ Feature: Create Network Contracts functionality tests
     And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
 
-  Scenario Outline: <Description>
-    Then I verify "+" button under "Managing" organization page
-    Then I click on "+" button on "Managing" organization page
-    And I verify "Create Managing Organization" header text on create organization page
-    Then I enter <MO_Name> in "Managing Organization Name" on create organization page
-    And I enter <Address1> in "Address 1" on create organization page
-    And I enter <Contact_Person> in "Contact Person" on create organization page
-    And I enter <Address2> in "Address 2" on create organization page
-    And I enter <Contact_Email> in "Contact Email" on create organization page
-    And I enter <City> in "City" on create organization page
-    And I enter <Contact_Phone> in "Contact Phone" on create organization page
-    And I select <State> in State on create organization page
-    And I enter <Postal_Code> in "Postal Code" on create organization page
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create MO" organization page
+  Scenario Outline: Create MO using API calls
+    Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
+    When create org with this data
+    Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
 
     Examples: 
-      | Description                                            | MO_Name | Contact_Person    | Contact_Email      | Contact_Phone | Address1 | Address2 | City | State    | Postal_Code | Message                                     |
-      | Create Managing Organization with all available fields | MONAME  | ContactPersonTest | Sample@yopmail.com |    5555599999 | Address1 | Address2 | City | New York |       10001 | Managing Organization Successfully Created. |
+      | desc      | particpantId | name   | contactPerson | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type       |
+      | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
 
   Scenario Outline: <Description>
     When I click on "Hospital" organization tab on organization dashboard

@@ -231,7 +231,14 @@ public class CreateManagingOrganization extends BaseClass {
 	{
 //		if(driver.findElements(By.cssSelector(".alert.alert-dismissible.alert-success>a")).size()>0)	
 //		{
-			if(org.contains("MO"))
+		if(org.equals("FETCHFROMAPI"))
+		{
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			CreateManagingOrganizationAPI.MONameList.clear();
+			CreateManagingOrganizationAPI.MONameList.add(tempMoOrg.get("MONAME"));
+		}
+	else if(org.contains("MO"))
 				{
 				iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
 					verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);

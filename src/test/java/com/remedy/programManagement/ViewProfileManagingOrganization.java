@@ -67,8 +67,9 @@ public class ViewProfileManagingOrganization extends BaseClass{
 	{
 		if (org.contains("Managing")){
 			String text = getTextForElement(driver.findElement(By.cssSelector(".participant-id")));
-		    String query = "SELECT participant_id from program_management.organization where name = '"+CreateManagingOrganization.moOrg.get("MONAME")+"'";
-		    String pID = fetchParticipantID(query);
+		    //String query = "SELECT participant_id from program_management.organization where name = '"+CreateManagingOrganization.moOrg.get("MONAME")+"'";
+		    String pID = CreateManagingOrganizationAPI.participantidList.get(0);
+		    longDelay();
 			Assert.assertEquals("Participant Id: "+pID+"|", text);
 		}
 		else if (org.contains("Payor")){
