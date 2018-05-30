@@ -121,7 +121,7 @@ public class DriverScript {
 			DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
 			//caps.setCapability("nativeEvents", false);
 //			caps.setCapability("nativeEvents", true);
-//			caps.setCapability("ignoreZoomSetting", true);
+			caps.setCapability("ignoreZoomSetting", true);
 //			caps.setCapability("enablePersistentHover", false);
 //			caps.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, true);
 //			caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);

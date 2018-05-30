@@ -1,5 +1,7 @@
 package com.remedy.userAdmin;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,6 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
+
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
 import com.remedy.userAdmin.CreateUserPage;
@@ -38,6 +41,7 @@ public class SuperUserLandingPage extends BaseClass {
 	}
 
 	public void iVerifyLandingPageUI(String text) {
+		driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
 		iWillWaitToSee(By.cssSelector("table.ui.celled.sortable.striped.table tbody"));
 		//iWillWaitToSee(By.cssSelector("div.chevron-group"));
 		if (text.contains("User table"))

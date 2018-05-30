@@ -305,49 +305,73 @@ public class EditUser extends BaseClass {
 
 	public void iSearchLocByBPID(String locationList) throws InterruptedException {
 
-		if (locationList.contains(",")) {
+		if (locationList.contains(",")) 
+		{
 			StringTokenizer st = new StringTokenizer(locationList, ",");
-			while (st.hasMoreTokens()) {
+			while (st.hasMoreTokens()) 
+			{
 				String token = st.nextToken().trim();
 				String location = token.substring(token.indexOf("--") + 2, token.length());
 				String BPID = token.substring(0, token.indexOf("--"));
 
 				delay();
-				while (!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))
-						.getText().equals(""))) {
-					driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))
-							.clear();
+				if(DriverScript.Config.getProperty("Browser").equals("ie"))
+				{
+					new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID).build().perform();
+					while(!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).getAttribute("value").equals(BPID)))
+					{
+						((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+						new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID).build().perform();
+					}
+					iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\"" + BPID+ "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location + "\")]"));
+					((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\"" + BPID+ "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location + "\")]")));
+					Thread.sleep(3000);
 				}
-				delay();
-				iFillInText(
-						driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")),
-						BPID);
-				iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\"" + BPID
-						+ "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location + "\")]"));
-				driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\"" + BPID
-						+ "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location + "\")]")).click();
-				Thread.sleep(3000);
-
+				else
+				{
+					while (!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).getText().equals(""))) 
+					{
+						driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).clear();
+					}
+					delay();
+					iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")),BPID);
+					iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\"" + BPID+ "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location + "\")]"));
+					driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\"" + BPID+ "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location + "\")]")).click();
+					Thread.sleep(3000);
+				}
 			}
-		} else {
+		} 
+		else 
+		{
 			String token = locationList;
 			String location = token.substring(token.indexOf("--") + 2, token.length());
 			String BPID = token.substring(0, token.indexOf("--"));
 			delay();
-			while (!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))
-					.getText().equals(""))) {
-				driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).clear();
+			if(DriverScript.Config.getProperty("Browser").equals("ie"))
+			{
+				new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID).build().perform();
+				while(!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).getAttribute("value").equals(BPID)))
+				{
+					((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+					new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID).build().perform();
+				}
+				iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\"" + BPID+ "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location + "\")]"));
+				((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\"" + BPID+ "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location + "\")]")));
+				Thread.sleep(3000);
 			}
-			delay();
-			iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")),
-					BPID);
-			iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\"" + BPID
-					+ "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location + "\")]"));
-			driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\"" + BPID
-					+ "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location + "\")]")).click();
-			Thread.sleep(3000);
+			else
+			{
+				while (!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).getText().equals(""))) 
+				{
+					driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).clear();
+				}
+				delay();
+				iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")),BPID);
+				iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\"" + BPID+ "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location + "\")]"));
+				driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\"" + BPID+ "\")]/../../following-sibling::tbody//label[contains(text(),\"" + location + "\")]")).click();
+				Thread.sleep(3000);
+			}
 		}
-
 	}
 
 	public void iSearchLocByBPIDForPTA(String locationList) throws InterruptedException {

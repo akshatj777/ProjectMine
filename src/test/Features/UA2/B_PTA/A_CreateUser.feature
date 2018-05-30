@@ -183,10 +183,10 @@ Feature: Create User - PTA User
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
     And I switch back to old window
-    #And I click on Institute tile for "<User>-<Role>" user
-    #And I switch to new window
-    #And I verify "<User>-<Role>" user navigated to Institute homepage
-    #And I switch back to old window
+    And I click on Institute tile for "<User>-<Role>" user
+    And I switch to new window
+    And I verify "<User>-<Role>" user navigated to Institute homepage
+    And I switch back to old window
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -417,10 +417,10 @@ Feature: Create User - PTA User
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
     And I switch back to old window
-    #And I click on Institute tile for "<User>-<Role>" user
-    #And I switch to new window
-    #And I verify "<User>-<Role>" user navigated to Institute homepage
-    #And I switch back to old window
+    And I click on Institute tile for "<User>-<Role>" user
+    And I switch to new window
+    And I verify "<User>-<Role>" user navigated to Institute homepage
+    And I switch back to old window
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -653,10 +653,10 @@ Feature: Create User - PTA User
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
     And I switch back to old window
-    #And I click on Institute tile for "<User>-<Role>" user
-    #And I switch to new window
-    #And I verify "<User>-<Role>" user navigated to Institute homepage
-    #And I switch back to old window
+    And I click on Institute tile for "<User>-<Role>" user
+    And I switch to new window
+    And I verify "<User>-<Role>" user navigated to Institute homepage
+    And I switch back to old window
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
