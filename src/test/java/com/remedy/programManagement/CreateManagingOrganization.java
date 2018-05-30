@@ -238,6 +238,13 @@ public class CreateManagingOrganization extends BaseClass {
 			CreateManagingOrganizationAPI.MONameList.clear();
 			CreateManagingOrganizationAPI.MONameList.add(tempMoOrg.get("MONAME"));
 		}
+		else if(org.equals("FETCHFROMAPIFORPAYOR"))
+		{
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			CreatePayorOrganizationAPI.PayorNameList.clear();
+			CreatePayorOrganizationAPI.PayorNameList.add(CreatePayorOrganization.tempPayorOrg.get("PAYORNAME"));
+		}
 	else if(org.contains("MO"))
 				{
 				iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));

@@ -56,7 +56,14 @@ public class SearchOrganization extends BaseClass{
 		else if(text.contains("PAYORNAME"))
 		{
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePayorOrganization.payorOrg.get("PAYORNAME"));
+			if(CreatePayorOrganizationAPI.PayorNameList.get(0).contains("\""))
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePayorOrganizationAPI.PayorNameList.get(0).substring(1, CreatePayorOrganizationAPI.PayorNameList.get(0).length()-1));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePayorOrganizationAPI.PayorNameList.get(0));
+			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(text.contains("SNFNAME - YES"))
@@ -116,10 +123,7 @@ public class SearchOrganization extends BaseClass{
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
 			  else if (value.equals("PID")){
-//				  String query = "SELECT participant_id from program_management.organization where name = '"+CreateManagingOrganization.moOrg.get("MONAME")+"'";
-//				  value = fetchParticipantID(query);
 				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateManagingOrganizationAPI.participantidList.get(0).substring(1, CreateManagingOrganizationAPI.participantidList.get(0).length()-1));
-				  //waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 				  value=CreateManagingOrganizationAPI.participantidList.get(0).substring(1, CreateManagingOrganizationAPI.participantidList.get(0).length()-1);
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
@@ -212,17 +216,16 @@ public class SearchOrganization extends BaseClass{
 		  else if (org.equalsIgnoreCase("Payor")){
 			  if (value.equals("PAYORNAME"))
 			  {
-				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePayorOrganization.payorOrg.get("PAYORNAME"));
+				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePayorOrganizationAPI.PayorNameList.get(0).substring(1, CreatePayorOrganizationAPI.PayorNameList.get(0).length()-1));
 				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				  value = CreatePayorOrganization.payorOrg.get("PAYORNAME");
+				  value = CreatePayorOrganizationAPI.PayorNameList.get(0).substring(1, CreatePayorOrganizationAPI.PayorNameList.get(0).length()-1);
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
 			  else if (value.equals("PID")){
-				  String query = "SELECT participant_id from program_management.organization where name = '"+CreatePayorOrganization.payorOrg.get("PAYORNAME")+"'";
-				  value = fetchParticipantID(query);
+				  //String query = "SELECT participant_id from program_management.organization where name = '"+CreatePayorOrganization.payorOrg.get("PAYORNAME")+"'";
+				  value = CreatePayorOrganizationAPI.participantidList.get(0).substring(1, CreatePayorOrganizationAPI.participantidList.get(0).length()-1);
 				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), value);
-				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
@@ -349,7 +352,14 @@ public class SearchOrganization extends BaseClass{
 		else if(text.contains("PAYORNAME"))
 		{
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
-			isElementPresentOnPage(By.xpath("//div[text()='"+CreatePayorOrganization.payorOrg.get("PAYORNAME")+"']"));
+			if(CreatePayorOrganizationAPI.PayorNameList.get(0).contains("\""))
+			{
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreatePayorOrganizationAPI.PayorNameList.get(0).substring(0, CreatePayorOrganizationAPI.PayorNameList.get(0).length()-1)+"']"));
+			}
+			else
+			{
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreatePayorOrganizationAPI.PayorNameList.get(0)+"']"));
+			}
 		}
 		else if(text.contains("SNFNAME - YES")){
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));

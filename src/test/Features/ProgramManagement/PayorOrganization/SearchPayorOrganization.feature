@@ -5,29 +5,18 @@ Feature: Search the Payor organization functionality test
     When I log in as super user
     Then I should see Tile text Program Management
     And I click on the "Program Management" tile
-    #And I switch to new window
     When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
 
-  Scenario Outline: <Description>
-    Then I click on "+" button on "Payor" organization page
-    And I verify "Create Payor Organization" header text on create organization page
-    Then I enter <Payor_Name> in "Payor Organization Name" on create organization page
-    And I enter <Address1> in "Address 1" on create organization page
-    And I enter <Contact_Person> in "Contact Person" on create organization page
-    And I enter <Address2> in "Address 2" on create organization page
-    And I enter <Contact_Email> in "Contact Email" on create organization page
-    And I enter <City> in "City" on create organization page
-    And I enter <Contact_Phone> in "Contact Phone" on create organization page
-    And I select <State> in State on create organization page
-    And I enter <Postal_Code> in "Postal Code" on create organization page
-    And I provide unique "Payor - <EIN>" in "EIN" on create organization page
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create Payor" organization page
+  Scenario Outline: Create Payor using API calls
+    Given build Json for Payor "<name>" and "<participantId>" and "<tinEin>" and "<contactName>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
+    When create payor with this data
+    Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
 
     Examples: 
-      | Description                                         | Payor_Name | Contact_Person    | Contact_Email      | Contact_Phone | Address1 | Address2 | City | State    | Postal_Code | EIN | Message                                  |
-      | Create Payor Organization with all available fields | PAYORNAME  | ContactPersonTest | Sample@yopmail.com |    5555599999 | Address1 | Address2 | City | New York |       10001 | EIN | Payor Organization Successfully Created. |
+      | desc         | participantId | name      | tinEin | contactName | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type  |
+      | Create Payor |               | PAYORNAME | EIN    | contactName | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | payor |
 
   Scenario Outline: <Description>
     Then I verify the Search bar on "Payor" organization page
@@ -49,15 +38,15 @@ Feature: Search the Payor organization functionality test
     And I verify "Edit Payor Organization" header text on edit organization page
     And I edit "Payor Organization Name" field to "<Edited_Payor_Name>" for organization
     Then I click on "Submit" button on "edit" organization page
-    Then I verify "Payor Organization Successfully Updated." after submitting the "edit Payor" organization page
+    Then I verify "Payor Organization Successfully Updated." after submitting the "FETCHFROMAPIFORPAYOR" organization page
     Then I search "<Edited_Payor_Name>" and verify with search list options on "Payor" organization search box
     Then I search with "<Payor_Name>" old name in organization search box
     Then I verify the "No matches" message for invalid search in Organization
     And I verify the "Create New Payor Organization" link under No matches
 
     Examples: 
-      | Description                                                               | Payor_Name | Edited_Payor_Name |
-      | Search for a Payor organization after editing the Payor organization name | PAYORNAME  | PAYORNAME         |
+      | Description                                                               | Payor_Name | Edited_Payor_Name |id|type|
+      | Search for a Payor organization after editing the Payor organization name | PAYORNAME  | PAYORNAME         |0|payor|
 
   Scenario Outline: Verification of error message if an organization is not found in search box
     Then I search with "<Payor_Name>" on organization in search box
