@@ -1,13 +1,13 @@
 Feature: Delete a user from SA
 
   Scenario Outline: <Description>
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -58,7 +58,8 @@ Feature: Delete a user from SA
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -123,13 +124,13 @@ Feature: Delete a user from SA
       | Super Admin | Case Manager |
 
   Scenario Outline: <Description> then delete that user and Login with unverified deleted user
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -197,7 +198,8 @@ Feature: Delete a user from SA
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds

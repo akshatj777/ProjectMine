@@ -170,7 +170,8 @@ public class CreateUserPage extends BaseClass{
 				if(DriverScript.Config.getProperty("Browser").equals("ie"))
 				{
 					iWillWaitToSee(By.xpath("//input[@placeholder='NPI']"));
-					((JavascriptExecutor) driver).executeScript("arguments[0].value=''", driver.findElement(By.xpath("//input[@placeholder='NPI']")));
+					driver.findElement(By.xpath("//input[@placeholder='NPI']")).sendKeys(Keys.CONTROL,"a");
+					driver.findElement(By.xpath("//input[@placeholder='NPI']")).sendKeys(Keys.DELETE);
 					new Actions(driver).sendKeys(driver.findElement(By.xpath("//input[@placeholder='NPI']")), npi).build().perform();
 				}
 				else
@@ -188,7 +189,9 @@ public class CreateUserPage extends BaseClass{
     		if(DriverScript.Config.getProperty("Browser").equals("ie"))
     		{
     			iWillWaitToSee(By.xpath("//input[@placeholder='First Name']"));
-    			((JavascriptExecutor) driver).executeScript("arguments[0].value=''", driver.findElement(By.xpath("//input[@placeholder='First Name']")));
+//    			((JavascriptExecutor) driver).executeScript("arguments[0].value=''", driver.findElement(By.xpath("//input[@placeholder='First Name']")));
+    			driver.findElement(By.xpath("//input[@placeholder='First Name']")).sendKeys(Keys.CONTROL,"a");
+    			driver.findElement(By.xpath("//input[@placeholder='First Name']")).sendKeys(Keys.DELETE);
     			new Actions(driver).sendKeys(driver.findElement(By.xpath("//input[@placeholder='First Name']")), text).build().perform();
     		}
     		else
@@ -204,7 +207,8 @@ public class CreateUserPage extends BaseClass{
     	if(DriverScript.Config.getProperty("Browser").equals("ie"))
     	{
     		iWillWaitToSee(By.xpath("//input[@placeholder='Last Name']"));
-    		((JavascriptExecutor) driver).executeScript("arguments[0].value=''", driver.findElement(By.xpath("//input[@placeholder='Last Name']")));
+    		driver.findElement(By.xpath("//input[@placeholder='Last Name']")).sendKeys(Keys.CONTROL,"a");
+    		driver.findElement(By.xpath("//input[@placeholder='Last Name']")).sendKeys(Keys.DELETE);
             new Actions(driver).sendKeys(driver.findElement(By.xpath("//input[@placeholder='Last Name']")), text).build().perform();
     	}
     	else
