@@ -1,6 +1,7 @@
 package com.remedy.baseClass;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -14,6 +15,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.jayway.restassured.response.Response;
+import com.remedy.RestCall.InsertDataIntoDataModels;
+import com.remedy.programManagement.CreateACHOrganizationAPI;
 import com.remedy.programManagement.CreateBundleAPI;
 import com.remedy.programManagement.CreateManagingOrganization;
 import com.remedy.programManagement.CreateManagingOrganizationAPI;
@@ -33,6 +36,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,6 +68,7 @@ public class BaseClass {
 	public static String parentWindow = null;
 	private static Gson gson = new Gson();
 	protected static Response response;
+	private static InsertDataIntoDataModels insertData = new InsertDataIntoDataModels();
 	public BaseClass(final WebDriver driver) {
 		this.driver = driver;
 	}
@@ -586,6 +591,10 @@ public class BaseClass {
 			idList.addAll(CreateManagingOrganizationAPI.idList);
 			CreateManagingOrganizationAPI.idList.clear();
 		} 
+		 else if (type.equals("hospital")) {
+				idList.addAll(CreateACHOrganizationAPI.idList);
+				CreateACHOrganizationAPI.idList.clear();
+			} 
 		//else if (type.equals("payor")) {
 //			idList.addAll(CreatePayorStepDef.returnIdList());
 //		}
@@ -629,5 +638,76 @@ public class BaseClass {
 			CreateManagingOrganizationAPI.MONameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
 			CreateManagingOrganizationAPI.participantidList.add((((JsonObject) jsonObject.get("data")).get("participantId")).toString());
 		}
+		else if(type.equals("hospital"))
+		{
+			CreateACHOrganizationAPI.ACHNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+			CreateACHOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
+		}
 	}
+	
+	public static List<String> generateLocationId(String cLocationId, String cCCN){
+
+
+        List<String> cucLocationIdList = insertData.splitList(cLocationId);
+        List<String> locationIdList = new ArrayList<>();
+        int cucLocationIdListSize = cucLocationIdList.size();
+        String ccn = cCCN;
+        String timeStamp = generateTimeStamp();
+        for(int i=0; i< cucLocationIdListSize ;i++) {
+
+            if (StringUtils.isNotBlank(cucLocationIdList.get(i))) {
+                locationIdList.add(cucLocationIdList.get(i)+ timeStamp.substring(10, 14));
+            }else{
+                locationIdList.add(null);
+            }
+        }
+        return locationIdList;
+    }
+	
+	public static String generateTimeStamp(){
+
+        DateFormat df = new SimpleDateFormat("MMddyyyyHHmmss");
+        Date date = new Date();
+        String timeStamp = df.format(date);
+        return timeStamp;
+    }
+	
+	public static Integer generateMarketId(String cMarketId) {
+
+        Integer marketId = null;
+        if (StringUtils.isNotBlank(cMarketId)) {
+            marketId = Integer.parseInt(cMarketId);
+        }
+        return marketId;
+    }
+	
+	public static String selectManagingOrg(String cMOrgID) {
+
+        String mOrgID = null;
+
+        if (StringUtils.isNotBlank(cMOrgID)) {
+            if (cMOrgID.equals("hasChild")) {
+                mOrgID = String.valueOf(CreateManagingOrganizationAPI.idList.get(0));
+            } else {
+                mOrgID = cMOrgID;
+            }
+        }
+        return mOrgID;
+    }
+	
+	public static String genearateOrgId(String cOrgId) {
+        String orgId = null;
+        String timeStamp = generateTimeStamp();
+
+        if (StringUtils.isNotBlank(cOrgId)) {
+            if (cOrgId.length() > 2 && cOrgId.length() <= 7) {
+                orgId = cOrgId + timeStamp.substring(10, 14);
+            } else if (cOrgId.length() == 2) {
+                orgId = cOrgId + timeStamp.substring(8, 14);
+            } else {
+                orgId = cOrgId;
+            }
+        }
+        return orgId;
+    }
 }

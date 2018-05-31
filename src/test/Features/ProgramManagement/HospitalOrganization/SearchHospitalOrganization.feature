@@ -11,8 +11,8 @@ Feature: Search the Hospital organizations functionality tests
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
     Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
-    When Get by id <id> and <type>
 
+    #When Get by id <id> and <type>
     Examples: 
       | desc      | particpantId | name   | contactPerson | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type       |
       | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
@@ -24,8 +24,9 @@ Feature: Search the Hospital organizations functionality tests
     When Get by id <id> and <type>
 
     Examples: 
-      | desc                       | participantId | name    | shortName | managingOrgId | ccn | ein | npi | locationId | locAddr1     | locAddr2     | locCity           | locState | locZip | locationName | locationType | marketId | regionId | address1 | address2 | city    | state | zip   | expPostCode |
-      | Create Hospital without MO |               | ACHNAME | shortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | NewYork ,newjersy | NY       |  10001 | Loc_Name     | [2,4,3],[5]  |     10,8 |      3,2 | Address1 | Address1 | NewYork | NY    | 12524 |         201 |
+      | desc                       | participantId | name    | shortName | managingOrgId | ccn | ein | npi | locationId | locAddr1     | locAddr2     | locCity        | locState | locZip | locationName | locationType | marketId | regionId | address1 | address2 | city           | state | zip   | expPostCode | id | type     | errorMsg |
+      | Create Hospital without MO |               | ACHNAME | shortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | AutomationCity | CA       |  10000 | Loc_Name     | [2,4,3],[5]  |     10,8 |      3,2 | Address1 | Address1 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
+      | Create Hospital without MO |               | ACHNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | AutomationCity | CA       |  10000 | Loc_Name     | [2,4,3],[5]  |     10,8 |      3,2 | Address1 | Address1 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
 
   Scenario Outline: <Description>
     When I click on "Hospital" organization tab on organization dashboard
