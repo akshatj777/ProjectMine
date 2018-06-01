@@ -383,7 +383,6 @@ public class CreateManagingOrganization extends BaseClass {
 	{
 		if(org.equals("Create_Network_Contract")){
 			iWillWaitToSee(By.xpath("//div[@class='alert alert-dismissible alert-danger']//div[contains(text(),'"+msg+"')]"));
-			//verifyTextForElement(driver.findElement(By.xpath("//div[@class='alert alert-dismissible alert-danger']//div[contains(text(),'"+msg+"')]")), msg);
 			Assert.assertTrue(isElementPresent(By.cssSelector(".alert.alert-dismissible.alert-danger>div")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
