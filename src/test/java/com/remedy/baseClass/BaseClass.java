@@ -74,7 +74,7 @@ public class BaseClass {
 	}
 	public WebDriverWait waitTo()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 300);
+		WebDriverWait wait = new WebDriverWait(driver, 60);
 		return wait;
 	}
 
@@ -642,6 +642,8 @@ public class BaseClass {
 		{
 			CreateACHOrganizationAPI.ACHNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
 			CreateACHOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
+			CreateACHOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
+			CreateACHOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
 		}
 	}
 	

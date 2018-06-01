@@ -17,6 +17,8 @@ public class CreateACHOrganizationAPI extends BaseClass{
 	public static List<Long> idList = new ArrayList<>();
 	public static List<String> ACHNameList = new ArrayList<>();
 	public static List<String> CCNNameList = new ArrayList<>();
+	public static List<String> EINNameList = new ArrayList<>();
+	public static List<String> NPINameList = new ArrayList<>();
 	public static HashMap<String, String> tempAchOrg = new HashMap<String, String>();
 	public static Long oldACH_WithMO = null;
 	public static Long oldACH_WithoutMO = null;
