@@ -86,4 +86,28 @@ public class BulkLoadSteps extends DriverScript{
     public void clickHideButton() throws Throwable {
     	bulkUser.clickHideButton();
     }
+    @When("^I verify text box field on import user page$")
+    public void iVerifyTestBoxField(){
+    	bulkUser.iVerifyTestBoxField();
+    }
+    @When("^I enter single user data$")
+    public void iEnterSingleData(){
+    	bulkUser.iEnterSingleData();
+    }
+    @When("^I enter multiple user data$")
+    public void iEnterMultipleData(){
+    	bulkUser.iEnterMultipleData();
+    }
+    @When("^I verify previous result \"([^\"]*)\" on summary page$")
+    public void iVerifySummarymsg(String text){
+    	bulkUser.iVerifySummarymsg(text);
+    }
+    @Then("^I enter invalid user data$")
+    public void enterInvalidData(){
+    	bulkUser.enterInvalidData();
+    }
+    @Then("^I verify \"([^\"]*)\" error message$")
+    public void verifyErrorMessage(String text){
+    	bulkUser.verifyErrorMessage(text);
+    }
 }

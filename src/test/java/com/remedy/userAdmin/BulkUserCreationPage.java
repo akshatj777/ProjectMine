@@ -539,4 +539,74 @@ public class BulkUserCreationPage extends BaseClass{
     	iWillWaitToSee(By.xpath("//button[text()='Hide']"));
     	driver.findElement(By.xpath("//button[text()='Hide']")).click();
     }
+public void iVerifyTestBoxField(){
+	iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
+	isElementPresentOnPage(By.xpath("//div[@class='component-neo-input']//textarea"));
+    }
+public void iEnterSingleData(){
+	String strUserData = null;
+    try 
+    {
+        strUserData = readContentForBulkUpload(2, 4);
+    }
+    catch(Exception e)
+    {
+    	System.out.println(e);
+    }
+    String randomString = RandomStringUtils.randomAlphabetic(8);
+	strUserData = strUserData.replace("EXECUTIVEMAIL", "test.automatemail+"+randomString+"@gmail.com");
+	
+	String randomNPI = RandomStringUtils.randomNumeric(10);
+	strUserData = strUserData.replace("NPI", randomNPI);
+	iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
+	iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
+
+}
+public void iVerifySummarymsg(String text){
+	Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[@class='successCountLabel'][text()='"+text+"']")));
+}
+public void iEnterMultipleData(){
+	String strUserData = null;
+    try 
+    {
+        strUserData = readContentForBulkUpload(2, 5);
+    }
+    catch(Exception e)
+    {
+    	System.out.println(e);
+    }
+    String randomString = RandomStringUtils.randomAlphabetic(8);
+	strUserData = strUserData.replace("EXECUTIVEMAIL", "test.automatemail+"+randomString+"@gmail.com");
+	randomString = RandomStringUtils.randomAlphabetic(8);
+	strUserData = strUserData.replace("MANAGERMAIL", "test.automatemail+"+randomString+"@gmail.com");
+
+	String randomNPI = RandomStringUtils.randomNumeric(10);
+	strUserData = strUserData.replace("NPI", randomNPI);
+	iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
+	iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
+
+}
+public void enterInvalidData(){
+	String strUserData = null;
+    try 
+    {
+        strUserData = readContentForBulkUpload(2, 4);
+    }
+    catch(Exception e)
+    {
+    	System.out.println(e);
+    }
+	String randomNPI = RandomStringUtils.randomNumeric(10);
+	strUserData = strUserData.replace("NPI", randomNPI);
+	iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
+	iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
+
+}
+public void verifyErrorMessage(String text){
+
+	iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
+	waitTo().until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
+	Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[@class='errorCountLabel'][text()='"+text+"']")));
+
+}
 }
