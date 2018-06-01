@@ -11,8 +11,8 @@ Feature: Search the Hospital organizations functionality tests
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
     Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
 
-    #When Get by id <id> and <type>
     Examples: 
       | desc      | particpantId | name   | contactPerson | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type       |
       | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
@@ -45,25 +45,6 @@ Feature: Search the Hospital organizations functionality tests
 
   Scenario Outline: <Description>
     When I click on "Hospital" organization tab on organization dashboard
-    Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
-    And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
-    And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
-    And I click on "Edit" button on particular organization
-    And I edit "Hospital Organization Name" field to "<Edited_Hospital_Name> - <Has_MO>" for organization
-    Then I click on "Submit" button on "Edit" organization page
-    Then I verify "<Message>" after submitting the "edit ACH - <Has_MO>" organization page
-    Then I search "<Edited_Hospital_Name> - <Has_MO>" and verify with search list options on "Hospital" organization search box
-    Then I search with "<Hosp_Name> - <Has_MO>" old name in organization search box
-    Then I verify the "No matches" message for invalid search in Organization
-    And I verify the "Create New Hospital Organization" link under No matches
-
-    Examples: 
-      | Description                                                               | Has_MO | Hosp_Name | Edited_Hospital_Name | Message                                     |
-      | Search Hospital Organization after editing the Hospital name - With MO    | YES    | ACHNAME   | ACHNAME              | Hospital Organization Successfully Updated. |
-      | Search Hospital Organization after editing the Hospital name - Without MO | NO     | ACHNAME   | ACHNAME              | Hospital Organization Successfully Updated. |
-
-  Scenario Outline: <Description>
-    When I click on "Hospital" organization tab on organization dashboard
     When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
     Then I search "<SearchParam>" and verify with search list options on Location in "<Hosp_Name> - <Has_MO>" profile page
@@ -75,6 +56,25 @@ Feature: Search the Hospital organizations functionality tests
       | Searching Location Type on Hospital Profile Page    | NO     | ACHNAME   | Inpatient    |
       | Searching Location Region on Hospital Profile Page  | NO     | ACHNAME   | Midwest      |
       | Searching Location Matket on Hospital Profile Page  | NO     | ACHNAME   | Chicago      |
+
+  Scenario Outline: <Description>
+    When I click on "Hospital" organization tab on organization dashboard
+    Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
+    And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
+    And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I edit "Hospital Organization Name" field to "<Edited_Hospital_Name> - <Has_MO>" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    Then I verify "<Message>" after submitting the "FETCHFROMAPIForACHNAME - <Has_MO>" organization page
+    Then I search "<Edited_Hospital_Name> - <Has_MO>" and verify with search list options on "Hospital" organization search box
+    Then I search with "<Hosp_Name> - <Has_MO>" old name in organization search box
+    Then I verify the "No matches" message for invalid search in Organization
+    And I verify the "Create New Hospital Organization" link under No matches
+
+    Examples: 
+      | Description                                                               | Has_MO | Hosp_Name | Edited_Hospital_Name | Message                                     |
+      | Search Hospital Organization after editing the Hospital name - With MO    | YES    | ACHNAME   | ACHNAME              | Hospital Organization Successfully Updated. |
+      | Search Hospital Organization after editing the Hospital name - Without MO | NO     | ACHNAME   | ACHNAME              | Hospital Organization Successfully Updated. |
 
   Scenario Outline: <Description>
     When I click on "Hospital" organization tab on organization dashboard

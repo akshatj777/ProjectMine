@@ -238,14 +238,36 @@ public class CreateManagingOrganization extends BaseClass {
 			CreateManagingOrganizationAPI.MONameList.clear();
 			CreateManagingOrganizationAPI.MONameList.add(tempMoOrg.get("MONAME"));
 		}
-	else if(org.contains("MO"))
+		else if(org.equals("FETCHFROMAPIForACHNAME - YES")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreateACHOrganizationAPI.tempAchOrg.isEmpty())
 				{
-				iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
-					verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
-					moOrg.clear();
-					moOrg.putAll(tempMoOrg);
-					waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+					CreateACHOrganizationAPI.tempAchOrg.clear();
+					CreateACHOrganizationAPI.ACHNameList.add(CreateACHOrganizationAPI.tempAchOrg.get("ACHNAME"));
 				}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(org.equals("FETCHFROMAPIForACHNAME - NO")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreateACHOrganizationAPI.tempAchOrg.isEmpty())
+			{
+				CreateACHOrganizationAPI.tempAchOrg.clear();
+				CreateACHOrganizationAPI.ACHNameList.add(CreateACHOrganizationAPI.tempAchOrg.get("ACHNAME"));
+			}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(org.contains("MO"))
+			{
+				iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+				verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+				moOrg.clear();
+				moOrg.putAll(tempMoOrg);
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			}
 				else if(org.contains("ACH - YES"))
 				{
 					iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
