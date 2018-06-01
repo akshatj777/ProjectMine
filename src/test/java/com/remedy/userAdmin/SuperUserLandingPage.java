@@ -53,6 +53,7 @@ public class SuperUserLandingPage extends BaseClass {
 		}
 		else if(text.equals("UsersTabOnLeftPane"))
 		{
+			iWillWaitToSee(By.xpath("//a[@href='https://user-admin-qa.remedypartners.com']"));
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[@href='https://user-admin-qa.remedypartners.com']")));
 		}
 		else if(text.equals("EmailOnTopRight"))
