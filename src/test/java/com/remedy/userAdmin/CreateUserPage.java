@@ -758,7 +758,8 @@ public class CreateUserPage extends BaseClass{
 	   }
 	   else
 	   {
-		   element.click();
+		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
+		   ((JavascriptExecutor)driver).executeScript(javaScript, element);
 		   iWillWaitToSee(By.cssSelector("#navbar-dropdown-menu-myprofile"));
 		   clickElement(driver.findElement(By.cssSelector("#navbar-dropdown-menu-myprofile")));  
 	   }
