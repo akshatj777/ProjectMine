@@ -7,25 +7,15 @@ Feature: Create Hospital organization functionality tests
     And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
 
-  Scenario Outline: <Description>
-    Then I verify "+" button under "Managing" organization page
-    Then I click on "+" button on "Managing" organization page
-    And I verify "Create Managing Organization" header text on create organization page
-    Then I enter <MO_Name> in "Managing Organization Name" on create organization page
-    And I enter <Address1> in "Address 1" on create organization page
-    And I enter <Contact_Person> in "Contact Person" on create organization page
-    And I enter <Address2> in "Address 2" on create organization page
-    And I enter <Contact_Email> in "Contact Email" on create organization page
-    And I enter <City> in "City" on create organization page
-    And I enter <Contact_Phone> in "Contact Phone" on create organization page
-    And I select <State> in State on create organization page
-    And I enter <Postal_Code> in "Postal Code" on create organization page
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create MO" organization page
+  Scenario Outline: Create MO using API calls
+    Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
+    When create org with this data
+    Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
 
     Examples: 
-      | Description                                            | MO_Name | Contact_Person    | Contact_Email      | Contact_Phone | Address1 | Address2 | City | State    | Postal_Code | Message                                     |
-      | Create Managing Organization with all available fields | MONAME  | ContactPersonTest | Sample@yopmail.com |    5555599999 | Address1 | Address2 | City | New York |       10001 | Managing Organization Successfully Created. |
+      | desc      | particpantId | name   | contactPerson | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type       |
+      | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
 
   Scenario: Verification of availability of all the fields on Create Hospital Organization page
     When I click on "Hospital" organization tab on organization dashboard
@@ -98,7 +88,7 @@ Feature: Create Hospital organization functionality tests
       | Check validation for blank Managing Organization | YES    | Blank        | ACHNAME   | Address1 | City | California |       10000 | LocName  | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI | A Managing Organization has to be selected. |
       | Check validation for blank ACH name              | NO     | MONAME       |           | Address1 | City | California |       10000 | LocName  | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI | Please enter an Organization Name           |
       | Check validation for blank Address1              | NO     | MONAME       | ACHNAME   |          | City | California |       10000 | LocName  | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI | Please enter an Address                     |
-      | Check validation for blank City                  | NO     | MONAME       | ACHNAME   | Address1 |      | California |       10000 | LocName  | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI | Please enter a City                         |
+      | Check validation for blank City                  | YES     | MONAME       | ACHNAME   | Address1 |      | California |       10000 | LocName  | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI | Please enter a City                         |
       | Check validation for blank State                 | NO     | MONAME       | ACHNAME   | Address1 | City |            |       10000 | LocName  | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI | Please select a State                       |
       | Check validation for blank Postal code           | NO     | MONAME       | ACHNAME   | Address1 | City | California |             | LocName  | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI | Please enter a Postal Code                  |
       | Check validation for blank Location name         | NO     | MONAME       | ACHNAME   | Address1 | City | California |       10000 |          | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI | Please enter a Location Name                |
@@ -144,7 +134,7 @@ Feature: Create Hospital organization functionality tests
       | Check Character Limit for Location Address2 field            |                                                                              |                                                           |                                                |                                                           |                                                |             |                                                                              |                                                          |                         | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstjklmnopqrst |                                                           |                 |             |             |              | The second address line may not be greater than 55 characters. |
       | Check Character Limit for Location City field                |                                                                              |                                                           |                                                |                                                           |                                                |             |                                                                              |                                                          |                         |                                                           | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstabcasdfghjk |                 |             |             |              | The City may not be greater than 45 characters.                |
       | Check Character Limit for Location Postal code field         |                                                                              |                                                           |                                                |                                                           |                                                |             |                                                                              |                                                          |                         |                                                           |                                                           | 10000-00000     |             |             |              | Please enter a valid Postal Code                               |
-      | Check Character Limit for CCN field - Less than 6 characters |                                                                              |                                                           |                                                |                                                           |                                                |             |                                                                              |                                                          |                         |                                                           |                                                           |                 | lessThan6   |             |              | The CCN must be at least 6 characters.                         |
+      #| Check Character Limit for CCN field - Less than 6 characters |                                                                              |                                                           |                                                |                                                           |                                                |             |                                                                              |                                                          |                         |                                                           |                                                           |                 | lessThan6   |             |              | The CCN must be at least 6 characters.                         |
       #| Check Character Limit for CCN field - Greater than 10 characters |                                                                              |                                                           |                                                |                                                           |                                                |             |                                                                              |                                                          |                         |                                                           |                                                           |                 | greaterThan10 |               |               | The CCN may not be greater than 10 characters.                 |
       #| Check Character Limit for EIN field                              |                                                                              |                                                           |                                                |                                                           |                                                |             |                                                                              |                                                          |                         |                                                           |                                                           |                 |               | greaterThan10 |               | The EIN may not be greater than 10 characters.                 |
       #| Check Character Limit for NPI field                              |                                                                              |                                                           |                                                |                                                           |                                                |             |                                                                              |                                                          |                         |                                                           |                                                           |                 |               |               | greaterThan10 | The NPI may not be greater than 10 characters.                 |
@@ -487,7 +477,7 @@ Feature: Create Hospital organization functionality tests
     Then I verify "<Message>" after submitting the "create ACH - <Has_MO>" organization page
     When I search with "ACHNAME - <Has_MO>" on organization in search box
     And I click "ACHNAME - <Has_MO>" field in search list on organization page
-    Then I verify Location ID should be same as "Hospital" Organization CCN
+    #Then I verify Location ID should be same as "Hospital" Organization CCN
 
     Examples: 
       | Description                                                                                       | Has_MO | Managing_Org | Hosp_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Message                                     |
@@ -607,7 +597,7 @@ Feature: Create Hospital organization functionality tests
     And I enter <City> in "City" on create organization page
     And I select <State> in State on create organization page
     And I enter <Postal_Code> in "Postal Code" on create organization page
-    #And I provide "CCN" as last created "Location_Id" on create organization page
+   #And I provide "CCN" as last created "Location_Id" on create organization page
     And I verify "Location 1" on "Create Hospital" organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
@@ -702,7 +692,7 @@ Feature: Create Hospital organization functionality tests
     And I verify "Location 1" on "Create Hospital" organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    #And I provide "Location_Id" as last created "Location_Id" on create organization page
+    And I provide "Location_Id" as last created "Location_Id" on create organization page
     And I select location type <Loc_Type> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page

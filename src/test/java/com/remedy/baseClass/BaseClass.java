@@ -16,6 +16,9 @@ import com.google.gson.JsonParser;
 import com.jayway.restassured.response.Response;
 import com.remedy.programManagement.CreateBundleAPI;
 import com.remedy.programManagement.CreateManagingOrganization;
+import com.remedy.programManagement.CreateManagingOrganizationAPI;
+import com.remedy.programManagement.CreatePGPOrganization;
+import com.remedy.programManagement.CreatePayorOrganizationAPI;
 import com.remedy.programManagement.CreatePractictionerAPI;
 import com.remedy.resources.DriverScript;
 
@@ -580,12 +583,15 @@ public class BaseClass {
 //			idList.addAll(CreateSnfOrgStepDef.returnIdList());
 //		} else if (type.equals("pgp")) {
 //			idList.addAll(PM77CreatePGPOrgStepDef.returnIdList());
-//		} else if (type.equals("management")) {
-//			idList.addAll(CreateManagementOrgStepDef.returnIdList());
-//		} else if (type.equals("payor")) {
-//			idList.addAll(CreatePayorStepDef.returnIdList());
-//		}
-	if (type.equals("bundle")) {
+		 if (type.equals("management")) {
+			idList.addAll(CreateManagingOrganizationAPI.idList);
+			CreateManagingOrganizationAPI.idList.clear();
+		} 
+		else if (type.equals("payor")) {
+			idList.addAll(CreatePayorOrganizationAPI.idList);
+			CreatePayorOrganizationAPI.idList.clear();
+		}
+		 else if (type.equals("bundle")) {
 			idList.addAll(CreateBundleAPI.idList);
 			CreateBundleAPI.idList.clear();
 //		} else if (type.equals("program")) {
@@ -619,6 +625,16 @@ public class BaseClass {
 		else if(type.equals("bundle"))
 		{
 			CreateBundleAPI.bundleNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+		}
+		else if(type.equals("management"))
+		{
+			CreateManagingOrganizationAPI.MONameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+			CreateManagingOrganizationAPI.participantidList.add((((JsonObject) jsonObject.get("data")).get("participantId")).toString());
+		}
+		else if(type.equals("payor"))
+		{
+			CreatePayorOrganizationAPI.PayorNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+			CreatePayorOrganizationAPI.participantidList.add((((JsonObject) jsonObject.get("data")).get("participantId")).toString());
 		}
 	}
 }
