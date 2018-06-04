@@ -1,13 +1,13 @@
 Feature: Bulk Upload User from SA
 
   Scenario: Bulk Upload User
-    Given I am on mail login page
-    Then I enter username "test.automatemail@gmail.com" to login mail account for bulk delete
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail@gmail.com" to login mail account for bulk delete
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     Then I log in as super user
     Then I should see Tile text User Admin
@@ -22,7 +22,7 @@ Feature: Bulk Upload User from SA
   Scenario Outline: <Description>
     Given I am on mail login page
     Then I enter username "test.automatemail" to login mail account for bulk delete
-    Then I enter password "Intel@01" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -41,8 +41,8 @@ Feature: Bulk Upload User from SA
     Then I verify "Change my password" link in mail content
     Then I click on "Change my password" link in mail content
     And I switch to new window
-    And I enter new password "Testing1" to set new password
-    And I enter confirm new password "Testing1" to set new password
+    And I enter new password "Testing1@" to set new password
+    And I enter confirm new password "Testing1@" to set new password
     And I click on submit button to set new password
 
     Examples: 
