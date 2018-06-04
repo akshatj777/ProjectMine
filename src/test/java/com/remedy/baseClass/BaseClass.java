@@ -18,6 +18,7 @@ import com.remedy.programManagement.CreateBundleAPI;
 import com.remedy.programManagement.CreateManagingOrganization;
 import com.remedy.programManagement.CreateManagingOrganizationAPI;
 import com.remedy.programManagement.CreatePGPOrganization;
+import com.remedy.programManagement.CreatePayorOrganizationAPI;
 import com.remedy.programManagement.CreatePractictionerAPI;
 import com.remedy.resources.DriverScript;
 
@@ -586,9 +587,10 @@ public class BaseClass {
 			idList.addAll(CreateManagingOrganizationAPI.idList);
 			CreateManagingOrganizationAPI.idList.clear();
 		} 
-		//else if (type.equals("payor")) {
-//			idList.addAll(CreatePayorStepDef.returnIdList());
-//		}
+		else if (type.equals("payor")) {
+			idList.addAll(CreatePayorOrganizationAPI.idList);
+			CreatePayorOrganizationAPI.idList.clear();
+		}
 		 else if (type.equals("bundle")) {
 			idList.addAll(CreateBundleAPI.idList);
 			CreateBundleAPI.idList.clear();
@@ -628,6 +630,11 @@ public class BaseClass {
 		{
 			CreateManagingOrganizationAPI.MONameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
 			CreateManagingOrganizationAPI.participantidList.add((((JsonObject) jsonObject.get("data")).get("participantId")).toString());
+		}
+		else if(type.equals("payor"))
+		{
+			CreatePayorOrganizationAPI.PayorNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+			CreatePayorOrganizationAPI.participantidList.add((((JsonObject) jsonObject.get("data")).get("participantId")).toString());
 		}
 	}
 }

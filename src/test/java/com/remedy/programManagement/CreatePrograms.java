@@ -50,6 +50,7 @@ public class CreatePrograms extends BaseClass {
 		else if(org.contains("Contracts")){
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>div"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>div")), msg);
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else 
 		   {
@@ -70,8 +71,8 @@ public class CreatePrograms extends BaseClass {
 		if(!text.equals(""))
 		{
 			driver.findElement(By.xpath("//div[text()='Select a Program']")).click();
-			delay();
-			clickSingleElementFromList((By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption")), CreatePrograms.programs.get(1));
+			new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[text()='Select a Program']")), CreatePrograms.programs.get(1)).build().perform();
+			driver.findElement(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption")).click();
 			delay();
 		}
 	}
