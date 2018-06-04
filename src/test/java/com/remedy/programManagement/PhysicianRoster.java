@@ -26,11 +26,11 @@ public class PhysicianRoster extends BaseClass{
 		}
 		else if(text.contains("ACHNAME - YES"))
 		{
-			isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganization.achOrg.get("ACHNAME")+"'"));
+			isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(0).substring(1, CreateACHOrganizationAPI.ACHNameList.get(0).length()-1)+"'"));
 		}
 		else if(text.contains("ACHNAME - NO"))
 		{
-			isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganization.achOrg_noMO.get("ACHNAME")+"'"));
+			isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(1).substring(1, CreateACHOrganizationAPI.ACHNameList.get(1).length()-1)+"'"));
 		}
 	}
 	

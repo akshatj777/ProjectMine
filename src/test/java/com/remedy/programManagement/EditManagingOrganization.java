@@ -140,19 +140,22 @@ public class EditManagingOrganization extends BaseClass {
 		if(field2.contains("MONAME")){
 			CreateManagingOrganization.moName = CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1);
 			CreateManagingOrganization.tempMoOrg.put("MONAME",createRandomName(field2));
-			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateManagingOrganization.tempMoOrg.get("MONAME"));
 		}
 		else if(field2.equalsIgnoreCase("ACHNAME - YES")){
 			CreateACHOrganization.oldACH_WithMO = CreateACHOrganizationAPI.ACHNameList.get(0).substring(1, CreateACHOrganizationAPI.ACHNameList.get(0).length()-1);
 			CreateACHOrganization.tempAchOrg.put("ACHNAME",createRandomName(field2));
-			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateACHOrganization.tempAchOrg.get("ACHNAME"));
 		}
 		else if(field2.equalsIgnoreCase("ACHNAME - NO")){
 			CreateACHOrganization.oldACH_WithoutMO = CreateACHOrganizationAPI.ACHNameList.get(1).substring(1, CreateACHOrganizationAPI.ACHNameList.get(1).length()-1);
 			CreateACHOrganization.tempAchOrg.put("ACHNAME",createRandomName(field2));
-			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateACHOrganization.tempAchOrg.get("ACHNAME"));
 		}
 		else if(field2.equalsIgnoreCase("DUPLICATE_ACH - YES")){
@@ -166,13 +169,15 @@ public class EditManagingOrganization extends BaseClass {
 		else if(field2.contains("PGPNAME - YES")){
 			CreatePGPOrganization.oldPGP_WithMO = CreatePGPOrganization.pgpOrg.get("PGPNAME");
 			CreatePGPOrganization.tempPGPOrg.put("PGPNAME",createRandomName(field2));
-			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePGPOrganization.tempPGPOrg.get("PGPNAME"));
 		}
 		else if(field2.contains("PGPNAME - NO")){
 			CreatePGPOrganization.oldPGP_WithoutMO = CreatePGPOrganization.pgpOrg_noMO.get("PGPNAME");
 			CreatePGPOrganization.tempPGPOrg.put("PGPNAME",createRandomName(field2));
-			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePGPOrganization.tempPGPOrg.get("PGPNAME"));
 		}
 		else if(field2.equalsIgnoreCase("DUPLICATE_PGP - YES")){
@@ -186,7 +191,8 @@ public class EditManagingOrganization extends BaseClass {
 		else if(field2.equals("PAYORNAME")){
 			CreatePayorOrganization.oldPayorOrg = CreatePayorOrganizationAPI.PayorNameList.get(0).substring(1, CreatePayorOrganizationAPI.PayorNameList.get(0).length()-1);
 			CreatePayorOrganization.tempPayorOrg.put("PAYORNAME",createRandomName(field2));
-			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePayorOrganization.tempPayorOrg.get("PAYORNAME"));
 			}
 		else if(field2.equalsIgnoreCase("Duplicate_Payor")){
@@ -327,13 +333,15 @@ public class EditManagingOrganization extends BaseClass {
 		else if(field2.equalsIgnoreCase("HHANAME - YES")){
 			CreateHHAOrganization.oldHHA_WithMO = CreateHHAOrganization.HHAOrg.get("HHANAME");
 			CreateHHAOrganization.tempHHAOrg.put("HHANAME",createRandomName(field2));
-			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
 		}
 		else if(field2.equalsIgnoreCase("HHANAME - NO")){
 			CreateHHAOrganization.oldHHA_WithoutMO = CreateHHAOrganization.HHAOrg_noMO.get("HHANAME");
 			CreateHHAOrganization.tempHHAOrg.put("HHANAME",createRandomName(field2));
-			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
 		}
 		else if(field2.equalsIgnoreCase("DUPLICATE_HHA - YES")){
