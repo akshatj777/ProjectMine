@@ -24,9 +24,9 @@ Feature: Search the Hospital organizations functionality tests
     When Get by id <id> and <type>
 
     Examples: 
-      | desc                       | participantId | name    | shortName | managingOrgId | ccn | ein | npi | locationId | locAddr1     | locAddr2     | locCity        | locState | locZip | locationName | locationType | marketId | regionId | address1 | address2 | city           | state | zip   | expPostCode | id | type     | errorMsg |
-      | Create Hospital without MO |               | ACHNAME | shortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | AutomationCity | CA       |  10000 | Loc_Name     | [2,4,3],[5]  |     10,8 |      3,2 | Address1 | Address1 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
-      | Create Hospital without MO |               | ACHNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | AutomationCity | CA       |  10000 | Loc_Name     | [2,4,3],[5]  |     10,8 |      3,2 | Address1 | Address1 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
+      | desc                       | participantId | name    | shortName | managingOrgId | ccn | ein | npi | locationId | locAddr1     | locAddr2     | locCity  | locState | locZip | locationName | locationType | marketId | regionId | address1 | address2 | city           | state | zip   | expPostCode | id | type     | errorMsg |
+      | Create Hospital with MO    |               | ACHNAME | shortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
+      | Create Hospital without MO |               | ACHNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
 
   Scenario Outline: <Description>
     When I click on "Hospital" organization tab on organization dashboard

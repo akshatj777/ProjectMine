@@ -242,10 +242,11 @@ public class CreateManagingOrganization extends BaseClass {
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
 			
-			if(!CreateACHOrganizationAPI.tempAchOrg.isEmpty())
+			if(!CreateACHOrganization.tempAchOrg.isEmpty())
 				{
+//					CreateACHOrganizationAPI.ACHNameList.clear();
+					CreateACHOrganizationAPI.ACHNameList.set(0, CreateACHOrganization.tempAchOrg.get("ACHNAME"));
 					CreateACHOrganizationAPI.tempAchOrg.clear();
-					CreateACHOrganizationAPI.ACHNameList.add(CreateACHOrganizationAPI.tempAchOrg.get("ACHNAME"));
 				}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
@@ -253,10 +254,11 @@ public class CreateManagingOrganization extends BaseClass {
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
 			
-			if(!CreateACHOrganizationAPI.tempAchOrg.isEmpty())
+			if(!CreateACHOrganization.tempAchOrg.isEmpty())
 			{
+//				CreateACHOrganizationAPI.ACHNameList.clear();
+				CreateACHOrganizationAPI.ACHNameList.set(1, CreateACHOrganization.tempAchOrg.get("ACHNAME"));
 				CreateACHOrganizationAPI.tempAchOrg.clear();
-				CreateACHOrganizationAPI.ACHNameList.add(CreateACHOrganizationAPI.tempAchOrg.get("ACHNAME"));
 			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}

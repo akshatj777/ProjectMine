@@ -25,8 +25,8 @@ Feature: Hospital Organization View profile Functionality tests.
 
     Examples: 
       | desc                       | participantId | name    | shortName | managingOrgId | ccn | ein | npi | locationId | locAddr1     | locAddr2     | locCity  | locState | locZip | locationName | locationType | marketId | regionId | address1 | address2 | city           | state | zip   | expPostCode | id | type     | errorMsg |
-      | Create Hospital with MO    |               | ACHNAME | shortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |     10,8 |      3,2 | Address1 | Address1 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
-      | Create Hospital without MO |               | ACHNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |     10,8 |      3,2 | Address1 | Address1 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
+      | Create Hospital with MO    |               | ACHNAME | shortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
+      | Create Hospital without MO |               | ACHNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
 
   Scenario Outline: <Description>
     When I click on "Hospital" organization tab on organization dashboard
@@ -79,8 +79,8 @@ Feature: Hospital Organization View profile Functionality tests.
     And I verify "2" location count on view "Hospital" organization page
 
     Examples: 
-      | Description                                                                                    | Has_MO | Hosp_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name   | Loc_Address1 | Loc_Type  | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN/TIN | NPI | StateVerification | Organization Type | Message                                     |
-      | Verification of Hospital details and count of locations displayed under Hospital org - with MO | YES    | ACHNAME   | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name21 | Loc_Address1 | Inpatient | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN     | NPI | CA                | ACH               | Hospital Organization Successfully Updated. |
+      | Description                                                                                    | Has_MO | Hosp_Name | Address1 | Short_Name | Address2 | City           | State      | Postal_Code | Loc_Name   | Loc_Address1 | Loc_Type  | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN/TIN | NPI | StateVerification | Organization Type | Message                                     |
+      | Verification of Hospital details and count of locations displayed under Hospital org - with MO | YES    | ACHNAME   | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name21 | Loc_Address1 | Inpatient | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN     | NPI | CA                | ACH               | Hospital Organization Successfully Updated. |
 
   Scenario Outline: <Description>
     When I search with "<MO_Name>" on organization in search box
@@ -117,8 +117,8 @@ Feature: Hospital Organization View profile Functionality tests.
     When I search with "<MO_Name>" on organization in search box
     And I click "<MO_Name>" field in search list on organization page
     And I verify "ACH" organization tab present under "Managing" Organization
-    And I verify count of "ACH" organizations is increased by 1
-    And I search with "<Hosp_Name> - <Has_MO>" on organization in search box
+    And I verify count of "ACH" organizations is increased by 2
+    And I search with "<Hosp_Name> - <Has_MO>" on view profile Managing Organization search box
     And I verify "<Hosp_Name> - <Has_MO>" details of "Hospital" associated on Managing Organization page
     And I verify "CCN" details of "Hospital" associated on Managing Organization page
     And I verify "<City>" details of "Hospital" associated on Managing Organization page

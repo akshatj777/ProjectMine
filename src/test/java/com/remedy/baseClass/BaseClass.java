@@ -589,6 +589,7 @@ public class BaseClass {
 //			idList.addAll(PM77CreatePGPOrgStepDef.returnIdList());
 		 if (type.equals("management")) {
 			idList.addAll(CreateManagingOrganizationAPI.idList);
+			CreateManagingOrganizationAPI.managingOrgID=CreateManagingOrganizationAPI.idList.get(0);
 			CreateManagingOrganizationAPI.idList.clear();
 		} 
 		 else if (type.equals("hospital")) {
@@ -689,7 +690,7 @@ public class BaseClass {
 
         if (StringUtils.isNotBlank(cMOrgID)) {
             if (cMOrgID.equals("hasChild")) {
-                mOrgID = String.valueOf(CreateManagingOrganizationAPI.idList.get(0));
+                mOrgID = String.valueOf(CreateManagingOrganizationAPI.managingOrgID);
             } else {
                 mOrgID = cMOrgID;
             }
