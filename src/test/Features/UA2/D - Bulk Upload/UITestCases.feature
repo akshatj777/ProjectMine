@@ -45,3 +45,27 @@ Feature: Bulk Upload User from SA
     Then I enter invalid user data
     Then I click on submit button on bulk user upload page
     Then I verify "1 user not added" error message
+
+    Scenario: Scenario to check multiple success test cases in one
+    Given I am on the login page
+    Then I log in as super user
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    Then I click on Import User button
+    Then I click on Try Again button
+    Then I enter user data for all application access
+    Then I click on submit button on bulk user upload page
+    Then I verify "50 users added" message
+    
+    Scenario: Scenario to check multiple failure test cases in one
+    Given I am on the login page
+    Then I log in as super user
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    Then I click on Import User button
+    Then I click on Try Again button
+    Then I enter user data for all application access
+    Then I click on submit button on bulk user upload page
+    Then I verify "50 users added" message
