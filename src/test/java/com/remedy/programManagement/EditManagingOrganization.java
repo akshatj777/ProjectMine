@@ -76,9 +76,18 @@ public class EditManagingOrganization extends BaseClass {
 		}
 		else if(field.contains("PAYORNAME"))
 		{
-			iWillWaitToSee(By.xpath("//div[text()='"+CreatePayorOrganization.payorOrg.get("PAYORNAME")+"']"));
-			clickElement(driver.findElement(By.xpath("//div[text()='"+CreatePayorOrganization.payorOrg.get("PAYORNAME")+"']")));
-			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			if(CreatePayorOrganizationAPI.PayorNameList.get(0).contains("\""))
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreatePayorOrganizationAPI.PayorNameList.get(0).substring(1, CreatePayorOrganizationAPI.PayorNameList.get(0).length()-1)+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreatePayorOrganizationAPI.PayorNameList.get(0).substring(1, CreatePayorOrganizationAPI.PayorNameList.get(0).length()-1)+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			}
+			else
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreatePayorOrganizationAPI.PayorNameList.get(0)+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreatePayorOrganizationAPI.PayorNameList.get(0)+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			}
 		}
 		else if(field.contains("SNFNAME - YES"))
 		{
@@ -175,7 +184,7 @@ public class EditManagingOrganization extends BaseClass {
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePGPOrganization.pgpOrg.get("PGPNAME"));
 		}
 		else if(field2.equals("PAYORNAME")){
-			CreatePayorOrganization.oldPayorOrg = CreatePayorOrganization.payorOrg.get("PAYORNAME");
+			CreatePayorOrganization.oldPayorOrg = CreatePayorOrganizationAPI.PayorNameList.get(0).substring(1, CreatePayorOrganizationAPI.PayorNameList.get(0).length()-1);
 			CreatePayorOrganization.tempPayorOrg.put("PAYORNAME",createRandomName(field2));
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePayorOrganization.tempPayorOrg.get("PAYORNAME"));

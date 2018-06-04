@@ -238,13 +238,19 @@ public class CreateManagingOrganization extends BaseClass {
 			CreateManagingOrganizationAPI.MONameList.clear();
 			CreateManagingOrganizationAPI.MONameList.add(tempMoOrg.get("MONAME"));
 		}
+		else if(org.equals("FETCHFROMAPIFORPAYOR"))
+		{
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			CreatePayorOrganizationAPI.PayorNameList.clear();
+			CreatePayorOrganizationAPI.PayorNameList.add(CreatePayorOrganization.tempPayorOrg.get("PAYORNAME"));
+		}
 		else if(org.equals("FETCHFROMAPIForACHNAME - YES")){
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
 			
 			if(!CreateACHOrganization.tempAchOrg.isEmpty())
 				{
-//					CreateACHOrganizationAPI.ACHNameList.clear();
 					CreateACHOrganizationAPI.ACHNameList.set(0, CreateACHOrganization.tempAchOrg.get("ACHNAME"));
 					CreateACHOrganizationAPI.tempAchOrg.clear();
 				}
@@ -256,7 +262,6 @@ public class CreateManagingOrganization extends BaseClass {
 			
 			if(!CreateACHOrganization.tempAchOrg.isEmpty())
 			{
-//				CreateACHOrganizationAPI.ACHNameList.clear();
 				CreateACHOrganizationAPI.ACHNameList.set(1, CreateACHOrganization.tempAchOrg.get("ACHNAME"));
 				CreateACHOrganizationAPI.tempAchOrg.clear();
 			}
@@ -400,7 +405,6 @@ public class CreateManagingOrganization extends BaseClass {
 	{
 		if(org.equals("Create_Network_Contract")){
 			iWillWaitToSee(By.xpath("//div[@class='alert alert-dismissible alert-danger']//div[contains(text(),'"+msg+"')]"));
-			//verifyTextForElement(driver.findElement(By.xpath("//div[@class='alert alert-dismissible alert-danger']//div[contains(text(),'"+msg+"')]")), msg);
 			Assert.assertTrue(isElementPresent(By.cssSelector(".alert.alert-dismissible.alert-danger>div")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
