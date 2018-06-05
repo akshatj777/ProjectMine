@@ -248,4 +248,8 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	public void iVerifyRemovedProgramInEditPage(String program){
 		editUser.iVerifyRemovedProgramInEditPage(program);
 	}
+	@Then("^I verify that pagination is not displayed for selected locations$")
+	public void verifyPaginationForSelectedLoc(){
+		editUser.verifyPaginationForSelectedLoc();
+	}
 }

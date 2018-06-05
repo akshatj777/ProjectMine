@@ -16,6 +16,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.remedy.baseClass.BaseClass;
 import com.remedy.userAdmin.CreateUserPage;
 
+import net.sourceforge.htmlunit.corejs.javascript.ast.CatchClause;
+
 public class EditUser extends BaseClass {
 	DateFormat df = new SimpleDateFormat("ddMMyyHHmmss");
 	Date timestamp = new Date();
@@ -674,5 +676,13 @@ public void verifySubmitButtonStatus() {
 }
 public void iVerifyRemovedProgramInEditPage(String program){
 	Assert.assertFalse(driver.findElement(By.xpath("//div[@class='ui label']/span")).getAttribute("innerText").toString().trim().equals(program));
+}
+public void verifyPaginationForSelectedLoc(){
+	try{
+	Assert.assertFalse(driver.findElement(By.xpath("//div[@class='component-selected-facility-options']")).getAttribute("nextSibling").toString().contains("paginator"));
+
+}catch(NullPointerException e){
+	Assert.assertFalse(false);
+}
 }
 }
