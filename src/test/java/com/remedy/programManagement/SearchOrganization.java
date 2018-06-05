@@ -509,4 +509,19 @@ public class SearchOrganization extends BaseClass{
 		iWillWaitToSee(By.cssSelector(".text-input-field-locationFilterTerm"));
 		iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), text);
 	}
+	
+	public void iSearchFieldOnACHandSNFOrganizationInSearchBox(String text, String org){
+		if(text.contains("ACHNAME - YES"))
+		{
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganization.achOrg.get("ACHNAME"));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(text.contains("ACHNAME - NO"))
+		{
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganization.achOrg_noMO.get("ACHNAME"));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+	}
 }
