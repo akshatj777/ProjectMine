@@ -32,13 +32,29 @@ public class SearchOrganization extends BaseClass{
 		else if(text.contains("ACHNAME - YES"))
 		{
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganization.achOrg.get("ACHNAME"));
+			//iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganization.achOrg.get("ACHNAME"));
+			if(CreateACHOrganizationAPI.ACHNameList.get(0).contains("\""))
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganizationAPI.ACHNameList.get(0).substring(1, CreateACHOrganizationAPI.ACHNameList.get(0).length()-1));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganizationAPI.ACHNameList.get(0));
+			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(text.contains("ACHNAME - NO"))
 		{
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganization.achOrg_noMO.get("ACHNAME"));
+			//iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganization.achOrg_noMO.get("ACHNAME"));
+			if(CreateACHOrganizationAPI.ACHNameList.get(1).contains("\""))
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganizationAPI.ACHNameList.get(1).substring(1, CreateACHOrganizationAPI.ACHNameList.get(1).length()-1));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganizationAPI.ACHNameList.get(1));
+			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(text.contains("PGPNAME - YES"))
@@ -137,30 +153,44 @@ public class SearchOrganization extends BaseClass{
 			}
 		  else if (org.equalsIgnoreCase("Hospital")){
 			  if (value.equals("ACHNAME - YES")){
-				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganization.achOrg.get("ACHNAME"));
+				  if(CreateACHOrganizationAPI.ACHNameList.get(0).contains("\""))
+				  {
+					  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganizationAPI.ACHNameList.get(0).substring(1, CreateACHOrganizationAPI.ACHNameList.get(0).length()-1));
+				  }
+				  else
+				  {
+					  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganizationAPI.ACHNameList.get(0).toString());
+				  }
 				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				  value = CreateACHOrganization.achOrg.get("ACHNAME");
+				  value = CreateACHOrganizationAPI.ACHNameList.get(0).substring(1, CreateACHOrganizationAPI.ACHNameList.get(0).length()-1);
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
 			  else if (value.equals("ACHNAME - NO")){
-				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganization.achOrg_noMO.get("ACHNAME"));
+				  if(CreateACHOrganizationAPI.ACHNameList.get(1).contains("\""))
+				  {
+					  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganizationAPI.ACHNameList.get(1).substring(1, CreateACHOrganizationAPI.ACHNameList.get(1).length()-1)); 
+				  }
+				  else
+				  {
+					  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganizationAPI.ACHNameList.get(1).toString());
+				  }
 				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				  value = CreateACHOrganization.achOrg_noMO.get("ACHNAME");
+				  value = CreateACHOrganizationAPI.ACHNameList.get(1).substring(1, CreateACHOrganizationAPI.ACHNameList.get(1).length()-1);
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
 			  else if (value.equals("CCN - YES")){
-				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganization.achOrg.get("CCN"));
+				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganizationAPI.CCNNameList.get(0).substring(1, CreateACHOrganizationAPI.CCNNameList.get(0).length()-1));
 				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				  value = CreateACHOrganization.achOrg.get("CCN");
+				  value = CreateACHOrganizationAPI.CCNNameList.get(0).substring(1, CreateACHOrganizationAPI.CCNNameList.get(0).length()-1);
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
 			  else if (value.equals("CCN - NO")){
-				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganization.achOrg_noMO.get("CCN"));
+				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganizationAPI.CCNNameList.get(1).substring(1, CreateACHOrganizationAPI.CCNNameList.get(1).length()-1));
 				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				  value = CreateACHOrganization.achOrg_noMO.get("CCN");
+				  value = CreateACHOrganizationAPI.CCNNameList.get(1).substring(1, CreateACHOrganizationAPI.CCNNameList.get(1).length()-1);
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
@@ -343,11 +373,27 @@ public class SearchOrganization extends BaseClass{
 		}
 		else if(text.contains("ACHNAME - YES")){
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
-			isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganization.achOrg.get("ACHNAME")+"']"));
+			//isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganization.achOrg.get("ACHNAME")+"']"));
+			if(CreateACHOrganizationAPI.ACHNameList.get(0).contains("\""))
+			{
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(0).substring(0, CreateACHOrganizationAPI.ACHNameList.get(0).length()-1)+"']"));
+			}
+			else
+			{
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(0)+"']"));
+			}
 		}
 		else if(text.contains("ACHNAME - NO")){
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
-			isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganization.achOrg_noMO.get("ACHNAME")+"']"));
+			//isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganization.achOrg_noMO.get("ACHNAME")+"']"));
+			if(CreateACHOrganizationAPI.ACHNameList.get(1).contains("\""))
+			{
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(1).substring(0, CreateACHOrganizationAPI.ACHNameList.get(1).length()-1)+"']"));
+			}
+			else
+			{
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(1)+"']"));
+			}
 		}
 		else if(text.contains("PAYORNAME"))
 		{
@@ -462,5 +508,20 @@ public class SearchOrganization extends BaseClass{
 	public void iSearchFieldOnLocationParametersonViewProfilePage(String text, String org) {
 		iWillWaitToSee(By.cssSelector(".text-input-field-locationFilterTerm"));
 		iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), text);
+	}
+	
+	public void iSearchFieldOnACHandSNFOrganizationInSearchBox(String text, String org){
+		if(text.contains("ACHNAME - YES"))
+		{
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganization.achOrg.get("ACHNAME"));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(text.contains("ACHNAME - NO"))
+		{
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganization.achOrg_noMO.get("ACHNAME"));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
 	}
 }

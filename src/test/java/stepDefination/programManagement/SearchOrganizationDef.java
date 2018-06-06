@@ -52,4 +52,9 @@ public class SearchOrganizationDef extends DriverScript{
 	  public void i_Search_With_Location_Search_List_Field_in_View_Profile_page(String text, String org) throws Throwable {
 		 searchorganization.iSearchFieldOnLocationParametersonViewProfilePage(text, org);
 	    }
+	
+	@And("^I search with \"([^\"]*)\" on \"([^\"]*)\" organization in search box$")
+	  public void i_Search_Field_On_ACHandSNF_Organization_In_SearchBox(String text, String org) throws Throwable {
+		 searchorganization.iSearchFieldOnACHandSNFOrganizationInSearchBox(text, org);
+	    }
 }
