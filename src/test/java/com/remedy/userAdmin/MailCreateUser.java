@@ -332,22 +332,22 @@ public class MailCreateUser extends BaseClass{
 	}
 	
 	public void iVerifyChangePasswordMailinInboxInMyAccount() {
-		iWillWaitToSee(By.xpath("//span[contains(text(),'Remedy Partners - Change Your Password We recently received a request to create')]"));
-    	Assert.assertTrue(isElementPresentOnPage((By.xpath("//span[contains(text(),'Remedy Partners - Change Your Password We recently received a request to create')]"))));
+		iWillWaitToSee(By.xpath("//span/b[text()='Remedy Partners - Change Your Password']"));
+    	Assert.assertTrue(isElementPresentOnPage((By.xpath("//span/b[text()='Remedy Partners - Change Your Password']"))));
 	}
 	
 	public void iClickOnChangePasswordMailInInboxInMyAccount() throws InterruptedException {
-		iWillWaitToSee(By.xpath("//span[contains(text(),'Remedy Partners - Change Your Password')]"));
+		iWillWaitToSee(By.xpath("//span/b[text()='Remedy Partners - Change Your Password']"));
 		Thread.sleep(3000);
-		if(driver.findElement(By.xpath("//span[contains(text(),'Remedy Partners - Change Your Password')]")).isEnabled())
+		if(driver.findElement(By.xpath("//span/b[text()='Remedy Partners - Change Your Password']")).isEnabled())
 		{
 			if(DriverScript.Config.getProperty("Browser").equals("ie"))
 			{
-				((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[contains(text(),'Remedy Partners - Change Your Password')]")));
+				((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span/b[text()='Remedy Partners - Change Your Password']")));
 			}
 			else
 			{
-				clickElement(driver.findElement(By.xpath("//span[contains(text(),'Remedy Partners - Change Your Password')]")));
+				clickElement(driver.findElement(By.xpath("//span/b[text()='Remedy Partners - Change Your Password']")));
 			}
 		}
 	}

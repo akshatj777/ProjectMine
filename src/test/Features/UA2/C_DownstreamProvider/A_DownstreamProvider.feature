@@ -69,8 +69,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
@@ -235,8 +235,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
@@ -401,8 +401,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
@@ -567,8 +567,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
@@ -733,8 +733,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
@@ -899,8 +899,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
@@ -1065,8 +1065,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
@@ -1231,8 +1231,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
@@ -1397,8 +1397,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
