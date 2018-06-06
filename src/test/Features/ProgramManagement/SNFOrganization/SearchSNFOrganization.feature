@@ -17,16 +17,16 @@ Feature: Search SNF organization functionality tests
       | desc      | particpantId | name   | contactPerson | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type       |
       | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
 
-  Scenario Outline: Create SNF using API calls
-    Given Build Json and pass it to post method with "<name>" and "<participantId>" and "<shortName>" and "<managingOrgId>" and "<ccn>" and "<ein>" and "<npi>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>" and "<locationName>" and "<locationType>" and "<marketId>" and "<locAddr1>" and "<locAddr2>" and "<locCity>" and "<locState>" and "<locZip>" and "<locationId>"
-    When create org with this data "snf"
+  Scenario Outline: <desc>
+    Given Build Json and pass it to post method with SNF "<name>" and "<participantId>" and "<shortName>" and "<managingOrgId>" and "<ccn>" and "<ein>" and "<npi>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>" and "<locationName>" and "<locationType>" and "<marketId>" and "<locAddr1>" and "<locAddr2>" and "<locCity>" and "<locState>" and "<locZip>" and "<locationId>"
+    When create SNF org with this data "snf"
     Then verification of Actual vs expected results <expPostCode> and "<errorMsg>"
     When Get by id <id> and <type>
 
     Examples: 
-      | desc                            | participantId | name                                            | shortName                                  | managingOrgId | ccn | ein | npi | locationId | locAddr1                                                                             | locAddr2            | locCity           | locState | locZip      | locationName            | locationType    | marketId | regionId | address1                                   | address2  | city    | state | zip   | expPostCode | errorMsg                                      |
-      | Create SNF using API calls with MO|               | SNFNAME | shortName | hasChild      | CC  | EI  | NP  | ,          | 256 5th ave123~!@#$%^&*()_+{}:<>?`-=[];./,2nd address 123~!@#$%^&*()_+{}:<>?`-=[];./ | 7th floor,6th floor | NewYork ,newjersy | NY  ,nj  | 10020,08592 | apLocationName,loc2Name | [17,18,19],[19] |     10,8 |      3,2 | 256 5th ave123~!@#$%^&*()_+{}:<>?`-=[]\\;. | 1st floor | NewYork | NY    | 12524 |         201 |                                               |
-      
+      | desc                                  | participantId | name    | shortName | managingOrgId | ccn | ein | npi | locationId | locAddr1     | locAddr2     | locCity  | locState | locZip | locationName | locationType    | marketId | regionId | address1 | address2 | city           | state | zip   | expPostCode | errorMsg | id | type |
+      | Create SNF using API calls with MO    |               | SNFNAME | shortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | NY       |  10001 | Loc_Name     | [17,18,19],[17] |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |          |  0 | snf  |
+      | Create SNF using API calls without MO |               | SNFNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | NY       |  10001 | Loc_Name     | [17,18,19],[17] |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |          |  0 | snf  |
 
   Scenario Outline: <Description>
     When I click on "SNF" organization tab on organization dashboard
@@ -51,7 +51,7 @@ Feature: Search SNF organization functionality tests
     And I click on "Edit" button on particular organization
     And I edit "SNF Organization Name" field to "<Edited_SNF_Name> - <Has_MO>" for organization
     Then I click on "Submit" button on "Edit" organization page
-    Then I verify "<Message>" after submitting the "edit SNF - <Has_MO>" organization page
+    Then I verify "<Message>" after submitting the "FETCHFROMAPIForSNFNAME - <Has_MO>" organization page
     Then I search "<Edited_SNF_Name> - <Has_MO>" and verify with search list options on "SNF" organization search box
     Then I search with "<SNF_Name> - <Has_MO>" old name in organization search box
     Then I verify the "No matches" message for invalid search in Organization

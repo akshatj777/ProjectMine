@@ -23,6 +23,7 @@ import com.remedy.programManagement.CreateManagingOrganizationAPI;
 import com.remedy.programManagement.CreatePGPOrganization;
 import com.remedy.programManagement.CreatePayorOrganizationAPI;
 import com.remedy.programManagement.CreatePractictionerAPI;
+import com.remedy.programManagement.CreateSNFOrganizationAPI;
 import com.remedy.resources.DriverScript;
 
 import java.io.FileInputStream;
@@ -586,17 +587,24 @@ public class BaseClass {
 
 //		if (type.equals("snf") || type.equals("hospital") || type.equals("ltch")) {
 //			idList.addAll(CreateSnfOrgStepDef.returnIdList());
-//		} else if (type.equals("pgp")) {
+//		} 
+//		else if (type.equals("pgp")) {
 //			idList.addAll(PM77CreatePGPOrgStepDef.returnIdList());
-		 if (type.equals("management")) {
+		 if (type.equals("management"))
+		 {
 			idList.addAll(CreateManagingOrganizationAPI.idList);
 			CreateManagingOrganizationAPI.managingOrgID=CreateManagingOrganizationAPI.idList.get(0);
 			CreateManagingOrganizationAPI.idList.clear();
-		 	} 
+		 } 
 		 else if (type.equals("hospital")) {
 				idList.addAll(CreateACHOrganizationAPI.idList);
 				CreateACHOrganizationAPI.idList.clear();
-			} 
+		 }
+		 else if (type.equals("snf")) 
+		 {
+				idList.addAll(CreateSNFOrganizationAPI.idList);
+				CreateSNFOrganizationAPI.idList.clear();
+		 }
 		//else if (type.equals("payor")) {
 //			idList.addAll(CreatePayorStepDef.returnIdList());
 //		}
@@ -650,6 +658,13 @@ public class BaseClass {
 			CreateACHOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
 			CreateACHOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
 			CreateACHOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
+		}
+		else if(type.equals("snf"))
+		{
+			CreateSNFOrganizationAPI.SNFNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+			CreateSNFOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
+			CreateSNFOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
+			CreateSNFOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
 		}
 		else if(type.equals("payor"))
 		{
