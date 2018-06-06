@@ -1,6 +1,8 @@
 package com.remedy.userAdmin;
 
 import com.remedy.baseClass.BaseClass;
+import com.remedy.resources.DriverScript;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,12 +19,20 @@ WebDriverWait wait= new WebDriverWait(driver, 30);
 	}
 
 	public void clickCreateUserButton() throws InterruptedException {
-		delay();
-
-		Thread.sleep(5000);
-		iWillWaitToSee(By.xpath("//button[text()='Add User']"));
-		clickElement(driver.findElement(By.xpath("//button[text()='Add User']")));
-
+		if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		{
+			delay();
+			Thread.sleep(5000);
+			iWillWaitToSee(By.xpath("//button[text()='Add User']"));
+			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//button[text()='Add User']")));
+		}
+		else
+		{
+			delay();
+			Thread.sleep(5000);
+			iWillWaitToSee(By.xpath("//button[text()='Add User']"));
+			clickElement(driver.findElement(By.xpath("//button[text()='Add User']")));
+		}
 	}
 
 	public void clickImportUsers() {

@@ -1,13 +1,13 @@
 Feature: Create User - PTA User
 
   Scenario Outline: <Description>
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -58,7 +58,8 @@ Feature: Create User - PTA User
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -74,8 +75,8 @@ Feature: Create User - PTA User
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
@@ -86,13 +87,13 @@ Feature: Create User - PTA User
       | Login with Super Admin User and create user with Partner Technical Administrator role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail |       | Partner Technical Administrator | Episodes, Reports, Physician Connect, Administration, Lessons | Episodes 2.0, TCI      |     | HZhmTBQzHtU1, Learning Pathway 2 | RWJ Barnabas Health, INC | BPCI-CJR  | CJR-10-6--Monmouth Medical Center - Southern Campus, CJR-10-1--Rwj University Hospital At New Brunswick, CJR-10-2--Rwj University Hospital At Somerset, CJR-10-3--Robert Wood Johnson University Hospital At Rahway | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: <Description>
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
@@ -131,7 +132,8 @@ Feature: Create User - PTA User
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -147,8 +149,8 @@ Feature: Create User - PTA User
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
@@ -202,9 +204,11 @@ Feature: Create User - PTA User
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I click on RemedyU tile for "<User>-<Role>" user
+    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I switch back to old window
     And I redirect to Remedy connect page
     #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
     #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
@@ -231,13 +235,13 @@ Feature: Create User - PTA User
       | Login with Case Manager and verify Product Tiles and their redirections | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName | LastName                                 | Case Manager | Episodes, Reports, TCI, Lessons | Episodes 2.0, Administration, Physician Connect | ROLE_TCS | Patient ID     | Episode DRG Issues |      | Care Coordination External                                                                                                                       | Monmouth Medical Center - Southern Campus, RWJ University Hospital at New Brunswick, RWJ University Hospital at Somerset, Robert Wood Johnson University Hospital At Rahway |
 
   Scenario Outline: <Description>
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -288,7 +292,8 @@ Feature: Create User - PTA User
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -304,8 +309,8 @@ Feature: Create User - PTA User
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
@@ -316,13 +321,13 @@ Feature: Create User - PTA User
       | Login with Super Admin User and create user with Partner Technical Administrator role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail |       | Partner Technical Administrator | Episodes, Reports, Physician Connect, Administration, Lessons | Episodes 2.0, TCI      |     | HZhmTBQzHtU1, Learning Pathway 2 | TeamHealth     | BPCI-Model2, BPCI-Model3 | 3056-q91--Rhea Medical Center, 3056-q91--The Medical Center At Franklin, 2070-g14--Baptist Medical Center  Beaches, 2070-g14--Mercy Hospital, 2070-g14--North Shore Med Center | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: <Description>
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
@@ -361,7 +366,8 @@ Feature: Create User - PTA User
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -377,8 +383,8 @@ Feature: Create User - PTA User
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
@@ -434,9 +440,11 @@ Feature: Create User - PTA User
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I click on RemedyU tile for "<User>-<Role>" user
+    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I switch back to old window
     And I redirect to Remedy connect page
     #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
     #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
@@ -465,13 +473,13 @@ Feature: Create User - PTA User
       | Login with Transitional Case Manager and verify Product Tiles and their redirections | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | Transitional Case Manager | Reports, TCI           | Episodes, Episodes 2.0, Administration, Physician Connect, Lessons | ROLE_TCS       | Patient ID     | Episode DRG Issues |      | Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | Baptist Medical Center  Beaches, Mercy Hospital, North Shore Med Center                                                      |
 
   Scenario Outline: <Description>
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -522,7 +530,8 @@ Feature: Create User - PTA User
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -538,8 +547,8 @@ Feature: Create User - PTA User
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
@@ -550,13 +559,13 @@ Feature: Create User - PTA User
       | Login with Super Admin User and create user with Partner Technical Administrator role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail |       | Partner Technical Administrator | Episodes, Reports, Physician Connect, Administration, Lessons | Episodes 2.0, TCI      |     | HZhmTBQzHtU1, Learning Pathway 2 | Covenant       | BPCI-Model3 | 3056-804--Catered Manor Nursing Center, 3056-805--Downey Care Center, 3056-806--Encinitas Nursing And Rehabilitation Center, 3056-808--Arbor Nursing Center, 3056-809--Courtyard Health Care Center, 3056-810--Emerald Gardens Nursing Center, 3056-811--Buena Vista Care Center, 3056-812--Gilroy Healthcare And Rehabilitation Center, 3056-813--Eagle Point Nursing & Rehabilitation Center, 3056-814--Cedar Ridge Health Rehab Center, 3056-815--Ennoble Skilled Nursing And Rehabilitation Center, 3056-816--Friendship Skilled Nursing & Rehabilitation Center, 3056-817--Covington Manor Health And  Rehabilitation Center, 3056-818--Clinton House Health And Rehab Center, 3056-819--Edgewood Manor Nursing Center, 3056-820--Fairview Skilled Nursing And Rehabilitation Center, 3056-i37--Pacific Coast Manor, 3056-i38--Sunrise Skilled Nursing & Rehabilitation Center, 3056-i39--Pyramid Point Post-acute Rehabilitation Center, 3056-i40--Hilltop Skilled Nursing, 3056-i41--Mccormick's Creek, 3056-i42--Palo Alto Sub-acute, 3056-i43--Meadow Manor, 3056-i44--Villa Georgetown, 3056-i45--Highland Health | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: <Description>
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
@@ -595,7 +604,8 @@ Feature: Create User - PTA User
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -611,11 +621,11 @@ Feature: Create User - PTA User
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
-    And I enter new password "Testing1" to set new password
-    And I enter confirm new password "Testing1" to set new password
+    And I enter new password "Testing1@" to set new password
+    And I enter confirm new password "Testing1@" to set new password
     And I click on submit button to set new password
 
     Examples: 
@@ -668,9 +678,11 @@ Feature: Create User - PTA User
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I click on RemedyU tile for "<User>-<Role>" user
+    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I switch back to old window
     And I redirect to Remedy connect page
     #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
     #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage

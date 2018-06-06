@@ -1,13 +1,13 @@
 Feature: Create User - Super Admin User
 
   Scenario Outline: <Description>
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -58,7 +58,8 @@ Feature: Create User - Super Admin User
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -74,8 +75,8 @@ Feature: Create User - Super Admin User
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
@@ -144,9 +145,11 @@ Feature: Create User - Super Admin User
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I click on RemedyU tile for "<User>-<Role>" user
+    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I switch back to old window
     And I redirect to Remedy connect page
     #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
     #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
@@ -188,13 +191,13 @@ Feature: Create User - Super Admin User
       | Login with Transitional Case Manager and verify Product Tiles and their redirections       | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | Transitional Case Manager       | Reports, TCI                         | Episodes, Episodes 2.0, Administration, Physician Connect, Lessons | ROLE_TCS       | Patient ID     | Episode DRG Issues           |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Remedy University                                                                                                                                                            | Hackensack University Medical Center, Birchaven, Independence House, Munroe Regional, Uf Health Shands Hospital, North Okaloosa Medical Center, Kendall Medical Center, Fort Walton Beach Medical Center, Highland Medical Center - Christus, B R F Hospital Holdings, Willis Knighton Medical Center, Willis Knighton Bossier Health Center, Aroostook Medical Center |
 
   Scenario Outline: <Description>
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -245,7 +248,8 @@ Feature: Create User - Super Admin User
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -261,8 +265,8 @@ Feature: Create User - Super Admin User
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
@@ -331,9 +335,11 @@ Feature: Create User - Super Admin User
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I click on RemedyU tile for "<User>-<Role>" user
+    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I switch back to old window
     And I redirect to Remedy connect page
     #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
     #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage

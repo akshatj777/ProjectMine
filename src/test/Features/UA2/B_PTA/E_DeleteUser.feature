@@ -1,13 +1,13 @@
 Feature: Delete a user from PTA
 
   Scenario Outline: <Description>
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -58,7 +58,8 @@ Feature: Delete a user from PTA
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -74,8 +75,8 @@ Feature: Delete a user from PTA
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
@@ -86,13 +87,13 @@ Feature: Delete a user from PTA
       | Login with Super Admin User and create user with Partner Technical Administrator role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail |       | Partner Technical Administrator | Episodes, Reports, Physician Connect, Administration, Lessons | Episodes 2.0, TCI      |     | HZhmTBQzHtU1, Learning Pathway 2 | Covenant       | BPCI-Model3 | 3056-804--Catered Manor Nursing Center, 3056-805--Downey Care Center, 3056-806--Encinitas Nursing And Rehabilitation Center, 3056-808--Arbor Nursing Center, 3056-809--Courtyard Health Care Center, 3056-810--Emerald Gardens Nursing Center, 3056-811--Buena Vista Care Center, 3056-812--Gilroy Healthcare And Rehabilitation Center, 3056-813--Eagle Point Nursing & Rehabilitation Center, 3056-814--Cedar Ridge Health Rehab Center, 3056-815--Ennoble Skilled Nursing And Rehabilitation Center, 3056-816--Friendship Skilled Nursing & Rehabilitation Center, 3056-817--Covington Manor Health And  Rehabilitation Center, 3056-818--Clinton House Health And Rehab Center, 3056-819--Edgewood Manor Nursing Center, 3056-820--Fairview Skilled Nursing And Rehabilitation Center, 3056-i37--Pacific Coast Manor, 3056-i38--Sunrise Skilled Nursing & Rehabilitation Center, 3056-i39--Pyramid Point Post, 3056-i40--Hilltop Skilled Nursing, 3056-i41--Mccormick, 3056-i42--Palo Alto Sub, 3056-i43--Meadow Manor, 3056-i44--Villa Georgetown, 3056-i45--Highland Health | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: <Description>
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
@@ -131,7 +132,8 @@ Feature: Delete a user from PTA
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -147,8 +149,8 @@ Feature: Delete a user from PTA
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
@@ -198,13 +200,13 @@ Feature: Delete a user from PTA
       | Partner Technical Administrator | Manager |
 
   Scenario Outline: <Description> then delete that user and Login with unverified deleted user
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
@@ -261,7 +263,8 @@ Feature: Delete a user from PTA
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -277,8 +280,8 @@ Feature: Delete a user from PTA
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "Testing1@" to set new password
     And I enter confirm new password "Testing1@" to set new password
