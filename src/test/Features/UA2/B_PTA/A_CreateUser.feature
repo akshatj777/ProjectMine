@@ -463,6 +463,31 @@ Feature: Create User - PTA User
       | Login with Case Manager and verify Product Tiles and their redirections              | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastName                                 | Case Manager              | Episodes, TCI          | Episodes 2.0, Administration, Physician Connect, Reports           | ROLE_TCS       | Patient ID     | Episode DRG Issues |      | Care Coordination External                                                                                                                                | North Shore Med Center, Mercy Hospital, Baptist Medical Center  Beaches, The Medical Center At Franklin, Rhea Medical Center |
       | Login with Physicians and verify Product Tiles and their redirections                | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastNameLastNameLastNameLastNameLastName | Physicians                | Episodes, Reports, TCI | Episodes 2.0, Administration, Lessons                              | ROLE_CLINICIAN | Patient ID     | Episode DRG Issues |      | Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2                                                                    | North Shore Med Center, Rhea Medical Center, The Medical Center At Franklin                                                  |
       | Login with Transitional Case Manager and verify Product Tiles and their redirections | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | Transitional Case Manager | Reports, TCI           | Episodes, Episodes 2.0, Administration, Physician Connect, Lessons | ROLE_TCS       | Patient ID     | Episode DRG Issues |      | Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | Baptist Medical Center  Beaches, Mercy Hospital, North Shore Med Center                                                      |
+Scenario Outline: Validating that Locations for the unselected Model are removed on view and edit user page
+    Given I am on the login page
+    Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
+    Then I enter newuser password for login to Remedy
+    Then I click Access button
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    And I click on Edit button
+    Then I select "Permissions" tab
+    Then I verify the header "Permissions"
+    Then I click on existing organisation "<Health System>"
+    Then I deselect "<RemovePrograms>" programs
+    And I verify that "<RemovePrograms>" is not reflected as selected in edit user page
+    Then I search the "<Locations>" in the Selected Locations section
+    Then I verify No results found for invalid Location for "first" organisation
+    Then I click on Submit button while edit for "<User>-<Role>"
+    Then I verify location "<LocationsValidation>" is not present on view page
+
+    Examples: 
+      | User                            | Role       | Health System | RemovePrograms | Locations                        | LocationsValidation                          |
+      | Partner Technical Administrator | Physicians | TeamHealth    | BPCI-Model2    | 2070-g14--North Shore Med Center | TeamHealth--2070-g14--North Shore Med Center |
 
   Scenario Outline: <Description>
     Given I am on mail login page

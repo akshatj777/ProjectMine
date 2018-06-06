@@ -1054,6 +1054,7 @@ public void iUnselectAllSelectedApps(){
 		iWillWaitToSee(By.xpath("//button[.='Submit']"));
 		clickElement(driver.findElement(By.xpath("//button[.='Submit']")));
 		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ui.modal.transition.visible.active.component-add-user-form")));
+	
 	}
    public void verifyAppUnchecked(String fieldName) throws Throwable {
 	   if(fieldName.contains(","))

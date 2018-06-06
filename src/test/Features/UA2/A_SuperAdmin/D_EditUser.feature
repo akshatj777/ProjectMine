@@ -41,6 +41,25 @@ Feature: Edit user page for SA
     Examples: 
       | User        | Role       | FirstName        | LastName        | Email             | Phone        | NPI | RemoveLearningPathwaySearchParameter | LearningPathwayID | Applications       |
       | Super Admin | Physicians | FirstName'Edited | LastName'Edited | test.automatemail | 996-385-2451 | NPI | i am learning path, 18h7phZr1h81     | n9yn5n0Qa581      | Episodes, Episodes |
+Scenario Outline: Validating that pagination is not displayed when few locations are added in the data permissions while editing a user
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    And I click on Edit button
+    Then I select "Permissions" tab
+    Then I verify the header "Permissions"
+    Then I click on existing organisation "<Health System>"
+    Then I select "<EnableLocations1>" locations
+    Then I verify that pagination is not displayed for selected locations
+
+    Examples: 
+      | User        | Role      | Health System | EnableLocations1                       |
+      | Super Admin | Physicians| TeamHealth    | 2070-g14--Baptist Medical Center  Beaches|
 
   Scenario: Verify NPI on the EC1 tile
     Given I am on the login page

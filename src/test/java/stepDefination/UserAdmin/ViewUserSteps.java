@@ -103,7 +103,10 @@ public class ViewUserSteps extends DriverScript{
 	public void i_verify_HealthSystemLocation(String locations) throws Throwable {
 		objViewUserPage.verifyHealthSystemLocation(locations);
 	}
-	
+	@Then("^I verify location \"([^\"]*)\" is not present on view page$")
+	public void i_verify_HealthSystemLocationNotPresent(String locations) throws Throwable {
+		objViewUserPage.i_verify_HealthSystemLocationNotPresent(locations);
+	}
 	@Then("^I verify enabled \"([^\"]*)\"$")
 	public void i_verify_enabled(String applicationsEnabled) throws Throwable {
 		objViewUserPage.verifyEnabledApplications(applicationsEnabled);

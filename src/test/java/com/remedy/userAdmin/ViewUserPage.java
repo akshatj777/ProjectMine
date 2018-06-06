@@ -156,7 +156,20 @@ public class ViewUserPage extends BaseClass {
 			}
 		}
 	}
-	
+	public void i_verify_HealthSystemLocationNotPresent(String locations) throws Throwable {
+		String healthSystem = locations.substring(0, locations.indexOf("--"));
+		//String BPID = locations.substring(locations.indexOf("--")+2, locations.lastIndexOf("--"));
+		String location = locations.substring(locations.lastIndexOf("--")+2, locations.length());
+		driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")).click();
+		Thread.sleep(3000);
+		if(driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")).isDisplayed())
+    	{
+    		driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")).sendKeys(location);
+    		Thread.sleep(3000);
+    		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='content active data-permissions-content']//h3[contains(text(),' No Results Found ')]")));
+    		
+	}
+	}
 	public void verifyEditIcon() throws Throwable {
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[@class='edit-controls']")));
 	}

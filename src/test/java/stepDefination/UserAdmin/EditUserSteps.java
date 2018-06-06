@@ -252,4 +252,8 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	public void verifyPaginationForSelectedLoc(){
 		editUser.verifyPaginationForSelectedLoc();
 	}
+	@Then("^I verify that All Locations checkbox is checked$")
+	public void verifyAllLocationBoxSelection() {
+		editUser.verifyAllLocationBoxSelection();
+	}
 }

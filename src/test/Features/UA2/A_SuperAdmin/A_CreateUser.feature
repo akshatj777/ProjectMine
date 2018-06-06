@@ -186,6 +186,52 @@ Feature: Create User - Super Admin User
       | Login with Partner Technical Administrator and verify Product Tiles and their redirections | Super Admin | FirstName                                 | LastName                                 | Partner Technical Administrator | Episodes, Reports, TCI               | Episodes 2.0, Administration, Lessons                              | ROLE_PRM       | Patient ID     | Episode DRG Issues           |      | Learning Pathway 2, New learning Path, Physician Acute Care Hospital Model 2, Remedy University                                                                                                                                                          | Hackensack University Medical Center, Bridgeway Care and Rehab Center at Bridgewater                                                                                                                                                                                                                                                                                   |
       | Login with Remedy Technical Administrator and verify Product Tiles and their redirections  | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | Remedy Technical Administrator  | Administration, TCI                  | Episodes, Episodes 2.0, Reports, Lessons                           | ROLE_ADMIN     | Patient ID     | Episode DRG Issues           |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University                                                                              | Mission Trails Baptist, Northeast Baptist Hospital, Baptist Medical Center, Bridgeway Care And Rehab Center At Bridgewater, Methodist Jennie Edmundson, Nebraska Orthopaedic Hospital, Bryan Medical Center, The Nebraska Methodist Hospital, Alegent Health Mercy Hospital, Nebraska Spine Hospital                                                                   |
       | Login with Transitional Case Manager and verify Product Tiles and their redirections       | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | Transitional Case Manager       | Reports, TCI                         | Episodes, Episodes 2.0, Administration, Physician Connect, Lessons | ROLE_TCS       | Patient ID     | Episode DRG Issues           |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Remedy University                                                                                                                                                            | Hackensack University Medical Center, Birchaven, Independence House, Munroe Regional, Uf Health Shands Hospital, North Okaloosa Medical Center, Kendall Medical Center, Fort Walton Beach Medical Center, Highland Medical Center - Christus, B R F Hospital Holdings, Willis Knighton Medical Center, Willis Knighton Bossier Health Center, Aroostook Medical Center |
+Scenario Outline: Locations should  not be displayed for the unselected Model on view and edit user page
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    And I click on Edit button
+    Then I select "Permissions" tab
+    Then I verify the header "Permissions"
+    Then I click on existing organisation "<Health System>"
+    Then I deselect "<RemovePrograms>" programs
+    And I verify that "<RemovePrograms>" is not reflected as selected in edit user page
+    Then I search the "<Locations>" in the Selected Locations section
+    Then I verify No results found for invalid Location for "first" organisation
+    Then I click on Submit button while edit for "<User>-<Role>"
+    Then I verify location "<LocationsValidation>" is not present on view page
+
+    Examples: 
+      | User        | Role      | Health System              | RemovePrograms | Locations                               | LocationsValidation                                                 |
+      | Super Admin | Remedy PM | Nebraska Spine Center, LLP | BPCI-Model3    | 3056-a58--Alegent Health Mercy Hospital | Nebraska Spine Center, LLP--3056-a58--Alegent Health Mercy Hospital |
+Scenario Outline: Validating that "All Locations" checkbox is checked after selecting all the locations under an organization
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    And I click on Edit button
+    Then I select "Permissions" tab
+    Then I verify the header "Permissions"
+    Then I remove health system "<Remove HealthSystem>"
+    And I click on "Remove" button on permissions tab
+    And I search for health system with <Health System>
+    And I select a <Health System>
+    Then I select "<Programs>" programs
+    Then I select "<Locations>" locations
+    Then I verify that All Locations checkbox is checked
+
+    Examples: 
+      | User        | Role    | Remove HealthSystem | Health System     | Programs    | Locations                   |                                             
+      | Super Admin | Manager | Avalon              | Stamford Hospital | BPCI-Model2 | 2070-015--Stamford Hospital | 
 
   Scenario Outline: Error message is not getting displayed on creating user for few locations of organization Adventist
     Given I am on the login page

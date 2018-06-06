@@ -1214,6 +1214,27 @@ Feature: Edit user page for PTA
       | Description                                                                       | User                            | FirstName | LastName                                 | Email             | Phone | Role    | Applications               | ApplicationsNotVisible                          | NPI | LearningPathwaySearchParameter                         | Health System1           | Programs1             | Locations1                                                          | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
       | Login with Partner Technical Administrator User and create user with Manager role | Partner Technical Administrator | FirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail |       | Manager | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect |     | p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81, n9yn5n0Qa581 | Butler Memorial Hospital | BPCI-Model2, BPCI-CJR | 2070-a55--Butler Memorial Hospital, CJR-1--Butler Memorial Hospital |                  |                |           |            |                  |                |           |            |
 
+  Scenario Outline: Validating that "All Locations" checkbox is checked after selecting all the locations under an organization
+    Given I am on the login page
+    Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
+    Then I enter newuser password for login to Remedy
+    Then I click Access button
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    And I click on Edit button
+    Then I select "Permissions" tab
+    Then I verify the header "Permissions"
+    Then I deselect "<RemovePrograms>" programs
+    Then I verify that All Locations checkbox is checked
+
+    Examples: 
+      | User                            | Role    | RemovePrograms |
+      | Partner Technical Administrator | Manager | BPCI-Model2    |
+
   Scenario Outline: <Description>
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy

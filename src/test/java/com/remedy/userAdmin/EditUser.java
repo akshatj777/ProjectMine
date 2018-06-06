@@ -685,4 +685,7 @@ public void verifyPaginationForSelectedLoc(){
 	Assert.assertFalse(false);
 }
 }
+public void verifyAllLocationBoxSelection() {
+	Assert.assertTrue(isElementPresent(By.xpath("//div[@class='ui checked checkbox']")));
+}
 }
