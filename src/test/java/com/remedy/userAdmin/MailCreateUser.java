@@ -198,6 +198,12 @@ public class MailCreateUser extends BaseClass{
 				iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
 				driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
 		}
+		else if(emailName.contains("qaautomation"))
+		{
+				email = "qaautomation"+"+"+RandomStringUtils.randomAlphabetic(8)+"@remedypartners.com";
+				iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
+				driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
+		}
 		else if(emailName.equals("EqualsTo76Char"))
 		{
 			email = "test.automatemail"+"+"+RandomStringUtils.randomAlphabetic(48)+"@gmail.com";
