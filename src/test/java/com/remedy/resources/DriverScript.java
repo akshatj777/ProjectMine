@@ -121,7 +121,7 @@ public class DriverScript {
 			DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
 			//caps.setCapability("nativeEvents", false);
 //			caps.setCapability("nativeEvents", true);
-//			caps.setCapability("ignoreZoomSetting", true);
+			caps.setCapability("ignoreZoomSetting", true);
 //			caps.setCapability("enablePersistentHover", false);
 //			caps.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, true);
 //			caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
@@ -129,7 +129,6 @@ public class DriverScript {
 			System.setProperty("webdriver.ie.driver",
 					IEDrvrPath + "IEDriverServer_Win32" + File.separator + "IEDriverServer.exe");
 			driver = new InternetExplorerDriver(caps);
-
 			break;
 		case "phantomJS":
 			String phantomJSDrvrPath;
@@ -185,8 +184,17 @@ public class DriverScript {
 	}
 
 	public void quitDriver() {
-		driver.manage().deleteAllCookies();
-		driver.quit();
-		driver = null;
+		if(Config.getProperty("Browser").equals("ie"))
+		{
+			driver.quit();
+			driver = null;
+		}
+		else
+		{
+			driver.manage().deleteAllCookies();
+			driver.quit();
+			driver = null;
+		}
+		
 	}
 }
