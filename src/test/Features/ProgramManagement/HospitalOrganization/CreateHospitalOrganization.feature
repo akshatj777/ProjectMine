@@ -508,8 +508,8 @@ Feature: Create Hospital organization functionality tests
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
     Then I verify "<Message>" after submitting the "create ACH - <Has_MO>" organization page
-    When I search with "ACHNAME - <Has_MO>" on organization in search box
-    And I click "ACHNAME - <Has_MO>" field in search list on organization page
+    When I search with "ACHNAME - <Has_MO>" on "Hospital" organization in search box
+    And I click "ACHNAME - <Has_MO>" field in search list on "Hospital" organization page
 
     Examples: 
       | Description                                                                                           | Has_MO | Managing_Org | Hosp_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Message                                     |
@@ -552,8 +552,8 @@ Feature: Create Hospital organization functionality tests
     And I enter zip <Loc_Postal_Code> for Location "2" on "create" organization page
     Then I click on "Submit" button on "create" organization page
     Then I verify "<Message>" after submitting the "create ACH - <Has_MO>" organization page
-    When I search with "ACHNAME - <Has_MO>" on organization in search box
-    And I click "ACHNAME - <Has_MO>" field in search list on organization page
+    When I search with "ACHNAME - <Has_MO>" on "Hospital" organization in search box
+    And I click "ACHNAME - <Has_MO>" field in search list on "Hospital" organization page
 
     Examples: 
       | Description                                                                                      | Has_MO | Managing_Org | Hosp_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Loc_Name1     | Loc_Address1_2 | EIN | NPI | Message                                     |
@@ -692,7 +692,7 @@ Feature: Create Hospital organization functionality tests
     And I verify "Location 1" on "Create Hospital" organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I provide "Location_Id" as last created "Location_Id" on create organization page
+    #And I provide "Location_Id" as last created "Location_Id" on create organization page
     And I select location type <Loc_Type> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page

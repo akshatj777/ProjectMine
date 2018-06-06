@@ -84,8 +84,13 @@ public class ViewACHOrganizationStepDef extends DriverScript {
 		viewACH.iGetCountOfAssociatedOrganization(org);
 		}
 	
-	@And("^I verify count of \"([^\"]*)\" organizations is increased by 1$")
+	@And("^I verify count of \"([^\"]*)\" organizations is increased by 2$")
 	  public void i_Verify_Count_Tab_Organizations_Increased1(String org) throws Throwable {
-		viewACH.iVerifyCountOfAssociatedOrgIncreasedBy1(org);
+		viewACH.iVerifyCountOfAssociatedOrgIncreasedBy2(org);
+		}
+	
+	@And("^I search with \"([^\"]*)\" on view profile Managing Organization search box$")
+	  public void i_Search_With_OrgName_on_view_Profile_Of_Managing_Organization_Search_Box(String text) throws Throwable {
+		viewACH.iSearchWithOrgNameonViewProfileOfManagingOrganizationSearchBox(text);
 		}
 }
