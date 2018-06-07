@@ -17,30 +17,16 @@ Feature: Search the PGP organizations functionality tests
       | desc      | particpantId | name   | contactPerson | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type       |
       | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
 
-  Scenario Outline: <Description>
-    When I click on "PGP" organization tab on organization dashboard
-    Then I click on "+" button on "PGP" organization page
-    And I verify "Create PGP Organization" header text on create organization page
-    And I select "<Has_MO>" radio button for managing organization
-    Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
-    Then I enter <PGP_Name> in "PGP Organization Name" on create organization page
-    And I enter <Address1> in "Address 1" on create organization page
-    And I enter <Short_Name> in "Short Name" on create organization page
-    And I enter <Address2> in "Address 2" on create organization page
-    And I enter <City> in "City" on create organization page
-    And I select region "<Region>" in "create PGP" organization page
-    And I select market "<Market>" in "create PGP" organization page
-    And I select <State> in State on create organization page
-    And I enter <Postal_Code> in "Postal Code" on create organization page
-    And I provide unique "PGP - <EIN>" in "EIN" on create organization page
-    And I provide unique "PGP - <NPI>" in "NPI" on create organization page
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create PGP - <Has_MO>" organization page
+  Scenario Outline: <desc>
+    Given Build Json for PGP "<name>" and "<participantId>" and "<shortName>" and "<managingOrgId>" and "<ein>" and "<npi>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>" and "<marketId>"
+    When create pgp org with this data
+    Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
 
     Examples: 
-      | Description                                                        | Has_MO | Managing_Org | PGP_Name | Address1 | Short_Name | Address2 | City | Region  | Market  | State      | Postal_Code | EIN | NPI | Message                                |
-      | Create PGP Organization with all the available fields - Without MO | NO     |              | PGPNAME  | Address1 | Short_Name | Address2 | City | Midwest | Chicago | California |       10000 | EIN | NPI | PGP Organization Successfully Created. |
-      | Create PGP Organization with all the available fields - With MO    | YES    | MONAME       | PGPNAME  | Address1 | Short_Name | Address2 | City | Midwest | Chicago | California |       10000 | EIN | NPI | PGP Organization Successfully Created. |
+      | desc                                  | name    | shortName | managingOrgId | participantId | ein | npi | address1  | address2 | city           | state | zip   | marketId | expStatusCode | responseMsg | id | type |
+      | Create PGP using API calls with MO    | PGPNAME | ShortName | hasChild      |               | EIN | NPI | Adderess1 | Address2 | AutomationCity | CA    | 10000 |        2 |           201 |             |  0 | pgp  |
+      | Create PGP using API calls without MO | PGPNAME | ShortName |               |               | EIN | NPI | Adderess1 | Address2 | AutomationCity | CA    | 10000 |        2 |           201 |             |  0 | pgp  |
 
   Scenario Outline: <Description>
     When I click on "PGP" organization tab on organization dashboard
@@ -48,14 +34,14 @@ Feature: Search the PGP organizations functionality tests
     Then I search "<SearchParam> - <Has_MO>" and verify with search list options on "PGP" organization search box
 
     Examples: 
-      | Description                                            | Has_MO | SearchParam |
-      | Search PGP Organization with EIN  - With MO            | YES    | EIN         |
-      | Search PGP Organization with EIN  - Without MO         | NO     | EIN         |
-      | Search PGP Organization with PGP Org Name - With MO    | YES    | PGPNAME     |
-      | Search PGP Organization with PGP Org Name - Without MO | NO     | PGPNAME     |
-      | Search PGP Organization with City                      |        | City        |
-      | Search PGP Organization with State                     |        | CA          |
-      | Search PGP Organization with Postal Code               |        |       10000 |
+      | Description                                            | Has_MO | SearchParam    |
+      | Search PGP Organization with EIN  - With MO            | YES    | EIN            |
+      | Search PGP Organization with EIN  - Without MO         | NO     | EIN            |
+      | Search PGP Organization with PGP Org Name - With MO    | YES    | PGPNAME        |
+      | Search PGP Organization with PGP Org Name - Without MO | NO     | PGPNAME        |
+      | Search PGP Organization with City                      |        | AutomationCity |
+      | Search PGP Organization with State                     |        | CA             |
+      | Search PGP Organization with Postal Code               |        |          10000 |
 
   Scenario Outline: <Description>
     When I click on "PGP" organization tab on organization dashboard
@@ -65,7 +51,7 @@ Feature: Search the PGP organizations functionality tests
     And I click on "Edit" button on particular organization
     And I edit "PGP Organization Name" field to "<Edited_PGP_Name> - <Has_MO>" for organization
     Then I click on "Submit" button on "Edit" organization page
-    Then I verify "<Message>" after submitting the "edit PGP - <Has_MO>" organization page
+    Then I verify "<Message>" after submitting the "FETCHFROMAPIForPGPNAME - <Has_MO>" organization page
     Then I search "<Edited_PGP_Name> - <Has_MO>" and verify with search list options on "PGP" organization search box
     Then I search with "<PGP_Name> - <Has_MO>" old name in organization search box
     Then I verify the "No matches" message for invalid search in Organization
