@@ -132,7 +132,7 @@ public class CreatePrograms extends BaseClass {
 			{
 				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 				longDelay();
-				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganization.SNFOrg_noMO.get("SNFNAME"));
+				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganizationAPI.SNFNameList.get(1).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(1).length()-1));
 				delay();
 				driver.findElement(By.cssSelector(".org-name")).click();
 			}
@@ -140,7 +140,7 @@ public class CreatePrograms extends BaseClass {
 			{
 				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 				longDelay();
-				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganization.SNFOrg.get("SNFNAME"));
+				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganizationAPI.SNFNameList.get(0).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(0).length()-1));
 				delay();
 				driver.findElement(By.cssSelector(".org-name")).click();
 			}
@@ -674,36 +674,36 @@ public class CreatePrograms extends BaseClass {
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganization.SNFOrg.get("SNFNAME"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganizationAPI.SNFNameList.get(0).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(0).length()-1));
 			  delay();
-			  value = CreateSNFOrganization.SNFOrg.get("SNFNAME");
+			  value = CreateSNFOrganizationAPI.SNFNameList.get(0).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(0).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-name")));
 		  }
 		  else if (value.equals("SNFNAME - NO"))
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganization.SNFOrg_noMO.get("SNFNAME"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganizationAPI.SNFNameList.get(1).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(1).length()-1));
 			  delay();
-			  value = CreateSNFOrganization.SNFOrg_noMO.get("SNFNAME");
+			  value = CreateSNFOrganizationAPI.SNFNameList.get(1).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(1).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-name")));
 		  }
 		  else if (value.equals("SNFNAMECCN - YES"))
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganization.SNFOrg.get("CCN"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganizationAPI.CCNNameList.get(0).substring(1, CreateSNFOrganizationAPI.CCNNameList.get(0).length()-1));
 			  delay();
-			  value = CreateSNFOrganization.SNFOrg.get("CCN");
+			  value = CreateSNFOrganizationAPI.SNFNameList.get(0).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(0).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-main-id")));
 		  }
 		  else if (value.equals("SNFNAMECCN - NO"))
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganization.SNFOrg_noMO.get("CCN"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganizationAPI.CCNNameList.get(1).substring(1, CreateSNFOrganizationAPI.CCNNameList.get(1).length()-1));
 			  delay();
-			  value = CreateSNFOrganization.SNFOrg_noMO.get("CCN");
+			  value = CreateSNFOrganizationAPI.CCNNameList.get(1).substring(1, CreateSNFOrganizationAPI.CCNNameList.get(1).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-main-id")));
 		  }
 		  else if (value.equals("HHANAME - YES"))

@@ -246,8 +246,8 @@ Feature: Create SNF organization functionality tests
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
     Then I verify "<Message>" after submitting the "create SNF - <Has_MO>" organization page
-    When I search with "SNFNAME - <Has_MO>" on organization in search box
-    And I click "SNFNAME - <Has_MO>" field in search list on organization page
+    When I search with "SNFNAME - <Has_MO>" on "SNF" organization in search box
+    And I click "SNFNAME - <Has_MO>" field in search list on "SNF" organization page
 
     #And I verify Location ID should be greater than "100000"
     Examples: 
@@ -291,8 +291,8 @@ Feature: Create SNF organization functionality tests
     And I enter zip <Loc_Postal_Code> for Location "2" on "create" organization page
     Then I click on "Submit" button on "create" organization page
     Then I verify "<Message>" after submitting the "create SNF - <Has_MO>" organization page
-    When I search with "SNFNAME - <Has_MO>" on organization in search box
-    And I click "SNFNAME - <Has_MO>" field in search list on organization page
+    When I search with "SNFNAME - <Has_MO>" on "SNF" organization in search box
+    And I click "SNFNAME - <Has_MO>" field in search list on "SNF" organization page
 
     Examples: 
       | Description                                                                                 | Has_MO | Managing_Org | SNF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type        | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Loc_Name1     | NPI | Message                                |

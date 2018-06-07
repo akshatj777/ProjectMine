@@ -267,6 +267,28 @@ public class CreateManagingOrganization extends BaseClass {
 			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
+		else if(org.equals("FETCHFROMAPIForSNFNAME - YES")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreateSNFOrganization.tempSNFOrg.isEmpty())
+				{
+					CreateSNFOrganizationAPI.SNFNameList.set(0, CreateSNFOrganization.tempSNFOrg.get("SNFNAME"));
+					CreateSNFOrganizationAPI.tempSNFOrg.clear();
+				}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(org.equals("FETCHFROMAPIForSNFNAME - NO")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreateSNFOrganization.tempSNFOrg.isEmpty())
+			{
+				CreateSNFOrganizationAPI.SNFNameList.set(1, CreateSNFOrganization.tempSNFOrg.get("SNFNAME"));
+				CreateSNFOrganizationAPI.tempSNFOrg.clear();
+			}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
 		else if(org.contains("MO"))
 			{
 				iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));

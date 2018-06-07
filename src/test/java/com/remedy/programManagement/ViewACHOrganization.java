@@ -42,12 +42,12 @@ public class ViewACHOrganization  extends BaseClass{
 			if (text.contains("YES"))
 			{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ccn"))); 
-				Assert.assertEquals("CCN: "+CreateSNFOrganization.SNFOrg.get("CCN"),actual.replace("|", ""));
+				Assert.assertEquals("CCN: "+CreateSNFOrganizationAPI.CCNNameList.get(0).substring(1, CreateSNFOrganizationAPI.CCNNameList.get(0).length()-1),actual.replace("|", ""));
 			}
 			else if (text.contains("NO"))
 			{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ccn"))); 
-				Assert.assertEquals("CCN: "+CreateSNFOrganization.SNFOrg_noMO.get("CCN"),actual.replace("|", ""));
+				Assert.assertEquals("CCN: "+CreateSNFOrganizationAPI.CCNNameList.get(1).substring(1, CreateSNFOrganizationAPI.CCNNameList.get(1).length()-1),actual.replace("|", ""));
 			}
 		else if (org.contains("HHA"))
 		{
@@ -106,13 +106,13 @@ public class ViewACHOrganization  extends BaseClass{
 			{	
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
 				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
-				Assert.assertEquals(CreateSNFOrganization.SNFOrg.get("EIN"),actual);
+				Assert.assertEquals(CreateSNFOrganizationAPI.EINNameList.get(0).substring(1, CreateSNFOrganizationAPI.EINNameList.get(0).length()-1),actual);
 			}
 			else if (text.contains("NO"))
 			{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
 				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
-				Assert.assertEquals(CreateSNFOrganization.SNFOrg_noMO.get("EIN"),actual);
+				Assert.assertEquals(CreateSNFOrganizationAPI.EINNameList.get(1).substring(1, CreateSNFOrganizationAPI.EINNameList.get(1).length()-1),actual);
 			}
 		}
 		else if (org.contains("HHA"))
@@ -195,13 +195,13 @@ public class ViewACHOrganization  extends BaseClass{
 			{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
 				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
-				Assert.assertEquals(CreateSNFOrganization.SNFOrg.get("NPI"),actual);
+				Assert.assertEquals(CreateSNFOrganizationAPI.NPINameList.get(0).substring(1, CreateSNFOrganizationAPI.NPINameList.get(0).length()-1),actual);
 			}
 			else if(text.contains("NO"))
 			{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
 				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
-				Assert.assertEquals(CreateSNFOrganization.SNFOrg_noMO.get("NPI"),actual);	
+				Assert.assertEquals(CreateSNFOrganizationAPI.NPINameList.get(1).substring(1, CreateSNFOrganizationAPI.NPINameList.get(1).length()-1),actual);	
 			}
 		}
 		else if(org.contains("HHA"))
@@ -393,6 +393,18 @@ public class ViewACHOrganization  extends BaseClass{
 		{
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganization.achOrg_noMO.get("ACHNAME"));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(text.contains("SNFNAME - YES"))
+		{
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateSNFOrganization.SNFOrg.get("SNFNAME"));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(text.contains("SNFNAME - NO"))
+		{
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateSNFOrganization.SNFOrg_noMO.get("SNFNAME"));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 	}
