@@ -128,4 +128,8 @@ public class MailCreateUserSteps extends DriverScript {
 	public void i_Open_NewTab_And_Close_The_Last_Tab() throws Throwable {
 		mailcreateuser.iOpenNewTabAndCloseLastTab();
 }
+    @Then("^I enter Email \"([^\"]*)\" with apostrophe and underscore to Create user$") 
+    public void iEnterEmailWithApostropheAndUnderscore(String email){
+    	mailcreateuser.iEnterEmailWithApostropheAndUnderscore(email);
+    }
 }

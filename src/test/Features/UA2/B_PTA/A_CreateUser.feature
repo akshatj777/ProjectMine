@@ -463,7 +463,8 @@ Feature: Create User - PTA User
       | Login with Case Manager and verify Product Tiles and their redirections              | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastName                                 | Case Manager              | Episodes, TCI          | Episodes 2.0, Administration, Physician Connect, Reports           | ROLE_TCS       | Patient ID     | Episode DRG Issues |      | Care Coordination External                                                                                                                                | North Shore Med Center, Mercy Hospital, Baptist Medical Center  Beaches, The Medical Center At Franklin, Rhea Medical Center |
       | Login with Physicians and verify Product Tiles and their redirections                | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastNameLastNameLastNameLastNameLastName | Physicians                | Episodes, Reports, TCI | Episodes 2.0, Administration, Lessons                              | ROLE_CLINICIAN | Patient ID     | Episode DRG Issues |      | Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2                                                                    | North Shore Med Center, Rhea Medical Center, The Medical Center At Franklin                                                  |
       | Login with Transitional Case Manager and verify Product Tiles and their redirections | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | Transitional Case Manager | Reports, TCI           | Episodes, Episodes 2.0, Administration, Physician Connect, Lessons | ROLE_TCS       | Patient ID     | Episode DRG Issues |      | Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | Baptist Medical Center  Beaches, Mercy Hospital, North Shore Med Center                                                      |
-Scenario Outline: Validating that Locations for the unselected Model are removed on view and edit user page
+
+  Scenario Outline: Validating that Locations for the unselected Model are removed on view and edit user page
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
@@ -573,6 +574,42 @@ Scenario Outline: Validating that Locations for the unselected Model are removed
     Examples: 
       | Description                                                                           | User        | UserName                               | Password | FirstName | LastName                                 | Email             | Phone | Role                            | Applications                                                  | ApplicationsNotVisible | NPI | LearningPathwaySearchParameter   | Health System1 | Programs1   | Locations1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
       | Login with Super Admin User and create user with Partner Technical Administrator role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail |       | Partner Technical Administrator | Episodes, Reports, Physician Connect, Administration, Lessons | Episodes 2.0, TCI      |     | HZhmTBQzHtU1, Learning Pathway 2 | Covenant       | BPCI-Model3 | 3056-804--Catered Manor Nursing Center, 3056-805--Downey Care Center, 3056-806--Encinitas Nursing And Rehabilitation Center, 3056-808--Arbor Nursing Center, 3056-809--Courtyard Health Care Center, 3056-810--Emerald Gardens Nursing Center, 3056-811--Buena Vista Care Center, 3056-812--Gilroy Healthcare And Rehabilitation Center, 3056-813--Eagle Point Nursing & Rehabilitation Center, 3056-814--Cedar Ridge Health Rehab Center, 3056-815--Ennoble Skilled Nursing And Rehabilitation Center, 3056-816--Friendship Skilled Nursing & Rehabilitation Center, 3056-817--Covington Manor Health And  Rehabilitation Center, 3056-818--Clinton House Health And Rehab Center, 3056-819--Edgewood Manor Nursing Center, 3056-820--Fairview Skilled Nursing And Rehabilitation Center, 3056-i37--Pacific Coast Manor, 3056-i38--Sunrise Skilled Nursing & Rehabilitation Center, 3056-i39--Pyramid Point Post-acute Rehabilitation Center, 3056-i40--Hilltop Skilled Nursing, 3056-i41--Mccormick's Creek, 3056-i42--Palo Alto Sub-acute, 3056-i43--Meadow Manor, 3056-i44--Villa Georgetown, 3056-i45--Highland Health | No               |                |           |            | No               |                |           |            |
+
+  Scenario Outline: Error should not be shown on creating a user with both apostrophe(') and underscore(_) in email id, having lessons enabled
+    Given I am on the login page
+    Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
+    Then I enter newuser password for login to Remedy
+    Then I click Access button
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    When I click on Add User button
+    Then I should see "Add New User" on the user creation page
+    Then I verify the header "General Information"
+    And I fill in First Name with "<FirstName>"
+    Then I fill in Last Name with <LastName>
+    Then I enter Email "<Email>" with apostrophe and underscore to Create user
+    And I enter Phone field with <Phone>
+    When I click the Organizational Role Field
+    Then I pick a Organizational <Role>
+    Then I enter NPI field with "<NPI>" for role "<Role>"
+    Then I click on Next button
+    Then I verify the header "Applications"
+    Then I select "<Applications>" product
+    Then I verify applications "<Applications>" are checked
+    Then I click on Select button
+    Then I verify Learning Pathway search box is available
+    Then I select "<LearningPathwaySearchParameter>" from the results
+    Then I click on Next button
+    Then I verify the header "Permissions"
+    #Then I select "<Programs1>" programs
+    Then I select "<Locations1>" locations for PTA user
+    Then I click on Submit button
+    Then I should see header text "Users"
+
+    Examples: 
+      | User                            | FirstName                            | LastName                                 | Email             | Phone | Role       | Applications | NPI | LearningPathwaySearchParameter | Health System1 | Programs1   | Locations1                             |
+      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail |       | Physicians | Lessons      | NPI | Care Coordination External     | Covenant       | BPCI-Model3 | 3056-809--Courtyard Health Care Center |
 
   Scenario Outline: <Description>
     Given I am on mail login page
@@ -755,19 +792,20 @@ Scenario Outline: Validating that Locations for the unselected Model are removed
     Then I verify the validation message "<ValidationMsg>" on Create User Page
 
     Examples: 
-      | Description                                           | FirstName  | LastName   | Email             | Phone      | Role       | NPI        | ValidationMsg                     |
-      | Verify validation message for blank First name        |            | Last Name  | test.automatemail | 9874563210 | Executive  |            | First Name is required            |
-      | Verify validation message for blank Last name         | First Name |            | test.automatemail | 9874563210 | Executive  |            | Last Name is required             |
-      | Verify validation message for blank Email             | First Name | Last Name  |                   | 9874563210 | Executive  |            | Email is required                 |
-      | Verify validation message for blank NPI               | First Name | Last Name  | test.automatemail | 9874563210 | Physicians |            | NPI is required                   |
-      | Verify validation message for invalid Email           | First Name | Last Name  | abc               | 9874563210 | Physicians | NPI        | Please enter a valid email        |
-      | Verify validation message for invalid Phone           | First Name | Last Name  | test.automatemail |     123564 | Physicians | NPI        | Please enter a valid phone number |
-      | Verify validation message for NPI less than 10 digits | First Name | Last Name  | test.automatemail | 9874563210 | Physicians |     123564 | Please enter a valid NPI          |
-      | Verify validation message for NPI as alphabets        | First Name | Last Name  | test.automatemail | 9874563210 | Physicians | abcdefgihj | Please enter a valid NPI          |
-      | Verify validation message for NPI as alphanumeric     | First Name | Last Name  | test.automatemail | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI          |
-      | Verify validation message for invalid First Name      | 84738&27919 | Last Name  | test.automatemail | 9874563210 | Physicians | NPI        | Please enter a valid name         |
-      | Verify validation message for invalid Last name       | First Name | 847&3827919 | test.automatemail | 9874563210 | Physicians | NPI        | Please enter a valid name         |
-| Verify validation message for NPI as .    | First Name | Last Name  | test.automatemail | 9874563210 | Physicians | .........1 | Please enter a valid NPI          |
+      | Description                                           | FirstName   | LastName    | Email             | Phone      | Role       | NPI        | ValidationMsg                     |
+      | Verify validation message for blank First name        |             | Last Name   | test.automatemail | 9874563210 | Executive  |            | First Name is required            |
+      | Verify validation message for blank Last name         | First Name  |             | test.automatemail | 9874563210 | Executive  |            | Last Name is required             |
+      | Verify validation message for blank Email             | First Name  | Last Name   |                   | 9874563210 | Executive  |            | Email is required                 |
+      | Verify validation message for blank NPI               | First Name  | Last Name   | test.automatemail | 9874563210 | Physicians |            | NPI is required                   |
+      | Verify validation message for invalid Email           | First Name  | Last Name   | abc               | 9874563210 | Physicians | NPI        | Please enter a valid email        |
+      | Verify validation message for invalid Phone           | First Name  | Last Name   | test.automatemail |     123564 | Physicians | NPI        | Please enter a valid phone number |
+      | Verify validation message for NPI less than 10 digits | First Name  | Last Name   | test.automatemail | 9874563210 | Physicians |     123564 | Please enter a valid NPI          |
+      | Verify validation message for NPI as alphabets        | First Name  | Last Name   | test.automatemail | 9874563210 | Physicians | abcdefgihj | Please enter a valid NPI          |
+      | Verify validation message for NPI as alphanumeric     | First Name  | Last Name   | test.automatemail | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI          |
+      | Verify validation message for invalid First Name      | 84738&27919 | Last Name   | test.automatemail | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Verify validation message for invalid Last name       | First Name  | 847&3827919 | test.automatemail | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Verify validation message for NPI as .                | First Name  | Last Name   | test.automatemail | 9874563210 | Physicians | .........1 | Please enter a valid NPI          |
+
   Scenario Outline: Verify validation message for invalid lesson name in search box
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy

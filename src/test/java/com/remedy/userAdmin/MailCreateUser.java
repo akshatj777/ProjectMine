@@ -227,4 +227,14 @@ public class MailCreateUser extends BaseClass{
 		    Thread.sleep(10000);
 	    }
 	}
+	public void iEnterEmailWithApostropheAndUnderscore(String emailName) {
+		if(emailName.equalsIgnoreCase("test.automatemail"))
+			{
+			email = emailName+"+_'"+RandomStringUtils.randomAlphabetic(8)+"@gmail.com";
+			iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
+			driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
+			delay();
+			}
+	
+	}
 }

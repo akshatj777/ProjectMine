@@ -1,25 +1,45 @@
 Feature: gfkdmgd
 
-  Scenario Outline: Validating that pagination is not displayed when few locations are added in the data permissions while editing a user
+  Scenario Outline: Error should not be shown on creating a user with both apostrophe(') and underscore(_) in email id, having remedy internal role and lessons enabled
     Given I am on the login page
-    When I log in as super user
+    When I enter email field test.automatemail+WEmxYmlg@gmail.com for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
     Then I should see Tile text User Admin
     And I click on the "User Admin" tile
     Then I should see header text "Users"
-    Then I enter "test.automatemail+XDyBjDZW@gmail.com" in search box for "<user>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    And I click on Edit button
-    Then I select "Permissions" tab
+    When I click on Add User button
+    Then I should see "Add New User" on the user creation page
+    Then I verify the header "General Information"
+    And I fill in First Name with "<FirstName>"
+    Then I fill in Last Name with <LastName>
+    Then I enter Email "<Email>" with apostrophe and underscore to Create user
+    And I enter Phone field with <Phone>
+    When I click the Organizational Role Field
+    Then I pick a Organizational <Role>
+    Then I enter NPI field with "<NPI>" for role "<Role>"
+    Then I click on Next button
+    Then I verify the header "Applications"
+    Then I verify applications "<Applications>" are unchecked
+    Then I verify Learning Pathway search box is not available
+    Then I select "<Applications>" product
+    Then I verify applications "<Applications>" are checked
+    
+    Then I click on Select button
+    Then I verify Learning Pathway search box is available
+    Then I select "<LearningPathwaySearchParameter>" from the results
+    Then I click on Next button
     Then I verify the header "Permissions"
-    Then I deselect "<RemovePrograms>" programs
-    Then I verify that All Locations checkbox is checked
+    Then I select "<Programs1>" programs
+    Then I select "<Locations1>" locations for PTA user
+    Then I click on Submit button
+    Then I should see header text "Users"
 
     Examples: 
-      | User        | Role    | Remove HealthSystem | Health System     | RemovePrograms | Locations                   |
-      | Super Admin | Manager | Avalon              | Stamford Hospital | BPCI-Model2    | 2070-015--Stamford Hospital |
+      | User                            | FirstName                            | LastName                                 | Email             | Phone | Role       | Applications      | NPI | LearningPathwaySearchParameter | Health System1 | Programs1   | Locations1                             |
+      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail |       | Physicians | Lessons | NPI | Care Coordination External     | Covenant       | BPCI-Model3 | 3056-809--Courtyard Health Care Center |
 
-  Scenario Outline: Validating that "All Locations" checkbox is checked after selecting all the locations under an organization
+  Scenario Outline: Error should not be shown on creating a user with both apostrophe(') and underscore(_) in email id, having remedy internal role and lessons enabled
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
@@ -27,15 +47,30 @@ Feature: gfkdmgd
     Then I should see Tile text User Admin
     And I click on the "User Admin" tile
     Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    And I click on Edit button
-    Then I select "Permissions" tab
+    When I click on Add User button
+    Then I should see "Add New User" on the user creation page
+    Then I verify the header "General Information"
+    And I fill in First Name with "<FirstName>"
+    Then I fill in Last Name with <LastName>
+    Then I enter Email "<Email>" with apostrophe and underscore to Create user
+    And I enter Phone field with <Phone>
+    When I click the Organizational Role Field
+    Then I pick a Organizational <Role>
+    Then I enter NPI field with "<NPI>" for role "<Role>"
+    Then I click on Next button
+    Then I verify the header "Applications"
+    Then I select "<Applications>" product
+    Then I verify applications "<Applications>" are checked
+    Then I click on Select button
+    Then I verify Learning Pathway search box is available
+    Then I select "<LearningPathwaySearchParameter>" from the results
+    Then I click on Next button
     Then I verify the header "Permissions"
-    Then I deselect "<RemovePrograms>" programs
-    Then I verify that All Locations checkbox is checked
+    #Then I select "<Programs1>" programs
+    Then I select "<Locations1>" locations for PTA user
+    Then I click on Submit button
+    Then I should see header text "Users"
 
     Examples: 
-      | User                            | Role    | RemovePrograms |
-      | Partner Technical Administrator | Manager | BPCI-Model2    |
+      | User                            | FirstName                            | LastName                                 | Email             | Phone | Role       | Applications      | NPI | LearningPathwaySearchParameter | Health System1 | Programs1   | Locations1                             |
+      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail |       | Physicians | Lessons | NPI | Care Coordination External     | Covenant       | BPCI-Model3 | 3056-809--Courtyard Health Care Center |

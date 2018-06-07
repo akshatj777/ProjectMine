@@ -42,8 +42,8 @@ public class CreateUserPage extends BaseClass{
 
     public void iClickOrganizationalField() 
     {
-        iWillWaitToSee(By.xpath("//div[text()='Select']"));
-    	clickElement(driver.findElement(By.xpath("//div[text()='Select']")));
+        iWillWaitToSee(By.xpath("//div[text()='Select Role']"));
+    	clickElement(driver.findElement(By.xpath("//div[text()='Select Role']")));
     }
     
     public void iClickAlreadySelectedOrganizationalField() 

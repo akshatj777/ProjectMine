@@ -1034,8 +1034,7 @@ Feature: Edit user page for PTA
       | Edit multiple to single program                                                   | Partner Technical Administrator | Manager | test.automatemail | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect | Episodes,Episodes  | BPCI-Model3    |             |                 |               | Adventist Health Bakersfield                                                                      | Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University | FirstName | LastNameLastNameLastNameLastNameLastName | ROLE_PRM | Patient ID     | Episode DRG Issues           | Sound Physicians       | Sound Physicians--BPCI Model 2 |Sound Physicians--BPCI Model 3| Sound Physicians--6005-059--Adventist Health Bakersfield                                                                                                                              |
       | Remove existing Program(Mod-2) and select another Program and check all locations | Partner Technical Administrator | Manager | test.automatemail | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect | Episodes,Episodes  | BPCI-Model2    | BPCI-Model3 |                 | All Locations | Presence Saint Joseph Medical Center, Penobscot Bay Medical Center, Aiken Regional Medical Center | Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University | FirstName | LastNameLastNameLastNameLastNameLastName | ROLE_PRM | Patient ID     | Episode DRG Issues [Model 3] | Sound Physicians       | Sound Physicians--BPCI Model 3 | |Sound Physicians--3090-066--Presence Saint Joseph Medical Center, Sound Physicians--3090-069--Penobscot Bay Medical Center, Sound Physicians--3090-079--Aiken Regional Medical Center |
       | Remove existing Program(Mod-3) and select another Program and check all locations | Partner Technical Administrator | Manager | test.automatemail | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect | Episodes,Episodes  | BPCI-Model3    | BPCI-Model2 |                 | All Locations | Adventist Health Bakersfield, Adventist Bolingbrook Hospital                                      | Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University | FirstName | LastNameLastNameLastNameLastNameLastName | ROLE_PRM | Patient ID     | Episode DRG Issues           | Sound Physicians       | Sound Physicians--BPCI Model 2 | |Sound Physicians--6005-059--Adventist Health Bakersfield, Sound Physicians--6005-059--Adventist Bolingbrook Hospital                                                                  |
-
-  Scenario Outline: Validating- all locations should not be displayed as selected when the "All Locations" check box is unchecked while editing the user
+ Scenario Outline: Validating- all locations should not be displayed as selected when the "All Locations" check box is unchecked while editing the user + Validating that pagination is not displayed when few locations are added in the data permissions while editing a user
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
@@ -1048,14 +1047,17 @@ Feature: Edit user page for PTA
     And I verify that I am navigated to user page
     And I click on Edit button
     Then I select "Permissions" tab
-    Then I select "<AddLocations>" locations for PTA user
-    Then I deselect "<AddLocations>" locations for PTA user
+    Then I verify the header "Permissions"
+    Then I deselect "<Locations>" locations for PTA user
     And I verify selected Location "<SelectedLocations>" are not shown in selected Locations section
+    Then I select "<EnableLocations>" locations for PTA user
+    Then I verify that pagination is not displayed for selected locations
 
     Examples: 
-      | User                            | Role    | AddLocations  | SelectedLocations              |
-      | Partner Technical Administrator | Manager | All Locations | Adventist Bolingbrook Hospital |
+      | User                            | Role    | Locations  | SelectedLocations              | EnableLocations                        |
+      | Partner Technical Administrator | Manager | All Locations | Adventist Bolingbrook Hospital | 6005-059--Adventist Health Bakersfield |
 
+ 
   Scenario Outline: <Description>
     Given I am on mail login page
     Then I enter username "test.automatemail" to login mail account
