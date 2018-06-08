@@ -32,8 +32,8 @@ public class CreateUserPage extends BaseClass{
 	public final static DateFormat df = new SimpleDateFormat("ddMMyyHHmmss");
 	public final static Date timestamp = new Date();
 	public final static String time = df.format(timestamp);
-	String userRole = null;
-	String userApplications = null;
+	static String userRole = null;
+	static String userApplications = null;
 	static String userNPI = "";
 	public static HashMap<String,HashMap<String,String>> usersEmailPerRole=new HashMap<String,HashMap<String,String>>();
 	public static HashMap<String,HashMap<String,String>> usersApplicationsPerRole=new HashMap<String,HashMap<String,String>>();

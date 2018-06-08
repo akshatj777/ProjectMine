@@ -1,5 +1,38 @@
 Feature: Super Admin Landing page verification
 
+  Scenario Outline: Create User through UA API call
+    Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>"
+    When Create User with this data for "<User>"
+    Then Verify Actual vs expected results "<expStatusCode>" and "<responseMsg>"
+    Given I am on mail login page
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
+    Then I enter password "1Welcome2" to login mail account
+    Then I click on Mail icon in my account
+    Then I click on Inbox in mail
+    And I wait for 3000 milli seconds
+    Then I verify Account Verification in Inbox in my account
+    Then I click on Account Verification mail in Inbox
+    Then I verify "Confirm my account!" link in mail content
+    Then I click on "Confirm my account!" link in mail content
+    And I switch to new window
+    Then I enter email to generate password link
+    And I click on send mail button
+    Then I switch back to old window
+    Then I click on Inbox in mail
+    Then I verify the unread mail in inbox in my account
+    Then I verify Change Password mail in Inbox in my account
+    Then I click on Change Password mail in Inbox
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
+    And I switch to new window
+    And I enter new password "Testing1@" to set new password
+    And I enter confirm new password "Testing1@" to set new password
+    And I click on submit button to set new password
+
+    Examples: 
+      | User        | FirstName | LastName                                 | Email                           | Phone      | NPI | RoleID      | Applications                                             | Locations                                         | expStatusCode |
+      | Super Admin | FirstName | Lastnamelastnamelastnamelastnamelastname | qaautomation@remedypartners.com | 9988665544 | NPI | 1-Executive | episode_connect-Episodes,reports-Reports,lessons-Lessons | 441324--3090-066--140011,441324--3090-066--140127 |           200 |
+
   Scenario: Verification of availability of fields on Super User Landing page
     Given I am on the login page
     When I log in as super user
