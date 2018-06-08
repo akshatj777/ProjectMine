@@ -289,6 +289,28 @@ public class CreateManagingOrganization extends BaseClass {
 			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
+		else if(org.equals("FETCHFROMAPIForHHANAME - YES")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreateHHAOrganization.tempHHAOrg.isEmpty())
+				{
+					CreateHHAOrganizationAPI.HHANameList.set(0, CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
+					CreateHHAOrganizationAPI.tempHHAOrg.clear();
+				}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(org.equals("FETCHFROMAPIForHHANAME - NO")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreateHHAOrganization.tempHHAOrg.isEmpty())
+			{
+				CreateHHAOrganizationAPI.HHANameList.set(1, CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
+				CreateHHAOrganizationAPI.tempHHAOrg.clear();
+			}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
 		else if(org.contains("MO"))
 			{
 				iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));

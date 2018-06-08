@@ -113,13 +113,29 @@ public class SearchOrganization extends BaseClass{
 		else if(text.contains("HHANAME - YES"))
 		{
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHHAOrganization.HHAOrg.get("HHANAME"));
+			//iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganization.achOrg.get("ACHNAME"));
+			if(CreateHHAOrganizationAPI.HHANameList.get(0).contains("\""))
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHHAOrganizationAPI.HHANameList.get(0).substring(1, CreateHHAOrganizationAPI.HHANameList.get(0).length()-1));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHHAOrganizationAPI.HHANameList.get(0));
+			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(text.contains("HHANAME - NO"))
 		{
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHHAOrganization.HHAOrg_noMO.get("HHANAME"));
+			//iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganization.achOrg_noMO.get("ACHNAME"));
+			if(CreateHHAOrganizationAPI.HHANameList.get(1).contains("\""))
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHHAOrganizationAPI.HHANameList.get(1).substring(1, CreateHHAOrganizationAPI.HHANameList.get(1).length()-1));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHHAOrganizationAPI.HHANameList.get(1));
+			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(text.contains("PROGRAMNAME"))
@@ -336,30 +352,44 @@ public class SearchOrganization extends BaseClass{
 		  }
 		  else if (org.equalsIgnoreCase("HHA")){
 			  if (value.equals("HHANAME - YES")){
-				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHHAOrganization.HHAOrg.get("HHANAME"));
+				  if(CreateHHAOrganizationAPI.HHANameList.get(0).contains("\""))
+				  {
+					  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHHAOrganizationAPI.HHANameList.get(0).substring(1, CreateHHAOrganizationAPI.HHANameList.get(0).length()-1));
+				  }
+				  else
+				  {
+					  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHHAOrganizationAPI.HHANameList.get(0).toString());
+				  }
 				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				  value = CreateHHAOrganization.HHAOrg.get("HHANAME");
+				  value = CreateHHAOrganizationAPI.HHANameList.get(0).substring(1, CreateHHAOrganizationAPI.HHANameList.get(0).length()-1);
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
 			  else if (value.equals("HHANAME - NO")){
-				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHHAOrganization.HHAOrg_noMO.get("HHANAME"));
+				  if(CreateHHAOrganizationAPI.HHANameList.get(1).contains("\""))
+				  {
+					  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHHAOrganizationAPI.HHANameList.get(1).substring(1, CreateHHAOrganizationAPI.HHANameList.get(1).length()-1)); 
+				  }
+				  else
+				  {
+					  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHHAOrganizationAPI.HHANameList.get(1).toString());
+				  }
 				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				  value = CreateHHAOrganization.HHAOrg_noMO.get("HHANAME");
+				  value = CreateHHAOrganizationAPI.HHANameList.get(1).substring(1, CreateHHAOrganizationAPI.HHANameList.get(1).length()-1);
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
 			  else if (value.equals("CCN - YES")){
-				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHHAOrganization.HHAOrg.get("CCN"));
+				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHHAOrganizationAPI.CCNNameList.get(0).substring(1, CreateHHAOrganizationAPI.CCNNameList.get(0).length()-1));
 				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				  value = CreateHHAOrganization.HHAOrg.get("CCN");
+				  value = CreateHHAOrganizationAPI.CCNNameList.get(0).substring(1, CreateHHAOrganizationAPI.CCNNameList.get(0).length()-1);
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
 			  else if (value.equals("CCN - NO")){
-				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHHAOrganization.HHAOrg_noMO.get("CCN"));
+				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHHAOrganizationAPI.CCNNameList.get(1).substring(1, CreateHHAOrganizationAPI.CCNNameList.get(1).length()-1));
 				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				  value = CreateHHAOrganization.HHAOrg_noMO.get("CCN");
+				  value = CreateHHAOrganizationAPI.CCNNameList.get(1).substring(1, CreateHHAOrganizationAPI.CCNNameList.get(1).length()-1);
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
