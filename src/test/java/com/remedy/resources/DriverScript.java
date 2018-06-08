@@ -20,7 +20,8 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import stepDefination.Hooks.InitialSetup;
-
+import static com.jayway.restassured.RestAssured.basePath;
+import static com.jayway.restassured.RestAssured.baseURI;
 
 /**
  * Created by salam on 8/5/15.
@@ -65,6 +66,10 @@ public class DriverScript {
 		if (driver == null)
 			
 			createNewDriverInstance();
+		
+		baseURI = Config.getProperty("baseURI", Config.getProperty("programmanagement.baseURI"));
+        // port = Integer.valueOf(getProperty("port", properties.getProperty("programmanagement.port")));
+        basePath = Config.getProperty("path", Config.getProperty("programmanagement.basePath"));
 	}
 
 	private void createNewDriverInstance() throws Exception {
@@ -116,7 +121,7 @@ public class DriverScript {
 			DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
 			//caps.setCapability("nativeEvents", false);
 //			caps.setCapability("nativeEvents", true);
-//			caps.setCapability("ignoreZoomSetting", true);
+			caps.setCapability("ignoreZoomSetting", true);
 //			caps.setCapability("enablePersistentHover", false);
 //			caps.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, true);
 //			caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
@@ -124,7 +129,6 @@ public class DriverScript {
 			System.setProperty("webdriver.ie.driver",
 					IEDrvrPath + "IEDriverServer_Win32" + File.separator + "IEDriverServer.exe");
 			driver = new InternetExplorerDriver(caps);
-
 			break;
 		case "phantomJS":
 			String phantomJSDrvrPath;
@@ -180,8 +184,17 @@ public class DriverScript {
 	}
 
 	public void quitDriver() {
-		driver.manage().deleteAllCookies();
-		driver.quit();
-		driver = null;
+		if(Config.getProperty("Browser").equals("ie"))
+		{
+			driver.quit();
+			driver = null;
+		}
+		else
+		{
+			driver.manage().deleteAllCookies();
+			driver.quit();
+			driver = null;
+		}
+		
 	}
 }

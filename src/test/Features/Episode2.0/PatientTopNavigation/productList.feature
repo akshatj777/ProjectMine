@@ -17,7 +17,7 @@ Given I am on the login page
     Then I click on product list icon appearing on the top left of the episodes page
     And I wait for 3000 milli seconds
     Then I select <Episode1> option from the dropdown
-    And I switch to new window
+    #And I switch to new window
     And I wait for 10000 milli seconds
     Then I should see Episode header text "Dashboard"
     

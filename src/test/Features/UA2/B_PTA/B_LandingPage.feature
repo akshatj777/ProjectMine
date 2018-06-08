@@ -66,8 +66,8 @@ Feature: Verification of Landing Page for PTA User
 
     Examples: 
       | Description                    | user                            | Role      | Email             | InvalidSearchParameter | SearchParameter                           |
-      | Search a user using First Name | Partner Technical Administrator | Executive | test.automatemail |                1768789 | FirstNameFirstNameFirstNameFirstNameFirst |
-      | Search a user using Last Name  | Partner Technical Administrator | Executive | test.automatemail |                1768789 | LastName                                  |
+      | Search a user using First Name | Partner Technical Administrator | Executive | test.automatemail |                1768789 | Firstnamefirstnamefirstnamefirstnamefirst |
+      | Search a user using Last Name  | Partner Technical Administrator | Executive | test.automatemail |                1768789 | Lastname                                  |
       | Search a user using Email      | Partner Technical Administrator | Executive | test.automatemail |                1768789 | FetchFromHM                               |
 
   Scenario Outline: Verify ability of PTA user to lock a user and cancel unlock

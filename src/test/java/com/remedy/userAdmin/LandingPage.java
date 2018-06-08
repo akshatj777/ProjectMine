@@ -23,6 +23,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class LandingPage extends BaseClass{
 
+	String parentWindow = null;
+	Set<String> handles = null;
 	public static String parentWindowTitle = null;
     public LandingPage(WebDriver driver){
 
@@ -36,8 +38,17 @@ public class LandingPage extends BaseClass{
     }
        
     public void iClickOnApplicateTile(String tile){
-        iWillWaitToSee(By.xpath(tile));
-        clickElement(driver.findElement(By.xpath(tile)));
+        if(DriverScript.Config.getProperty("Browser").equals("ie"))
+        {
+        	iWillWaitToSee(By.xpath(tile));
+        	((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath(tile)));
+        }
+        else
+        {
+        	iWillWaitToSee(By.xpath(tile));
+            clickElement(driver.findElement(By.xpath(tile)));
+        }
+        longDelay();
     }
 
     public void iSwitchToNewWindow(){
@@ -72,15 +83,35 @@ public class LandingPage extends BaseClass{
 			}
 			else if(DriverScript.Config.getProperty("Browser").equals("ie"))
 			{
-				Thread.sleep(5000);
-				String parentWindow = driver.getWindowHandle();
-				Set<String> handles = driver.getWindowHandles();
-				if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
+				parentWindow = driver.getWindowHandle();
+				if(driver.getWindowHandles().size()==2)
 				{
-					driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
+					handles = driver.getWindowHandles();
+					handles.remove(parentWindow);
+					driver.switchTo().window((String)handles.toArray()[0]);
 				}
+				else if(driver.getWindowHandles().size()>2)
+				{
+					Set<String> newHandles = driver.getWindowHandles();
+					newHandles.removeAll(handles);
+					driver.switchTo().window((String)newHandles.toArray()[0]);
+				}
+//				Thread.sleep(3000);
+//				if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
+//				{
+//					Thread.sleep(3000);
+//					while(!(driver.getWindowHandle().equals((String)handles.toArray()[handles.size()-1])))
+//					{
+//						Thread.sleep(3000);
+//						driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
+//					}
+//				}
+//				Thread.sleep(3000);
+//				System.out.println(driver.getTitle());
+				handles=driver.getWindowHandles();
+				driver.manage().window().maximize();
+				Thread.sleep(3000);
 			}
-    		
 		}
 		catch(Exception e)
 		{
@@ -115,13 +146,14 @@ public class LandingPage extends BaseClass{
     		}
     		else if(DriverScript.Config.getProperty("Browser").equals("ie"))
     		{
-    			String parentWindow = driver.getWindowHandle();
-                Set<String> handles = driver.getWindowHandles();
-                if(!((String)handles.toArray()[0]).equals(parentWindow))
-    			{
-    				driver.switchTo().window((String)handles.toArray()[0]);
-    			}
-                delay();
+    			driver.switchTo().window(parentWindow);
+//    			String parentWindow = driver.getWindowHandle();
+//                Set<String> handles = driver.getWindowHandles();
+//                if(!((String)handles.toArray()[0]).equals(parentWindow))
+//    			{
+//    				driver.switchTo().window((String)handles.toArray()[0]);
+//    			}
+//                delay();
     		}
     	}
     	catch(Exception e)
@@ -141,13 +173,21 @@ public class LandingPage extends BaseClass{
     	}
     }
     public void iClickOnTheTopUserAccountIconOnRemedyConnectPage (){
-    	iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
-		clickElement(driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")));
+    		iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
+    		clickElement(driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")));
     }
     
     public void IClickTopUserAccountLink() {
-    	iWillWaitToSee(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']"));
-		clickElement(driver.findElement(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']")));
+    	if(DriverScript.Config.getProperty("Browser").equals("ie"))
+    	{
+    		iWillWaitToSee(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']"));
+    		((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']")));
+    	}
+    	else
+    	{
+    		iWillWaitToSee(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']"));
+    		clickElement(driver.findElement(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']")));
+    	}
     }
 
     public void iSelectFromTopUserAccountDropDown(String link) throws InterruptedException{
@@ -158,11 +198,25 @@ public class LandingPage extends BaseClass{
 	      Thread.sleep(3000);
 	      if(link.equals("Log Out"))
 	      {
-	    	  driver.findElement(By.xpath("//a[@ng-click='user.logout()']")).click(); 
+	    	  if(DriverScript.Config.getProperty("Browser").equals("ie"))
+	    	  {
+	    		  ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[@ng-click='user.logout()']")));  
+	    	  }
+	    	  else
+	    	  {
+	    		  driver.findElement(By.xpath("//a[@ng-click='user.logout()']")).click();
+	    	  }
 	      }
 	      else if(link.equals("Reset Password"))
 	      {
-	    	  driver.findElement(By.xpath("//a[contains(@ng-click,'valentino.reset-password')]")).click();
+	    	  if(DriverScript.Config.getProperty("Browser").equals("ie"))
+	    	  {
+	    		  ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@ng-click,'valentino.reset-password')]")));
+	    	  }
+	    	  else
+	    	  {
+	    		  driver.findElement(By.xpath("//a[contains(@ng-click,'valentino.reset-password')]")).click();
+	    	  }
 	      }
     }
 
@@ -179,8 +233,8 @@ public class LandingPage extends BaseClass{
     }
     
     public void iClickOnHamburgurMenuOnTop(){
-    	iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-spoe']"));
-    	clickElement(driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-spoe']")));
+    		iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-spoe']"));
+        	clickElement(driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-spoe']")));
     }
     public void iConfirmOnResetPasswordBox(){
     	iWillWaitToSee(By.xpath("//*[contains(text(),'Okay')]"));

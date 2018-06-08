@@ -1,6 +1,7 @@
 package stepDefination.Hooks;
 
 
+import com.mysql.jdbc.Driver;
 //import com.github.mkolisnyk.cucumber.reporting.CucumberCoverageOverview;
 //import com.github.mkolisnyk.cucumber.reporting.CucumberDetailedResults;
 import com.remedy.resources.DriverScript;
@@ -38,9 +39,7 @@ public class InitialSetup {
                 scenario.embed(screenshot, "image/png");
             }
         } finally {
-        	
-        	
-        	new DriverScript().quitDriver();        
+        		new DriverScript().quitDriver();
         }
 
     }

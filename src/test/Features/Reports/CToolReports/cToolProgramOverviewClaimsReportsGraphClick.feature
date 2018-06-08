@@ -23,7 +23,7 @@ Feature: Clicking on Program Overview report graphs for claims reports
     Then I wait until loading icon disappears in program overview report
     And I will wait to see "Overall Program" under program overview report in iframe
     Then I click on "NPRA" claims graph point under overall program of program overview report
-    And I switch to new window
+    #And I switch to new window
     And I will wait to see "Financial Performance" is appearing after clicking graph point
     Then I verify "Financial Performance" in the new window after clicking on the graph point
     And I switch back to old window
@@ -60,7 +60,7 @@ Feature: Clicking on Program Overview report graphs for claims reports
     And I will wait to see "Overall Program" under program overview report in iframe
     And I click on "Overall Program" under program overview reports
     Then I click on skilled nursing "SNF" claims graph point under post acute utilization of program overview report
-    And I switch to new window
+    #And I switch to new window
     And I will wait to see "Performance" is appearing after clicking graph point
     Then I verify "Performance" in the new window after clicking on the graph point
     And I switch back to old window
@@ -68,26 +68,26 @@ Feature: Clicking on Program Overview report graphs for claims reports
     And I click on "Zoom In" button under long term acute care graph for post accute utilization report
     And I wait for 3000 milli seconds
     Then I click on long term acute care "LTCH" claims graph point under post acute utilization of program overview report
-    And I switch to new window
+    #And I switch to new window
     And I will wait to see "Performance" is appearing after clicking graph point
     Then I verify "Performance" in the new window after clicking on the graph point
     And I switch back to old window
     And I switch to reports embedded iframe
     Then I click on inpatient rehab "IRF" claims graph point under post acute utilization of program overview report
-    And I switch to new window
+    #And I switch to new window
     And I will wait to see "Performance" is appearing after clicking graph point
     Then I verify "Performance" in the new window after clicking on the graph point
     And I switch back to old window
     And I switch to reports embedded iframe
     Then I click on home health "HHA" claims graph point under post acute utilization of program overview report
-    And I switch to new window
+    #And I switch to new window
     And I will wait to see "Performance" is appearing after clicking graph point
     Then I verify "Performance" in the new window after clicking on the graph point
     And I switch back to old window
     And I switch to reports embedded iframe
     Then I scroll the page to bottom by "100"
     Then I click on "home" claims graph point under post acute utilization of program overview report
-    And I switch to new window
+    #And I switch to new window
     And I will wait to see "Performance" is appearing after clicking graph point
     Then I verify "Performance" in the new window after clicking on the graph point
     And I switch back to old window
@@ -95,7 +95,7 @@ Feature: Clicking on Program Overview report graphs for claims reports
     And I click on "Zoom in" button under other graph for post accute utilization report
     And I wait for 3000 milli seconds
     Then I click on "other" graph point of claims under post acute utilization of program overview report
-    And I switch to new window
+    #And I switch to new window
     And I will wait to see "Performance" is appearing after clicking graph point
     Then I verify "Performance" in the new window after clicking on the graph point
     And I switch back to old window
@@ -133,13 +133,13 @@ Feature: Clicking on Program Overview report graphs for claims reports
     And I click on "Overall Program" under program overview reports
     And I click on "Post Acute Utilization" under program overview reports
     Then I click on initial snf length of stay "initialSNF" claims graph point under snf length of stay of program overview report
-    And I switch to new window
+    #And I switch to new window
     And I will wait to see "SNF Performance" is appearing after clicking graph point
     Then I verify "SNF Performance" in the new window after clicking on the graph point
     And I switch back to old window
     And I switch to reports embedded iframe
     Then I click on snf days "daysSNF" claims graph point under snf length of stay of program overview report
-    And I switch to new window
+    #And I switch to new window
     And I will wait to see "Performance" is appearing after clicking graph point
     Then I verify "Performance" in the new window after clicking on the graph point
     And I switch back to old window
@@ -179,13 +179,13 @@ Feature: Clicking on Program Overview report graphs for claims reports
     And I click on "SNF Length of Stay" under program overview reports
     Then I scroll the page to bottom by "100"
     Then I click on episodes w readmit "episodesReadmits" claims graph point under readmissions of program overview report
-    And I switch to new window
+    #And I switch to new window
     And I will wait to see "Readmissions Claims" is appearing after clicking graph point
     Then I verify "Readmissions Claims" in the new window after clicking on the graph point
     And I switch back to old window
     And I switch to reports embedded iframe
     Then I click on readmits per episode "readmitsEpisodes" claims graph point under readmissions of program overview report
-    And I switch to new window
+    #And I switch to new window
     And I will wait to see "Readmissions Claims" is appearing after clicking graph point
     Then I verify "Readmissions Claims" in the new window after clicking on the graph point
     And I switch back to old window

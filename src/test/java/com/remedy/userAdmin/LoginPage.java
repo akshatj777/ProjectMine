@@ -2,7 +2,7 @@ package com.remedy.userAdmin;
 
 
 import com.remedy.baseClass.BaseClass;
-
+import com.remedy.resources.DriverScript;
 
 import java.util.concurrent.TimeUnit;
 
@@ -92,36 +92,28 @@ public class LoginPage extends BaseClass {
 		if(userName.equals("Remedy Technical Administrator"))
 		{
 			iWillWaitToSee(By.name("email"));
-
 			iFillInText(driver.findElement(By.name("email")), CreateUserPage.usersEmailPerRole.get("Super Admin-Remedy Technical Administrator").get(userName));
 		}
 		else if(userName.equals("Partner Technical Administrator"))
 		{
-
 			iWillWaitToSee(By.name("email"));
-
 			iFillInText(driver.findElement(By.name("email")), CreateUserPage.usersEmailPerRole.get("Super Admin-Partner Technical Administrator").get(userName));
 		}
 		else if(userName.equals("Downstream Provider"))
 		{
-
 			iWillWaitToSee(By.name("email"));
-
 			iFillInText(driver.findElement(By.name("email")), CreateUserPage.usersEmailPerRole.get("Super Admin-Downstream Provider").get(userName));
 		}
 		else
 		{
-
-			iWillWaitToSee(By.name("email"));
-
-			iFillInText(driver.findElement(By.name("email")), userName);
+				iWillWaitToSee(By.name("email"));
+				iFillInText(driver.findElement(By.name("email")), userName);
 		}
-		
 	}
 
 	public void iEnterPassword(String passWord) {
-		iWillWaitToSee(By.name("password"));
-		iFillInText(driver.findElement(By.name("password")), passWord);
+			iWillWaitToSee(By.name("password"));
+			iFillInText(driver.findElement(By.name("password")), passWord);
 	}
 
 	public void iEnterPasswordFieldForLoginAfterMailVerification(String passWord) {
@@ -129,9 +121,16 @@ public class LoginPage extends BaseClass {
 	}
 
 	public void iClickLogInButton() {
-		iWillWaitToSee(By.xpath("//*[contains(text(),'Log In')]"));
-		clickElement(driver.findElement(By.xpath("//*[contains(text(),'Log In')]")));
-
+		if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		{
+			iWillWaitToSee(By.xpath("//*[contains(text(),'Log In')]"));
+			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//*[contains(text(),'Log In')]")));
+		}
+		else
+		{
+			iWillWaitToSee(By.xpath("//*[contains(text(),'Log In')]"));
+			clickElement(driver.findElement(By.xpath("//*[contains(text(),'Log In')]")));
+		}
 	}
 
 	public void iVerifyLogInWidget() {

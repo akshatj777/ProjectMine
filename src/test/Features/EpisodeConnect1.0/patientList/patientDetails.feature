@@ -8,7 +8,7 @@ Feature: Patient Details Verification
     And I wait for 2000 milli seconds
     Then I should see Tile text Episodes
     And I click on the "Episodes" tile
-    And I switch to new window
+    #And I switch to new window
     Then I should see Episode header text "Dashboard"
     #Then I should see "Dashboard" in the left navigator present on the episode dashboard page
     #Then I should see "Bookmarks" in the left navigator present on the episode dashboard page
