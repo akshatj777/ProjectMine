@@ -182,19 +182,25 @@ public class MailCreateUser extends BaseClass{
 	public void iEnterEmailToCreateUser(String emailName) {
 		if(emailName.equalsIgnoreCase("qaautomation"))
 			{
-			email = emailName+"+"+RandomStringUtils.randomAlphabetic(8)+"@remedypartners.com";
+			String emailArr[]=emailName.split("@");
+			String emailPrefix=emailArr[0];
+			email = emailPrefix+"+"+RandomStringUtils.randomAlphabetic(8)+"@remedypartners.com";
 			iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
 			driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
 			}
 		else if(emailName.equalsIgnoreCase("qaautomation2"))
 		{
-				email = emailName+"+"+RandomStringUtils.randomAlphabetic(8)+"@remedypartners.com";
+			String emailArr[]=emailName.split("@");
+			String emailPrefix=emailArr[0];
+				email = emailPrefix+"+"+RandomStringUtils.randomAlphabetic(8)+"@remedypartners.com";
 				iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
 				driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
 		}
 		else if(emailName.equalsIgnoreCase("qaautomation3"))
 		{
-				email = emailName+"+"+RandomStringUtils.randomAlphabetic(8)+"@remedypartners.com";
+			String emailArr[]=emailName.split("@");
+			String emailPrefix=emailArr[0];
+				email = emailPrefix+"+"+RandomStringUtils.randomAlphabetic(8)+"@remedypartners.com";
 				iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
 				driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
 		}

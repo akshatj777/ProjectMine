@@ -9,7 +9,7 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I click on "Reset Password" button from top right corner icon
     Then I click on Okay on reset password confirmation box
     Given I am on mail login page
-    Then I enter username "qaautomation" to login mail account
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
     Then I enter password "1Welcome2" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
@@ -37,7 +37,7 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I click on "Reset Password" button from top right corner icon
     Then I click on Okay on reset password confirmation box
     Given I am on mail login page
-    Then I enter username "qaautomation" to login mail account
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
     Then I enter password "1Welcome2" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
@@ -65,7 +65,7 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I click on "Reset Password" button from top right corner icon
     Then I click on Okay on reset password confirmation box
     Given I am on mail login page
-    Then I enter username "qaautomation" to login mail account
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
     Then I enter password "1Welcome2" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
@@ -97,7 +97,7 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I enter email for "<User>-<Role>" to generate password link
     And I click on send mail button
     Given I am on mail login page
-    Then I enter username "qaautomation" to login mail account
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
     Then I enter password "1Welcome2" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
@@ -132,7 +132,7 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I enter email for "<User>-<Role>" to generate password link
     And I click on send mail button
     Given I am on mail login page
-    Then I enter username "qaautomation" to login mail account
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
     Then I enter password "1Welcome2" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
@@ -157,7 +157,7 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I enter email for "<User>-<Role>" to generate password link
     And I click on send mail button
     Given I am on mail login page
-    Then I enter username "qaautomation" to login mail account
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
     Then I enter password "1Welcome2" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail

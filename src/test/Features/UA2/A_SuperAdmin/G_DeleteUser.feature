@@ -2,7 +2,7 @@ Feature: Delete a user from SA
 
   Scenario Outline: <Description>
     #Given I am on mail login page
-    #Then I enter username "qaautomation" to login mail account
+    #Then I enter username "qaautomation@remedypartners.com" to login mail account
     #Then I enter password "1Welcome2" to login mail account
     #Then I click on Mail icon in my account
     #Then I click on Inbox in mail
@@ -58,7 +58,7 @@ Feature: Delete a user from SA
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter username "qaautomation" to login mail account
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
     Then I enter password "1Welcome2" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
@@ -83,8 +83,8 @@ Feature: Delete a user from SA
     And I click on submit button to set new password
 
     Examples: 
-      | Description                                                        | User        | UserName                               | Password | FirstName | LastName | Email             | Phone      | Role         | Applications               | ApplicationsNotVisible                               | NPI | LearningPathwaySearchParameter                                                           | Health System1                                                         | Programs1   | Locations1                                                   | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Login with Super Admin User and create user with Case Manager role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation | 9988776655 | Case Manager | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect, TCI |     | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, 5HDc3E6aK_E1 | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI-Model2 | 2070-023--Allentown, 2070-023--Bethlehem, 2070-025--Anderson | No               |                |           |            | No               |                |           |            |
+      | Description                                                        | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone      | Role         | Applications               | ApplicationsNotVisible                               | NPI | LearningPathwaySearchParameter                                                           | Health System1                                                         | Programs1   | Locations1                                                   | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Login with Super Admin User and create user with Case Manager role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Case Manager | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect, TCI |     | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, 5HDc3E6aK_E1 | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI-Model2 | 2070-023--Allentown, 2070-023--Bethlehem, 2070-025--Anderson | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: Login from SA and delete an existing user and Login with the verified deleted user
     Given I am on the login page
@@ -125,7 +125,7 @@ Feature: Delete a user from SA
 
   Scenario Outline: <Description> then delete that user and Login with unverified deleted user
     #Given I am on mail login page
-    #Then I enter username "qaautomation" to login mail account
+    #Then I enter username "qaautomation@remedypartners.com" to login mail account
     #Then I enter password "1Welcome2" to login mail account
     #Then I click on Mail icon in my account
     #Then I click on Inbox in mail
@@ -198,7 +198,7 @@ Feature: Delete a user from SA
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter username "qaautomation" to login mail account
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
     Then I enter password "1Welcome2" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
@@ -228,5 +228,5 @@ Feature: Delete a user from SA
     Then I should see User is Blocked
 
     Examples: 
-      | Description                                                   | User        | UserName                               | Password | FirstName | LastName | Email             | Phone | Role    | Applications               | ApplicationsNotVisible                               | NPI | LearningPathwaySearchParameter                                                                                                        | Health System1 | Programs1   | Locations1                  | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Login with Super Admin User and create user with Manager role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation |       | Manager | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect, TCI |     | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | Apple Rehab    | BPCI-Model3 | 3056-i11--Apple - Watertown | No               |                |           |            | No               |                |           |            |
+      | Description                                                   | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone | Role    | Applications               | ApplicationsNotVisible                               | NPI | LearningPathwaySearchParameter                                                                                                        | Health System1 | Programs1   | Locations1                  | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Login with Super Admin User and create user with Manager role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com |       | Manager | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect, TCI |     | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | Apple Rehab    | BPCI-Model3 | 3056-i11--Apple - Watertown | No               |                |           |            | No               |                |           |            |

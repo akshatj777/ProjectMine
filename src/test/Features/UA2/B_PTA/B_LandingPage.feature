@@ -65,10 +65,10 @@ Feature: Verification of Landing Page for PTA User
     Then I verify availability of "<SearchParameter>" for "<user>-<Role>"
 
     Examples: 
-      | Description                    | user                            | Role      | Email             | InvalidSearchParameter | SearchParameter                           |
-      | Search a user using First Name | Partner Technical Administrator | Executive | qaautomation |                1768789 | Firstnamefirstnamefirstnamefirstnamefirst |
-      | Search a user using Last Name  | Partner Technical Administrator | Executive | qaautomation |                1768789 | Lastname                                  |
-      | Search a user using Email      | Partner Technical Administrator | Executive | qaautomation |                1768789 | FetchFromHM                               |
+      | Description                    | user                            | Role      | Email                           | InvalidSearchParameter | SearchParameter                           |
+      | Search a user using First Name | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | Firstnamefirstnamefirstnamefirstnamefirst |
+      | Search a user using Last Name  | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | Lastname                                  |
+      | Search a user using Email      | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | FetchFromHM                               |
 
   Scenario Outline: Verify ability of PTA user to lock a user and cancel unlock
     Given I am on the login page
@@ -92,8 +92,8 @@ Feature: Verification of Landing Page for PTA User
     Then I should see User is Blocked
 
     Examples: 
-      | user                            | Role      | Email             | SearchParameter |
-      | Partner Technical Administrator | Executive | qaautomation | FetchFromHM     |
+      | user                            | Role      | Email                           | SearchParameter |
+      | Partner Technical Administrator | Executive | qaautomation@remedypartners.com | FetchFromHM     |
 
   Scenario Outline: Verify ability of PTA user to unlock a locked user
     Given I am on the login page
@@ -119,5 +119,5 @@ Feature: Verification of Landing Page for PTA User
     Then I verify "<Applications>" product on SPOE page
 
     Examples: 
-      | user                            | Role      | Email             | SearchParameter | Applications |
-      | Partner Technical Administrator | Executive | qaautomation | FetchFromHM     | Episodes     |
+      | user                            | Role      | Email                           | SearchParameter | Applications |
+      | Partner Technical Administrator | Executive | qaautomation@remedypartners.com | FetchFromHM     | Episodes     |
