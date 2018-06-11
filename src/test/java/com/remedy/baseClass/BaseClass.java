@@ -22,6 +22,7 @@ import com.remedy.programManagement.CreateHHAOrganizationAPI;
 import com.remedy.programManagement.CreateManagingOrganization;
 import com.remedy.programManagement.CreateManagingOrganizationAPI;
 import com.remedy.programManagement.CreatePGPOrganization;
+import com.remedy.programManagement.CreatePGPOrganizationAPI;
 import com.remedy.programManagement.CreatePayorOrganizationAPI;
 import com.remedy.programManagement.CreatePractictionerAPI;
 import com.remedy.programManagement.CreateSNFOrganizationAPI;
@@ -606,6 +607,11 @@ public class BaseClass {
 				idList.addAll(CreateSNFOrganizationAPI.idList);
 				CreateSNFOrganizationAPI.idList.clear();
 		 }
+		 else if (type.equals("pgp")) 
+		 {
+				idList.addAll(CreatePGPOrganizationAPI.idList);
+				CreatePGPOrganizationAPI.idList.clear();
+		 }
 		//else if (type.equals("payor")) {
 //			idList.addAll(CreatePayorStepDef.returnIdList());
 //		}
@@ -670,6 +676,12 @@ public class BaseClass {
 			CreateSNFOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
 			CreateSNFOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
 			CreateSNFOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
+		}
+		else if(type.equals("pgp"))
+		{
+			CreatePGPOrganizationAPI.PGPNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+			CreatePGPOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
+			CreatePGPOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
 		}
 		else if(type.equals("payor"))
 		{
