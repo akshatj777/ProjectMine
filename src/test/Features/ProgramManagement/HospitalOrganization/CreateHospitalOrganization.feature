@@ -475,8 +475,8 @@ Feature: Create Hospital organization functionality tests
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
     Then I verify "<Message>" after submitting the "create ACH - <Has_MO>" organization page
-    When I search with "ACHNAME - <Has_MO>" on organization in search box
-    And I click "ACHNAME - <Has_MO>" field in search list on organization page
+    When I search with "ACHNAME - <Has_MO>" on "Hospital" organization in search box
+    And I click "ACHNAME - <Has_MO>" field in search list on "Hospital" organization page
     #Then I verify Location ID should be same as "Hospital" Organization CCN
 
     Examples: 
@@ -672,8 +672,8 @@ Feature: Create Hospital organization functionality tests
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
     Then I verify "SNF Organization Successfully Created." after submitting the "create SNF - <Has_MO>" organization page
-    When I search with "SNFNAME - <Has_MO>" on organization in search box
-    And I click "SNFNAME - <Has_MO>" field in search list on organization page
+    When I search with "SNFNAME - <Has_MO>" on "SNF" organization in search box
+    And I click "SNFNAME - <Has_MO>" field in search list on "SNF" organization page
     #And I verify Location ID should be greater than "100000"
     When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
