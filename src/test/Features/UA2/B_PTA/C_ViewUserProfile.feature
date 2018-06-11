@@ -1,5 +1,51 @@
 Feature: View User - Super Admin User
 
+  Scenario Outline: Create User through UA API call
+    Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>" and "<LearningPathways>"
+    When Create User with this data for "<User>"
+    Then Verify Actual vs expected results "<expStatusCode>" and "<responseMsg>"
+    Given I am on mail login page
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
+    Then I enter password "1Welcome2" to login mail account
+    Then I click on Mail icon in my account
+    Then I click on Inbox in mail
+    And I wait for 3000 milli seconds
+    Then I verify Account Verification in Inbox in my account
+    Then I click on Account Verification mail in Inbox
+    Then I verify "Confirm my account!" link in mail content
+    Then I click on "Confirm my account!" link in mail content
+    And I switch to new window
+    Then I enter email to generate password link
+    And I click on send mail button
+    Then I switch back to old window
+    Then I click on Inbox in mail
+    Then I verify the unread mail in inbox in my account
+    Then I verify Change Password mail in Inbox in my account
+    Then I click on Change Password mail in Inbox
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
+    And I switch to new window
+    And I enter new password "Testing1@" to set new password
+    And I enter confirm new password "Testing1@" to set new password
+    And I click on submit button to set new password
+
+    Examples: 
+      | User        | FirstName | LastName                                 | Email                           | Phone      | NPI | RoleID                             | Applications                                                                                                     | LearningPathways                       | Locations                         | expStatusCode |
+      | Super Admin | FirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 |     | 20-Partner Technical Administrator | episode_connect-Episodes,reports-Reports,physician_portal-Physician Connect,admin-Administration,lessons-Lessons | 5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1 | 441355--ALL_BPIDS--ALL_FACILITIES |           200 |
+
+  Scenario Outline: Create User through UA API call
+    Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>" and "<LearningPathways>"
+    When Create User with this data for "<User>"
+    Then Verify Actual vs expected results "<expStatusCode>" and "<responseMsg>"
+
+    Examples: 
+      | User                            | FirstName                                 | LastName                                 | Email                           | Phone      | NPI | RoleID                       | Applications                                                                                | LearningPathways                                    | Locations                                                                                                                                                                                                                                                                                                              | expStatusCode |
+      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 |     | 1-Executive                  | episode_connect-Episodes,reports-Reports,lessons-Lessons                                    | 5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1              | 441355--3056-804--COVC0023, 441355--3056-805--055519, 441355--3056-806--055761                                                                                                                                                                                                                                         |           200 |
+      | Partner Technical Administrator | FirstName                                 | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |            |     | 2-Manager                    | episode_connect-Episodes,reports-Reports,lessons-Lessons                                    | p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | 441355--3056-808--555164                                                                                                                                                                                                                                                                                               |           200 |
+      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastName                                 | qaautomation@remedypartners.com |            |     | 3-Case Manager               | episode_connect-Episodes,reports-Reports,lessons-Lessons                                    | 5HDc3E6aK_E1                                        | 441355--3056-809--055922, 441355--3056-810--555442, 441355--3056-811--555394, 441355--3056-812--055797, 441355--3056-813--165218, 441355--3056-814--145571, 441355--3056-815--165559, 441355--3056-816--145769, 441355--3056-817--155446, 441355--3056-818--155295, 441355--3056-819--365489, 441355--3056-820--365488 |           200 |
+      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 | NPI | 4-Physicians                 | episode_connect-Episodes,reports-Reports,lessons-Lessons,physician_portal-Physician Connect | p11D0Vl2FSg1,qfy2xp8zSFc1                           | 441355--3056-i37--056048, 441355--3056-i38--145783, 441355--3056-i39--155298, 441355--3056-i40--145862, 441355--3056-i41--155649                                                                                                                                                                                       |           200 |
+      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | qaautomation@remedypartners.com | 9988776655 |     | 22-Transitional Case Manager | episode_connect-Episodes,reports-Reports,lessons-Lessons                                    | 5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81 | 441355--3056-i42--055646, 441355--3056-i43--146048, 441355--3056-i44--365786, 441355--3056-i45--145508                                                                                                                                                                                                                 |           200 |
+
   Scenario Outline: <Description>
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
