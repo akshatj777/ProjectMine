@@ -60,13 +60,29 @@ public class SearchOrganization extends BaseClass{
 		else if(text.contains("PGPNAME - YES"))
 		{
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePGPOrganization.pgpOrg.get("PGPNAME"));
+			//iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganization.achOrg.get("ACHNAME"));
+			if(CreatePGPOrganizationAPI.PGPNameList.get(0).contains("\""))
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePGPOrganizationAPI.PGPNameList.get(0).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(0).length()-1));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePGPOrganizationAPI.PGPNameList.get(0));
+			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(text.contains("PGPNAME - NO"))
 		{
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePGPOrganization.pgpOrg_noMO.get("PGPNAME"));
+			//iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateACHOrganization.achOrg_noMO.get("ACHNAME"));
+			if(CreatePGPOrganizationAPI.PGPNameList.get(1).contains("\""))
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePGPOrganizationAPI.PGPNameList.get(1).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(1).length()-1));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePGPOrganizationAPI.PGPNameList.get(1));
+			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		else if(text.contains("PAYORNAME"))
@@ -227,35 +243,45 @@ public class SearchOrganization extends BaseClass{
 			  }
 	     }
 		  else if (org.equalsIgnoreCase("PGP")){
-			  if (value.equals("PGPNAME - YES"))
-			  {
-				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePGPOrganization.pgpOrg.get("PGPNAME"));
+			  if (value.equals("PGPNAME - YES")){
+				  if(CreatePGPOrganizationAPI.PGPNameList.get(0).contains("\""))
+				  {
+					  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePGPOrganizationAPI.PGPNameList.get(0).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(0).length()-1));
+				  }
+				  else
+				  {
+					  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePGPOrganizationAPI.PGPNameList.get(0).toString());
+				  }
 				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				  value = CreatePGPOrganization.pgpOrg.get("PGPNAME");
+				  value = CreatePGPOrganizationAPI.PGPNameList.get(0).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(0).length()-1);
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
-			  else if (value.equals("PGPNAME - NO"))
-			  {
-				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePGPOrganization.pgpOrg_noMO.get("PGPNAME"));
+			  else if (value.equals("PGPNAME - NO")){
+				  if(CreatePGPOrganizationAPI.PGPNameList.get(1).contains("\""))
+				  {
+					  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePGPOrganizationAPI.PGPNameList.get(1).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(1).length()-1)); 
+				  }
+				  else
+				  {
+					  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePGPOrganizationAPI.PGPNameList.get(1).toString());
+				  }
 				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				  value = CreatePGPOrganization.pgpOrg_noMO.get("PGPNAME");
+				  value = CreatePGPOrganizationAPI.PGPNameList.get(1).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(1).length()-1);
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
-			  else if (value.equals("EIN - YES"))
-			  {
-				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePGPOrganization.pgpOrg.get("EIN"));
+			  else if (value.equals("EIN - YES")){
+				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePGPOrganizationAPI.EINNameList.get(0).substring(1, CreatePGPOrganizationAPI.EINNameList.get(0).length()-1));
 				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				  value = CreatePGPOrganization.pgpOrg.get("EIN");
+				  value = CreatePGPOrganizationAPI.EINNameList.get(0).substring(1, CreatePGPOrganizationAPI.EINNameList.get(0).length()-1);
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
-			  else if (value.equals("EIN - NO"))
-			  {
-				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePGPOrganization.pgpOrg_noMO.get("EIN"));
+			  else if (value.equals("EIN - NO")){
+				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePGPOrganizationAPI.EINNameList.get(1).substring(1, CreatePGPOrganizationAPI.EINNameList.get(1).length()-1));
 				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				  value = CreatePGPOrganization.pgpOrg_noMO.get("EIN");
+				  value = CreatePGPOrganizationAPI.EINNameList.get(1).substring(1, CreatePGPOrganizationAPI.EINNameList.get(1).length()-1);
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
@@ -447,11 +473,49 @@ public class SearchOrganization extends BaseClass{
 		}
 		else if(text.contains("SNFNAME - YES")){
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
-			isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganization.SNFOrg.get("SNFNAME")+"']"));
+			if(CreateSNFOrganizationAPI.SNFNameList.get(0).contains("\""))
+			{
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(0).substring(0, CreateSNFOrganizationAPI.SNFNameList.get(0).length()-1)+"']"));
+			}
+			else
+			{
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(0)+"']"));
+			}
 		}
 		else if(text.contains("SNFNAME - NO")){
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
-			isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganization.SNFOrg_noMO.get("SNFNAME")+"']"));
+			if(CreateSNFOrganizationAPI.SNFNameList.get(0).contains("\""))
+			{
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(0).substring(0, CreateSNFOrganizationAPI.SNFNameList.get(0).length()-1)+"']"));
+			}
+			else
+			{
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.PGPNameList.get(0)+"']"));
+			}
+		}
+		else if(text.contains("PGPNAME - YES")){
+			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
+			//isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganization.achOrg.get("ACHNAME")+"']"));
+			if(CreatePGPOrganizationAPI.PGPNameList.get(0).contains("\""))
+			{
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.PGPNameList.get(0).substring(0, CreatePGPOrganizationAPI.PGPNameList.get(0).length()-1)+"']"));
+			}
+			else
+			{
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.PGPNameList.get(0)+"']"));
+			}
+		}
+		else if(text.contains("PGPNAME - NO")){
+			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
+			//isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganization.achOrg_noMO.get("ACHNAME")+"']"));
+			if(CreatePGPOrganizationAPI.PGPNameList.get(1).contains("\""))
+			{
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.PGPNameList.get(1).substring(0, CreatePGPOrganizationAPI.PGPNameList.get(1).length()-1)+"']"));
+			}
+			else
+			{
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.PGPNameList.get(1)+"']"));
+			}
 		}
 		else if(text.contains("PROGRAMNAME")){
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));

@@ -130,7 +130,7 @@ public class CreatePrograms extends BaseClass {
 			{
 				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 				longDelay();
-				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganization.pgpOrg_noMO.get("PGPNAME"));
+				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganizationAPI.PGPNameList.get(1).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(1).length()-1));
 				delay();
 				driver.findElement(By.cssSelector(".org-name")).click();
 			}
@@ -138,7 +138,7 @@ public class CreatePrograms extends BaseClass {
 			{
 				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 				longDelay();
-				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganization.pgpOrg.get("PGPNAME"));
+				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganizationAPI.PGPNameList.get(0).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(0).length()-1));
 				delay();
 				driver.findElement(By.cssSelector(".org-name")).click();
 			}
@@ -291,7 +291,7 @@ public class CreatePrograms extends BaseClass {
 	}
 
 	public void iVerifyPGPOrganizationNameOnNetworkContractPage(String text, String page){
-		isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg_noMO.get("PGPNAME")+"'"));
+		isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.PGPNameList.get(1).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(1).length()-1)+"'"));
 	}
 	
 	public void iVerifySearchBoxForHospitalOrganizationOnNetworkContractPage(String page){
@@ -652,36 +652,36 @@ public class CreatePrograms extends BaseClass {
 		  {
 			    driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 				delay();
-				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganization.pgpOrg.get("PGPNAME"));
+				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganizationAPI.PGPNameList.get(0).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(0).length()-1));
 				delay();
-				value = CreatePGPOrganization.pgpOrg.get("PGPNAME");
+				value = CreatePGPOrganizationAPI.PGPNameList.get(0).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(0).length()-1);
 			    Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-name")));
 		 }
 		  else if (value.equals("PGPNAME - NO"))
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganization.pgpOrg_noMO.get("PGPNAME"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganizationAPI.PGPNameList.get(1).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(1).length()-1));
 			  delay();
-			  value = CreatePGPOrganization.pgpOrg_noMO.get("PGPNAME");
+			  value = CreatePGPOrganizationAPI.PGPNameList.get(1).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(1).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-name")));
 		  }
 		  else if (value.equals("PGPNAMEEIN - YES"))
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganization.pgpOrg.get("EIN"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganizationAPI.EINNameList.get(0).substring(1, CreatePGPOrganizationAPI.EINNameList.get(0).length()-1));
 			  delay();
-			  value = CreatePGPOrganization.pgpOrg.get("EIN");
+			  value = CreatePGPOrganizationAPI.EINNameList.get(0).substring(1, CreatePGPOrganizationAPI.EINNameList.get(0).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-main-id")));
 		  }
 		  else if (value.equals("PGPNAMEEIN - NO"))
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganization.pgpOrg_noMO.get("EIN"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganizationAPI.EINNameList.get(1).substring(1, CreatePGPOrganizationAPI.EINNameList.get(1).length()-1));
 			  delay();
-			  value = CreatePGPOrganization.pgpOrg_noMO.get("EIN");
+			  value = CreatePGPOrganizationAPI.EINNameList.get(1).substring(1, CreatePGPOrganizationAPI.EINNameList.get(1).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-main-id")));
 		  }
 		  else if (value.equals("SNFNAME - YES"))

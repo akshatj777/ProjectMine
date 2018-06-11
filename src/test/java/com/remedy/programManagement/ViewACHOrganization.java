@@ -91,13 +91,13 @@ public class ViewACHOrganization  extends BaseClass{
 			{	
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
 				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
-				Assert.assertEquals(CreatePGPOrganization.pgpOrg.get("EIN"),actual);
+				Assert.assertEquals(CreatePGPOrganizationAPI.EINNameList.get(0).substring(1, CreatePGPOrganizationAPI.EINNameList.get(0).length()-1),actual);
 			}
 			else if (text.contains("NO"))
 			{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
 				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
-				Assert.assertEquals(CreatePGPOrganization.pgpOrg_noMO.get("EIN"),actual);
+				Assert.assertEquals(CreatePGPOrganizationAPI.EINNameList.get(1).substring(1, CreatePGPOrganizationAPI.EINNameList.get(1).length()-1),actual);
 			}
 		}
 		else if (org.contains("SNF"))
@@ -180,13 +180,13 @@ public class ViewACHOrganization  extends BaseClass{
 			{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
 				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
-				Assert.assertEquals(CreatePGPOrganization.pgpOrg.get("NPI"),actual);
+				Assert.assertEquals(CreatePGPOrganizationAPI.NPINameList.get(0).substring(1, CreatePGPOrganizationAPI.NPINameList.get(0).length()-1),actual);
 			}
 			else if(text.contains("NO"))
 			{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
 				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
-				Assert.assertEquals(CreatePGPOrganization.pgpOrg_noMO.get("NPI"),actual);	
+				Assert.assertEquals(CreatePGPOrganizationAPI.NPINameList.get(1).substring(1, CreatePGPOrganizationAPI.NPINameList.get(1).length()-1),actual);	
 			}
 		}
 		else if(org.contains("SNF"))
@@ -324,13 +324,13 @@ public class ViewACHOrganization  extends BaseClass{
 		{
 			if(name.contains("PGPNAME"))
 			{
-				iWillWaitToSee(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg.get("PGPNAME")+"']"));
-				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg.get("PGPNAME")+"']")));
+				iWillWaitToSee(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.PGPNameList.get(0).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(0).length()-1)+"']"));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.PGPNameList.get(0).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(0).length()-1)+"']")));
 			}
 			else if(name.contains("EIN"))
 			{
-				iWillWaitToSee(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg.get("EIN")+"']"));
-				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg.get("EIN")+"']")));
+				iWillWaitToSee(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.EINNameList.get(0).substring(1, CreatePGPOrganizationAPI.EINNameList.get(0).length()-1)+"']"));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.EINNameList.get(0).substring(1, CreatePGPOrganizationAPI.EINNameList.get(0).length()-1)+"']")));
 			}
 		}
 		else if(org.contains("SNF"))
