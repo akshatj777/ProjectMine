@@ -180,7 +180,7 @@ public class MailCreateUser extends BaseClass{
 	}
 	
 	public void iEnterEmailToCreateUser(String emailName) {
-		if(emailName.equalsIgnoreCase("qaautomation"))
+		if(emailName.equalsIgnoreCase("qaautomation@remedypartners.com"))
 			{
 			String emailArr[]=emailName.split("@");
 			String emailPrefix=emailArr[0];
@@ -188,7 +188,7 @@ public class MailCreateUser extends BaseClass{
 			iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
 			driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
 			}
-		else if(emailName.equalsIgnoreCase("qaautomation2"))
+		else if(emailName.equalsIgnoreCase("qaautomation2@remedypartners.com"))
 		{
 			String emailArr[]=emailName.split("@");
 			String emailPrefix=emailArr[0];
@@ -196,7 +196,7 @@ public class MailCreateUser extends BaseClass{
 				iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
 				driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
 		}
-		else if(emailName.equalsIgnoreCase("qaautomation3"))
+		else if(emailName.equalsIgnoreCase("qaautomation3@remedypartners.com"))
 		{
 			String emailArr[]=emailName.split("@");
 			String emailPrefix=emailArr[0];
