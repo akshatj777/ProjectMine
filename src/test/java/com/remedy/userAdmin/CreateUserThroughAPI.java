@@ -44,6 +44,12 @@ public class CreateUserThroughAPI extends BaseClass {
 		JSONObject objParticipantListValue = new JSONObject();
 		JSONArray objParticipantListValueArray = new JSONArray();
 		JSONArray objLearningPathwayArray = new JSONArray();
+		JSONObject objParticipantID = new JSONObject();
+		JSONObject objBPIDList = new JSONObject();
+		
+		
+		JSONObject objParticipantListValueValue = new JSONObject();
+		JSONArray objBPIDListArray = new JSONArray();
 		
 		objFirstNameValue.put("value", firstName);
 		objLastNameValue.put("value", lastName);
@@ -140,14 +146,10 @@ public class CreateUserThroughAPI extends BaseClass {
 				JSONObject objFacilityKeyValue = new JSONObject();
 				JSONObject objFacilityKey = new JSONObject();
 				JSONObject objParticipantIDValue = new JSONObject();
-				JSONObject objParticipantID = new JSONObject();
-				JSONObject objBPIDList = new JSONObject();
-				JSONObject objBPIDListValue = new JSONObject();
-				JSONObject objBPIDValue = new JSONObject();
 				JSONObject objBPID = new JSONObject();
-				JSONObject objParticipantListValueValue = new JSONObject();
-				JSONArray objBPIDListArray = new JSONArray();
 				JSONArray objFacilityListArray = new JSONArray();
+				JSONObject objBPIDValue = new JSONObject();
+				JSONObject objBPIDListValue = new JSONObject();
 				String a = st.nextToken().trim();
 				String participantID = a.substring(0, a.indexOf("--"));
 				String BPID = a.substring(a.indexOf("--")+2, a.lastIndexOf("--"));
@@ -165,12 +167,13 @@ public class CreateUserThroughAPI extends BaseClass {
 				objFacilityList.putAll(objBPID);
 				objBPIDListValue.put("value", objFacilityList);
 				objBPIDListArray.add(objBPIDListValue);
-				objBPIDList.put("bpidList", objBPIDListArray);
-				objBPIDList.putAll(objParticipantID);
-				objParticipantListValueValue.put("value", objBPIDList);
-				//objParticipantListValueValue.put("participantID", objParticipantIDValue);
-				objParticipantListValueArray.add(objParticipantListValueValue);
+				
 			}
+			objBPIDList.put("bpidList", objBPIDListArray);
+			objBPIDList.putAll(objParticipantID);
+			objParticipantListValueValue.put("value", objBPIDList);
+			//objParticipantListValueValue.put("participantID", objParticipantIDValue);
+			objParticipantListValueArray.add(objParticipantListValueValue);
 			objParticipantListValue.put("value", objParticipantListValueArray);
 		}
 		else
@@ -180,14 +183,10 @@ public class CreateUserThroughAPI extends BaseClass {
 			JSONObject objFacilityKeyValue = new JSONObject();
 			JSONObject objFacilityKey = new JSONObject();
 			JSONObject objParticipantIDValue = new JSONObject();
-			JSONObject objParticipantID = new JSONObject();
-			JSONObject objBPIDList = new JSONObject();
-			JSONObject objBPIDListValue = new JSONObject();
-			JSONObject objBPIDValue = new JSONObject();
 			JSONObject objBPID = new JSONObject();
-			JSONObject objParticipantListValueValue = new JSONObject();
-			JSONArray objBPIDListArray = new JSONArray();
 			JSONArray objFacilityListArray = new JSONArray();
+			JSONObject objBPIDValue = new JSONObject();
+			JSONObject objBPIDListValue = new JSONObject();
 			String participantID = locations.substring(0, locations.indexOf("--"));
 			String BPID = locations.substring(locations.indexOf("--")+2, locations.lastIndexOf("--"));
 			String facilityKey = locations.substring(locations.lastIndexOf("--")+2, locations.length());
