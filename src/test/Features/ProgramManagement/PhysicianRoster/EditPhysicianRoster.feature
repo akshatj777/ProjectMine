@@ -49,24 +49,15 @@ Feature: Edit Physician Roster functionality tests
       | desc         | participantId | name      | tinEin | contactName       | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type  |
       | Create Payor |               | PAYORNAME | EIN    | ContactPersonTest | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | payor |
 
-  Scenario Outline: Create Programs under Payor Organization
-    When I click on "Payor" organization tab on organization dashboard
-    When I search with "<Payor_Name>" on organization in search box
-    And I click "<Payor_Name>" field in search list on organization page
-    And I verify "<Payor_Name>" name on the header of view profile
-    And I verify "Programs" as default tab selected on view profile of "Payor" Organization
-    And I verify the "Create New Program" button on view profile of "payor" Organization
-    Then I click on "Create New Program" button on "create" organization page
-    And I verify "Create Program" header text on create organization page
-    Then I enter <Program_Name> in "Program Name" on create organization page
-    And I click on checkbox for "Attribute to the physician who admitted the patient" Attribution rule
-    And I click on checkbox for "Attribute to the triggering provider id on the triggering claim" Attribution rule
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create Programs" on Payor organization page
+  Scenario Outline: <desc>
+    And build json for Program with attribution rules "<prgName>" and "<payorOrgId>" and "cId" and "" and "0" and "programID"
+    When create program with this data
+    Then verification of Actual vs expected results <expPrgStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
 
     Examples: 
-      | Description                              | Payor_Name | Program_Name | Message                      |
-      | Create Programs under Payor Organization | PAYORNAME  | PROGRAMNAME  | Program Successfully Created |
+      | desc                           | id | programID | prgName     | payorOrgId | expPrgStatusCode | responseMsg | name      | address1 | address2 | city | state | zip   | participantId | tinEin | contactName | contactEmail       | contactPhone | expDelCode | type    |
+      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |
 
   Scenario Outline: Create Bundle using API calls
     Given create Bundle Json to String and pass it to body with "<name>" and "<content>" and "<bundleCode>"

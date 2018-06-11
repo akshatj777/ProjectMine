@@ -81,7 +81,7 @@ Feature: Create Programs organization under Payor Organization functionality tes
       | Description                                                 | Payor_Name | Program_Name         | Message                      |
       | Check Character Limit edge condition for Program Name field | PAYORNAME  | equalsTo45Characters | Program Successfully Created |
       | To check the Allowed characters for the available field     | PAYORNAME  | AllowedCharatcters   | Program Successfully Created |
-      | Create Program under Payor Organization                    | PAYORNAME  | PROGRAMNAME          | Program Successfully Created |
+      | Create Program under Payor Organization                     | PAYORNAME  | PROGRAMNAME          | Program Successfully Created |
 
   Scenario Outline: <Description>
     When I search with "<Payor_Name>" on organization in search box
@@ -115,23 +115,6 @@ Feature: Create Programs organization under Payor Organization functionality tes
     Examples: 
       | Description                                          | Payor_Name | Program_Name | Message                      |
       | Create Program using Drag and Drop attribution rules | PAYORNAME  | PROGRAMNAME  | Program Successfully Created |
-
-  Scenario Outline: Edit Programs under Payor Organization
-    When I search with "<Payor_Name>" on organization in search box
-    And I click "<Payor_Name>" field in search list on organization page
-    And I verify "<Payor_Name>" name on the header of view profile
-    And I verify "Programs" as default tab selected on view profile of "Payor" Organization
-    Then I search with "<Program_Name>" on organization in search box
-    And I verify "<Program_Name>" field in search list on organization page
-    And I click "<Program_Name>" field in search list on organization page
-    And I verify "Edit Program" header text on edit organization page
-    And I edit "Program Name" field to "<Edited_Program_Name>" for organization
-    Then I click on "Submit" button on "edit" organization page
-    Then I verify "<Message>" after submitting the "edit Programs" on Payor organization page
-
-    Examples: 
-      | Description                            | Payor_Name | Program_Name | Edited_Program_Name | Message                      |
-      | Edit Programs under Payor Organization | PAYORNAME  | PROGRAMNAME  | PROGRAMNAME         | Program Successfully Updated |
 
   Scenario Outline: <Description>
     When I search with "<Payor_Name>" on organization in search box
