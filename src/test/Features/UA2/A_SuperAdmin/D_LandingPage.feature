@@ -62,9 +62,9 @@ Feature: Super Admin Landing page verification
 
     Examples: 
       | Description                    | user        | Role      | Email             | InvalidSearchParameter | SearchParameter                          |
-      | Search a user using First Name | Super Admin | Executive | test.automatemail |                1768789 | Firstname                                |
-      | Search a user using Last Name  | Super Admin | Executive | test.automatemail |                1768789 | Lastnamelastnamelastnamelastnamelastname |
-      | Search a user using Email      | Super Admin | Executive | test.automatemail |                1768789 | FetchFromHM                              |
+      | Search a user using First Name | Super Admin | Executive | qaautomation |                1768789 | Firstname                                |
+      | Search a user using Last Name  | Super Admin | Executive | qaautomation |                1768789 | Lastnamelastnamelastnamelastnamelastname |
+      | Search a user using Email      | Super Admin | Executive | qaautomation |                1768789 | FetchFromHM                              |
 
   Scenario Outline: Verify ability of Super Admin user to lock a user
     Given I am on the login page
@@ -91,7 +91,7 @@ Feature: Super Admin Landing page verification
 
     Examples: 
       | user        | Role      | Email             | SearchParameter |
-      | Super Admin | Executive | test.automatemail | FetchFromHM     |
+      | Super Admin | Executive | qaautomation | FetchFromHM     |
 
   Scenario Outline: Verify ability of Super Admin user to unlock a locked user
     Given I am on the login page
@@ -118,7 +118,7 @@ Feature: Super Admin Landing page verification
 
     Examples: 
       | user        | Role      | Email             | SearchParameter | Applications               |
-      | Super Admin | Executive | test.automatemail | FetchFromHM     | Episodes, Reports, Lessons |
+      | Super Admin | Executive | qaautomation | FetchFromHM     | Episodes, Reports, Lessons |
 
   Scenario: User should not get error message when he goes back to User Admin page from top navigation Menu
     Given I am on the login page

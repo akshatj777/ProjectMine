@@ -23,8 +23,8 @@ public class EditUser extends BaseClass {
 	DateFormat df = new SimpleDateFormat("ddMMyyHHmmss");
 	Date timestamp = new Date();
 	String time = df.format(timestamp);
-	String mail = "test.automatemail";
-	final String email = mail + "+" + time + "@gmail.com";
+	String mail = "qaautomation";
+	final String email = mail + "+" + time + "@remedypartners.com";
 	CreateUserPage createUserPage = new CreateUserPage(driver);
 
 	public EditUser(WebDriver driver) {
