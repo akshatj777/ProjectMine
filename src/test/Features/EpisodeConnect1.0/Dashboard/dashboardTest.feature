@@ -10,7 +10,7 @@ Feature: Dashboard Search for Patient
     And I wait for 1000 milli seconds
     Then I should see Tile text <Episode1>
     And I click on the "Episodes" tile
-    And I switch to new window
+    #And I switch to new window
     Then I should see Episode header text "Dashboard"
 
      #When I search for patient name on my patient Dashboard with "<PatientName>"

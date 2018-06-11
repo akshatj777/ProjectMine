@@ -1,13 +1,13 @@
 Feature: Edit page for Downstream provider
 
   Scenario Outline: <Description>
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -58,7 +58,8 @@ Feature: Edit page for Downstream provider
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -74,11 +75,11 @@ Feature: Edit page for Downstream provider
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
-    And I enter new password "Testing1" to set new password
-    And I enter confirm new password "Testing1" to set new password
+    And I enter new password "Testing1@" to set new password
+    And I enter confirm new password "Testing1@" to set new password
     And I click on submit button to set new password
 
     Examples: 
@@ -164,8 +165,8 @@ Feature: Edit page for Downstream provider
     And I should see Log in widget
 
     Examples: 
-      | User        | Email             | FirstName                                 | LastName                                 | PreviousRole | Role                | EnableApplications         | Applications           | ApplicationsNotVisible                              | Locations                                                                                    | HasHealthSystem1 | Health System1 | Locations1                                       | HealthSystemValidation                       | ProgramsValidation                                                                  | LocationsValidation                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Roletext | ReportCategory | ReportName                   | LearningPathway                                           | BPID | Facilities                                                                                                                                                                                                       |
-      | Super Admin | test.automatemail | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | Remedy TCS   | Downstream Provider | Episodes 2.0, Episodes 2.0 | Episodes, Episodes 2.0 | Administration, Physician Connect, Reports, Lessons | 555469, 345454, 5 Star Home Care Llc, 3 Angels Home Health, Coosa Valley Health Care, 020653 | Yes              | Covenant       | 3056-804--COVC0023, 3056-805--Downey Care Center | Healthsystem - Downstream Provider, Covenant | Covenant--BPCI Model 3, Healthsystem - Downstream Provider--Downstream Organization | Covenant--3056-804--Catered Manor Nursing Center, Covenant--3056-805--Downey Care Center, Healthsystem - Downstream Provider--DOWN-ORG--555469, Healthsystem - Downstream Provider--DOWN-ORG--345454, Healthsystem - Downstream Provider--DOWN-ORG--5 Star Home Care Llc, Healthsystem - Downstream Provider--DOWN-ORG--3 Angels Home Health, Healthsystem - Downstream Provider--DOWN-ORG--Coosa Valley Health Care, Healthsystem - Downstream Provider--DOWN-ORG--020653 | ROLE_SNF | Patient ID     | Episode DRG Issues [Model 3] | i am learning path, Learning Pathway 2, Remedy University |      | Catered Manor Nursing Center, Downey Care Center, woodruff Community Hospital, litchford Falls Healthcare Re, 5 Star Home Care Llc, 3 Angels Home Health, Coosa valley health care, Alaris Health at Jersey City |
+      | User        | Email             | FirstName                                 | LastName                                 | PreviousRole | Role                | EnableApplications         | Applications           | ApplicationsNotVisible                              | Locations                                                                                    | HasHealthSystem1 | Health System1 | Locations1                                       | HealthSystemValidation                       | ProgramsValidation                                                                  | LocationsValidation                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Roletext | ReportCategory | ReportName                   | LearningPathway                                           | BPID | Facilities                                                                                                                                                                                                                         |
+      | Super Admin | test.automatemail | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | Remedy TCS   | Downstream Provider | Episodes 2.0, Episodes 2.0 | Episodes, Episodes 2.0 | Administration, Physician Connect, Reports, Lessons | 555469, 345454, 5 Star Home Care Llc, 3 Angels Home Health, Coosa Valley Health Care, 020653 | Yes              | Covenant       | 3056-804--COVC0023, 3056-805--Downey Care Center | Healthsystem - Downstream Provider, Covenant | Covenant--BPCI Model 3, Healthsystem - Downstream Provider--Downstream Organization | Covenant--3056-804--Catered Manor Nursing Center, Covenant--3056-805--Downey Care Center, Healthsystem - Downstream Provider--DOWN-ORG--555469, Healthsystem - Downstream Provider--DOWN-ORG--345454, Healthsystem - Downstream Provider--DOWN-ORG--5 Star Home Care Llc, Healthsystem - Downstream Provider--DOWN-ORG--3 Angels Home Health, Healthsystem - Downstream Provider--DOWN-ORG--Coosa Valley Health Care, Healthsystem - Downstream Provider--DOWN-ORG--020653 | ROLE_SNF | Patient ID     | Episode DRG Issues [Model 3] | i am learning path, Learning Pathway 2, Remedy University |      | Catered Manor Nursing Center, Downey Care Center, woodruff Community Hospital, Litchford Falls Nursing & Rehabilitation Center, 5 Star Home Care Llc, 3 Angels Home Health, Coosa valley health care, Alaris Health at Jersey City |
 
   Scenario Outline: Edit downstream provider general details, applications and data permissions
     Given I am on the login page
@@ -448,9 +449,11 @@ Feature: Edit page for Downstream provider
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I click on RemedyU tile for "<User>-<Role>" user
+    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I switch back to old window
     And I redirect to Remedy connect page
     And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage

@@ -58,4 +58,9 @@ public class ViewProfileManagingOrganizationStepDef extends DriverScript {
 	  public void i_Verify_The_Button_On_View_Page(String button) throws Throwable {
 		viewProfileMO.iVerifyTheEditButtonontheViewPage(button);
 		}
+	
+	@Then ("^i navigate my URL \"([^\"]*)\"$")
+	public void letsnavigate(String url){
+		viewProfileMO.letnavigate(url);
+	}
 }

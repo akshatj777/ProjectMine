@@ -82,9 +82,11 @@ Feature: Edit user page for PTA
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I click on RemedyU tile for "<User>-<Role>" user
+    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I switch back to old window
     And I redirect to Remedy connect page
     #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
     #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
@@ -311,9 +313,11 @@ Feature: Edit user page for PTA
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I click on RemedyU tile for "<User>-<Role>" user
+    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I switch back to old window
     And I redirect to Remedy connect page
     #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
     #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
@@ -421,9 +425,11 @@ Feature: Edit user page for PTA
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I click on RemedyU tile for "<User>-<Role>" user
+    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I switch back to old window
     And I redirect to Remedy connect page
     #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
     #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
@@ -568,13 +574,13 @@ Feature: Edit user page for PTA
       | Partner Technical Administrator | test.automatemail |      | NPI  | Physicians   | Manager |                    | Episodes, Reports, Physician Connect, Lessons, Physician Connect | Administration, Episodes 2.0 |                                | ROLE_PRM | Patient ID     | Episode DRG Issues [Model 3] |      | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | FirstName | LastName | Apple - Watertown |
 
   Scenario Outline: <Description>
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -625,7 +631,8 @@ Feature: Edit user page for PTA
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -641,11 +648,11 @@ Feature: Edit user page for PTA
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
-    And I enter new password "Testing1" to set new password
-    And I enter confirm new password "Testing1" to set new password
+    And I enter new password "Testing1@" to set new password
+    And I enter confirm new password "Testing1@" to set new password
     And I click on submit button to set new password
 
     Examples: 
@@ -653,13 +660,13 @@ Feature: Edit user page for PTA
       | Login with Super Admin User and create user with Partner Technical Administrator role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail |       | Partner Technical Administrator | Episodes, Reports, Physician Connect, Administration, Lessons | Episodes 2.0, TCI      |     | HZhmTBQzHtU1, Learning Pathway 2 | Sound Physicians | BPCI-Model2, BPCI-Model3 | 3090-066--Presence Saint Joseph Medical Center, 3090-069--Penobscot Bay Medical Center, 3090-079--Aiken Regional Medical Center, 6005-059--Adventist Bolingbrook Hospital, 6005-059--Adventist Health Bakersfield | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: <Description>
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
@@ -698,7 +705,8 @@ Feature: Edit user page for PTA
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -714,11 +722,11 @@ Feature: Edit user page for PTA
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
-    And I enter new password "Testing1" to set new password
-    And I enter confirm new password "Testing1" to set new password
+    And I enter new password "Testing1@" to set new password
+    And I enter confirm new password "Testing1@" to set new password
     And I click on submit button to set new password
 
     Examples: 
@@ -791,9 +799,11 @@ Feature: Edit user page for PTA
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I click on RemedyU tile for "<User>-<Role>" user
+    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I switch back to old window
     And I redirect to Remedy connect page
     #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
     #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
@@ -888,9 +898,11 @@ Feature: Edit user page for PTA
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I click on RemedyU tile for "<User>-<Role>" user
+    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I switch back to old window
     And I redirect to Remedy connect page
     #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
     #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
@@ -1059,13 +1071,13 @@ Feature: Edit user page for PTA
 
  
   Scenario Outline: <Description>
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -1116,7 +1128,8 @@ Feature: Edit user page for PTA
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -1132,11 +1145,11 @@ Feature: Edit user page for PTA
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
-    And I enter new password "Testing1" to set new password
-    And I enter confirm new password "Testing1" to set new password
+    And I enter new password "Testing1@" to set new password
+    And I enter confirm new password "Testing1@" to set new password
     And I click on submit button to set new password
 
     Examples: 
@@ -1144,13 +1157,13 @@ Feature: Edit user page for PTA
       | Login with Super Admin User and create user with Partner Technical Administrator role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameLastNameLastNameLastNameLastName | test.automatemail |       | Partner Technical Administrator | Episodes, Reports, Physician Connect, Administration, Lessons | Episodes 2.0           |     | HZhmTBQzHtU1, Learning Pathway 2 | Butler Memorial Hospital | BPCI-Model2, BPCI-CJR | 2070-a55--Butler Memorial Hospital, CJR-1--Butler Memorial Hospital | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: <Description>
-    Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account
-    Then I enter password "Intel@01" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I click on delete icon in mail
-    Then I signout from mail account
+    #Given I am on mail login page
+    #Then I enter username "test.automatemail" to login mail account
+    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I click on Mail icon in my account
+    #Then I click on Inbox in mail
+    #Then I click on delete icon in mail
+    #Then I signout from mail account
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
@@ -1189,7 +1202,8 @@ Feature: Edit user page for PTA
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter password "Intel@01" to login mail account
+    Then I enter username "test.automatemail" to login mail account
+    Then I enter password "KuchBhi@001" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -1205,11 +1219,11 @@ Feature: Edit user page for PTA
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
-    And I enter new password "Testing1" to set new password
-    And I enter confirm new password "Testing1" to set new password
+    And I enter new password "Testing1@" to set new password
+    And I enter confirm new password "Testing1@" to set new password
     And I click on submit button to set new password
 
     Examples: 
@@ -1306,9 +1320,11 @@ Feature: Edit user page for PTA
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I click on RemedyU tile for "<User>-<Role>" user
+    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I switch back to old window
     And I redirect to Remedy connect page
     #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
     #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage

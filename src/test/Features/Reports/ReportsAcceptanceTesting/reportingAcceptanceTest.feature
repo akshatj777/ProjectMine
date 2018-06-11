@@ -605,13 +605,13 @@ Feature: Accepatance testing for reports
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     And I fetch the value of episodes present beside first physician
     When I click the first name under attributed physican column
-    And I switch to new window
+    #And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     And I verify fetched episodes data is appearing inside the kpi box of episodes
     Then I verify same episodes data is appearing under overall performance column in quaterly performance table
     And I click on "LMJ Bundle Details" link on the performance scorecard page
-    And I switch to new window
+    #And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     And I verify "Performance Scorecard" is appearing on clicking on lmj link

@@ -9,7 +9,7 @@ Feature: Super Admin Landing page verification
     And I should not see text "Unable to Load users" on Users page
     And I verify "SearchBox" on landing page
     And I verify "UsersTabOnLeftPane" on landing page
-    And I verify "EmailOnTopRight" on landing page
+    #And I verify "EmailOnTopRight" on landing page
     And I verify "User table" on landing page
     And I verify "Lock status Column" on landing page
     And I verify "User Name Column" on landing page

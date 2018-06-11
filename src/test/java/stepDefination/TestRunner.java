@@ -36,11 +36,10 @@ import stepDefination.Hooks.*;
                 "com.cucumber.listener.ExtentCucumberFormatter:target/vimalSelvam-cucumberReport/report.html"},
 
 
-        features = { "src/test/Features/" },
-
+        features = { "src/test/Features/" }
 
         //glue = { "./src/test/java/stepDefination" },
-        tags = {}
+        //tags = {""}
 )
 public class TestRunner {
 

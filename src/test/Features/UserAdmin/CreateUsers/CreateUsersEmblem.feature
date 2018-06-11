@@ -39,7 +39,7 @@ Feature: Creation of User with Emblem Payer and product tiles verification on cr
     Then I select Log Out option from the dropdown
     And I should see Log in widget
     Then I open new tab and close the last tab
-    And I switch to new window
+    #And I switch to new window
     Given I am on mail login page
     Then I enter password "Intel@01" to login mail account
     Then I click on Mail icon in my account
@@ -48,7 +48,7 @@ Feature: Creation of User with Emblem Payer and product tiles verification on cr
     Then I click on Account Verification mail in Inbox
     Then I verify "Confirm my account!" link in mail content
     Then I click on "Confirm my account!" link in mail content
-    And I switch to new window
+    #And I switch to new window
     Then I enter email to generate password link
     And I click on send mail button
     Then I switch back to old window
@@ -58,7 +58,7 @@ Feature: Creation of User with Emblem Payer and product tiles verification on cr
     Then I click on Change Password mail in Inbox
     Then I verify "Change my password" link in mail content
     Then I click on "Change my password" link in mail content
-    And I switch to new window
+    #And I switch to new window
     And I enter new password "Testing1" to set new password
     And I enter confirm new password "Testing1" to set new password
     And I click on submit button to set new password
@@ -137,7 +137,7 @@ Feature: Creation of User with Emblem Payer and product tiles verification on cr
     Then I select Log Out option from the dropdown
     And I should see Log in widget
     Then I open new tab and close the last tab
-    And I switch to new window
+    #And I switch to new window
     Given I am on mail login page
     Then I enter password "Intel@01" to login mail account
     Then I click on Mail icon in my account
@@ -146,7 +146,7 @@ Feature: Creation of User with Emblem Payer and product tiles verification on cr
     Then I click on Account Verification mail in Inbox
     Then I verify "Confirm my account!" link in mail content
     Then I click on "Confirm my account!" link in mail content
-    And I switch to new window
+    #And I switch to new window
     Then I enter email to generate password link
     And I click on send mail button
     Then I switch back to old window
@@ -156,7 +156,7 @@ Feature: Creation of User with Emblem Payer and product tiles verification on cr
     Then I click on Change Password mail in Inbox
     Then I verify "Change my password" link in mail content
     Then I click on "Change my password" link in mail content
-    And I switch to new window
+    #And I switch to new window
     And I enter new password "Testing1" to set new password
     And I enter confirm new password "Testing1" to set new password
     And I click on submit button to set new password

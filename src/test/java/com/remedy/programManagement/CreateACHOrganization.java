@@ -2,6 +2,7 @@ package com.remedy.programManagement;
 
 import java.util.HashMap;
 import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +17,7 @@ public class CreateACHOrganization extends BaseClass{
 	public static HashMap<String, String> achOrg_noMO = new HashMap<String, String>();
 	public static String oldACH_WithoutMO;
 	public static String oldACH_WithMO;
+	public static String location_Id;
 
 	public CreateACHOrganization(WebDriver driver) {
 		super(driver);
@@ -26,11 +28,14 @@ public class CreateACHOrganization extends BaseClass{
 	}
 	
 	public void iClickOnParticularOrganizationTabOrganizationDashboard(String text) {
-		delay();
+		longDelay();
+		iWillWaitToSee(By.cssSelector(".navLink.noselect"));
+				
 		List<WebElement> element = driver.findElements(By.cssSelector(".navLink.noselect"));
 		for (WebElement ele : element) {
 			if(ele.getText().contains(text)){
 				ele.click();
+				delay();
 			}
 		}
 		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
@@ -180,10 +185,7 @@ public class CreateACHOrganization extends BaseClass{
 				String value = createRandomNumber(5);
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
 			}
-			else if(id.contains("greaterThan10")){
-				String value = createRandomNumber(11);
-				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
-			}
+			
 			else {
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), id.substring(id.indexOf("-")+1).trim());
 				delay();
@@ -241,19 +243,23 @@ public class CreateACHOrganization extends BaseClass{
     	}
     }
     
-    public void iEnterStateForLocationOnACHOrg(String text, int num) {
+    public void iEnterStateForLocationOnACHOrg(String text, int num) 
+    {
     	driver.findElements(By.xpath("//div[text()='State']/preceding-sibling::div//input[@role='combobox']")).get(num).sendKeys(text);
-    	if(!text.isEmpty()){
-    	clickElement(driver.findElement(By.xpath("//div[(contains(@class,'VirtualizedSelectOption')) and text()='"+text+"']")));
+    	if(!text.isEmpty())
+    	{
+    		clickElement(driver.findElement(By.xpath("//div[(contains(@class,'VirtualizedSelectOption')) and text()='"+text+"']")));
     	}
     }
     
-    public void iEnterZipForLocationOnACHOrg(String text, int num) {
+    public void iEnterZipForLocationOnACHOrg(String text, int num) 
+    {
     	num = num-1;
     	iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].address.postalCode']")), text);
     }
 
-	public void iSelectRadioButtonForManagingOrganization(String text) { 
+	public void iSelectRadioButtonForManagingOrganization(String text) 
+	{ 
 		if(text.equalsIgnoreCase("YES"))
 		{
 			waitTo().until(ExpectedConditions.elementToBeClickable(By.cssSelector(".radio-button->input[value='true']")));
@@ -266,7 +272,8 @@ public class CreateACHOrganization extends BaseClass{
 		}
 	}
 	
-	public void iSelectManagingOrgNameInHasAManagingOrganizationDropDown(String managingOrg, String text) {
+	public void iSelectManagingOrgNameInHasAManagingOrganizationDropDown(String managingOrg, String text) 
+	{
 		if(text.equalsIgnoreCase("YES"))
 		{
 			if(managingOrg.equalsIgnoreCase("BLANK"))
@@ -274,34 +281,128 @@ public class CreateACHOrganization extends BaseClass{
 				iFillInText(driver.findElement(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']")), "");	
 			}
 			else if (managingOrg.contains("Invalid")){
-				iFillInText(driver.findElement(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']")), managingOrg);	
+				iFillInText(driver.findElement(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']")), managingOrg);
+				delay();
 			}
 			else 
 			{
-				iFillInText(driver.findElement(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']")), CreateManagingOrganization.moOrg.get("MONAME"));
+				iWillWaitToSee(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']"));
+				iFillInText(driver.findElement(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']")), CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1));
+				iWillWaitToSee(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption"));
 				clickElement(driver.findElement(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption")));
+				delay();
 			}
 		}
 	}
 	
-	public void iVerifyLocationHeaderOnOrganizationPage(String location) {
+	public void iVerifyLocationHeaderOnOrganizationPage(String location) 
+	{
 		String actual = null;
 		List <WebElement> element = driver.findElements(By.cssSelector(".col-md-11.location-indcator"));
-	    for(WebElement ele: element) {
-	    	if (ele.getText().replace("-", "").trim().equals(location)) {
+	    for(WebElement ele: element) 
+	    {
+	    	if (ele.getText().replace("-", "").trim().equals(location)) 
+	    	{
 	    		actual = ele.getText().replace("-", "").trim();
 	    	}
 	    }
 	    Assert.assertEquals(actual,location);
 	}
 	
-    public void iVerifyLocationCountOnViewOrganizationPage(int count) {
+    public void iVerifyLocationCountOnViewOrganizationPage(int count) 
+    {
+    	iWillWaitToSee(By.cssSelector(".fixedDataTableRowLayout_rowWrapper"));
     	List<WebElement> element = driver.findElements(By.cssSelector(".fixedDataTableRowLayout_rowWrapper"));
     	int actual = (element.size())-1;
     	Assert.assertEquals(count, actual);
     }
     
-    public void iVerifyMessageInHasAManagementOrganization(String text) {
+    public void iVerifyMessageInHasAManagementOrganization(String text) 
+    {
+    	iWillWaitToSee(By.cssSelector(".Select-noresults"));
     	verifyTextForElement(driver.findElement(By.cssSelector(".Select-noresults")), text);
+    }
+    
+    public void iEnterLocationIDForLocationOnACHOrg(String text, int num, String field) {
+    	num = num-1;
+    	if (field.contains("Hospital")){
+    		if(text.equals("LID"))
+        	{
+    			tempAchOrg.put("LID", createRandomNumber(18));
+    			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), tempAchOrg.get("LID"));
+    		}
+    		else if(text.equals("LIDmorethan20characters"))
+        	{
+    			tempAchOrg.put("LID", createRandomNumber(21));
+    			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), tempAchOrg.get("LID"));
+    		}
+        	else if(text.equals("DUPLICATE_LID"))
+        	{
+        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), achOrg.get("LID"));
+        	}
+        	else if(text.equals("greaterthan20"))
+        	{
+        		String value = createRandomNumber(22);
+    			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), value);
+        	}
+    	}
+    	else if(field.contains("SNF"))
+    	{
+    		if(text.equals("LID"))
+        	{
+    			CreateSNFOrganization.tempSNFOrg.put("LID", createRandomNumber(20));
+    			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateSNFOrganization.tempSNFOrg.get("LID"));
+    		}
+        	else if(text.equals("DUPLICATE_LID"))
+        	{
+        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateSNFOrganization.tempSNFOrg.get("LID"));
+        	}
+        	else if(text.equals("LIDmorethan20characters"))
+        	{
+    			CreateSNFOrganization.tempSNFOrg.put("LID", createRandomNumber(21));
+    			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), tempAchOrg.get("LID"));
+    		}
+    	}
+        else
+        {
+        	iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), text);
+        }
+    }
+    
+    public void iVerifyLocationIDShouldbeSameasOrganizationCCN(String text)
+    {
+    	if(text.contains("Hospital")){
+    		delay();
+        	iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), CreateACHOrganization.achOrg_noMO.get("CCN"));
+    		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+    		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+CreateACHOrganization.achOrg_noMO.get("CCN")+"')]")));
+    	}
+    	else if(text.contains("SNF")){
+    		delay();
+        	iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), CreateSNFOrganization.SNFOrg_noMO.get("CCN"));
+    		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+    		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+CreateSNFOrganization.SNFOrg_noMO.get("CCN")+"')]")));
+    	}
+    } 
+    
+    public void iVerifyLocationIdShouldBeGreater(int value)
+    {
+    	location_Id =driver.findElements(By.xpath("//div[@class='fixedDataTableCellLayout_main public_fixedDataTableCell_main' and (contains(@style,'height: 30px;'))]")).get(0).getText();
+    	int loc_Id = Integer.parseInt(location_Id);
+    	Assert.assertTrue(value<loc_Id);
+    }
+    
+    public void iProvideFromLastCreatedIdOnCreateOrganizationPage(String id,String field) throws InterruptedException {
+    	if(id.equalsIgnoreCase("CCN")){
+    		iFillInText(driver.findElement(By.xpath("//input[@placeholder='CCN']")), location_Id);
+    	}
+    	else if(id.equalsIgnoreCase("Location_Id")){
+    		iFillInText(driver.findElement(By.xpath("//input[@name='locations[0].locationId']")), location_Id);
+    	}
+    }
+    
+    public void iVerifyDuplicateLocationMessage(String text){
+    	iWillWaitToSee(By.xpath("//div[text()='Duplicate Location']"));
+    	verifyTextForElement(driver.findElement(By.xpath("//div[text()='Duplicate Location']")), text);
     }
 }

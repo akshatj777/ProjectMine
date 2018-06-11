@@ -2,6 +2,7 @@ package stepDefination.programManagement;
 
 import com.remedy.programManagement.CreateACHOrganization;
 import com.remedy.resources.DriverScript;
+
 import cucumber.api.java.en.And;
 
 public class CreateACHOrganizationStepDef extends DriverScript {
@@ -94,4 +95,29 @@ public class CreateACHOrganizationStepDef extends DriverScript {
 	  public void i_Click_On_Particular_Organization_Tab_on_Under_Managing_Organization(String text) throws Throwable {
 		 createACH.iClickOnParticularOrganizationTabOrganizationDashboard(text);
 	 }
+	 
+	 @And("^I enter Location Id ([^\"]*) for Location \"([^\"]*)\" on \"([^\"]*)\" organization page$")
+	  public void i_Enter_LocationID_For_Locations_On_OrganizationPage(String text,int num, String field) throws Throwable {
+		 createACH.iEnterLocationIDForLocationOnACHOrg(text,num,field);
+	    }
+	 
+	 @And("^I verify Location ID should be same as \"([^\"]*)\" Organization CCN$")
+	  public void i_Verify_LocationID_Should_be_Same_as_Organization_CCN(String text) throws Throwable {
+		 createACH.iVerifyLocationIDShouldbeSameasOrganizationCCN(text);
+	    }
+	 
+	 @And("^I verify Location ID should be greater than \"([^\"]*)\"$")
+	  public void i_Verify_LocationID_Should_be_Greater(int value) throws Throwable {
+		 createACH.iVerifyLocationIdShouldBeGreater(value);
+	    }
+	 
+	 @And("^I provide \"([^\"]*)\" as last created \"([^\"]*)\" on create organization page$")
+	  public void i_Provide_From_Last_Created_Id_Create_Organization_Page(String id,String field) throws Throwable {
+		 createACH.iProvideFromLastCreatedIdOnCreateOrganizationPage(id,field);
+	    }
+	 
+	 @And("^I verify duplicate Location Message \"([^\"]*)\"$")
+	  public void i_Verify_Duplicate_Location_Message(String text) throws Throwable {
+		 createACH.iVerifyDuplicateLocationMessage(text);
+	    }
 }

@@ -59,6 +59,11 @@ public class MailCreateUserSteps extends DriverScript {
 		mailcreateuser.iVerifyAccountVerificationMailInInboxInMyAccount();
 	}
 	
+	@Then("^I verify accounts for all the created users$") 
+	public void verifyAccount() throws Throwable {
+		mailcreateuser.verifyAccountForAllCreatedUsers();
+	}
+	
 	@Then("^I verify the unread mail in inbox in my account$")
 	public void i_Verify_The_Unread_Mail_In_Inbox_In_My_Account() throws Throwable{
 		mailcreateuser.i_Verify_The_Unread_Mail_In_Inbox_In_My_Account();
@@ -82,6 +87,11 @@ public class MailCreateUserSteps extends DriverScript {
 	@Then("^I click on \"([^\"]*)\" link in mail content$") 
 	public void i_Click_On_Link_In_Mail_Content(String link) throws Throwable {
 		mailcreateuser.iClickOnLinkInMailContentInInboxInMyAccount(link);
+	}
+	
+	@Then("^I enter email \"([^\"]*)\" to generate password link for bulk users$") 
+	public void i_Enter_Email_To_GeneratePassword_Link_ForBulkUsers(String bulkUserEmail) throws Throwable {
+		mailcreateuser.iEnterEmailToGeneratePasswordLinkForBulkUsers(bulkUserEmail);
 	}
 	
 	@Then("^I enter email to generate password link$") 

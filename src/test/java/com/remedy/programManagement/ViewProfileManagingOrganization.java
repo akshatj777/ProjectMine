@@ -1,10 +1,13 @@
 package com.remedy.programManagement;
 
 import java.util.HashMap;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 import java.sql.*;
+
 import com.remedy.baseClass.BaseClass;
 
 public class ViewProfileManagingOrganization extends BaseClass{
@@ -64,15 +67,16 @@ public class ViewProfileManagingOrganization extends BaseClass{
 	{
 		if (org.contains("Managing")){
 			String text = getTextForElement(driver.findElement(By.cssSelector(".participant-id")));
-		    String query = "SELECT participant_id from program_management.organization where name = '"+CreateManagingOrganization.moOrg.get("MONAME")+"'";
-		    String pID = fetchParticipantID(query);
+		    //String query = "SELECT participant_id from program_management.organization where name = '"+CreateManagingOrganization.moOrg.get("MONAME")+"'";
+		    String pID = CreateManagingOrganizationAPI.participantidList.get(0);
+		    longDelay();
 			Assert.assertEquals("Participant Id: "+pID+"|", text);
 		}
 		else if (org.contains("Payor")){
 			String text = getTextForElement(driver.findElement(By.cssSelector(".participant-id")));
 		    String query = "SELECT participant_id from program_management.organization where name = '"+CreatePayorOrganization.payorOrg.get("PAYORNAME")+"'";
 		    String pID = fetchParticipantID(query);
-			Assert.assertEquals("Participant Id: "+pID+"|", text);
+			Assert.assertEquals("Participant Id: "+pID+" |", text);
 		}
 	}
 	
@@ -132,5 +136,11 @@ public class ViewProfileManagingOrganization extends BaseClass{
 	
 	public void iVerifyTheEditButtonontheViewPage(String button) {
 		iVerifyTextFromListOfElement(By.cssSelector(".col-md-offset-11"), button);
+	}
+
+	public void letnavigate(String url) {
+		driver.navigate().to(url);
+		longDelay();
+		longDelay();
 	}
 }

@@ -10,7 +10,7 @@ Feature: Episode Connect Tasks
     Then I should see Tile text Episodes
 
     And I click on the "Episodes" tile
-    And I switch to new window
+    #And I switch to new window
     Then I should see Episode header text "Dashboard"
     Then I should see Notifications present on the top-nav bar present on the episode dashboard page
     When I click on Notification button present on the top-nav bar present on the episode dashboard page
@@ -41,7 +41,7 @@ Feature: Episode Connect Tasks
     Then I should see Tile text Episodes
 
     And I click on the "Episodes" tile
-    And I switch to new window
+    #And I switch to new window
     Then I should see Episode header text "Dashboard"
     Then I should see Notifications present on the top-nav bar present on the episode dashboard page
     When I click on Notification button present on the top-nav bar present on the episode dashboard page
