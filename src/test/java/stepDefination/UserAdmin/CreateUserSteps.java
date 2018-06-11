@@ -871,6 +871,7 @@ public class CreateUserSteps extends DriverScript {
 	 public void iVerifyAllLocationsPresence(String text) {
 		 createUser.iVerifyAllLocationsPresence(text);
 	 }
+
 	 @Then("^I click on > to navigate to next page while \"([^\"]*)\" the user$")
 	 public void iNavigateToNextLocationsPage(String text){
 		 createUser.iNavigateToNextLocationsPage(text);
@@ -896,4 +897,5 @@ public class CreateUserSteps extends DriverScript {
 	 public void iVerifyRolesAsPerUser(String user){
 		 createUser.iVerifyRolesAsPerUser(user);
 	 }
+
 }

@@ -41,3 +41,30 @@ Feature: View User - Super Admin User
       | View Case Manager user created from Super Admin                   | Partner Technical Administrator | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstName      | LastName                                 |              | Case Manager              | Episodes, Reports, Lessons                    | Episodes 2.0, Administration, Physician Connect, TCI |     | Care Coordination External                                                                                                                                | Covenant     | Covenant--BPCI Model 3 | Covenant--3056-809--Courtyard Health Care Center, Covenant--3056-810--Emerald Gardens Nursing Center, Covenant--3056-811--Buena Vista Care Center, Covenant--3056-812--Gilroy Healthcare And Rehabilitation Center, Covenant--3056-813--Eagle Point Nursing & Rehabilitation Center, Covenant--3056-814--Cedar Ridge Health Rehab Center, Covenant--3056-815--Ennoble Skilled Nursing And Rehabilitation Center, Covenant--3056-816--Friendship Skilled Nursing & Rehabilitation Center, Covenant--3056-817--Covington Manor Health And  Rehabilitation Center, Covenant--3056-818--Clinton House Health And Rehab Center, Covenant--3056-819--Edgewood Manor Nursing Center, Covenant--3056-820--Fairview Skilled Nursing And Rehabilitation Center |
       | View Physicians user created from Super Admin user                | Partner Technical Administrator | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstName      | LastNameLastNameLastNameLastNameLastName | 998-877-6655 | Physicians                | Episodes, Reports, Physician Connect, Lessons | Episodes 2.0, Administration, TCI                    |     | Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2                                                                    | Covenant     | Covenant--BPCI Model 3 | Covenant--3056-i37--Pacific Coast Manor, Covenant--3056-i38--Sunrise Skilled Nursing & Rehabilitation Center, Covenant--3056-i39--Pyramid Point Post, Covenant--3056-i40--Hilltop Skilled Nursing, Covenant--3056-i41--Mccormick                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
       | View Transitional Case Manager user created from Super Admin user | Partner Technical Administrator | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | 998-877-6655 | Transitional Case Manager | Episodes, Reports, Lessons                    | Episodes 2.0, Administration, Physician Connect, TCI |     | Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | Covenant     | Covenant--BPCI Model 3 | Covenant--3056-i42--Palo Alto Sub, Covenant--3056-i43--Meadow Manor, Covenant--3056-i44--Villa Georgetown, Covenant--3056-i45--Highland Health                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+
+  Scenario Outline: Lock/Unlock user from view user page
+    Given I am on the login page
+    Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
+    Then I enter newuser password for login to Remedy
+    Then I click Access button
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    Then I verify Lock/Unlock Icon
+    Then I click on "Lock" icon on view user page
+    Then I verify that user is "Locked" on view user page
+    Then I click on "Unlock" icon on view user page
+    Then I should see an alert with "Are you sure you want to unlock"
+    Then I click on "Cancel" button from the unlock alert
+    Then I verify user is "Locked"
+    Then I click on "Unlock" icon on view user page
+    Then I should see an alert with "Are you sure you want to unlock"
+    Then I click on "Unlock" button from the unlock alert
+    Then I verify that user is "Unlocked" on view user page
+
+    Examples: 
+      | User                            | Role      | UserName                               | Password |
+      | Partner Technical Administrator | Executive | lbarinstein+qaadmin@remedypartners.com | Testing1 |

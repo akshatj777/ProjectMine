@@ -92,3 +92,30 @@ Feature: View User - Super Admin User
     Examples: 
       | Description                                       | User        | UserName                               | Password | FirstName                                 | LastName                                 | Phone | Role      | ApplicationsEnabled        | ApplicationsNotVisible                               | NPI | LearningPathway                                           | HasHealthSystem2 | Health System2 | Programs2   | Locations2                                                                                            | HealthSystemValidation  | ProgramsValidation                                  | LocationsValidation                                                                                                                                               |
       | View Executive user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName |       | Executive | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect, TCI |     | i am learning path, Learning Pathway 2, Remedy University | Yes              | Penn           | BPCI-Model2 | 2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania, 2070-021--Upenn - Penn Presbyterian Hospital | Stamford Hospital, Penn | Stamford Hospital--BPCI Model 2, Penn--BPCI Model 2 | Stamford Hospital--2070-015--Stamford Hospital, Penn--2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania, Penn--2070-021--Upenn - Penn Presbyterian Hospital |
+
+  Scenario Outline: Lock/Unlock user from view user page
+    Given I am on the login page
+    When I enter email field lbarinstein+qaadmin@remedypartners.com for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    Then I verify Lock/Unlock Icon
+    Then I click on "Lock" icon on view user page
+    Then I verify that user is "Locked" on view user page
+    Then I click on "Unlock" icon on view user page
+    Then I should see an alert with "Are you sure you want to unlock"
+    Then I click on "Cancel" button from the unlock alert
+    Then I verify user is "Locked"
+    Then I click on "Unlock" icon on view user page
+    Then I should see an alert with "Are you sure you want to unlock"
+    Then I click on "Unlock" button from the unlock alert
+    Then I verify that user is "Unlocked" on view user page
+
+    Examples: 
+      | User        | Role      | UserName                               | Password |
+      | Super Admin | Executive | lbarinstein+qaadmin@remedypartners.com | Testing1 |

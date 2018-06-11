@@ -18,6 +18,7 @@ Feature: Verification of Landing Page for PTA User
     And I verify "User Role Column" on landing page
     And I verify "User Email Column" on landing page
     And I verify "Date Created Column" on landing page
+    And I verify "Release version" on landing page
     And I verify "Next Page Icon" on landing page
     And I verify "Last Page Icon" on landing page
     And I click on Last Page Icon on landing page
@@ -55,6 +56,7 @@ Feature: Verification of Landing Page for PTA User
     And I click on the "User Admin" tile
     Then I should see header text "Users"
     And I verify "SearchBox" on landing page
+    And I verify ghost text "Search" in search box
     Then I enter "<InvalidSearchParameter>" in search box for "<user>-<Role>"
     Then I should see cross icon to exit search
     Then I verify No Results Found is displayed
@@ -63,10 +65,10 @@ Feature: Verification of Landing Page for PTA User
     Then I verify availability of "<SearchParameter>" for "<user>-<Role>"
 
     Examples: 
-      | Description                    | user                            | Role      | Email             | InvalidSearchParameter | SearchParameter                           |
-      | Search a user using First Name | Partner Technical Administrator | Executive | test.automatemail |                1768789 | Firstnamefirstnamefirstnamefirstnamefirst |
-      | Search a user using Last Name  | Partner Technical Administrator | Executive | test.automatemail |                1768789 | Lastname                                  |
-      | Search a user using Email      | Partner Technical Administrator | Executive | test.automatemail |                1768789 | FetchFromHM                               |
+      | Description                    | user                            | Role      | Email                           | InvalidSearchParameter | SearchParameter                           |
+      | Search a user using First Name | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | Firstnamefirstnamefirstnamefirstnamefirst |
+      | Search a user using Last Name  | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | Lastname                                  |
+      | Search a user using Email      | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | FetchFromHM                               |
 
   Scenario Outline: Verify ability of PTA user to lock a user and cancel unlock
     Given I am on the login page
@@ -90,8 +92,8 @@ Feature: Verification of Landing Page for PTA User
     Then I should see User is Blocked
 
     Examples: 
-      | user                            | Role      | Email             | SearchParameter |
-      | Partner Technical Administrator | Executive | test.automatemail | FetchFromHM     |
+      | user                            | Role      | Email                           | SearchParameter |
+      | Partner Technical Administrator | Executive | qaautomation@remedypartners.com | FetchFromHM     |
 
   Scenario Outline: Verify ability of PTA user to unlock a locked user
     Given I am on the login page
@@ -117,5 +119,5 @@ Feature: Verification of Landing Page for PTA User
     Then I verify "<Applications>" product on SPOE page
 
     Examples: 
-      | user                            | Role      | Email             | SearchParameter | Applications |
-      | Partner Technical Administrator | Executive | test.automatemail | FetchFromHM     | Episodes     |
+      | user                            | Role      | Email                           | SearchParameter | Applications |
+      | Partner Technical Administrator | Executive | qaautomation@remedypartners.com | FetchFromHM     | Episodes     |
