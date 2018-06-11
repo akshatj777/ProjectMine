@@ -98,8 +98,8 @@ Feature: Verification of Landing Page for PTA User
 
     Examples: 
       | Description                    | user                            | Role      | Email                           | InvalidSearchParameter | SearchParameter                          |
-      | Search a user using First Name | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | FirstNameFirstNameFirstNameFirstName     |
-      | Search a user using Last Name  | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | LastNameLastNameLastNameLastNameLastName |
+      | Search a user using First Name | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | Firstnamefirstnamefirstnamefirstname     |
+      | Search a user using Last Name  | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | Lastnamelastnamelastnamelastnamelastname |
       | Search a user using Email      | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | FetchFromHM                              |
 
   Scenario Outline: Verify ability of PTA user to lock a user and cancel unlock
