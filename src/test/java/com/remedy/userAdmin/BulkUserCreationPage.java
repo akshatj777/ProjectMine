@@ -470,6 +470,7 @@ public class BulkUserCreationPage extends BaseClass{
     {
     	iWillWaitToSee(By.xpath("//button[text()='Submit']"));
     	clickElement(driver.findElement(By.xpath("//button[text()='Submit']")));
+    	
     }
     
     public void verifySuccessfulMessage(String text)
@@ -502,6 +503,7 @@ public class BulkUserCreationPage extends BaseClass{
     
     public void verifyHeaderText()
     {
+    	iWillWaitToSee(By.xpath("//h2/span[text()='Import Users']"));
     	Assert.assertTrue(isElementPresentOnPage(By.xpath("//h2/span[text()='Import Users']")));
     }
     
@@ -538,7 +540,7 @@ public void iEnterSingleData(){
 	String strUserData = null;
     try 
     {
-        strUserData = readContentForBulkUpload(2, 4);
+        strUserData = readContentForBulkUpload(2, 3);
     }
     catch(Exception e)
     {
@@ -546,6 +548,13 @@ public void iEnterSingleData(){
     }
     String randomString = RandomStringUtils.randomAlphabetic(8);
 	strUserData = strUserData.replace("EXECUTIVEMAIL", "test.automatemail+"+randomString+"@gmail.com");
+	HashMap<String,String> bulkEmailPerRole=new HashMap<String,String>();
+	HashMap<String,String> applicationsList = new HashMap<String,String>();
+	applicationsList.put("Executive", "Episodes, Reports, TCI, Lessons");
+	bulkEmailPerRole.put("Executive", "test.automatemail+"+randomString+"@gmail.com");
+	bulkUsersEmailPerRole.put("Super Admin-Executive", bulkEmailPerRole);
+	CreateUserPage.usersApplicationsPerRole.put("Super Admin-Executive", applicationsList);
+	CreateUserPage.usersEmailPerRole.put("Super Admin-Executive", bulkEmailPerRole);
 	
 	String randomNPI = RandomStringUtils.randomNumeric(10);
 	strUserData = strUserData.replace("NPI", randomNPI);
@@ -554,8 +563,14 @@ public void iEnterSingleData(){
 
 }
 public void iVerifySummarymsg(String text){
+	iWillWaitToSee(By.xpath("//*[contains(text(),'"+text+"')]"));
+	if(text.contains("not")){
+		
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[@class='errorCountLabel'][text()='"+text+"']")));
+	}
+	else{
 	Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[@class='successCountLabel'][text()='"+text+"']")));
-}
+	}}
 public void iEnterMultipleData(){
 	String strUserData = null;
     try 
@@ -581,7 +596,7 @@ public void enterInvalidData(){
 	String strUserData = null;
     try 
     {
-        strUserData = readContentForBulkUpload(2, 4);
+        strUserData = readContentForBulkUpload(2, 3);
     }
     catch(Exception e)
     {
@@ -595,9 +610,10 @@ public void enterInvalidData(){
 }
 public void verifyErrorMessage(String text){
 
-	iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
-	waitTo().until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
+	//iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
+	iWillWaitToSee(By.xpath("//*[contains(text(),'user not added')]"));
 	Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[@class='errorCountLabel'][text()='"+text+"']")));
 
 }
+
 }

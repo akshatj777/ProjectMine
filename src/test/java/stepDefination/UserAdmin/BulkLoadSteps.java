@@ -90,7 +90,7 @@ public class BulkLoadSteps extends DriverScript{
     public void iVerifyTestBoxField(){
     	bulkUser.iVerifyTestBoxField();
     }
-    @When("^I enter single user data$")
+    @When("^I enter single user data with full application access$")
     public void iEnterSingleData(){
     	bulkUser.iEnterSingleData();
     }
@@ -110,4 +110,5 @@ public class BulkLoadSteps extends DriverScript{
     public void verifyErrorMessage(String text){
     	bulkUser.verifyErrorMessage(text);
     }
+    
 }
