@@ -267,6 +267,28 @@ public class CreateManagingOrganization extends BaseClass {
 			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
+		else if(org.equals("FETCHFROMAPIForPGPNAME - YES")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreatePGPOrganization.tempPGPOrg.isEmpty())
+				{
+					CreatePGPOrganizationAPI.PGPNameList.set(0, CreatePGPOrganization.tempPGPOrg.get("PGPNAME"));
+					CreatePGPOrganizationAPI.tempPGPOrg.clear();
+				}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(org.equals("FETCHFROMAPIForPGPNAME - NO")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreatePGPOrganization.tempPGPOrg.isEmpty())
+			{
+				CreatePGPOrganizationAPI.PGPNameList.set(1, CreatePGPOrganization.tempPGPOrg.get("PGPNAME"));
+				CreatePGPOrganizationAPI.tempPGPOrg.clear();
+			}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
 		else if(org.equals("FETCHFROMAPIForSNFNAME - YES")){
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
@@ -289,25 +311,25 @@ public class CreateManagingOrganization extends BaseClass {
 			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
-		else if(org.equals("FETCHFROMAPIForPGPNAME - YES")){
+		else if(org.equals("FETCHFROMAPIForHHANAME - YES")){
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
 			
-			if(!CreatePGPOrganization.tempPGPOrg.isEmpty())
+			if(!CreateHHAOrganization.tempHHAOrg.isEmpty())
 				{
-					CreatePGPOrganizationAPI.PGPNameList.set(0, CreatePGPOrganization.tempPGPOrg.get("PGPNAME"));
-					CreatePGPOrganizationAPI.tempPGPOrg.clear();
+					CreateHHAOrganizationAPI.HHANameList.set(0, CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
+					CreateHHAOrganizationAPI.tempHHAOrg.clear();
 				}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
-		else if(org.equals("FETCHFROMAPIForPGPNAME - NO")){
+		else if(org.equals("FETCHFROMAPIForHHANAME - NO")){
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
 			
-			if(!CreatePGPOrganization.tempPGPOrg.isEmpty())
+			if(!CreateHHAOrganization.tempHHAOrg.isEmpty())
 			{
-				CreatePGPOrganizationAPI.PGPNameList.set(1, CreatePGPOrganization.tempPGPOrg.get("PGPNAME"));
-				CreatePGPOrganizationAPI.tempPGPOrg.clear();
+				CreateHHAOrganizationAPI.HHANameList.set(1, CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
+				CreateHHAOrganizationAPI.tempHHAOrg.clear();
 			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
