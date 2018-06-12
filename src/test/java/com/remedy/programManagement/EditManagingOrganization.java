@@ -139,15 +139,33 @@ public class EditManagingOrganization extends BaseClass {
 		}
 		else if(field.contains("HHANAME - YES"))
 		{
-			iWillWaitToSee(By.xpath("//div[text()='"+CreateHHAOrganization.HHAOrg.get("HHANAME")+"']"));
-			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateHHAOrganization.HHAOrg.get("HHANAME")+"']")));
-			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			if(CreateHHAOrganizationAPI.HHANameList.get(0).contains("\""))
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateHHAOrganizationAPI.HHANameList.get(0).substring(1, CreateHHAOrganizationAPI.HHANameList.get(0).length()-1)+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateHHAOrganizationAPI.HHANameList.get(0).substring(1, CreateHHAOrganizationAPI.HHANameList.get(0).length()-1)+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			}
+			else
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateHHAOrganizationAPI.HHANameList.get(0)+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateHHAOrganizationAPI.HHANameList.get(0)+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			}
 		}
 		else if(field.contains("HHANAME - NO"))
 		{
-			iWillWaitToSee(By.xpath("//div[text()='"+CreateHHAOrganization.HHAOrg_noMO.get("HHANAME")+"']"));
-			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateHHAOrganization.HHAOrg_noMO.get("HHANAME")+"']")));
-			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			if(CreateHHAOrganizationAPI.HHANameList.get(1).contains("\""))
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateHHAOrganizationAPI.HHANameList.get(1).substring(1, CreateHHAOrganizationAPI.HHANameList.get(1).length()-1)+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateHHAOrganizationAPI.HHANameList.get(1).substring(1, CreateHHAOrganizationAPI.HHANameList.get(1).length()-1)+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			}
+			else
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateHHAOrganizationAPI.HHANameList.get(1)+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateHHAOrganizationAPI.HHANameList.get(1)+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			}
 		}
 		else if(field.contains("PROGRAMNAME"))
 		{
@@ -376,14 +394,14 @@ public class EditManagingOrganization extends BaseClass {
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePayorOrganization.tempPayorOrg.get("PAYORNAME"));
 		}
 		else if(field2.equalsIgnoreCase("HHANAME - YES")){
-			CreateHHAOrganization.oldHHA_WithMO = CreateHHAOrganization.HHAOrg.get("HHANAME");
+			CreateHHAOrganization.oldHHA_WithMO = CreateHHAOrganizationAPI.HHANameList.get(0).substring(1, CreateHHAOrganizationAPI.HHANameList.get(0).length()-1);
 			CreateHHAOrganization.tempHHAOrg.put("HHANAME",createRandomName(field2));
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
 		}
 		else if(field2.equalsIgnoreCase("HHANAME - NO")){
-			CreateHHAOrganization.oldHHA_WithoutMO = CreateHHAOrganization.HHAOrg_noMO.get("HHANAME");
+			CreateHHAOrganization.oldHHA_WithoutMO = CreateHHAOrganizationAPI.HHANameList.get(1).substring(1, CreateHHAOrganizationAPI.HHANameList.get(1).length()-1);
 			CreateHHAOrganization.tempHHAOrg.put("HHANAME",createRandomName(field2));
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
@@ -391,11 +409,11 @@ public class EditManagingOrganization extends BaseClass {
 		}
 		else if(field2.equalsIgnoreCase("DUPLICATE_HHA - YES")){
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
-			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHHAOrganization.HHAOrg_noMO.get("HHANAME"));
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")),CreateHHAOrganizationAPI.HHANameList.get(1).substring(1, CreateHHAOrganizationAPI.HHANameList.get(1).length()-1));
 		}
 		else if(field2.equalsIgnoreCase("DUPLICATE_HHA - NO")){
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
-			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHHAOrganization.HHAOrg.get("HHANAME"));
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHHAOrganizationAPI.HHANameList.get(0).substring(1, CreateHHAOrganizationAPI.HHANameList.get(0).length()-1));
 		}
 		else 
 		{

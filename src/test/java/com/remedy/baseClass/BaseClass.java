@@ -18,6 +18,7 @@ import com.jayway.restassured.response.Response;
 import com.remedy.RestCall.InsertDataIntoDataModels;
 import com.remedy.programManagement.CreateACHOrganizationAPI;
 import com.remedy.programManagement.CreateBundleAPI;
+import com.remedy.programManagement.CreateHHAOrganizationAPI;
 import com.remedy.programManagement.CreateManagingOrganization;
 import com.remedy.programManagement.CreateManagingOrganizationAPI;
 import com.remedy.programManagement.CreatePGPOrganization;
@@ -624,6 +625,10 @@ public class BaseClass {
 			idList.addAll(CreateProgramAPI.idList);
 			CreateProgramAPI.idList.clear();
 		}
+		else if (type.equals("hha")) {
+			idList.addAll(CreateHHAOrganizationAPI.idList);
+			CreateHHAOrganizationAPI.idList.clear();
+		}
 		 else if (type.equals("bundle")) {
 			idList.addAll(CreateBundleAPI.idList);
 			CreateBundleAPI.idList.clear();
@@ -692,7 +697,13 @@ public class BaseClass {
 		else if(type.equals("program"))
 		{
 			CreateProgramAPI.PROGRAMNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
-			//CreateProgramAPI.PROGRAMIDList.add((((JsonObject) jsonObject.get("data")).get("programID")).toString());
+		}
+		else if(type.equals("hha"))
+		{
+			CreateHHAOrganizationAPI.HHANameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+			CreateHHAOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
+			CreateHHAOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
+			CreateHHAOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
 		}
 	}
 	
