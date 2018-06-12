@@ -15,6 +15,7 @@ public class CreateACHOrganizationAPI extends BaseClass{
 	
 	public InsertDataIntoDataModels insertData = new InsertDataIntoDataModels();
 	public static List<Long> idList = new ArrayList<>();
+	public static List<Long> copyIDList = new ArrayList<>();
 	public static List<String> ACHNameList = new ArrayList<>();
 	public static List<String> CCNNameList = new ArrayList<>();
 	public static List<String> EINNameList = new ArrayList<>();

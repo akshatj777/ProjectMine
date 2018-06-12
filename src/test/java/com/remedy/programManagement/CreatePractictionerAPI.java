@@ -159,7 +159,7 @@ public class CreatePractictionerAPI extends BaseClass{
 	            urlExt = "bundle/";
 	        } else if (type.equals("program")) {
 	            urlExt = "program/";
-	        } else if (type.equals("contract")) {
+	        } else if (type.equals("bundlePayment")) {
 	            urlExt = "contract/";
 	        } else if (type.equals("attributionrule")) {
 	            urlExt = "program/attributionrule/";

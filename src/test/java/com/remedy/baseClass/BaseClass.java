@@ -18,6 +18,7 @@ import com.jayway.restassured.response.Response;
 import com.remedy.RestCall.InsertDataIntoDataModels;
 import com.remedy.programManagement.CreateACHOrganizationAPI;
 import com.remedy.programManagement.CreateBundleAPI;
+import com.remedy.programManagement.CreateBundlePaymentContractAPI;
 import com.remedy.programManagement.CreateHHAOrganizationAPI;
 import com.remedy.programManagement.CreateManagingOrganization;
 import com.remedy.programManagement.CreateManagingOrganizationAPI;
@@ -600,6 +601,7 @@ public class BaseClass {
 		 } 
 		 else if (type.equals("hospital")) {
 				idList.addAll(CreateACHOrganizationAPI.idList);
+				CreateACHOrganizationAPI.copyIDList = CreateACHOrganizationAPI.idList; 
 				CreateACHOrganizationAPI.idList.clear();
 		 }
 		 else if (type.equals("snf")) 
@@ -612,9 +614,6 @@ public class BaseClass {
 				idList.addAll(CreatePGPOrganizationAPI.idList);
 				CreatePGPOrganizationAPI.idList.clear();
 		 }
-		//else if (type.equals("payor")) {
-//			idList.addAll(CreatePayorStepDef.returnIdList());
-//		}
 		else if (type.equals("payor")) {
 			idList.addAll(CreatePayorOrganizationAPI.idList);
 			CreatePayorOrganizationAPI.idList.clear();
@@ -626,12 +625,14 @@ public class BaseClass {
 		 else if (type.equals("bundle")) {
 			idList.addAll(CreateBundleAPI.idList);
 			CreateBundleAPI.idList.clear();
+		 }
 //		} else if (type.equals("program")) {
 //			idList.addAll(CreateProgramStepDef.returnIdList());
-//		} else if (type.equals("contract")) {
-//			idList.addAll(CreateContractStepDef.returnIdList());
-//		} else if (type.equals("hha")) {
-//			idList.addAll(PM705CreateHHAOrgStepDef.returnIdList());
+//		} 
+			else if (type.equals("contract")) {
+			idList.addAll(CreateBundlePaymentContractAPI.idList);
+			CreateBundlePaymentContractAPI.idList.clear();
+		} 
 //		} else if (type.equals("attributionrule")) {
 //			idList.addAll(PM621PostAttributionRulesStepDef.returnIdList());
 //		} else if (type.equals("classification")) {
@@ -642,7 +643,7 @@ public class BaseClass {
 //			idList.addAll(PM487CreateProviderTaxForClassGroupSpecilizationStepDef.returnSpecializationIdList());
 //		} else if (type.equals("providertaxonomy")) {
 //			idList.addAll(PM429CreateProviderTaxonomyStepDef.returnIdList());
-		} else if (type.equals("practitioner")) {
+		 else if (type.equals("practitioner")) {
 			idList.addAll(CreatePractictionerAPI.idList);
 			CreatePractictionerAPI.idList.clear();
 		}
