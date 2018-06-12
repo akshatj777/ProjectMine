@@ -45,12 +45,7 @@ public class CreateUserThroughAPI extends BaseClass {
 		JSONArray objParticipantListValueArray = new JSONArray();
 		JSONArray objLearningPathwayArray = new JSONArray();
 		JSONObject objParticipantID = new JSONObject();
-		JSONObject objBPIDList = new JSONObject();
-		
-		
-		JSONObject objParticipantListValueValue = new JSONObject();
-		JSONArray objBPIDListArray = new JSONArray();
-		
+
 		objFirstNameValue.put("value", firstName);
 		objLastNameValue.put("value", lastName);
 		if(email.contains("qaautomation"))
@@ -138,42 +133,105 @@ public class CreateUserThroughAPI extends BaseClass {
 		
 		if(locations.contains(","))
 		{
+			HashMap<String,String> dataPermissions = new HashMap<String,String>();
 			StringTokenizer st = new StringTokenizer(locations, ",");
 			while(st.hasMoreTokens())
 			{
-				JSONObject objFacilityList = new JSONObject();
-				JSONObject objFacilityListValue = new JSONObject();
-				JSONObject objFacilityKeyValue = new JSONObject();
-				JSONObject objFacilityKey = new JSONObject();
-				JSONObject objParticipantIDValue = new JSONObject();
-				JSONObject objBPID = new JSONObject();
-				JSONArray objFacilityListArray = new JSONArray();
-				JSONObject objBPIDValue = new JSONObject();
-				JSONObject objBPIDListValue = new JSONObject();
+				
 				String a = st.nextToken().trim();
 				String participantID = a.substring(0, a.indexOf("--"));
 				String BPID = a.substring(a.indexOf("--")+2, a.lastIndexOf("--"));
 				String facilityKey = a.substring(a.lastIndexOf("--")+2, a.length());
-				objParticipantIDValue.put("value", participantID);
-				objParticipantID.put("participantID", objParticipantIDValue);
-				objFacilityKeyValue.put("value", facilityKey);
-				objFacilityKey.put("facilityKey", objFacilityKeyValue);
-				objFacilityListValue.put("value", objFacilityKey);
-				objFacilityListArray.add(objFacilityListValue);
-				objFacilityList.put("facilityList", objFacilityListArray);
-				objBPIDValue.put("value", BPID);
-				objBPID.put("bpid", objBPIDValue);
-				//objBPID.putAll(objFacilityList);
-				objFacilityList.putAll(objBPID);
-				objBPIDListValue.put("value", objFacilityList);
-				objBPIDListArray.add(objBPIDListValue);
-				
+				if(dataPermissions.containsKey(participantID))
+				{
+					String ab = dataPermissions.get(participantID);
+					dataPermissions.put(participantID, ab+","+BPID+"--"+facilityKey);
+				}
+				else
+				{
+					dataPermissions.put(participantID, BPID+"--"+facilityKey);
+				}
 			}
-			objBPIDList.put("bpidList", objBPIDListArray);
-			objBPIDList.putAll(objParticipantID);
-			objParticipantListValueValue.put("value", objBPIDList);
-			//objParticipantListValueValue.put("participantID", objParticipantIDValue);
-			objParticipantListValueArray.add(objParticipantListValueValue);
+			for(int i=0;i<dataPermissions.size();i++)
+			{
+				JSONArray objBPIDListArray = new JSONArray();
+				JSONObject objParticipantListValueValue = new JSONObject();
+				JSONObject objBPIDList = new JSONObject();
+				
+				if(dataPermissions.get((dataPermissions.keySet().toArray())[i].toString()).contains(","))
+				{
+					JSONObject objParticipantIDValue = new JSONObject();
+					StringTokenizer st1 = new StringTokenizer(dataPermissions.get((dataPermissions.keySet().toArray())[i].toString()), ",");
+					while(st1.hasMoreTokens())
+					{
+						String newToken = st1.nextToken();
+						String participantID = (dataPermissions.keySet().toArray())[i].toString();
+						String BPID = newToken.substring(0,newToken.indexOf("--"));
+						String facilityKey = newToken.substring(newToken.lastIndexOf("--")+2, newToken.length());
+						JSONObject objFacilityList = new JSONObject();
+						JSONObject objFacilityListValue = new JSONObject();
+						JSONObject objFacilityKeyValue = new JSONObject();
+						JSONObject objFacilityKey = new JSONObject();
+						JSONObject objBPID = new JSONObject();
+						JSONArray objFacilityListArray = new JSONArray();
+						JSONObject objBPIDValue = new JSONObject();
+						JSONObject objBPIDListValue = new JSONObject();
+						objParticipantIDValue.put("value", participantID);
+						objParticipantID.put("participantID", objParticipantIDValue);
+						objFacilityKeyValue.put("value", facilityKey);
+						objFacilityKey.put("facilityKey", objFacilityKeyValue);
+						objFacilityListValue.put("value", objFacilityKey);
+						objFacilityListArray.add(objFacilityListValue);
+						objFacilityList.put("facilityList", objFacilityListArray);
+						objBPIDValue.put("value", BPID);
+						objBPID.put("bpid", objBPIDValue);
+						objBPID.putAll(objFacilityList);
+						objFacilityList.putAll(objBPID);
+						objBPIDListValue.put("value", objFacilityList);
+						objBPIDListArray.add(objBPIDListValue);
+						
+					}
+					objBPIDList.put("bpidList", objBPIDListArray);
+					objBPIDList.putAll(objParticipantID);
+					objParticipantListValueValue.put("value", objBPIDList);
+//					objParticipantListValueValue.put("participantID", objParticipantIDValue);
+					objParticipantListValueArray.add(objParticipantListValueValue);
+				}
+				else
+				{
+					String newToken = dataPermissions.get((dataPermissions.keySet().toArray())[i].toString());
+					String participantID = (dataPermissions.keySet().toArray())[i].toString();
+					String BPID = newToken.substring(0, newToken.indexOf("--"));
+					String facilityKey = newToken.substring(newToken.lastIndexOf("--")+2, newToken.length());
+					JSONObject objFacilityList = new JSONObject();
+					JSONObject objFacilityListValue = new JSONObject();
+					JSONObject objFacilityKeyValue = new JSONObject();
+					JSONObject objFacilityKey = new JSONObject();
+					JSONObject objParticipantIDValue = new JSONObject();
+					JSONObject objBPID = new JSONObject();
+					JSONArray objFacilityListArray = new JSONArray();
+					JSONObject objBPIDValue = new JSONObject();
+					JSONObject objBPIDListValue = new JSONObject();
+					objParticipantIDValue.put("value", participantID);
+					objParticipantID.put("participantID", objParticipantIDValue);
+					objFacilityKeyValue.put("value", facilityKey);
+					objFacilityKey.put("facilityKey", objFacilityKeyValue);
+					objFacilityListValue.put("value", objFacilityKey);
+					objFacilityListArray.add(objFacilityListValue);
+					objFacilityList.put("facilityList", objFacilityListArray);
+					objBPIDValue.put("value", BPID);
+					objBPID.put("bpid", objBPIDValue);
+					objBPID.putAll(objFacilityList);
+					objFacilityList.putAll(objBPID);
+					objBPIDListValue.put("value", objFacilityList);
+					objBPIDListArray.add(objBPIDListValue);
+					objBPIDList.put("bpidList", objBPIDListArray);
+					objBPIDList.putAll(objParticipantID);
+					objParticipantListValueValue.put("value", objBPIDList);
+					objParticipantListValueValue.put("participantID", objParticipantIDValue);
+					objParticipantListValueArray.add(objParticipantListValueValue);
+				}
+			}
 			objParticipantListValue.put("value", objParticipantListValueArray);
 		}
 		else
@@ -187,6 +245,9 @@ public class CreateUserThroughAPI extends BaseClass {
 			JSONArray objFacilityListArray = new JSONArray();
 			JSONObject objBPIDValue = new JSONObject();
 			JSONObject objBPIDListValue = new JSONObject();
+			JSONArray objBPIDListArray = new JSONArray();
+			JSONObject objParticipantListValueValue = new JSONObject();
+			JSONObject objBPIDList = new JSONObject();
 			String participantID = locations.substring(0, locations.indexOf("--"));
 			String BPID = locations.substring(locations.indexOf("--")+2, locations.lastIndexOf("--"));
 			String facilityKey = locations.substring(locations.lastIndexOf("--")+2, locations.length());
