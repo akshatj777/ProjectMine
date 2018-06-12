@@ -1,7 +1,7 @@
 Feature: Super Admin Landing page verification
 
   Scenario Outline: Create User through UA API call
-    Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>"
+    Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>" and "<LearningPathways>"
     When Create User with this data for "<User>"
     Then Verify Actual vs expected results "<expStatusCode>" and "<responseMsg>"
     Given I am on mail login page
@@ -30,8 +30,8 @@ Feature: Super Admin Landing page verification
     And I click on submit button to set new password
 
     Examples: 
-      | User        | FirstName | LastName                                 | Email                           | Phone      | NPI | RoleID      | Applications                                             | Locations                                         | expStatusCode |
-      | Super Admin | FirstName | Lastnamelastnamelastnamelastnamelastname | qaautomation@remedypartners.com | 9988665544 | NPI | 1-Executive | episode_connect-Episodes,reports-Reports,lessons-Lessons | 441324--3090-066--140011,441324--3090-066--140127 |           200 |
+      | User        | FirstName | LastName                                 | Email                           | Phone | NPI | RoleID      | Applications                                             | LearningPathways                       | Locations             | expStatusCode |
+      | Super Admin | Firstname | Lastnamelastnamelastnamelastnamelastname | qaautomation@remedypartners.com |       |     | 1-Executive | episode_connect-Episodes,reports-Reports,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
 
   Scenario: Verification of availability of fields on Super User Landing page
     Given I am on the login page

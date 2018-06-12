@@ -157,6 +157,7 @@ public class ViewUserPage extends BaseClass {
 				    		iWillWaitToSee(By.xpath("//div[@class='content active data-permissions-content']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//td[contains(text(),\""+location+"\")]"));
 				    		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='content active data-permissions-content']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//td[contains(text(),\""+location+"\")]")));
 				    		Thread.sleep(3000);
+				    		scrollIntoViewByJS(driver.findElement(By.xpath("//h3[text()='Data Permissions']")));
 				    		driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")).click();
 				    	}
 			    	}
