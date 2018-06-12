@@ -2,8 +2,8 @@ Feature: Bulk Upload User from SA
 
   Scenario Outline: Upload single user(Executive), verify email, login with created user and validate tiles
     #Given I am on mail login page
-    #Then I enter username "test.automatemail@gmail.com" to login mail account for bulk delete
-    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I enter username "qaautomation@remedypartners.com" to login mail account for bulk delete
+    #Then I enter password "1Welcome2" to login mail account
     #Then I click on Mail icon in my account
     #Then I click on Inbox in mail
     #Then I click on delete icon in mail
@@ -40,7 +40,7 @@ Feature: Bulk Upload User from SA
     Then I click on "Log Out" button again
     And I should see Log in widget
     Given I am on mail login page
-    Then I enter password "KuchBhi@001" to login mail account
+    Then I enter password "1Welcome2" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -131,8 +131,8 @@ Feature: Bulk Upload User from SA
 
   Scenario: Bulk Upload Multiple User
     #Given I am on mail login page
-    #Then I enter username "test.automatemail@gmail.com" to login mail account for bulk delete
-    #Then I enter password "KuchBhi@001" to login mail account
+    #Then I enter username "qaautomation@remedypartners.com" to login mail account for bulk delete
+    #Then I enter password "1Welcome2" to login mail account
     #Then I click on Mail icon in my account
     #Then I click on Inbox in mail
     #Then I click on delete icon in mail
@@ -150,8 +150,8 @@ Feature: Bulk Upload User from SA
 
   Scenario Outline: <Description>
     Given I am on mail login page
-    Then I enter username "test.automatemail" to login mail account for bulk delete
-    Then I enter password "KuchBhi@001" to login mail account
+    Then I enter username "qaautomation@remedypartners.com" to login mail account for bulk delete
+    Then I enter password "1Welcome2" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
