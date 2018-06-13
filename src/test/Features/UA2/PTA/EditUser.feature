@@ -794,63 +794,10 @@ Feature: Edit user page for PTA
       | User                            | Role    | AddLocations  | SelectedLocations              |
       | Partner Technical Administrator | Manager | All Locations | Adventist Bolingbrook Hospital |
 
-  Scenario Outline: <Description>
-    #Given I am on mail login page
-    #Then I enter username "qaautomation@remedypartners.com" to login mail account
-    #Then I enter password "1Welcome2" to login mail account
-    #Then I click on Mail icon in my account
-    #Then I click on Inbox in mail
-    #Then I click on delete icon in mail
-    #Then I signout from mail account
-    Given I am on the login page
-    When I enter email field <UserName> for login
-    And I enter password field <Password> for Login
-    Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
-    Then I should see header text "Users"
-    When I click on Add User button
-    Then I should see "Add New User" on the user creation page
-    Then I verify the header "General Information"
-    And I fill in First Name with "<FirstName>"
-    Then I fill in Last Name with <LastName>
-    And I enter Email "<Email>" to Create user
-    And I enter Phone field with <Phone>
-    When I click the Organizational Role Field
-    Then I pick a Organizational <Role>
-    Then I enter NPI field with "<NPI>" for role "<Role>"
-    Then I click on Next button
-    Then I verify the header "Applications"
-    Then I verify applications "<Applications>" are unchecked
-    Then I verify Learning Pathway search box is not available
-    Then I select "<Applications>" product
-    Then I verify applications "<Applications>" are checked
-    Then I click on Select button
-    Then I verify Learning Pathway search box is available
-    Then I select "<LearningPathwaySearchParameter>" from the results
-    Then I verify "<ApplicationsNotVisible>" is not visible on Applications tab
-    Then I click on Next button
-    Then I verify the header "Permissions"
-    And I search for health system with <Health System1>
-    And I select a <Health System1>
-    Then I select "<Programs1>" programs
-    Then I select "<Locations1>" locations
-    Then I click Add Organization button for "<HasHealthSystem2>" flag
-    And I search for health system with <Health System2>
-    And I select a <Health System2>
-    Then I select "<Programs2>" programs
-    Then I select "<Locations2>" locations
-    Then I click Add Organization button for "<HasHealthSystem3>" flag
-    And I search for health system with <Health System3>
-    And I select a <Health System3>
-    Then I select "<Programs3>" programs
-    Then I select "<Locations3>" locations
-    Then I click on Submit button for "<User>"
-    And I click on the top user account link
-    Then I click on "Log Out" button
-    And I should see Log in widget
-    Given I am on the login page
-    Then I click on "Log Out" button again
+  Scenario Outline: Create User through UA API call
+    Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>" and "<LearningPathways>"
+    When Create User with this data for "<User>"
+    Then Verify Actual vs expected results "<expStatusCode>" and "<responseMsg>"
     Given I am on mail login page
     Then I enter username "qaautomation@remedypartners.com" to login mail account
     Then I enter password "1Welcome2" to login mail account
@@ -877,82 +824,9 @@ Feature: Edit user page for PTA
     And I click on submit button to set new password
 
     Examples: 
-      | Description                                                                           | User        | UserName                               | Password | FirstName | LastName                                 | Email                           | Phone | Role                            | Applications                                                  | ApplicationsNotVisible | NPI | LearningPathwaySearchParameter   | Health System1           | Programs1             | Locations1                                                          | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Login with Super Admin User and create user with Partner Technical Administrator role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       | Partner Technical Administrator | Episodes, Reports, Physician Connect, Administration, Lessons | Episodes 2.0           |     | HZhmTBQzHtU1, Learning Pathway 2 | Butler Memorial Hospital | BPCI-Model2, BPCI-CJR | 2070-a55--Butler Memorial Hospital, CJR-1--Butler Memorial Hospital | No               |                |           |            | No               |                |           |            |
-
-  Scenario Outline: <Description>
-    #Given I am on mail login page
-    #Then I enter username "qaautomation@remedypartners.com" to login mail account
-    #Then I enter password "1Welcome2" to login mail account
-    #Then I click on Mail icon in my account
-    #Then I click on Inbox in mail
-    #Then I click on delete icon in mail
-    #Then I signout from mail account
-    Given I am on the login page
-    Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
-    Then I enter newuser password for login to Remedy
-    Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
-    Then I should see header text "Users"
-    When I click on Add User button
-    Then I should see "Add New User" on the user creation page
-    Then I verify the header "General Information"
-    And I fill in First Name with "<FirstName>"
-    Then I fill in Last Name with <LastName>
-    And I enter Email "<Email>" to Create user
-    And I enter Phone field with <Phone>
-    When I click the Organizational Role Field
-    Then I pick a Organizational <Role>
-    Then I enter NPI field with "<NPI>" for role "<Role>"
-    Then I click on Next button
-    Then I verify the header "Applications"
-    Then I verify applications "<Applications>" are unchecked
-    Then I verify Learning Pathway search box is not available
-    Then I select "<Applications>" product
-    Then I verify applications "<Applications>" are checked
-    Then I click on Select button
-    Then I verify Learning Pathway search box is available
-    Then I select "<LearningPathwaySearchParameter>" from the results
-    Then I verify "<ApplicationsNotVisible>" is not visible on Applications tab
-    Then I click on Next button
-    Then I verify the header "Permissions"
-    Then I select "<Programs1>" programs
-    Then I select "<Locations1>" locations for PTA user
-    Then I click on Submit button for "<User>"
-    And I click on the top user account link
-    Then I click on "Log Out" button
-    And I should see Log in widget
-    Given I am on the login page
-    Then I click on "Log Out" button again
-    Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account
-    Then I enter password "1Welcome2" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    And I wait for 3000 milli seconds
-    Then I verify Account Verification in Inbox in my account
-    Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm my account!" link in mail content
-    Then I click on "Confirm my account!" link in mail content
-    And I switch to new window
-    Then I enter email to generate password link
-    And I click on send mail button
-    Then I switch back to old window
-    Then I click on Inbox in mail
-    Then I verify the unread mail in inbox in my account
-    Then I verify Change Password mail in Inbox in my account
-    Then I click on Change Password mail in Inbox
-    Then I verify "Change My Password" link in mail content
-    Then I click on "Change My Password" link in mail content
-    And I switch to new window
-    And I enter new password "Testing1@" to set new password
-    And I enter confirm new password "Testing1@" to set new password
-    And I click on submit button to set new password
-
-    Examples: 
-      | Description                                                                       | User                            | FirstName | LastName                                 | Email                           | Phone | Role    | Applications               | ApplicationsNotVisible                          | NPI | LearningPathwaySearchParameter                         | Health System1           | Programs1             | Locations1                                                          | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Login with Partner Technical Administrator User and create user with Manager role | Partner Technical Administrator | FirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       | Manager | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect |     | p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81, n9yn5n0Qa581 | Butler Memorial Hospital | BPCI-Model2, BPCI-CJR | 2070-a55--Butler Memorial Hospital, CJR-1--Butler Memorial Hospital |                  |                |           |            |                  |                |           |            |
+      | User                            | FirstName | LastName                                 | Email                           | Phone      | NPI | RoleID                             | Applications                                                                                                     | LearningPathways                                       | Locations                                       | expStatusCode |
+      | Super Admin                     | FirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 |     | 20-Partner Technical Administrator | episode_connect-Episodes,reports-Reports,physician_portal-Physician Connect,admin-Administration,lessons-Lessons | HZhmTBQzHtU1,NFdw0Kts2C01                              | 439108--2070-a55--390168, 439108--CJR-1--390168 |           200 |
+      | Partner Technical Administrator | FirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |            |     | 2-Manager                          | episode_connect-Episodes,reports-Reports,lessons-Lessons                                                         | p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81, n9yn5n0Qa581 | 439108--2070-a55--390168, 439108--CJR-1--390168 |           200 |
 
   Scenario Outline: <Description>
     Given I am on the login page

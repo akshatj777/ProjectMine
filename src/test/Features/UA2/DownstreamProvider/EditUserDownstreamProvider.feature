@@ -1,62 +1,9 @@
 Feature: Edit page for Downstream provider
 
-  Scenario Outline: <Description>
-    #Given I am on mail login page
-    #Then I enter username "qaautomation@remedypartners.com" to login mail account
-    #Then I enter password "1Welcome2" to login mail account
-    #Then I click on Mail icon in my account
-    #Then I click on Inbox in mail
-    #Then I click on delete icon in mail
-    #Then I signout from mail account
-    Given I am on the login page
-    When I enter email field <UserName> for login
-    And I enter password field <Password> for Login
-    Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
-    Then I should see header text "Users"
-    When I click on Add User button
-    Then I should see "Add New User" on the user creation page
-    Then I verify the header "General Information"
-    And I fill in First Name with "<FirstName>"
-    Then I fill in Last Name with <LastName>
-    And I enter Email "<Email>" to Create user
-    And I enter Phone field with <Phone>
-    When I click the Organizational Role Field
-    Then I pick a Organizational <Role>
-    Then I enter NPI field with "<NPI>" for role "<Role>"
-    Then I click on Next button
-    Then I verify the header "Applications"
-    Then I verify applications "<Applications>" are unchecked
-    Then I verify Learning Pathway search box is not available
-    Then I select "<Applications>" product
-    Then I verify applications "<Applications>" are checked
-    Then I click on Select button
-    Then I verify Learning Pathway search box is available
-    Then I select "<LearningPathwaySearchParameter>" from the results
-    Then I verify "<ApplicationsNotVisible>" is not visible on Applications tab
-    Then I click on Next button
-    Then I verify the header "Permissions"
-    And I search for health system with <Health System1>
-    And I select a <Health System1>
-    Then I select "<Programs1>" programs
-    Then I select "<Locations1>" locations
-    Then I click Add Organization button for "<HasHealthSystem2>" flag
-    And I search for health system with <Health System2>
-    And I select a <Health System2>
-    Then I select "<Programs2>" programs
-    Then I select "<Locations2>" locations
-    Then I click Add Organization button for "<HasHealthSystem3>" flag
-    And I search for health system with <Health System3>
-    And I select a <Health System3>
-    Then I select "<Programs3>" programs
-    Then I select "<Locations3>" locations
-    Then I click on Submit button for "<User>"
-    And I click on the top user account link
-    Then I click on "Log Out" button
-    And I should see Log in widget
-    Given I am on the login page
-    Then I click on "Log Out" button again
+  Scenario Outline: Create User through UA API call
+    Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>" and "<LearningPathways>"
+    When Create User with this data for "<User>"
+    Then Verify Actual vs expected results "<expStatusCode>" and "<responseMsg>"
     Given I am on mail login page
     Then I enter username "qaautomation@remedypartners.com" to login mail account
     Then I enter password "1Welcome2" to login mail account
@@ -83,8 +30,8 @@ Feature: Edit page for Downstream provider
     And I click on submit button to set new password
 
     Examples: 
-      | Description                                                      | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone | Role       | Applications                                  | ApplicationsNotVisible            | NPI | LearningPathwaySearchParameter                                                                                | Health System1    | Programs1   | Locations1                  | HasHealthSystem2 | Health System2 | Programs2   | Locations2                     | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Login with Super Admin User and create user with Remedy TCS role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com |       | Remedy TCS | Episodes, Episodes 2.0, Reports, TCI, Lessons | Administration, Physician Connect |     | Learning Pathway 2, jusUV22erpk1, Clinical Operations Acute Care Hospital Model 2, n9yn5n0Qa581, 18h7phZr1h81 | Stamford Hospital | BPCI-Model2 | 2070-015--Stamford Hospital | Yes              | Altercare      | BPCI-Model3 | 3056-m03--Altercare - Alliance | No               |                |           |            |
+      | User        | FirstName | LastName | Email                           | Phone | NPI | RoleID       | Applications                                                                                    | LearningPathways                                                 | Locations                                       | expStatusCode |
+      | Super Admin | FirstName | LastName | qaautomation@remedypartners.com |       |     | 5-Remedy TCS | episode_connect-Episodes,reports-Reports,lessons-Lessons,episode_connect_2-Episodes 2.0,tci-TCI | NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | 514083--2070-015--TSH, 441369--3056-m03--365402 |           200 |
 
   Scenario Outline: Change Role from <PreviousRole> to <Role> and Edit details
     Given I am on the login page
