@@ -90,9 +90,9 @@ public class BulkLoadSteps extends DriverScript{
     public void iVerifyTestBoxField(){
     	bulkUser.iVerifyTestBoxField();
     }
-    @When("^I enter single user data with full application access$")
-    public void iEnterSingleData(){
-    	bulkUser.iEnterSingleData();
+    @When("^I enter single user data with full application access for \"([^\"]*)\"$")
+    public void iEnterSingleDataWithFullAccessPerRole(String role){
+    	bulkUser.iEnterSingleDataAllAppPerRole(role);
     }
     @When("^I enter multiple user data$")
     public void iEnterMultipleData(){
@@ -110,5 +110,12 @@ public class BulkLoadSteps extends DriverScript{
     public void verifyErrorMessage(String text){
     	bulkUser.verifyErrorMessage(text);
     }
-    
+    @Then("^I verify user \"([^\"]*)\" is added to users list$")
+    public void iVerifyUserIsAdded(String userRole){
+    	bulkUser.iVerifyUserIsAdded(userRole);
+    }
+    @Then("^I enter invalid and valid user data$")
+    public void enterValidAndInvalidData(){
+    	bulkUser.enterInvalidAndValidData();
+    }
 }

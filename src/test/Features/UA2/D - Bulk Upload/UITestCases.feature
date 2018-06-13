@@ -23,9 +23,26 @@ Feature: Bulk Upload User from SA
     Then I click on Import User button
     Then I verify header text "Import Users"
     Then I verify previous result "1 user not added" on summary page
+    Then I verify availability of Try Again button
     Then I click on Try Again button
     Then I click on Cross button
     Then I should see header text "Users"
+
+  Scenario: Scenario to check validation message when few users are added and few users are not added
+    Given I am on the login page
+    Then I log in as super user
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    Then I click on Import User button
+    Then I click on Try Again button
+    Then I enter invalid and valid user data
+    Then I click on submit button on bulk user upload page
+    Then I verify "1 user not added" error message
+    Then I verify "1 user added" message
+    Then I verify availability of cross button
+    Then I verify availability of Download Log button
+    Then I verify availability of Try Again button
 
   Scenario: Scenario to check multiple success test cases in one
     Given I am on the login page
@@ -50,5 +67,3 @@ Feature: Bulk Upload User from SA
     Then I enter user data for all application access
     Then I click on submit button on bulk user upload page
     Then I verify "50 users added" message
-
-  
