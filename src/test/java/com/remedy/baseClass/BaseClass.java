@@ -574,7 +574,6 @@ public class BaseClass {
 	}
 	
 	public static String generateJson(Object object) {
-
         return gson.toJson(object).toString();
     }
 	
@@ -716,7 +715,6 @@ public class BaseClass {
     }
 	
 	public static String generateTimeStamp(){
-
         DateFormat df = new SimpleDateFormat("MMddyyyyHHmmss");
         Date date = new Date();
         String timeStamp = df.format(date);
@@ -724,22 +722,23 @@ public class BaseClass {
     }
 	
 	public static Integer generateMarketId(String cMarketId) {
-
         Integer marketId = null;
-        if (StringUtils.isNotBlank(cMarketId)) {
+        if (StringUtils.isNotBlank(cMarketId)) 
+        {
             marketId = Integer.parseInt(cMarketId);
         }
         return marketId;
     }
 	
 	public static String selectManagingOrg(String cMOrgID) {
-
         String mOrgID = null;
-
         if (StringUtils.isNotBlank(cMOrgID)) {
-            if (cMOrgID.equals("hasChild")) {
+            if (cMOrgID.equals("hasChild"))
+            {
                 mOrgID = String.valueOf(CreateManagingOrganizationAPI.managingOrgID);
-            } else {
+            } 
+            else 
+            {
                 mOrgID = cMOrgID;
             }
         }
@@ -749,7 +748,6 @@ public class BaseClass {
 	public static String genearateOrgId(String cOrgId) {
         String orgId = null;
         String timeStamp = generateTimeStamp();
-
         if (StringUtils.isNotBlank(cOrgId)) {
             if (cOrgId.length() > 2 && cOrgId.length() <= 7) {
                 orgId = cOrgId + timeStamp.substring(10, 14);

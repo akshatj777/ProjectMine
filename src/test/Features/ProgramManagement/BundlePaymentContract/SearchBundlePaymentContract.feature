@@ -72,38 +72,39 @@ Feature: Search a Bundle Payment Contract Functionality tests
     When Get by id <id> and <type>
 
     Examples: 
-      | desc                            | id | type          | orgType  | contractId | endDate | organizationId | programId | startDate    | participatingBundleId | bundleStartDate | bundleEndDate | priceStartDate | priceEndDate | price | baseLineEndDate | baseLineStatDate | trendFactor | upperBound | lowerBound | expStatusCode | responseMsg |
-      | Create Contract using API Calls |  0 | bundlePayment | hospital | []         | []      |                |           | [2016-03-06] |                       | [2017-04-12]    | []            | [2017-04-15]   | []           | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | desc                            | id | type          | orgType      | contractId | endDate      | organizationId | programId | startDate    | participatingBundleId | bundleStartDate | bundleEndDate | priceStartDate | priceEndDate | price | baseLineEndDate | baseLineStatDate | trendFactor | upperBound | lowerBound | expStatusCode | responseMsg |
+      | Create Contract using API Calls |  0 | bundlePayment | hospital     | []         | [2019-12-19] |                |           | [2017-02-09] |                       | [2017-05-01]    | [2019-07-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract using API Calls |  0 | bundlePayment | hospitalNOMO | []         | [2019-12-19] |                |           | [2017-02-09] |                       | [2017-05-01]    | [2019-07-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
 
-  Scenario Outline: <Description>
-    When I click on "Payor" organization tab on organization dashboard
-    When I search with "<Payor_Name>" on organization in search box
-    And I click "<Payor_Name>" field in search list on organization page
-    And I verify "<Payor_Name>" name on the header of view profile
-    And I verify "Programs" as default tab selected on view profile of "Payor" Organization
-    And I verify "Contracts" tab present under "Payor" Organization
-    And I click on "Contracts" tab on view profile of "Payor" Organization
-    Then I search "<SearchParam>" and verify with search list options on "Bundle Payment Contract" search box
-
-    Examples: 
-      | Description                                | Payor_Name | SearchParam |
-      | Search for a Contract by Program Name      | PAYORNAME  | PROGRAMNAME |
-      | Search for a Contract by Contract ID       | PAYORNAME  | CID         |
-      | Search for a Contract by Organization Name | PAYORNAME  | ACHNAME     |
-      | Search for a Contract by Provider Type     | PAYORNAME  | ACH         |
-      | Search for a Contract by  Address          | PAYORNAME  | Address1    |
-
-  Scenario Outline: <Description>
-    When I click on "Payor" organization tab on organization dashboard
-    When I search with "<Payor_Name>" on organization in search box
-    And I click "<Payor_Name>" field in search list on organization page
-    And I verify "<Payor_Name>" name on the header of view profile
-    And I verify "Programs" as default tab selected on view profile of "Payor" Organization
-    And I verify "Contracts" tab present under "Payor" Organization
-    And I click on "Contracts" tab on view profile of "Payor" Organization
-    Then I search "<SearchParam>" and verify with search list options on "Programs" search box
-    Then I verify the "No matches" message for invalid search in Organization
-
-    Examples: 
-      | Description                             | Payor_Name | SearchParam               |
-      | Error message if a Program is Not found | PAYORNAME  | InvalidSearchContractName |
+  #Scenario Outline: <Description>
+    #When I click on "Payor" organization tab on organization dashboard
+    #When I search with "<Payor_Name>" on organization in search box
+    #And I click "<Payor_Name>" field in search list on organization page
+    #And I verify "<Payor_Name>" name on the header of view profile
+    #And I verify "Programs" as default tab selected on view profile of "Payor" Organization
+    #And I verify "Contracts" tab present under "Payor" Organization
+    #And I click on "Contracts" tab on view profile of "Payor" Organization
+    #Then I search "<SearchParam>" and verify with search list options on "Bundle Payment Contract" search box
+#
+    #Examples: 
+      #| Description                                | Payor_Name | SearchParam |
+      #| Search for a Contract by Program Name      | PAYORNAME  | PROGRAMNAME |
+      #| Search for a Contract by Contract ID       | PAYORNAME  | CID         |
+      #| Search for a Contract by Organization Name | PAYORNAME  | ACHNAME     |
+      #| Search for a Contract by Provider Type     | PAYORNAME  | ACH         |
+      #| Search for a Contract by  Address          | PAYORNAME  | Address1    |
+#
+  #Scenario Outline: <Description>
+    #When I click on "Payor" organization tab on organization dashboard
+    #When I search with "<Payor_Name>" on organization in search box
+    #And I click "<Payor_Name>" field in search list on organization page
+    #And I verify "<Payor_Name>" name on the header of view profile
+    #And I verify "Programs" as default tab selected on view profile of "Payor" Organization
+    #And I verify "Contracts" tab present under "Payor" Organization
+    #And I click on "Contracts" tab on view profile of "Payor" Organization
+    #Then I search "<SearchParam>" and verify with search list options on "Programs" search box
+    #Then I verify the "No matches" message for invalid search in Organization
+#
+    #Examples: 
+      #| Description                             | Payor_Name | SearchParam               |
+      #| Error message if a Program is Not found | PAYORNAME  | InvalidSearchContractName |
