@@ -141,3 +141,10 @@ Feature: Hospital Organization View profile Functionality tests.
     Examples: 
       | Description                                                             | MO_Name | Hosp_Name        |
       | Searching invalid details on Managing Organization Profile Page for ACH | MONAME  | NoMatchesACHNAME |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type    |
+      | MO, ACH |

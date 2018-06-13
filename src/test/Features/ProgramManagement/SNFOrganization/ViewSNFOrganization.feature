@@ -149,3 +149,10 @@ Feature: View SNF organization functionality tests
     Examples: 
       | Description                                                             | MO_Name | SNF_Name         |
       | Searching invalid details on Managing Organization Profile Page for SNF | MONAME  | NoMatchesSNFNAME |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type    |
+      | MO, SNF |

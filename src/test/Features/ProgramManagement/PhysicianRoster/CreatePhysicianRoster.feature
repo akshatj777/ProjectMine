@@ -737,3 +737,10 @@ Feature: Create Physician Roster functionality tests
     Examples: 
       | Description                                         | Has_MO | Hosp_Name | Program_Name | Hospital_Organization_Name | Physician    | PhysicianEndDate | PhysicianEndDate1 | Message                         |
       | Add multiple Physicians under Hospital Profile page | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI | 2019/12/21       | 2019/12/23        | Physicians Successfully Updated |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type                                                  |
+      | MO, Hospital, PGP, Payor, Program, Bundle, Practioner |

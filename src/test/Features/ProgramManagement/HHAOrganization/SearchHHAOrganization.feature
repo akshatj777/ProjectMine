@@ -28,20 +28,20 @@ Feature: Search the HHA organizations functionality tests
       | Create HHA with MO    | HHANAME | ShortName | hasChild      |               | EIN | NPI | CCN | Address1 | Address2 | City | CA    | 10000 |        1 |        1 |           201 |             |  0 | hha  |
       | Create HHA without MO | HHANAME | ShortName |               |               | EIN | NPI | CCN | Address1 | Address2 | City | CA    | 10000 |        1 |        1 |           201 |             |  0 | hha  |
 
-  #Scenario Outline: <Description>
-    #When I click on "HHA" organization tab on organization dashboard
-    #Then I verify the Search bar on "HHA" organization page
-    #Then I search "<SearchParam> - <Has_MO>" and verify with search list options on "HHA" organization search box
-#
-    #Examples: 
-      #| Description                                            | Has_MO | SearchParam |
-      #| Search HHA Organization with CCN  - With MO            | YES    | CCN         |
-      #| Search HHA Organization with CCN  - Without MO         | NO     | CCN         |
-      #| Search HHA Organization with HHA Org Name - With MO    | YES    | HHANAME     |
-      #| Search HHA Organization with HHA Org Name - Without MO | NO     | HHANAME     |
-      #| Search HHA Organization with City                      |        | City        |
-      #| Search HHA Organization with State                     |        | CA          |
-      #| Search HHA Organization with Postal Code               |        |       10000 |
+  Scenario Outline: <Description>
+    When I click on "HHA" organization tab on organization dashboard
+    Then I verify the Search bar on "HHA" organization page
+    Then I search "<SearchParam> - <Has_MO>" and verify with search list options on "HHA" organization search box
+
+    Examples: 
+      | Description                                            | Has_MO | SearchParam |
+      | Search HHA Organization with CCN  - With MO            | YES    | CCN         |
+      | Search HHA Organization with CCN  - Without MO         | NO     | CCN         |
+      | Search HHA Organization with HHA Org Name - With MO    | YES    | HHANAME     |
+      | Search HHA Organization with HHA Org Name - Without MO | NO     | HHANAME     |
+      | Search HHA Organization with City                      |        | City        |
+      | Search HHA Organization with State                     |        | CA          |
+      | Search HHA Organization with Postal Code               |        |       10000 |
 
   Scenario Outline: <Description>
     When I click on "HHA" organization tab on organization dashboard
@@ -71,3 +71,10 @@ Feature: Search the HHA organizations functionality tests
     Examples: 
       | Description                                                              | HHA_Name       |
       | Verification of error message if HHA organization is not found in search | NoMatchHHAName |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type    |
+      | MO, HHA |

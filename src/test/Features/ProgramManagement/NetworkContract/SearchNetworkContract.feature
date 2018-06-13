@@ -163,3 +163,10 @@ Feature: Search Network Contracts functionality tests
     Examples: 
       | Description                             | Has_MO | PGP_Name | SearchParam               |
       | Error message if a Program is Not found | NO     | PGPNAME  | InvalidSearchContractName |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type                                      |
+      | MO, Hospital, PGP, Payor, Program, Bundle |

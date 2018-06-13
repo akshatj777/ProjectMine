@@ -770,4 +770,68 @@ public class BaseClass {
         }
         return orgId;
     }
+	
+	public static void deleteNamesList(String type)
+	{
+		if(type.equals("MO"))
+		{
+			CreateManagingOrganizationAPI.MONameList.clear();
+			CreateManagingOrganizationAPI.participantidList.clear();
+		}
+		else if(type.equals("ACH"))
+		{
+			CreateACHOrganizationAPI.ACHNameList.clear();
+			CreateACHOrganizationAPI.CCNNameList.clear();
+			CreateACHOrganizationAPI.EINNameList.clear();
+			CreateACHOrganizationAPI.NPINameList.clear();
+		}
+		else if(type.equals("PGP"))
+		{
+			CreatePGPOrganizationAPI.PGPNameList.clear();
+			CreatePGPOrganizationAPI.EINNameList.clear();
+			CreatePGPOrganizationAPI.NPINameList.clear();
+		}
+		else if(type.equals("HHA"))
+		{
+			CreateHHAOrganizationAPI.HHANameList.clear();
+			CreateHHAOrganizationAPI.CCNNameList.clear();
+			CreateHHAOrganizationAPI.EINNameList.clear();
+			CreateHHAOrganizationAPI.NPINameList.clear();
+		}
+		else if(type.equals("SNF"))
+		{
+			CreateSNFOrganizationAPI.SNFNameList.clear();
+			CreateSNFOrganizationAPI.CCNNameList.clear();
+			CreateSNFOrganizationAPI.EINNameList.clear();
+			CreateSNFOrganizationAPI.NPINameList.clear();
+		}
+		else if(type.equals("Payor"))
+		{
+			CreatePayorOrganizationAPI.PayorNameList.clear();
+			CreatePayorOrganizationAPI.participantidList.clear();
+		}
+		else if(type.equals("Program"))
+		{
+			CreateProgramAPI.PROGRAMNameList.clear();
+		}
+		else if(type.equals("Bundle"))
+		{
+			CreateBundleAPI.bundleNameList.clear();
+		}
+		else if(type.equals("Contract"))
+		{
+			
+		}
+		else if(type.equals("Network Contract"))
+		{
+			
+		}
+		else if(type.equals("Practioner")){
+			CreatePractictionerAPI.practitionerNameList.clear();
+		}
+		else if(type.equals("Physician Roster"))
+		{
+			
+		}
+	}
 }

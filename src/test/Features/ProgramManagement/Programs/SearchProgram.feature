@@ -70,3 +70,10 @@ Feature: Search a Program
     Examples: 
       | Description                             | Payor_Name | SearchParam              |
       | Error message if a Program is Not found | PAYORNAME  | InvalidSearchProgramName |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type           |
+      | Payor, Program |

@@ -179,3 +179,10 @@ Feature: Edit the Managing organization functionality test
     Examples: 
       | Description                                 | MO_Name | Contact_Email            |
       | Verification of cancel button functionality | MONAME  | SampleEdited@yopmail.com |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type |
+      | MO   |

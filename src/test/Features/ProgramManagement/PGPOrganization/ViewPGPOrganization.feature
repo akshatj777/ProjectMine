@@ -86,3 +86,10 @@ Feature: View Functionality tests for PGP Organization.
     Examples: 
       | Description                                                             | MO_Name | PGP_Name         |
       | Searching invalid details on Managing Organization Profile Page for PGP | MONAME  | NoMatchesPGPNAME |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type    |
+      | MO, PGP |

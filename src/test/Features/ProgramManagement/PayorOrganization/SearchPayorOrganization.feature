@@ -45,8 +45,8 @@ Feature: Search the Payor organization functionality test
     And I verify the "Create New Payor Organization" link under No matches
 
     Examples: 
-      | Description                                                               | Payor_Name | Edited_Payor_Name |id|type|
-      | Search for a Payor organization after editing the Payor organization name | PAYORNAME  | PAYORNAME         |0|payor|
+      | Description                                                               | Payor_Name | Edited_Payor_Name | id | type  |
+      | Search for a Payor organization after editing the Payor organization name | PAYORNAME  | PAYORNAME         |  0 | payor |
 
   Scenario Outline: Verification of error message if an organization is not found in search box
     Then I search with "<Payor_Name>" on organization in search box
@@ -56,3 +56,10 @@ Feature: Search the Payor organization functionality test
     Examples: 
       | Description                                                                       | Payor_Name          |
       | Verification of error message if an Payor organization is not found in search box | NoMatchPayorOrgName |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type  |
+      | Payor |

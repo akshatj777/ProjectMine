@@ -28,69 +28,69 @@ Feature: Edit PGP organization functionality tests
       | Create PGP using API calls with MO    | PGPNAME | ShortName | hasChild      |               | EIN | NPI | Adderess1 | Address2 | AutomationCity | CA    | 10000 |        2 |           201 |             |  0 | pgp  |
       | Create PGP using API calls without MO | PGPNAME | ShortName |               |               | EIN | NPI | Adderess1 | Address2 | AutomationCity | CA    | 10000 |        2 |           201 |             |  0 | pgp  |
 
-  #Scenario Outline: <Description>
-    #When I click on "PGP" organization tab on organization dashboard
-    #Then I search with "<PGP_Name> - <Has_MO>" on organization in search box
-    #And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page
-    #And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
-    #And I click on "Edit" button on particular organization
-    #And I verify "Edit PGP Organization" header text on edit organization page
-    #And I verify "*PGP Organization Name" field on edit organization page
-    #And I verify "Short Name" field on edit organization page
-    #And I verify "Address 1" field on edit organization page
-    #And I verify "Address 2" field on edit organization page
-    #And I verify "City" field on edit organization page
-    #And I verify "Region" dropdown field on edit organization page
-    #And I verify "Market" dropdown field on edit organization page
-    #And I verify "State" dropdown field on edit organization page
-    #And I verify "Postal Code" field on edit organization page
-    #And I verify "ein" identifier is not editable
-    #And I verify "npi" identifier is not editable
-    #And I verify "Submit" button on edit organization page
-    #And I verify "Cancel" button on edit organization page
-#
-    #Examples: 
-      #| Description                                                                  | Has_MO | PGP_Name |
-      #| Verification of availability of all the fields on Edit PGP Organization page | NO     | PGPNAME  |
-#
-  #Scenario Outline: <Description>
-    #When I click on "PGP" organization tab on organization dashboard
-    #Then I search with "<PGP_Name> - <Has_MO>" on organization in search box
-    #And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page
-    #And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
-    #And I click on "Edit" button on particular organization
-    #And I verify "Edit PGP Organization" header text on edit organization page
-    #And I edit "PGP Organization Name" field to "<Edited_PGP_Name>" for organization
-#
-    #Examples: 
-      #| Description                         | Has_MO | PGP_Name | Edited_PGP_Name | ValidationMsg                     |
-      #| Check validation for blank PGP name | NO     | PGPNAME  |                 | Please enter an Organization Name |
-#
-  #Scenario Outline: <Description>
-    #When I click on "PGP" organization tab on organization dashboard
-    #Then I search with "<PGP_Name> - <Has_MO>" on organization in search box
-    #And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page
-    #And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
-    #And I click on "Edit" button on particular organization
-    #And I verify "Edit PGP Organization" header text on edit organization page
-    #And I edit "PGP Organization Name" field to "<Edited_PGP_Name> - <Has_MO>" for organization
-    #And I edit "Address 1" field to "<Address1>" for organization
-    #And I edit "Short Name" field to "<Short_Name>" for organization
-    #And I edit "Address 2" field to "<Address2>" for organization
-    #And I edit "City" field to "<City>" for organization
-    #And I edit "Postal Code" field to "<Postal_Code>" for organization
-    #And I switch the focus to "submit" button
-    #And I verify "<ValidationMessage>" field validation message on edit organization page
-#
-    #Examples: 
-      #| Description                                    | Has_MO | PGP_Name | Edited_PGP_Name                                                              | Address1                                                                | Short_Name                                     | Address2                                                                | City                                           | Postal_Code  | ValidationMessage                                              |
-      #| Check Character Limit for PGP name field       | YES    | PGPNAME  | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx |                                                                         |                                                |                                                                         |                                                |              | The Organization Name may not be greater than 75 characters.   |
-      #| Check Character Limit for Address1 field       | YES    | PGPNAME  |                                                                              | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstvwxyzabcdefghijklmnopqrst |                                                |                                                                         |                                                |              | The first address line may not be greater than 55 characters.  |
-      #| Check Character Limit for Short Name field     | YES    | PGPNAME  |                                                                              |                                                                         | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst |                                                                         |                                                |              | The shortName may not be greater than 45 characters.           |
-      #| Check Character Limit for Address2 field       | NO     | PGPNAME  |                                                                              |                                                                         |                                                | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstvwxyzabcdefghijklmnopqrst |                                                |              | The second address line may not be greater than 55 characters. |
-      #| Check Character Limit for City field           | NO     | PGPNAME  |                                                                              |                                                                         |                                                |                                                                         | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst |              | The City may not be greater than 45 characters.                |
-      #| Check Character Limit for Postal code field    | NO     | PGPNAME  |                                                                              |                                                                         |                                                |                                                                         |                                                | 10000-00000  | Please enter a valid Postal Code                               |
-      #| Check Allowed Characters for Postal code field | YES    | PGPNAME  |                                                                              |                                                                         |                                                |                                                                         |                                                | abcdefghijkl | Please enter a valid Postal Code                               |
+  Scenario Outline: <Description>
+    When I click on "PGP" organization tab on organization dashboard
+    Then I search with "<PGP_Name> - <Has_MO>" on organization in search box
+    And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I verify "Edit PGP Organization" header text on edit organization page
+    And I verify "*PGP Organization Name" field on edit organization page
+    And I verify "Short Name" field on edit organization page
+    And I verify "Address 1" field on edit organization page
+    And I verify "Address 2" field on edit organization page
+    And I verify "City" field on edit organization page
+    And I verify "Region" dropdown field on edit organization page
+    And I verify "Market" dropdown field on edit organization page
+    And I verify "State" dropdown field on edit organization page
+    And I verify "Postal Code" field on edit organization page
+    And I verify "ein" identifier is not editable
+    And I verify "npi" identifier is not editable
+    And I verify "Submit" button on edit organization page
+    And I verify "Cancel" button on edit organization page
+
+    Examples: 
+      | Description                                                                  | Has_MO | PGP_Name |
+      | Verification of availability of all the fields on Edit PGP Organization page | NO     | PGPNAME  |
+
+  Scenario Outline: <Description>
+    When I click on "PGP" organization tab on organization dashboard
+    Then I search with "<PGP_Name> - <Has_MO>" on organization in search box
+    And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I verify "Edit PGP Organization" header text on edit organization page
+    And I edit "PGP Organization Name" field to "<Edited_PGP_Name>" for organization
+
+    Examples: 
+      | Description                         | Has_MO | PGP_Name | Edited_PGP_Name | ValidationMsg                     |
+      | Check validation for blank PGP name | NO     | PGPNAME  |                 | Please enter an Organization Name |
+
+  Scenario Outline: <Description>
+    When I click on "PGP" organization tab on organization dashboard
+    Then I search with "<PGP_Name> - <Has_MO>" on organization in search box
+    And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I verify "Edit PGP Organization" header text on edit organization page
+    And I edit "PGP Organization Name" field to "<Edited_PGP_Name> - <Has_MO>" for organization
+    And I edit "Address 1" field to "<Address1>" for organization
+    And I edit "Short Name" field to "<Short_Name>" for organization
+    And I edit "Address 2" field to "<Address2>" for organization
+    And I edit "City" field to "<City>" for organization
+    And I edit "Postal Code" field to "<Postal_Code>" for organization
+    And I switch the focus to "submit" button
+    And I verify "<ValidationMessage>" field validation message on edit organization page
+
+    Examples: 
+      | Description                                    | Has_MO | PGP_Name | Edited_PGP_Name                                                              | Address1                                                                | Short_Name                                     | Address2                                                                | City                                           | Postal_Code  | ValidationMessage                                              |
+      | Check Character Limit for PGP name field       | YES    | PGPNAME  | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx |                                                                         |                                                |                                                                         |                                                |              | The Organization Name may not be greater than 75 characters.   |
+      | Check Character Limit for Address1 field       | YES    | PGPNAME  |                                                                              | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstvwxyzabcdefghijklmnopqrst |                                                |                                                                         |                                                |              | The first address line may not be greater than 55 characters.  |
+      | Check Character Limit for Short Name field     | YES    | PGPNAME  |                                                                              |                                                                         | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst |                                                                         |                                                |              | The shortName may not be greater than 45 characters.           |
+      | Check Character Limit for Address2 field       | NO     | PGPNAME  |                                                                              |                                                                         |                                                | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstvwxyzabcdefghijklmnopqrst |                                                |              | The second address line may not be greater than 55 characters. |
+      | Check Character Limit for City field           | NO     | PGPNAME  |                                                                              |                                                                         |                                                |                                                                         | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst |              | The City may not be greater than 45 characters.                |
+      | Check Character Limit for Postal code field    | NO     | PGPNAME  |                                                                              |                                                                         |                                                |                                                                         |                                                | 10000-00000  | Please enter a valid Postal Code                               |
+      | Check Allowed Characters for Postal code field | YES    | PGPNAME  |                                                                              |                                                                         |                                                |                                                                         |                                                | abcdefghijkl | Please enter a valid Postal Code                               |
 
   Scenario Outline: <Description>
     When I click on "PGP" organization tab on organization dashboard
@@ -129,3 +129,10 @@ Feature: Edit PGP organization functionality tests
       | Edit PGP Organization with all the available fields - With MO                                                                              | YES    | MONAME       | PGPNAME  | PGPNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
       | Edit Duplicate PGP Organization with all the available fields - Without MO                                                                 | NO     |              | PGPNAME  | DUPLICATE_PGP        | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
       | Edit Duplicate PGP Organization with all the available fields - With MO                                                                    | YES    | MONAME       | PGPNAME  | DUPLICATE_PGP        | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type    |
+      | MO, PGP |

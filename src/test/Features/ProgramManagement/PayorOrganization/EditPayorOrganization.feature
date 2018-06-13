@@ -136,3 +136,10 @@ Feature: Edit Payor organization functionality tests
       | Edit Payor Organization with Mandatory fields + ContactEmail + ContactPhone                 | PAYORNAME  | PAYORNAME            |                                               | Sample@yopmail.com                            |    5555599999 | Address1                                                |                                                         | City                                          | New York |       10001 | Payor Organization Successfully Updated. |
       | Edit Payor Organization with Mandatory fields + ContactPhone + ContactPerson + Address2     | PAYORNAME  | PAYORNAME            | ContactPersonTest                             |                                               |    5555599999 | Address1                                                | Address2                                                | City                                          | New York |       10001 | Payor Organization Successfully Updated. |
       | Edit Payor Organization with all available fields                                           | PAYORNAME  | PAYORNAME            | ContactPersonTest                             | Sample@yopmail.com                            |    5555599999 | Address1                                                | Address2                                                | City                                          | New York |       10001 | Payor Organization Successfully Updated. |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type  |
+      | Payor |

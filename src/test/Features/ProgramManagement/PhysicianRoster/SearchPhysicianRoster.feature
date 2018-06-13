@@ -252,3 +252,10 @@ Feature: Search Physician Roster functionality tests
     Examples: 
       | Description                               | Has_MO | Hosp_Name | Physician_Roster |
       | Search for a Physician by invalid details | NO     | ACHNAME   | Invalidsearch    |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type                                                  |
+      | MO, Hospital, PGP, Payor, Program, Bundle, Practioner |

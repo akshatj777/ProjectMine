@@ -56,3 +56,10 @@ Feature: Search the Managing organization functionality test
     Examples: 
       | Description                                                                 | MO_Name               |
       | Verification of error message if an organization is not found in search box | NoMatchMnagingOrgName |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type |
+      | MO   |

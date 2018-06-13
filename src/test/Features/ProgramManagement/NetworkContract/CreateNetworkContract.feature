@@ -423,3 +423,10 @@ Feature: Create Network Contracts functionality tests
     Examples: 
       | Description                                   | Has_MO | PGP_Name | Program_Name | PGP_Organization_Name | Organization_Name     |
       | Error message if an organization is not found | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               | NoNetworkContractName |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type                                      |
+      | MO, Hospital, PGP, Payor, Program, Bundle |

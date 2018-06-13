@@ -15,8 +15,13 @@ public class CreateManagingOrganizationAPIStepDef extends DriverScript{
 		CreateMOAPI.buildJsonForMO(cName, cPid, cContactName, cEmail, cPhone, cAddr1, cAddr2, cCity, cState, cZip);
         }
 	
- @When("^create org with this data$")
-    public void createOrgWithThisData() throws Throwable {
-	 CreateMOAPI.createOrgWithThisData();
-    }
+	@When("^create org with this data$")
+    	public void createOrgWithThisData() throws Throwable {
+		CreateMOAPI.createOrgWithThisData();
+    	}
+ 
+	@When("^delete references of the name list type \"([^\"]*)\"$")
+	public void deleteReferences(String type) throws Throwable {
+		CreateMOAPI.deleteReferences(type);
+    	}
 }

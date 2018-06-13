@@ -143,3 +143,10 @@ Feature: Create Programs organization under Payor Organization functionality tes
     Examples: 
       | Description                              | Payor_Name | Program_Name | Message                      |
       | Create Programs under Payor Organization | PAYORNAME  | PROGRAMNAME  | Program Successfully Created |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type  |
+      | Payor |

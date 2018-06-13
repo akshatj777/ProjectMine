@@ -71,3 +71,10 @@ Feature: Search the PGP organizations functionality tests
     Examples: 
       | Description                                                              | PGP_Name       |
       | Verification of error message if PGP organization is not found in search | NoMatchPGPName |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type    |
+      | MO, PGP |

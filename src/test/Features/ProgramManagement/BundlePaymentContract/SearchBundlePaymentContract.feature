@@ -124,3 +124,10 @@ Feature: Search a Bundle Payment Contract Functionality tests
     Examples: 
       | Description                             | Payor_Name | SearchParam               |
       | Error message if a Program is Not found | PAYORNAME  | InvalidSearchContractName |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type                                 |
+      | MO, Hospital, Payor, Program, Bundle |

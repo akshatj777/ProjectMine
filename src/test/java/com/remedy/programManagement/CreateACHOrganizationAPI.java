@@ -42,7 +42,7 @@ public class CreateACHOrganizationAPI extends BaseClass{
         }
         String ein = createRandomNumber(10);
         String npi = createRandomNumber(10);
-        String ccn = genearateOrgId(cCcn);
+        String ccn = createRandomNumber(10);
         List<String> locationIdList = generateLocationId(cLocationId,ccn);
         AddressDataModel addrs = insertAddrsData(cAddr1, cAddr2, cCity, cState, cZip);
         List<String> typList = new ArrayList<>();

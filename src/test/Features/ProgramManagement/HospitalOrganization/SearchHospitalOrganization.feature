@@ -85,3 +85,10 @@ Feature: Search the Hospital organizations functionality tests
     Examples: 
       | Description                                                                   | Hosp_Name      |
       | Verification of error message if Hospital organization is not found in search | NoMatchACHName |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type    |
+      | MO, ACH |

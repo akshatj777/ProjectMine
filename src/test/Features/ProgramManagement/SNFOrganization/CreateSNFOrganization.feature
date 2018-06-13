@@ -215,11 +215,11 @@ Feature: Create SNF organization functionality tests
     Then I verify "<Message>" after submitting the "create SNF - <Has_MO>" organization page
     When I search with "SNFNAME - <Has_MO>" on "SNF" organization in search box
     And I click "SNFNAME - <Has_MO>" field in search list on "SNF" organization page
-    #Then I verify Location ID should be same as "SNF" Organization CCN
 
+    #Then I verify Location ID should be same as "SNF" Organization CCN
     Examples: 
-      | Description                                                                                  | Has_MO | Managing_Org | SNF_Name             | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type        | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Message                                |
-      | Create a SNF Organization with Mandatory Fields and CCN as mandatory identifier - Without MO | NO     |              | SNFNAME | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Skilled Nursing | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | SNF Organization Successfully Created. |
+      | Description                                                                                  | Has_MO | Managing_Org | SNF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type        | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Message                                |
+      | Create a SNF Organization with Mandatory Fields and CCN as mandatory identifier - Without MO | NO     |              | SNFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Skilled Nursing | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | SNF Organization Successfully Created. |
 
   Scenario Outline: <Description>
     When I click on "SNF" organization tab on organization dashboard
@@ -324,7 +324,7 @@ Feature: Create SNF organization functionality tests
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
     Then I verify "SNF Organization Successfully Created." after submitting the "create SNF - <Has_MO>" organization page
-     When I search with "SNFNAME - <Has_MO>" on "SNF" organization in search box
+    When I search with "SNFNAME - <Has_MO>" on "SNF" organization in search box
     And I click "SNFNAME - <Has_MO>" field in search list on "SNF" organization page
     #And I verify Location ID should be greater than "100000"
     When I click on Organization link on Program Management page
@@ -750,3 +750,10 @@ Feature: Create SNF organization functionality tests
       | Verify Validation Message of SNF Organization with same CCN and NPI |    1234567890 |            | 1234567890 | The CCN and npi must be different. | The NPI and ccn must be different. |
       | Verify Validation Message of SNF Organization with same EIN and NPI |               | 1234567890 | 1234567890 | The EIN and npi must be different. | The NPI and ein must be different. |
       | Verify Validation of SNF Organization with duplicate CCN            | DUPLICATE_CCN |            |            | CCN Id already taken               |                                    |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type |
+      | MO   |
