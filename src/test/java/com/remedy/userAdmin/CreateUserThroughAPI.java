@@ -157,6 +157,7 @@ public class CreateUserThroughAPI extends BaseClass {
 				}
 				else
 				{
+					innerHM = new HashMap<String,String>();
 					innerHM.put(BPID, facilityKey);
 					dataPermissions.put(participantID, innerHM);
 				}
