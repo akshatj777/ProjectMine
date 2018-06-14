@@ -908,7 +908,7 @@ public class BulkUserCreationPage extends BaseClass {
 	public void iVerifyUserIsAdded(String userRole) {
 		String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole)
 				.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
-		iWillWaitToSee(By.xpath("//td[text(), '" + email + "']"));
+		
 		Assert.assertTrue(
 				driver.findElement(By.xpath("//td[@class='five wide']")).getText().toString().trim().equals(email));
 	}
@@ -935,4 +935,10 @@ public class BulkUserCreationPage extends BaseClass {
 		iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
 
 	}
+	 public void validataSuccessAndFailuremsg(String error, String success){
+		 iWillWaitToSee(By.xpath("//p[@class='successCountLabel']"));
+		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[@class='successCountLabel'][text()='" + success + "']")));
+		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[@class='errorCountLabel'][text()='" + error + "']")));
+
+	    }
 }

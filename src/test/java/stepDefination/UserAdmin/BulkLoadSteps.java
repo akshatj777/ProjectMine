@@ -118,4 +118,8 @@ public class BulkLoadSteps extends DriverScript{
     public void enterValidAndInvalidData(){
     	bulkUser.enterInvalidAndValidData();
     }
+    @Then("^I verify \"([^\"]*)\" error message and \"([^\"]*)\" success message$")
+    public void validataSuccessAndFailuremsg(String error, String success){
+    	bulkUser.validataSuccessAndFailuremsg(error, success);
+    }
 }
