@@ -130,11 +130,12 @@ public class CreateUserThroughAPI extends BaseClass {
 		
 		if(locations.contains(","))
 		{
+			HashMap<String,String> innerHM = new HashMap<String,String>();
 			HashMap<String,HashMap<String,String>> dataPermissions = new HashMap<String,HashMap<String,String>>();
 			StringTokenizer st = new StringTokenizer(locations, ",");
 			while(st.hasMoreTokens())
 			{
-				HashMap<String,String> innerHM = new HashMap<String,String>();
+				
 				String a = st.nextToken().trim();
 				String participantID = a.substring(0, a.indexOf("--"));
 				String BPID = a.substring(a.indexOf("--")+2, a.lastIndexOf("--"));

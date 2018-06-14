@@ -65,8 +65,8 @@ Feature: Create User - PTA User
     And I wait for 3000 milli seconds
     Then I verify Account Verification in Inbox in my account
     Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm my account!" link in mail content
-    Then I click on "Confirm my account!" link in mail content
+    Then I verify "Confirm My Account!" link in mail content
+    Then I click on "Confirm My Account!" link in mail content
     And I switch to new window
     Then I enter email to generate password link
     And I click on send mail button
@@ -139,8 +139,8 @@ Feature: Create User - PTA User
     And I wait for 3000 milli seconds
     Then I verify Account Verification in Inbox in my account
     Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm my account!" link in mail content
-    Then I click on "Confirm my account!" link in mail content
+    Then I verify "Confirm My Account!" link in mail content
+    Then I click on "Confirm My Account!" link in mail content
     And I switch to new window
     Then I enter email to generate password link
     And I click on send mail button
@@ -299,8 +299,8 @@ Feature: Create User - PTA User
     And I wait for 3000 milli seconds
     Then I verify Account Verification in Inbox in my account
     Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm my account!" link in mail content
-    Then I click on "Confirm my account!" link in mail content
+    Then I verify "Confirm My Account!" link in mail content
+    Then I click on "Confirm My Account!" link in mail content
     And I switch to new window
     Then I enter email to generate password link
     And I click on send mail button
@@ -373,8 +373,8 @@ Feature: Create User - PTA User
     And I wait for 3000 milli seconds
     Then I verify Account Verification in Inbox in my account
     Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm my account!" link in mail content
-    Then I click on "Confirm my account!" link in mail content
+    Then I verify "Confirm My Account!" link in mail content
+    Then I click on "Confirm My Account!" link in mail content
     And I switch to new window
     Then I enter email to generate password link
     And I click on send mail button
@@ -537,8 +537,8 @@ Feature: Create User - PTA User
     And I wait for 3000 milli seconds
     Then I verify Account Verification in Inbox in my account
     Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm my account!" link in mail content
-    Then I click on "Confirm my account!" link in mail content
+    Then I verify "Confirm My Account!" link in mail content
+    Then I click on "Confirm My Account!" link in mail content
     And I switch to new window
     Then I enter email to generate password link
     And I click on send mail button
@@ -611,8 +611,8 @@ Feature: Create User - PTA User
     And I wait for 3000 milli seconds
     Then I verify Account Verification in Inbox in my account
     Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm my account!" link in mail content
-    Then I click on "Confirm my account!" link in mail content
+    Then I verify "Confirm My Account!" link in mail content
+    Then I click on "Confirm My Account!" link in mail content
     And I switch to new window
     Then I enter email to generate password link
     And I click on send mail button
