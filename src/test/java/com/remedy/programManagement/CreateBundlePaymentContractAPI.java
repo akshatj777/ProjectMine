@@ -25,7 +25,7 @@ public class CreateBundlePaymentContractAPI extends BaseClass{
 
 	public void createContractJson(String contractId, String cEndDate, String orgIdFrmCucumber, String cProgramId, String cStartDate, String cBundleId, String bundlePrice, String cbundleStartDate, String cBundleEndDate, String type, String orgType, String priceStartDate, String priceEndDate, String baseLineEndDate, String baseLineStartDate, String trendFactor, String upperBound, String lowerBound)  {
 
-        List<Long> bundleIdList = new ArrayList<>();
+	 List<String> bundleIdList = new ArrayList<>();
         List<Long> programIdList = new ArrayList<>();
         List<Long> orgIdList = new ArrayList<>();
         List<ContractDetailsDataModel> contractDetailsMapList = new ArrayList();
@@ -79,12 +79,12 @@ public class CreateBundlePaymentContractAPI extends BaseClass{
         //adding to a list after spliting the cucumber data and get the index and insert to participating bundle map
         if (StringUtils.isBlank(cBundleId)) 
         {
-            bundleIdList = CreateBundleAPI.getId(orgType);
+           // bundleIdList = CreateBundleAPI.bundleNameList.get(0).toString();
         }
         else 
         {
             List<String> bundleIdSplitList = insertData.splitIntoSubList(cBundleId);
-            bundleIdList.add(Long.valueOf(bundleIdSplitList.get(0)));
+            bundleIdList.add(String.valueOf(bundleIdSplitList.get(0)));
         }
         if (StringUtils.isBlank(cProgramId)) 
         {
