@@ -52,7 +52,7 @@ public class CreateHHAOrganizationAPI extends BaseClass{
 
         AddressDataModel addrs = insertAddrsData(addr1, addr2, city, state, zip);
         OrgDataModel hhaOrgData = new OrgDataModel(name, pid, shortName, mOrgID, npi, ein,ccn, marketId, addrs);
-        jsonString = generateJson(hhaOrgData);
+        CreateHHAOrganizationAPI.jsonString = generateJson(hhaOrgData);
 
     }
 	

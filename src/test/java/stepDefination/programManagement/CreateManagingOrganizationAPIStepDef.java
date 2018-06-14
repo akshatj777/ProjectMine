@@ -21,7 +21,7 @@ public class CreateManagingOrganizationAPIStepDef extends DriverScript{
     	}
  
 	@When("^delete references of the name list type \"([^\"]*)\"$")
-	public void deleteReferences(String type) throws Throwable {
+	public void delete_References(String type) throws Throwable {
 		CreateMOAPI.deleteReferences(type);
     	}
 }
