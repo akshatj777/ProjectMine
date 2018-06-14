@@ -1,12 +1,5 @@
 package com.remedy.userAdmin;
 
-import org.openqa.selenium.WebDriver;
-
-import com.jayway.restassured.response.Response;
-import com.remedy.RestCall.*;
-import com.remedy.baseClass.BaseClass;
-import com.remedy.resources.DriverScript;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
@@ -14,9 +7,13 @@ import java.util.StringTokenizer;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import org.openqa.selenium.WebDriver;
+
+import com.jayway.restassured.response.Response;
+import com.remedy.RestCall.RestCallUtil;
+import com.remedy.baseClass.BaseClass;
+import com.remedy.resources.DriverScript;
+
 import junit.framework.Assert;
 
 public class CreateUserThroughAPI extends BaseClass {
@@ -133,7 +130,8 @@ public class CreateUserThroughAPI extends BaseClass {
 		
 		if(locations.contains(","))
 		{
-			HashMap<String,String> dataPermissions = new HashMap<String,String>();
+			HashMap<String,HashMap<String,String>> dataPermissions = new HashMap<String,HashMap<String,String>>();
+			HashMap<String,String> innerHM = new HashMap<String,String>();
 			StringTokenizer st = new StringTokenizer(locations, ",");
 			while(st.hasMoreTokens())
 			{
@@ -144,93 +142,103 @@ public class CreateUserThroughAPI extends BaseClass {
 				String facilityKey = a.substring(a.lastIndexOf("--")+2, a.length());
 				if(dataPermissions.containsKey(participantID))
 				{
-					String ab = dataPermissions.get(participantID);
-					dataPermissions.put(participantID, ab+","+BPID+"--"+facilityKey);
+					//String ab = dataPermissions.get(participantID);
+					if(innerHM.containsKey(BPID))
+					{
+						String ab = innerHM.get(BPID);
+						innerHM.put(BPID, facilityKey+","+ab);
+						dataPermissions.put(participantID, innerHM);
+					}
+					else
+					{
+						innerHM.put(BPID, facilityKey);
+						dataPermissions.put(participantID, innerHM);
+					}
 				}
 				else
 				{
-					dataPermissions.put(participantID, BPID+"--"+facilityKey);
+					innerHM.put(BPID, facilityKey);
+					dataPermissions.put(participantID, innerHM);
 				}
 			}
+			
 			for(int i=0;i<dataPermissions.size();i++)
 			{
 				JSONArray objBPIDListArray = new JSONArray();
 				JSONObject objParticipantListValueValue = new JSONObject();
-				JSONObject objBPIDList = new JSONObject();
-				
-				if(dataPermissions.get((dataPermissions.keySet().toArray())[i].toString()).contains(","))
+				JSONObject objBPIDList = new JSONObject();	
+				for(int j=0;j<dataPermissions.get(dataPermissions.keySet().toArray()[i]).size();j++)
 				{
-					JSONObject objParticipantIDValue = new JSONObject();
-					StringTokenizer st1 = new StringTokenizer(dataPermissions.get((dataPermissions.keySet().toArray())[i].toString()), ",");
-					while(st1.hasMoreTokens())
-					{
-						String newToken = st1.nextToken();
-						String participantID = (dataPermissions.keySet().toArray())[i].toString();
-						String BPID = newToken.substring(0,newToken.indexOf("--"));
-						String facilityKey = newToken.substring(newToken.lastIndexOf("--")+2, newToken.length());
+						
 						JSONObject objFacilityList = new JSONObject();
-						JSONObject objFacilityListValue = new JSONObject();
-						JSONObject objFacilityKeyValue = new JSONObject();
-						JSONObject objFacilityKey = new JSONObject();
 						JSONObject objBPID = new JSONObject();
 						JSONArray objFacilityListArray = new JSONArray();
 						JSONObject objBPIDValue = new JSONObject();
 						JSONObject objBPIDListValue = new JSONObject();
-						objParticipantIDValue.put("value", participantID);
-						objParticipantID.put("participantID", objParticipantIDValue);
-						objFacilityKeyValue.put("value", facilityKey);
-						objFacilityKey.put("facilityKey", objFacilityKeyValue);
-						objFacilityListValue.put("value", objFacilityKey);
-						objFacilityListArray.add(objFacilityListValue);
-						objFacilityList.put("facilityList", objFacilityListArray);
-						objBPIDValue.put("value", BPID);
-						objBPID.put("bpid", objBPIDValue);
-						objBPID.putAll(objFacilityList);
-						objFacilityList.putAll(objBPID);
-						objBPIDListValue.put("value", objFacilityList);
-						objBPIDListArray.add(objBPIDListValue);
-						
-					}
-					objBPIDList.put("bpidList", objBPIDListArray);
-					objBPIDList.putAll(objParticipantID);
-					objParticipantListValueValue.put("value", objBPIDList);
-//					objParticipantListValueValue.put("participantID", objParticipantIDValue);
-					objParticipantListValueArray.add(objParticipantListValueValue);
+						String BPID = "";
+						if(dataPermissions.get(dataPermissions.keySet().toArray()[i]).get(dataPermissions.get(dataPermissions.keySet().toArray()[i]).keySet().toArray()[j]).contains(","))
+						{
+							StringTokenizer st1 = new StringTokenizer(dataPermissions.get(dataPermissions.keySet().toArray()[i]).get(dataPermissions.get(dataPermissions.keySet().toArray()[i]).keySet().toArray()[j]),",");
+							while(st1.hasMoreTokens())
+							{
+								JSONObject objFacilityKeyValue = new JSONObject();
+								JSONObject objParticipantIDValue = new JSONObject();
+								JSONObject objFacilityKey = new JSONObject();
+								JSONObject objFacilityListValue = new JSONObject();
+								String newToken = st1.nextToken().trim();
+								String participantID = dataPermissions.keySet().toArray()[i].toString();
+								BPID = dataPermissions.get(dataPermissions.keySet().toArray()[i]).keySet().toArray()[j].toString();
+								String facilityKey = newToken;
+								objParticipantIDValue.put("value", participantID);
+								objParticipantID.put("participantID", objParticipantIDValue);
+								objFacilityKeyValue.put("value", facilityKey);
+								objFacilityKey.put("facilityKey", objFacilityKeyValue);
+								objFacilityListValue.put("value", objFacilityKey);
+								objFacilityListArray.add(objFacilityListValue);
+							}
+							objFacilityList.put("facilityList", objFacilityListArray);
+							objBPIDValue.put("value", BPID);
+							objBPID.put("bpid", objBPIDValue);
+							objBPID.putAll(objFacilityList);
+							objFacilityList.putAll(objBPID);
+							objBPIDListValue.put("value", objFacilityList);
+							objBPIDListArray.add(objBPIDListValue);
+						}
+						else
+						{
+							String participantID = dataPermissions.keySet().toArray()[i].toString();
+							BPID = dataPermissions.get(dataPermissions.keySet().toArray()[i]).keySet().toArray()[j].toString();
+							String facilityKey = dataPermissions.get(dataPermissions.keySet().toArray()[i]).get(dataPermissions.get(dataPermissions.keySet().toArray()[i]).keySet().toArray()[j]);
+							JSONObject objParticipantIDValue = new JSONObject();
+//							JSONObject objFacilityList = new JSONObject();
+							JSONObject objFacilityListValue = new JSONObject();
+							JSONObject objFacilityKeyValue = new JSONObject();
+							JSONObject objFacilityKey = new JSONObject();
+//							JSONObject objBPID = new JSONObject();
+//							JSONArray objFacilityListArray = new JSONArray();
+//							JSONObject objBPIDValue = new JSONObject();
+//							JSONObject objBPIDListValue = new JSONObject();
+							objParticipantIDValue.put("value", participantID);
+							objParticipantID.put("participantID", objParticipantIDValue);
+							objFacilityKeyValue.put("value", facilityKey);
+							objFacilityKey.put("facilityKey", objFacilityKeyValue);
+							objFacilityListValue.put("value", objFacilityKey);
+							objFacilityListArray.add(objFacilityListValue);
+							objFacilityList.put("facilityList", objFacilityListArray);
+							objBPIDValue.put("value", BPID);
+							objBPID.put("bpid", objBPIDValue);
+							objBPID.putAll(objFacilityList);
+							objFacilityList.putAll(objBPID);
+							objBPIDListValue.put("value", objFacilityList);
+							objBPIDListArray.add(objBPIDListValue);
+						}
 				}
-				else
-				{
-					String newToken = dataPermissions.get((dataPermissions.keySet().toArray())[i].toString());
-					String participantID = (dataPermissions.keySet().toArray())[i].toString();
-					String BPID = newToken.substring(0, newToken.indexOf("--"));
-					String facilityKey = newToken.substring(newToken.lastIndexOf("--")+2, newToken.length());
-					JSONObject objFacilityList = new JSONObject();
-					JSONObject objFacilityListValue = new JSONObject();
-					JSONObject objFacilityKeyValue = new JSONObject();
-					JSONObject objFacilityKey = new JSONObject();
-					JSONObject objParticipantIDValue = new JSONObject();
-					JSONObject objBPID = new JSONObject();
-					JSONArray objFacilityListArray = new JSONArray();
-					JSONObject objBPIDValue = new JSONObject();
-					JSONObject objBPIDListValue = new JSONObject();
-					objParticipantIDValue.put("value", participantID);
-					objParticipantID.put("participantID", objParticipantIDValue);
-					objFacilityKeyValue.put("value", facilityKey);
-					objFacilityKey.put("facilityKey", objFacilityKeyValue);
-					objFacilityListValue.put("value", objFacilityKey);
-					objFacilityListArray.add(objFacilityListValue);
-					objFacilityList.put("facilityList", objFacilityListArray);
-					objBPIDValue.put("value", BPID);
-					objBPID.put("bpid", objBPIDValue);
-					objBPID.putAll(objFacilityList);
-					objFacilityList.putAll(objBPID);
-					objBPIDListValue.put("value", objFacilityList);
-					objBPIDListArray.add(objBPIDListValue);
-					objBPIDList.put("bpidList", objBPIDListArray);
-					objBPIDList.putAll(objParticipantID);
-					objParticipantListValueValue.put("value", objBPIDList);
-					objParticipantListValueValue.put("participantID", objParticipantIDValue);
-					objParticipantListValueArray.add(objParticipantListValueValue);
-				}
+				objBPIDList.put("bpidList", objBPIDListArray);
+				objBPIDList.putAll(objParticipantID);
+				objParticipantListValueValue.put("value", objBPIDList);
+//				objParticipantListValueValue.put("participantID", objParticipantIDValue);
+				objParticipantListValueArray.add(objParticipantListValueValue);	
+
 			}
 			objParticipantListValue.put("value", objParticipantListValueArray);
 		}
