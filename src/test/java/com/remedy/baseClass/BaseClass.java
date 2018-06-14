@@ -601,6 +601,8 @@ public class BaseClass {
 		 } 
 		 else if (type.equals("hospital")) {
 				idList.addAll(CreateACHOrganizationAPI.idList);
+				Long a = CreateACHOrganizationAPI.idList.get(0);
+				CreateACHOrganizationAPI.copyIDList.add(a);
 				CreateACHOrganizationAPI.idList.clear();
 		 }
 		 else if (type.equals("snf")) 
