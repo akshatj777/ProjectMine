@@ -64,7 +64,7 @@ public class CreateManagingOrganizationAPI extends BaseClass {
 	{
 		if(type.contains(","))
 		{
-			StringTokenizer st = new StringTokenizer(type);
+			StringTokenizer st = new StringTokenizer(type, ",");
 			while(st.hasMoreTokens())
 			{
 				deleteNamesList(st.nextToken().trim());
