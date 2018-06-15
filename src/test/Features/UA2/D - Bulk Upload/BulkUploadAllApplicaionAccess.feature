@@ -128,8 +128,20 @@ Feature: Bulk Upload User from SA
     And I should see Log in widget
 
     Examples: 
-                                                                          | User        | Role      | NPI | FirstName          | LastName          | Phone | ApplicationsEnabled        | ApplicationsDisabled | HealthSystem      | Programs                        | Locations                                      | Applications                    | ApplicationsNotVisible                          | Roletext | ReportCategory | ReportName         | BPID | Facilities        | LearningPathway                                           |
-       | Super Admin | Executive |     | ExecutiveFirstName | ExecutiveLastName |       | Episodes, Reports, Lessons |                      | Stamford Hospital | Stamford Hospital--BPCI Model 2 | Stamford Hospital--2070-015--Stamford Hospital | Episodes, Reports, Lessons, TCI | Administration, Episodes 2.0, Physician Connect | ROLE_PRM | Patient ID     | Episode DRG Issues |      | Stamford Hospital | i am learning path, Learning Pathway 2, Remedy University |
+      | User        | Role      | NPI | FirstName          | LastName          | Phone | ApplicationsEnabled        | ApplicationsDisabled | HealthSystem      | Programs                        | Locations                                      | Applications                    | ApplicationsNotVisible                          | Roletext | ReportCategory | ReportName         | BPID | Facilities        | LearningPathway                                           |
+      | Super Admin | Executive |     | ExecutiveFirstName | ExecutiveLastName |       | Episodes, Reports, Lessons |                      | Stamford Hospital | Stamford Hospital--BPCI Model 2 | Stamford Hospital--2070-015--Stamford Hospital | Episodes, Reports, Lessons, TCI | Administration, Episodes 2.0, Physician Connect | ROLE_PRM | Patient ID     | Episode DRG Issues |      | Stamford Hospital | i am learning path, Learning Pathway 2, Remedy University |
+
+Scenario: Invalid Data Permission- Create user with only PID + Only BPID	+  Only Facility Key + PID and Facility key + Facility Key and BPID + Invalid separation by using comma (,) and semicolon (;)
+    Given I am on the login page
+    Then I log in as super user
+    Then I should see Tile text User Admin
+    And I click on the "User Admin" tile
+    Then I should see header text "Users"
+    Then I click on Import User button
+    Then I click on Try Again button
+    Then I enter data with invalid data permission values
+    Then I click on submit button on bulk user upload page
+    Then I verify "6 users not added" error message
 
   Scenario: Bulk Upload Multiple User
     #Given I am on mail login page

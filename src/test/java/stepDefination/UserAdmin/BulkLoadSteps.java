@@ -94,9 +94,9 @@ public class BulkLoadSteps extends DriverScript{
     public void iEnterSingleDataWithFullAccessPerRole(String role){
     	bulkUser.iEnterSingleDataAllAppPerRole(role);
     }
-    @When("^I enter multiple user data$")
-    public void iEnterMultipleData(){
-    	bulkUser.iEnterMultipleData();
+    @When("^I enter data with invalid data permission values$")
+    public void iEnterInvalidDPData(){
+    	bulkUser.iEnterInvalidDPData();
     }
     @When("^I verify previous result \"([^\"]*)\" on summary page$")
     public void iVerifySummarymsg(String text){
