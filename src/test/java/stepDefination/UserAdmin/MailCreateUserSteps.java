@@ -29,6 +29,11 @@ public class MailCreateUserSteps extends DriverScript {
 		mailcreateuser.iClickOnInboxUnderMail();
 	}
 	
+	@Then("^I set new password for the user \"([^\"]*)\"$") 
+	public void setNewPassword(String userRole) throws Throwable {
+		mailcreateuser.setNewPassword(userRole);
+	}
+	
 	@Then("^I click on Mail icon in my account$") 
 	public void i_Click_On_Mail_Icon_In_My_Account() throws Throwable {
 		mailcreateuser.iClickOnMailIconOnMyAccount();

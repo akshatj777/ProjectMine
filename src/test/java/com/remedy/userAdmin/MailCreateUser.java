@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
@@ -30,6 +32,7 @@ public class MailCreateUser extends BaseClass{
 	static String time = null;
 	static String mail = "test.automatemail";
 	static String email = null;
+	Set<String> handles = null;
 
 	public MailCreateUser(WebDriver driver) {
 		super(driver);
@@ -121,6 +124,244 @@ public class MailCreateUser extends BaseClass{
 	public void iClickOnSelectAllCheckBoxInMail() {
 		iWillWaitToSee(By.xpath("//div[@class='T-Jo-auh' and @role='presentation']"));
 		clickElement(driver.findElement(By.xpath("//div[@class='T-Jo-auh' and @role='presentation']")));
+	}
+	
+	public void setNewPassword(String userRole) throws InterruptedException {
+		boolean flag = false;
+		do
+		{
+			if(flag)
+			{
+				try
+		    	{
+		    		if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+		    		{
+		    			String parentWindow = driver.getWindowHandle();
+		                Set<String> handles = driver.getWindowHandles();
+		                if(!((String)handles.toArray()[0]).equals(parentWindow))
+		    			{
+		    				driver.switchTo().window((String)handles.toArray()[0]);
+		    			}
+		                delay();
+		    		}
+		    		else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+		    		{
+		    			String parentWindow = driver.getWindowHandle();
+		                Set<String> handles = driver.getWindowHandles();
+		                Object[] array = handles.toArray();
+						Arrays.sort(array);
+		                if(!(array[0].toString().equals(parentWindow)))
+		    			{
+		    				driver.switchTo().window(array[0].toString());
+		    			}
+		                delay();
+		    		}
+		    		else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		    		{
+		    			driver.switchTo().window(parentWindow);
+//		    			String parentWindow = driver.getWindowHandle();
+//		                Set<String> handles = driver.getWindowHandles();
+//		                if(!((String)handles.toArray()[0]).equals(parentWindow))
+//		    			{
+//		    				driver.switchTo().window((String)handles.toArray()[0]);
+//		    			}
+//		                delay();
+		    		}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.out.println(e.toString());
+		    	}
+				driver.findElement(By.xpath("//a[contains(text(),'Inbox (')]")).click();
+//				driver.findElements(By.xpath("//div/span[text()='More']")).get(1).click();
+//				iWillWaitToSee(By.xpath("//div[text()='Mark as unread']"));
+//				driver.findElement(By.xpath("//div[text()='Mark as unread']")).click();
+				
+			}
+			delay();
+			driver.findElement(By.xpath("//a[contains(text(),'Inbox (')]")).click();
+			iWillWaitToSee(By.xpath("//a[contains(text(),'Inbox (')]"));
+			isElementPresentOnPage(By.xpath("//a[contains(text(),'Inbox (')]"));
+			iWillWaitToSee(By.xpath("//div/span[contains(text(),'Change Your Password We recently received')]"));
+	    	Assert.assertTrue(isElementPresentOnPage((By.xpath("//div/span[contains(text(),'Change Your Password We recently received')]"))));
+	    	iWillWaitToSee(By.xpath("//div/span[contains(text(),'Change Your Password We recently received')]"));
+			Thread.sleep(3000);
+			if(driver.findElement(By.xpath("//div/span[contains(text(),'Change Your Password We recently received')]")).isEnabled())
+			{
+				if(DriverScript.Config.getProperty("Browser").equals("ie"))
+				{
+					((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div/span[contains(text(),'Change Your Password We recently received')]")));
+				}
+				else
+				{
+					clickElement(driver.findElement(By.xpath("//div/span[contains(text(),'Change Your Password We recently received')]")));
+				}
+			}
+			iWillWaitToSee(By.xpath("//a[contains(text(),'"+"Change My Password"+"')]"));
+			Assert.assertTrue(isElementPresentOnPage((By.xpath("//a[contains(text(),'"+"Change My Password"+"')]"))));
+			if(DriverScript.Config.getProperty("Browser").equals("ie"))
+			{
+				iWillWaitToSee(By.xpath("//a[contains(text(),'"+"Change My Password"+"')]"));
+				((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(text(),'"+"Change My Password"+"')]")));
+			}
+			else
+			{
+				iWillWaitToSee(By.xpath("//a[contains(text(),'"+"Change My Password"+"')]"));
+				clickElement(driver.findElement((By.xpath("//a[contains(text(),'"+"Change My Password"+"')]"))));
+			}
+			try
+			{
+				if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+				{
+					Thread.sleep(5000);
+					String parentWindow = driver.getWindowHandle();
+					Set<String> handles = driver.getWindowHandles();
+					if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
+					{
+						driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
+					}
+				}
+				else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+				{
+					Thread.sleep(5000);
+					String parentWindow = driver.getWindowHandle();
+					Set<String> handles = driver.getWindowHandles();
+					Object[] array = handles.toArray();
+					Arrays.sort(array);
+					System.out.println("Windows : "+Arrays.toString(array));
+					if(!(array[array.length-1].toString().equals(parentWindow)))
+					{
+						driver.switchTo().window(array[array.length-1].toString());
+						new WebDriverWait(driver, 180).until(
+						          webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+						System.out.println("Hello : "+driver.getTitle());
+						System.out.println("After Switching Window Handle : "+driver.getWindowHandle());
+					}
+				}
+				else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+				{
+					parentWindow = driver.getWindowHandle();
+					if(driver.getWindowHandles().size()==2)
+					{
+						handles = driver.getWindowHandles();
+						handles.remove(parentWindow);
+						driver.switchTo().window((String)handles.toArray()[0]);
+					}
+					else if(driver.getWindowHandles().size()>2)
+					{
+						Set<String> newHandles = driver.getWindowHandles();
+						newHandles.removeAll(handles);
+						driver.switchTo().window((String)newHandles.toArray()[0]);
+					}
+//					Thread.sleep(3000);
+//					if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
+//					{
+//						Thread.sleep(3000);
+//						while(!(driver.getWindowHandle().equals((String)handles.toArray()[handles.size()-1])))
+//						{
+//							Thread.sleep(3000);
+//							driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
+//						}
+//					}
+//					Thread.sleep(3000);
+//					System.out.println(driver.getTitle());
+					handles=driver.getWindowHandles();
+					driver.manage().window().maximize();
+					Thread.sleep(3000);
+				}
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.toString());
+			}
+			System.out.println(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim()).toLowerCase());
+			if(driver.findElements(By.xpath("//span[text()='"+CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim()).toLowerCase()+"']")).size()==0)
+			{
+				flag=true;
+			}
+		}
+		while(driver.findElements(By.xpath("//span[text()='"+CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim()).toLowerCase()+"']")).size()==0);
+		if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		{
+			Thread.sleep(3000);
+			iWillWaitToSee(By.name("password"));
+			System.out.println("Hello");
+			new Actions(driver).sendKeys(driver.findElement(By.xpath("//input[@placeholder='your new password']")), "Testing1@").build().perform();
+		}
+		else
+		{
+			iWillWaitToSee(By.name("password"));
+			iFillInText(driver.findElement(By.name("password")), "Testing1@");
+		}
+		
+		if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		{
+			iWillWaitToSee(By.xpath("//input[@placeholder='confirm your new password']"));
+			new Actions(driver).sendKeys(driver.findElement(By.xpath("//input[@placeholder='confirm your new password']")), "Testing1@").build().perform();
+		}
+		else
+		{
+			iWillWaitToSee(By.xpath("//input[@placeholder='confirm your new password']"));
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='confirm your new password']")), "Testing1@");
+		}
+		if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		{
+			iWillWaitToSee(By.xpath("//button[@type='submit']"));
+			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//button[@type='submit']")));
+			Thread.sleep(10000);
+		}
+		else
+		{
+			iWillWaitToSee(By.xpath("//button[@type='submit']"));
+			clickElement(driver.findElement(By.xpath("//button[@type='submit']")));
+			Thread.sleep(10000);
+		}
+		if(driver.findElements(By.xpath("//input[@type='email']")).size()>0)
+		{
+			try
+	    	{
+	    		if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+	    		{
+	    			String parentWindow = driver.getWindowHandle();
+	                Set<String> handles = driver.getWindowHandles();
+	                if(!((String)handles.toArray()[0]).equals(parentWindow))
+	    			{
+	    				driver.switchTo().window((String)handles.toArray()[0]);
+	    			}
+	                delay();
+	    		}
+	    		else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+	    		{
+	    			String parentWindow = driver.getWindowHandle();
+	                Set<String> handles = driver.getWindowHandles();
+	                Object[] array = handles.toArray();
+					Arrays.sort(array);
+	                if(!(array[0].toString().equals(parentWindow)))
+	    			{
+	    				driver.switchTo().window(array[0].toString());
+	    			}
+	                delay();
+	    		}
+	    		else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+	    		{
+	    			driver.switchTo().window(parentWindow);
+//	    			String parentWindow = driver.getWindowHandle();
+//	                Set<String> handles = driver.getWindowHandles();
+//	                if(!((String)handles.toArray()[0]).equals(parentWindow))
+//	    			{
+//	    				driver.switchTo().window((String)handles.toArray()[0]);
+//	    			}
+//	                delay();
+	    		}
+	    	}
+	    	catch(Exception e)
+	    	{
+	    		System.out.println(e.toString());
+	    	}
+			driver.findElements(By.xpath("//div[@class='T-I J-J5-Ji T-I-Js-IF W6eDmd ns T-I-ax7 L3']")).get(1).click();
+			iWillWaitToSee(By.xpath("//div[@role='menuitem']/div[text()='Trash']"));
+			driver.findElement(By.xpath("//div[@role='menuitem']/div[text()='Trash']")).click();
+		}
 	}
 	
 	public void iClickOnDeleteIconInMail() {
