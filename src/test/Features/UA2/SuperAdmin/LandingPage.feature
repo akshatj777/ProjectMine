@@ -10,28 +10,30 @@ Feature: Super Admin Landing page verification
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
-    Then I verify Account Verification in Inbox in my account
-    Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm My Account!" link in mail content
-    Then I click on "Confirm My Account!" link in mail content
-    And I switch to new window
-    Then I enter email to generate password link
-    And I click on send mail button
-    Then I switch back to old window
-    Then I click on Inbox in mail
-    Then I verify the unread mail in inbox in my account
-    Then I verify Change Password mail in Inbox in my account
-    Then I click on Change Password mail in Inbox
-    Then I verify "Change My Password" link in mail content
-    Then I click on "Change My Password" link in mail content
-    And I switch to new window
-    And I enter new password "Testing1@" to set new password
-    And I enter confirm new password "Testing1@" to set new password
-    And I click on submit button to set new password
+    Then I verify account for user "<User>-<Role>"
+    Then I set new password for the user "<User>-<Role>"
 
+    #Then I verify Account Verification in Inbox in my account
+    #Then I click on Account Verification mail in Inbox
+    #Then I verify "Confirm My Account!" link in mail content
+    #Then I click on "Confirm My Account!" link in mail content
+    #And I switch to new window
+    #Then I enter email to generate password link
+    #And I click on send mail button
+    #Then I switch back to old window
+    #Then I click on Inbox in mail
+    #Then I verify the unread mail in inbox in my account
+    #Then I verify Change Password mail in Inbox in my account
+    #Then I click on Change Password mail in Inbox
+    #Then I verify "Change My Password" link in mail content
+    #Then I click on "Change My Password" link in mail content
+    #And I switch to new window
+    #And I enter new password "Testing1@" to set new password
+    #And I enter confirm new password "Testing1@" to set new password
+    #And I click on submit button to set new password
     Examples: 
-      | User        | FirstName | LastName                                 | Email                           | Phone | NPI | RoleID      | Applications                                             | LearningPathways                       | Locations             | expStatusCode |
-      | Super Admin | Firstname | Lastnamelastnamelastnamelastnamelastname | qaautomation@remedypartners.com |       |     | 1-Executive | episode_connect-Episodes,reports-Reports,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
+      | User        | FirstName | LastName                                 | Email                           | Phone | NPI | Role      | RoleID      | Applications                                             | LearningPathways                       | Locations             | expStatusCode |
+      | Super Admin | Firstname | Lastnamelastnamelastnamelastnamelastname | qaautomation@remedypartners.com |       |     | Executive | 1-Executive | episode_connect-Episodes,reports-Reports,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
 
   Scenario: Verification of availability of fields on Super User Landing page
     Given I am on the login page

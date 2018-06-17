@@ -10,15 +10,16 @@ Feature: Delete a user from PTA
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
-    Then I verify Account Verification in Inbox in my account
-    Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm My Account!" link in mail content
-    Then I click on "Confirm My Account!" link in mail content
-    And I switch to new window
-    Then I enter email to generate password link
-    And I click on send mail button
-    Then I switch back to old window
-    Then I click on Inbox in mail
+    Then I verify account for user "<User>-<Role>"
+    #Then I verify Account Verification in Inbox in my account
+    #Then I click on Account Verification mail in Inbox
+    #Then I verify "Confirm My Account!" link in mail content
+    #Then I click on "Confirm My Account!" link in mail content
+    #And I switch to new window
+    #Then I enter email to generate password link
+    #And I click on send mail button
+    #Then I switch back to old window
+    #Then I click on Inbox in mail
     Then I set new password for the user "<User>-<Role>"
 
     #Then I verify the unread mail in inbox in my account
@@ -111,7 +112,8 @@ Feature: Delete a user from PTA
     Then I verify "<ApplicationsNotVisible>" is not visible on Applications tab
     Then I click on Next button
     Then I verify the header "Permissions"
-    Then I select "<Programs1>" programs for existing organisation
+    Then I select "<Programs1>" programs
+    #Then I select "<Programs1>" programs for existing organisation
     Then I select "<Locations1>" locations for PTA user
     Then I click on Submit button for "<User>"
     And I wait for 3000 milli seconds
@@ -143,24 +145,27 @@ Feature: Delete a user from PTA
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
-    Then I verify Account Verification in Inbox in my account
-    Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm My Account!" link in mail content
-    Then I click on "Confirm My Account!" link in mail content
-    And I switch to new window
-    Then I enter email to generate password link
-    And I click on send mail button
-    Then I switch back to old window
-    Then I click on Inbox in mail
-    Then I verify the unread mail in inbox in my account
-    Then I verify Change Password mail in Inbox in my account
-    Then I click on Change Password mail in Inbox
-    Then I verify "Change My Password" link in mail content
-    Then I click on "Change My Password" link in mail content
-    And I switch to new window
-    And I enter new password "Testing1@" to set new password
-    And I enter confirm new password "Testing1@" to set new password
-    And I click on submit button to set new password
+    Then I verify account for user "<User>-<Role>"
+    Then I set new password for the user "<User>-<Role>"
+    #Then I verify Account Verification in Inbox in my account
+    #Then I click on Account Verification mail in Inbox
+    #Then I verify "Confirm My Account!" link in mail content
+    #Then I click on "Confirm My Account!" link in mail content
+    #And I switch to new window
+    #Then I enter email to generate password link
+    #And I click on send mail button
+    #Then I switch back to old window
+    #Then I click on Inbox in mail
+    #Then I verify the unread mail in inbox in my account
+    #Then I verify Change Password mail in Inbox in my account
+    #Then I click on Change Password mail in Inbox
+    #Then I verify "Change My Password" link in mail content
+    #Then I click on "Change My Password" link in mail content
+    #And I switch to new window
+    #And I enter new password "Testing1@" to set new password
+    #And I enter confirm new password "Testing1@" to set new password
+    #And I click on submit button to set new password
+    Then I signout from mail account
     Given I am on the login page
     Then I enter newuser email for "<User>-<Role>" login to Remedy
     Then I enter newuser password for login to Remedy

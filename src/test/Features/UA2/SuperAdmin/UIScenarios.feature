@@ -1,5 +1,22 @@
 Feature: UI Scenarios - Super Admin User
 
+  Scenario Outline: Create Physician through API call and then verify the user
+    Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>" and "<LearningPathways>"
+    When Create User with this data for "<User>"
+    Then Verify Actual vs expected results "<expStatusCode>" and "<responseMsg>"
+    Given I am on mail login page
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
+    Then I enter password "1Welcome2" to login mail account
+    Then I click on Mail icon in my account
+    Then I click on Inbox in mail
+    And I wait for 3000 milli seconds
+    Then I verify account for user "<User>-<Role>"
+    Then I set new password for the user "<User>-<Role>"
+
+    Examples: 
+      | User        | FirstName                                 | LastName                                 | Email                           | Phone | NPI | Role       | RoleID       | Applications                                                                                | LearningPathways                       | Locations                                                                    | expStatusCode |
+      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       | NPI | Physicians | 4-Physicians | episode_connect-Episodes,reports-Reports,lessons-Lessons,physician_portal-Physician Connect | 3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | 441444--2070-g14--100029, 441444--3056-q91--441310, 441444--3056-q91--181318 |           200 |
+
   Scenario Outline: <Description>
     Given I am on the login page
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login

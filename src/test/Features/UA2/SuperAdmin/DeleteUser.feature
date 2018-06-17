@@ -10,28 +10,30 @@ Feature: Delete a user from SA
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
-    Then I verify Account Verification in Inbox in my account
-    Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm My Account!" link in mail content
-    Then I click on "Confirm My Account!" link in mail content
-    And I switch to new window
-    Then I enter email to generate password link
-    And I click on send mail button
-    Then I switch back to old window
-    Then I click on Inbox in mail
-    Then I verify the unread mail in inbox in my account
-    Then I verify Change Password mail in Inbox in my account
-    Then I click on Change Password mail in Inbox
-    Then I verify "Change My Password" link in mail content
-    Then I click on "Change My Password" link in mail content
-    And I switch to new window
-    And I enter new password "Testing1@" to set new password
-    And I enter confirm new password "Testing1@" to set new password
-    And I click on submit button to set new password
+    Then I verify account for user "<User>-<Role>"
+    Then I set new password for the user "<User>-<Role>"
 
+    #Then I verify Account Verification in Inbox in my account
+    #Then I click on Account Verification mail in Inbox
+    #Then I verify "Confirm My Account!" link in mail content
+    #Then I click on "Confirm My Account!" link in mail content
+    #And I switch to new window
+    #Then I enter email to generate password link
+    #And I click on send mail button
+    #Then I switch back to old window
+    #Then I click on Inbox in mail
+    #Then I verify the unread mail in inbox in my account
+    #Then I verify Change Password mail in Inbox in my account
+    #Then I click on Change Password mail in Inbox
+    #Then I verify "Change My Password" link in mail content
+    #Then I click on "Change My Password" link in mail content
+    #And I switch to new window
+    #And I enter new password "Testing1@" to set new password
+    #And I enter confirm new password "Testing1@" to set new password
+    #And I click on submit button to set new password
     Examples: 
-      | User        | FirstName | LastName | Email                           | Phone      | NPI | RoleID         | Applications                                             | LearningPathways                                    | Locations                                                     | expStatusCode |
-      | Super Admin | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 |     | 3-Case Manager | episode_connect-Episodes,reports-Reports,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1 | 514029--2070-023--A, 514029--2070-023--L, 514029--2070-025--T |           200 |
+      | User        | FirstName | LastName | Email                           | Phone      | NPI | Role         | RoleID         | Applications                                             | LearningPathways                                    | Locations                                                     | expStatusCode |
+      | Super Admin | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 |     | Case Manager | 3-Case Manager | episode_connect-Episodes,reports-Reports,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1 | 514029--2070-023--A, 514029--2070-023--L, 514029--2070-025--T |           200 |
 
   Scenario Outline: Login from SA and delete an existing user and Login with the verified deleted user
     Given I am on the login page
@@ -150,24 +152,27 @@ Feature: Delete a user from SA
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
-    Then I verify Account Verification in Inbox in my account
-    Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm My Account!" link in mail content
-    Then I click on "Confirm My Account!" link in mail content
-    And I switch to new window
-    Then I enter email to generate password link
-    And I click on send mail button
-    Then I switch back to old window
-    Then I click on Inbox in mail
-    Then I verify the unread mail in inbox in my account
-    Then I verify Change Password mail in Inbox in my account
-    Then I click on Change Password mail in Inbox
-    Then I verify "Change My Password" link in mail content
-    Then I click on "Change My Password" link in mail content
-    And I switch to new window
-    And I enter new password "Testing1@" to set new password
-    And I enter confirm new password "Testing1@" to set new password
-    And I click on submit button to set new password
+    Then I verify account for user "<User>-<Role>"
+    Then I set new password for the user "<User>-<Role>"
+    #Then I verify Account Verification in Inbox in my account
+    #Then I click on Account Verification mail in Inbox
+    #Then I verify "Confirm My Account!" link in mail content
+    #Then I click on "Confirm My Account!" link in mail content
+    #And I switch to new window
+    #Then I enter email to generate password link
+    #And I click on send mail button
+    #Then I switch back to old window
+    #Then I click on Inbox in mail
+    #Then I verify the unread mail in inbox in my account
+    #Then I verify Change Password mail in Inbox in my account
+    #Then I click on Change Password mail in Inbox
+    #Then I verify "Change My Password" link in mail content
+    #Then I click on "Change My Password" link in mail content
+    #And I switch to new window
+    #And I enter new password "Testing1@" to set new password
+    #And I enter confirm new password "Testing1@" to set new password
+    #And I click on submit button to set new password
+    Then I signout from mail account
     Given I am on the login page
     Then I enter newuser email for "<User>-<Role>" login to Remedy
     Then I enter newuser password for login to Remedy

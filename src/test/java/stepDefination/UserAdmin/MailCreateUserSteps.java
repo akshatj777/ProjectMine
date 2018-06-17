@@ -64,6 +64,11 @@ public class MailCreateUserSteps extends DriverScript {
 		mailcreateuser.iVerifyAccountVerificationMailInInboxInMyAccount();
 	}
 	
+	@Then("^I verify account for user \"([^\"]*)\"$") 
+	public void verifyAccountUA(String role) throws Throwable {
+		mailcreateuser.verifyAccountUA(role);
+	}
+	
 	@Then("^I verify accounts for all the created users$") 
 	public void verifyAccount() throws Throwable {
 		mailcreateuser.verifyAccountForAllCreatedUsers();

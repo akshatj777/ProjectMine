@@ -10,15 +10,16 @@ Feature: Edit user page for PTA
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
-    Then I verify Account Verification in Inbox in my account
-    Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm My Account!" link in mail content
-    Then I click on "Confirm My Account!" link in mail content
-    And I switch to new window
-    Then I enter email to generate password link
-    And I click on send mail button
-    Then I switch back to old window
-    Then I click on Inbox in mail
+    Then I verify account for user "<User>-<Role>"
+    #Then I verify Account Verification in Inbox in my account
+    #Then I click on Account Verification mail in Inbox
+    #Then I verify "Confirm My Account!" link in mail content
+    #Then I click on "Confirm My Account!" link in mail content
+    #And I switch to new window
+    #Then I enter email to generate password link
+    #And I click on send mail button
+    #Then I switch back to old window
+    #Then I click on Inbox in mail
     Then I set new password for the user "<User>-<Role>"
 
     #Then I verify the unread mail in inbox in my account
@@ -554,15 +555,16 @@ Feature: Edit user page for PTA
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
-    Then I verify Account Verification in Inbox in my account
-    Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm My Account!" link in mail content
-    Then I click on "Confirm My Account!" link in mail content
-    And I switch to new window
-    Then I enter email to generate password link
-    And I click on send mail button
-    Then I switch back to old window
-    Then I click on Inbox in mail
+    Then I verify account for user "<User>-<Role>"
+    #Then I verify Account Verification in Inbox in my account
+    #Then I click on Account Verification mail in Inbox
+    #Then I verify "Confirm My Account!" link in mail content
+    #Then I click on "Confirm My Account!" link in mail content
+    #And I switch to new window
+    #Then I enter email to generate password link
+    #And I click on send mail button
+    #Then I switch back to old window
+    #Then I click on Inbox in mail
     Then I set new password for the user "<User>-<Role>"
 
     #Then I verify the unread mail in inbox in my account
@@ -806,15 +808,16 @@ Feature: Edit user page for PTA
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
-    Then I verify Account Verification in Inbox in my account
-    Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm My Account!" link in mail content
-    Then I click on "Confirm My Account!" link in mail content
-    And I switch to new window
-    Then I enter email to generate password link
-    And I click on send mail button
-    Then I switch back to old window
-    Then I click on Inbox in mail
+    Then I verify account for user "<User>-<Role>"
+    #Then I verify Account Verification in Inbox in my account
+    #Then I click on Account Verification mail in Inbox
+    #Then I verify "Confirm My Account!" link in mail content
+    #Then I click on "Confirm My Account!" link in mail content
+    #And I switch to new window
+    #Then I enter email to generate password link
+    #And I click on send mail button
+    #Then I switch back to old window
+    #Then I click on Inbox in mail
     Then I set new password for the user "<User>-<Role>"
 
     #Then I verify the unread mail in inbox in my account
