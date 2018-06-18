@@ -20,7 +20,7 @@ public class ContractDetailsDataModel {
     private List<ParticipatingBundlesDataModel> participatingBundles = null;
 
 
-    public ContractDetailsDataModel(String contractId, String endDate, long organizationId, long programId, String startDate, String type, List<ParticipatingBundlesDataModel> participatingBundles) {
+    public ContractDetailsDataModel(String contractId, String endDate, long organizationId, Long programId, String startDate, String type, List<ParticipatingBundlesDataModel> participatingBundles) {
 
         this.contractId = contractId;
         this.endDate = endDate;

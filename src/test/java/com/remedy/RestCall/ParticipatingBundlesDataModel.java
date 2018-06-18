@@ -12,12 +12,12 @@ import java.util.List;
 public class ParticipatingBundlesDataModel {
 
     private String endDate;
-    private String participatingBundleId;
+    private Long participatingBundleId;
     private String startDate;
     private List<PricingListDataModel> pricingList = null;
 
 
-    public ParticipatingBundlesDataModel(String endDate, String participatingBundleId, String startDate, List<PricingListDataModel> pricingList) {
+    public ParticipatingBundlesDataModel(String endDate, Long participatingBundleId, String startDate, List<PricingListDataModel> pricingList) {
 
         this.endDate = endDate;
         this.participatingBundleId = participatingBundleId;
@@ -34,7 +34,7 @@ public class ParticipatingBundlesDataModel {
         return endDate;
     }
 
-    public String getParticipatingBundleId() {
+    public Long getParticipatingBundleId() {
         return participatingBundleId;
     }
 

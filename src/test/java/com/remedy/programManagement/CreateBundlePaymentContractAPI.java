@@ -18,6 +18,8 @@ public class CreateBundlePaymentContractAPI extends BaseClass{
 
 	public InsertDataIntoDataModels insertData = new InsertDataIntoDataModels();
 	public static List<Long> idList = new ArrayList<>();
+	public static List<String> BPCCIDList = new ArrayList<>();
+	public static List<Long> BPCIDcopyList = new ArrayList<>();
 	
 	public CreateBundlePaymentContractAPI(WebDriver driver) {
 		super(driver);
@@ -25,7 +27,7 @@ public class CreateBundlePaymentContractAPI extends BaseClass{
 
 	public void createContractJson(String contractId, String cEndDate, String orgIdFrmCucumber, String cProgramId, String cStartDate, String cBundleId, String bundlePrice, String cbundleStartDate, String cBundleEndDate, String type, String orgType, String priceStartDate, String priceEndDate, String baseLineEndDate, String baseLineStartDate, String trendFactor, String upperBound, String lowerBound)  {
 
-	 List<String> bundleIdList = new ArrayList<>();
+	 List<Long> bundleIdList = new ArrayList<>();
         List<Long> programIdList = new ArrayList<>();
         List<Long> orgIdList = new ArrayList<>();
         List<ContractDetailsDataModel> contractDetailsMapList = new ArrayList();
@@ -58,13 +60,22 @@ public class CreateBundlePaymentContractAPI extends BaseClass{
             	orgIdList.add(CreateACHOrganizationAPI.copyIDList.get(1)); 
             }
             else if (orgType.equals("pgp")) {
-                orgIdList = CreatePGPOrganizationAPI.getId(orgType);
+                orgIdList.add(CreatePGPOrganizationAPI.PGPcopyIDList.get(0));
+            } 
+            else if (orgType.equals("pgpNOMO")) {
+            	orgIdList.add(CreatePGPOrganizationAPI.PGPcopyIDList.get(1));
             } 
             else if (orgType.equals("hha")) {
-                orgIdList = CreateHHAOrganizationAPI.getId(orgType);
+            	orgIdList.add(CreateHHAOrganizationAPI.HHAcopyIDList.get(0));
+            }
+            else if (orgType.equals("hhaNOMO")) {
+            	orgIdList.add(CreateHHAOrganizationAPI.HHAcopyIDList.get(1));
             }
             else if (orgType.equals("snf")) {
-                orgIdList = CreateSNFOrganizationAPI.getId(orgType);
+            	orgIdList.add(CreateSNFOrganizationAPI.SNFcopyIDList.get(0));
+            }
+            else if (orgType.equals("snfNOMO")) {
+            	orgIdList.add(CreateSNFOrganizationAPI.SNFcopyIDList.get(1));
             }
             else
             {
@@ -79,22 +90,25 @@ public class CreateBundlePaymentContractAPI extends BaseClass{
         //adding to a list after spliting the cucumber data and get the index and insert to participating bundle map
         if (StringUtils.isBlank(cBundleId)) 
         {
-           // bundleIdList = CreateBundleAPI.bundleNameList.get(0).toString();
+        	  //bundleIdList = CreateBundleAPI.bundleNameList.get(0);
+        	bundleIdList.add(CreateBundleAPI.bundleIDList.get(0));
         }
         else 
         {
             List<String> bundleIdSplitList = insertData.splitIntoSubList(cBundleId);
-            bundleIdList.add(String.valueOf(bundleIdSplitList.get(0)));
+            bundleIdList.add(Long.valueOf(bundleIdSplitList.get(0)));
         }
         if (StringUtils.isBlank(cProgramId)) 
         {
-            programIdList = CreatePrograms.getId(orgType);
+            //programIdList = CreateProgramAPI.PROGRAMNameList.get(0);
+        	programIdList.add(CreateProgramAPI.PROGRAMIDList.get(0));
         } 
         else 
         {
             List<String> prgIdSplitList = insertData.splitIntoSubList(cProgramId);
             Long prfId = Long.valueOf(prgIdSplitList.get(0));
             programIdList.add(prfId);
+//            programIdList.add(prgIdSplitList.get(0));
         }
 
         // bundle data split from cucumber
@@ -169,7 +183,7 @@ public class CreateBundlePaymentContractAPI extends BaseClass{
             ContractDetailsDataModel contractDetailsPre = new ContractDetailsDataModel(contractIdFinalList.get(i), endDateFinalList.get(i), orgIdList.get(i), programIdList.get(i), startDateFinalList.get(i), type, participatingBundleList);
             contractDetailsMapList.add(contractDetailsPre);
         }
-        jsonString = generateJson(contractDetailsMapList);
+        CreateBundlePaymentContractAPI.jsonString = generateJson(contractDetailsMapList);
     }
 
 	public void createContractWithThisData() throws Throwable {

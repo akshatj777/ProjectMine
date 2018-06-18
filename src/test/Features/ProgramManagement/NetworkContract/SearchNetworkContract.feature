@@ -1,12 +1,5 @@
 Feature: Search Network Contracts functionality tests
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -70,67 +63,35 @@ Feature: Search Network Contracts functionality tests
       | validBundle | BC         | bundle- | create-bundle-content1 |           201 |             |
       | validBundle | BC         | bundle- | create-bundle-content1 |           201 |             |
 
-  Scenario Outline: <Description>
-    When I click on "Payor" organization tab on organization dashboard
-    When I search with "<Payor_Name>" on organization in search box
-    And I click "<Payor_Name>" field in search list on organization page
-    And I verify "<Payor_Name>" name on the header of view profile
-    And I verify "Contracts" tab present under "Payor" Organization
-    And I click on "Contracts" tab on view profile of "Payor" Organization
-    And I verify the "Create New Contract" button on view profile of "Payor" Organization
-    Then I click on "Create New Contract" button on "create" organization page
-    And I verify "Create Contract" header text on create organization page
-    And I select "<Program_Name>" Program name in create Contract page under "Payor" Organization
-    And I select Organization type "<Organization_Type>" for Contract "1" on "create" Contracts page
-    And I select Organization name "<Organization_Name> - <Has_MO>" for Contract "1" on "create" Contracts page
-    And I enter "<Contract_Id>" in "Contract Id" field for "Contract1" on create Contract page
-    And I select "1" Bundle "<Bundle>" for Contract "1" on "create" Contracts page
-    And I enter "<Price>" in "price" field for "Bundle1 Price1" on create Contract page
-    Then I enter date "<ContractStartDate>" in "ContractStartDate" field for index "0"
-    Then I enter date "<ContractEndDate>" in "ContractEndDate" field for index "1"
-    Then I enter date "<BundleStartDate>" in "BundleStartDate" field for index "2"
-    Then I enter date "<BundleEndDate>" in "BundleEndDate" field for index "3"
-    Then I enter date "<PriceStartDate>" in "PriceStartDate" field for index "4"
-    Then I enter date "<PriceEndDate>" in "Baseline Date" field for index "5"
-    Then I enter date "<BaselineStartDate>" in "BaselineStartDate" field for index "6"
-    Then I enter date "<BaselineEndDate>" in "BaselineEndDate" field for index "7"
-    And I enter "<Trend_Factor>" in "trendFactor" field for "Bundle1 Price1" on create Contract page
-    And I enter "<Upper_Bound>" in "upperBound" field for "Bundle1 Price1" on create Contract page
-    And I enter "<Lower_Bound>" in "lowerBound" field for "Bundle1 Price1" on create Contract page
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "Create Contracts" on Payor organization page
+  Scenario Outline: <desc>
+    Given build Json for Contract "<contractId>" and "<endDate>" and "<organizationId>" and "<programId>" and "<startDate>" and "<participatingBundleId>" and "<price>" and "<bundleStartDate>" and "<bundleEndDate>" and "<type>" and "<orgType>" and "<priceStartDate>" and "<priceEndDate>" and "<baseLineEndDate>" and "<baseLineStatDate>" and "<trendFactor>" and "<upperBound>" and "<lowerBound>"
+    When create contract with this data
+    Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
 
     Examples: 
-      | Description                                                       | Has_MO | Payor_Name | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | Program_Name | Organization_Type | Organization_Name | Contract_Id | Bundle       | Price | Trend_Factor | Upper_Bound | Lower_Bound | Message                       |
-      | Create Contracts with all available fields using PGP Organization | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | PGP               | PGPNAME           | CID         | FETCHFROMAPI |   113 |          121 |         135 |         106 | Contract Successfully Created |
-      | Create Contracts with all available fields using PGP Organization | YES    | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | PGP               | PGPNAME           | CID         | FETCHFROMAPI |    93 |          121 |         135 |         106 | Contract Successfully Created |
+      | desc                                                    | id | type          | orgType      | contractId | endDate      | organizationId | programId | startDate    | participatingBundleId | bundleStartDate | bundleEndDate | priceStartDate | priceEndDate | price | baseLineEndDate | baseLineStatDate | trendFactor | upperBound | lowerBound | expStatusCode | responseMsg |
+      | Create Contract with Hospital has MO using API Calls    |  0 | bundlePayment | hospital     | []         | [2019-12-31] |                |           | [2017-01-01] |                       | [2017-05-01]    | [2019-07-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract with Hospital has no MO using API Calls |  0 | bundlePayment | hospitalNOMO | []         | [2019-12-30] |                |           | [2017-01-01] |                       | [2017-05-01]    | [2019-07-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract with PGP using API Calls                |  0 | bundlePayment | pgp          | []         | [2019-12-31] |                |           | [2017-01-01] |                       | [2019-01-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract with PGP has no MO using API Calls      |  0 | bundlePayment | pgpNOMO      | []         | [2019-12-31] |                |           | [2017-01-01] |                       | [2019-01-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
 
-  Scenario Outline: <Description>
-    When I click on "PGP" organization tab on organization dashboard
-    When I search with "<PGP_Name> - <Has_MO>" on organization in search box
-    And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
-    And I verify "<PGP_Name> - <Has_MO>" name on the header of view profile
-    And I verify "Bundled Payment Contracts" as default tab selected on view profile of "PGP" Organization
-    And I verify "Network Contracts" tab present under "PGP" Organization
-    And I click on "Network Contracts" tab on view profile of "PGP" Organization
-    And I verify the "Create New Network Contract" button on view profile of "PGP" Organization
-    Then I click on "Create New Network Contract" button on "create" organization page
-    And I verify "Create Network Contract" header text on create organization page
-    And I select "<Program_Name>" Program name in create Contract page under "Payor" Organization
-    And I select Organization name "<Organization_Name> - <Has_MO>" for Contract "1" on "create" Network Contract page
-    And I click on react date picker close icon for "Start Date"
-    Then I enter date "<ContractStartDate>" in "ContractStartDate" field for index "0"
-    And I click on react date picker close icon for "End Date"
-    Then I enter date "<ContractEndDate>" in "ContractEndDate" field for index "1"
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create Contracts" on Payor organization page
+  Scenario Outline: <desc>
+    Given build json for Network contract "<endDate>" and "<organizationId>" and "<pgpContractId>" and "<startDate>" and "<type>" and <orgType>
+    When create network contract with this data
+    Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
 
     Examples: 
-      | Description                                           | Has_MO | PGP_Name | Program_Name | PGP_Organization_Name | Organization_Name | ContractStartDate | ContractEndDate | Message                               |
-      | Create Network contract with all the available fields | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               | ACHNAME           | 2017/01/12        | 2019/12/20      | Network Contract Successfully Created |
-      | Create Network contract with all the available fields | YES    | PGPNAME  | PROGRAMNAME  | PGPNAME               | ACHNAME           | 2017/01/12        | 2019/12/20      | Network Contract Successfully Created |
+      | desc                  | orgType      | type    | endDate      | organizationId | pgpContractId | startDate    | expStatusCode | responseMsg |
+      | createNetworkContract | hospital     | network | [2019-05-30] |                |               | [2018-07-03] |           201 |             |
+      | createNetworkContract | hospitalNOMO | network | [2019-06-30] |                |               | [2018-07-03] |           201 |             |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     When I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -150,6 +111,11 @@ Feature: Search Network Contracts functionality tests
       | Search for a Contract by End Date         | NO     | PGPNAME  | 2019-12-20  |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     When I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page

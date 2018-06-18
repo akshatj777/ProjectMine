@@ -608,11 +608,15 @@ public class BaseClass {
 		 else if (type.equals("snf")) 
 		 {
 				idList.addAll(CreateSNFOrganizationAPI.idList);
+				Long s = CreateSNFOrganizationAPI.idList.get(0);
+				CreateSNFOrganizationAPI.SNFcopyIDList.add(s);
 				CreateSNFOrganizationAPI.idList.clear();
 		 }
 		 else if (type.equals("pgp")) 
 		 {
 				idList.addAll(CreatePGPOrganizationAPI.idList);
+				Long p = CreatePGPOrganizationAPI.idList.get(0);
+				CreatePGPOrganizationAPI.PGPcopyIDList.add(p);
 				CreatePGPOrganizationAPI.idList.clear();
 		 }
 		else if (type.equals("payor")) {
@@ -622,21 +626,27 @@ public class BaseClass {
 		}
 		else if (type.equals("program")) {
 			idList.addAll(CreateProgramAPI.idList);
+			CreateProgramAPI.PROGRAMIDList.addAll(CreateProgramAPI.idList);
 			CreateProgramAPI.idList.clear();
 		}
 		else if (type.equals("hha")) {
 			idList.addAll(CreateHHAOrganizationAPI.idList);
+			Long h = CreateHHAOrganizationAPI.idList.get(0);
+			CreateHHAOrganizationAPI.HHAcopyIDList.add(h);
 			CreateHHAOrganizationAPI.idList.clear();
 		}
 		 else if (type.equals("bundle")) {
 			idList.addAll(CreateBundleAPI.idList);
+			CreateBundleAPI.bundleIDList.addAll(CreateBundleAPI.idList);
 			CreateBundleAPI.idList.clear();
 		 }
 //		} else if (type.equals("program")) {
 //			idList.addAll(CreateProgramStepDef.returnIdList());
 //		} 
-			else if (type.equals("contract")) {
+			else if (type.equals("bundlePayment")) {
 			idList.addAll(CreateBundlePaymentContractAPI.idList);
+			Long b = CreateBundlePaymentContractAPI.idList.get(0);
+			CreateBundlePaymentContractAPI.BPCIDcopyList.add(b);
 			CreateBundlePaymentContractAPI.idList.clear();
 		} 
 //		} else if (type.equals("attributionrule")) {
@@ -705,6 +715,10 @@ public class BaseClass {
 			CreateHHAOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
 			CreateHHAOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
 			CreateHHAOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
+		}
+		else if(type.equals("bundlePayment"))
+		{
+			CreateBundlePaymentContractAPI.BPCCIDList.add((((JsonObject) jsonObject.get("data")).get("contractId")).toString());
 		}
 	}
 	

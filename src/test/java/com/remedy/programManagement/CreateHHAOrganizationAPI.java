@@ -22,6 +22,7 @@ public class CreateHHAOrganizationAPI extends BaseClass{
 	public static HashMap<String, String> tempHHAOrg = new HashMap<String, String>();
 	public static Long oldHHA_WithMO = null;
 	public static Long oldHHA_WithoutMO = null;
+	public static List<Long> HHAcopyIDList = new ArrayList<>();
 
 	public CreateHHAOrganizationAPI(WebDriver driver) {
 		super(driver);
