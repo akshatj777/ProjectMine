@@ -1,6 +1,6 @@
-Feature: fdjskfaj
+Feature: Bulk upload multiple number of users at a time
 
-  Scenario: Scenario to check multiple success test cases at once
+Scenario: Scenario to check multiple success test cases at once
     Given I am on the login page
     Then I log in as super user
     Then I should see Tile text User Admin
@@ -10,4 +10,4 @@ Feature: fdjskfaj
     Then I click on Try Again button
     Then I enter "50" users data for import
     Then I click on submit button on bulk user upload page
-    Then I verify "49 users added" message
+    Then I verify "50 users added" message

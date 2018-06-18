@@ -46,7 +46,7 @@ public class BulkLoadSteps extends DriverScript{
     public void enterUserDataForAllApp() throws Throwable {
         bulkUser.enterDataForAllApp();
     }
-    
+  
     @Then("^I click on submit button on bulk user upload page$")
     public void clickSubmitButtonOnBulkUpload() throws Throwable {
         bulkUser.clickSubmit();
@@ -90,9 +90,9 @@ public class BulkLoadSteps extends DriverScript{
     public void iVerifyTestBoxField(){
     	bulkUser.iVerifyTestBoxField();
     }
-    @When("^I enter single user data with full application access for \"([^\"]*)\"$")
-    public void iEnterSingleDataWithFullAccessPerRole(String role){
-    	bulkUser.iEnterSingleDataAllAppPerRole(role);
+    @When("^I enter user data with full application access for \"([^\"]*)\"$")
+    public void iEnterDataWithFullAccessPerRole(String role){
+    	bulkUser.iEnterDataAllAppPerRole(role);
     }
     @When("^I enter data with invalid data permission values$")
     public void iEnterInvalidDPData(){
@@ -121,5 +121,9 @@ public class BulkLoadSteps extends DriverScript{
     @Then("^I verify \"([^\"]*)\" error message and \"([^\"]*)\" success message$")
     public void validataSuccessAndFailuremsg(String error, String success){
     	bulkUser.validataSuccessAndFailuremsg(error, success);
+    }
+    @Then("^I enter \"([^\"]*)\" users data for import$")
+    public void enterMultipleUserData(int userCount) throws Throwable {
+        bulkUser.enterMultipleUserData(userCount);
     }
 }
