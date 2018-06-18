@@ -198,7 +198,7 @@ public class MailCreateUser extends BaseClass{
 				}
 				else
 				{
-					clickElement(driver.findElement(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[text()='Remedy Partners - Change Your Password']")));
+					driver.findElement(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[text()='Remedy Partners - Change Your Password']")).click();
 				}
 			}
 			iWillWaitToSee(By.xpath("//a[contains(text(),'"+"Change My Password"+"')]"));
