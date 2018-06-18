@@ -100,3 +100,10 @@ Feature: Search SNF organization functionality tests
     Examples: 
       | Description                                                              | SNF_Name      |
       | Verification of error message if SNF organization is not found in search | NoMatchSNFOrg |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type    |
+      | MO, SNF |

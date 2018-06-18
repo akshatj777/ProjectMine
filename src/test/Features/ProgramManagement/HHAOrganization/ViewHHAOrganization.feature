@@ -55,8 +55,8 @@ Feature: View HHA organization functionality tests
 
     Examples: 
       | Description                                                             | Has_MO | HHA_Name | Address1 | Short_Name | Address2 | Region  | Market  | City | State      | Postal_Code | CCN | EIN/TIN | NPI | StateVerification | Organization Type  |
-      | Verification of HHA Organization details on HHA view page  - without MO | NO     | HHANAME  | Address1 | ShortName | Address2 | Midwest | Chicago | City | California |       10000 | CCN | EIN     | NPI | CA                | Home Health Agency |
-      | Verification of HHA Organization details on HHA view page - with MO     | YES    | HHANAME  | Address1 | ShortName | Address2 | Midwest | Chicago | City | California |       10000 | CCN | EIN     | NPI | CA                | Home Health Agency |
+      | Verification of HHA Organization details on HHA view page  - without MO | NO     | HHANAME  | Address1 | ShortName  | Address2 | Midwest | Chicago | City | California |       10000 | CCN | EIN     | NPI | CA                | Home Health Agency |
+      | Verification of HHA Organization details on HHA view page - with MO     | YES    | HHANAME  | Address1 | ShortName  | Address2 | Midwest | Chicago | City | California |       10000 | CCN | EIN     | NPI | CA                | Home Health Agency |
 
   Scenario Outline: <Description>
     When I search with "<MO_Name>" on organization in search box
@@ -110,3 +110,10 @@ Feature: View HHA organization functionality tests
     Examples: 
       | Description                                                             | MO_Name | Hosp_Name    |
       | Searching invalid details on Managing Organization Profile Page for ACH | MONAME  | NoMatchesOrg |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type    |
+      | MO, HHA |

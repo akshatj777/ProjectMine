@@ -169,3 +169,10 @@ Feature: Create PGP organization functionality tests.
     Examples: 
       | Description                                                         | EIN        | NPI        | Message                            | Message1                           |
       | Verify Validation Message of PGP Organization with same EIN and NPI | 1234567890 | 1234567890 | The EIN and npi must be different. | The NPI and ein must be different. |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type |
+      | MO   |

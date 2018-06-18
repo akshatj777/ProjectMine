@@ -74,3 +74,10 @@ Feature: Verification of Managing Organization details with no ACH/PGP/HHA/SNF a
     Examples: 
       | Description                          | MO_Name | Contact_Person | Contact_Email      | Contact_Phone | Address1 | Address2 | City | State    | Postal_Code | StateInitials |
       | View details on Managing Org profile | MONAME  | contactPerson  | Sample@yopmail.com | 212-567-8970  | Address1 | Address2 | City | New York |       10001 | NY            |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type |
+      | MO   |

@@ -198,3 +198,10 @@ Feature: Create HHA organization functionality tests
       | Verify Validation Message of HHA Organization with same CCN and NPI |    1234567890 |            | 1234567890 | The CCN and npi must be different. | The NPI and ccn must be different. |
       | Verify Validation Message of HHA Organization with same EIN and NPI |               | 1234567890 | 1234567890 | The EIN and npi must be different. | The NPI and ein must be different. |
       | Verify Validation of HHA Organization with duplicate CCN            | DUPLICATE_CCN |            |            | CCN Id already taken               |                                    |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type |
+      | MO   |
