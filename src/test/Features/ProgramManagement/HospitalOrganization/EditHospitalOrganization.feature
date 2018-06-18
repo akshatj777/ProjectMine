@@ -263,3 +263,10 @@ Feature: Edit Hospital organization functionality tests
     Examples: 
       | Description                                                  | Has_MO | Hosp_Name | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                     |
       | Edit a Hospital Organization with duplicate Location details | NO     | ACHNAME   | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | Hospital Organization Successfully Updated. |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type    |
+      | MO, ACH |

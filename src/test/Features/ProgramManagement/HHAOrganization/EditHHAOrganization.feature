@@ -145,3 +145,10 @@ Feature: Edit HHA organization functionality tests
       | Edit HHA Organization with all the available fields - With MO                   | YES    | HHANAME  | HHANAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Midwest | Chicago | HHA Organization Successfully Updated. |
       | Edit Duplicate HHA Organization with Mandatory fields - Without MO              | NO     | HHANAME  | DUPLICATE_HHA        | Address1                                                |                                               |                                                         | City                                          | California |       10000 |         |         | HHA Organization Successfully Updated. |
       | Edit Duplicate HHA Organization with Mandatory fields - With MO                 | YES    | HHANAME  | DUPLICATE_HHA        | Address1                                                |                                               |                                                         | City                                          | California |       10000 |         |         | HHA Organization Successfully Updated. |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type    |
+      | MO, HHA |

@@ -38,22 +38,15 @@ Feature: Search a Bundle Payment Contract Functionality tests
       | desc         | participantId | name      | tinEin | contactName       | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type  |
       | Create Payor |               | PAYORNAME | EIN    | ContactPersonTest | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | payor |
 
-  Scenario Outline: <Description>
-    When I click on "Payor" organization tab on organization dashboard
-    When I search with "<Payor_Name>" on organization in search box
-    And I click "<Payor_Name>" field in search list on organization page
-    And I verify "<Payor_Name>" name on the header of view profile
-    And I verify "Programs" as default tab selected on view profile of "Payor" Organization
-    And I verify the "Create New Program" button on view profile of "payor" Organization
-    Then I click on "Create New Program" button on "create" organization page
-    And I verify "Create Program" header text on create organization page
-    Then I enter <Program_Name> in "Program Name" on create organization page
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create Programs" on Payor organization page
+  Scenario Outline: <desc>
+    And build json for Program with attribution rules "<prgName>" and "<payorOrgId>" and "cId" and "" and "0" and "programID"
+    When create program with this data
+    Then verification of Actual vs expected results <expPrgStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
 
     Examples: 
-      | Description                              | Payor_Name | Program_Name | Message                      |
-      | Create Programs under Payor Organization | PAYORNAME  | PROGRAMNAME  | Program Successfully Created |
+      | desc                           | id | programID | prgName     | payorOrgId | expPrgStatusCode | responseMsg | name      | address1 | address2 | city | state | zip   | participantId | tinEin | contactName | contactEmail       | contactPhone | expDelCode | type    |
+      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |
 
   Scenario Outline: Create Bundle using API calls
     Given create Bundle Json to String and pass it to body with "<name>" and "<content>" and "<bundleCode>"
@@ -76,35 +69,42 @@ Feature: Search a Bundle Payment Contract Functionality tests
       | Create Contract using API Calls |  0 | bundlePayment | hospital     | []         | [2019-12-19] |                |           | [2017-02-09] |                       | [2017-05-01]    | [2019-07-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
       | Create Contract using API Calls |  0 | bundlePayment | hospitalNOMO | []         | [2019-12-19] |                |           | [2017-02-09] |                       | [2017-05-01]    | [2019-07-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
 
-  #Scenario Outline: <Description>
-    #When I click on "Payor" organization tab on organization dashboard
-    #When I search with "<Payor_Name>" on organization in search box
-    #And I click "<Payor_Name>" field in search list on organization page
-    #And I verify "<Payor_Name>" name on the header of view profile
-    #And I verify "Programs" as default tab selected on view profile of "Payor" Organization
-    #And I verify "Contracts" tab present under "Payor" Organization
-    #And I click on "Contracts" tab on view profile of "Payor" Organization
-    #Then I search "<SearchParam>" and verify with search list options on "Bundle Payment Contract" search box
-#
-    #Examples: 
-      #| Description                                | Payor_Name | SearchParam |
-      #| Search for a Contract by Program Name      | PAYORNAME  | PROGRAMNAME |
-      #| Search for a Contract by Contract ID       | PAYORNAME  | CID         |
-      #| Search for a Contract by Organization Name | PAYORNAME  | ACHNAME     |
-      #| Search for a Contract by Provider Type     | PAYORNAME  | ACH         |
-      #| Search for a Contract by  Address          | PAYORNAME  | Address1    |
-#
-  #Scenario Outline: <Description>
-    #When I click on "Payor" organization tab on organization dashboard
-    #When I search with "<Payor_Name>" on organization in search box
-    #And I click "<Payor_Name>" field in search list on organization page
-    #And I verify "<Payor_Name>" name on the header of view profile
-    #And I verify "Programs" as default tab selected on view profile of "Payor" Organization
-    #And I verify "Contracts" tab present under "Payor" Organization
-    #And I click on "Contracts" tab on view profile of "Payor" Organization
-    #Then I search "<SearchParam>" and verify with search list options on "Programs" search box
-    #Then I verify the "No matches" message for invalid search in Organization
-#
-    #Examples: 
-      #| Description                             | Payor_Name | SearchParam               |
-      #| Error message if a Program is Not found | PAYORNAME  | InvalidSearchContractName |
+  Scenario Outline: <Description>
+    When I click on "Payor" organization tab on organization dashboard
+    When I search with "<Payor_Name>" on organization in search box
+    And I click "<Payor_Name>" field in search list on organization page
+    And I verify "<Payor_Name>" name on the header of view profile
+    And I verify "Programs" as default tab selected on view profile of "Payor" Organization
+    And I verify "Contracts" tab present under "Payor" Organization
+    And I click on "Contracts" tab on view profile of "Payor" Organization
+    Then I search "<SearchParam>" and verify with search list options on "Bundle Payment Contract" search box
+
+    Examples: 
+      | Description                                | Payor_Name | SearchParam |
+      | Search for a Contract by Program Name      | PAYORNAME  | PROGRAMNAME |
+      | Search for a Contract by Contract ID       | PAYORNAME  | CID         |
+      | Search for a Contract by Organization Name | PAYORNAME  | ACHNAME     |
+      | Search for a Contract by Provider Type     | PAYORNAME  | ACH         |
+      | Search for a Contract by  Address          | PAYORNAME  | Address1    |
+
+  Scenario Outline: <Description>
+    When I click on "Payor" organization tab on organization dashboard
+    When I search with "<Payor_Name>" on organization in search box
+    And I click "<Payor_Name>" field in search list on organization page
+    And I verify "<Payor_Name>" name on the header of view profile
+    And I verify "Programs" as default tab selected on view profile of "Payor" Organization
+    And I verify "Contracts" tab present under "Payor" Organization
+    And I click on "Contracts" tab on view profile of "Payor" Organization
+    Then I search "<SearchParam>" and verify with search list options on "Programs" search box
+    Then I verify the "No matches" message for invalid search in Organization
+
+    Examples: 
+      | Description                             | Payor_Name | SearchParam               |
+      | Error message if a Program is Not found | PAYORNAME  | InvalidSearchContractName |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type                                 |
+      | MO, Hospital, Payor, Program, Bundle |

@@ -169,9 +169,18 @@ public class EditManagingOrganization extends BaseClass {
 		}
 		else if(field.contains("PROGRAMNAME"))
 		{
-			iWillWaitToSee(By.xpath("//div[text()='"+CreatePrograms.programs.get(1)+"']"));
-			clickElement(driver.findElement(By.xpath("//div[text()='"+CreatePrograms.programs.get(1)+"']")));
-			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			if(CreateProgramAPI.PROGRAMNameList.get(0).contains("\""))
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			}
+			else
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(1)+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(1)+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			}
 		}
 		else
 		{
@@ -280,7 +289,7 @@ public class EditManagingOrganization extends BaseClass {
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateSNFOrganizationAPI.SNFNameList.get(1));
 		}
 		else if(field2.contains("PROGRAMNAME")){
-			CreatePrograms.programName = CreatePrograms.programs.get(1);
+			CreatePrograms.programName = CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1);
 			CreatePrograms.tempPrograms.put(1,createRandomName(field2));
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePrograms.tempPrograms.get(1));

@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -23,6 +24,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
 
@@ -37,7 +39,19 @@ public class CreatePrograms extends BaseClass {
 	}
 	
 	public void iVerifyMessageAfterSubmittingCreateOrganizationPageUnderPayorOrganization(String msg, String org) {
-		if(org.contains("Programs")){
+		if(org.equals("FETCHFROMAPIFORProgramName"))
+		{
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>div"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>div")), msg);
+			if(!CreatePrograms.tempPrograms.isEmpty())
+			{
+				CreateProgramAPI.PROGRAMNameList.set(0, CreatePrograms.tempPrograms.get(1));
+				CreatePrograms.tempPrograms.clear();
+			}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		
+		else if(org.contains("Programs")){
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>div"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>div")), msg);
 			if(!CreatePrograms.tempPrograms.isEmpty())
@@ -71,7 +85,7 @@ public class CreatePrograms extends BaseClass {
 		if(!text.equals(""))
 		{
 			driver.findElement(By.xpath("//div[text()='Select a Program']")).click();
-			new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[text()='Select a Program']")), CreatePrograms.programs.get(1)).build().perform();
+			new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[text()='Select a Program']")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)).build().perform();
 			driver.findElement(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption")).click();
 			delay();
 		}
@@ -803,9 +817,9 @@ public class CreatePrograms extends BaseClass {
 		{
 			if (value.equals("PROGRAMNAME"))
 			{
-				 iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreatePrograms.programs.get(1));
+				 iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
 				 waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				 value = CreatePrograms.programs.get(1);
+				 value = CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1);
 				 iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			}
@@ -827,9 +841,9 @@ public class CreatePrograms extends BaseClass {
 		{
 			if (value.equals("PROGRAMNAME"))
 			{
-				 iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreatePrograms.programs.get(1));
+				 iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
 				 waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				 value = CreatePrograms.programs.get(1);
+				 value = CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1);
 				 iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			}
@@ -859,9 +873,9 @@ public class CreatePrograms extends BaseClass {
 		{
 			if (value.equals("PROGRAMNAME"))
 			{
-				 iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreatePrograms.programs.get(1));
+				 iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
 				 waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				 value = CreatePrograms.programs.get(1);
+				 value = CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1);
 				 iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			}

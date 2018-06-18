@@ -64,7 +64,7 @@ public class PhysicianRoster extends BaseClass{
 		if(!text.equals(""))
 		{
 			driver.findElement(By.xpath("//div[text()='Select a Program']")).click();
-			new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[text()='Select a Program']")), CreatePrograms.programs.get(1)).build().perform();
+			new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[text()='Select a Program']")), CreateProgramAPI.PROGRAMNameList.get(0).subSequence(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)).build().perform();
 			driver.findElement(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption")).click();
 			delay();
 		}

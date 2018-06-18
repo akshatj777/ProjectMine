@@ -71,24 +71,15 @@ Feature: Create Bundled Payment Contracts functionality tests
       | desc         | participantId | name      | tinEin | contactName       | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type  |
       | Create Payor |               | PAYORNAME | EIN    | ContactPersonTest | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | payor |
 
-  Scenario Outline: Create Programs under Payor Organization
-    When I click on "Payor" organization tab on organization dashboard
-    When I search with "<Payor_Name>" on organization in search box
-    And I click "<Payor_Name>" field in search list on organization page
-    And I verify "<Payor_Name>" name on the header of view profile
-    And I verify "Programs" as default tab selected on view profile of "Payor" Organization
-    And I verify the "Create New Program" button on view profile of "payor" Organization
-    Then I click on "Create New Program" button on "create" organization page
-    And I verify "Create Program" header text on create organization page
-    Then I enter <Program_Name> in "Program Name" on create organization page
-    And I click on checkbox for "Attribute to the physician who admitted the patient" Attribution rule
-    And I click on checkbox for "Attribute to the triggering provider id on the triggering claim" Attribution rule
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create Programs" on Payor organization page
+  Scenario Outline: <desc>
+    And build json for Program with attribution rules "<prgName>" and "<payorOrgId>" and "cId" and "" and "0" and "programID"
+    When create program with this data
+    Then verification of Actual vs expected results <expPrgStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
 
     Examples: 
-      | Description                              | Payor_Name | Program_Name | Message                      |
-      | Create Programs under Payor Organization | PAYORNAME  | PROGRAMNAME  | Program Successfully Created |
+      | desc                           | id | programID | prgName     | payorOrgId | expPrgStatusCode | responseMsg | name      | address1 | address2 | city | state | zip   | participantId | tinEin | contactName | contactEmail       | contactPhone | expDelCode | type    |
+      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |
 
   Scenario Outline: Create Bundle using API calls
     Given create Bundle Json to String and pass it to body with "<name>" and "<content>" and "<bundleCode>"
@@ -732,3 +723,10 @@ Feature: Create Bundled Payment Contracts functionality tests
     Examples: 
       | Description                           | Has_MO | Payor_Name | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | BundleStartDate1 | BundleEndDate1 | PriceStartDate1 | PriceEndDate1 | BaselineStartDate1 | BaselineEndDate1 | Program_Name | Organization_Type | Organization_Name | Contract_Id | Bundle       | Bundle_2     | Price1 | Price2 | Trend_Factor | Upper_Bound | Lower_Bound | Trend_Factor1 | Upper_Bound1 | Lower_Bound1 | Message                       |
       | Create contract with multiple Bundles | NO     | PAYORNAME  | 2017/01/02        | 2019/12/30      | 2017/03/04      | 2018/03/30    | 2017/05/01     | 2017/08/30   | 2017/06/09        | 2017/07/12      | 2018/05/01       | 2019/06/30     | 2018/08/03      | 2019/03/26    | 2018/11/09         | 2019/01/16       | PROGRAMNAME  | ACH               | ACHNAME           | CID         | FETCHFROMAPI | FETCHFROMAPI |    108 |     96 |          121 |         135 |         106 |            98 |          107 |           67 | Contract Successfully Created |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type                                                |
+      | MO, Hospital, PGP, SNF, HHA, Payor, Program, Bundle |
