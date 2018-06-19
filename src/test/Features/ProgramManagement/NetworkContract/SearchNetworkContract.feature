@@ -70,11 +70,9 @@ Feature: Search Network Contracts functionality tests
     When Get by id <id> and <type>
 
     Examples: 
-      | desc                                                    | id | type          | orgType      | contractId | endDate      | organizationId | programId | startDate    | participatingBundleId | bundleStartDate | bundleEndDate | priceStartDate | priceEndDate | price | baseLineEndDate | baseLineStatDate | trendFactor | upperBound | lowerBound | expStatusCode | responseMsg |
-      | Create Contract with Hospital has MO using API Calls    |  0 | bundlePayment | hospital     | []         | [2019-12-31] |                |           | [2017-01-01] |                       | [2017-05-01]    | [2019-07-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
-      | Create Contract with Hospital has no MO using API Calls |  0 | bundlePayment | hospitalNOMO | []         | [2019-12-30] |                |           | [2017-01-01] |                       | [2017-05-01]    | [2019-07-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
-      | Create Contract with PGP using API Calls                |  0 | bundlePayment | pgp          | []         | [2019-12-31] |                |           | [2017-01-01] |                       | [2019-01-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
-      | Create Contract with PGP has no MO using API Calls      |  0 | bundlePayment | pgpNOMO      | []         | [2019-12-31] |                |           | [2017-01-01] |                       | [2019-01-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | desc                                               | id | type          | orgType | contractId | endDate      | organizationId | programId | startDate    | participatingBundleId | bundleStartDate | bundleEndDate | priceStartDate | priceEndDate | price | baseLineEndDate | baseLineStatDate | trendFactor | upperBound | lowerBound | expStatusCode | responseMsg |
+      | Create Contract with PGP using API Calls           |  0 | bundlePayment | pgp     | []         | [2019-12-31] |                |           | [2017-01-01] |                       | [2019-01-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract with PGP has no MO using API Calls |  0 | bundlePayment | pgpNOMO | []         | [2019-12-31] |                |           | [2017-01-01] |                       | [2019-01-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
 
   Scenario Outline: <desc>
     Given build json for Network contract "<endDate>" and "<organizationId>" and "<pgpContractId>" and "<startDate>" and "<type>" and <orgType>
@@ -107,8 +105,8 @@ Feature: Search Network Contracts functionality tests
       | Search for a Contract by Oganization Name | NO     | PGPNAME  | ACHNAME     |
       | Search for a Contract by Type             | NO     | PGPNAME  | ACH         |
       | Search for a Contract by Program          | NO     | PGPNAME  | PROGRAMNAME |
-      | Search for a Contract by Start Date       | NO     | PGPNAME  | 2017-01-12  |
-      | Search for a Contract by End Date         | NO     | PGPNAME  | 2019-12-20  |
+      | Search for a Contract by Start Date       | NO     | PGPNAME  | 2018-07-03  |
+      | Search for a Contract by End Date         | NO     | PGPNAME  | 2019-06-30  |
 
   Scenario Outline: <Description>
     Given I am on the login page

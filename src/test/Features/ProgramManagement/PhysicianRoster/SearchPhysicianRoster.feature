@@ -66,6 +66,7 @@ Feature: Search Physician Roster functionality tests
     Given build Json for Contract "<contractId>" and "<endDate>" and "<organizationId>" and "<programId>" and "<startDate>" and "<participatingBundleId>" and "<price>" and "<bundleStartDate>" and "<bundleEndDate>" and "<type>" and "<orgType>" and "<priceStartDate>" and "<priceEndDate>" and "<baseLineEndDate>" and "<baseLineStatDate>" and "<trendFactor>" and "<upperBound>" and "<lowerBound>"
     When create contract with this data
     Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
 
     Examples: 
       | desc                                                    | id | type          | orgType      | contractId | endDate      | organizationId | programId | startDate    | participatingBundleId | bundleStartDate | bundleEndDate | priceStartDate | priceEndDate | price | baseLineEndDate | baseLineStatDate | trendFactor | upperBound | lowerBound | expStatusCode | responseMsg |
@@ -96,71 +97,17 @@ Feature: Search Physician Roster functionality tests
       | Description           | firstName | lastName     | npi | gender | enumerationDate | prefix | suffix | npiDeactivationDate | npiDeactivationReasonCode | otherFirstName | otherLastName | otherPrefix | otherSuffix | primaryTaxonomyId    | secondaryTaxonomyId | noOfLicenses | licenseNumber | licenseNumberStateCode | address1 | address2 | city | state | zip | expStatusCode | responseMsg | classificationId | groupingId | specializationId | providerTaxonCode |
       | validPractionerCreate | firstName | testLastName | PC  | f      | 2018-01-01      | ap     | test   | 2018-01-01          | dd                        | otherFirstName | otherLastName | ff          | ff          | generatePrimaryTaxId |                   1 |            2 |           2,5 | NY,NY                  | addr1    | addr2    | city | ny    | zip |           201 |             |                0 |          0 |                0 | CPT               |
 
-  Scenario Outline: <Description>
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-    When I click on "PGP" organization tab on organization dashboard
-    When I search with "<PGP_Name> - <Has_MO>" on organization in search box
-    And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
-    And I verify "<PGP_Name> - <Has_MO>" name on the header of view profile
-    And I verify "Bundled Payment Contracts" as default tab selected on view profile of "PGP" Organization
-    And I verify "Network Contracts" tab present under "PGP" Organization
-    And I verify "Physicians" tab present under "PGP" Organization
-    And I click on "Physicians" tab on view profile of "PGP" Organization
-    And I verify the "Add Physician" button on view profile of "PGP" Organization
-    Then I click on "Add Physician" button on "create" organization page
-    And I verify "Add Physician" header text on create organization page
-    And I verify the "<PGP_Organization_Name> - <Has_MO>" on "Create" Physician Roster page
-    And I verify "Program" dropdown is appearing on "Create" Physician Roster page
-    Then I select "<Program_Name>" Program name from program dropdown on "Create" Physician Roster page
-    And I select "1" Physician "<Physician>" on "Create" Physician Roster page
-    And I verify "Add Physician" button on "Create" Physician Roster page
-    And I click on "Add Physician" button on "Create" Physician Roster page
-    Then I enter date "<PhysicianStartDate>" in "PhysicianStartDate" field for index "0"
-    Then I enter date "<PhysicianEndDate>" in "PhysicianEndDate" field for index "1"
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "Create Contracts" on Payor organization page
+  Scenario Outline: <desc>
+    Given create physician roster Json "<practitionerContractId>" and "<practionerId>" and "<startDate>" and "<endDate>" and "<noOfRosters>"
+    When Add a physician "<index>" to a roster
+    Then verification of Actual vs expected results <expPostCode> and "<respMsg>"
 
     Examples: 
-      | Description                                                        | Has_MO | PGP_Name | Program_Name | PGP_Organization_Name | Physician    | PhysicianStartDate | PhysicianEndDate | Message                         |
-      | Add Physician with all the available fields under PGP Organization | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               | FETCHFROMAPI | 2017/01/30         | 2017/06/30       | Physicians Successfully Updated |
-      | Add Physician with all the available fields under PGP Organization | YES    | PGPNAME  | PROGRAMNAME  | PGPNAME               | FETCHFROMAPI | 2017/07/01         | 2017/12/01       | Physicians Successfully Updated |
-
-  Scenario Outline: <Description>
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-    When I click on "Hospital" organization tab on organization dashboard
-    When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
-    And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
-    And I verify "<Hosp_Name> - <Has_MO>" name on the header of view profile
-    And I verify "Location" as default tab selected on view profile of "Hospital" Organization
-    And I verify "Bundled Payment Contracts" tab present under "Hospital" Organization
-    And I verify "Physicians" tab present under "Hospital" Organization
-    And I click on "Physicians" tab on view profile of "Hospital" Organization
-    And I verify the "Add Physician" button on view profile of "Hospital" Organization
-    Then I click on "Add Physician" button on "create" organization page
-    And I verify "Add Physician" header text on create organization page
-    And I verify the "<Hospital_Organization_Name> - <Has_MO>" on "Create" Physician Roster page
-    And I verify "Program" dropdown is appearing on "Create" Physician Roster page
-    Then I select "<Program_Name>" Program name from program dropdown on "Create" Physician Roster page
-    And I select "1" Physician "<Physician>" on "Create" Physician Roster page
-    And I verify "Add Physician" button on "Create" Physician Roster page
-    And I click on "Add Physician" button on "Create" Physician Roster page
-    Then I enter date "<PhysicianStartDate>" in "PhysicianStartDate" field for index "0"
-    Then I enter date "<PhysicianEndDate>" in "PhysicianEndDate" field for index "1"
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "Create Contracts" on Payor organization page
-
-    Examples: 
-      | Description                                                             | Has_MO | Hosp_Name | Program_Name | Hospital_Organization_Name | Physician    | PhysicianStartDate | PhysicianEndDate | Message                         |
-      | Add Physician with all the available fields under Hospital Organization | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI | 2017/01/30         | 2017/12/01       | Physicians Successfully Updated |
-      | Add Physician with all the available fields under Hospital Organization | YES    | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI | 2018/01/01         | 2018/12/01       | Physicians Successfully Updated |
+      | desc                                            | noOfRosters | index | practitionerContractId | practionerId         | startDate  | endDate    | expPostCode | respMsg |
+      | createAPhysicianRoster under Hospital has MO    |           1 |     0 | null                   | addPhysicianToRoster | 2017-03-04 | 2017-12-30 |         200 |         |
+      | createAPhysicianRoster under Hospital has no MO |           1 |     1 | null                   | addPhysicianToRoster | 2017-03-04 | 2017-12-30 |         200 |         |
+      | createAPhysicianRoster under PGP has MO         |           1 |     2 | null                   | addPhysicianToRoster | 2017-03-04 | 2017-12-30 |         200 |         |
+      | createAPhysicianRoster under PGP has no MO      |           1 |     3 | null                   | addPhysicianToRoster | 2017-03-04 | 2017-12-30 |         200 |         |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -180,11 +127,11 @@ Feature: Search Physician Roster functionality tests
 
     Examples: 
       | Description                          | Has_MO | PGP_Name | SearchParam  |
-      | Search for a Physician by NPI        | NO     | PGPNAME  | FETCHFROMAPI |
-      | Search for a Physician by First Name | NO     | PGPNAME  | firstName    |
-      | Search for a Physician by Last Name  | NO     | PGPNAME  | testLastName |
-      | Search for a Physician by Start Date | NO     | PGPNAME  | 2017-01-30   |
-      | Search for a Physician by End Date   | NO     | PGPNAME  | 2017-06-30   |
+      | Search for a Physician by NPI        | YES    | PGPNAME  | FETCHFROMAPI |
+      | Search for a Physician by First Name | YES    | PGPNAME  | firstName    |
+      | Search for a Physician by Last Name  | YES    | PGPNAME  | testLastName |
+      | Search for a Physician by Start Date | YES    | PGPNAME  | 2017-03-04   |
+      | Search for a Physician by End Date   | YES    | PGPNAME  | 2017-12-30   |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -228,8 +175,8 @@ Feature: Search Physician Roster functionality tests
       | Search for a Physician by NPI        | NO     | ACHNAME   | FETCHFROMAPI |
       | Search for a Physician by First Name | NO     | ACHNAME   | firstName    |
       | Search for a Physician by Last Name  | NO     | ACHNAME   | testLastName |
-      | Search for a Physician by Start Date | NO     | ACHNAME   | 2017-01-30   |
-      | Search for a Physician by End Date   | NO     | ACHNAME   | 2017-12-01   |
+      | Search for a Physician by Start Date | NO     | ACHNAME   | 2017-03-04   |
+      | Search for a Physician by End Date   | NO     | ACHNAME   | 2017-12-30   |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -256,5 +203,5 @@ Feature: Search Physician Roster functionality tests
     When delete references of the name list type "<type>"
 
     Examples: 
-      | type                                                  |
-      | MO, Hospital, PGP, Payor, Program, Bundle, Practioner |
+      | type                                                    |
+      | MO, Hospital, PGP, Payor, Program, Bundle, practitioner |

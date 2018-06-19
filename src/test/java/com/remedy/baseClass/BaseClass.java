@@ -640,10 +640,7 @@ public class BaseClass {
 			CreateBundleAPI.bundleIDList.addAll(CreateBundleAPI.idList);
 			CreateBundleAPI.idList.clear();
 		 }
-//		} else if (type.equals("program")) {
-//			idList.addAll(CreateProgramStepDef.returnIdList());
-//		} 
-			else if (type.equals("bundlePayment")) {
+		else if (type.equals("bundlePayment")) {
 			idList.addAll(CreateBundlePaymentContractAPI.idList);
 			Long b = CreateBundlePaymentContractAPI.idList.get(0);
 			CreateBundlePaymentContractAPI.BPCIDcopyList.add(b);
@@ -661,6 +658,8 @@ public class BaseClass {
 //			idList.addAll(PM429CreateProviderTaxonomyStepDef.returnIdList());
 		 else if (type.equals("practitioner")) {
 			idList.addAll(CreatePractictionerAPI.idList);
+			Long p = CreatePractictionerAPI.idList.get(0);
+			CreatePractictionerAPI.practitionerIDList.add(p);
 			CreatePractictionerAPI.idList.clear();
 		}
 		return idList;
@@ -798,12 +797,14 @@ public class BaseClass {
 			CreateACHOrganizationAPI.CCNNameList.clear();
 			CreateACHOrganizationAPI.EINNameList.clear();
 			CreateACHOrganizationAPI.NPINameList.clear();
+			CreateACHOrganizationAPI.copyIDList.clear();
 		}
 		else if(type.equals("PGP"))
 		{
 			CreatePGPOrganizationAPI.PGPNameList.clear();
 			CreatePGPOrganizationAPI.EINNameList.clear();
 			CreatePGPOrganizationAPI.NPINameList.clear();
+			CreatePGPOrganizationAPI.PGPcopyIDList.clear();
 		}
 		else if(type.equals("HHA"))
 		{
@@ -811,6 +812,7 @@ public class BaseClass {
 			CreateHHAOrganizationAPI.CCNNameList.clear();
 			CreateHHAOrganizationAPI.EINNameList.clear();
 			CreateHHAOrganizationAPI.NPINameList.clear();
+			CreateHHAOrganizationAPI.HHAcopyIDList.clear();
 		}
 		else if(type.equals("SNF"))
 		{
@@ -818,6 +820,7 @@ public class BaseClass {
 			CreateSNFOrganizationAPI.CCNNameList.clear();
 			CreateSNFOrganizationAPI.EINNameList.clear();
 			CreateSNFOrganizationAPI.NPINameList.clear();
+			CreateSNFOrganizationAPI.SNFcopyIDList.clear();
 		}
 		else if(type.equals("Payor"))
 		{
@@ -827,10 +830,12 @@ public class BaseClass {
 		else if(type.equals("Program"))
 		{
 			CreateProgramAPI.PROGRAMNameList.clear();
+			CreateProgramAPI.PROGRAMIDList.clear();
 		}
 		else if(type.equals("Bundle"))
 		{
 			CreateBundleAPI.bundleNameList.clear();
+			CreateBundleAPI.bundleIDList.clear();
 		}
 		else if(type.equals("Contract"))
 		{
@@ -840,8 +845,9 @@ public class BaseClass {
 		{
 			
 		}
-		else if(type.equals("Practioner")){
+		else if(type.equals("practitioner")){
 			CreatePractictionerAPI.practitionerNameList.clear();
+			CreatePractictionerAPI.practitionerIDList.clear();
 		}
 		else if(type.equals("Physician Roster"))
 		{

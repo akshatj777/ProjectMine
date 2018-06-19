@@ -37,7 +37,7 @@ Feature: Search a Program
 
     Examples: 
       | Description                              | Payor_Name | SearchParam |
-      | Search for a Program by the ID           | PAYORNAME  | ID          |
+      #| Search for a Program by the ID           | PAYORNAME  | ID          |
       | Search for a Program by the Program name | PAYORNAME  | PROGRAMNAME |
 
   Scenario Outline: <Description>

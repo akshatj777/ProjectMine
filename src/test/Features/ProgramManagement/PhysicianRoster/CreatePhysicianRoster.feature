@@ -718,5 +718,5 @@ Feature: Create Physician Roster functionality tests
     When delete references of the name list type "<type>"
 
     Examples: 
-      | type                                                  |
-      | MO, Hospital, PGP, Payor, Program, Bundle, Practioner |
+      | type                                                    |
+      | MO, Hospital, PGP, Payor, Program, Bundle, practitioner |

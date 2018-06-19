@@ -84,7 +84,7 @@ public class CreateNetworkContractAPI extends BaseClass {
         }
 
         if (StringUtils.isBlank(bpContractIdCucumber)) {
-            bpContractIdList.add(CreateBundlePaymentContractAPI.BPCIDcopyList.get(0));
+            bpContractIdList.add(CreateBundlePaymentContractAPI.BPCIDcopyList.get(1));
         	} 
         	else {
         		List<String> pgpContractIdSplitList = insertData.splitIntoSubList(bpContractIdCucumber);

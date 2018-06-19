@@ -20,6 +20,7 @@ public class CreatePractictionerAPI extends BaseClass{
     public static List<Long> idList = new ArrayList<>();
     public static List<Long> idProvidertexnomyList = new ArrayList<>();
     public static List<String> practitionerNameList = new ArrayList<>();
+    public static List<Long> practitionerIDList = new ArrayList<>();
 
 	public CreatePractictionerAPI(WebDriver driver) {
 		super(driver);
