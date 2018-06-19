@@ -152,4 +152,15 @@ public class CommonSteps extends DriverScript {
     public void iSwitchBackToOLDWindowInReports(){
     	baseClass.switchBacktoOldWindow();
     }
+    
+    @Given("^I am on Analytics Tableau login page$")
+	public void i_am_on_analytics_tableau_login_page() throws Throwable{
+		driver.navigate().to(Config.getProperty("AnalyticsURL"));
+        driver.manage().timeouts().pageLoadTimeout(240, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        if(DriverScript.Config.getProperty("Browser").equals("ie"))
+        {
+        	driver.manage().window().maximize();
+        }
+	}
 }
