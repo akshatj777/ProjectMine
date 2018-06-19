@@ -28,8 +28,7 @@ Feature: Bulk Upload User from SA
     Then I click on Cross button
     Then I should see header text "Users"
 
-
-  Scenario: Scenario to check multiple success test cases in one
+  Scenario: Scenario to check multiple success test cases at once
     Given I am on the login page
     Then I log in as super user
     Then I should see Tile text User Admin
@@ -37,11 +36,11 @@ Feature: Bulk Upload User from SA
     Then I should see header text "Users"
     Then I click on Import User button
     Then I click on Try Again button
-    Then I enter user data for all application access
+    Then I enter "50" users data for import
     Then I click on submit button on bulk user upload page
-    Then I verify "50 users added" message
+    Then I verify "49 users added" message
 
-  Scenario: Scenario to check multiple failure test cases in one
+  Scenario: Scenario to check validation message when number of users entered exceed the limit
     Given I am on the login page
     Then I log in as super user
     Then I should see Tile text User Admin
@@ -49,6 +48,6 @@ Feature: Bulk Upload User from SA
     Then I should see header text "Users"
     Then I click on Import User button
     Then I click on Try Again button
-    Then I enter user data for all application access
+    Then I enter "51" users data for import
     Then I click on submit button on bulk user upload page
-    Then I verify "50 users added" message
+    Then I verify error message "You can only import up to 50 users at a time"

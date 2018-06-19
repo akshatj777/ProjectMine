@@ -126,4 +126,8 @@ public class BulkLoadSteps extends DriverScript{
     public void enterMultipleUserData(int userCount) throws Throwable {
         bulkUser.enterMultipleUserData(userCount);
     }
+    @Then("^I verify error message \"([^\"]*)\"$")
+    public void validateErrorMsgFor51Users(String text){
+    	bulkUser.validateErrorMsgFor51Users(text);
+    }
 }
