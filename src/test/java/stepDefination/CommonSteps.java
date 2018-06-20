@@ -47,13 +47,6 @@ public class CommonSteps extends DriverScript {
         {
         	driver.manage().window().maximize();
         }
-        Thread.sleep(2000);
-        while(!(driver.findElements(By.xpath("//input[@name='email']")).size()>0))
-        {
-        	Thread.sleep(2000);
-        	driver.navigate().refresh();
-        	Thread.sleep(2000);
-        }
     }
 
     @Then("^I go to mail verification page$")
