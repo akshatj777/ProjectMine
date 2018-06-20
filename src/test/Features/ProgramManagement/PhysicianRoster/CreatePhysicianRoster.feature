@@ -1,12 +1,5 @@
 Feature: Create Physician Roster functionality tests
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -105,6 +98,11 @@ Feature: Create Physician Roster functionality tests
       | validPractionerCreate | firstName | testLastName | PC  | f      | 2018-01-01      | ap     | test   | 2018-01-01          | dd                        | otherFirstName | otherLastName | ff          | ff          | generatePrimaryTaxId |                   1 |            2 |           2,5 | NY,NY                  | addr1    | addr2    | city | ny    | zip |           201 |             |                0 |          0 |                0 | CPT               |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     When I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -129,6 +127,11 @@ Feature: Create Physician Roster functionality tests
       | Elements on Add Physician page without selecting any program | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     When I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -157,6 +160,11 @@ Feature: Create Physician Roster functionality tests
       | Elements on Add Physician page after selecting a Contract(Program) with Start Date and End Date | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | 2017-01-16 | 2019-12-31 |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     When I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -197,6 +205,11 @@ Feature: Create Physician Roster functionality tests
       | Elements on Add Physician page after selecting a Physician | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | 2017-01-16 | 2019-12-26 | FETCHFROMAPI | firstName | testLastName | FETCHFROMAPI |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     When I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -222,6 +235,11 @@ Feature: Create Physician Roster functionality tests
       | Validation message if Start Date is left blank | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | 2017-01-09 | 2019-12-26 | FETCHFROMAPI | firstName | testLastName | FETCHFROMAPI | The start date is before the start of the Bundled Payment Contract |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     When I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -252,6 +270,11 @@ Feature: Create Physician Roster functionality tests
       | Validation when Physician Roster End Date is prior to Bundle Payment Contract Start Date                   | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI | firstName | testLastName | FETCHFROMAPI | 2017/01/30        | 2017/01/28      | The start date and end date are not valid.                         |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     When I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -278,6 +301,11 @@ Feature: Create Physician Roster functionality tests
       | Validation when Physician Start and End Dates are edited with same dates | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI | firstName | testLastName | FETCHFROMAPI | 2019/12/26        | 2019/12/26      | Validation errors: Require valid date range. End date (if specified) should be less a future date to the start date. |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     When I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -300,6 +328,11 @@ Feature: Create Physician Roster functionality tests
       | Search for a Physician organization by Last Name  | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               | testLastName |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     When I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -321,6 +354,11 @@ Feature: Create Physician Roster functionality tests
       | Error message for invalid search | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               | invalidsearch |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     When I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -348,6 +386,11 @@ Feature: Create Physician Roster functionality tests
       | Add Physician with all the available fields | YES    | PGPNAME  | PROGRAMNAME  | PGPNAME               | FETCHFROMAPI | 2019/12/25       | Physicians Successfully Updated |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     When I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -376,6 +419,11 @@ Feature: Create Physician Roster functionality tests
       | Add Physician with all the available fields | YES    | PGPNAME  | PROGRAMNAME  | PGPNAME               | FETCHFROMAPI | 2018/01/01         | 2018/12/01       | Physicians Successfully Updated |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     When I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -405,8 +453,13 @@ Feature: Create Physician Roster functionality tests
       | Description             | Has_MO | PGP_Name | Program_Name | PGP_Organization_Name | Physician    | PhysicianEndDate | PhysicianEndDate1 | Message                         |
       | Add multiple Physicians | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               | FETCHFROMAPI | 2019/12/24       | 2019/12/23        | Physicians Successfully Updated |
 
-  @Hospital
+  #Create Physician Roster under Hospital Organization
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -431,6 +484,11 @@ Feature: Create Physician Roster functionality tests
       | Elements on Add Physician page without selecting any program under Hospital Profile page | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -460,6 +518,11 @@ Feature: Create Physician Roster functionality tests
       | Elements on Add Physician page after selecting a Contract(Program) with Start Date and End Date under Hospital Profile page | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    |         123 | 2017-01-09 | 2019-12-26 |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -502,6 +565,11 @@ Feature: Create Physician Roster functionality tests
       | Elements on Add Physician page after selecting a Physician under Hospital Profile page | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    |         123 | 2017-01-09 | 2019-12-26 | FETCHFROMAPI | firstName | testLastName | FETCHFROMAPI |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -528,6 +596,11 @@ Feature: Create Physician Roster functionality tests
       | Validation message if Start Date is left blank under Hospital Profile page | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    |         123 | 2017-01-09 | 2019-12-26 | FETCHFROMAPI | firstName | testLastName | FETCHFROMAPI | The start date is before the start of the Bundled Payment Contract |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -559,6 +632,11 @@ Feature: Create Physician Roster functionality tests
       | Validation when Physician Roster End Date is prior to Bundle Payment Contract Start Date under Hospital Profile page                   | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    |         123 | FETCHFROMAPI | firstName | testLastName | FETCHFROMAPI | 2017/01/09        | 2017/01/01      | The start date and end date are not valid.                         |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -585,6 +663,11 @@ Feature: Create Physician Roster functionality tests
       | Validation when Physician Roster Start Date is same as Physician Roster End Date under Hospital Profile page | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    |         123 | FETCHFROMAPI | firstName | testLastName | FETCHFROMAPI | 2019/12/26        | 2019/12/26      | Validation errors: Require valid date range. End date (if specified) should be less a future date to the start date. |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -608,6 +691,11 @@ Feature: Create Physician Roster functionality tests
       | Search for a Physician organization by Last Name under Hospital Profile page  | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | testLastName |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -630,6 +718,11 @@ Feature: Create Physician Roster functionality tests
       | Error message for invalid search under Hospital Profile page | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | invalidsearch |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -657,6 +750,11 @@ Feature: Create Physician Roster functionality tests
       | Add Physician with all the available fields under Hospital Profile page | YES    | ACHNAME   | PROGRAMNAME  | ACHNAME                    | 2019/12/31       | FETCHFROMAPI | Physicians Successfully Updated |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -685,6 +783,11 @@ Feature: Create Physician Roster functionality tests
       | Add Physician with all the available fields under Hospital Profile page | YES    | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI | 2018/01/01         | 2018/12/01       | Physicians Successfully Updated |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page

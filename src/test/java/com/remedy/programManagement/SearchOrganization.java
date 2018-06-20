@@ -514,13 +514,13 @@ public class SearchOrganization extends BaseClass{
 		}
 		else if(text.contains("SNFNAME - NO")){
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
-			if(CreateSNFOrganizationAPI.SNFNameList.get(0).contains("\""))
+			if(CreateSNFOrganizationAPI.SNFNameList.get(1).contains("\""))
 			{
-				isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(0).substring(0, CreateSNFOrganizationAPI.SNFNameList.get(0).length()-1)+"']"));
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(1).substring(0, CreateSNFOrganizationAPI.SNFNameList.get(1).length()-1)+"']"));
 			}
 			else
 			{
-				isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.PGPNameList.get(0)+"']"));
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(1)+"']"));
 			}
 		}
 		else if(text.contains("PGPNAME - YES")){
