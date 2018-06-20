@@ -1,12 +1,21 @@
 package com.remedy.Analytics;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URL;
 
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
@@ -23,12 +32,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.sikuli.script.Screen;
 import org.sikuli.script.TextRecognizer;
 
+import com.asprise.ocr.Ocr;
+
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 
 import com.remedy.baseClass.BaseClass;
 
 public class ProgramPerformance extends BaseClass{
+	
+	private static String IMAGE_TYPE = "png";
 	
 	WebDriverWait wait = new WebDriverWait(driver, 180);
 
@@ -105,19 +118,103 @@ public class ProgramPerformance extends BaseClass{
 	}
 	
 	public void Screenshot1() throws IOException, TesseractException{
-		Screenshot screen=new AShot().takeScreenshot(driver, driver.findElements(By.xpath("//div[@tb-test-id='KPI_Episode']//div[@class='tvimagesContainer']/canvas")).get(1));
+		Screenshot screen=new AShot().takeScreenshot(driver, driver.findElement(By.xpath("//div[@tb-test-id='KPI_Episode']//div[@class='tvimagesContainer']/canvas")));
 		File fl = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image1.png");
 		ImageIO.write(screen.getImage(), "PNG", fl);
+		getImageAsString();
 //		ITesseract tsc = new Tesseract();
 //		String a = tsc.doOCR(fl);
 //		Screen s=new Screen();
 //		s.capture();
 //		String inputFile=("user.dir")+"\\src\\test\\Imports\\Image1.png";
-		Tesseract tesseract=new Tesseract();
+		//Tesseract tesseract=new Tesseract();
 ////		String importDir = System.getProperty("user.dir");
-		String newDir = "user.dir" + "\\" + "src" + "\\" + "test" + "\\" + "Imports" + "\\" + "TestData";
-		tesseract.setDatapath(newDir);
-		String fullText=tesseract.doOCR(fl);
-		System.out.println(fullText);
+		//String newDir = "user.dir" + "\\" + "src" + "\\" + "test" + "\\" + "Imports" + "\\" + "TestData";
+		//tesseract.setDatapath(newDir);
+		//String fullText=tesseract.doOCR(fl);
+		//System.out.println(fullText);
+//		             Ocr.setUp(); // one time setup
+//	                 Ocr ocr = new Ocr(); // create a new OCR engine
+//	                 ocr.startEngine("eng", Ocr.SPEED_FASTEST); // English
+//		BufferedImage image = ImageIO.read(new File(("user.dir")+"\\src\\test\\Imports\\Image1.png"));   
+//		String imageText = new OCR().recognizeCharacters((RenderedImage) image);
+//		System.out.println("Text From Image : \n"+ imageText);
+//	                 String s = ocr.recognize(new File[] {new File(("user.dir")+"\\src\\test\\Imports\\Image1.png")},
+//	    	                  Ocr.RECOGNIZE_TYPE_ALL, Ocr.OUTPUT_FORMAT_PLAINTEXT);
+//	                 System.out.println("Result: " + s);
+//	                 ocr.stopEngine();
     }
+	
+//	public static byte[] readImageTextFile()
+//	{
+//		byte[] dataFile = null;
+//		try
+//		{
+//			StringBuffer textData = new StringBuffer();
+//			FileInputStream fstream = new FileInputStream(("user.dir")+"\\src\\test\\Imports\\Image1.png");
+//			DataInputStream in = new DataInputStream(fstream);
+//			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+//			String srtData;
+//			while ((srtData = br.readLine()) != null) {
+//				textData.append(srtData);
+//			}
+//			br.close();
+//			fstream.close();
+//			in.close();
+//			dataFile = new sun.misc.BASE64Decoder().decodeBuffer(textData.toString());
+//		}
+//		catch( Exception e )
+//		{
+//			e.printStackTrace();
+//		}
+//		return dataFile;
+//	}
+
+	public static String getImageAsString()
+	{
+		
+		String dataContents = null;
+		try
+		{
+			File file = new File(System.getProperty(("user.dir"))+"\\src\\test\\Imports\\Image1.png");
+			byte[] fileData = new byte[ (int)file.length()];
+			InputStream inStream = new FileInputStream( file );
+			inStream.read(fileData);
+			inStream.close();
+			String tempFileData = new String(fileData);
+//			String finalData = tempFileData.substring(tempFileData
+//					.indexOf(extraStr)
+//					+ extraStr.length(), tempFileData.length());
+			byte[] temp = new sun.misc.BASE64Decoder().decodeBuffer(tempFileData);
+			dataContents = new String(temp);
+		}
+		catch( Exception e )
+		{
+			e.printStackTrace();
+		}
+		return dataContents;	
+//		String imageString = null;
+//		try
+//		{
+//			File f = new File(System.getProperty(("user.dir"))+"\\src\\test\\Imports\\Image1.png");
+//			BufferedImage buffImage = ImageIO.read(f);
+//			ByteArrayOutputStream os= new ByteArrayOutputStream();
+//			ImageIO.write(buffImage, "PNG", os);
+//			byte[] data= os.toByteArray();
+//			imageString = new sun.misc.BASE64Encoder().encode(data);
+//			System.out.println(imageString);
+//		}
+//		catch( FileNotFoundException fnfe )
+//		{
+//			fnfe.printStackTrace();
+//			System.out.println("Image is not located in the proper path.");
+//		}
+//		catch (IOException e) 
+//		{
+//			e.printStackTrace();
+//			System.out.println("Error in reading the image.");
+//		}
+//		return imageString;
+//	}
+	}
 }

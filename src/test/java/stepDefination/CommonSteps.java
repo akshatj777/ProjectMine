@@ -4,16 +4,22 @@ import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.Constants;
 import com.remedy.userAdmin.LandingPage;
 import com.remedy.resources.DriverScript;
+
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
 import stepDefination.Hooks.InitialSetup;
 
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.concurrent.TimeUnit;
+
+import javax.imageio.ImageIO;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
