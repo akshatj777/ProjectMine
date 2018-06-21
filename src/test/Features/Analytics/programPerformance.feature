@@ -2,7 +2,6 @@ Feature: Verify Program Performance Report
 
 Scenario: Verify the mouse over text on program overview report
   Given I am on Analytics Tableau login page
-  Then I verify "Episode" count section is appearing on the dashboard below "Episodes"
   And I wait till the visibility of "Username" field on login page
   Then I enter incorrect "Username" for analytics as "kprgmadm@yopmail" for login
   And I click on "signin" button on the analytics login page

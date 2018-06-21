@@ -1,6 +1,7 @@
 package com.remedy.Analytics;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.BufferedReader;
@@ -25,7 +26,12 @@ import javax.imageio.ImageIO;
 
 import org.bytedeco.javacpp.tesseract.TessBaseAPI;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -117,11 +123,12 @@ public class ProgramPerformance extends BaseClass{
 		System.out.println(hex);
 	}
 	
-	public void Screenshot1() throws IOException, TesseractException{
+	public void Screenshot1() throws Exception{
 		Screenshot screen=new AShot().takeScreenshot(driver, driver.findElement(By.xpath("//div[@tb-test-id='KPI_Episode']//div[@class='tvimagesContainer']/canvas")));
 		File fl = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image1.png");
 		ImageIO.write(screen.getImage(), "PNG", fl);
-		getImageAsString();
+		testBarcodeNumber();
+//		getImageAsString();
 //		ITesseract tsc = new Tesseract();
 //		String a = tsc.doOCR(fl);
 //		Screen s=new Screen();
@@ -217,4 +224,58 @@ public class ProgramPerformance extends BaseClass{
 //		return imageString;
 //	}
 	}
+	
+	 public void testBarcodeNumber() throws Exception {
+	        // get and capture the picture of the img element used to display the barcode image
+//	        WebElement barcodeImage = driver.findElement(By.xpath("//div[@tb-test-id='KPI_Episode']//div[@class='tvimagesContainer']"));
+//	        File imageFile = captureElementPicture(barcodeImage);
+	 
+	        // get the Tesseract direct interace
+		 File imageFile = new File(System.getProperty(("user.dir"))+"\\src\\test\\Imports\\Image1.png");
+	        Tesseract instance = new Tesseract();
+	 
+	        // the doOCR method of Tesseract will retrive the text
+	        // from image captured by Selenium
+	        String result = instance.doOCR(imageFile);
+	 
+	        // check the the result
+//	        assertEquals("Application number did not match", "123-45678", result.trim());
+	        System.out.println(result);
+	    }
+	 
+	 public static File captureElementPicture(WebElement element)
+	            throws Exception {
+	 
+	        // get the WrapsDriver of the WebElement
+	        WrapsDriver wrapsDriver = (WrapsDriver) element;
+	 
+	        // get the entire screenshot from the driver of passed WebElement
+	        File screen = ((TakesScreenshot) wrapsDriver.getWrappedDriver())
+	                .getScreenshotAs(OutputType.FILE);
+	 
+	        // create an instance of buffered image from captured screenshot
+	        BufferedImage img = ImageIO.read(screen);
+	 
+	        // get the width and height of the WebElement using getSize()
+	        int width = element.getSize().getWidth();
+	        int height = element.getSize().getHeight();
+	 
+	        // create a rectangle using width and height
+	        Rectangle rect = new Rectangle(width, height);
+	 
+	        // get the location of WebElement in a Point.
+	        // this will provide X & Y co-ordinates of the WebElement
+	        Point p = element.getLocation();
+	 
+	        // create image  for element using its location and size.
+	        // this will give image data specific to the WebElement
+	        BufferedImage dest = img.getSubimage(p.getX(), p.getY(), rect.width,
+	                rect.height);
+	 
+	        // write back the image data for element in File object
+	        ImageIO.write(dest, "png", screen);
+	 
+	        // return the File object containing image data
+	        return screen;
+	    }
 }
