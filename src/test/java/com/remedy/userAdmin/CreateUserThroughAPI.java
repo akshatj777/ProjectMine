@@ -95,6 +95,8 @@ public class CreateUserThroughAPI extends BaseClass {
 				objApplication.put(b, objApplicationValue);
 			}
 			CreateUserPage.userApplications = al.toString();
+			CreateUserPage.userApplications=CreateUserPage.userApplications.replace("[", "");
+			CreateUserPage.userApplications=CreateUserPage.userApplications.replace("]", "");
 			objSPOEApps.put("apps", objApplication);
 			objSPOEValue.put("value", objSPOEApps);
 		}
