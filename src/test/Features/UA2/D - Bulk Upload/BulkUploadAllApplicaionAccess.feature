@@ -263,30 +263,7 @@ Feature: Bulk Upload User from SA
       | User        | Role      | NPI | FirstName          | LastName          | Phone | ApplicationsEnabled        | ApplicationsDisabled | HealthSystem      | Programs                        | Locations                                      | Applications                    | ApplicationsNotVisible                          | Roletext | ReportCategory | ReportName         | BPID | Facilities        | LearningPathway                                           |
       | Super Admin | Executive |     | ExecutiveFirstName | ExecutiveLastName |       | Episodes, Reports, Lessons |                      | Stamford Hospital | Stamford Hospital--BPCI Model 2 | Stamford Hospital--2070-015--Stamford Hospital | Episodes, Reports, Lessons, TCI | Administration, Episodes 2.0, Physician Connect | ROLE_PRM | Patient ID     | Episode DRG Issues |      | Stamford Hospital | i am learning path, Learning Pathway 2, Remedy University |
 
-  Scenario: Scenario to Create user with Invalid Data
-    Given I am on the login page
-    Then I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
-    Then I should see header text "Users"
-    Then I click on Import User button
-    Then I click on Try Again button
-    Then I enter data with invalid values
-    Then I click on submit button on bulk user upload page
-    Then I verify "10 users not added" error message
-
-  Scenario: Scenario to Create user with Invalid email
-    Given I am on the login page
-    Then I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
-    Then I should see header text "Users"
-    Then I click on Import User button
-    Then I click on Try Again button
-    Then I enter user data with full application access for "Partner Technical Administrator"
-    Then I click on submit button on bulk user upload page
-    Then I verify error message "Contains invalid characters"
-
+ 
   Scenario: Bulk Upload User
     #Given I am on mail login page
     #Then I enter username "qaautomation@remedypartners.com" to login mail account for bulk delete

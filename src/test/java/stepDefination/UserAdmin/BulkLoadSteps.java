@@ -94,10 +94,7 @@ public class BulkLoadSteps extends DriverScript{
     public void iEnterDataWithFullAccessPerRole(String role){
     	bulkUser.iEnterDataAllAppPerRole(role);
     }
-    @When("^I enter data with invalid data permission values$")
-    public void iEnterInvalidDPData(){
-    	bulkUser.iEnterInvalidDPData();
-    }
+  
     @When("^I verify previous result \"([^\"]*)\" on summary page$")
     public void iVerifySummarymsg(String text){
     	bulkUser.iVerifySummarymsg(text);
@@ -105,6 +102,10 @@ public class BulkLoadSteps extends DriverScript{
     @Then("^I enter invalid user data$")
     public void enterInvalidData(){
     	bulkUser.enterInvalidData();
+    }
+    @Then("^I enter data with invalid values$")
+    public void enterInvalidDataValues(){
+    	bulkUser.enterInvalidDataValues();
     }
     @Then("^I verify \"([^\"]*)\" error message$")
     public void verifyErrorMessage(String text){
@@ -133,5 +134,9 @@ public class BulkLoadSteps extends DriverScript{
     @Then("^I enter valid data set for general information$")
     public void enterValidSetsOfData(){
     	bulkUser.enterValidSetsOfData();
+    }
+    @Then("^I enter users with same email$")
+    public void enterUsersWithSameEmail(){
+    	bulkUser.enterUsersWithSameEmail();
     }
 }
