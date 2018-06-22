@@ -88,7 +88,10 @@ public class ViewUserSteps extends DriverScript{
 	public void i_verify_Bulk_Email(String userRole) throws Throwable {
 		objViewUserPage.verifyBulkEmail(userRole);
 	}
-
+	@Then("^I verify bulk NPI \"([^\"]*)\"$")
+public void verifyBulkNPI(String field) throws Throwable {
+	objViewUserPage.verifyBulkNPI(field);
+}
 	@Then("^I verify phone \"([^\"]*)\"$")
 	public void i_verify_Phone(String field) throws Throwable {
 		objViewUserPage.verifyRole(field);

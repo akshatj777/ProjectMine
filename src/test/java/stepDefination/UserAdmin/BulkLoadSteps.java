@@ -131,10 +131,7 @@ public class BulkLoadSteps extends DriverScript{
     public void validateErrorMsgFor51Users(String text){
     	bulkUser.validateErrorMsgFor51Users(text);
     }
-    @Then("^I enter valid data set for general information$")
-    public void enterValidSetsOfData(){
-    	bulkUser.enterValidSetsOfData();
-    }
+  
     @Then("^I enter users with same email$")
     public void enterUsersWithSameEmail(){
     	bulkUser.enterUsersWithSameEmail();

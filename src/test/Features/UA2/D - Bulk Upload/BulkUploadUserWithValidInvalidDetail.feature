@@ -10,7 +10,7 @@ Feature: Bulk upload users with valid and invalid details
     Then I click on Try Again button
     Then I enter invalid and valid user data
     Then I click on submit button on bulk user upload page
-    Then I verify "3 users not added" error message and "3 users added" success message
+    Then I verify "12 users not added" error message and "1 user added" success message
     Then I verify availability of cross button
     Then I verify availability of Download Log button
     Then I verify availability of Try Again button
@@ -42,10 +42,8 @@ Feature: Bulk upload users with valid and invalid details
     And I click on submit button to set new password
 
     Examples: 
-      | Description                        | User        | Role         |
-      | Verify email for Executive User    | Super Admin | Executive    |
-      | Verify email Manager User          | Super Admin | Manager      |
-      | Verify email for Case Manager User | Super Admin | Case Manager |
+      | Description                     | User        | Role      |
+      | Verify email for Executive User | Super Admin | Executive |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -74,7 +72,7 @@ Feature: Bulk upload users with valid and invalid details
     Then I verify role "<Role>"
     Then I verify bulk email for "<User>-<Role>"
     Then I verify phone "<Phone>"
-    Then I verify NPI "<NPI>"
+    Then I verify bulk NPI "<NPI>"
     Then I verify enabled "<ApplicationsEnabled>"
     Then I verify disabled "<ApplicationsDisabled>"
     #Then I verify learning pathway "<LearningPathway>"
@@ -83,10 +81,8 @@ Feature: Bulk upload users with valid and invalid details
     Then I verify location "<Locations>"
 
     Examples: 
-      | Description                                       | User        | UserName                               | Password | FirstName            | LastName            | Phone        | Role         | ApplicationsEnabled | ApplicationsDisabled | NPI | LearningPathway                                                                                                                       | HealthSystem      | Programs                        | Locations                                                  |
-      | View Executive user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | ExecutiveFirstName   | ExecutiveLastName   |              | Executive    | Episodes, Lessons   | Reports              |     | i am learning path, Learning Pathway 2, Remedy University                                                                             | Stamford Hospital | Stamford Hospital--BPCI Model 2 | Stamford Hospital--2070-015--Stamford Hospital             |
-      | View Manager user created from Super Admin user   | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | ManagerFirstName     | ManagerLastName     | 987-654-5678 | Manager      | Lessons             | Episodes, Reports    |     | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | Branford Hills    | Branford Hills--BPCI Model 3    | Branford Hills--3056-r29--Branford Hills Healthcare Center |
-      | View Case Manager user created from Super Admin   | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | CaseManagerFirstName | CaseManagerLastName | 987-980-0980 | Case Manager | Reports             | Episodes, Lessons    |     | i am learning path, Learning Pathway 2, max-test-052417, Care Coordination External                                                   | Hackensack        | Hackensack--BPCI Model 2        | Hackensack--2070-005--Hackensack University Medical Center |
+      | Description                                       | User        | UserName                               | Password | FirstName          | LastName          | Phone | Role      | ApplicationsEnabled | ApplicationsDisabled | NPI | LearningPathway                                           | HealthSystem      | Programs                        | Locations                                      |
+      | View Executive user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | ExecutiveFirstName | ExecutiveLastName |       | Executive | Episodes, Lessons   | Reports              |     | i am learning path, Learning Pathway 2, Remedy University | Stamford Hospital | Stamford Hospital--BPCI Model 2 | Stamford Hospital--2070-015--Stamford Hospital |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -153,7 +149,5 @@ Feature: Bulk upload users with valid and invalid details
     And I should see Log in widget
 
     Examples: 
-      | Description                                                             | User        | FirstName            | LastName            | Role         | Applications                    | ApplicationsNotVisible                          | Roletext | ReportCategory | ReportName                   | BPID | Facilities                           | LearningPathway                                                                                                                       |  |
-      | Login with Executive and verify Product Tiles and their redirections    | Super Admin | ExecutiveFirstName   | ExecutiveLastName   | Executive    | Episodes, Reports, TCI, Lessons | Episodes 2.0, Administration, Physician Connect | ROLE_PRM | Patient ID     | Episode DRG Issues           |      | Stamford Hospital                    | i am learning path, Learning Pathway 2, Remedy University                                                                             |  |
-      | Login with Manager and verify Product Tiles and their redirections      | Super Admin | ManagerFirstName     | ManagerLastName     | Manager      | Episodes, Reports, TCI, Lessons | Episodes 2.0, Administration, Physician Connect | ROLE_PRM | Patient ID     | Episode DRG Issues [Model 3] |      | Branford Hills Healthcare Center     | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 |  |
-      | Login with Case Manager and verify Product Tiles and their redirections | Super Admin | CaseManagerFirstName | CaseManagerLastName | Case Manager | Episodes, Reports, TCI, Lessons | Episodes 2.0, Administration, Physician Connect | ROLE_TCS | Patient ID     | Episode DRG Issues           |      | Hackensack University Medical Center | i am learning path, Learning Pathway 2, max-test-052417, Care Coordination External                                                   |  |
+      | Description                                                          | User        | FirstName          | LastName          | Role      | Applications                    | ApplicationsNotVisible                          | Roletext | ReportCategory | ReportName         | BPID | Facilities        | LearningPathway                                           |  |
+      | Login with Executive and verify Product Tiles and their redirections | Super Admin | ExecutiveFirstName | ExecutiveLastName | Executive | Episodes, Reports, TCI, Lessons | Episodes 2.0, Administration, Physician Connect | ROLE_PRM | Patient ID     | Episode DRG Issues |      | Stamford Hospital | i am learning path, Learning Pathway 2, Remedy University |  |

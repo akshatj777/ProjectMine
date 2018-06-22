@@ -68,7 +68,21 @@ public class ViewUserPage extends BaseClass {
 			}
 		}
 	}
-	
+	public void verifyBulkNPI(String field) throws Throwable {
+		if(!(field.equals("")))
+		{
+			if(field.equals("NPI"))
+			{
+				iWillWaitToSee(By.xpath("//*[text()[contains(.,'"+BulkUserCreationPage.bulkUsersNPIPerRole+"')]]"));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[text()[contains(.,'"+BulkUserCreationPage.bulkUsersNPIPerRole+"')]]")));
+			}
+			else
+			{
+				iWillWaitToSee(By.xpath("//*[text()[contains(.,'"+field+"')]]"));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[text()[contains(.,'"+field+"')]]")));
+			}
+		}
+	}
 	public void verifyEmail(String email, String userRole) throws Throwable {
 		String emailUser = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[@title='"+emailUser+"']")));
