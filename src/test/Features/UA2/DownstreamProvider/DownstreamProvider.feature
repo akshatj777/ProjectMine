@@ -141,15 +141,15 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
     And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
     And I redirect to Remedy connect page
     And I click on Episodes 2 tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I redirect to Remedy connect page
+    And I click on Institute tile for "<User>-<Role>" user
+    And I switch to new window
+    And I verify "<User>-<Role>" user navigated to Institute homepage
+    And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -307,15 +307,15 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
     And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
     And I redirect to Remedy connect page
     And I click on Episodes 2 tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I redirect to Remedy connect page
+    And I click on Institute tile for "<User>-<Role>" user
+    And I switch to new window
+    And I verify "<User>-<Role>" user navigated to Institute homepage
+    And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -473,15 +473,15 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
     And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
     And I redirect to Remedy connect page
     And I click on Episodes 2 tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I redirect to Remedy connect page
+    And I click on Institute tile for "<User>-<Role>" user
+    And I switch to new window
+    And I verify "<User>-<Role>" user navigated to Institute homepage
+    And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -639,15 +639,15 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
     And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
     And I redirect to Remedy connect page
     And I click on Episodes 2 tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I redirect to Remedy connect page
+    And I click on Institute tile for "<User>-<Role>" user
+    And I switch to new window
+    And I verify "<User>-<Role>" user navigated to Institute homepage
+    And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -805,15 +805,15 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
     And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
     And I redirect to Remedy connect page
     And I click on Episodes 2 tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I redirect to Remedy connect page
+    And I click on Institute tile for "<User>-<Role>" user
+    And I switch to new window
+    And I verify "<User>-<Role>" user navigated to Institute homepage
+    And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -971,15 +971,15 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
     And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
     And I redirect to Remedy connect page
     And I click on Episodes 2 tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I redirect to Remedy connect page
+    And I click on Institute tile for "<User>-<Role>" user
+    And I switch to new window
+    And I verify "<User>-<Role>" user navigated to Institute homepage
+    And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -1137,15 +1137,15 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
     And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
     And I redirect to Remedy connect page
     And I click on Episodes 2 tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I redirect to Remedy connect page
+    And I click on Institute tile for "<User>-<Role>" user
+    And I switch to new window
+    And I verify "<User>-<Role>" user navigated to Institute homepage
+    And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -1303,15 +1303,15 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
     And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
     And I redirect to Remedy connect page
     And I click on Episodes 2 tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I redirect to Remedy connect page
+    And I click on Institute tile for "<User>-<Role>" user
+    And I switch to new window
+    And I verify "<User>-<Role>" user navigated to Institute homepage
+    And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -1469,15 +1469,15 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
     And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
     And I redirect to Remedy connect page
     And I click on Episodes 2 tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I redirect to Remedy connect page
+    And I click on Institute tile for "<User>-<Role>" user
+    And I switch to new window
+    And I verify "<User>-<Role>" user navigated to Institute homepage
+    And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
