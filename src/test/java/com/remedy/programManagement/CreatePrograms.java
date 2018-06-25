@@ -224,6 +224,11 @@ public class CreatePrograms extends BaseClass {
 				tempPrograms.put(1, RandomStringUtils.randomAlphabetic(8));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), tempPrograms.get(1));
 			}
+			else if(text.equals("CID-"))
+			{
+				tempPrograms.put(1, createRandomNumber(4));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), tempPrograms.get(1));
+			}
 			else if(text.equals("Duplicate_CID"))
 			{
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreatePrograms.programs.get(1));
