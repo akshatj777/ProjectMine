@@ -38,8 +38,8 @@ Feature: Super Admin Landing page verification
   Scenario: Verification of availability of fields on Super User Landing page
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     And I should not see text "Unable to Load users" on Users page
     And I verify "SearchBox" on landing page
@@ -82,8 +82,8 @@ Feature: Super Admin Landing page verification
   Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     And I verify "SearchBox" on landing page
     Then I enter "<InvalidSearchParameter>" in search box for "<user>-<Role>"
@@ -102,8 +102,8 @@ Feature: Super Admin Landing page verification
   Scenario Outline: Verify ability of Super Admin user to lock a user
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Adming
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     And I verify "SearchBox" on landing page
     Then I enter "<SearchParameter>" in search box for "<user>-<Role>"
@@ -129,8 +129,8 @@ Feature: Super Admin Landing page verification
   Scenario Outline: Verify ability of Super Admin user to unlock a locked user
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Adming
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I enter "<SearchParameter>" in search box for "<user>-<Role>"
     Then I verify availability of "<SearchParameter>" for "<user>-<Role>"
@@ -159,19 +159,19 @@ Feature: Super Admin Landing page verification
     Then I should see Tile text Episodes 2.0
     And I click on the "Reports" tile
     Then I verify page tile for reports page
-    And I click on "User Admin" tile from menu
+    And I click on "Users" tile from menu
     Then I should see header text "Users"
     Then I click on "Reports" from Management dropdown
     And I switch to new window
     Then I verify page tile for reports page
-    And I click on "User Admin" tile from menu
+    And I click on "Users" tile from menu
     Then I should see header text "Users"
 
   Scenario Outline: Verifying that User is redirected to User admin page although doesn't have access to UA
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Adming
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     And I click on the top user account link
     Then I click on "Log Out" button

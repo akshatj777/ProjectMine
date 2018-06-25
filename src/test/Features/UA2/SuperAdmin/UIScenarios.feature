@@ -22,8 +22,8 @@ Feature: UI Scenarios - Super Admin User
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     When I click on Add User button
     Then I should see "Add New User" on the user creation page
@@ -57,8 +57,8 @@ Feature: UI Scenarios - Super Admin User
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     When I click on Add User button
     Then I should see "Add New User" on the user creation page
@@ -86,8 +86,8 @@ Feature: UI Scenarios - Super Admin User
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     When I click on Add User button
     Then I should see "Add New User" on the user creation page
@@ -113,8 +113,8 @@ Feature: UI Scenarios - Super Admin User
   Scenario: Verify the functionality of back/Cancel button and tabs on the left on create user page
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     When I click on Add User button
     Then I should see "Add New User" on the user creation page
@@ -152,8 +152,8 @@ Feature: UI Scenarios - Super Admin User
   Scenario: Verify the functionality of Cross button on Permissions Tab on Create User page
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     When I click on Add User button
     Then I should see "Add New User" on the user creation page
@@ -176,8 +176,8 @@ Feature: UI Scenarios - Super Admin User
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     When I click on Add User button
     Then I should see "Add New User" on the user creation page
@@ -207,8 +207,8 @@ Feature: UI Scenarios - Super Admin User
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     When I click on Add User button
     Then I should see "Add New User" on the user creation page
@@ -252,8 +252,8 @@ Feature: UI Scenarios - Super Admin User
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     When I click on Add User button
     Then I should see "Add New User" on the user creation page
@@ -296,8 +296,8 @@ Feature: UI Scenarios - Super Admin User
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     When I click on Add User button
     Then I should see "Add New User" on the user creation page
@@ -341,8 +341,8 @@ Feature: UI Scenarios - Super Admin User
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     When I click on Add User button
     Then I should see "Add New User" on the user creation page
@@ -379,8 +379,8 @@ Feature: UI Scenarios - Super Admin User
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     When I click on Add User button
     Then I should see "Add New User" on the user creation page
@@ -415,8 +415,8 @@ Feature: UI Scenarios - Super Admin User
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     When I click on Add User button
     Then I should see "Add New User" on the user creation page
@@ -451,8 +451,8 @@ Feature: UI Scenarios - Super Admin User
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     When I click on Add User button
     Then I should see "Add New User" on the user creation page

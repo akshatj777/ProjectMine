@@ -31,8 +31,8 @@ Feature: View User - Super Admin User
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -86,8 +86,8 @@ Feature: View User - Super Admin User
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"

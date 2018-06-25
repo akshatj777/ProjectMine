@@ -55,8 +55,8 @@ Feature: Edit user page for SA
   Scenario Outline: Verifying editable/non-editable fields of general information tab and editing them
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -107,8 +107,8 @@ Feature: Edit user page for SA
   Scenario Outline: Editing user role from <PreviousRole> to <Role>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -135,10 +135,10 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<ApplicationsVisible>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<ApplicationsVisible>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<ApplicationsVisible>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
     And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
@@ -201,8 +201,8 @@ Feature: Edit user page for SA
   Scenario Outline: Changing the products and general details for <Role> and verifying product tile
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -225,10 +225,10 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
     And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
@@ -292,8 +292,8 @@ Feature: Edit user page for SA
   Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -322,10 +322,10 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
     And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
@@ -388,8 +388,8 @@ Feature: Edit user page for SA
   Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -422,10 +422,10 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
     And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
@@ -488,8 +488,8 @@ Feature: Edit user page for SA
   Scenario Outline: Editing locations -<Description>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -515,10 +515,10 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
     And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
@@ -583,8 +583,8 @@ Feature: Edit user page for SA
   Scenario Outline: Edit programs- <Description>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -611,10 +611,10 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
     And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
@@ -679,8 +679,8 @@ Feature: Edit user page for SA
   Scenario Outline: Changing General information, Role from <PreviousRole> to <Role> and Remove existing org and add new org
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
     And I verify that I am navigated to user page
@@ -721,10 +721,10 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
     And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
@@ -787,8 +787,8 @@ Feature: Edit user page for SA
   Scenario Outline: Changing General information, Role from <PreviousRole> to <Role> and edit Data permissions
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -827,10 +827,10 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
     And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
@@ -893,8 +893,8 @@ Feature: Edit user page for SA
   Scenario Outline: Remove phone, Role from <PreviousRole> to <Role> add new org
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -928,10 +928,10 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
     And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
@@ -994,8 +994,8 @@ Feature: Edit user page for SA
   Scenario Outline: Edit phone, Role from <PreviousRole> to <Role> and Remove Existing Location and Add new Location
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -1027,10 +1027,10 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
     And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
@@ -1093,8 +1093,8 @@ Feature: Edit user page for SA
   Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1125,8 +1125,8 @@ Feature: Edit user page for SA
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1144,8 +1144,8 @@ Feature: Edit user page for SA
   Scenario Outline: Verify the functionality of back/Cancel button
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1190,8 +1190,8 @@ Feature: Edit user page for SA
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -1220,8 +1220,8 @@ Feature: Edit user page for SA
   Scenario Outline: Invalid Health system and invalid location validation
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1247,8 +1247,8 @@ Feature: Edit user page for SA
   Scenario Outline: Remove selected locations and then remove the org
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1270,8 +1270,8 @@ Feature: Edit user page for SA
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1293,8 +1293,8 @@ Feature: Edit user page for SA
   Scenario Outline: Changing role from physician to Manager then back to Physicians
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -1323,8 +1323,8 @@ Feature: Edit user page for SA
   Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1352,8 +1352,8 @@ Feature: Edit user page for SA
   Scenario Outline: Validating- all locations should not be displayed as selected when the "All Locations" check box is unchecked while editing the user
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1372,8 +1372,8 @@ Feature: Edit user page for SA
   Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"

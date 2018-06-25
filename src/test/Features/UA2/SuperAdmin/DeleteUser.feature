@@ -38,8 +38,8 @@ Feature: Delete a user from SA
   Scenario Outline: Login from SA and delete an existing user and Login with the verified deleted user
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -84,8 +84,8 @@ Feature: Delete a user from SA
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     When I click on Add User button
     Then I should see "Add New User" on the user creation page
