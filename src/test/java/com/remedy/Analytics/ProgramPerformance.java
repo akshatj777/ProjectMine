@@ -24,6 +24,10 @@ import net.sourceforge.tess4j.TesseractException;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.io.FileUtils;
+import org.bytedeco.javacpp.BytePointer;
+import org.bytedeco.javacpp.lept;
+import org.bytedeco.javacpp.lept.PIX;
 import org.bytedeco.javacpp.tesseract.TessBaseAPI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -124,22 +128,23 @@ public class ProgramPerformance extends BaseClass{
 	}
 	
 	public void Screenshot1() throws Exception{
-		Screenshot screen=new AShot().takeScreenshot(driver, driver.findElement(By.xpath("//div[@tb-test-id='KPI_Episode']//div[@class='tvimagesContainer']/canvas")));
-		File fl = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image1.png");
+		Screenshot screen=new AShot().takeScreenshot(driver, driver.findElement(By.xpath("//canvas[contains(@style,'position') and @class='tabCanvas tab-widget' and @width='152']")));
+		File fl = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png");
 		ImageIO.write(screen.getImage(), "PNG", fl);
-		testBarcodeNumber();
+		TextFromImage();
+//		testBarcodeNumber();
 //		getImageAsString();
 //		ITesseract tsc = new Tesseract();
 //		String a = tsc.doOCR(fl);
 //		Screen s=new Screen();
 //		s.capture();
 //		String inputFile=("user.dir")+"\\src\\test\\Imports\\Image1.png";
-		//Tesseract tesseract=new Tesseract();
+//		Tesseract tesseract=new Tesseract();
 ////		String importDir = System.getProperty("user.dir");
-		//String newDir = "user.dir" + "\\" + "src" + "\\" + "test" + "\\" + "Imports" + "\\" + "TestData";
-		//tesseract.setDatapath(newDir);
-		//String fullText=tesseract.doOCR(fl);
-		//System.out.println(fullText);
+//		String newDir = (System.getProperty("user.dir")+"\\src\\test\\Imports\\Image1.png");
+//		tesseract.setDatapath(newDir);
+//		String fullText=tesseract.doOCR(fl);
+//		System.out.println(fullText);
 //		             Ocr.setUp(); // one time setup
 //	                 Ocr ocr = new Ocr(); // create a new OCR engine
 //	                 ocr.startEngine("eng", Ocr.SPEED_FASTEST); // English
@@ -243,7 +248,7 @@ public class ProgramPerformance extends BaseClass{
 	        System.out.println(result);
 	    }
 	 
-	 public static File captureElementPicture(WebElement element)
+	 public File captureElementPicture(WebElement element)
 	            throws Exception {
 	 
 	        // get the WrapsDriver of the WebElement
@@ -277,5 +282,36 @@ public class ProgramPerformance extends BaseClass{
 	 
 	        // return the File object containing image data
 	        return screen;
-	    }
+	    } 
+	 
+	 public void TakeShotOFElement() throws IOException {
+		 WebElement ele = driver.findElement(By.xpath("//canvas[@class='tabCanvas tab-widget' and @style='display: block; position: absolute; left: 0px; top: 0px; width: 256px; height: 54px;']"));
+		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		 BufferedImage  fullImg = ImageIO.read(screenshot);
+		 Point point = ele.getLocation();
+//		 Point point = new Point(515,160);
+		 point = point.moveBy(0, 87);
+		 System.out.println(point);
+		 int eleWidth = ele.getSize().getWidth();
+		 int eleHeight = ele.getSize().getHeight();
+		 
+		 BufferedImage eleScreenshot= fullImg.getSubimage(point.getX(), point.getY(),
+				    eleWidth, eleHeight);
+				ImageIO.write(eleScreenshot, "png", screenshot);
+				File screenshotLocation = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png");
+				FileUtils.copyFile(screenshot, screenshotLocation);
+				TextFromImage();
+	 }
+	 
+	 
+	 //Main Method to fetch text from screenshot
+	 public void TextFromImage(){
+		 TessBaseAPI instance=new TessBaseAPI();
+		 instance.Init(System.getProperty("user.dir")+"\\src\\test\\Imports\\TestData\\tessdata", "eng");
+		 PIX image=lept.pixRead(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png");
+		 instance.SetImage(image);
+		 BytePointer bytePointer=instance.GetUTF8Text();
+		 String output=bytePointer.getString();
+		 System.out.println("Text in image is"+output);
+	 }
 }

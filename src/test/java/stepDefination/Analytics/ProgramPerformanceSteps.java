@@ -88,7 +88,7 @@ public class ProgramPerformanceSteps extends DriverScript{
 	
 	@Then("^I verify \"([^\"]*)\" count section is appearing on the dashboard below \"([^\"]*)\"$")
 	public void i_verify_count_section_is_appearing_on_the_dashboard_below(String count,String text) throws Throwable{
-		programdashboard.Screenshot1();
+		programdashboard.TakeShotOFElement();
 	}
 	
 	@And("^I verify legend \"([^\"]*)\" is appearing on the dashboard$")
