@@ -38,8 +38,8 @@ Feature: Edit page for Downstream provider
   Scenario Outline: Change Role from <PreviousRole> to <Role> and Edit details
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -75,10 +75,10 @@ Feature: Edit page for Downstream provider
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
     And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
@@ -119,8 +119,8 @@ Feature: Edit page for Downstream provider
   Scenario Outline: Edit downstream provider general details, applications and data permissions
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -166,10 +166,10 @@ Feature: Edit page for Downstream provider
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
     And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
@@ -210,8 +210,8 @@ Feature: Edit page for Downstream provider
   Scenario Outline: Remove exiting health System and new org
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -250,10 +250,10 @@ Feature: Edit page for Downstream provider
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
     And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
@@ -294,8 +294,8 @@ Feature: Edit page for Downstream provider
   Scenario Outline: Change Role from <PreviousRole> to <Role>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -337,10 +337,10 @@ Feature: Edit page for Downstream provider
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
     And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user

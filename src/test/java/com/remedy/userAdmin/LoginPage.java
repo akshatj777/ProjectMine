@@ -134,9 +134,7 @@ public class LoginPage extends BaseClass {
 	}
 
 	public void iVerifyLogInWidget() {
-		iWillWaitToSee(By.cssSelector(".auth0-lock-content"));
-		isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-content")));
-
+		iWillWaitToSee(By.xpath("//div[@class='auth0-lock-body-content']"));
 	}
 	
 	public void iLogInAsRTAUser(String userName, String passWord){

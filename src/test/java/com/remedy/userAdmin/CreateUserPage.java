@@ -774,14 +774,14 @@ public class CreateUserPage extends BaseClass{
 	   while(st.hasMoreTokens())
 	   {
 		   if(st.nextToken().trim().equals("Episodes")){
-			   iWillWaitToSee(By.xpath("//p[text()='Episodes']"));
+			   iWillWaitToSee(By.xpath("//div[text()='Episodes']"));
 			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 			   {
-				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[@class='spoe-button episodes']")));
+				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Episodes']")));
 			   }
 			   else
 			   {
-				   clickElement(driver.findElement(By.xpath("//a[@class='spoe-button episodes']")));  
+				   clickElement(driver.findElement(By.xpath("//div[text()='Episodes']")));  
 			   }
 		   }   
 	   }
@@ -805,14 +805,14 @@ public class CreateUserPage extends BaseClass{
 	   while(st.hasMoreTokens())
 	   {
 			   if(st.nextToken().trim().equals("User Admin")){
-				   iWillWaitToSee(By.xpath("//div[text()='User Admin']"));
+				   iWillWaitToSee(By.xpath("//div[text()='Users']"));
 				   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 				   {
-					   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='User Admin']")));
+					   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Users']")));
 				   }
 				   else
 				   {
-					   clickElement(driver.findElement(By.xpath("//div[text()='User Admin']")));  
+					   clickElement(driver.findElement(By.xpath("//div[text()='Users']")));  
 				   }
 		   }   
 	   }
@@ -2061,17 +2061,17 @@ public class CreateUserPage extends BaseClass{
     	   }
     	   else if(newToken.contains("Administration"))
     	   {
-    		   token = "User Admin";
+    		   token = "Users";
     	   }
     	   else
     	   {
     		   token = newToken;   
     	   }
-    	   iWillWaitToSee(By.xpath("//p[text()='"+token.trim()+"']"));
-    	   Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[text()='"+token.trim()+"']")));
+    	   iWillWaitToSee(By.xpath("//div[text()='"+token.trim()+"']"));
+    	   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+token.trim()+"']")));
        } 
-	   iWillWaitToSee(By.xpath("//p[text()='Institute']"));
-       Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[text()='Institute']")));
+	   iWillWaitToSee(By.xpath("//div[text()='Institute']"));
+       Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Institute']")));
    }
    
    public void verifyProductTilesNotPresent(String products) throws Throwable {
@@ -2094,13 +2094,13 @@ public class CreateUserPage extends BaseClass{
     	   }
     	   else if(newToken.contains("Administration"))
     	   {
-    		   token = "User Admin";
+    		   token = "Users";
     	   }
     	   else
     	   {
     		   token = newToken;   
     	   }
-    		Assert.assertFalse(isElementNotPresentOnPage(By.xpath("//p[text()='"+token.trim()+"']")));
+    		Assert.assertFalse(isElementNotPresentOnPage(By.xpath("//div[text()='"+token.trim()+"']")));
        } 
    }
    
@@ -2158,16 +2158,13 @@ public class CreateUserPage extends BaseClass{
 	    	   }
 	    	   else if(newToken.contains("Administration"))
 	    	   {
-	    		   token = "User Admin";
+	    		   token = "Users";
 	    	   }
 	    	   else
 	    	   {
 	    		   token = newToken;   
 	    	   }
-			if(token.equals("Episodes"))
-			{
-				Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[text()='Institute']")));
-			}
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+token.trim()+"']")));
 	       } 
 	}
    
@@ -2192,7 +2189,7 @@ public class CreateUserPage extends BaseClass{
     	   }
     	   else if(newToken.contains("Administration"))
     	   {
-    		   token = "User Admin";
+    		   token = "Users";
     	   }
     	   else
     	   {

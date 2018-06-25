@@ -41,8 +41,8 @@ Feature: Verification of Landing Page for PTA User
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     And I should not see text "Unable to Load users" on Users page
     And I verify "SearchBox" on landing page
@@ -87,8 +87,8 @@ Feature: Verification of Landing Page for PTA User
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     And I verify "SearchBox" on landing page
     Then I enter "<InvalidSearchParameter>" in search box for "<user>-<Role>"
@@ -109,8 +109,8 @@ Feature: Verification of Landing Page for PTA User
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     And I verify "SearchBox" on landing page
     Then I enter "<SearchParameter>" in search box for "<user>-<Role>"
@@ -134,7 +134,7 @@ Feature: Verification of Landing Page for PTA User
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
     Then I click Access button
-    And I click on the "User Admin" tile
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I enter "<SearchParameter>" in search box for "<user>-<Role>"
     Then I verify availability of "<SearchParameter>" for "<user>-<Role>"
