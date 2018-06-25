@@ -240,14 +240,13 @@ Feature: Bulk Upload User from SA
       | User        | Role                      |
       | Super Admin | Transitional Case Manager |
 
-    Scenario Outline: Scenario to create a user with existing NPI
+  Scenario Outline: Scenario to create a user with existing NPI
     Given I am on the login page
-    
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I click on Import User button
     Then I click on Try Again button
@@ -257,4 +256,4 @@ Feature: Bulk Upload User from SA
 
     Examples: 
       | User        | Role       |
-      | Super Admin | Physicians |  
+      | Super Admin | Physicians |

@@ -10,7 +10,7 @@ Feature: Bulk upload users with valid and invalid details
     Then I click on Try Again button
     Then I enter invalid and valid user data
     Then I click on submit button on bulk user upload page
-    Then I verify "12 users not added" error message and "1 user added" success message
+    Then I verify "13 users not added" error message and "1 user added" success message
     Then I verify availability of cross button
     Then I verify availability of Download Log button
     Then I verify availability of Try Again button

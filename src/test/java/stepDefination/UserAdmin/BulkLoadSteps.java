@@ -136,4 +136,8 @@ public class BulkLoadSteps extends DriverScript{
     public void enterUsersWithSameEmail(){
     	bulkUser.enterUsersWithSameEmail();
     }
+    @Then("^I edit \"([^\"]*)\" user and enter data$")
+    public void editUser(String role){
+    	bulkUser.editUser(role);
+    }
 }

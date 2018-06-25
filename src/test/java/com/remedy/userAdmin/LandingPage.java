@@ -28,11 +28,10 @@ public class LandingPage extends BaseClass{
         super(driver);}
 
     public void iVerifyTextforTiles(String text){
-    	iWillWaitToSee(By.cssSelector(".title>p"));
-       	if(text.isEmpty()!=true){
-    		verifyTextForElementfromList(".title>p", text);
+    	iWillWaitToSee(By.xpath("//div[contains(text(),'"+text+"')]"));
+       isElementVisible(driver.findElement(By.xpath("//div[contains(text(),'"+text+"')]")));
     	}
-    }
+   
        
     public void iClickOnApplicateTile(String tile){
         iWillWaitToSee(By.xpath(tile));
