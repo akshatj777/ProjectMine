@@ -320,6 +320,30 @@ Feature: Create Bundled Payment Contracts functionality tests
     And I select "<Program_Name>" Program name in create Contract page under "Payor" Organization
     And I select Organization type "<Organization_Type>" for Contract "1" on "create" Contracts page
     And I select Organization name "<Organization_Name> - <Has_MO>" for Contract "1" on "create" Contracts page
+    And I select "1" Bundle "<Bundle>" for Contract "1" on "create" Contracts page
+    And I enter "<Price>" in "price" field for "Bundle1 Price1" on create Contract page
+    Then I enter date "<ContractStartDate>" in "ContractStartDate" field for index "0"
+    Then I enter date "<ContractEndDate>" in "ContractEndDate" field for index "1"
+    Then I click on "Submit" button on "create" organization page
+    And I verify "<ValidationMsg>" mandatory field validation message on create organization page
+
+    Examples: 
+      | Description                                                                                             | Has_MO | Payor_Name | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | Program_Name | Organization_Type | Organization_Name | Bundle       | Price | Trend_Factor | Upper_Bound | Lower_Bound | ValidationMsg                                  |
+      | Check validation message for Contract creation with Contract End Date is before the Contract Start Date | NO     | PAYORNAME  | 2017/01/05        | 2017/01/03      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPI |   123 |          121 |         135 |         106 | The Contract End Date is before the start date |
+
+  Scenario Outline: <Description>
+    When I click on "Payor" organization tab on organization dashboard
+    When I search with "<Payor_Name>" on organization in search box
+    And I click "<Payor_Name>" field in search list on organization page
+    And I verify "<Payor_Name>" name on the header of view profile
+    And I verify "Contracts" tab present under "Payor" Organization
+    And I click on "Contracts" tab on view profile of "Payor" Organization
+    And I verify the "Create New Contract" button on view profile of "Payor" Organization
+    Then I click on "Create New Contract" button on "create" organization page
+    And I verify "Create Contract" header text on create organization page
+    And I select "<Program_Name>" Program name in create Contract page under "Payor" Organization
+    And I select Organization type "<Organization_Type>" for Contract "1" on "create" Contracts page
+    And I select Organization name "<Organization_Name> - <Has_MO>" for Contract "1" on "create" Contracts page
     And I enter "<Contract_Id>" in "Contract Id" field for "Contract1" on create Contract page
     And I select "1" Bundle "<Bundle>" for Contract "1" on "create" Contracts page
     And I enter "<Price>" in "price" field for "Bundle1 Price1" on create Contract page
