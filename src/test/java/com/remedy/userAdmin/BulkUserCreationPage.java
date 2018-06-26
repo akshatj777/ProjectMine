@@ -258,14 +258,11 @@ public class BulkUserCreationPage extends BaseClass {
 
 		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
-		
+
 		bulkNPIPerRole.put("Physicians", randomNPI);
 		bulkUsersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
 		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
-		
 
-		
-		
 		iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 		iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
 	}
@@ -1300,8 +1297,7 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("NPI", randomNPI);
 			iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 			iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
-		}
-		else if (role.equals("Physicians")) {
+		} else if (role.equals("Physicians")) {
 			try {
 				strUserData = readContentForBulkUpload(27, 28);
 			} catch (Exception e) {
@@ -1315,8 +1311,9 @@ public class BulkUserCreationPage extends BaseClass {
 			bulkUsersEmailPerRole.put("Super Admin-Physicians", bulkEmailPerRole);
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Physicians", applicationsList);
 			CreateUserPage.usersEmailPerRole.put("Super Admin-Physicians", bulkEmailPerRole);
-		
-			String exisitingNPI = BulkUserCreationPage.bulkUsersNPIPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
+
+			String exisitingNPI = BulkUserCreationPage.bulkUsersNPIPerRole.get(userRole)
+					.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
 			strUserData = strUserData.replace("NPI", exisitingNPI);
 			iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 			iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
@@ -1544,75 +1541,162 @@ public class BulkUserCreationPage extends BaseClass {
 		iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
 
 	}
-	  public void editUser(String role){
-		  String strUserData = null;
-			String randomString = null;
-			HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
-			HashMap<String, String> applicationsList = new HashMap<String, String>();
-			HashMap<String, String> bulkNPIPerRole = new HashMap<String, String>();
-			if (role.equals("Executive")) {
-				try {
-					strUserData = readContentForBulkUpload(2, 3);
-				} catch (Exception e) {
-					System.out.println(e);
-				}
-				randomString = RandomStringUtils.randomAlphabetic(8);
-				strUserData = strUserData.replace("EXECUTIVEMAIL", "qaautomation+" + randomString + "@remedypartners.com");
-				strUserData = strUserData.replace(" Executive ", "Remedy Executive");
-				strUserData = strUserData.replace("514083:2070-015:TSH", "441447:3056-r29:075296");
-				applicationsList.put("Remedy Executive", "Episodes, Reports, TCI, Lessons");
-				bulkEmailPerRole.put("Remedy Executive", "qaautomation+" + randomString + "@remedypartners.com");
-				bulkUsersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
-				CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Executive", applicationsList);
-				CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
 
+	public void editUser(String role) {
+		String strUserData = null;
+		String randomString = null;
+		HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
+		HashMap<String, String> applicationsList = new HashMap<String, String>();
+		HashMap<String, String> bulkNPIPerRole = new HashMap<String, String>();
+		if (role.equals("Executive")) {
+			try {
+				strUserData = readContentForBulkUpload(2, 3);
+			} catch (Exception e) {
+				System.out.println(e);
 			}
-			else if (role.equals("Manager")) {
-				try {
-					strUserData = readContentForBulkUpload(3, 4);
-				} catch (Exception e) {
-					System.out.println(e);
-				}
-				randomString = RandomStringUtils.randomAlphabetic(8);
-				strUserData = strUserData.replace("MANAGERMAIL", "qaautomation+" + randomString + "@remedypartners.com");
-				strUserData = strUserData.replace(" Manager ", "Remedy TCS");
-				strUserData = strUserData.replace("ManagerFirstName" , "FirstNameEdited");
-				strUserData = strUserData.replace("ManagerLastName" , "LastNameEdited");
-				
-				strUserData = strUserData.replace("9876545678" , "");
-				applicationsList.put("Remedy TCS", "Episodes, Reports, TCI, Lessons");
-				bulkEmailPerRole.put("Remedy TCS", "qaautomation+" + randomString + "@remedypartners.com");
-				bulkUsersEmailPerRole.put("Super Admin-Remedy TCS", bulkEmailPerRole);
-				CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy TCS", applicationsList);
-				CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy TCS", bulkEmailPerRole);
+			randomString = RandomStringUtils.randomAlphabetic(8);
+			strUserData = strUserData.replace("EXECUTIVEMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace(" Executive ", "Remedy Executive");
+			strUserData = strUserData.replace("514083:2070-015:TSH", "441447:3056-r29:075296");
+			applicationsList.put("Remedy Executive", "Episodes, Reports, TCI, Lessons");
+			bulkEmailPerRole.put("Remedy Executive", "qaautomation+" + randomString + "@remedypartners.com");
+			bulkUsersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
+			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Executive", applicationsList);
+			CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
 
+		} else if (role.equals("Manager")) {
+			try {
+				strUserData = readContentForBulkUpload(3, 4);
+			} catch (Exception e) {
+				System.out.println(e);
 			}
-			else if (role.equals("Case Manager")) {
-				try {
-					strUserData = readContentForBulkUpload(4, 5);
-				} catch (Exception e) {
-					System.out.println(e);
-				}
-				randomString = RandomStringUtils.randomAlphabetic(8);
-				strUserData = strUserData.replace("CASEMGRMAIL", "qaautomation+" + randomString + "@remedypartners.com");
-				
-				strUserData = strUserData.replace("CaseManagerFirstName" , "FirstNameEdited");
-				strUserData = strUserData.replace("CaseManagerLastName" , "LastNameEdited");
-				
-				strUserData = strUserData.replace("9879800980" , "9879800978");
-				
-				strUserData = strUserData.replace("776109:2070-005:HUMC | | | True| False | False | False | True |  | False | | False" , "776109:2070-005:HUMC | | | False| True | False | False | False |  | False | | False");
-				applicationsList.put("Case Manager", "Episodes, TCI");
-				bulkEmailPerRole.put("Case Manager", "qaautomation+" + randomString + "@remedypartners.com");
-				bulkUsersEmailPerRole.put("Super Admin-Case Manager", bulkEmailPerRole);
-				CreateUserPage.usersApplicationsPerRole.put("Super Admin-Case Manager", applicationsList);
-				CreateUserPage.usersEmailPerRole.put("Super Admin-Case Manager", bulkEmailPerRole);
+			randomString = RandomStringUtils.randomAlphabetic(8);
+			strUserData = strUserData.replace("MANAGERMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace(" Manager ", "Remedy TCS");
+			strUserData = strUserData.replace("ManagerFirstName", "FirstNameEdited");
+			strUserData = strUserData.replace("ManagerLastName", "LastNameEdited");
 
+			strUserData = strUserData.replace("9876545678", "");
+			applicationsList.put("Remedy TCS", "Episodes, Reports, TCI, Lessons");
+			bulkEmailPerRole.put("Remedy TCS", "qaautomation+" + randomString + "@remedypartners.com");
+			bulkUsersEmailPerRole.put("Super Admin-Remedy TCS", bulkEmailPerRole);
+			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy TCS", applicationsList);
+			CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy TCS", bulkEmailPerRole);
+
+		} else if (role.equals("Case Manager")) {
+			try {
+				strUserData = readContentForBulkUpload(4, 5);
+			} catch (Exception e) {
+				System.out.println(e);
 			}
+			randomString = RandomStringUtils.randomAlphabetic(8);
+			strUserData = strUserData.replace("CASEMGRMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+
+			strUserData = strUserData.replace("CaseManagerFirstName", "FirstNameEdited");
+			strUserData = strUserData.replace("CaseManagerLastName", "LastNameEdited");
+
+			strUserData = strUserData.replace("9879800980", "9879800978");
+
+			strUserData = strUserData.replace(
+					"776109:2070-005:HUMC | | | True| False | False | False | True |  | False | | False",
+					"776109:2070-005:HUMC | | | False| True | False | False | False |  | False | | False");
+			applicationsList.put("Case Manager", "Episodes, TCI");
+			bulkEmailPerRole.put("Case Manager", "qaautomation+" + randomString + "@remedypartners.com");
+			bulkUsersEmailPerRole.put("Super Admin-Case Manager", bulkEmailPerRole);
+			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Case Manager", applicationsList);
+			CreateUserPage.usersEmailPerRole.put("Super Admin-Case Manager", bulkEmailPerRole);
+
+		} else if (role.equals("Physicians")) {
+			try {
+				strUserData = readContentForBulkUpload(5, 6);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			randomString = RandomStringUtils.randomAlphabetic(8);
+			strUserData = strUserData.replace("PHYSICIANSMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace(" Physicians ", " Manager ");
+			strUserData = strUserData.replace("NPI", "");
+			applicationsList.put("Manager", "Episodes, Reports, TCI, Lessons");
+			bulkEmailPerRole.put("Manager", "qaautomation+" + randomString + "@remedypartners.com");
+			bulkUsersEmailPerRole.put("Super Admin-Manager", bulkEmailPerRole);
+			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Manager", applicationsList);
+			CreateUserPage.usersEmailPerRole.put("Super Admin-Manager", bulkEmailPerRole);
+
+		} else if (role.equals("Remedy TCS")) {
+			try {
+				strUserData = readContentForBulkUpload(6, 7);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			randomString = RandomStringUtils.randomAlphabetic(8);
+			strUserData = strUserData.replace("RTCSMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+
+			strUserData = strUserData.replace(
+					"514025:2070-047:001 | | | True | True | True | False | False | True | False | |False ",
+					"514083:2070-015:TSH  | | | False | True | False | True | False | True | False | | False");
+			applicationsList.put("Remedy TCS", "Episodes, TCI, Lessons");
+			bulkEmailPerRole.put("Remedy TCS", "qaautomation+" + randomString + "@remedypartners.com");
+			bulkUsersEmailPerRole.put("Super Admin-Remedy TCS", bulkEmailPerRole);
+			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy TCS", applicationsList);
+			CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy TCS", bulkEmailPerRole);
+
+		} else if (role.equals("Remedy LPN")) {
+			try {
+				strUserData = readContentForBulkUpload(7, 8);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			randomString = RandomStringUtils.randomAlphabetic(8);
+			strUserData = strUserData.replace("RLPNMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("439245:ALL_BPIDS:ALL_FACILITIES", "441447:3056-r29:075296");
+			applicationsList.put("Remedy LPN", "Episodes, Episodes 2.0, Reports, TCI, Lessons");
+			bulkEmailPerRole.put("Remedy LPN", "qaautomation+" + randomString + "@remedypartners.com");
+			bulkUsersEmailPerRole.put("Super Admin-Remedy LPN", bulkEmailPerRole);
+			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy LPN", applicationsList);
+			CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy LPN", bulkEmailPerRole);
+
+		} else if (role.equals("Remedy RN")) {
+			try {
+				strUserData = readContentForBulkUpload(8, 9);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			randomString = RandomStringUtils.randomAlphabetic(8);
+			strUserData = strUserData.replace("RRNMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RRNFirstName", "RRNFirstNameEdited");
+			strUserData = strUserData.replace("RRNLastName", "RRNLastNameEdited");
+			strUserData = strUserData.replace("9878909878", "9878900000");
+
+			applicationsList.put("Remedy RN", "Episodes, Episodes 2.0, Reports, TCI, Lessons");
+			bulkEmailPerRole.put("Remedy RN", "qaautomation+" + randomString + "@remedypartners.com");
+			bulkUsersEmailPerRole.put("Super Admin-Remedy RN", bulkEmailPerRole);
+			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy RN", applicationsList);
+			CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy RN", bulkEmailPerRole);
+
+		}
+
+		else if (role.equals("Remedy Field RN")) {
+			try {
+				strUserData = readContentForBulkUpload(9, 10);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			randomString = RandomStringUtils.randomAlphabetic(8);
+			strUserData = strUserData.replace("RFRNMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace(" Remedy Field RN ", " Remedy Executive ");
 			
-			String randomNPI = RandomStringUtils.randomNumeric(10);
-			strUserData = strUserData.replace("NPI", randomNPI);
-			iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
-			iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
-	    }
+			applicationsList.put("Remedy Executive", "Episodes, Episodes 2.0, Reports, TCI, Lessons");
+			bulkEmailPerRole.put("Remedy Executive", "qaautomation+" + randomString + "@remedypartners.com");
+			bulkUsersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
+			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Executive", applicationsList);
+			CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
+
+		}
+		
+		
+		String randomNPI = RandomStringUtils.randomNumeric(10);
+		strUserData = strUserData.replace("NPI", randomNPI);
+		iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
+		iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
+	}
 }
