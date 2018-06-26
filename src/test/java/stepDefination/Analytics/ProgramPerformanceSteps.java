@@ -88,7 +88,7 @@ public class ProgramPerformanceSteps extends DriverScript{
 	
 	@Then("^I verify \"([^\"]*)\" count section is appearing on the dashboard below \"([^\"]*)\"$")
 	public void i_verify_count_section_is_appearing_on_the_dashboard_below(String count,String text) throws Throwable{
-		programdashboard.TakeShotOFElement();
+		programdashboard.iVerifyCountSectionOnTheDashboards(count,text);
 	}
 	
 	@And("^I verify legend \"([^\"]*)\" is appearing on the dashboard$")
@@ -100,4 +100,34 @@ public class ProgramPerformanceSteps extends DriverScript{
 	public void i_verify_legend_color_of_as_with_color_code(String field,String color,String code) throws Throwable{
 		programdashboard.iVerifyColorCodeForLegegend(field, color, code);
 	}
+	
+	@And("^I verify Episodes count as \"([^\"]*)\" on the dashboard$")
+	public void i_verify_the_count_for_episodes_as_on_the_dashboard(String count) throws Throwable{
+		programdashboard.TakeShotOFElement(count,"//div[@tb-test-id='KPI_Episode']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 152px; height: 52px;']");
+	}
+	
+	@And("^I verify program size count as \"([^\"]*)\" on the dashboard$")
+	public void i_verify_the_count_for_program_size_as_on_the_dashboard(String count) throws Throwable{
+		programdashboard.TakeShotOFElement(count,"//div[@tb-test-id='KPI_Program_size']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 227px; height: 52px;']");
+	}
+	
+	@And("^I verify npra count as \"([^\"]*)\" on the dashboard$")
+	public void i_verify_npra_count_as_on_the_dashboard(String count) throws Throwable{
+		programdashboard.TakeShotOFElement(count,"//div[@tb-test-id='KPI_NPRA']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 205px; height: 52px;']");
+	}
+	
+	@Then("^I verify \"([^\"]*)\" section is appearing on the dashboard$")
+	public void i_verify_Savings_Rate_section_is_appearing_on_the_dashboard(String text) throws Throwable{
+		programdashboard.iVerifySavingsRateSectionOnTheDashboards(text);
+	}
+	
+	@And("^I verify Discharge to SNF count as \"([^\"]*)\" on the dashboard$")
+	public void i_verify_Discharge_to_SNF_count_as_on_the_dashboards(String count) throws Throwable{
+		programdashboard.TakeShotOFElement(count,"//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 256px; height: 54px;']");
+	}
+	
+//	@And("^I verify Discharge to SNF count as \"([^\"]*)\" on the dashboard with picture resolution \"([^\"]*)\" \"([^\"]*)\"$")
+//	public void i_verify_Discharge_to_SNF_count_as_on_the_dashboards_with_picture_resolution(String count,int height,int width) throws Throwable{
+//		programdashboard.TakeShotOFElement(count,"//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 256px; height: 54px;']",height,width);
+//	}
 }

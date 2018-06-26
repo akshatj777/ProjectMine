@@ -1,7 +1,10 @@
 package com.remedy.Analytics;
 
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.BufferedReader;
@@ -18,18 +21,23 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URL;
 
+import net.coobird.thumbnailator.Thumbnails;
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
 import javax.imageio.ImageIO;
 
+import junit.framework.Assert;
+
 import org.apache.commons.io.FileUtils;
 import org.bytedeco.javacpp.BytePointer;
 import org.bytedeco.javacpp.lept;
 import org.bytedeco.javacpp.lept.PIX;
 import org.bytedeco.javacpp.tesseract.TessBaseAPI;
+import org.imgscalr.Scalr;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TakesScreenshot;
@@ -125,6 +133,10 @@ public class ProgramPerformance extends BaseClass{
 		System.out.println(value);
 		String hex = Color.fromString(value).asHex();
 		System.out.println(hex);
+	}
+	
+	public void iVerifySavingsRateSectionOnTheDashboards(String text){
+		isElementVisible(driver.findElement(By.xpath("//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas")));
 	}
 	
 	public void Screenshot1() throws Exception{
@@ -284,8 +296,8 @@ public class ProgramPerformance extends BaseClass{
 	        return screen;
 	    } 
 	 
-	 public void TakeShotOFElement() throws IOException {
-		 WebElement ele = driver.findElement(By.xpath("//canvas[@class='tabCanvas tab-widget' and @style='display: block; position: absolute; left: 0px; top: 0px; width: 256px; height: 54px;']"));
+	 public void TakeShotOFElement(String count,String element) throws IOException {
+		 WebElement ele = driver.findElement(By.xpath(element));
 		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		 BufferedImage  fullImg = ImageIO.read(screenshot);
 		 Point point = ele.getLocation();
@@ -297,10 +309,34 @@ public class ProgramPerformance extends BaseClass{
 		 
 		 BufferedImage eleScreenshot= fullImg.getSubimage(point.getX(), point.getY(),
 				    eleWidth, eleHeight);
-				ImageIO.write(eleScreenshot, "png", screenshot);
+//		 getScaledInstance(eleScreenshot,300,300,RenderingHints.VALUE_INTERPOLATION_BILINEAR,true);
+		 BufferedImage scaledImg = Scalr.resize(eleScreenshot, Scalr.Method.QUALITY, Scalr.Mode.FIT_TO_WIDTH,
+	                300, 300, Scalr.OP_ANTIALIAS); 
+		 ImageIO.write(scaledImg, "png", screenshot);
+//		 BufferedImage thumbImage = new BufferedImage(600, 500, BufferedImage.TYPE_INT_ARGB);
+//		    Graphics2D g2d = thumbImage.createGraphics();
+//		    g2d.drawImage(eleScreenshot.getScaledInstance(600, 500, Image.SCALE_SMOOTH), 0, 0, 600, 500, null);
+//		    g2d.dispose();
+//		    ImageIO.write(thumbImage, "png", screenshot);
+//		 BufferedImage bigger = Thumbnails.of(eleScreenshot).size(800, 500).asBufferedImage();
+//				ImageIO.write(bigger, "png", screenshot);
 				File screenshotLocation = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png");
+				if(screenshotLocation.exists())
+				{
+					screenshotLocation.delete();
+				}
 				FileUtils.copyFile(screenshot, screenshotLocation);
-				TextFromImage();
+//				TextFromImage();
+				TessBaseAPI instance=new TessBaseAPI();
+				 instance.Init(System.getProperty("user.dir")+"\\src\\test\\Imports\\TestData\\tessdata", "eng");
+				 PIX image=lept.pixRead(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png");
+				 instance.SetImage(image);
+				 BytePointer bytePointer=instance.GetUTF8Text();
+				 String output=bytePointer.getString();
+				 System.out.println("Text in image is"+output);
+				 String FinalOutput=output.replaceAll("\\s+", "");
+				 System.out.println(FinalOutput);
+				 Assert.assertEquals(count.trim(), FinalOutput.trim());
 	 }
 	 
 	 
@@ -314,4 +350,54 @@ public class ProgramPerformance extends BaseClass{
 		 String output=bytePointer.getString();
 		 System.out.println("Text in image is"+output);
 	 }
+	 
+	 public void IUploadImageInOnlineOCR(){
+		 driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");
+	 }
+	 
+	public BufferedImage getScaledInstance(BufferedImage img, int targetWidth,
+			int targetHeight, Object hint, boolean higherQuality) {
+		int type = (img.getTransparency() == Transparency.OPAQUE) ? BufferedImage.TYPE_INT_RGB
+				: BufferedImage.TYPE_INT_ARGB;
+		BufferedImage ret = (BufferedImage) img;
+		int w, h;
+		if (higherQuality) {
+			// Use multi-step technique: start with original size, then
+			// scale down in multiple passes with drawImage()
+			// until the target size is reached
+			w = img.getWidth();
+			h = img.getHeight();
+		} else {
+			// Use one-step technique: scale directly from original
+			// size to target size with a single drawImage() call
+			w = targetWidth;
+			h = targetHeight;
+		}
+
+		do {
+			if (higherQuality && w > targetWidth) {
+				w /= 2;
+				if (w < targetWidth) {
+					w = targetWidth;
+				}
+			}
+
+			if (higherQuality && h > targetHeight) {
+				h /= 2;
+				if (h < targetHeight) {
+					h = targetHeight;
+				}
+			}
+
+			BufferedImage tmp = new BufferedImage(w, h, type);
+			Graphics2D g2 = tmp.createGraphics();
+			g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, hint);
+			g2.drawImage(ret, 0, 0, w, h, null);
+			g2.dispose();
+
+			ret = tmp;
+		} while (w != targetWidth || h != targetHeight);
+
+		return ret;
+	}
 }

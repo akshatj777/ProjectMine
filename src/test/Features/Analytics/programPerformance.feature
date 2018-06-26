@@ -6,7 +6,7 @@ Scenario: Verify the mouse over text on program overview report
   Then I enter incorrect "Username" for analytics as "kprgmadm@yopmail" for login
   And I click on "signin" button on the analytics login page
   Then I verify "User account not found." "For help, contact your Tableau Server administrator." when i enter incorrect credentials
-  Then I enter in "Username" field for analytics as "kprgmadm@yopmail.com" for login
+  Then I enter in "Username" field for analytics as "kremexec@yopmail.com" for login
   And I click on "signin" button on the analytics login page
   And I wait till the visibility of "Password" field on login page
   Then I enter in "Password" field for analytics as "Testing1" for login
@@ -23,10 +23,16 @@ Scenario: Verify the mouse over text on program overview report
   Then I verify subtitle text "Evaluate program on key performance metrics and identify focus areas" is appearing inside dashboard
   And I verify "Episodes" is appearing for BAN section on the dashboard
   Then I verify "Episode" count section is appearing on the dashboard below "Episodes"
-  #And I verify "Program Size" is appearing for BAN section on the dashboard
-  #Then I verify "Program_size" count section is appearing on the dashboard below "Program Size"
-  #And I verify "NPRA" is appearing for BAN section on the dashboard
-  #Then I verify "NPRA" count section is appearing on the dashboard below "NPRA"
+  And I verify Episodes count as "124,585" on the dashboard
+  And I verify "Program Size" is appearing for BAN section on the dashboard
+  Then I verify "Program_size" count section is appearing on the dashboard below "Program Size"
+  And I verify program size count as "$2,383,637,236" on the dashboard
+  And I verify "NPRA" is appearing for BAN section on the dashboard
+  Then I verify "NPRA" count section is appearing on the dashboard below "NPRA"
+  And I verify npra count as "$123,088,876" on the dashboard
+  Then I verify "% SNF Disch Current" section is appearing on the dashboard
+  And I verify Discharge to SNF count as "23.4%Performance" on the dashboard
+  #And I verify Discharge to SNF count as "23.4%Performance" on the dashboard with picture resolution "400" "400"
   #And I verify legend "Performing" is appearing on the dashboard
   #Then I verify legend color of "Performing" as "Blue" with color code "#1D93BF"
   
