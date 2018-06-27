@@ -150,4 +150,19 @@ public class ProgramPerformanceSteps extends DriverScript{
 	public void i_verify_blue_colored_text_of_savings_rate_as_on_dashboard_with_picture_resolution(String count,String resolution) throws Throwable{
 		programdashboard.TakeShotOFBlueColorElement(count,"//div[@tb-test-id='Savings Rate']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 309px; height: 79px;']", resolution);
 	}
+	
+	@And("^I verify blue colored text of SNF Discharge Benchmark variance as \"([^\"]*)\" on dashboard with picture resolution \"([^\"]*)\"$")
+	public void i_verify_blue_colored_text_of_discharge_to_snf_as_on_dashboard_with_picture_resolution(String count,String resolution) throws Throwable{
+		programdashboard.TakeShotOFBlueColorElement(count,"//div[@tb-test-id='% SNF Disch Benchmark Variance']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 256px; height: 103px;']", resolution);
+	}
+	
+	@And("^I verify blue colored text of SNF Days Benchmark Variance as \"([^\"]*)\" on dashboard with picture resolution \"([^\"]*)\"$")
+	public void i_verify_blue_colored_text_of_SNF_Days_Benchmark_variance_as_on_dashboard_with_picture_resolution(String count,String resolution) throws Throwable{
+		programdashboard.TakeShotOFBlueColorElement(count,"//div[@tb-test-id='SNF Days Benchmark Variance']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 248px; height: 94px;']", resolution);
+	}
+	
+	@And("^I verify blue colored text of Readmissions Benchmark Variance as \"([^\"]*)\" on dashboard with picture resolution \"([^\"]*)\"$")
+	public void i_verify_blue_colored_text_of_Readmission_Benchmark_variance_as_on_dashboard_with_picture_resolution(String count,String resolution) throws Throwable{
+		programdashboard.TakeShotOFBlueColorElement(count,"//div[@tb-test-id='Readmissions Benchmark Variance']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 259px; height: 74px;']", resolution);
+	}
 }

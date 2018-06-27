@@ -8,8 +8,6 @@ import com.remedy.resources.DriverScript;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import ru.yandex.qatools.ashot.AShot;
-import ru.yandex.qatools.ashot.Screenshot;
 import stepDefination.Hooks.InitialSetup;
 
 import java.awt.AWTException;
