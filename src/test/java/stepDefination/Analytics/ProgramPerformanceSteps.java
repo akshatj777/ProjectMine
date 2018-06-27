@@ -101,19 +101,19 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iVerifyColorCodeForLegegend(field, color, code);
 	}
 	
-	@And("^I verify Episodes count as \"([^\"]*)\" on the dashboard$")
-	public void i_verify_the_count_for_episodes_as_on_the_dashboard(String count) throws Throwable{
-		programdashboard.TakeShotOFElement(count,"//div[@tb-test-id='KPI_Episode']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 152px; height: 52px;']");
+	@And("^I verify Episodes count as \"([^\"]*)\" on the dashboard with picture resolution \"([^\"]*)\"$")
+	public void i_verify_the_count_for_episodes_as_on_the_dashboard(String count,String resolution) throws Throwable{
+		programdashboard.TakeShotOFElement(count,"//div[@tb-test-id='KPI_Episode']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 152px; height: 52px;']",resolution);
 	}
 	
-	@And("^I verify program size count as \"([^\"]*)\" on the dashboard$")
-	public void i_verify_the_count_for_program_size_as_on_the_dashboard(String count) throws Throwable{
-		programdashboard.TakeShotOFElement(count,"//div[@tb-test-id='KPI_Program_size']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 227px; height: 52px;']");
+	@And("^I verify program size count as \"([^\"]*)\" on the dashboard with picture resolution \"([^\"]*)\"$")
+	public void i_verify_the_count_for_program_size_as_on_the_dashboard(String count,String resolution) throws Throwable{
+		programdashboard.TakeShotOFElement(count,"//div[@tb-test-id='KPI_Program_size']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 227px; height: 52px;']",resolution);
 	}
 	
-	@And("^I verify npra count as \"([^\"]*)\" on the dashboard$")
-	public void i_verify_npra_count_as_on_the_dashboard(String count) throws Throwable{
-		programdashboard.TakeShotOFElement(count,"//div[@tb-test-id='KPI_NPRA']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 205px; height: 52px;']");
+	@And("^I verify npra count as \"([^\"]*)\" on the dashboard with picture resolution \"([^\"]*)\"$")
+	public void i_verify_npra_count_as_on_the_dashboard(String count,String resolution) throws Throwable{
+		programdashboard.TakeShotOFElement(count,"//div[@tb-test-id='KPI_NPRA']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 205px; height: 52px;']",resolution);
 	}
 	
 	@Then("^I verify \"([^\"]*)\" section is appearing on the dashboard$")
@@ -121,13 +121,33 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iVerifySavingsRateSectionOnTheDashboards(text);
 	}
 	
-	@And("^I verify Discharge to SNF count as \"([^\"]*)\" on the dashboard$")
-	public void i_verify_Discharge_to_SNF_count_as_on_the_dashboards(String count) throws Throwable{
-		programdashboard.TakeShotOFElement(count,"//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 256px; height: 54px;']");
+//	@And("^I verify Discharge to SNF count as \"([^\"]*)\" on the dashboard$")
+//	public void i_verify_Discharge_to_SNF_count_as_on_the_dashboards(String count) throws Throwable{
+//		programdashboard.TakeShotOFElement(count,"//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 256px; height: 54px;']");
+//	}
+	
+	@And("^I verify Discharge to SNF count as \"([^\"]*)\" on the dashboard with picture resolution \"([^\"]*)\"$")
+	public void i_verify_Discharge_to_SNF_count_as_on_the_dashboards_with_picture_resolution(String count,String resolution) throws Throwable{
+		programdashboard.TakeShotOFElement(count,"//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 256px; height: 54px;']",resolution);
 	}
 	
-//	@And("^I verify Discharge to SNF count as \"([^\"]*)\" on the dashboard with picture resolution \"([^\"]*)\" \"([^\"]*)\"$")
-//	public void i_verify_Discharge_to_SNF_count_as_on_the_dashboards_with_picture_resolution(String count,int height,int width) throws Throwable{
-//		programdashboard.TakeShotOFElement(count,"//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 256px; height: 54px;']",height,width);
-//	}
+	@And("^I verify SNF Days count as \"([^\"]*)\" on the dashboard with picture resolution \"([^\"]*)\"$")
+	public void i_verify_SNF_Days_count_as_on_the_dashboards_with_picture_resolution(String count,String resolution) throws Throwable{
+		programdashboard.TakeShotOFElement(count,"//div[@tb-test-id='SNF Days Current']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 248px; height: 68px;']",resolution);
+	}
+	
+	@Then("^I verify %Episodes with a Readmission section is appearing on the dashboard$")
+	public void i_verify_episodes_with_a_readmission_section_is_appearing_on_the_dashboard() throws Throwable{
+		programdashboard.iVerifyReadmissionsSectionOnTheDashboards();
+	}
+	
+	@And("^I verify %Episodes with a Readmission count as \"([^\"]*)\" on the dashboard with picture resolution \"([^\"]*)\"$")
+	public void i_verify_episodes_with_a_readmission_count_as_on_the_dashboards_with_picture_resolution(String count,String resolution) throws Throwable{
+		programdashboard.TakeShotOFElement(count,"//div[@tb-test-id='Readmissions Current']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 259px; height: 58px;']",resolution);
+	}
+	
+	@And("^I verify blue colored text of Savings Rate as \"([^\"]*)\" on dashboard with picture resolution \"([^\"]*)\"$")
+	public void i_verify_blue_colored_text_of_savings_rate_as_on_dashboard_with_picture_resolution(String count,String resolution) throws Throwable{
+		programdashboard.TakeShotOFBlueColorElement(count,"//div[@tb-test-id='Savings Rate']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 309px; height: 79px;']", resolution);
+	}
 }

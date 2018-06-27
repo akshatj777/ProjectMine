@@ -139,6 +139,10 @@ public class ProgramPerformance extends BaseClass{
 		isElementVisible(driver.findElement(By.xpath("//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas")));
 	}
 	
+	public void iVerifyReadmissionsSectionOnTheDashboards(){
+		isElementVisible(driver.findElement(By.xpath("//div[@tb-test-id='Readmissions Current']//div[@class='tvimagesContainer']/canvas")));
+	}
+	
 	public void Screenshot1() throws Exception{
 		Screenshot screen=new AShot().takeScreenshot(driver, driver.findElement(By.xpath("//canvas[contains(@style,'position') and @class='tabCanvas tab-widget' and @width='152']")));
 		File fl = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png");
@@ -296,8 +300,14 @@ public class ProgramPerformance extends BaseClass{
 	        return screen;
 	    } 
 	 
-	 public void TakeShotOFElement(String count,String element) throws IOException {
+	 public void TakeShotOFElement(String count,String element,String resolution) throws IOException {
+		 String[] str=resolution.split("X");
+		 String h_value=str[0];
+		 String w_value=str[1];
+		 int height=Integer.parseInt(h_value);
+		 int width=Integer.parseInt(w_value);
 		 WebElement ele = driver.findElement(By.xpath(element));
+		 scrollIntoViewByJS(ele);
 		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		 BufferedImage  fullImg = ImageIO.read(screenshot);
 		 Point point = ele.getLocation();
@@ -311,7 +321,7 @@ public class ProgramPerformance extends BaseClass{
 				    eleWidth, eleHeight);
 //		 getScaledInstance(eleScreenshot,300,300,RenderingHints.VALUE_INTERPOLATION_BILINEAR,true);
 		 BufferedImage scaledImg = Scalr.resize(eleScreenshot, Scalr.Method.QUALITY, Scalr.Mode.FIT_TO_WIDTH,
-	                300, 300, Scalr.OP_ANTIALIAS); 
+				 height, width, Scalr.OP_ANTIALIAS); 
 		 ImageIO.write(scaledImg, "png", screenshot);
 //		 BufferedImage thumbImage = new BufferedImage(600, 500, BufferedImage.TYPE_INT_ARGB);
 //		    Graphics2D g2d = thumbImage.createGraphics();
@@ -408,7 +418,7 @@ public class ProgramPerformance extends BaseClass{
 
 		    //read image
 		    try{
-		      f = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png");
+		      f = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Blue.png");
 		      img = ImageIO.read(f);
 		    }catch(IOException e){
 		      System.out.println(e);
@@ -440,10 +450,52 @@ public class ProgramPerformance extends BaseClass{
 
 		    //write image
 		    try{
-		      f = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image3.png");
+		      f = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\GreyScale.jpg");
 		      ImageIO.write(img, "jpg", f);
 		    }catch(IOException e){
 		      System.out.println(e);
 		    }
 		  }//main() ends here
+	 
+	 public void TakeShotOFBlueColorElement(String count,String element,String resolution) throws IOException {
+		 String[] str=resolution.split("X");
+		 String h_value=str[0];
+		 String w_value=str[1];
+		 int height=Integer.parseInt(h_value);
+		 int width=Integer.parseInt(w_value);
+		 WebElement ele = driver.findElement(By.xpath(element));
+		 scrollIntoViewByJS(ele);
+		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		 BufferedImage  fullImg = ImageIO.read(screenshot);
+		 Point point = ele.getLocation();
+		 point = point.moveBy(0, 87);
+		 System.out.println(point);
+		 int eleWidth = ele.getSize().getWidth();
+		 int eleHeight = ele.getSize().getHeight();
+		 
+		 BufferedImage eleScreenshot= fullImg.getSubimage(point.getX(), point.getY(),
+				    eleWidth, eleHeight);
+		 BufferedImage scaledImg = Scalr.resize(eleScreenshot, Scalr.Method.QUALITY, Scalr.Mode.FIT_TO_WIDTH,
+				 height, width, Scalr.OP_ANTIALIAS); 
+		 ImageIO.write(scaledImg, "png", screenshot);
+				File screenshotLocation = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Blue.png");
+				if(screenshotLocation.exists())
+				{
+					screenshotLocation.delete();
+				}
+				FileUtils.copyFile(screenshot, screenshotLocation);
+				
+				greyscale();
+				
+				TessBaseAPI instance=new TessBaseAPI();
+				 instance.Init(System.getProperty("user.dir")+"\\src\\test\\Imports\\TestData\\tessdata", "eng");
+				 PIX image=lept.pixRead(System.getProperty("user.dir")+"\\src\\test\\Imports\\GreyScale.jpg");
+				 instance.SetImage(image);
+				 BytePointer bytePointer=instance.GetUTF8Text();
+				 String output=bytePointer.getString();
+				 System.out.println("Text in image is"+output);
+				 String FinalOutput=output.replaceAll("\\s+", "");
+				 System.out.println(FinalOutput);
+				 Assert.assertEquals(count.trim(), FinalOutput.trim());
+	 }
 }
