@@ -92,7 +92,7 @@ Feature: Edit user page for PTA
     #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
     #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -102,7 +102,7 @@ Feature: Edit user page for PTA
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
+    #And I switch back to old window
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -156,7 +156,7 @@ Feature: Edit user page for PTA
     And I enter password field Episode1! for Login
     And I click Access button
     And I click on Episode1 tile for "Partner Technical Administrator-Physicians" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "Partner Technical Administrator-Physicians" user
     And I verify NPI on ECI for "Partner Technical Administrator-Physicians" user
 
@@ -323,7 +323,7 @@ Feature: Edit user page for PTA
     #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
     #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -333,7 +333,7 @@ Feature: Edit user page for PTA
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
+    #And I switch back to old window
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -431,7 +431,7 @@ Feature: Edit user page for PTA
     #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
     #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -441,7 +441,7 @@ Feature: Edit user page for PTA
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
+    #And I switch back to old window
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -617,7 +617,7 @@ Feature: Edit user page for PTA
     #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
     #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -627,7 +627,7 @@ Feature: Edit user page for PTA
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
+    #And I switch back to old window
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -716,7 +716,7 @@ Feature: Edit user page for PTA
     #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
     #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -726,7 +726,7 @@ Feature: Edit user page for PTA
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
+    #And I switch back to old window
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -873,7 +873,7 @@ Feature: Edit user page for PTA
     #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
     #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -883,7 +883,7 @@ Feature: Edit user page for PTA
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
+    #And I switch back to old window
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user

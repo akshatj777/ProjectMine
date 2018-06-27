@@ -80,7 +80,7 @@ Feature: Edit page for Downstream provider
     #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
     #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -90,7 +90,7 @@ Feature: Edit page for Downstream provider
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
+    #And I switch back to old window
     And I redirect to Remedy connect page
     And I click on Episodes 2 tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
@@ -171,7 +171,7 @@ Feature: Edit page for Downstream provider
     #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
     #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -181,7 +181,7 @@ Feature: Edit page for Downstream provider
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
+    #And I switch back to old window
     And I redirect to Remedy connect page
     And I click on Episodes 2 tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
@@ -255,7 +255,7 @@ Feature: Edit page for Downstream provider
     #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
     #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -265,7 +265,7 @@ Feature: Edit page for Downstream provider
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
+    #And I switch back to old window
     And I redirect to Remedy connect page
     And I click on Episodes 2 tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
@@ -342,7 +342,7 @@ Feature: Edit page for Downstream provider
     #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
     #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -352,7 +352,7 @@ Feature: Edit page for Downstream provider
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
+    #And I switch back to old window
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
