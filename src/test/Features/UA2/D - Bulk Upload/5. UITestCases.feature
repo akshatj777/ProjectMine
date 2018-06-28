@@ -28,7 +28,6 @@ Feature: Bulk Upload User from SA
     Then I click on Cross button
     Then I should see header text "Users"
 
-
   Scenario: Scenario to Create user with Invalid email
     Given I am on the login page
     Then I log in as super user
@@ -76,6 +75,3 @@ Feature: Bulk Upload User from SA
     Then I enter "51" users data for import
     Then I click on submit button on bulk user upload page
     Then I verify error message "You can only import up to 50 users at a time"
-
-
-  

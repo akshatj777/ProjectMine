@@ -1415,7 +1415,7 @@ public class BulkUserCreationPage extends BaseClass {
 	public void enterInvalidAndValidData() {
 		String strUserData = null;
 		try {
-			strUserData = readContentForBulkUpload(104, 117);
+			strUserData = readContentForBulkUpload(104, 119);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -1446,6 +1446,9 @@ public class BulkUserCreationPage extends BaseClass {
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("PHYSICIANSMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
 
+		randomString = RandomStringUtils.randomAlphabetic(8);
+		strUserData = strUserData.replace("PHYSICIANSMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+		
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("EXECUTIVEMAIL4", "qaautomation+" + randomString + "@remedypartners.com");
 
@@ -1708,7 +1711,7 @@ public class BulkUserCreationPage extends BaseClass {
 
 			strUserData = strUserData.replace(
 					"Learning Pathway 2, New learning Path, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2",
-					"Learning Pathway 2, New learning Path, Clinical Operations Acute Care Hospital Model 2");
+					"Learning Pathway 2");
 			applicationsList.put("Remedy PM", "Episodes 2.0, Reports, TCI, Lessons");
 			bulkEmailPerRole.put("Remedy PM", "qaautomation+" + randomString + "@remedypartners.com");
 			bulkUsersEmailPerRole.put("Super Admin-Remedy PM", bulkEmailPerRole);
