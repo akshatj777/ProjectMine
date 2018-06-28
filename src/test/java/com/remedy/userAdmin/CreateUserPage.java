@@ -753,12 +753,14 @@ public class CreateUserPage extends BaseClass{
 	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 	   {
 		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
+		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
 		   ((JavascriptExecutor)driver).executeScript(javaScript, element);
 		   iWillWaitToSee(By.cssSelector("#navbar-dropdown-menu-myprofile"));
 		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.cssSelector("#navbar-dropdown-menu-myprofile")));
 	   }
 	   else
 	   {
+		   element.click();
 		   element.click();
 		   ((JavascriptExecutor)driver).executeScript(javaScript, element);
 		   iWillWaitToSee(By.cssSelector("#navbar-dropdown-menu-myprofile"));
@@ -2023,21 +2025,21 @@ public class CreateUserPage extends BaseClass{
    
    public void clickLogOutButtonAgain(String arg1) throws Throwable {
 	   Thread.sleep(2000);
-	   if(driver.findElements(By.cssSelector(".title>p")).size()>0)
+	   if(driver.findElements(By.xpath("//div[text()='Remedy Connect']")).size()>0)
 	   {
 		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		   {
-			   iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
-			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")));
+			   iWillWaitToSee(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']"));
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']")));
 			      delay();
-			      ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[@ng-click='user.logout()']")));
+			      ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='Log Out']")));
 		   }
 		   else
 		   {
-			   iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
-			      driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")).click();
+			   iWillWaitToSee(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']"));
+			      driver.findElement(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']")).click();
 			      delay();
-			      driver.findElement(By.xpath("//a[@ng-click='user.logout()']")).click();  
+			      driver.findElement(By.xpath("//span[text()='Log Out']")).click();  
 		   }
 	   }
    }
