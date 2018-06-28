@@ -15,6 +15,7 @@ import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -460,16 +461,25 @@ public class MailCreateUser extends BaseClass{
 			System.out.println(e.toString());
 		}
 		Thread.sleep(2000);
-		iWillWaitToSee(By.xpath("//input[@name='email']"));
-		driver.findElement(By.xpath("//input[@name='email']")).sendKeys(email);
+		
 		if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		{
+			iWillWaitToSee(By.xpath("//input[@name='email']"));
+			driver.findElement(By.xpath("//input[@name='email']")).sendKeys(email);
+			while(!(driver.findElement(By.xpath("//input[@name='email']")).getAttribute("value").equals(email)))
+			{
+				driver.findElement(By.xpath("//input[@name='email']")).sendKeys(Keys.CONTROL,"a");
+				driver.findElement(By.xpath("//input[@name='email']")).sendKeys(Keys.DELETE);
+				driver.findElement(By.xpath("//input[@name='email']")).sendKeys(email);
+			}
 			iWillWaitToSee(By.xpath("//button[@type='submit']"));
 			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//button[@type='submit']")));
 			Thread.sleep(3000);
 		}
 		else
 		{
+			iWillWaitToSee(By.xpath("//input[@name='email']"));
+			driver.findElement(By.xpath("//input[@name='email']")).sendKeys(email);
 			iWillWaitToSee(By.xpath("//button[@type='submit']"));
 			clickElement(driver.findElement(By.xpath("//button[@type='submit']")));
 			Thread.sleep(3000);
