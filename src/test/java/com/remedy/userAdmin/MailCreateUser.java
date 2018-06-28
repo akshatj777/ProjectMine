@@ -64,9 +64,16 @@ public class MailCreateUser extends BaseClass{
 	public void iEnterPasswordToLoginMailAccount(String password) throws InterruptedException {	
 		Thread.sleep(4000);
 			iWillWaitToSee(By.xpath("//input[@type='password']"));
-			driver.findElement(By.xpath("//input[@type='password']")).sendKeys(password);
+			
 			if(DriverScript.Config.getProperty("Browser").equals("ie"))
 			{
+				driver.findElement(By.xpath("//input[@type='password']")).sendKeys(password);
+				while(!(driver.findElement(By.xpath("//input[@type='password']")).getAttribute("data-initial-value").equals(password)))
+				{
+					driver.findElement(By.xpath("//input[@type='password']")).sendKeys(Keys.CONTROL,"a");
+					driver.findElement(By.xpath("//input[@type='password']")).sendKeys(Keys.DELETE);
+					driver.findElement(By.xpath("//input[@type='password']")).sendKeys(password);	
+				}
 				if(driver.findElements(By.xpath("//span[text()='Next']")).size()>0)
 				{
 					((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='Next']")));
@@ -78,6 +85,7 @@ public class MailCreateUser extends BaseClass{
 			}
 			else
 			{
+				driver.findElement(By.xpath("//input[@type='password']")).sendKeys(password);
 				if(driver.findElements(By.xpath("//span[text()='Next']")).size()>0)
 				{
 					clickElement(driver.findElement(By.xpath("//span[text()='Next']")));
