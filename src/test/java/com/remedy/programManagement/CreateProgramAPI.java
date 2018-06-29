@@ -16,7 +16,7 @@ public class CreateProgramAPI extends BaseClass{
 	public InsertDataIntoDataModels insertData = new InsertDataIntoDataModels();
 	public static List<Long> idList = new ArrayList<>();
 	public static List<String> PROGRAMNameList = new ArrayList<>();
-	public static List<String> PROGRAMIDList = new ArrayList<>();
+	public static List<Long> PROGRAMIDList = new ArrayList<>();
 	public static HashMap<String, String> tempPrograms = new HashMap<String, String>();
 	public static Long programName = null;
 	
