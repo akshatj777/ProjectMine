@@ -1,13 +1,5 @@
 Feature: Create Programs organization under Payor Organization functionality tests
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-    When I click on "Payor" organization tab on organization dashboard
-
   Scenario Outline: Create Payor using API calls
     Given build Json for Payor "<name>" and "<participantId>" and "<tinEin>" and "<contactName>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create payor with this data
@@ -19,6 +11,12 @@ Feature: Create Programs organization under Payor Organization functionality tes
       | Create Payor |               | PAYORNAME | EIN    | ContactPersonTest | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | payor |
 
   Scenario Outline: Verification of details on Programs under Payor Organization
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
     And I verify "<Payor_Name>" name on the header of view profile
@@ -49,6 +47,12 @@ Feature: Create Programs organization under Payor Organization functionality tes
       | Verification of details on Programs under Payor Organization | PAYORNAME  |
 
   Scenario Outline: Create Programs under Payor Organization
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
     And I verify "<Payor_Name>" name on the header of view profile
@@ -66,6 +70,12 @@ Feature: Create Programs organization under Payor Organization functionality tes
       | Check validation message for exceeding Character limit for Program Name field | PAYORNAME  | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst | The programName may not be greater than 45 characters. |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
     And I verify "<Payor_Name>" name on the header of view profile
@@ -84,6 +94,12 @@ Feature: Create Programs organization under Payor Organization functionality tes
       | Create Program under Payor Organization                     | PAYORNAME  | PROGRAMNAME          | Program Successfully Created |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
     And I verify "<Payor_Name>" name on the header of view profile
@@ -100,6 +116,12 @@ Feature: Create Programs organization under Payor Organization functionality tes
       | Create Program using duplicate program name | PAYORNAME  | DUPLICATE_PROGRAMNAME | There is a conflict error because an entity with similar identifying attributes already existed. |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
     And I verify "<Payor_Name>" name on the header of view profile
@@ -117,6 +139,12 @@ Feature: Create Programs organization under Payor Organization functionality tes
       | Create Program using Drag and Drop attribution rules | PAYORNAME  | PROGRAMNAME  | Program Successfully Created |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
     And I verify "<Payor_Name>" name on the header of view profile

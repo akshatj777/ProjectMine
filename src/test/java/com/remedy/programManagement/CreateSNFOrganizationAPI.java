@@ -25,6 +25,7 @@ public class CreateSNFOrganizationAPI extends BaseClass {
 	public static HashMap<String, String> tempSNFOrg = new HashMap<String, String>();
 	public static Long oldSNF_WithMO = null;
 	public static Long oldSNF_WithoutMO = null;
+	public static List<Long> SNFcopyIDList = new ArrayList<>();
 	
 	
 	public CreateSNFOrganizationAPI(WebDriver driver) {

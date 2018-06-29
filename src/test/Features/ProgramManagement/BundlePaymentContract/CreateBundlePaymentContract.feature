@@ -1,12 +1,5 @@
 Feature: Create Bundled Payment Contracts functionality tests
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -93,6 +86,11 @@ Feature: Create Bundled Payment Contracts functionality tests
       | validBundle | BC         | bundle- | create-bundle-content1 |           201 |             |
 
   Scenario Outline: Verification of details on Contracts under Payor Organization
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -134,6 +132,11 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Verification of details on Contracts under Payor Organization | PAYORNAME  | PROGRAMNAME  |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -167,6 +170,11 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Validation message if Start Date is left blank- Contract Section | NO     | PAYORNAME  |                   | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPI |   123 |          121 |         135 |         106 | Required      |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -200,6 +208,11 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Check validation message if Start Date is left blank for Bundle Section | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      |                 | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPI |   123 |          121 |         135 |         106 | Required      |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -233,6 +246,11 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Check validation message if Start Date is left blank for Bundle price Section | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    |                | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPI |   123 |          121 |         135 |         106 | Required      |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -266,6 +284,11 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Check validation message if Provider Name is left blank | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               |                   | FETCHFROMAPI |   123 |          121 |         135 |         106 | Please select an organization |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -308,6 +331,11 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Check validation messages for contract creation with Bundle Price Start Date is before the Bundle Start Date    | NO     | PAYORNAME  | 2017/01/01        | 2019/12/25      | 2018/04/21      | 2019/09/30    | 2018/03/03     | 2019/08/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPI |       |          121 |         135 |         106 | The bundle price start date is before the bundle start date     |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -366,6 +394,11 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Validation message for invalid Character format- Contract Id | YES    | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | HHA               | HHANAME           | @$%G&*9!    | FETCHFROMAPI |   123 |          121 |         135 |         106 | Validation errors: Validation failed for contractId. Only alpha-numeric characters and dashes - are allowed and maximum character limit is 8 |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -391,6 +424,11 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Search for a HHA organization by HHA Organization Name           | NO     | PAYORNAME  | PROGRAMNAME  | HHA               | HHANAME     |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -406,11 +444,16 @@ Feature: Create Bundled Payment Contracts functionality tests
     Then I search "<SearchParam>" and verify with search list options on "Bundle" dropdown box
 
     Examples: 
-      | Description                        | Has_MO | Payor_Name | Program_Name | Organization_Type | Organization_Name | SearchParam  |
-      | Search for a Bundle by Bundle Name | NO     | PAYORNAME  | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPI |
+      | Description                        | Has_MO | Payor_Name | Program_Name | Organization_Type | Organization_Name | SearchParam             |
+      | Search for a Bundle by Bundle Name | NO     | PAYORNAME  | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPI            |
+      | Search for a Bundle by Bundle Code | NO     | PAYORNAME  | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPIForBundleID |
 
-  #| Search for a Bundle by Bundle Code | NO     | PAYORNAME  | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPIForBundleID |
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -430,6 +473,11 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Error message for an invalid Provider search | NO     | PAYORNAME  | PROGRAMNAME  | ACH               | InvalidSearchOrganizationName |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -450,6 +498,11 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Error message for an invalid Bundle search | NO     | PAYORNAME  | PROGRAMNAME  | ACH               | ACHNAME           | InvalidSearch |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -480,17 +533,22 @@ Feature: Create Bundled Payment Contracts functionality tests
     Then I verify "<Message>" after submitting the "Create Contracts" on Payor organization page
 
     Examples: 
-      | Description                                                                                          | Has_MO | Payor_Name | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | Program_Name | Organization_Type | Organization_Name | Contract_Id     | Bundle       | Price | Trend_Factor | Upper_Bound | Lower_Bound | Message                       |
-      | Create Contracts with all available fields using Hospital Organization                               | NO     | PAYORNAME  | 2017/02/09        | 2019/12/19      | 2017/05/01      | 2019/07/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | CID             | FETCHFROMAPI |    96 |          121 |         135 |         106 | Contract Successfully Created |
-      | Create Contracts with all available fields using Hospital Organization                               | YES    | PAYORNAME  | 2017/01/15        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | CID             | FETCHFROMAPI |   103 |           91 |         135 |         106 | Contract Successfully Created |
-      | Create Contracts with all available fields using PGP Organization                                    | NO     | PAYORNAME  | 2017/01/16        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | PGP               | PGPNAME           | CID             | FETCHFROMAPI |   113 |          121 |         135 |         106 | Contract Successfully Created |
-      | Create Contracts with all available fields using PGP Organization                                    | YES    | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | PGP               | PGPNAME           | CID             | FETCHFROMAPI |    56 |          121 |         135 |         106 | Contract Successfully Created |
-      | Create Contracts with all available fields using SNF Organization                                    | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | SNF               | SNFNAME           | CID             | FETCHFROMAPI |    73 |          121 |         135 |         106 | Contract Successfully Created |
-      | Create Contracts with all available fields using SNF Organization                                    | YES    | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | SNF               | SNFNAME           | CID             | FETCHFROMAPI |   123 |          121 |         135 |         106 | Contract Successfully Created |
-      | Create Contracts with all available fields using HHA Organization                                    | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | HHA               | HHANAME           | CID             | FETCHFROMAPI |    46 |          121 |         135 |         106 | Contract Successfully Created |
-      | Create Contracts with all available fields using HHA Organization - Contract ID having All alphabets | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | HHA               | HHANAME           | AllAlphabetsCID | FETCHFROMAPI |    99 |          121 |         135 |         106 | Contract Successfully Created |
+      | Description                                                                                                           | Has_MO | Payor_Name | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | Program_Name | Organization_Type | Organization_Name | Contract_Id     | Bundle       | Price | Trend_Factor | Upper_Bound | Lower_Bound | Message                       |
+      | Create Contracts with all available fields using Hospital Organization                                                | NO     | PAYORNAME  | 2017/02/09        | 2019/12/19      | 2017/05/01      | 2019/07/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | CID             | FETCHFROMAPI |    96 |          121 |         135 |         106 | Contract Successfully Created |
+      | Create Contracts with all available fields using Hospital Organization                                                | YES    | PAYORNAME  | 2017/01/15        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | CID             | FETCHFROMAPI |   103 |           91 |         135 |         106 | Contract Successfully Created |
+      | Create Contracts with all available fields using PGP Organization                                                     | NO     | PAYORNAME  | 2017/01/16        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | PGP               | PGPNAME           | CID             | FETCHFROMAPI |   113 |          121 |         135 |         106 | Contract Successfully Created |
+      | Create Contracts with all available fields using PGP Organization - Contract ID having Alphanumeric and "-" Character | YES    | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | PGP               | PGPNAME           | CID-            | FETCHFROMAPI |    56 |          121 |         135 |         106 | Contract Successfully Created |
+      | Create Contracts with all available fields using SNF Organization                                                     | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | SNF               | SNFNAME           | CID             | FETCHFROMAPI |    73 |          121 |         135 |         106 | Contract Successfully Created |
+      | Create Contracts with all available fields using SNF Organization                                                     | YES    | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | SNF               | SNFNAME           | CID             | FETCHFROMAPI |   123 |          121 |         135 |         106 | Contract Successfully Created |
+      | Create Contracts with all available fields using HHA Organization                                                     | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | HHA               | HHANAME           | CID             | FETCHFROMAPI |    46 |          121 |         135 |         106 | Contract Successfully Created |
+      | Create Contracts with all available fields using HHA Organization - Contract ID having All alphabets                  | YES    | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | HHA               | HHANAME           | AllAlphabetsCID | FETCHFROMAPI |    99 |          121 |         135 |         106 | Contract Successfully Created |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -515,6 +573,11 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Create Contracts only Mandatory fields using Hospital Organization | NO     | PAYORNAME  | 2017/05/23        | 2018/07/24      | 2019/02/03     | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPI |    89 | Contract Successfully Created |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -560,6 +623,11 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Create contract using duplicate Bundles with overlapping dates in 1 contract | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2017/03/01      | 2018/03/30    | 2017/05/01     | 2017/08/30   | 2017/06/09        | 2017/07/12      | 2017/03/01       | 2018/03/30     | 2017/05/01      | 2017/08/30    | 2017/06/09         | 2017/07/12       | PROGRAMNAME  | ACH               | ACHNAME           | CID         | FETCHFROMAPI | FETCHFROMAPI |    113 |     96 |          121 |         135 |         106 |           121 |          135 |          106 | Bundle Date Range overlaps with other bundle |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -591,9 +659,14 @@ Feature: Create Bundled Payment Contracts functionality tests
 
     Examples: 
       | Description                                 | Has_MO | Payor_Name | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | Program_Name | Organization_Type | Organization_Name | Contract_Id   | Bundle       | Price | Trend_Factor | Upper_Bound | Lower_Bound | ValidationMsg     |
-      | Create contract using duplicate Contract Id | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | HHA               | HHANAME           | Duplicate_CID | FETCHFROMAPI |   123 |          121 |         135 |         106 | ID already exists |
+      | Create contract using duplicate Contract Id | NO     | PAYORNAME  | 2017/01/30        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | SNF               | SNFNAME           | Duplicate_CID | FETCHFROMAPI |   123 |          121 |         135 |         106 | ID already exists |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -628,6 +701,11 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Create contract using duplicate (Program+Provider+Bundle) combination with non-overlapping dates. | NO     | PAYORNAME  | 2017/01/31        | 2019/12/01      | 2019/01/02      | 2019/06/29    | 2019/03/02     | 2019/05/25   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | CID         | FETCHFROMAPI |   123 |          121 |         135 |         106 | There is a conflict error because an entity with similar identifying attributes already existed. |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -662,6 +740,11 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Create contract using duplicate (Program+Provider+Bundle) combination with overlapping dates | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | CID         | FETCHFROMAPI |   123 |          121 |         135 |         106 | There is a conflict error because an entity with similar identifying attributes already existed. |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -704,6 +787,11 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Create contract with 1 Bundle having multiple Prices | NO     | PAYORNAME  | 2017/02/05        | 2019/12/28      | 2018/01/04      | 2019/06/21    | 2018/02/02     | 2018/05/30   | 2018/03/01        | 2018/04/04      | 2018/06/02      | 2018/10/30    | 2018/07/01         | 2018/08/08       | PROGRAMNAME  | PGP               | PGPNAME           | CID         | FETCHFROMAPI |   123 |    101 |          121 |         135 |         106 | Contract Successfully Created |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page

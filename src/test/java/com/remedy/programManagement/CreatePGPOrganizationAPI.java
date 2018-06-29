@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
+
 import com.remedy.RestCall.*;
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
@@ -20,7 +21,7 @@ public class CreatePGPOrganizationAPI extends BaseClass{
 	public static HashMap<String, String> tempPGPOrg = new HashMap<String, String>();
 	public static Long oldPGP_WithMO = null;
 	public static Long oldPGP_WithoutMO = null;
-
+	public static List<Long> PGPcopyIDList = new ArrayList<>();
 
 	public CreatePGPOrganizationAPI(WebDriver driver) {
 		super(driver);
