@@ -8,7 +8,7 @@ Feature: To verify the options and functionality of Independence section of Carl
     And I wait for 2000 milli seconds
     Then I should see Tile text Episodes
     And I click on the "Episodes" tile
-    And I switch to new window
+    #And I switch to new window
     Then I should see Episode header text "Dashboard"
     When I click on "Patients" in the left navigator present on the episode dashboard page
     When I click on "Patient List" in the Patients dropdown menu

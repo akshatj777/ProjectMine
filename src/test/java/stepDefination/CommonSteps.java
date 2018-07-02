@@ -43,6 +43,10 @@ public class CommonSteps extends DriverScript {
         driver.navigate().to(Config.getProperty("BaseUrl"));
         driver.manage().timeouts().pageLoadTimeout(240, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        if(DriverScript.Config.getProperty("Browser").equals("ie"))
+        {
+        	driver.manage().window().maximize();
+        }
     }
 
     @Then("^I go to mail verification page$")
@@ -86,8 +90,8 @@ public class CommonSteps extends DriverScript {
     @And("^I verify current page \"([^\"]*)\" title$")
     public void iVerifyCurrentPageTitle(String pageTitle) {
     	 WebDriverWait wait = new WebDriverWait(driver, 120);
-    	 wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='flex-item order-2 btn logo valentino-icon-reports']"))));
-         Assert.assertTrue(driver.findElement(By.xpath("//div[@class='flex-item order-2 btn logo valentino-icon-reports']")).isDisplayed());
+    	 wait.until(ExpectedConditions.titleContains(pageTitle));
+         Assert.assertEquals(driver.getTitle(), pageTitle);
     }
 
     @And("^I wait for ([^\"]*) milli seconds$")
@@ -142,5 +146,10 @@ public class CommonSteps extends DriverScript {
             Action selected = builder.build();
             selected.perform();
     	}
+    }
+    
+    @And("^I switch back to old window in reports$")
+    public void iSwitchBackToOLDWindowInReports(){
+    	baseClass.switchBacktoOldWindow();
     }
 }

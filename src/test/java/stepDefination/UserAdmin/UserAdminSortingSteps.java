@@ -139,9 +139,4 @@ public class UserAdminSortingSteps extends DriverScript {
 	public void I_verify_the_favicon_on_user_admin_page() throws Throwable{
 		UserAdminSort.Iverifythefavicononuseradminpage();
 	}
-
-
-
-
-
 }

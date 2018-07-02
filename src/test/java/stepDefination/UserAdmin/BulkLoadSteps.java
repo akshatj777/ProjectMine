@@ -14,17 +14,16 @@ public class BulkLoadSteps extends DriverScript{
 
     BulkUserCreationPage bulkUser = new BulkUserCreationPage (driver);
 
-
     @And("^I upload file for bulk load users$")
     public void iUploadFileForBulkLoadUsers() throws Throwable {
 
         bulkUser.iUplaodFile();
     }
 
-
     @And("^I verify the Success Message$")
     public void iVerifyTheSucessMessage() throws Throwable {
         bulkUser.iVerifySuccssfulUserCreationMessage("1 user(s) successfully created");
+
     }
     
     @Then("^I click on Import User button$")
@@ -139,5 +138,6 @@ public class BulkLoadSteps extends DriverScript{
     @Then("^I edit \"([^\"]*)\" user and enter data$")
     public void editUser(String role){
     	bulkUser.editUser(role);
+
     }
 }

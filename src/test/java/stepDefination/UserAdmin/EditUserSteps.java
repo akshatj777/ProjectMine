@@ -17,43 +17,35 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	 editUser.iClickOnUser(email);
 	}
 
-	
-
 	@Then("^I click on Edit button$")
 	public void i_click_on_Edit_button() throws Throwable {
 	   editUser.iClickOnEditButton();
 	}
 
-	
 	@Then("^I verify the availability of field NPI for \"([^\"]*)\"$")
 	public void i_verify_the_availability_of_fields_for_Physicians(String role) throws Throwable {
 		editUser.VerifyNPIFieldForPhysicians(role);
-	}
-	
+	}	
 	
 	@And("^I fill in Phone with([^\"]*)$")
 	public void iFillInPhone(String number) throws Throwable {
 		editUser.iEnterPhone(number);
 	}
 	
-	
 	@When ("^I click the Organizational Role Field to edit$")
 	public void iClickOnRoleFieldToEdit(){
 		editUser.iClickOnRoleFieldToEdit();
 	}
 	
-	
 	@Then("^I select \"([^\"]*)\" tab$")
 	public void iSelectApplicationTab(String tab) throws Throwable {
 		editUser.iClickOnTab(tab);
 	}
-		
 
 	@Then("^I verify that \"([^\"]*)\" are \"([^\"]*)\"$")
 	public void i_verify_that_Episodes_Reports_Lessons_are(String apps, String select) throws Throwable {
 	    editUser.iVerifyThatApplicationsAreEditable(apps, select);
 	}
-	
 	
 	@Then("^I click on delete organisation icon$")
 	public void iDeleteOrganisation() throws Throwable {
@@ -74,12 +66,10 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	   editUser.iClickOnExisitingOrganisationByName(text);
 	}
 
-	
 	@Then("^I click on \"([^\"]*)\" button on permissions tab$")
 		public void iClickOnAddAnotherOrganisation(String text){
 			editUser.iClickOnAddAnotherOrganisation(text);
-		}
-	
+		}	
 
 	@Then("^I click on Select All Locations button for \"([^\"]*)\" Organisation$")
 	public void i_click_on_Select_All_Locations_button_for_Organisation(String arg1) throws Throwable {
@@ -176,7 +166,6 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 		editUser.iVerifyPTAProvisionedRoleOnEditPage();
 	}
 	
-	
 	@Then("^I should see \"([^\"]*)\" under data permissions$")
 	public void iVerifydataPermissionsField(String field){
 		editUser.iVerifydataPermissionsField(field);
@@ -217,8 +206,6 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	public void iVerifyIncompleteOrganisation(){
 		editUser.iVerifyIncompleteOrganisation();
 	}
-	
-	
 	
 	@Then("^I verify facility key \"([^\"]*)\" is displayed with location name \"([^\"]*)\"$")
 	public void iVerifyLocationDisplayedWithFacilityKey(String key, String text){

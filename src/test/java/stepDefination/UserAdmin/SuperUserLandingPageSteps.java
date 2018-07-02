@@ -216,5 +216,3 @@ public class SuperUserLandingPageSteps extends DriverScript {
 	ua2LandingPage.iVerifyReportsPage();
 	}
 }
-
-

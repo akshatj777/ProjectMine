@@ -1412,6 +1412,7 @@ public class BulkUserCreationPage extends BaseClass {
 				driver.findElement(By.xpath("//td[@class='five wide']")).getText().toString().trim().equals(email));
 	}
 
+
 	public void enterInvalidAndValidData() {
 		String strUserData = null;
 		try {
@@ -1678,6 +1679,7 @@ public class BulkUserCreationPage extends BaseClass {
 
 		}
 
+
 		else if (role.equals("Remedy Field RN")) {
 			try {
 				strUserData = readContentForBulkUpload(9, 10);
@@ -1693,8 +1695,9 @@ public class BulkUserCreationPage extends BaseClass {
 			bulkUsersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Executive", applicationsList);
 			CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
+		}
+     else if (role.equals("Remedy PM")) {
 
-		} else if (role.equals("Remedy PM")) {
 
 			try {
 				strUserData = readContentForBulkUpload(10, 11);
@@ -1720,6 +1723,8 @@ public class BulkUserCreationPage extends BaseClass {
 		}
 		else if (role.equals("Remedy Sales Team")) {
 
+
+
             try {
                 strUserData = readContentForBulkUpload(11, 12);
             } catch (Exception e) {
@@ -1739,6 +1744,7 @@ public class BulkUserCreationPage extends BaseClass {
             CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
         }
 		else if (role.equals("Remedy Other")) {
+
 
             try {
                 strUserData = readContentForBulkUpload(14, 15);

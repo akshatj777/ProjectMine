@@ -229,4 +229,9 @@ public class ReportsGlobalFiltersSteps extends DriverScript {
 	public void i_should_not_see_appearing_in_the_global_filters(String text) throws Throwable{
 		globalfilters.iShouldNotSeeHideSummaryAppearingInGlobalFilters(text);
 	}
+	
+	@And("^I wait untill the field \"([^\"]*)\" is appearing in the report$")
+	public void i_wait_untill_the_field_field_is_appearing_in_the_report(String text) throws Throwable{
+		globalfilters.iWaitUntillTheFieldIsAppearingInTheReport(text);
+	}
 }

@@ -137,6 +137,4 @@ public class UserAdminSorting extends BaseClass {
 	public void Iverifythefavicononuseradminpage(){
 		isElementVisible(driver.findElement(By.xpath("//link[@rel='shortcut icon']")));
 	}
-	
-
 }
