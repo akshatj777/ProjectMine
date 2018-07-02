@@ -475,7 +475,7 @@ Feature: Edit Bundle Payment Contract functionality tests
 
     Examples: 
       | Description              | Payor_Name | Bundle_Payment_Contract | Program     | Organization_Type | Organization_Name | Price | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | Trend_Factor | Upper_Bound | Lower_Bound | Message                       |
-      | Edit and save a contract | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | ACH               | ACHNAME           |    96 | 2017/03/15        | 2019/10/10      | 2017/06/01      | 2018/06/30    | 2017/07/01     | 2018/02/28   | 2017/10/01        | 2017/12/30      |           78 |          87 |          97 | Contract Successfully Updated |
+      | Edit and save a contract | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | ACH               | ACHNAME           |    96 | 2018/11/15        | 2019/10/10      | 2018/12/28      | 2019/08/30    | 2019/01/01     | 2019/4/28    | 2019/03/01        | 2019/06/30      |           78 |          87 |          97 | Contract Successfully Updated |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"

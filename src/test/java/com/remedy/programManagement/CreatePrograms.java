@@ -99,6 +99,7 @@ public class CreatePrograms extends BaseClass {
 	{
 		if(!text.equals(""))
 		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//*[contains(@name,'orgType')]/../div")));
 			driver.findElement(By.xpath("//*[contains(@name,'orgType')]/../div")).click();
 			iWillWaitToSee(By.cssSelector(".VirtualizedSelectOption"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+text+"']")));
@@ -110,6 +111,7 @@ public class CreatePrograms extends BaseClass {
 	{
 		if(!text.equals(""))
 		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")));
 			if(text.contains("ACHNAME - NO"))
 			{
 				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();

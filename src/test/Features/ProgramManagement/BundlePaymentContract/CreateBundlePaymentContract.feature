@@ -76,6 +76,8 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |
       | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |
       | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |
+      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |
+      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |
 
   Scenario Outline: Create Bundle using API calls
     Given create Bundle Json to String and pass it to body with "<name>" and "<content>" and "<bundleCode>"
@@ -449,7 +451,7 @@ Feature: Create Bundled Payment Contracts functionality tests
     Examples: 
       | Description                        | Has_MO | Payor_Name | Program_Name | Organization_Type | Organization_Name | SearchParam             |
       | Search for a Bundle by Bundle Name | NO     | PAYORNAME  | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPI            |
-      #| Search for a Bundle by Bundle Code | NO     | PAYORNAME  | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPIForBundleID |
+      | Search for a Bundle by Bundle Code | NO     | PAYORNAME  | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPIForBundleID |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -841,6 +843,139 @@ Feature: Create Bundled Payment Contracts functionality tests
     Examples: 
       | Description                           | Has_MO | Payor_Name | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | BundleStartDate1 | BundleEndDate1 | PriceStartDate1 | PriceEndDate1 | BaselineStartDate1 | BaselineEndDate1 | Program_Name | Organization_Type | Organization_Name | Contract_Id | Bundle       | Bundle_2     | Price1 | Price2 | Trend_Factor | Upper_Bound | Lower_Bound | Trend_Factor1 | Upper_Bound1 | Lower_Bound1 | Message                       |
       | Create contract with multiple Bundles | NO     | PAYORNAME  | 2017/01/02        | 2019/12/30      | 2017/03/04      | 2018/03/30    | 2017/05/01     | 2017/08/30   | 2017/06/09        | 2017/07/12      | 2018/05/01       | 2019/06/30     | 2018/08/03      | 2019/03/26    | 2018/11/09         | 2019/01/16       | PROGRAMNAME  | ACH               | ACHNAME           | CID         | FETCHFROMAPI | FETCHFROMAPI |    108 |     96 |          121 |         135 |         106 |            98 |          107 |           67 | Contract Successfully Created |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "Payor" organization tab on organization dashboard
+    When I search with "<Payor_Name>" on organization in search box
+    And I click "<Payor_Name>" field in search list on organization page
+    And I verify "<Payor_Name>" name on the header of view profile
+    And I verify "Contracts" tab present under "Payor" Organization
+    And I click on "Contracts" tab on view profile of "Payor" Organization
+    And I verify the "Create New Contract" button on view profile of "Payor" Organization
+    Then I click on "Create New Contract" button on "create" organization page
+    And I verify "Create Contract" header text on create organization page
+    And I select "4" Program name "<Program_Name>" in create Contract page under "Payor" Organization
+    And I select Organization type "<Organization_Type>" for Contract "1" on "create" Contracts page
+    And I select Organization name "<Organization_Name> - <Has_MO>" for Contract "1" on "create" Contracts page
+    And I enter "<Contract_Id>" in "Contract Id" field for "Contract1" on create Contract page
+    And I select "1" Bundle "<Bundle>" for Contract "1" on "create" Contracts page
+    And I enter "<Price1>" in "price" field for "Bundle1 Price1" on create Contract page
+    Then I enter date "<ContractStartDate>" in "ContractStartDate" field for index "0"
+    Then I enter date "<ContractEndDate>" in "ContractEndDate" field for index "1"
+    Then I enter date "<BundleStartDate>" in "BundleStartDate" field for index "2"
+    Then I enter date "<BundleEndDate>" in "BundleEndDate" field for index "3"
+    Then I enter date "<PriceStartDate>" in "PriceStartDate" field for index "4"
+    Then I enter date "<PriceEndDate>" in "Baseline Date" field for index "5"
+    Then I enter date "<BaselineStartDate>" in "BaselineStartDate" field for index "6"
+    Then I enter date "<BaselineEndDate>" in "BaselineEndDate" field for index "7"
+    And I enter "<Trend_Factor>" in "trendFactor" field for "Bundle1 Price1" on create Contract page
+    And I enter "<Upper_Bound>" in "upperBound" field for "Bundle1 Price1" on create Contract page
+    And I enter "<Lower_Bound>" in "lowerBound" field for "Bundl1 Price1" on create Contract page
+    Then I click on "Add Bundle" button on "create" organization page
+    Then I click on "+" button on "create" organization page
+    And I select Organization type "<Organization_Type>" for Contract "1" on "create" Contracts page
+    And I select Organization name "<Organization_Name> - <Has_MO>" for Contract "1" on "create" Contracts page
+    And I select "1" Bundle "<Bundle>" for Contract "1" on "create" Contracts page
+    And I enter "<Price1>" in "price" field for "Bundle1 Price1" on create Contract page
+    Then I enter date "<ContractStartDate>" in "ContractStartDate" field for index "8"
+    Then I enter date "<ContractEndDate>" in "ContractEndDate" field for index "9"
+    Then I enter date "<BundleStartDate>" in "BundleStartDate" field for index "10"
+    Then I enter date "<BundleEndDate>" in "BundleEndDate" field for index "11"
+    Then I enter date "<PriceStartDate>" in "PriceStartDate" field for index "12"
+    Then I enter date "<PriceEndDate>" in "Baseline Date" field for index "13"
+    Then I enter date "<BaselineStartDate>" in "BaselineStartDate" field for index "14"
+    Then I enter date "<BaselineEndDate>" in "BaselineEndDate" field for index "15"
+    And I enter "<Trend_Factor>" in "trendFactor" field for "Bundle1 Price1" on create Contract page
+    And I enter "<Upper_Bound>" in "upperBound" field for "Bundle1 Price1" on create Contract page
+    And I enter "<Lower_Bound>" in "lowerBound" field for "Bundl1 Price1" on create Contract page
+    Then I click on "Submit" button on "create" organization page
+
+    Examples: 
+      | Description                                      | Has_MO | Payor_Name | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | BundleStartDate1 | BundleEndDate1 | PriceStartDate1 | PriceEndDate1 | BaselineStartDate1 | BaselineEndDate1 | Program_Name | Organization_Type | Organization_Name | Organization_Type1 | Organization_Name1 | Contract_Id | Bundle       | Bundle_2     | Price1 | Price2 | Trend_Factor | Upper_Bound | Lower_Bound | Trend_Factor1 | Upper_Bound1 | Lower_Bound1 | Message                       |
+      | Create multiple contracts with duplicate Bundles | NO     | PAYORNAME  | 2017/01/02        | 2019/12/30      | 2017/03/04      | 2018/03/30    | 2017/05/01     | 2017/08/30   | 2017/06/09        | 2017/07/12      | 2018/05/01       | 2019/06/30     | 2018/08/03      | 2019/03/26    | 2018/11/09         | 2019/01/16       | PROGRAMNAME  | ACH               | ACHNAME           | PGP                | PGPNAME            | CID         | FETCHFROMAPI | FETCHFROMAPI |    108 |     96 |          121 |         135 |         106 |            98 |          107 |           67 | Contract Successfully Created |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "Payor" organization tab on organization dashboard
+    When I search with "<Payor_Name>" on organization in search box
+    And I click "<Payor_Name>" field in search list on organization page
+    And I verify "<Payor_Name>" name on the header of view profile
+    And I verify "Contracts" tab present under "Payor" Organization
+    And I click on "Contracts" tab on view profile of "Payor" Organization
+    And I verify the "Create New Contract" button on view profile of "Payor" Organization
+    Then I click on "Create New Contract" button on "create" organization page
+    And I verify "Create Contract" header text on create organization page
+    And I select "5" Program name "<Program_Name>" in create Contract page under "Payor" Organization
+    And I select Organization type "<Organization_Type>" for Contract "1" on "create" Contracts page
+    And I select Organization name "<Organization_Name> - <Has_MO>" for Contract "1" on "create" Contracts page
+    And I enter "<Contract_Id>" in "Contract Id" field for "Contract1" on create Contract page
+    And I select "1" Bundle "<Bundle>" for Contract "1" on "create" Contracts page
+    And I enter "<Price1>" in "price" field for "Bundle1 Price1" on create Contract page
+    Then I enter date "<ContractStartDate>" in "ContractStartDate" field for index "0"
+    Then I enter date "<ContractEndDate>" in "ContractEndDate" field for index "1"
+    Then I enter date "<BundleStartDate>" in "BundleStartDate" field for index "2"
+    Then I enter date "<BundleEndDate>" in "BundleEndDate" field for index "3"
+    Then I enter date "<PriceStartDate>" in "PriceStartDate" field for index "4"
+    Then I enter date "<PriceEndDate>" in "Baseline Date" field for index "5"
+    Then I enter date "<BaselineStartDate>" in "BaselineStartDate" field for index "6"
+    Then I enter date "<BaselineEndDate>" in "BaselineEndDate" field for index "7"
+    And I enter "<Trend_Factor>" in "trendFactor" field for "Bundle1 Price1" on create Contract page
+    And I enter "<Upper_Bound>" in "upperBound" field for "Bundle1 Price1" on create Contract page
+    And I enter "<Lower_Bound>" in "lowerBound" field for "Bundl1 Price1" on create Contract page
+    Then I click on "Add Bundle" button on "create" organization page
+    And I select "2" Bundle "<Bundle>" for Contract "1" on "create" Contracts page
+    And I enter "<Price2>" in "price" field for "Bundle2 Price1" on create Contract page
+    Then I enter date "<BundleStartDate1>" in "BundleStartDate" field for index "8"
+    Then I enter date "<BundleEndDate1>" in "BundleEndDate" field for index "9"
+    Then I enter date "<PriceStartDate1>" in "PriceStartDate" field for index "10"
+    Then I enter date "<PriceEndDate1>" in "Baseline Date" field for index "11"
+    Then I enter date "<BaselineStartDate1>" in "BaselineStartDate" field for index "12"
+    Then I enter date "<BaselineEndDate1>" in "BaselineEndDate" field for index "13"
+    And I enter "<Trend_Factor1>" in "trendFactor" field for "Bundle2 Price1" on create Contract page
+    And I enter "<Upper_Bound1>" in "upperBound" field for "Bundle2 Price1" on create Contract page
+    And I enter "<Lower_Bound1>" in "lowerBound" field for "Bundle2 Price1" on create Contract page
+    Then I click on "+" button on "create" organization page
+    And I select Organization type "<Organization_Type1>" for Contract "1" on "create" Contracts page
+    And I select Organization name "<Organization_Name1> - <Has_MO>" for Contract "1" on "create" Contracts page
+    And I select "1" Bundle "<Bundle>" for Contract "1" on "create" Contracts page
+    And I enter "<Price1>" in "price" field for "Bundle1 Price1" on create Contract page
+    Then I enter date "<ContractStartDate>" in "ContractStartDate" field for index "14"
+    Then I enter date "<ContractEndDate>" in "ContractEndDate" field for index "15"
+    Then I enter date "<BundleStartDate>" in "BundleStartDate" field for index "16"
+    Then I enter date "<BundleEndDate>" in "BundleEndDate" field for index "17"
+    Then I enter date "<PriceStartDate>" in "PriceStartDate" field for index "18"
+    Then I enter date "<PriceEndDate>" in "Baseline Date" field for index "19"
+    Then I enter date "<BaselineStartDate>" in "BaselineStartDate" field for index "20"
+    Then I enter date "<BaselineEndDate>" in "BaselineEndDate" field for index "21"
+    And I enter "<Trend_Factor>" in "trendFactor" field for "Bundle1 Price1" on create Contract page
+    And I enter "<Upper_Bound>" in "upperBound" field for "Bundle1 Price1" on create Contract page
+    And I enter "<Lower_Bound>" in "lowerBound" field for "Bundl1 Price1" on create Contract page
+    Then I click on "Add Bundle" button on "create" organization page
+    And I select "2" Bundle "<Bundle>" for Contract "1" on "create" Contracts page
+    And I enter "<Price2>" in "price" field for "Bundle2 Price1" on create Contract page
+    Then I enter date "<BundleStartDate1>" in "BundleStartDate" field for index "22"
+    Then I enter date "<BundleEndDate1>" in "BundleEndDate" field for index "23"
+    Then I enter date "<PriceStartDate1>" in "PriceStartDate" field for index "24"
+    Then I enter date "<PriceEndDate1>" in "Baseline Date" field for index "25"
+    Then I enter date "<BaselineStartDate1>" in "BaselineStartDate" field for index "26"
+    Then I enter date "<BaselineEndDate1>" in "BaselineEndDate" field for index "27"
+    And I enter "<Trend_Factor1>" in "trendFactor" field for "Bundle2 Price1" on create Contract page
+    And I enter "<Upper_Bound1>" in "upperBound" field for "Bundle2 Price1" on create Contract page
+    And I enter "<Lower_Bound1>" in "lowerBound" field for "Bundle2 Price1" on create Contract page
+    Then I click on "Submit" button on "create" organization page
+
+    Examples: 
+      | Description                                     | Has_MO | Payor_Name | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | BundleStartDate1 | BundleEndDate1 | PriceStartDate1 | PriceEndDate1 | BaselineStartDate1 | BaselineEndDate1 | Program_Name | Organization_Type | Organization_Name | Organization_Type1 | Organization_Name1 | Contract_Id | Bundle       | Bundle_2     | Price1 | Price2 | Trend_Factor | Upper_Bound | Lower_Bound | Trend_Factor1 | Upper_Bound1 | Lower_Bound1 | Message                       |
+      | Create multiple contracts with multiple Bundles | NO     | PAYORNAME  | 2017/01/02        | 2019/12/30      | 2017/03/04      | 2018/03/30    | 2017/05/01     | 2017/08/30   | 2017/06/09        | 2017/07/12      | 2018/05/01       | 2019/06/30     | 2018/08/03      | 2019/03/26    | 2018/11/09         | 2019/01/16       | PROGRAMNAME  | ACH               | ACHNAME           | PGP                | PGPNAME            | CID         | FETCHFROMAPI | FETCHFROMAPI |    108 |     96 |          121 |         135 |         106 |            98 |          107 |           67 | Contract Successfully Created |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"
