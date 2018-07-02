@@ -100,7 +100,7 @@ RSTFirstName | RSTLastName | RemedySTMAIL3 | 8989898787| Remedy Sales Team | NA 
 REFirstName | RELastName | RemedyExMAIL3 | | Remedy Executive | NA | 439108:ALL_BPIDS:ALL_FACILITIES  | | | True | True | True | False | False | False | False | | False
 PPEFirstName | PPELastName | abcdtrial3 | | Prospective Partner Executive | NA |442503:ALL_BPIDS:ALL_FACILITIES   | | | True | False | False | True | False | False | False | | False
 
-####################Invalid (105-118) and valid data (119), general details and app information for Bulk Upload User########################
+####################Invalid (105-122) and valid data (123), general details and app information for Bulk Upload User########################
 
 ExecutiveFirstName | ExecutiveLastName | EXECUTIVEMAIL1 | | Executive | NA | 439108::| | | True | True | False | True | False |  |  | | False
 ManagerFirstName | ManagerLastName | MANAGERMAIL | 9876545678 | Manager | NA | :CJR-1: | | | True | False | False | True | False |  | False | | False
@@ -113,8 +113,12 @@ ExecutiveFirstName | ExecutiveLastName | EXECUTIVEMAIL3 |98765456 | Executive | 
 PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL2 | | Physicians | qwertyuiop | 514083:2070-015:TSH | | | True | True | False | False | False |  |  | | True
 PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL3 | | Physicians | 12345678 | 514083:2070-015:TSH | | | True | True | False | False | False |  |  | | True
 ExecutiveFirstName | ExecutiveLastName | EXECUTIVEMAIL4 | | Executive | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False
- |  | EXECUTIVEMAIL5 | | Executive | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False
-Executive-FirstName123 | Executive-LastName123 | EXECUTIVEMAIL6 | | Executive | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False
-Executive-FirstName123 | Executive-LastName123 | EXECUTIVEMAIL8 | | Executive | 9876543215 | 514029:ALL_BPIDS:ALL_FACILITIES,fgfgdf | | | True | True | False | True | False |  |  | | False
- ExecutiveFirstName | ExecutiveLastName | EXECUTIVEMAIL7 | | Executive | NA | 439108:CJR-1:| | | True | True | False | True | False |  |  | | False
+ExecutiveFirstName |  | EXECUTIVEMAIL5 | | Executive | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False
+ExecutiveFirstName123 | ExecutiveLastName123 | EXECUTIVEMAIL6 | | Executive | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False
+Executive-FirstName | Executive-LastName | EXECUTIVEMAIL8 | | Executive | 9876543215 | 514029:ALL_BPIDS:ALL_FACILITIES,fgfgdf | | | True | True | False | True | False |  |  | | False
+ExecutiveFirstName | ExecutiveLastName | EXECUTIVEMAIL9 | | Executive | 9876543215 |  | | | True | True | False | True | False |  |  | | False
+ExecutiveFirstName | ExecutiveLastName |  | | Executive | 9876543215 | 514029:ALL_BPIDS:ALL_FACILITIES | | | True | True | False | True | False |  |  | | False
+ExecutiveFirstName | ExecutiveLastName | EXECUTIVEMAIL10 | |  | 9876543215 | 514029:ALL_BPIDS:ALL_FACILITIES | | | True | True | False | True | False |  |  | | False
+ |ExecutiveLastName  | EXECUTIVEMAIL11 | | Executive | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False
+ExecutiveFirstName | ExecutiveLastName | EXECUTIVEMAIL7 | | Executive | NA | 439108:CJR-1:| | | True | True | False | True | False |  |  | | False
  

@@ -3,6 +3,8 @@ package com.remedy.userAdmin;
 import com.remedy.baseClass.BaseClass;
 
 import org.junit.Assert;
+
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -1462,6 +1464,15 @@ public class BulkUserCreationPage extends BaseClass {
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("EXECUTIVEMAIL8", "qaautomation+" + randomString + "@remedypartners.com");
 
+		randomString = RandomStringUtils.randomAlphabetic(8);
+		strUserData = strUserData.replace("EXECUTIVEMAIL9", "qaautomation+" + randomString + "@remedypartners.com");
+
+		randomString = RandomStringUtils.randomAlphabetic(8);
+		strUserData = strUserData.replace("EXECUTIVEMAIL10", "qaautomation+" + randomString + "@remedypartners.com");
+
+		randomString = RandomStringUtils.randomAlphabetic(8);
+		strUserData = strUserData.replace("EXECUTIVEMAIL11", "qaautomation+" + randomString + "@remedypartners.com");
+
 		HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
 		HashMap<String, String> applicationsList = new HashMap<String, String>();
 		randomString = RandomStringUtils.randomAlphabetic(8);
@@ -1872,10 +1883,44 @@ public class BulkUserCreationPage extends BaseClass {
                     applicationsList);
             CreateUserPage.usersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
         }
+		else if (role.equals("Remedy Technical Administrator")) {
+
+            try {
+                strUserData = readContentForBulkUpload(18, 19);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            randomString = RandomStringUtils.randomAlphabetic(8);
+            strUserData = strUserData.replace("RTAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+            strUserData = strUserData.replace(" Remedy Technical Administrator ", " Physicians ");
+            strUserData = strUserData.replace("RTAFirstName", "RTAFirstNameEdited");
+            strUserData = strUserData.replace("RTALastName", "RTALastNameEdited");
+            strUserData = strUserData.replace("441448:3056-r31:075244,572091:3056-r30:075278,439104:2070-a48:070003 | | | True | False | False | False | False | True | True | | True"
+            		, "441348:ALL_BPIDS:ALL_FACILITIES   | | | False | False | False | False | False | True | False | | True");
+            
+            strUserData = strUserData.replace("441448:3056-r31:075244,572091:3056-r30:075278,439104:2070-a48:070003", "441348:ALL_BPIDS:ALL_FACILITIES ");
+            
+            
+            applicationsList.put("Physicians",
+                    "Physician Connect, TCI");
+           
+            bulkEmailPerRole.put("Physicians",
+                    "qaautomation+" + randomString + "@remedypartners.com");
+            bulkUsersEmailPerRole.put("Super Admin-Physicians", bulkEmailPerRole);
+            CreateUserPage.usersApplicationsPerRole.put("Super Admin-Physicians", applicationsList);
+            CreateUserPage.usersEmailPerRole.put("Super Admin-Physicians", bulkEmailPerRole);
+        }
+		
+		
+		
+		
+		
+		
 		
 		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
 		iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 		iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
 	}
+
 }

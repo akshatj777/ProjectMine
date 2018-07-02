@@ -1,8 +1,10 @@
 package stepDefination.UserAdmin;
 
+
+
 import com.remedy.resources.DriverScript;
 import com.remedy.userAdmin.BulkUserCreationPage;
-import cucumber.api.PendingException;
+
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -138,6 +140,7 @@ public class BulkLoadSteps extends DriverScript{
     @Then("^I edit \"([^\"]*)\" user and enter data$")
     public void editUser(String role){
     	bulkUser.editUser(role);
-
     }
+ 
+
 }
