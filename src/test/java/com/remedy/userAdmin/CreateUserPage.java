@@ -1299,71 +1299,141 @@ public class CreateUserPage extends BaseClass{
    }
 
    public void clickSubmitButtonForEdit(String user) throws Throwable {
-	   String firstKey = user.substring(0,user.indexOf("-"));
-		String secondKey = user.substring(user.indexOf("-")+1, user.lastIndexOf("-"));
-		String thirdKey = user.substring(user.lastIndexOf("-")+1, user.length());
-	   iWillWaitToSee(By.xpath("//button[.='Submit']"));
-		waitTo().until(ExpectedConditions.elementToBeClickable(By.xpath("//button[.='Submit']")));
-	   clickElement(driver.findElement(By.xpath("//button[.='Submit']")));
-		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ui.modal.transition.visible.active.component-add-user-form")));
-		HashMap<String,String> emailList = new HashMap<String,String>();
-		HashMap<String,String> applicationsList = new HashMap<String,String>();
-		HashMap<String,String> NPIList = new HashMap<String,String>();
-		if(!(secondKey.equals("")))
-		{
-			String newRole = thirdKey;
-			String oldRole = secondKey;
-			String userL = firstKey; 
-			emailList.put(newRole, CreateUserPage.usersEmailPerRole.get(userL+"-"+oldRole).get(oldRole).trim());
-			applicationsList.put(newRole, userApplications);
-			if(newRole.equals("Physicians"))
+	   if(user.indexOf("-")==user.lastIndexOf("-"))
+	   {
+		   iWillWaitToSee(By.xpath("//button[.='Submit']"));
+			waitTo().until(ExpectedConditions.elementToBeClickable(By.xpath("//button[.='Submit']")));
+		   clickElement(driver.findElement(By.xpath("//button[.='Submit']")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ui.modal.transition.visible.active.component-add-user-form")));
+			HashMap<String,String> emailList = new HashMap<String,String>();
+			HashMap<String,String> applicationsList = new HashMap<String,String>();
+			HashMap<String,String> NPIList = new HashMap<String,String>();
+			if(user.contains("--"))
 			{
-				NPIList.put(newRole, userNPI);
+				String newRole = user.substring(user.indexOf("-")+1, user.lastIndexOf("-")-1);
+				String oldRole = user.substring(user.lastIndexOf("-")+1,user.length());
+				String userL = user.substring(0,user.indexOf("-")); 
+				emailList.put(newRole, CreateUserPage.usersEmailPerRole.get(userL+"-"+oldRole).get(oldRole).trim());
+				applicationsList.put(newRole, userApplications);
+				if(newRole.equals("Physicians"))
+				{
+					NPIList.put(newRole, userNPI);
+				}
+				else
+				{
+					NPIList.put(newRole, "");
+				}
+				userNPI = "";
+				if(user.contains("Super Admin"))
+				{
+					usersEmailPerRole.put(userL+"-"+newRole, emailList);
+					usersApplicationsPerRole.put(userL+"-"+newRole, applicationsList);
+					usersNPIPerRole.put(userL+"-"+newRole, NPIList);
+				}
+				else if(user.contains("Partner Technical Administrator"))
+				{
+					usersEmailPerRole.put(userL+"-"+newRole, emailList);
+					usersApplicationsPerRole.put(userL+"-"+newRole, applicationsList);
+					usersNPIPerRole.put(userL+"-"+newRole, NPIList);
+				}
 			}
 			else
 			{
-				NPIList.put(newRole, "");
-			}
-			userNPI = "";
-			if(user.contains("Super Admin"))
+				emailList.put(user.substring(user.indexOf("-")+1), CreateUserPage.usersEmailPerRole.get(user).get(user.substring((user.indexOf("-")+1)).trim()));
+				applicationsList.put(user.substring(user.indexOf("-")+1), userApplications);
+				if(user.contains("Physicians"))
+				{
+					NPIList.put(user.substring(user.indexOf("-")+1), userNPI);
+				}
+				else
+				{
+					NPIList.put(user.substring(user.indexOf("-")+1), "");
+				}
+				userNPI = "";
+				if(user.contains("Super Admin"))
+				{
+					usersEmailPerRole.put(user.trim(), emailList);
+					usersApplicationsPerRole.put(user.trim(), applicationsList);
+					usersNPIPerRole.put(user.trim(), NPIList);
+				}
+				else if(user.contains("Partner Technical Administrator"))
+				{
+					usersEmailPerRole.put(user.trim(), emailList);
+					usersApplicationsPerRole.put(user.trim(), applicationsList);
+					usersNPIPerRole.put(user.trim(), NPIList);
+				}
+			} 
+	   }
+	   else
+	   {
+		   String firstKey = user.substring(0,user.indexOf("-"));
+			String secondKey = user.substring(user.indexOf("-")+1, user.lastIndexOf("-"));
+			String thirdKey = user.substring(user.lastIndexOf("-")+1, user.length());
+		   iWillWaitToSee(By.xpath("//button[.='Submit']"));
+			waitTo().until(ExpectedConditions.elementToBeClickable(By.xpath("//button[.='Submit']")));
+		   clickElement(driver.findElement(By.xpath("//button[.='Submit']")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ui.modal.transition.visible.active.component-add-user-form")));
+			HashMap<String,String> emailList = new HashMap<String,String>();
+			HashMap<String,String> applicationsList = new HashMap<String,String>();
+			HashMap<String,String> NPIList = new HashMap<String,String>();
+			if(!(secondKey.equals("")))
 			{
-				usersEmailPerRole.put(userL+"-"+newRole, emailList);
-				usersApplicationsPerRole.put(userL+"-"+newRole, applicationsList);
-				usersNPIPerRole.put(userL+"-"+newRole, NPIList);
-			}
-			else if(user.contains("Partner Technical Administrator"))
-			{
-				usersEmailPerRole.put(userL+"-"+newRole, emailList);
-				usersApplicationsPerRole.put(userL+"-"+newRole, applicationsList);
-				usersNPIPerRole.put(userL+"-"+newRole, NPIList);
-			}
-		}
-		else
-		{
-			emailList.put(thirdKey, CreateUserPage.usersEmailPerRole.get(firstKey+"-"+thirdKey).get(thirdKey));
-			applicationsList.put(thirdKey, userApplications);
-			if(thirdKey.contains("Physicians"))
-			{
-				NPIList.put(user.substring(user.indexOf("-")+1), userNPI);
+				String newRole = thirdKey;
+				String oldRole = secondKey;
+				String userL = firstKey; 
+				emailList.put(newRole, CreateUserPage.usersEmailPerRole.get(userL+"-"+oldRole).get(oldRole).trim());
+				applicationsList.put(newRole, userApplications);
+				if(newRole.equals("Physicians"))
+				{
+					NPIList.put(newRole, userNPI);
+				}
+				else
+				{
+					NPIList.put(newRole, "");
+				}
+				userNPI = "";
+				if(user.contains("Super Admin"))
+				{
+					usersEmailPerRole.put(userL+"-"+newRole, emailList);
+					usersApplicationsPerRole.put(userL+"-"+newRole, applicationsList);
+					usersNPIPerRole.put(userL+"-"+newRole, NPIList);
+				}
+				else if(user.contains("Partner Technical Administrator"))
+				{
+					usersEmailPerRole.put(userL+"-"+newRole, emailList);
+					usersApplicationsPerRole.put(userL+"-"+newRole, applicationsList);
+					usersNPIPerRole.put(userL+"-"+newRole, NPIList);
+				}
 			}
 			else
 			{
-				NPIList.put(user.substring(user.indexOf("-")+1), "");
-			}
-			userNPI = "";
-			if(firstKey.contains("Super Admin"))
-			{
-				usersEmailPerRole.put(firstKey+"-"+thirdKey, emailList);
-				usersApplicationsPerRole.put(firstKey+"-"+thirdKey, applicationsList);
-				usersNPIPerRole.put(firstKey+"-"+thirdKey, NPIList);
-			}
-			else if(firstKey.contains("Partner Technical Administrator"))
-			{
-				usersEmailPerRole.put(firstKey+"-"+thirdKey, emailList);
-				usersApplicationsPerRole.put(firstKey+"-"+thirdKey, applicationsList);
-				usersNPIPerRole.put(firstKey+"-"+thirdKey, NPIList);
-			}
-		}
+				emailList.put(thirdKey, CreateUserPage.usersEmailPerRole.get(firstKey+"-"+thirdKey).get(thirdKey));
+				applicationsList.put(thirdKey, userApplications);
+				if(thirdKey.contains("Physicians"))
+				{
+					NPIList.put(user.substring(user.indexOf("-")+1), userNPI);
+				}
+				else
+				{
+					NPIList.put(user.substring(user.indexOf("-")+1), "");
+				}
+				userNPI = "";
+				if(firstKey.contains("Super Admin"))
+				{
+					usersEmailPerRole.put(firstKey+"-"+thirdKey, emailList);
+					usersApplicationsPerRole.put(firstKey+"-"+thirdKey, applicationsList);
+					usersNPIPerRole.put(firstKey+"-"+thirdKey, NPIList);
+				}
+				else if(firstKey.contains("Partner Technical Administrator"))
+				{
+					usersEmailPerRole.put(firstKey+"-"+thirdKey, emailList);
+					usersApplicationsPerRole.put(firstKey+"-"+thirdKey, applicationsList);
+					usersNPIPerRole.put(firstKey+"-"+thirdKey, NPIList);
+				}
+			} 
+	   }
+	   
+	   
    }
    
    public void clickSubmitButtonToCheckErrorMessage() throws Throwable {
