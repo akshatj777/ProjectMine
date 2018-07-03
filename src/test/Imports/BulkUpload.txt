@@ -42,11 +42,6 @@ RTAFirstName | RTALastName | RTAMAIL | 3456765432| Remedy Technical Administrato
 TCMFirstName | TCMLastName | TCMMAIL | | Transitional Case Manager | NA | 441324:6005-080:490005-1 | | | False | False | False | True | False | False | False | | False
 DPFirstName | DPLastName | DPMAIL | 9998887770| Downstream Provider | NA | 015174 | | | False | True | False | False | False | False | False | | False
 
-####################Data Permissions for DP user:only M3 org and combination of M3 and Down org ########################
-
-DPFirstName | DPLastName | DPMAILM3 | 9998887770| Downstream Provider | NA | 441369:3056-m03:365402 | | | True | True | False | False | False | False | False | | False
-DPFirstName | DPLastName | DPMAILM3AndDown | 9998887770| Downstream Provider | NA | 441369:3056-m03:365402,450306 | | | True | True | False | False | False | False | False | | False
-
 #################### Multiple users import: 51 users ########################
 
 ExecutiveFirstName | ExecutiveLastName | EXECUTIVEMAIL | | Executive | NA | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False
@@ -121,4 +116,9 @@ ExecutiveFirstName | ExecutiveLastName |  | | Executive | 9876543215 | 514029:AL
 ExecutiveFirstName | ExecutiveLastName | EXECUTIVEMAIL10 | |  | 9876543215 | 514029:ALL_BPIDS:ALL_FACILITIES | | | True | True | False | True | False |  |  | | False
  |ExecutiveLastName  | EXECUTIVEMAIL11 | | Executive | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False
 ExecutiveFirstName | ExecutiveLastName | EXECUTIVEMAIL7 | | Executive | NA | 439108:CJR-1:| | | True | True | False | True | False |  |  | | False
+ 
+ ####################Data Permissions for DP user:only M3 org and combination of M3 and Down org ########################
+
+DPFirstName | DPLastName | DPMAILM3 | 9998887770| Downstream Provider | NA | 441369:3056-m03:365402 | | | True | True | False | False | False | False | False | | False
+DPFirstName | DPLastName | DPMAILM3AndDown | 9998887770| Downstream Provider | NA | 441369:3056-m03:365402,450306 | | | True | True | False | False | False | False | False | | False
  

@@ -275,7 +275,7 @@ public class BulkUserCreationPage extends BaseClass {
 		String randomString = null;
 		if (userCount == 50) {
 			try {
-				strUserData = readContentForBulkUpload(51, 100);
+				strUserData = readContentForBulkUpload(46, 95);
 			} catch (Exception e) {
 				System.out.println(e);
 			}
@@ -785,7 +785,7 @@ public class BulkUserCreationPage extends BaseClass {
 
 		if (userCount > 50) {
 			try {
-				strUserData = readContentForBulkUpload(51, 101);
+				strUserData = readContentForBulkUpload(46, 96);
 			} catch (Exception e) {
 				System.out.println(e);
 			}
@@ -1264,42 +1264,7 @@ public class BulkUserCreationPage extends BaseClass {
 			iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
 		}
 
-		else if (role.equals("Downstream Provider M3")) {
-			try {
-				strUserData = readContentForBulkUpload(46, 47);
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("DPMAILM3", "qaautomation+" + randomString + "@remedypartners.com");
-			applicationsList.put("Downstream Provider", "Episodes,Episodes 2.0, TCI");
-			bulkEmailPerRole.put("Downstream Provider", "qaautomation+" + randomString + "@remedypartners.com");
-			bulkUsersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
-			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
-			CreateUserPage.usersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
-			String randomNPI = RandomStringUtils.randomNumeric(10);
-			strUserData = strUserData.replace("NPI", randomNPI);
-			iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
-			iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
-		} else if (role.equals("Downstream Provider M3AndDown")) {
-			try {
-				strUserData = readContentForBulkUpload(47, 48);
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("DPMAILM3AndDown",
-					"qaautomation+" + randomString + "@remedypartners.com");
-			applicationsList.put("Downstream Provider", "Episodes,Episodes 2.0, TCI");
-			bulkEmailPerRole.put("Downstream Provider", "qaautomation+" + randomString + "@remedypartners.com");
-			bulkUsersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
-			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
-			CreateUserPage.usersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
-			String randomNPI = RandomStringUtils.randomNumeric(10);
-			strUserData = strUserData.replace("NPI", randomNPI);
-			iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
-			iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
-		} else if (role.equals("Physicians")) {
+		 else if (role.equals("Physicians")) {
 			try {
 				strUserData = readContentForBulkUpload(27, 28);
 			} catch (Exception e) {
@@ -1418,7 +1383,7 @@ public class BulkUserCreationPage extends BaseClass {
 	public void enterInvalidAndValidData() {
 		String strUserData = null;
 		try {
-			strUserData = readContentForBulkUpload(104, 119);
+			strUserData = readContentForBulkUpload(99, 118);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -1648,8 +1613,8 @@ public class BulkUserCreationPage extends BaseClass {
 
 			strUserData = strUserData.replace(
 					"514025:2070-047:001 | | | True | True | True | False | False | True | False | |False ",
-					"514083:2070-015:TSH  | | | False | True | False | True | False | True | False | | False");
-			applicationsList.put("Remedy TCS", "Episodes, TCI, Lessons");
+					"441348:ALL_BPIDS:ALL_FACILITIES  | | | True | True | True | True | True | True | False | |False");
+			applicationsList.put("Remedy TCS", "Episodes, TCI, Lessons, Episodes 2.0, Reports");
 			bulkEmailPerRole.put("Remedy TCS", "qaautomation+" + randomString + "@remedypartners.com");
 			bulkUsersEmailPerRole.put("Super Admin-Remedy TCS", bulkEmailPerRole);
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy TCS", applicationsList);
@@ -1892,15 +1857,13 @@ public class BulkUserCreationPage extends BaseClass {
             }
             randomString = RandomStringUtils.randomAlphabetic(8);
             strUserData = strUserData.replace("RTAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
-            strUserData = strUserData.replace(" Remedy Technical Administrator ", " Physicians ");
+            strUserData = strUserData.replace("Remedy Technical Administrator | NA |", "Physicians | NPI |");
+            
             strUserData = strUserData.replace("RTAFirstName", "RTAFirstNameEdited");
             strUserData = strUserData.replace("RTALastName", "RTALastNameEdited");
             strUserData = strUserData.replace("441448:3056-r31:075244,572091:3056-r30:075278,439104:2070-a48:070003 | | | True | False | False | False | False | True | True | | True"
             		, "441348:ALL_BPIDS:ALL_FACILITIES   | | | False | False | False | False | False | True | False | | True");
-            
-            strUserData = strUserData.replace("441448:3056-r31:075244,572091:3056-r30:075278,439104:2070-a48:070003", "441348:ALL_BPIDS:ALL_FACILITIES ");
-            
-            
+             
             applicationsList.put("Physicians",
                     "Physician Connect, TCI");
            
@@ -1911,7 +1874,29 @@ public class BulkUserCreationPage extends BaseClass {
             CreateUserPage.usersEmailPerRole.put("Super Admin-Physicians", bulkEmailPerRole);
         }
 		
-		
+		else if (role.equals("Transitional Case manager")) {
+
+            try {
+                strUserData = readContentForBulkUpload(19, 20);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            randomString = RandomStringUtils.randomAlphabetic(8);
+            strUserData = strUserData.replace("TCMMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+            strUserData = strUserData.replace(" Transitional Case Manager ", " Downstream Provider ");
+           
+            strUserData = strUserData.replace("514029:ALL_BPIDS:ALL_FACILITIES | | | True | False | False | True | False | False | False | | False"
+            		, "441369:3056-m03:365402,450306 | | | True | True | True | False | False | False | False | | False");
+             
+            applicationsList.put("Downstream Provider",
+                    "Episodes, Episodes 2.0, TCI");
+           
+            bulkEmailPerRole.put("Downstream Provider",
+                    "qaautomation+" + randomString + "@remedypartners.com");
+            bulkUsersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
+            CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
+            CreateUserPage.usersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
+        }
 		
 		
 		
