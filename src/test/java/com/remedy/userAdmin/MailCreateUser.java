@@ -321,16 +321,12 @@ public class MailCreateUser extends BaseClass{
 		{
 			iWillWaitToSee(By.xpath("//button[@type='submit']"));
 			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//button[@type='submit']")));
-			Thread.sleep(10000);
 		}
 		else
 		{
 			iWillWaitToSee(By.xpath("//button[@type='submit']"));
 			clickElement(driver.findElement(By.xpath("//button[@type='submit']")));
-			Thread.sleep(10000);
 		}
-		if(driver.findElements(By.xpath("//input[@type='email']")).size()>0)
-		{
 			try
 	    	{
 	    		if(DriverScript.Config.getProperty("Browser").equals("chrome"))
@@ -375,7 +371,6 @@ public class MailCreateUser extends BaseClass{
 //			iWillWaitToSee(By.xpath("//div[@role='menuitem']/div[text()='Trash']"));
 //			driver.findElement(By.xpath("//div[@role='menuitem']/div[text()='Trash']")).click();
 		}
-	}
 	
 	public void verifyAccountUA(String role) throws InterruptedException
 	{

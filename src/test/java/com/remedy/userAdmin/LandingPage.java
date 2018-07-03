@@ -172,8 +172,8 @@ public class LandingPage extends BaseClass{
     	}
     }
     public void iClickOnTheTopUserAccountIconOnRemedyConnectPage (){
-    		iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
-    		clickElement(driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")));
+    		iWillWaitToSee(By.xpath("//i[@class='dropdown icon']"));
+    		clickElement(driver.findElement(By.xpath("//i[@class='dropdown icon']")));
     }
     
     public void IClickTopUserAccountLink() {
@@ -192,29 +192,29 @@ public class LandingPage extends BaseClass{
     public void iSelectFromTopUserAccountDropDown(String link) throws InterruptedException{
     	driver.navigate().refresh();
     	Thread.sleep(3000);
-    	iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
-	      driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")).click();
+    	iWillWaitToSee(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']"));
+	      driver.findElement(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']")).click();
 	      Thread.sleep(3000);
 	      if(link.equals("Log Out"))
 	      {
 	    	  if(DriverScript.Config.getProperty("Browser").equals("ie"))
 	    	  {
-	    		  ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[@ng-click='user.logout()']")));  
+	    		  ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='Log Out']")));  
 	    	  }
 	    	  else
 	    	  {
-	    		  driver.findElement(By.xpath("//a[@ng-click='user.logout()']")).click();
+	    		  driver.findElement(By.xpath("//span[text()='Log Out']")).click();
 	    	  }
 	      }
 	      else if(link.equals("Reset Password"))
 	      {
 	    	  if(DriverScript.Config.getProperty("Browser").equals("ie"))
 	    	  {
-	    		  ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@ng-click,'valentino.reset-password')]")));
+	    		  ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='Reset Password']")));
 	    	  }
 	    	  else
 	    	  {
-	    		  driver.findElement(By.xpath("//a[contains(@ng-click,'valentino.reset-password')]")).click();
+	    		  driver.findElement(By.xpath("//span[text()='Reset Password']")).click();
 	    	  }
 	      }
     }

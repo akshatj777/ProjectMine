@@ -156,10 +156,10 @@ Feature: Create user having full application access- Super Admin User
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user

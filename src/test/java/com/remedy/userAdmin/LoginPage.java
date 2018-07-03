@@ -75,14 +75,14 @@ public class LoginPage extends BaseClass {
 
 	public void iVerifyResetPasswordText(String text) {
 
-		iWillWaitToSee(By.xpath("//div[@class='sso-reset-password-text-container']/p[contains(text(),'"+text+"')]"));
-		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='sso-reset-password-text-container']/p[contains(text(),'"+text+"')]")));
+		iWillWaitToSee(By.xpath("//div[text()=\"We've just sent you an email to reset your password.\"]"));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()=\"We've just sent you an email to reset your password.\"]")));
 	}
 
 	public void iClickOkayButtonForResetPasswordPopupFromAccountLink() {
-		iWillWaitToSee(By.cssSelector(".btn.btn-primary.hide-sso-messages"));
+		iWillWaitToSee(By.xpath("//button[text()='Okay']"));
 
-		WebElement element = driver.findElement(By.cssSelector(".btn.btn-primary.hide-sso-messages"));
+		WebElement element = driver.findElement(By.xpath("//button[text()='Okay']"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
 		delay();
 	}
@@ -134,7 +134,11 @@ public class LoginPage extends BaseClass {
 	}
 
 	public void iVerifyLogInWidget() {
-		iWillWaitToSee(By.xpath("//div[@class='auth0-lock-body-content']"));
+		if((isElementNotPresentOnPage(By.xpath("//div[@class='auth0-lock-body-content']"))))
+		{
+			driver.navigate().refresh();
+			iWillWaitToSee(By.xpath("//div[@class='auth0-lock-body-content']"));
+		}
 	}
 	
 	public void iLogInAsRTAUser(String userName, String passWord){
