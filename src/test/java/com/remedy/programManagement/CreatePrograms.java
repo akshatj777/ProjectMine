@@ -233,7 +233,7 @@ public class CreatePrograms extends BaseClass {
 			}
 			else if(text.equals("Duplicate_CID"))
 			{
-				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreatePrograms.programs.get(1));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
 			}
 			else{
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), text);
