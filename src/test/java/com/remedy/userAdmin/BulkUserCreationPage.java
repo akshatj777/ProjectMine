@@ -1473,10 +1473,9 @@ public class BulkUserCreationPage extends BaseClass {
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("EXECUTIVEMAIL7", "qaautomation+" + randomString + "@remedypartners.com");
 		
+		
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("MANAGERMAIL5", "qaautomation+" + randomString + "@remedypartners.com");
-		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("MANAGERMAIL6", "qaautomation+" + randomString + "@remedypartners.com");
 
 		
 		HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();

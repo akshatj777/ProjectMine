@@ -116,8 +116,7 @@ ExecutiveFirstName | ExecutiveLastName |  | | Executive | 9876543215 | 514029:AL
 ExecutiveFirstName | ExecutiveLastName | MANAGERMAIL2 | |  | 9876543215 | 514029:ALL_BPIDS:ALL_FACILITIES | | | True | True | False | True | False |  |  | | False
  |ExecutiveLastName  | MANAGERMAIL3 | | Executive | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False
 ExecutiveFirstName | ExecutiveLastName | EXECUTIVEMAIL7 | | Executive | NA | 439108:CJR-1:| | | True | True | False | True | False |  |  | | False
- ExecutiveFirstName | ExecutiveLastName | MANAGERMAIL5 | | Executive | NA | 439108,CJR-1,390168 | | | True | True | False | True | False |  |  | | False
- ExecutiveFirstName | ExecutiveLastName | MANAGERMAIL6 | | Executive | NA | 439108;CJR-1;390168 | | | True | True | False | True | False |  |  | | False
+ ExecutiveFirstName | ExecutiveLastName | MANAGERMAIL5 | | Executive | NA | 439108;CJR-1;390168 | | | True | True | False | True | False |  |  | | False
   ExecutiveFirstName | ExecutiveLastName | MANAGERMAIL4 | | Executive | NA | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False
  
   
