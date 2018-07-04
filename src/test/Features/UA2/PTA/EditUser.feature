@@ -11,26 +11,8 @@ Feature: Edit user page for PTA
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
     Then I verify account for user "<User>-<Role>"
-    #Then I verify Account Verification in Inbox in my account
-    #Then I click on Account Verification mail in Inbox
-    #Then I verify "Confirm My Account!" link in mail content
-    #Then I click on "Confirm My Account!" link in mail content
-    #And I switch to new window
-    #Then I enter email to generate password link
-    #And I click on send mail button
-    #Then I switch back to old window
-    #Then I click on Inbox in mail
     Then I set new password for the user "<User>-<Role>"
 
-    #Then I verify the unread mail in inbox in my account
-    #Then I verify Change Password mail in Inbox in my account
-    #Then I click on Change Password mail in Inbox
-    #Then I verify "Change My Password" link in mail content
-    #Then I click on "Change My Password" link in mail content
-    #And I switch to new window
-    #And I enter new password "Testing1@" to set new password
-    #And I enter confirm new password "Testing1@" to set new password
-    #And I click on submit button to set new password
     Examples: 
       | User                            | FirstName                                 | LastName                                 | Email                           | Phone      | NPI | Role                            | RoleID                             | Applications                                                                                                     | LearningPathways                                    | Locations                                                                                                                                                                                                                                                                                                              | expStatusCode |
       | Super Admin                     | FirstName                                 | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 |     | Partner Technical Administrator | 20-Partner Technical Administrator | episode_connect-Episodes,reports-Reports,physician_portal-Physician Connect,admin-Administration,lessons-Lessons | 5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1              | 441355--ALL_BPIDS--ALL_FACILITIES                                                                                                                                                                                                                                                                                      |           200 |
@@ -409,7 +391,7 @@ Feature: Edit user page for PTA
     And I verify No results found for invalid Location for "first" organisation
     When I deselect "<RemoveLocations>" locations for PTA user
     Then I select location by BPID "<AddLocations>" for PTA
-    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify first name "<FirstName>"
     Then I verify last name "<LastName>"
     Then I verify phone "<Phone>"
@@ -533,7 +515,7 @@ Feature: Edit user page for PTA
     Then I enter NPI field with "<NPI1>" for role "<Role>"
     Then I click on Next button
     Then I click on Next button
-    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify role "<Role>"
     And I click on Edit button
     When I click the Organizational Role Field to edit
@@ -541,7 +523,7 @@ Feature: Edit user page for PTA
     Then I enter NPI field with "<NPI2>" for role "<PreviousRole>"
     Then I click on Next button
     Then I click on Next button
-    Then I click on Submit button while edit for "<User>-<PreviousRole>--<Role>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify role "<PreviousRole>"
 
     Examples: 
@@ -559,26 +541,8 @@ Feature: Edit user page for PTA
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
     Then I verify account for user "<User>-<Role>"
-    #Then I verify Account Verification in Inbox in my account
-    #Then I click on Account Verification mail in Inbox
-    #Then I verify "Confirm My Account!" link in mail content
-    #Then I click on "Confirm My Account!" link in mail content
-    #And I switch to new window
-    #Then I enter email to generate password link
-    #And I click on send mail button
-    #Then I switch back to old window
-    #Then I click on Inbox in mail
     Then I set new password for the user "<User>-<Role>"
 
-    #Then I verify the unread mail in inbox in my account
-    #Then I verify Change Password mail in Inbox in my account
-    #Then I click on Change Password mail in Inbox
-    #Then I verify "Change My Password" link in mail content
-    #Then I click on "Change My Password" link in mail content
-    #And I switch to new window
-    #And I enter new password "Testing1@" to set new password
-    #And I enter confirm new password "Testing1@" to set new password
-    #And I click on submit button to set new password
     Examples: 
       | User                            | FirstName | LastName                                 | Email                           | Phone      | NPI | Role                            | RoleID                             | Applications                                                                                                     | LearningPathways                                       | Locations                                                                                                                        | expStatusCode |
       | Super Admin                     | FirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 |     | Partner Technical Administrator | 20-Partner Technical Administrator | episode_connect-Episodes,reports-Reports,physician_portal-Physician Connect,admin-Administration,lessons-Lessons | HZhmTBQzHtU1,NFdw0Kts2C01                              | 441324--3090-066--140007, 441324--3090-069--200063, 441324--3090-079--420082, 441324--6005-059--140304, 441324--6005-059--050455 |           200 |
@@ -814,26 +778,8 @@ Feature: Edit user page for PTA
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
     Then I verify account for user "<User>-<Role>"
-    #Then I verify Account Verification in Inbox in my account
-    #Then I click on Account Verification mail in Inbox
-    #Then I verify "Confirm My Account!" link in mail content
-    #Then I click on "Confirm My Account!" link in mail content
-    #And I switch to new window
-    #Then I enter email to generate password link
-    #And I click on send mail button
-    #Then I switch back to old window
-    #Then I click on Inbox in mail
     Then I set new password for the user "<User>-<Role>"
 
-    #Then I verify the unread mail in inbox in my account
-    #Then I verify Change Password mail in Inbox in my account
-    #Then I click on Change Password mail in Inbox
-    #Then I verify "Change My Password" link in mail content
-    #Then I click on "Change My Password" link in mail content
-    #And I switch to new window
-    #And I enter new password "Testing1@" to set new password
-    #And I enter confirm new password "Testing1@" to set new password
-    #And I click on submit button to set new password
     Examples: 
       | User                            | FirstName | LastName                                 | Email                           | Phone      | NPI | Role                            | RoleID                             | Applications                                                                                                     | LearningPathways                                       | Locations                                       | expStatusCode |
       | Super Admin                     | FirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 |     | Partner Technical Administrator | 20-Partner Technical Administrator | episode_connect-Episodes,reports-Reports,physician_portal-Physician Connect,admin-Administration,lessons-Lessons | HZhmTBQzHtU1,NFdw0Kts2C01                              | 439108--2070-a55--390168, 439108--CJR-1--390168 |           200 |

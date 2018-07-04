@@ -122,7 +122,7 @@ Feature: Edit user page for SA
     Then I enter "<LearningPathwaySearchParameter>" in Learning Pathway search box
     Then I select "<LearningPathwaySearchParameter>" from the results
     Then I click on Next button
-    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify role "<Role>"
     Then I verify enabled "<Applications>"
     And I click on the top user account link
@@ -179,10 +179,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -270,10 +270,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -303,9 +303,7 @@ Feature: Edit user page for SA
     And I click on Edit button
     Then I select "Permissions" tab
     Then I remove health system "<Remove HealthSystem1>"
-    And I click on "Remove" button on permissions tab
     Then I remove health system "<Remove HealthSystem2>"
-    And I click on "Remove" button on permissions tab
     And I search for health system with <Health System>
     And I select a <Health System>
     Then I select "<Programs>" programs
@@ -368,10 +366,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -469,10 +467,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -563,10 +561,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -660,10 +658,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -704,12 +702,11 @@ Feature: Edit user page for SA
     #Then I select "<LearningPathwaySearchParameter>" from the results
     Then I click on Next button
     Then I remove health system "<Remove HealthSystem>"
-    And I click on "Remove" button on permissions tab
     And I search for health system with <Health System>
     And I select a <Health System>
     Then I select "<Programs>" programs
     Then I select location by facility key "<Locations>"
-    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify first name "<FirstName>"
     Then I verify last name "<LastName>"
     Then I verify phone "<Phone>"
@@ -771,10 +768,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -816,7 +813,7 @@ Feature: Edit user page for SA
     Then I deselect "<RemovePrograms>" programs
     Then I select "<Programs>" programs
     Then I select "<Locations>" locations
-    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify last name "<LastName>"
     Then I verify phone "<Phone>"
     Then I verify enabled "<EnableApplications>"
@@ -878,10 +875,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -920,7 +917,7 @@ Feature: Edit user page for SA
     And I select a <Health System2>
     Then I select "<Programs>" programs
     Then I select "<Locations>" locations
-    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify phone "<PhoneValidation>"
     Then I verify enabled "<EnableApplications>"
     Then I verify health system "<Health System2>"
@@ -980,10 +977,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -1020,7 +1017,7 @@ Feature: Edit user page for SA
     Then I click on existing organisation "<Health System>"
     Then I select "<DisableLocations>" locations
     Then I select location by BPID "<EnableLocations>"
-    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify phone "<PhoneValidation>"
     Then I verify enabled "<EnableApplications>"
     Then I verify health system "<Health System>"
@@ -1080,10 +1077,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -1268,7 +1265,6 @@ Feature: Edit user page for SA
     Then I click on existing organisation "<Health System>"
     Then I select "<DisableLocations>" locations
     Then I remove health system "<Health System>"
-    And I click on "Remove" button on permissions tab
     Then I click on Submit button while edit for "<User>-<Role>"
 
     Examples: 
@@ -1315,7 +1311,7 @@ Feature: Edit user page for SA
     Then I enter NPI field with "<NPI1>" for role "<Role>"
     Then I click on Next button
     Then I click on Next button
-    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify role "<Role>"
     And I click on Edit button
     When I click the Organizational Role Field to edit
@@ -1323,7 +1319,7 @@ Feature: Edit user page for SA
     Then I enter NPI field with "<NPI2>" for role "<PreviousRole>"
     Then I click on Next button
     Then I click on Next button
-    Then I click on Submit button while edit for "<User>-<PreviousRole>--<Role>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify role "<PreviousRole>"
 
     Examples: 
@@ -1391,7 +1387,6 @@ Feature: Edit user page for SA
     And I click on Edit button
     Then I select "Permissions" tab
     Then I remove health system "<Remove HealthSystem>"
-    And I click on "Remove" button on permissions tab
     And I search for health system with <Health System>
     And I select a <Health System>
     Then I select "<Programs>" programs

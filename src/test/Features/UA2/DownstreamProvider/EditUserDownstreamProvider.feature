@@ -58,7 +58,7 @@ Feature: Edit page for Downstream provider
     And I search for health system with <Health System1>
     And I select a <Health System1>
     Then I select "<Locations1>" locations
-    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     And I verify that I am navigated to user page
     Then I verify role "<Role>"
     Then I verify enabled "<EnableApplications>"
@@ -320,7 +320,7 @@ Feature: Edit page for Downstream provider
     And I select a <Health System2>
     Then I select "<Programs2>" programs
     Then I select "<Locations2>" locations
-    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     And I verify that I am navigated to user page
     Then I verify role "<Role>"
     Then I verify enabled "<ApplicationsEnabled>"
