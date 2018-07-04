@@ -638,6 +638,7 @@ public class CreateUserPage extends BaseClass{
    }
    
    public void iClickOnEpisodesTwoTileUnderSpecificUserLoginPage(String role){
+	   delay();
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
@@ -781,6 +782,7 @@ public class CreateUserPage extends BaseClass{
    }
    
    public void iClickOnEpisode1TileUnderSpecificUserLoginPage(String role){
+	   delay();
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
