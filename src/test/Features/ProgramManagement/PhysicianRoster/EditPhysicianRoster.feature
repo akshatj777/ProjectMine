@@ -70,10 +70,10 @@ Feature: Edit Physician Roster functionality tests
 
     Examples: 
       | desc                                                    | id | type          | orgType      | contractId | endDate      | organizationId | programId | startDate    | participatingBundleId | bundleStartDate | bundleEndDate | priceStartDate | priceEndDate | price | baseLineEndDate | baseLineStatDate | trendFactor | upperBound | lowerBound | expStatusCode | responseMsg |
-      | Create Contract with Hopsital has MO using API Calls    |  0 | bundlePayment | hospital     | []         | [2019-12-31] |                |           | [2017-01-15] |                       | [2017-05-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
-      | Create Contract with Hopsital has no MO using API Calls |  0 | bundlePayment | hospitalNOMO | []         | [2019-12-26] |                |           | [2017-01-09] |                       | [2019-01-01]    | [2019-07-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
-      | Create Contract with PGP using API Calls                |  0 | bundlePayment | pgp          | []         | [2019-12-25] |                |           | [2017-01-01] |                       | [2019-01-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
-      | Create Contract with PGP has no MO using API Calls      |  0 | bundlePayment | pgpNOMO      | []         | [2019-12-26] |                |           | [2017-01-16] |                       | [2019-01-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract with Hopsital has MO using API Calls    |  0 | bundlePayment | hospital     | []         | [2020-12-31] |                |           | [2018-01-15] |                       | [2017-05-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract with Hopsital has no MO using API Calls |  0 | bundlePayment | hospitalNOMO | []         | [2020-12-26] |                |           | [2018-01-09] |                       | [2019-01-01]    | [2019-07-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract with PGP using API Calls                |  0 | bundlePayment | pgp          | []         | [2020-12-25] |                |           | [2018-01-01] |                       | [2019-01-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract with PGP has no MO using API Calls      |  0 | bundlePayment | pgpNOMO      | []         | [2020-12-26] |                |           | [2018-01-16] |                       | [2019-01-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
 
   Scenario Outline: : <Description>
     When create provider taxonomy classification grouping sepecialization Json "classificationForPhysRoster"
@@ -105,10 +105,10 @@ Feature: Edit Physician Roster functionality tests
 
     Examples: 
       | desc                                            | noOfRosters | index | practitionerContractId | practionerId         | startDate  | endDate    | expPostCode | respMsg |
-      | createAPhysicianRoster under Hospital has MO    |           1 |     0 | null                   | addPhysicianToRoster | 2018-01-01 | 2018-12-01 |         200 |         |
-      | createAPhysicianRoster under Hospital has no MO |           1 |     1 | null                   | addPhysicianToRoster | 2017-01-30 | 2017-12-01 |         200 |         |
-      | createAPhysicianRoster under PGP has MO         |           1 |     2 | null                   | addPhysicianToRoster | 2017-07-01 | 2017-12-01 |         200 |         |
-      | createAPhysicianRoster under PGP has no MO      |           1 |     3 | null                   | addPhysicianToRoster | 2017-01-30 | 2017-06-30 |         200 |         |
+      | createAPhysicianRoster under Hospital has MO    |           1 |     0 | null                   | addPhysicianToRoster | 2019-01-01 | 2020-12-01 |         200 |         |
+      | createAPhysicianRoster under Hospital has no MO |           1 |     1 | null                   | addPhysicianToRoster | 2019-01-30 | 2020-12-01 |         200 |         |
+      | createAPhysicianRoster under PGP has MO         |           1 |     2 | null                   | addPhysicianToRoster | 2019-07-01 | 2020-12-01 |         200 |         |
+      | createAPhysicianRoster under PGP has no MO      |           1 |     3 | null                   | addPhysicianToRoster | 2019-01-30 | 2020-06-30 |         200 |         |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -142,7 +142,7 @@ Feature: Edit Physician Roster functionality tests
 
     Examples: 
       | Description                                                                                     | Has_MO | PGP_Name | Program_Name | PGP_Organization_Name | Physician_Roster | FirstName | LastName     | NPI          | Start_Date | End_Date   |
-      | Editable fields for Physician and To verify user is not allowed to edit the non-editable fields | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2017-01-30 | 2017-06-30 |
+      | Editable fields for Physician and To verify user is not allowed to edit the non-editable fields | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2019-01-30 | 2020-06-30 |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -168,7 +168,7 @@ Feature: Edit Physician Roster functionality tests
 
     Examples: 
       | Description                                                                  | Has_MO | PGP_Name | Program_Name | PGP_Organization_Name | Contract_ID | Start_Date | End_Date   | Physician_Roster | FirstName | LastName     | NPI          | ValidationMessage                                                  |
-      | Validation message if Start Date is left blank on edit Physician Roster page | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | 2017-01-09 | 2019-12-26 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | The start date is before the start of the Bundled Payment Contract |
+      | Validation message if Start Date is left blank on edit Physician Roster page | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | 2019-01-09 | 2020-12-26 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | The start date is before the start of the Bundled Payment Contract |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -194,7 +194,7 @@ Feature: Edit Physician Roster functionality tests
 
     Examples: 
       | Description                                                                                                          | Has_MO | PGP_Name | Program_Name | PGP_Organization_Name | Contract_ID | Start_Date | End_Date   | Physician_Roster | FirstName | LastName     | NPI          | ValidationMessage                                             |
-      | Validation message if End Date is left blank when Bundle Payment Contract has End Date on Edit Physician Roster page | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | 2017-01-09 | 2019-12-26 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | The end date is after the end of the Bundled Payment Contract |
+      | Validation message if End Date is left blank when Bundle Payment Contract has End Date on Edit Physician Roster page | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | 2019-01-09 | 2020-12-26 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | The end date is after the end of the Bundled Payment Contract |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -221,11 +221,11 @@ Feature: Edit Physician Roster functionality tests
 
     Examples: 
       | Description                                                                                                                              | Has_MO | PGP_Name | Program_Name | PGP_Organization_Name | Contract_ID | Physician_Roster | FirstName | LastName     | NPI          | ContractStartDate | ContractEndDate | ValidationMessage                                                  |
-      | Check validation message when Physician Roster Start Date is prior to Bundle Payment Contract Start Date on Edit Physician Roster page   | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2017/01/08        | 2019/12/26      | The start date is before the start of the Bundled Payment Contract |
-      | Check validation message when Physician Roster Start Date is greater than Bundle Payment Contract End Date on Edit Physician Roster page | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2019/12/27        | 2019/12/26      | The start date and end date are not valid.                         |
-      | Validation when Physician Roster Start Date is greater than Physician Roster End Date on Edit Physician Roster page                      | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2019/12/02        | 2019/12/01      | The start date and end date are not valid.                         |
-      | Validation when Physician Roster End Date is greater than Bundle Payment Contract End Date on Edit Physician Roster page                 | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2017/01/30        | 2019/12/30      | The end date is after the end of the Bundled Payment Contract      |
-      | Validation when Physician Roster End Date is prior to Bundle Payment Contract Start Date on Edit Physician Roster page                   | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2017/01/30        | 2017/01/28      | The start date and end date are not valid.                         |
+      | Check validation message when Physician Roster Start Date is prior to Bundle Payment Contract Start Date on Edit Physician Roster page   | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2018/01/08        | 2020/12/26      | The start date is before the start of the Bundled Payment Contract |
+      | Check validation message when Physician Roster Start Date is greater than Bundle Payment Contract End Date on Edit Physician Roster page | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2020/11/27        | 2020/11/26      | The start date and end date are not valid.                         |
+      | Validation when Physician Roster Start Date is greater than Physician Roster End Date on Edit Physician Roster page                      | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2020/12/02        | 2020/11/01      | The start date and end date are not valid.                         |
+      | Validation when Physician Roster End Date is greater than Bundle Payment Contract End Date on Edit Physician Roster page                 | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2019/01/30        | 2020/12/30      | The end date is after the end of the Bundled Payment Contract      |
+      | Validation when Physician Roster End Date is prior to Bundle Payment Contract Start Date on Edit Physician Roster page                   | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2019/01/30        | 2017/01/28      | The start date and end date are not valid.                         |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -279,8 +279,8 @@ Feature: Edit Physician Roster functionality tests
 
     Examples: 
       | Description                                                        | Has_MO | PGP_Name | Program_Name | PGP_Organization_Name | Physician_Roster | PhysicianStartDate | PhysicianEndDate | Message                         |
-      | Edit and save a physician with all the available fields without MO | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               | FETCHFROMAPI     | 2017/01/30         | 2017/06/30       | Physicians Successfully Updated |
-      | Edit and save a physician with all the available fields with MO    | YES    | PGPNAME  | PROGRAMNAME  | PGPNAME               | FETCHFROMAPI     | 2018/07/01         | 2018/12/01       | Physicians Successfully Updated |
+      | Edit and save a physician with all the available fields without MO | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               | FETCHFROMAPI     | 2019/01/30         | 2020/06/30       | Physicians Successfully Updated |
+      | Edit and save a physician with all the available fields with MO    | YES    | PGPNAME  | PROGRAMNAME  | PGPNAME               | FETCHFROMAPI     | 2019/07/01         | 2020/12/01       | Physicians Successfully Updated |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -315,7 +315,7 @@ Feature: Edit Physician Roster functionality tests
 
     Examples: 
       | Description                                                                                     | Has_MO | Hosp_Name | Program_Name | Hospital_Organization_Name | Physician_Roster | FirstName | LastName     | NPI          | Start_Date | End_Date   |
-      | Editable fields for Physician and To verify user is not allowed to edit the non-editable fields | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2017-01-30 | 2017-12-01 |
+      | Editable fields for Physician and To verify user is not allowed to edit the non-editable fields | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2019-01-30 | 2020-12-01 |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -342,7 +342,7 @@ Feature: Edit Physician Roster functionality tests
 
     Examples: 
       | Description                                                                  | Has_MO | Hosp_Name | Program_Name | Hospital_Organization_Name | Contract_ID | Start_Date | End_Date   | Physician_Roster | FirstName | LastName     | NPI          | ValidationMessage                                                  |
-      | Validation message if Start Date is left blank on edit Physician Roster page | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    |         123 | 2017-01-09 | 2019-12-26 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | The start date is before the start of the Bundled Payment Contract |
+      | Validation message if Start Date is left blank on edit Physician Roster page | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    |         123 | 2019-01-09 | 2020-12-26 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | The start date is before the start of the Bundled Payment Contract |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -397,11 +397,11 @@ Feature: Edit Physician Roster functionality tests
 
     Examples: 
       | Description                                                                                                                              | Has_MO | Hosp_Name | Program_Name | Hospital_Organization_Name | Physician_Roster | FirstName | LastName     | NPI          | ContractStartDate | ContractEndDate | ValidationMessage                                                  |
-      | Check validation message when Physician Roster Start Date is prior to Bundle Payment Contract Start Date on Edit Physician Roster page   | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2017/01/08        | 2017/12/01      | The start date is before the start of the Bundled Payment Contract |
-      | Check validation message when Physician Roster Start Date is greater than Bundle Payment Contract End Date on Edit Physician Roster page | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2019/12/27        | 2017/12/01      | The start date and end date are not valid.                         |
-      | Validation when Physician Roster Start Date is greater than Physician Roster End Date on Edit Physician Roster page                      | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2019/12/05        | 2019/12/01      | The start date and end date are not valid.                         |
-      | Validation when Physician Roster End Date is greater than Bundle Payment Contract End Date on Edit Physician Roster page                 | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2017/01/30        | 2019/12/28      | The end date is after the end of the Bundled Payment Contract      |
-      | Validation when Physician Roster End Date is prior to Bundle Payment Contract Start Date on Edit Physician Roster page                   | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2017/01/30        | 2017/01/02      | The start date and end date are not valid.                         |
+      | Check validation message when Physician Roster Start Date is prior to Bundle Payment Contract Start Date on Edit Physician Roster page   | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2017/01/08        | 2020/12/01      | The start date is before the start of the Bundled Payment Contract |
+      | Check validation message when Physician Roster Start Date is greater than Bundle Payment Contract End Date on Edit Physician Roster page | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2020/12/27        | 2020/12/01      | The start date and end date are not valid.                         |
+      | Validation when Physician Roster Start Date is greater than Physician Roster End Date on Edit Physician Roster page                      | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2020/12/05        | 2020/12/01      | The start date and end date are not valid.                         |
+      | Validation when Physician Roster End Date is greater than Bundle Payment Contract End Date on Edit Physician Roster page                 | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2019/01/30        | 2020/12/30      | The end date is after the end of the Bundled Payment Contract      |
+      | Validation when Physician Roster End Date is prior to Bundle Payment Contract Start Date on Edit Physician Roster page                   | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2019/01/30        | 2019/01/02      | The start date and end date are not valid.                         |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -429,7 +429,7 @@ Feature: Edit Physician Roster functionality tests
 
     Examples: 
       | Description                                                              | Has_MO | Hosp_Name | Program_Name | Hospital_Organization_Name | Physician_Roster | FirstName | LastName     | NPI          | PhysicianStartDate | PhysicianEndDate | ValidationMessage                                                                                                    |
-      | Validation when Physician Start and End Dates are edited with same dates | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2017/12/01         | 2017/12/01       | Validation errors: Require valid date range. End date (if specified) should be less a future date to the start date. |
+      | Validation when Physician Start and End Dates are edited with same dates | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2019/12/01         | 2019/12/01       | Validation errors: Require valid date range. End date (if specified) should be less a future date to the start date. |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -457,8 +457,8 @@ Feature: Edit Physician Roster functionality tests
 
     Examples: 
       | Description                                                        | Has_MO | Hosp_Name | Program_Name | Hospital_Organization_Name | Physician_Roster | PhysicianStartDate | PhysicianEndDate | Message                         |
-      | Edit and save a physician with all the available fields without MO | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | 2017/02/30         | 2017/08/30       | Physicians Successfully Updated |
-      | Edit and save a physician with all the available fields with MO    | YES    | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | 2018/03/01         | 2018/12/01       | Physicians Successfully Updated |
+      | Edit and save a physician with all the available fields without MO | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | 2019/02/30         | 2020/08/30       | Physicians Successfully Updated |
+      | Edit and save a physician with all the available fields with MO    | YES    | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | 2019/03/01         | 2020/12/01       | Physicians Successfully Updated |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"

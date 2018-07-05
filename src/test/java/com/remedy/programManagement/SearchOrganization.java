@@ -631,7 +631,7 @@ public class SearchOrganization extends BaseClass{
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
 			if(CreateLTCHOrganizationAPI.LTCHNameList.get(0).contains("\""))
 			{
-				isElementPresentOnPage(By.xpath("//div[text()='"+CreateLTCHOrganizationAPI.LTCHNameList.get(0).substring(0, CreateLTCHOrganizationAPI.LTCHNameList.get(0).length()-1)+"']"));
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateLTCHOrganizationAPI.LTCHNameList.get(0).substring(1, CreateLTCHOrganizationAPI.LTCHNameList.get(0).length()-1)+"']"));
 			}
 			else
 			{
@@ -642,7 +642,7 @@ public class SearchOrganization extends BaseClass{
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
 			if(CreateLTCHOrganizationAPI.LTCHNameList.get(1).contains("\""))
 			{
-				isElementPresentOnPage(By.xpath("//div[text()='"+CreateLTCHOrganizationAPI.LTCHNameList.get(1).substring(0, CreateLTCHOrganizationAPI.LTCHNameList.get(1).length()-1)+"']"));
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateLTCHOrganizationAPI.LTCHNameList.get(1).substring(1, CreateLTCHOrganizationAPI.LTCHNameList.get(1).length()-1)+"']"));
 			}
 			else
 			{

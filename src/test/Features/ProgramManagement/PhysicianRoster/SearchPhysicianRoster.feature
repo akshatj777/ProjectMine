@@ -104,10 +104,10 @@ Feature: Search Physician Roster functionality tests
 
     Examples: 
       | desc                                            | noOfRosters | index | practitionerContractId | practionerId         | startDate  | endDate    | expPostCode | respMsg |
-      | createAPhysicianRoster under Hospital has MO    |           1 |     0 | null                   | addPhysicianToRoster | 2017-03-04 | 2017-12-30 |         200 |         |
-      | createAPhysicianRoster under Hospital has no MO |           1 |     1 | null                   | addPhysicianToRoster | 2017-03-04 | 2017-12-30 |         200 |         |
-      | createAPhysicianRoster under PGP has MO         |           1 |     2 | null                   | addPhysicianToRoster | 2017-03-04 | 2017-12-30 |         200 |         |
-      | createAPhysicianRoster under PGP has no MO      |           1 |     3 | null                   | addPhysicianToRoster | 2017-03-04 | 2017-12-30 |         200 |         |
+      | createAPhysicianRoster under Hospital has MO    |           1 |     0 | null                   | addPhysicianToRoster | 2019-03-04 | 2020-12-30 |         200 |         |
+      | createAPhysicianRoster under Hospital has no MO |           1 |     1 | null                   | addPhysicianToRoster | 2019-03-04 | 2020-12-30 |         200 |         |
+      | createAPhysicianRoster under PGP has MO         |           1 |     2 | null                   | addPhysicianToRoster | 2019-03-04 | 2020-12-30 |         200 |         |
+      | createAPhysicianRoster under PGP has no MO      |           1 |     3 | null                   | addPhysicianToRoster | 2019-03-04 | 2020-12-30 |         200 |         |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -130,8 +130,8 @@ Feature: Search Physician Roster functionality tests
       | Search for a Physician by NPI        | YES    | PGPNAME  | FETCHFROMAPI |
       | Search for a Physician by First Name | YES    | PGPNAME  | firstName    |
       | Search for a Physician by Last Name  | YES    | PGPNAME  | testLastName |
-      | Search for a Physician by Start Date | YES    | PGPNAME  | 2017-03-04   |
-      | Search for a Physician by End Date   | YES    | PGPNAME  | 2017-12-30   |
+      | Search for a Physician by Start Date | YES    | PGPNAME  | 2019-03-04   |
+      | Search for a Physician by End Date   | YES    | PGPNAME  | 2020-12-30   |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -175,8 +175,8 @@ Feature: Search Physician Roster functionality tests
       | Search for a Physician by NPI        | NO     | ACHNAME   | FETCHFROMAPI |
       | Search for a Physician by First Name | NO     | ACHNAME   | firstName    |
       | Search for a Physician by Last Name  | NO     | ACHNAME   | testLastName |
-      | Search for a Physician by Start Date | NO     | ACHNAME   | 2017-03-04   |
-      | Search for a Physician by End Date   | NO     | ACHNAME   | 2017-12-30   |
+      | Search for a Physician by Start Date | NO     | ACHNAME   | 2019-03-04   |
+      | Search for a Physician by End Date   | NO     | ACHNAME   | 2020-12-30   |
 
   Scenario Outline: <Description>
     Given I am on the login page
