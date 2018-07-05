@@ -1,12 +1,5 @@
 Feature: LTCH Organization View profile Functionality tests.
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -25,10 +18,15 @@ Feature: LTCH Organization View profile Functionality tests.
 
     Examples: 
       | desc                       | participantId | name     | shortName | managingOrgId | ccn | ein | npi | locationId | locAddr1     | locAddr2     | locCity  | locState | locZip | locationName | locationType | marketId | regionId | address1 | address2 | city           | state | zip   | expPostCode | errorMsg | id | type |
-      | Create LTCH Org with MO    |               | LTCHNAME | ShortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | NY       |  10001 | Loc_Name     | [20],[20]    |     10,8 |      3,2 | Address1 | Address2 | AutomationCity | NY    | 10000 |         201 |          |  0 | ltch |
-      | Create LTCH Org without MO |               | LTCHNAME | ShortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | NY       |  10001 | Loc_Name     | [20],[20]    |     10,8 |      3,2 | Address1 | Address2 | AutomationCity | NY    | 10000 |         201 |          |  0 | ltch |
+      | Create LTCH Org with MO    |               | LTCHNAME | ShortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | NY       |  10001 | Loc_Name     | [20],[20]    |        1 |        1 | Address1 | Address2 | AutomationCity | NY    | 10000 |         201 |          |  0 | ltch |
+      | Create LTCH Org without MO |               | LTCHNAME | ShortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | NY       |  10001 | Loc_Name     | [20],[20]    |        1 |        1 | Address1 | Address2 | AutomationCity | NY    | 10000 |         201 |          |  0 | ltch |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "LTCH" organization tab on organization dashboard
     When I search with "<LTCH_Name> - <Has_MO>" on organization in search box
     And I click "<LTCH_Name> - <Has_MO>" field in search list on organization page

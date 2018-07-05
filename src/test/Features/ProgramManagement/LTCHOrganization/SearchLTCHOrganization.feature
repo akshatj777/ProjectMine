@@ -18,8 +18,8 @@ Feature: Search the LTCH organizations functionality tests
 
     Examples: 
       | desc                       | participantId | name     | shortName | managingOrgId | ccn | ein | npi | locationId | locAddr1     | locAddr2     | locCity  | locState | locZip | locationName | locationType | marketId | regionId | address1 | address2 | city           | state | zip   | expPostCode | errorMsg | id | type |
-      | Create LTCH Org with MO    |               | LTCHNAME | ShortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | NY       |  10001 | Loc_Name     | [20],[20]    |     10,8 |      3,2 | Address1 | Address2 | AutomationCity | NY    | 10000 |         201 |          |  0 | ltch |
-      | Create LTCH Org without MO |               | LTCHNAME | ShortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | NY       |  10001 | Loc_Name     | [20],[20]    |     10,8 |      3,2 | Address1 | Address2 | AutomationCity | NY    | 10000 |         201 |          |  0 | ltch |
+      | Create LTCH Org with MO    |               | LTCHNAME | ShortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | NY       |  10001 | Loc_Name     | [20],[20]    |        1 |        1 | Address1 | Address2 | AutomationCity | NY    | 10000 |         201 |          |  0 | ltch |
+      | Create LTCH Org without MO |               | LTCHNAME | ShortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | NY       |  10001 | Loc_Name     | [20],[20]    |        1 |        1 | Address1 | Address2 | AutomationCity | NY    | 10000 |         201 |          |  0 | ltch |
 
   Scenario Outline: <Description>
     Given I am on the login page

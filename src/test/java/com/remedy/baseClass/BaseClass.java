@@ -836,6 +836,14 @@ public class BaseClass {
 			CreateSNFOrganizationAPI.NPINameList.clear();
 			CreateSNFOrganizationAPI.SNFcopyIDList.clear();
 		}
+		else if(type.equals("LTCH"))
+		{
+			CreateLTCHOrganizationAPI.LTCHNameList.clear();
+			CreateLTCHOrganizationAPI.CCNNameList.clear();
+			CreateLTCHOrganizationAPI.EINNameList.clear();
+			CreateLTCHOrganizationAPI.NPINameList.clear();
+			CreateLTCHOrganizationAPI.LTCHcopyIDList.clear();
+		}
 		else if(type.equals("Payor"))
 		{
 			CreatePayorOrganizationAPI.PayorNameList.clear();
