@@ -141,7 +141,7 @@ public class BulkLoadSteps extends DriverScript{
     public void editUser(String role){
     	bulkUser.editUser(role);
     }
-    @Then("^I edit user with invalid permissions$")
+    @Then("^I edit user with invalid data$")
 public void editWithInvalidData(){
     	bulkUser.editWithInvalidData();
     }
