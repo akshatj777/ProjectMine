@@ -32,7 +32,7 @@ public class LandingPage extends BaseClass{
     public void iVerifyTextforTiles(String text){
 //    	scrollIntoViewByJS(driver.findElement(By.cssSelector(".description")));
 //    	iWillWaitToSee(By.cssSelector(".description"));
-    	
+
        	if(text.isEmpty()!=true){
     		verifyTextForElementfromList(".description", text);
     	}

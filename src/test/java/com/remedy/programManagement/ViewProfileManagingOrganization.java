@@ -151,4 +151,18 @@ public class ViewProfileManagingOrganization extends BaseClass{
 		longDelay();
 		longDelay();
 	}
+	
+	public void iClickOnCreateNewOrganizationlinkunderNoMatches(String link){
+		clickElement(driver.findElement(By.cssSelector(".data-table-overlay-link>a")));
+	}
+	
+	public void iVerifytheRespectiveManagingOrganizationShouldbePrefilledorSelectedontheCreateOrganizationPage(){
+		iWillWaitToSee(By.xpath("//div[@class='Select-control']//span[contains(text(),'"+CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"')]"));
+		driver.findElement(By.xpath("//div[@class='Select-control']//span[contains(text(),'"+CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"')]")).getText();
+	}
+	
+	public void userShouldGetRedirectedToTheManagingOrganizationProfilePage(){
+		iWillWaitToSee(By.xpath("//h3[text()='"+CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"']"));
+		isElementPresentOnPage(By.xpath("//h3[text()='"+CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"']"));
+	}
 }
