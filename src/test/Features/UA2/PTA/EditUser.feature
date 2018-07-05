@@ -388,7 +388,7 @@ Feature: Edit user page for PTA
     Then I select "<EnableApplications>" product
     Then I click on Next button
     Then I select "<invalidLocations>" invalid locations for PTA
-    And I verify No results found for invalid Location for "first" organisation
+    And I verify No results found for invalid Location for "first" in selected organisation
     When I deselect "<RemoveLocations>" locations for PTA user
     Then I select location by BPID "<AddLocations>" for PTA
     Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"

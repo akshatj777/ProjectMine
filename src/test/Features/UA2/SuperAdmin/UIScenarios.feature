@@ -238,7 +238,7 @@ Feature: UI Scenarios - Super Admin User
     Then I select "<Locations1>" locations
     And I verify selected Location "<SelectedLocations>" in the selected Locations section
     Then I search the "<LocationsInvalid>" in the Selected Locations section
-    And I verify No results found for invalid Location for "first" organisation
+    And I verify No results found for invalid Location for "first" in selected organisation
     Then I search the "<Locations1>" in the Selected Locations section
     And I click on remove link icon for selected Locations on selected Locations section
     And I verify Selected Locations section after click on remove link icon
@@ -366,7 +366,7 @@ Feature: UI Scenarios - Super Admin User
     And I select a <Health System>
     Then I select "<Programs>" programs
     Then I select "<invalidLocations>" invalid locations
-    And I verify No results found for invalid Location for "first" organisation
+    And I verify No results found for invalid Location for "first" in selected organisation
     Then I click on existing organisation "<Health System>"
     Then I verify incomplete status for health system
 

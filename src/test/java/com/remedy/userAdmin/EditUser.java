@@ -647,6 +647,11 @@ public class EditUser extends BaseClass {
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='0 Results']")));
 		}
 	}
+	
+	public void VerifyMessageForInvalidLocations(String text) throws InterruptedException {
+			iWillWaitToSee(By.xpath("//h3[text()=' No Results Found ']"));
+			Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//h3[text()=' No Results Found ']"))));
+	}
 
 	public void iVerifyIncompleteOrganisation() {
 		iWillWaitToSee(By.cssSelector("span.participant-title-status"));

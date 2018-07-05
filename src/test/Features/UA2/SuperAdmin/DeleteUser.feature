@@ -13,24 +13,6 @@ Feature: Delete a user from SA
     Then I verify account for user "<User>-<Role>"
     Then I set new password for the user "<User>-<Role>"
 
-    #Then I verify Account Verification in Inbox in my account
-    #Then I click on Account Verification mail in Inbox
-    #Then I verify "Confirm My Account!" link in mail content
-    #Then I click on "Confirm My Account!" link in mail content
-    #And I switch to new window
-    #Then I enter email to generate password link
-    #And I click on send mail button
-    #Then I switch back to old window
-    #Then I click on Inbox in mail
-    #Then I verify the unread mail in inbox in my account
-    #Then I verify Change Password mail in Inbox in my account
-    #Then I click on Change Password mail in Inbox
-    #Then I verify "Change My Password" link in mail content
-    #Then I click on "Change My Password" link in mail content
-    #And I switch to new window
-    #And I enter new password "Testing1@" to set new password
-    #And I enter confirm new password "Testing1@" to set new password
-    #And I click on submit button to set new password
     Examples: 
       | User        | FirstName | LastName | Email                           | Phone      | NPI | Role         | RoleID         | Applications                                             | LearningPathways                                    | Locations                                                     | expStatusCode |
       | Super Admin | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 |     | Case Manager | 3-Case Manager | episode_connect-Episodes,reports-Reports,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1 | 514029--2070-023--A, 514029--2070-023--L, 514029--2070-025--T |           200 |
@@ -73,13 +55,6 @@ Feature: Delete a user from SA
       | Super Admin | Case Manager |
 
   Scenario Outline: <Description> then delete that user and Login with unverified deleted user
-    #Given I am on mail login page
-    #Then I enter username "qaautomation@remedypartners.com" to login mail account
-    #Then I enter password "1Welcome2" to login mail account
-    #Then I click on Mail icon in my account
-    #Then I click on Inbox in mail
-    #Then I click on delete icon in mail
-    #Then I signout from mail account
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -154,24 +129,6 @@ Feature: Delete a user from SA
     And I wait for 3000 milli seconds
     Then I verify account for user "<User>-<Role>"
     Then I set new password for the user "<User>-<Role>"
-    #Then I verify Account Verification in Inbox in my account
-    #Then I click on Account Verification mail in Inbox
-    #Then I verify "Confirm My Account!" link in mail content
-    #Then I click on "Confirm My Account!" link in mail content
-    #And I switch to new window
-    #Then I enter email to generate password link
-    #And I click on send mail button
-    #Then I switch back to old window
-    #Then I click on Inbox in mail
-    #Then I verify the unread mail in inbox in my account
-    #Then I verify Change Password mail in Inbox in my account
-    #Then I click on Change Password mail in Inbox
-    #Then I verify "Change My Password" link in mail content
-    #Then I click on "Change My Password" link in mail content
-    #And I switch to new window
-    #And I enter new password "Testing1@" to set new password
-    #And I enter confirm new password "Testing1@" to set new password
-    #And I click on submit button to set new password
     Then I signout from mail account
     Given I am on the login page
     Then I enter newuser email for "<User>-<Role>" login to Remedy

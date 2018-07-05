@@ -791,10 +791,12 @@ public class CreateUserPage extends BaseClass{
 			   iWillWaitToSee(By.xpath("//div[text()='Episodes']"));
 			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 			   {
+				   delay();
 				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Episodes']")));
 			   }
 			   else
 			   {
+				   delay();
 				   clickElement(driver.findElement(By.xpath("//div[text()='Episodes']")));  
 			   }
 		   }   
