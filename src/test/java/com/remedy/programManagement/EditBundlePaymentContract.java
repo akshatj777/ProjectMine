@@ -21,7 +21,7 @@ public class EditBundlePaymentContract extends BaseClass {
 	
 	public void iVerifyDropdownBoxisnotEditable(String text){
 		if(text.equals("ACHNAME")){
-			isElementEnabled(driver.findElement(By.xpath("//div[contains(text(),'"+CreateACHOrganization.achOrg_noMO.get("ACHNAME")+"')]")));
+			isElementEnabled(driver.findElement(By.xpath("//div[contains(text(),'"+CreateACHOrganizationAPI.ACHNameList.get(1).substring(1, CreateACHOrganizationAPI.ACHNameList.get(1).length()-1)+"')]")));
 		}
 		else if(text.equals("FETCHFROMAPI")){
 			isElementEnabled(driver.findElement(By.xpath("//span[contains(text(),'"+CreateBundleAPI.bundleNameList.get(0).substring(1, CreateBundleAPI.bundleNameList.get(0).length()-1)+"')]")));
@@ -32,7 +32,7 @@ public class EditBundlePaymentContract extends BaseClass {
 	}
 	
 	public void iVerifyProgramDropdownBoxisnotEditable(String text){
-		isElementEnabled(driver.findElement(By.xpath("//span[text()='"+CreatePrograms.programs.get(1)+"']")));
+		isElementEnabled(driver.findElement(By.xpath("//span[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']")));
 	}
 	
 	public void iVerifyContractIdFieldisnotEditable(String text){

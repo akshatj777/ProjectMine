@@ -63,4 +63,19 @@ public class ViewProfileManagingOrganizationStepDef extends DriverScript {
 	public void letsnavigate(String url){
 		viewProfileMO.letnavigate(url);
 	}
+	
+	@Then ("^I click on \"([^\"]*)\" link under No matches$")
+	public void i_Click_On_Create_New_Organization_link_under_No_Matches(String link){
+		viewProfileMO.iClickOnCreateNewOrganizationlinkunderNoMatches(link);
+	}
+	
+	@Then ("^I verify the respective Managing Organization should be pre-filled or selected on the Create organization page$")
+	public void i_Verify_the_Respective_Managing_Organization_should_be_Prefilled_or_Selected_on_the_Create_organization_page(){
+		viewProfileMO.iVerifytheRespectiveManagingOrganizationShouldbePrefilledorSelectedontheCreateOrganizationPage();
+	}
+	
+	@And("^User should get redirected to the managing organization profile page$")
+	  public void user_should_get_redirected_to_the_managing_organization_Profile_page() throws Throwable {
+		viewProfileMO.userShouldGetRedirectedToTheManagingOrganizationProfilePage();
+		}
 }

@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -23,6 +24,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
 
@@ -37,7 +39,19 @@ public class CreatePrograms extends BaseClass {
 	}
 	
 	public void iVerifyMessageAfterSubmittingCreateOrganizationPageUnderPayorOrganization(String msg, String org) {
-		if(org.contains("Programs")){
+		if(org.equals("FETCHFROMAPIFORProgramName"))
+		{
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>div"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>div")), msg);
+			if(!CreatePrograms.tempPrograms.isEmpty())
+			{
+				CreateProgramAPI.PROGRAMNameList.set(0, CreatePrograms.tempPrograms.get(1));
+				CreatePrograms.tempPrograms.clear();
+			}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		
+		else if(org.contains("Programs")){
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>div"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>div")), msg);
 			if(!CreatePrograms.tempPrograms.isEmpty())
@@ -66,12 +80,12 @@ public class CreatePrograms extends BaseClass {
 		iVerifyTextFromListOfElement(By.cssSelector(".data-table-header-cell>a"), header);
 	}
 
-	public void iSelectProgramNameInCreateContractPageUnderPayorOrganization(String text, String org) 
+	public void iSelectProgramNameInCreateContractPageUnderPayorOrganization(int index, String text, String org) 
 	{
 		if(!text.equals(""))
 		{
 			driver.findElement(By.xpath("//div[text()='Select a Program']")).click();
-			new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[text()='Select a Program']")), CreatePrograms.programs.get(1)).build().perform();
+			new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[text()='Select a Program']")), CreateProgramAPI.PROGRAMNameList.get(index-1).substring(1, CreateProgramAPI.PROGRAMNameList.get(index-1).length()-1)).build().perform();
 			driver.findElement(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption")).click();
 			delay();
 		}
@@ -85,6 +99,7 @@ public class CreatePrograms extends BaseClass {
 	{
 		if(!text.equals(""))
 		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//*[contains(@name,'orgType')]/../div")));
 			driver.findElement(By.xpath("//*[contains(@name,'orgType')]/../div")).click();
 			iWillWaitToSee(By.cssSelector(".VirtualizedSelectOption"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+text+"']")));
@@ -96,6 +111,7 @@ public class CreatePrograms extends BaseClass {
 	{
 		if(!text.equals(""))
 		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")));
 			if(text.contains("ACHNAME - NO"))
 			{
 				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
@@ -116,7 +132,7 @@ public class CreatePrograms extends BaseClass {
 			{
 				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 				longDelay();
-				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganization.pgpOrg_noMO.get("PGPNAME"));
+				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganizationAPI.PGPNameList.get(1).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(1).length()-1));
 				delay();
 				driver.findElement(By.cssSelector(".org-name")).click();
 			}
@@ -124,7 +140,7 @@ public class CreatePrograms extends BaseClass {
 			{
 				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 				longDelay();
-				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganization.pgpOrg.get("PGPNAME"));
+				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganizationAPI.PGPNameList.get(0).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(0).length()-1));
 				delay();
 				driver.findElement(By.cssSelector(".org-name")).click();
 			}
@@ -132,7 +148,7 @@ public class CreatePrograms extends BaseClass {
 			{
 				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 				longDelay();
-				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganization.SNFOrg_noMO.get("SNFNAME"));
+				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganizationAPI.SNFNameList.get(1).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(1).length()-1));
 				delay();
 				driver.findElement(By.cssSelector(".org-name")).click();
 			}
@@ -140,7 +156,7 @@ public class CreatePrograms extends BaseClass {
 			{
 				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 				longDelay();
-				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganization.SNFOrg.get("SNFNAME"));
+				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganizationAPI.SNFNameList.get(0).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(0).length()-1));
 				delay();
 				driver.findElement(By.cssSelector(".org-name")).click();
 			}
@@ -148,7 +164,7 @@ public class CreatePrograms extends BaseClass {
 			{
 				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 				longDelay();
-				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateHHAOrganization.HHAOrg_noMO.get("HHANAME"));
+				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateHHAOrganizationAPI.HHANameList.get(1).substring(1, CreateHHAOrganizationAPI.HHANameList.get(1).length()-1));
 				delay();
 				driver.findElement(By.cssSelector(".org-name")).click();
 			}
@@ -156,7 +172,7 @@ public class CreatePrograms extends BaseClass {
 			{
 				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 				longDelay();
-				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateHHAOrganization.HHAOrg.get("HHANAME"));
+				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateHHAOrganizationAPI.HHANameList.get(0).substring(1, CreateHHAOrganizationAPI.HHANameList.get(0).length()-1));
 				delay();
 				driver.findElement(By.cssSelector(".org-name")).click();
 			}
@@ -210,9 +226,14 @@ public class CreatePrograms extends BaseClass {
 				tempPrograms.put(1, RandomStringUtils.randomAlphabetic(8));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), tempPrograms.get(1));
 			}
+			else if(text.equals("CID-"))
+			{
+				tempPrograms.put(1, createRandomNumber(4));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), tempPrograms.get(1));
+			}
 			else if(text.equals("Duplicate_CID"))
 			{
-				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreatePrograms.programs.get(1));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
 			}
 			else{
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), text);
@@ -277,7 +298,7 @@ public class CreatePrograms extends BaseClass {
 	}
 
 	public void iVerifyPGPOrganizationNameOnNetworkContractPage(String text, String page){
-		isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg_noMO.get("PGPNAME")+"'"));
+		isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.PGPNameList.get(1).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(1).length()-1)+"'"));
 	}
 	
 	public void iVerifySearchBoxForHospitalOrganizationOnNetworkContractPage(String page){
@@ -638,108 +659,108 @@ public class CreatePrograms extends BaseClass {
 		  {
 			    driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 				delay();
-				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganization.pgpOrg.get("PGPNAME"));
+				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganizationAPI.PGPNameList.get(0).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(0).length()-1));
 				delay();
-				value = CreatePGPOrganization.pgpOrg.get("PGPNAME");
+				value = CreatePGPOrganizationAPI.PGPNameList.get(0).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(0).length()-1);
 			    Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-name")));
 		 }
 		  else if (value.equals("PGPNAME - NO"))
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganization.pgpOrg_noMO.get("PGPNAME"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganizationAPI.PGPNameList.get(1).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(1).length()-1));
 			  delay();
-			  value = CreatePGPOrganization.pgpOrg_noMO.get("PGPNAME");
+			  value = CreatePGPOrganizationAPI.PGPNameList.get(1).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(1).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-name")));
 		  }
 		  else if (value.equals("PGPNAMEEIN - YES"))
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganization.pgpOrg.get("EIN"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganizationAPI.EINNameList.get(0).substring(1, CreatePGPOrganizationAPI.EINNameList.get(0).length()-1));
 			  delay();
-			  value = CreatePGPOrganization.pgpOrg.get("EIN");
+			  value = CreatePGPOrganizationAPI.EINNameList.get(0).substring(1, CreatePGPOrganizationAPI.EINNameList.get(0).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-main-id")));
 		  }
 		  else if (value.equals("PGPNAMEEIN - NO"))
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganization.pgpOrg_noMO.get("EIN"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreatePGPOrganizationAPI.EINNameList.get(1).substring(1, CreatePGPOrganizationAPI.EINNameList.get(1).length()-1));
 			  delay();
-			  value = CreatePGPOrganization.pgpOrg_noMO.get("EIN");
+			  value = CreatePGPOrganizationAPI.EINNameList.get(1).substring(1, CreatePGPOrganizationAPI.EINNameList.get(1).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-main-id")));
 		  }
 		  else if (value.equals("SNFNAME - YES"))
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganization.SNFOrg.get("SNFNAME"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganizationAPI.SNFNameList.get(0).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(0).length()-1));
 			  delay();
-			  value = CreateSNFOrganization.SNFOrg.get("SNFNAME");
+			  value = CreateSNFOrganizationAPI.SNFNameList.get(0).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(0).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-name")));
 		  }
 		  else if (value.equals("SNFNAME - NO"))
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganization.SNFOrg_noMO.get("SNFNAME"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganizationAPI.SNFNameList.get(1).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(1).length()-1));
 			  delay();
-			  value = CreateSNFOrganization.SNFOrg_noMO.get("SNFNAME");
+			  value = CreateSNFOrganizationAPI.SNFNameList.get(1).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(1).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-name")));
 		  }
 		  else if (value.equals("SNFNAMECCN - YES"))
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganization.SNFOrg.get("CCN"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganizationAPI.CCNNameList.get(0).substring(1, CreateSNFOrganizationAPI.CCNNameList.get(0).length()-1));
 			  delay();
-			  value = CreateSNFOrganization.SNFOrg.get("CCN");
+			  value = CreateSNFOrganizationAPI.SNFNameList.get(0).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(0).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-main-id")));
 		  }
 		  else if (value.equals("SNFNAMECCN - NO"))
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganization.SNFOrg_noMO.get("CCN"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateSNFOrganizationAPI.CCNNameList.get(1).substring(1, CreateSNFOrganizationAPI.CCNNameList.get(1).length()-1));
 			  delay();
-			  value = CreateSNFOrganization.SNFOrg_noMO.get("CCN");
+			  value = CreateSNFOrganizationAPI.CCNNameList.get(1).substring(1, CreateSNFOrganizationAPI.CCNNameList.get(1).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-main-id")));
 		  }
 		  else if (value.equals("HHANAME - YES"))
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateHHAOrganization.HHAOrg.get("HHANAME"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateHHAOrganizationAPI.HHANameList.get(0).substring(1, CreateHHAOrganizationAPI.HHANameList.get(0).length()-1));
 			  delay();
-			  value = CreateHHAOrganization.HHAOrg.get("HHANAME");
+			  value = CreateHHAOrganizationAPI.HHANameList.get(0).substring(1, CreateHHAOrganizationAPI.HHANameList.get(0).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-name")));
 		  }
 		  else if (value.equals("HHANAME - NO"))
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateHHAOrganization.HHAOrg_noMO.get("HHANAME"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateHHAOrganizationAPI.HHANameList.get(1).substring(1, CreateHHAOrganizationAPI.HHANameList.get(1).length()-1));
 			  delay();
-			  value = CreateHHAOrganization.HHAOrg_noMO.get("HHANAME");
+			  value = CreateHHAOrganizationAPI.HHANameList.get(1).substring(1, CreateHHAOrganizationAPI.HHANameList.get(1).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-name")));
 		  }
 		  else if (value.equals("HHANAMECCN - YES"))
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateHHAOrganization.HHAOrg.get("CCN"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateHHAOrganizationAPI.CCNNameList.get(0).substring(1, CreateHHAOrganizationAPI.CCNNameList.get(0).length()-1));
 			  delay();
-			  value = CreateHHAOrganization.HHAOrg.get("CCN");
+			  value = CreateHHAOrganizationAPI.CCNNameList.get(0).substring(1, CreateHHAOrganizationAPI.CCNNameList.get(0).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-main-id")));
 		  }
 		  else if (value.equals("HHANAMECCN - NO"))
 		  {
 			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
 			  delay();
-			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateHHAOrganization.HHAOrg_noMO.get("CCN"));
+			  driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/following-sibling::div/input")).sendKeys(CreateHHAOrganizationAPI.CCNNameList.get(1).substring(1, CreateHHAOrganizationAPI.CCNNameList.get(1).length()-1));
 			  delay();
-			  value = CreateHHAOrganization.HHAOrg_noMO.get("CCN");
+			  value = CreateHHAOrganizationAPI.CCNNameList.get(1).substring(1, CreateHHAOrganizationAPI.CCNNameList.get(1).length()-1);
 			  Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".org-main-id")));
 		  }
 		}
@@ -803,9 +824,9 @@ public class CreatePrograms extends BaseClass {
 		{
 			if (value.equals("PROGRAMNAME"))
 			{
-				 iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreatePrograms.programs.get(1));
+				 iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
 				 waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				 value = CreatePrograms.programs.get(1);
+				 value = CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1);
 				 iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			}
@@ -827,23 +848,23 @@ public class CreatePrograms extends BaseClass {
 		{
 			if (value.equals("PROGRAMNAME"))
 			{
-				 iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreatePrograms.programs.get(1));
+				 iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
 				 waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				 value = CreatePrograms.programs.get(1);
+				 value = CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1);
 				 iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			}
 			 else if (value.equals("ACHNAME")){
-				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreateACHOrganization.achOrg_noMO.get("ACHNAME"));
+				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreateACHOrganizationAPI.ACHNameList.get(0).substring(1, CreateACHOrganizationAPI.ACHNameList.get(0).length()-1));
 				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				  value = CreateACHOrganization.achOrg_noMO.get("ACHNAME");
+				  value = CreateACHOrganizationAPI.ACHNameList.get(0).substring(1, CreateACHOrganizationAPI.ACHNameList.get(0).length()-1);
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
 			  else if (value.equals("CID")){
-				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreatePrograms.programs.get(1));
+				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
 				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				  value = CreatePrograms.programs.get(1);
+				  value = CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1);
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
@@ -859,9 +880,9 @@ public class CreatePrograms extends BaseClass {
 		{
 			if (value.equals("PROGRAMNAME"))
 			{
-				 iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreatePrograms.programs.get(1));
+				 iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
 				 waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				 value = CreatePrograms.programs.get(1);
+				 value = CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1);
 				 iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			}

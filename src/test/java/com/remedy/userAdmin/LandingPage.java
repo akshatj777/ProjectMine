@@ -30,7 +30,6 @@ public class LandingPage extends BaseClass{
         super(driver);}
 
     public void iVerifyTextforTiles(String text){
-//    	iWillWaitToSee(By.cssSelector(".title>p"));
        	if(text.isEmpty()!=true){
     		verifyTextForElementfromList(".description", text);
     	}

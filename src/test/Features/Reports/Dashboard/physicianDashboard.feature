@@ -58,7 +58,7 @@ Feature: Verification of physician report under dashboard
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I verify current page "Performance Scorecard Dashboard" title
     And I will wait to see "Performance Scorecard" in the newly opened tab after clicking attributed physician
     Then I verify scorecards appearing on performance scorecard dashboard page
@@ -129,7 +129,7 @@ Feature: Verification of physician report under dashboard
     And I verify search field is appearing below the count on performance evaluation by physician page
     Then I verify "Search within selected data set" text is appearing beside the search field on physician dashboard report
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I verify current page "Performance Scorecard Dashboard" title
     And I will wait to see "Performance Scorecard" in the newly opened tab after clicking attributed physician
     Then I verify scorecards appearing on performance scorecard dashboard page
@@ -192,7 +192,7 @@ Feature: Verification of physician report under dashboard
     Then I should verify "%" is appearing before the count under "% Eps with Readmit" column
     Then I verify "performance" table is appearing after selecting table option under dashboard physician report
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I verify current page "Performance Scorecard Dashboard" title
     And I will wait to see "Performance Scorecard" in the newly opened tab after clicking attributed physician
     Then I verify scorecards appearing on performance scorecard dashboard page
@@ -228,7 +228,7 @@ Feature: Verification of physician report under dashboard
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I verify current page "Performance Scorecard Dashboard" title
     And I will wait to see "Performance Scorecard" in the newly opened tab after clicking attributed physician
     Then I verify scorecards appearing on performance scorecard dashboard page
@@ -258,7 +258,7 @@ Feature: Verification of physician report under dashboard
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I verify current page "Performance Scorecard Dashboard" title
     Then I wait until loading icon disappears in physician dashboard report
     And I will wait to see "Performance Scorecard" in the newly opened tab after clicking attributed physician
@@ -294,7 +294,7 @@ Feature: Verification of physician report under dashboard
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     And I will wait to see "Performance Scorecard" in the newly opened tab after clicking attributed physician
@@ -324,7 +324,7 @@ Feature: Verification of physician report under dashboard
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     And I will wait to see "Performance Scorecard" in the newly opened tab after clicking attributed physician
@@ -337,25 +337,25 @@ Feature: Verification of physician report under dashboard
     And I click on "Episodes (Eps)" is kpi box on the performance scorecard dashboard page
     And I verify the user is on the same page by verifying the performance scorecards are appearing
     And I click on "Avg Episode Cost" is kpi box on the performance scorecard dashboard page
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading message disappears in the new window after clicking on element
     Then I verify current page "Spending" title
     Then I will wait to see "Spending" is appearing in the new window
     And I switch back to old window in reports
     And I click on "% Disch to SNF" is kpi box on the performance scorecard dashboard page
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading message disappears in the new window after clicking on element
     Then I verify current page "Performance" title
     Then I will wait to see "Performance" is appearing in the new window
     And I switch back to old window in reports
     And I click on "SNF Days" is kpi box on the performance scorecard dashboard page
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading message disappears in the new window after clicking on element
     Then I verify current page "Performance" title
     Then I will wait to see "Performance" is appearing in the new window
     And I switch back to old window in reports
     And I click on "% Eps w Readmit" is kpi box on the performance scorecard dashboard page
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading message disappears in the new window after clicking on element
     Then I verify current page "Readmissions Claims" title
     Then I will wait to see "Readmissions Claims" is appearing in the new window
@@ -381,12 +381,12 @@ Feature: Verification of physician report under dashboard
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     Then I verify "Top 5 Bundles by Episode Volume (2016Q4 - 2017Q3)" section is appearing on the performance scorecard dashboard page
     And I click on a row under top 5 "Bundle" performance table
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading message disappears in the new window after clicking on element
     Then I verify current page "Spending" title
     Then I will wait to see "Spending" is appearing in the new window
@@ -412,7 +412,7 @@ Feature: Verification of physician report under dashboard
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     And I verify "physician" filter is not having "All" in the filter
 
@@ -436,7 +436,7 @@ Feature: Verification of physician report under dashboard
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     And I click on the attributed physician having "<color>" dot in the chart of physician dashboard report
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     And I verify text with "<color>" is appearing inside the scorecards on performance scorecard page
@@ -472,7 +472,7 @@ Feature: Verification of physician report under dashboard
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     Then I verify "<selectedfilter>" is appearing under "<filtername>" filter field after applying filter
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     And I will wait to see "Performance Scorecard" in the newly opened tab after clicking attributed physician
@@ -501,7 +501,7 @@ Feature: Verification of physician report under dashboard
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     Then I verify "Top 5 Facility Performance" section is not appearing on the performance scorecard page
@@ -530,7 +530,7 @@ Feature: Verification of physician report under dashboard
     Then I wait for 40000 milli seconds
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     Then I click on "physician" filter in the filter options
@@ -561,7 +561,7 @@ Feature: Verification of physician report under dashboard
     Then I verify "Avg NPRA per Episode" toggle button is appearing beside "cost metric"
     And I verify "Avg NPRA per Episode" header name is center alligned on physician dashboard report
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     And I click on "Avg Episode Cost" radio button beside "cost metric"
@@ -591,7 +591,7 @@ Feature: Verification of physician report under dashboard
     And I verify column name "SNF PN Utilization" is appearing on the scorecard page
     And I verify column name "Avg NPRA per Episode" is appearing on the scorecard page
     And I click on "Avg NPRA per Episode" is kpi box on the performance scorecard dashboard page
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading message disappears in the new window after clicking on element
     Then I verify current page "Financial Performance" title
     Then I will wait to see "Financial Performance" is appearing in the new window
@@ -621,7 +621,7 @@ Feature: Verification of physician report under dashboard
     And I click on "System" radio button beside "cost metric"
     Then I verify "System" toggle button is appearing beside "Benchmark"
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     And I click on "Adj Historic" radio button beside "Benchmark"
@@ -653,7 +653,7 @@ Feature: Verification of physician report under dashboard
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     Then I verify "Top 5 SNFs by Episode Volume (2016Q4 - 2017Q3)" section is appearing on the performance scorecard dashboard page
@@ -684,11 +684,11 @@ Feature: Verification of physician report under dashboard
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     And I click on "LMJ Bundle Details" link on the performance scorecard page
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     And I verify "Performance Scorecard" is appearing on clicking on lmj link
@@ -790,11 +790,11 @@ Feature: Verification of physician report under dashboard
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     And I click on "LMJ Bundle Details" link on the performance scorecard page
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     And I verify "Performance Scorecard" is appearing on clicking on lmj link
@@ -824,7 +824,7 @@ Feature: Verification of physician report under dashboard
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     And I fetch the value of episodes present beside first physician
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     And I verify fetched episodes data is appearing inside the kpi box of episodes
@@ -850,7 +850,7 @@ Feature: Verification of physician report under dashboard
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     And I will wait to see "Performance Scorecard" in the newly opened tab after clicking attributed physician
@@ -910,12 +910,12 @@ Feature: Verification of physician report under dashboard
     Then I wait until loading icon disappears in physician dashboard report
     Then I should see "Performance Evaluation by Physician" appearing under physician dashboard reports
     When I click the first name under attributed physican column
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     And I will wait to see "Performance Scorecard" in the newly opened tab after clicking attributed physician
     And I click on "LMJ Bundle Details" link on the performance scorecard page
-    #And I switch to new window
+    And I switch to new window
     Then I wait until loading icon disappears in physician dashboard report
     Then I verify current page "Performance Scorecard Dashboard" title
     And I verify "Performance Scorecard" is appearing on clicking on lmj link

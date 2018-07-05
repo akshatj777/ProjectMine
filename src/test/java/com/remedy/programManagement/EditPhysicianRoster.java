@@ -46,7 +46,12 @@ public class EditPhysicianRoster extends BaseClass {
 		}
 		else if(org.equals("Payor")){
 			iWillWaitToSee(By.xpath("//input[@class='text-input-field-programFilterTerm']"));
-			iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-programFilterTerm']")), CreatePrograms.programs.get(1));
+			iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-programFilterTerm']")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
+			delay();
+		}
+		else{
+			iWillWaitToSee(By.cssSelector(".text-input-field-organizationFilterTerm"));
+			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), text);
 			delay();
 		}
 	}
@@ -54,7 +59,7 @@ public class EditPhysicianRoster extends BaseClass {
 	public void iVerifyPhysicianRosterFieldInSearchListOnViewProfileOfOrganizationSearchBox(String text, String org){
 		if(org.equals("Payor")){
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
-			isElementPresentOnPage(By.xpath("//div[text()='"+CreatePrograms.programs.get(1)+"']"));
+			isElementPresentOnPage(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']"));
 		}
 		else
 		{
@@ -111,9 +116,9 @@ public class EditPhysicianRoster extends BaseClass {
 		}
 		else if(org.equals("Payor"))
 		{
-			iWillWaitToSee(By.xpath("//div[text()='"+CreatePrograms.programs.get(1)+"']"));
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']"));
 			//clickElement(driver.findElement(By.xpath("//div[text()='"+CreatePrograms.programs.get(1)+"']")));
-			WebElement element = driver.findElement(By.xpath("//div[text()='"+CreatePrograms.programs.get(1)+"']"));
+			WebElement element = driver.findElement(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']"));
 			JavascriptExecutor executor = (JavascriptExecutor)driver;
 			executor.executeScript("arguments[0].click();", element);
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));

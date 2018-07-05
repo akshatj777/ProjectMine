@@ -18,11 +18,16 @@ import com.jayway.restassured.response.Response;
 import com.remedy.RestCall.InsertDataIntoDataModels;
 import com.remedy.programManagement.CreateACHOrganizationAPI;
 import com.remedy.programManagement.CreateBundleAPI;
+import com.remedy.programManagement.CreateBundlePaymentContractAPI;
+import com.remedy.programManagement.CreateHHAOrganizationAPI;
 import com.remedy.programManagement.CreateManagingOrganization;
 import com.remedy.programManagement.CreateManagingOrganizationAPI;
 import com.remedy.programManagement.CreatePGPOrganization;
+import com.remedy.programManagement.CreatePGPOrganizationAPI;
 import com.remedy.programManagement.CreatePayorOrganizationAPI;
 import com.remedy.programManagement.CreatePractictionerAPI;
+import com.remedy.programManagement.CreateProgramAPI;
+import com.remedy.programManagement.CreateSNFOrganizationAPI;
 import com.remedy.resources.DriverScript;
 
 import java.io.FileInputStream;
@@ -570,7 +575,6 @@ public class BaseClass {
 	}
 	
 	public static String generateJson(Object object) {
-
         return gson.toJson(object).toString();
     }
 	
@@ -586,33 +590,62 @@ public class BaseClass {
 
 //		if (type.equals("snf") || type.equals("hospital") || type.equals("ltch")) {
 //			idList.addAll(CreateSnfOrgStepDef.returnIdList());
-//		} else if (type.equals("pgp")) {
+//		} 
+//		else if (type.equals("pgp")) {
 //			idList.addAll(PM77CreatePGPOrgStepDef.returnIdList());
-		 if (type.equals("management")) {
+		 if (type.equals("management"))
+		 {
 			idList.addAll(CreateManagingOrganizationAPI.idList);
 			CreateManagingOrganizationAPI.managingOrgID=CreateManagingOrganizationAPI.idList.get(0);
 			CreateManagingOrganizationAPI.idList.clear();
-		 	} 
+		 } 
 		 else if (type.equals("hospital")) {
 				idList.addAll(CreateACHOrganizationAPI.idList);
+				Long a = CreateACHOrganizationAPI.idList.get(0);
+				CreateACHOrganizationAPI.copyIDList.add(a);
 				CreateACHOrganizationAPI.idList.clear();
-			} 
-		//else if (type.equals("payor")) {
-//			idList.addAll(CreatePayorStepDef.returnIdList());
-//		}
+		 }
+		 else if (type.equals("snf")) 
+		 {
+				idList.addAll(CreateSNFOrganizationAPI.idList);
+				Long s = CreateSNFOrganizationAPI.idList.get(0);
+				CreateSNFOrganizationAPI.SNFcopyIDList.add(s);
+				CreateSNFOrganizationAPI.idList.clear();
+		 }
+		 else if (type.equals("pgp")) 
+		 {
+				idList.addAll(CreatePGPOrganizationAPI.idList);
+				Long p = CreatePGPOrganizationAPI.idList.get(0);
+				CreatePGPOrganizationAPI.PGPcopyIDList.add(p);
+				CreatePGPOrganizationAPI.idList.clear();
+		 }
 		else if (type.equals("payor")) {
 			idList.addAll(CreatePayorOrganizationAPI.idList);
+			CreatePayorOrganizationAPI.payorID = CreatePayorOrganizationAPI.idList.get(0);
 			CreatePayorOrganizationAPI.idList.clear();
+		}
+		else if (type.equals("program")) {
+			idList.addAll(CreateProgramAPI.idList);
+			CreateProgramAPI.PROGRAMIDList.addAll(CreateProgramAPI.idList);
+			CreateProgramAPI.idList.clear();
+		}
+		else if (type.equals("hha")) {
+			idList.addAll(CreateHHAOrganizationAPI.idList);
+			Long h = CreateHHAOrganizationAPI.idList.get(0);
+			CreateHHAOrganizationAPI.HHAcopyIDList.add(h);
+			CreateHHAOrganizationAPI.idList.clear();
 		}
 		 else if (type.equals("bundle")) {
 			idList.addAll(CreateBundleAPI.idList);
+			CreateBundleAPI.bundleIDList.addAll(CreateBundleAPI.idList);
 			CreateBundleAPI.idList.clear();
-//		} else if (type.equals("program")) {
-//			idList.addAll(CreateProgramStepDef.returnIdList());
-//		} else if (type.equals("contract")) {
-//			idList.addAll(CreateContractStepDef.returnIdList());
-//		} else if (type.equals("hha")) {
-//			idList.addAll(PM705CreateHHAOrgStepDef.returnIdList());
+		 }
+		else if (type.equals("bundlePayment")) {
+			idList.addAll(CreateBundlePaymentContractAPI.idList);
+			Long b = CreateBundlePaymentContractAPI.idList.get(0);
+			CreateBundlePaymentContractAPI.BPCIDcopyList.add(b);
+			CreateBundlePaymentContractAPI.idList.clear();
+		} 
 //		} else if (type.equals("attributionrule")) {
 //			idList.addAll(PM621PostAttributionRulesStepDef.returnIdList());
 //		} else if (type.equals("classification")) {
@@ -623,8 +656,10 @@ public class BaseClass {
 //			idList.addAll(PM487CreateProviderTaxForClassGroupSpecilizationStepDef.returnSpecializationIdList());
 //		} else if (type.equals("providertaxonomy")) {
 //			idList.addAll(PM429CreateProviderTaxonomyStepDef.returnIdList());
-		} else if (type.equals("practitioner")) {
+		 else if (type.equals("practitioner")) {
 			idList.addAll(CreatePractictionerAPI.idList);
+			Long p = CreatePractictionerAPI.idList.get(0);
+			CreatePractictionerAPI.practitionerIDList.add(p);
 			CreatePractictionerAPI.idList.clear();
 		}
 		return idList;
@@ -651,10 +686,38 @@ public class BaseClass {
 			CreateACHOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
 			CreateACHOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
 		}
+		else if(type.equals("snf"))
+		{
+			CreateSNFOrganizationAPI.SNFNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+			CreateSNFOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
+			CreateSNFOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
+			CreateSNFOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
+		}
+		else if(type.equals("pgp"))
+		{
+			CreatePGPOrganizationAPI.PGPNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+			CreatePGPOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
+			CreatePGPOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
+		}
 		else if(type.equals("payor"))
 		{
 			CreatePayorOrganizationAPI.PayorNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
 			CreatePayorOrganizationAPI.participantidList.add((((JsonObject) jsonObject.get("data")).get("participantId")).toString());
+		}
+		else if(type.equals("program"))
+		{
+			CreateProgramAPI.PROGRAMNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+		}
+		else if(type.equals("hha"))
+		{
+			CreateHHAOrganizationAPI.HHANameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+			CreateHHAOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
+			CreateHHAOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
+			CreateHHAOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
+		}
+		else if(type.equals("bundlePayment"))
+		{
+			CreateBundlePaymentContractAPI.BPCCIDList.add((((JsonObject) jsonObject.get("data")).get("contractId")).toString());
 		}
 	}
 	
@@ -676,7 +739,6 @@ public class BaseClass {
     }
 	
 	public static String generateTimeStamp(){
-
         DateFormat df = new SimpleDateFormat("MMddyyyyHHmmss");
         Date date = new Date();
         String timeStamp = df.format(date);
@@ -684,22 +746,23 @@ public class BaseClass {
     }
 	
 	public static Integer generateMarketId(String cMarketId) {
-
         Integer marketId = null;
-        if (StringUtils.isNotBlank(cMarketId)) {
+        if (StringUtils.isNotBlank(cMarketId)) 
+        {
             marketId = Integer.parseInt(cMarketId);
         }
         return marketId;
     }
 	
 	public static String selectManagingOrg(String cMOrgID) {
-
         String mOrgID = null;
-
         if (StringUtils.isNotBlank(cMOrgID)) {
-            if (cMOrgID.equals("hasChild")) {
+            if (cMOrgID.equals("hasChild"))
+            {
                 mOrgID = String.valueOf(CreateManagingOrganizationAPI.managingOrgID);
-            } else {
+            } 
+            else 
+            {
                 mOrgID = cMOrgID;
             }
         }
@@ -709,7 +772,6 @@ public class BaseClass {
 	public static String genearateOrgId(String cOrgId) {
         String orgId = null;
         String timeStamp = generateTimeStamp();
-
         if (StringUtils.isNotBlank(cOrgId)) {
             if (cOrgId.length() > 2 && cOrgId.length() <= 7) {
                 orgId = cOrgId + timeStamp.substring(10, 14);
@@ -722,4 +784,74 @@ public class BaseClass {
         return orgId;
     }
 	
+	public static void deleteNamesList(String type)
+	{
+		if(type.equals("MO"))
+		{
+			CreateManagingOrganizationAPI.MONameList.clear();
+			CreateManagingOrganizationAPI.participantidList.clear();
+		}
+		else if(type.equals("ACH"))
+		{
+			CreateACHOrganizationAPI.ACHNameList.clear();
+			CreateACHOrganizationAPI.CCNNameList.clear();
+			CreateACHOrganizationAPI.EINNameList.clear();
+			CreateACHOrganizationAPI.NPINameList.clear();
+			CreateACHOrganizationAPI.copyIDList.clear();
+		}
+		else if(type.equals("PGP"))
+		{
+			CreatePGPOrganizationAPI.PGPNameList.clear();
+			CreatePGPOrganizationAPI.EINNameList.clear();
+			CreatePGPOrganizationAPI.NPINameList.clear();
+			CreatePGPOrganizationAPI.PGPcopyIDList.clear();
+		}
+		else if(type.equals("HHA"))
+		{
+			CreateHHAOrganizationAPI.HHANameList.clear();
+			CreateHHAOrganizationAPI.CCNNameList.clear();
+			CreateHHAOrganizationAPI.EINNameList.clear();
+			CreateHHAOrganizationAPI.NPINameList.clear();
+			CreateHHAOrganizationAPI.HHAcopyIDList.clear();
+		}
+		else if(type.equals("SNF"))
+		{
+			CreateSNFOrganizationAPI.SNFNameList.clear();
+			CreateSNFOrganizationAPI.CCNNameList.clear();
+			CreateSNFOrganizationAPI.EINNameList.clear();
+			CreateSNFOrganizationAPI.NPINameList.clear();
+			CreateSNFOrganizationAPI.SNFcopyIDList.clear();
+		}
+		else if(type.equals("Payor"))
+		{
+			CreatePayorOrganizationAPI.PayorNameList.clear();
+			CreatePayorOrganizationAPI.participantidList.clear();
+		}
+		else if(type.equals("Program"))
+		{
+			CreateProgramAPI.PROGRAMNameList.clear();
+			CreateProgramAPI.PROGRAMIDList.clear();
+		}
+		else if(type.equals("Bundle"))
+		{
+			CreateBundleAPI.bundleNameList.clear();
+			CreateBundleAPI.bundleIDList.clear();
+		}
+		else if(type.equals("Contract"))
+		{
+			
+		}
+		else if(type.equals("Network Contract"))
+		{
+			
+		}
+		else if(type.equals("practitioner")){
+			CreatePractictionerAPI.practitionerNameList.clear();
+			CreatePractictionerAPI.practitionerIDList.clear();
+		}
+		else if(type.equals("Physician Roster"))
+		{
+			
+		}
+	}
 }

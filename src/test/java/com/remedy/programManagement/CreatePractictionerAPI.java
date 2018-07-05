@@ -20,6 +20,7 @@ public class CreatePractictionerAPI extends BaseClass{
     public static List<Long> idList = new ArrayList<>();
     public static List<Long> idProvidertexnomyList = new ArrayList<>();
     public static List<String> practitionerNameList = new ArrayList<>();
+    public static List<Long> practitionerIDList = new ArrayList<>();
 
 	public CreatePractictionerAPI(WebDriver driver) {
 		super(driver);
@@ -159,7 +160,7 @@ public class CreatePractictionerAPI extends BaseClass{
 	            urlExt = "bundle/";
 	        } else if (type.equals("program")) {
 	            urlExt = "program/";
-	        } else if (type.equals("contract")) {
+	        } else if (type.equals("bundlePayment")) {
 	            urlExt = "contract/";
 	        } else if (type.equals("attributionrule")) {
 	            urlExt = "program/attributionrule/";

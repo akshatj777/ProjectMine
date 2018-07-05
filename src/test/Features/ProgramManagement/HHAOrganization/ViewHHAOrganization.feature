@@ -1,12 +1,5 @@
 Feature: View HHA organization functionality tests
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -17,33 +10,23 @@ Feature: View HHA organization functionality tests
       | desc      | particpantId | name   | contactPerson | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type       |
       | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
 
-  Scenario Outline: <Description>
-    When I click on "HHA" organization tab on organization dashboard
-    Then I click on "+" button on "HHA" organization page
-    And I verify "Create HHA Organization" header text on create organization page
-    And I select "<Has_MO>" radio button for managing organization
-    Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
-    Then I enter <HHA_Name> in "HHA Organization Name" on create organization page
-    And I enter <Address1> in "Address 1" on create organization page
-    And I enter <Short_Name> in "Short Name" on create organization page
-    And I enter <Address2> in "Address 2" on create organization page
-    And I select region "<Region>" in "create HHA" organization page
-    And I select market "<Market>" in "create HHA" organization page
-    And I enter <City> in "City" on create organization page
-    And I select <State> in State on create organization page
-    And I enter <Postal_Code> in "Postal Code" on create organization page
-    And I provide unique "HHA - <CCN>" in "CCN" on create organization page
-    And I provide unique "HHA - <EIN>" in "EIN" on create organization page
-    And I provide unique "HHA - <NPI>" in "NPI" on create organization page
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create HHA - <Has_MO>" organization page
+  Scenario Outline: <desc>
+    Given Build Json for HHA "<name>" and "<participantId>" and "<shortName>" and "<managingOrgId>" and "<ein>" and "<npi>" and "<ccn>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>" and "<marketId>"
+    When create hha org with this data
+    Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
 
     Examples: 
-      | Description                                                        | Has_MO | Managing_Org | HHA_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Region  | Market  | CCN | EIN | NPI | Message                                |
-      | Create HHA Organization with all the available fields - Without MO | NO     |              | HHANAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | CCN | EIN | NPI | HHA Organization Successfully Created. |
-      | Create HHA Organization with all the available fields - With MO    | YES    | MONAME       | HHANAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | CCN | EIN | NPI | HHA Organization Successfully Created. |
+      | desc                  | name    | shortName | managingOrgId | participantId | ein | npi | ccn | address1 | address2 | city | state | zip   | marketId | regionId | expStatusCode | responseMsg | id | type |
+      | Create HHA with MO    | HHANAME | ShortName | hasChild      |               | EIN | NPI | CCN | Address1 | Address2 | City | CA    | 10000 |        1 |        1 |           201 |             |  0 | hha  |
+      | Create HHA without MO | HHANAME | ShortName |               |               | EIN | NPI | CCN | Address1 | Address2 | City | CA    | 10000 |        1 |        1 |           201 |             |  0 | hha  |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "HHA" organization tab on organization dashboard
     When I search with "<HHA_Name> - <Has_MO>" on organization in search box
     And I click "<HHA_Name> - <Has_MO>" field in search list on organization page
@@ -70,10 +53,15 @@ Feature: View HHA organization functionality tests
 
     Examples: 
       | Description                                                             | Has_MO | HHA_Name | Address1 | Short_Name | Address2 | Region  | Market  | City | State      | Postal_Code | CCN | EIN/TIN | NPI | StateVerification | Organization Type  |
-      | Verification of HHA Organization details on HHA view page  - without MO | NO     | HHANAME  | Address1 | Short_Name | Address2 | Midwest | Chicago | City | California |       10000 | CCN | EIN     | NPI | CA                | Home Health Agency |
-      | Verification of HHA Organization details on HHA view page - with MO     | YES    | HHANAME  | Address1 | Short_Name | Address2 | Midwest | Chicago | City | California |       10000 | CCN | EIN     | NPI | CA                | Home Health Agency |
+      | Verification of HHA Organization details on HHA view page  - without MO | NO     | HHANAME  | Address1 | ShortName  | Address2 | Midwest | Chicago | City | California |       10000 | CCN | EIN     | NPI | CA                | Home Health Agency |
+      | Verification of HHA Organization details on HHA view page - with MO     | YES    | HHANAME  | Address1 | ShortName  | Address2 | Midwest | Chicago | City | California |       10000 | CCN | EIN     | NPI | CA                | Home Health Agency |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I search with "<MO_Name>" on organization in search box
     And I click "<MO_Name>" field in search list on organization page
     And I verify "HHA" organization tab present under "Managing" Organization
@@ -101,8 +89,8 @@ Feature: View HHA organization functionality tests
     And I click "<MO_Name>" field in search list on organization page
     And I verify "HHA" organization tab present under "Managing" Organization
     And I click on "HHA" organization tab on under Managing Organization
-    And I verify count of "HHA" organizations is increased by 1
-    And I search with "<HHA_Name> - <Has_MO>" on organization in search box
+    And I verify count of "HHA" organizations is increased by 2
+    And I search with "<HHA_Name> - <Has_MO>" on view profile Managing Organization search box
     And I verify "<HHA_Name> - <Has_MO>" details of "HHA" associated on Managing Organization page
     And I verify "CCN" details of "HHA" associated on Managing Organization page
     And I verify "<City>" details of "HHA" associated on Managing Organization page
@@ -114,6 +102,11 @@ Feature: View HHA organization functionality tests
       | Verification of HHA details and count on HHA tab under Managing org | YES    | MONAME  | HHANAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | CCN | EIN | NPI | CA                | ACH               | HHA Organization Successfully Created. |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I search with "<MO_Name>" on organization in search box
     And I click "<MO_Name>" field in search list on organization page
     And I verify "HHA" organization tab present under "Managing" Organization
@@ -125,3 +118,10 @@ Feature: View HHA organization functionality tests
     Examples: 
       | Description                                                             | MO_Name | Hosp_Name    |
       | Searching invalid details on Managing Organization Profile Page for ACH | MONAME  | NoMatchesOrg |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type    |
+      | MO, HHA |

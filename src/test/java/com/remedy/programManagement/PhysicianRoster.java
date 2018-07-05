@@ -21,11 +21,11 @@ public class PhysicianRoster extends BaseClass{
 	{
 		if(text.contains("PGPNAME - YES"))
 		{
-			isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg.get("PGPNAME")+"'"));
+			isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.PGPNameList.get(0).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(0).length()-1)+"'"));
 		}
 		else if(text.contains("PGPNAME - NO"))
 		{
-			isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg_noMO.get("PGPNAME")+"'"));
+			isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.PGPNameList.get(1).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(1).length()-1)+"'"));
 		}
 		else if(text.contains("ACHNAME - YES"))
 		{
@@ -64,7 +64,7 @@ public class PhysicianRoster extends BaseClass{
 		if(!text.equals(""))
 		{
 			driver.findElement(By.xpath("//div[text()='Select a Program']")).click();
-			new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[text()='Select a Program']")), CreatePrograms.programs.get(1)).build().perform();
+			new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[text()='Select a Program']")), CreateProgramAPI.PROGRAMNameList.get(0).subSequence(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)).build().perform();
 			driver.findElement(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption")).click();
 			delay();
 		}
