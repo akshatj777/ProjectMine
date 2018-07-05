@@ -658,12 +658,6 @@ public class CreateUserPage extends BaseClass{
    }
    
    public void iVerifyNavigationOnEpisodes2HomePage(String role){
-	   driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
-	   if(!(driver.findElements(By.xpath("//div[text()='Episode Connect']")).size()>0))
-	   {
-		   driver.navigate().refresh();
-		   iWillWaitToSee(By.xpath("//div[text()='Episode Connect']"));
-	   }
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
@@ -687,6 +681,12 @@ public class CreateUserPage extends BaseClass{
 //						   break;
 //					   }
 //				   }
+			   driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
+			   if(!(driver.findElements(By.xpath("//div[text()='Episode Connect']")).size()>0))
+			   {
+				   driver.navigate().refresh();
+				   iWillWaitToSee(By.xpath("//div[text()='Episode Connect']"));
+			   }
 				   iWillWaitToSee(By.xpath("//div[@class='patient-card']"));
 				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
 				   
