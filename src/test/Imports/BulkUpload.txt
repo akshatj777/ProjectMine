@@ -98,7 +98,7 @@ PPEFirstName | PPELastName | abcdtrial3 | | Prospective Partner Executive | NA |
 ####################Data Permissions for DP user:only M3 org and combination of M3 and Down org ########################
 
 DPFirstName | DPLastName | DPMAILM3 | 9998887770| Downstream Provider | NA | 441369:3056-m03:365402 | | | True | True | False | False | False | False | False | | False
-DPFirstName | DPLastName | DPMAILM3AndDown | 9998887770| Downstream Provider | NA | 450306, 441369:3056-m03:365402 | | | True | True | False | False | False | False | False | | False
+DPFirstName | DPLastName | DPMAILM3AndDown | 9998887770| Downstream Provider | NA | 441369:3056-m03:365402, 450306 | | | True | True | False | False | False | False | False | | False
 
 ####################Invalid (105-124) and valid data (125), general details and app information for Bulk Upload User########################
 

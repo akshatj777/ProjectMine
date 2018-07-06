@@ -1977,7 +1977,7 @@ applicationsList.put("Manager", "Episodes, Reports, TCI, Lessons");
             
         }
 		
-		else if (role.equals("Transitional Case manager")) {
+		else if (role.equals("Transitional Case Manager")) {
 			String userRole = "Super Admin-"+role.trim();
 			String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole)
 					.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
@@ -1991,7 +1991,7 @@ applicationsList.put("Manager", "Episodes, Reports, TCI, Lessons");
             strUserData = strUserData.replace(" Transitional Case Manager ", " Downstream Provider ");
            
             strUserData = strUserData.replace("514029:ALL_BPIDS:ALL_FACILITIES | | | True | False | False | True | False | False | False | | False"
-            		, "450306, 441369:3056-m03:365402 | | | True | True | False | False | False | False | False | | False");
+            		, "450306| | | True | True | False | False | False | False | False | | False");
             HashMap<String, String> applicationsList = new HashMap<String, String>();
             applicationsList.put("Downstream Provider",
                     "Episodes, TCI");
