@@ -77,7 +77,7 @@ Feature: Search the LTCH organizations functionality tests
     Then I search "<Edited_LTCH_Name> - <Has_MO>" and verify with search list options on "LTCH" organization search box
     Then I search with "<LTCH_Name> - <Has_MO>" old name in organization search box
     Then I verify the "No matches" message for invalid search in Organization
-    And I verify the "Create New Long-Term Care Hospital Organization Organization" link under No matches
+    And I verify the "Create New Long-Term Care Hospital Organization" link under No matches
 
     Examples: 
       | Description                                                       | Has_MO | LTCH_Name | Edited_LTCH_Name | Message                                 |
