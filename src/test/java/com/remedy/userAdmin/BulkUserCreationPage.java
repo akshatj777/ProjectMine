@@ -275,7 +275,7 @@ public class BulkUserCreationPage extends BaseClass {
 		String randomString = null;
 		if (userCount == 50) {
 			try {
-				strUserData = readContentForBulkUpload(46, 95);
+				strUserData = readContentForBulkUpload(46, 96);
 			} catch (Exception e) {
 				System.out.println(e);
 			}
@@ -781,11 +781,21 @@ public class BulkUserCreationPage extends BaseClass {
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Executive", applicationsList);
 			CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
 
+			randomString = RandomStringUtils.randomAlphabetic(8);
+			strUserData = strUserData.replace("abcdtrial3", "qaautomation+" + randomString + "@remedypartners.com");
+			applicationsList = new HashMap<String, String>();
+			applicationsList.put("Remedy Executive", "Episodes, Episodes 2.0, Reports, TCI, Lessons");
+			bulkEmailPerRole = new HashMap<String, String>();
+			bulkEmailPerRole.put("Remedy Executive", "qaautomation+" + randomString + "@remedypartners.com");
+			bulkUsersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
+			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Executive", applicationsList);
+			CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
+
 		}
 
 		if (userCount > 50) {
 			try {
-				strUserData = readContentForBulkUpload(46, 96);
+				strUserData = readContentForBulkUpload(46, 97);
 			} catch (Exception e) {
 				System.out.println(e);
 			}
@@ -938,6 +948,9 @@ public class BulkUserCreationPage extends BaseClass {
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
 			strUserData = strUserData.replace("abcdtrial3", "qaautomation+" + randomString + "@remedypartners.com");
+
+			randomString = RandomStringUtils.randomAlphabetic(8);
+			strUserData = strUserData.replace("abcdUserNeg3", "qaautomation+" + randomString + "@remedypartners.com");
 
 		}
 
@@ -1303,7 +1316,7 @@ public class BulkUserCreationPage extends BaseClass {
 			}
 		 else if (role.equals("Downstream Provider M3")) {
 	            try {
-	                strUserData = readContentForBulkUpload(99, 100);
+	                strUserData = readContentForBulkUpload(100, 101);
 	            } catch (Exception e) {
 	                System.out.println(e);
 	            }
@@ -1321,7 +1334,7 @@ public class BulkUserCreationPage extends BaseClass {
 	        } 
 		 else if (role.equals("Downstream Provider M3AndDown")) {
 	            try {
-	                strUserData = readContentForBulkUpload(100, 101);
+	                strUserData = readContentForBulkUpload(101, 102);
 	            } catch (Exception e) {
 	                System.out.println(e);
 	            }
@@ -1436,7 +1449,7 @@ public class BulkUserCreationPage extends BaseClass {
 	public void enterInvalidAndValidData() {
 		String strUserData = null;
 		try {
-			strUserData = readContentForBulkUpload(104, 125);
+			strUserData = readContentForBulkUpload(105, 126);
 		} catch (Exception e) {
 			System.out.println(e);
 		}

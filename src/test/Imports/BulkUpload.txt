@@ -94,11 +94,12 @@ RPMFirstName | RPMLastName | RemedyPMMAIL3 | | Remedy PM | NA | 441364:3056-k60:
 RSTFirstName | RSTLastName | RemedySTMAIL3 | 8989898787| Remedy Sales Team | NA |441371:ALL_BPIDS:ALL_FACILITIES   | | | True | False | False | False | True | False | False | | False
 REFirstName | RELastName | RemedyExMAIL3 | | Remedy Executive | NA | 439108:ALL_BPIDS:ALL_FACILITIES  | | | True | True | True | False | False | False | False | | False
 PPEFirstName | PPELastName | abcdtrial3 | | Prospective Partner Executive | NA |442503:ALL_BPIDS:ALL_FACILITIES   | | | True | False | False | True | False | False | False | | False
+PPEFirstName | PPELastName | abcdUserNeg3 | | Prospective Partner Executive | NA |442503:ALL_BPIDS:ALL_FACILITIES   | | | True | False | False | True | False | False | False | | False
 
 ####################Data Permissions for DP user:only M3 org and combination of M3 and Down org ########################
 
 DPFirstName | DPLastName | DPMAILM3 | 9998887770| Downstream Provider | NA | 441369:3056-m03:365402 | | | True | True | False | False | False | False | False | | False
-DPFirstName | DPLastName | DPMAILM3AndDown | 9998887770| Downstream Provider | NA | 441369:3056-m03:365402, 450306 | | | True | True | False | False | False | False | False | | False
+DPFirstName | DPLastName | DPMAILM3AndDown | 9998887770| Downstream Provider | NA | 441369:3056-m03:365402,450306 | | | True | True | False | False | False | False | False | | False
 
 ####################Invalid (105-124) and valid data (125), general details and app information for Bulk Upload User########################
 
