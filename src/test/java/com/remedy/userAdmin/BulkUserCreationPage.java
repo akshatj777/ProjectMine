@@ -1449,7 +1449,7 @@ public class BulkUserCreationPage extends BaseClass {
 	public void enterInvalidAndValidData() {
 		String strUserData = null;
 		try {
-			strUserData = readContentForBulkUpload(105, 126);
+			strUserData = readContentForBulkUpload(105, 129);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -1510,7 +1510,15 @@ public class BulkUserCreationPage extends BaseClass {
 		
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("MANAGERMAIL5", "qaautomation+" + randomString + "@remedypartners.com");
+		
+		randomString = RandomStringUtils.randomAlphabetic(8);
+		strUserData = strUserData.replace("MANAGERMAIL6", "qaautomation+" + randomString + "@remedypartners.com");
+		
+		randomString = RandomStringUtils.randomAlphabetic(8);
+		strUserData = strUserData.replace("MANAGERMAIL7", "qaautomation+" + randomString + "@remedypartners.com");
 
+		randomString = RandomStringUtils.randomAlphabetic(8);
+		strUserData = strUserData.replace("MANAGERMAIL8", "qaautomation+" + randomString + "@remedypartners.com");
 		
 		HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
 		HashMap<String, String> applicationsList = new HashMap<String, String>();
@@ -1649,8 +1657,8 @@ applicationsList.put("Manager", "Episodes, Reports, TCI, Lessons");
 			strUserData = strUserData.replace("9879800980", "9879800978");
 
 			strUserData = strUserData.replace(
-					"776109:2070-005:HUMC | | | True| False | False | False | True |  | False | | False",
-					"776109:2070-005:HUMC | | | False| True | False | False | False |  | False | | False");
+					"| True| False | False | False | True |  | False | | False",
+					"| False| True | False | False | False |  | False | | False");
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
 		
 			applicationsList.put("Case Manager", "Episodes, TCI");
@@ -1703,7 +1711,7 @@ applicationsList.put("Manager", "Episodes, Reports, TCI, Lessons");
 			strUserData = strUserData.replace("RTCSMAIL", email);
 
 			strUserData = strUserData.replace(
-					"514025:2070-047:001 | | | True | True | True | False | False | True | False | |False ",
+					"514025:2070-047:001 |NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | | True | True | True | False | False | True | False | |False ",
 					"441348:ALL_BPIDS:ALL_FACILITIES  | | | True | True | True | True | True | True | False | |False");
 			
 		} 
@@ -1720,8 +1728,8 @@ applicationsList.put("Manager", "Episodes, Reports, TCI, Lessons");
 			strUserData = strUserData.replace("RTCSMAIL", email);
 
 			strUserData = strUserData.replace(
-					"514025:2070-047:001 | | | True | True | True | False | False | True | False | |False ",
-					"441444:3056-q91:181318,441444:3056-q91:441310  | | | True | True | True | True | True | True | False | |False");
+					"514025:2070-047:001 |NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | | True | True | True | False | False | True | False | |False ",
+					"441444:3056-q91:181318,441444:3056-q91:441310  |NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | | True | True | True | True | True | True | False | |False");
 			
 		}else if (role.equals("Remedy LPN1")) {
 			String userRole = "Super Admin-Remedy LPN";
@@ -1734,7 +1742,7 @@ applicationsList.put("Manager", "Episodes, Reports, TCI, Lessons");
 			}
 			
 			strUserData = strUserData.replace("RLPNMAIL", email);
-			strUserData = strUserData.replace("439245:ALL_BPIDS:ALL_FACILITIES", "441444:3056-q91:181318,441444:2070-g14:100086");
+			strUserData = strUserData.replace("439245:ALL_BPIDS:ALL_FACILITIES||", "441444:3056-q91:181318,441444:2070-g14:100086|3hSOHNAnvjc1,NFdw0Kts2C01|");
 			
 		} 
 		else if (role.equals("Remedy LPN2")) {
@@ -1802,12 +1810,9 @@ applicationsList.put("Manager", "Episodes, Reports, TCI, Lessons");
 
 			
 			strUserData = strUserData.replace(
-					"441364:3056-k60:365973,441364:3056-k61:365860 | | | True| True | False | False | False | True | False | | False",
-					"441364:3056-k60:365973,441364:3056-k61:365860 | | | False| False | True | True | True | True | False | | False");
+					"441364:3056-k60:365973,441364:3056-k61:365860 |NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1 | | True| True | False | False | False | True | False | | False",
+					"441364:3056-k60:365973,441364:3056-k61:365860 |NFdw0Kts2C01 | | False| False | True | True | True | True | False | | False");
 
-			strUserData = strUserData.replace(
-					"Learning Pathway 2, New learning Path, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2",
-					"Learning Pathway 2");
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
 			applicationsList.put("Remedy PM", "Episodes 2.0, Reports, TCI, Lessons");
 				CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy PM", applicationsList);
@@ -1869,7 +1874,7 @@ applicationsList.put("Manager", "Episodes, Reports, TCI, Lessons");
           
             strUserData = strUserData.replace("REMAIL", email);
             strUserData = strUserData.replace(" Remedy Executive ", " Downstream Provider ");
-            strUserData = strUserData.replace("439108:ALL_BPIDS:ALL_FACILITIES", "441369:3056-m03:365402");
+            strUserData = strUserData.replace("439108:ALL_BPIDS:ALL_FACILITIES  |jusUV22erpk1,HZhmTBQzHtU1,n9yn5n0Qa581 |", "441369:3056-m03:365402||");
             HashMap<String, String> applicationsList = new HashMap<String, String>();
             applicationsList.put("Downstream Provider", "Episodes, Episodes 2.0, TCI");
            
@@ -1980,8 +1985,8 @@ applicationsList.put("Manager", "Episodes, Reports, TCI, Lessons");
             
             strUserData = strUserData.replace("RTAFirstName", "FirstnameeFirstnameeFirstnameeFirstnameeFirstnamee");
             strUserData = strUserData.replace("RTALastName", "LastnameeeLastnameeeLastnameeeLastnameeeLastnameee");
-            strUserData = strUserData.replace("441448:3056-r31:075244,572091:3056-r30:075278,439104:2070-a48:070003 | | | True | False | False | False | False | True | True | | True"
-            		, "441348:ALL_BPIDS:ALL_FACILITIES   | | | False | False | False | False | False | True | False | | True");
+            strUserData = strUserData.replace("441448:3056-r31:075244,572091:3056-r30:075278,439104:2070-a48:070003 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | True | False | False | False | False | True | True | | True"
+            		, "441348:ALL_BPIDS:ALL_FACILITIES   |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False | False | False | False | False | True | False | | True");
             HashMap<String, String> applicationsList = new HashMap<String, String>();
             applicationsList.put("Physicians",
                     "Physician Connect, TCI");
@@ -2003,7 +2008,7 @@ applicationsList.put("Manager", "Episodes, Reports, TCI, Lessons");
             strUserData = strUserData.replace("TCMMAIL", email);
             strUserData = strUserData.replace(" Transitional Case Manager ", " Downstream Provider ");
            
-            strUserData = strUserData.replace("514029:ALL_BPIDS:ALL_FACILITIES | | | True | False | False | True | False | False | False | | False"
+            strUserData = strUserData.replace("514029:ALL_BPIDS:ALL_FACILITIES |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581  | | True | False | False | True | False | False | False | | False"
             		, "450306| | | True | True | False | False | False | False | False | | False");
             HashMap<String, String> applicationsList = new HashMap<String, String>();
             applicationsList.put("Downstream Provider",
@@ -2028,7 +2033,7 @@ public void editWithInvalidData(){
 	
 	
 	try {
-		strUserData = readContentForBulkUpload(2,16);
+		strUserData = readContentForBulkUpload(2,17);
 	} catch (Exception e) {
 		System.out.println(e);
 	}
@@ -2102,7 +2107,10 @@ public void editWithInvalidData(){
 			.get("Super Admin-Partner Program Administrator".substring(("Super Admin-Partner Program Administrator".indexOf("-") + 1)).trim()));
 	strUserData = strUserData.replace("441445:3056-r26:1481","514083:2070-015:TSH,gfdgfgdfg");
 	
-	
+	randomString = RandomStringUtils.randomAlphabetic(8);
+	strUserData = strUserData.replace("RPAMAIL", BulkUserCreationPage.bulkUsersEmailPerRole.get("Super Admin-Remedy Program Administrator")
+			.get("Super Admin-Remedy Program Administrator".substring(("Super Admin-Remedy Program Administrator".indexOf("-") + 1)).trim()));
+	strUserData = strUserData.replace("| 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 |","| 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,ABUJHHIFDHHU |");
 	
 	strUserData = strUserData.replace("NPI", "");
 	iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
