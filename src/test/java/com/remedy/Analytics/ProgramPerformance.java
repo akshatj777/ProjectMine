@@ -4,8 +4,14 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.imageio.ImageIO;
 
@@ -501,8 +507,38 @@ public class ProgramPerformance extends BaseClass{
      }
 	 
 	 public void iSetCalendarAttributeValue(String date){
-		 setAttributevalue(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")),"textContent",date);
+		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+//		 setAttributevalue(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),"value",date);
+		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), date);
+		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
+		 clickElement(driver.findElement(By.xpath("//span[@class='tab-datepicker-today-date']")));
+//		 longDelay();
+//		 delay();
+//		 longDelay();
 		 iWillWaitToSee(By.cssSelector("#svg-spinner"));
 		 iWillWaitToSee(By.cssSelector(".tabCanvas.tab-widget"));
+	 }
+	 
+	 public void iReadTextFromOutputfile() throws IOException{
+//		 File file = new File(System.getProperty("user.dir")+"\\src\\test\\jmeterjmx\\PerformanceDashboardResult.txt");
+//		 String st = new String (System.getProperty("user.dir")+"\\src\\test\\jmeterjmx\\PerformanceDashboardResult.txt");
+//		 StringTokenizer tokens = new StringTokenizer(st);
+//		 while(tokens.hasMoreTokens()){
+//			 
+//		 }
+//		 }
+		 BufferedReader br=new BufferedReader(new FileReader(System.getProperty("user.dir")+"\\src\\test\\jmeterjmx\\PerformanceDashboardResult.txt"));
+		 List<String> names = new ArrayList<>();
+		 String line;
+		 while ((line = br.readLine())!= null) {           
+
+			 StringTokenizer st = new StringTokenizer(line, ",");     
+
+		     while (st.hasMoreTokens()){
+		       names.add(st.nextToken());
+		     }        
+		 }    
+
+		 System.out.println(names);    
 	 }
 }

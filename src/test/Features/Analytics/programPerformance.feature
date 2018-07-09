@@ -13,7 +13,7 @@ Scenario: Verify text on program overview report
   Then I verify "Program Performance" text is appearing inside dashboard
   Then I verify subtitle text "Evaluate program on key performance metrics and identify focus areas" is appearing inside dashboard
   And I set the time for starting date to "1/1/2018" on dashboard
-  
+  Then I read the values from the text file
   #Given I am on Analytics Tableau login page
   #Then I enter in "Username" field for analytics as "kremexec@yopmail.com" for login
   #And I click on "signin" button on the analytics login page

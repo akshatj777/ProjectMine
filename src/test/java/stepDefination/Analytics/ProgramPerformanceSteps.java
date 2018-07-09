@@ -1,5 +1,7 @@
 package stepDefination.Analytics;
 
+import java.io.IOException;
+
 import com.remedy.Analytics.ProgramPerformance;
 import com.remedy.resources.DriverScript;
 
@@ -180,5 +182,10 @@ public class ProgramPerformanceSteps extends DriverScript{
 	@And("^I set the time for starting date to \"([^\"]*)\" on dashboard$")
 	public void i_set_time_for_starting_date_to_on_dashboard(String date) throws Throwable{
 		programdashboard.iSetCalendarAttributeValue(date);
+	}
+	
+	@Then("^I read the values from the text file$")
+	public void i_read_the_alues_from_the_text_file() throws IOException{
+		programdashboard.iReadTextFromOutputfile();
 	}
 }
