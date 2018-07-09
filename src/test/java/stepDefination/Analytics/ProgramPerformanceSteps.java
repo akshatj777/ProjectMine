@@ -4,6 +4,7 @@ import com.remedy.Analytics.ProgramPerformance;
 import com.remedy.resources.DriverScript;
 
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
 public class ProgramPerformanceSteps extends DriverScript{
@@ -62,7 +63,7 @@ public class ProgramPerformanceSteps extends DriverScript{
 	
 	@And("^I switch to analytics iframe$")
 	public void i_switch_to_analytics_iframe() throws Throwable{
-		programdashboard.iSwitchToAnalyticsFrameWithXpath("//iframe[@title='data visualization']");
+		programdashboard.iSwitchToAnalyticsFrameWithXpath("//iframe[@class='report-iframe']");
 	}
 	
 	@Then("^I enter incorrect \"([^\"]*)\" for analytics as \"([^\"]*)\" for login$")
@@ -164,5 +165,20 @@ public class ProgramPerformanceSteps extends DriverScript{
 	@And("^I verify blue colored text of Readmissions Benchmark Variance as \"([^\"]*)\" on dashboard with picture resolution \"([^\"]*)\"$")
 	public void i_verify_blue_colored_text_of_Readmission_Benchmark_variance_as_on_dashboard_with_picture_resolution(String count,String resolution) throws Throwable{
 		programdashboard.TakeShotOFBlueColorElement(count,"//div[@tb-test-id='Readmissions Benchmark Variance']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 259px; height: 74px;']", resolution);
+	}
+	
+	@Given("^I execute the jmeter application and execute jmx file$")
+	public void i_execute_the_jmeter_application_and_execute_jmx_file() throws Throwable{
+		programdashboard.executejmeter();
+	}
+	
+	@And("^I click on \"([^\"]*)\" dashboard$")
+	public void i_click_on_dashboard(String dashboard) throws Throwable{
+		programdashboard.iClickOnDashboard(dashboard);
+	}
+	
+	@And("^I set the time for starting date to \"([^\"]*)\" on dashboard$")
+	public void i_set_time_for_starting_date_to_on_dashboard(String date) throws Throwable{
+		programdashboard.iSetCalendarAttributeValue(date);
 	}
 }

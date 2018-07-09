@@ -6,8 +6,11 @@ import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
+
 import junit.framework.Assert;
+
 import org.apache.commons.io.FileUtils;
 import org.bytedeco.javacpp.BytePointer;
 import org.bytedeco.javacpp.lept;
@@ -15,6 +18,7 @@ import org.bytedeco.javacpp.lept.PIX;
 import org.bytedeco.javacpp.tesseract.TessBaseAPI;
 import org.imgscalr.Scalr;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
@@ -24,7 +28,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import com.remedy.baseClass.BaseClass;
+import com.remedy.resources.DriverScript;
 
 public class ProgramPerformance extends BaseClass{
 	
@@ -75,6 +81,7 @@ public class ProgramPerformance extends BaseClass{
 	}
 	
 	public void iSwitchToAnalyticsFrameWithXpath(String frameXpath){
+		delay();
         swithToFrame(frameXpath);
         delay();
     }
@@ -471,5 +478,31 @@ public class ProgramPerformance extends BaseClass{
 				 String FinalOutput=output.replaceAll("\\s+", "");
 				 System.out.println(FinalOutput);
 				 Assert.assertEquals(count.trim(), FinalOutput.trim());
+	 }
+	 
+	 public void executejmeter() throws IOException
+	    {
+		 File jmx=new File(System.getProperty("user.dir")+"\\src\\test\\jmeterjmx\\TableauTest.jmx");
+//		 String jmeter=DriverScript.Config.getProperty("jmeterPath");
+//	     Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd C:\\apache-jmeter-4.0\\apache-jmeter-4.0\\bin && jmeter -n -t C:\\Users\\aseem.gupta\\Tableautestpaln\\Tableautestpaln\\TableauTest.jmx && exit\"");
+		 Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd "+DriverScript.Config.getProperty("jmeterPath")+" "+jmx+" && exit\"");
+	    }
+	 
+	 public void iClickOnDashboard(String dashboard){
+		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ui.image.report-image")));
+		 iWillWaitToSee(By.cssSelector(".report-title"));
+		 selectElementByDesc(".report-title", dashboard);
+	 }
+	 
+	 public void setAttributevalue(WebElement element, String attName, String attValue) {
+		  JavascriptExecutor js = (JavascriptExecutor) driver;
+		  js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", 
+		                element, attName, attValue);
+     }
+	 
+	 public void iSetCalendarAttributeValue(String date){
+		 setAttributevalue(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")),"textContent",date);
+		 iWillWaitToSee(By.cssSelector("#svg-spinner"));
+		 iWillWaitToSee(By.cssSelector(".tabCanvas.tab-widget"));
 	 }
 }
