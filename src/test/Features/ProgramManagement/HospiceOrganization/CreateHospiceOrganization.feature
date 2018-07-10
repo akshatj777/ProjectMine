@@ -95,6 +95,22 @@ Feature: Create Hospice organization functionality tests
     When I click on "Hospice" organization tab on organization dashboard
     Then I click on "+" button on "Hospice" organization page
     And I verify "Create Hospice Organization" header text on create organization page
+    And I select "YES" radio button for managing organization
+    Then I search and verify "<MO_Name>" managing organization name in "YES" Has a Management Organization drop down box
+
+    Examples: 
+      | Description                                                     | Has_MO | MO_Name |
+      | Search for a valid Managing Organization on Create Hospice page | YES    | MONAME  |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "Hospice" organization tab on organization dashboard
+    Then I click on "+" button on "Hospice" organization page
+    And I verify "Create Hospice Organization" header text on create organization page
     And I select "<Has_MO>" radio button for managing organization
     Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
     Then I enter <Hospice_Name> in "Hospice Organization Name" on create organization page

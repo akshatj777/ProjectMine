@@ -359,6 +359,15 @@ public class CreateACHOrganization extends BaseClass{
 		}
 	}
 	
+	public void iSearhandverifyManagingOrgNameInHasAManagingOrganizationDropDown(String text, String act) 
+	{
+		iWillWaitToSee(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']"));
+		iFillInText(driver.findElement(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']")), CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1));
+		iWillWaitToSee(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption"));
+		isElementPresent(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption"));
+		delay();
+	}
+	
 	public void iVerifyLocationHeaderOnOrganizationPage(String location) 
 	{
 		String actual = null;
