@@ -36,29 +36,13 @@ Feature: Bulk Upload User from SA
     Then I click on "Log Out" button again
     And I should see Log in widget
     Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account for bulk delete
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
     Then I enter password "1Welcome2" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
-    Then I verify Account Verification in Inbox in my account
-    Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm My Account!" link in mail content
-    Then I click on "Confirm My Account!" link in mail content
-    And I switch to new window
-    Then I enter email to generate password link
-    And I click on send mail button
-    Then I switch back to old window
-    Then I click on Inbox in mail
-    Then I verify the unread mail in inbox in my account
-    Then I verify Change Password mail in Inbox in my account
-    Then I click on Change Password mail in Inbox
-    Then I verify "Change My Password" link in mail content
-    Then I click on "Change My Password" link in mail content
-    And I switch to new window
-    And I enter new password "Testing1" to set new password
-    And I enter confirm new password "Testing1" to set new password
-    And I click on submit button to set new password
+    Then I verify account for user "<User>-<Role>"
+    Then I set new password for the user "<User>-<Role>"
     Given I am on the login page
     Then I enter newuser email for "<User>-<Role>" login to Remedy
     Then I enter newuser password for login to Remedy
@@ -102,7 +86,7 @@ Feature: Bulk Upload User from SA
     And I click on RemedyU tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
-    #And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
     And I redirect to Remedy connect page
     And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
@@ -123,18 +107,11 @@ Feature: Bulk Upload User from SA
     And I should see Log in widget
 
     Examples: 
-      | Description          | User        | Role                | RoleModel                     | NPI | FirstName   | LastName   | Phone | ApplicationsEnabled    | ApplicationsDisabled | HealthSystem                                  | Programs                                                                             | Locations                                                                                                           | Applications                | ApplicationsNotVisible                              | Roletext | ReportCategory | ReportName                   | BPID | Facilities                            | LearningPathway                                                                               |
-      | Only M3 organisation | Super Admin | Downstream Provider | Downstream Provider M3        |     | DPFirstName | DPLastName |       | Episodes, Episodes 2.0 |                      | Altercare                                     | Altercare--BPCI Model 3                                                              | Altercare--3056-m03--Altercare - Alliance                                                                           | Episodes, Episodes 2.0, TCI | Administration, Physician Connect, Lessons, Reports | ROLE_SNF | Patient ID     | Episode DRG Issues [Model 3] |      | Altercare - Alliance                  |  |
-      | Down org and M3 org  | Super Admin | Downstream Provider | Downstream Provider M3AndDown |     | DPFirstName | DPLastName |       | Episodes, Episodes 2.0 |                      | Healthsystem - Downstream Provider, Altercare | Healthsystem - Downstream Provider--Downstream Organization, Altercare--BPCI Model 3 | Healthsystem - Downstream Provider--DOWN-ORG--Stamford Memorial Hospital, Altercare--3056-m03--Altercare - Alliance | Episodes, Episodes 2.0, TCI | Administration, Physician Connect, Lessons, Reports | ROLE_SNF | Patient ID     | Episode DRG Issues [Model 3] |      | Stamford Memorial Hospital, Altercare |  |
+      | Description          | User        | Role                | RoleModel                     | NPI | FirstName   | LastName   | Phone | ApplicationsEnabled    | ApplicationsDisabled | HealthSystem                                  | Programs                                                                             | Locations                                                                                                           | Applications                | ApplicationsNotVisible                              | Roletext | ReportCategory | ReportName                   | BPID | Facilities                            | LearningPathway |
+      | Only M3 organisation | Super Admin | Downstream Provider | Downstream Provider M3        |     | DPFirstName | DPLastName |       | Episodes, Episodes 2.0 |                      | Altercare                                     | Altercare--BPCI Model 3                                                              | Altercare--3056-m03--Altercare - Alliance                                                                           | Episodes, Episodes 2.0, TCI | Administration, Physician Connect, Lessons, Reports | ROLE_SNF | Patient ID     | Episode DRG Issues [Model 3] |      | Altercare - Alliance                  |                 |
+      | Down org and M3 org  | Super Admin | Downstream Provider | Downstream Provider M3AndDown |     | DPFirstName | DPLastName |       | Episodes, Episodes 2.0 |                      | Healthsystem - Downstream Provider, Altercare | Healthsystem - Downstream Provider--Downstream Organization, Altercare--BPCI Model 3 | Healthsystem - Downstream Provider--DOWN-ORG--Stamford Memorial Hospital, Altercare--3056-m03--Altercare - Alliance | Episodes, Episodes 2.0, TCI | Administration, Physician Connect, Lessons, Reports | ROLE_SNF | Patient ID     | Episode DRG Issues [Model 3] |      | Stamford Memorial Hospital, Altercare |                 |
 
   Scenario: Bulk Upload User
-    #Given I am on mail login page
-    #Then I enter username "qaautomation@remedypartners.com" to login mail account for bulk delete
-    #Then I enter password "1Welcome2" to login mail account
-    #Then I click on Mail icon in my account
-    #Then I click on Inbox in mail
-    #Then I click on delete icon in mail
-    #Then I signout from mail account
     Given I am on the login page
     Then I log in as super user
     Then I should see Tile text User Admin
@@ -148,29 +125,13 @@ Feature: Bulk Upload User from SA
 
   Scenario Outline: <Description>
     Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account for bulk delete
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
     Then I enter password "1Welcome2" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
-    Then I verify Account Verification in Inbox in my account
-    Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm my account!" link in mail content
-    Then I click on "Confirm my account!" link in mail content
-    And I switch to new window
-    Then I enter email "<User>-<Role>" to generate password link for bulk users
-    And I click on send mail button
-    Then I switch back to old window
-    Then I click on Inbox in mail
-    Then I verify the unread mail in inbox in my account
-    Then I verify Change Password mail in Inbox in my account
-    Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
-    And I switch to new window
-    And I enter new password "Testing1@" to set new password
-    And I enter confirm new password "Testing1@" to set new password
-    And I click on submit button to set new password
+    Then I verify account for user "<User>-<Role>"
+    Then I set new password for the user "<User>-<Role>"
 
     Examples: 
       | Description                                           | User        | Role                            |
@@ -224,7 +185,7 @@ Feature: Bulk Upload User from SA
     Then I verify bulk NPI "<NPI>"
     Then I verify enabled "<ApplicationsEnabled>"
     Then I verify disabled "<ApplicationsDisabled>"
-    #Then I verify learning pathway "<LearningPathway>"
+    Then I verify learning pathway "<LearningPathway>"
     Then I verify health system "<HealthSystem>"
     Then I verify programs "<Programs>"
     Then I verify location "<Locations>"
@@ -249,7 +210,7 @@ Feature: Bulk Upload User from SA
       | View Partner Technical Administrator user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | PTAFirstName         | PTALastName         |              | Partner Technical Administrator | Administration, Lessons                | Episodes, Reports, Physician Connect                 |     | Learning Pathway 2, New learning Path, Remedy University                                                                                                                                                                                                 | Brookview Corporation                                           | Brookview Corporation--BPCI Model 3                                                                       | Brookview Corporation--3056-r30--Brookview                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
       | View Remedy Technical Administrator user created from Super Admin user  | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | RTAFirstName         | RTALastName         | 345-676-5432 | Remedy Technical Administrator  | Physician Connect, Administration, TCI | Episodes, Reports, Lessons, Episodes 2.0             |     | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University | Avon Health Center,Brookview Corporation,Day Kimball Healthcare | Avon Health Center--BPCI Model 3,Brookview Corporation--BPCI Model 3,Day Kimball Healthcare--BPCI Model 2 | Avon Health Center--3056-r31--Avon Health,Brookview Corporation--3056-r30--Brookview,Day Kimball Healthcare--2070-a48--Day Kimball Healthcare                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
       | View Transitional Case Manager user created from Super Admin user       | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | TCMFirstName         | TCMLastName         |              | Transitional Case Manager       | Lessons                                | Episodes 2.0, Administration, Physician Connect, TCI |     | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University | St. Lukes Health Network                                        | St. Lukes Health Network--BPCI Model 2                                                                    | St. Lukes Health Network--2070-023--Allentown,St. Lukes Health Network--2070-023--Bethlehem,St. Lukes Health Network--2070-025--Anderson,St. Lukes Health Network--2070-026--St. Luke's Hospital Quakertown Hospital,St. Lukes Health Network--2070-027--St. Luke's Hospital Miners Memorial Hospital,St. Lukes Health Network--2070-028--Warren Hospital                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-      | View Downstream Provider user created from Super Admin user             | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | DPFirstName          | DPLastName          | 999-888-7770 | Downstream Provider             | Episodes                               | Episodes 2.0                                         |     | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University | Healthsystem - Downstream Provider                              | Healthsystem - Downstream Provider--Downstream Organization                                               | Healthsystem - Downstream Provider--DOWN-ORG--Coosa Valley Health Care                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+      | View Downstream Provider user created from Super Admin user             | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | DPFirstName          | DPLastName          | 999-888-7770 | Downstream Provider             | Episodes                               | Episodes 2.0                                         |     |                                                                                                                                                                                                                                                          | Healthsystem - Downstream Provider                              | Healthsystem - Downstream Provider--Downstream Organization                                               | Healthsystem - Downstream Provider--DOWN-ORG--Coosa Valley Health Care                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -274,10 +235,10 @@ Feature: Bulk Upload User from SA
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
     And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -295,7 +256,7 @@ Feature: Bulk Upload User from SA
     And I click on RemedyU tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
-    #And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
     And I redirect to Remedy connect page
     And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
@@ -335,4 +296,4 @@ Feature: Bulk Upload User from SA
       | Login with Partner Technical Administrator and verify Product Tiles and their redirections | Super Admin | PTAFirstName         | PTALastName         | Partner Technical Administrator | Episodes, Reports, Physician Connect, Administration, TCI, Lessons               | Episodes 2.0                                                       | ROLE_PRM       | Patient ID     | Episode DRG Issues [Model 3] |      | Brookview                                                                                                                                                                                                                                                                                                                                                                                     | Learning Pathway 2, New learning Path, Remedy University                                                                                                                                                                                                 |  |
       | Login with Remedy Technical Administrator and verify Product Tiles and their redirections  | Super Admin | RTAFirstName         | RTALastName         | Remedy Technical Administrator  | Episodes, Episodes 2.0, Reports, Physician Connect, Administration, TCI, Lessons |                                                                    | ROLE_ADMIN     | Patient ID     | Episode DRG Issues           |      | Day Kimball Healthcare,Avon Health,Brookview                                                                                                                                                                                                                                                                                                                                                  | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University |  |
       | Login with Transitional Case Manager and verify Product Tiles and their redirections       | Super Admin | TCMFirstName         | TCMLastName         | Transitional Case Manager       | Episodes, Reports, TCI, Lessons                                                  | Episodes 2.0, Administration, Physician Connect                    | ROLE_TCS       | Patient ID     | Episode DRG Issues           |      | St. Luke's Hospital Quakertown Hospital, St. Luke's Hospital Miners Memorial Hospital,Allentown,Bethlehem,Warren Hospital,Anderson                                                                                                                                                                                                                                                            | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University |  |
-      | Login with DownStream Provider and verify Product Tiles and their redirections             | Super Admin | DPFirstName          | DPLastName          | Downstream Provider             | Episodes, Episodes 2.0, TCI                                                      | Administration, Physician Connect, Lessons, Reports                | ROLE_SNF       | Patient ID     | Episode DRG Issues [Model 3] |      | Coosa valley health care                                                                                                                                                                                                                                                                                                                                                                      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Remedy University                                                                                                                                                            |  |
+      | Login with DownStream Provider and verify Product Tiles and their redirections             | Super Admin | DPFirstName          | DPLastName          | Downstream Provider             | Episodes, Episodes 2.0, TCI                                                      | Administration, Physician Connect, Lessons, Reports                | ROLE_SNF       | Patient ID     | Episode DRG Issues [Model 3] |      | Coosa valley health care                                                                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                          |  |

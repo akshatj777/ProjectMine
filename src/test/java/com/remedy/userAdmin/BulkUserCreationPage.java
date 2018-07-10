@@ -20,11 +20,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  */
 public class BulkUserCreationPage extends BaseClass {
 	public static HashMap<String, HashMap<String, String>> bulkUsersEmailPerRole = new HashMap<String, HashMap<String, String>>();
-	public static HashMap<String, HashMap<String, String>> bulkUsersNPIPerRole = new HashMap<String, HashMap<String, String>>();
+	static String bulkUsersNPIPerRole;
 
 	public BulkUserCreationPage(WebDriver driver) {
 		super(driver);
-
 	}
 
 	public void iUplaodFile() {
@@ -32,7 +31,6 @@ public class BulkUserCreationPage extends BaseClass {
 		String filepath = (System.getProperty("user.dir") + "/src/test/java/com/remedy/resources/bulkUserCreation.txt");
 		WebElement elem = driver.findElement(By.cssSelector(".button-import>button"));
 		elem.sendKeys(filepath);
-
 	}
 
 	public void iVerifySuccssfulUserCreationMessage(String text) {
@@ -99,7 +97,7 @@ public class BulkUserCreationPage extends BaseClass {
 		applicationsList = new HashMap<String, String>();
 		applicationsList.put("Physicians", "Physician Connect, TCI");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkNPIPerRole = new HashMap<String, String>();
+//		bulkNPIPerRole = new HashMap<String, String>();
 		bulkEmailPerRole.put("Physicians", "qaautomation+." + randomString + "@remedypartners.com");
 		bulkUsersEmailPerRole.put("Super Admin-Physicians", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Physicians", applicationsList);
@@ -261,9 +259,9 @@ public class BulkUserCreationPage extends BaseClass {
 		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
 
-		bulkNPIPerRole.put("Physicians", randomNPI);
-		bulkUsersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
-		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
+//		bulkNPIPerRole.put("Physicians", randomNPI);
+		bulkUsersNPIPerRole = randomNPI;
+//		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
 
 		iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 		iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
@@ -1008,7 +1006,7 @@ public class BulkUserCreationPage extends BaseClass {
 		applicationsList = new HashMap<String, String>();
 		applicationsList.put("Physicians", "Episodes, Reports, Physician Connect, TCI, Lessons");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkNPIPerRole = new HashMap<String, String>();
+//		bulkNPIPerRole = new HashMap<String, String>();
 		bulkEmailPerRole.put("Physicians", "qaautomation+" + randomString + "@remedypartners.com");
 		bulkUsersEmailPerRole.put("Super Admin-Physicians", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Physicians", applicationsList);
@@ -1169,9 +1167,9 @@ public class BulkUserCreationPage extends BaseClass {
 
 		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
-		bulkNPIPerRole.put("Physicians", randomNPI);
-		bulkUsersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
-		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
+//		bulkNPIPerRole.put("Physicians", randomNPI);
+		bulkUsersNPIPerRole = randomNPI;
+//		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
 		iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 		iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
 	}
@@ -1179,7 +1177,6 @@ public class BulkUserCreationPage extends BaseClass {
 	public void clickSubmit() {
 		iWillWaitToSee(By.xpath("//button[text()='Submit']"));
 		clickElement(driver.findElement(By.xpath("//button[text()='Submit']")));
-
 	}
 
 	public void verifySuccessfulMessage(String text) {
@@ -1292,8 +1289,7 @@ public class BulkUserCreationPage extends BaseClass {
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Physicians", applicationsList);
 			CreateUserPage.usersEmailPerRole.put("Super Admin-Physicians", bulkEmailPerRole);
 
-			String exisitingNPI = BulkUserCreationPage.bulkUsersNPIPerRole.get(userRole)
-					.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
+			String exisitingNPI = BulkUserCreationPage.bulkUsersNPIPerRole;
 			strUserData = strUserData.replace("NPI", exisitingNPI);
 			iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 			iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);

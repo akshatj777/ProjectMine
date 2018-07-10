@@ -47,8 +47,6 @@ Scenario Outline: Scenario to Create user with Invalid data and validate error m
       | Invalid Email                                      | Super Admin | Partner Technical Administrator |
       | Data Permissions separation by using semicolon (;) | Super Admin | Remedy RN                 |
 
-
-
   Scenario: Scenario to check validation message when multiple users with same email is imported
     Given I am on the login page
     Then I log in as super user

@@ -49,8 +49,8 @@ public class MailCreateUser extends BaseClass{
 	
 	public void iEnterUserNameToLoginMailAccount(String role) {
 		iWillWaitToSee(By.xpath("//input[@type='email']"));
-		String emailVal = CreateUserPage.usersEmailPerRole.get(role).get(role.substring((role.indexOf("-")+1)).trim());
-		driver.findElement(By.xpath("//input[@type='email']")).sendKeys(emailVal);
+//		String emailVal = CreateUserPage.usersEmailPerRole.get(role).get(role.substring((role.indexOf("-")+1)).trim());
+		driver.findElement(By.xpath("//input[@type='email']")).sendKeys(role);
 		clickElement(driver.findElement(By.xpath("//span[text()='Next']")));
 	}
 	
@@ -204,9 +204,9 @@ public class MailCreateUser extends BaseClass{
 			iWillWaitToSee(By.xpath("//a[contains(text(),'Inbox (')]"));
 			isElementPresentOnPage(By.xpath("//a[contains(text(),'Inbox (')]"));
 			
-			driver.findElement(By.xpath("//input[@id='gbqfq']")).sendKeys(email);
+			driver.findElement(By.xpath("//input[@id='gbqfq']")).sendKeys(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim()));
 			delay();
-			driver.findElement(By.xpath("//span[@class='gbqfi gb_hc']")).click();
+			driver.findElement(By.xpath("//span[@class='gbqfi gb_dc']")).click();
 			delay();
 			iWillWaitToSee(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[text()='Remedy Partners - Change Your Password']"));
 	    	Assert.assertTrue(isElementPresentOnPage((By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[text()='Remedy Partners - Change Your Password']"))));
@@ -481,12 +481,12 @@ public class MailCreateUser extends BaseClass{
 		if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		{
 			iWillWaitToSee(By.xpath("//input[@name='email']"));
-			driver.findElement(By.xpath("//input[@name='email']")).sendKeys(email);
-			while(!(driver.findElement(By.xpath("//input[@name='email']")).getAttribute("value").equals(email)))
+			driver.findElement(By.xpath("//input[@name='email']")).sendKeys(CreateUserPage.usersEmailPerRole.get(role).get(role.substring((role.indexOf("-")+1)).trim()));
+			while(!(driver.findElement(By.xpath("//input[@name='email']")).getAttribute("value").equals(CreateUserPage.usersEmailPerRole.get(role).get(role.substring((role.indexOf("-")+1)).trim()))))
 			{
 				driver.findElement(By.xpath("//input[@name='email']")).sendKeys(Keys.CONTROL,"a");
 				driver.findElement(By.xpath("//input[@name='email']")).sendKeys(Keys.DELETE);
-				driver.findElement(By.xpath("//input[@name='email']")).sendKeys(email);
+				driver.findElement(By.xpath("//input[@name='email']")).sendKeys(CreateUserPage.usersEmailPerRole.get(role).get(role.substring((role.indexOf("-")+1)).trim()));
 			}
 			iWillWaitToSee(By.xpath("//button[@type='submit']"));
 			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//button[@type='submit']")));
@@ -495,7 +495,7 @@ public class MailCreateUser extends BaseClass{
 		else
 		{
 			iWillWaitToSee(By.xpath("//input[@name='email']"));
-			driver.findElement(By.xpath("//input[@name='email']")).sendKeys(email);
+			driver.findElement(By.xpath("//input[@name='email']")).sendKeys(CreateUserPage.usersEmailPerRole.get(role).get(role.substring((role.indexOf("-")+1)).trim()));
 			iWillWaitToSee(By.xpath("//button[@type='submit']"));
 			clickElement(driver.findElement(By.xpath("//button[@type='submit']")));
 			Thread.sleep(3000);
