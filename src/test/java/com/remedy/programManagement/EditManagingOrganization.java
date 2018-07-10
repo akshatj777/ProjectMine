@@ -167,6 +167,37 @@ public class EditManagingOrganization extends BaseClass {
 				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 			}
 		}
+		
+		else if(field.contains("LTCHNAME - YES"))
+		{
+			if(CreateLTCHOrganizationAPI.LTCHNameList.get(0).contains("\""))
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateLTCHOrganizationAPI.LTCHNameList.get(0).substring(1, CreateLTCHOrganizationAPI.LTCHNameList.get(0).length()-1)+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateLTCHOrganizationAPI.LTCHNameList.get(0).substring(1, CreateLTCHOrganizationAPI.LTCHNameList.get(0).length()-1)+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			}
+			else
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateLTCHOrganizationAPI.LTCHNameList.get(0)+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateLTCHOrganizationAPI.LTCHNameList.get(0)+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			}
+		}
+		else if(field.contains("LTCHNAME - NO"))
+		{
+			if(CreateLTCHOrganizationAPI.LTCHNameList.get(1).contains("\""))
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateLTCHOrganizationAPI.LTCHNameList.get(1).substring(1, CreateLTCHOrganizationAPI.LTCHNameList.get(1).length()-1)+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateLTCHOrganizationAPI.LTCHNameList.get(1).substring(1, CreateLTCHOrganizationAPI.LTCHNameList.get(1).length()-1)+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			}
+			else
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateLTCHOrganizationAPI.LTCHNameList.get(1)+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateLTCHOrganizationAPI.LTCHNameList.get(1)+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			}
+		}
 		else if(field.contains("PROGRAMNAME"))
 		{
 			if(CreateProgramAPI.PROGRAMNameList.get(0).contains("\""))
@@ -288,6 +319,29 @@ public class EditManagingOrganization extends BaseClass {
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateSNFOrganizationAPI.SNFNameList.get(1));
 		}
+		
+		else if(field2.equalsIgnoreCase("LTCHNAME - YES")){
+			CreateLTCHOrganization.oldLTCH_WithMO = CreateLTCHOrganizationAPI.LTCHNameList.get(0).substring(1, CreateLTCHOrganizationAPI.LTCHNameList.get(0).length()-1);
+			CreateLTCHOrganization.tempLTCHOrg.put("LTCHNAME",createRandomName(field2));
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateLTCHOrganization.tempLTCHOrg.get("LTCHNAME"));
+		}
+		else if(field2.equalsIgnoreCase("LTCHNAME - NO")){
+			CreateLTCHOrganization.oldLTCH_WithoutMO = CreateLTCHOrganizationAPI.LTCHNameList.get(1).substring(1, CreateLTCHOrganizationAPI.LTCHNameList .get(1).length()-1);
+			CreateLTCHOrganization.tempLTCHOrg.put("LTCHNAME",createRandomName(field2));
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateLTCHOrganization.tempLTCHOrg.get("LTCHNAME"));
+		}
+		else if(field2.equalsIgnoreCase("DUPLICATE_LTCH - YES")){
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateLTCHOrganizationAPI.LTCHNameList.get(1));
+		}
+		else if(field2.equalsIgnoreCase("DUPLICATE_LTCH - NO")){
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateLTCHOrganizationAPI.LTCHNameList.get(0));
+		}
 		else if(field2.contains("PROGRAMNAME")){
 			CreatePrograms.programName = CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1);
 			CreatePrograms.tempPrograms.put(1,createRandomName(field2));
@@ -327,6 +381,14 @@ public class EditManagingOrganization extends BaseClass {
 				CreateHHAOrganization.tempHHAOrg.put("HHANAME",RandomStringUtils.randomAlphabetic(75));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
 			}
+			else if(field1.contains("Long-Term Care Hospital"))
+			{
+				scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
+				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
+				CreateLTCHOrganization.tempLTCHOrg.put("LTCHNAME",RandomStringUtils.randomAlphabetic(75));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateLTCHOrganization.tempLTCHOrg.get("LTCHNAME"));
+			}
 		}
 		else if(field2.equalsIgnoreCase("AllowedCharatcters - NO")){
 			String str="a~`@!#$%^&*()-+_={}|;'[]<>,.?/Testing120";
@@ -361,6 +423,14 @@ public class EditManagingOrganization extends BaseClass {
 				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
 				CreateHHAOrganization.tempHHAOrg.put("HHANAME",str+RandomStringUtils.randomAlphabetic(7));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
+			}
+			else if(field1.contains("LTCH"))
+			{
+				scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
+				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
+				CreateLTCHOrganization.tempLTCHOrg.put("LTCHNAME",str+RandomStringUtils.randomAlphabetic(7));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateLTCHOrganization.tempLTCHOrg.get("LTCHNAME"));
 			}
 		}
 		else if(field2.contains("equalsTo75Characters")){
@@ -467,6 +537,18 @@ public class EditManagingOrganization extends BaseClass {
 		{
 			iWillWaitToSee(By.xpath("//div[text()='"+CreateSNFOrganization.SNFOrg_noMO.get("SNFNAME")+"']"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateSNFOrganization.SNFOrg_noMO.get("SNFNAME")+"']")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(field.contains("LTCHNAME - YES"))
+		{
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateLTCHOrganization.LTCHOrg.get("LTCHNAME")+"']"));
+			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateLTCHOrganization.LTCHOrg.get("LTCHNAME")+"']")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(field.contains("LTCHNAME - NO"))
+		{
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateLTCHOrganization.LTCHOrg_noMO.get("LTCHNAME")+"']"));
+			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateLTCHOrganization.LTCHOrg_noMO.get("LTCHNAME")+"']")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 	}

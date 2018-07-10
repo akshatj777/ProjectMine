@@ -49,6 +49,11 @@ public class EditPhysicianRoster extends BaseClass {
 			iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-programFilterTerm']")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
 			delay();
 		}
+		else{
+			iWillWaitToSee(By.cssSelector(".text-input-field-organizationFilterTerm"));
+			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), text);
+			delay();
+		}
 	}
 	
 	public void iVerifyPhysicianRosterFieldInSearchListOnViewProfileOfOrganizationSearchBox(String text, String org){

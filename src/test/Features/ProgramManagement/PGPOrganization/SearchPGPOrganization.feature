@@ -1,12 +1,5 @@
 Feature: Search the PGP organizations functionality tests
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -29,6 +22,11 @@ Feature: Search the PGP organizations functionality tests
       | Create PGP using API calls without MO | PGPNAME | ShortName |               |               | EIN | NPI | Adderess1 | Address2 | AutomationCity | CA    | 10000 |        2 |           201 |             |  0 | pgp  |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     Then I verify the Search bar on "PGP" organization page
     Then I search "<SearchParam> - <Has_MO>" and verify with search list options on "PGP" organization search box
@@ -44,6 +42,11 @@ Feature: Search the PGP organizations functionality tests
       | Search PGP Organization with Postal Code               |        |          10000 |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     Then I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -63,6 +66,11 @@ Feature: Search the PGP organizations functionality tests
       | Search PGP Organization after editing the PGP name - Without MO | NO     | PGPNAME  | PGPNAME         | PGP Organization Successfully Updated. |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     Then I search with "<PGP_Name>" on organization in search box
     Then I verify the "No matches" message for invalid search in Organization

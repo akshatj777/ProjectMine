@@ -57,6 +57,14 @@ public class ViewProfileManagingOrganization extends BaseClass{
 				isElementPresentOnPage(By.xpath("//a[@href='mailto:"+CreateManagingOrganization.moOrg.get("MONAME")+"']"));
 			}
 		}
+		else if(text.contains("LTCHNAME")){
+			if (text.contains("YES")){
+				isElementPresentOnPage(By.xpath("//a[@href='mailto:"+CreateManagingOrganization.moOrg.get("MONAME")+"']"));
+			}
+			else if (text.contains("NO")){
+				isElementPresentOnPage(By.xpath("//a[@href='mailto:"+CreateManagingOrganization.moOrg.get("MONAME")+"']"));
+			}
+		}
 		else
 		{
 			isElementPresentOnPage(By.xpath("//a[@href='mailto:"+text+"']"));
@@ -142,5 +150,19 @@ public class ViewProfileManagingOrganization extends BaseClass{
 		driver.navigate().to(url);
 		longDelay();
 		longDelay();
+	}
+	
+	public void iClickOnCreateNewOrganizationlinkunderNoMatches(String link){
+		clickElement(driver.findElement(By.cssSelector(".data-table-overlay-link>a")));
+	}
+	
+	public void iVerifytheRespectiveManagingOrganizationShouldbePrefilledorSelectedontheCreateOrganizationPage(){
+		iWillWaitToSee(By.xpath("//div[@class='Select-control']//span[contains(text(),'"+CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"')]"));
+		driver.findElement(By.xpath("//div[@class='Select-control']//span[contains(text(),'"+CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"')]")).getText();
+	}
+	
+	public void userShouldGetRedirectedToTheManagingOrganizationProfilePage(){
+		iWillWaitToSee(By.xpath("//h3[text()='"+CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"']"));
+		isElementPresentOnPage(By.xpath("//h3[text()='"+CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"']"));
 	}
 }

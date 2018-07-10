@@ -80,12 +80,12 @@ public class CreatePrograms extends BaseClass {
 		iVerifyTextFromListOfElement(By.cssSelector(".data-table-header-cell>a"), header);
 	}
 
-	public void iSelectProgramNameInCreateContractPageUnderPayorOrganization(String text, String org) 
+	public void iSelectProgramNameInCreateContractPageUnderPayorOrganization(int index, String text, String org) 
 	{
 		if(!text.equals(""))
 		{
 			driver.findElement(By.xpath("//div[text()='Select a Program']")).click();
-			new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[text()='Select a Program']")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)).build().perform();
+			new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[text()='Select a Program']")), CreateProgramAPI.PROGRAMNameList.get(index-1).substring(1, CreateProgramAPI.PROGRAMNameList.get(index-1).length()-1)).build().perform();
 			driver.findElement(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption")).click();
 			delay();
 		}
@@ -99,6 +99,7 @@ public class CreatePrograms extends BaseClass {
 	{
 		if(!text.equals(""))
 		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//*[contains(@name,'orgType')]/../div")));
 			driver.findElement(By.xpath("//*[contains(@name,'orgType')]/../div")).click();
 			iWillWaitToSee(By.cssSelector(".VirtualizedSelectOption"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+text+"']")));
@@ -110,6 +111,7 @@ public class CreatePrograms extends BaseClass {
 	{
 		if(!text.equals(""))
 		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")));
 			if(text.contains("ACHNAME - NO"))
 			{
 				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
@@ -231,7 +233,7 @@ public class CreatePrograms extends BaseClass {
 			}
 			else if(text.equals("Duplicate_CID"))
 			{
-				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreatePrograms.programs.get(1));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
 			}
 			else{
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), text);

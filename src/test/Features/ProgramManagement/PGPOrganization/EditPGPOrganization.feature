@@ -1,12 +1,5 @@
 Feature: Edit PGP organization functionality tests
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -29,6 +22,11 @@ Feature: Edit PGP organization functionality tests
       | Create PGP using API calls without MO | PGPNAME | ShortName |               |               | EIN | NPI | Adderess1 | Address2 | AutomationCity | CA    | 10000 |        2 |           201 |             |  0 | pgp  |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     Then I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -54,6 +52,11 @@ Feature: Edit PGP organization functionality tests
       | Verification of availability of all the fields on Edit PGP Organization page | NO     | PGPNAME  |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     Then I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -67,6 +70,11 @@ Feature: Edit PGP organization functionality tests
       | Check validation for blank PGP name | NO     | PGPNAME  |                 | Please enter an Organization Name |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     Then I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -93,6 +101,11 @@ Feature: Edit PGP organization functionality tests
       | Check Allowed Characters for Postal code field | YES    | PGPNAME  |                                                                              |                                                                         |                                                |                                                                         |                                                | abcdefghijkl | Please enter a valid Postal Code                               |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     Then I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page

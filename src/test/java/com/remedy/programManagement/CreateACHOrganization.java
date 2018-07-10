@@ -191,6 +191,38 @@ public class CreateACHOrganization extends BaseClass{
 				delay();
 			}
 		}
+		if (id.contains("LTCH")){
+			if((id.substring(id.indexOf("-")+1).trim()).equals("CCN")){
+				CreateLTCHOrganization.tempLTCHOrg.put("CCN", createRandomNumber(10));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.tempLTCHOrg.get("CCN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("EIN")){
+				CreateLTCHOrganization.tempLTCHOrg.put("EIN", createRandomNumber(10));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.tempLTCHOrg.get("EIN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("NPI")){
+				CreateLTCHOrganization.tempLTCHOrg.put("NPI", createRandomNumber(10));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.tempLTCHOrg.get("NPI"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_CCN")){
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.LTCHOrg_noMO.get("CCN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_EIN")){
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.LTCHOrg_noMO.get("EIN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
+					iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.LTCHOrg_noMO.get("NPI"));
+			}
+			else if(id.contains("lessThan6")){
+				String value = createRandomNumber(5);
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
+			}
+			
+			else {
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), id.substring(id.indexOf("-")+1).trim());
+				delay();
+			}
+		}
 	}
 	
 	public void iEnterLocationNameForLocationOnACHOrg(String text, int num) {
@@ -360,7 +392,24 @@ public class CreateACHOrganization extends BaseClass{
         	else if(text.equals("LIDmorethan20characters"))
         	{
     			CreateSNFOrganization.tempSNFOrg.put("LID", createRandomNumber(21));
-    			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), tempAchOrg.get("LID"));
+    			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateSNFOrganization.tempSNFOrg.get("LID"));
+    		}
+    	}
+    	else if(field.contains("LTCH"))
+    	{
+    		if(text.equals("LID"))
+        	{
+    			CreateLTCHOrganization.tempLTCHOrg.put("LID", createRandomNumber(15));
+    			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateLTCHOrganization.tempLTCHOrg.get("LID"));
+    		}
+        	else if(text.equals("DUPLICATE_LID"))
+        	{
+        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateLTCHOrganization.tempLTCHOrg.get("LID"));
+        	}
+        	else if(text.equals("LIDmorethan20characters"))
+        	{
+    			CreateLTCHOrganization.tempLTCHOrg.put("LID", createRandomNumber(21));
+    			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateLTCHOrganization.tempLTCHOrg.get("LID"));
     		}
     	}
         else

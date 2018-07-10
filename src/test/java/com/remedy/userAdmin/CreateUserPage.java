@@ -32,8 +32,8 @@ public class CreateUserPage extends BaseClass{
 	public final static DateFormat df = new SimpleDateFormat("ddMMyyHHmmss");
 	public final static Date timestamp = new Date();
 	public final static String time = df.format(timestamp);
-	String userRole = null;
-	String userApplications = null;
+	static String userRole = null;
+	static String userApplications = null;
 	static String userNPI = "";
 	public static HashMap<String,HashMap<String,String>> usersEmailPerRole=new HashMap<String,HashMap<String,String>>();
 	public static HashMap<String,HashMap<String,String>> usersApplicationsPerRole=new HashMap<String,HashMap<String,String>>();
@@ -105,17 +105,20 @@ public class CreateUserPage extends BaseClass{
     {
     	if(!(desc.equals("")))
     	{
-    		WebElement element = driver.findElement(By.xpath("//span[text()='"+desc+"']"));
-        	scrollIntoViewByJS(element);
-        	if(DriverScript.Config.getProperty("Browser").equals("ie"))
-        	{
-        		((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='"+desc+"']")));
-        	}
-        	else
-        	{
-        		element.click();
-        	}
-        	userRole = desc;
+    		if(!(driver.findElements(By.xpath("//div[@class='ui selection dropdown']/div[text()='"+desc+"']")).size()>0))
+    		{
+    			WebElement element = driver.findElement(By.xpath("//span[text()='"+desc+"']"));
+            	scrollIntoViewByJS(element);
+            	if(DriverScript.Config.getProperty("Browser").equals("ie"))
+            	{
+            		((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='"+desc+"']")));
+            	}
+            	else
+            	{
+            		element.click();
+            	}
+            	userRole = desc;
+    		}
     	}
     }
     
@@ -386,6 +389,7 @@ public class CreateUserPage extends BaseClass{
     		{
     			clickElement(driver.findElement(By.xpath("//div[text()='Select']")));
     			iWillWaitToSee(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input"));
+    			delay();
     			driver.findElement(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input")).sendKeys(text);
     		}
             Thread.sleep(4000);
@@ -589,27 +593,29 @@ public class CreateUserPage extends BaseClass{
     
     public void iSelectTileForTheRole(String appList){
     	String apps = "";
-    	
-    	if(appList.contains(","))
+    	if(!(appList.equals("")))
     	{
-    		StringTokenizer st = new StringTokenizer(appList,",");
-            while (st.hasMoreTokens()) {
-            	String a = st.nextToken().trim();
-            	iWillWaitToSee(By.xpath("//label[.='"+a+"']"));
-            	if(DriverScript.Config.getProperty("Browser").equals("ie"))
-            	{
-            		((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//label[.='"+a+"']")));
-            	}
-            	else
-            	{
-            		clickElement(driver.findElement(By.xpath("//label[.='"+a+"']")));
-            	}
-            }
-    	}
-    	else
-    	{
-    		iWillWaitToSee(By.xpath("//label[.='"+appList+"']"));
-    		clickElement(driver.findElement(By.xpath("//label[.='"+appList+"']")));
+    		if(appList.contains(","))
+        	{
+        		StringTokenizer st = new StringTokenizer(appList,",");
+                while (st.hasMoreTokens()) {
+                	String a = st.nextToken().trim();
+                	iWillWaitToSee(By.xpath("//label[.='"+a+"']"));
+                	if(DriverScript.Config.getProperty("Browser").equals("ie"))
+                	{
+                		((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//label[.='"+a+"']")));
+                	}
+                	else
+                	{
+                		clickElement(driver.findElement(By.xpath("//label[.='"+a+"']")));
+                	}
+                }
+        	}
+        	else
+        	{
+        		iWillWaitToSee(By.xpath("//label[.='"+appList+"']"));
+        		clickElement(driver.findElement(By.xpath("//label[.='"+appList+"']")));
+        	}
     	}
     	for(int i=1; i<=(driver.findElements(By.xpath("//div[@class='column padding']")).size());i++)
     	{
@@ -632,26 +638,26 @@ public class CreateUserPage extends BaseClass{
    }
    
    public void iClickOnEpisodesTwoTileUnderSpecificUserLoginPage(String role){
+	   delay();
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
 		   if(st.nextToken().trim().equals("Episodes 2.0")){
-			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[text()='Episodes 2.0']")));
+			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Episodes 2.0']")));
 			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 			   {
-				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//p[text()='Episodes 2.0']"))); 
+				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Episodes 2.0']"))); 
 			   }
 			   else
 			   {
-				   clickElement(driver.findElement(By.xpath("//p[text()='Episodes 2.0']")));
+				   clickElement(driver.findElement(By.xpath("//div[text()='Episodes 2.0']")));
 			   }
 		   }  
 	   }
    }
    
    public void iVerifyNavigationOnEpisodes2HomePage(String role){
-	   driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
@@ -676,6 +682,12 @@ public class CreateUserPage extends BaseClass{
 //						   break;
 //					   }
 //				   }
+			   driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
+			   if(!(driver.findElements(By.xpath("//div[text()='Episode Connect']")).size()>0))
+			   {
+				   driver.navigate().refresh();
+				   iWillWaitToSee(By.xpath("//div[text()='Episode Connect']"));
+			   }
 				   iWillWaitToSee(By.xpath("//div[@class='patient-card']"));
 				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
 				   
@@ -754,13 +766,15 @@ public class CreateUserPage extends BaseClass{
 	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 	   {
 		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
+		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
 		   ((JavascriptExecutor)driver).executeScript(javaScript, element);
 		   iWillWaitToSee(By.cssSelector("#navbar-dropdown-menu-myprofile"));
 		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.cssSelector("#navbar-dropdown-menu-myprofile")));
 	   }
 	   else
 	   {
-		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
+		   element.click();
+		   element.click();
 		   ((JavascriptExecutor)driver).executeScript(javaScript, element);
 		   iWillWaitToSee(By.cssSelector("#navbar-dropdown-menu-myprofile"));
 		   clickElement(driver.findElement(By.cssSelector("#navbar-dropdown-menu-myprofile")));  
@@ -770,19 +784,22 @@ public class CreateUserPage extends BaseClass{
    }
    
    public void iClickOnEpisode1TileUnderSpecificUserLoginPage(String role){
+	   delay();
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
 		   if(st.nextToken().trim().equals("Episodes")){
-			   iWillWaitToSee(By.xpath("//p[text()='Episodes']"));
+			   iWillWaitToSee(By.xpath("//div[text()='Episodes']"));
 			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 			   {
-				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[@class='spoe-button episodes']")));
+				   delay();
+				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Episodes']")));
 			   }
 			   else
 			   {
-				   clickElement(driver.findElement(By.xpath("//a[@class='spoe-button episodes']")));  
+				   delay();
+				   clickElement(driver.findElement(By.xpath("//div[text()='Episodes']")));  
 			   }
 		   }   
 	   }
@@ -794,8 +811,8 @@ public class CreateUserPage extends BaseClass{
 	   while(st.hasMoreTokens())
 	   {
 			   if(st.nextToken().trim().equals("Physician Connect")){
-				   iWillWaitToSee(By.xpath("//p[text()='Gainsharing Physician Survey']"));
-				   clickElement(driver.findElement(By.xpath("//p[text()='Gainsharing Physician Survey']")));
+				   iWillWaitToSee(By.xpath("//div[text()='Gainsharing Physician Survey']"));
+				   clickElement(driver.findElement(By.xpath("//div[text()='Gainsharing Physician Survey']")));
 		   }   
 	   }
    }
@@ -806,14 +823,14 @@ public class CreateUserPage extends BaseClass{
 	   while(st.hasMoreTokens())
 	   {
 			   if(st.nextToken().trim().equals("User Admin")){
-				   iWillWaitToSee(By.xpath("//p[text()='User Admin']"));
+				   iWillWaitToSee(By.xpath("//div[text()='Users']"));
 				   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 				   {
-					   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//p[text()='User Admin']")));
+					   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Users']")));
 				   }
 				   else
 				   {
-					   clickElement(driver.findElement(By.xpath("//p[text()='User Admin']")));  
+					   clickElement(driver.findElement(By.xpath("//div[text()='Users']")));  
 				   }
 		   }   
 	   }
@@ -998,16 +1015,16 @@ public class CreateUserPage extends BaseClass{
    }
 
    public void iClickOnInstituteTileUnderSpecificUserLoginPage(String role){
-		iWillWaitToSee(By.xpath("//p[text()='Institute']"));   
-	   Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[text()='Institute']")));
+		iWillWaitToSee(By.xpath("//div[text()='Institute']"));   
+	   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Institute']")));
 		if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		{
-			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//p[text()='Institute']")));
+			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Institute']")));
 			delay();
 		}
 		else
 		{
-			clickElement(driver.findElement(By.xpath("//p[text()='Institute']")));
+			clickElement(driver.findElement(By.xpath("//div[text()='Institute']")));
 			delay();
 		}
    }
@@ -1038,15 +1055,15 @@ public class CreateUserPage extends BaseClass{
    public void iClickOnReportsTileUnderSpecificUserLoginPage(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   if(application.contains("Reports")){
-		   iWillWaitToSee(By.xpath("//p[text()='Reports']"));
-		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[text()='Reports']")));
+		   iWillWaitToSee(By.xpath("//div[text()='Reports']"));
+		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Reports']")));
 		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		   {
-			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//p[text()='Reports']")));
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Reports']")));
 		   }
 		   else
 		   {
-			   clickElement(driver.findElement(By.xpath("//p[text()='Reports']")));  
+			   clickElement(driver.findElement(By.xpath("//div[text()='Reports']")));  
 		   }
 	   }
     }
@@ -1061,14 +1078,14 @@ public class CreateUserPage extends BaseClass{
    public void iClickOnRemedyUTileUnderSpecificUserLoginPage(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   if(application.contains("Lessons")){
-		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[text()='RemedyU']")));
+		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='RemedyU']")));
 		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		   {
-			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//p[text()='RemedyU']")));
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='RemedyU']")));
 		   }
 		   else
 		   {
-			   clickElement(driver.findElement(By.xpath("//p[text()='RemedyU']")));
+			   clickElement(driver.findElement(By.xpath("//div[text()='RemedyU']")));
 		   }
    	}
    }
@@ -1293,68 +1310,141 @@ public class CreateUserPage extends BaseClass{
    }
 
    public void clickSubmitButtonForEdit(String user) throws Throwable {
-	   iWillWaitToSee(By.xpath("//button[.='Submit']"));
-		waitTo().until(ExpectedConditions.elementToBeClickable(By.xpath("//button[.='Submit']")));
-	   clickElement(driver.findElement(By.xpath("//button[.='Submit']")));
-		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ui.modal.transition.visible.active.component-add-user-form")));
-		HashMap<String,String> emailList = new HashMap<String,String>();
-		HashMap<String,String> applicationsList = new HashMap<String,String>();
-		HashMap<String,String> NPIList = new HashMap<String,String>();
-		if(user.contains("--"))
-		{
-			String newRole = user.substring(user.indexOf("-")+1, user.lastIndexOf("-")-1);
-			String oldRole = user.substring(user.lastIndexOf("-")+1,user.length());
-			String userL = user.substring(0,user.indexOf("-")); 
-			emailList.put(newRole, CreateUserPage.usersEmailPerRole.get(userL+"-"+oldRole).get(oldRole).trim());
-			applicationsList.put(newRole, userApplications);
-			if(newRole.equals("Physicians"))
+	   if(user.indexOf("-")==user.lastIndexOf("-"))
+	   {
+		   iWillWaitToSee(By.xpath("//button[.='Submit']"));
+			waitTo().until(ExpectedConditions.elementToBeClickable(By.xpath("//button[.='Submit']")));
+		   clickElement(driver.findElement(By.xpath("//button[.='Submit']")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ui.modal.transition.visible.active.component-add-user-form")));
+			HashMap<String,String> emailList = new HashMap<String,String>();
+			HashMap<String,String> applicationsList = new HashMap<String,String>();
+			HashMap<String,String> NPIList = new HashMap<String,String>();
+			if(user.contains("--"))
 			{
-				NPIList.put(newRole, userNPI);
+				String newRole = user.substring(user.indexOf("-")+1, user.lastIndexOf("-")-1);
+				String oldRole = user.substring(user.lastIndexOf("-")+1,user.length());
+				String userL = user.substring(0,user.indexOf("-")); 
+				emailList.put(newRole, CreateUserPage.usersEmailPerRole.get(userL+"-"+oldRole).get(oldRole).trim());
+				applicationsList.put(newRole, userApplications);
+				if(newRole.equals("Physicians"))
+				{
+					NPIList.put(newRole, userNPI);
+				}
+				else
+				{
+					NPIList.put(newRole, "");
+				}
+				userNPI = "";
+				if(user.contains("Super Admin"))
+				{
+					usersEmailPerRole.put(userL+"-"+newRole, emailList);
+					usersApplicationsPerRole.put(userL+"-"+newRole, applicationsList);
+					usersNPIPerRole.put(userL+"-"+newRole, NPIList);
+				}
+				else if(user.contains("Partner Technical Administrator"))
+				{
+					usersEmailPerRole.put(userL+"-"+newRole, emailList);
+					usersApplicationsPerRole.put(userL+"-"+newRole, applicationsList);
+					usersNPIPerRole.put(userL+"-"+newRole, NPIList);
+				}
 			}
 			else
 			{
-				NPIList.put(newRole, "");
-			}
-			userNPI = "";
-			if(user.contains("Super Admin"))
+				emailList.put(user.substring(user.indexOf("-")+1), CreateUserPage.usersEmailPerRole.get(user).get(user.substring((user.indexOf("-")+1)).trim()));
+				applicationsList.put(user.substring(user.indexOf("-")+1), userApplications);
+				if(user.contains("Physicians"))
+				{
+					NPIList.put(user.substring(user.indexOf("-")+1), userNPI);
+				}
+				else
+				{
+					NPIList.put(user.substring(user.indexOf("-")+1), "");
+				}
+				userNPI = "";
+				if(user.contains("Super Admin"))
+				{
+					usersEmailPerRole.put(user.trim(), emailList);
+					usersApplicationsPerRole.put(user.trim(), applicationsList);
+					usersNPIPerRole.put(user.trim(), NPIList);
+				}
+				else if(user.contains("Partner Technical Administrator"))
+				{
+					usersEmailPerRole.put(user.trim(), emailList);
+					usersApplicationsPerRole.put(user.trim(), applicationsList);
+					usersNPIPerRole.put(user.trim(), NPIList);
+				}
+			} 
+	   }
+	   else
+	   {
+		   String firstKey = user.substring(0,user.indexOf("-"));
+			String secondKey = user.substring(user.indexOf("-")+1, user.lastIndexOf("-"));
+			String thirdKey = user.substring(user.lastIndexOf("-")+1, user.length());
+		   iWillWaitToSee(By.xpath("//button[.='Submit']"));
+			waitTo().until(ExpectedConditions.elementToBeClickable(By.xpath("//button[.='Submit']")));
+		   clickElement(driver.findElement(By.xpath("//button[.='Submit']")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ui.modal.transition.visible.active.component-add-user-form")));
+			HashMap<String,String> emailList = new HashMap<String,String>();
+			HashMap<String,String> applicationsList = new HashMap<String,String>();
+			HashMap<String,String> NPIList = new HashMap<String,String>();
+			if(!(secondKey.equals("")))
 			{
-				usersEmailPerRole.put(userL+"-"+newRole, emailList);
-				usersApplicationsPerRole.put(userL+"-"+newRole, applicationsList);
-				usersNPIPerRole.put(userL+"-"+newRole, NPIList);
-			}
-			else if(user.contains("Partner Technical Administrator"))
-			{
-				usersEmailPerRole.put(userL+"-"+newRole, emailList);
-				usersApplicationsPerRole.put(userL+"-"+newRole, applicationsList);
-				usersNPIPerRole.put(userL+"-"+newRole, NPIList);
-			}
-		}
-		else
-		{
-			emailList.put(user.substring(user.indexOf("-")+1), CreateUserPage.usersEmailPerRole.get(user).get(user.substring((user.indexOf("-")+1)).trim()));
-			applicationsList.put(user.substring(user.indexOf("-")+1), userApplications);
-			if(user.contains("Physicians"))
-			{
-				NPIList.put(user.substring(user.indexOf("-")+1), userNPI);
+				String newRole = thirdKey;
+				String oldRole = secondKey;
+				String userL = firstKey; 
+				emailList.put(newRole, CreateUserPage.usersEmailPerRole.get(userL+"-"+oldRole).get(oldRole).trim());
+				applicationsList.put(newRole, userApplications);
+				if(newRole.equals("Physicians"))
+				{
+					NPIList.put(newRole, userNPI);
+				}
+				else
+				{
+					NPIList.put(newRole, "");
+				}
+				userNPI = "";
+				if(user.contains("Super Admin"))
+				{
+					usersEmailPerRole.put(userL+"-"+newRole, emailList);
+					usersApplicationsPerRole.put(userL+"-"+newRole, applicationsList);
+					usersNPIPerRole.put(userL+"-"+newRole, NPIList);
+				}
+				else if(user.contains("Partner Technical Administrator"))
+				{
+					usersEmailPerRole.put(userL+"-"+newRole, emailList);
+					usersApplicationsPerRole.put(userL+"-"+newRole, applicationsList);
+					usersNPIPerRole.put(userL+"-"+newRole, NPIList);
+				}
 			}
 			else
 			{
-				NPIList.put(user.substring(user.indexOf("-")+1), "");
-			}
-			userNPI = "";
-			if(user.contains("Super Admin"))
-			{
-				usersEmailPerRole.put(user.trim(), emailList);
-				usersApplicationsPerRole.put(user.trim(), applicationsList);
-				usersNPIPerRole.put(user.trim(), NPIList);
-			}
-			else if(user.contains("Partner Technical Administrator"))
-			{
-				usersEmailPerRole.put(user.trim(), emailList);
-				usersApplicationsPerRole.put(user.trim(), applicationsList);
-				usersNPIPerRole.put(user.trim(), NPIList);
-			}
-		}
+				emailList.put(thirdKey, CreateUserPage.usersEmailPerRole.get(firstKey+"-"+thirdKey).get(thirdKey));
+				applicationsList.put(thirdKey, userApplications);
+				if(thirdKey.contains("Physicians"))
+				{
+					NPIList.put(user.substring(user.indexOf("-")+1), userNPI);
+				}
+				else
+				{
+					NPIList.put(user.substring(user.indexOf("-")+1), "");
+				}
+				userNPI = "";
+				if(firstKey.contains("Super Admin"))
+				{
+					usersEmailPerRole.put(firstKey+"-"+thirdKey, emailList);
+					usersApplicationsPerRole.put(firstKey+"-"+thirdKey, applicationsList);
+					usersNPIPerRole.put(firstKey+"-"+thirdKey, NPIList);
+				}
+				else if(firstKey.contains("Partner Technical Administrator"))
+				{
+					usersEmailPerRole.put(firstKey+"-"+thirdKey, emailList);
+					usersApplicationsPerRole.put(firstKey+"-"+thirdKey, applicationsList);
+					usersNPIPerRole.put(firstKey+"-"+thirdKey, NPIList);
+				}
+			} 
+	   }
+	   
+	   
    }
    
    public void clickSubmitButtonToCheckErrorMessage() throws Throwable {
@@ -1836,6 +1926,7 @@ public class CreateUserPage extends BaseClass{
 			    	   driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
 			    	   iFillInText(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), token);
 			    	   iWillWaitToSee(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),\""+token+"\")]"));
+			    	   delay();
 			    	   driver.findElement(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),\""+token+"\")]")).click();  
 		    	   }
 		   		}
@@ -2024,21 +2115,21 @@ public class CreateUserPage extends BaseClass{
    
    public void clickLogOutButtonAgain(String arg1) throws Throwable {
 	   Thread.sleep(2000);
-	   if(driver.findElements(By.cssSelector(".title>p")).size()>0)
+	   if(driver.findElements(By.xpath("//div[text()='Remedy Connect']")).size()>0)
 	   {
 		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		   {
-			   iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
-			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")));
+			   iWillWaitToSee(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']"));
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']")));
 			      delay();
-			      ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[@ng-click='user.logout()']")));
+			      ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='Log Out']")));
 		   }
 		   else
 		   {
-			   iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
-			      driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")).click();
+			   iWillWaitToSee(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']"));
+			      driver.findElement(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']")).click();
 			      delay();
-			      driver.findElement(By.xpath("//a[@ng-click='user.logout()']")).click();  
+			      driver.findElement(By.xpath("//span[text()='Log Out']")).click();  
 		   }
 	   }
    }
@@ -2062,17 +2153,17 @@ public class CreateUserPage extends BaseClass{
     	   }
     	   else if(newToken.contains("Administration"))
     	   {
-    		   token = "User Admin";
+    		   token = "Users";
     	   }
     	   else
     	   {
     		   token = newToken;   
     	   }
-    	   iWillWaitToSee(By.xpath("//p[text()='"+token.trim()+"']"));
-    	   Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[text()='"+token.trim()+"']")));
+    	   iWillWaitToSee(By.xpath("//div[text()='"+token.trim()+"']"));
+    	   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+token.trim()+"']")));
        } 
-	   iWillWaitToSee(By.xpath("//p[text()='Institute']"));
-       Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[text()='Institute']")));
+	   iWillWaitToSee(By.xpath("//div[text()='Institute']"));
+       Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Institute']")));
    }
    
    public void verifyProductTilesNotPresent(String products) throws Throwable {
@@ -2095,13 +2186,13 @@ public class CreateUserPage extends BaseClass{
     	   }
     	   else if(newToken.contains("Administration"))
     	   {
-    		   token = "User Admin";
+    		   token = "Users";
     	   }
     	   else
     	   {
     		   token = newToken;   
     	   }
-    		Assert.assertFalse(isElementNotPresentOnPage(By.xpath("//p[text()='"+token.trim()+"']")));
+    		Assert.assertFalse(isElementNotPresentOnPage(By.xpath("//div[text()='"+token.trim()+"']")));
        } 
    }
    
@@ -2159,16 +2250,13 @@ public class CreateUserPage extends BaseClass{
 	    	   }
 	    	   else if(newToken.contains("Administration"))
 	    	   {
-	    		   token = "User Admin";
+	    		   token = "Users";
 	    	   }
 	    	   else
 	    	   {
 	    		   token = newToken;   
 	    	   }
-			if(token.equals("Episodes"))
-			{
-				Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[text()='Institute']")));
-			}
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+token.trim()+"']")));
 	       } 
 	}
    
@@ -2193,7 +2281,7 @@ public class CreateUserPage extends BaseClass{
     	   }
     	   else if(newToken.contains("Administration"))
     	   {
-    		   token = "User Admin";
+    		   token = "Users";
     	   }
     	   else
     	   {
@@ -2207,16 +2295,16 @@ public class CreateUserPage extends BaseClass{
    
    //Code
    public void iRedirectToRemedyConnectPage() {
-		driver.get("https://cdn-qa.remedypartners.com/");
+		driver.get(DriverScript.Config.getProperty("BaseUrl"));
 		delay();
 	}
    
    public void iVerifyDropDownValueFromProfileIcon(String text, String role) {
-	   iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
+//	   iWillWaitToSee(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']"));
 		if(text.equals("Internal Support"))
 		{
-			Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[@ng-href='https://jira.remedypartners.com/servicedesk/customer/portal/2']")));
-			driver.get("https://cdn-qa.remedypartners.com/");
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Internal Support']")));
+//			driver.get("https://cdn-qa.remedypartners.com/");
 			delay();
 		}
 		else if(text.equals("Support"))
@@ -2226,25 +2314,25 @@ public class CreateUserPage extends BaseClass{
 			{
 				if(!(role.substring((role.indexOf("-")+1)).equals("Remedy Sales Team") || role.substring((role.indexOf("-")+1)).equals("Prospective Partner Executive")))
 				   {
-			Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[@ng-href='https://jira.remedypartners.com/servicedesk/customer/portal/2/user/login?destination=portal%2F2']")));
-			driver.get("https://cdn-qa.remedypartners.com/");
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Support']")));
+//			driver.get("https://access-qa.remedypartners.com/");
 			delay();
 				   }
 			}
 		}
 		else if(text.equals("Reset Password"))
 		{
-			Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[contains(@ng-click,'valentino.reset-password')]")));
-			driver.get("https://cdn-qa.remedypartners.com/");
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Reset Password']")));
+//			driver.get("https://access-qa.remedypartners.com/");
 			delay();
 		}
 		else if(text.equals("Log Out"))
 		{
-			Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[@ng-click='user.logout()']")));
-			driver.get("https://cdn-qa.remedypartners.com/");
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Log Out']")));
+//			driver.get("https://access-qa.remedypartners.com/");
 			delay();
 		}
-	}
+ 	}
    
    public void iClickOnFiledInDropdownOnProfileIcon(String text, String role) {
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
@@ -2252,11 +2340,11 @@ public class CreateUserPage extends BaseClass{
 		{
 			if(!(role.substring((role.indexOf("-")+1)).equals("Remedy Sales Team") || role.substring((role.indexOf("-")+1)).equals("Prospective Partner Executive")))
 			   {
-				   iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
-				      delay();
-				    	  driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")).click();
-					      iWillWaitToSee(By.xpath("//a[@ng-href='https://jira.remedypartners.com/servicedesk/customer/portal/2/user/login?destination=portal%2F2']"));
-					      driver.findElement(By.xpath("//a[@ng-href='https://jira.remedypartners.com/servicedesk/customer/portal/2/user/login?destination=portal%2F2']")).click();
+//				   iWillWaitToSee(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']"));
+//				      delay();
+//				    	  driver.findElement(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']")).click();
+//					      iWillWaitToSee(By.xpath("//a[@ng-href='https://jira.remedypartners.com/servicedesk/customer/portal/2/user/login?destination=portal%2F2']"));
+					      driver.findElement(By.xpath("//span[text()='Support']")).click();
 				      delay();
 				      objLandingPage.iSwitchToNewWindow();
 			   }

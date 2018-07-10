@@ -20,6 +20,7 @@ import com.remedy.programManagement.CreateACHOrganizationAPI;
 import com.remedy.programManagement.CreateBundleAPI;
 import com.remedy.programManagement.CreateBundlePaymentContractAPI;
 import com.remedy.programManagement.CreateHHAOrganizationAPI;
+import com.remedy.programManagement.CreateLTCHOrganizationAPI;
 import com.remedy.programManagement.CreateManagingOrganization;
 import com.remedy.programManagement.CreateManagingOrganizationAPI;
 import com.remedy.programManagement.CreatePGPOrganization;
@@ -79,7 +80,7 @@ public class BaseClass {
 	}
 	public WebDriverWait waitTo()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 300);
+		WebDriverWait wait = new WebDriverWait(driver, 120);
 		return wait;
 	}
 
@@ -640,6 +641,12 @@ public class BaseClass {
 			CreateHHAOrganizationAPI.HHAcopyIDList.add(h);
 			CreateHHAOrganizationAPI.idList.clear();
 		}
+		else if (type.equals("ltch")) {
+			idList.addAll(CreateLTCHOrganizationAPI.idList);
+			Long a = CreateLTCHOrganizationAPI.idList.get(0);
+			CreateLTCHOrganizationAPI.LTCHcopyIDList.add(a);
+			CreateLTCHOrganizationAPI.idList.clear();
+	 }
 		 else if (type.equals("bundle")) {
 			idList.addAll(CreateBundleAPI.idList);
 			CreateBundleAPI.bundleIDList.addAll(CreateBundleAPI.idList);
@@ -690,6 +697,13 @@ public class BaseClass {
 			CreateACHOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
 			CreateACHOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
 			CreateACHOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
+		}
+		else if(type.equals("ltch"))
+		{
+			CreateLTCHOrganizationAPI.LTCHNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+			CreateLTCHOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
+			CreateLTCHOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
+			CreateLTCHOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
 		}
 		else if(type.equals("snf"))
 		{
@@ -826,6 +840,14 @@ public class BaseClass {
 			CreateSNFOrganizationAPI.EINNameList.clear();
 			CreateSNFOrganizationAPI.NPINameList.clear();
 			CreateSNFOrganizationAPI.SNFcopyIDList.clear();
+		}
+		else if(type.equals("LTCH"))
+		{
+			CreateLTCHOrganizationAPI.LTCHNameList.clear();
+			CreateLTCHOrganizationAPI.CCNNameList.clear();
+			CreateLTCHOrganizationAPI.EINNameList.clear();
+			CreateLTCHOrganizationAPI.NPINameList.clear();
+			CreateLTCHOrganizationAPI.LTCHcopyIDList.clear();
 		}
 		else if(type.equals("Payor"))
 		{

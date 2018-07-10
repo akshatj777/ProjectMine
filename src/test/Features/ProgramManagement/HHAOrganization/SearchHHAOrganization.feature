@@ -1,12 +1,5 @@
 Feature: Search the HHA organizations functionality tests
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -24,26 +17,36 @@ Feature: Search the HHA organizations functionality tests
     When Get by id <id> and <type>
 
     Examples: 
-      | desc                  | name    | shortName | managingOrgId | participantId | ein | npi | ccn | address1 | address2 | city | state | zip   | marketId | regionId | expStatusCode | responseMsg | id | type |
-      | Create HHA with MO    | HHANAME | ShortName | hasChild      |               | EIN | NPI | CCN | Address1 | Address2 | City | CA    | 10000 |        1 |        1 |           201 |             |  0 | hha  |
-      | Create HHA without MO | HHANAME | ShortName |               |               | EIN | NPI | CCN | Address1 | Address2 | City | CA    | 10000 |        1 |        1 |           201 |             |  0 | hha  |
+      | desc                  | name    | shortName | managingOrgId | participantId | ein | npi | ccn | address1 | address2 | city           | state | zip   | marketId | regionId | expStatusCode | responseMsg | id | type |
+      | Create HHA with MO    | HHANAME | ShortName | hasChild      |               | EIN | NPI | CCN | Address1 | Address2 | AutomationCity | CA    | 10000 |        1 |        1 |           201 |             |  0 | hha  |
+      | Create HHA without MO | HHANAME | ShortName |               |               | EIN | NPI | CCN | Address1 | Address2 | AutomationCity | CA    | 10000 |        1 |        1 |           201 |             |  0 | hha  |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "HHA" organization tab on organization dashboard
     Then I verify the Search bar on "HHA" organization page
     Then I search "<SearchParam> - <Has_MO>" and verify with search list options on "HHA" organization search box
 
     Examples: 
-      | Description                                            | Has_MO | SearchParam |
-      | Search HHA Organization with CCN  - With MO            | YES    | CCN         |
-      | Search HHA Organization with CCN  - Without MO         | NO     | CCN         |
-      | Search HHA Organization with HHA Org Name - With MO    | YES    | HHANAME     |
-      | Search HHA Organization with HHA Org Name - Without MO | NO     | HHANAME     |
-      | Search HHA Organization with City                      |        | City        |
-      | Search HHA Organization with State                     |        | CA          |
-      | Search HHA Organization with Postal Code               |        |       10000 |
+      | Description                                            | Has_MO | SearchParam    |
+      | Search HHA Organization with CCN  - With MO            | YES    | CCN            |
+      | Search HHA Organization with CCN  - Without MO         | NO     | CCN            |
+      | Search HHA Organization with HHA Org Name - With MO    | YES    | HHANAME        |
+      | Search HHA Organization with HHA Org Name - Without MO | NO     | HHANAME        |
+      | Search HHA Organization with City                      |        | AutomationCity |
+      | Search HHA Organization with State                     |        | CA             |
+      | Search HHA Organization with Postal Code               |        |          10000 |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "HHA" organization tab on organization dashboard
     Then I search with "<HHA_Name> - <Has_MO>" on organization in search box
     And I verify "<HHA_Name> - <Has_MO>" field in search list on organization page
@@ -63,6 +66,11 @@ Feature: Search the HHA organizations functionality tests
       | Search HHA Organization after editing the HHA name - Without MO | NO     | HHANAME  | HHANAME         | HHA Organization Successfully Updated. |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "HHA" organization tab on organization dashboard
     Then I search with "<HHA_Name>" on organization in search box
     Then I verify the "No matches" message for invalid search in Organization
