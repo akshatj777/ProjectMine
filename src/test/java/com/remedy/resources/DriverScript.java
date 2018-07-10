@@ -66,10 +66,17 @@ public class DriverScript {
 		if (driver == null)
 			
 			createNewDriverInstance();
+		if(Config.getProperty("APICallForApplication").equals("PM"))
+		{
+			baseURI = Config.getProperty("baseURI", Config.getProperty("programmanagement.baseURI"));
+	        basePath = Config.getProperty("path", Config.getProperty("programmanagement.basePath"));
+		}
+		else if(Config.getProperty("APICallForApplication").equals("UA"))
+		{
+			baseURI = Config.getProperty("baseURI", Config.getProperty("useradmin.baseURI"));
+	        basePath = Config.getProperty("path", Config.getProperty("useradmin.basePath"));
+		}
 		
-		baseURI = Config.getProperty("baseURI", Config.getProperty("programmanagement.baseURI"));
-        // port = Integer.valueOf(getProperty("port", properties.getProperty("programmanagement.port")));
-        basePath = Config.getProperty("path", Config.getProperty("programmanagement.basePath"));
 	}
 
 	private void createNewDriverInstance() throws Exception {

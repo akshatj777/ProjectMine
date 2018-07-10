@@ -29,6 +29,11 @@ public class MailCreateUserSteps extends DriverScript {
 		mailcreateuser.iClickOnInboxUnderMail();
 	}
 	
+	@Then("^I set new password for the user \"([^\"]*)\"$") 
+	public void setNewPassword(String userRole) throws Throwable {
+		mailcreateuser.setNewPassword(userRole);
+	}
+	
 	@Then("^I click on Mail icon in my account$") 
 	public void i_Click_On_Mail_Icon_In_My_Account() throws Throwable {
 		mailcreateuser.iClickOnMailIconOnMyAccount();
@@ -57,6 +62,11 @@ public class MailCreateUserSteps extends DriverScript {
 	@Then("^I verify Account Verification in Inbox in my account$") 
 	public void i_Verify_AccountVerification_Mail_In_Inbox_In_MyAccount() throws Throwable {
 		mailcreateuser.iVerifyAccountVerificationMailInInboxInMyAccount();
+	}
+	
+	@Then("^I verify account for user \"([^\"]*)\"$") 
+	public void verifyAccountUA(String role) throws Throwable {
+		mailcreateuser.verifyAccountUA(role);
 	}
 	
 	@Then("^I verify accounts for all the created users$") 
