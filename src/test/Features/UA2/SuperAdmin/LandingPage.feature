@@ -1,10 +1,27 @@
 Feature: Super Admin Landing page verification
 
+  Scenario Outline: Create User through UA API call
+    Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>" and "<LearningPathways>"
+    When Create User with this data for "<User>"
+    Then Verify Actual vs expected results "<expStatusCode>" and "<responseMsg>"
+    Given I am on mail login page
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
+    Then I enter password "1Welcome2" to login mail account
+    Then I click on Mail icon in my account
+    Then I click on Inbox in mail
+    And I wait for 3000 milli seconds
+    Then I verify account for user "<User>-<Role>"
+    Then I set new password for the user "<User>-<Role>"
+
+    Examples: 
+      | User        | FirstName | LastName                                 | Email                           | Phone | NPI | Role      | RoleID      | Applications                                             | LearningPathways                       | Locations             | expStatusCode |
+      | Super Admin | Firstname | Lastnamelastnamelastnamelastnamelastname | qaautomation@remedypartners.com |       |     | Executive | 1-Executive | episode_connect-Episodes,reports-Reports,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
+
   Scenario: Verification of availability of fields on Super User Landing page
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     And I should not see text "Unable to Load users" on Users page
     And I verify "SearchBox" on landing page
@@ -47,8 +64,8 @@ Feature: Super Admin Landing page verification
   Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     And I verify "SearchBox" on landing page
     Then I enter "<InvalidSearchParameter>" in search box for "<user>-<Role>"
@@ -59,16 +76,16 @@ Feature: Super Admin Landing page verification
     Then I verify availability of "<SearchParameter>" for "<user>-<Role>"
 
     Examples: 
-      | Description                    | user        | Role      | Email             | InvalidSearchParameter | SearchParameter                          |
-      | Search a user using First Name | Super Admin | Executive | test.automatemail |                1768789 | Firstname                                |
-      | Search a user using Last Name  | Super Admin | Executive | test.automatemail |                1768789 | Lastnamelastnamelastnamelastnamelastname |
-      | Search a user using Email      | Super Admin | Executive | test.automatemail |                1768789 | FetchFromHM                              |
+      | Description                    | user        | Role      | Email                           | InvalidSearchParameter | SearchParameter                          |
+      | Search a user using First Name | Super Admin | Executive | qaautomation@remedypartners.com |                1768789 | Firstname                                |
+      | Search a user using Last Name  | Super Admin | Executive | qaautomation@remedypartners.com |                1768789 | Lastnamelastnamelastnamelastnamelastname |
+      | Search a user using Email      | Super Admin | Executive | qaautomation@remedypartners.com |                1768789 | FetchFromHM                              |
 
   Scenario Outline: Verify ability of Super Admin user to lock a user
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Adming
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     And I verify "SearchBox" on landing page
     Then I enter "<SearchParameter>" in search box for "<user>-<Role>"
@@ -88,14 +105,14 @@ Feature: Super Admin Landing page verification
     Then I should see User is Blocked
 
     Examples: 
-      | user        | Role      | Email             | SearchParameter |
-      | Super Admin | Executive | test.automatemail | FetchFromHM     |
+      | user        | Role      | Email                           | SearchParameter |
+      | Super Admin | Executive | qaautomation@remedypartners.com | FetchFromHM     |
 
   Scenario Outline: Verify ability of Super Admin user to unlock a locked user
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Adming
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I enter "<SearchParameter>" in search box for "<user>-<Role>"
     Then I verify availability of "<SearchParameter>" for "<user>-<Role>"
@@ -115,8 +132,8 @@ Feature: Super Admin Landing page verification
     Then I verify "<Applications>" product on SPOE page
 
     Examples: 
-      | user        | Role      | Email             | SearchParameter | Applications               |
-      | Super Admin | Executive | test.automatemail | FetchFromHM     | Episodes, Reports, Lessons |
+      | user        | Role      | Email                           | SearchParameter | Applications               |
+      | Super Admin | Executive | qaautomation@remedypartners.com | FetchFromHM     | Episodes, Reports, Lessons |
 
   Scenario: User should not get error message when he goes back to User Admin page from top navigation Menu
     Given I am on the login page
@@ -124,19 +141,19 @@ Feature: Super Admin Landing page verification
     Then I should see Tile text Episodes 2.0
     And I click on the "Reports" tile
     Then I verify page tile for reports page
-    And I click on "User Admin" tile from menu
+    And I click on "Users" tile from menu
     Then I should see header text "Users"
     Then I click on "Reports" from Management dropdown
     And I switch to new window
     Then I verify page tile for reports page
-    And I click on "User Admin" tile from menu
+    And I click on "Users" tile from menu
     Then I should see header text "Users"
 
   Scenario Outline: Verifying that User is redirected to User admin page although doesn't have access to UA
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Adming
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     And I click on the top user account link
     Then I click on "Log Out" button
