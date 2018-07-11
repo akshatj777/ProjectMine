@@ -45,8 +45,8 @@ Feature: Search IRF organization functionality tests
 
     Examples: 
       | Description                                                        | Has_MO | Managing_Org | IRF_Name | Address1 | Short_Name | Address2 | City           | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Message                                |
-      | Create IRF Organization with all the available fields - Without MO | NO     |              | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | IRF Organization Successfully Created. |
-      | Create IRF Organization with all the available fields - With MO    | YES    | MONAME       | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | IRF Organization Successfully Created. |
+      | Create IRF Organization with all the available fields - Without MO | NO     |              | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | irf Organization Successfully Created. |
+      | Create IRF Organization with all the available fields - With MO    | YES    | MONAME       | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | irf Organization Successfully Created. |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -67,30 +67,6 @@ Feature: Search IRF organization functionality tests
       | Search IRF Organization with City                      |        | AutomationCity |
       | Search IRF Organization with State                     |        | CA             |
       | Search IRF Organization with Postal Code               |        |          10000 |
-
-  Scenario Outline: <Description>
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-    When I click on "IRF" organization tab on organization dashboard
-    Then I search with "<IRF_Name> - <Has_MO>" on organization in search box
-    And I verify "<IRF_Name> - <Has_MO>" field in search list on organization page
-    And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
-    And I click on "Edit" button on particular organization
-    And I edit "Inpatient Rehab Facility Organization Name" field to "<Edited_SNF_Name> - <Has_MO>" for organization
-    Then I click on "Submit" button on "Edit" organization page
-    Then I verify "<Message>" after submitting the "edit IRF - <Has_MO>" organization page
-    Then I search "<Edited_IRF_Name> - <Has_MO>" and verify with search list options on "IRF" organization search box
-    Then I search with "<IRF_Name> - <Has_MO>" old name in organization search box
-    Then I verify the "No matches" message for invalid search in Organization
-    And I verify the "Create New Inpatient Rehab Facility Organization" link under No matches
-
-    Examples: 
-      | Description                                                     | Has_MO | IRF_Name | Edited_IRF_Name | Message                                |
-      | Search IRF Organization after editing the IRF name - With MO    | YES    | IRFNAME  | IRFNAME         | IRF Organization Successfully Updated. |
-      | Search IRF Organization after editing the IRF name - Without MO | NO     | IRFNAME  | IRFNAME         | IRF Organization Successfully Updated. |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -120,6 +96,30 @@ Feature: Search IRF organization functionality tests
     And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
     When I click on "IRF" organization tab on organization dashboard
+    Then I search with "<IRF_Name> - <Has_MO>" on organization in search box
+    And I verify "<IRF_Name> - <Has_MO>" field in search list on organization page
+    And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I edit "Inpatient Rehab Facility Organization Name" field to "<Edited_SNF_Name> - <Has_MO>" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    Then I verify "<Message>" after submitting the "edit IRF - <Has_MO>" organization page
+    Then I search "<Edited_IRF_Name> - <Has_MO>" and verify with search list options on "IRF" organization search box
+    Then I search with "<IRF_Name> - <Has_MO>" old name in organization search box
+    Then I verify the "No matches" message for invalid search in Organization
+    And I verify the "Create New IRF Organization" link under No matches
+
+    Examples: 
+      | Description                                                     | Has_MO | IRF_Name | Edited_IRF_Name | Message                                |
+      | Search IRF Organization after editing the IRF name - With MO    | YES    | IRFNAME  | IRFNAME         | irf Organization Successfully Updated. |
+      | Search IRF Organization after editing the IRF name - Without MO | NO     | IRFNAME  | IRFNAME         | irf Organization Successfully Updated. |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "IRF" organization tab on organization dashboard
     When I search with "<IRF_Name> - <Has_MO>" on organization in search box
     And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
     And I verify "Location" tab present under "IRF" Organization
@@ -140,7 +140,7 @@ Feature: Search IRF organization functionality tests
     When I click on "IRF" organization tab on organization dashboard
     Then I search with "<IRF_Name>" on organization in search box
     Then I verify the "No matches" message for invalid search in Organization
-    And I verify the "Create New Inpatient Rehab Facility Organization" link under No matches
+    And I verify the "Create New IRF Organization" link under No matches
 
     Examples: 
       | Description                                                              | IRF_Name      |
