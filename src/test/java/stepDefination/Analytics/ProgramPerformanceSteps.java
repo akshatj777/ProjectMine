@@ -169,9 +169,9 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.TakeShotOFBlueColorElement(count,"//div[@tb-test-id='Readmissions Benchmark Variance']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 259px; height: 74px;']", resolution);
 	}
 	
-	@Given("^I execute the jmeter application and execute jmx file$")
-	public void i_execute_the_jmeter_application_and_execute_jmx_file() throws Throwable{
-		programdashboard.executejmeter();
+	@Given("^I execute the jmeter application and execute jmx file \"([^\"]*)\"$")
+	public void i_execute_the_jmeter_application_and_execute_jmx_file(String location) throws Throwable{
+		programdashboard.executejmeter(location);
 	}
 	
 	@And("^I click on \"([^\"]*)\" dashboard$")
@@ -184,8 +184,24 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iSetCalendarAttributeValue(date);
 	}
 	
-	@Then("^I read the values from the text file$")
-	public void i_read_the_alues_from_the_text_file() throws IOException{
-		programdashboard.iReadTextFromOutputfile();
+	@Then("^I read the values from the text file \"([^\"]*)\"$")
+	public void i_read_the_alues_from_the_text_file(String location) throws IOException{
+		programdashboard.iReadTextFromOutputfile(location);
 	}
+	
+	@And("^I verify \"([^\"]*)\" count matched with database value on the dashboard with picture resolution \"([^\"]*)\"$")
+	public void i_verify_ec_episodes_count_matched_with_database_as_on_the_dashboard(String text,String resolution) throws Throwable{
+		programdashboard.GetTextFromScreenShot(text,"//div[@tb-test-id='KPI_Episode']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 152px; height: 52px;']",resolution);
+	}
+	
+	@Then("^I set the time from starting date as \"([^\"]*)\" to ending date \"([^\"]*)\" to validate claims episode data$")
+	public void i_set_the_time_from_starting_date_as_to_ending_date_to_validate_claims_episode_data(String start,String end) throws Throwable{
+		programdashboard.iSetStartAndEndDateForClaimsData(start, end);
+	}
+	
+	@And("^I verify \"([^\"]*)\" data is matched with database value on dashboard with picture resolution \"([^\"]*)\"$")
+	public void i_verify_data_is_matched_with_database_value_on_dashboard_with_picture_resolution(String text,String resolution) throws Throwable{
+		programdashboard.ReadTextFromSavingsRateField(text, "//div[@tb-test-id='Savings Rate']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 309px; height: 79px;']", resolution);
+	}
+	
 }

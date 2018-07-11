@@ -148,7 +148,7 @@ warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
 inner JOIN
 warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
 WHERE c.atRisk=&apos;Y&apos; 
-and c.anchorBeginDateKey &gt; 20170101 
+and c.anchorBeginDateKey &gt;= 20170101 
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 and e.bpid in  ${bpid}) a;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -171,7 +171,7 @@ warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
 INNER JOIN
 warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
 WHERE c.atRisk=&apos;Y&apos; 
-and c.anchorBeginDateKey &gt; 20170101 
+and c.anchorBeginDateKey &gt;= 20170101 
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 and e.bpid in  ${bpid}) as a;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -194,7 +194,7 @@ warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
 INNER JOIN
 warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
 WHERE c.atRisk=&apos;Y&apos; 
-and c.anchorBeginDateKey &gt; 20170101 
+and c.anchorBeginDateKey &gt;= 20170101 
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 and e.bpid in  ${bpid}) a;</stringProp>
           <stringProp name="queryArguments"></stringProp>

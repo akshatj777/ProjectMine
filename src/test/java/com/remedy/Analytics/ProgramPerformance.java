@@ -9,13 +9,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.StringTokenizer;
 
 import javax.imageio.ImageIO;
-
-import junit.framework.Assert;
 
 import org.apache.commons.io.FileUtils;
 import org.bytedeco.javacpp.BytePointer;
@@ -23,6 +23,7 @@ import org.bytedeco.javacpp.lept;
 import org.bytedeco.javacpp.lept.PIX;
 import org.bytedeco.javacpp.tesseract.TessBaseAPI;
 import org.imgscalr.Scalr;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -40,7 +41,9 @@ import com.remedy.resources.DriverScript;
 
 public class ProgramPerformance extends BaseClass{
 	
-	WebDriverWait wait = new WebDriverWait(driver, 180);
+	int ECEpiosdeCount,claimsEpiosdeCount,TotalNPRA,TotalProgram;
+    Double savingRate;
+	WebDriverWait wait = new WebDriverWait(driver, 300);
 
 	public ProgramPerformance(WebDriver driver) {
 		super(driver);
@@ -486,9 +489,9 @@ public class ProgramPerformance extends BaseClass{
 				 Assert.assertEquals(count.trim(), FinalOutput.trim());
 	 }
 	 
-	 public void executejmeter() throws IOException
+	 public void executejmeter(String location) throws IOException
 	    {
-		 File jmx=new File(System.getProperty("user.dir")+"\\src\\test\\jmeterjmx\\TableauTest.jmx");
+		 File jmx=new File(System.getProperty("user.dir")+location);
 //		 String jmeter=DriverScript.Config.getProperty("jmeterPath");
 //	     Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd C:\\apache-jmeter-4.0\\apache-jmeter-4.0\\bin && jmeter -n -t C:\\Users\\aseem.gupta\\Tableautestpaln\\Tableautestpaln\\TableauTest.jmx && exit\"");
 		 Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd "+DriverScript.Config.getProperty("jmeterPath")+" "+jmx+" && exit\"");
@@ -510,35 +513,173 @@ public class ProgramPerformance extends BaseClass{
 		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
 //		 setAttributevalue(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),"value",date);
 		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), date);
-		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
-		 clickElement(driver.findElement(By.xpath("//span[@class='tab-datepicker-today-date']")));
+//		 driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")).sendKeys(Keys.ENTER);
+		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
+//		 clickElement(driver.findElement(By.xpath("//span[@class='tab-datepicker-today-date']")));
+		 delay();
+//		 longDelay();
 //		 longDelay();
 //		 delay();
-//		 longDelay();
-		 iWillWaitToSee(By.cssSelector("#svg-spinner"));
+//		 iWillWaitToSee(By.cssSelector("#svg-spinner"));
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 iWillWaitToSee(By.cssSelector(".tabCanvas.tab-widget"));
 	 }
 	 
-	 public void iReadTextFromOutputfile() throws IOException{
-//		 File file = new File(System.getProperty("user.dir")+"\\src\\test\\jmeterjmx\\PerformanceDashboardResult.txt");
-//		 String st = new String (System.getProperty("user.dir")+"\\src\\test\\jmeterjmx\\PerformanceDashboardResult.txt");
-//		 StringTokenizer tokens = new StringTokenizer(st);
-//		 while(tokens.hasMoreTokens()){
-//			 
-//		 }
-//		 }
-		 BufferedReader br=new BufferedReader(new FileReader(System.getProperty("user.dir")+"\\src\\test\\jmeterjmx\\PerformanceDashboardResult.txt"));
-		 List<String> names = new ArrayList<>();
-		 String line;
-		 while ((line = br.readLine())!= null) {           
+	 public void iReadTextFromOutputfile(String location) throws IOException{
+		 BufferedReader br=new BufferedReader(new FileReader(System.getProperty("user.dir")+location));
+		 String names;
+		 while ((names = br.readLine())!= null) {           
 
-			 StringTokenizer st = new StringTokenizer(line, ",");     
-
+			 StringTokenizer st = new StringTokenizer(names, ",");     
+			 List<String> elements = new ArrayList<String>();
 		     while (st.hasMoreTokens()){
-		       names.add(st.nextToken());
-		     }        
-		 }    
-
-		 System.out.println(names);    
+		      elements.add(st.nextToken());
+		     } 
+		      String ECCount=elements.get(0).trim();
+		      String ec[]=ECCount.split("=");
+		      ECEpiosdeCount=Integer.parseInt(ec[1]);
+		      numberformat(ECEpiosdeCount);
+		      System.out.println("The Episode Count value is"+ECEpiosdeCount);
+		      String claimsCount=elements.get(1).trim();
+		      String claims[]=claimsCount.split("=");
+		      claimsEpiosdeCount=Integer.parseInt(claims[1]);
+		      numberformat(claimsEpiosdeCount);
+		      System.out.println("The Claims count value is"+claimsEpiosdeCount);
+		      String sRate=elements.get(2).trim();
+		      String saving[]=sRate.split("=");
+		      Double sav=Double.parseDouble(saving[1]);
+		      savingRate=sav;
+		      System.out.println("The savings rate value is"+savingRate);
+		      String TNPRA=elements.get(3).trim();
+		      String npra[]=TNPRA.split("=");
+		      TotalNPRA=Integer.parseInt(npra[1]);
+		      numberformat(TotalNPRA);
+		      System.out.println("The total npra value is"+TotalNPRA);
+		      String TProgram=elements.get(4).trim();
+		      String program[]=TProgram.split("=");
+		      TotalProgram=Integer.parseInt(program[1]);
+		      numberformat(TotalProgram);
+		      System.out.println("The total program value is"+TotalProgram);
+		      delay();
+		 }      
+	 }
+	 
+	 public String numberformat(int number) {
+	      NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+	      String numberAsString = numberFormat.format(number);
+	      System.out.println(numberAsString);
+		return numberAsString;
+	   }
+	 
+	 public void GetTextFromScreenShot(String text,String element,String resolution) throws IOException {
+		 delay();
+		 longDelay();
+		 longDelay();
+		 String[] str=resolution.split("X");
+		 String h_value=str[0];
+		 String w_value=str[1];
+		 int height=Integer.parseInt(h_value);
+		 int width=Integer.parseInt(w_value);
+		 WebElement ele = driver.findElement(By.xpath(element));
+//		 scrollIntoViewByJS(ele);
+		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		 BufferedImage  fullImg = ImageIO.read(screenshot);
+		 Point point = ele.getLocation();
+		 point = point.moveBy(100, 100);
+		 System.out.println(point);
+		 int eleWidth = ele.getSize().getWidth();
+		 int eleHeight = ele.getSize().getHeight();
+		 
+		 BufferedImage eleScreenshot= fullImg.getSubimage(point.getX(), point.getY(),
+				    eleWidth, eleHeight);
+		 BufferedImage scaledImg = Scalr.resize(eleScreenshot, Scalr.Method.QUALITY, Scalr.Mode.FIT_TO_WIDTH,
+				 height, width, Scalr.OP_ANTIALIAS); 
+		 ImageIO.write(scaledImg, "png", screenshot);
+				File screenshotLocation = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png");
+				if(screenshotLocation.exists())
+				{
+					screenshotLocation.delete();
+				}
+				FileUtils.copyFile(screenshot, screenshotLocation);
+				TessBaseAPI instance=new TessBaseAPI();
+				 instance.Init(System.getProperty("user.dir")+"\\src\\test\\Imports\\TestData\\tessdata", "eng");
+				 PIX image=lept.pixRead(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png");
+				 instance.SetImage(image);
+				 BytePointer bytePointer=instance.GetUTF8Text();
+				 String output=bytePointer.getString();
+				 System.out.println("Text in image is"+output);
+				 String FinalOutput=output.replaceAll("\\s+", "");
+				 System.out.println(FinalOutput);
+				 if(text.equals("EC Episodes"))
+				 {
+				 Assert.assertEquals(numberformat(ECEpiosdeCount), FinalOutput.trim());
+				 }else if(text.equals("Claims Episodes")){
+					 Assert.assertEquals(numberformat(claimsEpiosdeCount), FinalOutput.trim()); 
+				 }
+	 }
+	 
+	 public void iSetStartAndEndDateForClaimsData(String start,String end){
+		 longDelay();
+		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), start);
+		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
+		 delay();
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
+		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), end);
+		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
+		 delay();
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+		 delay();
+		 iWillWaitToSee(By.cssSelector(".tabCanvas.tab-widget"));
+		 longDelay();
+		 delay();
+	 }
+	 
+	 public void ReadTextFromSavingsRateField(String text,String element,String resolution) throws IOException {
+		 String[] str=resolution.split("X");
+		 String h_value=str[0];
+		 String w_value=str[1];
+		 int height=Integer.parseInt(h_value);
+		 int width=Integer.parseInt(w_value);
+		 WebElement ele = driver.findElement(By.xpath(element));
+//		 scrollIntoViewByJS(ele);
+		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		 BufferedImage  fullImg = ImageIO.read(screenshot);
+		 Point point = ele.getLocation();
+		 point = point.moveBy(100, 100);
+		 System.out.println(point);
+		 int eleWidth = ele.getSize().getWidth();
+		 int eleHeight = ele.getSize().getHeight();
+		 
+		 BufferedImage eleScreenshot= fullImg.getSubimage(point.getX(), point.getY(),
+				    eleWidth, eleHeight);
+		 
+		 BufferedImage scaledImg = Scalr.resize(eleScreenshot, Scalr.Method.QUALITY, Scalr.Mode.FIT_TO_WIDTH,
+				 height, width, Scalr.OP_ANTIALIAS); 
+		 ImageIO.write(scaledImg, "png", screenshot);
+				File screenshotLocation = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Blue.png");
+				if(screenshotLocation.exists())
+				{
+					screenshotLocation.delete();
+				}
+				FileUtils.copyFile(screenshot, screenshotLocation);
+				greyscale();	
+				
+				TessBaseAPI instance=new TessBaseAPI();
+				 instance.Init(System.getProperty("user.dir")+"\\src\\test\\Imports\\TestData\\tessdata", "eng");
+				 PIX image=lept.pixRead(System.getProperty("user.dir")+"\\src\\test\\Imports\\GreyScale.jpg");
+				 instance.SetImage(image);
+				 BytePointer bytePointer=instance.GetUTF8Text();
+				 String output=bytePointer.getString();
+				 System.out.println("Text in image is"+output);
+				 String FinalOutput=output.replaceAll("\\s+", "");
+				 System.out.println(FinalOutput);
+				 Double a= ((float)(((int)Math.pow(10,1)*savingRate))/Math.pow(10,1));
+				 if(text.equals("Savings Rate"))
+				 {
+					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
+//				 Assert.assertEquals(a,FinalOutput.trim().contains(a.toString()));
+				 }
 	 }
 }
