@@ -124,6 +124,14 @@ public class CreateManagingOrganization extends BaseClass {
 		{
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateSNFOrganization.SNFOrg.get("SNFNAME"));
 		}
+		else if(text.equals("IRFNAME")) {
+			CreateIRFOrganization.tempIRFOrg.put("IRFNAME", createRandomName(text));
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateIRFOrganization.tempIRFOrg.get("IRFNAME"));
+		}
+		else if(text.equals("DUPLICATE_IRF"))
+		{
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateIRFOrganization.IRFOrg.get("IRFNAME"));
+		}
 		else if(text.equals("HHANAME")) {
 			CreateHHAOrganization.tempHHAOrg.put("HHANAME", createRandomName(text));
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
@@ -426,7 +434,6 @@ public class CreateManagingOrganization extends BaseClass {
 					}
 				else if(org.contains("Payor"))
 				{
-					
 					iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
 					verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
 					if(!CreatePayorOrganization.tempPayorOrg.isEmpty())
@@ -457,6 +464,31 @@ public class CreateManagingOrganization extends BaseClass {
 					{
 						CreateSNFOrganization.SNFOrg_noMO.putAll(CreateSNFOrganization.tempSNFOrg);
 						CreateSNFOrganization.tempSNFOrg.clear();
+					}
+					waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				}
+		
+				else if(org.contains("IRF - YES"))
+				{
+					iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+					verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+					
+					if(!CreateIRFOrganization.tempIRFOrg.isEmpty())
+						{
+							CreateIRFOrganization.IRFOrg.putAll(CreateIRFOrganization.tempIRFOrg);
+							CreateIRFOrganization.tempIRFOrg.clear();
+						}
+					waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				}
+				else if(org.contains("IRF - NO"))
+				{
+					iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+					verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+					
+					if(!CreateIRFOrganization.tempIRFOrg.isEmpty())
+					{
+						CreateIRFOrganization.IRFOrg_noMO.putAll(CreateIRFOrganization.tempIRFOrg);
+						CreateIRFOrganization.tempIRFOrg.clear();
 					}
 					waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 				}

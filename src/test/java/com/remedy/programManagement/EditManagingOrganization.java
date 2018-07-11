@@ -198,6 +198,18 @@ public class EditManagingOrganization extends BaseClass {
 				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 			}
 		}
+		else if(field.contains("IRFNAME - YES"))
+		{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg.get("IRFNAME")+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg.get("IRFNAME")+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(field.contains("IRFNAME - NO"))
+		{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg_noMO.get("IRFNAME")+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg_noMO.get("IRFNAME")+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
 		else if(field.contains("PROGRAMNAME"))
 		{
 			if(CreateProgramAPI.PROGRAMNameList.get(0).contains("\""))

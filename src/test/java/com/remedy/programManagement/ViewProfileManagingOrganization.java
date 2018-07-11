@@ -65,6 +65,14 @@ public class ViewProfileManagingOrganization extends BaseClass{
 				isElementPresentOnPage(By.xpath("//a[@href='mailto:"+CreateManagingOrganization.moOrg.get("MONAME")+"']"));
 			}
 		}
+		else if(text.contains("IRFNAME")){
+			if (text.contains("YES")){
+				isElementPresentOnPage(By.xpath("//a[@href='mailto:"+CreateManagingOrganization.moOrg.get("MONAME")+"']"));
+			}
+			else if (text.contains("NO")){
+				isElementPresentOnPage(By.xpath("//a[@href='mailto:"+CreateManagingOrganization.moOrg.get("MONAME")+"']"));
+			}
+		}
 		else
 		{
 			isElementPresentOnPage(By.xpath("//a[@href='mailto:"+text+"']"));
