@@ -92,7 +92,7 @@ public class BulkLoadSteps extends DriverScript{
     	bulkUser.iVerifyTestBoxField();
     }
     @When("^I enter user data with full application access for \"([^\"]*)\"$")
-    public void iEnterDataWithFullAccessPerRole(String role){
+    public void iEnterDataWithFullAccessPerRole(String role) throws Throwable{
     	bulkUser.iEnterDataAllAppPerRole(role);
     }
   
