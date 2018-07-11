@@ -4,7 +4,7 @@ Feature: Edit bulk uploaded users
     Given I am on the login page
     Then I log in as super user
     Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I click on Import User button
     Then I click on Try Again button

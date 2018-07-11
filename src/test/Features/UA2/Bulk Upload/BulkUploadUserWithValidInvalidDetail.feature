@@ -53,7 +53,7 @@ Feature: Bulk upload users with valid and invalid details
     And I enter password field Testing1 for Login
     Then I click Access button
     Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for bulk user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -77,7 +77,7 @@ Feature: Bulk upload users with valid and invalid details
     Then I verify bulk NPI "<NPI>"
     Then I verify enabled "<ApplicationsEnabled>"
     Then I verify disabled "<ApplicationsDisabled>"
-   Then I verify learning pathway "<LearningPathway>"
+    Then I verify learning pathway "<LearningPathway>"
     Then I verify health system "<HealthSystem>"
     Then I verify programs "<Programs>"
     Then I verify location "<Locations>"
