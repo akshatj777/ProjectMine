@@ -77,7 +77,7 @@ Feature: Bulk upload users with valid and invalid details
     Then I verify bulk NPI "<NPI>"
     Then I verify enabled "<ApplicationsEnabled>"
     Then I verify disabled "<ApplicationsDisabled>"
-    #Then I verify learning pathway "<LearningPathway>"
+   Then I verify learning pathway "<LearningPathway>"
     Then I verify health system "<HealthSystem>"
     Then I verify programs "<Programs>"
     Then I verify location "<Locations>"
@@ -130,7 +130,7 @@ Feature: Bulk upload users with valid and invalid details
     And I click on RemedyU tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
-    #And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
     And I redirect to Remedy connect page
     And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
