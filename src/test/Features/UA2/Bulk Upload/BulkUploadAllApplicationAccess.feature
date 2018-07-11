@@ -85,13 +85,15 @@ Feature: Bulk Upload User from SA
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I click on RemedyU tile for "<User>-<Role>" user
+    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I switch back to old window
     And I redirect to Remedy connect page
-    And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    And I redirect to Remedy connect page
+    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
+    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
+    #And I redirect to Remedy connect page
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
@@ -256,13 +258,15 @@ Feature: Bulk Upload User from SA
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I click on RemedyU tile for "<User>-<Role>" user
+    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I switch back to old window
     And I redirect to Remedy connect page
-    And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    And I redirect to Remedy connect page
+    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
+    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
+    #And I redirect to Remedy connect page
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page

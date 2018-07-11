@@ -98,7 +98,7 @@ Feature: Bulk upload users with valid and invalid details
     And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
     And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -108,11 +108,12 @@ Feature: Bulk upload users with valid and invalid details
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I switch back to old window
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
+    And I redirect to Remedy connect page
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -128,13 +129,15 @@ Feature: Bulk upload users with valid and invalid details
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I click on RemedyU tile for "<User>-<Role>" user
+    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I switch back to old window
     And I redirect to Remedy connect page
-    And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    And I redirect to Remedy connect page
+    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
+    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
+    #And I redirect to Remedy connect page
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page

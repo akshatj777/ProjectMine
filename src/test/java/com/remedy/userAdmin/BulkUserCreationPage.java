@@ -1115,8 +1115,7 @@ public class BulkUserCreationPage extends BaseClass {
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("RPAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy Program Administrator",
-				"Episodes, Episodes 2.0, Reports, Physician Connect, TCI, Lessons");
+		applicationsList.put("Remedy Program Administrator","Episodes, Episodes 2.0, Reports, Physician Connect, TCI, Lessons");
 		bulkEmailPerRole = new HashMap<String, String>();
 		bulkEmailPerRole.put("Remedy Program Administrator", "qaautomation+" + randomString + "@remedypartners.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy Program Administrator", bulkEmailPerRole);
@@ -1126,8 +1125,7 @@ public class BulkUserCreationPage extends BaseClass {
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("PTAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Partner Technical Administrator",
-				"Episodes, Reports, Physician Connect, Administration, TCI, Lessons");
+		applicationsList.put("Partner Technical Administrator","Episodes, Reports, Physician Connect, Administration, TCI, Lessons");
 		bulkEmailPerRole = new HashMap<String, String>();
 		bulkEmailPerRole.put("Partner Technical Administrator", "qaautomation+" + randomString + "@remedypartners.com");
 		bulkUsersEmailPerRole.put("Super Admin-Partner Technical Administrator", bulkEmailPerRole);
@@ -1137,8 +1135,7 @@ public class BulkUserCreationPage extends BaseClass {
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("RTAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy Technical Administrator",
-				"Episodes, Episodes 2.0, Reports, Physician Connect, Administration, TCI, Lessons");
+		applicationsList.put("Remedy Technical Administrator","Episodes, Episodes 2.0, Reports, Physician Connect, Administration, TCI, Lessons");
 		bulkEmailPerRole = new HashMap<String, String>();
 		bulkEmailPerRole.put("Remedy Technical Administrator", "qaautomation+" + randomString + "@remedypartners.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy Technical Administrator", bulkEmailPerRole);
