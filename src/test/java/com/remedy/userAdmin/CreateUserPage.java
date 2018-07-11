@@ -1101,8 +1101,9 @@ public class CreateUserPage extends BaseClass{
 			   Assert.assertTrue(driver.findElement(By.cssSelector(".col-sm-6.col-md-3")).isDisplayed());
 		   }
 		   else{
-			   iWillWaitToSee(By.cssSelector(".close"));
-			   Assert.assertTrue(driver.findElement(By.cssSelector(".close")).isDisplayed());
+//			   iWillWaitToSee(By.cssSelector(".close"));
+//			   Assert.assertTrue(driver.findElement(By.cssSelector(".close")).isDisplayed());
+			   iWillWaitToSee(By.cssSelector(".btn.btn-primary"));
 			   driver.findElement(By.cssSelector(".btn.btn-primary")).click();
 			   Assert.assertTrue(driver.findElement(By.cssSelector(".nav.litmos-sub-nav")).isDisplayed());
 		   }
