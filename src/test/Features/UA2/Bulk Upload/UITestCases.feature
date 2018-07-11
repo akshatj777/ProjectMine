@@ -6,7 +6,7 @@ Feature: Bulk Upload User from SA
     And I enter password field Testing1 for Login
     Then I click Access button
     Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I click on Import User button
     Then I verify header text "Import Users"
@@ -32,7 +32,7 @@ Feature: Bulk Upload User from SA
     Given I am on the login page
     Then I log in as super user
     Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I click on Import User button
     Then I click on Try Again button

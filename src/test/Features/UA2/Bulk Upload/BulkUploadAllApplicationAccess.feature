@@ -85,13 +85,15 @@ Feature: Bulk Upload User from SA
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I click on RemedyU tile for "<User>-<Role>" user
+    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I switch back to old window
     And I redirect to Remedy connect page
-    And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    And I redirect to Remedy connect page
+    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
+    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
+    #And I redirect to Remedy connect page
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
@@ -116,7 +118,7 @@ Feature: Bulk Upload User from SA
     Given I am on the login page
     Then I log in as super user
     Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I click on Import User button
     Then I click on Try Again button
@@ -162,7 +164,7 @@ Feature: Bulk Upload User from SA
     And I enter password field Testing1 for Login
     Then I click Access button
     Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for bulk user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -256,13 +258,15 @@ Feature: Bulk Upload User from SA
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I click on RemedyU tile for "<User>-<Role>" user
+    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I switch back to old window
     And I redirect to Remedy connect page
-    And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    And I redirect to Remedy connect page
+    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
+    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
+    #And I redirect to Remedy connect page
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
@@ -291,7 +295,7 @@ Feature: Bulk Upload User from SA
       | Login with Remedy PM and verify Product Tiles and their redirections                       | Super Admin | RPMFirstName         | RPMLastName         | Remedy PM                       | Episodes, Episodes 2.0, Reports, TCI, Lessons                 | Administration, Physician Connect                                  | ROLE_PRM       | Patient ID     | Episode DRG Issues [Model 3] |      | Independence House,Birchaven                                                                                                                                                                                                                                                                                                                                                                  | Learning Pathway 2, New learning Path, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2                                                                                                                            |  |
       | Login with Remedy Sales Team and verify Product Tiles and their redirections               | Super Admin | RSTFirstName         | RSTLastName         | Remedy Sales Team               | Reports, TCI, Lessons                                         | Episodes, Episodes 2.0, Administration, Physician Connect          |                | Patient ID     | Episode DRG Issues [Model 3] |      |                                                                                                                                                                                                                                                                                                                                                                                               | i am learning path, Learning Pathway 2, max-test-052417, Clinical Operations Acute Care Hospital Model 2                                                                                                                                                 |  |
       | Login with Remedy Executive and verify Product Tiles and their redirections                | Super Admin | REFirstName          | RELastName          | Remedy Executive                | Episodes, Episodes 2.0, Reports, TCI, Lessons                 | Administration, Physician Connect                                  | ROLE_PRM       | Patient ID     | Episode DRG Issues           |      | Butler Memorial Hospital                                                                                                                                                                                                                                                                                                                                                                      | max-test-052417, New learning Path, Remedy University                                                                                                                                                                                                    |  |
-      | Login with Prospective Partner Executive and verify Product Tiles and their redirections   | Super Admin | PPEFirstName         | PPELastName         | Prospective Partner Executive   | Lessons, TCI                                                  | Administration, Physician Connect, Episodes, Episodes 2.0, Reports |                | Patient ID     | Episode DRG Issues           |      |                                                                                                                                                                                                                                                                                                                                                                                               |                                                                                                                                                                                                                                                          |  |
+      #| Login with Prospective Partner Executive and verify Product Tiles and their redirections   | Super Admin | PPEFirstName         | PPELastName         | Prospective Partner Executive   | Lessons, TCI                                                  | Administration, Physician Connect, Episodes, Episodes 2.0, Reports |                | Patient ID     | Episode DRG Issues           |      |                                                                                                                                                                                                                                                                                                                                                                                               |                                                                                                                                                                                                                                                          |  |
       | Login with Remedy Other and verify Product Tiles and their redirections                    | Super Admin | ROFirstName          | ROLastName          | Remedy Other                    | Episodes, Episodes 2.0, TCI, Lessons                          | Administration, Physician Connect, Reports                         | ROLE_PRM       | Patient ID     | Episode DRG Issues           |      | Jersey City Medical Center                                                                                                                                                                                                                                                                                                                                                                    | New learning Path, Physician Acute Care Hospital Model 2                                                                                                                                                                                                 |  |
       | Login with Partner Program Administrator and verify Product Tiles and their redirections   | Super Admin | PPAFirstName         | PPALastName         | Partner Program Administrator   | Episodes, Reports, TCI, Lessons                               | Physician Connect, Administration                                  | ROLE_PRM       | Patient ID     | Episode DRG Issues [Model 3] |      | Village Care Rehab and Nursing Ctr                                                                                                                                                                                                                                                                                                                                                            | i am learning path, Learning Pathway 2, max-test-052417, Physician Acute Care Hospital Model 2, Remedy University                                                                                                                                        |  |
       | Login with Remedy Program Administrator and verify Product Tiles and their redirections    | Super Admin | RPAFirstName         | RPALastName         | Remedy Program Administrator    | Episodes, Episodes 2.0, Reports, TCI, Lessons                 | Physician Connect, Administration                                  | ROLE_PRM       | Patient ID     | Episode DRG Issues [Model 3] |      | Palmer Ranch,Independence House,Birchaven,Carlsbad,Carmel Valley,Yorba Linda,Santa Rosa                                                                                                                                                                                                                                                                                                       | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University                                                                                                 |  |
