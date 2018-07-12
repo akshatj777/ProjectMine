@@ -260,9 +260,9 @@ public class BulkUserCreationPage extends BaseClass {
 		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
 
-//		bulkNPIPerRole.put("Physicians", randomNPI);
+		bulkNPIPerRole.put("Physicians", randomNPI);
 		bulkUsersNPIPerRole = randomNPI;
-//		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
+		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
 
 		iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 		iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
@@ -1165,9 +1165,9 @@ public class BulkUserCreationPage extends BaseClass {
 
 		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
-//		bulkNPIPerRole.put("Physicians", randomNPI);
+		bulkNPIPerRole.put("Physicians", randomNPI);
 		bulkUsersNPIPerRole = randomNPI;
-//		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
+		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
 		iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 		iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
 	}
@@ -2031,12 +2031,11 @@ public class BulkUserCreationPage extends BaseClass {
             
         }
 		
-		
-		
-		
-		
+		HashMap<String, String> bulkNPIPerRole = new HashMap<String, String>();
 		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
+		bulkNPIPerRole.put("Physicians", randomNPI);
+		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
 		iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 		iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
 	}
@@ -2129,4 +2128,35 @@ public void editWithInvalidData(){
 	iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 	iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
     }
+
+public void clickSubmitForEditBulkUser(String user, String userApplications)
+{
+	   
+		   iWillWaitToSee(By.xpath("//button[text()='Submit']"));
+			waitTo().until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Submit']")));
+		   clickElement(driver.findElement(By.xpath("//button[text()='Submit']")));
+		   iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
+			WebDriverWait objWait = new WebDriverWait(driver, 300);
+			objWait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
+			HashMap<String,String> emailList = new HashMap<String,String>();
+			HashMap<String,String> applicationsList = new HashMap<String,String>();
+			HashMap<String,String> NPIList = new HashMap<String,String>();
+			emailList.put(user.substring(user.indexOf("-")+1), CreateUserPage.usersEmailPerRole.get(user).get(user.substring((user.indexOf("-")+1)).trim()));
+			applicationsList.put(user.substring(user.indexOf("-")+1), userApplications);
+			if(user.contains("Physicians"))
+			{
+				NPIList.put(user.substring(user.indexOf("-")+1), bulkUsersNPIPerRole);
+			}
+			else
+			{
+				NPIList.put(user.substring(user.indexOf("-")+1), "");
+			}
+			bulkUsersNPIPerRole = "";
+			if(user.contains("Super Admin"))
+			{
+				CreateUserPage.usersEmailPerRole.put(user.trim(), emailList);
+				CreateUserPage.usersApplicationsPerRole.put(user.trim(), applicationsList);
+				CreateUserPage.usersNPIPerRole.put(user.trim(), NPIList);
+			}
+}
 }

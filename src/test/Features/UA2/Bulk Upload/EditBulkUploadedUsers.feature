@@ -55,7 +55,7 @@ Feature: Edit bulk uploaded users
     Then I click on Import User button
     Then I click on Try Again button
     Then I edit "<PreviousRoleText>" user and enter data
-    Then I click on submit button on bulk user upload page
+    Then I click on submit button on edit bulk user page for role "<User>-<PreviousRole>-<Role>" and applications "<ApplicationsEnabled>" 
     Then I verify "1 user added" message
     Then I verify availability of Hide button
     When I click on Hide button

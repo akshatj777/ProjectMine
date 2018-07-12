@@ -141,6 +141,12 @@ public class BulkLoadSteps extends DriverScript{
     public void editUser(String role){
     	bulkUser.editUser(role);
     }
+    
+    @Then("^I click on submit button on edit bulk user page for role \"([^\"]*)\" and applications \"([^\"]*)\"$")
+    public void clickSubmitButtonForEditUser(String role, String apps){
+    	bulkUser.clickSubmitForEditBulkUser(role,apps);
+    }
+    
     @Then("^I edit user with invalid data$")
 public void editWithInvalidData(){
     	bulkUser.editWithInvalidData();
