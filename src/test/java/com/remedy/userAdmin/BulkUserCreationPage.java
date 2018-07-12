@@ -14,6 +14,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Created by salam on 10/30/16.
@@ -1178,8 +1179,8 @@ public class BulkUserCreationPage extends BaseClass {
 
 	public void verifySuccessfulMessage(String text) {
 		iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
-		waitTo().until(
-				ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
+		WebDriverWait objWait = new WebDriverWait(driver, 300);
+		objWait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[@class='successCountLabel'][text()='" + text + "']")));
 	}
 
