@@ -99,7 +99,7 @@ Feature: View HHA organization functionality tests
 
     Examples: 
       | Description                                                         | Has_MO | MO_Name | HHA_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Region  | Market  | CCN | EIN | NPI | StateVerification | Organization Type | Message                                |
-      | Verification of HHA details and count on HHA tab under Managing org | YES    | MONAME  | HHANAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | CCN | EIN | NPI | CA                | ACH               | HHA Organization Successfully Created. |
+      | Verification of HHA details and count on HHA tab under Managing org | YES    | MONAME  | HHANAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | CCN | EIN | NPI | CA                | Hospice               | HHA Organization Successfully Created. |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -116,8 +116,8 @@ Feature: View HHA organization functionality tests
     And I verify the "Create New HHA Organization" link under No matches
 
     Examples: 
-      | Description                                                             | MO_Name | Hosp_Name    |
-      | Searching invalid details on Managing Organization Profile Page for ACH | MONAME  | NoMatchesOrg |
+      | Description                                                             | MO_Name | HHA_Name    |
+      | Searching invalid details on Managing Organization Profile Page for Hospice | MONAME  | NoMatchesOrg |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"

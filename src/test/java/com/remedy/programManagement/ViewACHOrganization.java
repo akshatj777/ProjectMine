@@ -63,6 +63,19 @@ public class ViewACHOrganization  extends BaseClass{
 				Assert.assertEquals("CCN: "+CreateHHAOrganizationAPI.CCNNameList.get(1).substring(1, CreateHHAOrganizationAPI.CCNNameList.get(1).length()-1),actual.replace("|", ""));
 			}
 		}
+		else if (org.contains("Hospice"))
+		{
+			if (text.contains("YES"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ccn"))); 
+				Assert.assertEquals("CCN: "+CreateHospiceOrganization.HospiceOrg.get("CCN"),actual.replace("|", ""));
+			}
+			else if (text.contains("NO"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ccn"))); 
+				Assert.assertEquals("CCN: "+CreateHospiceOrganization.HospiceOrg_noMO.get("CCN"),actual.replace("|", ""));
+			}
+		}
 		else if (org.contains("LTCH"))
 		{
 			if (text.contains("YES"))
@@ -179,12 +192,28 @@ public class ViewACHOrganization  extends BaseClass{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
 				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
 				Assert.assertEquals(CreateIRFOrganization.IRFOrg.get("EIN"),actual);
+
 			}
 			else if (text.contains("NO"))
 			{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
 				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
 				Assert.assertEquals(CreateIRFOrganization.IRFOrg_noMO.get("EIN"),actual);
+			}
+		}
+		else if (org.contains("Hospice"))
+		{
+			if (text.contains("YES"))
+			{	
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateHospiceOrganization.HospiceOrg.get("EIN"),actual);
+			}
+			else if (text.contains("NO"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateHospiceOrganization.HospiceOrg_noMO.get("EIN"),actual);
 			}
 		}
 		else 
@@ -291,6 +320,7 @@ public class ViewACHOrganization  extends BaseClass{
 				Assert.assertEquals(CreateLTCHOrganizationAPI.NPINameList.get(1).substring(1, CreateLTCHOrganizationAPI.NPINameList.get(1).length()-1),actual);	
 			}
 		}
+
 		else if(org.contains("IRF"))
 		{
 			if(text.contains("YES"))
@@ -304,6 +334,21 @@ public class ViewACHOrganization  extends BaseClass{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
 				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
 				Assert.assertEquals(CreateIRFOrganization.IRFOrg_noMO.get("EIN"),actual);	
+			}
+		}
+		else if(org.contains("Hospice"))
+		{
+			if(text.contains("YES"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateHospiceOrganization.HospiceOrg.get("NPI"),actual);
+			}
+			else if(text.contains("NO"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateHospiceOrganization.HospiceOrg_noMO.get("NPI"),actual);	
 			}
 		}
 		else
@@ -459,6 +504,19 @@ public class ViewACHOrganization  extends BaseClass{
 				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg.get("CCN")+"']")));
 			}
 		}
+		else if(org.contains("Hospice"))
+		{
+			if(name.contains("HOSPICENAME"))
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateHospiceOrganization.HospiceOrg.get("HOSPICENAME")+"']"));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateHospiceOrganization.HospiceOrg.get("HOSPICENAME")+"']")));
+			}
+			else if(name.contains("CCN"))
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateHospiceOrganization.HospiceOrg.get("CCN")+"']"));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateHospiceOrganization.HospiceOrg.get("CCN")+"']")));
+			}
+		}
 		else
 		{
 			iWillWaitToSee(By.xpath("//div[text()='"+name+"']"));
@@ -529,6 +587,18 @@ public class ViewACHOrganization  extends BaseClass{
 		{
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateIRFOrganization.IRFOrg_noMO.get("IRFNAME"));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(text.contains("HOSPICENAME - YES"))
+		{
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHospiceOrganization.HospiceOrg.get("HOSPICENAME"));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(text.contains("HOSPICENAME - NO"))
+		{
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHospiceOrganization.HospiceOrg_noMO.get("HOSPICENAME"));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 	}

@@ -210,6 +210,18 @@ public class EditManagingOrganization extends BaseClass {
 				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg_noMO.get("IRFNAME")+"']")));
 				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
+		else if(field.contains("HOSPICENAME - YES"))
+		{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateHospiceOrganization.HospiceOrg.get("HOSPICENAME")+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateHospiceOrganization.HospiceOrg.get("HOSPICENAME")+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(field.contains("HOSPICENAME - NO"))
+		{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateHospiceOrganization.HospiceOrg_noMO.get("HOSPICENAME")+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateHospiceOrganization.HospiceOrg_noMO.get("HOSPICENAME")+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
 		else if(field.contains("PROGRAMNAME"))
 		{
 			if(CreateProgramAPI.PROGRAMNameList.get(0).contains("\""))
@@ -419,6 +431,14 @@ public class EditManagingOrganization extends BaseClass {
 				CreateHHAOrganization.tempHHAOrg.put("HHANAME",RandomStringUtils.randomAlphabetic(75));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
 			}
+			else if(field1.contains("Hospice"))
+			{
+				scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
+				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
+				CreateHospiceOrganization.tempHospiceOrg.put("HOSPICENAME",RandomStringUtils.randomAlphabetic(75));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHospiceOrganization.tempHospiceOrg.get("HHANAME"));
+			}
 			else if(field1.contains("Long-Term Care Hospital"))
 			{
 				scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
@@ -470,6 +490,14 @@ public class EditManagingOrganization extends BaseClass {
 				CreateLTCHOrganization.tempLTCHOrg.put("LTCHNAME",str+RandomStringUtils.randomAlphabetic(7));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateLTCHOrganization.tempLTCHOrg.get("LTCHNAME"));
 			}
+			else if(field1.contains("Hospice"))
+			{
+				scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
+				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
+				CreateHospiceOrganization.tempHospiceOrg.put("HOSPICENAME",str+RandomStringUtils.randomAlphabetic(7));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHospiceOrganization.tempHospiceOrg.get("HOSPICENAME"));
+			}
 		}
 		else if(field2.contains("equalsTo75Characters")){
 			scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
@@ -515,6 +543,21 @@ public class EditManagingOrganization extends BaseClass {
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
 		}
+		
+		else if(field2.equalsIgnoreCase("HOSPICENAME - YES")){
+			CreateHospiceOrganization.oldHospice_WithMO = CreateHospiceOrganization.HospiceOrg.get("HOSPICENAME");
+			CreateHospiceOrganization.tempHospiceOrg.put("HOSPICENAME",createRandomName(field2));
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHospiceOrganization.tempHospiceOrg.get("HOSPICENAME"));
+		}
+		else if(field2.equalsIgnoreCase("HOSPICENAME - NO")){
+			CreateHospiceOrganization.oldHospice_WithoutMO = CreateHospiceOrganization.HospiceOrg_noMO.get("HOSPICENAME");
+			CreateHospiceOrganization.tempHospiceOrg.put("HOSPICENAME",createRandomName(field2));
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHospiceOrganization.tempHospiceOrg.get("HOSPICENAME"));
+		}
 		else if(field2.equalsIgnoreCase("DUPLICATE_HHA - YES")){
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")),CreateHHAOrganizationAPI.HHANameList.get(1).substring(1, CreateHHAOrganizationAPI.HHANameList.get(1).length()-1));
@@ -522,6 +565,14 @@ public class EditManagingOrganization extends BaseClass {
 		else if(field2.equalsIgnoreCase("DUPLICATE_HHA - NO")){
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHHAOrganizationAPI.HHANameList.get(0).substring(1, CreateHHAOrganizationAPI.HHANameList.get(0).length()-1));
+		}
+		else if(field2.equalsIgnoreCase("DUPLICATE_Hospice - YES")){
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")),CreateHospiceOrganization.HospiceOrg_noMO.get("HOSPICENAME"));
+		}
+		else if(field2.equalsIgnoreCase("DUPLICATE_Hospice - NO")){
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHospiceOrganization.HospiceOrg.get("HOSPICENAME"));
 		}
 		else 
 		{
