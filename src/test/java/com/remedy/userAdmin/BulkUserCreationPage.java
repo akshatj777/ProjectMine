@@ -1733,23 +1733,7 @@ public class BulkUserCreationPage extends BaseClass {
 					"441348:ALL_BPIDS:ALL_FACILITIES  | | | True | True | True | True | True | True | False | |False");
 			
 		} 
-		else if (role.equals("Remedy TCS2")) {
-			String userRole = "Super Admin-Remedy TCS";
-			String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole)
-					.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
-			try {
-				strUserData = readContentForBulkUpload(6, 7);
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-			
-			strUserData = strUserData.replace("RTCSMAIL", email);
-
-			strUserData = strUserData.replace(
-					"514025:2070-047:001 |NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | | True | True | True | False | False | True | False | |False ",
-					"441444:3056-q91:181318,441444:3056-q91:441310  |NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | | True | True | True | True | True | True | False | |False");
-			
-		}else if (role.equals("Remedy LPN1")) {
+		else if (role.equals("Remedy LPN1")) {
 			String userRole = "Super Admin-Remedy LPN";
 			String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole)
 					.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
@@ -1763,39 +1747,22 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("439245:ALL_BPIDS:ALL_FACILITIES||", "441444:3056-q91:181318,441444:2070-g14:100086|3hSOHNAnvjc1,NFdw0Kts2C01|");
 			
 		} 
-		else if (role.equals("Remedy LPN2")) {
-			String userRole = "Super Admin-Remedy LPN";
-			String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole)
-					.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
-			try {
-				strUserData = readContentForBulkUpload(7, 8);
-			} catch (Exception e) {
-				System.out.println(e);
-			}
 		
-			strUserData = strUserData.replace("RLPNMAIL", email);
-			strUserData = strUserData.replace("439245:ALL_BPIDS:ALL_FACILITIES", "441348:ALL_BPIDS:ALL_FACILITIES");
-			
-		}
-	/*	else if (role.equals("Remedy RN")) {
+	else if (role.equals("Remedy RN")) {
+		String userRole = "Super Admin-"+role.trim();
+		String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole)
+				.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
+	
 			try {
 				strUserData = readContentForBulkUpload(8, 9);
 			} catch (Exception e) {
 				System.out.println(e);
 			}
-			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RRNMAIL", "qaautomation+" + randomString + "@remedypartners.com");
-			strUserData = strUserData.replace("RRNFirstName", "RRNFirstNameEdited");
-			strUserData = strUserData.replace("RRNLastName", "RRNLastNameEdited");
-			strUserData = strUserData.replace("9878909878", "9878900000");
+			strUserData = strUserData.replace("RRNMAIL", email);
+			strUserData = strUserData.replace("441348:ALL_BPIDS:ALL_FACILITIES","441444:3056-q91:181318,441444:3056-q91:441310");
+			
 
-			applicationsList.put("Remedy RN", "Episodes, Episodes 2.0, Reports, TCI, Lessons");
-			bulkEmailPerRole.put("Remedy RN", "qaautomation+" + randomString + "@remedypartners.com");
-			bulkUsersEmailPerRole.put("Super Admin-Remedy RN", bulkEmailPerRole);
-			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy RN", applicationsList);
-			CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy RN", bulkEmailPerRole);
-
-		}*/
+		}
 
 
 		else if (role.equals("Remedy Field RN")) {
@@ -1828,8 +1795,8 @@ public class BulkUserCreationPage extends BaseClass {
 
 			
 			strUserData = strUserData.replace(
-					"441364:3056-k60:365973,441364:3056-k61:365860 |NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1 | | True| True | False | False | False | True | False | | False",
-					"441364:3056-k60:365973,441364:3056-k61:365860 |NFdw0Kts2C01 | | False| False | True | True | True | True | False | | False");
+					"|NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1 | | True| True | False | False | False | True | False | | False",
+					"|NFdw0Kts2C01 | | False| False | True | True | True | True | False | | False");
 
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
 			applicationsList.put("Remedy PM", "Episodes 2.0, Reports, TCI, Lessons");
@@ -1858,29 +1825,30 @@ public class BulkUserCreationPage extends BaseClass {
             CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Executive", applicationsList);
             CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
         }*/
-		/*else if (role.equals("Remedy Other")) {
+		else if (role.equals("Remedy Other")) {
 
-
+			String userRole = "Super Admin-"+role.trim();
+			String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole)
+					.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
+      
             try {
                 strUserData = readContentForBulkUpload(14, 15);
             } catch (Exception e) {
                 System.out.println(e);
             }
-            randomString = RandomStringUtils.randomAlphabetic(8);
-            strUserData = strUserData.replace("ROMAIL", "qaautomation+" + randomString + "@remedypartners.com");
-            strUserData = strUserData.replace(" Remedy Other ", " Manager ");
-            strUserData = strUserData.replace("ROFirstName", "ROFirstNameEdited");
-            strUserData = strUserData.replace("ROLastName", "ROLastNameEdited");
-            strUserData = strUserData.replace("514022:2070-007:J", "441348:ALL_BPIDS:ALL_FACILITIES");
+            strUserData = strUserData.replace("ROMAIL", email);
+            strUserData = strUserData.replace(" Remedy Other ", " Downstream Provider ");
             
-            applicationsList.put("Manager", "Episodes, Reports, TCI, Lessons");
+            strUserData = strUserData.replace("514022:2070-007:J |HZhmTBQzHtU1,18h7phZr1h81", "441369:3056-m03:365402||");
+            
+            HashMap<String, String> applicationsList = new HashMap<String, String>();
+            applicationsList.put("Downstream Provider", "Episodes, Episodes 2.0, TCI");
            
-            bulkEmailPerRole.put("Manager", "qaautomation+" + randomString + "@remedypartners.com");
-            bulkUsersEmailPerRole.put("Super Admin-Manager", bulkEmailPerRole);
-            CreateUserPage.usersApplicationsPerRole.put("Super Admin-Manager", applicationsList);
-            CreateUserPage.usersEmailPerRole.put("Super Admin-Manager", bulkEmailPerRole);
-        }*/
-		else if (role.equals("Remedy Executive")) {
+             CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
+
+            
+        }
+		/*else if (role.equals("Remedy Executive")) {
 			String userRole = "Super Admin-"+role.trim();
 			String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole)
 					.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
@@ -1898,29 +1866,22 @@ public class BulkUserCreationPage extends BaseClass {
            
              CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
             
-        }
-		/*else if (role.equals("Prospective Partner Executive")) {
-
+        }*/
+		else if (role.equals("Prospective Partner Executive")) {
+			String userRole = "Super Admin-"+role.trim();
+			String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole)
+					.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
+		
             try {
                 strUserData = readContentForBulkUpload(13, 14);
             } catch (Exception e) {
                 System.out.println(e);
             }
-            randomString = RandomStringUtils.randomAlphabetic(8);
-            strUserData = strUserData.replace("PPEMAIL", "qaautomation+" + randomString + "@remedypartners.com");
-            strUserData = strUserData.replace("PPEFirstName", "PPEFirstNameEdited");
-            strUserData = strUserData.replace("PPELastName", "PPELastNameEdited");
             
-            strUserData = strUserData.replace("| | Prospective Partner Executive", "|7676878998 | Prospective Partner Executive");
-            strUserData = strUserData.replace("442503:ALL_BPIDS:ALL_FACILITIES", "439108:ALL_BPIDS:ALL_FACILITIES");
-            applicationsList.put("Prospective Partner Executive", "Lessons, TCI");
-            
-            bulkEmailPerRole.put("Prospective Partner Executive",
-                    "qaautomation+" + randomString + "@remedypartners.com");
-            bulkUsersEmailPerRole.put("Super Admin-Prospective Partner Executive", bulkEmailPerRole);
-            CreateUserPage.usersApplicationsPerRole.put("Super Admin-Prospective Partner Executive", applicationsList);
-            CreateUserPage.usersEmailPerRole.put("Super Admin-Prospective Partner Executive", bulkEmailPerRole);
-        }*/
+            strUserData = strUserData.replace("PPEMAIL", email);
+
+            strUserData = strUserData.replace("442503:ALL_BPIDS:ALL_FACILITIES", "441348:ALL_BPIDS:ALL_FACILITIES");
+                   }
 		/*else if (role.equals("Partner Program Administrator")) {
 
             try {
@@ -1982,7 +1943,7 @@ public class BulkUserCreationPage extends BaseClass {
             strUserData = strUserData.replace("572091:3056-r30:075278", "441369:3056-m03:365402,450306");
             HashMap<String, String> applicationsList = new HashMap<String, String>();
             applicationsList.put("Downstream Provider",
-                    "Episodes, TCI");
+                    "Episodes, Episodes 2.0, TCI");
            
                 CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider",
                     applicationsList);
