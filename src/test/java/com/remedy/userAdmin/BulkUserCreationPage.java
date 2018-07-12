@@ -1193,7 +1193,10 @@ public class BulkUserCreationPage extends BaseClass {
 						.readAllLines(
 								Paths.get(System.getProperty("user.dir") + "//src//test//Imports//BulkUpload.txt"))
 						.get(i));
-				line.append("\n");
+				if(!(i==to-1))
+				{
+					line.append("\n");
+				}
 			}
 			data = line.toString();
 			return data;
