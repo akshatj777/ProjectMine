@@ -44,9 +44,9 @@ Feature: Search IRF organization functionality tests
     Then I verify "<Message>" after submitting the "create IRF - <Has_MO>" organization page
 
     Examples: 
-      | Description                                                        | Has_MO | Managing_Org | IRF_Name | Address1 | Short_Name | Address2 | City           | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Message                                |
-      | Create IRF Organization with all the available fields - Without MO | NO     |              | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | irf Organization Successfully Created. |
-      | Create IRF Organization with all the available fields - With MO    | YES    | MONAME       | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | irf Organization Successfully Created. |
+      | Description                                                        | Has_MO | Managing_Org | IRF_Name | Address1 | Short_Name | Address2 | City           | State    | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Message                                |
+      | Create IRF Organization with all the available fields - Without MO | NO     |              | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | New York |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | irf Organization Successfully Created. |
+      | Create IRF Organization with all the available fields - With MO    | YES    | MONAME       | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | New York |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | irf Organization Successfully Created. |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -65,7 +65,7 @@ Feature: Search IRF organization functionality tests
       | Search IRF Organization with IRF Org Name - With MO    | YES    | IRFNAME        |
       | Search IRF Organization with IRF Org Name - Without MO | NO     | IRFNAME        |
       | Search IRF Organization with City                      |        | AutomationCity |
-      | Search IRF Organization with State                     |        | CA             |
+      | Search IRF Organization with State                     |        | NY             |
       | Search IRF Organization with Postal Code               |        |          10000 |
 
   Scenario Outline: <Description>
@@ -97,10 +97,9 @@ Feature: Search IRF organization functionality tests
     When I click on Organization link on Program Management page
     When I click on "IRF" organization tab on organization dashboard
     Then I search with "<IRF_Name> - <Has_MO>" on organization in search box
-    And I verify "<IRF_Name> - <Has_MO>" field in search list on organization page
     And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
-    And I edit "Inpatient Rehab Facility Organization Name" field to "<Edited_SNF_Name> - <Has_MO>" for organization
+    And I edit "Inpatient Rehab Facility Organization Name" field to "<Edited_IRF_Name> - <Has_MO>" for organization
     Then I click on "Submit" button on "Edit" organization page
     Then I verify "<Message>" after submitting the "edit IRF - <Has_MO>" organization page
     Then I search "<Edited_IRF_Name> - <Has_MO>" and verify with search list options on "IRF" organization search box

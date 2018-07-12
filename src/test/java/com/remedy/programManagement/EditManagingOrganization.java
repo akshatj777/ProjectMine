@@ -331,6 +331,32 @@ public class EditManagingOrganization extends BaseClass {
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateSNFOrganizationAPI.SNFNameList.get(1));
 		}
+		else if(field2.equalsIgnoreCase("IRFNAME - YES")){
+			CreateIRFOrganization.oldIRF_WithMO = CreateIRFOrganization.IRFOrg.get("IRFNAME");
+			scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
+			CreateIRFOrganization.tempIRFOrg.put("IRFNAME",createRandomName(field2));
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateIRFOrganization.tempIRFOrg.get("IRFNAME"));
+		}
+		else if(field2.equalsIgnoreCase("IRFNAME - NO")){
+			CreateIRFOrganization.oldIRF_WithoutMO = CreateIRFOrganization.IRFOrg_noMO.get("IRFNAME");
+			scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
+			CreateIRFOrganization.tempIRFOrg.put("IRFNAME",createRandomName(field2));
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateIRFOrganization.tempIRFOrg.get("IRFNAME"));
+		}
+		else if(field2.equalsIgnoreCase("DUPLICATE_IRF - YES")){
+			scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateIRFOrganization.IRFOrg_noMO.get("IRFNAME"));
+		}
+		else if(field2.equalsIgnoreCase("DUPLICATE_IRF - NO")){
+			scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateIRFOrganization.IRFOrg.get("IRFNAME"));
+		}
 		
 		else if(field2.equalsIgnoreCase("LTCHNAME - YES")){
 			CreateLTCHOrganization.oldLTCH_WithMO = CreateLTCHOrganizationAPI.LTCHNameList.get(0).substring(1, CreateLTCHOrganizationAPI.LTCHNameList.get(0).length()-1);

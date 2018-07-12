@@ -44,9 +44,9 @@ Feature: View IRF organization functionality tests
     Then I verify "<Message>" after submitting the "create IRF - <Has_MO>" organization page
 
     Examples: 
-      | Description                                                        | Has_MO | Managing_Org | IRF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Message                                |
-      | Create IRF Organization with all the available fields - Without MO | NO     |              | IRFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | IRF Organization Successfully Created. |
-      | Create IRF Organization with all the available fields - With MO    | YES    | MONAME       | IRFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | IRF Organization Successfully Created. |
+      | Description                                                        | Has_MO | Managing_Org | IRF_Name | Address1 | Short_Name | Address2 | City           | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Message                                |
+      | Create IRF Organization with all the available fields - Without MO | NO     |              | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | irf Organization Successfully Created. |
+      | Create IRF Organization with all the available fields - With MO    | YES    | MONAME       | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | irf Organization Successfully Created. |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -110,8 +110,8 @@ Feature: View IRF organization functionality tests
 
     Examples: 
       | Description                                                                             | Has_MO | IRF_Name | Address1 | Short_Name | Address2 | City           | State      | Postal_Code | Loc_Name       | Loc_Address1 | Loc_Type | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN/TIN | NPI | StateVerification | Organization Type        | Message                                |
-      | Verification of IRF details and count of locations displayed under IRF org - with MO    | YES    | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name new2  | Loc_Address1 | IRF      | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN     | NPI | CA                | Inpatient Rehab Facility | IRF Organization Successfully Updated. |
-      | Verification of IRF details and count of locations displayed under IRF org - without MO | NO     | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name2 new2 | Loc_Address1 | IRF      | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN     | NPI | CA                | Inpatient Rehab Facility | IRF Organization Successfully Updated. |
+      | Verification of IRF details and count of locations displayed under IRF org - with MO    | YES    | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name new2  | Loc_Address1 | IRF      | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN     | NPI | CA                | Inpatient Rehab Facility | irf Organization Successfully Updated. |
+      | Verification of IRF details and count of locations displayed under IRF org - without MO | NO     | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name2 new2 | Loc_Address1 | IRF      | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN     | NPI | CA                | Inpatient Rehab Facility | irf Organization Successfully Updated. |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -165,7 +165,7 @@ Feature: View IRF organization functionality tests
 
     Examples: 
       | Description                                                         | Has_MO | MO_Name | IRF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | StateVerification | Message                                |
-      | Verification of IRF details and count on IRF tab under Managing org | YES    | MONAME  | IRFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | IRF      | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN | NPI | CA                | IRF Organization Successfully Created. |
+      | Verification of IRF details and count on IRF tab under Managing org | YES    | MONAME  | IRFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | IRF      | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN | NPI | CA                | irf Organization Successfully Created. |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -179,7 +179,7 @@ Feature: View IRF organization functionality tests
     And I click on "IRF" organization under Managing Organization
     And I search with "<IRF_Name>" on organization in search box
     Then I verify the "No matches" message for invalid search in Organization
-    And I verify the "Create New Inpatient Rehab Facility Organization" link under No matches
+    And I verify the "Create New IRF Organization" link under No matches
 
     Examples: 
       | Description                                                             | MO_Name | IRF_Name         |
