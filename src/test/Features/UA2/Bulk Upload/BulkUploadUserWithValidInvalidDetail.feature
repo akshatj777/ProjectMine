@@ -1,6 +1,6 @@
 Feature: Bulk upload users with valid and invalid details
 
-    Scenario: Scenario to create multiple users with valid and invalid details
+  Scenario: Scenario to create multiple users with valid and invalid details
     Given I am on the login page
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
@@ -17,35 +17,19 @@ Feature: Bulk upload users with valid and invalid details
     Then I verify availability of Download Log button
     Then I verify availability of Try Again button
 
-  Scenario Outline: <Description>
+  Scenario Outline: and <Description>
     Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account for bulk delete
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
     Then I enter password "1Welcome2" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
-    Then I verify Account Verification in Inbox in my account
-    Then I click on Account Verification mail in Inbox
-    Then I verify "Confirm my account!" link in mail content
-    Then I click on "Confirm my account!" link in mail content
-    And I switch to new window
-    Then I enter email "<User>-<Role>" to generate password link for bulk users
-    And I click on send mail button
-    Then I switch back to old window
-    Then I click on Inbox in mail
-    Then I verify the unread mail in inbox in my account
-    Then I verify Change Password mail in Inbox in my account
-    Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
-    And I switch to new window
-    And I enter new password "Testing1@" to set new password
-    And I enter confirm new password "Testing1@" to set new password
-    And I click on submit button to set new password
+    Then I verify account for user "<User>-<Role>"
+    Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | Description                     | User        | Role      |
-      | Verify email for Executive User | Super Admin | Executive |
+      | Description                   | User        | Role    |
+      | Verify email for Manager User | Super Admin | Manager |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -83,8 +67,8 @@ Feature: Bulk upload users with valid and invalid details
     Then I verify location "<Locations>"
 
     Examples: 
-      | Description                                       | User        | UserName                               | Password | FirstName          | LastName          | Phone | Role      | ApplicationsEnabled | ApplicationsDisabled | NPI | LearningPathway                                           | HealthSystem      | Programs                        | Locations                                      |
-      | View Executive user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | ExecutiveFirstName | ExecutiveLastName |       | Executive | Episodes, Lessons   | Reports              |     | i am learning path, Learning Pathway 2, Remedy University | Stamford Hospital | Stamford Hospital--BPCI Model 2 | Stamford Hospital--2070-015--Stamford Hospital |
+      | Description                                     | User        | UserName                               | Password | FirstName          | LastName          | Phone | Role    | ApplicationsEnabled | ApplicationsDisabled | NPI | LearningPathway                                           | HealthSystem      | Programs                        | Locations                                      |
+      | View Manager user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | ExecutiveFirstName | ExecutiveLastName |       | Manager | Episodes, Lessons   | Reports              |     |  | Stamford Hospital | Stamford Hospital--BPCI Model 2 | Stamford Hospital--2070-015--Stamford Hospital |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -93,10 +77,10 @@ Feature: Bulk upload users with valid and invalid details
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
     #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
@@ -154,5 +138,5 @@ Feature: Bulk upload users with valid and invalid details
     And I should see Log in widget
 
     Examples: 
-      | Description                                                          | User        | FirstName          | LastName          | Role      | Applications                    | ApplicationsNotVisible                          | Roletext | ReportCategory | ReportName         | BPID | Facilities        | LearningPathway                                           |  |
-      | Login with Executive and verify Product Tiles and their redirections | Super Admin | ExecutiveFirstName | ExecutiveLastName | Executive | Episodes, Reports, TCI, Lessons | Episodes 2.0, Administration, Physician Connect | ROLE_PRM | Patient ID     | Episode DRG Issues |      | Stamford Hospital | i am learning path, Learning Pathway 2, Remedy University |  |
+      | Description                                                        | User        | FirstName          | LastName          | Role    | Applications                    | ApplicationsNotVisible                          | Roletext | ReportCategory | ReportName         | BPID | Facilities        | LearningPathway                                           |  |
+      | Login with Manager and verify Product Tiles and their redirections | Super Admin | ExecutiveFirstName | ExecutiveLastName | Manager | Episodes, Reports, TCI, Lessons | Episodes 2.0, Administration, Physician Connect | ROLE_PRM | Patient ID     | Episode DRG Issues |      | Stamford Hospital |  |  |

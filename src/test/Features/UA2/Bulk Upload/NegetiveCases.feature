@@ -12,6 +12,7 @@ Feature: Negetive cases from bulk upload
     Then I click on Try Again button
     Then I enter user data for all application access
     Then I click on submit button on bulk user upload page
+    And I wait for 3000 milli seconds
     Then I verify "19 users added" message
 
   Scenario Outline: Scenario to Create user with Invalid data and validate error message-<Description>
@@ -51,7 +52,6 @@ Feature: Negetive cases from bulk upload
     Then I verify availability of link "Delete User"
     Then I click on "Delete User" link on general information tab
     Then I verify text "Are you sure you want to delete"
-    Then I verify "Cancel" button on deletion alert
     Then I verify availability of "Delete" button on deletion alert
     Then I click on "Delete" button to delete user
     Then I should see header text "Users"
