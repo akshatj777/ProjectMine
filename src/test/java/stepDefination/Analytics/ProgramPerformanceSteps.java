@@ -204,4 +204,24 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.ReadTextFromSavingsRateField(text, "//div[@tb-test-id='Savings Rate']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 309px; height: 79px;']", resolution);
 	}
 	
+	@And("^I verify \"([^\"]*)\" count matched with database value on dashboard for program size with picture resolution \"([^\"]*)\"$")
+	public void i_verify_program_size_count_matched_with_database_as_on_the_dashboard(String text,String resolution) throws Throwable{
+		programdashboard.GetTextFromScreenShot(text,"//div[@tb-test-id='KPI_Program_size']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 227px; height: 52px;']",resolution);
+	}
+	
+	@And("^I verify \"([^\"]*)\" count matched with database value on dashboard for npra with picture resolution \"([^\"]*)\"$")
+	public void i_verify_npra_count_matched_with_database_as_on_the_dashboard(String text,String resolution) throws Throwable{
+		programdashboard.GetTextFromScreenShot(text,"//div[@tb-test-id='KPI_NPRA']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 205px; height: 52px;']",resolution);
+	}
+	
+	@Then("^I select \"([^\"]*)\" from \"([^\"]*)\" field and click on \"([^\"]*)\"$")
+	public void i_select_from_field_and_click_on(String text,String field,String apply) throws Throwable{
+		programdashboard.iSelectValuesFromDropDown(text, field, apply);
+	}
+	
+	@And("^I set the time for starting date to \"([^\"]*)\" on dashboard and ending date to today date$")
+	public void i_set_time_for_starting_date_to_on_dashboard_and_ending_date_to_today_date(String date) throws Throwable{
+		programdashboard.iSetCalendarAttributeValueForEndingTodayDate(date);
+	}
+	
 }

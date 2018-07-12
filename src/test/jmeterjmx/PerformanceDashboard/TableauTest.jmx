@@ -84,15 +84,21 @@
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="No. of Episode (EC Source)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select sum(a.EC_Episode) AS ECEpiosdeCount from 
-(select
-BPID, sum(e.episodeCountReport) as EC_Episode
-from
-warehouse.factPatientEpisode  e
-where e.bundleRisk=1
-and e.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup
-where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and e.bpid in ${bpid}) a</stringProp>
+          <stringProp name="query">select sum(fp.episodeCountReport) AS ECEpiosdeCount
+from warehouse.factPatientEpisode fp
+inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK
+inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
+inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
+inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK
+inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
+where fp.bundleRisk = 1
+and fp.episodeCountReport = 1
+and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
+and de.bpid not like &apos;%DEMO%&apos;
+and dlk.lookupCategory = &apos;patientRisk&apos;
+and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
+and fp.anchorAdmitDateKey  &gt;= &apos;20180101&apos;
+and fp.BPID in ${bpid};</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">ECEpiosdeCount</stringProp>
@@ -145,10 +151,15 @@ from
 from warehouse.factClaims c
 inner JOIN
 warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
+inner JOIN 
+warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
 inner JOIN
 warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-WHERE c.atRisk=&apos;Y&apos; 
-and c.anchorBeginDateKey &gt;= 20170101 
+WHERE f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
+and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
+and e.bpid not like &apos;%DEMO%&apos;
+and c.atRisk=&apos;Y&apos; 
+and c.anchorBeginDateKey &gt;= 20160101 
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 and e.bpid in  ${bpid}) a;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -168,10 +179,15 @@ from
 from warehouse.factClaims c
 INNER JOIN
 warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
+inner join 
+warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
 INNER JOIN
 warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-WHERE c.atRisk=&apos;Y&apos; 
-and c.anchorBeginDateKey &gt;= 20170101 
+WHERE f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
+and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
+and e.bpid not like &apos;%DEMO%&apos;
+and c.atRisk=&apos;Y&apos; 
+and c.anchorBeginDateKey &gt;= 20160101 
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 and e.bpid in  ${bpid}) as a;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -185,16 +201,21 @@ and e.bpid in  ${bpid}) as a;</stringProp>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NPRA and PROGRAM SIZE metrics Caluclation by individual BPID" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select round(sum(NPRA)) AS TotalNPRA, round(sum(Program_size))as TotalProgram
+          <stringProp name="query">select round(sum(NPRA)) AS TotalNPRA, round(sum(Program_size)) as TotalProgram
 from
-(select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size 
+(select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size
 from warehouse.factClaims c
-INNER JOIN
+inner join
 warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-INNER JOIN
+inner join 
+warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
+inner join
 warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-WHERE c.atRisk=&apos;Y&apos; 
-and c.anchorBeginDateKey &gt;= 20170101 
+WHERE f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
+and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
+and e.bpid not like &apos;%DEMO%&apos;
+and c.atRisk=&apos;Y&apos;
+and c.anchorBeginDateKey &gt;= 20160101
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 and e.bpid in  ${bpid}) a;</stringProp>
           <stringProp name="queryArguments"></stringProp>

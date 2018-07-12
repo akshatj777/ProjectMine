@@ -1,1 +1,1 @@
-ECEpiosdeCount=1106,claimsEpiosdeCount=1570,savingRate=5.300,TotalNPRA=1948113,TotalProgram=37029262 
+ECEpiosdeCount=324,claimsEpiosdeCount=1565,savingRate=3.500,TotalNPRA=1670141,TotalProgram=47094540 

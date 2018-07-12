@@ -492,8 +492,6 @@ public class ProgramPerformance extends BaseClass{
 	 public void executejmeter(String location) throws IOException
 	    {
 		 File jmx=new File(System.getProperty("user.dir")+location);
-//		 String jmeter=DriverScript.Config.getProperty("jmeterPath");
-//	     Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd C:\\apache-jmeter-4.0\\apache-jmeter-4.0\\bin && jmeter -n -t C:\\Users\\aseem.gupta\\Tableautestpaln\\Tableautestpaln\\TableauTest.jmx && exit\"");
 		 Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd "+DriverScript.Config.getProperty("jmeterPath")+" "+jmx+" && exit\"");
 	    }
 	 
@@ -585,7 +583,7 @@ public class ProgramPerformance extends BaseClass{
 		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		 BufferedImage  fullImg = ImageIO.read(screenshot);
 		 Point point = ele.getLocation();
-		 point = point.moveBy(100, 100);
+		 point = point.moveBy(100, 60);
 		 System.out.println(point);
 		 int eleWidth = ele.getSize().getWidth();
 		 int eleHeight = ele.getSize().getHeight();
@@ -615,6 +613,10 @@ public class ProgramPerformance extends BaseClass{
 				 Assert.assertEquals(numberformat(ECEpiosdeCount), FinalOutput.trim());
 				 }else if(text.equals("Claims Episodes")){
 					 Assert.assertEquals(numberformat(claimsEpiosdeCount), FinalOutput.trim()); 
+				 }else if(text.equals("Program Size")){
+					 Assert.assertTrue(FinalOutput.trim().contains(Integer.toString(TotalProgram)));
+				 }else if(text.equals("NPRA")){
+					 Assert.assertTrue(FinalOutput.trim().contains(Integer.toString(TotalNPRA)));
 				 }
 	 }
 	 
@@ -647,7 +649,7 @@ public class ProgramPerformance extends BaseClass{
 		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		 BufferedImage  fullImg = ImageIO.read(screenshot);
 		 Point point = ele.getLocation();
-		 point = point.moveBy(100, 100);
+		 point = point.moveBy(100, 60);
 		 System.out.println(point);
 		 int eleWidth = ele.getSize().getWidth();
 		 int eleHeight = ele.getSize().getHeight();
@@ -681,5 +683,28 @@ public class ProgramPerformance extends BaseClass{
 					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
 //				 Assert.assertEquals(a,FinalOutput.trim().contains(a.toString()));
 				 }
+	 }
+	 
+	 public void iSelectValuesFromDropDown(String text,String field,String apply){
+		 clickElement(driver.findElement(By.xpath("//span[text()='"+field+"']/../../../../.. //span[@role='combobox']")));
+		 clickElement(driver.findElement(By.xpath("//input[contains(@name,'All')]/../div")));
+//		 delay();
+		 clickElement(driver.findElement(By.xpath("//a[@title='"+text+"']/../input/../div")));
+		 clickElement(driver.findElement(By.xpath("//span[text()='"+apply+"']")));
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+		 delay();
+	 }
+	 
+	 public void iSetCalendarAttributeValueForEndingTodayDate(String date){
+		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), date);
+		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
+		 delay();
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
+		 clickElement(driver.findElement(By.xpath("//span[@class='tab-datepicker-today-date']")));
+		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+		 delay();
 	 }
 }
