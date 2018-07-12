@@ -29,6 +29,7 @@ Feature: Edit HHA organization functionality tests
       | Create HHA without MO | HHANAME | ShortName |               |               | EIN | NPI | CCN | Address1 | Address2 | City | CA    | 10000 |        1 |        1 |           201 |             |  0 | hha  |
 
   Scenario Outline: <Description>
+ 
     When I click on "HHA" organization tab on organization dashboard
     When I search with "<HHA_Name> - <Has_MO>" on organization in search box
     And I verify "<HHA_Name> - <Has_MO>" name on the header of view profile

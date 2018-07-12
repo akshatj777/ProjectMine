@@ -64,6 +64,41 @@ Feature: Create IRF Organization functionality tests
     When I click on "IRF" organization tab on organization dashboard
     Then I click on "+" button on "IRF" organization page
     And I verify "Create Inpatient Rehab Facility Organization" header text on create organization page
+    And I select "YES" radio button for managing organization
+    Then I search and verify "<MO_Name>" managing organization name in "YES" Has a Management Organization drop down box
+
+    Examples: 
+      | Description                                                 | Has_MO | MO_Name |
+      | Search for a valid Managing Organization on Create IRF page | YES    | MONAME  |
+
+  Scenario Outline: <Description>
+    When I click on "IRF" organization tab on organization dashboard
+    Then I click on "+" button on "IRF" organization page
+    And I verify "Create Inpatient Rehab Facility Organization" header text on create organization page
+    Then I enter <IRF_Name> in "Inpatient Rehab Facility Organization Name" on create organization page
+    And I enter <Address1> in "Address 1" on create organization page
+    And I enter <City> in "City" on create organization page
+    And I select <State> in State on create organization page
+    And I enter <Postal_Code> in "Postal Code" on create organization page
+    And I provide unique "IRF - <CCN>" in "CCN" on create organization page
+    And I provide unique "IRF - <EIN>" in "EIN" on create organization page
+    And I provide unique "IRF - <NPI>" in "NPI" on create organization page
+    And I enter location name <Loc_Name> for Location "1" on "create" organization page
+    And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
+    And I enter city <Loc_City> for Location "1" on "create" organization page
+    And I select state <Loc_State> for Location "1" on "create" organization page
+    And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
+    Then I click on "Submit" button on "create" organization page
+    And I verify the radio buttons should get highlighted as red on create Organization Page
+
+    Examples: 
+      | Description                                            | IRF_Name | Address1 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI |
+      | Validation message when radio buttons are not selected | IRFNAME  | Address1 | City | California |       10000 | LocName  | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI |
+
+  Scenario Outline: <Description>
+    When I click on "IRF" organization tab on organization dashboard
+    Then I click on "+" button on "IRF" organization page
+    And I verify "Create Inpatient Rehab Facility Organization" header text on create organization page
     And I select "<Has_MO>" radio button for managing organization
     Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
     Then I enter <IRF_Name> in "Inpatient Rehab Facility Organization Name" on create organization page
