@@ -14,6 +14,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Created by salam on 10/30/16.
@@ -259,9 +260,9 @@ public class BulkUserCreationPage extends BaseClass {
 		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
 
-//		bulkNPIPerRole.put("Physicians", randomNPI);
+		bulkNPIPerRole.put("Physicians", randomNPI);
 		bulkUsersNPIPerRole = randomNPI;
-//		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
+		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
 
 		iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 		iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
@@ -1164,9 +1165,9 @@ public class BulkUserCreationPage extends BaseClass {
 
 		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
-//		bulkNPIPerRole.put("Physicians", randomNPI);
+		bulkNPIPerRole.put("Physicians", randomNPI);
 		bulkUsersNPIPerRole = randomNPI;
-//		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
+		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
 		iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 		iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
 	}
@@ -1177,9 +1178,13 @@ public class BulkUserCreationPage extends BaseClass {
 	}
 
 	public void verifySuccessfulMessage(String text) {
-		iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
-		waitTo().until(
-				ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
+		delay();
+		if(driver.findElements(By.xpath("//div[@class='ui text loader']")).size()>0)
+		{
+			iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
+			WebDriverWait objWait = new WebDriverWait(driver, 300);
+			objWait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
+		}
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[@class='successCountLabel'][text()='" + text + "']")));
 	}
 
@@ -1192,7 +1197,10 @@ public class BulkUserCreationPage extends BaseClass {
 						.readAllLines(
 								Paths.get(System.getProperty("user.dir") + "//src//test//Imports//BulkUpload.txt"))
 						.get(i));
-				line.append("\n");
+				if(!(i==to-1))
+				{
+					line.append("\n");
+				}
 			}
 			data = line.toString();
 			return data;
@@ -2027,12 +2035,11 @@ public class BulkUserCreationPage extends BaseClass {
             
         }
 		
-		
-		
-		
-		
+		HashMap<String, String> bulkNPIPerRole = new HashMap<String, String>();
 		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
+		bulkNPIPerRole.put("Physicians", randomNPI);
+		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
 		iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 		iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
 	}
@@ -2125,4 +2132,35 @@ public void editWithInvalidData(){
 	iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 	iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
     }
+
+public void clickSubmitForEditBulkUser(String user, String userApplications)
+{
+	   
+		   iWillWaitToSee(By.xpath("//button[text()='Submit']"));
+			waitTo().until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Submit']")));
+		   clickElement(driver.findElement(By.xpath("//button[text()='Submit']")));
+		   iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
+			WebDriverWait objWait = new WebDriverWait(driver, 300);
+			objWait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
+			HashMap<String,String> emailList = new HashMap<String,String>();
+			HashMap<String,String> applicationsList = new HashMap<String,String>();
+			HashMap<String,String> NPIList = new HashMap<String,String>();
+			String firstKey = user.substring(0,user.indexOf("-"));
+			String secondKey = user.substring(user.indexOf("-")+1, user.lastIndexOf("-"));
+			String thirdKey = user.substring(user.lastIndexOf("-")+1, user.length());
+			emailList.put(thirdKey, CreateUserPage.usersEmailPerRole.get(firstKey+"-"+secondKey).get(secondKey));
+			applicationsList.put(thirdKey, userApplications);
+			if(user.contains("Physicians"))
+			{
+				NPIList.put(thirdKey, bulkUsersNPIPerRole);
+			}
+			else
+			{
+				NPIList.put(thirdKey, "");
+			}
+			bulkUsersNPIPerRole = "";
+			CreateUserPage.usersEmailPerRole.put(firstKey+"-"+thirdKey, emailList);
+			CreateUserPage.usersApplicationsPerRole.put(firstKey+"-"+thirdKey, applicationsList);
+			CreateUserPage.usersNPIPerRole.put(firstKey+"-"+thirdKey, NPIList);
+}
 }
