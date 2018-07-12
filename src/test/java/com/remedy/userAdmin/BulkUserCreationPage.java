@@ -1178,9 +1178,13 @@ public class BulkUserCreationPage extends BaseClass {
 	}
 
 	public void verifySuccessfulMessage(String text) {
-//		iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
-		WebDriverWait objWait = new WebDriverWait(driver, 300);
-		objWait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
+		delay();
+		if(driver.findElements(By.xpath("//div[@class='ui text loader']")).size()>0)
+		{
+			iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
+			WebDriverWait objWait = new WebDriverWait(driver, 300);
+			objWait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
+		}
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[@class='successCountLabel'][text()='" + text + "']")));
 	}
 

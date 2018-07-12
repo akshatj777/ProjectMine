@@ -66,7 +66,7 @@ Feature: Edit bulk uploaded users
     Then I verify first name "<FirstName>"
     Then I verify last name "<LastName>"
     Then I verify role "<Role>"
-    Then I verify email "<Email>" for "<User>-<Role>"
+    Then I verify bulk email for "<User>-<Role>"
     Then I verify phone "<Phone>"
     Then I verify bulk NPI "<NPI>"
     Then I verify enabled "<ApplicationsEnabled>"
@@ -84,10 +84,10 @@ Feature: Edit bulk uploaded users
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
     #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
