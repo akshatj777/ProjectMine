@@ -132,6 +132,11 @@ public class BulkLoadSteps extends DriverScript{
     public void validateErrorMsgFor51Users(String text){
     	bulkUser.validateErrorMsgFor51Users(text);
     }
+    
+    @Then("^I verify error message \"([^\"]*)\" in the log file$")
+    public void validateErrorMsgInLogFile(String text){
+    	bulkUser.validateErrorMsgInLogFile(text);
+    }
   
     @Then("^I enter users with same email$")
     public void enterUsersWithSameEmail(){

@@ -4,11 +4,16 @@ import com.remedy.baseClass.BaseClass;
 
 import org.junit.Assert;
 
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.StringTokenizer;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -1566,6 +1571,62 @@ public class BulkUserCreationPage extends BaseClass {
 	public void validateErrorMsgFor51Users(String text) {
 		iWillWaitToSee(By.xpath("//*[contains(text(),'" + text + "')]"));
 		isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]")));
+	}
+	
+	public void validateErrorMsgInLogFile(String text) {
+		if(!(text.equals("")))
+		{
+			iWillWaitToSee(By.xpath("//button[text()='Download Log']"));
+			driver.findElement(By.xpath("//button[text()='Download Log']")).click();
+			String csvFile = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test" + File.separator+ "Imports" + File.separator + "Downloads" + File.separator + "import-log.csv";
+			File downloadFolder = new File(csvFile);
+			BufferedReader br = null;
+	        String line = "";
+	        
+	        try {
+	        	if(text.contains(","))
+		        {
+	        		StringTokenizer st = new StringTokenizer(text, ",");
+		            br = new BufferedReader(new FileReader(csvFile));
+		            while ((line = br.readLine()) != null) {
+		            	
+		                // use comma as separator
+		                //String[] errorMessage = line.split(cvsSplitBy);
+		            	String a = st.nextToken();
+		                Assert.assertTrue(line.contains(a));
+//		                System.out.println(errorMessage[errorMessage.length-1]);
+		            }
+		        }
+	        	else
+	        	{
+	        		br = new BufferedReader(new FileReader(csvFile));
+		            while ((line = br.readLine()) != null) {
+		            	
+		                // use comma as separator
+		                //String[] errorMessage = line.split(cvsSplitBy);
+		                Assert.assertTrue(line.contains(text));
+//		                System.out.println(errorMessage[errorMessage.length-1]);
+	        	}
+	        	}
+
+	        } catch (FileNotFoundException e) {
+	            e.printStackTrace();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } finally {
+	            if (br != null) {
+	                try {
+	                    br.close();
+	                    if(downloadFolder.exists())
+	                    {
+	                    	downloadFolder.delete();
+	                    }
+	                } catch (IOException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	        }
+		}
 	}
 
 	public void enterUsersWithSameEmail() {
