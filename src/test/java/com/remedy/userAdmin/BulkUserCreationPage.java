@@ -1178,7 +1178,7 @@ public class BulkUserCreationPage extends BaseClass {
 	}
 
 	public void verifySuccessfulMessage(String text) {
-		iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
+//		iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
 		WebDriverWait objWait = new WebDriverWait(driver, 300);
 		objWait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[@class='successCountLabel'][text()='" + text + "']")));
@@ -2141,22 +2141,22 @@ public void clickSubmitForEditBulkUser(String user, String userApplications)
 			HashMap<String,String> emailList = new HashMap<String,String>();
 			HashMap<String,String> applicationsList = new HashMap<String,String>();
 			HashMap<String,String> NPIList = new HashMap<String,String>();
-			emailList.put(user.substring(user.indexOf("-")+1), CreateUserPage.usersEmailPerRole.get(user).get(user.substring((user.indexOf("-")+1)).trim()));
-			applicationsList.put(user.substring(user.indexOf("-")+1), userApplications);
+			String firstKey = user.substring(0,user.indexOf("-"));
+			String secondKey = user.substring(user.indexOf("-")+1, user.lastIndexOf("-"));
+			String thirdKey = user.substring(user.lastIndexOf("-")+1, user.length());
+			emailList.put(thirdKey, CreateUserPage.usersEmailPerRole.get(firstKey+"-"+secondKey).get(secondKey));
+			applicationsList.put(thirdKey, userApplications);
 			if(user.contains("Physicians"))
 			{
-				NPIList.put(user.substring(user.indexOf("-")+1), bulkUsersNPIPerRole);
+				NPIList.put(thirdKey, bulkUsersNPIPerRole);
 			}
 			else
 			{
-				NPIList.put(user.substring(user.indexOf("-")+1), "");
+				NPIList.put(thirdKey, "");
 			}
 			bulkUsersNPIPerRole = "";
-			if(user.contains("Super Admin"))
-			{
-				CreateUserPage.usersEmailPerRole.put(user.trim(), emailList);
-				CreateUserPage.usersApplicationsPerRole.put(user.trim(), applicationsList);
-				CreateUserPage.usersNPIPerRole.put(user.trim(), NPIList);
-			}
+			CreateUserPage.usersEmailPerRole.put(firstKey+"-"+thirdKey, emailList);
+			CreateUserPage.usersApplicationsPerRole.put(firstKey+"-"+thirdKey, applicationsList);
+			CreateUserPage.usersNPIPerRole.put(firstKey+"-"+thirdKey, NPIList);
 }
 }

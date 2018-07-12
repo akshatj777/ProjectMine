@@ -60,13 +60,13 @@ Feature: Edit bulk uploaded users
     Then I verify availability of Hide button
     When I click on Hide button
     Then I should see header text "Users"
-    Then I search for bulk user with role "<User>-<PreviousRole>"
-    Then I select user with role "<User>-<PreviousRole>"
+    Then I search for bulk user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
     And I verify that I am navigated to user page
     Then I verify first name "<FirstName>"
     Then I verify last name "<LastName>"
     Then I verify role "<Role>"
-    Then I verify email "<Email>" for "<User>-<PreviousRole>"
+    Then I verify email "<Email>" for "<User>-<Role>"
     Then I verify phone "<Phone>"
     Then I verify bulk NPI "<NPI>"
     Then I verify enabled "<ApplicationsEnabled>"
@@ -79,7 +79,7 @@ Feature: Edit bulk uploaded users
     Given I am on the login page
     Then I click on "Log Out" button again
     And I should see Log in widget
-    Then I enter newuser email for "<User>-<PreviousRole>" login to Remedy
+    Then I enter newuser email for "<User>-<Role>" login to Remedy
     Then I enter newuser password for login to Remedy
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
