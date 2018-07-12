@@ -1235,7 +1235,7 @@ public class BulkUserCreationPage extends BaseClass {
 		isElementPresentOnPage(By.xpath("//div[@class='component-neo-input']//textarea"));
 	}
 
-	public void iEnterDataAllAppPerRole(String role) {
+	public void iEnterDataAllAppPerRole(String role) throws Throwable {
 		String strUserData = null;
 		String randomString = null;
 		HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
@@ -1252,8 +1252,9 @@ public class BulkUserCreationPage extends BaseClass {
 			String randomNPI = RandomStringUtils.randomNumeric(10);
 			strUserData = strUserData.replace("NPI", randomNPI);
 			iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
-			iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
+	         iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
 
+			
 		} else if (role.equals("Transitional Case Manager")) {
 			try {
 				strUserData = readContentForBulkUpload(41, 42);
@@ -1269,8 +1270,9 @@ public class BulkUserCreationPage extends BaseClass {
 			String randomNPI = RandomStringUtils.randomNumeric(10);
 			strUserData = strUserData.replace("NPI", randomNPI);
 			iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
-			iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
-		}
+	         iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
+
+				}
 
 		 else if (role.equals("Physicians")) {
 			try {
@@ -1290,8 +1292,9 @@ public class BulkUserCreationPage extends BaseClass {
 			String exisitingNPI = BulkUserCreationPage.bulkUsersNPIPerRole;
 			strUserData = strUserData.replace("NPI", exisitingNPI);
 			iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
-			iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
-		}
+	         iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
+
+					}
 		 else if (role.equals("Remedy RN")) {
 				try {
 					strUserData = readContentForBulkUpload(8, 9);
@@ -1304,8 +1307,9 @@ public class BulkUserCreationPage extends BaseClass {
 				String randomNPI = RandomStringUtils.randomNumeric(10);
 				strUserData = strUserData.replace("NPI", randomNPI);
 				iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
-				iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
+		         iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
 
+				
 				
 			}
 		 else if (role.equals("Downstream Provider M3")) {
@@ -1325,7 +1329,8 @@ public class BulkUserCreationPage extends BaseClass {
 	            strUserData = strUserData.replace("NPI", randomNPI);
 	            iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 	            iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
-	        } 
+
+	            	        } 
 		 else if (role.equals("Downstream Provider M3AndDown")) {
 	            try {
 	                strUserData = readContentForBulkUpload(101, 102);
@@ -1344,7 +1349,13 @@ public class BulkUserCreationPage extends BaseClass {
 	            strUserData = strUserData.replace("NPI", randomNPI);
 	            iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 	            iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
-	        }
+
+	            	        }
+		 else if (role.equals("Executive")) {
+			 enterMultipleUserData(51);        
+			
+			}
+		 
 
 	}
 
@@ -1443,7 +1454,7 @@ public class BulkUserCreationPage extends BaseClass {
 	public void enterInvalidAndValidData() {
 		String strUserData = null;
 		try {
-			strUserData = readContentForBulkUpload(105, 129);
+			strUserData = readContentForBulkUpload(105, 132);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -1518,11 +1529,16 @@ public class BulkUserCreationPage extends BaseClass {
 		HashMap<String, String> applicationsList = new HashMap<String, String>();
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("MANAGERMAIL4", "qaautomation+" + randomString + "@remedypartners.com");
-applicationsList.put("Manager", "Episodes, Reports, TCI, Lessons");
+		applicationsList.put("Manager", "Episodes, Reports, TCI, Lessons");
 		bulkEmailPerRole.put("Manager", "qaautomation+" + randomString + "@remedypartners.com");
 		bulkUsersEmailPerRole.put("Super Admin-Manager", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Manager", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Manager", bulkEmailPerRole);
+
+		strUserData = strUserData.replace("MANAGERMAIL9", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("MANAGERMAIL#10", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("MANAGERMAIL#11", "qaautomation+" + randomString + "@remedypartners.com");
+	
 
 		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
