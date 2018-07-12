@@ -1536,16 +1536,17 @@ public class BulkUserCreationPage extends BaseClass {
 		HashMap<String, String> applicationsList = new HashMap<String, String>();
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("MANAGERMAIL4", "qaautomation+" + randomString + "@remedypartners.com");
+		
+
+		strUserData = strUserData.replace("MANAGERMAIL9", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("MANAGERMAIL#10", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("MANAGERMAIL#11", "qaautomation+" + randomString + "@remedypartners.com");
+		
 		applicationsList.put("Manager", "Episodes, Reports, TCI, Lessons");
 		bulkEmailPerRole.put("Manager", "qaautomation+" + randomString + "@remedypartners.com");
 		bulkUsersEmailPerRole.put("Super Admin-Manager", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Manager", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Manager", bulkEmailPerRole);
-
-		strUserData = strUserData.replace("MANAGERMAIL9", "qaautomation+" + randomString + "@remedypartners.com");
-		strUserData = strUserData.replace("MANAGERMAIL#10", "qaautomation+" + randomString + "@remedypartners.com");
-		strUserData = strUserData.replace("MANAGERMAIL#11", "qaautomation+" + randomString + "@remedypartners.com");
-	
 
 		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);

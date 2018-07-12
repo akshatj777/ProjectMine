@@ -43,10 +43,11 @@ Feature: Bulk Upload User from SA
     And I wait for 3000 milli seconds
     Then I verify account for user "<User>-<Role>"
     Then I set new password for the user "<User>-<Role>"
+    And I switch to new window
     Given I am on the login page
     Then I enter newuser email for "<User>-<Role>" login to Remedy
     Then I enter newuser password for login to Remedy
-    And I click Access button
+    And I click Access button   
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
     #Then I click on Hamburger menu on top left of homepage
