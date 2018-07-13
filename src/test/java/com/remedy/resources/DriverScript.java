@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -95,6 +96,10 @@ public class DriverScript {
 
 		switch (browser) {
 		case "chrome":
+			String downloadFilepath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test" + File.separator + "Imports" + File.separator + "Downloads" ;
+			   HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+			   chromePrefs.put("profile.default_content_settings.popups", 0);
+			            chromePrefs.put("download.default_directory", downloadFilepath);
 			String chromDrvrPath;
 			chromDrvrPath = directory.getCanonicalPath() + File.separator + "lib" + File.separator;
 			os: switch (os) {
@@ -118,6 +123,7 @@ public class DriverScript {
 			options.addArguments("--disable-extensions");
 			options.addArguments("disable-infobars");
 			options.addArguments("--disable-plugins-discovery");
+			options.setExperimentalOption("prefs", chromePrefs);
             driver = new ChromeDriver(options);
             driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
 

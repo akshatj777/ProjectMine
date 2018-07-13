@@ -1,6 +1,6 @@
 Feature: Bulk upload users with valid and invalid details
 
-  Scenario: Scenario to create multiple users with valid and invalid details
+  Scenario Outline: Scenario to create multiple users with valid and invalid details
     Given I am on the login page
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
@@ -16,6 +16,11 @@ Feature: Bulk upload users with valid and invalid details
     Then I verify availability of cross button
     Then I verify availability of Download Log button
     Then I verify availability of Try Again button
+    Then I verify error message "<ErrorMessage>" in the log file
+
+    Examples: 
+      | ErrorMessage                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+      | bpid:facility field.,bpid:facility field.,bpid:facility field.,bpid:facility field.,bpid:facility field.,bpid:facility field.,a,valid organizationRoles are,Phone number is invalid,NPI is invalid,npi is not valid,NPI should be blank for this role,Last Name is required field. It should be valid string.,NPI should be blank for this role,NPI should be blank for this role,NPI should be blank for this role,Email is required field. It should be valid email.,valid organizationRoles are,First Name is required field. It should be valid string.,bpid:facility field.,bpid:facility field.,however some learning pathways were invalid,User has no access to RemedyU;,however some learning pathways were invalid,a |
 
   Scenario Outline: and <Description>
     Given I am on mail login page
@@ -67,8 +72,8 @@ Feature: Bulk upload users with valid and invalid details
     Then I verify location "<Locations>"
 
     Examples: 
-      | Description                                     | User        | UserName                               | Password | FirstName          | LastName          | Phone | Role    | ApplicationsEnabled | ApplicationsDisabled | NPI | LearningPathway                                           | HealthSystem      | Programs                        | Locations                                      |
-      | View Manager user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | ExecutiveFirstName | ExecutiveLastName |       | Manager | Episodes, Lessons   | Reports              |     |  | Stamford Hospital | Stamford Hospital--BPCI Model 2 | Stamford Hospital--2070-015--Stamford Hospital |
+      | Description                                     | User        | UserName                               | Password | FirstName          | LastName          | Phone | Role    | ApplicationsEnabled | ApplicationsDisabled | NPI | LearningPathway | HealthSystem      | Programs                        | Locations                                      |
+      | View Manager user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | ExecutiveFirstName | ExecutiveLastName |       | Manager | Episodes, Lessons   | Reports              |     |                 | Stamford Hospital | Stamford Hospital--BPCI Model 2 | Stamford Hospital--2070-015--Stamford Hospital |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -138,5 +143,5 @@ Feature: Bulk upload users with valid and invalid details
     And I should see Log in widget
 
     Examples: 
-      | Description                                                        | User        | FirstName          | LastName          | Role    | Applications                    | ApplicationsNotVisible                          | Roletext | ReportCategory | ReportName         | BPID | Facilities        | LearningPathway                                           |  |
-      | Login with Manager and verify Product Tiles and their redirections | Super Admin | ExecutiveFirstName | ExecutiveLastName | Manager | Episodes, Reports, TCI, Lessons | Episodes 2.0, Administration, Physician Connect | ROLE_PRM | Patient ID     | Episode DRG Issues |      | Stamford Hospital |  |  |
+      | Description                                                        | User        | FirstName          | LastName          | Role    | Applications                    | ApplicationsNotVisible                          | Roletext | ReportCategory | ReportName         | BPID | Facilities        | LearningPathway |  |
+      | Login with Manager and verify Product Tiles and their redirections | Super Admin | ExecutiveFirstName | ExecutiveLastName | Manager | Episodes, Reports, TCI, Lessons | Episodes 2.0, Administration, Physician Connect | ROLE_PRM | Patient ID     | Episode DRG Issues |      | Stamford Hospital |                 |  |
