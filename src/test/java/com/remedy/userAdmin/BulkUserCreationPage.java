@@ -1462,7 +1462,7 @@ public class BulkUserCreationPage extends BaseClass {
 
 			strUserData = strUserData.replace(
 					"441448:3056-r31:075244,572091:3056-r30:075278,439104:2070-a48:070003 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | True | False | False | False | False | True | True | | True",
-					"441348:ALL_BPIDS:ALL_FACILITIES   | | | False | False | False | False | False | True | False | | True");
+					"441348:ALL_BPIDS:ALL_FACILITIES   | | | False | False | False | False | True | True | False | | True");
 
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
 			applicationsList.put("Physicians", "Physician Connect, TCI");
