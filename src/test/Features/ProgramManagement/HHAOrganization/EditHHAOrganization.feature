@@ -1,12 +1,5 @@
 Feature: Edit HHA organization functionality tests
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -29,7 +22,11 @@ Feature: Edit HHA organization functionality tests
       | Create HHA without MO | HHANAME | ShortName |               |               | EIN | NPI | CCN | Address1 | Address2 | City | CA    | 10000 |        1 |        1 |           201 |             |  0 | hha  |
 
   Scenario Outline: <Description>
- 
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "HHA" organization tab on organization dashboard
     When I search with "<HHA_Name> - <Has_MO>" on organization in search box
     And I verify "<HHA_Name> - <Has_MO>" name on the header of view profile
@@ -58,6 +55,11 @@ Feature: Edit HHA organization functionality tests
       | Verification of availability of all the fields on Edit HHA Organization page - With MO    | YES    | HHANAME  |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "HHA" organization tab on organization dashboard
     When I search with "<HHA_Name> - <Has_MO>" on organization in search box
     And I verify "<HHA_Name> - <Has_MO>" name on the header of view profile
@@ -82,6 +84,11 @@ Feature: Edit HHA organization functionality tests
       | Check validation for blank Postal code | NO     | HHANAME  | HHANAME         | Address1 | City | California |             | Please enter a Postal Code        |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "HHA" organization tab on organization dashboard
     When I search with "<HHA_Name> - <Has_MO>" on organization in search box
     And I verify "<HHA_Name> - <Has_MO>" name on the header of view profile
@@ -109,6 +116,11 @@ Feature: Edit HHA organization functionality tests
       | Check Allowed Characters for Postal code field | YES    | HHANAME  |                                                                              |                                                           |                                                |                                                           |                                                | abcdefghijkl | Please enter a valid Postal Code                               |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "HHA" organization tab on organization dashboard
     When I search with "<HHA_Name> - <Has_MO>" on organization in search box
     And I verify "<HHA_Name> - <Has_MO>" name on the header of view profile

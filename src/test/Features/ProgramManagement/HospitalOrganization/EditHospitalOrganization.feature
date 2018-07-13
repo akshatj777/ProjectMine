@@ -4,6 +4,7 @@ Feature: Edit Hospital organization functionality tests
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
     Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
 
     Examples: 
       | desc      | particpantId | name   | contactPerson | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type       |
@@ -58,7 +59,7 @@ Feature: Edit Hospital organization functionality tests
 
     Examples: 
       | Description                                                                       | Has_MO | Hosp_Name |
-      | Verification of availability of all the fields on Edit Hospital Organization page | NO     | ACHNAME   |
+      | Verification of availability of all the fields on Edit Hospital Organization page | YES    | ACHNAME   |
 
   Scenario Outline: <Description>
     Given I am on the login page
