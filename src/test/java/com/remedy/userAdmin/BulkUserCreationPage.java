@@ -1237,7 +1237,7 @@ public class BulkUserCreationPage extends BaseClass {
 			iWillWaitToSee(By.xpath("//button[text()='Download Log']"));
 			driver.findElement(By.xpath("//button[text()='Download Log']")).click();
 			String csvFile = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test" + File.separator+ "Imports" + File.separator + "Downloads" + File.separator + "import-log.csv";
-			File downloadFolder = new File(csvFile);
+			File downloadFolder = new File(System.getProperty("user.dir") + File.separator + "src" + File.separator + "test" + File.separator+ "Imports" + File.separator + "Downloads");
 			BufferedReader br = null;
 	        String line = "";
 	        
@@ -1247,27 +1247,21 @@ public class BulkUserCreationPage extends BaseClass {
 		        {
 	        		StringTokenizer st = new StringTokenizer(text, ",");
 		            br = new BufferedReader(new FileReader(csvFile));
-		            while ((line = br.readLine()) != null) {
-		            	
-		                // use comma as separator
-		                //String[] errorMessage = line.split(cvsSplitBy);
+		            while ((line = br.readLine()) != null) 
+		            {
 		            	String a = st.nextToken();
 		                Assert.assertTrue(line.contains(a));
-//		                System.out.println(errorMessage[errorMessage.length-1]);
 		            }
 		        }
 	        	else
 	        	{
 	        		br = new BufferedReader(new FileReader(csvFile));
-		            while ((line = br.readLine()) != null) {
+		            while ((line = br.readLine()) != null) 
+		            {
 		            	
-		                // use comma as separator
-		                //String[] errorMessage = line.split(cvsSplitBy);
 		                Assert.assertTrue(line.contains(text));
-//		                System.out.println(errorMessage[errorMessage.length-1]);
+		            }
 	        	}
-	        	}
-
 	        } 
 	        catch (FileNotFoundException e) 
 	        {
@@ -1286,7 +1280,14 @@ public class BulkUserCreationPage extends BaseClass {
 	                    br.close();
 	                    if(downloadFolder.exists())
 	                    {
-	                    	downloadFolder.delete();
+	                    	if(downloadFolder.isDirectory())
+	                    	{
+	                    		for (File f : downloadFolder.listFiles())
+	                    		{
+	                    			f.delete();
+	                    		}
+	                    		downloadFolder.delete();
+	                    	}
 	                    }
 	                } 
 	                catch (IOException e) 
