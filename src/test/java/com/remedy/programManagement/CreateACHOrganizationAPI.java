@@ -3,7 +3,6 @@ package com.remedy.programManagement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 
@@ -15,6 +14,7 @@ public class CreateACHOrganizationAPI extends BaseClass{
 	
 	public InsertDataIntoDataModels insertData = new InsertDataIntoDataModels();
 	public static List<Long> idList = new ArrayList<>();
+	public static List<Long> copyIDList = new ArrayList<>();
 	public static List<String> ACHNameList = new ArrayList<>();
 	public static List<String> CCNNameList = new ArrayList<>();
 	public static List<String> EINNameList = new ArrayList<>();
@@ -42,7 +42,7 @@ public class CreateACHOrganizationAPI extends BaseClass{
         }
         String ein = createRandomNumber(10);
         String npi = createRandomNumber(10);
-        String ccn = genearateOrgId(cCcn);
+        String ccn = createRandomNumber(10);
         List<String> locationIdList = generateLocationId(cLocationId,ccn);
         AddressDataModel addrs = insertAddrsData(cAddr1, cAddr2, cCity, cState, cZip);
         List<String> typList = new ArrayList<>();

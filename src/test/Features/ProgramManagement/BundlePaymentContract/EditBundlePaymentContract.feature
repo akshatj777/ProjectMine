@@ -1,12 +1,5 @@
 Feature: Edit Bundle Payment Contract functionality tests
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -28,30 +21,16 @@ Feature: Edit Bundle Payment Contract functionality tests
       | Create Hospital using API calls with MO    |               | ACHNAME | shortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
       | Create Hospital using API calls without MO |               | ACHNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
 
-  Scenario Outline: <Description>
-    When I click on "PGP" organization tab on organization dashboard
-    Then I click on "+" button on "PGP" organization page
-    And I verify "Create PGP Organization" header text on create organization page
-    And I select "<Has_MO>" radio button for managing organization
-    Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
-    Then I enter <PGP_Name> in "PGP Organization Name" on create organization page
-    And I enter <Address1> in "Address 1" on create organization page
-    And I enter <Short_Name> in "Short Name" on create organization page
-    And I enter <Address2> in "Address 2" on create organization page
-    And I enter <City> in "City" on create organization page
-    And I select region "<Region>" in "create PGP" organization page
-    And I select market "<Market>" in "create PGP" organization page
-    And I select <State> in State on create organization page
-    And I enter <Postal_Code> in "Postal Code" on create organization page
-    And I provide unique "PGP - <EIN>" in "EIN" on create organization page
-    And I provide unique "PGP - <NPI>" in "NPI" on create organization page
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create PGP - <Has_MO>" organization page
+  Scenario Outline: <desc>
+    Given Build Json for PGP "<name>" and "<participantId>" and "<shortName>" and "<managingOrgId>" and "<ein>" and "<npi>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>" and "<marketId>"
+    When create pgp org with this data
+    Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
 
     Examples: 
-      | Description                                                        | Has_MO | Managing_Org | PGP_Name | Address1 | Short_Name | Address2 | City | Region  | Market  | State      | Postal_Code | EIN | NPI | Message                                |
-      | Create PGP Organization with all the available fields - Without MO | NO     |              | PGPNAME  | Address1 | Short_Name | Address2 | City | Midwest | Chicago | California |       10000 | EIN | NPI | PGP Organization Successfully Created. |
-      | Create PGP Organization with all the available fields - With MO    | YES    | MONAME       | PGPNAME  | Address1 | Short_Name | Address2 | City | Midwest | Chicago | California |       10000 | EIN | NPI | PGP Organization Successfully Created. |
+      | desc                                  | name    | shortName | managingOrgId | participantId | ein | npi | address1  | address2 | city           | state | zip   | marketId | expStatusCode | responseMsg | id | type |
+      | Create PGP using API calls with MO    | PGPNAME | ShortName | hasChild      |               | EIN | NPI | Adderess1 | Address2 | AutomationCity | CA    | 10000 |        2 |           201 |             |  0 | pgp  |
+      | Create PGP using API calls without MO | PGPNAME | ShortName |               |               | EIN | NPI | Adderess1 | Address2 | AutomationCity | CA    | 10000 |        2 |           201 |             |  0 | pgp  |
 
   Scenario Outline: Create Payor using API calls
     Given build Json for Payor "<name>" and "<participantId>" and "<tinEin>" and "<contactName>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
@@ -63,24 +42,15 @@ Feature: Edit Bundle Payment Contract functionality tests
       | desc         | participantId | name      | tinEin | contactName       | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type  |
       | Create Payor |               | PAYORNAME | EIN    | ContactPersonTest | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | payor |
 
-  Scenario Outline: Create Programs under Payor Organization
-    When I click on "Payor" organization tab on organization dashboard
-    When I search with "<Payor_Name>" on organization in search box
-    And I click "<Payor_Name>" field in search list on organization page
-    And I verify "<Payor_Name>" name on the header of view profile
-    And I verify "Programs" as default tab selected on view profile of "Payor" Organization
-    And I verify the "Create New Program" button on view profile of "payor" Organization
-    Then I click on "Create New Program" button on "create" organization page
-    And I verify "Create Program" header text on create organization page
-    Then I enter <Program_Name> in "Program Name" on create organization page
-    And I click on checkbox for "Attribute to the physician who admitted the patient" Attribution rule
-    And I click on checkbox for "Attribute to the triggering provider id on the triggering claim" Attribution rule
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create Programs" on Payor organization page
+  Scenario Outline: <desc>
+    And build json for Program with attribution rules "<prgName>" and "<payorOrgId>" and "cId" and "" and "0" and "programID"
+    When create program with this data
+    Then verification of Actual vs expected results <expPrgStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
 
     Examples: 
-      | Description                              | Payor_Name | Program_Name | Message                      |
-      | Create Programs under Payor Organization | PAYORNAME  | PROGRAMNAME  | Program Successfully Created |
+      | desc                           | id | programID | prgName     | payorOrgId | expPrgStatusCode | responseMsg | name      | address1 | address2 | city | state | zip   | participantId | tinEin | contactName | contactEmail       | contactPhone | expDelCode | type    |
+      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |
 
   Scenario Outline: Create Bundle using API calls
     Given create Bundle Json to String and pass it to body with "<name>" and "<content>" and "<bundleCode>"
@@ -93,44 +63,24 @@ Feature: Edit Bundle Payment Contract functionality tests
       | validBundle | BC         | bundle- | create-bundle-content1 |           201 |             |
       | validBundle | BC         | bundle- | create-bundle-content1 |           201 |             |
 
-  Scenario Outline: <Description>
-    When I click on "Payor" organization tab on organization dashboard
-    When I search with "<Payor_Name>" on organization in search box
-    And I click "<Payor_Name>" field in search list on organization page
-    And I verify "<Payor_Name>" name on the header of view profile
-    And I verify "Contracts" tab present under "Payor" Organization
-    And I click on "Contracts" tab on view profile of "Payor" Organization
-    And I verify the "Create New Contract" button on view profile of "Payor" Organization
-    Then I click on "Create New Contract" button on "create" organization page
-    And I verify "Create Contract" header text on create organization page
-    And I select "<Program_Name>" Program name in create Contract page under "Payor" Organization
-    And I select Organization type "<Organization_Type>" for Contract "1" on "create" Contracts page
-    And I select Organization name "<Organization_Name> - <Has_MO>" for Contract "1" on "create" Contracts page
-    And I enter "<Contract_Id>" in "Contract Id" field for "Contract1" on create Contract page
-    And I select "1" Bundle "<Bundle>" for Contract "1" on "create" Contracts page
-    And I enter "<Price>" in "price" field for "Bundle1 Price1" on create Contract page
-    Then I enter date "<ContractStartDate>" in "ContractStartDate" field for index "0"
-    Then I enter date "<ContractEndDate>" in "ContractEndDate" field for index "1"
-    Then I enter date "<BundleStartDate>" in "BundleStartDate" field for index "2"
-    Then I enter date "<BundleEndDate>" in "BundleEndDate" field for index "3"
-    Then I enter date "<PriceStartDate>" in "PriceStartDate" field for index "4"
-    Then I enter date "<PriceEndDate>" in "Baseline Date" field for index "5"
-    Then I enter date "<BaselineStartDate>" in "BaselineStartDate" field for index "6"
-    Then I enter date "<BaselineEndDate>" in "BaselineEndDate" field for index "7"
-    And I enter "<Trend_Factor>" in "trendFactor" field for "Bundle1 Price1" on create Contract page
-    And I enter "<Upper_Bound>" in "upperBound" field for "Bundle1 Price1" on create Contract page
-    And I enter "<Lower_Bound>" in "lowerBound" field for "Bundle1 Price1" on create Contract page
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "Create Contracts" on Payor organization page
+  Scenario Outline: <desc>
+    Given build Json for Contract "<contractId>" and "<endDate>" and "<organizationId>" and "<programId>" and "<startDate>" and "<participatingBundleId>" and "<price>" and "<bundleStartDate>" and "<bundleEndDate>" and "<type>" and "<orgType>" and "<priceStartDate>" and "<priceEndDate>" and "<baseLineEndDate>" and "<baseLineStatDate>" and "<trendFactor>" and "<upperBound>" and "<lowerBound>"
+    When create contract with this data
+    Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
 
     Examples: 
-      | Description                                                            | Has_MO | Payor_Name | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | Program_Name | Organization_Type | Organization_Name | Contract_Id | Bundle       | Price | Trend_Factor | Upper_Bound | Lower_Bound | Message                       |
-      | Create Contracts with all available fields using Hospital Organization | NO     | PAYORNAME  | 2017/02/01        | 2019/12/01      | 2017/05/01      | 2018/07/30    | 2017/07/01     | 2018/02/01   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | CID         | FETCHFROMAPI |    96 |          121 |         135 |         106 | Contract Successfully Created |
-      | Create Contracts with all available fields using Hospital Organization | YES    | PAYORNAME  | 2017/01/15        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | CID         | FETCHFROMAPI |   103 |           91 |         135 |         106 | Contract Successfully Created |
-      | Create Contracts with all available fields using PGP Organization      | NO     | PAYORNAME  | 2017/01/16        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | PGP               | PGPNAME           | CID         | FETCHFROMAPI |   113 |          121 |         135 |         106 | Contract Successfully Created |
-      | Create Contracts with all available fields using PGP Organization      | YES    | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | PGP               | PGPNAME           | CID         | FETCHFROMAPI |    56 |          121 |         135 |         106 | Contract Successfully Created |
+      | desc                            | id | type          | orgType      | contractId | endDate      | organizationId | programId | startDate    | participatingBundleId | bundleStartDate | bundleEndDate | priceStartDate | priceEndDate | price | baseLineEndDate | baseLineStatDate | trendFactor | upperBound | lowerBound | expStatusCode | responseMsg |
+      | Create Contract using API Calls |  0 | bundlePayment | hospital     | []         | [2020-12-31] |                |           | [2019-01-16] |                       | [2019-05-01]    | [2020-07-30]  | [2019-03-03]   | [2019-12-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract using API Calls |  0 | bundlePayment | hospitalNOMO | []         | [2020-12-30] |                |           | [2019-01-15] |                       | [2019-03-01]    | [2020-06-30]  | [2019-05-03]   | [2019-12-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract using API Calls |  0 | bundlePayment | pgp          | []         | [2020-12-19] |                |           | [2019-02-09] |                       | [2019-05-01]    | [2020-07-30]  | [2019-03-03]   | [2019-12-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract using API Calls |  0 | bundlePayment | pgpNOMO      | []         | [2020-12-19] |                |           | [2019-02-09] |                       | [2019-05-01]    | [2020-07-30]  | [2019-03-03]   | [2019-12-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -168,6 +118,11 @@ Feature: Edit Bundle Payment Contract functionality tests
       | Verification of details on Contracts under Payor Organization on edit contract page | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | ACH               | ACHNAME           | FETCHFROMAPI |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -190,6 +145,11 @@ Feature: Edit Bundle Payment Contract functionality tests
       | Edit a Contract With Mandatory Field Missing | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME |       | Required      |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -209,6 +169,11 @@ Feature: Edit Bundle Payment Contract functionality tests
       | Validation message if Start Date is left blank- Contract Section | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | Required      |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -228,6 +193,11 @@ Feature: Edit Bundle Payment Contract functionality tests
       | Validation message if Start Date is left blank- Bundle Section | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | Required      |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -247,6 +217,11 @@ Feature: Edit Bundle Payment Contract functionality tests
       | Validation message if Start Date is left blank- Bundle Price Section | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | Required      |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -270,15 +245,20 @@ Feature: Edit Bundle Payment Contract functionality tests
 
     Examples: 
       | Description                                                                                              | Payor_Name | Bundle_Payment_Contract | Program     | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | ValidationMsg                                               |
-      | Validation message for editing Contract with Contract End Date is before the Contract Start Date         | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2017/02/09        | 2017/01/07      | 2017/05/01      | 2018/07/30    | 2017/07/02     | 2018/02/01   | 2019/03/09        | 2019/05/12      | The Contract End Date is before the start date              |
-      | Validation message for editing Contract with Bundle End Date is before the bundle Start Date             | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2017/02/09        | 2019/12/19      | 2017/05/01      | 2017/04/23    | 2017/07/02     | 2018/02/01   | 2019/03/09        | 2019/05/12      | The bundle end date is before the bundle start date         |
-      | Validation message for editing Contract with Bundle Price End Date is before the Bundle Price Start Date | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2017/02/09        | 2019/12/19      | 2017/05/01      | 2019/06/30    | 2017/07/01     | 2017/06/01   | 2019/03/09        | 2019/05/12      | The bundle end date is before the bundle start date         |
-      | Validation messages for editing Contract with Bundle End Date is after Contract End Date                 | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2017/02/09        | 2019/12/19      | 2017/05/01      | 2019/12/21    | 2017/07/02     | 2018/02/01   | 2019/03/09        | 2019/05/12      | The bundle end date is after the contract end date          |
-      | Validation messages for editing Contract with Bundle Price End Date is after Bundle End Date             | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2017/02/09        | 2019/12/19      | 2017/05/01      | 2019/06/30    | 2018/03/03     | 2019/07/30   | 2019/03/09        | 2019/05/12      | The bundle price end date is after the bundle end date      |
-      | Validation messages for editing Contract with Bundle Start Date is before the Contract Start Date        | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2017/02/09        | 2019/12/19      | 2017/01/07      | 2019/06/30    | 2018/03/03     | 2019/07/30   | 2019/03/09        | 2019/05/12      | The bundle start date is before the contract start date     |
-      | Validation messages for editing Contract with Bundle Price Start Date is before the Bundle Start Date    | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2017/02/09        | 2017/02/07      | 2017/05/01      | 2019/06/30    | 2017/04/01     | 2019/07/30   | 2019/03/09        | 2019/05/12      | The bundle price start date is before the bundle start date |
+      | Validation message for editing Contract with Contract End Date is before the Contract Start Date         | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2019/02/09        | 2019/01/07      | 2019/05/01      | 2020/10/30    | 2019/07/02     | 2020/02/01   | 2019/08/09        | 2019/11/12      | The Contract End Date is before the start date              |
+      | Validation message for editing Contract with Bundle End Date is before the bundle Start Date             | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2019/02/09        | 2020/12/19      | 2019/05/01      | 2019/04/23    | 2019/07/02     | 2020/02/01   | 2019/08/09        | 2019/11/12      | The bundle end date is before the bundle start date         |
+      | Validation message for editing Contract with Bundle Price End Date is before the Bundle Price Start Date | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2019/02/09        | 2020/12/19      | 2019/05/01      | 2020/06/30    | 2019/07/01     | 2019/06/01   | 2019/08/09        | 2019/11/12      | The bundle end date is before the bundle start date         |
+      | Validation messages for editing Contract with Bundle End Date is after Contract End Date                 | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2019/02/09        | 2020/12/19      | 2019/05/01      | 2020/12/21    | 2019/07/02     | 2020/02/01   | 2019/08/09        | 2019/11/12      | The bundle end date is after the contract end date          |
+      | Validation messages for editing Contract with Bundle Price End Date is after Bundle End Date             | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2019/02/09        | 2020/12/19      | 2019/05/01      | 2020/06/30    | 2019/07/03     | 2020/07/30   | 2019/08/09        | 2019/11/12      | The bundle price end date is after the bundle end date      |
+      | Validation messages for editing Contract with Bundle Start Date is before the Contract Start Date        | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2019/02/09        | 2020/12/19      | 2019/01/07      | 2020/06/30    | 2019/07/03     | 2020/05/30   | 2019/09/09        | 2019/12/12      | The bundle start date is before the contract start date     |
+      | Validation messages for editing Contract with Bundle Price Start Date is before the Bundle Start Date    | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2019/02/09        | 2020/02/07      | 2019/05/01      | 2020/05/30    | 2019/04/01     | 2019/12/30   | 2019/08/09        | 2019/12/12      | The bundle price start date is before the bundle start date |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -303,11 +283,16 @@ Feature: Edit Bundle Payment Contract functionality tests
 
     Examples: 
       | Description                                                                                                                  | Payor_Name | Bundle_Payment_Contract | Program     | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | ValidationMsg1                                          | ValidationMsg2 |
-      | Validation messages for editing Contract with Contract Start Date is after the Bundle Start Date and Bundle Price Start Date | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2018/04/05        | 2019/12/19      | 2017/05/01      | 2019/06/30    | 2018/03/03     | 2019/05/30   | 2019/03/09        | 2019/05/12      | The bundle start date is before the contract start date |                |
-      | Validation messages for editing Contract with Contract End Date is before the Bundle End Date and Bundle Price End Date      | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2017/02/09        | 2019/04/30      | 2017/05/01      | 2019/06/30    | 2018/03/03     | 2019/05/30   | 2019/03/09        | 2019/05/12      | The bundle end date is after the contract end date      |                |
-      | Validation messages for editing Contract with Baseline End Date is before the Baseline Start Date                            | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2017/02/09        | 2019/12/19      | 2017/05/01      | 2019/06/30    | 2018/03/03     | 2019/07/30   | 2019/03/09        | 2019/02/12      | The bundle price end date is after the bundle end date  |                |
+      | Validation messages for editing Contract with Contract Start Date is after the Bundle Start Date and Bundle Price Start Date | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2019/07/05        | 2020/12/19      | 2019/05/01      | 2020/06/30    | 2019/06/03     | 2019/12/30   | 2019/08/09        | 2019/11/12      | The bundle start date is before the contract start date |                |
+      | Validation messages for editing Contract with Contract End Date is before the Bundle End Date and Bundle Price End Date      | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2019/02/09        | 2019/09/30      | 2019/05/01      | 2020/06/30    | 2019/06/03     | 2019/12/30   | 2019/09/09        | 2019/11/12      | The bundle end date is after the contract end date      |                |
+      | Validation messages for editing Contract with Baseline End Date is before the Baseline Start Date                            | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | 2017/02/09        | 2019/12/19      | 2017/05/01      | 2019/06/30    | 2018/03/03     | 2019/07/30   | 2019/10/09        | 2019/10/01      | The bundle price end date is after the bundle end date  |                |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -322,11 +307,16 @@ Feature: Edit Bundle Payment Contract functionality tests
     Then I search "<SearchParam>" and verify with search list options on "Bundle_2" dropdown box
 
     Examples: 
-      | Description                                              | Payor_Name | Bundle_Payment_Contract | Program     | SearchParam  |
-      | Search for a Bundle by Bundle Name on Edit contract page | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |
+      | Description                                              | Payor_Name | Bundle_Payment_Contract | Program     | SearchParam             |
+      | Search for a Bundle by Bundle Name on Edit contract page | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI            |
+      | Search for a Bundle by Bundle code on Edit contract page | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPIForBundleID |
 
-  #| Search for a Bundle by Bundle code on Edit contract page | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPIForBundleID |
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -346,6 +336,11 @@ Feature: Edit Bundle Payment Contract functionality tests
       | Error message for an invalid Bundle search on Edit contract page | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | InvalidSearch |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -373,9 +368,14 @@ Feature: Edit Bundle Payment Contract functionality tests
 
     Examples: 
       | Description                                                  | Payor_Name | Bundle_Payment_Contract | Program     | Bundle       | Price2 | BundleStartDate1 | BundleEndDate1 | PriceStartDate1 | PriceEndDate1 | BaselineStartDate1 | BaselineEndDate1 | Trend_Factor2 | Upper_Bound2 | Lower_Bound2 | ValidationMsg                                |
-      | Edit contract using duplicate Bundles with overlapping dates | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 | 2017/05/01       | 2018/07/30     | 2017/07/01      | 2018/02/01    | 2019/03/09         | 2019/05/12       |            37 |           57 |           77 | Bundle Date Range overlaps with other bundle |
+      | Edit contract using duplicate Bundles with overlapping dates | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 | 2019/03/01       | 2020/06/30     | 2019/05/03      | 2019/12/26    | 2019/03/09         | 2019/05/12       |            37 |           57 |           77 | Bundle Date Range overlaps with other bundle |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -403,18 +403,23 @@ Feature: Edit Bundle Payment Contract functionality tests
 
     Examples: 
       | Description                                                                                          | Payor_Name | Bundle_Payment_Contract | Program     | Bundle       | Price2 | BundleStartDate1 | BundleEndDate1 | PriceStartDate1 | PriceEndDate1 | BaselineStartDate1 | BaselineEndDate1 | Trend_Factor2 | Upper_Bound2 | Lower_Bound2 | ValidationMsg                                               |
-      | Validation message if newly added Bundle - Bundle Name is left blank                                 | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME |              |     98 | 2018/09/30       | 2019/09/30     | 2018/11/01      | 2019/07/30    | 2019/01/30         | 2019/04/30       |            37 |           57 |           77 | Required                                                    |
-      | Validation message if newly added Bundle - Start Date is left blank                                  | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 |                  | 2019/09/30     | 2018/11/01      | 2019/07/30    | 2019/01/30         | 2019/04/30       |            37 |           57 |           77 | Required                                                    |
-      | Validation message if newly added Bundle - price is left blank                                       | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |        | 2018/09/30       | 2019/09/30     | 2018/11/01      | 2019/07/30    | 2019/01/30         | 2019/04/30       |            37 |           57 |           77 | Required                                                    |
-      | Validation message if newly added Bundle - price Start Date is left blank                            | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 | 2018/09/30       | 2019/09/30     |                 | 2019/07/30    | 2019/01/30         | 2019/04/30       |            37 |           57 |           77 | Required                                                    |
-      | Validation message if newly added Bundle Bundle End Date is before the bundle Start Date             | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 | 2018/09/30       | 2018/09/01     | 2018/11/01      | 2019/07/30    | 2019/01/30         | 2019/04/30       |            37 |           57 |           77 | The bundle end date is before the bundle start date         |
-      | Validation message if newly added Bundle Bundle Price End Date is before the Bundle Price Start Date | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 | 2018/09/30       | 2019/09/30     | 2018/11/01      | 2018/10/01    | 2019/01/30         | 2019/04/30       |            37 |           57 |           77 | The bundle end date is before the bundle start date         |
-      | Validation message if newly added Bundle Bundle End Date is after Contract End Date                  | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 | 2018/09/30       | 2019/12/11     | 2018/11/01      | 2019/07/30    | 2019/01/30         | 2019/04/30       |            37 |           57 |           77 | The bundle end date is after the contract end date          |
-      | Validation message if newly added Bundle Bundle Price End Date is after Bundle End Date              | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 | 2018/09/30       | 2019/09/30     | 2018/11/01      | 2019/10/03    | 2019/01/30         | 2019/04/30       |            37 |           57 |           77 | The bundle price end date is after the bundle end date      |
-      | Validation message if newly added Bundle Bundle Start Date is before the Contract Start Date         | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 | 2017/01/15       | 2019/09/30     | 2018/11/01      | 2019/07/30    | 2019/01/30         | 2019/04/30       |            37 |           57 |           77 | The bundle start date is before the contract start date     |
-      | Validation message if newly added Bundle Bundle Price Start Date is before the Bundle Start Date     | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 | 2018/09/30       | 2019/09/30     | 2018/07/30      | 2019/07/30    | 2019/01/30         | 2019/04/30       |            37 |           57 |           77 | The bundle price start date is before the bundle start date |
+      | Validation message if newly added Bundle - Bundle Name is left blank                                 | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME |              |     98 | 2020/07/01       | 2020/12/28     | 2020/07/30      | 2020/11/01    | 2020/09/01         | 2020/09/30       |            37 |           57 |           77 | Required                                                    |
+      | Validation message if newly added Bundle - Start Date is left blank                                  | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 |                  | 2020/12/28     | 2020/07/30      | 2020/11/01    | 2020/09/01         | 2020/09/30       |            37 |           57 |           77 | Required                                                    |
+      | Validation message if newly added Bundle - price is left blank                                       | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |        | 2020/07/01       | 2020/12/28     | 2020/07/30      | 2020/11/01    | 2020/09/01         | 2020/09/30       |            37 |           57 |           77 | Required                                                    |
+      | Validation message if newly added Bundle - price Start Date is left blank                            | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 | 2020/07/01       | 2020/12/28     |                 | 2020/11/01    | 2020/09/01         | 2020/09/30       |            37 |           57 |           77 | Required                                                    |
+      | Validation message if newly added Bundle Bundle End Date is before the bundle Start Date             | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 | 2020/07/30       | 2020/07/01     | 2020/07/30      | 2020/11/01    | 2020/09/01         | 2020/09/30       |            37 |           57 |           77 | The bundle end date is before the bundle start date         |
+      | Validation message if newly added Bundle Bundle Price End Date is before the Bundle Price Start Date | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 | 2020/07/30       | 2020/12/25     | 2020/07/01      | 2020/11/01    | 2020/09/01         | 2020/09/30       |            37 |           57 |           77 | The bundle end date is before the bundle start date         |
+      | Validation message if newly added Bundle Bundle End Date is after Contract End Date                  | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 | 2020/07/30       | 2020/12/31     | 2020/07/01      | 2020/11/01    | 2020/09/01         | 2020/09/30       |            37 |           57 |           77 | The bundle end date is after the contract end date          |
+      | Validation message if newly added Bundle Bundle Price End Date is after Bundle End Date              | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 | 2020/07/30       | 2020/12/28     | 2020/07/01      | 2020/12/30    | 2020/09/01         | 2020/09/30       |            37 |           57 |           77 | The bundle price end date is after the bundle end date      |
+      | Validation message if newly added Bundle Bundle Start Date is before the Contract Start Date         | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 | 2019/01/01       | 2020/12/28     | 2020/07/01      | 2020/11/30    | 2020/09/01         | 2020/09/30       |            37 |           57 |           77 | The bundle start date is before the contract start date     |
+      | Validation message if newly added Bundle Bundle Price Start Date is before the Bundle Start Date     | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI |     98 | 2020/07/30       | 2020/12/28     | 2020/07/01      | 2020/11/30    | 2020/09/01         | 2020/09/30       |            37 |           57 |           77 | The bundle price start date is before the bundle start date |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -438,6 +443,11 @@ Feature: Edit Bundle Payment Contract functionality tests
       | Edit a Contract With Non-Mandatory Field Missing | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | ACH               | ACHNAME           |                    |                  |              |             |             | Contract Successfully Updated |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Payor" organization tab on organization dashboard
     When I search with "<Payor_Name>" on organization in search box
     And I click "<Payor_Name>" field in search list on organization page
@@ -465,4 +475,11 @@ Feature: Edit Bundle Payment Contract functionality tests
 
     Examples: 
       | Description              | Payor_Name | Bundle_Payment_Contract | Program     | Organization_Type | Organization_Name | Price | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | Trend_Factor | Upper_Bound | Lower_Bound | Message                       |
-      | Edit and save a contract | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | ACH               | ACHNAME           |    96 | 2017/03/15        | 2019/10/10      | 2017/06/01      | 2018/06/30    | 2017/07/01     | 2018/02/28   | 2017/10/01        | 2017/12/30      |           78 |          87 |          97 | Contract Successfully Updated |
+      | Edit and save a contract | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | ACH               | ACHNAME           |    96 | 2019/01/30        | 2020/12/10      | 2019/05/28      | 2020/06/30    | 2019/07/01     | 2020/03/28   | 2019/08/01        | 2019/12/30      |           78 |          87 |          97 | Contract Successfully Updated |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type                                      |
+      | MO, Hospital, PGP, Payor, Program, Bundle |

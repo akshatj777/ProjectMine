@@ -128,9 +128,21 @@ public class CreateManagingOrganization extends BaseClass {
 			CreateHHAOrganization.tempHHAOrg.put("HHANAME", createRandomName(text));
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
 		}
+		else if(text.equals("LTCHNAME")) {
+			CreateLTCHOrganization.tempLTCHOrg.put("LTCHNAME", createRandomName(text));
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.tempLTCHOrg.get("LTCHNAME"));
+		}
+		else if(text.equals("HOSPICENAME")) {
+			CreateHospiceOrganization.tempHospiceOrg.put("HOSPICENAME", createRandomName(text));
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.tempHospiceOrg.get("HOSPICENAME"));
+		}
 		else if(text.equals("DUPLICATE_hha"))
 		{
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHHAOrganization.HHAOrg.get("HHANAME"));
+		}
+		else if(text.equals("DUPLICATE_Hospice"))
+		{
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.HospiceOrg.get("HOSPICENAME"));
 		}
 		else if(text.equals("PROGRAMNAME")) {
 			CreatePrograms.tempPrograms.put(1, createRandomName(text));
@@ -175,6 +187,16 @@ public class CreateManagingOrganization extends BaseClass {
 				CreateHHAOrganization.tempHHAOrg.put("HHANAME",RandomStringUtils.randomAlphabetic(75));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
 			}
+			else if(field.contains("LTCH"))
+			{
+				CreateLTCHOrganization.tempLTCHOrg.put("LTCHNAME",RandomStringUtils.randomAlphabetic(75));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.tempLTCHOrg.get("LTCHNAME"));
+			}
+			else if(field.contains("Hospice"))
+			{
+				CreateHospiceOrganization.tempHospiceOrg.put("HOSPICENAME",RandomStringUtils.randomAlphabetic(75));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.tempHospiceOrg.get("HOSPICENAME"));
+			}
 		}
 		else if(text.equals("AllowedCharatcters")){
 			String str="a~`@!#$%^&*()-+_={}|;'[]<>,.?/Test120";
@@ -206,6 +228,16 @@ public class CreateManagingOrganization extends BaseClass {
 			{
 				CreateHHAOrganization.tempHHAOrg.put("HHANAME",str+RandomStringUtils.randomAlphabetic(7));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
+			}
+			else if(field.contains("LTCH"))
+			{
+				CreateLTCHOrganization.tempLTCHOrg.put("LTCHNAME",str+RandomStringUtils.randomAlphabetic(7));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.tempLTCHOrg.get("LTCHNAME"));
+			}
+			else if(field.contains("Hospice"))
+			{
+				CreateHospiceOrganization.tempHospiceOrg.put("HOSPICENAME",str+RandomStringUtils.randomAlphabetic(7));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.tempHospiceOrg.get("HOSPICENAME"));
 			}
 			else if(field.contains("Program"))
 			{
@@ -267,6 +299,28 @@ public class CreateManagingOrganization extends BaseClass {
 			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
+		else if(org.equals("FETCHFROMAPIForPGPNAME - YES")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreatePGPOrganization.tempPGPOrg.isEmpty())
+				{
+					CreatePGPOrganizationAPI.PGPNameList.set(0, CreatePGPOrganization.tempPGPOrg.get("PGPNAME"));
+					CreatePGPOrganizationAPI.tempPGPOrg.clear();
+				}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(org.equals("FETCHFROMAPIForPGPNAME - NO")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreatePGPOrganization.tempPGPOrg.isEmpty())
+			{
+				CreatePGPOrganizationAPI.PGPNameList.set(1, CreatePGPOrganization.tempPGPOrg.get("PGPNAME"));
+				CreatePGPOrganizationAPI.tempPGPOrg.clear();
+			}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
 		else if(org.equals("FETCHFROMAPIForSNFNAME - YES")){
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
@@ -289,6 +343,51 @@ public class CreateManagingOrganization extends BaseClass {
 			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
+		else if(org.equals("FETCHFROMAPIForHHANAME - YES")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreateHHAOrganization.tempHHAOrg.isEmpty())
+				{
+					CreateHHAOrganizationAPI.HHANameList.set(0, CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
+					CreateHHAOrganizationAPI.tempHHAOrg.clear();
+				}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(org.equals("FETCHFROMAPIForHHANAME - NO")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreateHHAOrganization.tempHHAOrg.isEmpty())
+			{
+				CreateHHAOrganizationAPI.HHANameList.set(1, CreateHHAOrganization.tempHHAOrg.get("HHANAME"));
+				CreateHHAOrganizationAPI.tempHHAOrg.clear();
+			}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(org.equals("FETCHFROMAPIForLTCHNAME - YES")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreateLTCHOrganization.tempLTCHOrg.isEmpty())
+				{
+					CreateLTCHOrganizationAPI.LTCHNameList.set(0, CreateLTCHOrganization.tempLTCHOrg.get("LTCHNAME"));
+					CreateLTCHOrganizationAPI.tempLTCHOrg.clear();
+				}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(org.equals("FETCHFROMAPIForLTCHNAME - NO")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreateLTCHOrganization.tempLTCHOrg.isEmpty())
+			{
+				CreateLTCHOrganizationAPI.LTCHNameList.set(1, CreateLTCHOrganization.tempLTCHOrg.get("LTCHNAME"));
+				CreateLTCHOrganizationAPI.tempLTCHOrg.clear();
+			}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		
 		else if(org.contains("MO"))
 			{
 				iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
@@ -400,6 +499,54 @@ public class CreateManagingOrganization extends BaseClass {
 					{
 						CreateHHAOrganization.HHAOrg_noMO.putAll(CreateHHAOrganization.tempHHAOrg);
 						CreateHHAOrganization.tempHHAOrg.clear();
+					}
+					waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				}
+				else if(org.contains("Hospice - YES"))
+				{
+					iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+					verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+					
+					if(!CreateHospiceOrganization.tempHospiceOrg.isEmpty())
+						{
+							CreateHospiceOrganization.HospiceOrg.putAll(CreateHospiceOrganization.tempHospiceOrg);
+							CreateHospiceOrganization.tempHospiceOrg.clear();
+						}
+					waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				}
+				else if(org.contains("Hospice - NO"))
+				{
+					iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+					verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+					
+					if(!CreateHospiceOrganization.tempHospiceOrg.isEmpty())
+					{
+						CreateHospiceOrganization.HospiceOrg_noMO.putAll(CreateHospiceOrganization.tempHospiceOrg);
+						CreateHospiceOrganization.tempHospiceOrg.clear();
+					}
+					waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				}
+				else if(org.contains("LTCH - YES"))
+				{
+					iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+					verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+					
+					if(!CreateLTCHOrganization.tempLTCHOrg.isEmpty())
+						{
+							CreateLTCHOrganization.LTCHOrg.putAll(CreateLTCHOrganization.tempLTCHOrg);
+							CreateLTCHOrganization.tempLTCHOrg.clear();
+						}
+					waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				}
+				else if(org.contains("LTCH - NO"))
+				{
+					iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+					verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+					
+					if(!CreateLTCHOrganization.tempLTCHOrg.isEmpty())
+					{
+						CreateLTCHOrganization.LTCHOrg_noMO.putAll(CreateLTCHOrganization.tempLTCHOrg);
+						CreateLTCHOrganization.tempLTCHOrg.clear();
 					}
 					waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 				}

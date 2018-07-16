@@ -20,9 +20,9 @@ public class CreateProgramsStepDef extends DriverScript{
 		programs.iVerifyHeaderLabelUnderSelectedOrganization(header,org);
 		}
 	
-	@And("^I select \"([^\"]*)\" Program name in create Contract page under \"([^\"]*)\" Organization$")
-	  public void i_select_Program_name_in_create_Contract_page_under_Payor_Organization(String text, String org) throws Throwable {
-		programs.iSelectProgramNameInCreateContractPageUnderPayorOrganization(text,org);
+	@And("^I select \"([^\"]*)\" Program name \"([^\"]*)\" in create Contract page under \"([^\"]*)\" Organization$")
+	  public void i_select_Program_name_in_create_Contract_page_under_Payor_Organization(int index,String text, String org) throws Throwable {
+		programs.iSelectProgramNameInCreateContractPageUnderPayorOrganization(index,text,org);
 		}
 	
 	@And("^I verify \"([^\"]*)\" on \"([^\"]*)\" page under Payor Organization$")

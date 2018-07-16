@@ -1,12 +1,30 @@
 Feature: Verification of Landing Page for PTA User
 
+  Scenario Outline: Create User through UA API call
+    Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>" and "<LearningPathways>"
+    When Create User with this data for "<User>"
+    Then Verify Actual vs expected results "<expStatusCode>" and "<responseMsg>"
+    Given I am on mail login page
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
+    Then I enter password "1Welcome2" to login mail account
+    Then I click on Mail icon in my account
+    Then I click on Inbox in mail
+    And I wait for 3000 milli seconds
+    Then I verify account for user "<User>-<Role>"
+    Then I set new password for the user "<User>-<Role>"
+
+    Examples: 
+      | User                            | FirstName                            | LastName                                 | Email                           | Phone      | NPI | Role                            | RoleID                             | Applications                                                                                                     | LearningPathways                       | Locations                                                                      | expStatusCode |
+      | Super Admin                     | FirstName                            | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 |     | Partner Technical Administrator | 20-Partner Technical Administrator | episode_connect-Episodes,reports-Reports,physician_portal-Physician Connect,admin-Administration,lessons-Lessons | 5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1 | 441355--ALL_BPIDS--ALL_FACILITIES                                              |           200 |
+      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 |     | Executive                       | 1-Executive                        | episode_connect-Episodes,reports-Reports,lessons-Lessons                                                         | 5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1 | 441355--3056-804--COVC0023, 441355--3056-805--055519, 441355--3056-806--055761 |           200 |
+
   Scenario: Verification of availability of fields on PTA User Landing page
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     And I should not see text "Unable to Load users" on Users page
     And I verify "SearchBox" on landing page
@@ -52,8 +70,8 @@ Feature: Verification of Landing Page for PTA User
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     And I verify "SearchBox" on landing page
     And I verify ghost text "Search" in search box
@@ -65,18 +83,19 @@ Feature: Verification of Landing Page for PTA User
     Then I verify availability of "<SearchParameter>" for "<user>-<Role>"
 
     Examples: 
-      | Description                    | user                            | Role      | Email                           | InvalidSearchParameter | SearchParameter                           |
-      | Search a user using First Name | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | Firstnamefirstnamefirstnamefirstnamefirst |
-      | Search a user using Last Name  | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | Lastname                                  |
-      | Search a user using Email      | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | FetchFromHM                               |
+      | Description                    | user                            | Role      | Email                           | InvalidSearchParameter | SearchParameter                          |
+      | Search a user using First Name | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | Firstnamefirstnamefirstnamefirstname     |
+      | Search a user using Last Name  | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | Lastnamelastnamelastnamelastnamelastname |
+      | Search a user using Email      | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | FetchFromHM                              |
+
 
   Scenario Outline: Verify ability of PTA user to lock a user and cancel unlock
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     And I verify "SearchBox" on landing page
     Then I enter "<SearchParameter>" in search box for "<user>-<Role>"
@@ -100,7 +119,7 @@ Feature: Verification of Landing Page for PTA User
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
     Then I click Access button
-    And I click on the "User Admin" tile
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I enter "<SearchParameter>" in search box for "<user>-<Role>"
     Then I verify availability of "<SearchParameter>" for "<user>-<Role>"

@@ -17,6 +17,7 @@ public class CreatePayorOrganizationAPI extends BaseClass{
 	public static List<Long> idList = new ArrayList<>();
 	public static List<String> participantidList = new ArrayList<>();
 	public static Long oldPayorOrg = null;
+	public static Long payorID = null;
 
 	public CreatePayorOrganizationAPI(WebDriver driver) {
 		super(driver);

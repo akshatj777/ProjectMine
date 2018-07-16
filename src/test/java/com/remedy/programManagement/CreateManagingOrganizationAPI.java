@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
 import com.remedy.RestCall.*;
+import java.util.StringTokenizer;
 
 public class CreateManagingOrganizationAPI extends BaseClass {
 	
@@ -58,4 +59,20 @@ public class CreateManagingOrganizationAPI extends BaseClass {
         }
         return addrs;
     }
+	
+	public static void deleteReferences(String type)
+	{
+		if(type.contains(","))
+		{
+			StringTokenizer st = new StringTokenizer(type, ",");
+			while(st.hasMoreTokens())
+			{
+				deleteNamesList(st.nextToken().trim());
+			}
+		}
+		else
+		{
+			deleteNamesList(type);
+		}
+	}
 }

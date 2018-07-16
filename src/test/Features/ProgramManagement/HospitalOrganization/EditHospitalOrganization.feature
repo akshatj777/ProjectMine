@@ -1,12 +1,5 @@
 Feature: Edit Hospital organization functionality tests
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -28,6 +21,11 @@ Feature: Edit Hospital organization functionality tests
       | Create Hospital without MO |               | ACHNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -63,6 +61,11 @@ Feature: Edit Hospital organization functionality tests
       | Verification of availability of all the fields on Edit Hospital Organization page | NO     | ACHNAME   |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -95,6 +98,11 @@ Feature: Edit Hospital organization functionality tests
       | Check validation for blank Location Postal code | NO     | ACHNAME   | ACHNAME              | Address1 | City | California |                 | LocName  | LAddress1    | LCity    | California |                 | Please enter a Postal Code        |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -131,6 +139,11 @@ Feature: Edit Hospital organization functionality tests
       | Check Allowed Characters for Location Postal code field on Edit Hospital Organization page | NO     | ACHNAME   |                                                                              |                                                           |                                                |                                                           |                                                |                 |                                                                                |                                                           |                                                           |                                                | abcdefghij      | Please enter a valid Postal Code                               |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -185,6 +198,11 @@ Feature: Edit Hospital organization functionality tests
       | Edit duplicate Hospital Organization name with Mandatory fields - With MO                                             | YES    | ACHNAME   | DUPLICATE_ACH        | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |           |            |            |                                                         | Loc_City                                      | California |           10000 | Hospital Organization Successfully Updated. |
 
   Scenario Outline: Edit a Hospital Organization With Mandatory Fields Missing
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -217,6 +235,11 @@ Feature: Edit Hospital organization functionality tests
       | Edit a Hospital Organization With Mandatory Fields Missing | NO     | ACHNAME   |                      |              |      |       |                 |          |              |          |           |                 |
 
   Scenario Outline: Add one more Location details on Edit Hospital Organization
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -241,6 +264,11 @@ Feature: Edit Hospital organization functionality tests
       | Add one more Location details on Edit Hospital Organization | NO     | ACHNAME   | Loc_Name new1 | Loc_Address14 | Inpatient | Midwest    | Chicago    | Loc_Address24 | Loc_City1 | California |           10001 | Hospital Organization Successfully Updated. |
 
   Scenario Outline: Edit a Hospital Organization with duplicate Location details
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -263,3 +291,10 @@ Feature: Edit Hospital organization functionality tests
     Examples: 
       | Description                                                  | Has_MO | Hosp_Name | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                     |
       | Edit a Hospital Organization with duplicate Location details | NO     | ACHNAME   | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | Hospital Organization Successfully Updated. |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type    |
+      | MO, ACH |

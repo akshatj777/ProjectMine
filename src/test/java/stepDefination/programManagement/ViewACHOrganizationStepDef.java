@@ -93,4 +93,9 @@ public class ViewACHOrganizationStepDef extends DriverScript {
 	  public void i_Search_With_OrgName_on_view_Profile_Of_Managing_Organization_Search_Box(String text) throws Throwable {
 		viewACH.iSearchWithOrgNameonViewProfileOfManagingOrganizationSearchBox(text);
 		}
+	
+	@And("^I click on \"([^\"]*)\" on view profile Managing Organization search box$")
+	  public void i_Click_On_OrgName_on_view_Profile_Of_Managing_Organization_Search_Box(String text) throws Throwable {
+		viewACH.iClickOnOrgNameonViewProfileOfManagingOrganizationSearchBox(text);
+		}
 }
