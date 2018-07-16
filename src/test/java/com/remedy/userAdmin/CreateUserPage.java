@@ -784,7 +784,6 @@ public class CreateUserPage extends BaseClass{
    }
    
    public void iClickOnEpisode1TileUnderSpecificUserLoginPage(String role){
-	   delay();
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
@@ -793,12 +792,12 @@ public class CreateUserPage extends BaseClass{
 			   iWillWaitToSee(By.xpath("//div[text()='Episodes']"));
 			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 			   {
-				   delay();
+				   longDelay();
 				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Episodes']")));
 			   }
 			   else
 			   {
-				   delay();
+				   longDelay();
 				   clickElement(driver.findElement(By.xpath("//div[text()='Episodes']")));  
 			   }
 		   }   
