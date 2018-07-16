@@ -371,7 +371,6 @@ public class MailCreateUser extends BaseClass{
 //			iWillWaitToSee(By.xpath("//div[@role='menuitem']/div[text()='Trash']"));
 //			driver.findElement(By.xpath("//div[@role='menuitem']/div[text()='Trash']")).click();
 		}
-	
 	public void verifyAccountUA(String role) throws InterruptedException
 	{
 		scrollIntoViewByJS(driver.findElement(By.xpath("//span/b[contains(text(),'Verify your account')]")));

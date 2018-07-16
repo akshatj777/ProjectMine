@@ -236,8 +236,9 @@ public class LandingPage extends BaseClass{
         	clickElement(driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-spoe']")));
     }
     public void iConfirmOnResetPasswordBox(){
-    	iWillWaitToSee(By.xpath("//*[contains(text(),'Okay')]"));
-    	clickElement(driver.findElement(By.xpath("//*[contains(text(),'Okay')]")));
+    	delay();
+    	iWillWaitToSee(By.xpath("//button[contains(text(),'Okay')]"));
+    	clickElement(driver.findElement(By.xpath("//button[contains(text(),'Okay')]")));
     	
     }
 public void PasswordMismachErrorMsg(String text){
@@ -293,14 +294,11 @@ public void errorMesgValidationForInvalidCreds(String text) {
 	
 }
 public void clickResetPasswordButton(String arg1) throws Throwable {
-	   Thread.sleep(2000);
-	   if(driver.findElements(By.cssSelector(".title>p")).size()>0)
-	   {
-		   iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
-	      driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")).click();
-	      delay();
-	      driver.findElement(By.xpath("//a[contains(text(),'Reset Password')]")).click();
-	   }
+	iWillWaitToSee(By.xpath("//i[@class='dropdown icon']"));
+	clickElement(driver.findElement(By.xpath("//i[@class='dropdown icon']")));
+	   iWillWaitToSee(By.xpath("//*[contains(text(),'"+arg1+"')]"));
+	      driver.findElement(By.xpath("//*[contains(text(),'"+arg1+"')]")).click();
+	  
 }
 public void remedyConnectPageVerification(){
 	iWillWaitToSee(By.cssSelector(".flex-item.order-2.btn.logo.valentino-icon-remedy-connect"));

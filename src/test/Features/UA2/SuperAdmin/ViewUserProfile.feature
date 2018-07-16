@@ -135,10 +135,6 @@ Feature: View User - Super Admin User
     Then I verify that user is "Locked" on view user page
     Then I click on "Unlock" icon on view user page
     Then I should see an alert with "Are you sure you want to unlock"
-    Then I click on "Cancel" button from the unlock alert
-    Then I verify user is "Locked"
-    Then I click on "Unlock" icon on view user page
-    Then I should see an alert with "Are you sure you want to unlock"
     Then I click on "Unlock" button from the unlock alert
     Then I verify that user is "Unlocked" on view user page
 
