@@ -882,8 +882,16 @@ public class CreateUserPage extends BaseClass{
 		            while (st1.hasMoreTokens()) {  
 		            	String token = st1.nextToken().trim();
 		            	System.out.println(token);
-		            	iWillWaitToSee(By.xpath("//li[contains(text(),\""+token+"\")]"));
-		            	Assert.assertTrue(isElementPresentOnPage(By.xpath("//li[contains(text(),\""+token+"\")]")));
+		            	Boolean flag = false;
+		            	List<WebElement> listItems = driver.findElements(By.xpath("//label[text()='Facilities']/parent::div//ul/li"));
+		        		for (WebElement item : listItems) {
+		        			flag = item.getText().toLowerCase().contains(token.toLowerCase());
+		        			if(flag==true)
+		        			{
+		        				break;
+		        			}
+		        		}
+		        		Assert.assertTrue(flag);
 		            }
 			   }
 			   else
@@ -1739,6 +1747,7 @@ public class CreateUserPage extends BaseClass{
 	   if(!(locationList.equals("")))
 	   	{
 	   if(locationList.equalsIgnoreCase("All Locations")){
+		   longDelay();
 		   iWillWaitToSee(By.xpath("//div[@class='content active']//label[text()='All Locations']"));
 		   clickElement(driver.findElement(By.xpath("//div[@class='content active']//label[text()='All Locations']")));
 		   delay();
