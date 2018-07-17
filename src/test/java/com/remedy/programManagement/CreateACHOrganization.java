@@ -191,6 +191,70 @@ public class CreateACHOrganization extends BaseClass{
 				delay();
 			}
 		}
+		if (id.contains("Hospice")){
+			if((id.substring(id.indexOf("-")+1).trim()).equals("CCN")){
+				CreateHospiceOrganization.tempHospiceOrg.put("CCN", createRandomNumber(10));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.tempHospiceOrg.get("CCN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("EIN")){
+				CreateHospiceOrganization.tempHospiceOrg.put("EIN", createRandomNumber(10));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.tempHospiceOrg.get("EIN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("NPI")){
+				CreateHospiceOrganization.tempHospiceOrg.put("NPI", createRandomNumber(10));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.tempHospiceOrg.get("NPI"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_CCN")){
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.HospiceOrg_noMO.get("CCN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_EIN")){
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.HospiceOrg_noMO.get("EIN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
+					iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.HospiceOrg_noMO.get("NPI"));
+			}
+			else if(id.contains("lessThan6")){
+				String value = createRandomNumber(5);
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
+			}
+			
+			else {
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), id.substring(id.indexOf("-")+1).trim());
+				delay();
+			}
+		}
+		if (id.contains("LTCH")){
+			if((id.substring(id.indexOf("-")+1).trim()).equals("CCN")){
+				CreateLTCHOrganization.tempLTCHOrg.put("CCN", createRandomNumber(10));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.tempLTCHOrg.get("CCN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("EIN")){
+				CreateLTCHOrganization.tempLTCHOrg.put("EIN", createRandomNumber(10));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.tempLTCHOrg.get("EIN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("NPI")){
+				CreateLTCHOrganization.tempLTCHOrg.put("NPI", createRandomNumber(10));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.tempLTCHOrg.get("NPI"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_CCN")){
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.LTCHOrg_noMO.get("CCN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_EIN")){
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.LTCHOrg_noMO.get("EIN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
+					iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.LTCHOrg_noMO.get("NPI"));
+			}
+			else if(id.contains("lessThan6")){
+				String value = createRandomNumber(5);
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
+			}
+			
+			else {
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), id.substring(id.indexOf("-")+1).trim());
+				delay();
+			}
+		}
 	}
 	
 	public void iEnterLocationNameForLocationOnACHOrg(String text, int num) {
@@ -295,6 +359,15 @@ public class CreateACHOrganization extends BaseClass{
 		}
 	}
 	
+	public void iSearhandverifyManagingOrgNameInHasAManagingOrganizationDropDown(String text, String act) 
+	{
+		iWillWaitToSee(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']"));
+		iFillInText(driver.findElement(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']")), CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1));
+		iWillWaitToSee(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption"));
+		isElementPresent(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption"));
+		delay();
+	}
+	
 	public void iVerifyLocationHeaderOnOrganizationPage(String location) 
 	{
 		String actual = null;
@@ -360,7 +433,24 @@ public class CreateACHOrganization extends BaseClass{
         	else if(text.equals("LIDmorethan20characters"))
         	{
     			CreateSNFOrganization.tempSNFOrg.put("LID", createRandomNumber(21));
-    			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), tempAchOrg.get("LID"));
+    			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateSNFOrganization.tempSNFOrg.get("LID"));
+    		}
+    	}
+    	else if(field.contains("LTCH"))
+    	{
+    		if(text.equals("LID"))
+        	{
+    			CreateLTCHOrganization.tempLTCHOrg.put("LID", createRandomNumber(15));
+    			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateLTCHOrganization.tempLTCHOrg.get("LID"));
+    		}
+        	else if(text.equals("DUPLICATE_LID"))
+        	{
+        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateLTCHOrganization.tempLTCHOrg.get("LID"));
+        	}
+        	else if(text.equals("LIDmorethan20characters"))
+        	{
+    			CreateLTCHOrganization.tempLTCHOrg.put("LID", createRandomNumber(21));
+    			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateLTCHOrganization.tempLTCHOrg.get("LID"));
     		}
     	}
         else

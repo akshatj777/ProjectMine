@@ -46,4 +46,4 @@ Feature: User admin Login Logout test
     Then I enter email "lbarinstein+qaadmin@remedypartners.com " for Login
     And I enter password field Testing8 for Login
     Then I click Access button
-    Then I verify the error message "Wrong email or password."
+    Then I verify the error message "WRONG EMAIL OR PASSWORD."

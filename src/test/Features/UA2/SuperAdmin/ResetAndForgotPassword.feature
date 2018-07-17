@@ -1,11 +1,27 @@
 Feature: Reset and forgot password functionality from UA2 application
 
+  Scenario Outline: Create User through UA API call
+    Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>" and "<LearningPathways>"
+    When Create User with this data for "<User>"
+    Then Verify Actual vs expected results "<expStatusCode>" and "<responseMsg>"
+    Given I am on mail login page
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
+    Then I enter password "1Welcome2" to login mail account
+    Then I click on Mail icon in my account
+    Then I click on Inbox in mail
+    And I wait for 3000 milli seconds
+    Then I verify account for user "<User>-<Role>"
+    Then I set new password for the user "<User>-<Role>"
+
+    Examples: 
+      | User        | FirstName                                 | LastName                                 | Email                           | Phone | NPI | Role      | RoleID      | Applications                                             | LearningPathways                       | Locations             | expStatusCode |
+      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       |     | Executive | 1-Executive | episode_connect-Episodes,reports-Reports,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
+
   Scenario Outline: Reset Password: Valid new password and confirm password match
     Given I am on the login page
     Then I enter newuser email for "<User>-<Role>" login to Remedy
     Then I enter newuser password for login to Remedy
     Then I click Access button
-    Then I verify Remedy Connect page
     Then I click on "Reset Password" button from top right corner icon
     Then I click on Okay on reset password confirmation box
     Given I am on mail login page
@@ -16,24 +32,22 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "<NewPassword>" to set new password
     And I enter confirm new password "<NewPassword>" to set new password
     And I click on submit button to set new password
-    Then I verify Remedy Connect page
+    And I redirect to Remedy connect page
 
     Examples: 
       | User        | Role      | NewPassword |
       | Super Admin | Executive | Testing2    |
-
-  Scenario Outline: Reset Password: New password and confirm password mismatch
+ Scenario Outline: Reset Password: New password and confirm password mismatch
     Given I am on the login page
     Then I enter newuser email for "<User>-<Role>" login to Remedy
     And I enter password field <Password> for Login
     Then I click Access button
-    Then I verify Remedy Connect page
     Then I click on "Reset Password" button from top right corner icon
     Then I click on Okay on reset password confirmation box
     Given I am on mail login page
@@ -44,8 +58,8 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "<NewPassword>" to set new password
     And I enter confirm new password "<ConfirmPass>" to set new password
@@ -61,7 +75,6 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I enter newuser email for "<User>-<Role>" login to Remedy
     And I enter password field <Password> for Login
     Then I click Access button
-    Then I verify Remedy Connect page
     Then I click on "Reset Password" button from top right corner icon
     Then I click on Okay on reset password confirmation box
     Given I am on mail login page
@@ -72,8 +85,8 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "<NewPassword>" to set new password
     And I enter confirm new password "<NewPassword>" to set new password
@@ -104,8 +117,8 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "<NewPassword>" to set new password
     And I enter confirm new password "<NewPassword>" to set new password
@@ -114,17 +127,16 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I enter newuser email for "<User>-<Role>" login to Remedy
     And I enter password field <NewPassword> for Login
     Then I click Access button
-    Then I verify Remedy Connect page
     Then I click on "Log Out" button again
     And I should see Log in widget
     Then I enter newuser email for "<User>-<Role>" login to Remedy
-    And I enter password field <Password> for Login
+    And I enter password field <WrongPassword> for Login
     Then I click Access button
     Then I should see error message for invalid credentials "Wrong email or password."
 
     Examples: 
-      | User        | Role      | NewPassword | Password |
-      | Super Admin | Executive | Testing1    | Testing2 |
+      | User        | Role      | NewPassword | WrongPassword |
+      | Super Admin | Executive | Testing1    | Testing8 |
 
   Scenario Outline: Forgot Password- New Password and confirm password mismatch
     Given I am on the login page
@@ -139,8 +151,8 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "<NewPassword>" to set new password
     And I enter confirm new password "<ConfirmPassword>" to set new password
@@ -164,8 +176,8 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I verify the unread mail in inbox in my account
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change my password" link in mail content
-    Then I click on "Change my password" link in mail content
+    Then I verify "Change My Password" link in mail content
+    Then I click on "Change My Password" link in mail content
     And I switch to new window
     And I enter new password "<NewPassword>" to set new password
     And I enter confirm new password "<NewPassword>" to set new password
@@ -175,3 +187,5 @@ Feature: Reset and forgot password functionality from UA2 application
     Examples: 
       | User        | Role      | NewPassword |
       | Super Admin | Executive | Test        |
+
+ 

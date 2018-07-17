@@ -20,16 +20,43 @@ public class ViewUserPage extends BaseClass {
 	}
 
 	public void searchForUserRole(String userRole) throws Throwable {
-		driver.navigate().refresh();
-		iWillWaitToSee(By.xpath("//tr[@class='component-user-table-row']"));
-		Thread.sleep(3000);
-		String email = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
-		iFillInText(driver.findElement(By.xpath("//input[@placeholder='Search']")), email);
-		Thread.sleep(3000);
+		if(userRole.lastIndexOf("-") == userRole.indexOf("-"))
+		{
+			driver.navigate().refresh();
+			iWillWaitToSee(By.xpath("//tr[@class='component-user-table-row']"));
+			Thread.sleep(3000);
+			String email = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='Search']")), email);
+			Thread.sleep(3000);
+		}
+		else
+		{
+			String firstKey = userRole.substring(0,userRole.indexOf("-"));
+			String secondKey = userRole.substring(userRole.indexOf("-")+1, userRole.lastIndexOf("-"));
+			String thirdKey = userRole.substring(userRole.lastIndexOf("-")+1, userRole.length());
+			if(secondKey.equals(""))
+			{
+				driver.navigate().refresh();
+				iWillWaitToSee(By.xpath("//tr[@class='component-user-table-row']"));
+				Thread.sleep(3000);
+				String email = CreateUserPage.usersEmailPerRole.get(firstKey+"-"+thirdKey).get(thirdKey);
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='Search']")), email);
+				Thread.sleep(3000);
+			}
+			else
+			{
+				driver.navigate().refresh();
+				iWillWaitToSee(By.xpath("//tr[@class='component-user-table-row']"));
+				Thread.sleep(3000);
+				String email = CreateUserPage.usersEmailPerRole.get(firstKey+"-"+secondKey).get(secondKey);
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='Search']")), email);
+				Thread.sleep(3000);
+			}
+		}
 	}
 
 	public void selectUserRole(String userRole) throws Throwable {
-		String email = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
+//		String email = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
 		iWillWaitToSee(By.xpath("//tr[@class='component-user-table-row']"));
 		clickElement(driver.findElement(By.xpath("//tr[@class='component-user-table-row']")));
 		Thread.sleep(3000);
@@ -157,6 +184,7 @@ public class ViewUserPage extends BaseClass {
 				    		iWillWaitToSee(By.xpath("//div[@class='content active data-permissions-content']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//td[contains(text(),\""+location+"\")]"));
 				    		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='content active data-permissions-content']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//td[contains(text(),\""+location+"\")]")));
 				    		Thread.sleep(3000);
+				    		scrollIntoViewByJS(driver.findElement(By.xpath("//h3[text()='Data Permissions']")));
 				    		driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")).click();
 				    	}
 			    	}

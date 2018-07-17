@@ -49,10 +49,12 @@ public class EditUser extends BaseClass {
 	}
 
 	public void iEnterPhone(String number) {
-		iWillWaitToSee(By.cssSelector("input[placeholder='Phone']"));
-		driver.findElement(By.cssSelector("input[placeholder='Phone']")).clear();
-		iFillInText(driver.findElement(By.cssSelector("input[placeholder='Phone']")), number);
-
+		if(!(number.equals("")))
+		{
+			iWillWaitToSee(By.cssSelector("input[placeholder='Phone']"));
+			driver.findElement(By.cssSelector("input[placeholder='Phone']")).clear();
+			iFillInText(driver.findElement(By.cssSelector("input[placeholder='Phone']")), number);
+		}
 	}
 
 	public void iVerifyThatEmailIsNonEditable() {
@@ -133,19 +135,38 @@ public class EditUser extends BaseClass {
 
 	public void iClickOnExisitingOrganisationByName(String text) {
 
-		iWillWaitToSee(By.cssSelector(".component-participant-title"));
+		if(!(text.equals("")))
+		{
+			iWillWaitToSee(By.xpath("//*[contains(text(),'" + text + "')]"));
 
-		clickElement(driver.findElement(By
-				.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'" + text + "')]")));
-
+			clickElement(driver.findElement(By
+					.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'" + text + "')]")));
+		}
 	}
 
 	public void iRemoveHealthSystemByName(String org) {
-		iWillWaitToSee(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'" + org
-				+ "')]/i[contains(@class,'remove link icon')]"));
-		clickElement(driver
-				.findElement(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'"
-						+ org + "')]/i[contains(@class,'remove link icon')]")));
+		if(!(org.equals("")))
+		{
+			if(org.contains(","))
+			{
+				StringTokenizer st = new StringTokenizer(org, ",");
+				while(st.hasMoreTokens())
+				{
+					String token = st.nextToken();
+					iWillWaitToSee(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'" + token + "')]/i[contains(@class,'remove link icon')]"));
+					clickElement(driver.findElement(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'"+ token + "')]/i[contains(@class,'remove link icon')]")));
+					if (isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + "Remove" + "')]"))) == true)
+						clickElement(driver.findElement(By.xpath("//*[contains(text(),'" + "Remove" + "')]")));
+				}
+			}
+			else
+			{
+				iWillWaitToSee(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'" + org+ "')]/i[contains(@class,'remove link icon')]"));
+				clickElement(driver.findElement(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'"+ org + "')]/i[contains(@class,'remove link icon')]")));
+				if (isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + "Remove" + "')]"))) == true)
+					clickElement(driver.findElement(By.xpath("//*[contains(text(),'" + "Remove" + "')]")));
+			}
+		}
 	}
 
 	public void clickAllLocationsButton(String arg) throws Throwable {
@@ -621,12 +642,17 @@ public class EditUser extends BaseClass {
 
 	public void iVerifyMessageForInvalidLocation(String text) throws InterruptedException {
 		if (text.equalsIgnoreCase("second")) {
-			iWillWaitToSee(By.xpath("//h3[contains(text(),'No Results Found')]"));
-			Assert.assertTrue(isElementVisible(driver.findElements(By.xpath("//h3[contains(text(),'No Results Found')]")).get(1)));
+			iWillWaitToSee(By.xpath("//div[text()='0 Results']"));
+			Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//div[text()='0 Results']"))));
 		} else if (text.equalsIgnoreCase("first")) {
-			iWillWaitToSee(By.xpath("//h3[contains(text(),'No Results Found')]"));
-			Assert.assertTrue(isElementPresentOnPage(By.xpath("//h3[contains(text(),'No Results Found')]")));
+			iWillWaitToSee(By.xpath("//div[text()='0 Results']"));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='0 Results']")));
 		}
+	}
+	
+	public void VerifyMessageForInvalidLocations(String text) throws InterruptedException {
+			iWillWaitToSee(By.xpath("//h3[text()=' No Results Found ']"));
+			Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//h3[text()=' No Results Found ']"))));
 	}
 
 	public void iVerifyIncompleteOrganisation() {

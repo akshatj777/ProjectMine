@@ -1,12 +1,34 @@
 Feature: View User - Super Admin User
 
+  Scenario Outline: Create PTA through API call and then verify the user
+    Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>" and "<LearningPathways>"
+    When Create User with this data for "<User>"
+    Then Verify Actual vs expected results "<expStatusCode>" and "<responseMsg>"
+    Given I am on mail login page
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
+    Then I enter password "1Welcome2" to login mail account
+    Then I click on Mail icon in my account
+    Then I click on Inbox in mail
+    And I wait for 3000 milli seconds
+    Then I verify account for user "<User>-<Role>"
+    Then I set new password for the user "<User>-<Role>"
+
+    Examples: 
+      | User                            | FirstName                                 | LastName                                 | Email                           | Phone      | NPI | Role                            | RoleID                             | Applications                                                                                                     | LearningPathways                                    | Locations                                                                                                                                                                                                                                                                                                              | expStatusCode |
+      | Super Admin                     | FirstName                                 | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 |     | Partner Technical Administrator | 20-Partner Technical Administrator | episode_connect-Episodes,reports-Reports,physician_portal-Physician Connect,admin-Administration,lessons-Lessons | 5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1              | 441355--ALL_BPIDS--ALL_FACILITIES                                                                                                                                                                                                                                                                                      |           200 |
+      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 |     | Executive                       | 1-Executive                        | episode_connect-Episodes,reports-Reports,lessons-Lessons                                                         | 5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1              | 441355--3056-804--COVC0023, 441355--3056-805--055519, 441355--3056-806--055761                                                                                                                                                                                                                                         |           200 |
+      | Partner Technical Administrator | FirstName                                 | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |            |     | Manager                         | 2-Manager                          | episode_connect-Episodes,reports-Reports,lessons-Lessons                                                         | p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | 441355--3056-808--555164                                                                                                                                                                                                                                                                                               |           200 |
+      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastName                                 | qaautomation@remedypartners.com |            |     | Case Manager                    | 3-Case Manager                     | episode_connect-Episodes,reports-Reports,lessons-Lessons                                                         | 5HDc3E6aK_E1                                        | 441355--3056-809--055922, 441355--3056-810--555442, 441355--3056-811--555394, 441355--3056-812--055797, 441355--3056-813--165218, 441355--3056-814--145571, 441355--3056-815--165559, 441355--3056-816--145769, 441355--3056-817--155446, 441355--3056-818--155295, 441355--3056-819--365489, 441355--3056-820--365488 |           200 |
+      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 | NPI | Physicians                      | 4-Physicians                       | episode_connect-Episodes,reports-Reports,lessons-Lessons,physician_portal-Physician Connect                      | p11D0Vl2FSg1,qfy2xp8zSFc1                           | 441355--3056-i37--056048, 441355--3056-i38--145783, 441355--3056-i39--155298, 441355--3056-i40--145862, 441355--3056-i41--155649                                                                                                                                                                                       |           200 |
+      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | qaautomation@remedypartners.com | 9988776655 |     | Transitional Case Manager       | 22-Transitional Case Manager       | episode_connect-Episodes,reports-Reports,lessons-Lessons                                                         | 5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81 | 441355--3056-i42--055646, 441355--3056-i43--146048, 441355--3056-i44--365786, 441355--3056-i45--145508                                                                                                                                                                                                                 |           200 |
+
   Scenario Outline: <Description>
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -56,10 +78,6 @@ Feature: View User - Super Admin User
     Then I verify Lock/Unlock Icon
     Then I click on "Lock" icon on view user page
     Then I verify that user is "Locked" on view user page
-    Then I click on "Unlock" icon on view user page
-    Then I should see an alert with "Are you sure you want to unlock"
-    Then I click on "Cancel" button from the unlock alert
-    Then I verify user is "Locked"
     Then I click on "Unlock" icon on view user page
     Then I should see an alert with "Are you sure you want to unlock"
     Then I click on "Unlock" button from the unlock alert

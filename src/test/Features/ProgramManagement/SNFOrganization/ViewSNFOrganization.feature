@@ -1,12 +1,5 @@
 Feature: View SNF organization functionality tests
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -29,6 +22,11 @@ Feature: View SNF organization functionality tests
       | Create SNF using API calls without MO |               | SNFNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | NY       |  10001 | Loc_Name     | [17,18,19],[17] |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |          |  0 | snf  |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "SNF" organization tab on organization dashboard
     When I search with "<SNF_Name> - <Has_MO>" on organization in search box
     And I click "<SNF_Name> - <Has_MO>" field in search list on organization page
@@ -89,6 +87,11 @@ Feature: View SNF organization functionality tests
       | Verification of SNF details and count of locations displayed under SNF org - without MO | NO     | SNFNAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name2 new2 | Loc_Address1 | Skilled Nursing | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN     | NPI | CA                | SNF               | SNF Organization Successfully Updated. |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I search with "<MO_Name>" on organization in search box
     And I click "<MO_Name>" field in search list on organization page
     And I verify "SNF" organization tab present under "Managing" Organization
@@ -138,6 +141,11 @@ Feature: View SNF organization functionality tests
       | Verification of SNF details and count on SNF tab under Managing org | YES    | MONAME  | SNFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Skilled Nursing | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN | NPI | CA                | SNF Organization Successfully Created. |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I search with "<MO_Name>" on organization in search box
     And I click "<MO_Name>" field in search list on organization page
     And I verify "SNF" organization tab present under "Managing" Organization
@@ -149,3 +157,10 @@ Feature: View SNF organization functionality tests
     Examples: 
       | Description                                                             | MO_Name | SNF_Name         |
       | Searching invalid details on Managing Organization Profile Page for SNF | MONAME  | NoMatchesSNFNAME |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type    |
+      | MO, SNF |

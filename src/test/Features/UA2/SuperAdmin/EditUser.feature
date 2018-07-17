@@ -1,10 +1,44 @@
 Feature: Edit user page for SA
 
+  Scenario Outline: Create User through UA API call
+    Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>" and "<LearningPathways>"
+    When Create User with this data for "<User>"
+    Then Verify Actual vs expected results "<expStatusCode>" and "<responseMsg>"
+    Given I am on mail login page
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
+    Then I enter password "1Welcome2" to login mail account
+    Then I click on Mail icon in my account
+    Then I click on Inbox in mail
+    And I wait for 3000 milli seconds
+    Then I verify account for user "<User>-<Role>"
+    Then I set new password for the user "<User>-<Role>"
+
+    Examples: 
+      | User        | FirstName                                 | LastName                                 | Email                           | Phone      | NPI | Role                            | RoleID                             | Applications                                                                                                                                            | LearningPathways                                                                                                     | Locations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | expStatusCode |
+      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |            |     | Executive                       | 1-Executive                        | episode_connect-Episodes,reports-Reports,lessons-Lessons                                                                                                | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581                                                                               | 514083--2070-015--TSH                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |           200 |
+      | Super Admin | FirstName                                 | LastName                                 | qaautomation@remedypartners.com |            |     | Manager                         | 2-Manager                          | episode_connect-Episodes,reports-Reports,lessons-Lessons                                                                                                | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81                                                     | 441354--3056-i11--075181                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |           200 |
+      | Super Admin | FirstName                                 | LastName                                 | qaautomation@remedypartners.com | 9988776655 |     | Case Manager                    | 3-Case Manager                     | episode_connect-Episodes,reports-Reports,lessons-Lessons                                                                                                | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1                                                                  | 514029--2070-023--A, 514029--2070-023--L, 514029--2070-025--T                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |           200 |
+      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |            | NPI | Physicians                      | 4-Physicians                       | episode_connect-Episodes,reports-Reports,lessons-Lessons,physician_portal-Physician Connect                                                             | 3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581                                                                               | 441444--2070-g14--100029, 441444--3056-q91--441310, 441444--3056-q91--181318                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |           200 |
+      | Super Admin | FirstName                                 | LastName                                 | qaautomation@remedypartners.com |            |     | Remedy TCS                      | 5-Remedy TCS                       | episode_connect-Episodes,reports-Reports,lessons-Lessons,episode_connect_2-Episodes 2.0,tci-TCI                                                         | NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581                                                     | 514083--2070-015--TSH, 441369--3056-m03--365402                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |           200 |
+      | Super Admin | FirstName                                 | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |            |     | Remedy LPN                      | 6-Remedy LPN                       | episode_connect-Episodes,reports-Reports,lessons-Lessons,episode_connect_2-Episodes 2.0,tci-TCI                                                         |                                                                                                                      | 441348--2070-020--HUP, 441348--2070-021--PMC, 441354--3056-i11--075181, 441354--3056-i12--075211                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |           200 |
+      | Super Admin | FirstName                                 | LastName                                 | qaautomation@remedypartners.com | 9988776655 |     | Remedy RN                       | 7-Remedy RN                        | episode_connect-Episodes,reports-Reports,lessons-Lessons,episode_connect_2-Episodes 2.0,tci-TCI                                                         | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | 441444--2070-g14--100029, 441444--3056-q91--441310, 441444--3056-q91--181318, 441324--6005-059--140010, 441324--6005-072--100022, 441324--3056-b75--490033, 441324--3090-066--140011                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |           200 |
+      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | qaautomation@remedypartners.com |            |     | Remedy Field RN                 | 8-Remedy Field RN                  | episode_connect-Episodes,reports-Reports,lessons-Lessons,episode_connect_2-Episodes 2.0,tci-TCI                                                         | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81              | 439207--2070-060--420091, 439207--2070-060--310083, 439207--2070-060--160045, 439207--2070-060--310041, 439207--2070-060--310086, 439207--2070-060--310044, 439207--2070-060--310112, 439207--2070-060--310038, 439207--2070-060--310086-1, 439207--2070-060--310039, 439207--2070-060--100019, 439207--2070-060--100217, 439207--2070-060--330119, 439207--2070-060--390048, 439207--2070-060--310096, 439207--2070-060--440002, 439207--2070-060--310002, 439207--2070-060--490063, 439207--2070-060--310029-IRF, 439207--2070-060--160029, 439207--2070-060--HUMC, 439207--2070-060--420070, 439207--2070-060--223321233, 439207--2070-060--100044, 439207--2070-060--310061, 439207--2070-060--330106, 439207--2070-060--310022, 439207--2070-060--310014, 439207--2070-060--310022-2, 439207--2070-060--310022-1, 439207--2070-060--210048, 439207--2070-060--210001, 439207--2070-060--100092, 439207--2070-060--100291, 439207--2070-060--310070, 439207--2070-060--100044-1, 439207--2070-060--310073, 439207--2070-060--390268, 439207--2070-060--310031, 439207--2070-060--310032, 439207--2070-060--440189, 439207--2070-060--310076, 439207--2070-060--100044-2, 439207--2070-060--310034-REH, 439207--2070-060--310034-REH, 439207--2070-060--310069, 439207--2070-060--490045, 439207--2070-060--310029, 439207--2070-060--310108, 439207--3056-a08--210048, 439207--3056-a08--310083, 807551--6005-197--UHS, 807551--6005-197--330394-REH, 807551--6005-198--CMH, 807551--3090-209--337181                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |           200 |
+      | Super Admin | FirstName                                 | LastName                                 | qaautomation@remedypartners.com |            |     | Remedy PM                       | 9-Remedy PM                        | episode_connect-Episodes,reports-Reports,lessons-Lessons,episode_connect_2-Episodes 2.0,tci-TCI                                                         | NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1                                                                  | 439207--2070-060--420091, 439207--3056-a08--210048, 439207--3056-a08--310083, 439207--3056-a08--210001, 439207--3056-a08--330106, 439207--3056-a08--310096, 439207--3056-a08--310076, 807551--6005-197--UHS, 807551--6005-197--330394-REH, 807551--6005-198--CMH, 807551--6005-200--430016, 807551--6005-200--100284 , 807551--6005-200--330307, 807551--6005-200--220012, 807551--6005-200--070028, 807551--6005-200--330304, 807551--6005-200--330385, 807551--6005-200--330222, 807551--6005-200--390119, 807551--6005-200--030093, 807551--6005-200--161395906, 807551--6005-200--330151, 807551--6005-200--330393, 807551--6005-200--330175, 807551--6005-200--310115, 807551--6005-200--050082, 807551--6005-200--080004, 807551--6005-200--210048, 807551--6005-200--150035, 807551--6005-200--330090, 807551--6005-200--PG3, 807551--6005-200--CMH, 807551--6005-200--UHS, 807551--6005-200--390042, 807551--6005-200--390001, 807551--6005-200--050503, 807551--6005-200--330136, 807551--6005-200--330011, 807551--6005-200--330231, 807551--6005-200--330132, 807551--6005-200--050684, 807551--6005-200--330078, 807551--6005-200--330013, 807551--6005-200--330085, 807551--6005-200--190020, 807551--6005-200--330141, 807551--6005-200--030061, 807551--6005-200--050390, 807551--6005-200--330394-REH, 807551--6005-200--ALB, 807551--6005-200--190146, 807551--3090-209--337181                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |           200 |
+      | Super Admin | FirstName                                 | LastName                                 | qaautomation@remedypartners.com |            |     | Remedy Sales Team               | 11-Remedy Sales Team               | episode_connect-Episodes,lessons-Lessons,tci-TCI                                                                                                        | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1                                                                  | 439207--2070-060--420091, 439207--2070-060--310083, 439207--2070-060--160045, 439207--2070-060--310041, 439207--2070-060--310086, 439207--2070-060--310044, 439207--2070-060--310112, 439207--2070-060--310038, 439207--2070-060--310086-1, 439207--2070-060--310039, 439207--2070-060--100019, 439207--2070-060--100217, 439207--2070-060--330119, 439207--2070-060--390048, 439207--2070-060--310096, 439207--2070-060--440002, 439207--2070-060--310002, 439207--2070-060--490063, 439207--2070-060--310029-IRF, 439207--2070-060--160029, 439207--2070-060--HUMC, 439207--2070-060--420070, 439207--2070-060--223321233, 439207--2070-060--100044, 439207--2070-060--310061, 439207--2070-060--330106, 439207--2070-060--310022, 439207--2070-060--310014, 439207--2070-060--310022-2, 439207--2070-060--310022-1, 439207--2070-060--210048, 439207--2070-060--210001, 439207--2070-060--100092, 439207--2070-060--100291, 439207--2070-060--310070, 439207--2070-060--100044-1, 439207--2070-060--310073, 439207--2070-060--390268, 439207--2070-060--310031, 439207--2070-060--310032, 439207--2070-060--440189, 439207--2070-060--310076, 439207--2070-060--100044-2, 439207--2070-060--310034-REH, 439207--2070-060--310034-REH, 439207--2070-060--310069, 439207--2070-060--490045, 439207--2070-060--310029, 439207--2070-060--310108, 439207--3056-a08--210048, 439207--3056-a08--310083, 439207--3056-a08--210001, 439207--3056-a08--330106, 439207--3056-a08--310096, 439207--3056-a08--310076, 807551--6005-197--UHS, 807551--6005-197--330394-REH, 807551--6005-198--CMH, 807551--6005-200--430016, 807551--6005-200--100284 , 807551--6005-200--330307, 807551--6005-200--220012, 807551--6005-200--070028, 807551--6005-200--330304, 807551--6005-200--330385, 807551--6005-200--330222, 807551--6005-200--390119, 807551--6005-200--030093, 807551--6005-200--161395906, 807551--6005-200--330151, 807551--6005-200--330393, 807551--6005-200--330175, 807551--6005-200--310115, 807551--6005-200--050082, 807551--6005-200--080004, 807551--6005-200--210048, 807551--6005-200--150035, 807551--6005-200--330090, 807551--6005-200--PG3, 807551--6005-200--CMH, 807551--6005-200--UHS, 807551--6005-200--390042, 807551--6005-200--390001, 807551--6005-200--050503, 807551--6005-200--330136, 807551--6005-200--330011, 807551--6005-200--330231, 807551--6005-200--330132, 807551--6005-200--050684, 807551--6005-200--330078, 807551--6005-200--330013, 807551--6005-200--330085, 807551--6005-200--190020, 807551--6005-200--330141, 807551--6005-200--030061, 807551--6005-200--050390, 807551--6005-200--330394-REH, 807551--6005-200--ALB, 807551--6005-200--190146, 807551--3090-209--337181 |           200 |
+      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | qaautomation@remedypartners.com | 9988776655 |     | Remedy Executive                | 14-Remedy Executive                | episode_connect-Episodes,reports-Reports,lessons-Lessons,episode_connect_2-Episodes 2.0,tci-TCI                                                         | jusUV22erpk1,HZhmTBQzHtU1,n9yn5n0Qa581                                                                               | 439108--CJR-1--390168, 439108--2070-a55--390168, 439207--2070-060--420091, 439207--3056-a08--210048, 439207--3056-a08--310083, 439207--3056-a08--210001, 439207--3056-a08--330106, 439207--3056-a08--310096, 439207--3056-a08--210001, 439207--3056-a08--330106, 439207--3056-a08--310096, 439207--3056-a08--310076                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |           200 |
+      | Super Admin | FirstName                                 | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |            |     | Prospective Partner Executive   | 15-Prospective Partner Executive   | lessons-Lessons                                                                                                                                         |                                                                                                                      | 514083--2070-015--TSH                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |           200 |
+      | Super Admin | FirstName                                 | LastName                                 | qaautomation@remedypartners.com |            |     | Remedy Other                    | 17-Remedy Other                    | episode_connect-Episodes,lessons-Lessons,episode_connect_2-Episodes 2.0,tci-TCI                                                                         | HZhmTBQzHtU1,18h7phZr1h81                                                                                            | 439108--2070-a55--390168, 439108--CJR-1--390168, 809046--CJR-10-6--310084                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |           200 |
+      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | qaautomation@remedypartners.com |            |     | Partner Program Administrator   | 18-Partner Program Administrator   | episode_connect-Episodes,reports-Reports,lessons-Lessons,episode_connect_2-Episodes 2.0,physician_portal-Physician Connect                              | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,18h7phZr1h81,n9yn5n0Qa581                                                     | 441371--3056-m55--555836, 441371--3056-m61--555745, 441371--3056-m63--555746,441371--3056-m69--555768, 441371--3056-m74--106022                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |           200 |
+      | Super Admin | FirstName                                 | LastName                                 | qaautomation@remedypartners.com | 9988776655 |     | Remedy Program Administrator    | 19-Remedy Program Administrator    | episode_connect-Episodes,reports-Reports,lessons-Lessons,episode_connect_2-Episodes 2.0,tci-TCI,physician_portal-Physician Connect                      | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581                                        | 441444--2070-g14--100029, 441444--3056-q91--181318, 441444--3056-q91--441310,441324--6005-059--140007, 441324--6005-059--140010, 441324--3056-b75--490033, 439207--2070-060--420091, 439207--2070-060--310083, 439207--2070-060--160045, 439207--2070-060--310041, 439207--2070-060--310086, 439207--2070-060--310044, 439207--2070-060--310112, 439207--2070-060--310038, 439207--2070-060--310086-1, 439207--2070-060--310039, 439207--2070-060--100019, 439207--2070-060--100217, 439207--2070-060--330119, 439207--2070-060--390048, 439207--2070-060--310096, 439207--2070-060--440002, 439207--2070-060--310002, 439207--2070-060--490063, 439207--2070-060--310029-IRF, 439207--2070-060--160029, 439207--2070-060--HUMC, 439207--2070-060--420070, 439207--2070-060--223321233, 439207--2070-060--100044, 439207--2070-060--310061, 439207--2070-060--330106, 439207--2070-060--310022, 439207--2070-060--310014, 439207--2070-060--310022-2, 439207--2070-060--310022-1, 439207--2070-060--210048, 439207--2070-060--210001, 439207--2070-060--100092, 439207--2070-060--100291, 439207--2070-060--310070, 439207--2070-060--100044-1, 439207--2070-060--310073, 439207--2070-060--390268, 439207--2070-060--310031, 439207--2070-060--310032, 439207--2070-060--440189, 439207--2070-060--310076, 439207--2070-060--100044-2, 439207--2070-060--310034-REH, 439207--2070-060--310034-REH, 439207--2070-060--310069, 439207--2070-060--490045, 439207--2070-060--310029, 439207--2070-060--310108, 439207--3056-a08--210048, 439207--3056-a08--310083, 439207--3056-a08--210001, 439207--3056-a08--330106, 439207--3056-a08--310096, 439207--3056-a08--310076                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |           200 |
+      | Super Admin | FirstName                                 | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |            |     | Partner Technical Administrator | 20-Partner Technical Administrator | episode_connect-Episodes,reports-Reports,lessons-Lessons,physician_portal-Physician Connect,admin-Administration                                        | NFdw0Kts2C01,HZhmTBQzHtU1,n9yn5n0Qa581                                                                               | 441355--3056-804--COVC0023, 441355--3056-805--055519, 441355--3056-806--055761,441355--3056-807--295023,  441355--3056-808--555164                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |           200 |
+      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | qaautomation@remedypartners.com | 9988776655 |     | Remedy Technical Administrator  | 21-Remedy Technical Administrator  | episode_connect-Episodes,reports-Reports,lessons-Lessons,episode_connect_2-Episodes 2.0,tci-TCI,physician_portal-Physician Connect,admin-Administration | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | 439207--2070-060--420091, 439207--2070-060--310083, 439207--2070-060--160045, 439207--2070-060--310041, 439207--2070-060--310086, 439207--2070-060--310044, 439207--2070-060--310112, 439207--2070-060--310038, 439207--2070-060--310086-1, 439207--2070-060--310039, 439207--2070-060--100019, 439207--2070-060--100217, 439207--2070-060--330119, 439207--2070-060--390048, 439207--2070-060--310096, 439207--2070-060--440002, 439207--2070-060--310002, 439207--2070-060--490063, 439207--2070-060--310029-IRF, 439207--2070-060--160029, 439207--2070-060--HUMC, 439207--2070-060--420070, 439207--2070-060--223321233, 439207--2070-060--100044, 439207--2070-060--310061, 439207--2070-060--330106, 439207--2070-060--310022, 439207--2070-060--310014, 439207--2070-060--310022-2, 439207--2070-060--310022-1, 439207--2070-060--210048, 439207--2070-060--210001, 439207--2070-060--100092, 439207--2070-060--100291, 439207--2070-060--310070, 439207--2070-060--100044-1, 439207--2070-060--310073, 439207--2070-060--390268, 439207--2070-060--310031, 439207--2070-060--310032, 439207--2070-060--440189, 439207--2070-060--310076, 439207--2070-060--100044-2, 439207--2070-060--310034-REH, 439207--2070-060--310034-REH, 439207--2070-060--310069, 439207--2070-060--490045, 439207--2070-060--310029, 439207--2070-060--310108, 439207--3056-a08--210048, 439207--3056-a08--310083, 439207--3056-a08--210001, 439207--3056-a08--330106, 439207--3056-a08--310096, 439207--3056-a08--310076,807551--6005-200--430016, 807551--6005-200--100284 , 807551--6005-200--330307, 807551--6005-200--220012, 807551--6005-200--070028, 807551--6005-200--330304, 807551--6005-200--330385, 807551--6005-200--330222, 807551--6005-200--390119, 807551--6005-200--030093, 807551--6005-200--161395906, 807551--6005-200--330151, 807551--6005-200--330393, 807551--6005-200--330175, 807551--6005-200--310115, 807551--6005-200--050082, 807551--6005-200--080004, 807551--6005-200--210048, 807551--6005-200--150035, 807551--6005-200--330090, 807551--6005-200--PG3, 807551--6005-200--CMH, 807551--6005-200--UHS, 807551--6005-200--390042, 807551--6005-200--390001, 807551--6005-200--050503, 807551--6005-200--330136, 807551--6005-200--330011, 807551--6005-200--330231, 807551--6005-200--330132, 807551--6005-200--050684, 807551--6005-200--330078, 807551--6005-200--330013, 807551--6005-200--330085, 807551--6005-200--190020, 807551--6005-200--330141, 807551--6005-200--030061, 807551--6005-200--050390, 807551--6005-200--330394-REH, 807551--6005-200--ALB, 807551--6005-200--190146, 807551--6005-197--UHS, 807551--3090-209--337181, 439108--CJR-1--390168, 439108--2070-a55--390168      |           200 |
+      | Super Admin | FirstName                                 | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |            |     | Transitional Case Manager       | 22-Transitional Case Manager       | episode_connect-Episodes,reports-Reports,lessons-Lessons                                                                                                | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | 807551--6005-197--UHS, 807551--6005-200--220012, 807551--3090-209--337181                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |           200 |
+
   Scenario Outline: Verifying editable/non-editable fields of general information tab and editing them
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -69,15 +103,15 @@ Feature: Edit user page for SA
     And I enter password field Episode1! for Login
     And I click Access button
     And I click on Episode1 tile for "Super Admin-Physicians" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "Super Admin-Physicians" user
     And I verify NPI on ECI for "Super Admin-Physicians" user
 
   Scenario Outline: Editing user role from <PreviousRole> to <Role> and validating Next button
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -94,7 +128,7 @@ Feature: Edit user page for SA
     Then I select "<LearningPathwaySearchParameter>" from the results
     Then I verify that Next button is "enabled"
     Then I click on Next button
-    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify role "<Role>"
     Then I verify enabled "<Applications>"
     And I click on the top user account link
@@ -107,12 +141,12 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<ApplicationsVisible>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<ApplicationsVisible>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<ApplicationsVisible>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -122,11 +156,8 @@ Feature: Edit user page for SA
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I switch back to old window
+    And I redirect to Remedy connect page
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -154,6 +185,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -175,8 +210,8 @@ Feature: Edit user page for SA
   Scenario Outline: Changing the products and general details for <Role> and verifying product tile
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -199,12 +234,12 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -214,11 +249,8 @@ Feature: Edit user page for SA
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I switch back to old window
+    And I redirect to Remedy connect page
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -246,6 +278,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -266,8 +302,8 @@ Feature: Edit user page for SA
   Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -275,10 +311,9 @@ Feature: Edit user page for SA
     And I click on Edit button
     Then I select "Permissions" tab
     Then I remove health system "<Remove HealthSystem1>"
-    And I click on "Remove" button on permissions tab
     Then I remove health system "<Remove HealthSystem2>"
-    And I click on "Remove" button on permissions tab
     And I search for health system with <Health System id>
+
     And I select a <Health System>
     Then I select "<Programs>" programs
     Then I select "<Locations>" locations
@@ -296,12 +331,12 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -311,11 +346,8 @@ Feature: Edit user page for SA
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I switch back to old window
+    And I redirect to Remedy connect page
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -343,6 +375,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -364,8 +400,8 @@ Feature: Edit user page for SA
   Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -398,12 +434,12 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -413,11 +449,8 @@ Feature: Edit user page for SA
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I switch back to old window
+    And I redirect to Remedy connect page
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -445,6 +478,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -464,8 +501,8 @@ Feature: Edit user page for SA
   Scenario Outline: Editing locations -<Description>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -491,12 +528,12 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -506,11 +543,8 @@ Feature: Edit user page for SA
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I switch back to old window
+    And I redirect to Remedy connect page
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -538,6 +572,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -559,8 +597,8 @@ Feature: Edit user page for SA
   Scenario Outline: Edit programs- <Description>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -587,12 +625,12 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -602,11 +640,8 @@ Feature: Edit user page for SA
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I switch back to old window
+    And I redirect to Remedy connect page
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -634,6 +669,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -655,8 +694,8 @@ Feature: Edit user page for SA
   Scenario Outline: Changing General information, Role from <PreviousRole> to <Role> and Remove existing org and add new org
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
     And I verify that I am navigated to user page
@@ -674,12 +713,11 @@ Feature: Edit user page for SA
     #Then I select "<LearningPathwaySearchParameter>" from the results
     Then I click on Next button
     Then I remove health system "<Remove HealthSystem>"
-    And I click on "Remove" button on permissions tab
     And I search for health system with <Health System>
     And I select a <Health System>
     Then I select "<Programs>" programs
     Then I select location by facility key "<Locations>"
-    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify first name "<FirstName>"
     Then I verify last name "<LastName>"
     Then I verify phone "<Phone>"
@@ -697,12 +735,12 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -712,11 +750,8 @@ Feature: Edit user page for SA
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I switch back to old window
+    And I redirect to Remedy connect page
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -744,6 +779,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -763,8 +802,8 @@ Feature: Edit user page for SA
   Scenario Outline: Changing General information, Role from <PreviousRole> to <Role> and edit Data permissions
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -785,7 +824,7 @@ Feature: Edit user page for SA
     Then I deselect "<RemovePrograms>" programs
     Then I select "<Programs>" programs
     Then I select "<Locations>" locations
-    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify last name "<LastName>"
     Then I verify phone "<Phone>"
     Then I verify enabled "<EnableApplications>"
@@ -804,12 +843,12 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -819,11 +858,8 @@ Feature: Edit user page for SA
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I switch back to old window
+    And I redirect to Remedy connect page
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -851,6 +887,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -892,8 +932,8 @@ Feature: Edit user page for SA
   Scenario Outline: Remove phone, Role from <PreviousRole> to <Role> add new org
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -911,7 +951,7 @@ Feature: Edit user page for SA
     And I select a <Health System2>
     Then I select "<Programs>" programs
     Then I select "<Locations>" locations
-    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify phone "<PhoneValidation>"
     Then I verify enabled "<EnableApplications>"
     Then I verify health system "<Health System2>"
@@ -927,12 +967,12 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -942,11 +982,8 @@ Feature: Edit user page for SA
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I switch back to old window
+    And I redirect to Remedy connect page
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -974,6 +1011,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -993,8 +1034,8 @@ Feature: Edit user page for SA
   Scenario Outline: Edit phone, Role from <PreviousRole> to <Role> and Remove Existing Location and Add new Location
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -1010,7 +1051,7 @@ Feature: Edit user page for SA
     Then I click on existing organisation "<Health System>"
     Then I select "<DisableLocations>" locations
     Then I select location by BPID "<EnableLocations>"
-    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify phone "<PhoneValidation>"
     Then I verify enabled "<EnableApplications>"
     Then I verify health system "<Health System>"
@@ -1026,12 +1067,12 @@ Feature: Edit user page for SA
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    Then I click on Hamburger menu on top left of homepage
-    And I verify "<Applications>" in product menu dropdown
-    And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    And I redirect to Remedy connect page
+    #Then I click on Hamburger menu on top left of homepage
+    #And I verify "<Applications>" in product menu dropdown
+    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
+    #And I redirect to Remedy connect page
     And I click on Episode1 tile for "<User>-<Role>" user
-    And I switch to new window
+    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -1041,11 +1082,8 @@ Feature: Edit user page for SA
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    And I switch back to old window
-    And I click on Institute tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to Institute homepage
-    And I switch back to old window
+    #And I switch back to old window
+    And I redirect to Remedy connect page
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
@@ -1073,6 +1111,10 @@ Feature: Edit user page for SA
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
+    #And I click on Institute tile for "<User>-<Role>" user
+    #And I switch to new window
+    #And I verify "<User>-<Role>" user navigated to Institute homepage
+    #And I switch back to old window
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -1092,8 +1134,8 @@ Feature: Edit user page for SA
   Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1127,8 +1169,8 @@ Feature: Edit user page for SA
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1146,8 +1188,8 @@ Feature: Edit user page for SA
   Scenario Outline: Verify the functionality of back/Cancel button
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1192,8 +1234,8 @@ Feature: Edit user page for SA
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -1222,8 +1264,8 @@ Feature: Edit user page for SA
   Scenario Outline: Invalid Health system and invalid location validation
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1238,7 +1280,7 @@ Feature: Edit user page for SA
     And I select a <Health System2>
     Then I select "<Programs2>" programs
     Then I select "<invalidLocations>" invalid locations
-    And I verify No results found for invalid Location for "second" organisation
+    And I verify No results found for invalid Location for "first" in selected organisation
     Then I click on existing organisation "<Health System2>"
     Then I verify incomplete status for health system
 
@@ -1249,8 +1291,8 @@ Feature: Edit user page for SA
   Scenario Outline: Remove selected locations and then remove the org
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1260,7 +1302,6 @@ Feature: Edit user page for SA
     Then I click on existing organisation "<Health System>"
     Then I select "<DisableLocations>" locations
     Then I remove health system "<Health System>"
-    And I click on "Remove" button on permissions tab
     Then I click on Submit button while edit for "<User>-<Role>"
 
     Examples: 
@@ -1272,8 +1313,8 @@ Feature: Edit user page for SA
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1295,8 +1336,8 @@ Feature: Edit user page for SA
   Scenario Outline: Changing role from physician to Manager then back to Physicians
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -1307,7 +1348,7 @@ Feature: Edit user page for SA
     Then I enter NPI field with "<NPI1>" for role "<Role>"
     Then I click on Next button
     Then I click on Next button
-    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify role "<Role>"
     And I click on Edit button
     When I click the Organizational Role Field to edit
@@ -1315,7 +1356,7 @@ Feature: Edit user page for SA
     Then I enter NPI field with "<NPI2>" for role "<PreviousRole>"
     Then I click on Next button
     Then I click on Next button
-    Then I click on Submit button while edit for "<User>-<PreviousRole>--<Role>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify role "<PreviousRole>"
 
     Examples: 
@@ -1325,8 +1366,8 @@ Feature: Edit user page for SA
   Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1354,8 +1395,8 @@ Feature: Edit user page for SA
   Scenario Outline: Validating- all locations should not be displayed as selected when the "All Locations" check box is unchecked while editing the user
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1374,8 +1415,8 @@ Feature: Edit user page for SA
   Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1383,7 +1424,6 @@ Feature: Edit user page for SA
     And I click on Edit button
     Then I select "Permissions" tab
     Then I remove health system "<Remove HealthSystem>"
-    And I click on "Remove" button on permissions tab
     And I search for health system with <Health System>
     And I select a <Health System>
     And I verify that "<ModelNotPresent>" model is not present under Programs

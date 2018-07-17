@@ -190,6 +190,10 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	public void iVerifyMessageForInvalidLocation(String text) throws InterruptedException{
 		editUser.iVerifyMessageForInvalidLocation(text);
 	}
+	@Then("^I verify No results found for invalid Location for \"([^\"]*)\" in selected organisation$")
+	public void verifyMessageForInvalidLocation(String text) throws InterruptedException{
+		editUser.VerifyMessageForInvalidLocations(text);
+	}
 	@Then("^I click on Select dropdown$")
 	public void iClickOnSelectOrgDropdown(){
 		editUser.iClickOnSelectOrgDropdown();

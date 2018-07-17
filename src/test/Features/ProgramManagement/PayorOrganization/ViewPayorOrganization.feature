@@ -44,3 +44,10 @@ Feature: View Payor Organization functionality tests
     Examples: 
       | Description                       | Payor_Name | Contact_Person    | Contact_Email      | Contact_Phone | Address1 | Address2 | City | State    | Postal_Code | StateInitials | Organization Type |
       | View details on Payor Org profile | PAYORNAME  | ContactPersonTest | Sample@yopmail.com | 212-567-8970  | Address1 | Address2 | City | New York |       10001 | NY            | Payor             |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type  |
+      | Payor |

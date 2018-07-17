@@ -1,12 +1,5 @@
 Feature: Search the Hospital organizations functionality tests
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -29,6 +22,11 @@ Feature: Search the Hospital organizations functionality tests
       | Create Hospital without MO |               | ACHNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     Then I verify the Search bar on "Hospital" organization page
     Then I search "<SearchParam> - <Has_MO>" and verify with search list options on "Hospital" organization search box
@@ -44,6 +42,11 @@ Feature: Search the Hospital organizations functionality tests
       | Search Hospital Organization with Postal Code                    |        |          10000 |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -58,6 +61,11 @@ Feature: Search the Hospital organizations functionality tests
       | Searching Location Matket on Hospital Profile Page  | NO     | ACHNAME   | Chicago      |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -77,6 +85,11 @@ Feature: Search the Hospital organizations functionality tests
       | Search Hospital Organization after editing the Hospital name - Without MO | NO     | ACHNAME   | ACHNAME              | Hospital Organization Successfully Updated. |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     Then I search with "<Hosp_Name>" on organization in search box
     Then I verify the "No matches" message for invalid search in Organization
@@ -85,3 +98,10 @@ Feature: Search the Hospital organizations functionality tests
     Examples: 
       | Description                                                                   | Hosp_Name      |
       | Verification of error message if Hospital organization is not found in search | NoMatchACHName |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type    |
+      | MO, ACH |

@@ -88,7 +88,7 @@ Feature: Create Hospital organization functionality tests
       | Check validation for blank Managing Organization | YES    | Blank        | ACHNAME   | Address1 | City | California |       10000 | LocName  | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI | A Managing Organization has to be selected. |
       | Check validation for blank ACH name              | NO     | MONAME       |           | Address1 | City | California |       10000 | LocName  | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI | Please enter an Organization Name           |
       | Check validation for blank Address1              | NO     | MONAME       | ACHNAME   |          | City | California |       10000 | LocName  | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI | Please enter an Address                     |
-      | Check validation for blank City                  | YES     | MONAME       | ACHNAME   | Address1 |      | California |       10000 | LocName  | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI | Please enter a City                         |
+      | Check validation for blank City                  | YES    | MONAME       | ACHNAME   | Address1 |      | California |       10000 | LocName  | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI | Please enter a City                         |
       | Check validation for blank State                 | NO     | MONAME       | ACHNAME   | Address1 | City |            |       10000 | LocName  | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI | Please select a State                       |
       | Check validation for blank Postal code           | NO     | MONAME       | ACHNAME   | Address1 | City | California |             | LocName  | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI | Please enter a Postal Code                  |
       | Check validation for blank Location name         | NO     | MONAME       | ACHNAME   | Address1 | City | California |       10000 |          | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI | Please enter a Location Name                |
@@ -475,10 +475,10 @@ Feature: Create Hospital organization functionality tests
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
     Then I verify "<Message>" after submitting the "create ACH - <Has_MO>" organization page
-    When I search with "ACHNAME - <Has_MO>" on organization in search box
-    And I click "ACHNAME - <Has_MO>" field in search list on organization page
-    #Then I verify Location ID should be same as "Hospital" Organization CCN
+    When I search with "ACHNAME - <Has_MO>" on "Hospital" organization in search box
+    And I click "ACHNAME - <Has_MO>" field in search list on "Hospital" organization page
 
+    #Then I verify Location ID should be same as "Hospital" Organization CCN
     Examples: 
       | Description                                                                                       | Has_MO | Managing_Org | Hosp_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Message                                     |
       | Create a Hospital Organization with Mandatory Fields and CCN as mandatory identifier - Without MO | NO     |              | ACHNAME   | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | Hospital Organization Successfully Created. |
@@ -597,7 +597,7 @@ Feature: Create Hospital organization functionality tests
     And I enter <City> in "City" on create organization page
     And I select <State> in State on create organization page
     And I enter <Postal_Code> in "Postal Code" on create organization page
-   #And I provide "CCN" as last created "Location_Id" on create organization page
+    #And I provide "CCN" as last created "Location_Id" on create organization page
     And I verify "Location 1" on "Create Hospital" organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
@@ -672,8 +672,8 @@ Feature: Create Hospital organization functionality tests
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
     Then I verify "SNF Organization Successfully Created." after submitting the "create SNF - <Has_MO>" organization page
-    When I search with "SNFNAME - <Has_MO>" on organization in search box
-    And I click "SNFNAME - <Has_MO>" field in search list on organization page
+    When I search with "SNFNAME - <Has_MO>" on "SNF" organization in search box
+    And I click "SNFNAME - <Has_MO>" field in search list on "SNF" organization page
     #And I verify Location ID should be greater than "100000"
     When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
@@ -766,6 +766,8 @@ Feature: Create Hospital organization functionality tests
       | Create Duplicate Hospital Organization with Mandatory fields - With MO                                                  | YES    | MONAME       | DUPLICATE_ACH        | Address1                                                |                                               |                                                         | City                                          | California |       10000 | Loc_Name                                                                    | Loc_Address1                                            |           |            |            |                                                         | Loc_City                                      | California |           10000 | CCN |               |               | Hospital Organization Successfully Created. |
       | Create Hospital Organization with duplicate NPI- Without MO                                                             | NO     |              | ACHNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Loc_Name                                                                    | Loc_Address1                                            | Inpatient | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | CCN | EIN           | DUPLICATE_NPI | Hospital Organization Successfully Created. |
       | Create Hospital Organization with duplicate EIN- Without MO                                                             | NO     |              | ACHNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Loc_Name                                                                    | Loc_Address1                                            | Inpatient | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | CCN | DUPLICATE_EIN | NPI           | Hospital Organization Successfully Created. |
+      | Create Hospital Organization with using same EIN and NPI                                                                | NO     |              | ACHNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Loc_Name                                                                    | Loc_Address1                                            | Inpatient | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 |     |    1234567890 |    1234567890 | Hospital Organization Successfully Created. |
+      | Create Hospital Organization with duplicate EIN- Without MO                                                             | NO     |              | ACHNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Loc_Name                                                                    | Loc_Address1                                            | Inpatient | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | CCN |               | NPI           | Hospital Organization Successfully Created. |
 
   Scenario Outline: Identifiers - <Description>
     When I click on "Hospital" organization tab on organization dashboard
@@ -779,8 +781,12 @@ Feature: Create Hospital organization functionality tests
     And I verify "<Message1>" field validation message on create organization page
 
     Examples: 
-      | Description                                                              | CCN           | EIN        | NPI        | Message                            | Message1                           |
-      | Verify Validation Message of Hospital Organization with same CCN and EIN |    1234567890 | 1234567890 |            | The CCN and ein must be different. | The EIN and ccn must be different. |
-      | Verify Validation Message of Hospital Organization with same CCN and NPI |    1234567890 |            | 1234567890 | The CCN and npi must be different. | The NPI and ccn must be different. |
-      | Verify Validation Message of Hospital Organization with same EIN and NPI |               | 1234567890 | 1234567890 | The EIN and npi must be different. | The NPI and ein must be different. |
-      | Verify Validation of Hospital Organization with duplicate CCN            | DUPLICATE_CCN |            |            | CCN Id already taken               |                                    |
+      | Description                                                   | CCN           | EIN | NPI | Message              | Message1 |
+      | Verify Validation of Hospital Organization with duplicate CCN | DUPLICATE_CCN |     |     | CCN Id already taken |          |
+
+  Scenario Outline: Delete references of the name list
+    When delete references of the name list type "<type>"
+
+    Examples: 
+      | type |
+      | MO   |

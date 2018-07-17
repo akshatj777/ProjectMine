@@ -31,9 +31,8 @@ public class LandingPage extends BaseClass{
         super(driver);}
 
     public void iVerifyTextforTiles(String text){
-    	iWillWaitToSee(By.cssSelector(".title>p"));
        	if(text.isEmpty()!=true){
-    		verifyTextForElementfromList(".title>p", text);
+    		verifyTextForElementfromList(".description", text);
     	}
     }
        
@@ -173,8 +172,8 @@ public class LandingPage extends BaseClass{
     	}
     }
     public void iClickOnTheTopUserAccountIconOnRemedyConnectPage (){
-    		iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
-    		clickElement(driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")));
+    		iWillWaitToSee(By.xpath("//i[@class='dropdown icon']"));
+    		clickElement(driver.findElement(By.xpath("//i[@class='dropdown icon']")));
     }
     
     public void IClickTopUserAccountLink() {
@@ -193,29 +192,29 @@ public class LandingPage extends BaseClass{
     public void iSelectFromTopUserAccountDropDown(String link) throws InterruptedException{
     	driver.navigate().refresh();
     	Thread.sleep(3000);
-    	iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
-	      driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")).click();
+    	iWillWaitToSee(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']"));
+	      driver.findElement(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']")).click();
 	      Thread.sleep(3000);
 	      if(link.equals("Log Out"))
 	      {
 	    	  if(DriverScript.Config.getProperty("Browser").equals("ie"))
 	    	  {
-	    		  ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[@ng-click='user.logout()']")));  
+	    		  ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='Log Out']")));  
 	    	  }
 	    	  else
 	    	  {
-	    		  driver.findElement(By.xpath("//a[@ng-click='user.logout()']")).click();
+	    		  driver.findElement(By.xpath("//span[text()='Log Out']")).click();
 	    	  }
 	      }
 	      else if(link.equals("Reset Password"))
 	      {
 	    	  if(DriverScript.Config.getProperty("Browser").equals("ie"))
 	    	  {
-	    		  ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@ng-click,'valentino.reset-password')]")));
+	    		  ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='Reset Password']")));
 	    	  }
 	    	  else
 	    	  {
-	    		  driver.findElement(By.xpath("//a[contains(@ng-click,'valentino.reset-password')]")).click();
+	    		  driver.findElement(By.xpath("//span[text()='Reset Password']")).click();
 	    	  }
 	      }
     }
@@ -237,8 +236,9 @@ public class LandingPage extends BaseClass{
         	clickElement(driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-spoe']")));
     }
     public void iConfirmOnResetPasswordBox(){
-    	iWillWaitToSee(By.xpath("//*[contains(text(),'Okay')]"));
-    	clickElement(driver.findElement(By.xpath("//*[contains(text(),'Okay')]")));
+    	delay();
+    	iWillWaitToSee(By.xpath("//button[contains(text(),'Okay')]"));
+    	clickElement(driver.findElement(By.xpath("//button[contains(text(),'Okay')]")));
     	
     }
 public void PasswordMismachErrorMsg(String text){
@@ -294,14 +294,11 @@ public void errorMesgValidationForInvalidCreds(String text) {
 	
 }
 public void clickResetPasswordButton(String arg1) throws Throwable {
-	   Thread.sleep(2000);
-	   if(driver.findElements(By.cssSelector(".title>p")).size()>0)
-	   {
-		   iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
-	      driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")).click();
-	      delay();
-	      driver.findElement(By.xpath("//a[contains(text(),'Reset Password')]")).click();
-	   }
+	iWillWaitToSee(By.xpath("//i[@class='dropdown icon']"));
+	clickElement(driver.findElement(By.xpath("//i[@class='dropdown icon']")));
+	   iWillWaitToSee(By.xpath("//*[contains(text(),'"+arg1+"')]"));
+	      driver.findElement(By.xpath("//*[contains(text(),'"+arg1+"')]")).click();
+	  
 }
 public void remedyConnectPageVerification(){
 	iWillWaitToSee(By.cssSelector(".flex-item.order-2.btn.logo.valentino-icon-remedy-connect"));
