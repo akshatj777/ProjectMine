@@ -39,7 +39,7 @@ import stepDefination.Hooks.*;
 
 
 
-        features = { "src/test/Features/UA2/test/" }
+        features = { "src/test/Features/" }
 
         //glue = { "./src/test/java/stepDefination" },
         //tags = {""}
