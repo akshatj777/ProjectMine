@@ -73,15 +73,14 @@ Feature: Edit user page for SA
     And I should see Log in widget
 
     Examples: 
-
-      | User        | Role       | FirstName        | LastName        | Email             | Phone        | NPI | RemoveLearningPathwaySearchParameter | LearningPathwayID | Applications       |
+      | User        | Role       | FirstName        | LastName        | Email                           | Phone        | NPI | RemoveLearningPathwaySearchParameter | LearningPathwayID | Applications       |
       | Super Admin | Physicians | FirstName'Edited | LastName'Edited | qaautomation@remedypartners.com | 996-385-2451 | NPI | i am learning path, 18h7phZr1h81     | n9yn5n0Qa581      | Episodes, Episodes |
 
   Scenario Outline: Validating that pagination is not displayed when few locations are added in the data permissions while editing a user
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -124,8 +123,7 @@ Feature: Edit user page for SA
     Then I unselect all selected applications
     Then I verify that Next button is "disabled"
     Then I select "<EnableApplications>" product
-    Then I enter "<LearningPathwaySearchParameter>" in Learning Pathway search box
-    Then I select "<LearningPathwaySearchParameter>" from the results
+    Then I verify "<LearningPathway>" while editing the user
     Then I verify that Next button is "enabled"
     Then I click on Next button
     Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
@@ -202,10 +200,8 @@ Feature: Edit user page for SA
     And I should see Log in widget
 
     Examples: 
-
-      | User        | UserName                               | Password | Email             | NPI | PreviousRole | Role                          | EnableApplications                            | Applications                                  | ApplicationsVisible        | ApplicationsNotVisible       | LearningPathwaySearchParameter                                                                                                        | Roletext | ReportCategory | ReportName                   | BPID | LearningPathway                                                                                                                       | FirstName | LastName | Facilities        |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com |     | Manager      | Partner Program Administrator | Physician Connect, Episodes, Reports, Lessons | Episodes, Reports, Physician Connect, Lessons | Episodes, Reports, Lessons | Administration, Episodes 2.0 | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | ROLE_PRM | Patient ID     | Episode DRG Issues [Model 3] |      | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | FirstName | LastName | Apple - Watertown |
-
+      | User        | UserName                               | Password | Email                           | NPI | PreviousRole | Role                          | EnableApplications                            | Applications                                  | ApplicationsVisible                           | ApplicationsNotVisible       | LearningPathwaySearchParameter                                                                                                        | Roletext | ReportCategory | ReportName                   | BPID | LearningPathway                                                                                                                       | FirstName | LastName | Facilities        |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com |     | Manager      | Partner Program Administrator | Physician Connect, Episodes, Reports, Lessons | Episodes, Reports, Physician Connect, Lessons | Episodes, Reports, Lessons, Physician Connect | Administration, Episodes 2.0 | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | ROLE_PRM | Patient ID     | Episode DRG Issues [Model 3] |      | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | FirstName | LastName | Apple - Watertown |
 
   Scenario Outline: Changing the products and general details for <Role> and verifying product tile
     Given I am on the login page
@@ -311,9 +307,8 @@ Feature: Edit user page for SA
     And I click on Edit button
     Then I select "Permissions" tab
     Then I remove health system "<Remove HealthSystem1>"
-    Then I remove health system "<Remove HealthSystem2>"
+    #Then I remove health system "<Remove HealthSystem2>"
     And I search for health system with <Health System id>
-
     And I select a <Health System>
     Then I select "<Programs>" programs
     Then I select "<Locations>" locations
@@ -392,10 +387,8 @@ Feature: Edit user page for SA
     And I should see Log in widget
 
     Examples: 
-
-      | Description                          | User        | Role      | Email             | Applications                    | ApplicationsNotVisible                          | Remove HealthSystem1 | Remove HealthSystem2 | Health System id | Health System    | Programs    | Locations                                                                               | Facilities                                                          | ProgramsValidation             | LocationsValidation                                                                                                         | LearningPathway                                           | FirstName                                 | LastName                                 | Roletext | ReportCategory | ReportName         |
+      | Description                          | User        | Role      | Email                           | Applications                    | ApplicationsNotVisible                          | Remove HealthSystem1 | Remove HealthSystem2 | Health System id | Health System    | Programs    | Locations                                                                               | Facilities                                                          | ProgramsValidation             | LocationsValidation                                                                                                         | LearningPathway                                           | FirstName                                 | LastName                                 | Roletext | ReportCategory | ReportName         |
       | Remove Existing org and add new org1 | Super Admin | Executive | qaautomation@remedypartners.com | Reports, Episodes, TCI, Lessons | Episodes 2.0, Administration, Physician Connect | Stamford Hospital    | Penn                 |           441324 | Sound Physicians | BPCI-Model2 | 6005-080--Winchester Medical Center - Rehab Unit, 6005-063--Fairbanks Memorial Hospital | Winchester Medical Center - Rehab Unit, Fairbanks Memorial Hospital | Sound Physicians--BPCI Model 2 | Sound Physicians--6005-080--Winchester Medical Center - Rehab Unit, Sound Physicians--6005-063--Fairbanks Memorial Hospital | i am learning path, Learning Pathway 2, Remedy University | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | ROLE_PRM | Patient ID     | Episode DRG Issues |
-
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -511,6 +504,7 @@ Feature: Edit user page for SA
     Then I select "Applications" tab
     Then I unselect "<DisableApplications>" product
     Then I select "Permissions" tab
+    Then I remove health system "<Remove HealthSystem>"
     Then I click on existing organisation "<Health System>"
     Then I deselect "<RemoveLocations>" locations
     Then I select "<Locations>" locations
@@ -589,10 +583,10 @@ Feature: Edit user page for SA
     And I should see Log in widget
 
     Examples: 
-      | Description                                | User        | Role       | Email                            | Applications                                  | ApplicationsNotVisible                          | DisableApplications | RemoveLocations | Locations                                                  | Programs    | Health System | Facilities                                                                                                                                              | ProgramsValidation                                       | LocationsValidation                                                                                                                                                                                                                                   | LearningPathway                                                                                                                                | FirstName | LastName                                 | Roletext | ReportCategory | ReportName         |
-      | Edit single location to multiple locations | Super Admin | Remedy TCS | qaautomation@remedypartners.com2 | Episodes, Reports, TCI, Lessons               | Episodes 2.0, Administration, Physician Connect | Episodes 2.0        |                 | 3056-m04--Altercare Post, 3056-m05--Altercare - Big Rapids | BPCI-Model3 | Altercare     | Altercare Post-Acute Rehab Center, Altercare - Big Rapids, Stamford Hospital, Altercare - Alliance                                                      | Stamford Hospital--BPCI Model 2, Altercare--BPCI Model 3 | Altercare--3056-m04--Altercare Post, Altercare--3056-m05--Altercare - Big Rapids, Stamford Hospital--2070-015--Stamford Hospital, Altercare--3056-m03--Altercare - Alliance                                                                           | Learning Pathway 2, max-test-052417, Clinical Operations Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University | FirstName | LastName                                 | ROLE_TCS | Patient ID     | Episode DRG Issues |
-      | Edit to All Locations                      | Super Admin | Remedy LPN | qaautomation@remedypartners.com2 | Episodes 2.0, Reports, TCI, Lessons           | Episodes, Administration, Physician Connect     | Episodes            |                 | All Locations                                              | BPCI-Model2 | Penn          | UPenn - Hospital of the Univ. of Pennsylvania, Upenn - Penn Presbyterian Hospital, Upenn - Pennsylvania Hospital, Apple - Rocky Hill, Apple - Watertown | Penn--BPCI Model 2, Apple Rehab--BPCI Model 3            | Penn--2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania, Penn--2070-021--Upenn - Penn Presbyterian Hospital, Penn--2070-022--Upenn - Pennsylvania Hospital, Apple Rehab--3056-i11--Apple - Watertown, Apple Rehab--3056-i12--Apple - Rocky Hill |                                                                                                                                                | FirstName | LastNameLastNameLastNameLastNameLastName | ROLE_LPN | Patient ID     | Episode DRG Issues |
-      | Edit All locations to single location      | Super Admin | Remedy LPN | qaautomation@remedypartners.com2 | Episodes 2.0, Reports, TCI, Lessons, Episodes | Administration, Physician Connect               | Episodes            | All Locations   | 2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania    | BPCI-Model2 | Penn          | UPenn - Hospital of the Univ. of Pennsylvania, Apple - Rocky Hill, Apple - Watertown                                                                    | Penn--BPCI Model 2, Apple Rehab--BPCI Model 3            | Penn--2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania, Apple Rehab--3056-i11--Apple - Watertown, Apple Rehab--3056-i12--Apple - Rocky Hill                                                                                                    |                                                                                                                                                | FirstName | LastNameLastNameLastNameLastNameLastName | ROLE_LPN | Patient ID     | Episode DRG Issues |
+      | Description                                | User        | Role       | Email                            | Applications                                  | ApplicationsNotVisible                          | DisableApplications | RemoveLocations | Locations                                                  | Programs    | Health System | Remove HealthSystem | Facilities                                                                                                                                              | ProgramsValidation                                       | LocationsValidation                                                                                                                                                                                                                                   | LearningPathway                                                                                                                                | FirstName | LastName                                 | Roletext | ReportCategory | ReportName         |
+      | Edit single location to multiple locations | Super Admin | Remedy TCS | qaautomation@remedypartners.com2 | Episodes, Reports, TCI, Lessons               | Episodes 2.0, Administration, Physician Connect | Episodes 2.0        |                 | 3056-m04--Altercare Post, 3056-m05--Altercare - Big Rapids | BPCI-Model3 | Altercare     |                     | Altercare Post-Acute Rehab Center, Altercare - Big Rapids, Stamford Hospital, Altercare - Alliance                                                      | Stamford Hospital--BPCI Model 2, Altercare--BPCI Model 3 | Altercare--3056-m04--Altercare Post, Altercare--3056-m05--Altercare - Big Rapids, Stamford Hospital--2070-015--Stamford Hospital, Altercare--3056-m03--Altercare - Alliance                                                                           | Learning Pathway 2, max-test-052417, Clinical Operations Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University | FirstName | LastName                                 | ROLE_TCS | Patient ID     | Episode DRG Issues |
+      | Edit to All Locations                      | Super Admin | Remedy LPN | qaautomation@remedypartners.com2 | Episodes 2.0, Reports, TCI, Lessons           | Episodes, Administration, Physician Connect     | Episodes            |                 | All Locations                                              | BPCI-Model2 | Penn          |                     | UPenn - Hospital of the Univ. of Pennsylvania, Upenn - Penn Presbyterian Hospital, Upenn - Pennsylvania Hospital, Apple - Rocky Hill, Apple - Watertown | Penn--BPCI Model 2, Apple Rehab--BPCI Model 3            | Penn--2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania, Penn--2070-021--Upenn - Penn Presbyterian Hospital, Penn--2070-022--Upenn - Pennsylvania Hospital, Apple Rehab--3056-i11--Apple - Watertown, Apple Rehab--3056-i12--Apple - Rocky Hill |                                                                                                                                                | FirstName | LastNameLastNameLastNameLastNameLastName | ROLE_LPN | Patient ID     | Episode DRG Issues |
+      | Edit All locations to single location      | Super Admin | Remedy LPN | qaautomation@remedypartners.com2 | Episodes 2.0, Reports, TCI, Lessons, Episodes | Administration, Physician Connect               | Episodes            | All Locations   | 2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania    | BPCI-Model2 | Penn          | Apple Rehab         | UPenn - Hospital of the Univ. of Pennsylvania                                                                                                           | Penn--BPCI Model 2                                       | Penn--2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania                                                                                                                                                                                         |                                                                                                                                                | FirstName | LastNameLastNameLastNameLastNameLastName | ROLE_LPN | Patient ID     | Episode DRG Issues |
 
   Scenario Outline: Edit programs- <Description>
     Given I am on the login page
@@ -797,7 +791,7 @@ Feature: Edit user page for SA
 
     Examples: 
       | User        | UserName                               | Password | FirstName | LastName       | Email                            | Phone        | NPI | PreviousRole | Role    | EnableApplications | Applications               | ApplicationsNotVisible                          | Remove HealthSystem                                                    | Health System                                                          | Programs    | Locations | LearningPathwaySearchParameter | Roletext | ReportCategory | ReportName         | BPID | Facilities                              | LearningPathway                                                                     | HealthSystemValidation   | ProgramsValidation                     | LocationsValidation                                              |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameEdited | qaautomation@remedypartners.com2 | 996-385-2451 |     | Case Manager | Manager | Reports            | Episodes, Reports, Lessons | Administration, Physician Connect, Episodes 2.0 | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI-Model2 |    390035 |                                | ROLE_PRM | Patient ID     | Episode DRG Issues |      | St. Luke's Hospital Quakertown Hospital | i am learning path, Learning Pathway 2, max-test-052417, Care Coordination External | St. Lukes Health Network | St. Lukes Health Network--BPCI Model 2 | St. Lukes Health Network--2070-026--Hospital Quakertown Hospital |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameEdited | qaautomation@remedypartners.com2 | 996-385-2451 |     | Case Manager | Manager | Reports            | Episodes, Reports, Lessons | Administration, Physician Connect, Episodes 2.0 | St. Lukes Health Network | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI-Model2 |    390035 |                                | ROLE_PRM | Patient ID     | Episode DRG Issues |      | St. Luke's Hospital Quakertown Hospital | i am learning path, Learning Pathway 2, max-test-052417, Care Coordination External | St. Lukes Health Network | St. Lukes Health Network--BPCI Model 2 | St. Lukes Health Network--2070-026--Hospital Quakertown Hospital |
 
   Scenario Outline: Changing General information, Role from <PreviousRole> to <Role> and edit Data permissions
     Given I am on the login page
@@ -904,15 +898,14 @@ Feature: Edit user page for SA
     And I should see Log in widget
 
     Examples: 
-
-      | User        | UserName                               | Password | FirstName       | LastName       | Email             | Phone        | NPI | PreviousRole              | Role              | EnableApplications | RemoveApplications | Applications | ApplicationsNotVisible                     | Health System                      | RemovePrograms           | Programs    | Locations                                                     | LearningPathwaySearchParameter | Roletext | ReportCategory | ReportName         | BPID | Facilities                                | ProgramsValidation                               | RemoveProgramsValidation                         | LocationsValidation                                                                                                                   | LearningPathway                                                                                                                                                                                                                                          |
+      | User        | UserName                               | Password | FirstName       | LastName       | Email                           | Phone        | NPI | PreviousRole              | Role              | EnableApplications | RemoveApplications | Applications | ApplicationsNotVisible                     | Health System                      | RemovePrograms           | Programs    | Locations                                                     | LearningPathwaySearchParameter | Roletext | ReportCategory | ReportName         | BPID | Facilities                                | ProgramsValidation                               | RemoveProgramsValidation                         | LocationsValidation                                                                                                                   | LearningPathway                                                                                                                                                                                                                                          |
       | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameEdited | LastNameEdited | qaautomation@remedypartners.com | 996-385-2451 |     | Transitional Case Manager | Remedy Sales Team | TCI                | Reports            | TCI, Lessons | Administration, Physician Connect, Reports | United Health Services of New York | BPCI-Model3, BPCI-Model2 | BPCI-Model2 | 6005-197--United Health Services, 6005-200--Cape Cod Hospital |                                | ROLE_TCS | Patient ID     | Episode DRG Issues |      | United Health Services, Cape Cod Hospital | United Health Services of New York--BPCI Model 2 | United Health Services of New York--BPCI Model 3 | United Health Services of New York--6005-197--United Health Services, United Health Services of New York--6005-200--Cape Cod Hospital | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University |
 
   Scenario Outline: Selected locations for Model-2 are not getting displayed as selected after unchecking Model-2 from program drop down while editing the user
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -926,7 +919,7 @@ Feature: Edit user page for SA
     Then I verify No results found for invalid Location for "first" organisation
 
     Examples: 
-      | User        | Email             | Role       | Health System | RemovePrograms | Locations                        |
+      | User        | Email                           | Role       | Health System | RemovePrograms | Locations                        |
       | Super Admin | qaautomation@remedypartners.com | Physicians | TeamHealth    | BPCI-Model2    | 2070-g14--North Shore Med Center |
 
   Scenario Outline: Remove phone, Role from <PreviousRole> to <Role> add new org
@@ -1029,7 +1022,7 @@ Feature: Edit user page for SA
 
     Examples: 
       | User        | FirstName | LastName | PreviousRole      | Role       | Phone      | PhoneValidation | NPI | EnableApplications          | Applications               | ApplicationsNotVisible       | Email                            | HasHealthSystem2 | Health System2 | Programs    | Locations                        | Roletext       | ReportCategory | ReportName         | BPID | HealthSystemValidation                         | ProgramsValidation                                                         | LocationsValidation                                                                                                                                                                 | Facilities                                                        | LearningPathway                                                                                          |
-      | Super Admin | FirstName | LastName | Remedy Sales Team | Physicians | 9999999999 | 999-999-9999    | NPI | Physician Connect, Episodes | Episodes, Reports, Lessons | Episodes 2.0, Administration | qaautomation@remedypartners.com2 | Yes              | TeamHealth     | BPCI-Model2 | 2070-g14--North Shore Med Center | ROLE_CLINICIAN | Patient ID     | Episode DRG Issues |      | TeamHealth, United Health Services of New York | TeamHealth--BPCI Model 2, United Health Services of New York--BPCI Model 2 | TeamHealth--2070-g14--North Shore Med Center, United Health Services of New York--6005-197--United Health Services, United Health Services of New York--6005-200--Cape Cod Hospital | North Shore Med Center, United Health Services, Cape Cod Hospital | i am learning path, Learning Pathway 2, max-test-052417, Clinical Operations Acute Care Hospital Model 2 |
+      | Super Admin | FirstName | LastName | Remedy Sales Team | Physicians | 9999999999 | 999-999-9999    | NPI | Physician Connect, Episodes | Episodes, Reports, Lessons, Physician Connect | Episodes 2.0, Administration | qaautomation@remedypartners.com2 | Yes              | TeamHealth     | BPCI-Model2 | 2070-g14--North Shore Med Center | ROLE_CLINICIAN | Patient ID     | Episode DRG Issues |      | TeamHealth, United Health Services of New York | TeamHealth--BPCI Model 2, United Health Services of New York--BPCI Model 2 | TeamHealth--2070-g14--North Shore Med Center, United Health Services of New York--6005-197--United Health Services, United Health Services of New York--6005-200--Cape Cod Hospital | North Shore Med Center, United Health Services, Cape Cod Hospital | i am learning path, Learning Pathway 2, max-test-052417, Clinical Operations Acute Care Hospital Model 2 |
 
   Scenario Outline: Edit phone, Role from <PreviousRole> to <Role> and Remove Existing Location and Add new Location
     Given I am on the login page
@@ -1150,8 +1143,7 @@ Feature: Edit user page for SA
     Then I verify the validation message "<ValidationMsg>" on Create User Page
 
     Examples: 
-
-      | Description                                           | User        | FirstName  | LastName   | Email             | Phone      | Role       | NPI        | ValidationMsg                     |
+      | Description                                           | User        | FirstName  | LastName   | Email                           | Phone      | Role       | NPI        | ValidationMsg                     |
       | Verify validation message for blank First name        | Super Admin |            | Last Name  | qaautomation@remedypartners.com | 9874563210 | Executive  |            | First Name is required            |
       | Verify validation message for blank Last name         | Super Admin | First Name |            | qaautomation@remedypartners.com | 9874563210 | Executive  |            | Last Name is required             |
       | Verify validation message for blank NPI               | Super Admin | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians |            | NPI is required                   |
@@ -1162,7 +1154,6 @@ Feature: Edit user page for SA
       | Verify validation message for invalid First Name      | Super Admin | 84738&7919 | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
       | Verify validation message for invalid Last name       | Super Admin | First Name | 847382&919 | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
       | Verify validation message for NPI as .                | Super Admin | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians | .........1 | Please enter a valid NPI          |
-
 
   Scenario Outline: Verify auto selected programs in Organizations
     Given I am on the login page
@@ -1439,8 +1430,8 @@ Feature: Edit user page for SA
   Scenario Outline: Learning pathway retained on unchecking and again checking Lessons on Editing any user
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
@@ -1452,14 +1443,14 @@ Feature: Edit user page for SA
     Then I verify "<LearningPathway>" while editing the user
 
     Examples: 
-      | User        | Email             | Role      | DisableApplications | EnableApplications | LearningPathway                                           |
+      | User        | Email                           | Role      | DisableApplications | EnableApplications | LearningPathway                                           |
       | Super Admin | qaautomation@remedypartners.com | Executive | Lessons             | Lessons            | i am learning path, Learning Pathway 2, Remedy University |
 
   Scenario Outline: Validating Learning Pathway ID on edit role and reload the page again
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -1490,8 +1481,8 @@ Feature: Edit user page for SA
   Scenario Outline: "Next" button is enabled without having any selection to application on editing any role to "Prospective Partner Executive"
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -1517,8 +1508,8 @@ Feature: Edit user page for SA
   Scenario Outline: Validating organization on editing any role to downstream provider (without saving) and back to same role/other role
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -1550,14 +1541,14 @@ Feature: Edit user page for SA
     Then I verify health system "<Health System2>"
 
     Examples: 
-      | User        | UserName                               | Password | Email             | NPI | PreviousRole                  | Role                | EnableApplications | LearningPathwaySearchParameter         | HasHealthSystem2 | Health System2 | Programs2   | Locations2                              |
+      | User        | UserName                               | Password | Email                           | NPI | PreviousRole                  | Role                | EnableApplications | LearningPathwaySearchParameter         | HasHealthSystem2 | Health System2 | Programs2   | Locations2                              |
       | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com |     | Prospective Partner Executive | Downstream Provider | Episodes           | i am learning path, Learning Pathway 2 | Yes              | Penn           | BPCI-Model2 | 2070-022--Upenn - Pennsylvania Hospital |
 
   Scenario Outline: Editing any role to Physicians (without saving) and back to same role/other role
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<PreviousRole>"
     Then I select user with role "<User>-<PreviousRole>"
@@ -1578,5 +1569,5 @@ Feature: Edit user page for SA
     Then I verify role "<Role2>"
 
     Examples: 
-      | User        | UserName                               | Password | Email             | NPI | PreviousRole                  | Role       | Role2   |
+      | User        | UserName                               | Password | Email                           | NPI | PreviousRole                  | Role       | Role2   |
       | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com | NPI | Prospective Partner Executive | Physicians | Manager |

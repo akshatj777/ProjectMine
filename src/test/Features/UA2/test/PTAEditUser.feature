@@ -238,39 +238,7 @@ Feature: Edit user page for PTA
       | User                            | PreviousRole | Role1      | NPI | ApplicationsChecked1       | ApplicationsUnchecked1 | Role2   | ApplicationsChecked2       | ApplicationsUnchecked2 |
       | Partner Technical Administrator | Executive    | Physicians | NPI | Reports, Episodes, Lessons | Physician Connect      | Manager | Reports, Episodes, Lessons |                        |
 
-  Scenario Outline: <Description>
-    Given I am on the login page
-    Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
-    Then I enter newuser password for login to Remedy
-    Then I click Access button
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    And I click on Edit button
-    Then I verify the header "General Information"
-    And I fill in First Name with "<FirstName>"
-    Then I fill in Last Name with <LastName>
-    And I enter Phone field with <Phone>
-    Then I enter NPI field with "<NPI>" for role "<Role>"
-    And I switch the focus to Next button
-    Then I verify the validation message "<ValidationMsg>" on Create User Page
-
-    Examples: 
-      | Description                                           | User                            | FirstName  | LastName   | Email                           | Phone      | Role       | NPI        | ValidationMsg                     |  |
-      | Verify validation message for blank First name        | Partner Technical Administrator |            | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians |            | First Name is required            |  |
-      | Verify validation message for blank Last name         | Partner Technical Administrator | First Name |            | qaautomation@remedypartners.com | 9874563210 | Physicians |            | Last Name is required             |  |
-      | Verify validation message for blank NPI               | Partner Technical Administrator | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians |            | NPI is required                   |  |
-      | Verify validation message for invalid Phone           | Partner Technical Administrator | First Name | Last Name  | qaautomation@remedypartners.com |     123564 | Physicians | NPI        | Please enter a valid phone number |  |
-      | Verify validation message for NPI less than 10 digits | Partner Technical Administrator | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians |     123564 | Please enter a valid NPI          |  |
-      | Verify validation message for NPI as alphabets        | Partner Technical Administrator | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians | abcdefgihj | Please enter a valid NPI          |  |
-      | Verify validation message for NPI as alphanumeric     | Partner Technical Administrator | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI          |  |
-      | Verify validation message for invalid First Name      | Partner Technical Administrator | 847&827919 | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |  |
-      | Verify validation message for invalid Last name       | Partner Technical Administrator | First Name | 847382&919 | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |  |
-      | Verify validation message for NPI as .                | Partner Technical Administrator | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians | .........1 | Please enter a valid NPI          |  |
-
+  
   Scenario Outline: Edit locations -<Description>
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy

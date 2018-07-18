@@ -283,8 +283,7 @@ Feature: UI Scenarios - Super Admin User
     Then I select "<Programs1>" programs
     And I click on remove link icon for selected Health system
     And I verify text on pop up window after click on remove link icon
-    And I click "Cancel" link on pop up window
-    And I click on remove link icon for selected Health system
+    
     And I click "Remove" button on pop up window
     Then I verify the header "Permissions"
 
@@ -483,8 +482,9 @@ Feature: UI Scenarios - Super Admin User
   Scenario Outline: Validating that on removing the organization and selecting it again, "incomplete" error message is not displayed
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
     And I verify that I am navigated to user page

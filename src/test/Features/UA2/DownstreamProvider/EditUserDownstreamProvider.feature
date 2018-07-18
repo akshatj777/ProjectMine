@@ -198,8 +198,8 @@ Feature: Edit page for Downstream provider
  Scenario Outline: Validating that pagination is not displayed when few locations are added in the data permissions while editing a user
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    Then I should see Tile text Users
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"
