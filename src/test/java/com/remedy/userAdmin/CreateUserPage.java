@@ -1752,6 +1752,7 @@ public void iUnselectAllSelectedApps(){
 	   if(!(locationList.equals("")))
 	   	{
 	   if(locationList.equalsIgnoreCase("All Locations")){
+		   delay();
 		   iWillWaitToSee(By.xpath("//div[@class='content active']//label[text()='All Locations']"));
 		   clickElement(driver.findElement(By.xpath("//div[@class='content active']//label[text()='All Locations']")));
 		   delay();

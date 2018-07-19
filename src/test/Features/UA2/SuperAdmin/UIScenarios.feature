@@ -283,14 +283,11 @@ Feature: UI Scenarios - Super Admin User
     Then I select "<Programs1>" programs
     And I click on remove link icon for selected Health system
     And I verify text on pop up window after click on remove link icon
-    
-    And I click "Remove" button on pop up window
+    And I click on "Remove" button on permissions tab
     Then I verify the header "Permissions"
-
     Examples: 
       | Description                                         | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone      | Role         | Applications               | ApplicationsNotVisible                               | NPI | LearningPathwaySearchParameter         | Health System1                                                         | Programs1   | Locations1                                                   | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
       | Verify successful removal of selected health system | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Case Manager | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect, TCI |     | i am learning path, Learning Pathway 2 | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI-Model2 | 2070-023--Allentown, 2070-023--Bethlehem, 2070-025--Anderson | No               |                |           |            | No               |                |           |            |
-
   Scenario Outline: Verify that Next button and left side menu is enabled only when mandatory fields are selected
     Given I am on the login page
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
