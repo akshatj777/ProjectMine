@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
-
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
@@ -402,13 +403,13 @@ public class ProgramPerformance extends BaseClass{
 		return ret;
 	}
 	
-	 public void greyscale()throws IOException{
+	 public void greyscale(String fileLocation)throws IOException{
 		    BufferedImage img = null;
 		    File f = null;
 
 		    //read image
 		    try{
-		      f = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Blue.png");
+		      f = new File(fileLocation);
 		      img = ImageIO.read(f);
 		    }catch(IOException e){
 		      System.out.println(e);
@@ -475,7 +476,8 @@ public class ProgramPerformance extends BaseClass{
 					screenshotLocation.delete();
 				}
 				FileUtils.copyFile(screenshot, screenshotLocation);
-				greyscale();	
+				String fileLocation = System.getProperty("user.dir")+"\\src\\test\\Imports\\Blue.png";
+				greyscale(fileLocation);	
 				
 				TessBaseAPI instance=new TessBaseAPI();
 				 instance.Init(System.getProperty("user.dir")+"\\src\\test\\Imports\\TestData\\tessdata", "eng");
@@ -492,7 +494,7 @@ public class ProgramPerformance extends BaseClass{
 	 public void executejmeter(String location) throws IOException
 	    {
 		 File jmx=new File(System.getProperty("user.dir")+location);
-		 Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd "+DriverScript.Config.getProperty("jmeterPath")+" "+jmx+" && exit\"");
+		 Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd "+DriverScript.Config.getProperty("jmeterPath")+" && jmeter -n -t"+" "+jmx+" && exit\"");
 	    }
 	 
 	 public void iClickOnDashboard(String dashboard){
@@ -508,6 +510,7 @@ public class ProgramPerformance extends BaseClass{
      }
 	 
 	 public void iSetCalendarAttributeValue(String date){
+		 longDelay();
 		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
 //		 setAttributevalue(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),"value",date);
 		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), date);
@@ -583,7 +586,7 @@ public class ProgramPerformance extends BaseClass{
 		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		 BufferedImage  fullImg = ImageIO.read(screenshot);
 		 Point point = ele.getLocation();
-		 point = point.moveBy(100, 60);
+		 point = point.moveBy(100, 100);
 		 System.out.println(point);
 		 int eleWidth = ele.getSize().getWidth();
 		 int eleHeight = ele.getSize().getHeight();
@@ -599,9 +602,11 @@ public class ProgramPerformance extends BaseClass{
 					screenshotLocation.delete();
 				}
 				FileUtils.copyFile(screenshot, screenshotLocation);
+				String fileLocation = System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png";
+				greyscale(fileLocation);
 				TessBaseAPI instance=new TessBaseAPI();
 				 instance.Init(System.getProperty("user.dir")+"\\src\\test\\Imports\\TestData\\tessdata", "eng");
-				 PIX image=lept.pixRead(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png");
+				 PIX image=lept.pixRead(System.getProperty("user.dir")+"\\src\\test\\Imports\\GreyScale.jpg");
 				 instance.SetImage(image);
 				 BytePointer bytePointer=instance.GetUTF8Text();
 				 String output=bytePointer.getString();
@@ -666,7 +671,8 @@ public class ProgramPerformance extends BaseClass{
 					screenshotLocation.delete();
 				}
 				FileUtils.copyFile(screenshot, screenshotLocation);
-				greyscale();	
+				String fileLocation = System.getProperty("user.dir")+"\\src\\test\\Imports\\Blue.png";
+				greyscale(fileLocation);	
 				
 				TessBaseAPI instance=new TessBaseAPI();
 				 instance.Init(System.getProperty("user.dir")+"\\src\\test\\Imports\\TestData\\tessdata", "eng");
@@ -687,9 +693,15 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iSelectValuesFromDropDown(String text,String field,String apply){
 		 clickElement(driver.findElement(By.xpath("//span[text()='"+field+"']/../../../../.. //span[@role='combobox']")));
-		 clickElement(driver.findElement(By.xpath("//input[contains(@name,'All')]/../div")));
+//		 clickElement(driver.findElement(By.xpath("//input[contains(@name,'All')]")))
+		 WebElement elem = driver.findElement(By.xpath("//input[contains(@name,'All')]"));;
+		 Actions act=new Actions(driver);
+		 act.moveToElement(elem).click().build().perform();
 //		 delay();
-		 clickElement(driver.findElement(By.xpath("//a[@title='"+text+"']/../input/../div")));
+//		 clickElement(driver.findElement(By.xpath("//a[@title='"+text+"']/../input")));
+		 WebElement elem1 = driver.findElement(By.xpath("//a[@title='"+text+"']/../input"));;
+		 Actions act1=new Actions(driver);
+		 act1.moveToElement(elem1).click().build().perform();
 		 clickElement(driver.findElement(By.xpath("//span[text()='"+apply+"']")));
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 delay();
@@ -706,5 +718,23 @@ public class ProgramPerformance extends BaseClass{
 		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 delay();
+	 }
+	 
+	 public void ireadtextfromimage() throws IOException{
+		 TessBaseAPI instance=new TessBaseAPI();
+		  File screenshot= new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png");
+		  BufferedImage eleScreenshot = ImageIO.read(screenshot);
+		 BufferedImage scaledImg = Scalr.resize(eleScreenshot, Scalr.Method.QUALITY, Scalr.Mode.FIT_TO_WIDTH,
+				 500, 500, Scalr.OP_ANTIALIAS); 
+		 ImageIO.write(scaledImg, "png", screenshot);
+		 greyscale(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png");
+		 instance.Init(System.getProperty("user.dir")+"\\src\\test\\Imports\\TestData\\tessdata", "eng");
+		 PIX image=lept.pixRead(System.getProperty("user.dir")+"\\src\\test\\Imports\\GreyScale.jpg");
+		 instance.SetImage(image);
+		 BytePointer bytePointer=instance.GetUTF8Text();
+		 String output=bytePointer.getString();
+		 System.out.println("Text in image is"+output);
+		 String FinalOutput=output.replaceAll("\\s+", "");
+		 System.out.println(FinalOutput);
 	 }
 }

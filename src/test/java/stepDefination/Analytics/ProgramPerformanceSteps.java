@@ -224,4 +224,9 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iSetCalendarAttributeValueForEndingTodayDate(date);
 	}
 	
+	@Then("^I read the text from image$")
+	public void i_read_the_text_from_image() throws Throwable{
+		programdashboard.ireadtextfromimage();
+	}
+	
 }
