@@ -1,5 +1,13 @@
 package com.remedy.programManagement;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -176,4 +184,10 @@ public class EditPhysicianRoster extends BaseClass {
 			}
 		}
 	}
+
+	 public void setAttributevalue(WebElement element, String attName, String attValue) {
+		  JavascriptExecutor js = (JavascriptExecutor) driver;
+		  js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", 
+		                element, attName, attValue);
+		    }
 }
