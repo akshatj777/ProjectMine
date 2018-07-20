@@ -193,7 +193,7 @@ public class MailCreateUser extends BaseClass{
 			
 			driver.findElement(By.xpath("//input[@id='gbqfq']")).sendKeys(email);
 			delay();
-			driver.findElement(By.xpath("//span[@class='gbqfi gb_dc']")).click();
+			driver.findElement(By.xpath("//span[@class='gbqfi gb_hc']")).click();
 			delay();
 			iWillWaitToSee(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[text()='Remedy Partners - Change Your Password']"));
 	    	Assert.assertTrue(isElementPresentOnPage((By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[text()='Remedy Partners - Change Your Password']"))));
