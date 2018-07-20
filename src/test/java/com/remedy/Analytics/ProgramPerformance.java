@@ -11,11 +11,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
+
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+
 import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
@@ -40,10 +43,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
 
+
 public class ProgramPerformance extends BaseClass{
 	
 	int ECEpiosdeCount,claimsEpiosdeCount,TotalNPRA,TotalProgram;
     Double savingRate;
+    String StartDate;
 	WebDriverWait wait = new WebDriverWait(driver, 300);
 
 	public ProgramPerformance(WebDriver driver) {
@@ -561,11 +566,15 @@ public class ProgramPerformance extends BaseClass{
 		      TotalProgram=Integer.parseInt(program[1]);
 		      numberformat(TotalProgram);
 		      System.out.println("The total program value is"+TotalProgram);
+		      String sDate=elements.get(5).trim();
+		      String startD[]=sDate.split("=");
+		      StartDate=startD[1];
+		      System.out.println("Start Date is"+StartDate);
 		      delay();
 		 }      
 	 }
-	 
-	 public String numberformat(int number) {
+
+	public String numberformat(int number) {
 	      NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
 	      String numberAsString = numberFormat.format(number);
 	      System.out.println(numberAsString);
@@ -618,14 +627,14 @@ public class ProgramPerformance extends BaseClass{
 				 Assert.assertEquals(numberformat(ECEpiosdeCount), FinalOutput.trim());
 				 }else if(text.equals("Claims Episodes")){
 					 Assert.assertEquals(numberformat(claimsEpiosdeCount), FinalOutput.trim()); 
-				 }else if(text.equals("Program Size")){
-					 Assert.assertTrue(FinalOutput.trim().contains(Integer.toString(TotalProgram)));
+				 }else if(text.equals("Program Size")){;
+					 Assert.assertTrue(FinalOutput.trim().contains(numberformat(TotalProgram)));
 				 }else if(text.equals("NPRA")){
-					 Assert.assertTrue(FinalOutput.trim().contains(Integer.toString(TotalNPRA)));
+					 Assert.assertTrue(FinalOutput.trim().contains(numberformat(TotalNPRA)));
 				 }
 	 }
 	 
-	 public void iSetStartAndEndDateForClaimsData(String start,String end){
+	 public void iSetStartAndEndDateForClaimsData(String start){
 		 longDelay();
 		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
 		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), start);
@@ -633,7 +642,7 @@ public class ProgramPerformance extends BaseClass{
 		 delay();
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
-		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), end);
+		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), StartDate);
 		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
 		 delay();
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
@@ -654,7 +663,7 @@ public class ProgramPerformance extends BaseClass{
 		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		 BufferedImage  fullImg = ImageIO.read(screenshot);
 		 Point point = ele.getLocation();
-		 point = point.moveBy(100, 60);
+		 point = point.moveBy(100, 100);
 		 System.out.println(point);
 		 int eleWidth = ele.getSize().getWidth();
 		 int eleHeight = ele.getSize().getHeight();
@@ -687,7 +696,6 @@ public class ProgramPerformance extends BaseClass{
 				 if(text.equals("Savings Rate"))
 				 {
 					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
-//				 Assert.assertEquals(a,FinalOutput.trim().contains(a.toString()));
 				 }
 	 }
 	 
@@ -705,19 +713,20 @@ public class ProgramPerformance extends BaseClass{
 		 clickElement(driver.findElement(By.xpath("//span[text()='"+apply+"']")));
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 delay();
+//		 clickElement(driver.findElement(By.xpath("//span[text()='"+field+"']/../../../../.. //span[@role='combobox']")));
 	 }
 	 
-	 public void iSetCalendarAttributeValueForEndingTodayDate(String date){
-		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
-		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), date);
-		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
-		 delay();
-		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+	 public void iSetCalendarAttributeValueForEndingTodayDate(){
 		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
 		 clickElement(driver.findElement(By.xpath("//span[@class='tab-datepicker-today-date']")));
 		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 delay();
+		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), StartDate);
+		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
+		 delay();
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 	 }
 	 
 	 public void ireadtextfromimage() throws IOException{

@@ -194,14 +194,14 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.GetTextFromScreenShot(text,"//div[@tb-test-id='KPI_Episode']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 152px; height: 52px;']",resolution);
 	}
 	
-	@Then("^I set the time from starting date as \"([^\"]*)\" to ending date \"([^\"]*)\" to validate claims episode data$")
-	public void i_set_the_time_from_starting_date_as_to_ending_date_to_validate_claims_episode_data(String start,String end) throws Throwable{
-		programdashboard.iSetStartAndEndDateForClaimsData(start, end);
+	@Then("^I set the time from starting date as \"([^\"]*)\" to ending date to claimscube date to validate claims episode data$")
+	public void i_set_the_time_from_starting_date_as_to_ending_date_to_validate_claims_episode_data(String start) throws Throwable{
+		programdashboard.iSetStartAndEndDateForClaimsData(start);
 	}
 	
 	@And("^I verify \"([^\"]*)\" data is matched with database value on dashboard with picture resolution \"([^\"]*)\"$")
 	public void i_verify_data_is_matched_with_database_value_on_dashboard_with_picture_resolution(String text,String resolution) throws Throwable{
-		programdashboard.ReadTextFromSavingsRateField(text, "//div[@tb-test-id='Savings Rate']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 309px; height: 79px;']", resolution);
+		programdashboard.ReadTextFromSavingsRateField(text, "//div[@tb-test-id='Savings Rate']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 309px; height: 76px;']", resolution);
 	}
 	
 	@And("^I verify \"([^\"]*)\" count matched with database value on dashboard for program size with picture resolution \"([^\"]*)\"$")
@@ -211,7 +211,7 @@ public class ProgramPerformanceSteps extends DriverScript{
 	
 	@And("^I verify \"([^\"]*)\" count matched with database value on dashboard for npra with picture resolution \"([^\"]*)\"$")
 	public void i_verify_npra_count_matched_with_database_as_on_the_dashboard(String text,String resolution) throws Throwable{
-		programdashboard.GetTextFromScreenShot(text,"//div[@tb-test-id='KPI_NPRA']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 205px; height: 52px;']",resolution);
+		programdashboard.GetTextFromScreenShot(text,"//div[@tb-test-id='KPI_NPRA']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 185px; height: 52px;']",resolution);
 	}
 	
 	@Then("^I select \"([^\"]*)\" from \"([^\"]*)\" field and click on \"([^\"]*)\"$")
@@ -219,9 +219,9 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iSelectValuesFromDropDown(text, field, apply);
 	}
 	
-	@And("^I set the time for starting date to \"([^\"]*)\" on dashboard and ending date to today date$")
-	public void i_set_time_for_starting_date_to_on_dashboard_and_ending_date_to_today_date(String date) throws Throwable{
-		programdashboard.iSetCalendarAttributeValueForEndingTodayDate(date);
+	@And("^I set the time for starting date to claimscube date on dashboard and ending date to today date$")
+	public void i_set_time_for_starting_date_to_on_dashboard_and_ending_date_to_today_date() throws Throwable{
+		programdashboard.iSetCalendarAttributeValueForEndingTodayDate();
 	}
 	
 	@Then("^I read the text from image$")
