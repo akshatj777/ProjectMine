@@ -182,20 +182,30 @@ Feature: Create HHA organization functionality tests
       | Create Duplicate HHA Organization with Mandatory fields - With MO                                | YES    | MONAME       | DUPLICATE_hha        | Address1                                                |                                               |                                                         | City                                          | California |       10000 |         |         | CCN |            |            | HHA Organization Successfully Created. |
       | Create HHA Organization with Mandatory fields same EIN and NPI                                   | YES    | MONAME       | HHANAME              | Address1                                                |                                               |                                                         | City                                          | California |       10000 |         |         |     | 1234567890 | 1234567890 | HHA Organization Successfully Created. |
 
-  Scenario Outline: Identifiers - <Description>
+  Scenario Outline: <Description>
     When I click on "HHA" organization tab on organization dashboard
     Then I click on "+" button on "HHA" organization page
     And I verify "Create HHA Organization" header text on create organization page
+    And I select "<Has_MO>" radio button for managing organization
+    Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
+    Then I enter <HHA_Name> in "HHA Organization Name" on create organization page
+    And I enter <Address1> in "Address 1" on create organization page
+    And I enter <Short_Name> in "Short Name" on create organization page
+    And I enter <Address2> in "Address 2" on create organization page
+    And I select region "<Region>" in "create HHA" organization page
+    And I select market "<Market>" in "create HHA" organization page
+    And I enter <City> in "City" on create organization page
+    And I select <State> in State on create organization page
+    And I enter <Postal_Code> in "Postal Code" on create organization page
     And I provide unique "HHA - <CCN>" in "CCN" on create organization page
     And I provide unique "HHA - <EIN>" in "EIN" on create organization page
     And I provide unique "HHA - <NPI>" in "NPI" on create organization page
-    And I switch the focus to "submit" button
+    Then I click on "Submit" button on "create" organization page
     And I verify "<Message>" field validation message on create organization page
-    And I verify "<Message1>" field validation message on create organization page
 
     Examples: 
-      | Description                                              | CCN           | Message | Message1             |
-      | Verify Validation of HHA Organization with duplicate CCN | DUPLICATE_CCN |         | CCN Id already taken |
+      | Description                                              | Has_MO | Managing_Org | HHA_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Region  | Market  | CCN           | Message              |
+      | Verify Validation of HHA Organization with duplicate CCN | NO     |              | HHANAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | DUPLICATE_CCN | CCN Id already taken |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"

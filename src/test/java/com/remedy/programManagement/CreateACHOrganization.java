@@ -191,6 +191,38 @@ public class CreateACHOrganization extends BaseClass{
 				delay();
 			}
 		}
+		if (id.contains("Hospice")){
+			if((id.substring(id.indexOf("-")+1).trim()).equals("CCN")){
+				CreateHospiceOrganization.tempHospiceOrg.put("CCN", createRandomNumber(10));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.tempHospiceOrg.get("CCN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("EIN")){
+				CreateHospiceOrganization.tempHospiceOrg.put("EIN", createRandomNumber(10));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.tempHospiceOrg.get("EIN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("NPI")){
+				CreateHospiceOrganization.tempHospiceOrg.put("NPI", createRandomNumber(10));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.tempHospiceOrg.get("NPI"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_CCN")){
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.HospiceOrg_noMO.get("CCN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_EIN")){
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.HospiceOrg_noMO.get("EIN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
+					iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.HospiceOrg_noMO.get("NPI"));
+			}
+			else if(id.contains("lessThan6")){
+				String value = createRandomNumber(5);
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
+			}
+			
+			else {
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), id.substring(id.indexOf("-")+1).trim());
+				delay();
+			}
+		}
 		if (id.contains("LTCH")){
 			if((id.substring(id.indexOf("-")+1).trim()).equals("CCN")){
 				CreateLTCHOrganization.tempLTCHOrg.put("CCN", createRandomNumber(10));
@@ -325,6 +357,15 @@ public class CreateACHOrganization extends BaseClass{
 				delay();
 			}
 		}
+	}
+	
+	public void iSearhandverifyManagingOrgNameInHasAManagingOrganizationDropDown(String text, String act) 
+	{
+		iWillWaitToSee(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']"));
+		iFillInText(driver.findElement(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']")), CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1));
+		iWillWaitToSee(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption"));
+		isElementPresent(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption"));
+		delay();
 	}
 	
 	public void iVerifyLocationHeaderOnOrganizationPage(String location) 
