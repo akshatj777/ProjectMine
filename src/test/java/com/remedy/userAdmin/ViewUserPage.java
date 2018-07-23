@@ -231,6 +231,7 @@ public class ViewUserPage extends BaseClass {
 	}
 
 	public void i_verify_HealthSystemLocationNotPresent(String locations) throws Throwable {
+		if(!(locations.isEmpty())){
 		String healthSystem = locations.substring(0, locations.indexOf("--"));
 		//String BPID = locations.substring(locations.indexOf("--")+2, locations.lastIndexOf("--"));
 		String location = locations.substring(locations.lastIndexOf("--")+2, locations.length());
@@ -243,6 +244,7 @@ public class ViewUserPage extends BaseClass {
     		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='content active data-permissions-content']//h3[contains(text(),' No Results Found ')]")));
     		
 	}
+		}
 	}
 	public void verifyEditIcon() throws Throwable {
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[@class='edit-controls']")));

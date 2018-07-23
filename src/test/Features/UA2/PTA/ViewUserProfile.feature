@@ -55,6 +55,8 @@ Feature: View User - Super Admin User
     Then I verify health system "<HealthSystem>"
     Then I verify programs "<Programs>"
     Then I verify location "<Locations>"
+    Then I refresh the view user page
+    And I verify that I am navigated to user page
 
     Examples: 
       | Description                                                       | User                            | UserName                               | Password | FirstName                                 | LastName                                 | Phone        | Role                      | ApplicationsEnabled                           | ApplicationsNotVisible                               | NPI | LearningPathway                                                                                                                                           | HealthSystem | Programs               | Locations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
