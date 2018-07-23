@@ -47,7 +47,7 @@ import com.remedy.resources.DriverScript;
 public class ProgramPerformance extends BaseClass{
 	
 	int ECEpiosdeCount,claimsEpiosdeCount,TotalNPRA,TotalProgram;
-    Double savingRate;
+    Double savingRate,DischargeToSNF;
     String StartDate;
 	WebDriverWait wait = new WebDriverWait(driver, 300);
 
@@ -570,6 +570,11 @@ public class ProgramPerformance extends BaseClass{
 		      String startD[]=sDate.split("=");
 		      StartDate=startD[1];
 		      System.out.println("Start Date is"+StartDate);
+		      String dSNF=elements.get(6).trim();
+		      String Dtosnf[]=dSNF.split("=");
+		      Double snf=Double.parseDouble(Dtosnf[1]);
+		      DischargeToSNF=snf;
+		      System.out.println("The discharge to snf value is"+DischargeToSNF);
 		      delay();
 		 }      
 	 }
@@ -595,7 +600,7 @@ public class ProgramPerformance extends BaseClass{
 		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		 BufferedImage  fullImg = ImageIO.read(screenshot);
 		 Point point = ele.getLocation();
-		 point = point.moveBy(100, 100);
+		 point = point.moveBy(100, 60);
 		 System.out.println(point);
 		 int eleWidth = ele.getSize().getWidth();
 		 int eleHeight = ele.getSize().getHeight();
@@ -631,6 +636,9 @@ public class ProgramPerformance extends BaseClass{
 					 Assert.assertTrue(FinalOutput.trim().contains(numberformat(TotalProgram)));
 				 }else if(text.equals("NPRA")){
 					 Assert.assertTrue(FinalOutput.trim().contains(numberformat(TotalNPRA)));
+				 }else if(text.equals("%Discharge to SNF")){
+					 Double a= ((float)(((int)Math.pow(10,1)*DischargeToSNF))/Math.pow(10,1));
+					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
 				 }
 	 }
 	 
@@ -663,7 +671,7 @@ public class ProgramPerformance extends BaseClass{
 		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		 BufferedImage  fullImg = ImageIO.read(screenshot);
 		 Point point = ele.getLocation();
-		 point = point.moveBy(100, 100);
+		 point = point.moveBy(100, 60);
 		 System.out.println(point);
 		 int eleWidth = ele.getSize().getWidth();
 		 int eleHeight = ele.getSize().getHeight();
@@ -745,5 +753,23 @@ public class ProgramPerformance extends BaseClass{
 		 System.out.println("Text in image is"+output);
 		 String FinalOutput=output.replaceAll("\\s+", "");
 		 System.out.println(FinalOutput);
+	 }
+	 
+	 public void iSetCalendarstartingDateAndEndDateToToday(String text){
+		 delay();
+//		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+		 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), text);
+		 longDelay();
+		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
+		 longDelay();
+		 delay();
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+		 delay();
+		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
+		 clickElement(driver.findElement(By.xpath("//span[@class='tab-datepicker-today-date']")));
+		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+		 delay();
 	 }
 }

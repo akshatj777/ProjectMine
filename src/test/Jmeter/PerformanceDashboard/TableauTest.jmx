@@ -238,6 +238,51 @@ and e.bpid in  ${bpid}) a;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Discharge to SNF" enabled="true">
+          <stringProp name="dataSource">MySQLQA</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">select round(sum(category)/sum(episodes),3) * 100 as DischargeToSNF
+from
+(select e.bpid, SUM(if( (c.postAcuteCategory) = &quot;SNF&quot;, 1,0) ) as Category, sum(currEpiCounts) as Episodes
+from warehouse.factClaims c
+inner join
+warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
+inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
+inner join
+warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
+WHERE f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
+and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
+and e.bpid not like &apos;%DEMO%&apos;
+and c.atRisk=&apos;Y&apos;
+and c.anchorBeginDateKey &gt;= 20170101
+and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
+and e.bpid in  ${bpid}
+and f.ccn = (&apos;390223&apos;)
+union
+select
+fp.BPID, SUM(if( (fp.NSOCType) = &quot;SNF&quot;, 1,0) ) as Category, sum(fp.episodeCountReport) as Episodes
+from warehouse.factPatientEpisode fp
+inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK
+inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
+inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
+inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK
+inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
+where fp.bundleRisk = 1
+and fp.episodeCountReport = 1
+and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
+and de.bpid not like &apos;%DEMO%&apos;
+and dlk.lookupCategory = &apos;patientRisk&apos;
+and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
+and fp.BPID in ${bpid}
+and df.ccn = (&apos;390223&apos;)) a;</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames">dischargetoSNF</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
         <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
           <boolProp name="displayJMeterProperties">false</boolProp>
           <boolProp name="displayJMeterVariables">true</boolProp>
@@ -257,7 +302,7 @@ and e.bpid in  ${bpid}) a;</stringProp>
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo ECEpiosdeCount=${ECEpiosdeCount_1},claimsEpiosdeCount=${claimsEpiosdeCount_1},savingRate=${savingRate_1},TotalNPRA=${TotalNPRA_1},TotalProgram=${TotalProgram_1},StartDate=${StartDate_1} &gt; PerformanceDashboardResult.txt</stringProp>
+                <stringProp name="Argument.value">echo ECEpiosdeCount=${ECEpiosdeCount_1},claimsEpiosdeCount=${claimsEpiosdeCount_1},savingRate=${savingRate_1},TotalNPRA=${TotalNPRA_1},TotalProgram=${TotalProgram_1},StartDate=${StartDate_1},dischargetoSNF=${dischargetoSNF_1} &gt; PerformanceDashboardResult.txt</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>

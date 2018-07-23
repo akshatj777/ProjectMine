@@ -229,4 +229,14 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.ireadtextfromimage();
 	}
 	
+	@And("^I verify \"([^\"]*)\" count matched with database value on dashboard for discharge to snf with picture resolution \"([^\"]*)\"$")
+	public void i_verify_count_matched_with_database_for_discharge_to_snf_as_on_the_dashboard(String text,String resolution) throws Throwable{
+		programdashboard.GetTextFromScreenShot(text,"//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 256px; height: 51px;']",resolution);
+	}
+	
+	@Then("^I set the time from starting date as \"([^\"]*)\" and ending date to today date$")
+	public void i_set_the_time_from_starting_date_as_and_ending_date_to_today_date(String text) throws Throwable{
+		programdashboard.iSetCalendarstartingDateAndEndDateToToday(text);
+	}
+	
 }
