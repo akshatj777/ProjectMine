@@ -56,7 +56,7 @@ public class ViewUserPage extends BaseClass {
 	}
 
 	public void selectUserRole(String userRole) throws Throwable {
-//		String email = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
+	String email = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
 		iWillWaitToSee(By.xpath("//tr[@class='component-user-table-row']"));
 		clickElement(driver.findElement(By.xpath("//tr[@class='component-user-table-row']")));
 		Thread.sleep(3000);
@@ -229,6 +229,7 @@ public class ViewUserPage extends BaseClass {
 			}
 		}
 	}
+
 	public void i_verify_HealthSystemLocationNotPresent(String locations) throws Throwable {
 		String healthSystem = locations.substring(0, locations.indexOf("--"));
 		//String BPID = locations.substring(locations.indexOf("--")+2, locations.lastIndexOf("--"));
