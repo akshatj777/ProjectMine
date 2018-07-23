@@ -515,7 +515,7 @@ public class CreateACHOrganization extends BaseClass{
     
     public void iVerifyLocationIdShouldBeGreater(int value)
     {
-    	location_Id =driver.findElements(By.xpath("//div[@class='fixedDataTableCellLayout_main public_fixedDataTableCell_main' and (contains(@style,'height: 30px;'))]")).get(0).getText();
+    	location_Id =driver.findElement(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(), '10')]")).getText();
     	int loc_Id = Integer.parseInt(location_Id);
     	Assert.assertTrue(value<loc_Id);
     }
