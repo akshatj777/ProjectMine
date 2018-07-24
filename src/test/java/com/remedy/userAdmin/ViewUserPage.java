@@ -65,6 +65,9 @@ public class ViewUserPage extends BaseClass {
 	}
 
 	public void selectUserRole(String userRole) throws Throwable {
+
+	//String email = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
+
 		iWillWaitToSee(By.xpath("//tr[@class='component-user-table-row']"));
 		clickElement(driver.findElement(By.xpath("//tr[@class='component-user-table-row']")));
 		Thread.sleep(3000);
@@ -256,7 +259,23 @@ public class ViewUserPage extends BaseClass {
 			}
 		}
 	}
-	
+
+	public void i_verify_HealthSystemLocationNotPresent(String locations) throws Throwable {
+		if(!(locations.isEmpty())){
+		String healthSystem = locations.substring(0, locations.indexOf("--"));
+		//String BPID = locations.substring(locations.indexOf("--")+2, locations.lastIndexOf("--"));
+		String location = locations.substring(locations.lastIndexOf("--")+2, locations.length());
+		driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")).click();
+		Thread.sleep(3000);
+		if(driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")).isDisplayed())
+    	{
+    		driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")).sendKeys(location);
+    		Thread.sleep(3000);
+    		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='content active data-permissions-content']//h3[contains(text(),' No Results Found ')]")));
+    		
+	}
+		}
+	}
 	public void verifyEditIcon() throws Throwable {
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[@class='edit-controls']")));
 	}
@@ -344,4 +363,44 @@ public class ViewUserPage extends BaseClass {
 public void iRefreshViewUserPage() {
 	driver.navigate().refresh();
 	}
+
+public void iVerifyRemovedProgramInViewPage(String programs){
+	if(programs.contains(","))
+	{
+		StringTokenizer st = new StringTokenizer(programs, ",");
+		while(st.hasMoreTokens())
+		{
+			String token = st.nextToken().trim();
+	    	String program = token.substring(token.indexOf("--")+2, token.length());
+	    	String healthSystem = token.substring(0, token.indexOf("--"));
+	    	iWillWaitToSee(By.xpath("//div[@class='title accordion-title']"));
+	    	Assert.assertFalse(isElementPresentOnPage(By.xpath("//div[@class='title accordion-title']//span[contains(text(),'"+healthSystem+"')]//span[contains(text(),'"+program+"')]")));
+		}
+	}
+	else
+	{
+		String program = programs.substring(programs.indexOf("--")+2, programs.length());
+    	String healthSystem = programs.substring(0, programs.indexOf("--"));
+    	iWillWaitToSee(By.xpath("//div[@class='title accordion-title']"));
+    	Assert.assertFalse(isElementPresentOnPage(By.xpath("//div[@class='title accordion-title']//span[contains(text(),'"+healthSystem+"')]//span[contains(text(),'"+program+"')]")));
+	}
 }
+
+
+public void iClickOnLockUnlockIcon(String text){
+	if(text.equals("Lock"))
+	clickElement(driver.findElement(By.cssSelector(".component-lock-icon.unlocked")));
+else
+clickElement(driver.findElement(By.cssSelector(".component-lock-icon.locked")));
+}
+public void iVerifyLockedAndUnlockedUsers(String text){
+	if(text.equals("Locked")){
+		iWillWaitToSee(By.xpath("//span[@class='component-lock-icon locked']"));
+	Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".component-lock-icon.locked")));
+	}else{
+		iWillWaitToSee(By.xpath("//span[@class='component-lock-icon unlocked']"));
+	Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".component-lock-icon.unlocked")));
+}
+}
+}
+

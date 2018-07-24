@@ -41,18 +41,19 @@ Feature: PTA UI Scenarios
     Then I verify the validation message "<ValidationMsg>" on Create User Page
 
     Examples: 
-      | Description                                           | FirstName  | LastName   | Email                           | Phone      | Role       | NPI        | ValidationMsg                     |
-      | Verify validation message for blank First name        |            | Last Name  | qaautomation@remedypartners.com | 9874563210 | Executive  |            | First Name is required            |
-      | Verify validation message for blank Last name         | First Name |            | qaautomation@remedypartners.com | 9874563210 | Executive  |            | Last Name is required             |
-      | Verify validation message for blank Email             | First Name | Last Name  |                                 | 9874563210 | Executive  |            | Email is required                 |
-      | Verify validation message for blank NPI               | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians |            | NPI is required                   |
-      | Verify validation message for invalid Email           | First Name | Last Name  | abc                             | 9874563210 | Physicians | NPI        | Please enter a valid email        |
-      | Verify validation message for invalid Phone           | First Name | Last Name  | qaautomation@remedypartners.com |     123564 | Physicians | NPI        | Please enter a valid phone number |
-      | Verify validation message for NPI less than 10 digits | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians |     123564 | Please enter a valid NPI          |
-      | Verify validation message for NPI as alphabets        | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians | abcdefgihj | Please enter a valid NPI          |
-      | Verify validation message for NPI as alphanumeric     | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI          |
-      | Verify validation message for invalid First Name      | 8473827919 | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
-      | Verify validation message for invalid Last name       | First Name | 8473827919 | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Description                                           | FirstName   | LastName    | Email                           | Phone      | Role       | NPI        | ValidationMsg                     |
+      | Verify validation message for blank First name        |             | Last Name   | qaautomation@remedypartners.com | 9874563210 | Executive  |            | First Name is required            |
+      | Verify validation message for blank Last name         | First Name  |             | qaautomation@remedypartners.com | 9874563210 | Executive  |            | Last Name is required             |
+      | Verify validation message for blank Email             | First Name  | Last Name   |                                 | 9874563210 | Executive  |            | Email is required                 |
+      | Verify validation message for blank NPI               | First Name  | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians |            | NPI is required                   |
+      | Verify validation message for invalid Email           | First Name  | Last Name   | abc                             | 9874563210 | Physicians | NPI        | Please enter a valid email        |
+      | Verify validation message for invalid Phone           | First Name  | Last Name   | qaautomation@remedypartners.com |     123564 | Physicians | NPI        | Please enter a valid phone number |
+      | Verify validation message for NPI less than 10 digits | First Name  | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians |     123564 | Please enter a valid NPI          |
+      | Verify validation message for NPI as alphabets        | First Name  | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians | abcdefgihj | Please enter a valid NPI          |
+      | Verify validation message for NPI as alphanumeric     | First Name  | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI          |
+      | Verify validation message for invalid First Name      | 84738&27919 | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Verify validation message for invalid Last name       | First Name  | 847&3827919 | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Verify validation message for NPI as .                | First Name  | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians | .........1 | Please enter a valid NPI          |
 
   Scenario Outline: Verify validation message for invalid lesson name in search box
     Given I am on the login page
@@ -428,3 +429,72 @@ Feature: PTA UI Scenarios
     Examples: 
       | User                            | FirstName                                          | LastName                                           | Email                                                                        | Phone      | Role       | NPI        |
       | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | TestmailTestmailTestmailTestmailTestmailTestmailTestmailTestmailAA@gmail.com | 9876759231 | Physicians | 1234567890 |
+
+  Scenario: Validating correct Role for PTA user on general information section
+    Given I am on the login page
+    When I enter email field lbarinstein+qaadmin@remedypartners.com for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    When I click on Add User button
+    Then I should see "Add New User" on the user creation page
+    When I click the Organizational Role Field
+    Then I verify that roles are reflected as per the "Super Admin"
+    Then I click on Cross button
+    And I click on the top user account link
+    Then I click on "Log Out" button
+    And I should see Log in widget
+    Given I am on the login page
+    Then I click on "Log Out" button again
+    And I should see Log in widget
+    Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
+    Then I enter newuser password for login to Remedy
+    Then I click Access button
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    When I click on Add User button
+    Then I should see "Add New User" on the user creation page
+    When I click the Organizational Role Field
+    Then I verify that roles are reflected as per the "PTA"
+
+  Scenario Outline: validating Learning Pathway on edit role
+    Given I am on the login page
+    Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
+    Then I enter newuser password for login to Remedy
+    Then I click Access button
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    When I click on Add User button
+    Then I should see "Add New User" on the user creation page
+    Then I verify the header "General Information"
+    And I fill in First Name with "<FirstName>"
+    Then I fill in Last Name with <LastName>
+    And I enter Email "<Email>" to Create user
+    When I click the Organizational Role Field
+    Then I pick a Organizational <Role1>
+    Then I enter NPI field with "<NPI>" for role "<Role1>"
+    Then I click on Next button
+    Then I verify the header "Applications"
+    Then I verify applications "<Applications>" are unchecked
+    Then I verify Learning Pathway search box is not available
+    Then I select "<Applications>" product
+    Then I verify applications "<Applications>" are checked
+    Then I click on Select button
+    Then I verify Learning Pathway search box is available
+    Then I select "<LearningPathwaySearchParameter>" from the results
+    Then I click on Back button
+    Then I verify the header "General Information"
+    When I click the Organizational Role Field to edit
+    Then I pick a Organizational <Role2>
+    Then I enter NPI field with "<NPI>" for role "<Role2>"
+    Then I click on Next button
+    Then I verify the header "Applications"
+    Then I verify Learning Pathway search box is not available
+
+    Examples: 
+      | User                            | UserName                               | Password | FirstName | LastName | Email                           | Role1      | Applications     | NPI | LearningPathwaySearchParameter                         | Role2     |
+      | Partner Technical Administrator | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reports, Lessons | NPI | p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81, n9yn5n0Qa581 | Executive |

@@ -31,7 +31,7 @@ public class MailCreateUser extends BaseClass{
 	static DateFormat df = new SimpleDateFormat("ddMMyyHHmmss");
 	static Date timestamp = null;
 	static String time = null;
-	static String mail = "test.automatemail";
+	static String mail = "qaautomation";
 	static String email = null;
 	Set<String> handles = null;
 
@@ -573,6 +573,7 @@ public class MailCreateUser extends BaseClass{
 		}
 	}
 	
+	
 	public void iClickOnDeleteIconInMail() {
 		iWillWaitToSee(By.xpath("//div[@class='T-Jo-auh' and @role='presentation']"));
 		if(DriverScript.Config.getProperty("Browser").equals("ie"))
@@ -630,21 +631,27 @@ public class MailCreateUser extends BaseClass{
 	}
 	
 	public void iEnterEmailToCreateUser(String emailName) {
-		if(emailName.equalsIgnoreCase("test.automatemail"))
+		if(emailName.equalsIgnoreCase("qaautomation@remedypartners.com"))
 			{
-			email = emailName+"+"+RandomStringUtils.randomAlphabetic(8)+"@gmail.com";
+			String emailArr[]=emailName.split("@");
+			String emailPrefix=emailArr[0];
+			email = emailPrefix+"+"+RandomStringUtils.randomAlphabetic(8)+"@remedypartners.com";
 			iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
 			driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
 			}
-		else if(emailName.equalsIgnoreCase("test.automatemail2"))
+		else if(emailName.equalsIgnoreCase("qaautomation2@remedypartners.com"))
 		{
-				email = emailName+"+"+RandomStringUtils.randomAlphabetic(8)+"@gmail.com";
+			String emailArr[]=emailName.split("@");
+			String emailPrefix=emailArr[0];
+				email = emailPrefix+"+"+RandomStringUtils.randomAlphabetic(8)+"@remedypartners.com";
 				iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
 				driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
 		}
-		else if(emailName.equalsIgnoreCase("test.automatemail3"))
+		else if(emailName.equalsIgnoreCase("qaautomation3@remedypartners.com"))
 		{
-				email = emailName+"+"+RandomStringUtils.randomAlphabetic(8)+"@gmail.com";
+			String emailArr[]=emailName.split("@");
+			String emailPrefix=emailArr[0];
+				email = emailPrefix+"+"+RandomStringUtils.randomAlphabetic(8)+"@remedypartners.com";
 				iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
 				driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
 		}
@@ -656,7 +663,7 @@ public class MailCreateUser extends BaseClass{
 		}
 		else if(emailName.equals("EqualsTo76Char"))
 		{
-			email = "test.automatemail"+"+"+RandomStringUtils.randomAlphabetic(48)+"@gmail.com";
+			email = "qaautomation"+"+"+RandomStringUtils.randomAlphabetic(48)+"@remedypartners.com";
 			iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
 			driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
 		}
@@ -859,5 +866,15 @@ public class MailCreateUser extends BaseClass{
 		    driver.findElement(By.cssSelector("* /deep/ #clearBrowsingDataConfirm")).click();
 		    Thread.sleep(10000);
 	    }
+	}
+	public void iEnterEmailWithApostropheAndUnderscore(String emailName) {
+		if(emailName.equalsIgnoreCase("qaautomation@remedypartners.com"))
+			{
+			email = emailName+"+_'"+RandomStringUtils.randomAlphabetic(8)+"@gmail.com";
+			iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
+			driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
+			delay();
+			}
+	
 	}
 }

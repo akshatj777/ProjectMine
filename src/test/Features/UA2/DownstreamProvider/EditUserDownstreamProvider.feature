@@ -33,6 +33,7 @@ Feature: Edit page for Downstream provider
     Then I select "<EnableApplications>" product
     Then I click on Next button
     Then I verify the header "Permissions"
+    Then I verify that submit button is disabled when data permission is not selected
     Then I verify unavailability of organization drop down
     Then I verify text "Which location(s) does this user have access to?" is "Present" in Permission tab
     Then I select "<Locations>" locations for Downstream Provider role
@@ -119,9 +120,14 @@ Feature: Edit page for Downstream provider
     And I fill in Phone with <Phone>
     Then I verify the availability of fields "Role"
     Then I click on Next button
-    Then I unselect "<DisableApplications>" product
+    Then I verify the header "Applications"
+     Then I unselect all selected applications
+    Then I verify that Next button is "disabled"
+    Then I select "<EnableApplications>" product
+    Then I verify that Next button is "enabled"
     Then I click on Next button
     Then I verify the header "Permissions"
+     Then I verify cross icon
     Then I click on existing organisation "<Health System>"
     Then I deselect "<DeselectLocations>" locations for Downstream Provider role
     #Then I select "<Locations>" locations for Downstream Provider role
@@ -186,8 +192,29 @@ Feature: Edit page for Downstream provider
     And I should see Log in widget
 
     Examples: 
-      | User        | Email                           | Role                | FirstName       | LastName       | Phone        | DisableApplications | Applications | ApplicationsNotVisible                                        | DeselectLocations                                          | Locations                                          | Health System       | Health System1 | DisableLocations1                                                    | EnableLocations1                                                                 | HealthSystemValidation                       | ProgramsValidation                                                                  | LocationsValidation                                                                                                                                                                                                                | Roletext | ReportCategory | ReportName                   | LearningPathway                                           | BPID | Facilities                                                                                                           |
-      | Super Admin | qaautomation@remedypartners.com | Downstream Provider | FirstNameEdited | LastNameEdited | 996-385-2451 | Episodes            | Episodes 2.0 | Episodes, Administration, Physician Connect, Reports, Lessons | 555469, 345454, 5 Star Home Care Llc, 3 Angels Home Health | 345454, 5 Star Home Care Llc, 3 Angels Home Health | Downstream Provider | Covenant       | 3056-804--Catered Manor Nursing Center, 3056-805--Downey Care Center | 3056-809--Courtyard Health Care Center, 3056-810--Emerald Gardens Nursing Center | Healthsystem - Downstream Provider, Covenant | Covenant--BPCI Model 3, Healthsystem - Downstream Provider--Downstream Organization | Covenant--3056-809--Courtyard Health Care Center, Covenant--3056-810--Emerald Gardens Nursing Center, Healthsystem - Downstream Provider--DOWN-ORG--Coosa Valley Health Care, Healthsystem - Downstream Provider--DOWN-ORG--020653 | ROLE_SNF | Patient ID     | Episode DRG Issues [Model 3] | i am learning path, Learning Pathway 2, Remedy University |      | Courtyard Health Care Center, Emerald Gardens Nursing Center, Coosa valley health care, Alaris Health at Jersey City |
+
+      | User        | Email             | Role                | FirstName       | LastName       | Phone        | EnableApplications | Applications | ApplicationsNotVisible                                        | DeselectLocations                                          | Locations                                          | Health System       | Health System1 | DisableLocations1                                                    | EnableLocations1                                                                 | HealthSystemValidation                       | ProgramsValidation                                                                  | LocationsValidation                                                                                                                                                                                                                | Roletext | ReportCategory | ReportName                   | LearningPathway                                           | BPID | Facilities                                                                                                           |
+      | Super Admin | qaautomation@remedypartners.com | Downstream Provider | FirstNameEdited | LastNameEdited | 996-385-2451 | Episodes 2.0       | Episodes 2.0 | Episodes, Administration, Physician Connect, Reports, Lessons | 555469, 345454, 5 Star Home Care Llc, 3 Angels Home Health | 345454, 5 Star Home Care Llc, 3 Angels Home Health | Downstream Provider | Covenant       | 3056-804--Catered Manor Nursing Center, 3056-805--Downey Care Center | 3056-809--Courtyard Health Care Center, 3056-810--Emerald Gardens Nursing Center | Healthsystem - Downstream Provider, Covenant | Covenant--BPCI Model 3, Healthsystem - Downstream Provider--Downstream Organization | Covenant--3056-809--Courtyard Health Care Center, Covenant--3056-810--Emerald Gardens Nursing Center, Healthsystem - Downstream Provider--DOWN-ORG--Coosa Valley Health Care, Healthsystem - Downstream Provider--DOWN-ORG--020653 | ROLE_SNF | Patient ID     | Episode DRG Issues [Model 3] | i am learning path, Learning Pathway 2, Remedy University |      | Courtyard Health Care Center, Emerald Gardens Nursing Center, Coosa valley health care, Alaris Health at Jersey City |
+ Scenario Outline: Validating that pagination is not displayed when few locations are added in the data permissions while editing a user
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    And I click on Edit button
+    Then I select "Permissions" tab
+    Then I verify the header "Permissions"
+    Then I click on existing organisation "<Health System>"
+    Then I select "<EnableLocations1>" locations
+    Then I verify that pagination is not displayed for selected locations
+
+    Examples: 
+      | User        | Role                | Health System | EnableLocations1                       |
+      | Super Admin | Downstream Provider | Covenant      | 3056-804--Catered Manor Nursing Center |
+
 
   Scenario Outline: Remove exiting health System and new org
     Given I am on the login page
@@ -206,6 +233,7 @@ Feature: Edit page for Downstream provider
     Then I click on Next button
     Then I unselect "<EnableApplication>" product
     Then I click on Next button
+
     And I click on "Remove" button on permissions tab
     Then I click Add Model3 Organization button for "<HasHealthSystem1>" flag for Downstream Provider role
     And I search for health system with <Health System1>

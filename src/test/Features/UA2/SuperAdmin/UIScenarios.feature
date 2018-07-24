@@ -49,8 +49,9 @@ Feature: UI Scenarios - Super Admin User
       | Verify validation message for NPI less than 10 digits | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians |     123564 | Please enter a valid NPI          |
       | Verify validation message for NPI as alphabets        | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians | abcdefgihj | Please enter a valid NPI          |
       | Verify validation message for NPI as alphanumeric     | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI          |
-      | Verify validation message for invalid First Name      | 8473827919 | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
-      | Verify validation message for invalid Last name       | First Name | 8473827919 | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Verify validation message for invalid First Name      | 84738&27919 | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Verify validation message for invalid Last name       | First Name  | 84738&27919 | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Verify validation message for NPI as .                | First Name  | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians | .........1 | Please enter a valid NPI          |
 
   Scenario Outline: Verify validation message for invalid lesson name in search box
     Given I am on the login page
@@ -282,15 +283,11 @@ Feature: UI Scenarios - Super Admin User
     Then I select "<Programs1>" programs
     And I click on remove link icon for selected Health system
     And I verify text on pop up window after click on remove link icon
-    And I click "Cancel" link on pop up window
-    And I click on remove link icon for selected Health system
-    And I click "Remove" button on pop up window
+    And I click on "Remove" button on permissions tab
     Then I verify the header "Permissions"
-
     Examples: 
       | Description                                         | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone      | Role         | Applications               | ApplicationsNotVisible                               | NPI | LearningPathwaySearchParameter         | Health System1                                                         | Programs1   | Locations1                                                   | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
       | Verify successful removal of selected health system | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Case Manager | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect, TCI |     | i am learning path, Learning Pathway 2 | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI-Model2 | 2070-023--Allentown, 2070-023--Bethlehem, 2070-025--Anderson | No               |                |           |            | No               |                |           |            |
-
   Scenario Outline: Verify that Next button and left side menu is enabled only when mandatory fields are selected
     Given I am on the login page
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
@@ -478,3 +475,66 @@ Feature: UI Scenarios - Super Admin User
     Examples: 
       | User        | UserName                               | Password | FirstName | LastName | Email                           | Role       | Applications | NPI | Health System     | Programs    | Locations    |
       | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reports      | NPI | Stamford Hospital | BPCI-Model2 | All 2070-015 |
+
+  Scenario Outline: Validating that on removing the organization and selecting it again, "incomplete" error message is not displayed
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+     Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    And I click on Edit button
+    Then I select "Permissions" tab
+    Then I remove health system "<Remove HealthSystem>"
+    And I click on "Remove" button on permissions tab
+    And I search for health system with <Health System>
+    And I select a <Health System>
+    Then I select "<Programs>" programs
+    Then I select "<Locations>" locations
+    Then I click on existing organisation "<Health System>"
+    Then I verify incomplete status is not shown for health system
+
+    Examples: 
+      | User        | Role      | Remove HealthSystem | Health System     | Programs    | Locations                   |
+      | Super Admin | Executive | Stamford Hospital   | Stamford Hospital | BPCI-Model2 | 2070-015--Stamford Hospital |
+  
+  Scenario Outline: validating Learning Pathway on edit role
+    Given I am on the login page
+    When I enter email field <UserName> for login
+    And I enter password field <Password> for Login
+    Then I click Access button
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    When I click on Add User button
+    Then I should see "Add New User" on the user creation page
+    Then I verify the header "General Information"
+    And I fill in First Name with "<FirstName>"
+    Then I fill in Last Name with <LastName>
+    And I enter Email "<Email>" to Create user
+    When I click the Organizational Role Field
+    Then I pick a Organizational <Role1>
+    Then I enter NPI field with "<NPI>" for role "<Role1>"
+    Then I click on Next button
+    Then I verify the header "Applications"
+    Then I verify applications "<Applications>" are unchecked
+    Then I verify Learning Pathway search box is not available
+    Then I select "<Applications>" product
+    Then I verify applications "<Applications>" are checked
+    Then I click on Select button
+    Then I verify Learning Pathway search box is available
+    Then I select "<LearningPathwaySearchParameter>" from the results
+    Then I click on Back button
+    Then I verify the header "General Information"
+    When I click the Organizational Role Field to edit
+    Then I pick a Organizational <Role2>
+    Then I enter NPI field with "<NPI>" for role "<Role2>"
+    Then I click on Next button
+    Then I verify the header "Applications"
+    Then I verify Learning Pathway search box is not available
+
+    Examples: 
+      | User        | UserName                               | Password | FirstName | LastName | Email                           | Role1      | Applications     | NPI | LearningPathwaySearchParameter                      | Role2     |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reports, Lessons | NPI | Learning Pathway 2, jusUV22erpk1, Remedy University | Executive |

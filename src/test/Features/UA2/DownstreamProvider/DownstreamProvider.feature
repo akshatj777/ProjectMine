@@ -1,6 +1,7 @@
 Feature: Create Downstream Provider user from Super Admin and Validate the user profile page
 
   Scenario Outline: <Description>
+
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -144,6 +145,7 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
       | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episodes, TCI | Episodes 2.0, Administration, Physician Connect, Lessons, Reports | ROLE_SNF | Patient ID     | Episode DRG Issues [Model 3] |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Remedy University | woodruff Community Hospital, Litchford Falls Nursing & Rehabilitation Center, 5 Star Home Care Llc, 3 Angels Home Health, Coosa valley health care, Alaris Health at Jersey City |
 
   Scenario Outline: <Description>
+
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -287,6 +289,7 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
       | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episodes 2.0, TCI | Episodes, Administration, Physician Connect, Lessons, Reports | ROLE_SNF | Patient ID     | Episode DRG Issues [Model 3] |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Remedy University | woodruff Community Hospital, Litchford Falls Nursing & Rehabilitation Center, 5 Star Home Care Llc, 3 Angels Home Health, Coosa valley health care, Alaris Health at Jersey City |
 
   Scenario Outline: <Description>
+
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -430,6 +433,7 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
       | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episodes, Episodes 2.0, TCI | Administration, Physician Connect, Lessons, Reports | ROLE_SNF | Patient ID     | Episode DRG Issues [Model 3] |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Remedy University | woodruff Community Hospital, Litchford Falls Nursing & Rehabilitation Center, 5 Star Home Care Llc, 3 Angels Home Health, Coosa valley health care, Alaris Health at Jersey City |
 
   Scenario Outline: <Description>
+
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -573,6 +577,7 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
       | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episodes, TCI | Episodes 2.0, Administration, Physician Connect, Lessons, Reports | ROLE_SNF | Patient ID     | Episode DRG Issues [Model 3] |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Remedy University | Catered Manor Nursing Center, Downey Care Center, Encinitas Nursing and Rehabilitation Center, Arbor Nursing Center, Courtyard Health Care Center, Emerald Gardens Nursing Center, Buena Vista Care Center, Gilroy Healthcare and Rehabilitation Center, Eagle Point Nursing & Rehabilitation Center, Cedar Ridge Health Rehab Center, Ennoble Skilled Nursing and Rehabilitation Center, Friendship Skilled Nursing & Rehabilitation Center, Covington Manor Health and  Rehabilitation Center, Clinton House Health and Rehab Center, Edgewood Manor Nursing Center, Fairview Skilled Nursing and Rehabilitation Center, Pacific Coast Manor, Sunrise Skilled Nursing & Rehabilitation Center, Pyramid Point Post-Acute Rehabilitation Center, Hilltop Skilled Nursing, McCormick's Creek, Palo Alto Sub-Acute, Meadow Manor, Villa Georgetown, Highland Health, Birchaven, Independence House |
 
   Scenario Outline: <Description>
+
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -716,6 +721,7 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
       | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episodes 2.0, TCI | Episodes, Administration, Physician Connect, Lessons, Reports | ROLE_SNF | Patient ID     | Episode DRG Issues [Model 3] |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Remedy University | Catered Manor Nursing Center, Downey Care Center, Encinitas Nursing and Rehabilitation Center, Arbor Nursing Center, Courtyard Health Care Center, Emerald Gardens Nursing Center, Buena Vista Care Center, Gilroy Healthcare and Rehabilitation Center, Eagle Point Nursing & Rehabilitation Center, Cedar Ridge Health Rehab Center, Ennoble Skilled Nursing and Rehabilitation Center, Friendship Skilled Nursing & Rehabilitation Center, Covington Manor Health and  Rehabilitation Center, Clinton House Health and Rehab Center, Edgewood Manor Nursing Center, Fairview Skilled Nursing and Rehabilitation Center, Pacific Coast Manor, Sunrise Skilled Nursing & Rehabilitation Center, Pyramid Point Post-Acute Rehabilitation Center, Hilltop Skilled Nursing, McCormick's Creek, Palo Alto Sub-Acute, Meadow Manor, Villa Georgetown, Highland Health, Birchaven, Independence House |
 
   Scenario Outline: <Description>
+
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -859,6 +865,7 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
       | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episodes, Episodes 2.0, TCI | Administration, Physician Connect, Lessons, Reports | ROLE_SNF | Patient ID     | Episode DRG Issues [Model 3] |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Remedy University | Catered Manor Nursing Center, Downey Care Center, Encinitas Nursing and Rehabilitation Center, Arbor Nursing Center, Courtyard Health Care Center, Emerald Gardens Nursing Center, Buena Vista Care Center, Gilroy Healthcare and Rehabilitation Center, Eagle Point Nursing & Rehabilitation Center, Cedar Ridge Health Rehab Center, Ennoble Skilled Nursing and Rehabilitation Center, Friendship Skilled Nursing & Rehabilitation Center, Covington Manor Health and  Rehabilitation Center, Clinton House Health and Rehab Center, Edgewood Manor Nursing Center, Fairview Skilled Nursing and Rehabilitation Center, Pacific Coast Manor, Sunrise Skilled Nursing & Rehabilitation Center, Pyramid Point Post-Acute Rehabilitation Center, Hilltop Skilled Nursing, McCormick's Creek, Palo Alto Sub-Acute, Meadow Manor, Villa Georgetown, Highland Health, Birchaven, Independence House |
 
   Scenario Outline: <Description>
+
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -1002,6 +1009,7 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
       | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episodes, TCI | Episodes 2.0, Administration, Physician Connect, Lessons, Reports | ROLE_SNF | Patient ID     | Episode DRG Issues |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Remedy University | woodruff Community Hospital, Litchford Falls Nursing & Rehabilitation Center, 5 Star Home Care Llc, 3 Angels Home Health, Aa Advanced Care Inc, Coosa valley health care, Alaris Health at Jersey City, Catered Manor Nursing Center, Downey Care Center, Encinitas Nursing and Rehabilitation Center, Arbor Nursing Center, Courtyard Health Care Center, Emerald Gardens Nursing Center, Buena Vista Care Center, Gilroy Healthcare and Rehabilitation Center, Eagle Point Nursing & Rehabilitation Center, Cedar Ridge Health Rehab Center, Ennoble Skilled Nursing and Rehabilitation Center, Friendship Skilled Nursing & Rehabilitation Center, Covington Manor Health and  Rehabilitation Center, Clinton House Health and Rehab Center, Edgewood Manor Nursing Center, Fairview Skilled Nursing and Rehabilitation Center, Pacific Coast Manor, Sunrise Skilled Nursing & Rehabilitation Center, Pyramid Point Post-Acute Rehabilitation Center, Hilltop Skilled Nursing, McCormick's Creek, Palo Alto Sub-Acute, Meadow Manor, Villa Georgetown, Highland Health, Birchaven, Independence House, Munroe Regional, Uf Health Shands Hospital, North Okaloosa Medical Center, Kendall Medical Center, Fort Walton Beach Medical Center, Highland Medical Center - Christus, B R F Hospital Holdings, Willis Knighton Medical Center, Willis Knighton Bossier Health Center, Aroostook Medical Center |
 
   Scenario Outline: <Description>
+
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -1145,6 +1153,7 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
       | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episodes 2.0, TCI | Episodes, Administration, Physician Connect, Lessons, Reports | ROLE_SNF | Patient ID     | Episode DRG Issues |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Remedy University | woodruff Community Hospital, Litchford Falls Nursing & Rehabilitation Center, 5 Star Home Care Llc, 3 Angels Home Health, Aa Advanced Care Inc, Coosa valley health care, Alaris Health at Jersey City, Catered Manor Nursing Center, Downey Care Center, Encinitas Nursing and Rehabilitation Center, Arbor Nursing Center, Courtyard Health Care Center, Emerald Gardens Nursing Center, Buena Vista Care Center, Gilroy Healthcare and Rehabilitation Center, Eagle Point Nursing & Rehabilitation Center, Cedar Ridge Health Rehab Center, Ennoble Skilled Nursing and Rehabilitation Center, Friendship Skilled Nursing & Rehabilitation Center, Covington Manor Health and  Rehabilitation Center, Clinton House Health and Rehab Center, Edgewood Manor Nursing Center, Fairview Skilled Nursing and Rehabilitation Center, Pacific Coast Manor, Sunrise Skilled Nursing & Rehabilitation Center, Pyramid Point Post-Acute Rehabilitation Center, Hilltop Skilled Nursing, McCormick's Creek, Palo Alto Sub-Acute, Meadow Manor, Villa Georgetown, Highland Health, Birchaven, Independence House, Munroe Regional, Uf Health Shands Hospital, North Okaloosa Medical Center, Kendall Medical Center, Fort Walton Beach Medical Center, Highland Medical Center - Christus, B R F Hospital Holdings, Willis Knighton Medical Center, Willis Knighton Bossier Health Center, Aroostook Medical Center |
 
   Scenario Outline: <Description>
+
     Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
@@ -1284,5 +1293,79 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I should see Log in widget
 
     Examples: 
-      | Description                                                                    | User        | FirstName                                 | LastName | Role                | Applications                | ApplicationsNotVisible                              | Roletext | ReportCategory | ReportName         | BPID | LearningPathway                                                                               | Facilities                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-      | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episodes, Episodes 2.0, TCI | Administration, Physician Connect, Lessons, Reports | ROLE_SNF | Patient ID     | Episode DRG Issues |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Remedy University | woodruff Community Hospital, Litchford Falls Nursing & Rehabilitation Center, 5 Star Home Care Llc, 3 Angels Home Health, Aa Advanced Care Inc, Coosa valley health care, Alaris Health at Jersey City, Catered Manor Nursing Center, Downey Care Center, Encinitas Nursing and Rehabilitation Center, Arbor Nursing Center, Courtyard Health Care Center, Emerald Gardens Nursing Center, Buena Vista Care Center, Gilroy Healthcare and Rehabilitation Center, Eagle Point Nursing & Rehabilitation Center, Cedar Ridge Health Rehab Center, Ennoble Skilled Nursing and Rehabilitation Center, Friendship Skilled Nursing & Rehabilitation Center, Covington Manor Health and  Rehabilitation Center, Clinton House Health and Rehab Center, Edgewood Manor Nursing Center, Fairview Skilled Nursing and Rehabilitation Center, Pacific Coast Manor, Sunrise Skilled Nursing & Rehabilitation Center, Pyramid Point Post-Acute Rehabilitation Center, Hilltop Skilled Nursing, McCormick's Creek, Palo Alto Sub-Acute, Meadow Manor, Villa Georgetown, Highland Health, Birchaven, Independence House, Munroe Regional, Uf Health Shands Hospital, North Okaloosa Medical Center, Kendall Medical Center, Fort Walton Beach Medical Center, Highland Medical Center - Christus, B R F Hospital Holdings, Willis Knighton Medical Center, Willis Knighton Bossier Health Center, Aroostook Medical Center |
+      | Description                                                                    | User        | FirstName                                 | LastName | Role                | Applications                | ApplicationsNotVisible                              | Roletext | ReportCategory | ReportName         | BPID | LearningPathway                                                                               | Facilities                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+      | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episodes, Episodes 2.0, TCI | Administration, Physician Connect, Lessons, Reports | ROLE_SNF | Patient ID     | Episode DRG Issues |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Remedy University | woodruff Community Hospital, litchford Falls Healthcare Re, 5 Star Home Care Llc, 3 Angels Home Health, Aa Advanced Care Inc, Coosa valley health care, Alaris Health at Jersey City, Catered Manor Nursing Center, Downey Care Center, Encinitas Nursing and Rehabilitation Center, Arbor Nursing Center, Courtyard Health Care Center, Emerald Gardens Nursing Center, Buena Vista Care Center, Gilroy Healthcare and Rehabilitation Center, Eagle Point Nursing & Rehabilitation Center, Cedar Ridge Health Rehab Center, Ennoble Skilled Nursing and Rehabilitation Center, Friendship Skilled Nursing & Rehabilitation Center, Covington Manor Health and  Rehabilitation Center, Clinton House Health and Rehab Center, Edgewood Manor Nursing Center, Fairview Skilled Nursing and Rehabilitation Center, Pacific Coast Manor, Sunrise Skilled Nursing & Rehabilitation Center, Pyramid Point Post-Acute Rehabilitation Center, Hilltop Skilled Nursing, McCormick's Creek, Palo Alto Sub-Acute, Meadow Manor, Villa Georgetown, Highland Health, Birchaven, Independence House, Munroe Regional, Uf Health Shands Hospital, North Okaloosa Medical Center, Kendall Medical Center, Fort Walton Beach Medical Center, Highland Medical Center - Christus, B R F Hospital Holdings, Willis Knighton Medical Center, Willis Knighton Bossier Health Center, Aroostook Medical Center |
+
+  Scenario Outline: Validating that Error is getting displayed on searching any downstream provider location less than 5 alphabets and clicking on pagination on creating and editing Downstream Provider role
+    Given I am on the login page
+    When I enter email field <UserName> for login
+    And I enter password field <Password> for Login
+    Then I click Access button
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    When I click on Add User button
+    Then I should see "Add New User" on the user creation page
+    Then I verify the header "General Information"
+    And I fill in First Name with "<FirstName>"
+    Then I fill in Last Name with <LastName>
+    And I enter Email "<Email>" to Create user
+    When I click the Organizational Role Field
+    Then I pick a Organizational <Role>
+    Then I click on Next button
+    Then I verify the header "Applications"
+    Then I verify applications "<Applications>" are unchecked
+    Then I select "<Applications>" product
+    Then I verify applications "<Applications>" are checked
+    Then I verify "<ApplicationsNotVisible>" is not visible on Applications tab
+    Then I click on Next button
+    Then I verify the header "Permissions"
+    Then I search "<Loc>" locations for Downstream Provider role
+    Then I click on > to navigate to next page while "creating" the user
+    Then I should not see any error message on searching any downstream provider location less than 5 alphabets
+    Then I select "<Locations>" locations for Downstream Provider role
+    Then I click on Submit button for "<User>"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    Then I verify Edit Icon
+    Then I click on Edit Icon
+    Then I select "Permissions" tab
+    Then I search "<Loc>" locations for Downstream Provider role
+    Then I click on > to navigate to next page while "editing" the user
+    Then I should not see any error message on searching any downstream provider location less than 5 alphabets
+
+    Examples: 
+      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email             | Role                | Applications | ApplicationsNotVisible                                   | NPI | LearningPathwaySearchParameter | Loc | Locations            |
+      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | test.automatemail | Downstream Provider | Episodes     | Administration, Physician Connect, TCI, Reports, Lessons |     |                                | Bap | 5 Star Home Care Llc |
+
+  Scenario Outline: Validating Cross(X) icon for Downstream Provider role
+    Given I am on the login page
+    When I enter email field <UserName> for login
+    And I enter password field <Password> for Login
+    Then I click Access button
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    When I click on Add User button
+    Then I should see "Add New User" on the user creation page
+    Then I verify the header "General Information"
+    And I fill in First Name with "<FirstName>"
+    Then I fill in Last Name with <LastName>
+    And I enter Email "<Email>" to Create user
+    And I enter Phone field with <Phone>
+    When I click the Organizational Role Field
+    Then I pick a Organizational <Role>
+    Then I click on Next button
+    Then I verify the header "Applications"
+    Then I select "<Applications>" product
+    Then I verify applications "<Applications>" are checked
+    Then I click on Next button
+    Then I verify the header "Permissions"
+    Then I select "<Locations>" locations for Downstream Provider role
+    Then I click on Cross button
+    Then I should see header text "Users"
+
+    Examples: 
+      | User        | UserName                               | Password | FirstName                                 | LastName | Email             | Phone      | Role                | Applications | NPI | Locations                                      |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | test.automatemail | 9988776655 | Downstream Provider | Episodes     |     | 3 Angels Home Health, Coosa Valley Health Care |

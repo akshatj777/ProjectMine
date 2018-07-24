@@ -158,7 +158,7 @@ public class LoginPage extends BaseClass {
 	}
 	
 	public void iShouldVerifyWatermarkTextAppearingUnderEmailTextboxField(){
-		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//input[@placeholder='name@domain.com']"))));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//input[@placeholder='yours@example.com']"))));
 	}
 	
 	public void iShouldSeePasswordTextboxField(){
@@ -192,3 +192,4 @@ public class LoginPage extends BaseClass {
 		verifyTextForElement(driver.findElement(By.xpath("//span[@class='animated fadeInUp']")), text);
 	}
 }
+

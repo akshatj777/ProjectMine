@@ -19,12 +19,14 @@ import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
 import com.remedy.userAdmin.CreateUserPage;
 
+import net.sourceforge.htmlunit.corejs.javascript.ast.CatchClause;
+
 public class EditUser extends BaseClass {
 	DateFormat df = new SimpleDateFormat("ddMMyyHHmmss");
 	Date timestamp = new Date();
 	String time = df.format(timestamp);
-	String mail = "test.automatemail";
-	final String email = mail + "+" + time + "@gmail.com";
+	String mail = "qaautomation";
+	final String email = mail + "+" + time + "@remedypartners.com";
 	CreateUserPage createUserPage = new CreateUserPage(driver);
 
 	public EditUser(WebDriver driver) {
@@ -135,7 +137,7 @@ public class EditUser extends BaseClass {
 
 		if(!(text.equals("")))
 		{
-			iWillWaitToSee(By.cssSelector(".component-participant-title"));
+			iWillWaitToSee(By.xpath("//*[contains(text(),'" + text + "')]"));
 
 			clickElement(driver.findElement(By
 					.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'" + text + "')]")));
@@ -658,7 +660,10 @@ public class EditUser extends BaseClass {
 		String actual = getTextForElement(driver.findElement(By.cssSelector("span.participant-title-status")));
 		Assert.assertEquals("(incomplete)", actual.trim());
 	}
-
+public void iVerifyIncompleteStatusNotShown() {
+		
+		Assert.assertFalse(isElementVisible(driver.findElement(By.cssSelector("span.participant-title-status"))));
+	}
 	public void iClickOnSelectOrgDropdown() {
 		clickElement(driver.findElement(By.cssSelector("div.ui.selection.dropdown")));
 	}
@@ -720,5 +725,44 @@ public void iCheckErrMsgIsNotShown(String text){
 public void iEnterLearningPathway(String text){
 	clickElement(driver.findElement(By.cssSelector("div.ui.selection.dropdown")));
 	 iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), text);
+}
+public void validateLearningPathwayWhileEdit(String pathways){
+	if (pathways.contains(",")) {
+		StringTokenizer st = new StringTokenizer(pathways, ",");
+		while(st.hasMoreTokens())
+		{
+			String pathway = st.nextToken().trim();
+			iWillWaitToSee(By.xpath("//span[contains(text(),'"+pathway+"')]"));
+		isElementVisible(driver.findElement(By.xpath("//span[contains(text(),'"+pathway+"')]")));
+		}
+	}
+	else{
+		iWillWaitToSee(By.xpath("//span[contains(text(),'"+pathways+"')]"));
+		isElementVisible(driver.findElement(By.xpath("//span[contains(text(),'"+pathways+"')]")));
+	}
+}
+public void iVerifyCrossIcon(){
+	isElementVisible(driver.findElement(By.xpath("//*[name()='svg' and @fill='#48677b']//*[name()='g' and @id='iCons']")));
+	
+}
+public void verifySubmitButtonStatus() {
+	WebElement el = driver.findElement(By.xpath("//button[.='Submit']"));
+	
+		Assert.assertFalse(el.isEnabled());
+	
+}
+public void iVerifyRemovedProgramInEditPage(String program){
+	Assert.assertFalse(driver.findElement(By.xpath("//div[@class='ui label']/span")).getAttribute("innerText").toString().trim().equals(program));
+}
+public void verifyPaginationForSelectedLoc(){
+	try{
+	Assert.assertFalse(driver.findElement(By.xpath("//div[@class='component-selected-facility-options']")).getAttribute("nextSibling").toString().contains("paginator"));
+
+}catch(NullPointerException e){
+	Assert.assertFalse(false);
+}
+}
+public void verifyAllLocationBoxSelection() {
+	Assert.assertTrue(isElementPresent(By.xpath("//div[@class='ui checked checkbox']")));
 }
 }
