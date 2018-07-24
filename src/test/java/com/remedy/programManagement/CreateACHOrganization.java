@@ -511,6 +511,12 @@ public class CreateACHOrganization extends BaseClass{
     		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
     		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+CreateSNFOrganization.SNFOrg_noMO.get("CCN")+"')]")));
     	}
+    	else if(text.contains("IRF")){
+    		delay();
+        	iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), CreateIRFOrganization.IRFOrg_noMO.get("CCN"));
+    		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+    		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+CreateIRFOrganization.IRFOrg_noMO.get("CCN")+"')]")));
+    	}
     } 
     
     public void iVerifyLocationIdShouldBeGreater(int value)

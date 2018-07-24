@@ -45,8 +45,8 @@ Feature: Search IRF organization functionality tests
 
     Examples: 
       | Description                                                        | Has_MO | Managing_Org | IRF_Name | Address1 | Short_Name | Address2 | City           | State    | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Message                                |
-      | Create IRF Organization with all the available fields - Without MO | NO     |              | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | New York |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | irf Organization Successfully Created. |
-      | Create IRF Organization with all the available fields - With MO    | YES    | MONAME       | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | New York |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | irf Organization Successfully Created. |
+      | Create IRF Organization with all the available fields - Without MO | NO     |              | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | New York |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | IRF Organization Successfully Created. |
+      | Create IRF Organization with all the available fields - With MO    | YES    | MONAME       | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | New York |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | IRF Organization Successfully Created. |
 
   Scenario Outline: <Description>
     Given I am on the login page

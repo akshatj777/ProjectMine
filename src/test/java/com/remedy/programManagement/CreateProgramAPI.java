@@ -24,8 +24,9 @@ public class CreateProgramAPI extends BaseClass{
 		super(driver);
 	}
 	
-	public void createProgramJsonWAttributionRules(String pName, String payorOrId, String cId, String cValue, int noOfRulesForThisPrg, String programID) throws Throwable {
+	public void createProgramJsonWAttributionRules(String pName, String payorOrId, String cId, String cValue, int noOfRulesForThisPrg, String programID, boolean multipleBundleEpisode) throws Throwable {
         List<RankAttributionRuleDataModel> idRankList = new ArrayList<>();
+        List<RankAttributionRuleDataModel> idValidationRankList = new ArrayList<>(); 
         ProgramDataModel programDataModel = null;
         Long id = null;
         Float value = null;
@@ -44,7 +45,7 @@ public class CreateProgramAPI extends BaseClass{
            }
             else 
             {
-              cIds.add("");
+              cIds.add("1");
             }
             if (StringUtils.isNotBlank(cValue))
             {
@@ -71,9 +72,16 @@ public class CreateProgramAPI extends BaseClass{
                 {
                     value=null;
                 }
-                RankAttributionRuleDataModel reRankAttributionRules = new RankAttributionRuleDataModel(id, value);
-                idRankList.add(reRankAttributionRules);
+//                RankAttributionRuleDataModel reRankAttributionRules = new RankAttributionRuleDataModel(id, value);
+//                idRankList.add(reRankAttributionRules);
+//                idValidationRankList.add(reRankAttributionRules);
+//                idValidationRankList=null;
             }
+            RankAttributionRuleDataModel reRankAttributionRules = new RankAttributionRuleDataModel(id, value);
+            idRankList.add(reRankAttributionRules);
+//            idValidationRankList.add(reRankAttributionRules);
+            reRankAttributionRules = new RankAttributionRuleDataModel(id, value);
+            idValidationRankList.add(reRankAttributionRules);
         }
         if(StringUtils.isNotBlank(pName)) 
         {
@@ -85,12 +93,12 @@ public class CreateProgramAPI extends BaseClass{
             for (int i = 0; i < payorIdList.size(); i++) 
             {
                 Long payorId = CreatePayorOrganizationAPI.payorID;
-                programDataModel = new ProgramDataModel(name, payorId, idRankList);
+                programDataModel = new ProgramDataModel(multipleBundleEpisode, name, payorId, idRankList, idValidationRankList);
             }
         } 
         else 
         {
-            programDataModel = new ProgramDataModel(name, Long.parseLong(payorOrId), idRankList);
+            programDataModel = new ProgramDataModel(multipleBundleEpisode, name, Long.parseLong(payorOrId), idRankList, idValidationRankList);
         }
         CreateProgramAPI.jsonString = generateJson(programDataModel);
     }
