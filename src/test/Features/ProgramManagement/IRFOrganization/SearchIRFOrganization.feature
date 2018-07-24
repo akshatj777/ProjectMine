@@ -109,8 +109,8 @@ Feature: Search IRF organization functionality tests
 
     Examples: 
       | Description                                                     | Has_MO | IRF_Name | Edited_IRF_Name | Message                                |
-      | Search IRF Organization after editing the IRF name - With MO    | YES    | IRFNAME  | IRFNAME         | irf Organization Successfully Updated. |
-      | Search IRF Organization after editing the IRF name - Without MO | NO     | IRFNAME  | IRFNAME         | irf Organization Successfully Updated. |
+      | Search IRF Organization after editing the IRF name - With MO    | YES    | IRFNAME  | IRFNAME         | IRF Organization Successfully Updated. |
+      | Search IRF Organization after editing the IRF name - Without MO | NO     | IRFNAME  | IRFNAME         | IRF Organization Successfully Updated. |
 
   Scenario Outline: <Description>
     Given I am on the login page
