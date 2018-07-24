@@ -61,7 +61,6 @@ import static stepDefination.CommonSteps.actionEvent;
  * Created by salam on 7/27/15.
  */
 public class BaseClass {
-
 	public WebDriver driver = null;
 	protected static long Wait_Time = 1000L;
 	protected static long delay_Time = 2000L;
@@ -575,6 +574,12 @@ public class BaseClass {
 		((JavascriptExecutor)driver).executeScript("window.scrollTo(0, -document.body.scrollHeight)");	
 	}
 	
+
+	void checkHash()
+	{
+		System.out.println("dsdss");
+	}
+
 	public static String generateJson(Object object) {
         return gson.toJson(object).toString();
     }
@@ -877,3 +882,4 @@ public class BaseClass {
 		}
 	}
 }
+
