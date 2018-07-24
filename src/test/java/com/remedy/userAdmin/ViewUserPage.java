@@ -66,6 +66,7 @@ public class ViewUserPage extends BaseClass {
 
 	public void selectUserRole(String userRole) throws Throwable {
 
+
 	//String email = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
 
 		iWillWaitToSee(By.xpath("//tr[@class='component-user-table-row']"));
