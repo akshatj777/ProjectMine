@@ -85,7 +85,14 @@ public class ViewUserPage extends BaseClass {
 	public void verifyLastName(String field) throws Throwable {
 		isElementPresentOnPage(By.xpath("//span[text()='"+field+"']"));
 	}
-	
+	public void verifyPhone(String field) throws Throwable {
+		if(!(field.equals(""))){
+		
+		field=new StringBuffer(field).insert(3, "-").toString();
+		field=new StringBuffer(field).insert(7, "-").toString();
+		isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+field+"')]")));
+		}
+	}
 	public void verifyRole(String field) throws Throwable {
 		if(!(field.equals("")))
 		{

@@ -285,10 +285,8 @@ Feature: Edit user page for SA
     And I click on Edit button
     Then I select "Permissions" tab
     Then I remove health system "<Remove HealthSystem1>"
-
     #Then I remove health system "<Remove HealthSystem2>"
     And I search for health system with <Health System id>
-
     And I select a <Health System>
     Then I select "<Programs>" programs
     Then I select "<Locations>" locations
@@ -769,10 +767,8 @@ Feature: Edit user page for SA
     And I should see Log in widget
 
     Examples: 
-
-      | User        | UserName                               | Password | FirstName | LastName       | Email                            | Phone        | NPI | PreviousRole | Role    | EnableApplications | Applications               | ApplicationsNotVisible                          | Remove HealthSystem                                                    | Health System                                                          | Programs    | Locations | LearningPathwaySearchParameter | Roletext | ReportCategory | ReportName         | BPID | Facilities                              | LearningPathway                                                                     | HealthSystemValidation   | ProgramsValidation                     | LocationsValidation                                              |
+      | User        | UserName                               | Password | FirstName | LastName       | Email                            | Phone        | NPI | PreviousRole | Role    | EnableApplications | Applications               | ApplicationsNotVisible                          | Remove HealthSystem      | Health System                                                          | Programs    | Locations | LearningPathwaySearchParameter | Roletext | ReportCategory | ReportName         | BPID | Facilities                              | LearningPathway                                                                     | HealthSystemValidation   | ProgramsValidation                     | LocationsValidation                                              |
       | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameEdited | qaautomation@remedypartners.com2 | 996-385-2451 |     | Case Manager | Manager | Reports            | Episodes, Reports, Lessons | Administration, Physician Connect, Episodes 2.0 | St. Lukes Health Network | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI-Model2 |    390035 |                                | ROLE_PRM | Patient ID     | Episode DRG Issues |      | St. Luke's Hospital Quakertown Hospital | i am learning path, Learning Pathway 2, max-test-052417, Care Coordination External | St. Lukes Health Network | St. Lukes Health Network--BPCI Model 2 | St. Lukes Health Network--2070-026--Hospital Quakertown Hospital |
-
 
   Scenario Outline: Changing General information, Role from <PreviousRole> to <Role> and edit Data permissions
     Given I am on the login page
@@ -980,10 +976,8 @@ Feature: Edit user page for SA
     And I should see Log in widget
 
     Examples: 
-
-      | User        | FirstName | LastName | PreviousRole      | Role       | Phone      | PhoneValidation | NPI | EnableApplications          | Applications               | ApplicationsNotVisible       | Email                            | HasHealthSystem2 | Health System2 | Programs    | Locations                        | Roletext       | ReportCategory | ReportName         | BPID | HealthSystemValidation                         | ProgramsValidation                                                         | LocationsValidation                                                                                                                                                                 | Facilities                                                        | LearningPathway                                                                                          |
+      | User        | FirstName | LastName | PreviousRole      | Role       | Phone      | PhoneValidation | NPI | EnableApplications          | Applications                                  | ApplicationsNotVisible       | Email                            | HasHealthSystem2 | Health System2 | Programs    | Locations                        | Roletext       | ReportCategory | ReportName         | BPID | HealthSystemValidation                         | ProgramsValidation                                                         | LocationsValidation                                                                                                                                                                 | Facilities                                                        | LearningPathway                                                                                          |
       | Super Admin | FirstName | LastName | Remedy Sales Team | Physicians | 9999999999 | 999-999-9999    | NPI | Physician Connect, Episodes | Episodes, Reports, Lessons, Physician Connect | Episodes 2.0, Administration | qaautomation@remedypartners.com2 | Yes              | TeamHealth     | BPCI-Model2 | 2070-g14--North Shore Med Center | ROLE_CLINICIAN | Patient ID     | Episode DRG Issues |      | TeamHealth, United Health Services of New York | TeamHealth--BPCI Model 2, United Health Services of New York--BPCI Model 2 | TeamHealth--2070-g14--North Shore Med Center, United Health Services of New York--6005-197--United Health Services, United Health Services of New York--6005-200--Cape Cod Hospital | North Shore Med Center, United Health Services, Cape Cod Hospital | i am learning path, Learning Pathway 2, max-test-052417, Clinical Operations Acute Care Hospital Model 2 |
-
 
   Scenario Outline: Edit phone, Role from <PreviousRole> to <Role> and Remove Existing Location and Add new Location
     Given I am on the login page
