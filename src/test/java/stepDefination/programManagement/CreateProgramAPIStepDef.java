@@ -9,9 +9,9 @@ public class CreateProgramAPIStepDef extends DriverScript{
 	
 	CreateProgramAPI programAPI =new CreateProgramAPI(driver);
 
-	@And("^build json for Program with attribution rules \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void create_ProgramJsonW_AttributionRules(String pName, String payorOrId, String cId, String cValue, int noOfRulesForThisPrg, String programID, boolean multipleBundleEpisodes) throws Throwable {
-		programAPI.createProgramJsonWAttributionRules(pName, payorOrId, cId, cValue, noOfRulesForThisPrg, programID, multipleBundleEpisodes);
+	@And("^build json for Program with attribution rules \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void createProgramJsonWAttributionRules(String pName, String payorOrId, String cAttributionRankID, String cAttributinRankValue, int noOfAttributionRulesForThisPrg, String cValidationRankID, String cValidationValue, int noOfValidationRulesForThisPrg, boolean multipleBundleEpisode) throws Throwable {
+		programAPI.createProgramJsonWAttributionRules(pName, payorOrId, cAttributionRankID, cAttributinRankValue, noOfAttributionRulesForThisPrg, cValidationRankID, cValidationValue, noOfValidationRulesForThisPrg, multipleBundleEpisode);
     }
 
     @And("^create program with this data$")

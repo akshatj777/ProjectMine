@@ -43,7 +43,7 @@ Feature: Search Physician Roster functionality tests
       | Create Payor |               | PAYORNAME | EIN    | ContactPersonTest | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | payor |
 
   Scenario Outline: <desc>
-    And build json for Program with attribution rules "<prgName>" and "<payorOrgId>" and "1" and "0" and "1" and "programID" and "<multipleBundleEpisodes>"
+    And build json for Program with attribution rules "<prgName>" and "<payorOrgId>" and "" and "" and "0" and "" and "" and "0" and "<multipleBundleEpisode>"
     When create program with this data
     Then verification of Actual vs expected results <expPrgStatusCode> and "<responseMsg>"
     When Get by id <id> and <type>
