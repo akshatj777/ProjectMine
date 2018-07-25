@@ -649,8 +649,8 @@ public class EditUser extends BaseClass {
 	}
 	
 	public void VerifyMessageForInvalidLocations(String text) throws InterruptedException {
-			iWillWaitToSee(By.xpath("//h3[text()=' No Results Found ']"));
-			Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//h3[text()=' No Results Found ']"))));
+			iWillWaitToSee(By.xpath("//div[@class='content active']//h3[text()=' No Results Found ']"));
+			Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//div[@class='content active']//h3[text()=' No Results Found ']"))));
 	}
 
 	public void iVerifyIncompleteOrganisation() {
