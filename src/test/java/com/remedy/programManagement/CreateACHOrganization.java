@@ -491,6 +491,23 @@ public class CreateACHOrganization extends BaseClass{
     			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateLTCHOrganization.tempLTCHOrg.get("LID"));
     		}
     	}
+    	else if(field.contains("IRF"))
+    	{
+    		if(text.equals("LID"))
+        	{
+    			CreateIRFOrganization.tempIRFOrg.put("LID", createRandomNumber(15));
+    			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateIRFOrganization.tempIRFOrg.get("LID"));
+    		}
+        	else if(text.equals("DUPLICATE_LID"))
+        	{
+        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateIRFOrganization.tempIRFOrg.get("LID"));
+        	}
+        	else if(text.equals("LIDmorethan20characters"))
+        	{
+    			CreateIRFOrganization.tempIRFOrg.put("LID", createRandomNumber(21));
+    			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateIRFOrganization.tempIRFOrg.get("LID"));
+    		}
+    	}
         else
         {
         	iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), text);

@@ -351,7 +351,7 @@ Feature: Edit IRF Organization functionality tests
     Then I verify "Location 2" on "Edit" organization page
     And I edit "Location Name" field to <Loc_Name> for Location "2" for organization
     Then I click on "Submit" button on "Edit" organization page
-    And I verify duplicate Location Message "Duplicate Location"
+    #And I verify duplicate Location Message "Duplicate Location"
 
     Examples: 
       | Description                                             | Has_MO | IRF_Name | Loc_Name | Loc_Address1 | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                |

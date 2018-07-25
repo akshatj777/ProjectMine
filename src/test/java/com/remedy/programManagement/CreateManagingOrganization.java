@@ -200,6 +200,11 @@ public class CreateManagingOrganization extends BaseClass {
 				CreateLTCHOrganization.tempLTCHOrg.put("LTCHNAME",RandomStringUtils.randomAlphabetic(75));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.tempLTCHOrg.get("LTCHNAME"));
 			}
+			else if(field.contains("IRF"))
+			{
+				CreateIRFOrganization.tempIRFOrg.put("IRFNAME",RandomStringUtils.randomAlphabetic(75));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateIRFOrganization.tempIRFOrg.get("IRFNAME"));
+			}
 			else if(field.contains("Hospice"))
 			{
 				CreateHospiceOrganization.tempHospiceOrg.put("HOSPICENAME",RandomStringUtils.randomAlphabetic(75));
@@ -241,6 +246,11 @@ public class CreateManagingOrganization extends BaseClass {
 			{
 				CreateLTCHOrganization.tempLTCHOrg.put("LTCHNAME",str+RandomStringUtils.randomAlphabetic(7));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.tempLTCHOrg.get("LTCHNAME"));
+			}
+			else if(field.contains("IRF"))
+			{
+				CreateIRFOrganization.tempIRFOrg.put("IRFNAME",str+RandomStringUtils.randomAlphabetic(7));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateIRFOrganization.tempIRFOrg.get("IRFNAME"));
 			}
 			else if(field.contains("Hospice"))
 			{
