@@ -242,13 +242,21 @@ public class LandingPage extends BaseClass{
     	clickElement(driver.findElement(By.xpath("//button[contains(text(),'Okay')]")));
     	
     }
-public void PasswordMismachErrorMsg(String text){
+public void ValidationMsgForRestPass(String text){
+	if(text.equals("Please ensure the password and the confirmation are the same")){
     	iWillWaitToSee(By.cssSelector(".auth0-global-message.auth0-global-message-error"));
     	Assert.assertTrue(driver.findElement(By.cssSelector(".auth0-global-message.auth0-global-message-error")).getAttribute("innerText").toString().trim().contains(text));
-    }
-public void passwordGuidelinesVerification(){
-	Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-password-strength.animated.fadeIn"))));
-}
+	}
+	else if (text.equals("Remedy Connect")){
+		iWillWaitToSee(By.xpath("//*[contains(text(),'"+text+"')]"));
+		isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+text+"')]")));
+	}
+	else if (text.equals("Password guidelines")){
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-password-strength.animated.fadeIn"))));
+
+	}
+	}
+
 public void forgotPasswordLink(){
 	iWillWaitToSee(By.cssSelector("a.auth0-lock-alternative-link"));
 	clickElement(driver.findElement(By.cssSelector("a.auth0-lock-alternative-link")));

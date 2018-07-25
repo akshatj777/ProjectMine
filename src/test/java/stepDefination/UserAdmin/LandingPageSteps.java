@@ -63,14 +63,11 @@ public class LandingPageSteps extends DriverScript{
     public void iConfirmOnResetPasswordBox(){
     	landingPage.iConfirmOnResetPasswordBox();
     }
-    @Then("^I should see error message for password mismatch \"([^\"]*)\"$")
-    public void PasswordMismachErrorMsg(String text){
-    	landingPage.PasswordMismachErrorMsg(text);
+    @Then("^I validate the validation message \"([^\"]*)\" for reset password$")
+    public void ValidationMsgForRestPass(String text){
+    	landingPage.ValidationMsgForRestPass(text);
     }
-    @Then("^I should see password guidelines for a valid password$")
-    public void passwordGuidelinesVerification(){
-    	landingPage.passwordGuidelinesVerification();
-    }
+   
     @Then("^I click on forgot password link$")
     public void forgotPasswordLink(){
     	landingPage.forgotPasswordLink();
