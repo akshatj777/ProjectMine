@@ -1,6 +1,6 @@
 Feature: UI Scenarios - Super Admin User
 
-  Scenario Outline: UI verification of Login page
+  Scenario Outline: Login page validation- <Description>
     Given I am on the login page
     And I should see Log in widget
     Then I should see email textbox field
@@ -16,11 +16,11 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the validation message "<ValidationMsg>"
 
     Examples: 
-      | Email                                  | Password | ValidationMsg            |
-      | lbarinstein+qaadmin@remedypartners.com | Testing1 | Remedy Connect           |
-      | lbarinstein+qaadmin@remedypartners.com |          | Can't be blank           |
-      | lbarinstein+qaadmin@remedypartners.com | Testing8 | WRONG EMAIL OR PASSWORD. |
-      |                                        |          | Can't be blank           |
+      | Description                   | Email                                  | Password | ValidationMsg            |
+      | correct username and password | lbarinstein+qaadmin@remedypartners.com | Testing1 | Remedy Connect           |
+      | blank password                | lbarinstein+qaadmin@remedypartners.com |          | Can't be blank           |
+      | Wrong credentials             | lbarinstein+qaadmin@remedypartners.com | Testing8 | WRONG EMAIL OR PASSWORD. |
+      | Blank email and password      |                                        |          | Can't be blank           |
 
   Scenario Outline: Create Physician through API call and then verify the user
     Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>" and "<LearningPathways>"

@@ -17,33 +17,7 @@ Feature: Reset and forgot password functionality from UA2 application
       | User        | FirstName                                 | LastName                                 | Email                           | Phone | NPI | Role      | RoleID      | Applications                                             | LearningPathways                       | Locations             | expStatusCode |
       | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       |     | Executive | 1-Executive | episode_connect-Episodes,reports-Reports,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
 
-  Scenario Outline: Reset Password: Valid new password and confirm password match
-    Given I am on the login page
-    Then I enter newuser email for "<User>-<Role>" login to Remedy
-    Then I enter newuser password for login to Remedy
-    Then I click Access button
-    Then I click on "Reset Password" button from top right corner icon
-    Then I click on Okay on reset password confirmation box
-    Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account
-    Then I enter password "1Welcome2" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I verify the unread mail in inbox in my account
-    Then I verify Change Password mail in Inbox in my account
-    Then I click on Change Password mail in Inbox
-    Then I verify "Change My Password" link in mail content
-    Then I click on "Change My Password" link in mail content
-    And I switch to new window
-    And I enter new password "<NewPassword>" to set new password
-    And I enter confirm new password "<NewPassword>" to set new password
-    And I click on submit button to set new password
-    And I redirect to Remedy connect page
-
-    Examples: 
-      | User        | Role      | NewPassword |
-      | Super Admin | Executive | Testing2    |
- Scenario Outline: Reset Password: New password and confirm password mismatch
+  Scenario Outline: Reset Password: Validating validation message for - <Description>
     Given I am on the login page
     Then I enter newuser email for "<User>-<Role>" login to Remedy
     And I enter password field <Password> for Login
@@ -64,38 +38,13 @@ Feature: Reset and forgot password functionality from UA2 application
     And I enter new password "<NewPassword>" to set new password
     And I enter confirm new password "<ConfirmPass>" to set new password
     And I click on submit button to set new password
-    And I should see error message for password mismatch "Please ensure the password and the confirmation are the same"
+    And I validate the validation message "<ValidationMsg>" for reset password
 
     Examples: 
-      | User        | Role      | Password | NewPassword | ConfirmPass |
-      | Super Admin | Executive | Testing2 | Testing1    | Test        |
-
-  Scenario Outline: Reset Password: Invalid new password
-    Given I am on the login page
-    Then I enter newuser email for "<User>-<Role>" login to Remedy
-    And I enter password field <Password> for Login
-    Then I click Access button
-    Then I click on "Reset Password" button from top right corner icon
-    Then I click on Okay on reset password confirmation box
-    Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account
-    Then I enter password "1Welcome2" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I verify the unread mail in inbox in my account
-    Then I verify Change Password mail in Inbox in my account
-    Then I click on Change Password mail in Inbox
-    Then I verify "Change My Password" link in mail content
-    Then I click on "Change My Password" link in mail content
-    And I switch to new window
-    And I enter new password "<NewPassword>" to set new password
-    And I enter confirm new password "<NewPassword>" to set new password
-    And I click on submit button to set new password
-    And I should see password guidelines for a valid password
-
-    Examples: 
-      | User        | Role      | Password | NewPassword |
-      | Super Admin | Executive | Testing2 | test        |
+      | Description                                               | User        | Role      | Password  | NewPassword | ConfirmPass | ValidationMsg                                                |
+      | Password reset successful                                 | Super Admin | Executive | Testing1@ | Testing2    | Testing2    | Remedy Connect                                               |
+      | when password and the confirmation password are different | Super Admin | Executive | Testing2  | Testing1$   | Test        | Please ensure the password and the confirmation are the same |
+      | When entered password does not meet guidelines            | Super Admin | Executive | Testing2  | test        |             | Password guidelines                                          |
 
   Scenario Outline: Forgot Password- Forgot password page validation and putting invalid and valid email and logging in with new password
     Given I am on the login page
@@ -136,9 +85,9 @@ Feature: Reset and forgot password functionality from UA2 application
 
     Examples: 
       | User        | Role      | NewPassword | WrongPassword |
-      | Super Admin | Executive | Testing1    | Testing8 |
+      | Super Admin | Executive | Testing1    | Testing8      |
 
-  Scenario Outline: Forgot Password- New Password and confirm password mismatch
+  Scenario Outline: Forgot Password- Validating validation message - <Description>
     Given I am on the login page
     Then I click on forgot password link
     Then I enter email for "<User>-<Role>" to generate password link
@@ -157,35 +106,9 @@ Feature: Reset and forgot password functionality from UA2 application
     And I enter new password "<NewPassword>" to set new password
     And I enter confirm new password "<ConfirmPassword>" to set new password
     And I click on submit button to set new password
-    And I should see error message for password mismatch "Please ensure the password and the confirmation are the same"
+    And I validate the validation message "<ValidationMsg>" for reset password
 
     Examples: 
-      | User        | Role      | NewPassword | ConfirmPassword |
-      | Super Admin | Executive | Testing3    | Test            |
-
-  Scenario Outline: Forgot Password- putting invalid new password and verify password guidelines
-    Given I am on the login page
-    Then I click on forgot password link
-    Then I enter email for "<User>-<Role>" to generate password link
-    And I click on send mail button
-    Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account
-    Then I enter password "1Welcome2" to login mail account
-    Then I click on Mail icon in my account
-    Then I click on Inbox in mail
-    Then I verify the unread mail in inbox in my account
-    Then I verify Change Password mail in Inbox in my account
-    Then I click on Change Password mail in Inbox
-    Then I verify "Change My Password" link in mail content
-    Then I click on "Change My Password" link in mail content
-    And I switch to new window
-    And I enter new password "<NewPassword>" to set new password
-    And I enter confirm new password "<NewPassword>" to set new password
-    And I click on submit button to set new password
-    And I should see password guidelines for a valid password
-
-    Examples: 
-      | User        | Role      | NewPassword |
-      | Super Admin | Executive | Test        |
-
- 
+      | Description                                               | User        | Role      | NewPassword | ConfirmPassword | ValidationMsg                                                |
+      | when password and the confirmation password are different | Super Admin | Executive | Testing3    | Test            | Please ensure the password and the confirmation are the same |
+      | When entered password does not meet guidelines            | Super Admin | Executive | Test        |                 | Password guidelines                                          |
