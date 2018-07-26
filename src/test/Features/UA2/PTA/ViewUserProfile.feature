@@ -1,4 +1,4 @@
-Feature: View User - Super Admin User
+Feature: View User - PTA User
 
   Scenario Outline: Create PTA through API call and then verify the user
     Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>" and "<LearningPathways>"
