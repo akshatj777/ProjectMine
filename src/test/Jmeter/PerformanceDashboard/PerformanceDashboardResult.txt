@@ -1,1 +1,1 @@
-ECEpiosdeCount=194,claimsEpiosdeCount=1747,savingRate=2.800,TotalNPRA=1490798,TotalProgram=52928895,StartDate=03/31/2018,dischargetoSNF=25.300 
+ECEpiosdeCount=194,claimsEpiosdeCount=1747,savingRate=2.800,TotalNPRA=1490798,TotalProgram=52928895,StartDate=03/31/2018,dischargetoSNF=25.300 ,SNFDays=21.9,EpisodesWithReadmission=13.800

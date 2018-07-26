@@ -23,5 +23,9 @@ Scenario: Verify text on program overview report
   And I verify "NPRA" count matched with database value on dashboard for npra with picture resolution "300X300"
   Then I set the time from starting date as "1/1/2017" and ending date to today date
   And I verify "%Discharge to SNF" count matched with database value on dashboard for discharge to snf with picture resolution "500X500"
+  And I verify "%Episodes with a Readmission" count matched with database value on dashboard for episodes with readmission with picture resolution "500X500"
+  Then I set the time from starting date as "1/1/2017" to ending date to claimscube date to validate claims episode data
+  And I verify "SNF Days" count matched with database value on dashboard for snf days with picture resolution "500X500"
+  
   
   

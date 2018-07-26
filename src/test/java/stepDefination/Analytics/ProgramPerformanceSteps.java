@@ -239,4 +239,14 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iSetCalendarstartingDateAndEndDateToToday(text);
 	}
 	
+	@And("^I verify \"([^\"]*)\" count matched with database value on dashboard for snf days with picture resolution \"([^\"]*)\"$")
+	public void i_verify_count_matched_with_database_for_snf_days_as_on_the_dashboard(String text,String resolution) throws Throwable{
+		programdashboard.GetTextFromScreenShot(text,"//div[@tb-test-id='SNF Days Current']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 248px; height: 56px;']",resolution);
+	}
+	
+	@And("^I verify \"([^\"]*)\" count matched with database value on dashboard for episodes with readmission with picture resolution \"([^\"]*)\"$")
+	public void i_verify_count_matched_with_database_for_episodes_with_readmission_as_on_the_dashboard(String text,String resolution) throws Throwable{
+		programdashboard.GetTextFromScreenShot(text,"//div[@tb-test-id='Readmissions Current']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 259px; height: 55px;']",resolution);
+	}
+	
 }

@@ -47,7 +47,7 @@ import com.remedy.resources.DriverScript;
 public class ProgramPerformance extends BaseClass{
 	
 	int ECEpiosdeCount,claimsEpiosdeCount,TotalNPRA,TotalProgram;
-    Double savingRate,DischargeToSNF;
+    Double savingRate,DischargeToSNF,SNFDays,EpisodesWithReadmission;
     String StartDate;
 	WebDriverWait wait = new WebDriverWait(driver, 300);
 
@@ -575,6 +575,16 @@ public class ProgramPerformance extends BaseClass{
 		      Double snf=Double.parseDouble(Dtosnf[1]);
 		      DischargeToSNF=snf;
 		      System.out.println("The discharge to snf value is"+DischargeToSNF);
+		      String SnfDays=elements.get(7).trim();
+		      String snfD[]=SnfDays.split("=");
+		      Double snfdays=Double.parseDouble(snfD[1]);
+		      SNFDays=snfdays;
+		      System.out.println("The snf days value is"+SNFDays);
+		      String EWReadmission=elements.get(8).trim();
+		      String EReadmission[]=EWReadmission.split("=");
+		      Double episodeR=Double.parseDouble(EReadmission[1]);
+		      EpisodesWithReadmission=episodeR;
+		      System.out.println("The episodes with readmissions value is"+EpisodesWithReadmission);
 		      delay();
 		 }      
 	 }
@@ -638,6 +648,12 @@ public class ProgramPerformance extends BaseClass{
 					 Assert.assertTrue(FinalOutput.trim().contains(numberformat(TotalNPRA)));
 				 }else if(text.equals("%Discharge to SNF")){
 					 Double a= ((float)(((int)Math.pow(10,1)*DischargeToSNF))/Math.pow(10,1));
+					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
+				 }else if(text.equals("SNF Days")){
+					 Double a= ((float)(((int)Math.pow(10,1)*SNFDays))/Math.pow(10,1));
+					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
+				 }else if(text.equals("%Episodes with a Readmission")){
+					 Double a= ((float)(((int)Math.pow(10,1)*EpisodesWithReadmission))/Math.pow(10,1));
 					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
 				 }
 	 }
