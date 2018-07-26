@@ -1513,7 +1513,8 @@ public void iUnselectAllSelectedApps(){
 	
 	}
    public void verifyAppUnchecked(String fieldName) throws Throwable {
-	   if(fieldName.contains(","))
+	   if(!(fieldName.isEmpty()))
+			   {	   if(fieldName.contains(","))
 	   {
 		   StringTokenizer st = new StringTokenizer(fieldName,",");
 	       while (st.hasMoreTokens()) {  
@@ -1526,7 +1527,9 @@ public void iUnselectAllSelectedApps(){
 	   }
 	    
    }
+   }
    public void verifyAppChecked(String fieldName) throws Throwable {
+	   if(!(fieldName.isEmpty())){
 	   if(fieldName.contains(","))
 	   {
 		   StringTokenizer st = new StringTokenizer(fieldName,",");
@@ -1538,6 +1541,7 @@ public void iUnselectAllSelectedApps(){
 	   {
 		   Assert.assertTrue(isElementPresent(By.xpath("//label[text()='"+fieldName+"']/parent::div[@class='ui checked checkbox']")));
 	   }
+   }
    }
    
    public void verifyApplicationList(String appList) throws Throwable {
@@ -1583,7 +1587,7 @@ public void iUnselectAllSelectedApps(){
    }
 
    public void enterTextLearningPathwaySearchBox(String searchParam) throws Throwable {
-       if(!(searchParam.equals("")))
+       if(!(searchParam.isEmpty()))
        {
     	   iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), searchParam);  
        }

@@ -90,7 +90,8 @@ public class ViewUserPage extends BaseClass {
 		
 		field=new StringBuffer(field).insert(3, "-").toString();
 		field=new StringBuffer(field).insert(7, "-").toString();
-		isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+field+"')]")));
+	Assert.assertTrue(driver.findElement(By.xpath("//div[@class='info-row'][2]")).getAttribute("innerText").toString().contains(field));
+
 		}
 	}
 	public void verifyRole(String field) throws Throwable {
