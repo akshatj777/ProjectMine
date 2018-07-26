@@ -21,7 +21,7 @@ public class EditPhysicianRosterStepDef extends DriverScript {
 	    }
 	
 	@Then("^I click \"([^\"]*)\" field in search list on view profile of \"([^\"]*)\" Organization search box$")
-	  public void i_Clcik_PhysicianRoster_Field_In_Search_List_On_View_Profile_Of_Organization_Search_Box(String text, String org) throws Throwable {
+	  public void i_Click_PhysicianRoster_Field_In_Search_List_On_View_Profile_Of_Organization_Search_Box(String text, String org) throws Throwable {
 		editPhysicianRoster.iClickPhysicianRosterFieldInSearchListOnViewProfileOfOrganizationSearchBox(text, org);
 	    }
 	

@@ -17,7 +17,7 @@ public class EditHospitalOrganization extends BaseClass{
 		if (org.contains("YES")){
 			String actual = getTextForElement(driver.findElement(By.cssSelector(".display-managing-org")));
 			actual = actual.substring((actual.indexOf(":"))+1).trim();
-			Assert.assertEquals(CreateManagingOrganization.moOrg.get("MONAME"),actual);
+			Assert.assertEquals(CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1),actual);
 		}
 		else
 		{

@@ -43,14 +43,14 @@ Feature: Edit Physician Roster functionality tests
       | Create Payor |               | PAYORNAME | EIN    | ContactPersonTest | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | payor |
 
   Scenario Outline: <desc>
-    And build json for Program with attribution rules "<prgName>" and "<payorOrgId>" and "cId" and "" and "0" and "programID"
+    And build json for Program with attribution rules "<prgName>" and "<payorOrgId>" and "" and "" and "0" and "" and "" and "0" and "<multipleBundleEpisode>"
     When create program with this data
     Then verification of Actual vs expected results <expPrgStatusCode> and "<responseMsg>"
     When Get by id <id> and <type>
 
     Examples: 
-      | desc                           | id | programID | prgName     | payorOrgId | expPrgStatusCode | responseMsg | name      | address1 | address2 | city | state | zip   | participantId | tinEin | contactName | contactEmail       | contactPhone | expDelCode | type    |
-      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |
+      | desc                           | id | programID | prgName     | payorOrgId | expPrgStatusCode | responseMsg | name      | address1 | address2 | city | state | zip   | participantId | tinEin | contactName | contactEmail       | contactPhone | expDelCode | type    | multipleBundleEpisodes |
+      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program | true                   |
 
   Scenario Outline: Create Bundle using API calls
     Given create Bundle Json to String and pass it to body with "<name>" and "<content>" and "<bundleCode>"
@@ -70,10 +70,10 @@ Feature: Edit Physician Roster functionality tests
 
     Examples: 
       | desc                                                    | id | type          | orgType      | contractId | endDate      | organizationId | programId | startDate    | participatingBundleId | bundleStartDate | bundleEndDate | priceStartDate | priceEndDate | price | baseLineEndDate | baseLineStatDate | trendFactor | upperBound | lowerBound | expStatusCode | responseMsg |
-      | Create Contract with Hopsital has MO using API Calls    |  0 | bundlePayment | hospital     | []         | [2020-12-31] |                |           | [2018-01-15] |                       | [2018-05-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
-      | Create Contract with Hopsital has no MO using API Calls |  0 | bundlePayment | hospitalNOMO | []         | [2020-12-26] |                |           | [2018-01-09] |                       | [2019-01-01]    | [2019-07-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
-      | Create Contract with PGP using API Calls                |  0 | bundlePayment | pgp          | []         | [2020-12-25] |                |           | [2018-01-01] |                       | [2019-01-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
-      | Create Contract with PGP has no MO using API Calls      |  0 | bundlePayment | pgpNOMO      | []         | [2020-12-26] |                |           | [2018-01-16] |                       | [2019-01-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract with Hopsital has MO using API Calls    |  0 | bundlePayment | hospital     | []         | [2020-12-31] |                |           | [2017-01-15] |                       | [2018-05-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract with Hopsital has no MO using API Calls |  0 | bundlePayment | hospitalNOMO | []         | [2020-12-26] |                |           | [2017-01-09] |                       | [2019-01-01]    | [2019-07-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract with PGP using API Calls                |  0 | bundlePayment | pgp          | []         | [2020-12-25] |                |           | [2017-01-01] |                       | [2019-01-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract with PGP has no MO using API Calls      |  0 | bundlePayment | pgpNOMO      | []         | [2020-12-26] |                |           | [2017-01-16] |                       | [2019-01-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
 
   Scenario Outline: : <Description>
     When create provider taxonomy classification grouping sepecialization Json "classificationForPhysRoster"
@@ -222,11 +222,11 @@ Feature: Edit Physician Roster functionality tests
 
     Examples: 
       | Description                                                                                                                              | Has_MO | PGP_Name | Program_Name | PGP_Organization_Name | Contract_ID | Physician_Roster | FirstName | LastName     | NPI          | ContractStartDate | ContractEndDate | ValidationMessage                                                  |
-      | Check validation message when Physician Roster Start Date is prior to Bundle Payment Contract Start Date on Edit Physician Roster page   | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2019/01/08        | 2020/12/26      | The start date is before the start of the Bundled Payment Contract |
-      | Check validation message when Physician Roster Start Date is greater than Bundle Payment Contract End Date on Edit Physician Roster page | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2020/11/27        | 2020/11/26      | The start date and end date are not valid.                         |
+      | Check validation message when Physician Roster Start Date is prior to Bundle Payment Contract Start Date on Edit Physician Roster page   | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2017/01/01        | 2020/12/26      | The start date is before the start of the Bundled Payment Contract |
+      | Check validation message when Physician Roster Start Date is greater than Bundle Payment Contract End Date on Edit Physician Roster page | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2021/11/27        | 2020/11/26      | The start date and end date are not valid.                         |
       | Validation when Physician Roster Start Date is greater than Physician Roster End Date on Edit Physician Roster page                      | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2020/12/02        | 2020/11/01      | The start date and end date are not valid.                         |
-      | Validation when Physician Roster End Date is greater than Bundle Payment Contract End Date on Edit Physician Roster page                 | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2019/01/30        | 2020/12/30      | The end date is after the end of the Bundled Payment Contract      |
-      | Validation when Physician Roster End Date is prior to Bundle Payment Contract Start Date on Edit Physician Roster page                   | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2019/01/30        | 2017/01/28      | The start date and end date are not valid.                         |
+      | Validation when Physician Roster End Date is greater than Bundle Payment Contract End Date on Edit Physician Roster page                 | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2019/01/30        | 2021/12/30      | The end date is after the end of the Bundled Payment Contract      |
+      | Validation when Physician Roster End Date is prior to Bundle Payment Contract Start Date on Edit Physician Roster page                   | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               |         123 | FETCHFROMAPI     | firstName | testLastName | FETCHFROMAPI | 2019/01/30        | 2017/01/01      | The start date and end date are not valid.                         |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -276,12 +276,12 @@ Feature: Edit Physician Roster functionality tests
     Then I enter date "<PhysicianStartDate>" in "PhysicianStartDate" field for index "0"
     Then I enter date "<PhysicianEndDate>" in "PhysicianEndDate" field for index "1"
     Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "edit Contracts " on Payor organization page
+    Then I verify "<Message>" after submitting the "edit Contracts" on Payor organization page
 
     Examples: 
       | Description                                                        | Has_MO | PGP_Name | Program_Name | PGP_Organization_Name | Physician_Roster | PhysicianStartDate | PhysicianEndDate | Message                         |
-      | Edit and save a physician with all the available fields without MO | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               | FETCHFROMAPI     | 2019/01/30         | 2020/06/30       | Physicians Successfully Updated |
-      | Edit and save a physician with all the available fields with MO    | YES    | PGPNAME  | PROGRAMNAME  | PGPNAME               | FETCHFROMAPI     | 2019/07/01         | 2020/12/01       | Physicians Successfully Updated |
+      | Edit and save a physician with all the available fields without MO | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               | FETCHFROMAPI     | TodaysDate         | FutureDate       | Physicians Successfully Updated |
+      | Edit and save a physician with all the available fields with MO    | YES    | PGPNAME  | PROGRAMNAME  | PGPNAME               | FETCHFROMAPI     | TodaysDate         | FutureDate       | Physicians Successfully Updated |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -458,8 +458,8 @@ Feature: Edit Physician Roster functionality tests
 
     Examples: 
       | Description                                                        | Has_MO | Hosp_Name | Program_Name | Hospital_Organization_Name | Physician_Roster | PhysicianStartDate | PhysicianEndDate | Message                         |
-      | Edit and save a physician with all the available fields without MO | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | 2019/02/30         | 2020/08/30       | Physicians Successfully Updated |
-      | Edit and save a physician with all the available fields with MO    | YES    | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | 2019/03/01         | 2020/12/01       | Physicians Successfully Updated |
+      | Edit and save a physician with all the available fields without MO | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | TodaysDate         | FutureDate       | Physicians Successfully Updated |
+      | Edit and save a physician with all the available fields with MO    | YES    | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI     | TodaysDate         | FutureDate       | Physicians Successfully Updated |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"

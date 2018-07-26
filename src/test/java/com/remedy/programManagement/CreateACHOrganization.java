@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -144,6 +145,43 @@ public class CreateACHOrganization extends BaseClass{
 			}
 			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
 					iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateSNFOrganization.SNFOrg.get("NPI"));
+			}
+			else if(id.contains("lessThan6")){
+				String value = createRandomNumber(5);
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
+			}
+			else if(id.contains("greaterThan10")){
+				String value = createRandomNumber(11);
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
+			}
+			else 
+			{
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), id.substring(id.indexOf("-")+1).trim());
+				delay();
+			}
+		}
+		
+		if (id.contains("IRF")){
+			if((id.substring(id.indexOf("-")+1).trim()).equals("CCN")){
+				CreateIRFOrganization.tempIRFOrg.put("CCN", createRandomNumber(10));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateIRFOrganization.tempIRFOrg.get("CCN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("EIN")){
+				CreateIRFOrganization.tempIRFOrg.put("EIN", createRandomNumber(10));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateIRFOrganization.tempIRFOrg.get("EIN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("NPI")){
+				CreateIRFOrganization.tempIRFOrg.put("NPI", createRandomNumber(10));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateIRFOrganization.tempIRFOrg.get("NPI"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_CCN")){
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateIRFOrganization.IRFOrg.get("CCN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_EIN")){
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateIRFOrganization.IRFOrg.get("EIN"));
+			}
+			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
+					iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateIRFOrganization.IRFOrg.get("NPI"));
 			}
 			else if(id.contains("lessThan6")){
 				String value = createRandomNumber(5);
@@ -453,6 +491,23 @@ public class CreateACHOrganization extends BaseClass{
     			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateLTCHOrganization.tempLTCHOrg.get("LID"));
     		}
     	}
+    	else if(field.contains("IRF"))
+    	{
+    		if(text.equals("LID"))
+        	{
+    			CreateIRFOrganization.tempIRFOrg.put("LID", createRandomNumber(15));
+    			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateIRFOrganization.tempIRFOrg.get("LID"));
+    		}
+        	else if(text.equals("DUPLICATE_LID"))
+        	{
+        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateIRFOrganization.tempIRFOrg.get("LID"));
+        	}
+        	else if(text.equals("LIDmorethan20characters"))
+        	{
+    			CreateIRFOrganization.tempIRFOrg.put("LID", createRandomNumber(21));
+    			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateIRFOrganization.tempIRFOrg.get("LID"));
+    		}
+    	}
         else
         {
         	iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), text);
@@ -473,11 +528,17 @@ public class CreateACHOrganization extends BaseClass{
     		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
     		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+CreateSNFOrganization.SNFOrg_noMO.get("CCN")+"')]")));
     	}
+    	else if(text.contains("IRF")){
+    		delay();
+        	iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), CreateIRFOrganization.IRFOrg_noMO.get("CCN"));
+    		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+    		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+CreateIRFOrganization.IRFOrg_noMO.get("CCN")+"')]")));
+    	}
     } 
     
     public void iVerifyLocationIdShouldBeGreater(int value)
     {
-    	location_Id =driver.findElements(By.xpath("//div[@class='fixedDataTableCellLayout_main public_fixedDataTableCell_main' and (contains(@style,'height: 30px;'))]")).get(0).getText();
+    	location_Id =driver.findElement(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(), '10')]")).getText();
     	int loc_Id = Integer.parseInt(location_Id);
     	Assert.assertTrue(value<loc_Id);
     }
@@ -494,5 +555,13 @@ public class CreateACHOrganization extends BaseClass{
     public void iVerifyDuplicateLocationMessage(String text){
     	iWillWaitToSee(By.xpath("//div[text()='Duplicate Location']"));
     	verifyTextForElement(driver.findElement(By.xpath("//div[text()='Duplicate Location']")), text);
+    }
+    
+    public void iVerifyTheRadioButtonsShouldGetHighlightedAsRedonCreateOrganizationpage(){
+    	WebElement element = driver.findElement(By.xpath("//span[text()='Has a Managing Organization']"));
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView();", element);
+    	String color = driver.findElement(By.xpath("//span[text()='Has a Managing Organization']")).getCssValue("color");
+    	//Assert.assertEquals(color, driver.findElement(By.xpath("//span[text()='Has a Managing Organization']")));
     }
 }

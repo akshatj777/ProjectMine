@@ -1,12 +1,5 @@
 Feature: Edit Hospice organization functionality tests
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -18,6 +11,11 @@ Feature: Edit Hospice organization functionality tests
       | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospice" organization tab on organization dashboard
     Then I click on "+" button on "Hospice" organization page
     And I verify "Create Hospice Organization" header text on create organization page
@@ -44,6 +42,11 @@ Feature: Edit Hospice organization functionality tests
       | Create Hospice Organization with all the available fields - With MO    | YES    | MONAME       | HOSPICENAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Midwest | Chicago | CCN | EIN | NPI | Hospice Organization Successfully Created. |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospice" organization tab on organization dashboard
     When I search with "<Hospice_Name> - <Has_MO>" on organization in search box
     And I verify "<Hospice_Name> - <Has_MO>" name on the header of view profile
@@ -68,6 +71,11 @@ Feature: Edit Hospice organization functionality tests
       | Check validation for blank Postal code  | NO     | HOSPICENAME  | HOSPICENAME         | Address1 | City | California |             | Please enter a Postal Code        |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospice" organization tab on organization dashboard
     When I search with "<Hospice_Name> - <Has_MO>" on organization in search box
     And I verify "<Hospice_Name> - <Has_MO>" name on the header of view profile
@@ -95,6 +103,11 @@ Feature: Edit Hospice organization functionality tests
       | Check Allowed Characters for Postal code field | YES    | HOSPICENAME  |                                                                              |                                                           |                                                |                                                           |                                                | abcdefghijkl | Please enter a valid Postal Code                               |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospice" organization tab on organization dashboard
     When I search with "<Hospice_Name> - <Has_MO>" on organization in search box
     And I verify "<Hospice_Name> - <Has_MO>" name on the header of view profile
@@ -115,23 +128,23 @@ Feature: Edit Hospice organization functionality tests
     Then I verify "<Message>" after submitting the "edit Hospice - <Has_MO>" organization page
 
     Examples: 
-      | Description                                                                         | Has_MO | Hospice_Name | Edited_Hospice_Name  | Address1                                                | Short_Name                                    | Address2                                                | City                                          | State      | Postal_Code | Region  | Market  | Message                                    |
-      | Check Character Limit edge condition for Hospice name field - Without MO            | NO     | HOSPICENAME  | equalsTo75Characters | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
-      | Check Character Limit edge condition for Address1 field - Without MO                | NO     | HOSPICENAME  | HOSPICENAME          | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrsjklmnopqrs | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
-      | Check Character Limit edge condition for Short Name field - Without MO              | NO     | HOSPICENAME  | HOSPICENAME          | Address1                                                | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrs | Address2                                                | City                                          | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
-      | Check Character Limit edge condition for Address2 field - Without MO                | NO     | HOSPICENAME  | HOSPICENAME          | Address1                                                | Short_Name                                    | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrsjklmnopqrs | City                                          | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
-      | Check Character Limit edge condition for City field - Without MO                    | NO     | HOSPICENAME  | HOSPICENAME          | Address1                                                | Short_Name                                    | Address2                                                | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrs | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
-      | Check Character Limit edge condition for Postal code field - Without MO             | NO     | HOSPICENAME  | HOSPICENAME          | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California | 10000-0000  | Midwest | Chicago | Hospice Organization Successfully Updated. |
+      | Description                                                                         | Has_MO | Hospice_Name | Edited_Hospice_Name | Address1                                                | Short_Name                                    | Address2                                                | City                                          | State      | Postal_Code | Region  | Market  | Message                                    |
+      | Check Character Limit edge condition for Hospice name field - Without MO            | NO     | HOSPICENAME  | HOSPICENAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
+      | Check Character Limit edge condition for Address1 field - Without MO                | NO     | HOSPICENAME  | HOSPICENAME         | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrsjklmnopqrs | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
+      | Check Character Limit edge condition for Short Name field - Without MO              | NO     | HOSPICENAME  | HOSPICENAME         | Address1                                                | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrs | Address2                                                | City                                          | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
+      | Check Character Limit edge condition for Address2 field - Without MO                | NO     | HOSPICENAME  | HOSPICENAME         | Address1                                                | Short_Name                                    | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrsjklmnopqrs | City                                          | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
+      | Check Character Limit edge condition for City field - Without MO                    | NO     | HOSPICENAME  | HOSPICENAME         | Address1                                                | Short_Name                                    | Address2                                                | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrs | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
+      | Check Character Limit edge condition for Postal code field - Without MO             | NO     | HOSPICENAME  | HOSPICENAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California | 10000-0000  | Midwest | Chicago | Hospice Organization Successfully Updated. |
       #| To check the Allowed characters for the available fields in Edit Hospice Organization - Without MO | NO     | HOSPICENAME  | AllowedCharatcters   | !@$%^&*()_+{}:<>?,./;'[]\\=Address1                     | !@$%^&*()_+{}:<>?,./;'[]\\=Short_Name         | !@$%^&*()_+{}:<>?,./;'[]\\=Address2                     | !@$%^&*()_+{}:<>?,./;'[]\\=City123            | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated.                                                           |
-      | Edit Hospice Organization with Mandatory fields - Without MO                        | NO     | HOSPICENAME  | HOSPICENAME          | Address1                                                |                                               |                                                         | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
-      | Edit Hospice Organization with Mandatory fields + ShortName - Without MO            | NO     | HOSPICENAME  | HOSPICENAME          | Address1                                                | Short_Name                                    |                                                         | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
-      | Edit Hospice Organization with Mandatory fields + Address2 - Without MO             | NO     | HOSPICENAME  | HOSPICENAME          | Address1                                                |                                               | Address2                                                | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
-      | Edit Hospice Organization with Mandatory fields + Address2 + ShortName - Without MO | NO     | HOSPICENAME  | HOSPICENAME          | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
-      | Edit Hospice Organization with Mandatory fields - With MO                           | YES    | HOSPICENAME  | HOSPICENAME          | Address1                                                |                                               |                                                         | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
-      | Edit Hospice Organization with all the available fields - Without MO                | NO     | HOSPICENAME  | HOSPICENAME          | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
-      | Edit Hospice Organization with all the available fields - With MO                   | YES    | HOSPICENAME  | HOSPICENAME          | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
-      | Edit Duplicate Hospice Organization with Mandatory fields - Without MO              | NO     | HOSPICENAME  | DUPLICATE_Hospice    | Address1                                                |                                               |                                                         | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
-      | Edit Duplicate Hospice Organization with Mandatory fields - With MO                 | YES    | HOSPICENAME  | DUPLICATE_Hospice    | Address1                                                |                                               |                                                         | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
+      | Edit Hospice Organization with Mandatory fields - Without MO                        | NO     | HOSPICENAME  | HOSPICENAME         | Address1                                                |                                               |                                                         | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
+      | Edit Hospice Organization with Mandatory fields + ShortName - Without MO            | NO     | HOSPICENAME  | HOSPICENAME         | Address1                                                | Short_Name                                    |                                                         | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
+      | Edit Hospice Organization with Mandatory fields + Address2 - Without MO             | NO     | HOSPICENAME  | HOSPICENAME         | Address1                                                |                                               | Address2                                                | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
+      | Edit Hospice Organization with Mandatory fields + Address2 + ShortName - Without MO | NO     | HOSPICENAME  | HOSPICENAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
+      | Edit Hospice Organization with Mandatory fields - With MO                           | YES    | HOSPICENAME  | HOSPICENAME         | Address1                                                |                                               |                                                         | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
+      | Edit Hospice Organization with all the available fields - Without MO                | NO     | HOSPICENAME  | HOSPICENAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
+      | Edit Hospice Organization with all the available fields - With MO                   | YES    | HOSPICENAME  | HOSPICENAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
+      | Edit Duplicate Hospice Organization with Mandatory fields - Without MO              | NO     | HOSPICENAME  | DUPLICATE_Hospice   | Address1                                                |                                               |                                                         | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
+      | Edit Duplicate Hospice Organization with Mandatory fields - With MO                 | YES    | HOSPICENAME  | DUPLICATE_Hospice   | Address1                                                |                                               |                                                         | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"

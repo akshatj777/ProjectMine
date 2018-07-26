@@ -345,6 +345,74 @@ public class CreatePrograms extends BaseClass {
 	{
 		if(!(date.equals("")))
 		{
+			if(date.equals("TodaysDate"))
+			   {
+			    Date todaysDate = new Date();
+			    date= new SimpleDateFormat("yyyy/MM/dd").format(todaysDate);
+			   }
+			else if(date.equals("FutureDate"))
+			   {
+			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			    Date futureDate = new Date();
+			    Calendar c = Calendar.getInstance();
+			    c.setTime(futureDate);
+			    c.add(Calendar.DATE, 365);
+			    date = sdf.format(c.getTime());
+			   }
+			else if(date.equals("BundleStartDate"))
+			   {
+			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			    Date futureDate = new Date();
+			    Calendar c = Calendar.getInstance();
+			    c.setTime(futureDate);
+			    c.add(Calendar.DATE, 50);
+			    date = sdf.format(c.getTime());
+			   }
+			else if(date.equals("BundleEndDate"))
+			   {
+			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			    Date futureDate = new Date();
+			    Calendar c = Calendar.getInstance();
+			    c.setTime(futureDate);
+			    c.add(Calendar.DATE, 280);
+			    date = sdf.format(c.getTime());
+			   }
+			else if(date.equals("PriceStartDate"))
+			   {
+			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			    Date futureDate = new Date();
+			    Calendar c = Calendar.getInstance();
+			    c.setTime(futureDate);
+			    c.add(Calendar.DATE, 90);
+			    date = sdf.format(c.getTime());
+			   }
+			else if(date.equals("PriceEndDate"))
+			   {
+			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			    Date futureDate = new Date();
+			    Calendar c = Calendar.getInstance();
+			    c.setTime(futureDate);
+			    c.add(Calendar.DATE, 200);
+			    date = sdf.format(c.getTime());
+			   }
+			else if(date.equals("BaselineStartDate"))
+			   {
+			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			    Date futureDate = new Date();
+			    Calendar c = Calendar.getInstance();
+			    c.setTime(futureDate);
+			    c.add(Calendar.DATE, 120);
+			    date = sdf.format(c.getTime());
+			   }
+			else if(date.equals("BaselineEndDate"))
+			   {
+			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			    Date futureDate = new Date();
+			    Calendar c = Calendar.getInstance();
+			    c.setTime(futureDate);
+			    c.add(Calendar.DATE, 150);
+			    date = sdf.format(c.getTime());
+			   }
 			String[] arrMonth = new String[]{"January","February","March","April","May","June","July","August","September","October","November","December"};
 			Date date1=new SimpleDateFormat("yyyy/MM/dd").parse(date); 
 			Calendar cal = Calendar.getInstance();

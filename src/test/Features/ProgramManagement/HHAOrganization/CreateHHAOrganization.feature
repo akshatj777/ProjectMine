@@ -77,6 +77,17 @@ Feature: Create HHA organization functionality tests
     And I select "YES" radio button for managing organization
     Then I select "Invalid_Managing_Org" managing organization name in "YES" Has a Management Organization drop down
     And I verify "No results found" in Has a Management Organization dropdown
+    
+    Scenario Outline: <Description>
+    When I click on "HHA" organization tab on organization dashboard
+    Then I click on "+" button on "HHA" organization page
+    And I verify "Create HHA Organization" header text on create organization page
+    And I select "YES" radio button for managing organization
+    Then I search and verify "<MO_Name>" managing organization name in "YES" Has a Management Organization drop down box
+
+    Examples: 
+      | Description                                                 | Has_MO | MO_Name |
+      | Search for a valid Managing Organization on Create HHA page | YES    | MONAME  |
 
   Scenario Outline: <Description>
     When I click on "HHA" organization tab on organization dashboard

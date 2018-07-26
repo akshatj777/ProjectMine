@@ -65,19 +65,19 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Create Payor |               | PAYORNAME | EIN    | ContactPersonTest | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | payor |
 
   Scenario Outline: <desc>
-    And build json for Program with attribution rules "<prgName>" and "<payorOrgId>" and "cId" and "" and "0" and "programID"
+    And build json for Program with attribution rules "<prgName>" and "<payorOrgId>" and "" and "" and "0" and "" and "" and "0" and "<multipleBundleEpisode>"
     When create program with this data
     Then verification of Actual vs expected results <expPrgStatusCode> and "<responseMsg>"
     When Get by id <id> and <type>
 
     Examples: 
-      | desc                           | id | programID | prgName     | payorOrgId | expPrgStatusCode | responseMsg | name      | address1 | address2 | city | state | zip   | participantId | tinEin | contactName | contactEmail       | contactPhone | expDelCode | type    |
-      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |
-      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |
-      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |
-      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |
-      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |
-      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |
+      | desc                           | id | programID | prgName     | payorOrgId | expPrgStatusCode | responseMsg | name      | address1 | address2 | city | state | zip   | participantId | tinEin | contactName | contactEmail       | contactPhone | expDelCode | type    | multipleBundleEpisodes |
+      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program | true                   |
+      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program | true                   |
+      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 | true        | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |                        |
+      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |                        |
+      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |                        |
+      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |                        |
 
   Scenario Outline: Create Bundle using API calls
     Given create Bundle Json to String and pass it to body with "<name>" and "<content>" and "<bundleCode>"
@@ -310,6 +310,35 @@ Feature: Create Bundled Payment Contracts functionality tests
     And I enter "<Price>" in "price" field for "Bundle1 Price1" on create Contract page
     Then I enter date "<ContractStartDate>" in "ContractStartDate" field for index "0"
     Then I enter date "<ContractEndDate>" in "ContractEndDate" field for index "1"
+    Then I click on "Submit" button on "create" organization page
+    And I verify "<ValidationMsg>" mandatory field validation message on create organization page
+
+    Examples: 
+      | Description                                                                                             | Has_MO | Payor_Name | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | Program_Name | Organization_Type | Organization_Name | Bundle       | Price | Trend_Factor | Upper_Bound | Lower_Bound | ValidationMsg                                  |
+      | Check validation message for Contract creation with Contract End Date is before the Contract Start Date | NO     | PAYORNAME  | 2017/01/05        | 2017/01/03      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPI |   123 |          121 |         135 |         106 | The Contract End Date is before the start date |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "Payor" organization tab on organization dashboard
+    When I search with "<Payor_Name>" on organization in search box
+    And I click "<Payor_Name>" field in search list on organization page
+    And I verify "<Payor_Name>" name on the header of view profile
+    And I verify "Contracts" tab present under "Payor" Organization
+    And I click on "Contracts" tab on view profile of "Payor" Organization
+    And I verify the "Create New Contract" button on view profile of "Payor" Organization
+    Then I click on "Create New Contract" button on "create" organization page
+    And I verify "Create Contract" header text on create organization page
+    And I select "1" Program name "<Program_Name>" in create Contract page under "Payor" Organization
+    And I select Organization type "<Organization_Type>" for Contract "1" on "create" Contracts page
+    And I select Organization name "<Organization_Name> - <Has_MO>" for Contract "1" on "create" Contracts page
+    And I select "1" Bundle "<Bundle>" for Contract "1" on "create" Contracts page
+    And I enter "<Price>" in "price" field for "Bundle1 Price1" on create Contract page
+    Then I enter date "<ContractStartDate>" in "ContractStartDate" field for index "0"
+    Then I enter date "<ContractEndDate>" in "ContractEndDate" field for index "1"
     Then I enter date "<BundleStartDate>" in "BundleStartDate" field for index "2"
     Then I enter date "<BundleEndDate>" in "BundleEndDate" field for index "3"
     Then I enter date "<PriceStartDate>" in "PriceStartDate" field for index "4"
@@ -327,7 +356,6 @@ Feature: Create Bundled Payment Contracts functionality tests
       | Check validation message if Program Name is left blank                                                          | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      |              | ACH               | ACHNAME           | FETCHFROMAPI |   123 |          121 |         135 |         106 | Please select a Program                                         |
       | Check validation message if Bundle Name is left blank                                                           | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           |              |   123 |          121 |         135 |         106 | Required                                                        |
       | Check validation message if Price field is left blank                                                           | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPI |       |          121 |         135 |         106 | Required                                                        |
-      | Check validation message for Contract creation with Contract End Date is before the Contract Start Date         | NO     | PAYORNAME  | 2017/01/05        | 2017/01/03      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPI |   123 |          121 |         135 |         106 | The Contract End Date is before the start date                  |
       | Check validation message for contract creation with Bundle End Date is before the bundle Start Date             | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/02/24      | 2019/01/24    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPI |   123 |          121 |         135 |         106 | The bundle end date is before the bundle start date             |
       | Check validation message for Contract creation with Bundle Price End Date is before the Bundle Price Start Date | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/05/03     | 2019/04/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPI |       |          121 |         135 |         106 | The bundle price end date is before the bundle price start date |
       | Check validation message for contract creation with Bundle End Date is after Contract End Date                  | NO     | PAYORNAME  | 2017/01/01        | 2019/10/25      | 2019/01/01      | 2019/11/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | FETCHFROMAPI |       |          121 |         135 |         106 | The bundle end date is after the contract end date              |
@@ -704,46 +732,8 @@ Feature: Create Bundled Payment Contracts functionality tests
 
     Examples: 
       | Description                                                                                       | Has_MO | Payor_Name | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | Program_Name | Organization_Type | Organization_Name | Contract_Id | Bundle       | Price | Trend_Factor | Upper_Bound | Lower_Bound | Message                                                                                          |
-      | Create contract using duplicate (Program+Provider+Bundle) combination with non-overlapping dates. | NO     | PAYORNAME  | 2017/01/31        | 2019/12/01      | 2019/01/02      | 2019/06/29    | 2019/03/02     | 2019/05/25   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | CID         | FETCHFROMAPI |   123 |          121 |         135 |         106 | There is a conflict error because an entity with similar identifying attributes already existed. |
-
-  Scenario Outline: <Description>
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-    When I click on "Payor" organization tab on organization dashboard
-    When I search with "<Payor_Name>" on organization in search box
-    And I click "<Payor_Name>" field in search list on organization page
-    And I verify "<Payor_Name>" name on the header of view profile
-    And I verify "Contracts" tab present under "Payor" Organization
-    And I click on "Contracts" tab on view profile of "Payor" Organization
-    And I verify the "Create New Contract" button on view profile of "Payor" Organization
-    Then I click on "Create New Contract" button on "create" organization page
-    And I verify "Create Contract" header text on create organization page
-    And I select "1" Program name "<Program_Name>" in create Contract page under "Payor" Organization
-    And I select Organization type "<Organization_Type>" for Contract "1" on "create" Contracts page
-    And I select Organization name "<Organization_Name> - <Has_MO>" for Contract "1" on "create" Contracts page
-    And I enter "<Contract_Id>" in "Contract Id" field for "Contract1" on create Contract page
-    And I select "1" Bundle "<Bundle>" for Contract "1" on "create" Contracts page
-    And I enter "<Price>" in "price" field for "Bundle1 Price1" on create Contract page
-    Then I enter date "<ContractStartDate>" in "ContractStartDate" field for index "0"
-    Then I enter date "<ContractEndDate>" in "ContractEndDate" field for index "1"
-    Then I enter date "<BundleStartDate>" in "BundleStartDate" field for index "2"
-    Then I enter date "<BundleEndDate>" in "BundleEndDate" field for index "3"
-    Then I enter date "<PriceStartDate>" in "PriceStartDate" field for index "4"
-    Then I enter date "<PriceEndDate>" in "Baseline Date" field for index "5"
-    Then I enter date "<BaselineStartDate>" in "BaselineStartDate" field for index "6"
-    Then I enter date "<BaselineEndDate>" in "BaselineEndDate" field for index "7"
-    And I enter "<Trend_Factor>" in "trendFactor" field for "Bundle1 Price1" on create Contract page
-    And I enter "<Upper_Bound>" in "upperBound" field for "Bundle1 Price1" on create Contract page
-    And I enter "<Lower_Bound>" in "lowerBound" field for "Bundle1 Price1" on create Contract page
-    Then I click on "Submit" button on "create" organization page
-    Then I verify duplicate "<Message>" after submitting the "create BPC" organization page
-
-    Examples: 
-      | Description                                                                                  | Has_MO | Payor_Name | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | Program_Name | Organization_Type | Organization_Name | Contract_Id | Bundle       | Price | Trend_Factor | Upper_Bound | Lower_Bound | Message                                                                                          |
-      | Create contract using duplicate (Program+Provider+Bundle) combination with overlapping dates | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | CID         | FETCHFROMAPI |   123 |          121 |         135 |         106 | There is a conflict error because an entity with similar identifying attributes already existed. |
+      | Create contract using duplicate (Program+Provider+Bundle) combination with non-overlapping dates. | NO     | PAYORNAME  | 2020/01/31        | 2022/12/01      | 2021/01/02      | 2022/06/29    | 2021/03/02     | 2022/05/25   | 2022/03/09        | 2012/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | CID         | FETCHFROMAPI |   123 |          121 |         135 |         106 | There is a conflict error because an entity with similar identifying attributes already existed. |
+      | Create contract using duplicate (Program+Provider+Bundle) combination with overlapping dates      | NO     | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | CID         | FETCHFROMAPI |   123 |          121 |         135 |         106 | There is a conflict error because an entity with similar identifying attributes already existed. |
 
   Scenario Outline: <Description>
     Given I am on the login page
