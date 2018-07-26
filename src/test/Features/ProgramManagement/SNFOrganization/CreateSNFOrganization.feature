@@ -64,6 +64,41 @@ Feature: Create SNF organization functionality tests
     When I click on "SNF" organization tab on organization dashboard
     Then I click on "+" button on "SNF" organization page
     And I verify "Create SNF Organization" header text on create organization page
+    And I select "YES" radio button for managing organization
+    Then I search and verify "<MO_Name>" managing organization name in "YES" Has a Management Organization drop down box
+
+    Examples: 
+      | Description                                                 | Has_MO | MO_Name |
+      | Search for a valid Managing Organization on Create SNF page | YES    | MONAME  |
+
+  Scenario Outline: <Description>
+    When I click on "SNF" organization tab on organization dashboard
+    Then I click on "+" button on "SNF" organization page
+    And I verify "Create SNF Organization" header text on create organization page
+    Then I enter <SNF_Name> in "SNF Organization Name" on create organization page
+    And I enter <Address1> in "Address 1" on create organization page
+    And I enter <City> in "City" on create organization page
+    And I select <State> in State on create organization page
+    And I enter <Postal_Code> in "Postal Code" on create organization page
+    And I provide unique "SNF - <CCN>" in "CCN" on create organization page
+    And I provide unique "SNF - <EIN>" in "EIN" on create organization page
+    And I provide unique "SNF - <NPI>" in "NPI" on create organization page
+    And I enter location name <Loc_Name> for Location "1" on "create" organization page
+    And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
+    And I enter city <Loc_City> for Location "1" on "create" organization page
+    And I select state <Loc_State> for Location "1" on "create" organization page
+    And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
+    Then I click on "Submit" button on "create" organization page
+    And I verify the radio buttons should get highlighted as red on create Organization Page
+
+    Examples: 
+      | Description                                            | SNF_Name | Address1 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI |
+      | Validation message when radio buttons are not selected | SNFNAME  | Address1 | City | California |       10000 | LocName  | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI |
+
+  Scenario Outline: <Description>
+    When I click on "SNF" organization tab on organization dashboard
+    Then I click on "+" button on "SNF" organization page
+    And I verify "Create SNF Organization" header text on create organization page
     And I select "<Has_MO>" radio button for managing organization
     Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
     Then I enter <SNF_Name> in "SNF Organization Name" on create organization page
@@ -248,8 +283,8 @@ Feature: Create SNF organization functionality tests
     Then I verify "<Message>" after submitting the "create SNF - <Has_MO>" organization page
     When I search with "SNFNAME - <Has_MO>" on "SNF" organization in search box
     And I click "SNFNAME - <Has_MO>" field in search list on "SNF" organization page
+    And I verify Location ID should be greater than "100000"
 
-    #And I verify Location ID should be greater than "100000"
     Examples: 
       | Description                                                                                      | Has_MO | Managing_Org | SNF_Name             | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type        | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Message                                |
       | Create a SNF Organization with Mandatory Fields and any other identifier except CCN - Without MO | NO     |              | equalsTo75Characters | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Skilled Nursing | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | SNF Organization Successfully Created. |
@@ -326,7 +361,7 @@ Feature: Create SNF organization functionality tests
     Then I verify "SNF Organization Successfully Created." after submitting the "create SNF - <Has_MO>" organization page
     When I search with "SNFNAME - <Has_MO>" on "SNF" organization in search box
     And I click "SNFNAME - <Has_MO>" field in search list on "SNF" organization page
-    #And I verify Location ID should be greater than "100000"
+    And I verify Location ID should be greater than "100000"
     When I click on Organization link on Program Management page
     When I click on "SNF" organization tab on organization dashboard
     Then I click on "+" button on "SNF" organization page
@@ -340,7 +375,7 @@ Feature: Create SNF organization functionality tests
     And I enter <City> in "City" on create organization page
     And I select <State> in State on create organization page
     And I enter <Postal_Code> in "Postal Code" on create organization page
-    #And I provide "CCN" as last created "Location_Id" on create organization page
+    And I provide "CCN" as last created "Location_Id" on create organization page
     And I verify "Location 1" on "Create SNF" organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
@@ -352,11 +387,11 @@ Feature: Create SNF organization functionality tests
     And I select state <Loc_State> for Location "1" on "create" organization page
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
-    Then I verify duplicate "<Message>" after submitting the "create SNF" organization page
+    Then I verify "<Message>" after submitting the "create SNF - <Has_MO>" organization page
 
     Examples: 
-      | Description                                                                                                                   | Has_MO | Managing_Org | SNF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Location_ID | Loc_Type        | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Loc_Name      | CCN | NPI | Message                                                                                          |
-      | Verify auto generated location ID when CCN of current organization is already used as location Id for some other organization | NO     |              | SNFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | LID         | Skilled Nursing | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10001 | Loc_Name new2 | CCN | NPI | There is a conflict error because an entity with similar identifying attributes already existed. |
+      | Description                                                                                                                   | Has_MO | Managing_Org | SNF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Location_ID | Loc_Type        | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Loc_Name      | CCN | NPI | Message                                |
+      | Verify auto generated location ID when CCN of current organization is already used as location Id for some other organization | NO     |              | SNFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | LID         | Skilled Nursing | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10001 | Loc_Name new2 | CCN | NPI | SNF Organization Successfully Created. |
 
   Scenario Outline: <Description>
     When I click on "SNF" organization tab on organization dashboard

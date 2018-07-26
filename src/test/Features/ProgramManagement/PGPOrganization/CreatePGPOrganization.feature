@@ -56,6 +56,17 @@ Feature: Create PGP organization functionality tests.
     When I click on "PGP" organization tab on organization dashboard
     Then I click on "+" button on "PGP" organization page
     And I verify "Create PGP Organization" header text on create organization page
+    And I select "YES" radio button for managing organization
+    Then I search and verify "<MO_Name>" managing organization name in "YES" Has a Management Organization drop down box
+
+    Examples: 
+      | Description                                                      | Has_MO | MO_Name |
+      | Search for a valid Managing Organization on Create Hospital page | YES    | MONAME  |
+
+  Scenario Outline: <Description>
+    When I click on "PGP" organization tab on organization dashboard
+    Then I click on "+" button on "PGP" organization page
+    And I verify "Create PGP Organization" header text on create organization page
     And I select "<Has_MO>" radio button for managing organization
     Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
     Then I enter <PGP_Name> in "PGP Organization Name" on create organization page

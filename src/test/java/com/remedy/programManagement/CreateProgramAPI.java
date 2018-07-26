@@ -24,57 +24,95 @@ public class CreateProgramAPI extends BaseClass{
 		super(driver);
 	}
 	
-	public void createProgramJsonWAttributionRules(String pName, String payorOrId, String cId, String cValue, int noOfRulesForThisPrg, String programID) throws Throwable {
-        List<RankAttributionRuleDataModel> idRankList = new ArrayList<>();
+	public void createProgramJsonWAttributionRules(String pName, String payorOrId, String cAttributionRankID, String cAttributinRankValue, int noOfAttributionRulesForThisPrg, String cValidationRankID, String cValidationValue, int noOfValidationRulesForThisPrg, boolean multipleBundleEpisode) throws Throwable {
+		List<RankAttributionRuleDataModel> idValidationRankList = new ArrayList<>();
+        List<RankAttributionRuleDataModel> idRankList = new ArrayList<>(); 
         ProgramDataModel programDataModel = null;
         Long id = null;
         Float value = null;
         String name =null;
-        if (StringUtils.isBlank(cId) && StringUtils.isBlank(cValue))
-        {
+        if (StringUtils.isBlank(cAttributionRankID) && StringUtils.isBlank(cAttributinRankValue)) {
+
             idRankList = null;
         }
         else 
         {
            List<String> cIds = new ArrayList<>();
            List<String> cValues = new ArrayList<>();
-           if (StringUtils.isNotBlank(cId))
+           if (StringUtils.isNotBlank(cAttributionRankID))
            {
-                cIds.addAll(insertData.splitList(cId));
+                cIds.addAll(insertData.splitList(cAttributionRankID));
            }
             else 
             {
               cIds.add("");
             }
-            if (StringUtils.isNotBlank(cValue))
+            if (StringUtils.isNotBlank(cAttributinRankValue))
             {
-                cValues.addAll(insertData.splitList(cValue));
+                cValues.addAll(insertData.splitList(cAttributinRankValue));
             }
             else 
             {
                 cValues.add("");
             }
-            for (int i = 0; i < noOfRulesForThisPrg; i++) 
+            for (int i = 0; i < noOfAttributionRulesForThisPrg; i++) 
             {
-                if( StringUtils.isNotBlank(cIds.get(i))) 
-                {
+
+                if( StringUtils.isNotBlank(cIds.get(i))) {
                     id = Long.valueOf(cIds.get(i));
-                }
-                else
-                {
+                }else{
                     id = null;
                 }
-                if( StringUtils.isNotBlank(cValues.get(i)))
-                {
+                if( StringUtils.isNotBlank(cValues.get(i))) {
                     value = Float.valueOf(cValues.get(i));
-                }else
-                {
+                }else{
                     value=null;
                 }
+
                 RankAttributionRuleDataModel reRankAttributionRules = new RankAttributionRuleDataModel(id, value);
                 idRankList.add(reRankAttributionRules);
             }
         }
+        
+        if (StringUtils.isBlank(cValidationRankID) && StringUtils.isBlank(cValidationValue)) {
+
+            idValidationRankList = null;
+        }else {
+
+            List<String> cIds = new ArrayList<>();
+            List<String> cValues = new ArrayList<>();
+
+            if (StringUtils.isNotBlank(cValidationRankID)){
+                cIds.addAll(insertData.splitList(cValidationRankID));
+           }else {
+              cIds.add("");
+           }
+
+            if (StringUtils.isNotBlank(cValidationValue)){
+                cValues.addAll(insertData.splitList(cValidationValue));
+            }else {
+                cValues.add("");
+            }
+
+
+            for (int i = 0; i < noOfValidationRulesForThisPrg; i++) {
+
+                if( StringUtils.isNotBlank(cIds.get(i))) {
+                    id = Long.valueOf(cIds.get(i));
+                }else{
+                    id = null;
+                }
+                if( StringUtils.isNotBlank(cValues.get(i))) {
+                    value = Float.valueOf(cValues.get(i));
+                }else{
+                    value=null;
+                }
+
+                RankAttributionRuleDataModel reRankAttributionRules = new RankAttributionRuleDataModel(id, value);
+                idValidationRankList.add(reRankAttributionRules);
+            }
+        }
+        
         if(StringUtils.isNotBlank(pName)) 
         {
             name = createRandomName(pName);
@@ -85,12 +123,12 @@ public class CreateProgramAPI extends BaseClass{
             for (int i = 0; i < payorIdList.size(); i++) 
             {
                 Long payorId = CreatePayorOrganizationAPI.payorID;
-                programDataModel = new ProgramDataModel(name, payorId, idRankList);
+                programDataModel = new ProgramDataModel(multipleBundleEpisode, name, payorId, idRankList, idValidationRankList);
             }
         } 
         else 
         {
-            programDataModel = new ProgramDataModel(name, Long.parseLong(payorOrId), idRankList);
+            programDataModel = new ProgramDataModel(multipleBundleEpisode, name, Long.parseLong(payorOrId), idRankList, idValidationRankList);
         }
         CreateProgramAPI.jsonString = generateJson(programDataModel);
     }
