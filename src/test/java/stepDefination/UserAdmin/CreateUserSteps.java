@@ -572,14 +572,11 @@ public class CreateUserSteps extends DriverScript {
 		createUser.clickCancelButton();
 	}
 
-	@Then("^I enter \"([^\"]*)\" in Learning Pathway search box$")
-	public void enterTextLearningPathwaySearchBox(String searchParam) throws Throwable {
-		createUser.enterTextLearningPathwaySearchBox(searchParam);
+	@Then("^I edit learning pathway \"([^\"]*)\"$")
+	public void EditLearningPathway(String searchParam) throws Throwable {
+		createUser.EditLearningPathway(searchParam);
 	}
-	@Then("^I remove \"([^\"]*)\" from the results$")
-	public void removeLearningPath(String searchParam) throws Throwable {
-		createUser.selectLearningPath(searchParam);
-	}
+	
 	@Then("^I select \"([^\"]*)\" from the results$")
 	public void selectLearningPath(String searchParam) throws Throwable {
 		createUser.selectLearningPath(searchParam);

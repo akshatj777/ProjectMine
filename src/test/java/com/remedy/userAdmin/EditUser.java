@@ -702,9 +702,11 @@ public void iVerifyIncompleteStatusNotShown() {
 	}
 
 public void iVerifyLearningPathwayIDIsNotDisplayed(String id){
+	if(!(id.isEmpty())){
 
 		Assert.assertFalse(driver.findElements(By.cssSelector("div.ui.label")).get(0).getAttribute("innerText").toString().contains(id));
 	}
+}
 public void iVerifyLocationDisplayedWithFacilityKey(String key, String text){
  	waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+text+"\")]"))));
 // 	String actual = getTextForElement(driver.findElement(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+text+"\")]")));

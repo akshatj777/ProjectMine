@@ -1513,8 +1513,10 @@ public void iUnselectAllSelectedApps(){
 	
 	}
    public void verifyAppUnchecked(String fieldName) throws Throwable {
-	   if(!(fieldName.isEmpty()))
-			   {	   if(fieldName.contains(","))
+	   if(!(fieldName.isEmpty())) {
+		   iWillWaitToSee(By.xpath("//div[@class='ui checkbox']"));
+			   {	   
+			if(fieldName.contains(","))
 	   {
 		   StringTokenizer st = new StringTokenizer(fieldName,",");
 	       while (st.hasMoreTokens()) {  
@@ -1528,8 +1530,10 @@ public void iUnselectAllSelectedApps(){
 	    
    }
    }
+   }
    public void verifyAppChecked(String fieldName) throws Throwable {
 	   if(!(fieldName.isEmpty())){
+		   iWillWaitToSee(By.xpath("//div[@class='ui checked checkbox']"));
 	   if(fieldName.contains(","))
 	   {
 		   StringTokenizer st = new StringTokenizer(fieldName,",");
@@ -1586,12 +1590,78 @@ public void iUnselectAllSelectedApps(){
        clickElement(driver.findElement(By.xpath("//button[text()='Cancel']")));
    }
 
-   public void enterTextLearningPathwaySearchBox(String searchParam) throws Throwable {
+   public void EditLearningPathway(String searchParam) throws Throwable {
        if(!(searchParam.isEmpty()))
        {
-    	   iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), searchParam);  
+    	   iWillWaitToSee(By.xpath("//div[@class='ui selection dropdown']"));
+    	   clickElement(driver.findElement(By.xpath("//div[@class='ui selection dropdown']")));
+    	   if(!(searchParam.equals("")))
+           {
+        	   if(searchParam.contains(","))
+        	   {
+        		   StringTokenizer st = new StringTokenizer(searchParam, ",");
+        		   while (st.hasMoreTokens()) {
+        			   //delay();
+        			   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']"))));
+        			   scrollIntoViewByJS(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")));
+        			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+        			   {
+            			   String a = st.nextToken().trim();
+            			   //Thread.sleep(3000);
+            			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), a).build().perform();
+            			   delay();
+            			   while(!(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")).getAttribute("value").equals(a)))
+            			   {
+            				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+            				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), a).build().perform();
+            			   }
+            			   iWillWaitToSee(By.xpath("//label[contains(text(),\""+a+"\")]"));
+            			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//label[contains(text(),\""+a+"\")]")));
+        			   }
+        			   else
+        			   {
+        				   driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
+            			   String a = st.nextToken().trim();
+            			   //Thread.sleep(3000);
+            			   iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), a);
+            			   //Thread.sleep(3000);
+            			   iWillWaitToSee(By.xpath("//label[contains(text(),\""+a+"\")]"));
+            			   clickElement(driver.findElement(By.xpath("//label[contains(text(),\""+a+"\")]"))); 
+        			   }
+        			   
+        			   //Thread.sleep(3000);
+        		   }
+        		   driver.findElement(By.xpath("//a[contains(text(),'Applications')]")).click();
+        	   }
+        	   else
+        	   {
+        		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+        		   {
+        			   scrollIntoViewByJS(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")));
+        			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), searchParam).build().perform();
+        			   delay();
+        			   while(!(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")).getAttribute("value").equals(searchParam)))
+        			   {
+        				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+        				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), searchParam).build().perform();
+        			   }
+        			   iWillWaitToSee(By.xpath("//label[contains(text(),\""+searchParam+"\")]"));
+        			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//label[contains(text(),\""+searchParam+"\")]")));
+        		   }
+        		   else
+        		   {
+        			   scrollIntoViewByJS(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")));
+            		   driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
+            		   iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), searchParam);
+        			   iWillWaitToSee(By.xpath("//label[contains(text(),\""+searchParam+"\")]"));
+            		   clickElement(driver.findElement(By.xpath("//label[contains(text(),\""+searchParam+"\")]")));
+            		   driver.findElement(By.xpath("//a[contains(text(),'Applications')]")).click();
+        		   }
+        	   }
+           } 
        }
-   }
+       }
+   
 
    public void selectLearningPath(String searchParam) throws Throwable {
        if(userApplications.contains("Lessons"))
