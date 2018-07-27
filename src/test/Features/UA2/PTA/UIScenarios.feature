@@ -238,7 +238,7 @@ Feature: PTA UI Scenarios
     Then I select "<Locations1>" locations for PTA user
     And I verify selected Location "<SelectedLocations>" in the selected Locations section
     Then I search the "<LocationsInvalid>" in the Selected Locations section
-    And I verify No results found for invalid Location for "first" in selected organisation
+    And I verify No results found for invalid Location for "first" in selected organisation for PTA user
     Then I search the "<Locations1>" in the Selected Locations section
     And I click on remove link icon for selected Locations on selected Locations section
     And I verify Selected Locations section after click on remove link icon
@@ -312,7 +312,7 @@ Feature: PTA UI Scenarios
     Then I click on Next button
     Then I verify the header "Permissions"
     Then I select "<invalidLocations>" invalid locations for PTA
-    And I verify No results found for invalid Location for "first" in selected organisation
+    And I verify No results found for invalid Location for "first" in selected organisation for PTA user
 
     Examples: 
       | FirstName | LastName | Email                           | Phone      | Role         | Applications | NPI | invalidLocations |
