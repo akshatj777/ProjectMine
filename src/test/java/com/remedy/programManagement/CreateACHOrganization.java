@@ -19,6 +19,7 @@ public class CreateACHOrganization extends BaseClass{
 	public static String oldACH_WithoutMO;
 	public static String oldACH_WithMO;
 	public static String location_Id;
+	public static int loc_Id;
 
 	public CreateACHOrganization(WebDriver driver) {
 		super(driver);
@@ -510,6 +511,7 @@ public class CreateACHOrganization extends BaseClass{
     	}
         else
         {
+        	delay();
         	iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), text);
         }
     }
@@ -539,13 +541,14 @@ public class CreateACHOrganization extends BaseClass{
     public void iVerifyLocationIdShouldBeGreater(int value)
     {
     	location_Id =driver.findElement(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(), '10')]")).getText();
-    	int loc_Id = Integer.parseInt(location_Id);
+    	loc_Id = Integer.parseInt(location_Id);
     	Assert.assertTrue(value<loc_Id);
     }
     
     public void iProvideFromLastCreatedIdOnCreateOrganizationPage(String id,String field) throws InterruptedException {
     	if(id.equalsIgnoreCase("CCN")){
-    		iFillInText(driver.findElement(By.xpath("//input[@placeholder='CCN']")), location_Id);
+    		//iFillInText(driver.findElement(By.xpath("//input[@placeholder='CCN']")), location_Id);
+    		driver.findElement(By.xpath("//input[@placeholder='CCN']")).sendKeys(location_Id.valueOf(loc_Id));
     	}
     	else if(id.equalsIgnoreCase("Location_Id")){
     		iFillInText(driver.findElement(By.xpath("//input[@name='locations[0].locationId']")), location_Id);
