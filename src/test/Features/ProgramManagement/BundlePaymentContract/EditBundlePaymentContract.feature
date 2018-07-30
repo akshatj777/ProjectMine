@@ -309,7 +309,7 @@ Feature: Edit Bundle Payment Contract functionality tests
     Examples: 
       | Description                                              | Payor_Name | Bundle_Payment_Contract | Program     | SearchParam             |
       | Search for a Bundle by Bundle Name on Edit contract page | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPI            |
-      | Search for a Bundle by Bundle code on Edit contract page | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPIForBundleID |
+      #| Search for a Bundle by Bundle code on Edit contract page | PAYORNAME  | PROGRAMNAME             | PROGRAMNAME | FETCHFROMAPIForBundleID |
 
   Scenario Outline: <Description>
     Given I am on the login page
