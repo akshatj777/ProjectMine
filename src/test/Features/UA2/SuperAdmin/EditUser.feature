@@ -34,14 +34,14 @@ Feature: Edit user page for SA
       | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | qaautomation@remedypartners.com | 9988776655 |     | Remedy Technical Administrator  | 21-Remedy Technical Administrator  | episode_connect-Episodes,reports-Reports,lessons-Lessons,episode_connect_2-Episodes 2.0,tci-TCI,physician_portal-Physician Connect,admin-Administration | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | 439207--2070-060--420091, 439207--2070-060--310083, 439207--2070-060--160045, 439207--2070-060--310041, 439207--2070-060--310086, 439207--2070-060--310044, 439207--2070-060--310112, 439207--2070-060--310038, 439207--2070-060--310086-1, 439207--2070-060--310039, 439207--2070-060--100019, 439207--2070-060--100217, 439207--2070-060--330119, 439207--2070-060--390048, 439207--2070-060--310096, 439207--2070-060--440002, 439207--2070-060--310002, 439207--2070-060--490063, 439207--2070-060--310029-IRF, 439207--2070-060--160029, 439207--2070-060--HUMC, 439207--2070-060--420070, 439207--2070-060--223321233, 439207--2070-060--100044, 439207--2070-060--310061, 439207--2070-060--330106, 439207--2070-060--310022, 439207--2070-060--310014, 439207--2070-060--310022-2, 439207--2070-060--310022-1, 439207--2070-060--210048, 439207--2070-060--210001, 439207--2070-060--100092, 439207--2070-060--100291, 439207--2070-060--310070, 439207--2070-060--100044-1, 439207--2070-060--310073, 439207--2070-060--390268, 439207--2070-060--310031, 439207--2070-060--310032, 439207--2070-060--440189, 439207--2070-060--310076, 439207--2070-060--100044-2, 439207--2070-060--310034-REH, 439207--2070-060--310034-REH, 439207--2070-060--310069, 439207--2070-060--490045, 439207--2070-060--310029, 439207--2070-060--310108, 439207--3056-a08--210048, 439207--3056-a08--310083, 439207--3056-a08--210001, 439207--3056-a08--330106, 439207--3056-a08--310096, 439207--3056-a08--310076,807551--6005-200--430016, 807551--6005-200--100284 , 807551--6005-200--330307, 807551--6005-200--220012, 807551--6005-200--070028, 807551--6005-200--330304, 807551--6005-200--330385, 807551--6005-200--330222, 807551--6005-200--390119, 807551--6005-200--030093, 807551--6005-200--161395906, 807551--6005-200--330151, 807551--6005-200--330393, 807551--6005-200--330175, 807551--6005-200--310115, 807551--6005-200--050082, 807551--6005-200--080004, 807551--6005-200--210048, 807551--6005-200--150035, 807551--6005-200--330090, 807551--6005-200--PG3, 807551--6005-200--CMH, 807551--6005-200--UHS, 807551--6005-200--390042, 807551--6005-200--390001, 807551--6005-200--050503, 807551--6005-200--330136, 807551--6005-200--330011, 807551--6005-200--330231, 807551--6005-200--330132, 807551--6005-200--050684, 807551--6005-200--330078, 807551--6005-200--330013, 807551--6005-200--330085, 807551--6005-200--190020, 807551--6005-200--330141, 807551--6005-200--030061, 807551--6005-200--050390, 807551--6005-200--330394-REH, 807551--6005-200--ALB, 807551--6005-200--190146, 807551--6005-197--UHS, 807551--3090-209--337181, 439108--CJR-1--390168, 439108--2070-a55--390168      |           200 |
       | Super Admin | FirstName                                 | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |            |     | Transitional Case Manager       | 22-Transitional Case Manager       | episode_connect-Episodes,reports-Reports,lessons-Lessons                                                                                                | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | 807551--6005-197--UHS, 807551--6005-200--220012, 807551--3090-209--337181                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |           200 |
 
-  Scenario Outline: Verifying editable/non-editable fields of general information tab and editing them
+  Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
     Then I should see Tile text Users
     And I click on the "Users" tile
     Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
+    Then I search for user with role "<User>-<PreviousRole>-<Role>"
+    Then I select user with role "<User>-<PreviousRole>-<Role>"
     And I verify that I am navigated to user page
     And I click on Edit button
     Then I verify the header "General Information"
@@ -54,58 +54,54 @@ Feature: Edit user page for SA
     Then I verify the availability of fields "Phone"
     And I fill in Phone with <Phone>
     Then I verify the availability of fields "Role"
-    Then I verify the availability of field NPI for "<Role>"
-    Then I enter NPI field with "<NPI>" for role "<Role>"
-    Then I click on Next button
-    Then I select "<Applications>" product
-    Then I click on learning pathway dropdown
-    Then I enter "<RemoveLearningPathwaySearchParameter>" in Learning Pathway search box
-    Then I remove "<RemoveLearningPathwaySearchParameter>" from the results
-    Then I verify that Learning Pathway ID "<LearningPathwayID>" is not displayed for the enabled Learning Pathway
-    Then I click on Next button
-    Then I click on Submit button while edit for "<User>-<Role>"
-    Then I verify first name "<FirstName>"
-    Then I verify last name "<LastName>"
-    Then I verify phone "<Phone>"
-    Then I verify NPI "<NPI>"
-    And I click on the top user account link
-    Then I click on "Log Out" button
-    And I should see Log in widget
-
-    Examples: 
-      | User        | Role       | FirstName        | LastName        | Email                            | Phone        | NPI | RemoveLearningPathwaySearchParameter | LearningPathwayID | Applications       |
-      | Super Admin | Physicians | FirstName'Edited | LastName'Edited | qaautomation@remedypartners.com2 | 996-385-2451 | NPI | i am learning path, 18h7phZr1h81     | n9yn5n0Qa581      | Episodes, Episodes |
-
-  Scenario: Verify NPI on the EC1 tile
-    Given I am on the login page
-    When I enter email field qa.admin@yopmail.com for login
-    And I enter password field Episode1! for Login
-    And I click Access button
-    And I click on Episode1 tile for "Super Admin-Physicians" user
-    #And I switch to new window
-    And I verify "Dashboard" after redirection to EC1 for "Super Admin-Physicians" user
-    And I verify NPI on ECI for "Super Admin-Physicians" user
-
-  Scenario Outline: Editing user role from <PreviousRole> to <Role>
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<PreviousRole>"
-    Then I select user with role "<User>-<PreviousRole>"
-    And I verify that I am navigated to user page
-    And I click on Edit button
     When I click the Organizational Role Field to edit
     Then I pick a Organizational <Role>
     Then I enter NPI field with "<NPI>" for role "<Role>"
     Then I click on Next button
+    Then I verify the header "Applications"
+    Then I verify applications "<ApplicationsUnchecked>" are unchecked
+    Then I verify applications "<ApplicationsChecked>" are checked
+    Then I unselect all selected applications
+    Then I verify that Next button is "disabled"
     Then I select "<EnableApplications>" product
-    Then I enter "<LearningPathwaySearchParameter>" in Learning Pathway search box
+    Then I unselect "<DisableApplications>" product
     Then I select "<LearningPathwaySearchParameter>" from the results
+    Then I edit learning pathway "<AddLearningPathwaySearchParameter>"
+    Then I edit learning pathway "<RemoveLearningPathwaySearchParameter>"
+    Then I verify that Learning Pathway ID "<LearningPathwayID>" is not displayed for the enabled Learning Pathway
+    Then I verify that Next button is "enabled"
     Then I click on Next button
+     Then I verify the header "Permissions"
+    Then I click on existing organisation "<ClickHealthSystem>"
+    Then I deselect "<RemovePrograms>" programs
+    Then I deselect "<RemoveLocations>" locations
+    Then I remove health system "<RemoveHealthSystem>"
+    And I search for health system with <Health System>
+    And I select a <Health System>
+    Then I select "<Programs>" programs
+    Then I select "<Locations>" locations
+    Then I click Add Organization button for "<HasHealthSystem2>" flag
+    And I search for health system with <Health System2>
+    And I select a <Health System2>
+    Then I select "<Programs2>" programs
+    Then I select "<Locations2>" locations
+    Then I click Add Organization button for "<HasHealthSystem3>" flag
+    And I search for health system with <Health System3>
+    And I select a <Health System3>
+    Then I select "<Programs3>" programs
+    Then I select "<Locations3>" locations
     Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
+    Then I verify first name "<FirstName>"
+    Then I verify last name "<LastName>"
     Then I verify role "<Role>"
+    Then I verify email "<Email>" for "<User>-<Role>"
+    Then I verify phone "<Phone>"
+    Then I verify NPI "<NPI>"
+    Then I verify learning pathway "<LearningPathway>"
+    Then I verify health system "<HealthSystemsValidation>"
+    Then I verify programs "<ProgramsValidation>"
+    Then I verify location "<LocationsValidation>"
+    Then I verify disabled "<DisableApplications>"
     Then I verify enabled "<Applications>"
     And I click on the top user account link
     Then I click on "Log Out" button
@@ -115,7 +111,7 @@ Feature: Edit user page for SA
     Then I enter newuser email for "<User>-<Role>" login to Remedy
     Then I enter newuser password for login to Remedy
     And I click Access button
-    Then I verify "<ApplicationsVisible>" product on SPOE page
+    Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
     #Then I click on Hamburger menu on top left of homepage
     #And I verify "<ApplicationsVisible>" in product menu dropdown
@@ -165,919 +161,45 @@ Feature: Edit user page for SA
     #And I switch to new window
     #And I verify "<User>-<Role>" user navigated to Institute homepage
     #And I switch back to old window
-    And I click on the top user account link on remedy connect page
-    And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
-    And I verify "Log Out" in dropdown on profile icon for "<Role>" user
-    And I click on "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify page header "Login" for "Support" on Remedy Connect for "<User>-<Role>" user
-    Then I select Reset Password option from the dropdown
-    And I should see text popup for reset password "We have sent you an e-mail with a link to reset your password."
-    And I click Okay button for reset password popup
-    Then I select Log Out option from the dropdown
-    And I should see Log in widget
-
-    Examples: 
-      | User        | UserName                               | Password | Email                            | NPI | PreviousRole | Role                          | EnableApplications | Applications                                                     | ApplicationsVisible        | ApplicationsNotVisible       | LearningPathwaySearchParameter | Roletext | ReportCategory | ReportName                   | BPID | LearningPathway                                                                                                                       | FirstName | LastName | Facilities        |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com2 |     | Manager      | Partner Program Administrator | Physician Connect  | Episodes, Reports, Physician Connect, Lessons, Physician Connect | Episodes, Reports, Lessons | Administration, Episodes 2.0 |                                | ROLE_PRM | Patient ID     | Episode DRG Issues [Model 3] |      | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | FirstName | LastName | Apple - Watertown |
-
-  Scenario Outline: Changing the products and general details for <Role> and verifying product tile
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    And I click on Edit button
-    Then I select "Applications" tab
-    Then I unselect "<DisableApplications>" product
-    Then I select "Permissions" tab
-    Then I click on Submit button while edit for "<User>-<Role>"
-    Then I verify role "<Role>"
-    Then I verify enabled "<Applications>"
-    Then I verify disabled "<DisableApplications>"
     And I click on the top user account link
-    Then I click on "Log Out" button
-    Given I am on the login page
-    Then I click on "Log Out" button again
-    And I should see Log in widget
-    Then I enter newuser email for "<User>-<Role>" login to Remedy
-    Then I enter newuser password for login to Remedy
-    And I click Access button
-    Then I verify "<Applications>" product on SPOE page
-    Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    #Then I click on Hamburger menu on top left of homepage
-    #And I verify "<Applications>" in product menu dropdown
-    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    #And I redirect to Remedy connect page
-    And I click on Episode1 tile for "<User>-<Role>" user
-    #And I switch to new window
-    And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
-    And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
-    And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
-    And I verify "Not Associated" payer on user profile for "<User>-<Role>" user
-    And I verify "Medicare" payer on user profile for "<User>-<Role>" user
-    And I should not see "Emblem" payer on user profile for "<User>-<Role>" user
-    And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
-    And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
-    And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    #And I switch back to old window
-    And I redirect to Remedy connect page
-    And I click on Reports tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Reports homepage
-    And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
-    Then I click on "<ReportName>" report text for Overall Program Reports for "<User>-<Role>" user
-    Then I verify "<ReportName>" on the reports main page for "<User>-<Role>" user
-    #When I click on field-panel-icon button for "<User>-<Role>" user
-    #When I click to "BPID" field filter under "Episode Initiator" filter field for "<User>-<Role>" user
-    #And I choose "Filter" option from select options of filter field for "<User>-<Role>" user
-    #And I should see "<BPID>" in the filter value list for "<User>-<Role>" user
-    #And I click on cancel button from filter for "<User>-<Role>" user
-    And I redirect to Remedy connect page
-    And I click on Episodes 2 tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
-    And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
-    And I click on RemedyU tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to RemedyU homepage
-    And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
-    And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
-    And I switch back to old window
-    And I redirect to Remedy connect page
-    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    #And I redirect to Remedy connect page
-    And I click on User Admin tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to User Admin homepage
-    And I redirect to Remedy connect page
-    #And I click on Institute tile for "<User>-<Role>" user
-    #And I switch to new window
-    #And I verify "<User>-<Role>" user navigated to Institute homepage
-    #And I switch back to old window
-    And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
     And I verify "Log Out" in dropdown on profile icon for "<Role>" user
     And I click on "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify page header "Login" for "Support" on Remedy Connect for "<User>-<Role>" user
     Then I select Reset Password option from the dropdown
-    And I should see text popup for reset password "We have sent you an e-mail with a link to reset your password."
+    And I should see text popup for reset password "We've just sent you an email to reset your password."
     And I click Okay button for reset password popup
     Then I select Log Out option from the dropdown
     And I should see Log in widget
 
     Examples: 
-      | User        | Role         | Email                            | DisableApplications | Applications               | ApplicationsNotVisible                                   | Roletext | ReportCategory | ReportName                   | BPID | LearningPathway                                                                                                                                                                                                                                          | Facilities                                                                                                                                                          | FirstName | LastName |
-      | Super Admin | Case Manager | qaautomation@remedypartners.com2 | Reports             | Episodes, TCI, Lessons     | Episodes 2.0, Administration, Physician Connect, Reports | ROLE_TCS | Patient ID     | Episode DRG Issues           |      | i am learning path, Learning Pathway 2, max-test-052417, Care Coordination External                                                                                                                                                                      | Allentown, Bethlehem, Anderson                                                                                                                                      | FirstName | LastName |
-      | Super Admin | Remedy RN    | qaautomation@remedypartners.com2 | Reports, Episodes   | Episodes 2.0, TCI, Lessons | Reports, Episodes, Administration, Physician Connect     | ROLE_RN  | Patient ID     | Episode DRG Issues [Model 3] |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University | North Shore Med Center, Rhea Medical Center, The Medical Center At Franklin, Evanston Hospital, Jackson North Med Center, Warren Memorial Hospital, Herrin Hospital | FirstName | LastName |
+      | Description                                                                 | User        | UserName                               | Password | Email                           | NPI | Phone      | PreviousRole              | Role                            | ApplicationsUnchecked             | ApplicationsChecked                      | EnableApplications                                                          | DisableApplications | Applications                                                  | ApplicationsNotVisible                                   | RemoveLearningPathwaySearchParameter                                                                                                                                                                                                 | LearningPathwayID | AddLearningPathwaySearchParameter | LearningPathwaySearchParameter | Roletext       | ReportCategory | ReportName                   | BPID | LearningPathway                                                                                                                                                                                                                                          | FirstName                                 | LastName                                 | Facilities                                                                                                                                                                                                                                                                       | RemoveHealthSystem                                                     | RemoveLocations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | RemovePrograms | ClickHealthSystem                                    | Health System                                                          | Programs    | Locations                                                                               | HealthSystemsValidation                                                              | ProgramsValidation                                                                                                                                                                                                                 | LocationsValidation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | HasHealthSystem2 | Health System2 | Programs2   | Locations2                       | HasHealthSystem3 | Health System3    | Programs3   | Locations3                  |  |
+      | Change user role and then provision the user                                | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com |     |            | Manager                   | Partner Program Administrator   | Physician Connect                 | Episodes, Reports, Lessons               | Physician Connect, Episodes, Reports, Lessons                               |                     | Episodes, Reports, Lessons                                    | Administration, Episodes 2.0, Physician Connect          |                                                                                                                                                                                                                                      |                   |                                   |                                | ROLE_PRM       | Patient ID     | Episode DRG Issues [Model 3] |      | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2                                                                                                                    | FirstName                                 | LastName                                 | Apple - Watertown                                                                                                                                                                                                                                                                |                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |                |                                                      |                                                                        |             |                                                                                         |                                                                                      |                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |                  |                |             |                                  |                  |                   |             |                             |  |
+      | Change the General Details, Application access and then provision the user  | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com |     |            |                           | Case Manager                    |                                   |                                          | Episodes, Lessons, Reports                                                  | Reports             | Episodes, TCI, Lessons                                        | Episodes 2.0, Administration, Physician Connect, Reports |                                                                                                                                                                                                                                      |                   |                                   |                                | ROLE_TCS       | Patient ID     | Episode DRG Issues           |      | i am learning path, Learning Pathway 2, max-test-052417, Care Coordination External                                                                                                                                                                      | FirstName                                 | LastName                                 | Allentown, Bethlehem, Anderson                                                                                                                                                                                                                                                   |                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |                |                                                      |                                                                        |             |                                                                                         |                                                                                      |                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |                  |                |             |                                  |                  |                   |             |                             |  |
+      | Change the General Details, Application access and then provision the user  | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com |     |            |                           | Remedy RN                       |                                   |                                          | Episodes 2.0, Lessons, Reports, Episodes                                    | Reports, Episodes   | Episodes 2.0, TCI, Lessons                                    | Reports, Episodes, Administration, Physician Connect     | Learning Pathway 2, max-test-052417, New learning Path, Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University | 3hSOHNAnvjc1      |                                   |                                | ROLE_RN        | Patient ID     | Episode DRG Issues [Model 3] |      | i am learning path                                                                                                                                                                                                                                       | FirstName                                 | LastName                                 | North Shore Med Center, Rhea Medical Center, The Medical Center At Franklin, Evanston Hospital, Jackson North Med Center, Warren Memorial Hospital, Herrin Hospital                                                                                                              |                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |                |                                                      |                                                                        |             |                                                                                         |                                                                                      |                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |                  |                |             |                                  |                  |                   |             |                             |  |
+      | Remove existing organisation, add a new org and then provision the user     | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com |     |            |                           | Executive                       |                                   |                                          | Reports, Episodes, Lessons                                                  |                     | Reports, Episodes, TCI, Lessons                               | Episodes 2.0, Administration, Physician Connect          |                                                                                                                                                                                                                                      |                   |                                   |                                | ROLE_PRM       | Patient ID     | Episode DRG Issues           |      | i am learning path, Learning Pathway 2, Remedy University                                                                                                                                                                                                | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | Winchester Medical Center - Rehab Unit, Fairbanks Memorial Hospital                                                                                                                                                                                                              | Stamford Hospital                                                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |                |                                                      | Sound Physicians                                                       | BPCI-Model2 | 6005-080--Winchester Medical Center - Rehab Unit, 6005-063--Fairbanks Memorial Hospital | Sound Physicians                                                                     | Sound Physicians--BPCI Model 2                                                                                                                                                                                                     | Sound Physicians--6005-080--Winchester Medical Center - Rehab Unit, Sound Physicians--6005-063--Fairbanks Memorial Hospital                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |                  |                |             |                                  |                  |                   |             |                             |  |
+      | Add two orgs to existing data set and then provision the user               | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com |     |            |                           | Partner Technical Administrator |                                   |                                          | Episodes, Reports, Administration, Lessons, Physician Connect               | Physician Connect   | Episodes, Reports, Administration, TCI, Lessons               | Physician Connect, Episodes 2.0                          |                                                                                                                                                                                                                                      |                   |                                   |                                | ROLE_PRM       | Patient ID     | Episode DRG Issues [Model 3] |      | Learning Pathway 2, New learning Path, Remedy University                                                                                                                                                                                                 | FirstName                                 | LastNameLastNameLastNameLastNameLastName | Stamford Hospital, North Shore Med Center, Catered Manor Nursing Center, Downey Care Center, Encinitas Nursing and Rehabilitation Center,  Carson Nursing and Rehabilitation Center,  Arbor Nursing Center                                                                       |                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |                |                                                      |                                                                        |             |                                                                                         | Covenant, TeamHealth, Stamford Hospital                                              | Stamford Hospital--BPCI Model 2, TeamHealth--BPCI Model 2, Covenant--BPCI Model 3                                                                                                                                                  | Stamford Hospital--2070-015--Stamford Hospital, TeamHealth--2070-g14--North Shore Med Center, Covenant--3056-804--Catered Manor Nursing Center, Covenant--3056-805--Downey Care Center, Covenant--3056-806--Encinitas Nursing And Rehabilitation Center,  Covenant--3056-807--Carson Nursing And Rehabilitation Center,  Covenant--3056-808--Arbor Nursing Center                                                                                                                                                                                                                                                                                                                                                                                                                                                | Yes              | TeamHealth     | BPCI-Model2 | 2070-g14--North Shore Med Center | Yes              | Stamford Hospital | BPCI-Model2 | 2070-015--Stamford Hospital |  |
+      | Edit single location to multiple locations and then provision the user      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com |     |            |                           | Remedy TCS                      |                                   |                                          | Episodes, Reports, Lessons, Episodes 2.0                                    | Episodes 2.0        | Episodes, Reports, TCI, Lessons                               | Episodes 2.0, Administration, Physician Connect          |                                                                                                                                                                                                                                      |                   |                                   |                                | ROLE_TCS       | Patient ID     | Episode DRG Issues           |      | Learning Pathway 2, max-test-052417, Clinical Operations Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University                                                                                                           | FirstName                                 | LastName                                 | Altercare Post-Acute Rehab Center, Altercare - Big Rapids, Stamford Hospital, Altercare - Alliance                                                                                                                                                                               |                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |                | Altercare                                            |                                                                        |             | 3056-m04--Altercare Post, 3056-m05--Altercare - Big Rapids                              | Stamford Hospital, Altercare                                                         | Stamford Hospital--BPCI Model 2, Altercare--BPCI Model 3                                                                                                                                                                           | Altercare--3056-m04--Altercare Post, Altercare--3056-m05--Altercare - Big Rapids, Stamford Hospital--2070-015--Stamford Hospital, Altercare--3056-m03--Altercare - Alliance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |                  |                |             |                                  |                  |                   |             |                             |  |
+      | Edit to all locations and then provision the user                           | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com |     |            |                           | Remedy LPN                      |                                   |                                          | Episodes 2.0, Reports, Lessons, Episodes                                    | Episodes            | Episodes 2.0, Reports, TCI, Lessons                           | Episodes, Administration, Physician Connect              |                                                                                                                                                                                                                                      |                   |                                   |                                | ROLE_LPN       | Patient ID     | Episode DRG Issues           |      |                                                                                                                                                                                                                                                          | FirstName                                 | LastNameLastNameLastNameLastNameLastName | UPenn - Hospital of the Univ. of Pennsylvania, Upenn - Penn Presbyterian Hospital, Upenn - Pennsylvania Hospital, Apple - Rocky Hill, Apple - Watertown                                                                                                                          |                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |                | Penn                                                 |                                                                        |             | All Locations                                                                           | Penn, Apple Rehab                                                                    | Penn--BPCI Model 2, Apple Rehab--BPCI Model 3                                                                                                                                                                                      | Penn--2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania, Penn--2070-021--Upenn - Penn Presbyterian Hospital, Penn--2070-022--Upenn - Pennsylvania Hospital, Apple Rehab--3056-i11--Apple - Watertown, Apple Rehab--3056-i12--Apple - Rocky Hill                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |                  |                |             |                                  |                  |                   |             |                             |  |
+      | Edit all locations to single location and then provision the user           | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com |     |            |                           | Remedy LPN                      |                                   |                                          | Episodes 2.0, Reports, Lessons, Episodes                                    | Episodes            | Episodes 2.0, Reports, TCI, Lessons                           | Administration, Physician Connect, Episodes              |                                                                                                                                                                                                                                      |                   |                                   |                                | ROLE_LPN       | Patient ID     | Episode DRG Issues           |      |                                                                                                                                                                                                                                                          | FirstName                                 | LastNameLastNameLastNameLastNameLastName | UPenn - Hospital of the Univ. of Pennsylvania, Apple - Rocky Hill, Apple - Watertown                                                                                                                                                                                             |                                                                        | All Locations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |                | Penn                                                 |                                                                        |             | 2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania                                 | Penn, Apple Rehab                                                                    | Penn--BPCI Model 2, Apple Rehab--BPCI Model 3                                                                                                                                                                                      | Penn--2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania, Apple Rehab--3056-i11--Apple - Watertown, Apple Rehab--3056-i12--Apple - Rocky Hill                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |                  |                |             |                                  |                  |                   |             |                             |  |
+      | Edit and disable M2 program and then provision the user                     | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com |     |            |                           | Remedy Field RN                 |                                   |                                          | Episodes, Episodes 2.0, Reports, Lessons                                    |                     | Episodes, Episodes 2.0, Reports, TCI, Lessons                 | Administration, Physician Connect                        |                                                                                                                                                                                                                                      |                   |                                   |                                | ROLE_FRN       | Patient ID     | Episode DRG Issues [Model 3] |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2                    | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | Howard County General Hospital, East Orange General Hospital, United Health Services, Binghamton General-Sandiford Rehabilitation Center, Chenango Memorial Hospital, UHS Twin Tier Home Health Inc.                                                                             |                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | BPCI-Model2    | Cardiovascular Associates of The Delaware Valley,p A |                                                                        |             |                                                                                         | United Health Services of New York, Cardiovascular Associates of The Delaware Valley | United Health Services of New York--BPCI Model 2, United Health Services of New York--BPCI Model 3, Cardiovascular Associates of The Delaware Valley--BPCI Model 3                                                                 | United Health Services of New York--6005-197--United Health Services, United Health Services of New York--6005-197--Binghamton General, United Health Services of New York--6005-198--Chenango Memorial Hospital, United Health Services of New York--3090-209--Uhs Twin Tier Home Health Inc., Cardiovascular Associates of The Delaware Valley--3056-a08--Howard County General Hospital, Cardiovascular Associates of The Delaware Valley--3056-a08--East Orange General Hospital                                                                                                                                                                                                                                                                                                                             |                  |                |             |                                  |                  |                   |             |                             |  |
+      | Edit and disable M3 program and then provision the user                     | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com |     |            |                           | Remedy Executive                |                                   |                                          | Episodes, Episodes 2.0, Reports, Lessons                                    |                     | Episodes, Episodes 2.0, Reports, TCI, Lessons                 | Administration, Physician Connect                        |                                                                                                                                                                                                                                      |                   |                                   |                                | ROLE_PRM       | Patient ID     | Episode DRG Issues           |      | max-test-052417, New learning Path, Remedy University                                                                                                                                                                                                    | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | Butler Memorial Hospital, Carolinas Hospital System - Florence                                                                                                                                                                                                                   |                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | BPCI-Model3    | Cardiovascular Associates of The Delaware Valley,p A |                                                                        |             |                                                                                         | Cardiovascular Associates of The Delaware Valley, Butler Memorial Hospital           | Cardiovascular Associates of The Delaware Valley--BPCI Model 2, Butler Memorial Hospital--BPCI-CJR, Butler Memorial Hospital--BPCI Model 2                                                                                         | Butler Memorial Hospital--CJR-1--Butler Memorial Hospital, Butler Memorial Hospital--2070-a55--Butler Memorial Hospital, Cardiovascular Associates of The Delaware Valley--2070-060--Carolinas Hospital System - Florence                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |                  |                |             |                                  |                  |                   |             |                             |  |
+      | Edit and disable BPCI-CJR program and then provision the user               | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com |     |            |                           | Remedy Other                    |                                   |                                          | Episodes, Episodes 2.0, Lessons                                             |                     | Episodes, Episodes 2.0, TCI, Lessons                          | Administration, Physician Connect                        |                                                                                                                                                                                                                                      |                   |                                   |                                | ROLE_PRM       | Patient ID     | Episode DRG Issues           |      | New learning Path, Physician Acute Care Hospital Model 2                                                                                                                                                                                                 | FirstName                                 | LastName                                 | Butler Memorial Hospital, Monmouth Medical Center - Southern Campus                                                                                                                                                                                                              |                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | BPCI-CJR       | Butler Memorial Hospital                             |                                                                        |             |                                                                                         | Butler Memorial Hospital, RWJ Barnabas Health                                        | Butler Memorial Hospital--BPCI Model 2, RWJ Barnabas Health--BPCI-CJR                                                                                                                                                              | Butler Memorial Hospital--2070-a55--Butler Memorial Hospital, RWJ Barnabas Health--CJR-10-6--Monmouth Medical Center - Southern Campus                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |                  |                |             |                                  |                  |                   |             |                             |  |
+      | Edit general information, edit role and remove existing org and add new org | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com |     |            | Case Manager              | Manager                         | Reports                           | Episodes, Lessons                        | Episodes, Reports, Lessons                                                  |                     | Episodes, Reports, Lessons                                    | Administration, Physician Connect, Episodes 2.0          |                                                                                                                                                                                                                                      |                   |                                   |                                | ROLE_PRM       | Patient ID     | Episode DRG Issues           |      | i am learning path, Learning Pathway 2, max-test-052417, Care Coordination External                                                                                                                                                                      | FirstName                                 | LastNameEdited                           | St. Luke's Hospital Quakertown Hospital                                                                                                                                                                                                                                          | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |                |                                                      | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI-Model2 |                                                                                  390035 | St. Lukes Health Network                                                             | St. Lukes Health Network--BPCI Model 2                                                                                                                                                                                             | St. Lukes Health Network--2070-026--Hospital Quakertown Hospital                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |                  |                |             |                                  |                  |                   |             |                             |  |
+      | Edit general information, edit role and edit Data permissions               | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com |     |            | Transitional Case Manager | Remedy Sales Team               |                                   | Reports, Lessons                         | Reports, Lessons                                                            | Reports             | TCI, Lessons                                                  | Administration, Physician Connect, Reports               |                                                                                                                                                                                                                                      |                   |                                   |                                | ROLE_TCS       | Patient ID     | Episode DRG Issues           |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University | FirstNameEdited                           | LastNameEdited                           | United Health Services, Cape Cod Hospital                                                                                                                                                                                                                                        |                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | BPCI-Model3    | United Health Services of New York                   |                                                                        |             |                                                                                         |                                                                                      | United Health Services of New York--BPCI Model 2                                                                                                                                                                                   | United Health Services of New York--6005-197--United Health Services, United Health Services of New York--6005-200--Cape Cod Hospital                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |                  |                |             |                                  |                  |                   |             |                             |  |
+      | Edit role and add new org                                                   | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com | NPI |            | Remedy Sales Team         | Physicians                      | Physician Connect, Reports        | Episodes, Lessons                        | Episodes, Reports, Lessons, Physician Connect                               |                     | Episodes, Reports, Lessons                                    | Episodes 2.0, Administration, Physician Connect          |                                                                                                                                                                                                                                      |                   |                                   |                                | ROLE_CLINICIAN | Patient ID     | Episode DRG Issues           |      | i am learning path, Learning Pathway 2, max-test-052417, Clinical Operations Acute Care Hospital Model 2                                                                                                                                                 | FirstName                                 | LastName                                 | North Shore Med Center, United Health Services, Cape Cod Hospital                                                                                                                                                                                                                |                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |                |                                                      |                                                                        |             |                                                                                         | TeamHealth, United Health Services of New York                                       | TeamHealth--BPCI Model 2, United Health Services of New York--BPCI Model 2                                                                                                                                                         | TeamHealth--2070-g14--North Shore Med Center, United Health Services of New York--6005-197--United Health Services, United Health Services of New York--6005-200--Cape Cod Hospital                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Yes              | TeamHealth     | BPCI-Model2 | 2070-g14--North Shore Med Center |                  |                   |             |                             |  |
+      | Edit phone and role and remove exisiting location and add new               | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | qaautomation@remedypartners.com |     | 9999999999 | Remedy PM                 | Remedy Technical Administrator  | Administration, Physician Connect | Episodes, Episodes 2.0, Reports, Lessons | Episodes, Episodes 2.0, Reports, Administration, Physician Connect, Lessons |                     | Episodes, Episodes 2.0, Reports, Administration, Lessons, TCI | Physician Connect                                        |                                                                                                                                                                                                                                      |                   |                                   |                                | ROLE_ADMIN     | Patient ID     | Episode DRG Issues           |      | Learning Pathway 2, New learning Path, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2                                                                                                                            | FirstName                                 | LastName                                 | Carolinas Hospital System - Florence, Howard County General Hospital, East Orange General Hospital, Meritus Medical Center, North Shore University Hospital, St. Michael's Medical Center, Saint Barnabas Medical Center, United Health Services, UHS Twin Tier Home Health Inc. |                                                                        | 6005-197--United Health Services, 6005-197--Binghamton General, 6005-198--Chenango Memorial Hospital, 6005-200--Avera Mckennan Hospital & University Health Center, 6005-200--Westchester General Hospital , 6005-200--Cayuga Medical Center At Ithaca, 6005-200--Cape Cod Hospital, 6005-200--St  Vincent, 6005-200--White Plains Hospital Center, 6005-200--North Central Bronx Hospital, 6005-200--Saratoga Hospital, 6005-200--Moses Taylor Hospital, 6005-200--Banner Del E Webb Medical Center, 6005-200--161395906, 6005-200--St. James Mercy Hospital, 6005-200--University Hospital, 6005-200--Cortland Regional Medical Center, 6005-200--Hackettstown Regional Medical Center, 6005-200--St Johns Regional Medical Center, 6005-200--Bayhealth - Kent General Hospital, 6005-200--Howard County General Hospital, 6005-200--Porter Regional Hospital, 6005-200--Arnot Ogden Medical Center, 6005-200--St. Peter's Hospital, 6005-200--Chenango Memorial Hospital, 6005-200--United Health Services, 6005-200--Washington Hospital, 6005-200--Geisinger - Community Medical Center, 6005-200--Scripps Memorial Hospital - Encinitas, 6005-200--Mary Imogene Bassett Hospital, 6005-200--Our Lady Of Lourdes Memorial Hospital, 6005-200--Queens Hospital Center, 6005-200--Tlc Health Network, 6005-200--Menifee Valley Medical Center, 6005-200--Sisters Of Charity Hospital, 6005-200--Albany Medical Center Hospital, 6005-200--Aurelia Osborn Fox Memorial Hospital, 6005-200--Lane Regional Medical Center, 6005-200--Brookhaven Memorial Hospital Medical Center, 6005-200--Banner Boswell Medical Center, 6005-200--Hemet Valley Medical Center, 6005-200--Binghamton General, 6005-200--Albany Memorial Hospital, 6005-200--East Jefferson General Hospital, 3090-209--Uhs Twin Tier Home Health Inc. |                | United Health Services of New York                   |                                                                        |             | 6005-197--United Health Services, 3090-209--Uhs Twin Tier Home Health Inc.              |                                                                                      | Cardiovascular Associates of The Delaware Valley--BPCI Model 2, Cardiovascular Associates of The Delaware Valley--BPCI Model 3, United Health Services of New York--BPCI Model 2, United Health Services of New York--BPCI Model 3 | United Health Services of New York--3090-209--Uhs Twin Tier Home Health Inc., Cardiovascular Associates of The Delaware Valley--2070-060--Carolinas Hospital System - Florence, Cardiovascular Associates of The Delaware Valley--3056-a08--Howard County General Hospital, Cardiovascular Associates of The Delaware Valley--3056-a08--East Orange General Hospital, Cardiovascular Associates of The Delaware Valley--3056-a08--Meritus Medical Center, Cardiovascular Associates of The Delaware Valley--3056-a08--North Shore University Hospital, Cardiovascular Associates of The Delaware Valley--3056-a08--St. Michael's Medical Center, Cardiovascular Associates of The Delaware Valley--3056-a08--Saint Barnabas Medical Center, United Health Services of New York--6005-197--United Health Services |                  |                |             |                                  |                  |                   |             |                             |  |
 
-  Scenario Outline: <Description>
+  Scenario: Verify NPI on the EC1 tile
     Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    And I click on Edit button
-    Then I select "Permissions" tab
-    Then I remove health system "<Remove HealthSystem1>"
-    #Then I remove health system "<Remove HealthSystem2>"
-    And I search for health system with <Health System id>
-    And I select a <Health System>
-    Then I select "<Programs>" programs
-    Then I select "<Locations>" locations
-    Then I click on Submit button while edit for "<User>-<Role>"
-    Then I verify health system "<Health System>"
-    Then I verify programs "<ProgramsValidation>"
-    Then I verify location "<LocationsValidation>"
-    And I click on the top user account link
-    Then I click on "Log Out" button
-    Given I am on the login page
-    Then I click on "Log Out" button again
-    And I should see Log in widget
-    Then I enter newuser email for "<User>-<Role>" login to Remedy
-    Then I enter newuser password for login to Remedy
+    When I enter email field qa.admin@yopmail.com for login
+    And I enter password field Episode1! for Login
     And I click Access button
-    Then I verify "<Applications>" product on SPOE page
-    Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    #Then I click on Hamburger menu on top left of homepage
-    #And I verify "<Applications>" in product menu dropdown
-    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    #And I redirect to Remedy connect page
-    And I click on Episode1 tile for "<User>-<Role>" user
+    And I click on Episode1 tile for "Super Admin-Physicians" user
     #And I switch to new window
-    And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
-    And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
-    And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
-    And I verify "Not Associated" payer on user profile for "<User>-<Role>" user
-    And I verify "Medicare" payer on user profile for "<User>-<Role>" user
-    And I should not see "Emblem" payer on user profile for "<User>-<Role>" user
-    And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
-    And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
-    And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    #And I switch back to old window
-    And I redirect to Remedy connect page
-    And I click on Reports tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Reports homepage
-    And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
-    Then I click on "<ReportName>" report text for Overall Program Reports for "<User>-<Role>" user
-    Then I verify "<ReportName>" on the reports main page for "<User>-<Role>" user
-    #When I click on field-panel-icon button for "<User>-<Role>" user
-    #When I click to "BPID" field filter under "Episode Initiator" filter field for "<User>-<Role>" user
-    #And I choose "Filter" option from select options of filter field for "<User>-<Role>" user
-    #And I should see "<BPID>" in the filter value list for "<User>-<Role>" user
-    #And I click on cancel button from filter for "<User>-<Role>" user
-    And I redirect to Remedy connect page
-    And I click on Episodes 2 tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
-    And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
-    And I click on RemedyU tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to RemedyU homepage
-    And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
-    And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
-    And I switch back to old window
-    And I redirect to Remedy connect page
-    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    #And I redirect to Remedy connect page
-    And I click on User Admin tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to User Admin homepage
-    And I redirect to Remedy connect page
-    #And I click on Institute tile for "<User>-<Role>" user
-    #And I switch to new window
-    #And I verify "<User>-<Role>" user navigated to Institute homepage
-    #And I switch back to old window
-    And I click on the top user account link on remedy connect page
-    And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
-    And I verify "Log Out" in dropdown on profile icon for "<Role>" user
-    And I click on "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify page header "Login" for "Support" on Remedy Connect for "<User>-<Role>" user
-    Then I select Reset Password option from the dropdown
-    And I should see text popup for reset password "We have sent you an e-mail with a link to reset your password."
-    And I click Okay button for reset password popup
-    Then I select Log Out option from the dropdown
-    And I should see Log in widget
-
-    Examples: 
-      | Description                          | User        | Role      | Email                            | Applications                    | ApplicationsNotVisible                          | Remove HealthSystem1 | Remove HealthSystem2 | Health System    | Programs    | Locations                                                                               | Facilities                                                          | ProgramsValidation             | LocationsValidation                                                                                                         | LearningPathway                                           | FirstName                                 | LastName                                 | Roletext | ReportCategory | ReportName         |
-      | Remove Existing org and add new org1 | Super Admin | Executive | qaautomation@remedypartners.com2 | Reports, Episodes, TCI, Lessons | Episodes 2.0, Administration, Physician Connect | Stamford Hospital    | Penn                 | Sound Physicians | BPCI-Model2 | 6005-080--Winchester Medical Center - Rehab Unit, 6005-063--Fairbanks Memorial Hospital | Winchester Medical Center - Rehab Unit, Fairbanks Memorial Hospital | Sound Physicians--BPCI Model 2 | Sound Physicians--6005-080--Winchester Medical Center - Rehab Unit, Sound Physicians--6005-063--Fairbanks Memorial Hospital | i am learning path, Learning Pathway 2, Remedy University | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | ROLE_PRM | Patient ID     | Episode DRG Issues |
-
-  Scenario Outline: <Description>
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    And I click on Edit button
-    Then I select "Applications" tab
-    Then I unselect "<DisableApplications>" product
-    Then I select "Permissions" tab
-    Then I click Add Organization button for "<HasHealthSystem2>" flag
-    And I search for health system with <Health System2>
-    And I select a <Health System2>
-    Then I select "<Programs2>" programs
-    Then I select "<Locations2>" locations
-    Then I click Add Organization button for "<HasHealthSystem3>" flag
-    And I search for health system with <Health System3>
-    And I select a <Health System3>
-    Then I select "<Programs3>" programs
-    Then I select "<Locations3>" locations
-    Then I click on Submit button while edit for "<User>-<Role>"
-    Then I verify health system "<HealthSystemValidation>"
-    Then I verify programs "<ProgramsValidation>"
-    Then I verify location "<LocationsValidation>"
-    And I click on the top user account link
-    Then I click on "Log Out" button
-    Given I am on the login page
-    Then I click on "Log Out" button again
-    And I should see Log in widget
-    Then I enter newuser email for "<User>-<Role>" login to Remedy
-    Then I enter newuser password for login to Remedy
-    And I click Access button
-    Then I verify "<Applications>" product on SPOE page
-    Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    #Then I click on Hamburger menu on top left of homepage
-    #And I verify "<Applications>" in product menu dropdown
-    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    #And I redirect to Remedy connect page
-    And I click on Episode1 tile for "<User>-<Role>" user
-    #And I switch to new window
-    And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
-    And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
-    And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
-    And I verify "Not Associated" payer on user profile for "<User>-<Role>" user
-    And I verify "Medicare" payer on user profile for "<User>-<Role>" user
-    And I should not see "Emblem" payer on user profile for "<User>-<Role>" user
-    And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
-    And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
-    And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    #And I switch back to old window
-    And I redirect to Remedy connect page
-    And I click on Reports tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Reports homepage
-    And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
-    Then I click on "<ReportName>" report text for Overall Program Reports for "<User>-<Role>" user
-    Then I verify "<ReportName>" on the reports main page for "<User>-<Role>" user
-    #When I click on field-panel-icon button for "<User>-<Role>" user
-    #When I click to "BPID" field filter under "Episode Initiator" filter field for "<User>-<Role>" user
-    #And I choose "Filter" option from select options of filter field for "<User>-<Role>" user
-    #And I should see "<BPID>" in the filter value list for "<User>-<Role>" user
-    #And I click on cancel button from filter for "<User>-<Role>" user
-    And I redirect to Remedy connect page
-    And I click on Episodes 2 tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
-    And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
-    And I click on RemedyU tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to RemedyU homepage
-    And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
-    And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
-    And I switch back to old window
-    And I redirect to Remedy connect page
-    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    #And I redirect to Remedy connect page
-    And I click on User Admin tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to User Admin homepage
-    And I redirect to Remedy connect page
-    #And I click on Institute tile for "<User>-<Role>" user
-    #And I switch to new window
-    #And I verify "<User>-<Role>" user navigated to Institute homepage
-    #And I switch back to old window
-    And I click on the top user account link on remedy connect page
-    And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
-    And I verify "Log Out" in dropdown on profile icon for "<Role>" user
-    And I click on "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify page header "Login" for "Support" on Remedy Connect for "<User>-<Role>" user
-    Then I select Reset Password option from the dropdown
-    And I should see text popup for reset password "We have sent you an e-mail with a link to reset your password."
-    And I click Okay button for reset password popup
-    Then I select Log Out option from the dropdown
-    And I should see Log in widget
-
-    Examples: 
-      | Description       | User        | Role                            | Email                            | Applications                                    | AppliationNotVisible            | DisableApplications | Locations2                       | Programs2   | HasHealthSystem2 | Health System2 | HasHealthSystem3 | Health System3    | Programs3   | Locations3                  | Facilities                                                                                                                                                                                                 | HealthSystemValidation                  | ProgramsValidation                                                                | LocationsValidation                                                                                                                                                                                                                                                                                                                                               | LearningPathway                                          | FirstName | LastName                                 | Roletext | ReportName                   | ReportCategory |
-      | Add org2 and org3 | Super Admin | Partner Technical Administrator | qaautomation@remedypartners.com2 | Episodes, Reports, Administration, TCI, Lessons | Physician Connect, Episodes 2.0 | Physician Connect   | 2070-g14--North Shore Med Center | BPCI-Model2 | Yes              | TeamHealth     | Yes              | Stamford Hospital | BPCI-Model2 | 2070-015--Stamford Hospital | Stamford Hospital, North Shore Med Center, Catered Manor Nursing Center, Downey Care Center, Encinitas Nursing and Rehabilitation Center,  Carson Nursing and Rehabilitation Center,  Arbor Nursing Center | Covenant, TeamHealth, Stamford Hospital | Stamford Hospital--BPCI Model 2, TeamHealth--BPCI Model 2, Covenant--BPCI Model 3 | Stamford Hospital--2070-015--Stamford Hospital, TeamHealth--2070-g14--North Shore Med Center, Covenant--3056-804--Catered Manor Nursing Center, Covenant--3056-805--Downey Care Center, Covenant--3056-806--Encinitas Nursing And Rehabilitation Center,  Covenant--3056-807--Carson Nursing And Rehabilitation Center,  Covenant--3056-808--Arbor Nursing Center | Learning Pathway 2, New learning Path, Remedy University | FirstName | LastNameLastNameLastNameLastNameLastName | ROLE_PRM | Episode DRG Issues [Model 3] | Patient ID     |
-
-  Scenario Outline: Editing locations -<Description>
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    And I click on Edit button
-    Then I select "Applications" tab
-    Then I unselect "<DisableApplications>" product
-    Then I select "Permissions" tab
-    Then I click on existing organisation "<Health System>"
-    Then I deselect "<RemoveLocations>" locations
-    Then I select "<Locations>" locations
-    Then I click on Submit button while edit for "<User>-<Role>"
-    Then I verify health system "<Health System>"
-    Then I verify programs "<ProgramsValidation>"
-    Then I verify location "<LocationsValidation>"
-    And I click on the top user account link
-    Then I click on "Log Out" button
-    Given I am on the login page
-    Then I click on "Log Out" button again
-    And I should see Log in widget
-    Then I enter newuser email for "<User>-<Role>" login to Remedy
-    Then I enter newuser password for login to Remedy
-    And I click Access button
-    Then I verify "<Applications>" product on SPOE page
-    Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    #Then I click on Hamburger menu on top left of homepage
-    #And I verify "<Applications>" in product menu dropdown
-    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    #And I redirect to Remedy connect page
-    And I click on Episode1 tile for "<User>-<Role>" user
-    #And I switch to new window
-    And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
-    And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
-    And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
-    And I verify "Not Associated" payer on user profile for "<User>-<Role>" user
-    And I verify "Medicare" payer on user profile for "<User>-<Role>" user
-    And I should not see "Emblem" payer on user profile for "<User>-<Role>" user
-    And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
-    And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
-    And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    #And I switch back to old window
-    And I redirect to Remedy connect page
-    And I click on Reports tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Reports homepage
-    And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
-    Then I click on "<ReportName>" report text for Overall Program Reports for "<User>-<Role>" user
-    Then I verify "<ReportName>" on the reports main page for "<User>-<Role>" user
-    #When I click on field-panel-icon button for "<User>-<Role>" user
-    #When I click to "BPID" field filter under "Episode Initiator" filter field for "<User>-<Role>" user
-    #And I choose "Filter" option from select options of filter field for "<User>-<Role>" user
-    #And I should see "<BPID>" in the filter value list for "<User>-<Role>" user
-    #And I click on cancel button from filter for "<User>-<Role>" user
-    And I redirect to Remedy connect page
-    And I click on Episodes 2 tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
-    And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
-    And I click on RemedyU tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to RemedyU homepage
-    And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
-    And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
-    And I switch back to old window
-    And I redirect to Remedy connect page
-    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    #And I redirect to Remedy connect page
-    And I click on User Admin tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to User Admin homepage
-    And I redirect to Remedy connect page
-    #And I click on Institute tile for "<User>-<Role>" user
-    #And I switch to new window
-    #And I verify "<User>-<Role>" user navigated to Institute homepage
-    #And I switch back to old window
-    And I click on the top user account link on remedy connect page
-    And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
-    And I verify "Log Out" in dropdown on profile icon for "<Role>" user
-    And I click on "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify page header "Login" for "Support" on Remedy Connect for "<User>-<Role>" user
-    Then I select Reset Password option from the dropdown
-    And I should see text popup for reset password "We have sent you an e-mail with a link to reset your password."
-    And I click Okay button for reset password popup
-    Then I select Log Out option from the dropdown
-    And I should see Log in widget
-
-    Examples: 
-      | Description                                | User        | Role       | Email                            | Applications                                  | ApplicationsNotVisible                          | DisableApplications | RemoveLocations | Locations                                                  | Programs    | Health System | Facilities                                                                                                                                              | ProgramsValidation                                       | LocationsValidation                                                                                                                                                                                                                                   | LearningPathway                                                                                                                                | FirstName | LastName                                 | Roletext | ReportCategory | ReportName         |
-      | Edit single location to multiple locations | Super Admin | Remedy TCS | qaautomation@remedypartners.com2 | Episodes, Reports, TCI, Lessons               | Episodes 2.0, Administration, Physician Connect | Episodes 2.0        |                 | 3056-m04--Altercare Post, 3056-m05--Altercare - Big Rapids | BPCI-Model3 | Altercare     | Altercare Post-Acute Rehab Center, Altercare - Big Rapids, Stamford Hospital, Altercare - Alliance                                                      | Stamford Hospital--BPCI Model 2, Altercare--BPCI Model 3 | Altercare--3056-m04--Altercare Post, Altercare--3056-m05--Altercare - Big Rapids, Stamford Hospital--2070-015--Stamford Hospital, Altercare--3056-m03--Altercare - Alliance                                                                           | Learning Pathway 2, max-test-052417, Clinical Operations Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University | FirstName | LastName                                 | ROLE_TCS | Patient ID     | Episode DRG Issues |
-      | Edit to All Locations                      | Super Admin | Remedy LPN | qaautomation@remedypartners.com2 | Episodes 2.0, Reports, TCI, Lessons           | Episodes, Administration, Physician Connect     | Episodes            |                 | All Locations                                              | BPCI-Model2 | Penn          | UPenn - Hospital of the Univ. of Pennsylvania, Upenn - Penn Presbyterian Hospital, Upenn - Pennsylvania Hospital, Apple - Rocky Hill, Apple - Watertown | Penn--BPCI Model 2, Apple Rehab--BPCI Model 3            | Penn--2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania, Penn--2070-021--Upenn - Penn Presbyterian Hospital, Penn--2070-022--Upenn - Pennsylvania Hospital, Apple Rehab--3056-i11--Apple - Watertown, Apple Rehab--3056-i12--Apple - Rocky Hill |                                                                                                                                                | FirstName | LastNameLastNameLastNameLastNameLastName | ROLE_LPN | Patient ID     | Episode DRG Issues |
-      | Edit All locations to single location      | Super Admin | Remedy LPN | qaautomation@remedypartners.com2 | Episodes 2.0, Reports, TCI, Lessons, Episodes | Administration, Physician Connect               | Episodes            | All Locations   | 2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania    | BPCI-Model2 | Penn          | UPenn - Hospital of the Univ. of Pennsylvania, Apple - Rocky Hill, Apple - Watertown                                                                    | Penn--BPCI Model 2, Apple Rehab--BPCI Model 3            | Penn--2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania, Apple Rehab--3056-i11--Apple - Watertown, Apple Rehab--3056-i12--Apple - Rocky Hill                                                                                                    |                                                                                                                                                | FirstName | LastNameLastNameLastNameLastNameLastName | ROLE_LPN | Patient ID     | Episode DRG Issues |
-
-  Scenario Outline: Edit programs- <Description>
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    And I click on Edit button
-    Then I select "Applications" tab
-    Then I unselect "<DisableApplications>" product
-    Then I select "Permissions" tab
-    Then I click on existing organisation "<Health System>"
-    Then I deselect "<RemovePrograms>" programs
-    #Then I select "<Programs>" programs for existing organisation
-    #Then I select "<Locations>" locations
-    Then I click on Submit button while edit for "<User>-<Role>"
-    Then I verify health system "<HealthSystemValidation>"
-    Then I verify programs "<ProgramsValidation>"
-    Then I verify location "<LocationsValidation>"
-    And I click on the top user account link
-    Then I click on "Log Out" button
-    Given I am on the login page
-    Then I click on "Log Out" button again
-    And I should see Log in widget
-    Then I enter newuser email for "<User>-<Role>" login to Remedy
-    Then I enter newuser password for login to Remedy
-    And I click Access button
-    Then I verify "<Applications>" product on SPOE page
-    Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    #Then I click on Hamburger menu on top left of homepage
-    #And I verify "<Applications>" in product menu dropdown
-    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    #And I redirect to Remedy connect page
-    And I click on Episode1 tile for "<User>-<Role>" user
-    #And I switch to new window
-    And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
-    And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
-    And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
-    And I verify "Not Associated" payer on user profile for "<User>-<Role>" user
-    And I verify "Medicare" payer on user profile for "<User>-<Role>" user
-    And I should not see "Emblem" payer on user profile for "<User>-<Role>" user
-    And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
-    And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
-    And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    #And I switch back to old window
-    And I redirect to Remedy connect page
-    And I click on Reports tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Reports homepage
-    And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
-    Then I click on "<ReportName>" report text for Overall Program Reports for "<User>-<Role>" user
-    Then I verify "<ReportName>" on the reports main page for "<User>-<Role>" user
-    #When I click on field-panel-icon button for "<User>-<Role>" user
-    #When I click to "BPID" field filter under "Episode Initiator" filter field for "<User>-<Role>" user
-    #And I choose "Filter" option from select options of filter field for "<User>-<Role>" user
-    #And I should see "<BPID>" in the filter value list for "<User>-<Role>" user
-    #And I click on cancel button from filter for "<User>-<Role>" user
-    And I redirect to Remedy connect page
-    And I click on Episodes 2 tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
-    And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
-    And I click on RemedyU tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to RemedyU homepage
-    And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
-    And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
-    And I switch back to old window
-    And I redirect to Remedy connect page
-    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    #And I redirect to Remedy connect page
-    And I click on User Admin tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to User Admin homepage
-    And I redirect to Remedy connect page
-    #And I click on Institute tile for "<User>-<Role>" user
-    #And I switch to new window
-    #And I verify "<User>-<Role>" user navigated to Institute homepage
-    #And I switch back to old window
-    And I click on the top user account link on remedy connect page
-    And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
-    And I verify "Log Out" in dropdown on profile icon for "<Role>" user
-    And I click on "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify page header "Login" for "Support" on Remedy Connect for "<User>-<Role>" user
-    Then I select Reset Password option from the dropdown
-    And I should see text popup for reset password "We have sent you an e-mail with a link to reset your password."
-    And I click Okay button for reset password popup
-    Then I select Log Out option from the dropdown
-    And I should see Log in widget
-
-    Examples: 
-      | Description                                                                                         | User        | Role             | Email                            | Applications                                  | ApplicationsNotVisible            | DisableApplications | Locations | RemovePrograms | Programs    | Health System                                        | Facilities                                                                                                                                                                                           | LearningPathway                                                                                                                                                                                                                       | FirstName                                 | LastName | Roletext | ReportCategory | ReportName                   | HealthSystemValidation                                                               | ProgramsValidation                                                                                                                                                 | LocationsValidation                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-      | Search user with multiple model-disable model-2 and model-3 remained enabled then verify locations  | Super Admin | Remedy Field RN  | qaautomation@remedypartners.com2 | Episodes, Episodes 2.0, Reports, TCI, Lessons | Administration, Physician Connect | Episodes, Episodes  |           | BPCI-Model2    | BPCI-Model3 | Cardiovascular Associates of The Delaware Valley,p A | Howard County General Hospital, East Orange General Hospital, United Health Services, Binghamton General-Sandiford Rehabilitation Center, Chenango Memorial Hospital, UHS Twin Tier Home Health Inc. | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | ROLE_FRN | Patient ID     | Episode DRG Issues [Model 3] | United Health Services of New York, Cardiovascular Associates of The Delaware Valley | United Health Services of New York--BPCI Model 2, United Health Services of New York--BPCI Model 3, Cardiovascular Associates of The Delaware Valley--BPCI Model 3 | United Health Services of New York--6005-197--United Health Services, United Health Services of New York--6005-197--Binghamton General, United Health Services of New York--6005-198--Chenango Memorial Hospital, United Health Services of New York--3090-209--Uhs Twin Tier Home Health Inc., Cardiovascular Associates of The Delaware Valley--3056-a08--Howard County General Hospital, Cardiovascular Associates of The Delaware Valley--3056-a08--East Orange General Hospital |
-      | Search user with multiple model-disable model-3 with model-2 remained enabled and verify locations  | Super Admin | Remedy Executive | qaautomation@remedypartners.com2 | Episodes, Episodes 2.0, Reports, TCI, Lessons | Administration, Physician Connect | Episodes, Episodes  |           | BPCI-Model3    | BPCI-Model2 | Cardiovascular Associates of The Delaware Valley,p A | Butler Memorial Hospital, Carolinas Hospital System - Florence                                                                                                                                       | max-test-052417, New learning Path, Remedy University                                                                                                                                                                                 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | ROLE_PRM | Patient ID     | Episode DRG Issues           | Cardiovascular Associates of The Delaware Valley, Butler Memorial Hospital           | Cardiovascular Associates of The Delaware Valley--BPCI Model 2, Butler Memorial Hospital--BPCI-CJR, Butler Memorial Hospital--BPCI Model 2                         | Butler Memorial Hospital--CJR-1--Butler Memorial Hospital, Butler Memorial Hospital--2070-a55--Butler Memorial Hospital, Cardiovascular Associates of The Delaware Valley--2070-060--Carolinas Hospital System - Florence                                                                                                                                                                                                                                                            |
-      | Search user with multiple model-disable BPCI-CJR with model-2 remained enabled and verify locations | Super Admin | Remedy Other     | qaautomation@remedypartners.com2 | Episodes, Episodes 2.0, TCI, Lessons          | Administration, Physician Connect | Episodes, Episodes  |           | BPCI-CJR       | BPCI-Model2 | Butler Memorial Hospital                             | Butler Memorial Hospital, Monmouth Medical Center - Southern Campus                                                                                                                                  | New learning Path, Physician Acute Care Hospital Model 2                                                                                                                                                                              | FirstName                                 | LastName | ROLE_PRM | Patient ID     | Episode DRG Issues           | Butler Memorial Hospital, RWJ Barnabas Health                                        | Butler Memorial Hospital--BPCI Model 2, RWJ Barnabas Health--BPCI-CJR                                                                                              | Butler Memorial Hospital--2070-a55--Butler Memorial Hospital, RWJ Barnabas Health--CJR-10-6--Monmouth Medical Center - Southern Campus                                                                                                                                                                                                                                                                                                                                               |
-
-  Scenario Outline: Changing General information, Role from <PreviousRole> to <Role> and Remove existing org and add new org
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I search for user with role "<User>-<PreviousRole>"
-    Then I select user with role "<User>-<PreviousRole>"
-    And I verify that I am navigated to user page
-    And I click on Edit button
-    And I fill in First Name with "<FirstName>"
-    Then I fill in Last Name with <LastName>
-    And I fill in Phone with <Phone>
-    When I click the Organizational Role Field to edit
-    Then I pick a Organizational <Role>
-    Then I enter NPI field with "<NPI>" for role "<Role>"
-    Then I click on Next button
-    Then I select "<EnableApplications>" product
-    #Then I click on Select button
-    #Then I enter "<LearningPathwaySearchParameter>" in Learning Pathway search box
-    #Then I select "<LearningPathwaySearchParameter>" from the results
-    Then I click on Next button
-    Then I remove health system "<Remove HealthSystem>"
-    And I search for health system with <Health System>
-    And I select a <Health System>
-    Then I select "<Programs>" programs
-    Then I select "<Locations>" locations
-    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
-    Then I verify first name "<FirstName>"
-    Then I verify last name "<LastName>"
-    Then I verify phone "<Phone>"
-    Then I verify enabled "<EnableApplications>"
-    Then I verify health system "<HealthSystemValidation>"
-    Then I verify programs "<ProgramsValidation>"
-    Then I verify location "<LocationsValidation>"
-    And I click on the top user account link
-    Then I click on "Log Out" button
-    Given I am on the login page
-    Then I click on "Log Out" button again
-    And I should see Log in widget
-    Then I enter newuser email for "<User>-<Role>" login to Remedy
-    Then I enter newuser password for login to Remedy
-    And I click Access button
-    Then I verify "<Applications>" product on SPOE page
-    Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    #Then I click on Hamburger menu on top left of homepage
-    #And I verify "<Applications>" in product menu dropdown
-    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    #And I redirect to Remedy connect page
-    And I click on Episode1 tile for "<User>-<Role>" user
-    #And I switch to new window
-    And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
-    And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
-    And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
-    And I verify "Not Associated" payer on user profile for "<User>-<Role>" user
-    And I verify "Medicare" payer on user profile for "<User>-<Role>" user
-    And I should not see "Emblem" payer on user profile for "<User>-<Role>" user
-    And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
-    And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
-    And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    #And I switch back to old window
-    And I redirect to Remedy connect page
-    And I click on Reports tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Reports homepage
-    And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
-    Then I click on "<ReportName>" report text for Overall Program Reports for "<User>-<Role>" user
-    Then I verify "<ReportName>" on the reports main page for "<User>-<Role>" user
-    #When I click on field-panel-icon button for "<User>-<Role>" user
-    #When I click to "BPID" field filter under "Episode Initiator" filter field for "<User>-<Role>" user
-    #And I choose "Filter" option from select options of filter field for "<User>-<Role>" user
-    #And I should see "<BPID>" in the filter value list for "<User>-<Role>" user
-    #And I click on cancel button from filter for "<User>-<Role>" user
-    And I redirect to Remedy connect page
-    And I click on Episodes 2 tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
-    And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
-    And I click on RemedyU tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to RemedyU homepage
-    And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
-    And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
-    And I switch back to old window
-    And I redirect to Remedy connect page
-    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    #And I redirect to Remedy connect page
-    And I click on User Admin tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to User Admin homepage
-    And I redirect to Remedy connect page
-    #And I click on Institute tile for "<User>-<Role>" user
-    #And I switch to new window
-    #And I verify "<User>-<Role>" user navigated to Institute homepage
-    #And I switch back to old window
-    And I click on the top user account link on remedy connect page
-    And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
-    And I verify "Log Out" in dropdown on profile icon for "<Role>" user
-    And I click on "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify page header "Login" for "Support" on Remedy Connect for "<User>-<Role>" user
-    Then I select Reset Password option from the dropdown
-    And I should see text popup for reset password "We have sent you an e-mail with a link to reset your password."
-    And I click Okay button for reset password popup
-    Then I select Log Out option from the dropdown
-    And I should see Log in widget
-
-    Examples: 
-      | User        | UserName                               | Password | FirstName | LastName       | Email                            | Phone        | NPI | PreviousRole | Role    | EnableApplications | Applications               | ApplicationsNotVisible                          | Remove HealthSystem      | Health System                                                          | Programs    | Locations | LearningPathwaySearchParameter | Roletext | ReportCategory | ReportName         | BPID | Facilities                              | LearningPathway                                                                     | HealthSystemValidation   | ProgramsValidation                     | LocationsValidation                                              |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastNameEdited | qaautomation@remedypartners.com2 | 996-385-2451 |     | Case Manager | Manager | Reports            | Episodes, Reports, Lessons | Administration, Physician Connect, Episodes 2.0 | St. Lukes Health Network | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI-Model2 |    390035 |                                | ROLE_PRM | Patient ID     | Episode DRG Issues |      | St. Luke's Hospital Quakertown Hospital | i am learning path, Learning Pathway 2, max-test-052417, Care Coordination External | St. Lukes Health Network | St. Lukes Health Network--BPCI Model 2 | St. Lukes Health Network--2070-026--Hospital Quakertown Hospital |
-
-  Scenario Outline: Changing General information, Role from <PreviousRole> to <Role> and edit Data permissions
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<PreviousRole>"
-    Then I select user with role "<User>-<PreviousRole>"
-    And I verify that I am navigated to user page
-    And I click on Edit button
-    Then I verify the header "General Information"
-    And I fill in First Name with "<FirstName>"
-    Then I fill in Last Name with <LastName>
-    And I fill in Phone with <Phone>
-    When I click the Organizational Role Field to edit
-    Then I pick a Organizational <Role>
-    Then I enter NPI field with "<NPI>" for role "<Role>"
-    Then I click on Next button
-    Then I unselect "<RemoveApplications>" product
-    Then I select "<EnableApplications>" product
-    Then I click on Next button
-    Then I click on existing organisation "<Health System>"
-    Then I deselect "<RemovePrograms>" programs
-    Then I select "<Programs>" programs
-    Then I select "<Locations>" locations
-    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
-    Then I verify last name "<LastName>"
-    Then I verify phone "<Phone>"
-    Then I verify enabled "<EnableApplications>"
-    Then I verify disabled "<RemoveApplications>"
-    Then I verify health system "<Health System>"
-    Then I verify programs "<ProgramsValidation>"
-    Then I verify location "<LocationsValidation>"
-    And I click on the top user account link
-    Then I click on "Log Out" button
-    Given I am on the login page
-    Then I click on "Log Out" button again
-    And I should see Log in widget
-    Then I enter newuser email for "<User>-<Role>" login to Remedy
-    Then I enter newuser password for login to Remedy
-    And I click Access button
-    Then I verify "<Applications>" product on SPOE page
-    Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    #Then I click on Hamburger menu on top left of homepage
-    #And I verify "<Applications>" in product menu dropdown
-    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    #And I redirect to Remedy connect page
-    And I click on Episode1 tile for "<User>-<Role>" user
-    #And I switch to new window
-    And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
-    And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
-    And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
-    And I verify "Not Associated" payer on user profile for "<User>-<Role>" user
-    And I verify "Medicare" payer on user profile for "<User>-<Role>" user
-    And I should not see "Emblem" payer on user profile for "<User>-<Role>" user
-    And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
-    And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
-    And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    #And I switch back to old window
-    And I redirect to Remedy connect page
-    And I click on Reports tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Reports homepage
-    And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
-    Then I click on "<ReportName>" report text for Overall Program Reports for "<User>-<Role>" user
-    Then I verify "<ReportName>" on the reports main page for "<User>-<Role>" user
-    #When I click on field-panel-icon button for "<User>-<Role>" user
-    #When I click to "BPID" field filter under "Episode Initiator" filter field for "<User>-<Role>" user
-    #And I choose "Filter" option from select options of filter field for "<User>-<Role>" user
-    #And I should see "<BPID>" in the filter value list for "<User>-<Role>" user
-    #And I click on cancel button from filter for "<User>-<Role>" user
-    And I redirect to Remedy connect page
-    And I click on Episodes 2 tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
-    And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
-    And I click on RemedyU tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to RemedyU homepage
-    And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
-    And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
-    And I switch back to old window
-    And I redirect to Remedy connect page
-    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    #And I redirect to Remedy connect page
-    And I click on User Admin tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to User Admin homepage
-    And I redirect to Remedy connect page
-    #And I click on Institute tile for "<User>-<Role>" user
-    #And I switch to new window
-    #And I verify "<User>-<Role>" user navigated to Institute homepage
-    #And I switch back to old window
-    And I click on the top user account link on remedy connect page
-    And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
-    And I verify "Log Out" in dropdown on profile icon for "<Role>" user
-    And I click on "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify page header "Login" for "Support" on Remedy Connect for "<User>-<Role>" user
-    Then I select Reset Password option from the dropdown
-    And I should see text popup for reset password "We have sent you an e-mail with a link to reset your password."
-    And I click Okay button for reset password popup
-    Then I select Log Out option from the dropdown
-    And I should see Log in widget
-
-    Examples: 
-      | User        | UserName                               | Password | FirstName       | LastName       | Email                            | Phone        | NPI | PreviousRole              | Role              | EnableApplications | RemoveApplications | Applications | ApplicationsNotVisible                     | Health System                      | RemovePrograms           | Programs    | Locations                                                     | LearningPathwaySearchParameter | Roletext | ReportCategory | ReportName         | BPID | Facilities                                | ProgramsValidation                               | LocationsValidation                                                                                                                   | LearningPathway                                                                                                                                                                                                                                          |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameEdited | LastNameEdited | qaautomation@remedypartners.com2 | 996-385-2451 |     | Transitional Case Manager | Remedy Sales Team | TCI                | Reports            | TCI, Lessons | Administration, Physician Connect, Reports | United Health Services of New York | BPCI-Model3, BPCI-Model2 | BPCI-Model2 | 6005-197--United Health Services, 6005-200--Cape Cod Hospital |                                | ROLE_TCS | Patient ID     | Episode DRG Issues |      | United Health Services, Cape Cod Hospital | United Health Services of New York--BPCI Model 2 | United Health Services of New York--6005-197--United Health Services, United Health Services of New York--6005-200--Cape Cod Hospital | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2, Remedy University |
-
-  Scenario Outline: Remove phone, Role from <PreviousRole> to <Role> add new org
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<PreviousRole>"
-    Then I select user with role "<User>-<PreviousRole>"
-    And I verify that I am navigated to user page
-    And I click on Edit button
-    And I fill in Phone with <Phone>
-    When I click the Organizational Role Field to edit
-    Then I pick a Organizational <Role>
-    Then I enter NPI field with "<NPI>" for role "<Role>"
-    Then I click on Next button
-    Then I select "<EnableApplications>" product
-    Then I click on Next button
-    Then I click Add Organization button for "<HasHealthSystem2>" flag
-    And I search for health system with <Health System2>
-    And I select a <Health System2>
-    Then I select "<Programs>" programs
-    Then I select "<Locations>" locations
-    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
-    Then I verify phone "<PhoneValidation>"
-    Then I verify enabled "<EnableApplications>"
-    Then I verify health system "<Health System2>"
-    Then I verify programs "<ProgramsValidation>"
-    Then I verify location "<LocationsValidation>"
-    And I click on the top user account link
-    Then I click on "Log Out" button
-    Given I am on the login page
-    Then I click on "Log Out" button again
-    And I should see Log in widget
-    Then I enter newuser email for "<User>-<Role>" login to Remedy
-    Then I enter newuser password for login to Remedy
-    And I click Access button
-    Then I verify "<Applications>" product on SPOE page
-    Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    #Then I click on Hamburger menu on top left of homepage
-    #And I verify "<Applications>" in product menu dropdown
-    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    #And I redirect to Remedy connect page
-    And I click on Episode1 tile for "<User>-<Role>" user
-    #And I switch to new window
-    And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
-    And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
-    And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
-    And I verify "Not Associated" payer on user profile for "<User>-<Role>" user
-    And I verify "Medicare" payer on user profile for "<User>-<Role>" user
-    And I should not see "Emblem" payer on user profile for "<User>-<Role>" user
-    And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
-    And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
-    And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    #And I switch back to old window
-    And I redirect to Remedy connect page
-    And I click on Reports tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Reports homepage
-    And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
-    Then I click on "<ReportName>" report text for Overall Program Reports for "<User>-<Role>" user
-    Then I verify "<ReportName>" on the reports main page for "<User>-<Role>" user
-    #When I click on field-panel-icon button for "<User>-<Role>" user
-    #When I click to "BPID" field filter under "Episode Initiator" filter field for "<User>-<Role>" user
-    #And I choose "Filter" option from select options of filter field for "<User>-<Role>" user
-    #And I should see "<BPID>" in the filter value list for "<User>-<Role>" user
-    #And I click on cancel button from filter for "<User>-<Role>" user
-    And I redirect to Remedy connect page
-    And I click on Episodes 2 tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
-    And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
-    And I click on RemedyU tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to RemedyU homepage
-    And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
-    And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
-    And I switch back to old window
-    And I redirect to Remedy connect page
-    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    #And I redirect to Remedy connect page
-    And I click on User Admin tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to User Admin homepage
-    And I redirect to Remedy connect page
-    #And I click on Institute tile for "<User>-<Role>" user
-    #And I switch to new window
-    #And I verify "<User>-<Role>" user navigated to Institute homepage
-    #And I switch back to old window
-    And I click on the top user account link on remedy connect page
-    And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
-    And I verify "Log Out" in dropdown on profile icon for "<Role>" user
-    And I click on "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify page header "Login" for "Support" on Remedy Connect for "<User>-<Role>" user
-    Then I select Reset Password option from the dropdown
-    And I should see text popup for reset password "We have sent you an e-mail with a link to reset your password."
-    And I click Okay button for reset password popup
-    Then I select Log Out option from the dropdown
-    And I should see Log in widget
-
-    Examples: 
-      | User        | FirstName | LastName | PreviousRole      | Role       | Phone      | PhoneValidation | NPI | EnableApplications          | Applications                                  | ApplicationsNotVisible       | Email                            | HasHealthSystem2 | Health System2 | Programs    | Locations                        | Roletext       | ReportCategory | ReportName         | BPID | HealthSystemValidation                         | ProgramsValidation                                                         | LocationsValidation                                                                                                                                                                 | Facilities                                                        | LearningPathway                                                                                          |
-      | Super Admin | FirstName | LastName | Remedy Sales Team | Physicians | 9999999999 | 999-999-9999    | NPI | Physician Connect, Episodes | Episodes, Reports, Lessons, Physician Connect | Episodes 2.0, Administration | qaautomation@remedypartners.com2 | Yes              | TeamHealth     | BPCI-Model2 | 2070-g14--North Shore Med Center | ROLE_CLINICIAN | Patient ID     | Episode DRG Issues |      | TeamHealth, United Health Services of New York | TeamHealth--BPCI Model 2, United Health Services of New York--BPCI Model 2 | TeamHealth--2070-g14--North Shore Med Center, United Health Services of New York--6005-197--United Health Services, United Health Services of New York--6005-200--Cape Cod Hospital | North Shore Med Center, United Health Services, Cape Cod Hospital | i am learning path, Learning Pathway 2, max-test-052417, Clinical Operations Acute Care Hospital Model 2 |
-
-  Scenario Outline: Edit phone, Role from <PreviousRole> to <Role> and Remove Existing Location and Add new Location
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<PreviousRole>"
-    Then I select user with role "<User>-<PreviousRole>"
-    And I verify that I am navigated to user page
-    And I click on Edit button
-    And I fill in Phone with <Phone>
-    When I click the Organizational Role Field to edit
-    Then I pick a Organizational <Role>
-    Then I enter NPI field with "<NPI>" for role "<Role>"
-    Then I click on Next button
-    Then I select "<EnableApplications>" product
-    Then I click on Next button
-    Then I click on existing organisation "<Health System>"
-    Then I select "<DisableLocations>" locations
-    Then I select location by BPID "<EnableLocations>"
-    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
-    Then I verify phone "<PhoneValidation>"
-    Then I verify enabled "<EnableApplications>"
-    Then I verify health system "<Health System>"
-    Then I verify programs "<ProgramsValidation>"
-    Then I verify location "<LocationsValidation>"
-    And I click on the top user account link
-    Then I click on "Log Out" button
-    Given I am on the login page
-    Then I click on "Log Out" button again
-    And I should see Log in widget
-    Then I enter newuser email for "<User>-<Role>" login to Remedy
-    Then I enter newuser password for login to Remedy
-    And I click Access button
-    Then I verify "<Applications>" product on SPOE page
-    Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    #Then I click on Hamburger menu on top left of homepage
-    #And I verify "<Applications>" in product menu dropdown
-    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    #And I redirect to Remedy connect page
-    And I click on Episode1 tile for "<User>-<Role>" user
-    #And I switch to new window
-    And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
-    And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
-    And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
-    And I verify "Not Associated" payer on user profile for "<User>-<Role>" user
-    And I verify "Medicare" payer on user profile for "<User>-<Role>" user
-    And I should not see "Emblem" payer on user profile for "<User>-<Role>" user
-    And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
-    And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
-    And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    #And I switch back to old window
-    And I redirect to Remedy connect page
-    And I click on Reports tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Reports homepage
-    And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
-    Then I click on "<ReportName>" report text for Overall Program Reports for "<User>-<Role>" user
-    Then I verify "<ReportName>" on the reports main page for "<User>-<Role>" user
-    #When I click on field-panel-icon button for "<User>-<Role>" user
-    #When I click to "BPID" field filter under "Episode Initiator" filter field for "<User>-<Role>" user
-    #And I choose "Filter" option from select options of filter field for "<User>-<Role>" user
-    #And I should see "<BPID>" in the filter value list for "<User>-<Role>" user
-    #And I click on cancel button from filter for "<User>-<Role>" user
-    And I redirect to Remedy connect page
-    And I click on Episodes 2 tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
-    And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
-    And I click on RemedyU tile for "<User>-<Role>" user
-    And I switch to new window
-    And I verify "<User>-<Role>" user navigated to RemedyU homepage
-    And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
-    And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
-    And I switch back to old window
-    And I redirect to Remedy connect page
-    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    #And I redirect to Remedy connect page
-    And I click on User Admin tile for "<User>-<Role>" user
-    And I verify "<User>-<Role>" user navigated to User Admin homepage
-    And I redirect to Remedy connect page
-    #And I click on Institute tile for "<User>-<Role>" user
-    #And I switch to new window
-    #And I verify "<User>-<Role>" user navigated to Institute homepage
-    #And I switch back to old window
-    And I click on the top user account link on remedy connect page
-    And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
-    And I verify "Log Out" in dropdown on profile icon for "<Role>" user
-    And I click on "Support" in dropdown on profile icon for "<User>-<Role>" user
-    And I verify page header "Login" for "Support" on Remedy Connect for "<User>-<Role>" user
-    Then I select Reset Password option from the dropdown
-    And I should see text popup for reset password "We have sent you an e-mail with a link to reset your password."
-    And I click Okay button for reset password popup
-    Then I select Log Out option from the dropdown
-    And I should see Log in widget
-
-    Examples: 
-      | User        | FirstName | LastName | PreviousRole | Role                           | Phone      | PhoneValidation | NPI | EnableApplications                | Applications                                                  | Email                            | Health System                      | Programs                 | DisableLocations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | EnableLocations                                                            | Roletext   | ReportCategory | ReportName         | BPID | Facilities                                                                                                                                                                                                                                                                       | ProgramsValidation                                                                                                                                                                                                                 | LocationsValidation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | LearningPathway                                                                                                               |
-      | Super Admin | FirstName | LastName | Remedy PM    | Remedy Technical Administrator | 9999999999 | 999-999-9999    |     | Physician Connect, Administration | Episodes, Episodes 2.0, Reports, Administration, TCI, Lessons | qaautomation@remedypartners.com2 | United Health Services of New York | BPCI-Model2, BPCI-Model3 | 6005-197--United Health Services, 6005-197--Binghamton General, 6005-198--Chenango Memorial Hospital, 6005-200--Avera Mckennan Hospital & University Health Center, 6005-200--Westchester General Hospital , 6005-200--Cayuga Medical Center At Ithaca, 6005-200--Cape Cod Hospital, 6005-200--St  Vincent, 6005-200--White Plains Hospital Center, 6005-200--North Central Bronx Hospital, 6005-200--Saratoga Hospital, 6005-200--Moses Taylor Hospital, 6005-200--Banner Del E Webb Medical Center, 6005-200--161395906, 6005-200--St. James Mercy Hospital, 6005-200--University Hospital, 6005-200--Cortland Regional Medical Center, 6005-200--Hackettstown Regional Medical Center, 6005-200--St Johns Regional Medical Center, 6005-200--Bayhealth - Kent General Hospital, 6005-200--Howard County General Hospital, 6005-200--Porter Regional Hospital, 6005-200--Arnot Ogden Medical Center, 6005-200--St. Peter's Hospital, 6005-200--Chenango Memorial Hospital, 6005-200--United Health Services, 6005-200--Washington Hospital, 6005-200--Geisinger - Community Medical Center, 6005-200--Scripps Memorial Hospital - Encinitas, 6005-200--Mary Imogene Bassett Hospital, 6005-200--Our Lady Of Lourdes Memorial Hospital, 6005-200--Queens Hospital Center, 6005-200--Tlc Health Network, 6005-200--Menifee Valley Medical Center, 6005-200--Sisters Of Charity Hospital, 6005-200--Albany Medical Center Hospital, 6005-200--Aurelia Osborn Fox Memorial Hospital, 6005-200--Lane Regional Medical Center, 6005-200--Brookhaven Memorial Hospital Medical Center, 6005-200--Banner Boswell Medical Center, 6005-200--Hemet Valley Medical Center, 6005-200--Binghamton General, 6005-200--Albany Memorial Hospital, 6005-200--East Jefferson General Hospital, 3090-209--Uhs Twin Tier Home Health Inc. | 6005-197--United Health Services, 3090-209--Uhs Twin Tier Home Health Inc. | ROLE_ADMIN | Patient ID     | Episode DRG Issues |      | Carolinas Hospital System - Florence, Howard County General Hospital, East Orange General Hospital, Meritus Medical Center, North Shore University Hospital, St. Michael's Medical Center, Saint Barnabas Medical Center, United Health Services, UHS Twin Tier Home Health Inc. | Cardiovascular Associates of The Delaware Valley--BPCI Model 2, Cardiovascular Associates of The Delaware Valley--BPCI Model 3, United Health Services of New York--BPCI Model 2, United Health Services of New York--BPCI Model 3 | United Health Services of New York--3090-209--Uhs Twin Tier Home Health Inc., Cardiovascular Associates of The Delaware Valley--2070-060--Carolinas Hospital System - Florence, Cardiovascular Associates of The Delaware Valley--3056-a08--Howard County General Hospital, Cardiovascular Associates of The Delaware Valley--3056-a08--East Orange General Hospital, Cardiovascular Associates of The Delaware Valley--3056-a08--Meritus Medical Center, Cardiovascular Associates of The Delaware Valley--3056-a08--North Shore University Hospital, Cardiovascular Associates of The Delaware Valley--3056-a08--St. Michael's Medical Center, Cardiovascular Associates of The Delaware Valley--3056-a08--Saint Barnabas Medical Center, United Health Services of New York--6005-197--United Health Services | Learning Pathway 2, New learning Path, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2 |
+    And I verify "Dashboard" after redirection to EC1 for "Super Admin-Physicians" user
+    And I verify NPI on ECI for "Super Admin-Physicians" user
 
   Scenario Outline: <Description>
     Given I am on the login page
