@@ -189,4 +189,9 @@ public class CreateProgramsStepDef extends DriverScript{
 	  public void i_Verify_HeaderText_On_Create_Organization_Page(String text, String action) throws Throwable {
 		 createMO.iVerifyHeaderTextOnCreateOrganizationPage(text);
 	    }
+	 
+	 @And("^I verify auto incremented contract ID should be starts with \"([^\"]*)\"$")
+	  public void i_Verify_Auto_Incremented_CID(String text) throws Throwable {
+		 programs.iVerifyAutoIncrementedCID(text);
+	    }
 }
