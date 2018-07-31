@@ -159,7 +159,7 @@ WHERE f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims
 and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
 and e.bpid not like &apos;%DEMO%&apos;
 and c.atRisk=&apos;Y&apos; 
-and c.anchorBeginDateKey &gt;= 20160101 
+and c.anchorBeginDateKey &gt;= 20170101 
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 and e.bpid in  ${bpid}) a;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -187,9 +187,10 @@ WHERE f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims
 and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
 and e.bpid not like &apos;%DEMO%&apos;
 and c.atRisk=&apos;Y&apos; 
-and c.anchorBeginDateKey &gt;= 20160101 
+and c.anchorBeginDateKey &gt;= 20170101 
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and e.bpid in  ${bpid}) as a;</stringProp>
+and e.bpid in  ${bpid}
+and f.ccn in (&apos;390223&apos;)) a;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">savingRate</stringProp>
@@ -215,7 +216,7 @@ WHERE f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims
 and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
 and e.bpid not like &apos;%DEMO%&apos;
 and c.atRisk=&apos;Y&apos;
-and c.anchorBeginDateKey &gt;= 20160101
+and c.anchorBeginDateKey &gt;= 20170101
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 and e.bpid in  ${bpid}) a;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -283,7 +284,7 @@ and df.ccn = (&apos;390223&apos;)) a;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days (Claims)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select round(sum(snfDaysTrimmed)/sum(Episodes),1) as SNFDays

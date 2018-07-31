@@ -1,4 +1,4 @@
-Feature: Verify Program Performance Report
+Feature: Verify Program Performance Dashboard
 
 Scenario: Verify text on program overview report
   Given I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\PerformanceDashboard\\TableauTest.jmx"
@@ -14,18 +14,18 @@ Scenario: Verify text on program overview report
   Then I verify subtitle text "Evaluate program on key performance metrics and identify focus areas" is appearing inside dashboard
   Then I read the values from the text file "\\src\\test\\Jmeter\\PerformanceDashboard\\PerformanceDashboardResult.txt"
   And I set the time for starting date to claimscube date on dashboard and ending date to today date
-  And I verify "EC Episodes" count matched with database value on the dashboard with picture resolution "500X500"
-  Then I set the time from starting date as "1/1/2016" to ending date to claimscube date to validate claims episode data
   Then I select "Penn Presbyterian Medical Center - 2070-021" from "Episode Initiator - BPID" field and click on "Apply"
-  And I verify "Savings Rate" data is matched with database value on dashboard with picture resolution "500X500"
-  And I verify "Claims Episodes" count matched with database value on the dashboard with picture resolution "450X450"
+  And I verify "EC Episodes" count matched with database value on the dashboard with picture resolution "500X500"
+  Then I set the time from starting date as "1/1/2017" to ending date to claimscube date to validate claims episode data
+  #Then I select "Penn Presbyterian Medical Center - 2070-021" from "Episode Initiator - BPID" field and click on "Apply"
+  And I verify "Savings Rate" data is matched with database value on dashboard with picture resolution "600X600"
+  And I verify "Claims Episodes" count matched with database value on the dashboard with picture resolution "500X500"
   And I verify "Program Size" count matched with database value on dashboard for program size with picture resolution "300X300"
   And I verify "NPRA" count matched with database value on dashboard for npra with picture resolution "300X300"
+  #And I verify "SNF Days" count matched with database value on dashboard for snf days with picture resolution "700X700"
   Then I set the time from starting date as "1/1/2017" and ending date to today date
-  And I verify "%Discharge to SNF" count matched with database value on dashboard for discharge to snf with picture resolution "500X500"
-  And I verify "%Episodes with a Readmission" count matched with database value on dashboard for episodes with readmission with picture resolution "500X500"
+  And I verify "%Discharge to SNF" count matched with database value on dashboard for discharge to snf with picture resolution "700X700"
+  And I verify "%Episodes with a Readmission" count matched with database value on dashboard for episodes with readmission with picture resolution "700X700"
   Then I set the time from starting date as "1/1/2017" to ending date to claimscube date to validate claims episode data
-  And I verify "SNF Days" count matched with database value on dashboard for snf days with picture resolution "500X500"
-  
-  
+  And I verify "SNF Days" count matched with database value on dashboard for snf days with picture resolution "700X700"
   

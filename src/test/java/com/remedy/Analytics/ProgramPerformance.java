@@ -48,7 +48,8 @@ public class ProgramPerformance extends BaseClass{
 	
 	int ECEpiosdeCount,claimsEpiosdeCount,TotalNPRA,TotalProgram;
     Double savingRate,DischargeToSNF,SNFDays,EpisodesWithReadmission;
-    String StartDate;
+    String StartDate,facilityname,facilitybpid;
+    Actions act=new Actions(driver);
 	WebDriverWait wait = new WebDriverWait(driver, 300);
 
 	public ProgramPerformance(WebDriver driver) {
@@ -532,15 +533,15 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iReadTextFromOutputfile(String location) throws IOException{
-		 BufferedReader br=new BufferedReader(new FileReader(System.getProperty("user.dir")+location));
-		 String names;
-		 while ((names = br.readLine())!= null) {           
+		    	 BufferedReader br=new BufferedReader(new FileReader(System.getProperty("user.dir")+location));
+				 String names;
+				 while ((names = br.readLine())!= null) {           
 
-			 StringTokenizer st = new StringTokenizer(names, ",");     
-			 List<String> elements = new ArrayList<String>();
-		     while (st.hasMoreTokens()){
-		      elements.add(st.nextToken());
-		     } 
+					 StringTokenizer st = new StringTokenizer(names, ",");     
+					 List<String> elements = new ArrayList<String>();
+				     while (st.hasMoreTokens()){
+				      elements.add(st.nextToken());
+				     }
 		      String ECCount=elements.get(0).trim();
 		      String ec[]=ECCount.split("=");
 		      ECEpiosdeCount=Integer.parseInt(ec[1]);
@@ -585,8 +586,18 @@ public class ProgramPerformance extends BaseClass{
 		      Double episodeR=Double.parseDouble(EReadmission[1]);
 		      EpisodesWithReadmission=episodeR;
 		      System.out.println("The episodes with readmissions value is"+EpisodesWithReadmission);
+//		      String claimsEReadmission=elements.get(9).trim();
+//		      String claimsReadmission[]=claimsEReadmission.split("=");
+//		      Double claimsepisodeR=Double.parseDouble(claimsReadmission[1]);
+//		      claimsEpisodesReadmission=claimsepisodeR;
+//		      System.out.println("The epiosde with readmission value for claims is"+claimsEpisodesReadmission);
+//		      String ecEReadmission=elements.get(10).trim();
+//		      String ecReadmission[]=ecEReadmission.split("=");
+//		      Double ecepisodeR=Double.parseDouble(ecReadmission[1]);
+//		      ecEpsiodesReadmission=ecepisodeR;
+//		      System.out.println("The episode with readmission value for ec is"+ecEpsiodesReadmission);
 		      delay();
-		 }      
+		     }
 	 }
 
 	public String numberformat(int number) {
@@ -606,11 +617,14 @@ public class ProgramPerformance extends BaseClass{
 		 int height=Integer.parseInt(h_value);
 		 int width=Integer.parseInt(w_value);
 		 WebElement ele = driver.findElement(By.xpath(element));
-//		 scrollIntoViewByJS(ele);
+		 if(text.equals("%Episodes with a Readmission"))
+		 {
+		 scrollIntoViewByJS(ele);
+		 }
 		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		 BufferedImage  fullImg = ImageIO.read(screenshot);
 		 Point point = ele.getLocation();
-		 point = point.moveBy(100, 60);
+		 point = point.moveBy(100, 100);
 		 System.out.println(point);
 		 int eleWidth = ele.getSize().getWidth();
 		 int eleHeight = ele.getSize().getHeight();
@@ -661,10 +675,13 @@ public class ProgramPerformance extends BaseClass{
 	 public void iSetStartAndEndDateForClaimsData(String start){
 		 longDelay();
 		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+//		 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
 		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), start);
 		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
 		 delay();
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+		 delay();
+		 longDelay();
 		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
 		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), StartDate);
 		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
@@ -687,7 +704,7 @@ public class ProgramPerformance extends BaseClass{
 		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		 BufferedImage  fullImg = ImageIO.read(screenshot);
 		 Point point = ele.getLocation();
-		 point = point.moveBy(100, 60);
+		 point = point.moveBy(100, 100);
 		 System.out.println(point);
 		 int eleWidth = ele.getSize().getWidth();
 		 int eleHeight = ele.getSize().getHeight();
@@ -724,20 +741,23 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iSelectValuesFromDropDown(String text,String field,String apply){
+		 longDelay();
 		 clickElement(driver.findElement(By.xpath("//span[text()='"+field+"']/../../../../.. //span[@role='combobox']")));
 //		 clickElement(driver.findElement(By.xpath("//input[contains(@name,'All')]")))
-		 WebElement elem = driver.findElement(By.xpath("//input[contains(@name,'All')]"));;
-		 Actions act=new Actions(driver);
+		 WebElement elem = driver.findElement(By.xpath("//input[contains(@name,'All')]"));
 		 act.moveToElement(elem).click().build().perform();
 //		 delay();
 //		 clickElement(driver.findElement(By.xpath("//a[@title='"+text+"']/../input")));
-		 WebElement elem1 = driver.findElement(By.xpath("//a[@title='"+text+"']/../input"));;
-		 Actions act1=new Actions(driver);
-		 act1.moveToElement(elem1).click().build().perform();
+		 WebElement elem1 = driver.findElement(By.xpath("//a[@title='"+text+"']/../input"));
+//		 Actions act1=new Actions(driver);
+		 act.moveToElement(elem1).click().build().perform();
 		 clickElement(driver.findElement(By.xpath("//span[text()='"+apply+"']")));
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 delay();
 //		 clickElement(driver.findElement(By.xpath("//span[text()='"+field+"']/../../../../.. //span[@role='combobox']")));
+//		 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='"+field+"']/../../../../.. //span[@role='combobox']")));
+		 WebElement elem2 = driver.findElement(By.xpath("//span[text()='"+field+"']/../../../../.. //span[@role='combobox']"));
+		 act.moveToElement(elem2).click().build().perform();
 	 }
 	 
 	 public void iSetCalendarAttributeValueForEndingTodayDate(){
@@ -746,6 +766,7 @@ public class ProgramPerformance extends BaseClass{
 		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 delay();
+		 longDelay();
 		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
 		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), StartDate);
 		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
@@ -787,5 +808,35 @@ public class ProgramPerformance extends BaseClass{
 		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 delay();
+	 }
+	 
+	 public void iReadValuesForOutputFileForIPECDashboard(String location) throws IOException{
+		 BufferedReader br=new BufferedReader(new FileReader(System.getProperty("user.dir")+location));
+		 String names;
+		 while ((names = br.readLine())!= null) {           
+
+			 StringTokenizer st = new StringTokenizer(names, ",");     
+			 List<String> elements = new ArrayList<String>();
+		     while (st.hasMoreTokens()){
+		      elements.add(st.nextToken());
+		     }
+    	  String facility=elements.get(0).trim();
+	      String nameoffacility[]=facility.split("=");
+	      facilityname=nameoffacility[1];
+	      System.out.println("The facility name is"+facilityname);
+	      String facbpid=elements.get(1).trim();
+	      String bpid[]=facbpid.split("=");
+	      facilitybpid=bpid[1];
+	      System.out.println("The facility bpid is"+facilitybpid);
+		 }
+	 }
+	 
+	 public void iVerifyTextInFiterFieldValues(String filter){
+		 longDelay();
+		 clickElement(driver.findElement(By.xpath("//span[text()='"+filter+"']/../../../../.. //span[@role='combobox']")));
+		 delay();
+		 String observed=getTextForElement(driver.findElement(By.xpath("//a[contains(text(),'"+facilitybpid+"')]")));
+		 String Actual=""+facilityname+" - "+facilitybpid+"";
+		 Assert.assertEquals(observed.trim(), Actual.trim());
 	 }
 }
