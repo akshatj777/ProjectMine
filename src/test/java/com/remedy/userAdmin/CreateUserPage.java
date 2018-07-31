@@ -2710,8 +2710,9 @@ public void iUnselectAllSelectedApps(){
 	 }
  public void iNavigateToNextLocationsPage(String text){
 	 if(text.equals("creating")){
-	 isElementVisible(driver.findElements(By.cssSelector(".icon.chevron.right")).get(3));
-	 clickElement(driver.findElements(By.cssSelector(".icon.chevron.right")).get(3));}
+	 isElementVisible(driver.findElement(By.xpath("//div[@class='content']//div[@class='single-chevron']/i[@class='icon chevron right']")));
+	 clickElement(driver.findElement(By.xpath("//div[@class='content']//div[@class='single-chevron']/i[@class='icon chevron right']")));
+	 }
 	 else{
 		 isElementVisible(driver.findElement(By.cssSelector(".icon.chevron.right")));
 		 clickElement(driver.findElement(By.cssSelector(".icon.chevron.right")));
