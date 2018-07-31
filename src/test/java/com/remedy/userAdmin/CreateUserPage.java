@@ -2719,6 +2719,7 @@ public void iUnselectAllSelectedApps(){
 	 }
 	 
 	 public void iClickOnRemoveLinkIconforSelectedLocationsSelectLocationsSection(){
+		 iWillWaitToSee(By.cssSelector(".remove.link.icon"));
 		 clickElement(driver.findElement(By.cssSelector(".remove.link.icon")));
 	 }
 	 

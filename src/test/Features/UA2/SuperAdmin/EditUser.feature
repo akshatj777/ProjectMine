@@ -323,7 +323,7 @@ Feature: Edit user page for SA
       | User        | Role    | HasHealthSystem2 | InvalidHealthSystem | Health System2 | Programs2   | invalidLocations |
       | Super Admin | Manager | Yes              | hdvb                | Avalon         | BPCI-Model3 | hkfj             |
 
-  Scenario Outline: Delete location from selected locations section and then remove the org
+  Scenario Outline: Remove selected locations and then remove the org
     Given I am on the login page
     When I log in as super user
     Then I should see Tile text Users
@@ -335,17 +335,38 @@ Feature: Edit user page for SA
     And I click on Edit button
     Then I select "Permissions" tab
     Then I click on existing organisation "<Health System>"
+    Then I select "<DisableLocations>" locations
+    Then I remove health system "<Health System>"
+    Then I click on Submit button while edit for "<User>-<Role>"
+
+    Examples: 
+      | User        | Role      | Health System | DisableLocations                         |
+      | Super Admin | Remedy RN | TeamHealth    | 3056-q91--The Medical Center At Franklin |
+
+  Scenario Outline: Verify the search functionality in selected locations and delete a location
+    Given I am on the login page
+    When I enter email field lbarinstein+qaadmin@remedypartners.com for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    And I click on Edit button
+    Then I select "Permissions" tab
+    Then I verify the header "Permissions"
+    Then I click on existing organisation "<Health System>"
     And I verify selected Location "<SelectedLocations>" in the selected Locations section
     Then I search the "<Locations>" in the Selected Locations section
     Then I verify facility key "<facilityKey>" is displayed with location name "Fairbanks Memorial Hospital"
     And I click on remove link icon for selected Locations on selected Locations section
     And I verify Selected Locations section after click on remove link icon
-    Then I remove health system "<Health System>"
-    Then I click on Submit button while edit for "<User>-<Role>"
 
     Examples: 
-      | User        | Role      | Health System | Locations                                | SelectedLocations                       | facilityKey |
-      | Super Admin | Remedy RN | TeamHealth    | 3056-q91--The Medical Center At Franklin | The Medical Center At Franklin (181318) |      181318 |
+      | User        | UserName                               | Password | Role      | Health System    | SelectedLocations                    | Locations                             | facilityKey |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | Executive | Sound Physicians | Fairbanks Memorial Hospital (020012) | 6005-063--Fairbanks Memorial Hospital |      020012 |
 
   Scenario Outline: Changing role from physician to Manager then back to Physicians
     Given I am on the login page

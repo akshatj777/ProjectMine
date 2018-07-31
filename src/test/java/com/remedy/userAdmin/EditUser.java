@@ -155,6 +155,7 @@ public class EditUser extends BaseClass {
 					String token = st.nextToken();
 					iWillWaitToSee(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'" + token + "')]/i[contains(@class,'remove link icon')]"));
 					clickElement(driver.findElement(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'"+ token + "')]/i[contains(@class,'remove link icon')]")));
+					
 					if (isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + "Remove" + "')]"))) == true)
 						clickElement(driver.findElement(By.xpath("//*[contains(text(),'" + "Remove" + "')]")));
 				}
@@ -163,7 +164,9 @@ public class EditUser extends BaseClass {
 			{
 				iWillWaitToSee(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'" + org+ "')]/i[contains(@class,'remove link icon')]"));
 				clickElement(driver.findElement(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'"+ org + "')]/i[contains(@class,'remove link icon')]")));
+			
 				if (isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + "Remove" + "')]"))) == true)
+					
 					clickElement(driver.findElement(By.xpath("//*[contains(text(),'" + "Remove" + "')]")));
 			}
 		}
