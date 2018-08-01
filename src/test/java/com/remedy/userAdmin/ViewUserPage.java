@@ -269,19 +269,87 @@ public class ViewUserPage extends BaseClass {
 	}
 
 	public void i_verify_HealthSystemLocationNotPresent(String locations) throws Throwable {
-		if(!(locations.isEmpty())){
-		String healthSystem = locations.substring(0, locations.indexOf("--"));
-		//String BPID = locations.substring(locations.indexOf("--")+2, locations.lastIndexOf("--"));
-		String location = locations.substring(locations.lastIndexOf("--")+2, locations.length());
-		driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")).click();
-		Thread.sleep(3000);
-		if(driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")).isDisplayed())
-    	{
-    		driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")).sendKeys(location);
-    		Thread.sleep(3000);
-    		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='content active data-permissions-content']//h3[contains(text(),' No Results Found ')]")));
-    		
-	}
+		if(!(locations.equals("")))
+		{
+			if(locations.contains(","))
+			{
+				StringTokenizer st = new StringTokenizer(locations, ",");
+				while(st.hasMoreTokens())
+				{
+					String token = st.nextToken().trim();
+					String healthSystem = token.substring(0, token.indexOf("--"));
+					String BPID = token.substring(token.indexOf("--")+2, token.lastIndexOf("--"));
+					String location = token.substring(token.lastIndexOf("--")+2, token.length());
+			    	if(DriverScript.Config.getProperty("Browser").equals("ie"))
+			    	{
+			    		((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")));
+			    		Thread.sleep(3000);
+			    		if(driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")).isDisplayed())
+			    		{
+			    			new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")), location).build().perform();
+			    			while(!(driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")).getAttribute("value")).equals(location))
+			    			{
+			    				((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+			    				new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")), location).build().perform();
+			    			}
+			    			Thread.sleep(3000);
+			    			Assert.assertFalse(isElementPresentOnPage(By.xpath("//div[@class='content active data-permissions-content']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//td[contains(text(),\""+location+"\")]")));
+				    		Thread.sleep(3000);
+				    		((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")));
+			    		}
+			    	}
+			    	else
+			    	{
+			    		driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")).click();
+				    	Thread.sleep(3000);
+				    	if(driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")).isDisplayed())
+				    	{
+				    		driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")).sendKeys(location);
+				    		Thread.sleep(3000);
+				    		Assert.assertFalse(isElementPresentOnPage(By.xpath("//div[@class='content active data-permissions-content']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//td[contains(text(),\""+location+"\")]")));
+				    		Thread.sleep(3000);
+				    		scrollIntoViewByJS(driver.findElement(By.xpath("//h3[text()='Data Permissions']")));
+				    		driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")).click();
+				    	}
+			    	}
+				}
+			}
+			else
+			{
+				String healthSystem = locations.substring(0, locations.indexOf("--"));
+				String BPID = locations.substring(locations.indexOf("--")+2, locations.lastIndexOf("--"));
+				String location = locations.substring(locations.lastIndexOf("--")+2, locations.length());
+				if(DriverScript.Config.getProperty("Browser").equals("ie"))
+				{
+					((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")));
+		    		Thread.sleep(3000);
+		    		if(driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")).isDisplayed())
+		    		{
+		    			new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")), location).build().perform();
+		    			while(!(driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")).getAttribute("value")).equals(location))
+		    			{
+		    				((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+		    				new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")), location).build().perform();
+		    			}
+		    			Thread.sleep(3000);
+		    			Assert.assertFalse(isElementPresentOnPage(By.xpath("//div[@class='content active data-permissions-content']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//td[contains(text(),\""+location+"\")]")));
+			    		Thread.sleep(3000);
+			    		((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")));
+		    		}
+				}
+				else
+				{
+					driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")).click();
+					Thread.sleep(3000);
+					if(driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")).isDisplayed())
+			    	{
+			    		driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")).sendKeys(location);
+			    		Thread.sleep(3000);
+			    		Assert.assertFalse(isElementPresentOnPage(By.xpath("//div[@class='content active data-permissions-content']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//td[contains(text(),\""+location+"\")]")));
+			    		Thread.sleep(3000);
+			    	}
+				}
+			}
 		}
 	}
 	public void verifyEditIcon() throws Throwable {
@@ -373,6 +441,7 @@ public void iRefreshViewUserPage() {
 	}
 
 public void iVerifyRemovedProgramInViewPage(String programs){
+	if(!(programs.isEmpty())) {
 	if(programs.contains(","))
 	{
 		StringTokenizer st = new StringTokenizer(programs, ",");
@@ -393,7 +462,7 @@ public void iVerifyRemovedProgramInViewPage(String programs){
     	Assert.assertFalse(isElementPresentOnPage(By.xpath("//div[@class='title accordion-title']//span[contains(text(),'"+healthSystem+"')]//span[contains(text(),'"+program+"')]")));
 	}
 }
-
+}
 
 public void iClickOnLockUnlockIcon(String text){
 	if(text.equals("Lock"))
