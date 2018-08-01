@@ -17,7 +17,7 @@ Feature: Create LTCH organization functionality tests
       | desc      | particpantId | name   | contactPerson | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type       |
       | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
 
-  Scenario: Verification of availability of all the fields on Create Hospital Organization page
+  Scenario: Verification of availability of all the fields on Create LTCH Organization page
     When I click on "LTCH" organization tab on organization dashboard
     Then I verify "+" button under "LTCH" organization page
     And I verify "CCN" header label under "LTCH" organization
@@ -60,6 +60,41 @@ Feature: Create LTCH organization functionality tests
     And I select "YES" radio button for managing organization
     Then I select "Invalid_Managing_Org" managing organization name in "YES" Has a Management Organization drop down
     And I verify "No results found" in Has a Management Organization dropdown
+
+  Scenario Outline: <Description>
+    When I click on "LTCH" organization tab on organization dashboard
+    Then I click on "+" button on "LTCH" organization page
+    And I verify "Create Long-Term Care Hospital Organization" header text on create organization page
+    And I select "YES" radio button for managing organization
+    Then I search and verify "<MO_Name>" managing organization name in "YES" Has a Management Organization drop down box
+
+    Examples: 
+      | Description                                                  | Has_MO | MO_Name |
+      | Search for a valid Managing Organization on Create LTCH page | YES    | MONAME  |
+
+  Scenario Outline: <Description>
+    When I click on "LTCH" organization tab on organization dashboard
+    Then I click on "+" button on "LTCH" organization page
+    And I verify "Create Long-Term Care Hospital Organization" header text on create organization page
+    Then I enter <LTCH_Name> in "Long-Term Care Hospital Organization Name" on create organization page
+    And I enter <Address1> in "Address 1" on create organization page
+    And I enter <City> in "City" on create organization page
+    And I select <State> in State on create organization page
+    And I enter <Postal_Code> in "Postal Code" on create organization page
+    And I provide unique "LTCH - <CCN>" in "CCN" on create organization page
+    And I provide unique "LTCH - <EIN>" in "EIN" on create organization page
+    And I provide unique "LTCH - <NPI>" in "NPI" on create organization page
+    And I enter location name <Loc_Name> for Location "1" on "create" organization page
+    And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
+    And I enter city <Loc_City> for Location "1" on "create" organization page
+    And I select state <Loc_State> for Location "1" on "create" organization page
+    And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
+    Then I click on "Submit" button on "create" organization page
+    And I verify the radio buttons should get highlighted as red on create Organization Page
+
+    Examples: 
+      | Description                                            | LTCH_Name | Address1 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI |
+      | Validation message when radio buttons are not selected | LTCHNAME  | Address1 | City | California |       12358 | LocName  | LAddress1    | LCity    | California |           10001 | CCN | EIN | NPI |
 
   Scenario Outline: <Description>
     When I click on "LTCH" organization tab on organization dashboard
@@ -161,7 +196,7 @@ Feature: Create LTCH organization functionality tests
     And I verify "Location 1" on "Create LTCH" organization page
     And I enter location name LocationName for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I enter Location Id <Location_ID> for Location "1" on "create Hospital" organization page
+    And I enter Location Id <Location_ID> for Location "1" on "create LTCH" organization page
     And I select location type <Loc_Type> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
@@ -182,7 +217,7 @@ Feature: Create LTCH organization functionality tests
     And I select state <Loc_State> for Location "2" on "create" organization page
     And I enter zip <Loc_Postal_Code> for Location "2" on "create" organization page
     Then I click on "Submit" button on "create" organization page
-    Then I verify duplicate "<Message>" after submitting the "create ACH - <Has_MO>" organization page
+    Then I verify duplicate "<Message>" after submitting the "create LTCH - <Has_MO>" organization page
 
     Examples: 
       | Description                                                                             | Has_MO | Managing_Org | LTCH_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Location_ID | Loc_Type                | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Loc_Name1     | CCN | EIN | NPI | Message                                                                                          |
@@ -245,7 +280,6 @@ Feature: Create LTCH organization functionality tests
     And I enter <City> in "City" on create organization page
     And I select <State> in State on create organization page
     And I enter <Postal_Code> in "Postal Code" on create organization page
-    And I provide unique "LTCH - <CCN>" in "CCN" on create organization page
     And I provide unique "LTCH - <EIN>" in "EIN" on create organization page
     And I provide unique "LTCH - <NPI>" in "NPI" on create organization page
     And I verify "Location 1" on "Create LTCH" organization page
@@ -368,8 +402,8 @@ Feature: Create LTCH organization functionality tests
       | Create LTCH Organization with Mandatory fields - With MO                                                            | YES    | MONAME       | LTCHNAME             | Address1                                                |                                               |                                                         | City                                          | California |       10000 | Loc_Name                                                                    | Loc_Address1                                            |                         |            |            |                                                         | Loc_City                                      | California |           10000 | CCN |               |               | LTCH Organization Successfully Created. |
       | Create LTCH Organization with all the available fields - Without MO                                                 | NO     |              | LTCHNAME             | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Loc_Name                                                                    | Loc_Address1                                            | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | CCN | EIN           | NPI           | LTCH Organization Successfully Created. |
       | Create LTCH Organization with all the available fields - With MO                                                    | YES    | MONAME       | LTCHNAME             | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Loc_Name                                                                    | Loc_Address1                                            | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | CCN | EIN           | NPI           | LTCH Organization Successfully Created. |
-      | Create Duplicate Hospital Organization with Mandatory fields - Without MO                                           | NO     |              | DUPLICATE_LTCH       | Address1                                                |                                               |                                                         | City                                          | California |       10000 | Loc_Name                                                                    | Loc_Address1                                            |                         |            |            |                                                         | Loc_City                                      | California |           10000 | CCN |               |               | LTCH Organization Successfully Created. |
-      | Create Duplicate Hospital Organization with Mandatory fields - With MO                                              | YES    | MONAME       | DUPLICATE_LTCH       | Address1                                                |                                               |                                                         | City                                          | California |       10000 | Loc_Name                                                                    | Loc_Address1                                            |                         |            |            |                                                         | Loc_City                                      | California |           10000 | CCN |               |               | LTCH Organization Successfully Created. |
+      | Create Duplicate LTCH Organization with Mandatory fields - Without MO                                               | NO     |              | DUPLICATE_LTCH       | Address1                                                |                                               |                                                         | City                                          | California |       10000 | Loc_Name                                                                    | Loc_Address1                                            |                         |            |            |                                                         | Loc_City                                      | California |           10000 | CCN |               |               | LTCH Organization Successfully Created. |
+      | Create Duplicate LTCH Organization with Mandatory fields - With MO                                                  | YES    | MONAME       | DUPLICATE_LTCH       | Address1                                                |                                               |                                                         | City                                          | California |       10000 | Loc_Name                                                                    | Loc_Address1                                            |                         |            |            |                                                         | Loc_City                                      | California |           10000 | CCN |               |               | LTCH Organization Successfully Created. |
       | Create LTCH Organization with duplicate NPI- Without MO                                                             | NO     |              | LTCHNAME             | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Loc_Name                                                                    | Loc_Address1                                            | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | CCN | EIN           | DUPLICATE_NPI | LTCH Organization Successfully Created. |
       | Create LTCH Organization with duplicate EIN- Without MO                                                             | NO     |              | LTCHNAME             | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Loc_Name                                                                    | Loc_Address1                                            | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | CCN | DUPLICATE_EIN | NPI           | LTCH Organization Successfully Created. |
       | Create LTCH Organization with same EIN and NPI- Without MO                                                          | NO     |              | LTCHNAME             | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Loc_Name                                                                    | Loc_Address1                                            | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 |     |    1234567890 |    1234567890 | LTCH Organization Successfully Created. |
@@ -464,10 +498,71 @@ Feature: Create LTCH organization functionality tests
     Then I verify "<Message>" after submitting the "create LTCH - <Has_MO>" organization page
     When I search with "LTCHNAME - <Has_MO>" on "LTCH" organization in search box
     And I click "LTCHNAME - <Has_MO>" field in search list on "LTCH" organization page
+    And I verify Location ID should be greater than "100000"
 
     Examples: 
       | Description                                                                                       | Has_MO | Managing_Org | LTCH_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type                | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Message                                 |
       | Create a LTCH Organization with Mandatory Fields and any other identifier except CCN - Without MO | NO     |              | LTCHNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | LTCH Organization Successfully Created. |
+
+  Scenario Outline: <Description>
+    When I click on "LTCH" organization tab on organization dashboard
+    Then I click on "+" button on "LTCH" organization page
+    And I verify "Create Long-Term Care Hospital Organization" header text on create organization page
+    And I select "<Has_MO>" radio button for managing organization
+    Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
+    Then I enter <LTCH_Name> in "Long-Term Care Hospital Organization Name" on create organization page
+    And I enter <Address1> in "Address 1" on create organization page
+    And I enter <Short_Name> in "Short Name" on create organization page
+    And I enter <Address2> in "Address 2" on create organization page
+    And I enter <City> in "City" on create organization page
+    And I select <State> in State on create organization page
+    And I enter <Postal_Code> in "Postal Code" on create organization page
+    And I provide unique "LTCH - <NPI>" in "NPI" on create organization page
+    And I verify "Location 1" on "Create LTCH" organization page
+    And I enter location name <Loc_Name> for Location "1" on "create" organization page
+    And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
+    And I select location type <Loc_Type> for Location "1" on "create" organization page
+    And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
+    And I select region <Loc_Region> for Location "1" on "create" organization page
+    And I enter city <Loc_City> for Location "1" on "create" organization page
+    And I select market <Loc_Market> for region "<Loc_Region>" for Location "1" on "create" organization page
+    And I select state <Loc_State> for Location "1" on "create" organization page
+    And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
+    Then I click on "Submit" button on "create" organization page
+    Then I verify "LTCH Organization Successfully Created." after submitting the "create LTCH - <Has_MO>" organization page
+    When I search with "LTCHNAME - <Has_MO>" on "LTCH" organization in search box
+    And I click "LTCHNAME - <Has_MO>" field in search list on "LTCH" organization page
+    And I verify Location ID should be greater than "100000"
+    When I click on Organization link on Program Management page
+    When I click on "LTCH" organization tab on organization dashboard
+    Then I click on "+" button on "LTCH" organization page
+    And I verify "Create Long-Term Care Hospital Organization" header text on create organization page
+    And I select "<Has_MO>" radio button for managing organization
+    Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
+    Then I enter <LTCH_Name> in "Long-Term Care Hospital Organization Name" on create organization page
+    And I enter <Address1> in "Address 1" on create organization page
+    And I enter <Short_Name> in "Short Name" on create organization page
+    And I enter <Address2> in "Address 2" on create organization page
+    And I enter <City> in "City" on create organization page
+    And I select <State> in State on create organization page
+    And I enter <Postal_Code> in "Postal Code" on create organization page
+    And I provide "CCN" as last created "Location_Id" on create organization page
+    And I verify "Location 1" on "Create LTCH" organization page
+    And I enter location name <Loc_Name> for Location "1" on "create" organization page
+    And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
+    And I select location type <Loc_Type> for Location "1" on "create" organization page
+    And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
+    And I select region <Loc_Region> for Location "1" on "create" organization page
+    And I enter city <Loc_City> for Location "1" on "create" organization page
+    And I select market <Loc_Market> for region "<Loc_Region>" for Location "1" on "create" organization page
+    And I select state <Loc_State> for Location "1" on "create" organization page
+    And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
+    Then I click on "Submit" button on "create" organization page
+    Then I verify "<Message>" after submitting the "create LTCH - <Has_MO>" organization page
+
+    Examples: 
+      | Description                                                                                                                   | Has_MO | Managing_Org | LTCH_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Location_ID | Loc_Type                | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Loc_Name      | CCN | NPI | Message                                 |
+      | Verify auto generated location ID when CCN of current organization is already used as location Id for some other organization | NO     |              | LTCHNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | LID         | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10001 | Loc_Name new2 | CCN | NPI | LTCH Organization Successfully Created. |
 
   Scenario Outline: <Description>
     When I click on "LTCH" organization tab on organization dashboard

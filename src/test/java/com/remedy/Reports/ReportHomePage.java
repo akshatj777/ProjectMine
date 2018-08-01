@@ -874,7 +874,7 @@ public class ReportHomePage extends BaseClass {
     }
     
     public void iWaitToseeTile(String tile){
-    	iWillWaitToSee(By.xpath("//p[text()='"+tile+"']"));
+    	iWillWaitToSee(By.xpath("//div[text()='"+tile+"']"));
     }
     
     public void iWaitToSeeUnderReportsTileText(String report){

@@ -198,7 +198,18 @@ public class EditManagingOrganization extends BaseClass {
 				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 			}
 		}
-		
+		else if(field.contains("IRFNAME - YES"))
+		{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg.get("IRFNAME")+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg.get("IRFNAME")+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(field.contains("IRFNAME - NO"))
+		{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg_noMO.get("IRFNAME")+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg_noMO.get("IRFNAME")+"']")));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
 		else if(field.contains("HOSPICENAME - YES"))
 		{
 				iWillWaitToSee(By.xpath("//div[text()='"+CreateHospiceOrganization.HospiceOrg.get("HOSPICENAME")+"']"));
@@ -331,6 +342,32 @@ public class EditManagingOrganization extends BaseClass {
 			scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateSNFOrganizationAPI.SNFNameList.get(1));
+		}
+		else if(field2.equalsIgnoreCase("IRFNAME - YES")){
+			CreateIRFOrganization.oldIRF_WithMO = CreateIRFOrganization.IRFOrg.get("IRFNAME");
+			scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
+			CreateIRFOrganization.tempIRFOrg.put("IRFNAME",createRandomName(field2));
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateIRFOrganization.tempIRFOrg.get("IRFNAME"));
+		}
+		else if(field2.equalsIgnoreCase("IRFNAME - NO")){
+			CreateIRFOrganization.oldIRF_WithoutMO = CreateIRFOrganization.IRFOrg_noMO.get("IRFNAME");
+			scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
+			CreateIRFOrganization.tempIRFOrg.put("IRFNAME",createRandomName(field2));
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateIRFOrganization.tempIRFOrg.get("IRFNAME"));
+		}
+		else if(field2.equalsIgnoreCase("DUPLICATE_IRF - YES")){
+			scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateIRFOrganization.IRFOrg_noMO.get("IRFNAME"));
+		}
+		else if(field2.equalsIgnoreCase("DUPLICATE_IRF - NO")){
+			scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateIRFOrganization.IRFOrg.get("IRFNAME"));
 		}
 		
 		else if(field2.equalsIgnoreCase("LTCHNAME - YES")){
@@ -601,6 +638,18 @@ public class EditManagingOrganization extends BaseClass {
 		{
 			iWillWaitToSee(By.xpath("//div[text()='"+CreateLTCHOrganization.LTCHOrg_noMO.get("LTCHNAME")+"']"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateLTCHOrganization.LTCHOrg_noMO.get("LTCHNAME")+"']")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(field.contains("IRFNAME - YES"))
+		{
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg.get("IRFNAME")+"']"));
+			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg.get("IRFNAME")+"']")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(field.contains("IRFNAME - NO"))
+		{
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg_noMO.get("IRFNAME")+"']"));
+			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg_noMO.get("IRFNAME")+"']")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 	}

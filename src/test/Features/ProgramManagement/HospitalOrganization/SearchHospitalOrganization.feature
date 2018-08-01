@@ -18,8 +18,8 @@ Feature: Search the Hospital organizations functionality tests
 
     Examples: 
       | desc                       | participantId | name    | shortName | managingOrgId | ccn | ein | npi | locationId | locAddr1     | locAddr2     | locCity  | locState | locZip | locationName | locationType | marketId | regionId | address1 | address2 | city           | state | zip   | expPostCode | id | type     | errorMsg |
-      | Create Hospital with MO    |               | ACHNAME | shortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
-      | Create Hospital without MO |               | ACHNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
+      | Create Hospital with MO    |               | ACHNAME | shortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | NY    | 10000 |         201 |  0 | hospital |          |
+      | Create Hospital without MO |               | ACHNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | NY    | 10000 |         201 |  0 | hospital |          |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -38,7 +38,7 @@ Feature: Search the Hospital organizations functionality tests
       | Search Hospital Organization with Hospital Org Name - With MO    | YES    | ACHNAME        |
       | Search Hospital Organization with Hospital Org Name - Without MO | NO     | ACHNAME        |
       | Search Hospital Organization with City                           |        | AutomationCity |
-      | Search Hospital Organization with State                          |        | CA             |
+      | Search Hospital Organization with State                          |        | NY             |
       | Search Hospital Organization with Postal Code                    |        |          10000 |
 
   Scenario Outline: <Description>
@@ -56,7 +56,7 @@ Feature: Search the Hospital organizations functionality tests
       | Description                                         | Has_MO | Hosp_Name | SearchParam  |
       | Searching Location Name on Hospital Profile Page    | YES    | ACHNAME   | Loc_Name     |
       | Searching Location Address on Hospital Profile Page | YES    | ACHNAME   | Loc_Address1 |
-      | Searching Location Type on Hospital Profile Page    | NO     | ACHNAME   | Inpatient    |
+      | Searching Location Type on Hospital Profile Page    | NO     | ACHNAME   | Emergency    |
       | Searching Location Region on Hospital Profile Page  | NO     | ACHNAME   | Midwest      |
       | Searching Location Matket on Hospital Profile Page  | NO     | ACHNAME   | Chicago      |
 
