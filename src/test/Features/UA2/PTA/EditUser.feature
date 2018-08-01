@@ -49,8 +49,8 @@ Feature: Edit user page for PTA
     Then I click on Next button
     Then I unselect "<RemoveApplications>" product
     Then I click on learning pathway dropdown
-    Then I enter "<RemoveLearningPathwaySearchParameter>" in Learning Pathway search box
-    Then I remove "<RemoveLearningPathwaySearchParameter>" from the results
+    #Then I enter "<RemoveLearningPathwaySearchParameter>" in Learning Pathway search box
+    #Then I remove "<RemoveLearningPathwaySearchParameter>" from the results
     Then I verify that Learning Pathway ID "<LearningPathwayID>" is not displayed for the enabled Learning Pathway
     Then I click on Next button
     Then I click on Submit button while edit for "<User>-<Role>"
@@ -199,7 +199,7 @@ Feature: Edit user page for PTA
     Then I verify the header "Applications"
     Then I click on learning pathway dropdown
     Then I verify Learning Pathway search box is available
-    Then I enter "<LearningPathwayName>" in Learning Pathway search box
+   # Then I enter "<LearningPathwayName>" in Learning Pathway search box
     And I verify No results found under Learning Pathway search box
 
     Examples: 
@@ -393,7 +393,7 @@ Feature: Edit user page for PTA
     Then I verify that Next button is "enabled"
     Then I click on Next button
     Then I select "<invalidLocations>" invalid locations for PTA
-    And I verify No results found for invalid Location for "first" in selected organisation
+    And I verify No results found for invalid Location for "first" in selected organisation for PTA user
     When I deselect "<RemoveLocations>" locations for PTA user
     Then I select location by BPID "<AddLocations>" for PTA
     Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
@@ -476,8 +476,10 @@ Feature: Edit user page for PTA
     And I should see Log in widget
 
     Examples: 
-      | User                            | FirstName       | LastName       | Email                           | Phone        | NPI | PreviousRole | Role       | EnableApplications                            | Applications                                  | ApplicationsNotVisible       | Health System | Programs    | invalidLocations | RemoveLocations                                                                                                             | AddLocations                   | LearningPathwaySearchParameter | Roletext       | ReportCategory | ReportName                   | BPID | Facilities           | ProgramsValidation     | LocationsValidation                      | LearningPathway                                                                                                    |
-      | Partner Technical Administrator | FirstNameEdited | LastNameEdited | qaautomation@remedypartners.com | 996-385-2451 | NPI | Executive    | Physicians | Episodes, Reports, Lessons, Physician Connect | Episodes, Reports, Lessons, Physician Connect | Episodes 2.0, Administration | Covenant      | BPCI-Model3 | hkfj             | 3056-804--Catered Manor Nursing Center, 3056-805--Downey Care Center, 3056-806--Encinitas Nursing And Rehabilitation Center | 3056-808--Arbor Nursing Center |                                | ROLE_CLINICIAN | Patient ID     | Episode DRG Issues [Model 3] |      | Arbor Nursing Center | Covenant--BPCI Model 3 | Covenant--3056-808--Arbor Nursing Center | Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2 |
+
+      | User                            | FirstName       | LastName       | Email                           | Phone        | NPI | PreviousRole | Role       | EnableApplications                            | Applications               | ApplicationsNotVisible                          | Health System | Programs    | invalidLocations | RemoveLocations                                                                                                             | AddLocations                   | LearningPathwaySearchParameter | Roletext       | ReportCategory | ReportName                   | BPID | Facilities           | ProgramsValidation     | LocationsValidation                      | LearningPathway                                                                                                    |
+      | Partner Technical Administrator | FirstNameEdited | LastNameEdited | qaautomation@remedypartners.com | 996-385-2451 | NPI | Executive    | Physicians | Episodes, Reports, Lessons, Physician Connect | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect | Covenant      | BPCI-Model3 | hkfj             | 3056-804--Catered Manor Nursing Center, 3056-805--Downey Care Center, 3056-806--Encinitas Nursing And Rehabilitation Center | 3056-808--Arbor Nursing Center |                                | ROLE_CLINICIAN | Patient ID     | Episode DRG Issues [Model 3] |      | Arbor Nursing Center | Covenant--BPCI Model 3 | Covenant--3056-808--Arbor Nursing Center | Care Coordination External, Clinical Operations Acute Care Hospital Model 2, Executive Acute Care Hospital Model 2 |
+
 
   Scenario Outline: Verify the search functionality in selected locations and delete a location
     Given I am on the login page
@@ -523,7 +525,7 @@ Feature: Edit user page for PTA
     Then I verify the header "Applications"
     Then I verify "<LearningPathway>" while editing the user
     Then I click on Next button
-    Then I click on Submit button while edit for "<User>-<Role>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     And I verify that I am navigated to user page
     Then I verify learning pathway "<LearningPathway>"
     Then I refresh the page
@@ -560,7 +562,7 @@ Feature: Edit user page for PTA
     Then I enter NPI field with "<NPI>" for role "<Role2>"
     Then I click on Next button
     Then I click on Next button
-    Then I click on Submit button while edit for "<User>-<Role2>--<PreviousRole>"
+    Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role2>"
     Then I verify role "<Role2>"
 
     Examples: 
@@ -827,7 +829,7 @@ Feature: Edit user page for PTA
     Then I select "Permissions" tab
     Then I deselect "<RemovePrograms>" programs
     Then I search the "<Locations>" in the Selected Locations section
-    Then I verify No results found for invalid Location for "first" organisation
+    And I verify No results found for invalid Location for "first" in selected organisation for PTA user
 
     Examples: 
       | User                            | Email                           | Role    | Health System    | RemovePrograms | Locations                              |

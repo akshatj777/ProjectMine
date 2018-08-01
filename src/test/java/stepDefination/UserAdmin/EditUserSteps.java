@@ -194,6 +194,11 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	public void verifyMessageForInvalidLocation(String text) throws InterruptedException{
 		editUser.VerifyMessageForInvalidLocations(text);
 	}
+	
+	@Then("^I verify No results found for invalid Location for \"([^\"]*)\" in selected organisation for PTA user$")
+	public void verifyMessageForInvalidLocationForPTAUser(String text) throws InterruptedException{
+		editUser.VerifyMessageForInvalidLocationsPTAUser(text);
+	}
 	@Then("^I click on Select dropdown$")
 	public void iClickOnSelectOrgDropdown(){
 		editUser.iClickOnSelectOrgDropdown();

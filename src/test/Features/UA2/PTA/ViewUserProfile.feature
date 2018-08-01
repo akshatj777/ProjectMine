@@ -1,4 +1,4 @@
-Feature: View User - Super Admin User
+Feature: View User - PTA User
 
   Scenario Outline: Create PTA through API call and then verify the user
     Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>" and "<LearningPathways>"
@@ -72,7 +72,7 @@ Feature: View User - Super Admin User
     Then I enter newuser password for login to Remedy
     Then I click Access button
     Then I should see Tile text User Admin
-    And I click on the "User Admin" tile
+    And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I select user with role "<User>-<Role>"

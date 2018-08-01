@@ -160,7 +160,7 @@ Feature: View User - Super Admin User
     Then I deselect "<RemovePrograms>" programs
     And I verify that "<RemovePrograms>" is not reflected as selected in edit user page
     Then I search the "<RemovedLocations>" in the Selected Locations section
-    Then I verify No results found for invalid Location for "first" organisation
+    Then I verify No results found for invalid Location for "first" in selected organisation
     Then I click on Submit button while edit for "<User>-<Role>"
     Then I verify programs "<Programs>"
     Then I verify location "<Locations>"
