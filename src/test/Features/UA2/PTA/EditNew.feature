@@ -1,6 +1,24 @@
 Feature: Merged Edit user scenarios from PTA
 
-  Scenario Outline: Change General information and edit apps
+  Scenario Outline: Create User through UA API call
+    Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>" and "<LearningPathways>"
+    When Create User with this data for "<User>"
+    Then Verify Actual vs expected results "<expStatusCode>" and "<responseMsg>"
+    Given I am on mail login page
+    Then I enter username "qaautomation@remedypartners.com" to login mail account
+    Then I enter password "1Welcome2" to login mail account
+    Then I click on Mail icon in my account
+    Then I click on Inbox in mail
+    And I wait for 3000 milli seconds
+    Then I verify account for user "<User>-<Role>"
+    Then I set new password for the user "<User>-<Role>"
+
+    Examples: 
+      | User                            | FirstName | LastName                                 | Email                           | Phone      | NPI | Role                            | RoleID                             | Applications                                                                                                     | LearningPathways                                       | Locations                                                                                                                        | expStatusCode |
+      | Super Admin                     | FirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 |     | Partner Technical Administrator | 20-Partner Technical Administrator | episode_connect-Episodes,reports-Reports,physician_portal-Physician Connect,admin-Administration,lessons-Lessons | HZhmTBQzHtU1,NFdw0Kts2C01                              | 441324--3090-066--140007, 441324--3090-069--200063, 441324--3090-079--420082, 441324--6005-059--140304, 441324--6005-059--050455 |           200 |
+      | Partner Technical Administrator | FirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |            |     | Manager                         | 2-Manager                          | episode_connect-Episodes,reports-Reports,lessons-Lessons                                                         | p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81, n9yn5n0Qa581 | 441324--6005-059--050455                                                                                                         |           200 |
+
+  Scenario Outline: <Description>
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
@@ -22,6 +40,8 @@ Feature: Merged Edit user scenarios from PTA
     Then I verify the availability of fields "Phone"
     And I fill in Phone with <Phone>
     Then I verify the availability of fields "Role"
+     When I click the Organizational Role Field to edit
+    Then I pick a Organizational <Role>
     Then I verify the availability of field NPI for "<Role>"
     Then I enter NPI field with "<NPI>" for role "<Role>"
     Then I click on Next button
@@ -42,7 +62,6 @@ Feature: Merged Edit user scenarios from PTA
     Then I deselect "<RemovePrograms>" programs
     Then I deselect "<RemoveLocations>" locations for PTA user
     Then I select "<AddPrograms>" programs for existing organisation
-    
     Then I select "<AddLocations>" locations for PTA user
     And I verify that "<RemovePrograms>" is not reflected as selected in edit user page
     Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
@@ -54,11 +73,11 @@ Feature: Merged Edit user scenarios from PTA
     Then I verify NPI "<NPI>"
     Then I verify learning pathway "<LearningPathway>"
     Then I verify health system "<HealthSystemsValidation>"
+    Then I verify Program "<RemoveProgramsValidation>" is not present in view user page
     Then I verify programs "<ProgramsValidation>"
     Then I verify location "<LocationsValidation>"
-	Then I verify Program "<RemoveProgramsValidation>" is not present in view user page
-    Then I verify location "<RemovedLocationsValidation>" is not present on view page
     
+    Then I verify location "<RemovedLocationsValidation>" is not present on view page
     Then I verify disabled "<DisableApplications>"
     Then I verify enabled "<Applications>"
     And I click on the top user account link
