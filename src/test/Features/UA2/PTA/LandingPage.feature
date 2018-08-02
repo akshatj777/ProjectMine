@@ -36,6 +36,7 @@ Feature: Verification of Landing Page for PTA User
     And I verify "User Role Column" on landing page
     And I verify "User Email Column" on landing page
     And I verify "Date Created Column" on landing page
+    And I verify "Release version" on landing page
     And I verify "Next Page Icon" on landing page
     And I verify "Last Page Icon" on landing page
     And I click on Last Page Icon on landing page
@@ -73,6 +74,7 @@ Feature: Verification of Landing Page for PTA User
     And I click on the "Users" tile
     Then I should see header text "Users"
     And I verify "SearchBox" on landing page
+    And I verify ghost text "Search" in search box
     Then I enter "<InvalidSearchParameter>" in search box for "<user>-<Role>"
     Then I should see cross icon to exit search
     Then I verify No Results Found is displayed
@@ -85,6 +87,7 @@ Feature: Verification of Landing Page for PTA User
       | Search a user using First Name | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | Firstnamefirstnamefirstnamefirstname     |
       | Search a user using Last Name  | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | Lastnamelastnamelastnamelastnamelastname |
       | Search a user using Email      | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | FetchFromHM                              |
+
 
   Scenario Outline: Verify ability of PTA user to lock a user and cancel unlock
     Given I am on the login page

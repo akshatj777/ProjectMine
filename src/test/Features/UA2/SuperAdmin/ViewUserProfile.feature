@@ -118,3 +118,55 @@ Feature: View User - Super Admin User
     Examples: 
       | Description                                       | User        | UserName                               | Password | FirstName                                 | LastName                                 | Phone | Role      | ApplicationsEnabled        | ApplicationsNotVisible                               | NPI | LearningPathway                                           | HasHealthSystem2 | Health System2 | Programs2   | Locations2                                                                                            | HealthSystemValidation  | ProgramsValidation                                  | LocationsValidation                                                                                                                                               |
       | View Executive user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName |       | Executive | Episodes, Reports, Lessons | Episodes 2.0, Administration, Physician Connect, TCI |     | i am learning path, Learning Pathway 2, Remedy University | Yes              | Penn           | BPCI-Model2 | 2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania, 2070-021--Upenn - Penn Presbyterian Hospital | Stamford Hospital, Penn | Stamford Hospital--BPCI Model 2, Penn--BPCI Model 2 | Stamford Hospital--2070-015--Stamford Hospital, Penn--2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania, Penn--2070-021--Upenn - Penn Presbyterian Hospital |
+
+  Scenario Outline: Lock/Unlock user from view user page
+    Given I am on the login page
+    When I enter email field lbarinstein+qaadmin@remedypartners.com for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    Then I verify Lock/Unlock Icon
+    Then I click on "Lock" icon on view user page
+    Then I verify that user is "Locked" on view user page
+    Then I click on "Unlock" icon on view user page
+    Then I should see an alert with "Are you sure you want to unlock"
+    Then I click on "Unlock" button from the unlock alert
+    Then I verify that user is "Unlocked" on view user page
+
+    Examples: 
+      | User        | Role      | UserName                               | Password |
+      | Super Admin | Executive | lbarinstein+qaadmin@remedypartners.com | Testing1 |
+
+  Scenario Outline: Validating that Locations for the unselected Model are removed on view and edit user page
+    Given I am on the login page
+    When I enter email field lbarinstein+qaadmin@remedypartners.com for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    And I click on Edit button
+    Then I select "Permissions" tab
+    Then I verify the header "Permissions"
+    Then I click on existing organisation "<Health System>"
+    Then I deselect "<RemovePrograms>" programs
+    And I verify that "<RemovePrograms>" is not reflected as selected in edit user page
+    Then I search the "<RemovedLocations>" in the Selected Locations section
+    Then I verify No results found for invalid Location for "first" in selected organisation
+    Then I click on Submit button while edit for "<User>-<Role>"
+    Then I verify programs "<Programs>"
+    Then I verify location "<Locations>"
+    Then I verify Program "<RemoveProgramsValidation>" is not present in view user page
+    Then I verify location "<RemovedLocationsValidation>" is not present on view page
+
+    Examples: 
+      | User        | Role       | Health System | RemovePrograms | RemovedLocations                 | RemovedLocationsValidation                   | Locations                                                                                       | Programs                 | RemoveProgramsValidation |
+      | Super Admin | Physicians | TeamHealth    | BPCI-Model2    | 2070-g14--North Shore Med Center | TeamHealth--2070-g14--North Shore Med Center | TeamHealth--3056-q91--Rhea Medical Center, TeamHealth--3056-q91--The Medical Center At Franklin | TeamHealth--BPCI Model 3 | TeamHealth--BPCI Model 2 |
