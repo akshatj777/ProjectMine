@@ -163,8 +163,8 @@ Feature: View User - Super Admin User
     Then I verify No results found for invalid Location for "first" in selected organisation
     Then I click on Submit button while edit for "<User>-<Role>"
     Then I verify programs "<Programs>"
-    Then I verify location "<Locations>"
     Then I verify Program "<RemoveProgramsValidation>" is not present in view user page
+    Then I verify location "<Locations>"
     Then I verify location "<RemovedLocationsValidation>" is not present on view page
 
     Examples: 

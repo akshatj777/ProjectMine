@@ -301,6 +301,7 @@ public class ViewUserPage extends BaseClass {
 			    	else
 			    	{
 			    		driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")).click();
+			    		driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")).click();
 				    	Thread.sleep(3000);
 				    	if(driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")).isDisplayed())
 				    	{
@@ -339,6 +340,7 @@ public class ViewUserPage extends BaseClass {
 				}
 				else
 				{
+					driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")).click();
 					driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")).click();
 					Thread.sleep(3000);
 					if(driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")).isDisplayed())
