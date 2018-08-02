@@ -244,6 +244,10 @@ public class CreateUserSteps extends DriverScript {
 	public void iSelectTileForTheRole(String appList) throws Throwable {
 		createUser.iSelectTileForTheRole(appList);
 	}
+	@Then("^I unselect all selected applications$")
+	public void iUnselectAllSelectedApps(){
+		createUser.iUnselectAllSelectedApps();
+	}
 	
 	@Then("^I verify \"([^\"]*)\" is not visible on Applications tab$")
 	public void verifyProductNotPresentOnApplicationsTab(String products) throws Throwable {
@@ -522,7 +526,10 @@ public class CreateUserSteps extends DriverScript {
 		createUser.clickSubmitButtonForDifferentUsers(user);
 	}
 
-
+	@Then("^I click on Submit button$")
+	public void clickSubmitButton() throws Throwable {
+		createUser.clickSubmitButton();
+	}
 	
 	@Then("^I click on Submit button to check for error message$")
 	public void clickSubmitButtonToCheckError() throws Throwable {
@@ -592,6 +599,10 @@ public class CreateUserSteps extends DriverScript {
 	public void selectPrograms(String programList) throws Throwable {
 		createUser.selectPrograms(programList);
 	}
+	@Then("^I verify that \"([^\"]*)\" model is not present under Programs$")
+		public void iVerifyModel(String text){
+			createUser.iVerifyModel(text);
+		}
 	
 	@Then("^I select \"([^\"]*)\" locations$")
 	public void selectLocations(String locationList) throws Throwable {
@@ -857,8 +868,35 @@ public class CreateUserSteps extends DriverScript {
 	 public void iEnterExistingEmail(String userRole){
 		 createUser.iEnterExistingEmail(userRole);
 	 }
-	 @Then("^I verify that \\\"([^\\\"]*)\\\" is not present under the bpid$")
+	 @Then("^I verify that \"([^\"]*)\" is not present under the bpid$")
 	 public void iVerifyAllLocationsPresence(String text) {
 		 createUser.iVerifyAllLocationsPresence(text);
 	 }
+
+	 @Then("^I click on > to navigate to next page while \"([^\"]*)\" the user$")
+	 public void iNavigateToNextLocationsPage(String text){
+		 createUser.iNavigateToNextLocationsPage(text);
+	 }
+	 @Then("^I search \"([^\"]*)\" locations for Downstream Provider role$")
+	 public void iSearchDPLocations(String locationList){
+		 createUser.iSearchDPLocations(locationList);
+	 }
+	 
+	 @Then("^I should not see any error message on searching any downstream provider location less than 5 alphabets$")
+	 public void iShouldNotSeeAnyErrorMessageForDPLocations(){
+		 createUser.iShouldNotSeeAnyErrorMessageForDPLocations();
+	 }
+	 @Then("^I should not get error message- \"([^\"]*)\"$")
+	 public void validateErrorMsg(String text){
+		 createUser.validateErrorMsg(text);
+	 }
+	 @Then("^I select created user$")
+	 public void iSelectCreatedUser() throws InterruptedException{
+		 createUser.iSelectCreatedUser();
+	 }
+	 @Then("^I verify that roles are reflected as per the \"([^\"]*)\"$")
+	 public void iVerifyRolesAsPerUser(String user){
+		 createUser.iVerifyRolesAsPerUser(user);
+	 }
+
 }

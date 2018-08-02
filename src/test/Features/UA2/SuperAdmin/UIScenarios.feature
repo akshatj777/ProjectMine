@@ -1,5 +1,27 @@
 Feature: UI Scenarios - Super Admin User
 
+  Scenario Outline: Login page validation- <Description>
+    Given I am on the login page
+    And I should see Log in widget
+    Then I should see email textbox field
+    Then I should verify watermark text appearing under email textbox field
+    Then I should see password textbox field
+    Then I should verify watermark text appearing under password textbox field
+    Then I should see forgot password link
+    Then I should see Log In button
+    Then I refresh the page
+    When I enter email field <Email> for login
+    And I enter password field <Password> for Login
+    Then I click Access button
+    Then I verify the validation message "<ValidationMsg>"
+
+    Examples: 
+      | Description                   | Email                                  | Password | ValidationMsg            |
+      | correct username and password | lbarinstein+qaadmin@remedypartners.com | Testing1 | Remedy Connect           |
+      | blank password                | lbarinstein+qaadmin@remedypartners.com |          | Can't be blank           |
+      | Wrong credentials             | lbarinstein+qaadmin@remedypartners.com | Testing8 | WRONG EMAIL OR PASSWORD. |
+      | Blank email and password      |                                        |          | Can't be blank           |
+
   Scenario Outline: Create Physician through API call and then verify the user
     Given Build JSON for Create User "<FirstName>" and "<LastName>" and "<Email>" and "<Phone>" and "<NPI>" and "<RoleID>" and "<Applications>" and "<Locations>" and "<LearningPathways>"
     When Create User with this data for "<User>"
@@ -39,18 +61,19 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the validation message "<ValidationMsg>" on Create User Page
 
     Examples: 
-      | Description                                           | FirstName  | LastName   | Email                           | Phone      | Role       | NPI        | ValidationMsg                     |
-      | Verify validation message for blank First name        |            | Last Name  | qaautomation@remedypartners.com | 9874563210 | Executive  |            | First Name is required            |
-      | Verify validation message for blank Last name         | First Name |            | qaautomation@remedypartners.com | 9874563210 | Executive  |            | Last Name is required             |
-      | Verify validation message for blank Email             | First Name | Last Name  |                                 | 9874563210 | Executive  |            | Email is required                 |
-      | Verify validation message for blank NPI               | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians |            | NPI is required                   |
-      | Verify validation message for invalid Email           | First Name | Last Name  | abc                             | 9874563210 | Physicians | NPI        | Please enter a valid email        |
-      | Verify validation message for invalid Phone           | First Name | Last Name  | qaautomation@remedypartners.com |     123564 | Physicians | NPI        | Please enter a valid phone number |
-      | Verify validation message for NPI less than 10 digits | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians |     123564 | Please enter a valid NPI          |
-      | Verify validation message for NPI as alphabets        | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians | abcdefgihj | Please enter a valid NPI          |
-      | Verify validation message for NPI as alphanumeric     | First Name | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI          |
-      | Verify validation message for invalid First Name      | 8473827919 | Last Name  | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
-      | Verify validation message for invalid Last name       | First Name | 8473827919 | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Description                                           | FirstName   | LastName    | Email                           | Phone      | Role       | NPI        | ValidationMsg                     |
+      | Verify validation message for blank First name        |             | Last Name   | qaautomation@remedypartners.com | 9874563210 | Executive  |            | First Name is required            |
+      | Verify validation message for blank Last name         | First Name  |             | qaautomation@remedypartners.com | 9874563210 | Executive  |            | Last Name is required             |
+      | Verify validation message for blank Email             | First Name  | Last Name   |                                 | 9874563210 | Executive  |            | Email is required                 |
+      | Verify validation message for blank NPI               | First Name  | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians |            | NPI is required                   |
+      | Verify validation message for invalid Email           | First Name  | Last Name   | abc                             | 9874563210 | Physicians | NPI        | Please enter a valid email        |
+      | Verify validation message for invalid Phone           | First Name  | Last Name   | qaautomation@remedypartners.com |     123564 | Physicians | NPI        | Please enter a valid phone number |
+      | Verify validation message for NPI less than 10 digits | First Name  | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians |     123564 | Please enter a valid NPI          |
+      | Verify validation message for NPI as alphabets        | First Name  | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians | abcdefgihj | Please enter a valid NPI          |
+      | Verify validation message for NPI as alphanumeric     | First Name  | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI          |
+      | Verify validation message for invalid First Name      | 84738&27919 | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Verify validation message for invalid Last name       | First Name  | 84738&27919 | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Verify validation message for NPI as .                | First Name  | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians | .........1 | Please enter a valid NPI          |
 
   Scenario Outline: Verify validation message for invalid lesson name in search box
     Given I am on the login page
@@ -282,9 +305,7 @@ Feature: UI Scenarios - Super Admin User
     Then I select "<Programs1>" programs
     And I click on remove link icon for selected Health system
     And I verify text on pop up window after click on remove link icon
-    And I click "Cancel" link on pop up window
-    And I click on remove link icon for selected Health system
-    And I click "Remove" button on pop up window
+    And I click on "Remove" button on permissions tab
     Then I verify the header "Permissions"
 
     Examples: 
@@ -478,3 +499,66 @@ Feature: UI Scenarios - Super Admin User
     Examples: 
       | User        | UserName                               | Password | FirstName | LastName | Email                           | Role       | Applications | NPI | Health System     | Programs    | Locations    |
       | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reports      | NPI | Stamford Hospital | BPCI-Model2 | All 2070-015 |
+
+  Scenario Outline: Validating that on removing the organization and selecting it again, "incomplete" error message is not displayed
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    And I click on Edit button
+    Then I select "Permissions" tab
+    Then I remove health system "<Remove HealthSystem>"
+    And I click on "Remove" button on permissions tab
+    And I search for health system with <Health System>
+    And I select a <Health System>
+    Then I select "<Programs>" programs
+    Then I select "<Locations>" locations
+    Then I click on existing organisation "<Health System>"
+    Then I verify incomplete status is not shown for health system
+
+    Examples: 
+      | User        | Role      | Remove HealthSystem | Health System     | Programs    | Locations                   |
+      | Super Admin | Executive | Stamford Hospital   | Stamford Hospital | BPCI-Model2 | 2070-015--Stamford Hospital |
+
+  Scenario Outline: validating Learning Pathway on edit role
+    Given I am on the login page
+    When I enter email field <UserName> for login
+    And I enter password field <Password> for Login
+    Then I click Access button
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    When I click on Add User button
+    Then I should see "Add New User" on the user creation page
+    Then I verify the header "General Information"
+    And I fill in First Name with "<FirstName>"
+    Then I fill in Last Name with <LastName>
+    And I enter Email "<Email>" to Create user
+    When I click the Organizational Role Field
+    Then I pick a Organizational <Role1>
+    Then I enter NPI field with "<NPI>" for role "<Role1>"
+    Then I click on Next button
+    Then I verify the header "Applications"
+    Then I verify applications "<Applications>" are unchecked
+    Then I verify Learning Pathway search box is not available
+    Then I select "<Applications>" product
+    Then I verify applications "<Applications>" are checked
+    Then I click on Select button
+    Then I verify Learning Pathway search box is available
+    Then I select "<LearningPathwaySearchParameter>" from the results
+    Then I click on Back button
+    Then I verify the header "General Information"
+    When I click the Organizational Role Field to edit
+    Then I pick a Organizational <Role2>
+    Then I enter NPI field with "<NPI>" for role "<Role2>"
+    Then I click on Next button
+    Then I verify the header "Applications"
+    Then I verify Learning Pathway search box is not available
+
+    Examples: 
+      | User        | UserName                               | Password | FirstName | LastName | Email                           | Role1      | Applications     | NPI | LearningPathwaySearchParameter                      | Role2     |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reports, Lessons | NPI | Learning Pathway 2, jusUV22erpk1, Remedy University | Executive |

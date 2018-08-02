@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Assert;
 //import org.apache.commons.collections.set.SynchronizedSet;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -235,4 +236,85 @@ public class LandingPage extends BaseClass{
     		iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-spoe']"));
         	clickElement(driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-spoe']")));
     }
+    public void iConfirmOnResetPasswordBox(){
+    	delay();
+    	iWillWaitToSee(By.xpath("//button[contains(text(),'Okay')]"));
+    	clickElement(driver.findElement(By.xpath("//button[contains(text(),'Okay')]")));
+    	
+    }
+public void ValidationMsgForRestPass(String text){
+	if(text.equals("Please ensure the password and the confirmation are the same")){
+    	iWillWaitToSee(By.cssSelector(".auth0-global-message.auth0-global-message-error"));
+    	Assert.assertTrue(driver.findElement(By.cssSelector(".auth0-global-message.auth0-global-message-error")).getAttribute("innerText").toString().trim().contains(text));
+	}
+	else if (text.equals("Remedy Connect")){
+		iWillWaitToSee(By.xpath("//*[contains(text(),'"+text+"')]"));
+		isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+text+"')]")));
+	}
+	else if (text.equals("Password guidelines")){
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-password-strength.animated.fadeIn"))));
+
+	}
+	}
+
+public void forgotPasswordLink(){
+	iWillWaitToSee(By.cssSelector("a.auth0-lock-alternative-link"));
+	clickElement(driver.findElement(By.cssSelector("a.auth0-lock-alternative-link")));
+}
+public void resetPasswordMsg(String text){
+	//iWillWaitToSee(By.xpath("//p/span/text()"));
+	//Assert.assertTrue(driver.findElement(By.xpath("//p/span/text()")).getAttribute("data").toString().contains(text));
+	iWillWaitToSee(By.xpath("//*[contains(text(),'"+text+"')]"));
+	isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+text+"')]")));
+}
+
+
+public void EmailFieldVerificationOnForgotPasswordPage(){
+	isElementVisible(driver.findElement(By.xpath("//input[@name='email']")));
+}
+
+
+public void sendEmailButtonVerification(){
+	isElementVisible(driver.findElement(By.xpath("//button[@type='submit']")));
+}
+public void backButtonOnForgotPasswordPageVerification(){
+	isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-back-button")));
+}
+public void iClickOnBackButtonOnForgotPassPage(){
+	clickElement(driver.findElement(By.cssSelector(".auth0-lock-back-button")));
+}
+public void iEnterEmailToCreatePass(String userRole){
+	iWillWaitToSee(By.xpath("//input[@name='email']"));
+	driver.findElement(By.xpath("//input[@name='email']")).clear();
+	if(userRole.contains("Super Admin")){
+	String email = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
+	driver.findElement(By.xpath("//input[@name='email']")).sendKeys(email);
+	}
+	else{
+		driver.findElement(By.xpath("//input[@name='email']")).sendKeys(userRole);
+	}
+}
+public void validationMsgForInvalidEmail() {
+	isElementVisible(driver.findElement(By.xpath("//button[@type='submit']")));
+}
+public void errorMesgValidationForInvalidCreds(String text) {
+	iWillWaitToSee(By.xpath("//*[contains(text(),'"+text+"')]"));
+	isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+text+"')]")));
+	
+}
+public void clickResetPasswordButton(String arg1) throws Throwable {
+	iWillWaitToSee(By.xpath("//i[@class='dropdown icon']"));
+	clickElement(driver.findElement(By.xpath("//i[@class='dropdown icon']")));
+	   iWillWaitToSee(By.xpath("//*[contains(text(),'"+arg1+"')]"));
+	      driver.findElement(By.xpath("//*[contains(text(),'"+arg1+"')]")).click();
+	  
+}
+public void remedyConnectPageVerification(){
+	iWillWaitToSee(By.cssSelector(".flex-item.order-2.btn.logo.valentino-icon-remedy-connect"));
+	isElementVisible(driver.findElement(By.cssSelector(".flex-item.order-2.btn.logo.valentino-icon-remedy-connect")));
+}
+public void verifySearchGhostText(String text){
+	isElementVisible(driver.findElement(By.xpath("//input[@placeholder='Search']")));
+}
+
 }

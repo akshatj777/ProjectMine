@@ -68,6 +68,7 @@ Feature: Super Admin Landing page verification
     And I click on the "Users" tile
     Then I should see header text "Users"
     And I verify "SearchBox" on landing page
+    And I verify ghost text "Search" in search box
     Then I enter "<InvalidSearchParameter>" in search box for "<user>-<Role>"
     Then I should see cross icon to exit search
     Then I verify No Results Found is displayed

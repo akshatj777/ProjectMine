@@ -46,6 +46,7 @@ public class CreateUserPage extends BaseClass{
 
     public void iClickOrganizationalField() 
     {
+
         if(DriverScript.Config.getProperty("Browser").equals("ie"))
         {
         	iWillWaitToSee(By.xpath("//div[text()='Select Role']"));
@@ -56,6 +57,7 @@ public class CreateUserPage extends BaseClass{
         	iWillWaitToSee(By.xpath("//div[text()='Select Role']"));
         	clickElement(driver.findElement(By.xpath("//div[text()='Select Role']")));
         }
+
     }
     
     public void iClickAlreadySelectedOrganizationalField() 
@@ -401,14 +403,14 @@ public class CreateUserPage extends BaseClass{
     {
     	if(!(desc.equals("")))
     	{
-    	iWillWaitToSee(By.xpath("//span[text()='"+desc+"']"));
+    	iWillWaitToSee(By.xpath("//div[contains(@class,'item')]/span[text()='"+desc+"']"));
         if(DriverScript.Config.getProperty("Browser").equals("ie"))
         {
-        	((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='"+desc+"']")));
+        	((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[contains(@class,'item')]/span[text()='"+desc+"']")));
         }
         else
         {
-        	clickElement(driver.findElement(By.xpath("//span[text()='"+desc+"']")));
+        	clickElement(driver.findElement(By.xpath("//div[contains(@class,'item')]/span[text()='"+desc+"']")));
         }
         Thread.sleep(3000);
     	}
@@ -628,7 +630,11 @@ public class CreateUserPage extends BaseClass{
     	apps = apps.substring(0, apps.length()-1);
     	userApplications = apps;
     }
-    
+public void iUnselectAllSelectedApps(){
+	iWillWaitToSee(By.xpath("//div[@class='ui checked checkbox']"));
+			clickAllElementofAlistbyXpath("//div[@class='ui checked checkbox']");
+		
+	}
     public void iClickOnContinueToDashboardMessage() {
         clickElement(driver.findElement(By.xpath("//button[text()='Continue to my dashboard']")));
     }
@@ -1460,6 +1466,7 @@ public class CreateUserPage extends BaseClass{
 		clickElement(driver.findElement(By.xpath("//button[.='Submit']")));
    }
    
+ 
    
    
 	public void clickSubmitButtonForDifferentUsers(String user) throws Throwable {
@@ -1502,6 +1509,8 @@ public class CreateUserPage extends BaseClass{
 	public void clickSubmitButton() throws Throwable {
 		iWillWaitToSee(By.xpath("//button[.='Submit']"));
 		clickElement(driver.findElement(By.xpath("//button[.='Submit']")));
+		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ui.modal.transition.visible.active.component-add-user-form")));
+	
 	}
    public void verifyAppUnchecked(String fieldName) throws Throwable {
 	   if(fieldName.contains(","))
@@ -1657,7 +1666,13 @@ public class CreateUserPage extends BaseClass{
    public void verifyLoginButton() throws Throwable {
 	   Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[contains(text(),'Log In')]")));
    }
-   
+   public void iVerifyModel(String text){
+	   delay();
+	   driver.findElement(By.cssSelector(".ui.selection.dropdown")).click();
+	   iWillWaitToSee(By.xpath("//label[contains(text(),'BPCI-Model')]"));
+	  Assert.assertFalse( isElementNotPresentOnPage(By.xpath("//label[text()='"+text+"']")));
+	  driver.findElement(By.cssSelector(".ui.selection.dropdown")).click();
+	}
    public void selectPrograms(String programList) throws Throwable {
 	   if(!(programList.equals("")))
    	{
@@ -1747,7 +1762,11 @@ public class CreateUserPage extends BaseClass{
 	   if(!(locationList.equals("")))
 	   	{
 	   if(locationList.equalsIgnoreCase("All Locations")){
-		   longDelay();
+
+
+		   delay();
+
+
 		   iWillWaitToSee(By.xpath("//div[@class='content active']//label[text()='All Locations']"));
 		   clickElement(driver.findElement(By.xpath("//div[@class='content active']//label[text()='All Locations']")));
 		   delay();
@@ -1966,7 +1985,39 @@ public class CreateUserPage extends BaseClass{
 		   		}
 		   	}
 	   	}
-   
+   public void iSearchDPLocations(String locationList)
+   {
+	   if(!(locationList.equals("")))
+	   	{
+		   if(locationList.contains(","))
+		   {
+			   StringTokenizer st = new StringTokenizer(locationList,",");
+		       while (st.hasMoreTokens()) 
+		       {
+		    	   String token = st.nextToken().trim();
+//		    	   delay();
+//		    	   while(!(driver.findElement(By.xpath("//p[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")).getText().equals("")))
+//			    	   {
+//			    		   driver.findElement(By.xpath("//p[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);  
+//			    	   }
+//		    	   delay();
+		    	   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']"))));
+		    	   driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
+		    	   iFillInText(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), token);
+//		    	   iWillWaitToSee(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),\""+token+"\")]"));
+		    	
+		       }
+		   }
+		   else
+		   {
+			   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']"))));
+	    	   driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
+	    	   iFillInText(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), locationList);
+//	    	   iWillWaitToSee(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),\""+locationList+"\")]"));
+		   }
+			   
+	   	}
+   }
    public void selectLocationsForPTAUser(String locationList) throws Throwable {
 	   if(!(locationList.equals("")))
 	   	{
@@ -2657,4 +2708,45 @@ public class CreateUserPage extends BaseClass{
 	 delay();
 	Assert.assertFalse(driver.findElements(By.cssSelector("tr.component-bpid-row")).get(0).getAttribute("innerText").toString().contains(text));
 	 }
+ public void iNavigateToNextLocationsPage(String text){
+	 if(text.equals("creating")){
+	 isElementVisible(driver.findElement(By.xpath("//div[@class='content']//div[@class='single-chevron']/i[@class='icon chevron right']")));
+	 clickElement(driver.findElement(By.xpath("//div[@class='content']//div[@class='single-chevron']/i[@class='icon chevron right']")));
+	 }
+	 else{
+		 isElementVisible(driver.findElement(By.cssSelector(".icon.chevron.right")));
+		 clickElement(driver.findElement(By.cssSelector(".icon.chevron.right")));
+		 
+	 }
+		 
+ }
+ public void iShouldNotSeeAnyErrorMessageForDPLocations(){
+	 iWillWaitToSee(By.xpath("//tr[@class='component-bpid-row']"));
+	 Assert.assertTrue(driver.findElements(By.xpath("//tr[@class='component-bpid-row']")).size()>0);
+ }
+ public void validateErrorMsg(String text){
+	 Assert.assertFalse(isElementPresentOnPage(By.xpath("//*[contains(text(),'"+text+"')]")));
+ }
+ public void iSelectCreatedUser() throws InterruptedException{
+	 iWillWaitToSee(By.xpath("//tr[@class='component-user-table-row']"));
+		clickElement(driver.findElement(By.xpath("//tr[@class='component-user-table-row']")));
+		Thread.sleep(3000);
+ }
+ public void iVerifyRolesAsPerUser(String user){
+	 if(user.equalsIgnoreCase("Super Admin")){
+		Assert.assertTrue(driver.findElements(By.xpath("//div[@class='scrolling menu transition']/div[@class='item']/span")).size()>=18);
+	 }
+	 else if (user.equalsIgnoreCase("PTA")){
+		 String text;
+		 
+		 int size =driver.findElements(By.xpath("//div[@class='scrolling menu transition']/div[@class='item']/span")).size();
+		 Assert.assertTrue(size==5);
+		 for(int i=0;i<size;i++){
+			text=driver.findElements(By.xpath("//div[@class='scrolling menu transition']/div[@class='item']/span")).get(i).getAttribute("innerText").toString().trim();
+			 Assert.assertTrue(text.equals("Executive")|| text.equals("Manager") || text.equals("Case Manager") ||text.equals("Physicians") ||text.equals("Transitional Case Manager"));
+		
+	 }
+		 
+	 }
+ }
 }
