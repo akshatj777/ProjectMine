@@ -221,14 +221,13 @@ public class EditUser extends BaseClass {
 		}
 	}
 
-	public void iVerifyDownstreamProviderPermission(String text, String present) {
-		if (present.equals("Present")) {
+	public void iVerifyDownstreamProviderPermission(String text, String role) {
+		if(role.equals("Downstream Provider")){
 			iWillWaitToSee(By.xpath("//*[contains(text(),'" + text + "')]"));
 			isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]")));
-		} else if (present.equals("Not Present")) {
-			isElementNotPresentOnPage(By.xpath("//*[contains(text(),'" + text + "')]"));
 		}
-	}
+		}
+	
 
 	public void iSeeNoResults(String text) {
 		if (text.contains(".")) {

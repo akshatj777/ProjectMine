@@ -2262,9 +2262,7 @@ public void iUnselectAllSelectedApps(){
 	   Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='"+programName+"']")));
    }
    
-   public void verifyUnavailabilityOrganizationDropDown() throws Throwable {
-       isElementNotPresentOnPage("");
-   }
+ 
    
    public void searchLocation(String location) throws Throwable {
        iFillInText(driver.findElement(By.xpath("//input[@placeholder='Search']")), location);

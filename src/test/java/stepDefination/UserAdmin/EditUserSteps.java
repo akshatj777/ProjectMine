@@ -80,9 +80,9 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	public void i_verify_that_are_in_Applications_tab(String appList, String text) throws Throwable {
 		editUser.iVerifyProductAsPerRole(appList, text);
 	}
-	@Then("^I verify text \"([^\"]*)\" is \"([^\"]*)\" in Permission tab$")
-	public void iVerifyDownstreamProviderPermission(String text, String present){
-		editUser.iVerifyDownstreamProviderPermission(text,present);
+	@Then("^I verify text \"([^\"]*)\" is present for \"([^\"]*)\"$")
+	public void iVerifyDownstreamProviderPermission(String text, String role){
+		editUser.iVerifyDownstreamProviderPermission(text,role);
 	}
 	@Then("^I should see text \"([^\"]*)\"$")
 	public void iSeeNoResults(String text){

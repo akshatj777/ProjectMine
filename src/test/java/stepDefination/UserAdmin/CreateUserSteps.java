@@ -636,10 +636,7 @@ public class CreateUserSteps extends DriverScript {
 		createUser.verifyDefaultProgramOrganization(programName);
 	}
 
-	@Then("^I verify unavailability of organization drop down$")
-	public void verifyUnavailabilityOrganizationDropDown() throws Throwable {
-		createUser.verifyUnavailabilityOrganizationDropDown();
-	}
+
 
 	@Then("^I search for \"([^\"]*)\"$")
 	public void searchLocation(String location) throws Throwable {
