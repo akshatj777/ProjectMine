@@ -13,3 +13,4 @@ Scenario: Verify the data metric validations in inpatient episode clearing dashb
   Then I verify "Inpatient Episode Clearing" text is appearing inside dashboard
   Then I read the values from the ipec dashbaord output file "\\src\\test\\Jmeter\\IPECDashboard\\IpecDashboardResults.txt"
   And I verify bpid matched with data appearing under filet field "Episode Initiator - BPID"
+  

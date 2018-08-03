@@ -259,4 +259,94 @@ public class ProgramPerformanceSteps extends DriverScript{
 	public void i_read_the_values_from_the_ipec_dashbaord_output_file(String location) throws IOException{
 		programdashboard.iReadValuesForOutputFileForIPECDashboard(location);
 	}
+	
+	@Then("^I verify \"([^\"]*)\" text is appearing when tried to login with invalid credentials$")
+	public void i_verify_text_is_appearing_when_tried_to_login_with_invalid_credentials(String text) throws Throwable{
+		programdashboard.iVerifyInavlidTextAppearingWhenTriedWithIncorrectCredentials(text);
+	}
+	
+	@Then("^I verify \"([^\"]*)\" legend is appearing on the program performance dashboard with picture resolution \"([^\"]*)\"$")
+	public void i_verify_performing_legend_is_appearing_on_the_program_performance_dashboard(String text,String resolution) throws Throwable{
+		programdashboard.GetTextFromLegends(text,"//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 104px; height: 13px;']",resolution);
+	}
+	
+	@Then("^I verify \"([^\"]*)\" legend is appearing on the program performance dashboard below underperforming with picture resolution \"([^\"]*)\"$")
+	public void i_verify_performing_legend_is_appearing_on_the_program_performance_dashboard_below_underperforming(String text,String resolution) throws Throwable{
+		programdashboard.GetTextFromLegends(text,"//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 104px; height: 14px;']",resolution);
+	}
+	
+	@Then("^I verify %Discharge to SNF section is appearing on the dashboard$")
+	public void i_verify_discharge_to_snf_section_is_appearing_on_the_dashboard() throws Throwable{
+		programdashboard.iVerifyDischargeToSNFSectionOnTheDashboards();
+	}
+	
+	@Then("^I verify SNF days section is appearing on the dashbaord$")
+	public void i_verify_SNF_days_section_is_appearing_on_the_dashboard() throws Throwable{
+		programdashboard.iVerifySNFDaysSectionOnTheDashboards();
+	}
+	
+	@And("^I verify the \"([^\"]*)\" section appearing on program performance dashboard$")
+	public void i_verify_section_appearing_on_program_performance_dashboard(String text) throws Throwable{
+		programdashboard.iVerifyBenchmarkVarianceFieldsOnProgramOverview(text);
+	}
+	
+	@Then("^I verify \"([^\"]*)\" is selected in the filter field \"([^\"]*)\"$")
+	public void i_verify_value_is_selected_in_the_filter_field(String value,String filter) throws Throwable{
+		programdashboard.iVerifyFilterValueAppearingOnDasboard(value, filter);
+	}
+	
+	@Then("^I verify graph for \"([^\"]*)\" is appearing on the program performance dashboard$")
+	public void i_verify_graph_for_is_appearing_on_the_program_performance_dashboard(String text) throws Throwable{
+		programdashboard.iVerifyTheGraphsAppearingOnDashboard(text);
+	}
+	
+	@Then("^I validate the text appearing after mouse hovering on discharge to SNF as \"([^\"]*)\"$")
+	public void i_validate_the_text_appearing_after_mose_hovering_on_discharge_to_snf(String verifytext){
+		programdashboard.iValidateMouseHoverText("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas",verifytext);
+	}
+	
+	@Then("^I validate the text appearing after mouse hovering on snf days as \"([^\"]*)\"$")
+	public void i_validate_the_text_appearing_after_mouse_hovering_on_snf_days_as(String verifytext){
+		programdashboard.iValidateMouseHoverText("//div[@tb-test-id='SNF Days Current']//div[@class='tvimagesContainer']/canvas",verifytext);
+	}
+	
+	@Then("^I validate the text appearing after mouse hovering on episodes with a readmission as \"([^\"]*)\"$")
+	public void i_validate_the_text_appearing_after_mouse_hovering_on_episodes_with_a_readmission_as(String verifytext){
+		programdashboard.iValidateMouseHoverText("//div[@tb-test-id='Readmissions Current']//div[@class='tvimagesContainer']/canvas",verifytext);
+	}
+	
+	@Then("^I validate the text appearing after mouse hovering on savings rate as \"([^\"]*)\"$")
+	public void i_validate_the_text_appearing_after_mouse_hovering_on_savings_rate_as(String verifytext){
+		programdashboard.iValidateMouseHoverText("//div[@tb-test-id='Savings Rate']//div[@class='tvimagesContainer']/canvas",verifytext);
+	}
+	
+	@And("^I verify \"([^\"]*)\" is appearing in the tool tip text on the snf days metric value$")
+	public void i_verify_is_appearing_in_the_tool_tip_text_on_the_snf_days_metric_value(String text){
+		programdashboard.iValidateAdjHistText(text,"//div[@tb-test-id='SNF Days Current']//div[@class='tvimagesContainer']/canvas");
+	}
+	
+	@And("^I verify \"([^\"]*)\" is appearing in the tool tip text on the episodes with a readmission value$")
+	public void i_verify_is_appearing_in_the_tool_tip_text_on_the_episodes_with_a_readmission_metric_value(String text){
+		programdashboard.iValidateAdjHistText(text,"//div[@tb-test-id='Readmissions Current']//div[@class='tvimagesContainer']/canvas");
+	}
+	
+	@And("^I verify \"([^\"]*)\" is appearing on the program performance dashboard$")
+	public void i_verify_is_appearing_on_the_program_performance_dashboard(String text){
+		programdashboard.iValidateFilterName(text);
+	}
+	
+	@Then("^I validate the text appearing after mouse hovering on discharge to SNF benchmark value as \"([^\"]*)\"$")
+	public void i_validate_the_text_appearing_after_mose_hovering_on_discharge_to_snf_benchmark_value_as(String verifytext){
+		programdashboard.iValidateMouseHoverText("//div[@tb-test-id='% SNF Disch Benchmark Variance']//div[@class='tvimagesContainer']/canvas",verifytext);
+	}
+	
+	@Then("^I validate the text appearing after mouse hovering on snf days benchmark value as \"([^\"]*)\"$")
+	public void i_validate_the_text_appearing_after_mouse_hovering_on_snf_days_benchmark_value_as(String verifytext){
+		programdashboard.iValidateMouseHoverText("//div[@tb-test-id='SNF Days Benchmark Variance']//div[@class='tvimagesContainer']/canvas",verifytext);
+	}
+	
+	@Then("^I validate the text appearing after mouse hovering on episodes with a readmission benchmark value as \"([^\"]*)\"$")
+	public void i_validate_the_text_appearing_after_mouse_hovering_on_episodes_with_a_readmission_benchmark_value_as(String verifytext){
+		programdashboard.iValidateMouseHoverText("//div[@tb-test-id='Readmissions Benchmark Variance']//div[@class='tvimagesContainer']/canvas",verifytext);
+	}
 }

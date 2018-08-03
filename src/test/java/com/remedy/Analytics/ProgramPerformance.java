@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -62,9 +63,8 @@ public class ProgramPerformance extends BaseClass{
 	}
 	
 	public void iEnterInFieldsForAnalyticsOnLoginPage(String field,String value){
-		iWillWaitToSee(By.xpath("//input[@title='"+field+"']"));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@title='"+field+"']")));
-		iFillInText(driver.findElement(By.xpath("//input[@title='"+field+"']")), value);
+		iWillWaitToSee(By.name("email"));
+		iFillInText(driver.findElement(By.name("email")), value);
 	}
 	
 	public void iClickonSignInButtonOnAnalyticsLoginPage(String text){
@@ -838,5 +838,98 @@ public class ProgramPerformance extends BaseClass{
 		 String observed=getTextForElement(driver.findElement(By.xpath("//a[contains(text(),'"+facilitybpid+"')]")));
 		 String Actual=""+facilityname+" - "+facilitybpid+"";
 		 Assert.assertEquals(observed.trim(), Actual.trim());
+	 }
+	 
+	 public void iVerifyInavlidTextAppearingWhenTriedWithIncorrectCredentials(String text){
+		 isElementVisible(driver.findElement(By.xpath("//span[text()='"+text+"']")));
+	 }
+	 
+	 public void GetTextFromLegends(String text,String element,String resolution) throws IOException {
+		 delay();
+		 longDelay();
+		 longDelay();
+		 String[] str=resolution.split("X");
+		 String h_value=str[0];
+		 String w_value=str[1];
+		 int height=Integer.parseInt(h_value);
+		 int width=Integer.parseInt(w_value);
+		 WebElement ele = driver.findElement(By.xpath(element));
+		 if(text.equals("%Episodes with a Readmission"))
+		 {
+		 scrollIntoViewByJS(ele);
+		 }
+		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		 BufferedImage  fullImg = ImageIO.read(screenshot);
+		 Point point = ele.getLocation();
+		 point = point.moveBy(80, 100);
+		 System.out.println(point);
+		 int eleWidth = ele.getSize().getWidth();
+		 int eleHeight = ele.getSize().getHeight();
+		 
+		 BufferedImage eleScreenshot= fullImg.getSubimage(point.getX(), point.getY(),
+				    eleWidth, eleHeight);
+		 BufferedImage scaledImg = Scalr.resize(eleScreenshot, Scalr.Method.QUALITY, Scalr.Mode.FIT_TO_WIDTH,
+				 height, width, Scalr.OP_ANTIALIAS); 
+		 ImageIO.write(scaledImg, "png", screenshot);
+				File screenshotLocation = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png");
+				if(screenshotLocation.exists())
+				{
+					screenshotLocation.delete();
+				}
+				FileUtils.copyFile(screenshot, screenshotLocation);
+				String fileLocation = System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png";
+				greyscale(fileLocation);
+				TessBaseAPI instance=new TessBaseAPI();
+				 instance.Init(System.getProperty("user.dir")+"\\src\\test\\Imports\\TestData\\tessdata", "eng");
+				 PIX image=lept.pixRead(System.getProperty("user.dir")+"\\src\\test\\Imports\\GreyScale.jpg");
+				 instance.SetImage(image);
+				 BytePointer bytePointer=instance.GetUTF8Text();
+				 String output=bytePointer.getString();
+				 System.out.println("Text in image is"+output);
+				 String FinalOutput=output.replaceAll("\\s+", "");
+				 System.out.println(FinalOutput);
+				 Assert.assertEquals(text, FinalOutput.trim());
+	 }
+	 
+	 public void iVerifyDischargeToSNFSectionOnTheDashboards(){
+		 isElementVisible(driver.findElement(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")));
+	 }
+	 public void iVerifySNFDaysSectionOnTheDashboards(){
+		 isElementVisible(driver.findElement(By.xpath("//div[@tb-test-id='SNF Days Current']//div[@class='tvimagesContainer']/canvas")));
+	 }
+	 public void iVerifyBenchmarkVarianceFieldsOnProgramOverview(String text){
+		 isElementVisible(driver.findElement(By.xpath("//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas")));
+	 }
+	 
+	 public void iVerifyFilterValueAppearingOnDasboard(String value,String filter){
+		 isElementVisible(driver.findElement(By.xpath("//span[@class='tabComboBoxName'][text()='"+value+"']")));
+	 }
+	 
+	 public void iVerifyTheGraphsAppearingOnDashboard(String text){
+		 isElementVisible(driver.findElement(By.xpath("//div[@tb-test-id='"+text+" Trend']")));
+	 }
+	 
+	 public void iValidateMouseHoverText(String element,String verifytext){
+		 WebElement elem = driver.findElement(By.xpath(element));
+		 act.moveToElement(elem).click().build().perform();
+		 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+		 System.out.println(gettext);
+		 String a = gettext.replaceAll("\\d+.\\d+%", "");
+		 a = a.replaceAll("\\d", "");
+		 a = a.replaceAll("\\s+", " ");
+		 System.out.println(a);
+		 Assert.assertTrue(a.trim().contains(verifytext.trim()));
+	 }
+	 
+	 public void iValidateAdjHistText(String text,String element){
+		 WebElement elem = driver.findElement(By.xpath(element));
+		 act.moveToElement(elem).click().build().perform();
+		 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+		 System.out.println(gettext);
+		 Assert.assertTrue(gettext.trim().contains(text.trim()));
+	 }
+	 
+	 public void iValidateFilterName(String text){
+		 isElementVisible(driver.findElement(By.xpath("//span[text()='"+text+"']")));
 	 }
 }
