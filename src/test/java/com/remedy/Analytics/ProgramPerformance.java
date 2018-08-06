@@ -28,6 +28,7 @@ import org.bytedeco.javacpp.lept;
 import org.bytedeco.javacpp.lept.PIX;
 import org.bytedeco.javacpp.tesseract.TessBaseAPI;
 import org.imgscalr.Scalr;
+import org.jsoup.select.Evaluator.ContainsText;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -931,5 +932,103 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iValidateFilterName(String text){
 		 isElementVisible(driver.findElement(By.xpath("//span[text()='"+text+"']")));
+	 }
+	 
+	 public void iValidateTitleNameOnDashbaord(String text){
+		 isElementVisible(driver.findElement(By.xpath("//span[text()='"+text+"']")));
+	 }
+	 
+	 public void GetTextFromBenchmarks(String text,String element,String resolution) throws IOException {
+		 delay();
+		 longDelay();
+		 longDelay();
+		 String[] str=resolution.split("X");
+		 String h_value=str[0];
+		 String w_value=str[1];
+		 int height=Integer.parseInt(h_value);
+		 int width=Integer.parseInt(w_value);
+		 WebElement ele = driver.findElement(By.xpath(element));
+		 if(text.equals("%Episodes with a Readmission"))
+		 {
+		 scrollIntoViewByJS(ele);
+		 }
+		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		 BufferedImage  fullImg = ImageIO.read(screenshot);
+		 Point point = ele.getLocation();
+		 point = point.moveBy(80, 100);
+		 System.out.println(point);
+		 int eleWidth = ele.getSize().getWidth();
+		 int eleHeight = ele.getSize().getHeight();
+		 
+		 BufferedImage eleScreenshot= fullImg.getSubimage(point.getX(), point.getY(),
+				    eleWidth, eleHeight);
+		 BufferedImage scaledImg = Scalr.resize(eleScreenshot, Scalr.Method.QUALITY, Scalr.Mode.FIT_TO_WIDTH,
+				 height, width, Scalr.OP_ANTIALIAS); 
+		 ImageIO.write(scaledImg, "png", screenshot);
+				File screenshotLocation = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png");
+				if(screenshotLocation.exists())
+				{
+					screenshotLocation.delete();
+				}
+				FileUtils.copyFile(screenshot, screenshotLocation);
+				String fileLocation = System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png";
+				greyscale(fileLocation);
+				TessBaseAPI instance=new TessBaseAPI();
+				 instance.Init(System.getProperty("user.dir")+"\\src\\test\\Imports\\TestData\\tessdata", "eng");
+				 PIX image=lept.pixRead(System.getProperty("user.dir")+"\\src\\test\\Imports\\GreyScale.jpg");
+				 instance.SetImage(image);
+				 BytePointer bytePointer=instance.GetUTF8Text();
+				 String output=bytePointer.getString();
+				 System.out.println("Text in image is"+output);
+				 String FinalOutput=output.replaceAll("\\s+", "");
+				 System.out.println(FinalOutput);
+				 Assert.assertTrue(FinalOutput.trim().contains(text.trim()));
+	 }
+	 
+	 public void GetTextForEpisodesWithReadmission(String text,String element,String resolution) throws IOException {
+		 delay();
+		 longDelay();
+		 longDelay();
+		 String[] str=resolution.split("X");
+		 String h_value=str[0];
+		 String w_value=str[1];
+		 int height=Integer.parseInt(h_value);
+		 int width=Integer.parseInt(w_value);
+		 WebElement graphele = driver.findElement(By.xpath("//div[@tb-test-id='Readmissions Trend']//div[@class='tab-tvBottomAxis tvimagesNS']/div/canvas"));
+		 act.moveToElement(graphele).click().build().perform();
+		 longDelay();
+		 WebElement ele = driver.findElement(By.xpath(element));
+//		 scrollIntoViewByJS(ele);
+		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		 BufferedImage  fullImg = ImageIO.read(screenshot);
+		 Point point = ele.getLocation();
+		 point = point.moveBy(80, 0);
+		 System.out.println(point);
+		 int eleWidth = ele.getSize().getWidth();
+		 int eleHeight = ele.getSize().getHeight();
+		 
+		 BufferedImage eleScreenshot= fullImg.getSubimage(point.getX(), point.getY(),
+				    eleWidth, eleHeight);
+		 BufferedImage scaledImg = Scalr.resize(eleScreenshot, Scalr.Method.QUALITY, Scalr.Mode.FIT_TO_WIDTH,
+				 height, width, Scalr.OP_ANTIALIAS); 
+		 ImageIO.write(scaledImg, "png", screenshot);
+				File screenshotLocation = new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png");
+				if(screenshotLocation.exists())
+				{
+					screenshotLocation.delete();
+				}
+				FileUtils.copyFile(screenshot, screenshotLocation);
+				String fileLocation = System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png";
+				greyscale(fileLocation);
+				TessBaseAPI instance=new TessBaseAPI();
+				 instance.Init(System.getProperty("user.dir")+"\\src\\test\\Imports\\TestData\\tessdata", "eng");
+				 PIX image=lept.pixRead(System.getProperty("user.dir")+"\\src\\test\\Imports\\GreyScale.jpg");
+				 instance.SetImage(image);
+				 BytePointer bytePointer=instance.GetUTF8Text();
+				 String output=bytePointer.getString();
+				 System.out.println("Text in image is"+output);
+				 String FinalOutput=output.replaceAll("\\s+", "");
+				 System.out.println(FinalOutput);
+				 Assert.assertTrue(FinalOutput.trim().contains(text.trim()));
 	 }
 }

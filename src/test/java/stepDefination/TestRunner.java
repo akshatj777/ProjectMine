@@ -35,7 +35,7 @@ import stepDefination.Hooks.*;
                 "junit:target/cucumber-results/cucumber-results.xml", "json:target/cucumber-results/cucumber.json",
                 "com.cucumber.listener.ExtentCucumberFormatter:target/vimalSelvam-cucumberReport/report.html"},
 
-        features = { "src/test/Features/Analytics/programPerformance.feature:91" }
+        features = { "src/test/Features/Analytics/programPerformance.feature:79" }
         //glue = { "./src/test/java/stepDefination" },
         //tags = {""}
 )

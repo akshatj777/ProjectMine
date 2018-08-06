@@ -349,4 +349,54 @@ public class ProgramPerformanceSteps extends DriverScript{
 	public void i_validate_the_text_appearing_after_mouse_hovering_on_episodes_with_a_readmission_benchmark_value_as(String verifytext){
 		programdashboard.iValidateMouseHoverText("//div[@tb-test-id='Readmissions Benchmark Variance']//div[@class='tvimagesContainer']/canvas",verifytext);
 	}
+	
+	@And("^I verify \"([^\"]*)\" title is appearing on the program performance dashboard$")
+	public void i_verify_title_is_appearing_on_the_program_performance_dashboard(String text){
+		programdashboard.iValidateTitleNameOnDashbaord(text);
+	}
+	
+	@And("^I verify \"([^\"]*)\" text is appearing below %Disch to SNF benchmark metric value with picture resolution \"([^\"]*)\"$")
+    public void i_verify_text_is_appearing_below_Disch_to_SNF_benchmark_metric_value(String text,String resolution) throws IOException{
+		programdashboard.GetTextFromBenchmarks(text, "//div[@tb-test-id='% SNF Disch Benchmark Variance']//div[@class='tvimagesContainer']/canvas", resolution);
+	}
+	
+	@And("^I verify \"([^\"]*)\" text is appearing below snf days benchmark metric value with pictur resolution \"([^\"]*)\"$")
+	public void i_verify_text_is_appearing_below_snf_days_benchmark_metric_value(String text,String resolution) throws IOException{
+		programdashboard.GetTextFromBenchmarks(text, "//div[@tb-test-id='SNF Days Benchmark Variance']//div[@class='tvimagesContainer']/canvas", resolution);
+	}
+	
+	@And("^I verify \"([^\"]*)\" text is appearing below episodes with a readmission metric value with picture resolution \"([^\"]*)\"$")
+	public void i_verify_text_is_appearing_below_episodes_with_a_readmission_metric_value_with_picture_resolution(String text,String resolution) throws IOException{
+		programdashboard.GetTextForEpisodesWithReadmission(text, "//div[@tb-test-id='Readmissions Benchmark Variance']//div[@class='tvimagesContainer']/canvas", resolution);
+	}
+	
+	@And("^I verify \"([^\"]*)\" text is appearing on %Disch to SNF metric field with picture resolution \"([^\"]*)\"$")
+	public void i_verify_text_is_appearing_on_disch_to_snf_metric_field(String text,String resolution) throws IOException{
+		programdashboard.GetTextFromBenchmarks(text, "//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas", resolution);
+	}
+	
+	@And("^I verify \"([^\"]*)\" text is appearing on SNF Days metric field with picture resolution \"([^\"]*)\"$")
+	public void i_verify_text_is_appearing_on_snf_days_metric_field(String text,String resolution) throws IOException{
+		programdashboard.GetTextFromBenchmarks(text, "//div[@tb-test-id='SNF Days Current']//div[@class='tvimagesContainer']/canvas", resolution);
+	}
+	
+	@And("^I verify \"([^\"]*)\" text is appearing on episodes with a readmission metric field with picture resolution \"([^\"]*)\"$")
+	public void i_verify_text_is_appearing_on_episodes_with_readmission_metric_field(String text,String resolution) throws IOException{
+		programdashboard.GetTextForEpisodesWithReadmission(text, "//div[@tb-test-id='Readmissions Current']//div[@class='tvimagesContainer']/canvas", resolution);
+	}
+	
+	@Then("^I verify \"([^\"]*)\" symbol is appearing beside benchmark text under %Disch to SNF metric field with picture resolution \"([^\"]*)\"$")
+	public void i_verify_symbol_is_appearing_beside_benchmark_text_under_disch_to_snf_metric_field(String text,String resolution) throws IOException{
+		programdashboard.GetTextFromBenchmarks(text, "//div[@tb-test-id='% SNF Disch Benchmark Variance']//div[@class='tvimagesContainer']/canvas", resolution);
+	}
+	
+	@Then("^I verify \"([^\"]*)\" symbol is appearing beside benchmark text under snf days metric field with picture resolution \"([^\"]*)\"$")
+	public void i_verify_symbol_is_appearing_beside_benchmark_text_under_snf_days_metric_field(String text,String resolution) throws IOException{
+		programdashboard.GetTextFromBenchmarks(text, "//div[@tb-test-id='SNF Days Benchmark Variance']//div[@class='tvimagesContainer']/canvas", resolution);
+	}
+	
+	@Then("^I verify \"([^\"]*)\" symbol is appearing beside benchmark text under episodes with a readmission metric field with picture resolution \"([^\"]*)\"$")
+	public void i_verify_symbol_is_appearing_beside_benchmark_text_under_episodes_with_a_readmission_metric_field(String text,String resolution) throws IOException{
+		programdashboard.GetTextForEpisodesWithReadmission(text, "//div[@tb-test-id='Readmissions Benchmark Variance']//div[@class='tvimagesContainer']/canvas", resolution);
+	}
 }
