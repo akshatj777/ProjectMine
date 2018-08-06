@@ -444,7 +444,7 @@ Feature: Edit user page for SA
     Then I click on existing organisation "<Health System>"
     Then I select "<AddLocations>" locations
     Then I deselect "<AddLocations>" locations
-    And I verify selected Location "<SelectedLocations>" are not shown in selected Locations section
+    And I verify Location "<SelectedLocations>" are not shown in selected Locations section
 
     Examples: 
       | User        | Role      | Health System    | AddLocations  | SelectedLocations                  |
