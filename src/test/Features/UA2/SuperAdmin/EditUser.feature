@@ -425,7 +425,7 @@ Feature: Edit user page for SA
       | User        | Role      | Health System    | AddLocations  | SelectedLocations                  |
       | Super Admin | Executive | Sound Physicians | All Locations | Advocate Trinity Hospital (140048) |
 
-  Scenario Outline: <Description>
+  Scenario Outline: Validating pagination for locations and Error message "User does not exist. Please go back to the users list page." should not be displayed
     Given I am on the login page
     When I log in as super user
     Then I should see Tile text Users
@@ -436,7 +436,11 @@ Feature: Edit user page for SA
     And I verify that I am navigated to user page
     And I click on Edit button
     Then I select "Permissions" tab
-    Then I remove health system "<Remove HealthSystem>"
+    Then I verify the header "Permissions"
+    Then I click on existing organisation "<Remove HealthSystem1>"
+    Then I verify that pagination is not displayed for selected locations
+    Then I remove health system "<Remove HealthSystem1>"
+    Then I remove health system "<Remove HealthSystem2>"
     And I search for health system with <Health System>
     And I select a <Health System>
     Then I select "<Programs>" programs
@@ -445,5 +449,5 @@ Feature: Edit user page for SA
     Then I verify error message "User does not exist. Please go back to the users list page." is not displayed
 
     Examples: 
-      | Description                                                                                         | User        | Role      | Remove HealthSystem | Health System                                                          | Programs    | Locations     |
-      | Error message "User does not exist. Please go back to the users list page." should not be displayed | Super Admin | Executive | Sound Physicians    | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI-Model2 | All Locations |
+      | User        | Role         | Remove HealthSystem1     | Remove HealthSystem2 | Health System                                                          | Programs    | Locations     |
+      | Super Admin | Remedy Other | Butler Memorial Hospital | RWJ Barnabas Health  | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI-Model2 | All Locations |
