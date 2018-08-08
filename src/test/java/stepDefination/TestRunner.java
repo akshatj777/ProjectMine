@@ -36,7 +36,7 @@ import stepDefination.Hooks.*;
                 "com.cucumber.listener.ExtentCucumberFormatter:target/vimalSelvam-cucumberReport/report.html"},
 
 
-        features = { "src/test/Features/UA2/PTA/EditNew.feature" }
+        features = { "src/test/Features/UA2/SuperAdmin/EditUser.feature" }
 
 
         //glue = { "./src/test/java/stepDefination" },
