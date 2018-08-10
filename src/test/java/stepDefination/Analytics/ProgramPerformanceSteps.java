@@ -347,7 +347,7 @@ public class ProgramPerformanceSteps extends DriverScript{
 	
 	@Then("^I validate the text appearing after mouse hovering on episodes with a readmission benchmark value as \"([^\"]*)\"$")
 	public void i_validate_the_text_appearing_after_mouse_hovering_on_episodes_with_a_readmission_benchmark_value_as(String verifytext){
-		programdashboard.iValidateMouseHoverText("//div[@tb-test-id='Readmissions Benchmark Variance']//div[@class='tvimagesContainer']/canvas",verifytext);
+		programdashboard.iValidateMouseHoverTextForReadmissions("//div[@tb-test-id='Readmissions Benchmark Variance']//div[@class='tvimagesContainer']/canvas",verifytext);
 	}
 	
 	@And("^I verify \"([^\"]*)\" title is appearing on the program performance dashboard$")
@@ -398,5 +398,10 @@ public class ProgramPerformanceSteps extends DriverScript{
 	@Then("^I verify \"([^\"]*)\" symbol is appearing beside benchmark text under episodes with a readmission metric field with picture resolution \"([^\"]*)\"$")
 	public void i_verify_symbol_is_appearing_beside_benchmark_text_under_episodes_with_a_readmission_metric_field(String text,String resolution) throws IOException{
 		programdashboard.GetTextForEpisodesWithReadmission(text, "//div[@tb-test-id='Readmissions Benchmark Variance']//div[@class='tvimagesContainer']/canvas", resolution);
+	}
+	
+	@And("^I verify \"([^\"]*)\" tooltip is having the same value fetched from database$")
+	public void i_verify_discharge_tooltip_is_having_the_same_value_fetched_from_database(String text) throws Throwable{
+		programdashboard.iValidateBenchmarkToolTipText("//div[@tb-test-id='% SNF Disch Benchmark Variance']//div[@class='tvimagesContainer']/canvas", text);
 	}
 }

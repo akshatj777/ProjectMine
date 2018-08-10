@@ -49,7 +49,7 @@ import com.remedy.resources.DriverScript;
 public class ProgramPerformance extends BaseClass{
 	
 	int ECEpiosdeCount,claimsEpiosdeCount,TotalNPRA,TotalProgram;
-    Double savingRate,DischargeToSNF,SNFDays,EpisodesWithReadmission;
+    Double savingRate,DischargeToSNF,SNFDaysClaims, SNFDaysEC,EpisodesWithReadmission,dischargetoSNFBenchmarkClaims,DischargeToSNFEC,dischargetoSNFBenchmarkEC;
     String StartDate,facilityname,facilitybpid;
     Actions act=new Actions(driver);
 	WebDriverWait wait = new WebDriverWait(driver, 300);
@@ -505,7 +505,6 @@ public class ProgramPerformance extends BaseClass{
 	    }
 	 
 	 public void iClickOnDashboard(String dashboard){
-		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ui.image.report-image")));
 		 iWillWaitToSee(By.cssSelector(".report-title"));
 		 selectElementByDesc(".report-title", dashboard);
 	 }
@@ -577,27 +576,37 @@ public class ProgramPerformance extends BaseClass{
 		      Double snf=Double.parseDouble(Dtosnf[1]);
 		      DischargeToSNF=snf;
 		      System.out.println("The discharge to snf value is"+DischargeToSNF);
-		      String SnfDays=elements.get(7).trim();
-		      String snfD[]=SnfDays.split("=");
-		      Double snfdays=Double.parseDouble(snfD[1]);
-		      SNFDays=snfdays;
-		      System.out.println("The snf days value is"+SNFDays);
+		      String SnfDaysClaims=elements.get(7).trim();
+		      String snfDClaims[]=SnfDaysClaims.split("=");
+		      Double snfdaysClaims=Double.parseDouble(snfDClaims[1]);
+		      SNFDaysClaims=snfdaysClaims;
+		      System.out.println("The snf days Claims value is"+SNFDaysClaims);
 		      String EWReadmission=elements.get(8).trim();
 		      String EReadmission[]=EWReadmission.split("=");
 		      Double episodeR=Double.parseDouble(EReadmission[1]);
 		      EpisodesWithReadmission=episodeR;
 		      System.out.println("The episodes with readmissions value is"+EpisodesWithReadmission);
-//		      String claimsEReadmission=elements.get(9).trim();
-//		      String claimsReadmission[]=claimsEReadmission.split("=");
-//		      Double claimsepisodeR=Double.parseDouble(claimsReadmission[1]);
-//		      claimsEpisodesReadmission=claimsepisodeR;
-//		      System.out.println("The epiosde with readmission value for claims is"+claimsEpisodesReadmission);
-//		      String ecEReadmission=elements.get(10).trim();
-//		      String ecReadmission[]=ecEReadmission.split("=");
-//		      Double ecepisodeR=Double.parseDouble(ecReadmission[1]);
-//		      ecEpsiodesReadmission=ecepisodeR;
-//		      System.out.println("The episode with readmission value for ec is"+ecEpsiodesReadmission);
+		      String dsnfbenchmarkclaims=elements.get(9).trim();
+		      String SNFBenchmarkClaims[]=dsnfbenchmarkclaims.split("=");
+		      Double BenchmarkSNFClaims=Double.parseDouble(SNFBenchmarkClaims[1]);
+		      dischargetoSNFBenchmarkClaims=BenchmarkSNFClaims;
+		      System.out.println("The discharge to snf benchmark value for claims is"+dischargetoSNFBenchmarkClaims);
+		      String dSNFEC=elements.get(10).trim();
+		      String DtosnfEC[]=dSNFEC.split("=");
+		      Double snfEC=Double.parseDouble(DtosnfEC[1]);
+		      DischargeToSNFEC=snfEC;
+		      System.out.println("The discharge to snf value for EC is"+DischargeToSNFEC);
 		      delay();
+		      String dsnfbenchmarkEC=elements.get(11).trim();
+		      String SNFBenchmarkEC[]=dsnfbenchmarkEC.split("=");
+		      Double BenchmarkSNFEC=Double.parseDouble(SNFBenchmarkEC[1]);
+		      dischargetoSNFBenchmarkEC=BenchmarkSNFEC;
+		      System.out.println("The discharge to snf benchmark value for EC is"+dischargetoSNFBenchmarkEC);
+		      String SnfDaysEC=elements.get(12).trim();
+		      String snfDEC[]=SnfDaysEC.split("=");
+		      Double snfdaysEC=Double.parseDouble(snfDEC[1]);
+		      SNFDaysEC=snfdaysEC;
+		      System.out.println("The snf days EC value is"+SNFDaysEC);
 		     }
 	 }
 
@@ -625,7 +634,12 @@ public class ProgramPerformance extends BaseClass{
 		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		 BufferedImage  fullImg = ImageIO.read(screenshot);
 		 Point point = ele.getLocation();
-		 point = point.moveBy(100, 100);
+		 if(text.equals("%Episodes with a Readmission")){
+			 point = point.moveBy(80, 0);
+		 }else{
+			 point = point.moveBy(100, 80);
+		 }
+		 
 		 System.out.println(point);
 		 int eleWidth = ele.getSize().getWidth();
 		 int eleHeight = ele.getSize().getHeight();
@@ -661,14 +675,20 @@ public class ProgramPerformance extends BaseClass{
 					 Assert.assertTrue(FinalOutput.trim().contains(numberformat(TotalProgram)));
 				 }else if(text.equals("NPRA")){
 					 Assert.assertTrue(FinalOutput.trim().contains(numberformat(TotalNPRA)));
-				 }else if(text.equals("%Discharge to SNF")){
+				 }else if(text.equals("%Discharge to SNF Claims")){
 					 Double a= ((float)(((int)Math.pow(10,1)*DischargeToSNF))/Math.pow(10,1));
 					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
-				 }else if(text.equals("SNF Days")){
-					 Double a= ((float)(((int)Math.pow(10,1)*SNFDays))/Math.pow(10,1));
+				 }else if(text.equals("SNF Days Claims")){
+					 Double a= ((float)(((int)Math.pow(10,1)*SNFDaysClaims))/Math.pow(10,1));
+					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
+				 }else if(text.equals("SNF Days EC")){
+					 Double a= ((float)(((int)Math.pow(10,1)*SNFDaysEC))/Math.pow(10,1));
 					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
 				 }else if(text.equals("%Episodes with a Readmission")){
 					 Double a= ((float)(((int)Math.pow(10,1)*EpisodesWithReadmission))/Math.pow(10,1));
+					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
+				 }else if(text.equals("%Discharge to SNF EC")){
+					 Double a= ((float)(((int)Math.pow(10,1)*DischargeToSNFEC))/Math.pow(10,1));
 					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
 				 }
 	 }
@@ -765,6 +785,7 @@ public class ProgramPerformance extends BaseClass{
 		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
 		 clickElement(driver.findElement(By.xpath("//span[@class='tab-datepicker-today-date']")));
 		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
+		 delay();
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 delay();
 		 longDelay();
@@ -1030,5 +1051,36 @@ public class ProgramPerformance extends BaseClass{
 				 String FinalOutput=output.replaceAll("\\s+", "");
 				 System.out.println(FinalOutput);
 				 Assert.assertTrue(FinalOutput.trim().contains(text.trim()));
+	 }
+	 
+	 public void iValidateMouseHoverTextForReadmissions(String element,String verifytext){
+		 WebElement graphele = driver.findElement(By.xpath("//div[@tb-test-id='Readmissions Trend']//div[@class='tab-tvBottomAxis tvimagesNS']/div/canvas"));
+		 act.moveToElement(graphele).click().build().perform();
+		 longDelay();
+		 WebElement elem = driver.findElement(By.xpath(element));
+		 act.moveToElement(elem).click().build().perform();
+		 longDelay();
+		 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+		 System.out.println(gettext);
+		 String a = gettext.replaceAll("\\d+.\\d+%", "");
+		 a = a.replaceAll("\\d", "");
+		 a = a.replaceAll("\\s+", " ");
+		 System.out.println(a);
+		 Assert.assertTrue(a.trim().contains(verifytext.trim()));
+	 }
+	 
+	 public void iValidateBenchmarkToolTipText(String element, String text){
+		 WebElement elem = driver.findElement(By.xpath(element));
+		 act.moveToElement(elem).click().build().perform();
+		 longDelay();
+		 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+		 System.out.println(gettext);
+		 if (text.contains("Claims")){
+			 Double a= ((float)(((int)Math.pow(10,1)*dischargetoSNFBenchmarkClaims))/Math.pow(10,1));
+			 Assert.assertTrue(gettext.trim().contains(a.toString()));
+		 }else {
+			 Assert.assertTrue(gettext.trim().contains(dischargetoSNFBenchmarkEC.toString()));
+		 }
+		
 	 }
 }

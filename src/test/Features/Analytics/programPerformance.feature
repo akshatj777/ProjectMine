@@ -59,7 +59,7 @@ Scenario: Verify the mouse hovering text on the program performance dashbaord pa
   Then I validate the text appearing after mouse hovering on snf days benchmark value as "The SNF Days of"
   And I verify "Adj Hist" is appearing in the tool tip text on the snf days metric value
   Then I validate the text appearing after mouse hovering on episodes with a readmission as "The Percent Episodes with a Readmission of was Below Benchmark (Adj Hist) of over total episodes."
-  #Then I validate the text appearing after mouse hovering on episodes with a readmission benchmark value as "The Percent Episodes with a Readmission of was Below Benchmark (Adj Hist) of over total episodes."
+  Then I validate the text appearing after mouse hovering on episodes with a readmission benchmark value as "The Percent Episodes with a Readmission of was Below Benchmark (Adj Hist) of over total episodes."
   And I verify "Adj Hist" is appearing in the tool tip text on the episodes with a readmission value
 
 Scenario: Verify the benchmark values are appearing on the dashbaord
@@ -132,16 +132,19 @@ Scenario: Verify data metric validations on program overview dashbaord
   Then I read the values from the text file "\\src\\test\\Jmeter\\PerformanceDashboard\\PerformanceDashboardResult.txt"
   And I set the time for starting date to claimscube date on dashboard and ending date to today date
   Then I select "Penn Presbyterian Medical Center - 2070-021" from "Episode Initiator - BPID" field and click on "Apply"
+  And I verify "Penn Presbyterian Medical Center - 390223" is selected in the filter field "Anchor Facility - CCN"
   And I verify "EC Episodes" count matched with database value on the dashboard with picture resolution "500X500"
+  And I verify "%Discharge to SNF EC" count matched with database value on dashboard for discharge to snf with picture resolution "700X700"
+ 	And I verify "Discharge to snf benchmark EC" tooltip is having the same value fetched from database
+ 	And I verify "SNF Days EC" count matched with database value on dashboard for snf days with picture resolution "700X700"
   Then I set the time from starting date as "1/1/2017" to ending date to claimscube date to validate claims episode data
-  #Then I select "Penn Presbyterian Medical Center - 2070-021" from "Episode Initiator - BPID" field and click on "Apply"
   And I verify "Savings Rate" data is matched with database value on dashboard with picture resolution "600X600"
   And I verify "Claims Episodes" count matched with database value on the dashboard with picture resolution "500X500"
   And I verify "Program Size" count matched with database value on dashboard for program size with picture resolution "300X300"
   And I verify "NPRA" count matched with database value on dashboard for npra with picture resolution "300X300"
-  #And I verify "SNF Days" count matched with database value on dashboard for snf days with picture resolution "700X700"
-  Then I set the time from starting date as "1/1/2017" and ending date to today date
-  And I verify "%Discharge to SNF" count matched with database value on dashboard for discharge to snf with picture resolution "700X700"
-  And I verify "%Episodes with a Readmission" count matched with database value on dashboard for episodes with readmission with picture resolution "700X700"
-  Then I set the time from starting date as "1/1/2017" to ending date to claimscube date to validate claims episode data
-  And I verify "SNF Days" count matched with database value on dashboard for snf days with picture resolution "700X700"
+  And I verify "%Discharge to SNF Claims" count matched with database value on dashboard for discharge to snf with picture resolution "700X700"
+  And I verify "Discharge to snf benchmark Claims" tooltip is having the same value fetched from database
+  #Then I set the time from starting date as "1/1/2017" to ending date to claimscube date to validate claims episode data
+  And I verify "SNF Days Claims" count matched with database value on dashboard for snf days with picture resolution "700X700"
+  #Then I set the time from starting date as "1/1/2017" and ending date to today date
+  #And I verify "%Episodes with a Readmission" count matched with database value on dashboard for episodes with readmission with picture resolution "700X700"
