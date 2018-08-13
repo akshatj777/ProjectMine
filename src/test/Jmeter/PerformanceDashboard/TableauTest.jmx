@@ -415,46 +415,138 @@ AND fp.totalSNFDays &gt; 0
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission (Claims)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select round(sum(readmissionCounter)/sum(Episodes), 3) * 100 as EpisodesWithReadmission
-from
-(
-select sum(if((c.readmission_flag) = 1,1,0)) as readmissionCounter, sum(c.currEpiCounts) as Episodes
+          <stringProp name="query">select round(sum(readmissionCounter)/sum(Episodes)*100, 1) as EpisodesWithReadmissionClaims
+from (select sum(if((c.readmission_flag) = 1,1,0)) as readmissionCounter, sum(c.currEpiCounts) as Episodes
 from warehouse.factClaims c
 inner join
 warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
 inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
-inner join
-warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
+inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
+inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey
+inner join warehouse.dimDRG d on c.anchorDrgKey = d.drgSK
+where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
+and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
+and e.bpid not like &apos;%DEMO%&apos;
+and c.atRisk=&apos;Y&apos;
+and c.anchorBeginDateKey &gt;= 20170101
+-- and c.anchorBeginDateKey &lt;= 20180301
+ and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
+ and e.bpid in  ${bpid}
+ and f.ccn in (&apos;390223&apos;)
+ -- and d.bundleName in (&apos;Renal failure&apos;,&apos;Congestive heart failure&apos;)
+ -- and dp.npi in (&apos;1497045017&apos;,&apos;1609038355&apos;)
+ -- and d.drgCode in (&apos;291&apos;,&apos;293&apos;,&apos;684&apos;)
+ and c.targetPrice &lt;&gt; 0) a;</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames">EpisodesWithReadmissionClaims</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission (EC)" enabled="true">
+          <stringProp name="dataSource">MySQLQA</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">SELECT ROUND(SUM(readmissionCounter) / SUM(Episodes)*100,1) as EpisodesWithReadmissionEC
+FROM (SELECT SUM(IF((fp.readmissionCounter) &gt;= 1, 1, 0)) AS readmissionCounter,
+SUM(fp.episodeCountReport) AS Episodes
+FROM warehouse.factPatientEpisode fp
+    INNER JOIN warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
+    INNER JOIN warehouse.dimFacility df ON fp.anchorAdmitFacilityKey = df.facilitySK
+    INNER JOIN warehouse.dimFacility pac ON fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
+    INNER JOIN warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
+    INNER JOIN warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
+    INNER JOIN warehouse.dimDRG drg ON drg.drgSK = fp.currDrgKey
+    WHERE
+        fp.bundleRisk = 1
+            AND fp.episodeCountReport = 1
+            AND df.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
+            AND pac.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
+            AND de.bpid NOT LIKE &apos;%DEMO%&apos;
+            AND dlk.lookupCategory = &apos;patientRisk&apos;
+            AND fp.anchorAdmitDateKey &gt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
+            -- AND fp.anchorAdmitDateKey &gt;= &apos;20180401&apos;
+            -- AND fp.anchorAdmitDateKey &lt;= &apos;20180701&apos;
+            AND fp.bpid IN (&apos;2070-021&apos;)
+            AND df.ccn IN (&apos;390223&apos;)
+            -- AND drg.bundleName IN (&apos;Acute myocardial infarction&apos; , &apos;Sepsis&apos;, &apos;COPD, bronchitis, asthma&apos;)
+            -- AND drg.drgCode IN (&apos;280&apos; , &apos;281&apos;, &apos;202&apos;, &apos;190&apos;, &apos;870&apos;)
+            ) a;</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames">EpisodesWithReadmissionEC</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission Benchmark (Claims)" enabled="true">
+          <stringProp name="dataSource">MySQLQA</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">select round(sum(baseEpiReadmissions)/sum(baseEpicounts)*100, 1) as EpisodesWithReadmissionBenchmarkClaims
+from (select e.bpid, SUM(c.baseEpiReadmissions) as baseEpiReadmissions, sum(c.baseEpiCounts) as baseEpicounts
+from warehouse.factClaims c
+inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
+inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
+inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
+inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey
+inner join warehouse.dimDRG d on c.anchorDrgKey = d.drgSK
 WHERE f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
 and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
 and e.bpid not like &apos;%DEMO%&apos;
 and c.atRisk=&apos;Y&apos;
 and c.anchorBeginDateKey &gt;= 20170101
-and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and e.bpid in  ${bpid}
-and f.ccn in (&apos;390223&apos;)
-union
-select sum(if((fp.readmissionCounter) &gt;= 1 , 1, 0)) as readmissionCounter, sum(fp.episodeCountReport) as Episodes
-from warehouse.factPatientEpisode fp
-inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK
-inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
-inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK
-inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
-where fp.bundleRisk = 1
-and fp.episodeCountReport = 1
-and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
-and de.bpid not like &apos;%DEMO%&apos;
-and dlk.lookupCategory = &apos;patientRisk&apos;
-and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and fp.BPID in ${bpid}
-and df.CCN in (&apos;390223&apos;) ) a;</stringProp>
+-- and c.anchorBeginDateKey &lt;= 20180301
+ and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
+ and e.bpid in  ${bpid}
+ and f.ccn in (&apos;390223&apos;)
+ -- and d.bundleName in (&apos;Renal failure&apos;,&apos;Congestive heart failure&apos;)
+ -- and dp.npi in (&apos;1497045017&apos;,&apos;1609038355&apos;)
+ -- and d.drgCode in (&apos;291&apos;,&apos;293&apos;,&apos;684&apos;)
+ and c.targetPrice &lt;&gt; 0) a;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">EpisodesWithReadmission</stringProp>
+          <stringProp name="variableNames">EpisodesWithReadmissionBenchmarkClaims</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission Benchmark (EC)" enabled="true">
+          <stringProp name="dataSource">MySQLQA</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">SELECT ROUND((baseEpiReadmissions) / (baseEpiCounts)*100, 1) as EpisodesWithReadmissionBenchmarkEC
+FROM (SELECT SUM(fp.baseEpiReadmissions) AS baseEpiReadmissions, SUM(fp.baseEpiCounts) AS baseEpiCounts
+    FROM
+    warehouse.factPatientEpisode fp
+    INNER JOIN warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
+    INNER JOIN warehouse.dimFacility df ON fp.anchorAdmitFacilityKey = df.facilitySK
+    INNER JOIN warehouse.dimFacility pac ON fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
+    INNER JOIN warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
+    INNER JOIN warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
+    INNER JOIN warehouse.dimDRG drg ON drg.drgSK = fp.currDrgKey
+    WHERE
+        fp.bundleRisk = 1
+            AND fp.episodeCountReport = 1
+            AND df.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
+            AND pac.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
+            AND de.bpid NOT LIKE &apos;%DEMO%&apos;
+            AND dlk.lookupCategory = &apos;patientRisk&apos;
+            AND fp.anchorAdmitDateKey &gt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
+            -- AND fp.anchorAdmitDateKey &gt;= &apos;20180401&apos;
+            -- AND fp.anchorAdmitDateKey &lt;= &apos;20180701&apos;
+            AND fp.bpid IN ${bpid}
+            AND df.ccn IN (&apos;390223&apos;)
+            -- AND drg.bundleName IN (&apos;Acute myocardial infarction&apos; , &apos;Sepsis&apos;, &apos;COPD, bronchitis, asthma&apos;)
+            -- AND drg.drgCode IN (&apos;280&apos; , &apos;281&apos;, &apos;202&apos;, &apos;190&apos;, &apos;870&apos;)
+            ) a;</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames">EpisodesWithReadmissionBenchmarkEC</stringProp>
           <stringProp name="resultVariable"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -549,7 +641,7 @@ and df.CCN in (&apos;390223&apos;)
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo ECEpiosdeCount=${ECEpiosdeCount_1},claimsEpiosdeCount=${claimsEpiosdeCount_1},savingRate=${savingRate_1},TotalNPRA=${TotalNPRA_1},TotalProgram=${TotalProgram_1},StartDate=${StartDate_1},dischargetoSNFClaims=${dischargetoSNFClaims_1} ,SNFDaysClaims=${SNFDaysClaims_1},EpisodesWithReadmission=${EpisodesWithReadmission_1},dischtoSNFBenchmarkClaims=${dischtoSNFBenchmarkClaims_1},dischargetoSNFEC=${dischargetoSNFEC_1},dischtoSNFBenchmarkEC=${dischtoSNFBenchmarkEC_1},SNFDaysEC=${SNFDaysEC_1}&gt; PerformanceDashboardResult.txt</stringProp>
+                <stringProp name="Argument.value">echo ECEpiosdeCount=${ECEpiosdeCount_1},claimsEpiosdeCount=${claimsEpiosdeCount_1},savingRate=${savingRate_1},TotalNPRA=${TotalNPRA_1},TotalProgram=${TotalProgram_1},StartDate=${StartDate_1},dischargetoSNFClaims=${dischargetoSNFClaims_1} ,SNFDaysClaims=${SNFDaysClaims_1},EpisodesWithReadmissionClaims=${EpisodesWithReadmissionClaims_1},dischtoSNFBenchmarkClaims=${dischtoSNFBenchmarkClaims_1},dischargetoSNFEC=${dischargetoSNFEC_1},dischtoSNFBenchmarkEC=${dischtoSNFBenchmarkEC_1},SNFDaysEC=${SNFDaysEC_1},EpisodesWithReadmissionEC=${EpisodesWithReadmissionEC_1},EpisodesWithReadmissionBenchmarkClaims=${EpisodesWithReadmissionBenchmarkClaims_1},EpisodesWithReadmissionBenchmarkEC=${EpisodesWithReadmissionBenchmarkEC_1}&gt; PerformanceDashboardResult.txt</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
