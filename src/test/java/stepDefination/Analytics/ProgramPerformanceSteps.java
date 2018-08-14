@@ -402,6 +402,6 @@ public class ProgramPerformanceSteps extends DriverScript{
 	
 	@And("^I verify \"([^\"]*)\" tooltip is having the same value fetched from database$")
 	public void i_verify_discharge_tooltip_is_having_the_same_value_fetched_from_database(String text) throws Throwable{
-		programdashboard.iValidateBenchmarkToolTipText("//div[@tb-test-id='% SNF Disch Benchmark Variance']//div[@class='tvimagesContainer']/canvas", text);
+		programdashboard.iValidateBenchmarkToolTipText(text);
 	}
 }

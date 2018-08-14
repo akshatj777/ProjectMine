@@ -415,6 +415,84 @@ AND fp.totalSNFDays &gt; 0
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days Benchmark (Claims)" enabled="true">
+          <stringProp name="dataSource">MySQLQA</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">select round(sum(baseSNFDays)/sum(baseSNFCount),1) as SNFDaysBenchmarkClaims
+from
+(select e.bpid, sum(c.baseSNFDays) as baseSNFDays, sum(c.baseSNFCount) as baseSNFCount
+from warehouse.factClaims c
+inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
+inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
+inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
+inner join warehouse.dimPhysician p ON c.physicianKey = p.physicianSK
+inner join warehouse.dimDRG d on c.anchorDrgKey = d.drgSK
+where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
+and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
+and e.bpid not like &apos;%DEMO%&apos;
+and c.atRisk=&apos;Y&apos;
+and c.anchorBeginDateKey &gt;= 20170101
+-- and c.anchorBeginDateKey &lt;= 20180301
+ and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
+-- and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;)
+and e.bpid in  ${bpid}
+ and f.ccn in (&apos;390223&apos;)
+-- and p.npi in (&apos;1609861061&apos;,&apos;1710225214&apos;)
+-- and d.drgCode in (&apos;291&apos;,&apos;292&apos;)
+ -- and d.bundleName in (&apos;Congestive heart failure&apos;)
+ and c.targetPrice &lt;&gt; 0
+ and c.snfDaysTrimmed &gt; 0
+) a;</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames">SNFDaysBenchmarkClaims</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days Benchmark (EC)" enabled="true">
+          <stringProp name="dataSource">MySQLQA</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">SELECT round( SUM(fp.baseSNFDays) / SUM(fp.baseEpiCounts) ,1 )  AS SNFDaysBenchmarkEC
+FROM
+    warehouse.factPatientEpisode fp
+        INNER JOIN
+    warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
+        INNER JOIN
+    warehouse.dimFacility df ON fp.anchorAdmitFacilityKey = df.facilitySK
+        INNER JOIN
+    warehouse.dimFacility pac ON fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
+        INNER JOIN
+    warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
+        INNER JOIN
+    warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
+    inner join warehouse.dimDRG drg on drg.drgSK = fp.currDrgKey
+WHERE
+    fp.bundleRisk = 1
+        AND fp.totalSNFDays &gt; 0
+        AND fp.dataQualityFlag NOT LIKE &apos;%Invalid%&apos;
+        AND fp.episodeCountReport = 1
+        AND df.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
+        AND pac.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
+        AND de.bpid NOT LIKE &apos;%DEMO%&apos;
+        AND dlk.lookupCategory = &apos;patientRisk&apos;
+        -- AND fp.anchorAdmitDateKey &gt;= 20180401
+       -- AND fp.anchorAdmitDateKey &lt;= 20180430
+		and fp.anchorAdmitDateKey &gt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
+
+        AND df.CCN IN (&apos;390223&apos;)
+        -- AND drg.bundleName IN (&apos;Amputation&apos; , &apos;Cellulitis&apos;)
+        AND fp.BPID IN ${bpid}
+        -- AND drg.drgCode IN (&apos;240&apos; , &apos;475&apos;, &apos;602&apos;);</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames">SNFDaysBenchmarkEC</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission (Claims)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
@@ -641,7 +719,7 @@ and df.CCN in (&apos;390223&apos;)
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo ECEpiosdeCount=${ECEpiosdeCount_1},claimsEpiosdeCount=${claimsEpiosdeCount_1},savingRate=${savingRate_1},TotalNPRA=${TotalNPRA_1},TotalProgram=${TotalProgram_1},StartDate=${StartDate_1},dischargetoSNFClaims=${dischargetoSNFClaims_1} ,SNFDaysClaims=${SNFDaysClaims_1},EpisodesWithReadmissionClaims=${EpisodesWithReadmissionClaims_1},dischtoSNFBenchmarkClaims=${dischtoSNFBenchmarkClaims_1},dischargetoSNFEC=${dischargetoSNFEC_1},dischtoSNFBenchmarkEC=${dischtoSNFBenchmarkEC_1},SNFDaysEC=${SNFDaysEC_1},EpisodesWithReadmissionEC=${EpisodesWithReadmissionEC_1},EpisodesWithReadmissionBenchmarkClaims=${EpisodesWithReadmissionBenchmarkClaims_1},EpisodesWithReadmissionBenchmarkEC=${EpisodesWithReadmissionBenchmarkEC_1}&gt; PerformanceDashboardResult.txt</stringProp>
+                <stringProp name="Argument.value">echo ECEpiosdeCount=${ECEpiosdeCount_1},claimsEpiosdeCount=${claimsEpiosdeCount_1},savingRate=${savingRate_1},TotalNPRA=${TotalNPRA_1},TotalProgram=${TotalProgram_1},StartDate=${StartDate_1},dischargetoSNFClaims=${dischargetoSNFClaims_1} ,SNFDaysClaims=${SNFDaysClaims_1},EpisodesWithReadmissionClaims=${EpisodesWithReadmissionClaims_1},dischtoSNFBenchmarkClaims=${dischtoSNFBenchmarkClaims_1},dischargetoSNFEC=${dischargetoSNFEC_1},dischtoSNFBenchmarkEC=${dischtoSNFBenchmarkEC_1},SNFDaysEC=${SNFDaysEC_1},EpisodesWithReadmissionEC=${EpisodesWithReadmissionEC_1},EpisodesWithReadmissionBenchmarkClaims=${EpisodesWithReadmissionBenchmarkClaims_1},EpisodesWithReadmissionBenchmarkEC=${EpisodesWithReadmissionBenchmarkEC_1},SNFDaysBenchmarkClaims=${SNFDaysBenchmarkClaims_1},SNFDaysBenchmarkEC=${SNFDaysBenchmarkEC_1}&gt; PerformanceDashboardResult.txt</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>

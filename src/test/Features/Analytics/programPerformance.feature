@@ -137,6 +137,7 @@ Scenario: Verify data metric validations on program overview dashbaord
   And I verify "%Discharge to SNF EC" count matched with database value on dashboard for discharge to snf with picture resolution "700X700"
   And I verify "Discharge to snf benchmark EC" tooltip is having the same value fetched from database
   And I verify "SNF Days EC" count matched with database value on dashboard for snf days with picture resolution "700X700"
+  And I verify "SNF Days benchmark EC" tooltip is having the same value fetched from database
    And I verify "%Episodes with a Readmission EC" count matched with database value on dashboard for discharge to snf with picture resolution "700X700"
   And I verify "%Episodes with a Readmission benchmark EC" tooltip is having the same value fetched from database
   
@@ -150,6 +151,7 @@ Scenario: Verify data metric validations on program overview dashbaord
   And I verify "Discharge to snf benchmark Claims" tooltip is having the same value fetched from database
   #Then I set the time from starting date as "1/1/2017" to ending date to claimscube date to validate claims episode data
   And I verify "SNF Days Claims" count matched with database value on dashboard for snf days with picture resolution "700X700"
+  And I verify "SNF Days benchmark EC" tooltip is having the same value fetched from database
   And I verify "%Episodes with a Readmission Claims" count matched with database value on dashboard for discharge to snf with picture resolution "700X700"
   And I verify "%Episodes with a Readmission benchmark Claims" tooltip is having the same value fetched from database
   
