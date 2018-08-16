@@ -508,6 +508,9 @@ public class ProgramPerformance extends BaseClass{
 	 public void iClickOnDashboard(String dashboard){
 		 iWillWaitToSee(By.cssSelector(".report-title"));
 		 selectElementByDesc(".report-title", dashboard);
+		 isElementVisible(driver.findElement(By.xpath("//div[text()='Analytics']")));
+		 longDelay();
+		 driver.navigate().refresh();
 	 }
 	 
 	 public void setAttributevalue(WebElement element, String attName, String attValue) {
@@ -717,8 +720,8 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iSetStartAndEndDateForClaimsData(String start){
 		 longDelay();
-		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
-//		 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+//		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+		 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
 		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), start);
 		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
 		 delay();
