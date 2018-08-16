@@ -507,6 +507,9 @@ public class ProgramPerformance extends BaseClass{
 	 public void iClickOnDashboard(String dashboard){
 		 iWillWaitToSee(By.cssSelector(".report-title"));
 		 selectElementByDesc(".report-title", dashboard);
+		 isElementVisible(driver.findElement(By.xpath("//div[text()='Analytics']")));
+		 longDelay();
+		 driver.navigate().refresh();
 	 }
 	 
 	 public void setAttributevalue(WebElement element, String attName, String attValue) {
@@ -637,7 +640,7 @@ public class ProgramPerformance extends BaseClass{
 		 if(text.equals("%Episodes with a Readmission")){
 			 point = point.moveBy(80, 0);
 		 }else{
-			 point = point.moveBy(100, 80);
+			 point = point.moveBy(100, 100);
 		 }
 		 
 		 System.out.println(point);
@@ -694,9 +697,8 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iSetStartAndEndDateForClaimsData(String start){
-		 longDelay();
-		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
-//		 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+//		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+		 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
 		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), start);
 		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
 		 delay();
@@ -782,6 +784,10 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iSetCalendarAttributeValueForEndingTodayDate(){
+//		 WebElement elem = driver.findElement(By.xpath("//div[@tb-test-id='KPI_Episode']//div[@class='tvimagesContainer']/canvas"));
+//		 scrollIntoViewByJS(elem);
+//		 act.moveToElement(elem).click().build().perform();
+		 longDelay();
 		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
 		 clickElement(driver.findElement(By.xpath("//span[@class='tab-datepicker-today-date']")));
 		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
