@@ -49,7 +49,8 @@ import com.remedy.resources.DriverScript;
 public class ProgramPerformance extends BaseClass{
 	
 	int ECEpiosdeCount,claimsEpiosdeCount,TotalNPRA,TotalProgram;
-    Double savingRate,DischargeToSNF,SNFDaysClaims, SNFDaysEC,EpisodesWithReadmission,dischargetoSNFBenchmarkClaims,DischargeToSNFEC,dischargetoSNFBenchmarkEC;
+    Double savingRate,DischargeToSNF,SNFDaysClaims, SNFDaysEC,EpisodesWithReadmissionClaims,dischargetoSNFBenchmarkClaims,DischargeToSNFEC,dischargetoSNFBenchmarkEC,EpisodesWithReadmissionEC,SNFDaysBenchmarkClaims,
+    SNFDaysBenchmarkEC;
     String StartDate,facilityname,facilitybpid;
     Actions act=new Actions(driver);
 	WebDriverWait wait = new WebDriverWait(driver, 300);
@@ -584,11 +585,11 @@ public class ProgramPerformance extends BaseClass{
 		      Double snfdaysClaims=Double.parseDouble(snfDClaims[1]);
 		      SNFDaysClaims=snfdaysClaims;
 		      System.out.println("The snf days Claims value is"+SNFDaysClaims);
-		      String EWReadmission=elements.get(8).trim();
-		      String EReadmission[]=EWReadmission.split("=");
-		      Double episodeR=Double.parseDouble(EReadmission[1]);
-		      EpisodesWithReadmission=episodeR;
-		      System.out.println("The episodes with readmissions value is"+EpisodesWithReadmission);
+		      String EWReadmissionClaims=elements.get(8).trim();
+		      String EReadmissionClaims[]=EWReadmissionClaims.split("=");
+		      Double episodeRClaims=Double.parseDouble(EReadmissionClaims[1]);
+		      EpisodesWithReadmissionClaims=episodeRClaims;
+		      System.out.println("The episodes with readmissions value is Claims"+EpisodesWithReadmissionClaims);
 		      String dsnfbenchmarkclaims=elements.get(9).trim();
 		      String SNFBenchmarkClaims[]=dsnfbenchmarkclaims.split("=");
 		      Double BenchmarkSNFClaims=Double.parseDouble(SNFBenchmarkClaims[1]);
@@ -610,6 +611,21 @@ public class ProgramPerformance extends BaseClass{
 		      Double snfdaysEC=Double.parseDouble(snfDEC[1]);
 		      SNFDaysEC=snfdaysEC;
 		      System.out.println("The snf days EC value is"+SNFDaysEC);
+		      String EWReadmissionEC=elements.get(13).trim();
+		      String EReadmissionEC[]=EWReadmissionEC.split("=");
+		      Double episodeREC=Double.parseDouble(EReadmissionEC[1]);
+		      EpisodesWithReadmissionEC=episodeREC;
+		      System.out.println("The episodes with readmissions value is EC"+EpisodesWithReadmissionEC);
+		      String snfDaysBMClaims=elements.get(14).trim();
+		      String SNFDaysBenchMClaims[]=snfDaysBMClaims.split("=");
+		      Double BenchmarkSNFDaysClaims=Double.parseDouble(SNFDaysBenchMClaims[1]);
+		      SNFDaysBenchmarkClaims =BenchmarkSNFDaysClaims;
+		      System.out.println("The episodes with SNF Days Benchmark Claims"+SNFDaysBenchmarkClaims);
+		      String snfDaysBMEC=elements.get(15).trim();
+		      String SNFDaysBenchMEC[]=snfDaysBMClaims.split("=");
+		      Double BenchmarkSNFDaysEC=Double.parseDouble(SNFDaysBenchMEC[1]);
+		      SNFDaysBenchmarkEC =BenchmarkSNFDaysEC;
+		      System.out.println("The episodes with SNF Days Benchmark EC"+SNFDaysBenchmarkEC);
 		     }
 	 }
 
@@ -630,16 +646,19 @@ public class ProgramPerformance extends BaseClass{
 		 int height=Integer.parseInt(h_value);
 		 int width=Integer.parseInt(w_value);
 		 WebElement ele = driver.findElement(By.xpath(element));
-		 if(text.equals("%Episodes with a Readmission"))
+		 if(text.contains("%Episodes with a Readmission"))
 		 {
 		 scrollIntoViewByJS(ele);
 		 }
 		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		 BufferedImage  fullImg = ImageIO.read(screenshot);
 		 Point point = ele.getLocation();
-		 if(text.equals("%Episodes with a Readmission")){
-			 point = point.moveBy(80, 0);
+		 if(text.contains("%Episodes with a Readmission")){
+			 System.out.println("VVVV"+point.getX()+"YYYYYYYYY"+point.getY());
+//			 point = point.moveBy(325, 104);
+			 point = point.moveBy(80, 20);
 		 }else{
+			 System.out.println("Value+++++++++"+point.getX()+"YYYYYYYYY"+point.getY());
 			 point = point.moveBy(100, 100);
 		 }
 		 
@@ -687,16 +706,20 @@ public class ProgramPerformance extends BaseClass{
 				 }else if(text.equals("SNF Days EC")){
 					 Double a= ((float)(((int)Math.pow(10,1)*SNFDaysEC))/Math.pow(10,1));
 					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
-				 }else if(text.equals("%Episodes with a Readmission")){
-					 Double a= ((float)(((int)Math.pow(10,1)*EpisodesWithReadmission))/Math.pow(10,1));
-					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
+				 }else if(text.equals("%Episodes with a Readmission Claims")){
+					 Assert.assertTrue(FinalOutput.trim().contains(EpisodesWithReadmissionEC.toString()));
 				 }else if(text.equals("%Discharge to SNF EC")){
 					 Double a= ((float)(((int)Math.pow(10,1)*DischargeToSNFEC))/Math.pow(10,1));
 					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
+				 }else if(text.equals("%Episodes with a Readmission EC")){
+					 Assert.assertTrue(FinalOutput.trim().contains(EpisodesWithReadmissionEC.toString()));
 				 }
+				 
+				 
 	 }
 	 
 	 public void iSetStartAndEndDateForClaimsData(String start){
+		 longDelay();
 //		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
 		 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
 		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), start);
@@ -889,6 +912,8 @@ public class ProgramPerformance extends BaseClass{
 		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		 BufferedImage  fullImg = ImageIO.read(screenshot);
 		 Point point = ele.getLocation();
+		 System.out.println("XXXXXXXXXXXXXXXX"+point.getX());
+		 System.out.println("YYYYYYYYYYYYYYYYY"+point.getY());
 		 point = point.moveBy(80, 100);
 		 System.out.println(point);
 		 int eleWidth = ele.getSize().getWidth();
@@ -1075,18 +1100,42 @@ public class ProgramPerformance extends BaseClass{
 		 Assert.assertTrue(a.trim().contains(verifytext.trim()));
 	 }
 	 
-	 public void iValidateBenchmarkToolTipText(String element, String text){
-		 WebElement elem = driver.findElement(By.xpath(element));
+	 public void iValidateBenchmarkToolTipText( String text){
+		 WebElement elem = null;
+		 if(text.contains("Readmission benchmark")){
+			 WebElement graphele = driver.findElement(By.xpath("//div[@tb-test-id='Readmissions Trend']//div[@class='tab-tvBottomAxis tvimagesNS']/div/canvas"));
+			 act.moveToElement(graphele).click().build().perform();
+			 longDelay();
+			 elem=driver.findElement(By.xpath("//div[@tb-test-id='Readmissions Benchmark Variance']//div[@class='tvimagesContainer']/canvas"));
+		 }
+		 else if(text.contains("Discharge to snf benchmark")){
+			 elem=driver.findElement(By.xpath("//div[@tb-test-id='% SNF Disch Benchmark Variance']//div[@class='tvimagesContainer']/canvas"));
+		 }
+		 else if(text.contains("SNF Days benchmark")){
+			 longDelay();
+			 elem=driver.findElement(By.xpath("//div[@tb-test-id='SNF Days Benchmark Variance']//div[@class='tvimagesContainer']/canvas"));
+		 }
 		 act.moveToElement(elem).click().build().perform();
 		 longDelay();
 		 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
 		 System.out.println(gettext);
-		 if (text.contains("Claims")){
+		 if (text.contains("Discharge to snf benchmark Claims")){
 			 Double a= ((float)(((int)Math.pow(10,1)*dischargetoSNFBenchmarkClaims))/Math.pow(10,1));
 			 Assert.assertTrue(gettext.trim().contains(a.toString()));
-		 }else {
+		 }else if (text.contains("Discharge to snf benchmark EC")){
 			 Assert.assertTrue(gettext.trim().contains(dischargetoSNFBenchmarkEC.toString()));
+		 }else if (text.contains("Episodes with a Readmission benchmark Claims")){
+			 Assert.assertTrue(gettext.trim().contains(EpisodesWithReadmissionClaims.toString()));
+		 }else if (text.contains("Episodes with a Readmission benchmark EC")){
+			 Assert.assertTrue(gettext.trim().contains(EpisodesWithReadmissionEC.toString()));
+		 }else if (text.contains("SNF Days benchmark EC")){
+			 Assert.assertTrue(gettext.trim().contains(SNFDaysBenchmarkEC.toString()));
+		 }else if (text.contains("SNF Days benchmark Claims")){
+			 Assert.assertTrue(gettext.trim().contains(SNFDaysBenchmarkClaims.toString()));
 		 }
+		 
+		 
 		
 	 }
+	 
 }
