@@ -549,7 +549,7 @@ FROM warehouse.factPatientEpisode fp
             AND fp.anchorAdmitDateKey &gt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
             -- AND fp.anchorAdmitDateKey &gt;= &apos;20180401&apos;
             -- AND fp.anchorAdmitDateKey &lt;= &apos;20180701&apos;
-            AND fp.bpid IN (&apos;2070-021&apos;)
+            AND fp.bpid IN ${bpid}
             AND df.ccn IN (&apos;390223&apos;)
             -- AND drg.bundleName IN (&apos;Acute myocardial infarction&apos; , &apos;Sepsis&apos;, &apos;COPD, bronchitis, asthma&apos;)
             -- AND drg.drgCode IN (&apos;280&apos; , &apos;281&apos;, &apos;202&apos;, &apos;190&apos;, &apos;870&apos;)
@@ -700,6 +700,73 @@ and df.CCN in (&apos;390223&apos;)
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="BPID Filter Validation" enabled="true">
+          <stringProp name="dataSource">MySQLQA</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">select distinct a.episodeInitiatorNameInitCap, a.bpid from 
+(select
+distinct de.episodeInitiatorNameInitCap, de.bpid
+from warehouse.factPatientEpisode fp 
+inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK
+inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
+inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
+inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK
+inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
+Inner JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID where username = &apos;Qafivedashtest@yopmail.com&apos;
+       GROUP BY bpid
+       )tbsBPID ON de.BPID = tbsBPID.bpid
+Inner JOIN 
+     (       
+        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityCCN where username = &apos;Qafivedashtest@yopmail.com&apos;
+       GROUP BY ccn
+        )tbsCCN on df.ccn=tbsCCN.ccn
+Inner JOIN 
+     (       
+        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityFacilityKey where username = &apos;Qafivedashtest@yopmail.com&apos;
+       GROUP BY facilitykey
+        )tbsFacilityKey on df.sourceFacilityKey=tbsFacilityKey.facilitykey      
+where fp.bundleRisk = 1 
+and fp.episodeCountReport = 1
+and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
+and de.bpid not like &apos;%DEMO%&apos;
+and dlk.lookupCategory = &apos;patientRisk&apos;
+and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
+and fp.anchorAdmitDateKey &lt;= 20180610
+union
+select distinct 
+e.episodeInitiatorNameInitCap, e.bpid
+from warehouse.factClaims c
+    LEFT JOIN warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
+    LEFT JOIN warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK       
+    LEFT JOIN warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK        
+    inner JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID  where username = &apos;Qafivedashtest@yopmail.com&apos;
+       GROUP BY bpid
+       )tbsBPID ON e.BPID = tbsBPID.bpid
+WHERE c.atRisk=&apos;Y&apos; 
+ and f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) 
+ and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
+and tbsBPID.username  like &apos;Qafivedashtest@yopmail.com&apos;
+and c.anchorBeginDateKey &gt;= 20170101
+and c.anchorBeginDateKey &lt;=  (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
+)
+a
+order by a.episodeInitiatorNameInitCap, a.bpid;</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames">episodeInitiatorNameInitCap, bpid</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
         <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
           <boolProp name="displayJMeterProperties">false</boolProp>
           <boolProp name="displayJMeterVariables">true</boolProp>
@@ -719,7 +786,7 @@ and df.CCN in (&apos;390223&apos;)
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo ECEpiosdeCount=${ECEpiosdeCount_1},claimsEpiosdeCount=${claimsEpiosdeCount_1},savingRate=${savingRate_1},TotalNPRA=${TotalNPRA_1},TotalProgram=${TotalProgram_1},StartDate=${StartDate_1},dischargetoSNFClaims=${dischargetoSNFClaims_1} ,SNFDaysClaims=${SNFDaysClaims_1},EpisodesWithReadmissionClaims=${EpisodesWithReadmissionClaims_1},dischtoSNFBenchmarkClaims=${dischtoSNFBenchmarkClaims_1},dischargetoSNFEC=${dischargetoSNFEC_1},dischtoSNFBenchmarkEC=${dischtoSNFBenchmarkEC_1},SNFDaysEC=${SNFDaysEC_1},EpisodesWithReadmissionEC=${EpisodesWithReadmissionEC_1},EpisodesWithReadmissionBenchmarkClaims=${EpisodesWithReadmissionBenchmarkClaims_1},EpisodesWithReadmissionBenchmarkEC=${EpisodesWithReadmissionBenchmarkEC_1},SNFDaysBenchmarkClaims=${SNFDaysBenchmarkClaims_1},SNFDaysBenchmarkEC=${SNFDaysBenchmarkEC_1}&gt; PerformanceDashboardResult.txt</stringProp>
+                <stringProp name="Argument.value">echo ECEpiosdeCount=${ECEpiosdeCount_1},claimsEpiosdeCount=${claimsEpiosdeCount_1},savingRate=${savingRate_1},TotalNPRA=${TotalNPRA_1},TotalProgram=${TotalProgram_1},StartDate=${StartDate_1},dischargetoSNFClaims=${dischargetoSNFClaims_1} ,SNFDaysClaims=${SNFDaysClaims_1},EpisodesWithReadmissionClaims=${EpisodesWithReadmissionClaims_1},dischtoSNFBenchmarkClaims=${dischtoSNFBenchmarkClaims_1},dischargetoSNFEC=${dischargetoSNFEC_1},dischtoSNFBenchmarkEC=${dischtoSNFBenchmarkEC_1},SNFDaysEC=${SNFDaysEC_1},EpisodesWithReadmissionEC=${EpisodesWithReadmissionEC_1},EpisodesWithReadmissionBenchmarkClaims=${EpisodesWithReadmissionBenchmarkClaims_1},EpisodesWithReadmissionBenchmarkEC=${EpisodesWithReadmissionBenchmarkEC_1},SNFDaysBenchmarkClaims=${SNFDaysBenchmarkClaims_1},SNFDaysBenchmarkEC=${SNFDaysBenchmarkEC_1},episodeInitiatorNameInitCap=${episodeInitiatorNameInitCap_1},bpid=${bpid_1},episodeInitiatorNameInitCap=${episodeInitiatorNameInitCap_2},bpid=${bpid_2}&gt; PerformanceDashboardResult.txt</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>

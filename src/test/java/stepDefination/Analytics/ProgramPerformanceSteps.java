@@ -225,6 +225,11 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iSetCalendarAttributeValueForEndingTodayDate();
 	}
 	
+	@And("^I set the time filter for End date to today date$")
+	public void i_set_time_Filter_For_End_date_to_today_date() throws Throwable{
+		programdashboard.iSetCalendarAttributeValueForTodaysEndDate();
+	}
+	
 	@Then("^I read the text from image$")
 	public void i_read_the_text_from_image() throws Throwable{
 		programdashboard.ireadtextfromimage();
@@ -335,6 +340,11 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iValidateFilterName(text);
 	}
 	
+	@And("^I click \"([^\"]*)\" Filter on the program performance dashboard$")
+	public void i_click_filter_on_the_program_performance_dashboard(String text){
+		programdashboard.iClickOnFilterName(text);
+	}
+	
 	@Then("^I validate the text appearing after mouse hovering on discharge to SNF benchmark value as \"([^\"]*)\"$")
 	public void i_validate_the_text_appearing_after_mose_hovering_on_discharge_to_snf_benchmark_value_as(String verifytext){
 		programdashboard.iValidateMouseHoverText("//div[@tb-test-id='% SNF Disch Benchmark Variance']//div[@class='tvimagesContainer']/canvas",verifytext);
@@ -403,5 +413,10 @@ public class ProgramPerformanceSteps extends DriverScript{
 	@And("^I verify \"([^\"]*)\" tooltip is having the same value fetched from database$")
 	public void i_verify_discharge_tooltip_is_having_the_same_value_fetched_from_database(String text) throws Throwable{
 		programdashboard.iValidateBenchmarkToolTipText(text);
+	}
+	
+	@And("^I verify Episode Initiator BPID values with database value$")
+	public void i_verify_Episode_Initiator_BPID_values_with_database_value() throws Throwable{
+		programdashboard.iVeriyEpisodeIntiatorBPID();
 	}
 }

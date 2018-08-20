@@ -149,13 +149,16 @@ Scenario: Verify data metric validations on program overview dashbaord
   And I verify "NPRA" count matched with database value on dashboard for npra with picture resolution "300X300"
   And I verify "%Discharge to SNF Claims" count matched with database value on dashboard for discharge to snf with picture resolution "700X700"
   And I verify "Discharge to snf benchmark Claims" tooltip is having the same value fetched from database
-  #Then I set the time from starting date as "1/1/2017" to ending date to claimscube date to validate claims episode data
+  ###3#Then I set the time from starting date as "1/1/2017" to ending date to claimscube date to validate claims episode data
   And I verify "SNF Days Claims" count matched with database value on dashboard for snf days with picture resolution "700X700"
   And I verify "SNF Days benchmark EC" tooltip is having the same value fetched from database
   And I verify "%Episodes with a Readmission Claims" count matched with database value on dashboard for discharge to snf with picture resolution "700X700"
   And I verify "%Episodes with a Readmission benchmark Claims" tooltip is having the same value fetched from database
+  And I set the time filter for End date to today date
+  And I click "Episode Initiator - BPID" Filter on the program performance dashboard
+  And I verify Episode Initiator BPID values with database value
   
-  #Then I set the time from starting date as "1/1/2017" and ending date to today date
-  #And I verify "%Episodes with a Readmission" count matched with database value on dashboard for episodes with readmission with picture resolution "700X700"
+  #####Then I set the time from starting date as "1/1/2017" and ending date to today date
+  ####And I verify "%Episodes with a Readmission" count matched with database value on dashboard for episodes with readmission with picture resolution "700X700"
   
   

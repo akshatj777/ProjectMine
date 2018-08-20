@@ -50,8 +50,8 @@ public class ProgramPerformance extends BaseClass{
 	
 	int ECEpiosdeCount,claimsEpiosdeCount,TotalNPRA,TotalProgram;
     Double savingRate,DischargeToSNF,SNFDaysClaims, SNFDaysEC,EpisodesWithReadmissionClaims,dischargetoSNFBenchmarkClaims,DischargeToSNFEC,dischargetoSNFBenchmarkEC,EpisodesWithReadmissionEC,SNFDaysBenchmarkClaims,
-    SNFDaysBenchmarkEC;
-    String StartDate,facilityname,facilitybpid;
+    SNFDaysBenchmarkEC,EpisodesWithReadmissionBenchmarkClaims,EpisodesWithReadmissionBenchmarkEC;
+    String StartDate,facilityname,facilitybpid,episodeInitiatorNameInitCap_1,bpid_1,episodeInitiatorNameInitCap_2,bpid_2;
     Actions act=new Actions(driver);
 	WebDriverWait wait = new WebDriverWait(driver, 300);
 
@@ -616,16 +616,51 @@ public class ProgramPerformance extends BaseClass{
 		      Double episodeREC=Double.parseDouble(EReadmissionEC[1]);
 		      EpisodesWithReadmissionEC=episodeREC;
 		      System.out.println("The episodes with readmissions value is EC"+EpisodesWithReadmissionEC);
-		      String snfDaysBMClaims=elements.get(14).trim();
+		      String EWReadmissionBenchmarkClaims=elements.get(14).trim();
+		      String EReadmissionBMClaims[]=EWReadmissionBenchmarkClaims.split("=");
+		      Double episodeRBMClaim=Double.parseDouble(EReadmissionBMClaims[1]);
+		      EpisodesWithReadmissionBenchmarkClaims=episodeRBMClaim;
+		      System.out.println("The episodes with readmissions value is EC"+EpisodesWithReadmissionBenchmarkClaims);
+		      String EWReadmissionBenhmarkEC=elements.get(15).trim();
+		      String EReadmissionBenchmarkEC[]=EWReadmissionBenhmarkEC.split("=");
+		      Double episodeRBenchmarkEC=Double.parseDouble(EReadmissionBenchmarkEC[1]);
+		      EpisodesWithReadmissionBenchmarkEC=episodeRBenchmarkEC;
+		      System.out.println("The episodes with readmissions value is EC"+EpisodesWithReadmissionBenchmarkEC);
+		      String snfDaysBMClaims=elements.get(16).trim();
 		      String SNFDaysBenchMClaims[]=snfDaysBMClaims.split("=");
 		      Double BenchmarkSNFDaysClaims=Double.parseDouble(SNFDaysBenchMClaims[1]);
 		      SNFDaysBenchmarkClaims =BenchmarkSNFDaysClaims;
 		      System.out.println("The episodes with SNF Days Benchmark Claims"+SNFDaysBenchmarkClaims);
-		      String snfDaysBMEC=elements.get(15).trim();
-		      String SNFDaysBenchMEC[]=snfDaysBMClaims.split("=");
+		      String snfDaysBMEC=elements.get(17).trim();
+		      String SNFDaysBenchMEC[]=snfDaysBMEC.split("=");
 		      Double BenchmarkSNFDaysEC=Double.parseDouble(SNFDaysBenchMEC[1]);
 		      SNFDaysBenchmarkEC =BenchmarkSNFDaysEC;
 		      System.out.println("The episodes with SNF Days Benchmark EC"+SNFDaysBenchmarkEC);
+		      //Validation of BPID (Having 2 values) 16, 17
+		      String episodeInitNamebpid=elements.get(18).trim();
+		      String EpisodeInitNamebpid[]=episodeInitNamebpid.split("=");
+//		      Double EpisodeInitiatorNameBPID=Double.parseDouble(EpisodeInitNamebpid[1]);
+		      episodeInitiatorNameInitCap_1=EpisodeInitNamebpid[1];
+		      // Using both variables
+		      String episodeInitbpid=elements.get(19).trim();
+		      String EpisodeInitBpid[]=episodeInitbpid.split("=");
+//		      Double EpisodeInitiatorCapBPID=Double.parseDouble(EpisodeInitBpid[1]);
+		      bpid_1 =EpisodeInitBpid[1];
+		      // Concat Name and Id ex - Lawrence General Hospital - 2070-b72
+		      System.out.println("BPID Filter"+episodeInitiatorNameInitCap_1+" "+"-"+" "+bpid_1);
+		      episodeInitiatorNameInitCap_1=episodeInitiatorNameInitCap_1+" "+"-"+" "+bpid_1;
+		      String episodeInitNamebpid1=elements.get(20).trim();
+		      String EpisodeInitNamebpid1[]=episodeInitNamebpid1.split("=");
+//		      Double EpisodeInitiatorNameBPID=Double.parseDouble(EpisodeInitNamebpid[1]);
+		      episodeInitiatorNameInitCap_2=EpisodeInitNamebpid1[1];
+		      // Using both variables
+		      String episodeInitbpid1=elements.get(21).trim();
+		      String EpisodeInitBpid1[]=episodeInitbpid1.split("=");
+//		      Double EpisodeInitiatorCapBPID=Double.parseDouble(EpisodeInitBpid[1]);
+		      bpid_2 =EpisodeInitBpid1[1];
+		      // Concat Name and Id ex - Lawrence General Hospital - 2070-b72
+		      System.out.println("BPID Filter"+episodeInitiatorNameInitCap_2+" "+"-"+" "+bpid_2);
+		      episodeInitiatorNameInitCap_2=episodeInitiatorNameInitCap_2+" "+"-"+" "+bpid_2;
 		     }
 	 }
 
@@ -649,14 +684,16 @@ public class ProgramPerformance extends BaseClass{
 		 if(text.contains("%Episodes with a Readmission"))
 		 {
 		 scrollIntoViewByJS(ele);
+		 delay();
 		 }
 		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		 BufferedImage  fullImg = ImageIO.read(screenshot);
 		 Point point = ele.getLocation();
 		 if(text.contains("%Episodes with a Readmission")){
 			 System.out.println("VVVV"+point.getX()+"YYYYYYYYY"+point.getY());
+			 point = point.moveBy(80, 120);
 //			 point = point.moveBy(325, 104);
-			 point = point.moveBy(80, 20);
+//			 point = point.moveBy(80, 20);
 		 }else{
 			 System.out.println("Value+++++++++"+point.getX()+"YYYYYYYYY"+point.getY());
 			 point = point.moveBy(100, 100);
@@ -825,6 +862,17 @@ public class ProgramPerformance extends BaseClass{
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 	 }
 	 
+	 public void iSetCalendarAttributeValueForTodaysEndDate(){
+		 longDelay();
+		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
+		 clickElement(driver.findElement(By.xpath("//span[@class='tab-datepicker-today-date']")));
+		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
+		 delay();
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+		 delay();
+		 longDelay();
+	 }
+	 
 	 public void ireadtextfromimage() throws IOException{
 		 TessBaseAPI instance=new TessBaseAPI();
 		  File screenshot= new File(System.getProperty("user.dir")+"\\src\\test\\Imports\\Image2.png");
@@ -986,6 +1034,11 @@ public class ProgramPerformance extends BaseClass{
 		 isElementVisible(driver.findElement(By.xpath("//span[text()='"+text+"']")));
 	 }
 	 
+	 public void iClickOnFilterName(String text){
+		 clickElement(driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']")));
+		 delay();
+	 }
+	 
 	 public void iValidateTitleNameOnDashbaord(String text){
 		 isElementVisible(driver.findElement(By.xpath("//span[text()='"+text+"']")));
 	 }
@@ -1125,17 +1178,19 @@ public class ProgramPerformance extends BaseClass{
 		 }else if (text.contains("Discharge to snf benchmark EC")){
 			 Assert.assertTrue(gettext.trim().contains(dischargetoSNFBenchmarkEC.toString()));
 		 }else if (text.contains("Episodes with a Readmission benchmark Claims")){
-			 Assert.assertTrue(gettext.trim().contains(EpisodesWithReadmissionClaims.toString()));
+			 Assert.assertTrue(gettext.trim().contains(EpisodesWithReadmissionBenchmarkClaims.toString()));
 		 }else if (text.contains("Episodes with a Readmission benchmark EC")){
-			 Assert.assertTrue(gettext.trim().contains(EpisodesWithReadmissionEC.toString()));
+			 Assert.assertTrue(gettext.trim().contains(EpisodesWithReadmissionBenchmarkEC.toString()));
 		 }else if (text.contains("SNF Days benchmark EC")){
 			 Assert.assertTrue(gettext.trim().contains(SNFDaysBenchmarkEC.toString()));
 		 }else if (text.contains("SNF Days benchmark Claims")){
 			 Assert.assertTrue(gettext.trim().contains(SNFDaysBenchmarkClaims.toString()));
 		 }
-		 
-		 
-		
+	 }
+	 
+	 public void iVeriyEpisodeIntiatorBPID(){
+		Assert.assertEquals(driver.findElements(By.cssSelector("#tableau_base_widget_LegacyCategoricalQuickFilter_0_menu a")).get(1).getText().trim(),episodeInitiatorNameInitCap_1);
+		Assert.assertEquals(driver.findElements(By.cssSelector("#tableau_base_widget_LegacyCategoricalQuickFilter_0_menu a")).get(2).getText().trim(),episodeInitiatorNameInitCap_2);
 	 }
 	 
 }
