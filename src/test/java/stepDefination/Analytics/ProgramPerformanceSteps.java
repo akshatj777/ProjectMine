@@ -419,4 +419,49 @@ public class ProgramPerformanceSteps extends DriverScript{
 	public void i_verify_Episode_Initiator_BPID_values_with_database_value() throws Throwable{
 		programdashboard.iVeriyEpisodeIntiatorBPID();
 	}
+	
+	@And("^I verify Facility name and ccn values with database values$")
+	public void i_verify_FacilityName_And_CCN_values_with_database_value() throws Throwable{
+		programdashboard.iVeriyAnchorFacilityCCN();
+	}
+	
+	@And("^I verify bundle names at row level security with database values for selected Episode Initiator BPID$")
+	public void i_verify_bundle_names_At_Row_level_security_with_database_value_For_Selected_bpid() throws Throwable{
+		programdashboard.iVeriyBundleNameInRowLevelSecurityForSelectedBPID();
+	}
+	
+	@And("^I verify Remedy Region Market at row level security with database values for selected Episode Initiator BPID$")
+	public void i_verify_remedy_region_market_At_Row_level_security_with_database_value_For_Selected_bpid() throws Throwable{
+		programdashboard.iVeriyRemedyRegionMarketInRowLevelSecurityForSelectedBPID();
+	}
+	
+	@And("^I verify Partner Region Market at row level security with database values for selected Episode Initiator BPID$")
+	public void i_verify_partner_region_market_At_Row_level_security_with_database_value_For_Selected_bpid() throws Throwable{
+		programdashboard.iVeriyPartnerRegionMarketInRowLevelSecurityForSelectedBPID();
+	}
+	
+	@And("^I verify Participant Data Filter values with database values for selected Episode Initiator BPID$")
+	public void i_verify_Participant_Data_Filter_Values_with_database_value_For_Selected_bpid() throws Throwable{
+		programdashboard.iVeriyParticipantFilterForSelectedBPID();
+	}
+	
+	@And("^I verify DRG-Fracture Data Filter values with database values for selected Episode Initiator BPID$")
+	public void i_verify_DRG_Fracture_Data_Filter_Values_with_database_value_For_Selected_bpid() throws Throwable{
+		programdashboard.iVeriyDRGFractureFilterForSelectedBPID();
+	}
+	
+	@And("^I verify Physician-NPI Data Filter values with database values for selected Episode Initiator BPID$")
+	public void i_verify_Physician_NPI_Data_Filter_Values_with_database_value_For_Selected_bpid() throws Throwable{
+		programdashboard.iVeriyPhysicanNPIFilterForSelectedBPID();
+	}
+	
+	@And("^I verify Model Data Filter values with database values for selected Episode Initiator BPID$")
+	public void i_verify_Model_Data_Filter_Values_with_database_value_For_Selected_bpid() throws Throwable{
+		programdashboard.iVeriyModelFilterForSelectedBPID();
+	}
+	
+	@And("^I verify Anchor Facility Detail Data Filter values with database values for selected Episode Initiator BPID$")
+	public void i_verify_Anchor_Facility_Detail_Data_Filter_Values_with_database_value_For_Selected_bpid() throws Throwable{
+		programdashboard.iVeriyAnchorFacilityDetailsFilterForSelectedBPID();
+	}
 }

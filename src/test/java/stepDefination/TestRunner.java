@@ -34,7 +34,7 @@ import stepDefination.Hooks.*;
         plugin = {"html:target/cucumber-results", "usage:target/cucumber-results/cucumber-usage.json",
                 "junit:target/cucumber-results/cucumber-results.xml", "json:target/cucumber-results/cucumber.json"},
 
-        features = { "src/test/Features/Analytics/programPerformance.feature:121" }
+        features = { "src/test/Features/Analytics/programPerformance.feature:199" }
         //glue = { "./src/test/java/stepDefination" },
         //tags = {""}
 )

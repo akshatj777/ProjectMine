@@ -45,13 +45,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
 
+import net.bytebuddy.description.modifier.SynchronizationState;
+
 
 public class ProgramPerformance extends BaseClass{
 	
 	int ECEpiosdeCount,claimsEpiosdeCount,TotalNPRA,TotalProgram;
     Double savingRate,DischargeToSNF,SNFDaysClaims, SNFDaysEC,EpisodesWithReadmissionClaims,dischargetoSNFBenchmarkClaims,DischargeToSNFEC,dischargetoSNFBenchmarkEC,EpisodesWithReadmissionEC,SNFDaysBenchmarkClaims,
     SNFDaysBenchmarkEC,EpisodesWithReadmissionBenchmarkClaims,EpisodesWithReadmissionBenchmarkEC;
-    String StartDate,facilityname,facilitybpid,episodeInitiatorNameInitCap_1,bpid_1,episodeInitiatorNameInitCap_2,bpid_2;
+    String StartDate,facilityname,facilitybpid,episodeInitiatorNameInitCap_1,bpid_1,episodeInitiatorNameInitCap_2,bpid_2, facilityNameValidation,ccnValidation,
+    bundleName1,bundleName2,bundleName3,bundleName4,region,market,regionPartner,marketPartner,participantName,model,facilityNameInitCap;
+    List<String> DRG_fracture= new ArrayList<>();
+    List<String> Physician_NPI= new ArrayList<>();
     Actions act=new Actions(driver);
 	WebDriverWait wait = new WebDriverWait(driver, 300);
 
@@ -541,7 +546,7 @@ public class ProgramPerformance extends BaseClass{
 				 String names;
 				 while ((names = br.readLine())!= null) {           
 
-					 StringTokenizer st = new StringTokenizer(names, ",");     
+					 StringTokenizer st = new StringTokenizer(names, "`");     
 					 List<String> elements = new ArrayList<String>();
 				     while (st.hasMoreTokens()){
 				      elements.add(st.nextToken());
@@ -639,29 +644,90 @@ public class ProgramPerformance extends BaseClass{
 		      //Validation of BPID (Having 2 values) 16, 17
 		      String episodeInitNamebpid=elements.get(18).trim();
 		      String EpisodeInitNamebpid[]=episodeInitNamebpid.split("=");
-//		      Double EpisodeInitiatorNameBPID=Double.parseDouble(EpisodeInitNamebpid[1]);
 		      episodeInitiatorNameInitCap_1=EpisodeInitNamebpid[1];
-		      // Using both variables
 		      String episodeInitbpid=elements.get(19).trim();
 		      String EpisodeInitBpid[]=episodeInitbpid.split("=");
-//		      Double EpisodeInitiatorCapBPID=Double.parseDouble(EpisodeInitBpid[1]);
 		      bpid_1 =EpisodeInitBpid[1];
-		      // Concat Name and Id ex - Lawrence General Hospital - 2070-b72
+		      /** Concat Name and Id ex - Lawrence General Hospital - 2070-b72 **/
 		      System.out.println("BPID Filter"+episodeInitiatorNameInitCap_1+" "+"-"+" "+bpid_1);
 		      episodeInitiatorNameInitCap_1=episodeInitiatorNameInitCap_1+" "+"-"+" "+bpid_1;
 		      String episodeInitNamebpid1=elements.get(20).trim();
 		      String EpisodeInitNamebpid1[]=episodeInitNamebpid1.split("=");
-//		      Double EpisodeInitiatorNameBPID=Double.parseDouble(EpisodeInitNamebpid[1]);
 		      episodeInitiatorNameInitCap_2=EpisodeInitNamebpid1[1];
-		      // Using both variables
 		      String episodeInitbpid1=elements.get(21).trim();
 		      String EpisodeInitBpid1[]=episodeInitbpid1.split("=");
-//		      Double EpisodeInitiatorCapBPID=Double.parseDouble(EpisodeInitBpid[1]);
 		      bpid_2 =EpisodeInitBpid1[1];
-		      // Concat Name and Id ex - Lawrence General Hospital - 2070-b72
+		      /** Concat Name and Id ex - Lawrence General Hospital - 2070-b72 **/
 		      System.out.println("BPID Filter"+episodeInitiatorNameInitCap_2+" "+"-"+" "+bpid_2);
 		      episodeInitiatorNameInitCap_2=episodeInitiatorNameInitCap_2+" "+"-"+" "+bpid_2;
+		      /** Validation of Facility Name & CCN value **/
+		      String fnameValidation=elements.get(22).trim();
+		      String facNameValidtn[]=fnameValidation.split("=");
+		      facilityNameValidation=facNameValidtn[1];
+		      String ccn_validtn=elements.get(23).trim();
+		      String ccn_validatnArry[]=ccn_validtn.split("=");
+		      ccnValidation=ccn_validatnArry[1];
+		      System.out.println("Facility Name And CCN value:"+facilityname+" "+"-"+" "+ccnValidation);
+		      /** BundleNames Validation **/
+		      String bundlName1=elements.get(24).trim();
+		      String bundleName1Arry[]=bundlName1.split("=");
+		      bundleName1=bundleName1Arry[1];
+		      String bundlName2=elements.get(25).trim();
+		      String bundleName2Arry[]=bundlName2.split("=");
+		      bundleName2=bundleName2Arry[1];
+		      String bundlName3=elements.get(26).trim();
+		      String bundleName3Arry[]=bundlName3.split("=");
+		      bundleName3=bundleName3Arry[1];
+		      String bundlName4=elements.get(27).trim();
+		      String bundleName4Arry[]=bundlName4.split("=");
+		      bundleName4=bundleName4Arry[1];
+		      System.out.println("BundleNames:"+"/n"+bundleName1+"/n"+bundleName2+"/n"+bundleName3+"/n"+bundleName4);
+		      /**Region and Market filter**/
+		      String regionTemp=elements.get(28).trim();
+		      String regionTempArry[]=regionTemp.split("=");
+		      region=regionTempArry[1];
+		      String marketTemp=elements.get(29).trim();
+		      String marketTempArry[]=marketTemp.split("=");
+		      market=marketTempArry[1];
+		      System.out.println("Region amd market value: "+"Remedy-"+region+"-"+market);
+		      /** Verify Null value for Partner Region Market Filter **/
+		      String regionPartnerTemp=elements.get(30).trim();
+		      String regionPartnerTempArry[]=regionPartnerTemp.split("=");
+		      regionPartner=regionPartnerTempArry[1];
+		      String marketPartnerTemp=elements.get(31).trim();
+		      String marketPartnerTempArry[]=marketPartnerTemp.split("=");
+		      marketPartner=marketPartnerTempArry[1];
+		      System.out.println("Value of Partner Region and Market:"+regionPartner+"<----->"+marketPartner);
+		      /**Participant Data Filter  **/
+		      String participantNameTemp=elements.get(32).trim();
+		      String participantNameTempArry[]=participantNameTemp.split("=");
+		      participantName=participantNameTempArry[1];
+		      System.out.println("Value of ParticipantName: "+participantName);
+		      /** Storing Values of DRG Fracture in list **/
+		      for (int i=33;i<=53;i++){
+		    	  String DRG_FractureTmp=elements.get(i).trim();
+			      String DRG_FractureTmpArry[]=DRG_FractureTmp.split("=");
+			      DRG_fracture.add(DRG_FractureTmpArry[1]);
+			      System.out.println("DRG_Fracture: "+DRG_FractureTmpArry[1]);
+		      }
+		      /** Storing Values of Physician Npi Fracture in list **/
+		      for (int i=54;i<=83;i++){
+		    	  String Physician_NPITmp=elements.get(i).trim();
+			      String Physician_NPITmpArry[]=Physician_NPITmp.split("=");
+			      Physician_NPI.add(Physician_NPITmpArry[1]);
+			      System.out.println("Physician_NPI: "+Physician_NPITmpArry[1]);
+		      }
+		      String modelTmp=elements.get(84).trim();
+		      String modelTmpArry[]=modelTmp.split("=");
+		      model=modelTmpArry[1];
+		      System.out.println("Model: "+model);
+		      
+		      String facilityNameInitCapTemp=elements.get(85).trim();
+		      String facilityNameInitCapTempArry[]=facilityNameInitCapTemp.split("=");
+		      facilityNameInitCap=facilityNameInitCapTempArry[1];
+		      System.out.println("Anchor Facility Details: "+facilityNameInitCap);
 		     }
+				 
 	 }
 
 	public String numberformat(int number) {
@@ -1035,8 +1101,10 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iClickOnFilterName(String text){
-		 clickElement(driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']")));
-		 delay();
+//		 clickElement(driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']")));
+//		 delay();
+		 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']"));
+		 act.moveToElement(elem).click().build().perform();
 	 }
 	 
 	 public void iValidateTitleNameOnDashbaord(String text){
@@ -1193,4 +1261,71 @@ public class ProgramPerformance extends BaseClass{
 		Assert.assertEquals(driver.findElements(By.cssSelector("#tableau_base_widget_LegacyCategoricalQuickFilter_0_menu a")).get(2).getText().trim(),episodeInitiatorNameInitCap_2);
 	 }
 	 
+	 public void iVeriyAnchorFacilityCCN(){
+			Assert.assertEquals(driver.findElements(By.cssSelector("#tableau_base_widget_LegacyCategoricalQuickFilter_1_menu a")).get(1).getText().trim(),facilityNameValidation+" "+"-"+" "+ccnValidation);
+		 }
+	 
+	 public void iVeriyBundleNameInRowLevelSecurityForSelectedBPID(){
+		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_2_menu']//a[@title='"+bundleName1+"']")));
+		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_2_menu']//a[@title='"+bundleName2+"']")));
+		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_2_menu']//a[@title='"+bundleName3+"']")));
+		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_2_menu']//a[@title='"+bundleName4+"']")));
+	 }
+	 
+	 public void iVeriyRemedyRegionMarketInRowLevelSecurityForSelectedBPID(){
+		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_4_menu']//a[@title='Remedy-"+region+" "+market+"']")));
+		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_4_menu']//a[@title='Remedy-"+region+"-"+market+"']")));
+	 }
+	 
+	 public void iVeriyPartnerRegionMarketInRowLevelSecurityForSelectedBPID(){
+		 if(regionPartner.contains("regionPartner_1")&&marketPartner.contains("marketPartner_1")){
+			 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_3_menu']//a[@title='Null']")));
+		 }
+		 else{
+			 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_3_menu']//a[@title='"+regionPartner+"-"+marketPartner+"']")));
+		 }
+	 }
+	 public void iVeriyParticipantFilterForSelectedBPID(){
+		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_5_menu']//a[@title='(All)']")));
+		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_5_menu']//a[@title='"+participantName+"']")));
+	 }
+	 
+	 public void iVeriyDRGFractureFilterForSelectedBPID(){
+		 List<String> value = new ArrayList<String>();
+		 List<WebElement> element1 = driver.findElements(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_6_menu']//a"));
+		 for (int i =1;i<element1.size();i++){
+			 value.add(element1.get(i).getText().trim());
+			 System.out.println("For Loop Value---"+element1.get(i).getText().trim());
+		 }
+		 /** comparing list values **/
+		 Assert.assertTrue(DRG_fracture.containsAll(value));
+	 }
+	 
+	 public void iVeriyPhysicanNPIFilterForSelectedBPID(){
+		 List<String> value = new ArrayList<String>();
+		 List<WebElement> element1 = driver.findElements(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_7_menu']//a"));
+		 for (int i=2;i<element1.size();i++){
+			 value.add(element1.get(i).getText().trim());
+			 System.out.println("For Loop Value Physician NPI---"+element1.get(i).getText().trim());
+		 }
+		 /** comparing list values **/
+		 Assert.assertTrue(Physician_NPI.containsAll(value));
+	 }
+	 
+	 public void iVeriyModelFilterForSelectedBPID(){
+		 List<String> value = new ArrayList<String>();
+		 List<String> modelDBValue = new ArrayList<String>();
+		 List<WebElement> element1 = driver.findElements(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_9_menu']//a"));
+		 for (int i =1;i<element1.size();i++){
+			 value.add(element1.get(i).getText().trim());
+		 }
+		 modelDBValue.add(model);
+		 /** comparing list values **/
+		 Assert.assertTrue(modelDBValue.containsAll(value));
+	 }
+	 
+	 public void iVeriyAnchorFacilityDetailsFilterForSelectedBPID(){
+		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_8_menu']//a[@title='Null']")));
+		 
+	 }
 }
