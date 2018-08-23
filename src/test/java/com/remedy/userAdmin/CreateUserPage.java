@@ -631,9 +631,13 @@ public class CreateUserPage extends BaseClass{
     	userApplications = apps;
     }
 public void iUnselectAllSelectedApps(){
-	iWillWaitToSee(By.xpath("//div[@class='ui checked checkbox']"));
+	
+	if(isElementNotPresentOnPage(By.xpath("//div[@class='ui checked checkbox']"))==false){
+		return;
+	}else{
+		iWillWaitToSee(By.xpath("//div[@class='ui checked checkbox']"));
 			clickAllElementofAlistbyXpath("//div[@class='ui checked checkbox']");
-		
+	}
 	}
     public void iClickOnContinueToDashboardMessage() {
         clickElement(driver.findElement(By.xpath("//button[text()='Continue to my dashboard']")));
