@@ -464,4 +464,14 @@ public class ProgramPerformanceSteps extends DriverScript{
 	public void i_verify_Anchor_Facility_Detail_Data_Filter_Values_with_database_value_For_Selected_bpid() throws Throwable{
 		programdashboard.iVeriyAnchorFacilityDetailsFilterForSelectedBPID();
 	}
+	
+	@And("^I click on Refresh DB data Icon On dashboard$")
+	public void i_Click_On_RefreshDB_Data_Icon_On_Dashboard() throws Throwable{
+		programdashboard.iClickRefreshDBData();
+	}
+	
+	@Then("^I set \"([^\"]*)\" as \"([^\"]*)\" in Date field on dashboard$")
+	public void i_Set_Date_In_Date_Field_On_Dashboard(String field, String value) throws Throwable{
+		programdashboard.iSetDateInDateFieldAttribute(field,value);
+	}
 }

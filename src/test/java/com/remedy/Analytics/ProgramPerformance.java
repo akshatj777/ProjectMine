@@ -45,8 +45,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
 
-import net.bytebuddy.description.modifier.SynchronizationState;
-
 
 public class ProgramPerformance extends BaseClass{
 	
@@ -515,7 +513,6 @@ public class ProgramPerformance extends BaseClass{
 		 selectElementByDesc(".report-title", dashboard);
 		 isElementVisible(driver.findElement(By.xpath("//div[text()='Analytics']")));
 		 longDelay();
-		 driver.navigate().refresh();
 	 }
 	 
 	 public void setAttributevalue(WebElement element, String attName, String attValue) {
@@ -817,8 +814,6 @@ public class ProgramPerformance extends BaseClass{
 				 }else if(text.equals("%Episodes with a Readmission EC")){
 					 Assert.assertTrue(FinalOutput.trim().contains(EpisodesWithReadmissionEC.toString()));
 				 }
-				 
-				 
 	 }
 	 
 	 public void iSetStartAndEndDateForClaimsData(String start){
@@ -840,6 +835,34 @@ public class ProgramPerformance extends BaseClass{
 		 iWillWaitToSee(By.cssSelector(".tabCanvas.tab-widget"));
 		 longDelay();
 		 delay();
+	 }
+	 
+	 public void iSetDateInDateFieldAttribute(String field, String value){
+		 longDelay();
+		 if(field.equals("Start Date")){
+			 if(value.contains("ClaimsCubeDate")){
+				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerText']")), StartDate);
+			 }else {
+				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), value);
+			 }
+		 }else if (field.equals("End Date")){
+			 if(value.contains("ClaimsCubeDate")){
+				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
+				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperText']")), StartDate);
+			 }else if(value.contains("Today")){
+				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
+				 clickElement(driver.findElement(By.xpath("//span[@class='tab-datepicker-today-date']")));
+			 }else{
+				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
+				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), value);
+				 }
+		 }
+		 driver.findElement(By.xpath("//canvas")).click();
+		 delay();
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+		 longDelay();
 	 }
 	 
 	 public void ReadTextFromSavingsRateField(String text,String element,String resolution) throws IOException {
@@ -1326,6 +1349,13 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iVeriyAnchorFacilityDetailsFilterForSelectedBPID(){
 		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_8_menu']//a[@title='Null']")));
-		 
+	 }
+	 
+	 public void iClickRefreshDBData(){
+		//div[@class='wcGlassPane' and contains(@style,'cursor: wait;')]
+//		 iWillWaitToSee(By.xpath("//div[@class='wcGlassPane' and contains(@style,'cursor: default;')]"));
+		 clickElement(driver.findElement(By.xpath("//span[text()='Refresh']")));
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='wcGlassPane' and contains(@style,'cursor: wait;')]")));
+		 delay();
 	 }
 }
