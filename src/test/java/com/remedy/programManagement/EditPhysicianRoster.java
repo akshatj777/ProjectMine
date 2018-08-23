@@ -152,6 +152,7 @@ public class EditPhysicianRoster extends BaseClass {
 			{
 				iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreatePractictionerAPI.practitionerNameList.get(0).toString().substring(1, CreatePractictionerAPI.practitionerNameList.get(0).toString().length()-1));
 				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				delay();
 				scrollIntoViewByJS(driver.findElement(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+CreatePractictionerAPI.practitionerNameList.get(0).toString().substring(1, CreatePractictionerAPI.practitionerNameList.get(0).toString().length()-1)+"')]")));
 				iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+CreatePractictionerAPI.practitionerNameList.get(0).toString().substring(1, CreatePractictionerAPI.practitionerNameList.get(0).toString().length()-1)+"')]"));
 				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+CreatePractictionerAPI.practitionerNameList.get(0).toString().substring(1, CreatePractictionerAPI.practitionerNameList.get(0).toString().length()-1)+"')]")));
@@ -160,6 +161,7 @@ public class EditPhysicianRoster extends BaseClass {
 			{
 				iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), value);
 				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				delay();
 				scrollIntoViewByJS(driver.findElement(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 				iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));

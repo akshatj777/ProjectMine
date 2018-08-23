@@ -218,17 +218,17 @@ public class CreatePrograms extends BaseClass {
 		if(field.equals("Contract Id")){
 			if(text.equals("CID"))
 			{
-				tempPrograms.put(1, createRandomNumber(8));
+				tempPrograms.put(1, createRandomNumber(15));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), tempPrograms.get(1));
 			}
 			else if(text.equals("AllAlphabetsCID"))
 			{
-				tempPrograms.put(1, RandomStringUtils.randomAlphabetic(8));
+				tempPrograms.put(1, RandomStringUtils.randomAlphabetic(15));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), tempPrograms.get(1));
 			}
 			else if(text.equals("CID-"))
 			{
-				tempPrograms.put(1, createRandomNumber(4));
+				tempPrograms.put(1, createRandomNumber(11));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), tempPrograms.get(1));
 			}
 			else if(text.equals("Duplicate_CID"))
@@ -1080,6 +1080,11 @@ public class CreatePrograms extends BaseClass {
 	    String pID = row.get("1").get("id");
 	    con.close();
 	    return pID;
+	}
+	
+	public void iVerifyAutoIncrementedCID(String text){
+		iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'80000')]"));
+		isElementPresent(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'80000')]"));
 	}
 }
 

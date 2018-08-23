@@ -193,7 +193,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 1" on "Create IRF" organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I enter Location Id <Location_ID> for Location "1" on "create IRF" organization page
+    And I enter Location Id <Location_ID> for Location "1" on "create" organization page
     And I select location type <Loc_Type> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
@@ -205,7 +205,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 2" on "Create IRF" organization page
     And I enter location name <Loc_Name2> for Location "2" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "create" organization page
-    And I enter Location Id <Location_ID> for Location "2" on "create IRF" organization page
+    And I enter Location Id <Location_ID> for Location "2" on "create" organization page
     And I select location type <Loc_Type> for Location "2" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "2" on "create" organization page
     And I select region <Loc_Region> for Location "2" on "create" organization page
@@ -280,7 +280,7 @@ Feature: Create IRF Organization functionality tests
     Then I verify "<Message>" after submitting the "create IRF - <Has_MO>" organization page
     When I search with "IRFNAME - <Has_MO>" on "IRF" organization in search box
     And I click "IRFNAME - <Has_MO>" field in search list on "IRF" organization page
-    And I verify Location ID should be greater than "100000"
+    #And I verify Location ID should be greater than "100000"
 
     Examples: 
       | Description                                                                                      | Has_MO | Managing_Org | IRF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Message                                |
@@ -358,7 +358,7 @@ Feature: Create IRF Organization functionality tests
     Then I verify "IRF Organization Successfully Created." after submitting the "create IRF - <Has_MO>" organization page
     When I search with "IRFNAME - <Has_MO>" on "IRF" organization in search box
     And I click "IRFNAME - <Has_MO>" field in search list on "IRF" organization page
-    And I verify Location ID should be greater than "100000"
+    #And I verify Location ID should be greater than "100000"
     When I click on Organization link on Program Management page
     When I click on "IRF" organization tab on organization dashboard
     Then I click on "+" button on "IRF" organization page
@@ -451,7 +451,7 @@ Feature: Create IRF Organization functionality tests
     Then I verify "Hospital Organization Successfully Created." after submitting the "create ACH - <Has_MO>" organization page
     When I search with "ACHNAME - <Has_MO>" on "Hospital" organization in search box
     And I click "ACHNAME - <Has_MO>" field in search list on "Hospital" organization page
-    And I verify Location ID should be greater than "100000"
+    #And I verify Location ID should be greater than "100000"
     When I click on Organization link on Program Management page
     When I click on "IRF" organization tab on organization dashboard
     Then I click on "+" button on "IRF" organization page
