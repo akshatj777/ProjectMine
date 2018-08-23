@@ -653,15 +653,15 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes 2.0")){
-			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Episodes 2.0']")));
+		   if(st.nextToken().trim().equals("Episode Connect for Post-acute Care")){
+			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Episodes Post Acute']")));
 			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 			   {
-				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Episodes 2.0']"))); 
+				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Episodes Post Acute']"))); 
 			   }
 			   else
 			   {
-				   clickElement(driver.findElement(By.xpath("//div[text()='Episodes 2.0']")));
+				   clickElement(driver.findElement(By.xpath("//div[text()='Episodes Post Acute']")));
 			   }
 		   }  
 	   }
@@ -672,7 +672,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes 2.0")){
+		   if(st.nextToken().trim().equals("Episode Connect for Post-acute Care")){
 //			   if(role.substring((role.indexOf("-")+1)).equals("Remedy Technical Administrator"))
 //			   {
 //				   iWillWaitToSee(By.xpath("//h2[text()='BPCI Performance']"));
@@ -735,7 +735,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes 2.0")){
+		   if(st.nextToken().trim().equals("Episode Connect for Post-acute Care")){
 //			   if(role.substring((role.indexOf("-")+1)).equals("Remedy Technical Administrator"))
 //			   {
 //				   iWillWaitToSee(By.xpath("//button[contains(text(),'View All Patients')]"));
@@ -767,7 +767,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
 	   iWillWaitToSee(By.cssSelector(".username"));
 	   WebElement element = driver.findElement(By.xpath("//i[@class='fa fa-angle-down']"));
 	   String javaScript = "var evObj = document.createEvent('MouseEvents');" +
@@ -798,17 +798,17 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
-			   iWillWaitToSee(By.xpath("//div[text()='Episodes']"));
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
+			   iWillWaitToSee(By.xpath("//div[text()='Episodes Classic']"));
 			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 			   {
 				   longDelay();
-				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Episodes']")));
+				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Episodes Classic']")));
 			   }
 			   else
 			   {
 				   longDelay();
-				   clickElement(driver.findElement(By.xpath("//div[text()='Episodes']")));  
+				   clickElement(driver.findElement(By.xpath("//div[text()='Episodes Classic']")));  
 			   }
 		   }   
 	   }
@@ -850,7 +850,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
 			   iWillWaitToSee(By.cssSelector(".username"));
 			   isElementPresentOnPage(By.xpath("//h3/span[contains(text(),'Dashboard')]"));
 		   }   
@@ -862,7 +862,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
 			   iWillWaitToSee(By.cssSelector("#patientsListOpenClose"));
 			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 			   {
@@ -885,7 +885,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
 			   if(facility.contains(","))
 			   {
 				   StringTokenizer st1 = new StringTokenizer(facility,",");
@@ -918,7 +918,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
 			   iVerifyTextFromListOfElement(By.xpath("//div[label[text()='Payers']]//li"), payer);
 		   }   
 	   }
@@ -929,7 +929,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
 			   isElementNotPresentOnPage(By.xpath("//div[label[text()='Payers']]//li[text()='"+payer+"']"));
 		   }   
 	   }
@@ -942,7 +942,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Episodes")){
+			   if(st.nextToken().trim().equals("Episode Connect Classic")){
 				   iWillWaitToSee(By.xpath("//div[@class='row body']//a[@class='btn btn-default dropdown-toggle']"));
 				   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 				   {
@@ -982,7 +982,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
 			   waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.id("tblPatients_processing")));
 			   driver.findElement(By.id("filterTab_custom")).click();
 			   waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.id("tblPatients_processing")));
@@ -997,7 +997,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
 			   if(role.substring((role.indexOf("-")+1)).equals("Physicians"))
 			   {
 				   if(DriverScript.Config.getProperty("Browser").equals("ie"))
@@ -1056,7 +1056,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Reports"))
+		   if(st.nextToken().trim().equals("Reporting Classic"))
 		   {
 			   longDelay();
 		       iWillWaitToSee(By.xpath("//iframe[@class='embedded-iframe ng-scope']"));
@@ -1071,23 +1071,23 @@ public void iUnselectAllSelectedApps(){
    
    public void iClickOnReportsTileUnderSpecificUserLoginPage(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Reports")){
-		   iWillWaitToSee(By.xpath("//div[text()='Reports']"));
-		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Reports']")));
+	   if(application.contains("Reporting Classic")){
+		   iWillWaitToSee(By.xpath("//div[text()='Reporting']"));
+		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Reporting']")));
 		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		   {
-			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Reports']")));
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Reporting']")));
 		   }
 		   else
 		   {
-			   clickElement(driver.findElement(By.xpath("//div[text()='Reports']")));  
+			   clickElement(driver.findElement(By.xpath("//div[text()='Reporting']")));  
 		   }
 	   }
     }
    
    public void iVerifyNavigationOnReportsHomePage(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Reports")){
+	   if(application.contains("Reporting Classic")){
 		   iWillWaitToSee(By.cssSelector(".dropdown-tile-label.ng-binding")); 
 	   }
    }
@@ -2518,7 +2518,7 @@ public void iUnselectAllSelectedApps(){
    
    public void iClickOnFiledInDropdownOnProfileIcon(String text, String role) {
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-		if(application.contains("Episodes"))
+		if(application.contains("Episode Connect Classic"))
 		{
 			if(!(role.substring((role.indexOf("-")+1)).equals("Remedy Sales Team") || role.substring((role.indexOf("-")+1)).equals("Prospective Partner Executive")))
 			   {
@@ -2535,7 +2535,7 @@ public void iUnselectAllSelectedApps(){
    
    public void iVerifyPageHeaderForPageOnRemedyConnect(String title, String role ) throws InterruptedException {
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-		if(application.contains("Episodes"))
+		if(application.contains("Episode Connect Classic"))
 		{
 			try
 			   {
@@ -2567,7 +2567,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Reports"))
+			   if(st.nextToken().trim().equals("Reporting Classic"))
 			   {
 				   iWillWaitToSee(By.xpath("//label[@class='dropdown-tile-label ng-binding'][text()='"+text+"']"));
 				   selectElementByDesc(".dropdown-tile-label.ng-binding", text);
@@ -2581,7 +2581,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Reports"))
+			   if(st.nextToken().trim().equals("Reporting Classic"))
 			   {
 				   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 				   {
@@ -2602,7 +2602,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Reports"))
+			   if(st.nextToken().trim().equals("Reporting Classic"))
 			   {
 				   iWillWaitToSee(By.xpath(".//div[@class='field-panel-icon']"));
 				   clickElement(driver.findElement(By.xpath(".//div[@class='field-panel-icon']")));
@@ -2615,7 +2615,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Reports"))
+			   if(st.nextToken().trim().equals("Reporting Classic"))
 			   {
 				   iWillWaitToSee(By.xpath(".//*[@id='fieldListTreeContent']//div[@formula='["+filterTitle+"].["+filterField+"]']"));
 				   clickElement(driver.findElement(By.xpath(".//*[@id='fieldListTreeContent']//div[@formula='["+filterTitle+"].["+filterField+"]']")));
@@ -2630,7 +2630,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Reports"))
+			   if(st.nextToken().trim().equals("Reporting Classic"))
 			   {
 				   clickElement(driver.findElement(By.xpath(toLocator)));
 			   }
@@ -2642,7 +2642,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Reports"))
+			   if(st.nextToken().trim().equals("Reporting Classic"))
 			   {
 				   if(text.contains(","))
 				   {
@@ -2669,7 +2669,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Reports"))
+			   if(st.nextToken().trim().equals("Reporting Classic"))
 			   {
 				   iWillWaitToSee(By.id("dlgBtnCancel"));
 				   clickElement(driver.findElement(By.id("dlgBtnCancel")));
@@ -2682,7 +2682,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Reports"))
+			   if(st.nextToken().trim().equals("Reporting Classic"))
 			   {
 				   iWillWaitToSee(By.xpath("//div[@class='flex-item order-2 btn logo valentino-icon-reports']"));
 				   clickElement(driver.findElement(By.xpath("//div[@class='flex-item order-2 btn logo valentino-icon-reports']")));
