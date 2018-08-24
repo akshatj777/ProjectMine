@@ -53,6 +53,7 @@ public class ProgramPerformance extends BaseClass{
     SNFDaysBenchmarkEC,EpisodesWithReadmissionBenchmarkClaims,EpisodesWithReadmissionBenchmarkEC;
     String StartDate,facilityname,facilitybpid,episodeInitiatorNameInitCap_1,bpid_1,episodeInitiatorNameInitCap_2,bpid_2, facilityNameValidation,ccnValidation,
     bundleName1,bundleName2,bundleName3,bundleName4,region,market,regionPartner,marketPartner,participantName,model,facilityNameInitCap;
+    List<String> bundle_Name= new ArrayList<>();
     List<String> DRG_fracture= new ArrayList<>();
     List<String> Physician_NPI= new ArrayList<>();
     Actions act=new Actions(driver);
@@ -512,6 +513,11 @@ public class ProgramPerformance extends BaseClass{
 		 iWillWaitToSee(By.cssSelector(".report-title"));
 		 selectElementByDesc(".report-title", dashboard);
 		 isElementVisible(driver.findElement(By.xpath("//div[text()='Analytics']")));
+		 driver.navigate().refresh();
+		 isElementVisible(driver.findElement(By.xpath("//div[text()='Analytics']")));
+//		 WebElement elem = driver.findElement(By.xpath("//a[text()=' < Back']"));
+//		 act.moveToElement(elem).build().perform();
+//		 scrollIntoViewByJS(driver.findElement(By.xpath("//span[@class='report-type']")));
 		 longDelay();
 	 }
 	 
@@ -666,19 +672,25 @@ public class ProgramPerformance extends BaseClass{
 		      ccnValidation=ccn_validatnArry[1];
 		      System.out.println("Facility Name And CCN value:"+facilityname+" "+"-"+" "+ccnValidation);
 		      /** BundleNames Validation **/
-		      String bundlName1=elements.get(24).trim();
-		      String bundleName1Arry[]=bundlName1.split("=");
-		      bundleName1=bundleName1Arry[1];
-		      String bundlName2=elements.get(25).trim();
-		      String bundleName2Arry[]=bundlName2.split("=");
-		      bundleName2=bundleName2Arry[1];
-		      String bundlName3=elements.get(26).trim();
-		      String bundleName3Arry[]=bundlName3.split("=");
-		      bundleName3=bundleName3Arry[1];
-		      String bundlName4=elements.get(27).trim();
-		      String bundleName4Arry[]=bundlName4.split("=");
-		      bundleName4=bundleName4Arry[1];
-		      System.out.println("BundleNames:"+"/n"+bundleName1+"/n"+bundleName2+"/n"+bundleName3+"/n"+bundleName4);
+		      for (int i=24;i<=27;i++){
+		    	  String bundle_NameTmp=elements.get(i).trim();
+			      String bundle_NameTmpArry[]=bundle_NameTmp.split("=");
+			      bundle_Name.add(bundle_NameTmpArry[1].trim());
+			      System.out.println("bundle_Name: "+bundle_NameTmpArry[1]);
+		      }
+//		      String bundlName1=elements.get(24).trim();
+//		      String bundleName1Arry[]=bundlName1.split("=");
+//		      bundleName1=bundleName1Arry[1];
+//		      String bundlName2=elements.get(25).trim();
+//		      String bundleName2Arry[]=bundlName2.split("=");
+//		      bundleName2=bundleName2Arry[1];
+//		      String bundlName3=elements.get(26).trim();
+//		      String bundleName3Arry[]=bundlName3.split("=");
+//		      bundleName3=bundleName3Arry[1];
+//		      String bundlName4=elements.get(27).trim();
+//		      String bundleName4Arry[]=bundlName4.split("=");
+//		      bundleName4=bundleName4Arry[1];
+//		      System.out.println("BundleNames:"+"/n"+bundleName1+"/n"+bundleName2+"/n"+bundleName3+"/n"+bundleName4);
 		      /**Region and Market filter**/
 		      String regionTemp=elements.get(28).trim();
 		      String regionTempArry[]=regionTemp.split("=");
@@ -854,15 +866,19 @@ public class ProgramPerformance extends BaseClass{
 			 }else if(value.contains("Today")){
 				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
 				 clickElement(driver.findElement(By.xpath("//span[@class='tab-datepicker-today-date']")));
+				 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 			 }else{
 				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
 				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), value);
 				 }
 		 }
-		 driver.findElement(By.xpath("//canvas")).click();
-		 delay();
+		 longDelay();
+		 WebElement elem = driver.findElement(By.xpath("//span[text()='Bundle']/../../../../.. //span[@role='combobox']"));
+		 act.moveToElement(elem).click().build().perform();
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 longDelay();
+		 act.moveToElement(elem).click().build().perform();
+		 delay();
 	 }
 	 
 	 public void ReadTextFromSavingsRateField(String text,String element,String resolution) throws IOException {
@@ -1126,7 +1142,7 @@ public class ProgramPerformance extends BaseClass{
 	 public void iClickOnFilterName(String text){
 //		 clickElement(driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']")));
 //		 delay();
-		 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']"));
+		 WebElement elem = driver.findElement(By.xpath("//span[contains(text(),'"+text+"')]/../../../../.. //span[@role='combobox']"));
 		 act.moveToElement(elem).click().build().perform();
 	 }
 	 
@@ -1289,14 +1305,24 @@ public class ProgramPerformance extends BaseClass{
 		 }
 	 
 	 public void iVeriyBundleNameInRowLevelSecurityForSelectedBPID(){
-		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_2_menu']//a[@title='"+bundleName1+"']")));
-		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_2_menu']//a[@title='"+bundleName2+"']")));
-		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_2_menu']//a[@title='"+bundleName3+"']")));
-		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_2_menu']//a[@title='"+bundleName4+"']")));
+		 
+		//div[@class='tileContainer']//a
+		 List<String> value = new ArrayList<String>();
+		 List<WebElement> element1 = driver.findElements(By.xpath("//div[@class='tileContainer']//a"));
+		 for (int i =0;i<element1.size();i++){
+			 value.add(element1.get(i).getText().trim());
+			 System.out.println("For Loop Value for BundleName---"+element1.get(i).getText().trim());
+		 }
+		 /** comparing list values **/
+		 Assert.assertTrue(bundle_Name.containsAll(value));
+//		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_2_menu']//a[@title='"+bundleName1+"']")));
+//		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_2_menu']//a[@title='"+bundleName2+"']")));
+//		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_2_menu']//a[@title='"+bundleName3+"']")));
+//		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_2_menu']//a[@title='"+bundleName4+"']")));
 	 }
 	 
 	 public void iVeriyRemedyRegionMarketInRowLevelSecurityForSelectedBPID(){
-		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_4_menu']//a[@title='Remedy-"+region+" "+market+"']")));
+//		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_4_menu']//a[@title='Remedy-"+region+" "+market+"']")));
 		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_4_menu']//a[@title='Remedy-"+region+"-"+market+"']")));
 	 }
 	 
@@ -1309,14 +1335,14 @@ public class ProgramPerformance extends BaseClass{
 		 }
 	 }
 	 public void iVeriyParticipantFilterForSelectedBPID(){
-		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_5_menu']//a[@title='(All)']")));
-		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_5_menu']//a[@title='"+participantName+"']")));
+		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[@title='(All)']")));
+		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='tileContainer']//a[@title='"+participantName+"']")));
 	 }
 	 
 	 public void iVeriyDRGFractureFilterForSelectedBPID(){
 		 List<String> value = new ArrayList<String>();
-		 List<WebElement> element1 = driver.findElements(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_6_menu']//a"));
-		 for (int i =1;i<element1.size();i++){
+		 List<WebElement> element1 = driver.findElements(By.xpath("//div[@class='tileContainer']//a"));
+		 for (int i =0;i<element1.size();i++){
 			 value.add(element1.get(i).getText().trim());
 			 System.out.println("For Loop Value---"+element1.get(i).getText().trim());
 		 }
@@ -1326,8 +1352,8 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iVeriyPhysicanNPIFilterForSelectedBPID(){
 		 List<String> value = new ArrayList<String>();
-		 List<WebElement> element1 = driver.findElements(By.xpath("//div[@id='tableau_base_widget_LegacyCategoricalQuickFilter_7_menu']//a"));
-		 for (int i=2;i<element1.size();i++){
+		 List<WebElement> element1 = driver.findElements(By.xpath("//div[@class='tileContainer']//a"));
+		 for (int i=0;i<element1.size();i++){
 			 value.add(element1.get(i).getText().trim());
 			 System.out.println("For Loop Value Physician NPI---"+element1.get(i).getText().trim());
 		 }

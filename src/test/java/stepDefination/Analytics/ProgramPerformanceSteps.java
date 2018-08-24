@@ -270,8 +270,8 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iVerifyInavlidTextAppearingWhenTriedWithIncorrectCredentials(text);
 	}
 	
-	@Then("^I verify \"([^\"]*)\" legend is appearing on the program performance dashboard with picture resolution \"([^\"]*)\"$")
-	public void i_verify_performing_legend_is_appearing_on_the_program_performance_dashboard(String text,String resolution) throws Throwable{
+	@Then("^I verify \"([^\"]*)\" legend is appearing on the \"([^\"]*)\" dashboard with picture resolution \"([^\"]*)\"$")
+	public void i_verify_performing_legend_is_appearing_on_the_dashboard(String text,String dashboard,String resolution) throws Throwable{
 		programdashboard.GetTextFromLegends(text,"//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 104px; height: 13px;']",resolution);
 	}
 	
@@ -300,8 +300,8 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iVerifyFilterValueAppearingOnDasboard(value, filter);
 	}
 	
-	@Then("^I verify graph for \"([^\"]*)\" is appearing on the program performance dashboard$")
-	public void i_verify_graph_for_is_appearing_on_the_program_performance_dashboard(String text) throws Throwable{
+	@Then("^I verify graph for \"([^\"]*)\" is appearing on the \"([^\"]*)\" dashboard$")
+	public void i_verify_graph_for_is_appearing_on_the_dashboard(String text,String dashboard) throws Throwable{
 		programdashboard.iVerifyTheGraphsAppearingOnDashboard(text);
 	}
 	
@@ -335,13 +335,13 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iValidateAdjHistText(text,"//div[@tb-test-id='Readmissions Current']//div[@class='tvimagesContainer']/canvas");
 	}
 	
-	@And("^I verify \"([^\"]*)\" is appearing on the program performance dashboard$")
-	public void i_verify_is_appearing_on_the_program_performance_dashboard(String text){
+	@And("^I verify \"([^\"]*)\" is appearing on the \"([^\"]*)\" dashboard$")
+	public void i_verify_is_appearing_on_the_dashboard(String text,String dashboard){
 		programdashboard.iValidateFilterName(text);
 	}
 	
-	@And("^I click \"([^\"]*)\" Filter on the program performance dashboard$")
-	public void i_click_filter_on_the_program_performance_dashboard(String text){
+	@And("^I click \"([^\"]*)\" Filter on the \"([^\"]*)\" dashboard$")
+	public void i_click_filter_on_the_dashboard(String text,String dashboard){
 		programdashboard.iClickOnFilterName(text);
 	}
 	
