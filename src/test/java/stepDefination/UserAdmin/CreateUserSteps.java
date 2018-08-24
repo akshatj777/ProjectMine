@@ -892,5 +892,8 @@ public class CreateUserSteps extends DriverScript {
 	 public void iVerifyRolesAsPerUser(String user){
 		 createUser.iVerifyRolesAsPerUser(user);
 	 }
-
+	 @Then("^I enter \"([^\"]*)\" in Learning Pathway search box$")
+		public void enterTextLearningPathwaySearchBox(String searchParam) throws Throwable {
+			createUser.enterTextLearningPathwaySearchBox(searchParam);
+		}
 }

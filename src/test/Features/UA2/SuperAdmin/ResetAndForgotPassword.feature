@@ -15,7 +15,7 @@ Feature: Reset and forgot password functionality from UA2 application
 
     Examples: 
       | User        | FirstName                                 | LastName                                 | Email                           | Phone | NPI | Role      | RoleID      | Applications                                             | LearningPathways                       | Locations             | expStatusCode |
-      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       |     | Executive | 1-Executive | episode_connect-Episodes,reports-Reports,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
+      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       |     | Leader | 1-Leader | episode_connect-Episode Connect Classic,Reporting Classic-Reporting Classic,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
 
   Scenario Outline: Reset Password: Validating validation message for - <Description>
     Given I am on the login page
@@ -42,9 +42,9 @@ Feature: Reset and forgot password functionality from UA2 application
 
     Examples: 
       | Description                                               | User        | Role      | Password  | NewPassword | ConfirmPass | ValidationMsg                                                |
-      | Password reset successful                                 | Super Admin | Executive | Testing1@ | Testing2    | Testing2    | Remedy Connect                                               |
-      | when password and the confirmation password are different | Super Admin | Executive | Testing2  | Testing1$   | Test        | Please ensure the password and the confirmation are the same |
-      | When entered password does not meet guidelines            | Super Admin | Executive | Testing2  | test        |             | Password guidelines                                          |
+      | Password reset successful                                 | Super Admin | Leader | Testing1@ | Testing2    | Testing2    | Remedy Connect                                               |
+      | when password and the confirmation password are different | Super Admin | Leader | Testing2  | Testing1$   | Test        | Please ensure the password and the confirmation are the same |
+      | When entered password does not meet guidelines            | Super Admin | Leader | Testing2  | test        |             | Password guidelines                                          |
 
   Scenario Outline: Forgot Password- Forgot password page validation and putting invalid and valid email and logging in with new password
     Given I am on the login page
@@ -85,7 +85,7 @@ Feature: Reset and forgot password functionality from UA2 application
 
     Examples: 
       | User        | Role      | NewPassword | WrongPassword |
-      | Super Admin | Executive | Testing1    | Testing8      |
+      | Super Admin | Leader | Testing1    | Testing8      |
 
   Scenario Outline: Forgot Password- Validating validation message - <Description>
     Given I am on the login page
@@ -110,5 +110,5 @@ Feature: Reset and forgot password functionality from UA2 application
 
     Examples: 
       | Description                                               | User        | Role      | NewPassword | ConfirmPassword | ValidationMsg                                                |
-      | when password and the confirmation password are different | Super Admin | Executive | Testing3    | Test            | Please ensure the password and the confirmation are the same |
-      | When entered password does not meet guidelines            | Super Admin | Executive | Test        |                 | Password guidelines                                          |
+      | when password and the confirmation password are different | Super Admin | Leader | Testing3    | Test            | Please ensure the password and the confirmation are the same |
+      | When entered password does not meet guidelines            | Super Admin | Leader | Test        |                 | Password guidelines                                          |

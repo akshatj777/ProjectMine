@@ -14,8 +14,8 @@ Feature: Edit page for Downstream provider
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | User        | FirstName | LastName | Email                           | Phone | NPI | Role       | RoleID       | Applications                                                                                    | LearningPathways                                                 | Locations                                       | expStatusCode |
-      | Super Admin | FirstName | LastName | qaautomation@remedypartners.com |       |     | Remedy TCS | 5-Remedy TCS | episode_connect-Episodes,reports-Reports,lessons-Lessons,episode_connect_2-Episodes 2.0,tci-TCI | NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | 514083--2070-015--TSH, 441369--3056-m03--365402 |           200 |
+      | User        | FirstName | LastName | Email                           | Phone | NPI | Role       | RoleID       | Applications                                                                                                                                                                                          | LearningPathways                                                 | Locations                                       | expStatusCode |
+      | Super Admin | FirstName | LastName | qaautomation@remedypartners.com |       |     | Remedy TCS | 5-Remedy TCS | episode_connect-Episode Connect Classic,Reporting Classic-Reporting Classic,lessons-Lessons,episode_connect_2-Episode Connect for Post-acute Care,Care Innovation Institute-Care Innovation Institute | NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | 514083--2070-015--TSH, 441369--3056-m03--365402 |           200 |
 
   Scenario Outline: <Description>
     Given I am on the login page

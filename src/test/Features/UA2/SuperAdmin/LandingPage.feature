@@ -14,8 +14,8 @@ Feature: Super Admin Landing page verification
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | User        | FirstName | LastName                                 | Email                           | Phone | NPI | Role      | RoleID      | Applications                                             | LearningPathways                       | Locations             | expStatusCode |
-      | Super Admin | Firstname | Lastnamelastnamelastnamelastnamelastname | qaautomation@remedypartners.com |       |     | Executive | 1-Executive | episode_connect-Episodes,reports-Reports,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
+      | User        | FirstName | LastName                                 | Email                           | Phone | NPI | Role   | RoleID   | Applications                                             | LearningPathways                       | Locations             | expStatusCode |
+      | Super Admin | Firstname | Lastnamelastnamelastnamelastnamelastname | qaautomation@remedypartners.com |       |     | Leader | 1-Leader | episode_connect-Episode Connect Classic,Reporting Classic-Reporting Classic,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
 
   Scenario: Verification of availability of fields on Super User Landing page
     Given I am on the login page
@@ -77,10 +77,10 @@ Feature: Super Admin Landing page verification
     Then I verify availability of "<SearchParameter>" for "<user>-<Role>"
 
     Examples: 
-      | Description                    | user        | Role      | Email                           | InvalidSearchParameter | SearchParameter                          |
-      | Search a user using First Name | Super Admin | Executive | qaautomation@remedypartners.com |                1768789 | Firstname                                |
-      | Search a user using Last Name  | Super Admin | Executive | qaautomation@remedypartners.com |                1768789 | Lastnamelastnamelastnamelastnamelastname |
-      | Search a user using Email      | Super Admin | Executive | qaautomation@remedypartners.com |                1768789 | FetchFromHM                              |
+      | Description                    | user        | Role   | Email                           | InvalidSearchParameter | SearchParameter                          |
+      | Search a user using First Name | Super Admin | Leader | qaautomation@remedypartners.com |                1768789 | Firstname                                |
+      | Search a user using Last Name  | Super Admin | Leader | qaautomation@remedypartners.com |                1768789 | Lastnamelastnamelastnamelastnamelastname |
+      | Search a user using Email      | Super Admin | Leader | qaautomation@remedypartners.com |                1768789 | FetchFromHM                              |
 
   Scenario Outline: Verify ability of Super Admin user to lock a user
     Given I am on the login page
@@ -106,8 +106,8 @@ Feature: Super Admin Landing page verification
     Then I should see User is Blocked
 
     Examples: 
-      | user        | Role      | Email                           | SearchParameter |
-      | Super Admin | Executive | qaautomation@remedypartners.com | FetchFromHM     |
+      | user        | Role   | Email                           | SearchParameter |
+      | Super Admin | Leader | qaautomation@remedypartners.com | FetchFromHM     |
 
   Scenario Outline: Verify ability of Super Admin user to unlock a locked user
     Given I am on the login page
@@ -133,22 +133,25 @@ Feature: Super Admin Landing page verification
     Then I verify "<Applications>" product on SPOE page
 
     Examples: 
-      | user        | Role      | Email                           | SearchParameter | Applications               |
-      | Super Admin | Executive | qaautomation@remedypartners.com | FetchFromHM     | Episodes, Reports, Lessons |
+      | user        | Role   | Email                           | SearchParameter | Applications               |
+      | Super Admin | Leader | qaautomation@remedypartners.com | FetchFromHM     | Episode Connect Classic, Reporting Classic, Lessons |
 
-  Scenario: User should not get error message when he goes back to User Admin page from top navigation Menu
+  Scenario Outline: User should not get error message when he goes back to User Admin page from top navigation Menu
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text Episodes 2.0
-    And I click on the "Reports" tile
-    Then I verify page tile for reports page
+    And I click on Reports tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on "Users" tile from menu
     Then I should see header text "Users"
-    Then I click on "Reports" from Management dropdown
+    Then I click on "Reporting Classic" from Management dropdown
     And I switch to new window
     Then I verify page tile for reports page
     And I click on "Users" tile from menu
     Then I should see header text "Users"
+
+    Examples: 
+      | user        | Role   |
+      | Super Admin | Leader |
 
   Scenario Outline: Verifying that User is redirected to User admin page although doesn't have access to UA
     Given I am on the login page
@@ -168,5 +171,5 @@ Feature: Super Admin Landing page verification
     Then I verify "<Applications>" product on SPOE page
 
     Examples: 
-      | user        | Role      | Applications               |
-      | Super Admin | Executive | Episodes, Reports, Lessons |
+      | user        | Role   | Applications               |
+      | Super Admin | Leader | Episode Connect Classic, Reporting Classic, Lessons |

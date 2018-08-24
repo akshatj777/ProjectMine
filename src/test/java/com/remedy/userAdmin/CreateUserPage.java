@@ -1072,15 +1072,15 @@ public void iUnselectAllSelectedApps(){
    public void iClickOnReportsTileUnderSpecificUserLoginPage(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   if(application.contains("Reporting Classic")){
-		   iWillWaitToSee(By.xpath("//div[text()='Reporting']"));
-		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Reporting']")));
+		   iWillWaitToSee(By.xpath("//div[text()='Reporting Classic']"));
+		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Reporting Classic']")));
 		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		   {
-			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Reporting']")));
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Reporting Classic']")));
 		   }
 		   else
 		   {
-			   clickElement(driver.findElement(By.xpath("//div[text()='Reporting']")));  
+			   clickElement(driver.findElement(By.xpath("//div[text()='Reporting Classic']")));  
 		   }
 	   }
     }
@@ -2828,5 +2828,11 @@ public void iUnselectAllSelectedApps(){
 	 }
 		 
 	 }
+ }
+ public void enterTextLearningPathwaySearchBox(String searchParam) throws Throwable {
+     if(!(searchParam.equals("")))
+     {
+  	   iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), searchParam);  
+     }
  }
 }
