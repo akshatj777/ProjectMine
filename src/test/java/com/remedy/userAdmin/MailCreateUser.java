@@ -563,10 +563,10 @@ public class MailCreateUser extends BaseClass{
 //			driver.findElements(By.xpath("//div[@class='T-I J-J5-Ji T-I-Js-IF W6eDmd ns T-I-ax7 L3']")).get(1).click();
 //			iWillWaitToSee(By.xpath("//div[@role='menuitem']/div[text()='Trash']"));
 //			driver.findElement(By.xpath("//div[@role='menuitem']/div[text()='Trash']")).click();
-			//iWillWaitToSee(By.xpath("//div[@class=' G-atb D E']//div[@class='T-I J-J5-Ji nX T-I-ax7 T-I-Js-Gs  W6eDmd']"));
-			//driver.findElement(By.xpath("//div[@class=' G-atb D E']//div[@class='T-I J-J5-Ji nX T-I-ax7 T-I-Js-Gs  W6eDmd']")).click();
-			iWillWaitToSee(By.xpath("//div[@class='ar9 T-I-J3 J-J5-Ji'] "));
-			driver.findElements(By.xpath("//div[@class='ar9 T-I-J3 J-J5-Ji']")).get(1).click();
+			iWillWaitToSee(By.xpath("//div[@class=' G-atb D E']//div[@class='T-I J-J5-Ji nX T-I-ax7 T-I-Js-Gs  W6eDmd']"));
+			driver.findElement(By.xpath("//div[@class=' G-atb D E']//div[@class='T-I J-J5-Ji nX T-I-ax7 T-I-Js-Gs  W6eDmd']")).click();
+			//iWillWaitToSee(By.xpath("//div[@class='ar9 T-I-J3 J-J5-Ji'] "));
+			//driver.findElements(By.xpath("//div[@class='ar9 T-I-J3 J-J5-Ji']")).get(1).click();
 			Thread.sleep(4000);
 			iWillWaitToSee(By.xpath("//a[contains(text(),'Inbox')]"));
 			clickElement(driver.findElement(By.xpath("//a[contains(text(),'Inbox')]")));
