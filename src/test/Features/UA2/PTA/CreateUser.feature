@@ -279,7 +279,7 @@ Feature: Create User - PTA User
     Then I click on Select button
     Then I verify Learning Pathway search box is available
     Then I select "<LearningPathwaySearchParameter>" from the results
-    Then I verify "<ApplicationsNotVisible>" is not visible on Applications tab
+   
     Then I click on Next button
     Then I verify the header "Permissions"
     Then I select "<Programs1>" programs
