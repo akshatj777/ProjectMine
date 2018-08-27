@@ -1,6 +1,6 @@
 Feature: Verify Physician Dashboard
 
-  Scenario: Verify the functional test cases under Physician overview dashbaord
+  Scenario: Verify the functional test cases under Physician dashbaord
     Given I am on the login page
     When I enter incorrect "email" for analytics as "Qafivedashtest@yopmail" for login
     And I enter password field Testing123 for Login
@@ -23,7 +23,7 @@ Feature: Verify Physician Dashboard
     Then I verify "Underperforming" legend is appearing on the "Physician" dashboard with picture resolution "300X300"
     Then I verify graph for "Physician Comparison by Volume" is appearing on the "Physician" dashboard
 
-  Scenario: Verify the mouse hovering text on the program performance dashbaord page
+  Scenario: Verify the mouse hovering text on the Physician dashbaord page
     Given I am on the login page
     When I enter incorrect "email" for analytics as "Qafivedashtest@yopmail" for login
     And I enter password field Testing123 for Login
@@ -45,7 +45,7 @@ Feature: Verify Physician Dashboard
     And I verify "NPRA Per Episode: " Tool tip is appearing for Bar grapth on "Physician" Dashboard
     And I verify "Click here to go to Physician Scorecard" Tool tip is appearing for Bar grapth on "Physician" Dashboard
 
-  Scenario: Validate the filter fields on Physician overview dashbaord -Done
+  Scenario: Validate the filter fields on Physician dashbaord -Done
     Given I am on the login page
     When I enter email field Qafivedashtest@yopmail.com for login
     And I enter password field Testing123 for Login
@@ -67,8 +67,8 @@ Feature: Verify Physician Dashboard
     Then I select "Penn Presbyterian Medical Center - 2070-021" from "Episode Initiator - BPID" field and click on "Apply"
     And I verify "Penn Presbyterian Medical Center - 390223" is selected in the filter field "Anchor Facility - CCN"
 
-  Scenario: Verify data filter validations on program overview dashbaord
-    Given I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\PhysicianDashboard\\TableauTest.jmx"
+  Scenario: Verify data filter validations on Physician dashbaord
+    Given I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\PerformanceDashboard\\TableauTest.jmx"
     Given I am on the login page
     When I enter email field Qafivedashtest@yopmail.com for login
     And I enter password field Testing123 for Login
@@ -79,7 +79,7 @@ Feature: Verify Physician Dashboard
     And I switch to analytics iframe
     And I click on Refresh DB data Icon On dashboard
     Then I verify "Physician Comparison" text is appearing inside dashboard
-    Then I read the values from the text file "\\src\\test\\Jmeter\\PhysicianDashboard\\PhysicianDashboardResult.txt"
+    Then I read the row filter values from the text file "\\src\\test\\Jmeter\\PerformanceDashboard\\PerformanceDashboardResult.txt"
     Then I set "Start Date" as "1/1/2017" in Date field on dashboard
     Then I set "End Date" as "Todays Date" in Date field on dashboard
     And I click "Episode Initiator - BPID" Filter on the "Physician" dashboard

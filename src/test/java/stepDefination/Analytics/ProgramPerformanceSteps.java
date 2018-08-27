@@ -189,6 +189,11 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iReadTextFromOutputfile(location);
 	}
 	
+	@Then("^I read the row filter values from the text file \"([^\"]*)\"$")
+	public void i_read_the_row_filter_values_from_the_text_file(String location) throws IOException{
+		programdashboard.iReadRowFilterValueFormTxt(location);
+	}
+	
 	@And("^I verify \"([^\"]*)\" count matched with database value on the dashboard with picture resolution \"([^\"]*)\"$")
 	public void i_verify_ec_episodes_count_matched_with_database_as_on_the_dashboard(String text,String resolution) throws Throwable{
 //		programdashboard.GetTextFromScreenShot(text,"//div[@tb-test-id='KPI_Episode']//div[@class='tvimagesContainer']/canvas[@style='display: block; width: 152px; height: 55px;']",resolution);

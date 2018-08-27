@@ -549,7 +549,7 @@ public class ProgramPerformance extends BaseClass{
 				 String names;
 				 while ((names = br.readLine())!= null) {           
 
-					 StringTokenizer st = new StringTokenizer(names, "`");     
+					 StringTokenizer st = new StringTokenizer(names, "!");     
 					 List<String> elements = new ArrayList<String>();
 				     while (st.hasMoreTokens()){
 				      elements.add(st.nextToken());
@@ -644,99 +644,97 @@ public class ProgramPerformance extends BaseClass{
 		      Double BenchmarkSNFDaysEC=Double.parseDouble(SNFDaysBenchMEC[1]);
 		      SNFDaysBenchmarkEC =BenchmarkSNFDaysEC;
 		      System.out.println("The episodes with SNF Days Benchmark EC"+SNFDaysBenchmarkEC);
-		      //Validation of BPID (Having 2 values) 16, 17
-		      String episodeInitNamebpid=elements.get(18).trim();
+				 }
+	 }
+	 
+	 public void iReadRowFilterValueFormTxt(String location) throws IOException{
+		 BufferedReader br=new BufferedReader(new FileReader(System.getProperty("user.dir")+location));
+		 String names;
+		 while ((names = br.readLine())!= null) {           
+
+			 StringTokenizer st = new StringTokenizer(names, "!");     
+			 List<String> elements = new ArrayList<String>();
+		     while (st.hasMoreTokens()){
+		      elements.add(st.nextToken());
+		     }
+		     String episodeInitNamebpid=elements.get(1).trim();
 		      String EpisodeInitNamebpid[]=episodeInitNamebpid.split("=");
 		      episodeInitiatorNameInitCap_1=EpisodeInitNamebpid[1];
-		      String episodeInitbpid=elements.get(19).trim();
+		      String episodeInitbpid=elements.get(2).trim();
 		      String EpisodeInitBpid[]=episodeInitbpid.split("=");
 		      bpid_1 =EpisodeInitBpid[1];
 		      /** Concat Name and Id ex - Lawrence General Hospital - 2070-b72 **/
 		      System.out.println("BPID Filter"+episodeInitiatorNameInitCap_1+" "+"-"+" "+bpid_1);
 		      episodeInitiatorNameInitCap_1=episodeInitiatorNameInitCap_1+" "+"-"+" "+bpid_1;
-		      String episodeInitNamebpid1=elements.get(20).trim();
+		      String episodeInitNamebpid1=elements.get(3).trim();
 		      String EpisodeInitNamebpid1[]=episodeInitNamebpid1.split("=");
 		      episodeInitiatorNameInitCap_2=EpisodeInitNamebpid1[1];
-		      String episodeInitbpid1=elements.get(21).trim();
+		      String episodeInitbpid1=elements.get(4).trim();
 		      String EpisodeInitBpid1[]=episodeInitbpid1.split("=");
 		      bpid_2 =EpisodeInitBpid1[1];
 		      /** Concat Name and Id ex - Lawrence General Hospital - 2070-b72 **/
 		      System.out.println("BPID Filter"+episodeInitiatorNameInitCap_2+" "+"-"+" "+bpid_2);
 		      episodeInitiatorNameInitCap_2=episodeInitiatorNameInitCap_2+" "+"-"+" "+bpid_2;
 		      /** Validation of Facility Name & CCN value **/
-		      String fnameValidation=elements.get(22).trim();
+		      String fnameValidation=elements.get(5).trim();
 		      String facNameValidtn[]=fnameValidation.split("=");
 		      facilityNameValidation=facNameValidtn[1];
-		      String ccn_validtn=elements.get(23).trim();
+		      String ccn_validtn=elements.get(6).trim();
 		      String ccn_validatnArry[]=ccn_validtn.split("=");
 		      ccnValidation=ccn_validatnArry[1];
 		      System.out.println("Facility Name And CCN value:"+facilityname+" "+"-"+" "+ccnValidation);
 		      /** BundleNames Validation **/
-		      for (int i=24;i<=27;i++){
+		      for (int i=7;i<=10;i++){
 		    	  String bundle_NameTmp=elements.get(i).trim();
 			      String bundle_NameTmpArry[]=bundle_NameTmp.split("=");
 			      bundle_Name.add(bundle_NameTmpArry[1].trim());
 			      System.out.println("bundle_Name: "+bundle_NameTmpArry[1]);
 		      }
-//		      String bundlName1=elements.get(24).trim();
-//		      String bundleName1Arry[]=bundlName1.split("=");
-//		      bundleName1=bundleName1Arry[1];
-//		      String bundlName2=elements.get(25).trim();
-//		      String bundleName2Arry[]=bundlName2.split("=");
-//		      bundleName2=bundleName2Arry[1];
-//		      String bundlName3=elements.get(26).trim();
-//		      String bundleName3Arry[]=bundlName3.split("=");
-//		      bundleName3=bundleName3Arry[1];
-//		      String bundlName4=elements.get(27).trim();
-//		      String bundleName4Arry[]=bundlName4.split("=");
-//		      bundleName4=bundleName4Arry[1];
-//		      System.out.println("BundleNames:"+"/n"+bundleName1+"/n"+bundleName2+"/n"+bundleName3+"/n"+bundleName4);
 		      /**Region and Market filter**/
-		      String regionTemp=elements.get(28).trim();
+		      String regionTemp=elements.get(11).trim();
 		      String regionTempArry[]=regionTemp.split("=");
 		      region=regionTempArry[1];
-		      String marketTemp=elements.get(29).trim();
+		      String marketTemp=elements.get(12).trim();
 		      String marketTempArry[]=marketTemp.split("=");
 		      market=marketTempArry[1];
 		      System.out.println("Region amd market value: "+"Remedy-"+region+"-"+market);
 		      /** Verify Null value for Partner Region Market Filter **/
-		      String regionPartnerTemp=elements.get(30).trim();
+		      String regionPartnerTemp=elements.get(13).trim();
 		      String regionPartnerTempArry[]=regionPartnerTemp.split("=");
 		      regionPartner=regionPartnerTempArry[1];
-		      String marketPartnerTemp=elements.get(31).trim();
+		      String marketPartnerTemp=elements.get(14).trim();
 		      String marketPartnerTempArry[]=marketPartnerTemp.split("=");
 		      marketPartner=marketPartnerTempArry[1];
 		      System.out.println("Value of Partner Region and Market:"+regionPartner+"<----->"+marketPartner);
 		      /**Participant Data Filter  **/
-		      String participantNameTemp=elements.get(32).trim();
+		      String participantNameTemp=elements.get(15).trim();
 		      String participantNameTempArry[]=participantNameTemp.split("=");
 		      participantName=participantNameTempArry[1];
 		      System.out.println("Value of ParticipantName: "+participantName);
 		      /** Storing Values of DRG Fracture in list **/
-		      for (int i=33;i<=53;i++){
+		      for (int i=16;i<=36;i++){
 		    	  String DRG_FractureTmp=elements.get(i).trim();
 			      String DRG_FractureTmpArry[]=DRG_FractureTmp.split("=");
 			      DRG_fracture.add(DRG_FractureTmpArry[1]);
 			      System.out.println("DRG_Fracture: "+DRG_FractureTmpArry[1]);
 		      }
 		      /** Storing Values of Physician Npi Fracture in list **/
-		      for (int i=54;i<=83;i++){
+		      for (int i=37;i<=66;i++){
 		    	  String Physician_NPITmp=elements.get(i).trim();
 			      String Physician_NPITmpArry[]=Physician_NPITmp.split("=");
 			      Physician_NPI.add(Physician_NPITmpArry[1]);
 			      System.out.println("Physician_NPI: "+Physician_NPITmpArry[1]);
 		      }
-		      String modelTmp=elements.get(84).trim();
+		      String modelTmp=elements.get(67).trim();
 		      String modelTmpArry[]=modelTmp.split("=");
 		      model=modelTmpArry[1];
 		      System.out.println("Model: "+model);
 		      
-		      String facilityNameInitCapTemp=elements.get(85).trim();
+		      String facilityNameInitCapTemp=elements.get(68).trim();
 		      String facilityNameInitCapTempArry[]=facilityNameInitCapTemp.split("=");
 		      facilityNameInitCap=facilityNameInitCapTempArry[1];
 		      System.out.println("Anchor Facility Details: "+facilityNameInitCap);
 		     }
-				 
 	 }
 
 	public String numberformat(int number) {
@@ -1112,7 +1110,7 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iVerifyTheGraphsAppearingOnDashboard(String text){
-		 isElementVisible(driver.findElement(By.xpath("//div[@tb-test-id='"+text+" Trend']")));
+		 isElementVisible(driver.findElement(By.xpath("//div[contains(@tb-test-id,'"+text+"']")));
 	 }
 	 
 	 public void iValidateMouseHoverText(String element,String verifytext){
@@ -1384,4 +1382,5 @@ public class ProgramPerformance extends BaseClass{
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='wcGlassPane' and contains(@style,'cursor: wait;')]")));
 		 delay();
 	 }
+	 
 }

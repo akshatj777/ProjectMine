@@ -172,7 +172,7 @@ Scenario: Verify data filter validations on program overview dashbaord
   And I click on Refresh DB data Icon On dashboard
   Then I verify "Program Performance" text is appearing inside dashboard
   
-  Then I read the values from the text file "\\src\\test\\Jmeter\\PerformanceDashboard\\PerformanceDashboardResult.txt"
+  Then I read the row filter values from the text file "\\src\\test\\Jmeter\\PerformanceDashboard\\PerformanceDashboardResult.txt"
   Then I select "Penn Presbyterian Medical Center - 2070-021" from "Episode Initiator - BPID" field and click on "Apply"
   
   #Then I set the time from starting date as "1/1/2017" to ending date to claimscube date to validate claims episode data
