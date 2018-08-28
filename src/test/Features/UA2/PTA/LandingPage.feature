@@ -14,9 +14,9 @@ Feature: Verification of Landing Page for PTA User
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | User                            | FirstName                            | LastName                                 | Email                           | Phone      | NPI | Role                            | RoleID                             | Applications                                                                                                     | LearningPathways                       | Locations                                                                      | expStatusCode |
-      | Super Admin                     | FirstName                            | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 |     | Partner Technical Administrator | 20-Partner Technical Administrator | episode_connect-Episodes,reports-Reports,physician_portal-Physician Connect,admin-Administration,lessons-Lessons | 5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1 | 441355--ALL_BPIDS--ALL_FACILITIES                                              |           200 |
-      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 |     | Executive                       | 1-Executive                        | episode_connect-Episodes,reports-Reports,lessons-Lessons                                                         | 5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1 | 441355--3056-804--COVC0023, 441355--3056-805--055519, 441355--3056-806--055761 |           200 |
+      | User                            | FirstName                            | LastName                                 | Email                           | Phone      | NPI | Role                            | RoleID                             | Applications                                                                                                                                        | LearningPathways                       | Locations                                                                      | expStatusCode |
+      | Super Admin                     | FirstName                            | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 |     | Partner Technical Administrator | 20-Partner Technical Administrator | episode_connect-Episode Connect Classic,Reporting Classic-Reporting Classic,physician_portal-Physician Connect,admin-Administration,lessons-Lessons | 5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1 | 441355--ALL_BPIDS--ALL_FACILITIES                                              |           200 |
+      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 |     | Leader                          | 1-Leader                           | episode_connect-Episode Connect Classic,Reporting Classic-Reporting Classic,lessons-Lessons                                                         | 5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1 | 441355--3056-804--COVC0023, 441355--3056-805--055519, 441355--3056-806--055761 |           200 |
 
   Scenario: Verification of availability of fields on PTA User Landing page
     Given I am on the login page
@@ -83,11 +83,10 @@ Feature: Verification of Landing Page for PTA User
     Then I verify availability of "<SearchParameter>" for "<user>-<Role>"
 
     Examples: 
-      | Description                    | user                            | Role      | Email                           | InvalidSearchParameter | SearchParameter                          |
-      | Search a user using First Name | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | Firstnamefirstnamefirstnamefirstname     |
-      | Search a user using Last Name  | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | Lastnamelastnamelastnamelastnamelastname |
-      | Search a user using Email      | Partner Technical Administrator | Executive | qaautomation@remedypartners.com |                1768789 | FetchFromHM                              |
-
+      | Description                    | user                            | Role   | Email                           | InvalidSearchParameter | SearchParameter                          |
+      | Search a user using First Name | Partner Technical Administrator | Leader | qaautomation@remedypartners.com |                1768789 | Firstnamefirstnamefirstnamefirstname     |
+      | Search a user using Last Name  | Partner Technical Administrator | Leader | qaautomation@remedypartners.com |                1768789 | Lastnamelastnamelastnamelastnamelastname |
+      | Search a user using Email      | Partner Technical Administrator | Leader | qaautomation@remedypartners.com |                1768789 | FetchFromHM                              |
 
   Scenario Outline: Verify ability of PTA user to lock a user and cancel unlock
     Given I am on the login page
@@ -111,8 +110,8 @@ Feature: Verification of Landing Page for PTA User
     Then I should see User is Blocked
 
     Examples: 
-      | user                            | Role      | Email                           | SearchParameter |
-      | Partner Technical Administrator | Executive | qaautomation@remedypartners.com | FetchFromHM     |
+      | user                            | Role   | Email                           | SearchParameter |
+      | Partner Technical Administrator | Leader | qaautomation@remedypartners.com | FetchFromHM     |
 
   Scenario Outline: Verify ability of PTA user to unlock a locked user
     Given I am on the login page
@@ -138,5 +137,5 @@ Feature: Verification of Landing Page for PTA User
     Then I verify "<Applications>" product on SPOE page
 
     Examples: 
-      | user                            | Role      | Email                           | SearchParameter | Applications |
-      | Partner Technical Administrator | Executive | qaautomation@remedypartners.com | FetchFromHM     | Episodes     |
+      | user                            | Role   | Email                           | SearchParameter | Applications            |
+      | Partner Technical Administrator | Leader | qaautomation@remedypartners.com | FetchFromHM     | Episode Connect Classic |
