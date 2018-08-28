@@ -59,20 +59,6 @@ Feature: Edit page for Downstream provider
     Then I click on existing organisation "<Click DPHealthSystem>"
     Then I deselect "<RemoveDPLocations>" locations for Downstream Provider role
     Then I select "<DPLocations>" locations for Downstream Provider role
-    And I search for health system with <Health System>
-    And I select a <Health System>
-    Then I select "<Programs>" programs
-    Then I select "<Locations>" locations
-    Then I click Add Organization button for "<HasHealthSystem2>" flag
-    And I search for health system with <Health System2>
-    And I select a <Health System2>
-    Then I select "<Programs2>" programs
-    Then I select "<Locations2>" locations
-    Then I click Add Organization button for "<HasHealthSystem3>" flag
-    And I search for health system with <Health System3>
-    And I select a <Health System3>
-    Then I select "<Programs3>" programs
-    Then I select "<Locations3>" locations
     Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     Then I verify first name "<FirstName>"
     Then I verify last name "<LastName>"
