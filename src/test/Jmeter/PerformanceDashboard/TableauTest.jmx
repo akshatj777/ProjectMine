@@ -69,19 +69,29 @@
           </SystemSampler>
           <hashTree/>
         </hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="false">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="QueryECEpisodes" elementType="Argument">
+              <stringProp name="Argument.name">QueryECEpisodes</stringProp>
+              <stringProp name="Argument.value">SELECT     SUM(fp.episodeCountReport) as ECEpiosdeCount FROM     warehouse.factPatientEpisode fp         INNER JOIN     warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK         INNER JOIN     warehouse.dimFacility df ON fp.anchorAdmitFacilityKey = df.facilitySK         INNER JOIN     warehouse.dimFacility pac ON fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK         INNER JOIN     warehouse.dimPatient dp ON fp.patientKey = dp.patientSK         INNER JOIN     warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName         INNER JOIN     warehouse.dimDRG drg ON drg.drgSK = fp.currDrgKey WHERE     fp.bundleRisk = 1         AND fp.episodeCountReport = 1         AND df.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)         AND pac.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)         AND de.bpid NOT LIKE &apos;%DEMO%&apos;         AND dlk.lookupCategory = &apos;patientRisk&apos;         AND fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)         ${xyz}         and df.CCN in (&apos;390223&apos;) </stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
           <stringProp name="filename">EpisodeCount.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">bpid</stringProp>
+          <stringProp name="variableNames">bpid,ccn</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
           <boolProp name="stopThread">true</boolProp>
           <stringProp name="shareMode">shareMode.all</stringProp>
-          <boolProp name="ignoreFirstLine">false</boolProp>
+          <boolProp name="ignoreFirstLine">true</boolProp>
         </CSVDataSet>
         <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="UserName Qafivedashtest@yopmail.com" enabled="true">
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="UserName Qafivedashtest@yopmail.com" enabled="false">
           <stringProp name="filename">TestUser.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">userName</stringProp>
@@ -93,38 +103,22 @@
           <boolProp name="ignoreFirstLine">false</boolProp>
         </CSVDataSet>
         <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="BeanShell Sampler" enabled="false">
+          <stringProp name="BeanShellSampler.query">vars.get(&quot;bpid&quot;);
+vars.getObject(&quot;QueryECEpisodes&quot;);
+</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="No. of Episode (EC Source)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT
-    SUM(fp.episodeCountReport) as ECEpiosdeCount
-FROM
-    warehouse.factPatientEpisode fp
-        INNER JOIN
-    warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
-        INNER JOIN
-    warehouse.dimFacility df ON fp.anchorAdmitFacilityKey = df.facilitySK
-        INNER JOIN
-    warehouse.dimFacility pac ON fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-        INNER JOIN
-    warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
-        INNER JOIN
-    warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
-        INNER JOIN
-    warehouse.dimDRG drg ON drg.drgSK = fp.currDrgKey
-WHERE
-    fp.bundleRisk = 1
-        AND fp.episodeCountReport = 1
-        AND df.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-        AND pac.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-        AND de.bpid NOT LIKE &apos;%DEMO%&apos;
-        AND dlk.lookupCategory = &apos;patientRisk&apos;
-        AND fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-        AND fp.BPID IN ${bpid}
-        and df.CCN in (&apos;390223&apos;)</stringProp>
+          <stringProp name="query">${Query}</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">ECEpiosdeCount</stringProp>
+          <stringProp name="variableNames">ECEpisodeCount</stringProp>
           <stringProp name="resultVariable"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -164,63 +158,92 @@ if ( ! new String(&quot;${expect3}&quot;).equals(&quot;na&quot;)) {
             <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
           </BeanShellAssertion>
           <hashTree/>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_BPID&quot;,&quot;AND fp.BPID IN ${bpid}&quot;);	
+} else {
+	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;ccn&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_CCN&quot;,&quot;AND df.CCN in ${ccn}&quot;);	
+} else{
+	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
+}
+
+
+
+</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <collectionProp name="UserParameters.names">
+              <stringProp name="78391464">Query</stringProp>
+              <stringProp name="0"></stringProp>
+            </collectionProp>
+            <collectionProp name="UserParameters.thread_values">
+              <collectionProp name="-48228084">
+                <stringProp name="-1003364479">SELECT     SUM(fp.episodeCountReport) as ECEpisodeCount FROM     warehouse.factPatientEpisode fp         INNER JOIN     warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK         INNER JOIN     warehouse.dimFacility df ON fp.anchorAdmitFacilityKey = df.facilitySK         INNER JOIN     warehouse.dimFacility pac ON fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK         INNER JOIN     warehouse.dimPatient dp ON fp.patientKey = dp.patientSK         INNER JOIN     warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName         INNER JOIN     warehouse.dimDRG drg ON drg.drgSK = fp.currDrgKey WHERE     fp.bundleRisk = 1         AND fp.episodeCountReport = 1         AND df.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)         AND pac.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)         AND de.bpid NOT LIKE &apos;%DEMO%&apos;         AND dlk.lookupCategory = &apos;patientRisk&apos;         AND fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)         ${Q_BPID}         ${Q_CCN} </stringProp>
+                <stringProp name="0"></stringProp>
+              </collectionProp>
+            </collectionProp>
+            <boolProp name="UserParameters.per_iteration">false</boolProp>
+          </UserParameters>
+          <hashTree/>
         </hashTree>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="No. of Episode (Claims Source)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select sum(c.currEpiCounts) as ClaimsEpiosdeCount
-from warehouse.factClaims c
-inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
-inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey
-inner join warehouse.dimDRG d on c.anchorDrgKey = d.drgSK
-where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and e.bpid not like &apos;%DEMO%&apos;
-and c.atRisk=&apos;Y&apos;
-and c.anchorBeginDateKey &gt;= 20170101
-and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
- and e.bpid in  ${bpid}
- and f.ccn in (&apos;390223&apos;)
- -- and d.bundleName in (&apos;Coronary artery bypass graft&apos;)
- -- and d.drgCode in (&apos;233&apos;)
- -- and dp.npi in (&apos;220010&apos;,&apos;390223&apos;)
-and c.targetPrice &lt;&gt; 0;</stringProp>
+          <stringProp name="query">${Query}</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">claimsEpiosdeCount</stringProp>
+          <stringProp name="variableNames">claimsEpisodeCount</stringProp>
           <stringProp name="resultVariable"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
-        <hashTree/>
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
+} else {
+	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;ccn&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
+} else{
+	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
+}
+
+
+
+</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <collectionProp name="UserParameters.names">
+              <stringProp name="78391464">Query</stringProp>
+              <stringProp name="0"></stringProp>
+            </collectionProp>
+            <collectionProp name="UserParameters.thread_values">
+              <collectionProp name="156382014">
+                <stringProp name="2083253724">select sum(c.currEpiCounts) as Claims_Episode from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;=(select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}   ${Q_CCN} and c.targetPrice &lt;&gt; 0;</stringProp>
+                <stringProp name="0"></stringProp>
+              </collectionProp>
+            </collectionProp>
+            <boolProp name="UserParameters.per_iteration">false</boolProp>
+          </UserParameters>
+          <hashTree/>
+        </hashTree>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Saving Rate " enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select (round((sum(NPRA)/sum(Program_size)),3)*100) as Savings_Rate
-from
-(select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size
-from warehouse.factClaims c
-inner join
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
-inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey
-inner join warehouse.dimDRG d on c.anchorDrgKey = d.drgSK
-where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and e.bpid not like &apos;%DEMO%&apos;
-and c.atRisk=&apos;Y&apos;
-and c.anchorBeginDateKey &gt;= 20170101
--- and c.anchorBeginDateKey &lt;= 20180301
-and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
- and e.bpid in  ${bpid}
- and f.ccn in (&apos;390223&apos;)
- -- and d.bundleName in (&apos;Congestive heart failure&apos;)
- -- and dp.npi in (&apos;1063730448&apos;,&apos;1215356449&apos;,&apos;1366683997&apos;,&apos;1336484708&apos;)
- -- and d.drgCode in (&apos;291&apos;,&apos;292&apos;,&apos;293&apos;)
-and c.targetPrice &lt;&gt; 0) a;</stringProp>
+          <stringProp name="query">${Query}</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">savingRate</stringProp>
@@ -228,42 +251,136 @@ and c.targetPrice &lt;&gt; 0) a;</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NPRA and PROGRAM SIZE metrics Caluclation by individual BPID" enabled="true">
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
+} else {
+	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;ccn&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
+} else{
+	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
+}
+
+
+
+</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <collectionProp name="UserParameters.names">
+              <stringProp name="78391464">Query</stringProp>
+              <stringProp name="0"></stringProp>
+            </collectionProp>
+            <collectionProp name="UserParameters.thread_values">
+              <collectionProp name="5387305">
+                <stringProp name="-1413710132">select (round((sum(NPRA)/sum(Program_size)),3)*100) as Savings_Rate from (select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size  from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${Q_BPID}  ${Q_CCN} and c.targetPrice &lt;&gt; 0) a;</stringProp>
+                <stringProp name="0"></stringProp>
+              </collectionProp>
+            </collectionProp>
+            <boolProp name="UserParameters.per_iteration">false</boolProp>
+          </UserParameters>
+          <hashTree/>
+        </hashTree>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NPRA and PROGRAM SIZE (Claims)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select round(sum(NPRA)) as TotalNPRA, round(sum(Program_size)) as TotalProgram
-from
-(select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size
-from warehouse.factClaims c
-inner join
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
-inner join
-warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey
-inner join warehouse.dimDRG d on c.anchorDrgKey = d.drgSK
-where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and e.bpid not like &apos;%DEMO%&apos;
-and c.atRisk=&apos;Y&apos;
-and c.anchorBeginDateKey &gt;= 20170101
--- and c.anchorBeginDateKey &lt;= 20180101
-and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
- and e.bpid in  ${bpid}
- and f.ccn in (&apos;390223&apos;)
- -- and d.drgCode in (&apos;246&apos;,&apos;247&apos;,&apos;248&apos;,&apos;249&apos;)
- -- and d.bundleName in (&apos;Percutaneous coronary intervention&apos;)
- -- and dp.npi in (&apos;1174554851&apos;,&apos;1679735211&apos;,&apos;1942231709&apos;)
-and c.targetPrice &lt;&gt; 0) a;</stringProp>
+          <stringProp name="query">${Query}</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">TotalNPRA, TotalProgram</stringProp>
+          <stringProp name="variableNames">Claims_TotalNPRA, Claims_TotalProgram</stringProp>
           <stringProp name="resultVariable"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
-        <hashTree/>
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
+} else {
+	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;ccn&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
+} else{
+	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
+}
+
+
+
+</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <collectionProp name="UserParameters.names">
+              <stringProp name="78391464">Query</stringProp>
+              <stringProp name="0"></stringProp>
+            </collectionProp>
+            <collectionProp name="UserParameters.thread_values">
+              <collectionProp name="-56539331">
+                <stringProp name="1999691598">select round(sum(NPRA)) as Claims_NPRA, round(sum(Program_size)) as Claims_ProgramSize from (select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size  from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) ${Q_BPID} ${Q_CCN}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
+                <stringProp name="0"></stringProp>
+              </collectionProp>
+            </collectionProp>
+            <boolProp name="UserParameters.per_iteration">false</boolProp>
+          </UserParameters>
+          <hashTree/>
+        </hashTree>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NPRA and PROGRAM SIZE (EC)" enabled="false">
+          <stringProp name="dataSource">MySQLQA</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">${Query}</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames">EC_TotalNPRA, EC_TotalProgram</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="false">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
+} else {
+	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;ccn&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
+} else{
+	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
+}
+
+
+
+</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="false">
+            <collectionProp name="UserParameters.names">
+              <stringProp name="78391464">Query</stringProp>
+              <stringProp name="0"></stringProp>
+            </collectionProp>
+            <collectionProp name="UserParameters.thread_values">
+              <collectionProp name="534179541">
+                <stringProp name="2095440741">select round(sum(NPRA)) as EC_NPRA, round(sum(Program_size)) as EC_ProgramSize from (select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size  from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;   and c.anchorBeginDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) ${Q_BPID} ${Q_CCN}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
+                <stringProp name="0"></stringProp>
+              </collectionProp>
+            </collectionProp>
+            <boolProp name="UserParameters.per_iteration">false</boolProp>
+          </UserParameters>
+          <hashTree/>
+        </hashTree>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Start Date for Dashboard" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
@@ -279,28 +396,7 @@ and c.targetPrice &lt;&gt; 0) a;</stringProp>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Discharge to SNF (Claims)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select round(sum(category)/sum(episodes),3) * 100 as DischargeToSNFClaims
-from
-(select e.bpid, SUM(if( (c.postAcuteCategory) = &quot;SNF&quot;, 1,0) ) as Category, sum(currEpiCounts) as Episodes
-from warehouse.factClaims c
-inner join
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
-inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey
-inner join warehouse.dimDRG d on c.anchorDrgKey = d.drgSK
-where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and e.bpid not like &apos;%DEMO%&apos;
-and c.atRisk=&apos;Y&apos;
-and c.anchorBeginDateKey &gt;= 20170101
-and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and e.bpid in  ${bpid}
-and f.ccn in (&apos;390223&apos;)
--- and d.bundleName in (&apos;Coronary artery bypass graft&apos;)
--- and d.drgCode in (&apos;232&apos;,&apos;233&apos;,&apos;234&apos;,&apos;235&apos;,&apos;236&apos;)
--- and dp.npi in (&apos;1659559250&apos;,&apos;1699702597&apos;,&apos;1679740005&apos;,&apos;1407913940&apos;)
-and c.targetPrice &lt;&gt; 0) a;</stringProp>
+          <stringProp name="query">${Query}</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">dischargetoSNFClaims</stringProp>
@@ -308,36 +404,46 @@ and c.targetPrice &lt;&gt; 0) a;</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
-        <hashTree/>
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
+} else {
+	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;ccn&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
+} else{
+	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
+}
+
+
+
+</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <collectionProp name="UserParameters.names">
+              <stringProp name="78391464">Query</stringProp>
+              <stringProp name="0"></stringProp>
+            </collectionProp>
+            <collectionProp name="UserParameters.thread_values">
+              <collectionProp name="-1562769674">
+                <stringProp name="-1055016577">select round((sum(category)/sum(episodes)) * 100,1) as DischargeToSNFClaims from (select e.bpid, SUM(if( (c.postAcuteCategory) = &quot;SNF&quot;, 1,0) ) as Category, sum(currEpiCounts) as Episodes from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20170101   and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) ${Q_BPID} ${Q_CCN}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
+                <stringProp name="0"></stringProp>
+              </collectionProp>
+            </collectionProp>
+            <boolProp name="UserParameters.per_iteration">false</boolProp>
+          </UserParameters>
+          <hashTree/>
+        </hashTree>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Discharge to SNF (EC)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT ROUND(SUM(Category) / SUM(episodes), 3) * 100 as DischargeToSNFEC
-FROM(SELECT fp.BPID,
-SUM(IF((fp.NSOCType) IN (&apos;SNF&apos;), 1, 0)) AS Category,
-SUM(fp.episodeCountReport) AS Episodes
-FROM
-warehouse.factPatientEpisode fp
-INNER JOIN warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
-INNER JOIN warehouse.dimFacility df ON fp.anchorAdmitFacilityKey = df.facilitySK
-INNER JOIN warehouse.dimFacility pac ON fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-INNER JOIN warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
-INNER JOIN warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
-INNER JOIN warehouse.dimDRG drg ON drg.drgSK = fp.currDrgKey
-WHERE fp.bundleRisk = 1
-AND fp.episodeCountReport = 1
-            AND df.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-            AND pac.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-            AND de.bpid NOT LIKE &apos;%DEMO%&apos;
-            AND dlk.lookupCategory = &apos;patientRisk&apos;
-            AND fp.anchorAdmitDateKey &gt; &apos;20180331&apos;
-            -- AND fp.anchorAdmitDateKey &lt;= &apos;20180531&apos;
-            AND fp.NSOCType IN (&apos;SNF&apos; , &apos;LTCH&apos;, &apos;OTHER&apos;, &apos;HHA&apos;, &apos;HOME&apos;, &apos;IRF&apos;)
-            AND fp.BPID IN (&apos;2070-021&apos;))
-            -- and drg.bundleName in (&apos;Acute myocardial infarction&apos;,&apos;Sepsis&apos;,&apos;COPD, bronchitis, asthma&apos;)
-		    -- and df.CCN in (&apos;030030&apos;,&apos;030083&apos;,&apos;030110&apos;)
-			-- AND drg.drgCode IN (&apos;280&apos;,&apos;202&apos;,&apos;192&apos;,&apos;870&apos;))
-            a;</stringProp>
+          <stringProp name="query">${Query}</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">dischargetoSNFEC</stringProp>
@@ -345,35 +451,46 @@ AND fp.episodeCountReport = 1
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
-        <hashTree/>
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_BPID&quot;,&quot;and fp.bpid in  ${bpid}&quot;);	
+} else {
+	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;ccn&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_CCN&quot;,&quot;and df.ccn in ${ccn}&quot;);	
+} else{
+	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
+}
+
+
+
+</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <collectionProp name="UserParameters.names">
+              <stringProp name="78391464">Query</stringProp>
+              <stringProp name="0"></stringProp>
+            </collectionProp>
+            <collectionProp name="UserParameters.thread_values">
+              <collectionProp name="-131193189">
+                <stringProp name="-69858541">select round((sum(category)/sum(episodes)) * 100,1) as DischargeToSNFEC from (select fp.BPID, sum(if((fp.NSOCType) in (&apos;SNF&apos;), 1,0) ) as Category, sum(fp.episodeCountReport) as Episodes from warehouse.factPatientEpisode fp  inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName inner join warehouse.dimDRG drg on drg.drgSK = fp.currDrgKey where fp.bundleRisk = 1  and fp.episodeCountReport = 1 and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos;  and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;,&apos;IRF&apos;)  ${Q_BPID} ${Q_CCN} )a;</stringProp>
+                <stringProp name="0"></stringProp>
+              </collectionProp>
+            </collectionProp>
+            <boolProp name="UserParameters.per_iteration">false</boolProp>
+          </UserParameters>
+          <hashTree/>
+        </hashTree>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days (Claims)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select round(sum(snfDaysTrimmed)/sum(Episodes),1) as SNFDaysClaims
-from
-(select e.bpid, sum(if(c.snfDaysTrimmed,1,0)) as Episodes,
-sum(c.snfDaysTrimmed) as snfDaysTrimmed
-from warehouse.factClaims c
-inner join
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
-inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey
-inner join warehouse.dimDRG d on c.anchorDrgKey = d.drgSK
-where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and e.bpid not like &apos;%DEMO%&apos;
-and c.atRisk=&apos;Y&apos;
-and c.anchorBeginDateKey &gt;= 20170101
--- and c.anchorBeginDateKey &lt;= 20180301
-and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
- and e.bpid in  ${bpid}
- and f.ccn in (&apos;390223&apos;)
--- and dp.npi in (&apos;1609861061&apos;,&apos;1710225214&apos;)
- -- and d.drgCode in (&apos;291&apos;,&apos;292&apos;)
- -- and d.bundleName in (&apos;Congestive heart failure&apos;)
--- and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;)
-and c.targetPrice &lt;&gt; 0) a;</stringProp>
+          <stringProp name="query">${Query}</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">SNFDaysClaims</stringProp>
@@ -381,44 +498,46 @@ and c.targetPrice &lt;&gt; 0) a;</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
-        <hashTree/>
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
+} else {
+	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;ccn&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
+} else{
+	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
+}
+
+
+
+</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <collectionProp name="UserParameters.names">
+              <stringProp name="78391464">Query</stringProp>
+              <stringProp name="0"></stringProp>
+            </collectionProp>
+            <collectionProp name="UserParameters.thread_values">
+              <collectionProp name="207863930">
+                <stringProp name="-1101674208">select round(sum(snfDaysTrimmed)/sum(Episodes),1) as SNFDaysClaims from (select e.bpid, sum(if(c.snfDaysTrimmed,1,0)) as Episodes,  sum(c.snfDaysTrimmed) as snfDaysTrimmed from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) ${Q_BPID} ${Q_CCN} and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;) and c.targetPrice &lt;&gt; 0) a;</stringProp>
+                <stringProp name="0"></stringProp>
+              </collectionProp>
+            </collectionProp>
+            <boolProp name="UserParameters.per_iteration">false</boolProp>
+          </UserParameters>
+          <hashTree/>
+        </hashTree>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days (EC)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT round(SUM(CASE WHEN (fp.dataQualityFlag NOT LIKE &apos;%Invalid%&apos; AND fp.totalSNFDays &gt;= 90) 
-THEN 90 
-WHEN (fp.dataQualityFlag NOT LIKE &apos;%Invalid%&apos;) THEN fp.totalSNFDays
-ELSE 0 END) / (SUM(IF((fp.totalSNFDays &gt; 0
-AND fp.dataQualityFlag NOT LIKE &apos;Invalid%&apos;),
-fp.currEpiCounts,0))),1) AS SNFDaysEC
-FROM
-warehouse.factPatientEpisode fp
-INNER JOIN
-warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
-INNER JOIN
-warehouse.dimFacility df ON fp.anchorAdmitFacilityKey = df.facilitySK
-INNER JOIN
-warehouse.dimFacility pac ON fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-INNER JOIN
-warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
-inner join warehouse.dimDRG drg on drg.drgSK = fp.currDrgKey
-INNER JOIN
-warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
-WHERE
-fp.bundleRisk = 1
-AND fp.totalSNFDays &gt; 0
-        AND fp.dataQualityFlag NOT LIKE &apos;%Invalid%&apos;
-        AND fp.episodeCountReport = 1
-        AND df.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-        AND pac.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-        AND de.bpid NOT LIKE &apos;%DEMO%&apos;
-        AND dlk.lookupCategory = &apos;patientRisk&apos;
-        AND fp.anchorAdmitDateKey &gt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-        -- AND fp.anchorAdmitDateKey &lt;= 20180430
-        and df.CCN in (&apos;390223&apos;)
-        -- and drg.bundleName in (&apos;Amputation&apos;,&apos;Cellulitis&apos;)
-        AND fp.BPID IN ${bpid}
-        -- and drg.drgCode in (&apos;240&apos;,&apos;475&apos;,&apos;602&apos;);</stringProp>
+          <stringProp name="query">${Query}</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">SNFDaysEC</stringProp>
@@ -426,8 +545,43 @@ AND fp.totalSNFDays &gt; 0
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days Benchmark (Claims)" enabled="true">
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_BPID&quot;,&quot;and fp.bpid in  ${bpid}&quot;);	
+} else {
+	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;ccn&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_CCN&quot;,&quot;and df.ccn in ${ccn}&quot;);	
+} else{
+	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
+}
+
+
+
+</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <collectionProp name="UserParameters.names">
+              <stringProp name="78391464">Query</stringProp>
+              <stringProp name="0"></stringProp>
+            </collectionProp>
+            <collectionProp name="UserParameters.thread_values">
+              <collectionProp name="917651617">
+                <stringProp name="-1078777831">select round(sum(case when (fp.dataQualityFlag not like &apos;%Invalid%&apos; and fp.totalSNFDays &gt;= 90) then 90 when (fp.dataQualityFlag not like &apos;%Invalid%&apos; ) then fp.totalSNFDays else 0 end ) /(sum(if((fp.totalSNFDays &gt; 0 and fp.dataQualityFlag not like &apos;Invalid%&apos;),fp.currEpiCounts,0))),1)  as SNFDaysEC from warehouse.factPatientEpisode fp  inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName where fp.bundleRisk = 1  and fp.totalSNFDays &gt; 0 and fp.dataQualityFlag not like &apos;%Invalid%&apos; and fp.episodeCountReport = 1 and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos; and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) ${Q_BPID} ${Q_CCN}</stringProp>
+                <stringProp name="0"></stringProp>
+              </collectionProp>
+            </collectionProp>
+            <boolProp name="UserParameters.per_iteration">false</boolProp>
+          </UserParameters>
+          <hashTree/>
+        </hashTree>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days Benchmark (Claims)" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select round(sum(baseSNFDays)/sum(baseSNFCount),1) as SNFDaysBenchmarkClaims
@@ -463,7 +617,7 @@ and e.bpid in  ${bpid}
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days Benchmark (EC)" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days Benchmark (EC)" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">SELECT round( SUM(fp.baseSNFDays) / SUM(fp.baseEpiCounts) ,1 )  AS SNFDaysBenchmarkEC
@@ -505,7 +659,7 @@ WHERE
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission (Claims)" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission (Claims)" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select round(sum(readmissionCounter)/sum(Episodes)*100, 1) as EpisodesWithReadmissionClaims
@@ -538,7 +692,7 @@ and c.anchorBeginDateKey &gt;= 20170101
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission (EC)" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission (EC)" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">SELECT ROUND(SUM(readmissionCounter) / SUM(Episodes)*100,1) as EpisodesWithReadmissionEC
@@ -574,7 +728,7 @@ FROM warehouse.factPatientEpisode fp
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission Benchmark (Claims)" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission Benchmark (Claims)" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select round(sum(baseEpiReadmissions)/sum(baseEpicounts)*100, 1) as EpisodesWithReadmissionBenchmarkClaims
@@ -606,7 +760,7 @@ and c.anchorBeginDateKey &gt;= 20170101
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission Benchmark (EC)" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission Benchmark (EC)" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">SELECT ROUND((baseEpiReadmissions) / (baseEpiCounts)*100, 1) as EpisodesWithReadmissionBenchmarkEC
@@ -642,7 +796,7 @@ FROM (SELECT SUM(fp.baseEpiReadmissions) AS baseEpiReadmissions, SUM(fp.baseEpiC
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Discharge to SNF Benchmark (Claims)" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Discharge to SNF Benchmark (Claims)" enabled="false">
           <stringProp name="TestPlan.comments">	</stringProp>
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
@@ -677,7 +831,7 @@ and c.targetPrice &lt;&gt; 0) a;  </stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Discharge to SNF Benchmark (EC)" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Discharge to SNF Benchmark (EC)" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select round(baseSNF/baseEpicounts* 100, 1)  as dischtoSNFBenchmarkEC
@@ -712,7 +866,7 @@ and df.CCN in (&apos;390223&apos;)
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="BPID Filter Validation" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="BPID Filter Validation" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct a.episodeInitiatorNameInitCap, a.bpid from 
@@ -779,7 +933,7 @@ order by a.episodeInitiatorNameInitCap, a.bpid;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Facility Name CCN Value Validation " enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Facility Name CCN Value Validation " enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct a.facilityName, a.ccn from 
@@ -851,7 +1005,7 @@ a order by facilityName;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="BundleName row level Validation " enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="BundleName row level Validation " enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct a.bundleName from
@@ -936,7 +1090,7 @@ order by a.bundleName;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Remedy Region Market Filter Validation" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Remedy Region Market Filter Validation" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct region, market
@@ -1024,7 +1178,7 @@ order by region, market;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Partner Region Market Filter Validation" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Partner Region Market Filter Validation" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct regionPartner, marketPartner
@@ -1116,7 +1270,7 @@ order by regionPartner, marketPartner;
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Participant Filter Validation" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Participant Filter Validation" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct a.participantName from 
@@ -1208,7 +1362,7 @@ order by participantName;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="DRG - Fracture Filter Validation" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="DRG - Fracture Filter Validation" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct a.DRG_Fracture from 
@@ -1309,7 +1463,7 @@ order by a.DRG_Fracture;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Physician - NPI Filter Validation" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Physician - NPI Filter Validation" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct a.Physician_NPI
@@ -1394,7 +1548,7 @@ order by a.Physician_NPI;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="MODEL Filter Validation" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="MODEL Filter Validation" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct a.model
@@ -1476,7 +1630,7 @@ a;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Anchor Facility Details Filter Validation" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Anchor Facility Details Filter Validation" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct a.facilityName, a.facilityNameInitCap, a.facilitySK
@@ -1544,7 +1698,7 @@ a;</stringProp>
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo ECEpiosdeCount=${ECEpiosdeCount_1}`claimsEpiosdeCount=${claimsEpiosdeCount_1}`savingRate=${savingRate_1}`TotalNPRA=${TotalNPRA_1}`TotalProgram=${TotalProgram_1}`StartDate=${StartDate_1}`dischargetoSNFClaims=${dischargetoSNFClaims_1} `SNFDaysClaims=${SNFDaysClaims_1}`EpisodesWithReadmissionClaims=${EpisodesWithReadmissionClaims_1}`dischtoSNFBenchmarkClaims=${dischtoSNFBenchmarkClaims_1}`dischargetoSNFEC=${dischargetoSNFEC_1}`dischtoSNFBenchmarkEC=${dischtoSNFBenchmarkEC_1}`SNFDaysEC=${SNFDaysEC_1}`EpisodesWithReadmissionEC=${EpisodesWithReadmissionEC_1}`EpisodesWithReadmissionBenchmarkClaims=${EpisodesWithReadmissionBenchmarkClaims_1}`EpisodesWithReadmissionBenchmarkEC=${EpisodesWithReadmissionBenchmarkEC_1}`SNFDaysBenchmarkClaims=${SNFDaysBenchmarkClaims_1}`SNFDaysBenchmarkEC=${SNFDaysBenchmarkEC_1}`episodeInitiatorNameInitCap=${episodeInitiatorNameInitCap_1}`bpid=${bpid_1}`episodeInitiatorNameInitCap=${episodeInitiatorNameInitCap_2}`bpid=${bpid_2}`facilityName=${facilityName_1}`ccn=${ccn_1}`bundleName=${bundleName_1}`bundleName=${bundleName_2}`bundleName=${bundleName_3}`bundleName=${bundleName_4}`region=${region_1}`market=${market_1}`regionPartner=${regionPartner_1}`marketPartner=${marketPartner_1}`participantName=${participantName_1}`DRG_Fracture=${DRG_Fracture_1}`DRG_Fracture=${DRG_Fracture_2}`DRG_Fracture=${DRG_Fracture_3}`DRG_Fracture=${DRG_Fracture_4}`DRG_Fracture=${DRG_Fracture_5}`DRG_Fracture=${DRG_Fracture_6}`DRG_Fracture=${DRG_Fracture_7}`DRG_Fracture=${DRG_Fracture_8}`DRG_Fracture=${DRG_Fracture_9}`DRG_Fracture=${DRG_Fracture_10}`DRG_Fracture=${DRG_Fracture_11}`DRG_Fracture=${DRG_Fracture_12}`DRG_Fracture=${DRG_Fracture_13}`DRG_Fracture=${DRG_Fracture_14}`DRG_Fracture=${DRG_Fracture_15}`DRG_Fracture=${DRG_Fracture_16}`DRG_Fracture=${DRG_Fracture_17}`DRG_Fracture=${DRG_Fracture_18}`DRG_Fracture=${DRG_Fracture_19}`DRG_Fracture=${DRG_Fracture_20}`DRG_Fracture=${DRG_Fracture_21}`Physician_NPI=${Physician_NPI_2}`Physician_NPI=${Physician_NPI_3}`Physician_NPI=${Physician_NPI_4}`Physician_NPI=${Physician_NPI_5}`Physician_NPI=${Physician_NPI_6}`Physician_NPI=${Physician_NPI_7}`Physician_NPI=${Physician_NPI_8}`Physician_NPI=${Physician_NPI_9}`Physician_NPI=${Physician_NPI_10}`Physician_NPI=${Physician_NPI_11}`Physician_NPI=${Physician_NPI_12}`Physician_NPI=${Physician_NPI_13}`Physician_NPI=${Physician_NPI_14}`Physician_NPI=${Physician_NPI_15}`Physician_NPI=${Physician_NPI_16}`Physician_NPI=${Physician_NPI_17}`Physician_NPI=${Physician_NPI_18}`Physician_NPI=${Physician_NPI_19}`Physician_NPI=${Physician_NPI_20}`Physician_NPI=${Physician_NPI_21}`Physician_NPI=${Physician_NPI_22}`Physician_NPI=${Physician_NPI_23}`Physician_NPI=${Physician_NPI_24}`Physician_NPI=${Physician_NPI_25}`Physician_NPI=${Physician_NPI_26}`Physician_NPI=${Physician_NPI_27}`Physician_NPI=${Physician_NPI_28}`Physician_NPI=${Physician_NPI_29}`Physician_NPI=${Physician_NPI_30}`Physician_NPI=${Physician_NPI_31}`model=${model_1}`facilityNameInitCap=${facilityNameInitCap_1}&gt; PerformanceDashboardResult.txt</stringProp>
+                <stringProp name="Argument.value">echo ECEpisodeCount=${ECEpisodeCount_1}*claimsEpisodeCount=${claimsEpisodeCount_1}*savingRate=${savingRate_1}*Claims_TotalNPRA=${Claims_TotalNPRA_1}*Claims_TotalProgram=${Claims_TotalProgram_1}*StartDate=${StartDate_1}*dischargetoSNFClaims=${dischargetoSNFClaims_1}*dischargetoSNFEC=${dischargetoSNFEC_1}*SNFDaysClaims=${SNFDaysClaims_1}*SNFDaysEC=${SNFDaysEC_1}&gt;&gt; PerformanceDashboardResult.txt</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
