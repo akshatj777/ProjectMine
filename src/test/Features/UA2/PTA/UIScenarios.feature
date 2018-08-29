@@ -105,7 +105,7 @@ Feature: PTA UI Scenarios
     Then I select "<Applications>" product
     Then I click on Next button
     Then I verify the header "Permissions"
-    Then I verify default program "BPCI-Model3" associated with organization
+    Then I verify default program "BPCI Model 3" associated with organization
 
     Examples: 
       | Role   | Applications                                        | Health System |
@@ -245,7 +245,7 @@ Feature: PTA UI Scenarios
 
     Examples: 
       | Description                                           | User                            | UserName                               | Password | FirstName                                          | LastName                                           | Email                           | Phone | Role   | Applications                                        | ApplicationsNotVisible                                                                            | NPI | LearningPathwaySearchParameter                                              | Health System1 | Programs1   | LocationsInvalid | Locations1                     | SelectedLocations    | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Verify the search functionality in selected locations | Partner Technical Administrator | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastNameLastNameLN | qaautomation@remedypartners.com |       | Leader | Episode Connect Classic, Reporting Classic, Lessons | Episode Connect for Post-acute Care, Administration, Physician Connect, Care Innovation Institute |     | Care Coordination External, Clinical Operations Acute Care Hospital Model 2 | Covenant       | BPCI-Model3 | hjfd             | 3056-808--Arbor Nursing Center | Arbor Nursing Center | No               |                |           |            | No               |                |           |            |
+      | Verify the search functionality in selected locations | Partner Technical Administrator | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastNameLastNameLN | qaautomation@remedypartners.com |       | Leader | Episode Connect Classic, Reporting Classic, Lessons | Episode Connect for Post-acute Care, Administration, Physician Connect, Care Innovation Institute |     | Care Coordination External, Clinical Operations Acute Care Hospital Model 2 | Covenant       | BPCI Model 3 | hjfd             | 3056-808--Arbor Nursing Center | Arbor Nursing Center | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: Verify that Next button and left side menu is enabled only when mandatory fields are selected
     Given I am on the login page
@@ -350,7 +350,7 @@ Feature: PTA UI Scenarios
 
     Examples: 
       | User                            | FirstName | LastName | Email                           | Role       | Applications      | NPI | Programs    | Health System | Locations                      |
-      | Partner Technical Administrator | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic |     | BPCI-Model3 | Covenant      | 3056-808--Arbor Nursing Center |
+      | Partner Technical Administrator | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic |     | BPCI Model 3 | Covenant      | 3056-808--Arbor Nursing Center |
 
   Scenario Outline: Creating user with existing Email and validating error message
     Given I am on the login page
@@ -384,7 +384,7 @@ Feature: PTA UI Scenarios
 
     Examples: 
       | User                            | FirstName | LastName | Email                           | Role       | Applications      | NPI | Programs    | Locations                      |
-      | Partner Technical Administrator | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic | NPI | BPCI-Model3 | 3056-808--Arbor Nursing Center |
+      | Partner Technical Administrator | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic | NPI | BPCI Model 3 | 3056-808--Arbor Nursing Center |
 
   Scenario Outline: Verify that Only name is displayed for Learning Pathway ID's
     Given I am on the login page
