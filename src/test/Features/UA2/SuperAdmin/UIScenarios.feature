@@ -222,8 +222,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify applications "<Applications2>" are unchecked
 
     Examples: 
-      | Role1                          | Applications1                                                                                                                       | Role2                         | Applications2 |
-      | Remedy Technical Administrator | Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Lessons, Administration, Care Innovation Institute | Prospective Partner Executive | Lessons       |
+      | Role1                           | Applications1                                                       | Role2                         | Applications2 |
+      | Partner Technical Administrator | Episode Connect Classic, Reporting Classic, Lessons, Administration | Prospective Partner Executive | Lessons       |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -262,7 +262,7 @@ Feature: UI Scenarios - Super Admin User
     And I verify selected Location "<SelectedLocations>" in the selected Locations section
     Then I search the "<LocationsInvalid>" in the Selected Locations section
     And I verify No results found for invalid Location for "first" in selected organisation
-    Then I search the "<Locations1>" in the Selected Locations section
+    Then I search the "<SelectedLocations>" in the Selected Locations section
     And I click on remove link icon for selected Locations on selected Locations section
     And I verify Selected Locations section after click on remove link icon
 
@@ -309,8 +309,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the header "Permissions"
 
     Examples: 
-      | Description                                         | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone      | Role              | Applications                                        | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter         | Health System1                                                         | Programs1    | Locations1                                                   | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Verify successful removal of selected health system | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Advanced Operator | Episode Connect Classic, Reporting Classic, Lessons | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | i am learning path, Learning Pathway 2 | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI Model 2 | 2070-023--Allentown, 2070-023--Bethlehem, 2070-025--Anderson | No               |                |           |            | No               |                |           |            |
+      | Description                                         | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone      | Role              | Applications                                        | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter         | Health System1   | Programs1    | Locations1                                                                  | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Verify successful removal of selected health system | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Advanced Operator | Episode Connect Classic, Reporting Classic, Lessons | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | i am learning path, Learning Pathway 2 | Sound Physicians | BPCI Model 2 | 6005-059--Presence Saint Joseph Medical Center, 6005-059--Evanston Hospital | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: Verify that Next button and left side menu is enabled only when mandatory fields are selected
     Given I am on the login page
@@ -354,8 +354,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify that Submit button is "enabled"
 
     Examples: 
-      | FirstName  | LastName  | Email                           | Role       | NPI | Applications      | Health System1 | Programs1    | Locations_BPID                                          | Locations_facility key |
-      | First'Name | Last'Name | qaautomation@remedypartners.com | Physicians | NPI | Reporting Classic | Penn           | BPCI Model 2 | 2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania | PMC                    |
+      | FirstName  | LastName  | Email                           | Role       | NPI | Applications      | Health System1    | Programs1    | Locations_BPID              | Locations_facility key |
+      | First'Name | Last'Name | qaautomation@remedypartners.com | Physicians | NPI | Reporting Classic | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital | TSH                    |
 
   Scenario Outline: Enter invalid health system and location and verify error message
     Given I am on the login page
@@ -392,8 +392,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify incomplete status for health system
 
     Examples: 
-      | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone      | Role              | Applications      | NPI | Health System_invalid | Health System | Programs     | invalidLocations |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Advanced Operator | Reporting Classic |     | hkfj                  | Penn          | BPCI Model 2 | hkfj             |
+      | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone      | Role              | Applications      | NPI | Health System_invalid | Health System     | Programs     | invalidLocations |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Advanced Operator | Reporting Classic |     | hkfj                  | Stamford Hospital | BPCI Model 2 | hkfj             |
 
   Scenario Outline: Creating user with existing NPI and validating error message
     Given I am on the login page
