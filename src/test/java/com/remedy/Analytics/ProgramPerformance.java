@@ -13,6 +13,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
@@ -22,6 +23,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.io.FileUtils;
 import org.bytedeco.javacpp.BytePointer;
 import org.bytedeco.javacpp.lept;
@@ -58,7 +60,9 @@ public class ProgramPerformance extends BaseClass{
     List<String> Physician_NPI= new ArrayList<>();
     Actions act=new Actions(driver);
 	WebDriverWait wait = new WebDriverWait(driver, 300);
-
+	public static List<ArrayList<String>> col= new ArrayList<ArrayList<String>>();
+	public static HashMap<String, String> outputText =new HashMap<String,String>();
+	
 	public ProgramPerformance(WebDriver driver) {
 		super(driver);
 	}
@@ -503,21 +507,18 @@ public class ProgramPerformance extends BaseClass{
 				 Assert.assertEquals(count.trim(), FinalOutput.trim());
 	 }
 	 
-	 public void executejmeter(String location) throws IOException
+	 public void executejmeter(String location) throws IOException, InterruptedException
 	    {
 		 File jmx=new File(System.getProperty("user.dir")+location);
 		 Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd "+DriverScript.Config.getProperty("jmeterPath")+" && jmeter -n -t"+" "+jmx+" && exit\"");
+	    Thread.sleep(20000);
 	    }
 	 
 	 public void iClickOnDashboard(String dashboard){
 		 iWillWaitToSee(By.cssSelector(".report-title"));
 		 selectElementByDesc(".report-title", dashboard);
-		 isElementVisible(driver.findElement(By.xpath("//div[text()='Analytics']")));
-		 driver.navigate().refresh();
-		 isElementVisible(driver.findElement(By.xpath("//div[text()='Analytics']")));
-//		 WebElement elem = driver.findElement(By.xpath("//a[text()=' < Back']"));
-//		 act.moveToElement(elem).build().perform();
-//		 scrollIntoViewByJS(driver.findElement(By.xpath("//span[@class='report-type']")));
+		 longDelay();
+		 iWillWaitToSee(By.cssSelector(".component-report-header"));
 		 longDelay();
 	 }
 	 
@@ -544,106 +545,114 @@ public class ProgramPerformance extends BaseClass{
 		 iWillWaitToSee(By.cssSelector(".tabCanvas.tab-widget"));
 	 }
 	 
-	 public void iReadTextFromOutputfile(String location) throws IOException{
-		    	 BufferedReader br=new BufferedReader(new FileReader(System.getProperty("user.dir")+location));
+	 public void iReadTextFromOutputfile(String location) throws IOException, InterruptedException{
+		 Thread.sleep(10000);
+		 BufferedReader br=new BufferedReader(new FileReader(System.getProperty("user.dir")+location));
 				 String names;
+				 System.out.println(br.lines());
+				 ArrayList<String> elements = new ArrayList<String>();
 				 while ((names = br.readLine())!= null) {           
 
-					 StringTokenizer st = new StringTokenizer(names, "!");     
-					 List<String> elements = new ArrayList<String>();
-				     while (st.hasMoreTokens()){
-				      elements.add(st.nextToken());
-				     }
-		      String ECCount=elements.get(0).trim();
-		      String ec[]=ECCount.split("=");
-		      ECEpiosdeCount=Integer.parseInt(ec[1]);
-		      numberformat(ECEpiosdeCount);
-		      System.out.println("The Episode Count value is"+ECEpiosdeCount);
-		      String claimsCount=elements.get(1).trim();
-		      String claims[]=claimsCount.split("=");
-		      claimsEpiosdeCount=Integer.parseInt(claims[1]);
-		      numberformat(claimsEpiosdeCount);
-		      System.out.println("The Claims count value is"+claimsEpiosdeCount);
-		      String sRate=elements.get(2).trim();
-		      String saving[]=sRate.split("=");
-		      Double sav=Double.parseDouble(saving[1]);
-		      savingRate=sav;
-		      System.out.println("The savings rate value is"+savingRate);
-		      String TNPRA=elements.get(3).trim();
-		      String npra[]=TNPRA.split("=");
-		      TotalNPRA=Integer.parseInt(npra[1]);
-		      numberformat(TotalNPRA);
-		      System.out.println("The total npra value is"+TotalNPRA);
-		      String TProgram=elements.get(4).trim();
-		      String program[]=TProgram.split("=");
-		      TotalProgram=Integer.parseInt(program[1]);
-		      numberformat(TotalProgram);
-		      System.out.println("The total program value is"+TotalProgram);
-		      String sDate=elements.get(5).trim();
-		      String startD[]=sDate.split("=");
-		      StartDate=startD[1];
-		      System.out.println("Start Date is"+StartDate);
-		      String dSNF=elements.get(6).trim();
-		      String Dtosnf[]=dSNF.split("=");
-		      Double snf=Double.parseDouble(Dtosnf[1]);
-		      DischargeToSNF=snf;
-		      System.out.println("The discharge to snf value is"+DischargeToSNF);
-		      String SnfDaysClaims=elements.get(7).trim();
-		      String snfDClaims[]=SnfDaysClaims.split("=");
-		      Double snfdaysClaims=Double.parseDouble(snfDClaims[1]);
-		      SNFDaysClaims=snfdaysClaims;
-		      System.out.println("The snf days Claims value is"+SNFDaysClaims);
-		      String EWReadmissionClaims=elements.get(8).trim();
-		      String EReadmissionClaims[]=EWReadmissionClaims.split("=");
-		      Double episodeRClaims=Double.parseDouble(EReadmissionClaims[1]);
-		      EpisodesWithReadmissionClaims=episodeRClaims;
-		      System.out.println("The episodes with readmissions value is Claims"+EpisodesWithReadmissionClaims);
-		      String dsnfbenchmarkclaims=elements.get(9).trim();
-		      String SNFBenchmarkClaims[]=dsnfbenchmarkclaims.split("=");
-		      Double BenchmarkSNFClaims=Double.parseDouble(SNFBenchmarkClaims[1]);
-		      dischargetoSNFBenchmarkClaims=BenchmarkSNFClaims;
-		      System.out.println("The discharge to snf benchmark value for claims is"+dischargetoSNFBenchmarkClaims);
-		      String dSNFEC=elements.get(10).trim();
-		      String DtosnfEC[]=dSNFEC.split("=");
-		      Double snfEC=Double.parseDouble(DtosnfEC[1]);
-		      DischargeToSNFEC=snfEC;
-		      System.out.println("The discharge to snf value for EC is"+DischargeToSNFEC);
-		      delay();
-		      String dsnfbenchmarkEC=elements.get(11).trim();
-		      String SNFBenchmarkEC[]=dsnfbenchmarkEC.split("=");
-		      Double BenchmarkSNFEC=Double.parseDouble(SNFBenchmarkEC[1]);
-		      dischargetoSNFBenchmarkEC=BenchmarkSNFEC;
-		      System.out.println("The discharge to snf benchmark value for EC is"+dischargetoSNFBenchmarkEC);
-		      String SnfDaysEC=elements.get(12).trim();
-		      String snfDEC[]=SnfDaysEC.split("=");
-		      Double snfdaysEC=Double.parseDouble(snfDEC[1]);
-		      SNFDaysEC=snfdaysEC;
-		      System.out.println("The snf days EC value is"+SNFDaysEC);
-		      String EWReadmissionEC=elements.get(13).trim();
-		      String EReadmissionEC[]=EWReadmissionEC.split("=");
-		      Double episodeREC=Double.parseDouble(EReadmissionEC[1]);
-		      EpisodesWithReadmissionEC=episodeREC;
-		      System.out.println("The episodes with readmissions value is EC"+EpisodesWithReadmissionEC);
-		      String EWReadmissionBenchmarkClaims=elements.get(14).trim();
-		      String EReadmissionBMClaims[]=EWReadmissionBenchmarkClaims.split("=");
-		      Double episodeRBMClaim=Double.parseDouble(EReadmissionBMClaims[1]);
-		      EpisodesWithReadmissionBenchmarkClaims=episodeRBMClaim;
-		      System.out.println("The episodes with readmissions value is EC"+EpisodesWithReadmissionBenchmarkClaims);
-		      String EWReadmissionBenhmarkEC=elements.get(15).trim();
-		      String EReadmissionBenchmarkEC[]=EWReadmissionBenhmarkEC.split("=");
-		      Double episodeRBenchmarkEC=Double.parseDouble(EReadmissionBenchmarkEC[1]);
-		      EpisodesWithReadmissionBenchmarkEC=episodeRBenchmarkEC;
-		      System.out.println("The episodes with readmissions value is EC"+EpisodesWithReadmissionBenchmarkEC);
-		      String snfDaysBMClaims=elements.get(16).trim();
-		      String SNFDaysBenchMClaims[]=snfDaysBMClaims.split("=");
-		      Double BenchmarkSNFDaysClaims=Double.parseDouble(SNFDaysBenchMClaims[1]);
-		      SNFDaysBenchmarkClaims =BenchmarkSNFDaysClaims;
-		      System.out.println("The episodes with SNF Days Benchmark Claims"+SNFDaysBenchmarkClaims);
-		      String snfDaysBMEC=elements.get(17).trim();
-		      String SNFDaysBenchMEC[]=snfDaysBMEC.split("=");
-		      Double BenchmarkSNFDaysEC=Double.parseDouble(SNFDaysBenchMEC[1]);
-		      SNFDaysBenchmarkEC =BenchmarkSNFDaysEC;
-		      System.out.println("The episodes with SNF Days Benchmark EC"+SNFDaysBenchmarkEC);
+//					 StringTokenizer st = new StringTokenizer(names, "*");     
+					
+					
+					 elements.add(names);
+//					 while (st.hasMoreTokens()){
+//				      elements.add(st.nextToken());
+//				     }
+				     delay();
+				     col.add(elements);
+				  //   elements.clear();
+//		      String ECCount=elements.get(0).trim();
+//		      String ec[]=ECCount.split("=");
+//		      ECEpiosdeCount=Integer.parseInt(ec[1]);
+//		      numberformat(ECEpiosdeCount);
+//		      System.out.println("The Episode Count value is"+ECEpiosdeCount);
+//		      String claimsCount=elements.get(1).trim();
+//		      String claims[]=claimsCount.split("=");
+//		      claimsEpiosdeCount=Integer.parseInt(claims[1]);
+//		      numberformat(claimsEpiosdeCount);
+//		      System.out.println("The Claims count value is"+claimsEpiosdeCount);
+//		      String sRate=elements.get(2).trim();
+//		      String saving[]=sRate.split("=");
+//		      Double sav=Double.parseDouble(saving[1]);
+//		      savingRate=sav;
+//		      System.out.println("The savings rate value is"+savingRate);
+//		      String TNPRA=elements.get(3).trim();
+//		      String npra[]=TNPRA.split("=");
+//		      TotalNPRA=Integer.parseInt(npra[1]);
+//		      numberformat(TotalNPRA);
+//		      System.out.println("The total npra value is"+TotalNPRA);
+//		      String TProgram=elements.get(4).trim();
+//		      String program[]=TProgram.split("=");
+//		      TotalProgram=Integer.parseInt(program[1]);
+//		      numberformat(TotalProgram);
+//		      System.out.println("The total program value is"+TotalProgram);
+//		      String sDate=elements.get(5).trim();
+//		      String startD[]=sDate.split("=");
+//		      StartDate=startD[1];
+//		      System.out.println("Start Date is"+StartDate);
+//		      String dSNF=elements.get(6).trim();
+//		      String Dtosnf[]=dSNF.split("=");
+//		      Double snf=Double.parseDouble(Dtosnf[1]);
+//		      DischargeToSNF=snf;
+//		      System.out.println("The discharge to snf value is"+DischargeToSNF);
+//		      String SnfDaysClaims=elements.get(7).trim();
+//		      String snfDClaims[]=SnfDaysClaims.split("=");
+//		      Double snfdaysClaims=Double.parseDouble(snfDClaims[1]);
+//		      SNFDaysClaims=snfdaysClaims;
+//		      System.out.println("The snf days Claims value is"+SNFDaysClaims);
+//		      String EWReadmissionClaims=elements.get(8).trim();
+//		      String EReadmissionClaims[]=EWReadmissionClaims.split("=");
+//		      Double episodeRClaims=Double.parseDouble(EReadmissionClaims[1]);
+//		      EpisodesWithReadmissionClaims=episodeRClaims;
+//		      System.out.println("The episodes with readmissions value is Claims"+EpisodesWithReadmissionClaims);
+//		      String dsnfbenchmarkclaims=elements.get(9).trim();
+//		      String SNFBenchmarkClaims[]=dsnfbenchmarkclaims.split("=");
+//		      Double BenchmarkSNFClaims=Double.parseDouble(SNFBenchmarkClaims[1]);
+//		      dischargetoSNFBenchmarkClaims=BenchmarkSNFClaims;
+//		      System.out.println("The discharge to snf benchmark value for claims is"+dischargetoSNFBenchmarkClaims);
+//		      String dSNFEC=elements.get(10).trim();
+//		      String DtosnfEC[]=dSNFEC.split("=");
+//		      Double snfEC=Double.parseDouble(DtosnfEC[1]);
+//		      DischargeToSNFEC=snfEC;
+//		      System.out.println("The discharge to snf value for EC is"+DischargeToSNFEC);
+//		      delay();
+//		      String dsnfbenchmarkEC=elements.get(11).trim();
+//		      String SNFBenchmarkEC[]=dsnfbenchmarkEC.split("=");
+//		      Double BenchmarkSNFEC=Double.parseDouble(SNFBenchmarkEC[1]);
+//		      dischargetoSNFBenchmarkEC=BenchmarkSNFEC;
+//		      System.out.println("The discharge to snf benchmark value for EC is"+dischargetoSNFBenchmarkEC);
+//		      String SnfDaysEC=elements.get(12).trim();
+//		      String snfDEC[]=SnfDaysEC.split("=");
+//		      Double snfdaysEC=Double.parseDouble(snfDEC[1]);
+//		      SNFDaysEC=snfdaysEC;
+//		      System.out.println("The snf days EC value is"+SNFDaysEC);
+//		      String EWReadmissionEC=elements.get(13).trim();
+//		      String EReadmissionEC[]=EWReadmissionEC.split("=");
+//		      Double episodeREC=Double.parseDouble(EReadmissionEC[1]);
+//		      EpisodesWithReadmissionEC=episodeREC;
+//		      System.out.println("The episodes with readmissions value is EC"+EpisodesWithReadmissionEC);
+//		      String EWReadmissionBenchmarkClaims=elements.get(14).trim();
+//		      String EReadmissionBMClaims[]=EWReadmissionBenchmarkClaims.split("=");
+//		      Double episodeRBMClaim=Double.parseDouble(EReadmissionBMClaims[1]);
+//		      EpisodesWithReadmissionBenchmarkClaims=episodeRBMClaim;
+//		      System.out.println("The episodes with readmissions value is EC"+EpisodesWithReadmissionBenchmarkClaims);
+//		      String EWReadmissionBenhmarkEC=elements.get(15).trim();
+//		      String EReadmissionBenchmarkEC[]=EWReadmissionBenhmarkEC.split("=");
+//		      Double episodeRBenchmarkEC=Double.parseDouble(EReadmissionBenchmarkEC[1]);
+//		      EpisodesWithReadmissionBenchmarkEC=episodeRBenchmarkEC;
+//		      System.out.println("The episodes with readmissions value is EC"+EpisodesWithReadmissionBenchmarkEC);
+//		      String snfDaysBMClaims=elements.get(16).trim();
+//		      String SNFDaysBenchMClaims[]=snfDaysBMClaims.split("=");
+//		      Double BenchmarkSNFDaysClaims=Double.parseDouble(SNFDaysBenchMClaims[1]);
+//		      SNFDaysBenchmarkClaims =BenchmarkSNFDaysClaims;
+//		      System.out.println("The episodes with SNF Days Benchmark Claims"+SNFDaysBenchmarkClaims);
+//		      String snfDaysBMEC=elements.get(17).trim();
+//		      String SNFDaysBenchMEC[]=snfDaysBMEC.split("=");
+//		      Double BenchmarkSNFDaysEC=Double.parseDouble(SNFDaysBenchMEC[1]);
+//		      SNFDaysBenchmarkEC =BenchmarkSNFDaysEC;
+//		      System.out.println("The episodes with SNF Days Benchmark EC"+SNFDaysBenchmarkEC);
 				 }
 	 }
 	 
@@ -927,16 +936,24 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iSelectValuesFromDropDown(String text,String field,String apply){
+		 if(!text.isEmpty()){
 		 longDelay();
 		 clickElement(driver.findElement(By.xpath("//span[text()='"+field+"']/../../../../.. //span[@role='combobox']")));
 //		 clickElement(driver.findElement(By.xpath("//input[contains(@name,'All')]")))
 		 WebElement elem = driver.findElement(By.xpath("//input[contains(@name,'All')]"));
 		 act.moveToElement(elem).click().build().perform();
-//		 delay();
-//		 clickElement(driver.findElement(By.xpath("//a[@title='"+text+"']/../input")));
-		 WebElement elem1 = driver.findElement(By.xpath("//a[@title='"+text+"']/../input"));
-//		 Actions act1=new Actions(driver);
-		 act.moveToElement(elem1).click().build().perform();
+		 if(text.contains(",")){
+			 StringTokenizer st= new StringTokenizer(text, ",");
+			 System.out.println(st.countTokens());
+			 while (st.hasMoreTokens()){
+				
+//				 WebElement elem1 = driver.findElement(By.xpath("//a[contains(@title,'"+st.nextToken()+"')]/../input"));
+//				 Actions act=new Actions(driver);
+//				 act.moveToElement(driver.findElement(By.xpath("//a[contains(@title,'"+st.nextToken()+"')]/../input"))).click().build().perform();
+				 driver.findElement(By.xpath("//a[contains(@title,'"+st.nextToken()+"')]/../input")).click();
+				 delay();
+			 }
+		 }
 		 clickElement(driver.findElement(By.xpath("//span[text()='"+apply+"']")));
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 delay();
@@ -944,6 +961,7 @@ public class ProgramPerformance extends BaseClass{
 //		 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='"+field+"']/../../../../.. //span[@role='combobox']")));
 		 WebElement elem2 = driver.findElement(By.xpath("//span[text()='"+field+"']/../../../../.. //span[@role='combobox']"));
 		 act.moveToElement(elem2).click().build().perform();
+	 }
 	 }
 	 
 	 public void iSetCalendarAttributeValueForEndingTodayDate(){
@@ -1376,11 +1394,24 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iClickRefreshDBData(){
-		//div[@class='wcGlassPane' and contains(@style,'cursor: wait;')]
-//		 iWillWaitToSee(By.xpath("//div[@class='wcGlassPane' and contains(@style,'cursor: default;')]"));
 		 clickElement(driver.findElement(By.xpath("//span[text()='Refresh']")));
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='wcGlassPane' and contains(@style,'cursor: wait;')]")));
 		 delay();
 	 }
+	 
+	 public void readDataMetricsValueFromQuery(int index){
+		 List<String> val = new ArrayList<String>();
+		 String value=col.get(index).toString();
+		 StringTokenizer st = new StringTokenizer(value, "*");
+		 while(st.hasMoreTokens()){
+			 val.add(st.nextToken());
+		 }
+		 for(int i=0;i<val.size();i++){
+			 String var[] =val.get(0).trim().split("=");
+			 outputText.put(var[0], var[1]);
+		 }
+		 System.out.println("Value of Output File Size:"+outputText.size());
+	 }
+	 
 	 
 }

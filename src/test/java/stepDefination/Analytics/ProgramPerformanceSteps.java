@@ -185,7 +185,7 @@ public class ProgramPerformanceSteps extends DriverScript{
 	}
 	
 	@Then("^I read the values from the text file \"([^\"]*)\"$")
-	public void i_read_the_alues_from_the_text_file(String location) throws IOException{
+	public void i_read_the_alues_from_the_text_file(String location) throws IOException, InterruptedException{
 		programdashboard.iReadTextFromOutputfile(location);
 	}
 	
@@ -478,5 +478,10 @@ public class ProgramPerformanceSteps extends DriverScript{
 	@Then("^I set \"([^\"]*)\" as \"([^\"]*)\" in Date field on dashboard$")
 	public void i_Set_Date_In_Date_Field_On_Dashboard(String field, String value) throws Throwable{
 		programdashboard.iSetDateInDateFieldAttribute(field,value);
+	}
+	
+	@Then("^I get the value \"([^\"]*)\" from Output file of data metric validation$")
+	public void i_Get_the_Value_Of_Row_From_OutputFile_Of_DataMetricValidation(int index) throws Throwable{
+		programdashboard.readDataMetricsValueFromQuery(index);
 	}
 }
