@@ -143,5 +143,5 @@ Feature: Bulk upload users with valid and invalid details
     And I should see Log in widget
 
     Examples: 
-      | Description                                                        | User        | FirstName          | LastName          | Role    | Applications                    | ApplicationsNotVisible                          | Roletext | ReportCategory | ReportName         | BPID | Facilities        | LearningPathway |  |
-      | Login with Manager and verify Product Tiles and their redirections | Super Admin | ExecutiveFirstName | ExecutiveLastName | Manager | Episodes, Reports, TCI, Lessons | Episodes 2.0, Administration, Physician Connect | ROLE_PRM | Patient ID     | Episode DRG Issues |      | Stamford Hospital |                 |  |
+      | Description                                                        | User        | FirstName          | LastName          | Role    | Applications                    | ApplicationsNotVisible       | Roletext | ReportCategory | ReportName         | BPID | Facilities        | LearningPathway |  |
+      | Login with Manager and verify Product Tiles and their redirections | Super Admin | ExecutiveFirstName | ExecutiveLastName | Manager | Episodes, Reports, TCI, Lessons | Episodes 2.0, Administration | ROLE_PRM | Patient ID     | Episode DRG Issues |      | Stamford Hospital |                 |  |

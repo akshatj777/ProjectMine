@@ -37,7 +37,7 @@ Feature: UI Scenarios - Super Admin User
 
     Examples: 
       | User        | FirstName                                 | LastName                                 | Email                           | Phone | NPI | Role       | RoleID       | Applications                                                                                | LearningPathways                       | Locations                                                                    | expStatusCode |
-      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       | NPI | Physicians | 4-Physicians | episode_connect-Episode Connect Classic,Reporting Classic-Reporting Classic,lessons-Lessons,physician_portal-Physician Connect | 3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | 441444--2070-g14--100029, 441444--3056-q91--441310, 441444--3056-q91--181318 |           200 |
+      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       | NPI | Physicians | 4-Physicians | episode_connect-Episode Connect Classic,Reporting Classic-Reporting Classic,lessons-Lessons | 3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | 441444--2070-g14--100029, 441444--3056-q91--441310, 441444--3056-q91--181318 |           200 |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -101,7 +101,7 @@ Feature: UI Scenarios - Super Admin User
     And I verify No results found under Learning Pathway search box
 
     Examples: 
-      | Role   | Applications               | LearningPathwayName |
+      | Role   | Applications                                        | LearningPathwayName |
       | Leader | Episode Connect Classic, Reporting Classic, Lessons | Test123             |
 
   Scenario Outline: Verify auto selected programs in Organizations
@@ -130,7 +130,7 @@ Feature: UI Scenarios - Super Admin User
     Then I verify default program "BPCI Model 2" associated with organization
 
     Examples: 
-      | Role   | Applications               | Health System     |
+      | Role   | Applications                                        | Health System     |
       | Leader | Episode Connect Classic, Reporting Classic, Lessons | Stamford Hospital |
 
   Scenario: Verify the functionality of back/Cancel button and tabs on the left on create user page
@@ -222,8 +222,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify applications "<Applications2>" are unchecked
 
     Examples: 
-      | Role1                          | Applications1                                                                    | Role2                         | Applications2 |
-      | Remedy Technical Administrator | Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Lessons, Physician Connect, Administration, Care Innovation Institute | Prospective Partner Executive | Lessons       |
+      | Role1                          | Applications1                                                                                                                       | Role2                         | Applications2 |
+      | Remedy Technical Administrator | Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Lessons, Administration, Care Innovation Institute | Prospective Partner Executive | Lessons       |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -267,8 +267,8 @@ Feature: UI Scenarios - Super Admin User
     And I verify Selected Locations section after click on remove link icon
 
     Examples: 
-      | Description                                           | User        | UserName                               | Password | FirstName                                          | LastName                                           | Email                           | Phone | Role   | Applications               | ApplicationsNotVisible                               | NPI | LearningPathwaySearchParameter         | Health System1 | Programs1                | Locations1                       | SelectedLocations      | LocationsInvalid | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Verify the search functionality in selected locations | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastNameLastNameLN | qaautomation@remedypartners.com |       | Leader | Episode Connect Classic, Reporting Classic, Lessons | Episode Connect for Post-acute Care, Administration, Physician Connect, Care Innovation Institute |     | i am learning path, Learning Pathway 2 | TeamHealth     | BPCI Model 2, BPCI Model 3 | 2070-g14--Baptist Medical Center | Baptist Medical Center | fhdjfs           | No               |                |           |            | No               |                |           |            |
+      | Description                                           | User        | UserName                               | Password | FirstName                                          | LastName                                           | Email                           | Phone | Role   | Applications                                        | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter         | Health System1 | Programs1                  | Locations1                       | SelectedLocations      | LocationsInvalid | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Verify the search functionality in selected locations | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastNameLastNameLN | qaautomation@remedypartners.com |       | Leader | Episode Connect Classic, Reporting Classic, Lessons | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | i am learning path, Learning Pathway 2 | TeamHealth     | BPCI Model 2, BPCI Model 3 | 2070-g14--Baptist Medical Center | Baptist Medical Center | fhdjfs           | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -309,8 +309,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the header "Permissions"
 
     Examples: 
-      | Description                                         | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone      | Role         | Applications               | ApplicationsNotVisible                               | NPI | LearningPathwaySearchParameter         | Health System1                                                         | Programs1   | Locations1                                                   | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Verify successful removal of selected health system | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Advanced Operator | Episode Connect Classic, Reporting Classic, Lessons | Episode Connect for Post-acute Care, Administration, Physician Connect, Care Innovation Institute |     | i am learning path, Learning Pathway 2 | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI Model 2 | 2070-023--Allentown, 2070-023--Bethlehem, 2070-025--Anderson | No               |                |           |            | No               |                |           |            |
+      | Description                                         | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone      | Role              | Applications                                        | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter         | Health System1                                                         | Programs1    | Locations1                                                   | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Verify successful removal of selected health system | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Advanced Operator | Episode Connect Classic, Reporting Classic, Lessons | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | i am learning path, Learning Pathway 2 | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI Model 2 | 2070-023--Allentown, 2070-023--Bethlehem, 2070-025--Anderson | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: Verify that Next button and left side menu is enabled only when mandatory fields are selected
     Given I am on the login page
@@ -354,8 +354,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify that Submit button is "enabled"
 
     Examples: 
-      | FirstName  | LastName  | Email                           | Role       | NPI | Applications | Health System1 | Programs1   | Locations_BPID                                          | Locations_facility key |
-      | First'Name | Last'Name | qaautomation@remedypartners.com | Physicians | NPI | Reporting Classic      | Penn           | BPCI Model 2 | 2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania | PMC                    |
+      | FirstName  | LastName  | Email                           | Role       | NPI | Applications      | Health System1 | Programs1    | Locations_BPID                                          | Locations_facility key |
+      | First'Name | Last'Name | qaautomation@remedypartners.com | Physicians | NPI | Reporting Classic | Penn           | BPCI Model 2 | 2070-020--Upenn - Hospital Of The Univ. Of Pennsylvania | PMC                    |
 
   Scenario Outline: Enter invalid health system and location and verify error message
     Given I am on the login page
@@ -392,8 +392,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify incomplete status for health system
 
     Examples: 
-      | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone      | Role         | Applications | NPI | Health System_invalid | Health System | Programs    | invalidLocations |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Advanced Operator | Reporting Classic      |     | hkfj                  | Penn          | BPCI Model 2 | hkfj             |
+      | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone      | Role              | Applications      | NPI | Health System_invalid | Health System | Programs     | invalidLocations |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Advanced Operator | Reporting Classic |     | hkfj                  | Penn          | BPCI Model 2 | hkfj             |
 
   Scenario Outline: Creating user with existing NPI and validating error message
     Given I am on the login page
@@ -428,8 +428,8 @@ Feature: UI Scenarios - Super Admin User
     Then I should see error message for duplicate value "Account with this NPI already exists"
 
     Examples: 
-      | User        | UserName                               | Password | FirstName | LastName | Email                           | Role       | Applications | NPI | Health System     | Programs    | Locations                   |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic      |     | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital |
+      | User        | UserName                               | Password | FirstName | LastName | Email                           | Role       | Applications      | NPI | Health System     | Programs     | Locations                   |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic |     | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital |
 
   Scenario Outline: Creating user with existing Email and validating error message
     Given I am on the login page
@@ -464,8 +464,8 @@ Feature: UI Scenarios - Super Admin User
     Then I should see error message for duplicate value "Account with this email already exists"
 
     Examples: 
-      | User        | UserName                               | Password | FirstName | LastName | Email                           | Role       | Applications | NPI | Health System     | Programs    | Locations                   |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic      | NPI | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital |
+      | User        | UserName                               | Password | FirstName | LastName | Email                           | Role       | Applications      | NPI | Health System     | Programs     | Locations                   |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic | NPI | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital |
 
   Scenario Outline: Validating that BPID with one location does not have All locations under BPID
     Given I am on the login page
@@ -497,8 +497,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify that "<Locations>" is not present under the bpid
 
     Examples: 
-      | User        | UserName                               | Password | FirstName | LastName | Email                           | Role       | Applications | NPI | Health System     | Programs    | Locations    |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic      | NPI | Stamford Hospital | BPCI Model 2 | All 2070-015 |
+      | User        | UserName                               | Password | FirstName | LastName | Email                           | Role       | Applications      | NPI | Health System     | Programs     | Locations    |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic | NPI | Stamford Hospital | BPCI Model 2 | All 2070-015 |
 
   Scenario Outline: Validating that on removing the organization and selecting it again, "incomplete" error message is not displayed
     Given I am on the login page
@@ -521,7 +521,7 @@ Feature: UI Scenarios - Super Admin User
     Then I verify incomplete status is not shown for health system
 
     Examples: 
-      | User        | Role   | Remove HealthSystem | Health System     | Programs    | Locations                   |
+      | User        | Role   | Remove HealthSystem | Health System     | Programs     | Locations                   |
       | Super Admin | Leader | Stamford Hospital   | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital |
 
   Scenario Outline: validating Learning Pathway on edit role
@@ -560,5 +560,5 @@ Feature: UI Scenarios - Super Admin User
     Then I verify Learning Pathway search box is not available
 
     Examples: 
-      | User        | UserName                               | Password | FirstName | LastName | Email                           | Role1      | Applications     | NPI | LearningPathwaySearchParameter                      | Role2  |
+      | User        | UserName                               | Password | FirstName | LastName | Email                           | Role1      | Applications               | NPI | LearningPathwaySearchParameter                      | Role2  |
       | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic, Lessons | NPI | Learning Pathway 2, jusUV22erpk1, Remedy University | Leader |
