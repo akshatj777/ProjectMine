@@ -125,9 +125,6 @@ Feature: Create user having full application access- Super Admin User
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
     And I switch back to old window
     And I redirect to Remedy connect page
-    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    #And I redirect to Remedy connect page
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page

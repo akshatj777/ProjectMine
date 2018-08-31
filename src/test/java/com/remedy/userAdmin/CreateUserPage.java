@@ -403,14 +403,14 @@ public class CreateUserPage extends BaseClass{
     {
     	if(!(desc.equals("")))
     	{
-    	iWillWaitToSee(By.xpath("//div[contains(@class,'item')]/span[text()='"+desc+"']"));
+    	iWillWaitToSee(By.xpath("//div[contains(@class,'item')]/span[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')='"+desc.toLowerCase()+"']"));
         if(DriverScript.Config.getProperty("Browser").equals("ie"))
         {
-        	((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[contains(@class,'item')]/span[text()='"+desc+"']")));
+        	((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[contains(@class,'item')]/span[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')='"+desc.toLowerCase()+"']")));
         }
         else
         {
-        	clickElement(driver.findElement(By.xpath("//div[contains(@class,'item')]/span[text()='"+desc+"']")));
+        	clickElement(driver.findElement(By.xpath("//div[contains(@class,'item')]/span[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')='"+desc.toLowerCase()+"']")));
         }
         Thread.sleep(3000);
     	}
@@ -2325,17 +2325,17 @@ public void iUnselectAllSelectedApps(){
     	   {
     		   token = "RemedyU";
     	   }
-    	   else if(newToken.contains("TCI"))
-    	   {
-    		   token = "Institute";
-    	   }
-    	   else if(newToken.contains("Physician Connect"))
-    	   {
-    		   token = "Gainsharing Physician Survey";
-    	   }
     	   else if(newToken.contains("Administration"))
     	   {
     		   token = "Users";
+    	   }
+    	   else if(newToken.contains("Episode Connect for Post-acute Care"))
+    	   {
+    		   token = "Episodes Post Acute";
+    	   }
+    	   else if(newToken.contains("Episode Connect Classic"))
+    	   {
+    		   token = "Episode Classic";
     	   }
     	   else
     	   {
