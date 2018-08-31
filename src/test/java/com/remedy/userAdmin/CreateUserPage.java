@@ -2344,8 +2344,6 @@ public void iUnselectAllSelectedApps(){
     	   iWillWaitToSee(By.xpath("//div[text()='"+token.trim()+"']"));
     	   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+token.trim()+"']")));
        } 
-	   iWillWaitToSee(By.xpath("//div[text()='Institute']"));
-       Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Institute']")));
    }
    
    public void verifyProductTilesNotPresent(String products) throws Throwable {
@@ -2358,17 +2356,17 @@ public void iUnselectAllSelectedApps(){
     	   {
     		   token = "RemedyU";
     	   }
-    	   else if(newToken.contains("TCI"))
-    	   {
-    		   token = "Institute";
-    	   }
-    	   else if(newToken.contains("Physician Connect"))
-    	   {
-    		   token = "Gainsharing Physician Survey";
-    	   }
     	   else if(newToken.contains("Administration"))
     	   {
     		   token = "Users";
+    	   }
+    	   else if(newToken.contains("Episode Connect for Post-acute Care"))
+    	   {
+    		   token = "Episodes Post Acute";
+    	   }
+    	   else if(newToken.contains("Episode Connect Classic"))
+    	   {
+    		   token = "Episode Classic";
     	   }
     	   else
     	   {
