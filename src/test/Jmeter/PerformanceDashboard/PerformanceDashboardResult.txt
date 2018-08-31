@@ -1,0 +1,4 @@
+ECEpisodeCount=266*claimsEpisodeCount=876*savingRate=3.8*Claims_TotalNPRA=1010720*Claims_TotalProgram=26308632*StartDate=03/31/2018*dischargetoSNFClaims=24.9*dischargetoSNFEC=26.0*SNFDaysClaims=20.4*SNFDaysEC=15.5
+ECEpisodeCount=344*claimsEpisodeCount=1118*savingRate=6.3*Claims_TotalNPRA=2079673*Claims_TotalProgram=33173667*StartDate=03/31/2018*dischargetoSNFClaims=24.4*dischargetoSNFEC=25.3*SNFDaysClaims=21.4*SNFDaysEC=15.5
+ECEpisodeCount=78*claimsEpisodeCount=242*savingRate=15.6*Claims_TotalNPRA=1068954*Claims_TotalProgram=6865035*StartDate=03/31/2018*dischargetoSNFClaims=22.7*dischargetoSNFEC=23.1*SNFDaysClaims=24.6*SNFDaysEC=${SNFDaysEC_1}
+ECEpisodeCount=344*claimsEpisodeCount=1118*savingRate=6.3*Claims_TotalNPRA=2079673*Claims_TotalProgram=33173667*StartDate=03/31/2018*dischargetoSNFClaims=24.4*dischargetoSNFEC=25.3*SNFDaysClaims=21.4*SNFDaysEC=15.5

@@ -484,4 +484,14 @@ public class ProgramPerformanceSteps extends DriverScript{
 	public void i_Get_the_Value_Of_Row_From_OutputFile_Of_DataMetricValidation(int index) throws Throwable{
 		programdashboard.readDataMetricsValueFromQuery(index);
 	}
+	
+	@Then("^I clear output data for Data metrics from \"([^\"]*)\" Output file$")
+	public void i_Clear_Data_from_Outputfile(String path) throws Throwable{
+		programdashboard.clearDataFromOutputFile(path);
+	}
+	
+	@And("^I verify \"([^\"]*)\" data metric value with database value on the dashboard for \"([^\"]*)\" with picture resolution \"([^\"]*)\"$")
+	public void i_verify_data_metric_value_with_database_as_on_the_dashboard(String text,String data,String resolution) throws Throwable{
+		programdashboard.verifyDataMetricValueWithdatabase(text,data,resolution);
+	}
 }

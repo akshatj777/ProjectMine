@@ -9,9 +9,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -53,16 +55,17 @@ public class ProgramPerformance extends BaseClass{
 	int ECEpiosdeCount,claimsEpiosdeCount,TotalNPRA,TotalProgram;
     Double savingRate,DischargeToSNF,SNFDaysClaims, SNFDaysEC,EpisodesWithReadmissionClaims,dischargetoSNFBenchmarkClaims,DischargeToSNFEC,dischargetoSNFBenchmarkEC,EpisodesWithReadmissionEC,SNFDaysBenchmarkClaims,
     SNFDaysBenchmarkEC,EpisodesWithReadmissionBenchmarkClaims,EpisodesWithReadmissionBenchmarkEC;
-    String StartDate,facilityname,facilitybpid,episodeInitiatorNameInitCap_1,bpid_1,episodeInitiatorNameInitCap_2,bpid_2, facilityNameValidation,ccnValidation,
+    String facilityname,facilitybpid,episodeInitiatorNameInitCap_1,bpid_1,episodeInitiatorNameInitCap_2,bpid_2, facilityNameValidation,ccnValidation,
     bundleName1,bundleName2,bundleName3,bundleName4,region,market,regionPartner,marketPartner,participantName,model,facilityNameInitCap;
     List<String> bundle_Name= new ArrayList<>();
     List<String> DRG_fracture= new ArrayList<>();
     List<String> Physician_NPI= new ArrayList<>();
     Actions act=new Actions(driver);
 	WebDriverWait wait = new WebDriverWait(driver, 300);
-	public static List<ArrayList<String>> col= new ArrayList<ArrayList<String>>();
+	public static ArrayList<String> col= new ArrayList<String>();
 	public static HashMap<String, String> outputText =new HashMap<String,String>();
-	
+	public static String FinalOutput=null;
+	String StartDate = null;
 	public ProgramPerformance(WebDriver driver) {
 		super(driver);
 	}
@@ -546,22 +549,23 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iReadTextFromOutputfile(String location) throws IOException, InterruptedException{
-		 Thread.sleep(10000);
+		 Thread.sleep(18000);
 		 BufferedReader br=new BufferedReader(new FileReader(System.getProperty("user.dir")+location));
 				 String names;
 				 System.out.println(br.lines());
-				 ArrayList<String> elements = new ArrayList<String>();
+//				 ArrayList<String> elements = new ArrayList<String>();
 				 while ((names = br.readLine())!= null) {           
-
+					 delay();
+				     col.add(names);
 //					 StringTokenizer st = new StringTokenizer(names, "*");     
 					
 					
-					 elements.add(names);
+//					 elements.add(names);
 //					 while (st.hasMoreTokens()){
 //				      elements.add(st.nextToken());
 //				     }
-				     delay();
-				     col.add(elements);
+//				     delay();
+//				     col.add(names);
 				  //   elements.clear();
 //		      String ECCount=elements.get(0).trim();
 //		      String ec[]=ECCount.split("=");
@@ -763,7 +767,7 @@ public class ProgramPerformance extends BaseClass{
 		 int height=Integer.parseInt(h_value);
 		 int width=Integer.parseInt(w_value);
 		 WebElement ele = driver.findElement(By.xpath(element));
-		 if(text.contains("%Episodes with a Readmission"))
+		 if(text.contains("Readmissions Current"))
 		 {
 		 scrollIntoViewByJS(ele);
 		 delay();
@@ -771,7 +775,7 @@ public class ProgramPerformance extends BaseClass{
 		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		 BufferedImage  fullImg = ImageIO.read(screenshot);
 		 Point point = ele.getLocation();
-		 if(text.contains("%Episodes with a Readmission")){
+		 if(text.contains("Readmissions Current")){
 			 System.out.println("VVVV"+point.getX()+"YYYYYYYYY"+point.getY());
 			 point = point.moveBy(80, 120);
 //			 point = point.moveBy(325, 104);
@@ -805,34 +809,34 @@ public class ProgramPerformance extends BaseClass{
 				 BytePointer bytePointer=instance.GetUTF8Text();
 				 String output=bytePointer.getString();
 				 System.out.println("Text in image is"+output);
-				 String FinalOutput=output.replaceAll("\\s+", "");
+				 FinalOutput=output.replaceAll("\\s+", "");
 				 System.out.println(FinalOutput);
-				 if(text.equals("EC Episodes"))
-				 {
-				 Assert.assertEquals(numberformat(ECEpiosdeCount), FinalOutput.trim());
-				 }else if(text.equals("Claims Episodes")){
-					 Assert.assertEquals(numberformat(claimsEpiosdeCount), FinalOutput.trim()); 
-				 }else if(text.equals("Program Size")){;
-					 Assert.assertTrue(FinalOutput.trim().contains(numberformat(TotalProgram)));
-				 }else if(text.equals("NPRA")){
-					 Assert.assertTrue(FinalOutput.trim().contains(numberformat(TotalNPRA)));
-				 }else if(text.equals("%Discharge to SNF Claims")){
-					 Double a= ((float)(((int)Math.pow(10,1)*DischargeToSNF))/Math.pow(10,1));
-					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
-				 }else if(text.equals("SNF Days Claims")){
-					 Double a= ((float)(((int)Math.pow(10,1)*SNFDaysClaims))/Math.pow(10,1));
-					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
-				 }else if(text.equals("SNF Days EC")){
-					 Double a= ((float)(((int)Math.pow(10,1)*SNFDaysEC))/Math.pow(10,1));
-					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
-				 }else if(text.equals("%Episodes with a Readmission Claims")){
-					 Assert.assertTrue(FinalOutput.trim().contains(EpisodesWithReadmissionEC.toString()));
-				 }else if(text.equals("%Discharge to SNF EC")){
-					 Double a= ((float)(((int)Math.pow(10,1)*DischargeToSNFEC))/Math.pow(10,1));
-					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
-				 }else if(text.equals("%Episodes with a Readmission EC")){
-					 Assert.assertTrue(FinalOutput.trim().contains(EpisodesWithReadmissionEC.toString()));
-				 }
+//				 if(text.equals("EC Episodes"))
+//				 {
+//				 Assert.assertEquals(numberformat(ECEpiosdeCount), FinalOutput.trim());
+//				 }else if(text.equals("Claims Episodes")){
+//					 Assert.assertEquals(numberformat(claimsEpiosdeCount), FinalOutput.trim()); 
+//				 }else if(text.equals("Program Size")){;
+//					 Assert.assertTrue(FinalOutput.trim().contains(numberformat(TotalProgram)));
+//				 }else if(text.equals("NPRA")){
+//					 Assert.assertTrue(FinalOutput.trim().contains(numberformat(TotalNPRA)));
+//				 }else if(text.equals("%Discharge to SNF Claims")){
+//					 Double a= ((float)(((int)Math.pow(10,1)*DischargeToSNF))/Math.pow(10,1));
+//					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
+//				 }else if(text.equals("SNF Days Claims")){
+//					 Double a= ((float)(((int)Math.pow(10,1)*SNFDaysClaims))/Math.pow(10,1));
+//					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
+//				 }else if(text.equals("SNF Days EC")){
+//					 Double a= ((float)(((int)Math.pow(10,1)*SNFDaysEC))/Math.pow(10,1));
+//					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
+//				 }else if(text.equals("%Episodes with a Readmission Claims")){
+//					 Assert.assertTrue(FinalOutput.trim().contains(EpisodesWithReadmissionEC.toString()));
+//				 }else if(text.equals("%Discharge to SNF EC")){
+//					 Double a= ((float)(((int)Math.pow(10,1)*DischargeToSNFEC))/Math.pow(10,1));
+//					 Assert.assertTrue(FinalOutput.trim().contains(a.toString()));
+//				 }else if(text.equals("%Episodes with a Readmission EC")){
+//					 Assert.assertTrue(FinalOutput.trim().contains(EpisodesWithReadmissionEC.toString()));
+//				 }
 	 }
 	 
 	 public void iSetStartAndEndDateForClaimsData(String start){
@@ -1400,18 +1404,81 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void readDataMetricsValueFromQuery(int index){
-		 List<String> val = new ArrayList<String>();
-		 String value=col.get(index).toString();
-		 StringTokenizer st = new StringTokenizer(value, "*");
+		 System.out.println(col.get(index));
+		 System.out.println(col.size());
+		 StringTokenizer st = new StringTokenizer(col.get(index), "*");
 		 while(st.hasMoreTokens()){
-			 val.add(st.nextToken());
-		 }
-		 for(int i=0;i<val.size();i++){
-			 String var[] =val.get(0).trim().split("=");
+			 String var[] =st.nextToken().trim().split("=");
 			 outputText.put(var[0], var[1]);
 		 }
 		 System.out.println("Value of Output File Size:"+outputText.size());
+		 StartDate=outputText.get("StartDate");
 	 }
 	 
+	 public void clearDataFromOutputFile(String path) throws FileNotFoundException {
+		 PrintWriter writer = new PrintWriter(System.getProperty("user.dir")+path);
+		 writer.print("");
+		 writer.close();
+	 }
+	 
+	 public void verifyDataMetricValueWithdatabase(String text,String data, String resolution) throws IOException{
+		 String xpath="//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas";
+		 GetTextFromScreenShot(text, xpath, resolution);
+		 if(data.equalsIgnoreCase("EC")){
+			 if(text.contains("Episode")){
+				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
+				 Assert.assertEquals(outputText.get("ECEpisodeCount").trim(), FinalOutput.trim());
+			 }else if(text.contains("Program_size")){
+				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
+//				 Assert.assertTrue(FinalOutput.trim().equals("Program Spend"));
+			 }else if(text.contains("NPRA")){
+				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
+//				 Assert.assertTrue(FinalOutput.trim().equals("NPRA"));
+			 }else if(text.contains("Savings Rate")){
+				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
+				 Assert.assertTrue(FinalOutput.trim().equals("Saving Rate"));
+			 }else if(text.contains("SNF Disch Current")){
+				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
+				 Assert.assertTrue(FinalOutput.trim().contains(outputText.get("dischargetoSNFEC").trim()));
+			 }else if(text.contains("SNF Days Current")){
+				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
+				 if(!outputText.get("SNFDaysEC").trim().equals("${SNFDaysEC_1}")){
+					 Assert.assertTrue(FinalOutput.trim().contains(outputText.get("SNFDaysEC").trim()));
+				 }else{
+					 
+				 }
+				
+			 }else if(text.contains("Readmissions Current")){
+				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
+				 Assert.assertTrue(FinalOutput.trim().contains(outputText.get("EpisodesWithReadmissionEC").trim()));
+			 }
+			 
+		 }else if (data.equalsIgnoreCase("Claims")){
+			 if(text.contains("Episode")){
+				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
+				 Assert.assertEquals(outputText.get("claimsEpisodeCount").trim(), FinalOutput.trim());
+			 }else if(text.contains("Program_size")){
+				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
+				 Assert.assertEquals(outputText.get("Claims_TotalProgram").trim(), FinalOutput.trim());
+			 }else if(text.contains("NPRA")){
+				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
+				 Assert.assertEquals(outputText.get("Claims_TotalNPRA").trim(), FinalOutput.trim());
+			 }else if(text.contains("Savings Rate")){
+				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
+				 Assert.assertTrue(FinalOutput.trim().equals("Saving Rate"));
+			 }else if(text.contains("SNF Disch Current")){
+				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
+				 Assert.assertTrue(FinalOutput.trim().contains(outputText.get("dischargetoSNFClaims").trim()));
+			 }else if(text.contains("SNF Days Current")){
+				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
+				 Assert.assertTrue(FinalOutput.trim().contains(outputText.get("SNFDaysClaims").trim()));
+			 }else if(text.contains("Readmissions Current")){
+				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
+				 Assert.assertTrue(FinalOutput.trim().contains(outputText.get("EpisodesWithReadmissionClaims").trim()));
+			 }
+		 }else{
+			 
+		 }
+	 }
 	 
 }
