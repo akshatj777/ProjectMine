@@ -149,7 +149,7 @@ public class CreateUserPage extends BaseClass{
 		{
 			if(npi.equals("NPI"))
 			{
-				userNPI = RandomStringUtils.randomNumeric(10);
+				userNPI = "213" + RandomStringUtils.randomNumeric(7);
 				if(DriverScript.Config.getProperty("Browser").equals("ie"))
 				{
 					iWillWaitToSee(By.xpath("//input[@placeholder='NPI']"));
