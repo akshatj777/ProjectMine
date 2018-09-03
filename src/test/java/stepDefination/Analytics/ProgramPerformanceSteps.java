@@ -415,9 +415,9 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.GetTextForEpisodesWithReadmission(text, "//div[@tb-test-id='Readmissions Benchmark Variance']//div[@class='tvimagesContainer']/canvas", resolution);
 	}
 	
-	@And("^I verify \"([^\"]*)\" tooltip is having the same value fetched from database$")
-	public void i_verify_discharge_tooltip_is_having_the_same_value_fetched_from_database(String text) throws Throwable{
-		programdashboard.iValidateBenchmarkToolTipText(text);
+	@And("^I verify \"([^\"]*)\" tooltip for \"([^\"]*)\" is having the same value fetched from database$")
+	public void i_verify_discharge_tooltip_is_having_the_same_value_fetched_from_database(String text,String data) throws Throwable{
+		programdashboard.iValidateBenchmarkToolTipText(text,data);
 	}
 	
 	@And("^I verify Episode Initiator BPID values with database value$")

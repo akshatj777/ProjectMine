@@ -761,6 +761,7 @@ public class ProgramPerformance extends BaseClass{
 		 delay();
 		 longDelay();
 		 longDelay();
+//		 scrollToTopOfThePage();
 		 String[] str=resolution.split("X");
 		 String h_value=str[0];
 		 String w_value=str[1];
@@ -777,12 +778,12 @@ public class ProgramPerformance extends BaseClass{
 		 Point point = ele.getLocation();
 		 if(text.contains("Readmissions Current")){
 			 System.out.println("VVVV"+point.getX()+"YYYYYYYYY"+point.getY());
-			 point = point.moveBy(80, 120);
+			 point = point.moveBy(00, -40);
 //			 point = point.moveBy(325, 104);
 //			 point = point.moveBy(80, 20);
 		 }else{
 			 System.out.println("Value+++++++++"+point.getX()+"YYYYYYYYY"+point.getY());
-			 point = point.moveBy(100, 100);
+			 point = point.moveBy(80, 100);
 		 }
 		 
 		 System.out.println(point);
@@ -865,7 +866,7 @@ public class ProgramPerformance extends BaseClass{
 		 if(field.equals("Start Date")){
 			 if(value.contains("ClaimsCubeDate")){
 				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
-				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerText']")), StartDate);
+				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), StartDate);
 			 }else {
 				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
 				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), value);
@@ -873,7 +874,7 @@ public class ProgramPerformance extends BaseClass{
 		 }else if (field.equals("End Date")){
 			 if(value.contains("ClaimsCubeDate")){
 				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
-				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperText']")), StartDate);
+				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), StartDate);
 			 }else if(value.contains("Today")){
 				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
 				 clickElement(driver.findElement(By.xpath("//span[@class='tab-datepicker-today-date']")));
@@ -944,7 +945,10 @@ public class ProgramPerformance extends BaseClass{
 		 longDelay();
 		 clickElement(driver.findElement(By.xpath("//span[text()='"+field+"']/../../../../.. //span[@role='combobox']")));
 //		 clickElement(driver.findElement(By.xpath("//input[contains(@name,'All')]")))
+//		 iWillWaitToSee(By.xpath("//input[contains(@name,'All')]"));
+		 delay();
 		 WebElement elem = driver.findElement(By.xpath("//input[contains(@name,'All')]"));
+		 
 		 act.moveToElement(elem).click().build().perform();
 		 if(text.contains(",")){
 			 StringTokenizer st= new StringTokenizer(text, ",");
@@ -957,6 +961,9 @@ public class ProgramPerformance extends BaseClass{
 				 driver.findElement(By.xpath("//a[contains(@title,'"+st.nextToken()+"')]/../input")).click();
 				 delay();
 			 }
+		 } else {
+			 driver.findElement(By.xpath("//a[contains(@title,'"+text+"')]/../input")).click();
+			 delay();
 		 }
 		 clickElement(driver.findElement(By.xpath("//span[text()='"+apply+"']")));
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
@@ -1280,39 +1287,57 @@ public class ProgramPerformance extends BaseClass{
 		 Assert.assertTrue(a.trim().contains(verifytext.trim()));
 	 }
 	 
-	 public void iValidateBenchmarkToolTipText( String text){
+	 public void iValidateBenchmarkToolTipText(String text,String data){
 		 WebElement elem = null;
-		 if(text.contains("Readmission benchmark")){
-			 WebElement graphele = driver.findElement(By.xpath("//div[@tb-test-id='Readmissions Trend']//div[@class='tab-tvBottomAxis tvimagesNS']/div/canvas"));
-			 act.moveToElement(graphele).click().build().perform();
-			 longDelay();
-			 elem=driver.findElement(By.xpath("//div[@tb-test-id='Readmissions Benchmark Variance']//div[@class='tvimagesContainer']/canvas"));
-		 }
-		 else if(text.contains("Discharge to snf benchmark")){
-			 elem=driver.findElement(By.xpath("//div[@tb-test-id='% SNF Disch Benchmark Variance']//div[@class='tvimagesContainer']/canvas"));
-		 }
-		 else if(text.contains("SNF Days benchmark")){
-			 longDelay();
-			 elem=driver.findElement(By.xpath("//div[@tb-test-id='SNF Days Benchmark Variance']//div[@class='tvimagesContainer']/canvas"));
-		 }
+		 elem=driver.findElement(By.xpath("//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas"));
 		 act.moveToElement(elem).click().build().perform();
 		 longDelay();
 		 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
 		 System.out.println(gettext);
-		 if (text.contains("Discharge to snf benchmark Claims")){
-			 Double a= ((float)(((int)Math.pow(10,1)*dischargetoSNFBenchmarkClaims))/Math.pow(10,1));
-			 Assert.assertTrue(gettext.trim().contains(a.toString()));
-		 }else if (text.contains("Discharge to snf benchmark EC")){
-			 Assert.assertTrue(gettext.trim().contains(dischargetoSNFBenchmarkEC.toString()));
-		 }else if (text.contains("Episodes with a Readmission benchmark Claims")){
-			 Assert.assertTrue(gettext.trim().contains(EpisodesWithReadmissionBenchmarkClaims.toString()));
-		 }else if (text.contains("Episodes with a Readmission benchmark EC")){
-			 Assert.assertTrue(gettext.trim().contains(EpisodesWithReadmissionBenchmarkEC.toString()));
-		 }else if (text.contains("SNF Days benchmark EC")){
-			 Assert.assertTrue(gettext.trim().contains(SNFDaysBenchmarkEC.toString()));
-		 }else if (text.contains("SNF Days benchmark Claims")){
-			 Assert.assertTrue(gettext.trim().contains(SNFDaysBenchmarkClaims.toString()));
+		 if(text.contains("SNF Disch Benchmark Variance")){
+			 Assert.assertTrue(gettext.trim().contains(outputText.get("dischtoSNFBenchmark"+data)));
+		 }else if (text.contains("SNF Days Benchmark Variance")){
+			 Assert.assertTrue(gettext.trim().contains(outputText.get("SNFDaysBenchmark"+data)));
+		 }else if(text.contains("Readmissions Benchmark Variance")){
+			 Assert.assertTrue(gettext.trim().contains(outputText.get("EpisodesWithReadmissionBenchmark"+data)));
+		 }else{
+			 Assert.assertTrue(gettext.trim().contains(text.toString()));
 		 }
+		 
+		 
+//		 WebElement elem = null;
+//		 if(text.contains("Readmission benchmark")){
+//			 WebElement graphele = driver.findElement(By.xpath("//div[@tb-test-id='Readmissions Trend']//div[@class='tab-tvBottomAxis tvimagesNS']/div/canvas"));
+//			 act.moveToElement(graphele).click().build().perform();
+//			 longDelay();
+//			 elem=driver.findElement(By.xpath("//div[@tb-test-id='Readmissions Benchmark Variance']//div[@class='tvimagesContainer']/canvas"));
+//		 }
+//		 else if(text.contains("Discharge to snf benchmark")){
+//			 elem=driver.findElement(By.xpath("//div[@tb-test-id='% SNF Disch Benchmark Variance']//div[@class='tvimagesContainer']/canvas"));
+//		 }
+//		 else if(text.contains("SNF Days benchmark")){
+//			 longDelay();
+//			 elem=driver.findElement(By.xpath("//div[@tb-test-id='SNF Days Benchmark Variance']//div[@class='tvimagesContainer']/canvas"));
+//		 }
+//		 act.moveToElement(elem).click().build().perform();
+//		 longDelay();
+//		 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+//		 System.out.println(gettext);
+		 
+//		 if (text.contains("Discharge to snf benchmark Claims")){
+//			 Double a= ((float)(((int)Math.pow(10,1)*dischargetoSNFBenchmarkClaims))/Math.pow(10,1));
+//			 Assert.assertTrue(gettext.trim().contains(a.toString()));
+//		 }else if (text.contains("Discharge to snf benchmark EC")){
+//			 Assert.assertTrue(gettext.trim().contains(dischargetoSNFBenchmarkEC.toString()));
+//		 }else if (text.contains("Episodes with a Readmission benchmark Claims")){
+//			 Assert.assertTrue(gettext.trim().contains(EpisodesWithReadmissionBenchmarkClaims.toString()));
+//		 }else if (text.contains("Episodes with a Readmission benchmark EC")){
+//			 Assert.assertTrue(gettext.trim().contains(EpisodesWithReadmissionBenchmarkEC.toString()));
+//		 }else if (text.contains("SNF Days benchmark EC")){
+//			 Assert.assertTrue(gettext.trim().contains(SNFDaysBenchmarkEC.toString()));
+//		 }else if (text.contains("SNF Days benchmark Claims")){
+//			 Assert.assertTrue(gettext.trim().contains(SNFDaysBenchmarkClaims.toString()));
+//		 }
 	 }
 	 
 	 public void iVeriyEpisodeIntiatorBPID(){
@@ -1401,6 +1426,8 @@ public class ProgramPerformance extends BaseClass{
 		 clickElement(driver.findElement(By.xpath("//span[text()='Refresh']")));
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='wcGlassPane' and contains(@style,'cursor: wait;')]")));
 		 delay();
+		 driver.switchTo().defaultContent();
+		 scrollToTopOfThePage();
 	 }
 	 
 	 public void readDataMetricsValueFromQuery(int index){
@@ -1430,13 +1457,14 @@ public class ProgramPerformance extends BaseClass{
 				 Assert.assertEquals(outputText.get("ECEpisodeCount").trim(), FinalOutput.trim());
 			 }else if(text.contains("Program_size")){
 				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
-//				 Assert.assertTrue(FinalOutput.trim().equals("Program Spend"));
+				 Assert.assertTrue(FinalOutput.isEmpty());
 			 }else if(text.contains("NPRA")){
 				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
-//				 Assert.assertTrue(FinalOutput.trim().equals("NPRA"));
+//				 Assert.assertNu
+				 Assert.assertTrue(FinalOutput.isEmpty());
 			 }else if(text.contains("Savings Rate")){
 				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
-				 Assert.assertTrue(FinalOutput.trim().equals("Saving Rate"));
+//				 Assert.assertTrue(FinalOutput.trim().equals("SavingsRate"));
 			 }else if(text.contains("SNF Disch Current")){
 				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
 				 Assert.assertTrue(FinalOutput.trim().contains(outputText.get("dischargetoSNFEC").trim()));
