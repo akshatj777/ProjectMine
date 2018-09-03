@@ -190,9 +190,9 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	public void iVerifyMessageForInvalidLocation(String text) throws InterruptedException{
 		editUser.iVerifyMessageForInvalidLocation(text);
 	}
-	@Then("^I verify No results found for invalid Location for \"([^\"]*)\" in selected organisation$")
-	public void verifyMessageForInvalidLocation(String text) throws InterruptedException{
-		editUser.VerifyMessageForInvalidLocations(text);
+	@Then("^I verify No results found for invalid Location in selected organisation$")
+	public void verifyMessageForInvalidLocation() throws InterruptedException{
+		editUser.VerifyMessageForInvalidLocations();
 	}
 	
 	@Then("^I verify No results found for invalid Location for \"([^\"]*)\" in selected organisation for PTA user$")
