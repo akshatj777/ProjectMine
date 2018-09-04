@@ -27,7 +27,7 @@
         <stringProp name="password">1Welcome2</stringProp>
       </JDBCDataSource>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Performace DashBoard" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Physician DashBoard" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -72,1459 +72,156 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
           <stringProp name="filename">EpisodeCount.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">bpid</stringProp>
+          <stringProp name="variableNames">bpid,ccn</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
           <boolProp name="stopThread">true</boolProp>
           <stringProp name="shareMode">shareMode.all</stringProp>
-          <boolProp name="ignoreFirstLine">false</boolProp>
+          <boolProp name="ignoreFirstLine">true</boolProp>
         </CSVDataSet>
         <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="UserName Qafivedashtest@yopmail.com" enabled="true">
-          <stringProp name="filename">TestUser.csv</stringProp>
-          <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">userName</stringProp>
-          <stringProp name="delimiter">|</stringProp>
-          <boolProp name="quotedData">false</boolProp>
-          <boolProp name="recycle">false</boolProp>
-          <boolProp name="stopThread">true</boolProp>
-          <stringProp name="shareMode">shareMode.all</stringProp>
-          <boolProp name="ignoreFirstLine">false</boolProp>
-        </CSVDataSet>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="No. of Episode (EC Source)" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="No. of Episode (Claims Source)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT
-    SUM(fp.episodeCountReport) as ECEpiosdeCount
-FROM
-    warehouse.factPatientEpisode fp
-        INNER JOIN
-    warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
-        INNER JOIN
-    warehouse.dimFacility df ON fp.anchorAdmitFacilityKey = df.facilitySK
-        INNER JOIN
-    warehouse.dimFacility pac ON fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-        INNER JOIN
-    warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
-        INNER JOIN
-    warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
-        INNER JOIN
-    warehouse.dimDRG drg ON drg.drgSK = fp.currDrgKey
-WHERE
-    fp.bundleRisk = 1
-        AND fp.episodeCountReport = 1
-        AND df.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-        AND pac.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-        AND de.bpid NOT LIKE &apos;%DEMO%&apos;
-        AND dlk.lookupCategory = &apos;patientRisk&apos;
-        AND fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-        AND fp.BPID IN ${bpid}
-        and df.CCN in (&apos;390223&apos;)</stringProp>
+          <stringProp name="query">${Query}</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">ECEpiosdeCount</stringProp>
+          <stringProp name="variableNames">claimsEpisodeCount</stringProp>
           <stringProp name="resultVariable"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree>
-          <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="false">
-            <stringProp name="BeanShellAssertion.query">if ( ! new String(&quot;${expect1}&quot;).equals(&quot;na&quot;)) {
-
-	if( ! new String(&quot;${drgSubCode_1}&quot;).equals(&quot;${expect1}&quot;)) {
-		Failure = true;
-		FailureMessage = &quot;drgSubCode_1=&quot; + &quot;${drgSubCode_1}&quot; + &quot; and &quot; + &quot;expecting &quot; + &quot;${expect1}&quot;;
-	
-	}
-
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
+} else {
+	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
 }
-if ( ! new String(&quot;${expect2}&quot;).equals(&quot;na&quot;)) {
-
-	if( ! new String(&quot;${drgSubCode_2}&quot;).equals(&quot;${expect2}&quot;)) {
-		Failure = true;
-		FailureMessage = &quot;drgSubCode_2=&quot; + &quot;${drgSubCode_2}&quot; + &quot; and &quot; + &quot;expecting &quot; + &quot;${expect2}&quot;;
-	
-	}
-
+if(!vars.get(&quot;ccn&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
+} else{
+	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
 
-if ( ! new String(&quot;${expect3}&quot;).equals(&quot;na&quot;)) {
 
-	if( ! new String(&quot;${drgSubCode_3}&quot;).equals(&quot;${expect3}&quot;)) {
-		Failure = true;
-		FailureMessage = &quot;drgSubCode_3=&quot; + &quot;${drgSubCode_3}&quot; + &quot; and &quot; + &quot;expecting &quot; + &quot;${expect3}&quot;;
-	
-	}
 
-}</stringProp>
-            <stringProp name="BeanShellAssertion.filename"></stringProp>
-            <stringProp name="BeanShellAssertion.parameters"></stringProp>
-            <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
-          </BeanShellAssertion>
+</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <collectionProp name="UserParameters.names">
+              <stringProp name="78391464">Query</stringProp>
+              <stringProp name="0"></stringProp>
+            </collectionProp>
+            <collectionProp name="UserParameters.thread_values">
+              <collectionProp name="-1345286659">
+                <stringProp name="-181944515">select   	sum(c.currEpiCounts) as episodecount       from warehouse.factClaims c 	LEFT JOIN warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK     LEFT JOIN warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK        	LEFT JOIN  warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK     LEFT JOIN warehouse.dimPhysician dp ON c.physicianKey = dp.physicianSK     WHERE f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= &apos;20160101&apos;  and c.anchorBeginDateKey &lt;=  (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) ${Q_BPID} ${Q_CCN}  and c.targetPrice &lt;&gt; 0; </stringProp>
+                <stringProp name="0"></stringProp>
+              </collectionProp>
+            </collectionProp>
+            <boolProp name="UserParameters.per_iteration">false</boolProp>
+          </UserParameters>
           <hashTree/>
         </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="No. of Episode (Claims Source)" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Spend Per Episode (Claims)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select sum(c.currEpiCounts) as ClaimsEpiosdeCount
-from warehouse.factClaims c
-inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
-inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey
-inner join warehouse.dimDRG d on c.anchorDrgKey = d.drgSK
-where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and e.bpid not like &apos;%DEMO%&apos;
-and c.atRisk=&apos;Y&apos;
-and c.anchorBeginDateKey &gt;= 20170101
-and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
- and e.bpid in  ${bpid}
- and f.ccn in (&apos;390223&apos;)
- -- and d.bundleName in (&apos;Coronary artery bypass graft&apos;)
- -- and d.drgCode in (&apos;233&apos;)
- -- and dp.npi in (&apos;220010&apos;,&apos;390223&apos;)
-and c.targetPrice &lt;&gt; 0;</stringProp>
+          <stringProp name="query">${Query}</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">claimsEpiosdeCount</stringProp>
+          <stringProp name="variableNames">SpendPerEpisodeClaims</stringProp>
           <stringProp name="resultVariable"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Saving Rate " enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select (round((sum(NPRA)/sum(Program_size)),3)*100) as Savings_Rate
-from
-(select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size
-from warehouse.factClaims c
-inner join
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
-inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey
-inner join warehouse.dimDRG d on c.anchorDrgKey = d.drgSK
-where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and e.bpid not like &apos;%DEMO%&apos;
-and c.atRisk=&apos;Y&apos;
-and c.anchorBeginDateKey &gt;= 20170101
--- and c.anchorBeginDateKey &lt;= 20180301
-and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
- and e.bpid in  ${bpid}
- and f.ccn in (&apos;390223&apos;)
- -- and d.bundleName in (&apos;Congestive heart failure&apos;)
- -- and dp.npi in (&apos;1063730448&apos;,&apos;1215356449&apos;,&apos;1366683997&apos;,&apos;1336484708&apos;)
- -- and d.drgCode in (&apos;291&apos;,&apos;292&apos;,&apos;293&apos;)
-and c.targetPrice &lt;&gt; 0) a;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">savingRate</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NPRA and PROGRAM SIZE metrics Caluclation by individual BPID" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select round(sum(NPRA)) as TotalNPRA, round(sum(Program_size)) as TotalProgram
-from
-(select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size
-from warehouse.factClaims c
-inner join
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
-inner join
-warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey
-inner join warehouse.dimDRG d on c.anchorDrgKey = d.drgSK
-where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and e.bpid not like &apos;%DEMO%&apos;
-and c.atRisk=&apos;Y&apos;
-and c.anchorBeginDateKey &gt;= 20170101
--- and c.anchorBeginDateKey &lt;= 20180101
-and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
- and e.bpid in  ${bpid}
- and f.ccn in (&apos;390223&apos;)
- -- and d.drgCode in (&apos;246&apos;,&apos;247&apos;,&apos;248&apos;,&apos;249&apos;)
- -- and d.bundleName in (&apos;Percutaneous coronary intervention&apos;)
- -- and dp.npi in (&apos;1174554851&apos;,&apos;1679735211&apos;,&apos;1942231709&apos;)
-and c.targetPrice &lt;&gt; 0) a;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">TotalNPRA, TotalProgram</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Start Date for Dashboard" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select DATE_FORMAT(CAST(lookupValue AS UNSIGNED),&apos;%m/%d/%Y&apos;) as StartDate from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">StartDate</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Discharge to SNF (Claims)" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select round(sum(category)/sum(episodes),3) * 100 as DischargeToSNFClaims
-from
-(select e.bpid, SUM(if( (c.postAcuteCategory) = &quot;SNF&quot;, 1,0) ) as Category, sum(currEpiCounts) as Episodes
-from warehouse.factClaims c
-inner join
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
-inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey
-inner join warehouse.dimDRG d on c.anchorDrgKey = d.drgSK
-where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and e.bpid not like &apos;%DEMO%&apos;
-and c.atRisk=&apos;Y&apos;
-and c.anchorBeginDateKey &gt;= 20170101
-and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and e.bpid in  ${bpid}
-and f.ccn in (&apos;390223&apos;)
--- and d.bundleName in (&apos;Coronary artery bypass graft&apos;)
--- and d.drgCode in (&apos;232&apos;,&apos;233&apos;,&apos;234&apos;,&apos;235&apos;,&apos;236&apos;)
--- and dp.npi in (&apos;1659559250&apos;,&apos;1699702597&apos;,&apos;1679740005&apos;,&apos;1407913940&apos;)
-and c.targetPrice &lt;&gt; 0) a;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">dischargetoSNFClaims</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Discharge to SNF (EC)" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT ROUND(SUM(Category) / SUM(episodes), 3) * 100 as DischargeToSNFEC
-FROM(SELECT fp.BPID,
-SUM(IF((fp.NSOCType) IN (&apos;SNF&apos;), 1, 0)) AS Category,
-SUM(fp.episodeCountReport) AS Episodes
-FROM
-warehouse.factPatientEpisode fp
-INNER JOIN warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
-INNER JOIN warehouse.dimFacility df ON fp.anchorAdmitFacilityKey = df.facilitySK
-INNER JOIN warehouse.dimFacility pac ON fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-INNER JOIN warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
-INNER JOIN warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
-INNER JOIN warehouse.dimDRG drg ON drg.drgSK = fp.currDrgKey
-WHERE fp.bundleRisk = 1
-AND fp.episodeCountReport = 1
-            AND df.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-            AND pac.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-            AND de.bpid NOT LIKE &apos;%DEMO%&apos;
-            AND dlk.lookupCategory = &apos;patientRisk&apos;
-            AND fp.anchorAdmitDateKey &gt; &apos;20180331&apos;
-            -- AND fp.anchorAdmitDateKey &lt;= &apos;20180531&apos;
-            AND fp.NSOCType IN (&apos;SNF&apos; , &apos;LTCH&apos;, &apos;OTHER&apos;, &apos;HHA&apos;, &apos;HOME&apos;, &apos;IRF&apos;)
-            AND fp.BPID IN (&apos;2070-021&apos;))
-            -- and drg.bundleName in (&apos;Acute myocardial infarction&apos;,&apos;Sepsis&apos;,&apos;COPD, bronchitis, asthma&apos;)
-		    -- and df.CCN in (&apos;030030&apos;,&apos;030083&apos;,&apos;030110&apos;)
-			-- AND drg.drgCode IN (&apos;280&apos;,&apos;202&apos;,&apos;192&apos;,&apos;870&apos;))
-            a;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">dischargetoSNFEC</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days (Claims)" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select round(sum(snfDaysTrimmed)/sum(Episodes),1) as SNFDaysClaims
-from
-(select e.bpid, sum(if(c.snfDaysTrimmed,1,0)) as Episodes,
-sum(c.snfDaysTrimmed) as snfDaysTrimmed
-from warehouse.factClaims c
-inner join
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
-inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey
-inner join warehouse.dimDRG d on c.anchorDrgKey = d.drgSK
-where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and e.bpid not like &apos;%DEMO%&apos;
-and c.atRisk=&apos;Y&apos;
-and c.anchorBeginDateKey &gt;= 20170101
--- and c.anchorBeginDateKey &lt;= 20180301
-and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
- and e.bpid in  ${bpid}
- and f.ccn in (&apos;390223&apos;)
--- and dp.npi in (&apos;1609861061&apos;,&apos;1710225214&apos;)
- -- and d.drgCode in (&apos;291&apos;,&apos;292&apos;)
- -- and d.bundleName in (&apos;Congestive heart failure&apos;)
--- and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;)
-and c.targetPrice &lt;&gt; 0) a;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">SNFDaysClaims</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days (EC)" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT round(SUM(CASE WHEN (fp.dataQualityFlag NOT LIKE &apos;%Invalid%&apos; AND fp.totalSNFDays &gt;= 90) 
-THEN 90 
-WHEN (fp.dataQualityFlag NOT LIKE &apos;%Invalid%&apos;) THEN fp.totalSNFDays
-ELSE 0 END) / (SUM(IF((fp.totalSNFDays &gt; 0
-AND fp.dataQualityFlag NOT LIKE &apos;Invalid%&apos;),
-fp.currEpiCounts,0))),1) AS SNFDaysEC
-FROM
-warehouse.factPatientEpisode fp
-INNER JOIN
-warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
-INNER JOIN
-warehouse.dimFacility df ON fp.anchorAdmitFacilityKey = df.facilitySK
-INNER JOIN
-warehouse.dimFacility pac ON fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-INNER JOIN
-warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
-inner join warehouse.dimDRG drg on drg.drgSK = fp.currDrgKey
-INNER JOIN
-warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
-WHERE
-fp.bundleRisk = 1
-AND fp.totalSNFDays &gt; 0
-        AND fp.dataQualityFlag NOT LIKE &apos;%Invalid%&apos;
-        AND fp.episodeCountReport = 1
-        AND df.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-        AND pac.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-        AND de.bpid NOT LIKE &apos;%DEMO%&apos;
-        AND dlk.lookupCategory = &apos;patientRisk&apos;
-        AND fp.anchorAdmitDateKey &gt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-        -- AND fp.anchorAdmitDateKey &lt;= 20180430
-        and df.CCN in (&apos;390223&apos;)
-        -- and drg.bundleName in (&apos;Amputation&apos;,&apos;Cellulitis&apos;)
-        AND fp.BPID IN ${bpid}
-        -- and drg.drgCode in (&apos;240&apos;,&apos;475&apos;,&apos;602&apos;);</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">SNFDaysEC</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days Benchmark (Claims)" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select round(sum(baseSNFDays)/sum(baseSNFCount),1) as SNFDaysBenchmarkClaims
-from
-(select e.bpid, sum(c.baseSNFDays) as baseSNFDays, sum(c.baseSNFCount) as baseSNFCount
-from warehouse.factClaims c
-inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
-inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-inner join warehouse.dimPhysician p ON c.physicianKey = p.physicianSK
-inner join warehouse.dimDRG d on c.anchorDrgKey = d.drgSK
-where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and e.bpid not like &apos;%DEMO%&apos;
-and c.atRisk=&apos;Y&apos;
-and c.anchorBeginDateKey &gt;= 20170101
--- and c.anchorBeginDateKey &lt;= 20180301
- and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
--- and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;)
-and e.bpid in  ${bpid}
- and f.ccn in (&apos;390223&apos;)
--- and p.npi in (&apos;1609861061&apos;,&apos;1710225214&apos;)
--- and d.drgCode in (&apos;291&apos;,&apos;292&apos;)
- -- and d.bundleName in (&apos;Congestive heart failure&apos;)
- and c.targetPrice &lt;&gt; 0
- and c.snfDaysTrimmed &gt; 0
-) a;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">SNFDaysBenchmarkClaims</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days Benchmark (EC)" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT round( SUM(fp.baseSNFDays) / SUM(fp.baseEpiCounts) ,1 )  AS SNFDaysBenchmarkEC
-FROM
-    warehouse.factPatientEpisode fp
-        INNER JOIN
-    warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
-        INNER JOIN
-    warehouse.dimFacility df ON fp.anchorAdmitFacilityKey = df.facilitySK
-        INNER JOIN
-    warehouse.dimFacility pac ON fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-        INNER JOIN
-    warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
-        INNER JOIN
-    warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
-    inner join warehouse.dimDRG drg on drg.drgSK = fp.currDrgKey
-WHERE
-    fp.bundleRisk = 1
-        AND fp.totalSNFDays &gt; 0
-        AND fp.dataQualityFlag NOT LIKE &apos;%Invalid%&apos;
-        AND fp.episodeCountReport = 1
-        AND df.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-        AND pac.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-        AND de.bpid NOT LIKE &apos;%DEMO%&apos;
-        AND dlk.lookupCategory = &apos;patientRisk&apos;
-        -- AND fp.anchorAdmitDateKey &gt;= 20180401
-       -- AND fp.anchorAdmitDateKey &lt;= 20180430
-		and fp.anchorAdmitDateKey &gt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
+} else {
+	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;ccn&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
+} else{
+	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
+}
 
-        AND df.CCN IN (&apos;390223&apos;)
-        -- AND drg.bundleName IN (&apos;Amputation&apos; , &apos;Cellulitis&apos;)
-        AND fp.BPID IN ${bpid}
-        -- AND drg.drgCode IN (&apos;240&apos; , &apos;475&apos;, &apos;602&apos;);</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">SNFDaysBenchmarkEC</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission (Claims)" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select round(sum(readmissionCounter)/sum(Episodes)*100, 1) as EpisodesWithReadmissionClaims
-from (select sum(if((c.readmission_flag) = 1,1,0)) as readmissionCounter, sum(c.currEpiCounts) as Episodes
-from warehouse.factClaims c
-inner join
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
-inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey
-inner join warehouse.dimDRG d on c.anchorDrgKey = d.drgSK
-where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and e.bpid not like &apos;%DEMO%&apos;
-and c.atRisk=&apos;Y&apos;
-and c.anchorBeginDateKey &gt;= 20170101
--- and c.anchorBeginDateKey &lt;= 20180301
- and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
- and e.bpid in  ${bpid}
- and f.ccn in (&apos;390223&apos;)
- -- and d.bundleName in (&apos;Renal failure&apos;,&apos;Congestive heart failure&apos;)
- -- and dp.npi in (&apos;1497045017&apos;,&apos;1609038355&apos;)
- -- and d.drgCode in (&apos;291&apos;,&apos;293&apos;,&apos;684&apos;)
- and c.targetPrice &lt;&gt; 0) a;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">EpisodesWithReadmissionClaims</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission (EC)" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT ROUND(SUM(readmissionCounter) / SUM(Episodes)*100,1) as EpisodesWithReadmissionEC
-FROM (SELECT SUM(IF((fp.readmissionCounter) &gt;= 1, 1, 0)) AS readmissionCounter,
-SUM(fp.episodeCountReport) AS Episodes
-FROM warehouse.factPatientEpisode fp
-    INNER JOIN warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
-    INNER JOIN warehouse.dimFacility df ON fp.anchorAdmitFacilityKey = df.facilitySK
-    INNER JOIN warehouse.dimFacility pac ON fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-    INNER JOIN warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
-    INNER JOIN warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
-    INNER JOIN warehouse.dimDRG drg ON drg.drgSK = fp.currDrgKey
-    WHERE
-        fp.bundleRisk = 1
-            AND fp.episodeCountReport = 1
-            AND df.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-            AND pac.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-            AND de.bpid NOT LIKE &apos;%DEMO%&apos;
-            AND dlk.lookupCategory = &apos;patientRisk&apos;
-            AND fp.anchorAdmitDateKey &gt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-            -- AND fp.anchorAdmitDateKey &gt;= &apos;20180401&apos;
-            -- AND fp.anchorAdmitDateKey &lt;= &apos;20180701&apos;
-            AND fp.bpid IN ${bpid}
-            AND df.ccn IN (&apos;390223&apos;)
-            -- AND drg.bundleName IN (&apos;Acute myocardial infarction&apos; , &apos;Sepsis&apos;, &apos;COPD, bronchitis, asthma&apos;)
-            -- AND drg.drgCode IN (&apos;280&apos; , &apos;281&apos;, &apos;202&apos;, &apos;190&apos;, &apos;870&apos;)
-            ) a;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">EpisodesWithReadmissionEC</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission Benchmark (Claims)" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select round(sum(baseEpiReadmissions)/sum(baseEpicounts)*100, 1) as EpisodesWithReadmissionBenchmarkClaims
-from (select e.bpid, SUM(c.baseEpiReadmissions) as baseEpiReadmissions, sum(c.baseEpiCounts) as baseEpicounts
-from warehouse.factClaims c
-inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
-inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey
-inner join warehouse.dimDRG d on c.anchorDrgKey = d.drgSK
-WHERE f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and e.bpid not like &apos;%DEMO%&apos;
-and c.atRisk=&apos;Y&apos;
-and c.anchorBeginDateKey &gt;= 20170101
--- and c.anchorBeginDateKey &lt;= 20180301
- and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
- and e.bpid in  ${bpid}
- and f.ccn in (&apos;390223&apos;)
- -- and d.bundleName in (&apos;Renal failure&apos;,&apos;Congestive heart failure&apos;)
- -- and dp.npi in (&apos;1497045017&apos;,&apos;1609038355&apos;)
- -- and d.drgCode in (&apos;291&apos;,&apos;293&apos;,&apos;684&apos;)
- and c.targetPrice &lt;&gt; 0) a;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">EpisodesWithReadmissionBenchmarkClaims</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission Benchmark (EC)" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT ROUND((baseEpiReadmissions) / (baseEpiCounts)*100, 1) as EpisodesWithReadmissionBenchmarkEC
-FROM (SELECT SUM(fp.baseEpiReadmissions) AS baseEpiReadmissions, SUM(fp.baseEpiCounts) AS baseEpiCounts
-    FROM
-    warehouse.factPatientEpisode fp
-    INNER JOIN warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
-    INNER JOIN warehouse.dimFacility df ON fp.anchorAdmitFacilityKey = df.facilitySK
-    INNER JOIN warehouse.dimFacility pac ON fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-    INNER JOIN warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
-    INNER JOIN warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
-    INNER JOIN warehouse.dimDRG drg ON drg.drgSK = fp.currDrgKey
-    WHERE
-        fp.bundleRisk = 1
-            AND fp.episodeCountReport = 1
-            AND df.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-            AND pac.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-            AND de.bpid NOT LIKE &apos;%DEMO%&apos;
-            AND dlk.lookupCategory = &apos;patientRisk&apos;
-            AND fp.anchorAdmitDateKey &gt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-            -- AND fp.anchorAdmitDateKey &gt;= &apos;20180401&apos;
-            -- AND fp.anchorAdmitDateKey &lt;= &apos;20180701&apos;
-            AND fp.bpid IN ${bpid}
-            AND df.ccn IN (&apos;390223&apos;)
-            -- AND drg.bundleName IN (&apos;Acute myocardial infarction&apos; , &apos;Sepsis&apos;, &apos;COPD, bronchitis, asthma&apos;)
-            -- AND drg.drgCode IN (&apos;280&apos; , &apos;281&apos;, &apos;202&apos;, &apos;190&apos;, &apos;870&apos;)
-            ) a;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">EpisodesWithReadmissionBenchmarkEC</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Discharge to SNF Benchmark (Claims)" enabled="true">
-          <stringProp name="TestPlan.comments">	</stringProp>
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select round(baseSNF/baseEpicounts, 3) * 100 as dischtoSNFBenchmarkClaims
-from
-(select e.bpid, SUM(baseSNF) as baseSNF, sum(baseEpicounts) as baseEpicounts
-from warehouse.factClaims c
-inner join
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
-inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey
-inner join warehouse.dimDRG d on c.anchorDrgKey = d.drgSK
-where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and e.bpid not like &apos;%DEMO%&apos;
-and c.atRisk=&apos;Y&apos;
-and c.anchorBeginDateKey &gt;= 20170101
--- and c.anchorBeginDateKey &lt;= 20180301
-and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and e.bpid in  ${bpid}
-and f.ccn in (&apos;390223&apos;)
--- and d.bundleName in (&apos;Coronary artery bypass graft&apos;)
--- and d.drgCode in (&apos;232&apos;,&apos;233&apos;,&apos;234&apos;,&apos;235&apos;,&apos;236&apos;)
--- and dp.npi in (&apos;1659559250&apos;,&apos;1699702597&apos;,&apos;1679740005&apos;,&apos;1407913940&apos;)
-and c.targetPrice &lt;&gt; 0) a;  </stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">dischtoSNFBenchmarkClaims</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Discharge to SNF Benchmark (EC)" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select round(baseSNF/baseEpicounts* 100, 1)  as dischtoSNFBenchmarkEC
-from
-(select fp.BPID, sum(fp.baseSNF) as baseSNF, sum(fp.baseEpiCounts) as baseEpicounts
-from warehouse.factPatientEpisode fp
-inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK
-inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
-inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK
-inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
-inner join warehouse.dimDRG drg on drg.drgSK = fp.currDrgKey
-where fp.bundleRisk = 1
-and fp.episodeCountReport = 1
-and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
-and de.bpid not like &apos;%DEMO%&apos;
-and dlk.lookupCategory = &apos;patientRisk&apos;
--- and fp.anchorAdmitDateKey  &gt;= &apos;20180501&apos;
--- and fp.anchorAdmitDateKey  &lt;= &apos;20180531&apos;
-and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;,&apos;IRF&apos;)
-AND fp.BPID IN ${bpid}
--- and drg.bundleName in (&apos;Acute myocardial infarction&apos;,&apos;Sepsis&apos;,&apos;COPD, bronchitis, asthma&apos;)
-and df.CCN in (&apos;390223&apos;)
--- AND drg.drgCode IN (&apos;280&apos;,&apos;202&apos;,&apos;192&apos;,&apos;870&apos;)
-)a;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">dischtoSNFBenchmarkEC</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="BPID Filter Validation" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select distinct a.episodeInitiatorNameInitCap, a.bpid from 
-(select
-distinct de.episodeInitiatorNameInitCap, de.bpid
-from warehouse.factPatientEpisode fp 
-inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK
-inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
-inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK
-inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
-Inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID where username = &apos;Qafivedashtest@yopmail.com&apos;
-       GROUP BY bpid
-       )tbsBPID ON de.BPID = tbsBPID.bpid
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN where username = &apos;Qafivedashtest@yopmail.com&apos;
-       GROUP BY ccn
-        )tbsCCN on df.ccn=tbsCCN.ccn
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityFacilityKey where username = &apos;Qafivedashtest@yopmail.com&apos;
-       GROUP BY facilitykey
-        )tbsFacilityKey on df.sourceFacilityKey=tbsFacilityKey.facilitykey      
-where fp.bundleRisk = 1 
-and fp.episodeCountReport = 1
-and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
-and de.bpid not like &apos;%DEMO%&apos;
-and dlk.lookupCategory = &apos;patientRisk&apos;
-and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and fp.anchorAdmitDateKey &lt;= 20180610
-union
-select distinct 
-e.episodeInitiatorNameInitCap, e.bpid
-from warehouse.factClaims c
-    LEFT JOIN warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-    LEFT JOIN warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK       
-    LEFT JOIN warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK        
-    inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID  where username = &apos;Qafivedashtest@yopmail.com&apos;
-       GROUP BY bpid
-       )tbsBPID ON e.BPID = tbsBPID.bpid
-WHERE c.atRisk=&apos;Y&apos; 
- and f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) 
- and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and tbsBPID.username  like &apos;Qafivedashtest@yopmail.com&apos;
-and c.anchorBeginDateKey &gt;= 20170101
-and c.anchorBeginDateKey &lt;=  (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-)
-a
-order by a.episodeInitiatorNameInitCap, a.bpid;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">episodeInitiatorNameInitCap, bpid</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Facility Name CCN Value Validation " enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select distinct a.facilityName, a.ccn from 
-(select
-distinct df.facilityName, df.ccn
-from warehouse.factPatientEpisode fp 
-inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK
-inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
-inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK
-inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
-Inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID where username = &apos;Qafivedashtest@yopmail.com&apos;
-       GROUP BY bpid
-       )tbsBPID ON de.BPID = tbsBPID.bpid
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN where username = &apos;Qafivedashtest@yopmail.com&apos;
-       GROUP BY ccn
-        )tbsCCN on df.ccn=tbsCCN.ccn
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityFacilityKey where username = &apos;Qafivedashtest@yopmail.com&apos;
-       GROUP BY facilitykey
-        )tbsFacilityKey on df.sourceFacilityKey=tbsFacilityKey.facilitykey      
-where fp.bundleRisk = 1 
-and fp.episodeCountReport = 1
-and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
-and de.bpid not like &apos;%DEMO%&apos;
-and dlk.lookupCategory = &apos;patientRisk&apos;
-and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and fp.anchorAdmitDateKey &lt;= 20180610
-and de.bpid = @test_bpid
-union
-select distinct 
-f.facilityName, f.ccn
-from warehouse.factClaims c
-    LEFT JOIN warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-    LEFT JOIN warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK       
-    LEFT JOIN warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK        
-    inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID  where username = &apos;Qafivedashtest@yopmail.com&apos;
-       GROUP BY bpid
-       )tbsBPID ON e.BPID = tbsBPID.bpid
-inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN  where username = &apos;Qafivedashtest@yopmail.com&apos;
-       GROUP BY ccn
-        )tbsCCN on f.ccn=tbsCCN.ccn
-WHERE c.atRisk=&apos;Y&apos; 
-and f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) 
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and c.anchorBeginDateKey &gt;= 20170101
-and c.anchorBeginDateKey &lt;=  (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and e.bpid = ${bpid})
-a order by facilityName;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">facilityName, ccn</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="BundleName row level Validation " enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select distinct a.bundleName from
-(select
-distinct d.bundleName
-from warehouse.factPatientEpisode fp
-inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK
-inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
-inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK
-inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
-inner join warehouse.dimDRG d on fp.currDrgKey = d.drgSK
-Inner JOIN
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON de.BPID = tbsBPID.bpid
-Inner JOIN
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on df.ccn=tbsCCN.ccn
-Inner JOIN
-     (       
-        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
-       GROUP BY facilitykey
-        )tbsFacilityKey on df.sourceFacilityKey=tbsFacilityKey.facilitykey      
-where fp.bundleRisk = 1
-and fp.episodeCountReport = 1
-and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
-and de.bpid not like &apos;%DEMO%&apos;
-and dlk.lookupCategory = &apos;patientRisk&apos;
-and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and fp.anchorAdmitDateKey &lt;= 20180820
-and de.bpid in (&apos;2070-021&apos;)
-and df.ccn in (&apos;390223&apos;)
-union
-select distinct
-drg.bundleName
-from warehouse.factClaims c
-    LEFT JOIN
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-    LEFT JOIN
-warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK       
-    LEFT JOIN
-warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-    LEFT JOIN
-warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    
-    LEFT JOIN
-warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK
-    inner JOIN
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID  where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON e.BPID = tbsBPID.bpid
-inner JOIN
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN  where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on f.ccn=tbsCCN.ccn
 
-WHERE c.atRisk=&apos;Y&apos;
-and f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and c.anchorBeginDateKey &gt;= 20170301
-and c.anchorBeginDateKey &lt;=  (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and e.bpid in ${bpid}
-and f.ccn in (&apos;390223&apos;)
--- and p.npi = @test_physician_npi -- Use this parameter when validating the filters on Physician dashboard
-) a
-order by a.bundleName;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">bundleName</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Remedy Region Market Filter Validation" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select distinct region, market
-from
-(select
-distinct rm.region, rm.market
-from warehouse.factPatientEpisode fp 
-inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK
-inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
-inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-inner join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey
-inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK
-inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
-inner join warehouse.dimDRG d on fp.currDrgKey = d.drgSK
-Inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON de.BPID = tbsBPID.bpid
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on df.ccn=tbsCCN.ccn
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
-       GROUP BY facilitykey
-        )tbsFacilityKey on df.sourceFacilityKey=tbsFacilityKey.facilitykey      
-where fp.bundleRisk = 1 
-and fp.episodeCountReport = 1
-and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
-and de.bpid not like &apos;%DEMO%&apos;
-and dlk.lookupCategory = &apos;patientRisk&apos;
-and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and de.bpid = ${bpid}
-union
-select distinct 
-rm.region, rm.market
-from warehouse.factClaims c
-	LEFT JOIN
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-    LEFT JOIN
-warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK       
-	LEFT JOIN 
-warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-    LEFT JOIN
-warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    
-	LEFT JOIN
-warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK
-	LEFT JOIN
-warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK
-	inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID  where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON e.BPID = tbsBPID.bpid
-inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN  where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on f.ccn=tbsCCN.ccn
 
-WHERE c.atRisk=&apos;Y&apos; 
-and f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) 
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and c.anchorBeginDateKey &gt;= 20170101
-
-and c.anchorBeginDateKey &lt;=  (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and e.bpid = ${bpid}
--- and f.ccn = @test_ccn
--- and p.npi = @test_physician_npi -- Use this parameter when validating the filters on Physician dashboard
-)a
-order by region, market;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">region, market</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Partner Region Market Filter Validation" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select distinct regionPartner, marketPartner
-from
-(select
-distinct rm.region as regionPartner, rm.market as marketPartner
-from warehouse.factPatientEpisode fp 
-inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK
-inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
-inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-inner join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgPartnerKey
-inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK
-inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
-inner join warehouse.dimDRG d on fp.currDrgKey = d.drgSK
-Inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON de.BPID = tbsBPID.bpid
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on df.ccn=tbsCCN.ccn
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
-       GROUP BY facilitykey
-        )tbsFacilityKey on df.sourceFacilityKey=tbsFacilityKey.facilitykey      
-where fp.bundleRisk = 1 
-and fp.episodeCountReport = 1
-and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
-and de.bpid not like &apos;%DEMO%&apos;
-and dlk.lookupCategory = &apos;patientRisk&apos;
-and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and de.bpid = ${bpid}
-union
-select distinct 
-rmp.region, rmp.market
-from warehouse.factClaims c
-	LEFT JOIN
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-    LEFT JOIN
-warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK       
-	LEFT JOIN 
-warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-    LEFT JOIN
-warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    
-	LEFT JOIN
-warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK
-	LEFT JOIN
-warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK
-	LEFT JOIN
-warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK
-	inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID  where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON e.BPID = tbsBPID.bpid
-inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN  where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on f.ccn=tbsCCN.ccn
-WHERE c.atRisk=&apos;Y&apos; 
-and f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) 
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and e.bpid  not like &apos;%DEMO%&apos; 
-and c.anchorBeginDateKey &gt;= 20170101
-and c.anchorBeginDateKey &lt;=  (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and e.bpid = ${bpid}
--- and f.ccn = @test_ccn
--- and p.npi = @test_physician_npi
--- and rm.region = @test_region
--- and rm.market = @test_market
-) a
-order by regionPartner, marketPartner;
 </stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <collectionProp name="UserParameters.names">
+              <stringProp name="78391464">Query</stringProp>
+              <stringProp name="0"></stringProp>
+            </collectionProp>
+            <collectionProp name="UserParameters.thread_values">
+              <collectionProp name="-1987561542">
+                <stringProp name="-1971770484">select   	round(sum(c.epi_allowed_completed )/sum(c.currEpiCounts)) as &apos;Spend Per Episode&apos;       from warehouse.factClaims c 	LEFT JOIN warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK     LEFT JOIN warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK        	LEFT JOIN  warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK     LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK     WHERE c.atRisk=&apos;Y&apos;  and f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid  not like &apos;%DEMO%&apos;  and c.anchorBeginDateKey &gt;= 20160101 and c.anchorBeginDateKey &lt;=  (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) and c.targetPrice &lt;&gt; 0 and c.postAcuteCategory in (&apos;SNF&apos;,&apos;IRF&apos;,&apos;LTCH&apos;, &apos;Other&apos;,&apos;Home&apos;,&apos;HHA&apos;) ${Q_BPID} ${Q_CCN} ;</stringProp>
+                <stringProp name="0"></stringProp>
+              </collectionProp>
+            </collectionProp>
+            <boolProp name="UserParameters.per_iteration">false</boolProp>
+          </UserParameters>
+          <hashTree/>
+        </hashTree>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NPRA Per Episode (Claims)" enabled="true">
+          <stringProp name="dataSource">MySQLQA</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">${Query}</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">regionPartner, marketPartner</stringProp>
+          <stringProp name="variableNames">NPRAPerEpisodeClaims</stringProp>
           <stringProp name="resultVariable"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Participant Filter Validation" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select distinct a.participantName from 
-(select
-distinct de.participantName
-from warehouse.factPatientEpisode fp 
-inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK
-inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
-inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-inner join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgPartnerKey
-inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK
-inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
-inner join warehouse.dimDRG d on fp.currDrgKey = d.drgSK
-Inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON de.BPID = tbsBPID.bpid
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on df.ccn=tbsCCN.ccn
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
-       GROUP BY facilitykey
-        )tbsFacilityKey on df.sourceFacilityKey=tbsFacilityKey.facilitykey      
-where fp.bundleRisk = 1 
-and fp.episodeCountReport = 1
-and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
-and de.bpid not like &apos;%DEMO%&apos;
-and dlk.lookupCategory = &apos;patientRisk&apos;
-and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and de.bpid = ${bpid}
-union
-select distinct 
-e.participantNameInitCap
-from warehouse.factClaims c
-	LEFT JOIN
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-    LEFT JOIN
-warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK       
-	LEFT JOIN 
-warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-    LEFT JOIN
-warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    
-	LEFT JOIN
-warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK
-	LEFT JOIN
-warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK
-	LEFT JOIN
-warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK
-	inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID  where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON e.BPID = tbsBPID.bpid
-inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN  where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on f.ccn=tbsCCN.ccn
-WHERE c.atRisk=&apos;Y&apos; 
-and f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) 
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and e.bpid  not like &apos;%DEMO%&apos; 
-and c.anchorBeginDateKey &gt;= 20170101
-and c.anchorBeginDateKey &lt;=  (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and e.bpid = ${bpid}
--- and f.ccn = @test_ccn
--- and p.npi = @test_physician_npi -- Use this parameter when validating the filters on Physician dashboard
--- and rm.region = @test_region
--- and rm.market = @test_market
--- and rmp.region = @test_partner_region
--- and rmp.market = @test_partner_market
-) a
-order by participantName;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">participantName</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="DRG - Fracture Filter Validation" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select distinct a.DRG_Fracture from 
-(select
-distinct case when d.drgCode is null then null else d.drgCode end as drgCode,
-     CONCAT(d.drgName ,&apos; (&apos;,d.drgCode,&apos;)&apos;) as &apos;DRG_Fracture&apos;
-from warehouse.factPatientEpisode fp 
-inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK
-inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
-inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-inner join warehouse.dimDRG d on fp.currDrgKey = d.drgSK
-inner join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgPartnerKey
-inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK
-inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
-Inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON de.BPID = tbsBPID.bpid
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on df.ccn=tbsCCN.ccn
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
-       GROUP BY facilitykey
-        )tbsFacilityKey on df.sourceFacilityKey=tbsFacilityKey.facilitykey      
-where fp.bundleRisk = 1 
-and fp.episodeCountReport = 1
-and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
-and de.bpid not like &apos;%DEMO%&apos;
-and dlk.lookupCategory = &apos;patientRisk&apos;
-and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and de.bpid = ${bpid}
-and df.ccn = &apos;390223&apos;
-union
-select distinct 
-    case when drg.drgCode is null then null else drg.drgCode end as drgCode, 
-     case when drg.drgcode in (469,470) and drg.drgsubcode=0 then CONCAT(drg.drgName, &apos; - &apos;, drg.drgsubname,&apos; (&apos;,drg.drgcode ,&apos; - NF)&apos;)
-     when drg.drgcode in (469,470) and drg.drgsubcode=1 then CONCAT(drg.drgName, &apos; - &apos;, drg.drgsubname,&apos; (&apos;,drg.drgcode ,&apos; - F)&apos;)
-     when drg.drgcode in (469,470) and drg.drgsubcode=-99 then CONCAT( drg.drgName, &apos; - &apos;, drg.drgsubname,&apos; (&apos;, drg.drgcode ,&apos; - U)&apos;)
-     else CONCAT(drg.drgName,&apos; (&apos;,drg.drgcode ,&apos;)&apos;)
-    end as &apos;DRG_Fracture&apos;
-from warehouse.factClaims c
-	LEFT JOIN
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-    LEFT JOIN
-warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK       
-	LEFT JOIN 
-warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-    LEFT JOIN
-warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    
-	LEFT JOIN
-warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK
-	LEFT JOIN
-warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK
-	LEFT JOIN
-warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK
-	inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID  where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON e.BPID = tbsBPID.bpid
-inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN  where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on f.ccn=tbsCCN.ccn
-WHERE c.atRisk=&apos;Y&apos; 
-and f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) 
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and e.bpid  not like &apos;%DEMO%&apos; 
-and c.anchorBeginDateKey &gt;= 20170101
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
+} else {
+	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;ccn&quot;).equals(&quot;nullValue&quot;)){
+	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
+} else{
+	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
+}
 
-and c.anchorBeginDateKey &lt;=  (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and e.bpid = ${bpid}
-and f.ccn = &apos;390223&apos;
--- and p.npi = @test_physician_npi
--- and rm.region = @test_region
--- and rm.market = @test_market
--- and rmp.region = @test_partner_region
--- and rmp.market = @test_partner_market
--- and e.participantNameInitCap = @test_parrticipant
-) a
-order by a.DRG_Fracture;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">DRG_Fracture</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Physician - NPI Filter Validation" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select distinct a.Physician_NPI
-from
-(select dpy.physicianNameInitCap, dpy.npi,
-CONCAT(dpy.physicianNameInitCap,&apos; - &apos;, dpy.npi) as &apos;Physician_NPI&apos;
-from warehouse.factPatientEpisode fp 
-inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK
-inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
-inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-inner join warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
-inner join warehouse.dimDRG d on fp.currDrgKey = d.drgSK
-inner join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgPartnerKey
-inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK
-inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
-Inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON de.BPID = tbsBPID.bpid
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on df.ccn=tbsCCN.ccn
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
-       GROUP BY facilitykey
-        )tbsFacilityKey on df.sourceFacilityKey=tbsFacilityKey.facilitykey      
-where fp.bundleRisk = 1 
-and fp.episodeCountReport = 1
-and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
-and de.bpid not like &apos;%DEMO%&apos;
-and dlk.lookupCategory = &apos;patientRisk&apos;
-and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and de.bpid = ${bpid}
-and df.ccn = &apos;390223&apos;
-union
-select distinct 
-p.physicianNameInitCap, p.npi, 
-CONCAT(p.physicianNameInitCap,&apos; - &apos;, p.npi) as &apos;Physician_NPI&apos;
-from warehouse.factClaims c
-	LEFT JOIN
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-    LEFT JOIN
-warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK       
-	LEFT JOIN 
-warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-    LEFT JOIN
-warehouse.dimPhysician p ON c.physicianKey = p.physicianSK        
-inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID  where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON e.BPID = tbsBPID.bpid
-inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN  where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on f.ccn=tbsCCN.ccn
 
-WHERE c.atRisk=&apos;Y&apos; 
-and f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) 
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and c.anchorBeginDateKey &gt;= 20170101
-and c.anchorBeginDateKey &lt;=  (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and e.bpid = ${bpid}
-and f.ccn = &apos;390223&apos;
-) a
-order by a.Physician_NPI;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">Physician_NPI</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="MODEL Filter Validation" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select distinct a.model
-from
-(select fp.model
-from warehouse.factPatientEpisode fp 
-inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK
-inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
-inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-inner join warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
-inner join warehouse.dimDRG d on fp.currDrgKey = d.drgSK
-inner join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgPartnerKey
-inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK
-inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
-Inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON de.BPID = tbsBPID.bpid
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on df.ccn=tbsCCN.ccn
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
-       GROUP BY facilitykey
-        )tbsFacilityKey on df.sourceFacilityKey=tbsFacilityKey.facilitykey      
-where fp.bundleRisk = 1 
-and fp.episodeCountReport = 1
-and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
-and de.bpid not like &apos;%DEMO%&apos;
-and dlk.lookupCategory = &apos;patientRisk&apos;
-and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and de.bpid = ${bpid}
-and df.ccn = &apos;390223&apos;
-union
-select distinct c.model
-from warehouse.factClaims c
-	LEFT JOIN
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-    LEFT JOIN
-warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK       
-	LEFT JOIN 
-warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
-    LEFT JOIN
-warehouse.dimPhysician p ON c.physicianKey = p.physicianSK        
-inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID  where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON e.BPID = tbsBPID.bpid
-inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN  where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on f.ccn=tbsCCN.ccn
 
-WHERE c.atRisk=&apos;Y&apos; 
-and f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) 
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and c.anchorBeginDateKey &gt;= 20170101
-and c.anchorBeginDateKey &lt;=  (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and e.bpid = ${bpid}
-and f.ccn = &apos;390223&apos;
-)
-a;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">model</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Anchor Facility Details Filter Validation" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select distinct a.facilityName, a.facilityNameInitCap, a.facilitySK
-from
-(select df.facilityName, df.facilityNameInitCap, df.facilitySK
-from warehouse.factPatientEpisode fp 
-inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK
-inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
-inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-inner join warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
-inner join warehouse.dimDRG d on fp.currDrgKey = d.drgSK
-inner join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgPartnerKey
-inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK
-inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
-Inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON de.BPID = tbsBPID.bpid
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on df.ccn=tbsCCN.ccn
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
-       GROUP BY facilitykey
-        )tbsFacilityKey on df.sourceFacilityKey=tbsFacilityKey.facilitykey      
-where fp.bundleRisk = 1 
-and fp.episodeCountReport = 1
-and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
-and de.bpid not like &apos;%DEMO%&apos;
-and dlk.lookupCategory = &apos;patientRisk&apos;
-and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and de.bpid = ${bpid})
-a;</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">facilityNameInitCap</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
+</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+            <collectionProp name="UserParameters.names">
+              <stringProp name="78391464">Query</stringProp>
+              <stringProp name="0"></stringProp>
+            </collectionProp>
+            <collectionProp name="UserParameters.thread_values">
+              <collectionProp name="-684647342">
+                <stringProp name="102067781">select   	round(sum(c.npra_completed)/sum(c.currEpiCounts)) as &apos;NPRA Per Episode&apos;       from warehouse.factClaims c 	LEFT JOIN warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK     LEFT JOIN warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK        	LEFT JOIN  warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK     LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK     WHERE c.atRisk=&apos;Y&apos;  and f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid  not like &apos;%DEMO%&apos;  and c.anchorBeginDateKey &gt;= 20160101 and c.anchorBeginDateKey &lt;=  (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) and c.targetPrice &lt;&gt; 0 and c.postAcuteCategory in (&apos;SNF&apos;,&apos;IRF&apos;,&apos;LTCH&apos;, &apos;Other&apos;,&apos;Home&apos;,&apos;HHA&apos;) ${Q_BPID} ${Q_CCN} ;</stringProp>
+                <stringProp name="0"></stringProp>
+              </collectionProp>
+            </collectionProp>
+            <boolProp name="UserParameters.per_iteration">false</boolProp>
+          </UserParameters>
+          <hashTree/>
+        </hashTree>
         <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
           <boolProp name="displayJMeterProperties">false</boolProp>
           <boolProp name="displayJMeterVariables">true</boolProp>
@@ -1544,7 +241,7 @@ a;</stringProp>
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo ECEpiosdeCount=${ECEpiosdeCount_1}`claimsEpiosdeCount=${claimsEpiosdeCount_1}`savingRate=${savingRate_1}`TotalNPRA=${TotalNPRA_1}`TotalProgram=${TotalProgram_1}`StartDate=${StartDate_1}`dischargetoSNFClaims=${dischargetoSNFClaims_1} `SNFDaysClaims=${SNFDaysClaims_1}`EpisodesWithReadmissionClaims=${EpisodesWithReadmissionClaims_1}`dischtoSNFBenchmarkClaims=${dischtoSNFBenchmarkClaims_1}`dischargetoSNFEC=${dischargetoSNFEC_1}`dischtoSNFBenchmarkEC=${dischtoSNFBenchmarkEC_1}`SNFDaysEC=${SNFDaysEC_1}`EpisodesWithReadmissionEC=${EpisodesWithReadmissionEC_1}`EpisodesWithReadmissionBenchmarkClaims=${EpisodesWithReadmissionBenchmarkClaims_1}`EpisodesWithReadmissionBenchmarkEC=${EpisodesWithReadmissionBenchmarkEC_1}`SNFDaysBenchmarkClaims=${SNFDaysBenchmarkClaims_1}`SNFDaysBenchmarkEC=${SNFDaysBenchmarkEC_1}`episodeInitiatorNameInitCap=${episodeInitiatorNameInitCap_1}`bpid=${bpid_1}`episodeInitiatorNameInitCap=${episodeInitiatorNameInitCap_2}`bpid=${bpid_2}`facilityName=${facilityName_1}`ccn=${ccn_1}`bundleName=${bundleName_1}`bundleName=${bundleName_2}`bundleName=${bundleName_3}`bundleName=${bundleName_4}`region=${region_1}`market=${market_1}`regionPartner=${regionPartner_1}`marketPartner=${marketPartner_1}`participantName=${participantName_1}`DRG_Fracture=${DRG_Fracture_1}`DRG_Fracture=${DRG_Fracture_2}`DRG_Fracture=${DRG_Fracture_3}`DRG_Fracture=${DRG_Fracture_4}`DRG_Fracture=${DRG_Fracture_5}`DRG_Fracture=${DRG_Fracture_6}`DRG_Fracture=${DRG_Fracture_7}`DRG_Fracture=${DRG_Fracture_8}`DRG_Fracture=${DRG_Fracture_9}`DRG_Fracture=${DRG_Fracture_10}`DRG_Fracture=${DRG_Fracture_11}`DRG_Fracture=${DRG_Fracture_12}`DRG_Fracture=${DRG_Fracture_13}`DRG_Fracture=${DRG_Fracture_14}`DRG_Fracture=${DRG_Fracture_15}`DRG_Fracture=${DRG_Fracture_16}`DRG_Fracture=${DRG_Fracture_17}`DRG_Fracture=${DRG_Fracture_18}`DRG_Fracture=${DRG_Fracture_19}`DRG_Fracture=${DRG_Fracture_20}`DRG_Fracture=${DRG_Fracture_21}`Physician_NPI=${Physician_NPI_2}`Physician_NPI=${Physician_NPI_3}`Physician_NPI=${Physician_NPI_4}`Physician_NPI=${Physician_NPI_5}`Physician_NPI=${Physician_NPI_6}`Physician_NPI=${Physician_NPI_7}`Physician_NPI=${Physician_NPI_8}`Physician_NPI=${Physician_NPI_9}`Physician_NPI=${Physician_NPI_10}`Physician_NPI=${Physician_NPI_11}`Physician_NPI=${Physician_NPI_12}`Physician_NPI=${Physician_NPI_13}`Physician_NPI=${Physician_NPI_14}`Physician_NPI=${Physician_NPI_15}`Physician_NPI=${Physician_NPI_16}`Physician_NPI=${Physician_NPI_17}`Physician_NPI=${Physician_NPI_18}`Physician_NPI=${Physician_NPI_19}`Physician_NPI=${Physician_NPI_20}`Physician_NPI=${Physician_NPI_21}`Physician_NPI=${Physician_NPI_22}`Physician_NPI=${Physician_NPI_23}`Physician_NPI=${Physician_NPI_24}`Physician_NPI=${Physician_NPI_25}`Physician_NPI=${Physician_NPI_26}`Physician_NPI=${Physician_NPI_27}`Physician_NPI=${Physician_NPI_28}`Physician_NPI=${Physician_NPI_29}`Physician_NPI=${Physician_NPI_30}`Physician_NPI=${Physician_NPI_31}`model=${model_1}`facilityNameInitCap=${facilityNameInitCap_1}&gt; PerformanceDashboardResult.txt</stringProp>
+                <stringProp name="Argument.value">echo claimsEpisodeCount=${claimsEpisodeCount_1}*SpendPerEpisodeClaims=${SpendPerEpisodeClaims_1}*NPRAPerEpisodeClaims=${NPRAPerEpisodeClaims_1}&gt;&gt; PhysicianDashboardResult.txt</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
