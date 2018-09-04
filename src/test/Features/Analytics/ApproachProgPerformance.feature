@@ -29,7 +29,7 @@ Feature: Approach for Program Performance Dashboard
     And I verify "KPI_Episode" data metric value with database value on the dashboard for "EC" with picture resolution "500X500"
     And I verify "% SNF Disch Current" data metric value with database value on the dashboard for "EC" with picture resolution "700X700"
     And I verify "% SNF Disch Benchmark Variance" tooltip for "EC" is having the same value fetched from database
-    And I verify "SNF Days Current" data metric value with database value on the dashboard for "EC" with picture resolution "700X700"
+    And I verify "SNF Days Current" data metric value with database value on the dashboard for "EC" with picture resolution "800X800"
     And I verify "SNF Days Benchmark Variance" tooltip for "EC" is having the same value fetched from database
     And I verify "Readmissions Current" data metric value with database value on the dashboard for "EC" with picture resolution "700X700"
     And I verify "Readmissions Benchmark Variance" tooltip for "EC" is having the same value fetched from database
@@ -44,7 +44,7 @@ Feature: Approach for Program Performance Dashboard
     And I verify "KPI_Program_size" data metric value with database value on the dashboard for "Claims" with picture resolution "600X600"
     And I verify "KPI_NPRA" data metric value with database value on the dashboard for "Claims" with picture resolution "600X600"
     And I verify "KPI_Episode" data metric value with database value on the dashboard for "Claims" with picture resolution "500X500"
-    And I verify "% SNF Disch Current" data metric value with database value on the dashboard for "Claims" with picture resolution "700X700"
+    And I verify "% SNF Disch Current" data metric value with database value on the dashboard for "Claims" with picture resolution "900X900"
     And I verify "% SNF Disch Benchmark Variance" tooltip for "Claims" is having the same value fetched from database
     And I verify "SNF Days Current" data metric value with database value on the dashboard for "Claims" with picture resolution "700X700"
     And I verify "SNF Days Benchmark Variance" tooltip for "Claims" is having the same value fetched from database

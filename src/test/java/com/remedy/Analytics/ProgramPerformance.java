@@ -1291,20 +1291,19 @@ public class ProgramPerformance extends BaseClass{
 		 elem=driver.findElement(By.xpath("//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas"));
 		 act.moveToElement(elem).click().build().perform();
 		 longDelay();
-//		 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
-//		 System.out.println(gettext);
 		 if(text.contains("SNF Disch Benchmark Variance")){
-			 if(outputText.get("dischtoSNFBenchmark"+data).contains("${SNFDaysBenchmark"+data+"_1}")){
-				 Assert.assertFalse(isElementPresent(By.xpath("//div[@class='tab-ubertipTooltip']/span")));
-			 }else{
-				 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
-				 System.out.println(gettext);
-				 Assert.assertTrue(gettext.trim().contains(outputText.get("dischtoSNFBenchmark"+data)));
-			 }
-		 }else if (text.contains("SNF Days Benchmark Variance")){
 			 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
 			 System.out.println(gettext);
-			 Assert.assertTrue(gettext.trim().contains(outputText.get("SNFDaysBenchmark"+data)));
+			 Assert.assertTrue(gettext.trim().contains(outputText.get("dischtoSNFBenchmark"+data)));
+		 }else if (text.contains("SNF Days Benchmark Variance")){
+			 if(outputText.get("SNFDaysBenchmark"+data).contains("${SNFDaysBenchmark"+data+"_1}")){
+				 Assert.assertFalse(isElementPresent(By.xpath("//div[@class='tab-ubertipTooltip']/span")));
+				 }
+			 else{
+				 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+				 System.out.println(gettext);
+				 Assert.assertTrue(gettext.trim().contains(outputText.get("SNFDaysBenchmark"+data)));
+		 }
 		 }else if(text.contains("Readmissions Benchmark Variance")){
 			 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
 			 System.out.println(gettext);
@@ -1314,41 +1313,6 @@ public class ProgramPerformance extends BaseClass{
 			 System.out.println(gettext);
 			 Assert.assertTrue(gettext.trim().contains(text.toString()));
 		 }
-		 
-		 
-//		 WebElement elem = null;
-//		 if(text.contains("Readmission benchmark")){
-//			 WebElement graphele = driver.findElement(By.xpath("//div[@tb-test-id='Readmissions Trend']//div[@class='tab-tvBottomAxis tvimagesNS']/div/canvas"));
-//			 act.moveToElement(graphele).click().build().perform();
-//			 longDelay();
-//			 elem=driver.findElement(By.xpath("//div[@tb-test-id='Readmissions Benchmark Variance']//div[@class='tvimagesContainer']/canvas"));
-//		 }
-//		 else if(text.contains("Discharge to snf benchmark")){
-//			 elem=driver.findElement(By.xpath("//div[@tb-test-id='% SNF Disch Benchmark Variance']//div[@class='tvimagesContainer']/canvas"));
-//		 }
-//		 else if(text.contains("SNF Days benchmark")){
-//			 longDelay();
-//			 elem=driver.findElement(By.xpath("//div[@tb-test-id='SNF Days Benchmark Variance']//div[@class='tvimagesContainer']/canvas"));
-//		 }
-//		 act.moveToElement(elem).click().build().perform();
-//		 longDelay();
-//		 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
-//		 System.out.println(gettext);
-		 
-//		 if (text.contains("Discharge to snf benchmark Claims")){
-//			 Double a= ((float)(((int)Math.pow(10,1)*dischargetoSNFBenchmarkClaims))/Math.pow(10,1));
-//			 Assert.assertTrue(gettext.trim().contains(a.toString()));
-//		 }else if (text.contains("Discharge to snf benchmark EC")){
-//			 Assert.assertTrue(gettext.trim().contains(dischargetoSNFBenchmarkEC.toString()));
-//		 }else if (text.contains("Episodes with a Readmission benchmark Claims")){
-//			 Assert.assertTrue(gettext.trim().contains(EpisodesWithReadmissionBenchmarkClaims.toString()));
-//		 }else if (text.contains("Episodes with a Readmission benchmark EC")){
-//			 Assert.assertTrue(gettext.trim().contains(EpisodesWithReadmissionBenchmarkEC.toString()));
-//		 }else if (text.contains("SNF Days benchmark EC")){
-//			 Assert.assertTrue(gettext.trim().contains(SNFDaysBenchmarkEC.toString()));
-//		 }else if (text.contains("SNF Days benchmark Claims")){
-//			 Assert.assertTrue(gettext.trim().contains(SNFDaysBenchmarkClaims.toString()));
-//		 }
 	 }
 	 
 	 public void iVeriyEpisodeIntiatorBPID(){
