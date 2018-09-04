@@ -65,7 +65,6 @@ public class ProgramPerformance extends BaseClass{
 	public static ArrayList<String> col= new ArrayList<String>();
 	public static HashMap<String, String> outputText =new HashMap<String,String>();
 	public static String FinalOutput=null;
-	String StartDate = null;
 	public ProgramPerformance(WebDriver driver) {
 		super(driver);
 	}
@@ -851,7 +850,7 @@ public class ProgramPerformance extends BaseClass{
 		 delay();
 		 longDelay();
 		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
-		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), StartDate);
+//		 *****************iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), StartDate);
 		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
 		 delay();
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
@@ -864,9 +863,9 @@ public class ProgramPerformance extends BaseClass{
 	 public void iSetDateInDateFieldAttribute(String field, String value){
 		 longDelay();
 		 if(field.equals("Start Date")){
-			 if(value.contains("ClaimsCubeDate")){
+			 if(value.contains("ECStartDate")){
 				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
-				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), StartDate);
+				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),outputText.get("ECStartDateDB"));
 			 }else {
 				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
 				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), value);
@@ -874,7 +873,7 @@ public class ProgramPerformance extends BaseClass{
 		 }else if (field.equals("End Date")){
 			 if(value.contains("ClaimsCubeDate")){
 				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
-				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), StartDate);
+				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), outputText.get("ClaimsCubeDateDB"));
 			 }else if(value.contains("Today")){
 				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
 				 clickElement(driver.findElement(By.xpath("//span[@class='tab-datepicker-today-date']")));
@@ -988,7 +987,7 @@ public class ProgramPerformance extends BaseClass{
 		 delay();
 		 longDelay();
 		 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
-		 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), StartDate);
+//		 ********************iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), StartDate);
 		 driver.findElements(By.xpath("//div[@tb-test-id='% SNF Disch Current']//div[@class='tvimagesContainer']/canvas")).get(1).click();
 		 delay();
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
@@ -1292,15 +1291,27 @@ public class ProgramPerformance extends BaseClass{
 		 elem=driver.findElement(By.xpath("//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas"));
 		 act.moveToElement(elem).click().build().perform();
 		 longDelay();
-		 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
-		 System.out.println(gettext);
+//		 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+//		 System.out.println(gettext);
 		 if(text.contains("SNF Disch Benchmark Variance")){
-			 Assert.assertTrue(gettext.trim().contains(outputText.get("dischtoSNFBenchmark"+data)));
+			 if(outputText.get("dischtoSNFBenchmark"+data).contains("${SNFDaysBenchmark"+data+"_1}")){
+				 Assert.assertFalse(isElementPresent(By.xpath("//div[@class='tab-ubertipTooltip']/span")));
+			 }else{
+				 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+				 System.out.println(gettext);
+				 Assert.assertTrue(gettext.trim().contains(outputText.get("dischtoSNFBenchmark"+data)));
+			 }
 		 }else if (text.contains("SNF Days Benchmark Variance")){
+			 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+			 System.out.println(gettext);
 			 Assert.assertTrue(gettext.trim().contains(outputText.get("SNFDaysBenchmark"+data)));
 		 }else if(text.contains("Readmissions Benchmark Variance")){
+			 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+			 System.out.println(gettext);
 			 Assert.assertTrue(gettext.trim().contains(outputText.get("EpisodesWithReadmissionBenchmark"+data)));
 		 }else{
+			 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+			 System.out.println(gettext);
 			 Assert.assertTrue(gettext.trim().contains(text.toString()));
 		 }
 		 
@@ -1426,6 +1437,7 @@ public class ProgramPerformance extends BaseClass{
 		 clickElement(driver.findElement(By.xpath("//span[text()='Refresh']")));
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='wcGlassPane' and contains(@style,'cursor: wait;')]")));
 		 delay();
+		 scrollIntoViewByJS(driver.findElement(By.xpath("//div[@id='tabZoneId1']")));
 		 driver.switchTo().defaultContent();
 		 scrollToTopOfThePage();
 	 }
@@ -1439,7 +1451,7 @@ public class ProgramPerformance extends BaseClass{
 			 outputText.put(var[0], var[1]);
 		 }
 		 System.out.println("Value of Output File Size:"+outputText.size());
-		 StartDate=outputText.get("StartDate");
+		 System.out.println(outputText.get("ECStartDateDB")+":::"+outputText.get("ClaimsCubeDateDB"));
 	 }
 	 
 	 public void clearDataFromOutputFile(String path) throws FileNotFoundException {
@@ -1453,18 +1465,14 @@ public class ProgramPerformance extends BaseClass{
 		 GetTextFromScreenShot(text, xpath, resolution);
 		 if(data.equalsIgnoreCase("EC")){
 			 if(text.contains("Episode")){
-				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
-				 Assert.assertEquals(outputText.get("ECEpisodeCount").trim(), FinalOutput.trim());
+				 Assert.assertEquals(outputText.get("ECEpisodeCount").trim(), FinalOutput.replaceAll(",","").trim());
 			 }else if(text.contains("Program_size")){
-				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
 				 Assert.assertTrue(FinalOutput.isEmpty());
 			 }else if(text.contains("NPRA")){
-				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
-//				 Assert.assertNu
 				 Assert.assertTrue(FinalOutput.isEmpty());
 			 }else if(text.contains("Savings Rate")){
 				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
-//				 Assert.assertTrue(FinalOutput.trim().equals("SavingsRate"));
+				 Assert.assertTrue(FinalOutput.trim().equals("SavingsRate"));
 			 }else if(text.contains("SNF Disch Current")){
 				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
 				 Assert.assertTrue(FinalOutput.trim().contains(outputText.get("dischargetoSNFEC").trim()));
@@ -1473,7 +1481,7 @@ public class ProgramPerformance extends BaseClass{
 				 if(!outputText.get("SNFDaysEC").trim().equals("${SNFDaysEC_1}")){
 					 Assert.assertTrue(FinalOutput.trim().contains(outputText.get("SNFDaysEC").trim()));
 				 }else{
-					 
+					 Assert.assertTrue(FinalOutput.isEmpty());
 				 }
 				
 			 }else if(text.contains("Readmissions Current")){
@@ -1484,16 +1492,16 @@ public class ProgramPerformance extends BaseClass{
 		 }else if (data.equalsIgnoreCase("Claims")){
 			 if(text.contains("Episode")){
 				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
-				 Assert.assertEquals(outputText.get("claimsEpisodeCount").trim(), FinalOutput.trim());
+				 Assert.assertEquals(outputText.get("claimsEpisodeCount").trim(), FinalOutput.replaceAll(",","").trim());
 			 }else if(text.contains("Program_size")){
 				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
-				 Assert.assertEquals(outputText.get("Claims_TotalProgram").trim(), FinalOutput.trim());
+				 Assert.assertEquals(outputText.get("Claims_TotalProgram").trim(), FinalOutput.replace("$", "").replaceAll(",","").trim());
 			 }else if(text.contains("NPRA")){
 				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
-				 Assert.assertEquals(outputText.get("Claims_TotalNPRA").trim(), FinalOutput.trim());
+				 Assert.assertEquals(outputText.get("Claims_TotalNPRA").trim(), FinalOutput.replace("$", "").replaceAll(",","").trim());
 			 }else if(text.contains("Savings Rate")){
 				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
-				 Assert.assertTrue(FinalOutput.trim().equals("Saving Rate"));
+				 Assert.assertTrue(FinalOutput.trim().contains(outputText.get("savingRate")));
 			 }else if(text.contains("SNF Disch Current")){
 				 System.out.println(data+"=="+text+"=="+FinalOutput.trim());
 				 Assert.assertTrue(FinalOutput.trim().contains(outputText.get("dischargetoSNFClaims").trim()));

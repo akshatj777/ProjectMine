@@ -341,7 +341,7 @@ if(!vars.get(&quot;ccn&quot;).equals(&quot;nullValue&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-658750986">
+              <collectionProp name="534179541">
                 <stringProp name="2095440741">select round(sum(NPRA)) as EC_NPRA, round(sum(Program_size)) as EC_ProgramSize from (select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size  from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;   and c.anchorBeginDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) ${Q_BPID} ${Q_CCN}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -353,10 +353,13 @@ if(!vars.get(&quot;ccn&quot;).equals(&quot;nullValue&quot;)){
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Start Date for Dashboard" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select DATE_FORMAT(CAST(lookupValue AS UNSIGNED),&apos;%m/%d/%Y&apos;) as StartDate from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;</stringProp>
+          <stringProp name="query">select DATE_FORMAT(CAST(lookupValue AS UNSIGNED),&apos;%m/%d/%Y&apos;) as ClaimsCubeDate,
+DATE_FORMAT(adddate(CAST(lookupValue AS UNSIGNED),1),&apos;%m/%d/%Y&apos;) as ECStartDate 
+from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;;
+</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">StartDate</stringProp>
+          <stringProp name="variableNames">ClaimsCubeDateDB,ECStartDateDB</stringProp>
           <stringProp name="resultVariable"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -946,7 +949,7 @@ if(!vars.get(&quot;ccn&quot;).equals(&quot;nullValue&quot;)){
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo ECEpisodeCount=${ECEpisodeCount_1}*claimsEpisodeCount=${claimsEpisodeCount_1}*savingRate=${savingRate_1}*Claims_TotalNPRA=${Claims_TotalNPRA_1}*Claims_TotalProgram=${Claims_TotalProgram_1}*StartDate=${StartDate_1}*dischargetoSNFClaims=${dischargetoSNFClaims_1}*dischargetoSNFEC=${dischargetoSNFEC_1}*SNFDaysClaims=${SNFDaysClaims_1}*SNFDaysEC=${SNFDaysEC_1}*SNFDaysBenchmarkClaims=${SNFDaysBenchmarkClaims_1}*SNFDaysBenchmarkEC=${SNFDaysBenchmarkEC_1}*EpisodesWithReadmissionBenchmarkClaims=${EpisodesWithReadmissionBenchmarkClaims_1}*EpisodesWithReadmissionBenchmarkEC=${EpisodesWithReadmissionBenchmarkEC_1}*dischtoSNFBenchmarkClaims=${dischtoSNFBenchmarkClaims_1}*dischtoSNFBenchmarkEC=${dischtoSNFBenchmarkEC_1}&gt;&gt; PerformanceDashboardResult.txt</stringProp>
+                <stringProp name="Argument.value">echo ECEpisodeCount=${ECEpisodeCount_1}*claimsEpisodeCount=${claimsEpisodeCount_1}*savingRate=${savingRate_1}*Claims_TotalNPRA=${Claims_TotalNPRA_1}*Claims_TotalProgram=${Claims_TotalProgram_1}*ECStartDateDB=${ECStartDateDB_1}*ClaimsCubeDateDB=${ClaimsCubeDateDB_1}*dischargetoSNFClaims=${dischargetoSNFClaims_1}*dischargetoSNFEC=${dischargetoSNFEC_1}*SNFDaysClaims=${SNFDaysClaims_1}*SNFDaysEC=${SNFDaysEC_1}*SNFDaysBenchmarkClaims=${SNFDaysBenchmarkClaims_1}*SNFDaysBenchmarkEC=${SNFDaysBenchmarkEC_1}*EpisodesWithReadmissionBenchmarkClaims=${EpisodesWithReadmissionBenchmarkClaims_1}*EpisodesWithReadmissionBenchmarkEC=${EpisodesWithReadmissionBenchmarkEC_1}*dischtoSNFBenchmarkClaims=${dischtoSNFBenchmarkClaims_1}*dischtoSNFBenchmarkEC=${dischtoSNFBenchmarkEC_1}*EpisodesWithReadmissionEC=${EpisodesWithReadmissionEC_1}*EpisodesWithReadmissionClaims=${EpisodesWithReadmissionClaims_1}&gt;&gt; PerformanceDashboardResult.txt</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
