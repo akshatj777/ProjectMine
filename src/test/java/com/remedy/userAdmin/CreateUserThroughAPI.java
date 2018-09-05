@@ -40,7 +40,6 @@ public class CreateUserThroughAPI extends BaseClass {
 		JSONObject objSPOEApps = new JSONObject();
 		JSONObject objSPOEValue = new JSONObject();
 		JSONArray objLearningPathwayArray = new JSONArray();
-		JSONObject objParticipantID = new JSONObject();
 		JSONArray objParticipantListArray = new JSONArray();
 
 		objFirstNameValue.put("value", firstName);
@@ -144,7 +143,6 @@ public class CreateUserThroughAPI extends BaseClass {
 				String facilityKey = a.substring(a.lastIndexOf("--")+2, a.length());
 				if(dataPermissions.containsKey(participantID))
 				{
-					//String ab = dataPermissions.get(participantID);
 					if(innerHM.containsKey(BPID))
 					{
 						String ab = innerHM.get(BPID);
@@ -167,11 +165,14 @@ public class CreateUserThroughAPI extends BaseClass {
 			
 			for(int i=0;i<dataPermissions.size();i++)
 			{
-				JSONArray objBPIDListArray = new JSONArray();
 				for(int j=0;j<dataPermissions.get(dataPermissions.keySet().toArray()[i]).size();j++)
 				{
-						JSONObject objBPID = new JSONObject();
-						JSONArray objFacilityListArray = new JSONArray();
+					JSONObject objParticipantID = new JSONObject();
+					JSONArray objBPIDListArray = new JSONArray();
+					JSONObject objBPID = new JSONObject();
+					JSONArray objFacilityListArray = new JSONArray();
+					
+					
 						String BPID = "";
 						String participantID = "";
 						if(dataPermissions.get(dataPermissions.keySet().toArray()[i]).get(dataPermissions.get(dataPermissions.keySet().toArray()[i]).keySet().toArray()[j]).contains(","))
@@ -191,31 +192,30 @@ public class CreateUserThroughAPI extends BaseClass {
 							objBPID.put("bpid", BPID);
 							objBPID.put("facilityList", objFacilityListArray);
 							objBPIDListArray.add(objBPID);
-							objParticipantID.put("participantId", participantID);
-							objParticipantID.put("bpidList", objBPIDListArray);
-							objParticipantListArray.add(objParticipantID);
 						}
 						else
 						{
+							JSONObject objFacilityKey = new JSONObject();
 							participantID = dataPermissions.keySet().toArray()[i].toString();
 							BPID = dataPermissions.get(dataPermissions.keySet().toArray()[i]).keySet().toArray()[j].toString();
 							String facilityKey = dataPermissions.get(dataPermissions.keySet().toArray()[i]).get(dataPermissions.get(dataPermissions.keySet().toArray()[i]).keySet().toArray()[j]);
-							JSONObject objFacilityKey = new JSONObject();
 							
 							objFacilityKey.put("facilityKey", facilityKey);
 							objFacilityListArray.add(objFacilityKey);
 							objBPID.put("bpid", BPID);
 							objBPID.put("facilityList", objFacilityListArray);
 							objBPIDListArray.add(objBPID);
-							objParticipantID.put("participantId", participantID);
-							objParticipantID.put("bpidList", objBPIDListArray);
-							objParticipantListArray.add(objParticipantID);
 						}
+						objParticipantID.put("participantId", participantID);
+						objParticipantID.put("bpidList", objBPIDListArray);
+						objParticipantListArray.add(objParticipantID);
 				}
+				
 			}
 		}
 		else
 		{
+			JSONObject objParticipantID = new JSONObject();
 			JSONObject objFacilityKey = new JSONObject();
 			JSONObject objBPID = new JSONObject();
 			JSONArray objFacilityListArray = new JSONArray();
