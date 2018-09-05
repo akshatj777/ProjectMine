@@ -1,8 +1,11 @@
-bpid|ccn
-('2070-021')|('390223')
-nullValue|('390223','220010')
-('2070-b72')|('220010')
-('2070-021','2070-b72')|('390223','220010')
+bpid|ccn|facilityName|bundleName|region|market|partnerRegion|partnerMarket|participantName|drgCode|npi|physicianName|model
+('2070-b72','2070-f10','2070-021','2070-f11')|('340020','420101','420089','420080','220010','390223')|skip|skip|skip|skip|skip|skip|skip|skip|skip|skip|skip
+('2070-b72','2070-f10','2070-021','2070-f11')|('340020','420101','420089','420080','220010','390223')|skip|('Acute myocardial infarction','Amputation', 'Cellulitis','Hip & femur procedures except major joint','Nutritional and metabolic disorders','Other knee procedures','Syncope & collapse','Urinary tract infection')|skip|skip|skip|skip|skip|skip|skip|skip|skip|skip
+('2070-b72','2070-f10','2070-021','2070-f11')|('340020','420101','420089','420080','220010','390223')|skip|skip|('East','SXSW')|('Middle States','Mid-Atlantic')|skip|skip|skip|skip|skip|skip|skip
+('2070-b72','2070-f10','2070-021','2070-f11')|('340020','420101','420089','420080','220010','390223')|skip|skip|skip|skip|skip|skip|('Apollo, Md','Penn')|skip|skip|skip|skip
+('2070-b72','2070-f10','2070-021','2070-f11')|('340020','420101','420089','420080','220010','390223')|skip|skip|skip|skip|skip|skip|skip|('281','617','554','602','233','533','563','293','482','690','470','552','247','301','556','312','558','256')|skip|skip|skip
+('2070-b72','2070-f10','2070-021','2070-f11')|('340020','420101','420089','420080','220010','390223')|skip|skip|skip|skip|skip|skip|skip|skip|('1013216282','1598926529','1861403875','1104247535','1184784977','1073758579','1518167824','1356431621','1023124880','1336589019','1295895159','1215987466','1356635262','1306803044','1407116106','1013948793','1477543072')|skip|skip
+('2070-b72','2070-021')|('220010','390223')|skip|('Congestive heart failure','Fractures of the femur and hip or pelvis','Lower Major joint replacement','Medical non-infectious orthopedic','Revision of the hip or knee')|('East')|('New England','Middle States')|skip|skip|('Lawrence General Hospital','Penn')|('291', '469','467')|('1184784977','1609861061','1912059502','1639121957','1548280902','1487614632','1770727109')|skip|('2')
 
 
 
