@@ -24,7 +24,7 @@ Feature: Edit user page for SA
       | Super Admin | FirstName                                 | LastName                                 | qaautomation@remedypartners.com |            |     | Remedy Other                    | 17-Remedy Other                    | episode_connect-Episode Connect Classic,lessons-Lessons,episode_connect_2-Episode Connect for Post-acute Care,Care Innovation Institute-Care Innovation Institute                                     | HZhmTBQzHtU1,18h7phZr1h81                                                                                            | 514083--2070-015--TSH                                                                                                                                                                                                                                                                                                                                                    |           200 |
       | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | qaautomation@remedypartners.com |            |     | Partner Program Administrator   | 18-Partner Program Administrator   | episode_connect-Episode Connect Classic,Reporting Classic-Reporting Classic,lessons-Lessons,episode_connect_2-Episode Connect for Post-acute Care                                                     | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,18h7phZr1h81,n9yn5n0Qa581                                                     | 514083--2070-015--TSH                                                                                                                                                                                                                                                                                                                                                    |           200 |
       | Super Admin | FirstName                                 | LastName                                 | qaautomation@remedypartners.com | 9988776655 |     | Remedy Program Administrator    | 19-Remedy Program Administrator    | episode_connect-Episode Connect Classic,Reporting Classic-Reporting Classic,lessons-Lessons,episode_connect_2-Episode Connect for Post-acute Care,Care Innovation Institute-Care Innovation Institute | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581                                        | 439120--2070-c83--HCH, 439120--2070-c83--100073-REH, 439120--2070-c85--220066-IRF, 439120--2070-c85--MMC, 514083--2070-015--TSH, 514029--2070-025--T, 514029--2070-028--310060                                                                                                                                                                                           |           200 |
-      | Super Admin | FirstName                                 | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |            |     | Partner Technical Administrator | 20-Partner Technical Administrator | episode_connect-Episode Connect Classic,Reporting Classic-Reporting Classic,lessons-Lessons,admin-Administration                                                                                      | NFdw0Kts2C01,HZhmTBQzHtU1,n9yn5n0Qa581                                                                               | 441324--6005-059--140007, 441324--3090-068--290039, 441324--3090-191--290039, 441324--3090-068--10118, 441324--3090-068--50113, 441324--3090-068--200018, 441324--3090-068--240093, 441324--3090-068--270049, 441324--3090-068--290012, 441324--3090-068--290021, 441324--3090-068--290022, 441324--3090-068--290041, 441324--3090-068--290045, 441324--3090-068--290046 |           200 |
+      | Super Admin | FirstName                                 | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |            |     | Partner Technical Administrator | 20-Partner Technical Administrator | episode_connect-Episode Connect Classic,Reporting Classic-Reporting Classic,lessons-Lessons,admin-Administration                                                                                      | NFdw0Kts2C01,HZhmTBQzHtU1,n9yn5n0Qa581                                                                               | 441324--6005-059--140007, 441324--3090-068--290039, 441324--3090-191--290039, 441324--3090-068--010118, 441324--3090-068--050113, 441324--3090-068--200018, 441324--3090-068--240093, 441324--3090-068--270049, 441324--3090-068--290012, 441324--3090-068--290021, 441324--3090-068--290022, 441324--3090-068--290041, 441324--3090-068--290045, 441324--3090-068--290046 |           200 |
       | Super Admin | FirstName                                 | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |            |     | Operator                        | 22-Operator                        | episode_connect-Episode Connect Classic,Reporting Classic-Reporting Classic,lessons-Lessons                                                                                                           | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | 514029--2070-028--310060, 514029--2070-025--T, 514029--2070-025--390326, 514029--2070-028--SLW                                                                                                                                                                                                                                                                           |           200 |
 
   Scenario Outline: <Description>
@@ -392,10 +392,9 @@ Feature: Edit user page for SA
     Then I click on Submit button while edit for "<User>-<Role>"
 
     Examples: 
-      | User        | Role     | Health System    | DisableLocations                 |
-      | Super Admin | Operator | Trinity Health   | 2070-c82--Saint Francis Hospital |
+      | User        | Role     | Health System  | DisableLocations                 |
+      | Super Admin | Operator | Trinity Health | 2070-c82--Saint Francis Hospital |
 
-  
   Scenario Outline: Validating- all locations should not be displayed as selected when the "All Locations" check box is unchecked while editing the user
     Given I am on the login page
     When I log in as super user
@@ -411,10 +410,10 @@ Feature: Edit user page for SA
     Then I select "<AddLocations>" locations
     Then I deselect "<AddLocations>" locations
     And I verify Location "<SelectedLocations>" are not shown in selected Locations section
- 
+
     Examples: 
-      | User        | Role    	 | Health System    | AddLocations  | SelectedLocations                  |
-      | Super Admin | Physicians | Trinity Health   | All Locations | Saint Francis Hospital - Wilmington (FWD) |
+      | User        | Role       | Health System  | AddLocations  | SelectedLocations                         |
+      | Super Admin | Physicians | Trinity Health | All Locations | Saint Francis Hospital - Wilmington (FWD) |
 
   Scenario Outline: Validating pagination for locations and Error message "User does not exist. Please go back to the users list page." should not be displayed
     Given I am on the login page
@@ -431,7 +430,6 @@ Feature: Edit user page for SA
     Then I click on existing organisation "<Remove HealthSystem1>"
     Then I verify that pagination is not displayed for selected locations
     Then I remove health system "<Remove HealthSystem1>"
-    Then I remove health system "<Remove HealthSystem2>"
     And I search for health system with <Health System>
     And I select a <Health System>
     Then I select "<Programs>" programs
@@ -440,5 +438,5 @@ Feature: Edit user page for SA
     Then I verify error message "User does not exist. Please go back to the users list page." is not displayed
 
     Examples: 
-      | User        | Role         | Remove HealthSystem1     | Remove HealthSystem2 | Health System                                                          | Programs     | Locations     |
-      | Super Admin | Remedy Other | Butler Memorial Hospital | RWJ Barnabas Health  | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI Model 2 | All Locations |
+      | User        | Role         | Remove HealthSystem1                                                   | Health System                                                          | Programs     | Locations     |
+      | Super Admin | Remedy Other | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | BPCI Model 2 | All Locations |
