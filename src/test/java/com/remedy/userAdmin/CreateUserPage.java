@@ -2321,7 +2321,7 @@ public void iUnselectAllSelectedApps(){
 	   String token = null;
        while (st.hasMoreTokens()) {
     	   String newToken = st.nextToken().trim();
-    	   if(newToken.contains("Lessons"))
+    	   if(newToken.contains("Remedy University"))
     	   {
     		   token = "RemedyU";
     	   }
@@ -2352,7 +2352,7 @@ public void iUnselectAllSelectedApps(){
        while (st.hasMoreTokens()) 
        {
     	   String newToken = st.nextToken();
-    	   if(newToken.contains("Lessons"))
+    	   if(newToken.contains("Remedy University"))
     	   {
     		   token = "RemedyU";
     	   }

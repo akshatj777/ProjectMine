@@ -14,8 +14,8 @@ Feature: Super Admin Landing page verification
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | User        | FirstName | LastName                                 | Email                           | Phone | NPI | Role   | RoleID   | Applications                                                                                | LearningPathways                       | Locations             | expStatusCode |
-      | Super Admin | Firstname | Lastnamelastnamelastnamelastnamelastname | qaautomation@remedypartners.com |       |     | Leader | 1-Leader | episode_connect-Episode Connect Classic,Reporting Classic-Reporting Classic,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
+      | User        | FirstName | LastName                                 | Email                           | Phone | NPI | Role   | RoleID   | Applications                                                                      | LearningPathways                       | Locations             | expStatusCode |
+      | Super Admin | Firstname | Lastnamelastnamelastnamelastnamelastname | qaautomation@remedypartners.com |       |     | Leader | 1-Leader | episode_connect-Episode Connect Classic,reports-Reporting Classic,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
 
   Scenario: Verification of availability of fields on Super User Landing page
     Given I am on the login page
@@ -150,7 +150,7 @@ Feature: Super Admin Landing page verification
     Then I should see header text "Users"
 
     Examples: 
-      | user        | Role   |
+      | User        | Role   |
       | Super Admin | Leader |
 
   Scenario Outline: Verifying that User is redirected to User admin page although doesn't have access to UA
