@@ -14,8 +14,8 @@ Feature: Delete a user from SA
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | User        | FirstName | LastName | Email                           | Phone      | NPI | Role              | RoleID              | Applications                                             | LearningPathways                                    | Locations           | expStatusCode |
-      | Super Admin | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 |     | Advanced Operator | 3-Advanced Operator | episode_connect-Episodes,reports-Reports,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1 | 514029--2070-025--T |           200 |
+      | User        | FirstName | LastName | Email                           | Phone      | NPI | Role                | RoleID                                                                            | Applications                                        | LearningPathways                              | Locations | expStatusCode |
+      | Super Admin | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 |     | 3-Advanced Operator | episode_connect-Episode Connect Classic,reports-Reporting Classic,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1 | 514029--2070-025--T, 514029--2070-028--310060 |       200 |               |
 
   Scenario Outline: Login from SA and delete an existing user and Login with the verified deleted user
     Given I am on the login page

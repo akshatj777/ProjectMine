@@ -390,12 +390,12 @@ public class ViewUserPage extends BaseClass {
 				   StringTokenizer st = new StringTokenizer(applicationsEnabled, ",");
 				   while(st.hasMoreTokens())
 				   {
-					   isElementPresentOnPage(By.xpath("//tr/td[text()='"+st.nextToken().trim()+"']/parent::tr/td[text()='Enabled']"));   
+					   isElementPresentOnPage(By.xpath("//tr/td[text()='"+st.nextToken().trim()+"']/parent::tr//span[text()='Enabled']"));   
 				   }
 			}
 			else
 			{
-				isElementPresentOnPage(By.xpath("//tr/td[text()='"+applicationsEnabled+"']/parent::tr/td[text()='Enabled']"));
+				isElementPresentOnPage(By.xpath("//tr/td[text()='"+applicationsEnabled+"']/parent::tr//span[text()='Enabled']"));
 			}
 			
 		}

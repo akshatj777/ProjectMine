@@ -36,8 +36,8 @@ Feature: UI Scenarios - Super Admin User
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | User        | FirstName                                 | LastName                                 | Email                           | Phone | NPI | Role       | RoleID       | Applications                                                                                | LearningPathways                       | Locations             | expStatusCode |
-      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       | NPI | Physicians | 4-Physicians | episode_connect-Episode Connect Classic,Reporting Classic-Reporting Classic,lessons-Lessons | 3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
+      | User        | FirstName                                 | LastName                                 | Email                           | Phone | NPI | Role       | RoleID       | Applications                                                                      | LearningPathways                       | Locations             | expStatusCode |
+      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       | NPI | Physicians | 4-Physicians | episode_connect-Episode Connect Classic,reports-Reporting Classic,lessons-Lessons | 3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -261,7 +261,7 @@ Feature: UI Scenarios - Super Admin User
     Then I select "<Locations1>" locations
     And I verify selected Location "<SelectedLocations>" in the selected Locations section
     Then I search the "<LocationsInvalid>" in the Selected Locations section
-  And I verify No results found for invalid Location in selected organisation
+    And I verify No results found for invalid Location in selected organisation
     Then I search the "<SelectedLocations>" in the Selected Locations section
     And I click on remove link icon for selected Locations on selected Locations section
     And I verify Selected Locations section after click on remove link icon
