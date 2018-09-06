@@ -14,8 +14,8 @@ Feature: Edit page for Downstream provider
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | User        | FirstName | LastName | Email                           | Phone | NPI | Role   | RoleID   | Applications                                                                                                    | LearningPathways                                       | Locations             | expStatusCode |
-      | Super Admin | FirstName | LastName | qaautomation@remedypartners.com |       |     | Leader | 1-Leader | episode_connect-Episode Connect Classic,Reporting Classic-Reporting Classic,Remedy University-Remedy University | New learning Path, Learning Pathway 2, max-test-052417 | 514083--2070-015--TSH |           200 |
+      | User        | FirstName | LastName | Email                           | Phone | NPI | Role   | RoleID   | Applications                                                                                                                         | LearningPathways                                       | Locations             | expStatusCode |
+      | Super Admin | FirstName | LastName | qaautomation@remedypartners.com |       |     | Leader | 1-Leader | episode_connect-Episode Connect Classic,Reporting Classic-Reporting Classic,Remedy University-Remedy University, Reporting-Reporting | New learning Path, Learning Pathway 2, max-test-052417 | 514083--2070-015--TSH |           200 |
 
   Scenario Outline: <Description>
     Given I am on the login page
