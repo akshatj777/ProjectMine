@@ -2335,7 +2335,7 @@ public void iUnselectAllSelectedApps(){
     	   }
     	   else if(newToken.contains("Episode Connect Classic"))
     	   {
-    		   token = "Episode Classic";
+    		   token = "Episodes Classic";
     	   }
     	   else
     	   {
@@ -2366,7 +2366,7 @@ public void iUnselectAllSelectedApps(){
     	   }
     	   else if(newToken.contains("Episode Connect Classic"))
     	   {
-    		   token = "Episode Classic";
+    		   token = "Episodes Classic";
     	   }
     	   else
     	   {
