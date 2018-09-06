@@ -494,4 +494,28 @@ public class ProgramPerformanceSteps extends DriverScript{
 	public void i_verify_data_metric_value_with_database_as_on_the_dashboard(String text,String data,String resolution) throws Throwable{
 		programdashboard.verifyDataMetricValueWithdatabase(text,data,resolution);
 	}
+	
+	@And("^I get all the \"([^\"]*)\" filter value for \"([^\"]*)\" dashboard$")
+	public void i_get_all_filter_value_for_dashboard(String filter,String dashboard) throws Throwable{
+		programdashboard.iSelectAllValuesInFilter(filter, dashboard);
+	}
+	
+	@And("^I verify \"([^\"]*)\" for DB and FE Metrics value  for \"([^\"]*)\"$")
+	public void i_verify_value_for_DB_And_FE_Metrics(String text,String data) throws Throwable{
+		programdashboard.iVerifyDBandFEForMetrics(text,data);
+	}
+	
+	@And("^I open the file \"([^\"]*)\" for writting data to input file$")
+	public void i_open_file_after_writing_data_to_input_fileInputFile(String path) throws Throwable{
+		programdashboard.iOpenTheInputFile(path);
+	}
+	
+	@And("^I move to new line for writting new set of data to input$")
+	public void i_move_to_new_line_for_writting_new_set_data_to_InputFile() throws Throwable{
+		programdashboard.iMoveToNewLineInInputFile();
+	}
+	@And("^I close the file for after writting data to input file$")
+	public void i_close_file_after_writing_data_to_input_fileInputFile() throws Throwable{
+		programdashboard.iCloseTheInputFile();
+	}
 }
