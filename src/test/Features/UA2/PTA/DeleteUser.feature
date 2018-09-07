@@ -90,7 +90,7 @@ Feature: Delete a user from PTA
     Then I click on Select button
     Then I verify Learning Pathway search box is available
     Then I select "<LearningPathwaySearchParameter>" from the results
-    Then I verify "<ApplicationsNotVisible>" is not visible on Applications tab
+    #Then I verify "<ApplicationsNotVisible>" is not visible on Applications tab
     Then I click on Next button
     Then I verify the header "Permissions"
     Then I select "<Programs1>" programs
@@ -155,4 +155,4 @@ Feature: Delete a user from PTA
 
     Examples: 
       | Description                                                                        | User                            | FirstName                                 | LastName | Email                           | Phone      | Role     | Applications      | ApplicationsNotVisible                                                                   | NPI | LearningPathwaySearchParameter  | Programs1    | Locations1                      | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Login with Partner Technical Administrator User and create user with Operator role | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedypartners.com | 9988776655 | Operator | Reporting Classic | Episode Connect for Post-acute Care,Administration, Care Innovation Institute, Reporting |     | 5HDc3E6aK_E1, Remedy University | BPCI Model 3 | 3090-068--Mountainview Hospital |                  |                |           |            |                  |                |           |            |
+      | Login with Partner Technical Administrator User and create user with Operator role | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedypartners.com | 9988776655 | Operator | Reporting Classic | Episode Connect for Post-acute Care, Administration, Care Innovation Institute, Reporting |     | 5HDc3E6aK_E1, Remedy University | BPCI Model 3 | 3090-068--Mountainview Hospital |                  |                |           |            |                  |                |           |            |
