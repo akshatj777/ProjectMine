@@ -792,7 +792,7 @@ public class BulkUserCreationPage extends BaseClass {
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
 
-		String randomNPI = RandomStringUtils.randomNumeric(10);
+		String randomNPI = "12" + RandomStringUtils.randomNumeric(8);
 		strUserData = strUserData.replace("NPI", randomNPI);
 		bulkNPIPerRole.put("Physicians", randomNPI);
 		bulkUsersNPIPerRole = randomNPI;

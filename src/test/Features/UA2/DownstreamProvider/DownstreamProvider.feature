@@ -20,8 +20,12 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I click on Next button
     Then I verify the header "Applications"
     Then I verify applications "<Applications>" are unchecked
+    Then I verify Learning Pathway search box is not available
     Then I select "<Applications>" product
     Then I verify applications "<Applications>" are checked
+    Then I click on Select button
+    Then I verify Learning Pathway search box is available
+    Then I select "<LearningPathwaySearchParameter>" from the results
     Then I verify "<ApplicationsNotVisible>" is not visible on Applications tab
     Then I click on Next button
     Then I verify the header "Permissions"
@@ -159,6 +163,9 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I verify applications "<Applications>" are unchecked
     Then I select "<Applications>" product
     Then I verify applications "<Applications>" are checked
+    Then I click on Select button
+    Then I verify Learning Pathway search box is available
+    Then I select "<LearningPathwaySearchParameter>" from the results
     Then I verify "<ApplicationsNotVisible>" is not visible on Applications tab
     Then I click on Next button
     Then I verify the header "Permissions"
@@ -290,6 +297,9 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I verify applications "<Applications>" are unchecked
     Then I select "<Applications>" product
     Then I verify applications "<Applications>" are checked
+    Then I click on Select button
+    Then I verify Learning Pathway search box is available
+    Then I select "<LearningPathwaySearchParameter>" from the results
     Then I verify "<ApplicationsNotVisible>" is not visible on Applications tab
     Then I click on Next button
     Then I verify the header "Permissions"
@@ -421,6 +431,9 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I verify applications "<Applications>" are unchecked
     Then I select "<Applications>" product
     Then I verify applications "<Applications>" are checked
+    Then I click on Select button
+    Then I verify Learning Pathway search box is available
+    Then I select "<LearningPathwaySearchParameter>" from the results
     Then I verify "<ApplicationsNotVisible>" is not visible on Applications tab
     Then I click on Next button
     Then I verify the header "Permissions"
@@ -557,6 +570,9 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I verify applications "<Applications>" are unchecked
     Then I select "<Applications>" product
     Then I verify applications "<Applications>" are checked
+    Then I click on Select button
+    Then I verify Learning Pathway search box is available
+    Then I select "<LearningPathwaySearchParameter>" from the results
     Then I verify "<ApplicationsNotVisible>" is not visible on Applications tab
     Then I click on Next button
     Then I verify the header "Permissions"
