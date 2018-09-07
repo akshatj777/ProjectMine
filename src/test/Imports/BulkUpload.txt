@@ -1,6 +1,6 @@
 ####################Data Permissions for Bulk Upload User having all application Access########################
 
-ExecutiveFirstName | ExecutiveLastName | EXECUTIVEMAIL | | Executive | NA | 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | | True | True | False | True | False |  |  | | False
+ExecutiveFirstName | ExecutiveLastName | EXECUTIVEMAIL | | Executive | NA | 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | | True | False | True | True | False | False | True | | False
 ManagerFirstName | ManagerLastName | MANAGERMAIL | 9876545678 | Manager | NA | 441447:3056-r29:075296 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81 | | True | False | False | True | False |  | False | | False
 CaseManagerFirstName | CaseManagerLastName | CASEMGRMAIL |9879800980 | Case Manager | NA |776109:2070-005:HUMC |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1  | | True| False | False | False | True |  | False | | False
 PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL | | Physicians | NPI | 514026:2070-046:H |3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | | True | True | False | False | False |  |  | | True

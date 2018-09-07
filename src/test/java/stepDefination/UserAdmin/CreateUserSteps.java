@@ -559,7 +559,7 @@ public class CreateUserSteps extends DriverScript {
 
 	@Then("^I verify Learning Pathway search box is available$")
 	public void verifyLearningPathwayAvailable() throws Throwable {
-		createUser.verifyLearningPathwayNotAvailable();
+		createUser.verifyLearningPathwayAvailable();
 	}
 
 	@Then("^I click on Select button$")
