@@ -14,8 +14,8 @@ Feature: Delete a user from SA
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | User        | FirstName | LastName | Email                           | Phone      | NPI | Role                | RoleID                                                                            | Applications                                        | LearningPathways                              | Locations | expStatusCode |
-      | Super Admin | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 |     | 3-Advanced Operator | episode_connect-Episode Connect Classic,reports-Reporting Classic,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1 | 514029--2070-025--T, 514029--2070-028--310060 |       200 |               |
+      | User        | FirstName | LastName | Email                           | Phone      | NPI | Role              | RoleID              | Applications                                                                      | LearningPathways                                    | Locations                                     | expStatusCode |
+      | Super Admin | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 |     | Advanced Operator | 3-Advanced Operator | episode_connect-Episode Connect Classic,reports-Reporting Classic,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1 | 514029--2070-025--T, 514029--2070-028--310060 |           200 |
 
   Scenario Outline: Login from SA and delete an existing user and Login with the verified deleted user
     Given I am on the login page
@@ -74,7 +74,6 @@ Feature: Delete a user from SA
     Then I enter NPI field with "<NPI>" for role "<Role>"
     Then I click on Next button
     Then I verify the header "Applications"
-    Then I verify applications "<Applications>" are unchecked
     Then I verify Learning Pathway search box is not available
     Then I select "<Applications>" product
     Then I verify applications "<Applications>" are checked
@@ -137,5 +136,5 @@ Feature: Delete a user from SA
     Then I should see User is Blocked
 
     Examples: 
-      | Description                                                   | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone | Role    | Applications                                        | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter                                                                                                        | Health System1    | Programs1    | Locations1                  | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Login with Super Admin User and create user with Manager role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com |       | Manager | Episode Connect Classic, Reporting Classic, Lessons | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital | No               |                |           |            | No               |                |           |            |
+      | Description                                                   | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone | Role    | Applications                                                  | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter                                                                                                        | Health System1    | Programs1    | Locations1                  | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Login with Super Admin User and create user with Manager role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com |       | Manager | Episode Connect Classic, Reporting Classic, Remedy University | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2 | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital | No               |                |           |            | No               |                |           |            |

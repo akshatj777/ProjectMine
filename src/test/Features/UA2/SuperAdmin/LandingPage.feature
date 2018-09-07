@@ -14,8 +14,8 @@ Feature: Super Admin Landing page verification
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | User        | FirstName | LastName                                 | Email                           | Phone | NPI | Role   | RoleID   | Applications                                                                      | LearningPathways                       | Locations             | expStatusCode |
-      | Super Admin | Firstname | Lastnamelastnamelastnamelastnamelastname | qaautomation@remedypartners.com |       |     | Leader | 1-Leader | episode_connect-Episode Connect Classic,reports-Reporting Classic,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
+      | User        | FirstName                                 | LastName                                 | Email                           | Phone | NPI | Role   | RoleID   | Applications                                                                                                       | LearningPathways                       | Locations             | expStatusCode |
+      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       |     | Leader | 1-Leader | episode_connect-Episode Connect Classic, reports-Reporting Classic, lessons-Remedy University, analytics-Reporting | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
 
   Scenario: Verification of availability of fields on Super User Landing page
     Given I am on the login page
@@ -133,8 +133,8 @@ Feature: Super Admin Landing page verification
     Then I verify "<Applications>" product on SPOE page
 
     Examples: 
-      | user        | Role   | Email                           | SearchParameter | Applications                                 |
-      | Super Admin | Leader | qaautomation@remedypartners.com | FetchFromHM     | Episodes Classic, Reporting Classic, Lessons |
+      | user        | Role   | Email                           | SearchParameter | Applications                                                      |
+      | Super Admin | Leader | qaautomation@remedypartners.com | FetchFromHM     | Episodes Classic, Reporting Classic, Remedy University, Reporting |
 
   Scenario Outline: User should not get error message when he goes back to User Admin page from top navigation Menu
     Given I am on the login page
@@ -171,5 +171,5 @@ Feature: Super Admin Landing page verification
     Then I verify "<Applications>" product on SPOE page
 
     Examples: 
-      | user        | Role   | Applications                                 |
-      | Super Admin | Leader | Episodes Classic, Reporting Classic, Lessons |
+      | user        | Role   | Applications                                                      |
+      | Super Admin | Leader | Episodes Classic, Reporting Classic, Remedy University, Reporting |
