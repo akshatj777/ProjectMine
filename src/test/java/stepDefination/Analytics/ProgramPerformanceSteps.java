@@ -347,7 +347,7 @@ public class ProgramPerformanceSteps extends DriverScript{
 	
 	@And("^I click \"([^\"]*)\" Filter on the \"([^\"]*)\" dashboard$")
 	public void i_click_filter_on_the_dashboard(String text,String dashboard){
-		programdashboard.iClickOnFilterName(text);
+		programdashboard.iClickOnFilterName(text,dashboard);
 	}
 	
 	@Then("^I validate the text appearing after mouse hovering on discharge to SNF benchmark value as \"([^\"]*)\"$")
@@ -490,19 +490,19 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.clearDataFromOutputFile(path);
 	}
 	
-	@And("^I verify \"([^\"]*)\" data metric value with database value on the dashboard for \"([^\"]*)\" with picture resolution \"([^\"]*)\"$")
-	public void i_verify_data_metric_value_with_database_as_on_the_dashboard(String text,String data,String resolution) throws Throwable{
-		programdashboard.verifyDataMetricValueWithdatabase(text,data,resolution);
+	@And("^I Save \"([^\"]*)\" data metric FE value on the dashboard for \"([^\"]*)\" with picture resolution \"([^\"]*)\"$")
+	public void i_save_data_metric_FE_value_on_the_dashboard(String text,String data,String resolution) throws Throwable{
+		programdashboard.saveDataMetricValueWithdatabase(text,data,resolution);
 	}
 	
-	@And("^I get all the \"([^\"]*)\" filter value for \"([^\"]*)\" dashboard$")
-	public void i_get_all_filter_value_for_dashboard(String filter,String dashboard) throws Throwable{
-		programdashboard.iSelectAllValuesInFilter(filter, dashboard);
+	@And("^I select \"([^\"]*)\" checkbox in \"([^\"]*)\" filter on \"([^\"]*)\" dashboard$")
+	public void i_select_checkbox_under_filter_for_dashboard(String checkbox, String filter,String dashboard) throws Throwable{
+		programdashboard.iSelectCheckboxValuesInFilter(checkbox,filter, dashboard);
 	}
 	
-	@And("^I verify \"([^\"]*)\" for DB and FE Metrics value  for \"([^\"]*)\"$")
-	public void i_verify_value_for_DB_And_FE_Metrics(String text,String data) throws Throwable{
-		programdashboard.iVerifyDBandFEForMetrics(text,data);
+	@And("^I verify \"([^\"]*)\" for DB and FE Metrics value at \"([^\"]*)\" for \"([^\"]*)\"$")
+	public void i_verify_value_for_DB_And_FE_Metrics(String text,String row,String data) throws Throwable{
+		programdashboard.iVerifyDBandFEForMetrics(text,row,data);
 	}
 	
 	@And("^I open the file \"([^\"]*)\" for writting data to input file$")
@@ -510,12 +510,17 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iOpenTheInputFile(path);
 	}
 	
-	@And("^I move to new line for writting new set of data to input$")
-	public void i_move_to_new_line_for_writting_new_set_data_to_InputFile() throws Throwable{
-		programdashboard.iMoveToNewLineInInputFile();
-	}
 	@And("^I close the file for after writting data to input file$")
 	public void i_close_file_after_writing_data_to_input_fileInputFile() throws Throwable{
 		programdashboard.iCloseTheInputFile();
+	}
+//	--------------------------------------------
+	@And("^I initialize the storage of Image in HashMap$")
+	public void i_initialize_storage_of_Image_in_HashMap() throws Throwable{
+		programdashboard.iInitializeStorageOfImageInHashMap();
+	}
+	@And("^I save the values of output images in \"([^\"]*)\" index in storage HashMap$")
+	public void i_save_values_output_images_in_index_in_hashmap(String index) throws Throwable{
+		programdashboard.iSaveAllOutputImagesInIndexInHashMap(index);
 	}
 }
