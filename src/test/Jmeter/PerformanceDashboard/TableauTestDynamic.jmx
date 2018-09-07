@@ -145,7 +145,7 @@ if ( ! new String(&quot;${expect3}&quot;).equals(&quot;na&quot;)) {
               <stringProp name="78391464">Query</stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="1822376938">
+              <collectionProp name="-2090843492">
                 <stringProp name="1822376907">SELECT     SUM(fp.episodeCountReport) as ECEpisodeCount FROM     warehouse.factPatientEpisode fp         INNER JOIN     warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK         INNER JOIN     warehouse.dimFacility df ON fp.anchorAdmitFacilityKey = df.facilitySK         INNER JOIN     warehouse.dimFacility pac ON fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK         INNER JOIN     warehouse.dimPatient dp ON fp.patientKey = dp.patientSK         INNER JOIN     warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName         INNER JOIN     warehouse.dimDRG d ON d.drgSK = fp.currDrgKey WHERE     fp.bundleRisk = 1         AND fp.episodeCountReport = 1         AND df.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)         AND pac.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)         AND de.bpid NOT LIKE &apos;%DEMO%&apos;         AND dlk.lookupCategory = &apos;patientRisk&apos;         AND fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)         ${Q_BPID}   </stringProp>
               </collectionProp>
             </collectionProp>
@@ -169,12 +169,12 @@ if ( ! new String(&quot;${expect3}&quot;).equals(&quot;na&quot;)) {
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
             <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;skip&quot;)){
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;Skip&quot;)){
 	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
 } else {
 	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;ccn&quot;).equals(&quot;skip&quot;)){
+if(!vars.get(&quot;ccn&quot;).equals(&quot;Skip&quot;)){
 	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);

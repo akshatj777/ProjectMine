@@ -2,7 +2,7 @@ Feature: Verify Program Performance Dashboard
 
   Scenario Outline: Verify data filter validations on program overview dashbaord
     Given I am on the login page
-    When I enter email field Qafivedashtest@yopmail.com for login
+    When I enter email field <User> for login
     And I enter password field Testing123 for Login
     Then I click Access button
     And I wait to see "Reporting" tile
@@ -26,11 +26,11 @@ Feature: Verify Program Performance Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | Row | BPID        | CCN         |
-      |   1 | True Random | Skip        |
-      |   2 | Skip        | True All    |
-      |   3 | True All    | True Random |
-      |   4 | True All    | True All    |
+      | User                        | Row | BPID        | CCN         |
+      | Qadashboardtest@yopmail.com |   1 | True Random | Skip        |
+      | Qatwodashtest@yopmail.com   |   2 | Skip        | True All    |
+      | Qatendashtest@yopmail.com   |   3 | True All    | True Random |
+      | Qafivedashtest@yopmail.com  |   4 | True All    | True All    |
 
   Scenario: Execute JMX file and read Output data for Data Metrics Validation
     When I close the file for after writting data to input file

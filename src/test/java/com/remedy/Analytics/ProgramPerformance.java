@@ -1380,6 +1380,7 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iClickRefreshDBData(){
+		 iWillWaitToSee(By.xpath("//span[text()='Refresh']"));
 		 clickElement(driver.findElement(By.xpath("//span[text()='Refresh']")));
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='wcGlassPane' and contains(@style,'cursor: wait;')]")));
 		 delay();
@@ -1521,6 +1522,7 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iOpenTheInputFile(String path) throws FileNotFoundException{
+		 // Remove the line of code to a separate method
 		 writer=new PrintWriter(System.getProperty("user.dir")+path);
 		 File file = new File(System.getProperty("user.dir")+path);
 		 boolean empty = file.length() == 0;
