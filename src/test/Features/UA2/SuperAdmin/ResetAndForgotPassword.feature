@@ -14,8 +14,8 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | User        | FirstName                                 | LastName                                 | Email                           | Phone | NPI | Role   | RoleID   | Applications                                                                      | LearningPathways                       | Locations             | expStatusCode |
-      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       |     | Leader | 1-Leader | episode_connect-Episode Connect Classic,reports-Reporting Classic,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
+      | User        | FirstName                                 | LastName                                 | Email                           | Phone | NPI | Role   | RoleID   | Applications                                                                                                       | LearningPathways                       | Locations             | expStatusCode |
+      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       |     | Leader | 1-Leader | episode_connect-Episode Connect Classic, reports-Reporting Classic, lessons-Remedy University, analytics-Reporting | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
 
   Scenario Outline: Reset Password: Validating validation message for - <Description>
     Given I am on the login page
