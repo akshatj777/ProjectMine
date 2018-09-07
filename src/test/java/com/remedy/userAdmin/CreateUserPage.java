@@ -1568,10 +1568,7 @@ public void iUnselectAllSelectedApps(){
    } 
    
    public void verifyLearningPathwayNotAvailable() throws Throwable {
-	   if(userApplications.contains("Remedy University"))
-       {
 	   Assert.assertFalse(isElementPresentOnPage(By.xpath(".column.padding>.component-learning-pathway-dropdown")));
-       }
    }
    
    public void verifyLearningPathwayAvailable() throws Throwable {
