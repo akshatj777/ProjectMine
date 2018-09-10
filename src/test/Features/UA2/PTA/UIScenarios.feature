@@ -98,32 +98,7 @@ Feature: PTA UI Scenarios
       | Role   | Applications                                                  | LearningPathwayName |
       | Leader | Episode Connect Classic, Reporting Classic, Remedy University | Test123             |
 
-  Scenario Outline: Verify auto selected programs in Organizations
-    Given I am on the login page
-    Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
-    Then I enter newuser password for login to Remedy
-    Then I click Access button
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I should see header text "Users"
-    When I click on Add User button
-    Then I should see "Add New User" on the user creation page
-    Then I verify the header "General Information"
-    And I fill in First Name with "FirstName"
-    Then I fill in Last Name with LastName
-    And I enter Email "qaautomation@remedypartners.com" to Create user
-    When I click the Organizational Role Field
-    Then I pick a Organizational <Role>
-    Then I click on Next button
-    Then I verify the header "Applications"
-    Then I select "<Applications>" product
-    Then I click on Next button
-    Then I verify the header "Permissions"
-    Then I verify default program "BPCI Model 2" associated with organization
 
-    Examples: 
-      | Role   | Applications                                                  | Health System    |
-      | Leader | Episode Connect Classic, Reporting Classic, Remedy University | Sound Physicians |
 
   Scenario: Verify the functionality of back/Cancel button and tabs on the left on create user page
     Given I am on the login page
@@ -160,7 +135,7 @@ Feature: PTA UI Scenarios
     Then I verify the header "Applications"
     Then I click on "Permissions" tab on the left
     Then I verify the header "Permissions"
-    Then I click on Select All Locations button
+    
     Then I click on Cancel button
     Then I should see header text "Users"
 
@@ -295,12 +270,13 @@ Feature: PTA UI Scenarios
     Then I verify that "General Information" menu is "enabled"
     Then I verify that "Permissions" menu is "enabled"
     Then I verify that Submit button is "disabled"
+    Then I select "<Programs>" programs
     Then I select location by BPID "<Locations_BPID>" for PTA
     Then I verify that Submit button is "enabled"
 
     Examples: 
-      | FirstName  | LastName  | Email                           | Role   | NPI | Applications      | Locations_BPID                  |
-      | First'Name | Last'Name | qaautomation@remedypartners.com | Leader |     | Reporting Classic | 3090-068--Mountainview Hospital |
+      | FirstName  | LastName  | Email                           | Role   | NPI | Applications      | Locations_BPID                  |Programs|
+      | First'Name | Last'Name | qaautomation@remedypartners.com | Leader |     | Reporting Classic | 3090-068--Mountainview Hospital | BPCI Model 3|
 
   Scenario Outline: Enter invalid location and verify error message
     Given I am on the login page
@@ -325,12 +301,13 @@ Feature: PTA UI Scenarios
     Then I select "<Applications>" product
     Then I click on Next button
     Then I verify the header "Permissions"
+    Then I select "<Programs>" programs
     Then I select "<invalidLocations>" invalid locations for PTA
     And I verify No results found for invalid Location for "first" in selected organisation for PTA user
 
     Examples: 
-      | FirstName | LastName | Email                           | Phone      | Role              | Applications      | NPI | invalidLocations |
-      | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Advanced Operator | Reporting Classic |     | hkfj             |
+      | FirstName | LastName | Email                           | Phone      | Role              | Applications      | NPI | invalidLocations |Programs|
+      | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Advanced Operator | Reporting Classic |     | hkfj             |BPCI Model 3|
 
   Scenario Outline: Creating user with existing Email and validating error message
     Given I am on the login page

@@ -2815,7 +2815,7 @@ public void iUnselectAllSelectedApps(){
  }
  public void iVerifyRolesAsPerUser(String user){
 	 if(user.equalsIgnoreCase("Super Admin")){
-		Assert.assertTrue(driver.findElements(By.xpath("//div[@class='scrolling menu transition']/div[@class='item']/span")).size()>=18);
+		Assert.assertTrue(driver.findElements(By.xpath("//div[@class='scrolling menu transition']/div[@class='item']/span")).size()>=10);
 	 }
 	 else if (user.equalsIgnoreCase("PTA")){
 		 String text;
@@ -2824,7 +2824,7 @@ public void iUnselectAllSelectedApps(){
 		 Assert.assertTrue(size==5);
 		 for(int i=0;i<size;i++){
 			text=driver.findElements(By.xpath("//div[@class='scrolling menu transition']/div[@class='item']/span")).get(i).getAttribute("innerText").toString().trim();
-			 Assert.assertTrue(text.equals("Executive")|| text.equals("Manager") || text.equals("Case Manager") ||text.equals("Transitional Case Manager"));
+			 Assert.assertTrue(text.equals("Leader")|| text.equals("Manager") || text.equals("Advanced Operator") ||text.equals("Operator"));
 		
 	 }
 		 
