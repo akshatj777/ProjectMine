@@ -783,10 +783,10 @@ public class ProgramPerformance extends BaseClass{
 		 Point point = ele.getLocation();
 		 if(text.contains("Readmissions Current")){
 			 System.out.println("VVVV"+point.getX()+"YYYYYYYYY"+point.getY());
-			 point = point.moveBy(00, -40);
+			 point = point.moveBy(60, -40);
 		 }else{
 			 System.out.println("Value+++++++++"+point.getX()+"YYYYYYYYY"+point.getY());
-			 point = point.moveBy(80, 100);
+			 point = point.moveBy(80, 90);
 		 }
 		 
 		 System.out.println(point);
@@ -816,7 +816,6 @@ public class ProgramPerformance extends BaseClass{
 				 FinalOutput=output.replaceAll("\\s+", "").replace("$","").replaceAll(",", "").trim();
 				 System.out.println(FinalOutput);
 				 imageOutput.put(text, FinalOutput);
-//				 mapOfHmImageOuput.put(text, imageOutput);
 	 }
 	 
 	 public void iSetStartAndEndDateForClaimsData(String start){
@@ -1268,33 +1267,42 @@ public class ProgramPerformance extends BaseClass{
 		 Assert.assertTrue(a.trim().contains(verifytext.trim()));
 	 }
 	 
-	 public void iValidateBenchmarkToolTipText(String text,String data){
+	 public void iSaveBenchmarkToolTipText(String text,String data){
 		 WebElement elem = null;
 		 elem=driver.findElement(By.xpath("//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas"));
 		 act.moveToElement(elem).click().build().perform();
 		 longDelay();
-		 if(text.contains("SNF Disch Benchmark Variance")){
-			 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
-			 System.out.println(gettext);
-			 Assert.assertTrue(gettext.trim().contains(outputText.get("dischtoSNFBenchmark"+data)));
-		 }else if (text.contains("SNF Days Benchmark Variance")){
-			 if(outputText.get("SNFDaysBenchmark"+data).contains("${SNFDaysBenchmark"+data+"_1}")){
-				 Assert.assertFalse(isElementPresent(By.xpath("//div[@class='tab-ubertipTooltip']/span")));
-				 }
-			 else{
-				 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
-				 System.out.println(gettext);
-				 Assert.assertTrue(gettext.trim().contains(outputText.get("SNFDaysBenchmark"+data)));
-		 }
-		 }else if(text.contains("Readmissions Benchmark Variance")){
-			 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
-			 System.out.println(gettext);
-			 Assert.assertTrue(gettext.trim().contains(outputText.get("EpisodesWithReadmissionBenchmark"+data)));
-		 }else{
-			 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
-			 System.out.println(gettext);
-			 Assert.assertTrue(gettext.trim().contains(text.toString()));
-		 }
+		 String getText=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+		 System.out.println(getText);
+		 imageOutput.put(text, getText);
+		 
+//		 if(text.contains("SNF Disch Benchmark Variance")){
+//			 String SNF_Discharge_BM_Variance=getText;
+//			 imageOutput.put(text, getText);
+//			 String snfDischargeBenchMark=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+//			 System.out.println(snfDischargeBenchMark);
+			 
+//			 Assert.assertTrue(gettext.trim().contains(outputText.get("dischtoSNFBenchmark"+data)));
+//		 }else if (text.contains("SNF Days Benchmark Variance")){
+//			 String SNF_Days_BM_Variance=getText;
+////			 if(outputText.get("SNFDaysBenchmark"+data).contains("${SNFDaysBenchmark"+data+"_1}")){
+////				 Assert.assertFalse(isElementPresent(By.xpath("//div[@class='tab-ubertipTooltip']/span")));
+////				 }
+////			 else{
+////				 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+////				 System.out.println(gettext);
+////				 Assert.assertTrue(gettext.trim().contains(outputText.get("SNFDaysBenchmark"+data)));
+////		 }
+//		 }else if(text.contains("Readmissions Benchmark Variance")){
+//			 String Readmissions_BM_Variance=getText;
+////			 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+////			 System.out.println(gettext);
+////			 Assert.assertTrue(gettext.trim().contains(outputText.get("EpisodesWithReadmissionBenchmark"+data)));
+//		 }else{
+//			 String gettext=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+//			 System.out.println(gettext);
+//			 Assert.assertTrue(gettext.trim().contains(text.toString()));
+//		 }
 	 }
 	 
 	 public void iVeriyEpisodeIntiatorBPID(){
@@ -1390,7 +1398,6 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void readDataMetricsValueFromQuery(int index){
-		 index = index-1;
 		 StringTokenizer st = new StringTokenizer(col.get(index), "*");
 		 while(st.hasMoreTokens()){
 			 String var[] =st.nextToken().trim().split("=");
@@ -1408,7 +1415,7 @@ public class ProgramPerformance extends BaseClass{
 	 public void saveDataMetricValueWithdatabase(String text,String data, String resolution) throws IOException{
 		 String xpath="//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas";
 		 GetTextFromScreenShot(text, xpath, resolution);
-		 
+/**		 
 //		 -------
 		 if(data.equalsIgnoreCase("EC")){
 			 if(text.contains("Episode")){
@@ -1462,6 +1469,7 @@ public class ProgramPerformance extends BaseClass{
 		 }else{
 			 
 		 }
+		 **/
 	 }
 	 
 	 public void iSelectCheckboxValuesInFilter(String checkbox,String filter,String dashboard) throws FileNotFoundException{
@@ -1473,11 +1481,17 @@ public class ProgramPerformance extends BaseClass{
 			 if(checkbox.contains("Random")){
 			            int n=listItems.size();
 			            int random_n=getRandomNumberInRange(1,n);
-			            for (int i = 0; i < random_n; i++) {
+			            for (int i = 1; i < random_n; i++) {
 			             int randomIndex = rand.nextInt(listItems.size());
 			             WebElement randomElement = listItems.get(randomIndex);
 			             String val=randomElement.getText();
-			             val=val.substring(val.indexOf("-")+1).trim();
+			             for (int itr=0;itr<=val.length();itr++) {
+								val=val.substring(val.indexOf("- ")+1).trim();
+							}
+//			             val=val.substring(val.indexOf("- ")+1).trim();
+//			             if(val.contains("\\s+")) {
+//			            	 val=val.substring(val.indexOf("- ")+1).trim();
+//			             }
 			             driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
 			             val="'"+val+"'";
 			             arrayListTexts.add(val);
@@ -1487,7 +1501,13 @@ public class ProgramPerformance extends BaseClass{
 			 }else if(checkbox.contains("All")){
 				 for(int i =1;i<listItems.size();i++){
 						String val=listItems.get(i).getText();
-						val=val.substring(val.indexOf("-")+1).trim();
+						for (int itr=0;itr<=val.length();itr++) {
+							val=val.substring(val.indexOf("- ")+1).trim();
+						}
+//						val=val.substring(val.indexOf("-")+1).trim();
+//						if(val.contains("\\s+")) {
+//			            	 val=val.substring(val.indexOf("- ")+1).trim();
+//			             }
 						driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
 						val="'"+val+"'";
 						arrayListTexts.add(val);
@@ -1521,12 +1541,11 @@ public class ProgramPerformance extends BaseClass{
 		
 	 }
 	 
-	 public void iOpenTheInputFile(String path) throws FileNotFoundException{
-		 // Remove the line of code to a separate method
-		 writer=new PrintWriter(System.getProperty("user.dir")+path);
-		 File file = new File(System.getProperty("user.dir")+path);
-		 boolean empty = file.length() == 0;
-		 if(!empty){
+	 public void iOpenTheInputFile(String path,String row) throws FileNotFoundException{
+		 if(row.equals("1")){
+			 writer=new PrintWriter(System.getProperty("user.dir")+path);
+			 imageOutput=new HashMap<String,String>();
+		 }else{
 			 writer.print(System.lineSeparator());
 		 }
 	 }
@@ -1538,19 +1557,20 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iVerifyDBandFEForMetrics(String text,String row,String data){
+		 if(!text.contains("Variance")){
 		 if (data.equalsIgnoreCase("Claims")){
-			 if(text.contains("Episode")){
-				 System.out.println("Value Fetched="+mapOfHmImageOuput.get(row).get(text));
-				 Assert.assertEquals(outputText.get("claimsEpisodeCount").trim(),mapOfHmImageOuput.get(row).get(text));
-//				 Assert.assertEquals(outputText.get("claimsEpisodeCount").trim(), FinalOutput.replaceAll(",","").trim());
-	 }}}
+				 System.out.println("Value Fetched="+mapOfHmImageOuput.get(row).get(text)+"Asserted With ==="+outputText.get(text+"_"+data));
+//				 Assert.assertEquals(outputText.get(text+"_"+data).trim(),mapOfHmImageOuput.get(row).get(text));
+				 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains(outputText.get(text+"_"+data)));
+
+				 }}
+		 else{
+			 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains(outputText.get(text+"_"+data)));
+		 }
+		 }
 	 
 	 public void iCloseTheInputFile(){
 		 writer.close();
-	 }
-	 
-	 public void iInitializeStorageOfImageInHashMap(){
-		 imageOutput=new HashMap<String,String>();
 	 }
 	 
 	 public void iSaveAllOutputImagesInIndexInHashMap(String index){
@@ -1564,4 +1584,5 @@ public class ProgramPerformance extends BaseClass{
 		  Random r = new Random();
 		  return r.nextInt((max - min) + 1) + min;
 	 }
+	 
 }

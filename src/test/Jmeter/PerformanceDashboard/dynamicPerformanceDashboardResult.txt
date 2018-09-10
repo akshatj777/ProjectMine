@@ -1,1 +1,1 @@
-ECEpisodeCount=${ECEpisodeCount_1}*claimsEpisodeCount=2546
+KPI_Episode_Claims=3646*Savings Rate_Claims=1.8*KPI_NPRA_Claims=1550890*KPI_Program_size_Claims=85457149*% SNF Disch Current_Claims=22.2*SNF Days Current_Claims=27.5*SNF Days Benchmark Variance_Claims=38.1*Readmissions Current_Claims=27.2*Readmissions Benchmark Variance_Claims=39.9*% SNF Disch Benchmark Variance_Claims=15.2

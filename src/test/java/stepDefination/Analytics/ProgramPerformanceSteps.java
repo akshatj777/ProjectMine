@@ -415,9 +415,9 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.GetTextForEpisodesWithReadmission(text, "//div[@tb-test-id='Readmissions Benchmark Variance']//div[@class='tvimagesContainer']/canvas", resolution);
 	}
 	
-	@And("^I verify \"([^\"]*)\" tooltip for \"([^\"]*)\" is having the same value fetched from database$")
-	public void i_verify_discharge_tooltip_is_having_the_same_value_fetched_from_database(String text,String data) throws Throwable{
-		programdashboard.iValidateBenchmarkToolTipText(text,data);
+	@And("^I Save \"([^\"]*)\" tooltip for \"([^\"]*)\" on the \"([^\"]*)\" dashboard$")
+	public void i_save_tooltip_for_data_on_dashboard(String text,String data,String dashboard) throws Throwable{
+		programdashboard.iSaveBenchmarkToolTipText(text,data);
 	}
 	
 	@And("^I verify Episode Initiator BPID values with database value$")
@@ -505,9 +505,9 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iVerifyDBandFEForMetrics(text,row,data);
 	}
 	
-	@And("^I open the file \"([^\"]*)\" for writting data to input file$")
-	public void i_open_file_after_writing_data_to_input_fileInputFile(String path) throws Throwable{
-		programdashboard.iOpenTheInputFile(path);
+	@And("^I open file \"([^\"]*)\" for writting data at \"([^\"]*)\" to input file$")
+	public void i_open_file_after_writing_data_to_input_fileInputFile(String path,String row) throws Throwable{
+		programdashboard.iOpenTheInputFile(path,row);
 	}
 	
 	@And("^I close the file for after writting data to input file$")
@@ -515,12 +515,9 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iCloseTheInputFile();
 	}
 //	--------------------------------------------
-	@And("^I initialize the storage of Image in HashMap$")
-	public void i_initialize_storage_of_Image_in_HashMap() throws Throwable{
-		programdashboard.iInitializeStorageOfImageInHashMap();
-	}
 	@And("^I save the values of output images in \"([^\"]*)\" index in storage HashMap$")
 	public void i_save_values_output_images_in_index_in_hashmap(String index) throws Throwable{
 		programdashboard.iSaveAllOutputImagesInIndexInHashMap(index);
 	}
+	
 }

@@ -14,8 +14,7 @@ Feature: Verify Program Performance Dashboard
     Then I verify "Program Performance" text is appearing inside dashboard
     Then I set "Start Date" as "1/1/2016 " in Date field on dashboard
     Then I set "End Date" as "3/31/2018" in Date field on dashboard
-    When I open the file "\\src\\test\\Jmeter\\PerformanceDashboard\\dynamic.csv" for writting data to input file
-    And I initialize the storage of Image in HashMap
+    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\dynamic.csv" for writting data at "1" to input file
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
     And I select "<BPID>" checkbox in "BPID" filter on "Program overview" dashboard
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
@@ -23,14 +22,23 @@ Feature: Verify Program Performance Dashboard
     And I select "<CCN>" checkbox in "CCN" filter on "Program overview" dashboard
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
     And I Save "KPI_Episode" data metric FE value on the dashboard for "Claims" with picture resolution "500X500"
+    And I Save "Savings Rate" data metric FE value on the dashboard for "Claims" with picture resolution "600X600"
+    And I Save "KPI_Program_size" data metric FE value on the dashboard for "Claims" with picture resolution "600X600"
+    And I Save "KPI_NPRA" data metric FE value on the dashboard for "Claims" with picture resolution "600X600"
+    And I Save "% SNF Disch Current" data metric FE value on the dashboard for "Claims" with picture resolution "900X900"
+    And I Save "% SNF Disch Benchmark Variance" tooltip for "Claims" on the "Performance Overview" dashboard
+    And I Save "SNF Days Current" data metric FE value on the dashboard for "Claims" with picture resolution "700X700"
+    And I Save "SNF Days Benchmark Variance" tooltip for "Claims" on the "Performance Overview" dashboard
+    And I Save "Readmissions Current" data metric FE value on the dashboard for "Claims" with picture resolution "700X700"
+    And I Save "Readmissions Benchmark Variance" tooltip for "Claims" on the "Performance Overview" dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
       | User                        | Row | BPID        | CCN         |
-      | Qadashboardtest@yopmail.com |   1 | True Random | Skip        |
-      | Qatwodashtest@yopmail.com   |   2 | Skip        | True All    |
+      | Qadashboardtest@yopmail.com |   1 | True All    | True All    |
+      | Qatwodashtest@yopmail.com   |   1 | True Random | True All    |
       | Qatendashtest@yopmail.com   |   3 | True All    | True Random |
-      | Qafivedashtest@yopmail.com  |   4 | True All    | True All    |
+      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random |
 
   Scenario: Execute JMX file and read Output data for Data Metrics Validation
     When I close the file for after writting data to input file
@@ -39,12 +47,21 @@ Feature: Verify Program Performance Dashboard
     Then I read the values from the text file "\\src\\test\\Jmeter\\PerformanceDashboard\\dynamicPerformanceDashboardResult.txt"
 
   Scenario Outline: Verify DB and FE values
-    And I get the value "<Row>" from Output file of data metric validation
+    And I get the value "<Index>" from Output file of data metric validation
     Then I verify "KPI_Episode" for DB and FE Metrics value at "<Row>" for "Claims"
+    Then I verify "Savings Rate" for DB and FE Metrics value at "<Row>" for "Claims"
+    Then I verify "KPI_Program_size" for DB and FE Metrics value at "<Row>" for "Claims"
+    Then I verify "KPI_NPRA" for DB and FE Metrics value at "<Row>" for "Claims"
+    Then I verify "% SNF Disch Current" for DB and FE Metrics value at "<Row>" for "Claims"
+    Then I verify "SNF Days Current" for DB and FE Metrics value at "<Row>" for "Claims"
+    Then I verify "Readmissions Current" for DB and FE Metrics value at "<Row>" for "Claims"
+    Then I verify "% SNF Disch Benchmark Variance" for DB and FE Metrics value at "<Row>" for "Claims"
+    Then I verify "SNF Days Benchmark Variance" for DB and FE Metrics value at "<Row>" for "Claims"
+    Then I verify "Readmissions Benchmark Variance" for DB and FE Metrics value at "<Row>" for "Claims"
 
     Examples: 
-      | Row |
-      |   1 |
-      |   2 |
-      |   3 |
-      |   4 |
+      | Index | Row |
+      |     0 |   1 |
+      |     1 |   2 |
+      |     2 |   3 |
+      |     3 |   4 |

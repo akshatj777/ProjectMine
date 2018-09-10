@@ -81,78 +81,6 @@
           <boolProp name="ignoreFirstLine">false</boolProp>
         </CSVDataSet>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="No. of Episode (EC Source)" enabled="false">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">${Query}</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">ECEpisodeCount</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree>
-          <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="false">
-            <stringProp name="BeanShellAssertion.query">if ( ! new String(&quot;${expect1}&quot;).equals(&quot;na&quot;)) {
-
-	if( ! new String(&quot;${drgSubCode_1}&quot;).equals(&quot;${expect1}&quot;)) {
-		Failure = true;
-		FailureMessage = &quot;drgSubCode_1=&quot; + &quot;${drgSubCode_1}&quot; + &quot; and &quot; + &quot;expecting &quot; + &quot;${expect1}&quot;;
-	
-	}
-
-}
-if ( ! new String(&quot;${expect2}&quot;).equals(&quot;na&quot;)) {
-
-	if( ! new String(&quot;${drgSubCode_2}&quot;).equals(&quot;${expect2}&quot;)) {
-		Failure = true;
-		FailureMessage = &quot;drgSubCode_2=&quot; + &quot;${drgSubCode_2}&quot; + &quot; and &quot; + &quot;expecting &quot; + &quot;${expect2}&quot;;
-	
-	}
-
-}
-
-if ( ! new String(&quot;${expect3}&quot;).equals(&quot;na&quot;)) {
-
-	if( ! new String(&quot;${drgSubCode_3}&quot;).equals(&quot;${expect3}&quot;)) {
-		Failure = true;
-		FailureMessage = &quot;drgSubCode_3=&quot; + &quot;${drgSubCode_3}&quot; + &quot; and &quot; + &quot;expecting &quot; + &quot;${expect3}&quot;;
-	
-	}
-
-}</stringProp>
-            <stringProp name="BeanShellAssertion.filename"></stringProp>
-            <stringProp name="BeanShellAssertion.parameters"></stringProp>
-            <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
-          </BeanShellAssertion>
-          <hashTree/>
-          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
-            <stringProp name="filename"></stringProp>
-            <stringProp name="parameters"></stringProp>
-            <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BPID&quot;,&quot;AND fp.BPID IN ${bpid}&quot;);	
-} else {
-	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
-}
-
-}</stringProp>
-          </BeanShellPreProcessor>
-          <hashTree/>
-          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
-            <collectionProp name="UserParameters.names">
-              <stringProp name="78391464">Query</stringProp>
-            </collectionProp>
-            <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-2090843492">
-                <stringProp name="1822376907">SELECT     SUM(fp.episodeCountReport) as ECEpisodeCount FROM     warehouse.factPatientEpisode fp         INNER JOIN     warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK         INNER JOIN     warehouse.dimFacility df ON fp.anchorAdmitFacilityKey = df.facilitySK         INNER JOIN     warehouse.dimFacility pac ON fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK         INNER JOIN     warehouse.dimPatient dp ON fp.patientKey = dp.patientSK         INNER JOIN     warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName         INNER JOIN     warehouse.dimDRG d ON d.drgSK = fp.currDrgKey WHERE     fp.bundleRisk = 1         AND fp.episodeCountReport = 1         AND df.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)         AND pac.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)         AND de.bpid NOT LIKE &apos;%DEMO%&apos;         AND dlk.lookupCategory = &apos;patientRisk&apos;         AND fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)         ${Q_BPID}   </stringProp>
-              </collectionProp>
-            </collectionProp>
-            <boolProp name="UserParameters.per_iteration">false</boolProp>
-          </UserParameters>
-          <hashTree/>
-        </hashTree>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="No. of Episode (Claims Source)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
@@ -169,12 +97,12 @@ if ( ! new String(&quot;${expect3}&quot;).equals(&quot;na&quot;)) {
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
             <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;Skip&quot;)){
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
 } else {
 	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;ccn&quot;).equals(&quot;Skip&quot;)){
+if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
@@ -197,7 +125,7 @@ if(!vars.get(&quot;ccn&quot;).equals(&quot;Skip&quot;)){
           </UserParameters>
           <hashTree/>
         </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Saving Rate " enabled="false">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Saving Rate " enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">${Query}</stringProp>
@@ -213,71 +141,17 @@ if(!vars.get(&quot;ccn&quot;).equals(&quot;Skip&quot;)){
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
             <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;skip&quot;)){
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
 } else {
 	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;ccn&quot;).equals(&quot;skip&quot;)){
+if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;facilityName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_FacilityName&quot;,&quot;AND f.facilityName IN ${facilityName}&quot;);	
-} else {
-	vars.put(&quot;Q_FacilityName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;bundleName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BundleName&quot;,&quot;AND drg.bundleName IN ${bundleName}&quot;);	
-} else{
-	vars.put(&quot;Q_BundleName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;region&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Region&quot;,&quot;AND rm.region IN ${region}&quot;);	
-} else {
-	vars.put(&quot;Q_Region&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;market&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Market&quot;,&quot;AND rm.market IN ${market}&quot;);	
-} else{
-	vars.put(&quot;Q_Market&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerRegion&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;AND rmp.region IN ${partnerRegion}&quot;);	
-} else {
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerMarket&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;AND rmp.market IN ${partnerMarket}&quot;);	
-} else{
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;participantName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;AND e.participantName IN ${participantName}&quot;);	
-} else{
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;drgCode&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_DrgCode&quot;,&quot;AND drg.drgCode IN ${drgCode}&quot;);	
-} else {
-	vars.put(&quot;Q_DrgCode&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;npi&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_NPI&quot;,&quot;AND p.npi IN ${npi}&quot;);	
-} else{
-	vars.put(&quot;Q_NPI&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;physicianName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;AND p.physicianNameInitCap IN ${physicianName}&quot;);	
-} else {
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Model&quot;,&quot;AND c.Model IN ${model}&quot;);	
-} else{
-	vars.put(&quot;Q_Model&quot;,&quot;&quot;);
-}</stringProp>
+</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
@@ -286,8 +160,8 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="509305613">
-                <stringProp name="1912665193">select (round((sum(NPRA)/sum(Program_size))*100,1)) as Savings_Rate from (select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size  from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK   left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}       ${Q_CCN}        ${Q_FacilityName}     ${Q_BundleName}         ${Q_Region}    ${Q_Market}       ${Q_PartnerRegion}           ${Q_PartnerMarket}           ${Q_ParticipantName}            ${Q_DrgCode}                     ${Q_NPI}            ${Q_PhysicianName}             ${Q_Model} and c.targetPrice &lt;&gt; 0) a;</stringProp>
+              <collectionProp name="-1251092965">
+                <stringProp name="-456000673">select (round((sum(NPRA)/sum(Program_size))*100,1)) as Savings_Rate from (select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size  from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK   left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}       ${Q_CCN}    and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
@@ -295,7 +169,7 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
           </UserParameters>
           <hashTree/>
         </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NPRA and PROGRAM SIZE (Claims)" enabled="false">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NPRA and PROGRAM SIZE (Claims)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">${Query}</stringProp>
@@ -311,71 +185,17 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
             <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;skip&quot;)){
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
 } else {
 	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;ccn&quot;).equals(&quot;skip&quot;)){
+if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;facilityName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_FacilityName&quot;,&quot;AND f.facilityName IN ${facilityName}&quot;);	
-} else {
-	vars.put(&quot;Q_FacilityName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;bundleName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BundleName&quot;,&quot;AND drg.bundleName IN ${bundleName}&quot;);	
-} else{
-	vars.put(&quot;Q_BundleName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;region&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Region&quot;,&quot;AND rm.region IN ${region}&quot;);	
-} else {
-	vars.put(&quot;Q_Region&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;market&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Market&quot;,&quot;AND rm.market IN ${market}&quot;);	
-} else{
-	vars.put(&quot;Q_Market&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerRegion&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;AND rmp.region IN ${partnerRegion}&quot;);	
-} else {
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerMarket&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;AND rmp.market IN ${partnerMarket}&quot;);	
-} else{
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;participantName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;AND e.participantName IN ${participantName}&quot;);	
-} else{
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;drgCode&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_DrgCode&quot;,&quot;AND drg.drgCode IN ${drgCode}&quot;);	
-} else {
-	vars.put(&quot;Q_DrgCode&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;npi&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_NPI&quot;,&quot;AND p.npi IN ${npi}&quot;);	
-} else{
-	vars.put(&quot;Q_NPI&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;physicianName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;AND p.physicianNameInitCap IN ${physicianName}&quot;);	
-} else {
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Model&quot;,&quot;AND c.Model IN ${model}&quot;);	
-} else{
-	vars.put(&quot;Q_Model&quot;,&quot;&quot;);
-}</stringProp>
+</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
@@ -384,106 +204,8 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-397522602">
-                <stringProp name="-743072050">select round(sum(NPRA)) as Claims_NPRA, round(sum(Program_size)) as Claims_ProgramSize from (select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size  from warehouse.factClaims c left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK   left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}       ${Q_CCN}        ${Q_FacilityName}     ${Q_BundleName}         ${Q_Region}    ${Q_Market}       ${Q_PartnerRegion}           ${Q_PartnerMarket}           ${Q_ParticipantName}            ${Q_DrgCode}                     ${Q_NPI}            ${Q_PhysicianName}             ${Q_Model}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
-                <stringProp name="0"></stringProp>
-              </collectionProp>
-            </collectionProp>
-            <boolProp name="UserParameters.per_iteration">false</boolProp>
-          </UserParameters>
-          <hashTree/>
-        </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NPRA and PROGRAM SIZE (EC)" enabled="false">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">${Query}</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">EC_TotalNPRA, EC_TotalProgram</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree>
-          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="false">
-            <stringProp name="filename"></stringProp>
-            <stringProp name="parameters"></stringProp>
-            <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BPID&quot;,&quot;AND fp.BPID IN ${bpid}&quot;);	
-} else {
-	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;ccn&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_CCN&quot;,&quot;AND df.CCN IN ${ccn}&quot;);	
-} else{
-	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;facilityName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_FacilityName&quot;,&quot;AND df.facilityName IN ${facilityName}&quot;);	
-} else {
-	vars.put(&quot;Q_FacilityName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;bundleName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BundleName&quot;,&quot;AND d.bundleName IN ${bundleName}&quot;);	
-} else{
-	vars.put(&quot;Q_BundleName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;region&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Region&quot;,&quot;AND rm.region IN ${region}&quot;);	
-} else {
-	vars.put(&quot;Q_Region&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;market&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Market&quot;,&quot;AND rm.market IN ${market}&quot;);	
-} else{
-	vars.put(&quot;Q_Market&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerRegion&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;AND rmp.region IN ${partnerRegion}&quot;);	
-} else {
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerMarket&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;AND rmp.market IN ${partnerMarket}&quot;);	
-} else{
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;participantName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;AND de.participantName IN ${bundleName}&quot;);	
-} else{
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;drgCode&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_DrgCode&quot;,&quot;AND d.drgCode IN ${drgCode}&quot;);	
-} else {
-	vars.put(&quot;Q_DrgCode&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;npi&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_NPI&quot;,&quot;AND dpy.npi IN ${npi}&quot;);	
-} else{
-	vars.put(&quot;Q_NPI&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;physicianName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;AND dpy.physicianNameInitCap IN ${physicianName}&quot;);	
-} else {
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Model&quot;,&quot;AND fp.Model IN ${model}&quot;);	
-} else{
-	vars.put(&quot;Q_Model&quot;,&quot;&quot;);
-}</stringProp>
-          </BeanShellPreProcessor>
-          <hashTree/>
-          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="false">
-            <collectionProp name="UserParameters.names">
-              <stringProp name="78391464">Query</stringProp>
-              <stringProp name="0"></stringProp>
-            </collectionProp>
-            <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-658750986">
-                <stringProp name="2095440741">select round(sum(NPRA)) as EC_NPRA, round(sum(Program_size)) as EC_ProgramSize from (select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size  from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;   and c.anchorBeginDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) ${Q_BPID} ${Q_CCN}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
+              <collectionProp name="-1130941114">
+                <stringProp name="868914567">select round(sum(NPRA)) as Claims_NPRA, round(sum(Program_size)) as Claims_ProgramSize from (select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size  from warehouse.factClaims c left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK   left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}       ${Q_CCN}      and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
@@ -506,7 +228,7 @@ from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;;
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Discharge to SNF (Claims)" enabled="false">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Discharge to SNF (Claims)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">${Query}</stringProp>
@@ -522,71 +244,17 @@ from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;;
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
             <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;skip&quot;)){
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
 } else {
 	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;ccn&quot;).equals(&quot;skip&quot;)){
+if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;facilityName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_FacilityName&quot;,&quot;AND f.facilityName IN ${facilityName}&quot;);	
-} else {
-	vars.put(&quot;Q_FacilityName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;bundleName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BundleName&quot;,&quot;AND drg.bundleName IN ${bundleName}&quot;);	
-} else{
-	vars.put(&quot;Q_BundleName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;region&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Region&quot;,&quot;AND rm.region IN ${region}&quot;);	
-} else {
-	vars.put(&quot;Q_Region&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;market&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Market&quot;,&quot;AND rm.market IN ${market}&quot;);	
-} else{
-	vars.put(&quot;Q_Market&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerRegion&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;AND rmp.region IN ${partnerRegion}&quot;);	
-} else {
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerMarket&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;AND rmp.market IN ${partnerMarket}&quot;);	
-} else{
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;participantName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;AND e.participantName IN ${participantName}&quot;);	
-} else{
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;drgCode&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_DrgCode&quot;,&quot;AND drg.drgCode IN ${drgCode}&quot;);	
-} else {
-	vars.put(&quot;Q_DrgCode&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;npi&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_NPI&quot;,&quot;AND p.npi IN ${npi}&quot;);	
-} else{
-	vars.put(&quot;Q_NPI&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;physicianName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;AND p.physicianNameInitCap IN ${physicianName}&quot;);	
-} else {
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Model&quot;,&quot;AND c.Model IN ${model}&quot;);	
-} else{
-	vars.put(&quot;Q_Model&quot;,&quot;&quot;);
-}</stringProp>
+</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
@@ -595,8 +263,8 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="2141414557">
-                <stringProp name="-805842603">select round((sum(category)/sum(episodes)) * 100,1) as DischargeToSNFClaims from (select e.bpid, SUM(if( (c.postAcuteCategory) = &quot;SNF&quot;, 1,0) ) as Category, sum(currEpiCounts) as Episodes from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20170101   and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}       ${Q_CCN}        ${Q_FacilityName}     ${Q_BundleName}         ${Q_Region}    ${Q_Market}       ${Q_PartnerRegion}           ${Q_PartnerMarket}           ${Q_ParticipantName}            ${Q_DrgCode}                     ${Q_NPI}            ${Q_PhysicianName}             ${Q_Model}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
+              <collectionProp name="6059003">
+                <stringProp name="726854912">select round((sum(category)/sum(episodes)) * 100,1) as DischargeToSNFClaims from (select e.bpid, SUM(if( (c.postAcuteCategory) = &quot;SNF&quot;, 1,0) ) as Category, sum(currEpiCounts) as Episodes from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101   and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}       ${Q_CCN}   and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
@@ -604,105 +272,7 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
           </UserParameters>
           <hashTree/>
         </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Discharge to SNF (EC)" enabled="false">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">${Query}</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">dischargetoSNFEC</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree>
-          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
-            <stringProp name="filename"></stringProp>
-            <stringProp name="parameters"></stringProp>
-            <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BPID&quot;,&quot;AND fp.BPID IN ${bpid}&quot;);	
-} else {
-	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;ccn&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_CCN&quot;,&quot;AND df.CCN IN ${ccn}&quot;);	
-} else{
-	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;facilityName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_FacilityName&quot;,&quot;AND df.facilityName IN ${facilityName}&quot;);	
-} else {
-	vars.put(&quot;Q_FacilityName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;bundleName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BundleName&quot;,&quot;AND d.bundleName IN ${bundleName}&quot;);	
-} else{
-	vars.put(&quot;Q_BundleName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;region&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Region&quot;,&quot;AND rm.region IN ${region}&quot;);	
-} else {
-	vars.put(&quot;Q_Region&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;market&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Market&quot;,&quot;AND rm.market IN ${market}&quot;);	
-} else{
-	vars.put(&quot;Q_Market&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerRegion&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;AND rmp.region IN ${partnerRegion}&quot;);	
-} else {
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerMarket&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;AND rmp.market IN ${partnerMarket}&quot;);	
-} else{
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;participantName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;AND de.participantName IN ${participantName}&quot;);	
-} else{
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;drgCode&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_DrgCode&quot;,&quot;AND d.drgCode IN ${drgCode}&quot;);	
-} else {
-	vars.put(&quot;Q_DrgCode&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;npi&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_NPI&quot;,&quot;AND dpy.npi IN ${npi}&quot;);	
-} else{
-	vars.put(&quot;Q_NPI&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;physicianName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;AND dpy.physicianNameInitCap IN ${physicianName}&quot;);	
-} else {
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Model&quot;,&quot;AND fp.Model IN ${model}&quot;);	
-} else{
-	vars.put(&quot;Q_Model&quot;,&quot;&quot;);
-}</stringProp>
-          </BeanShellPreProcessor>
-          <hashTree/>
-          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
-            <collectionProp name="UserParameters.names">
-              <stringProp name="78391464">Query</stringProp>
-              <stringProp name="0"></stringProp>
-            </collectionProp>
-            <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="750278520">
-                <stringProp name="-358571745">select round((sum(category)/sum(episodes)) * 100,1) as DischargeToSNFEC from (select fp.BPID, sum(if((fp.NSOCType) in (&apos;SNF&apos;), 1,0) ) as Category, sum(fp.episodeCountReport) as Episodes from warehouse.factPatientEpisode fp  inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName inner join warehouse.dimDRG drg on drg.drgSK = fp.currDrgKey where fp.bundleRisk = 1  and fp.episodeCountReport = 1 and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos;  and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;,&apos;IRF&apos;)   ${Q_BPID}       ${Q_CCN}        ${Q_FacilityName}     ${Q_BundleName}         ${Q_Region}    ${Q_Market}       ${Q_PartnerRegion}           ${Q_PartnerMarket}           ${Q_ParticipantName}            ${Q_DrgCode}                     ${Q_NPI}            ${Q_PhysicianName}             ${Q_Model} )a;</stringProp>
-                <stringProp name="0"></stringProp>
-              </collectionProp>
-            </collectionProp>
-            <boolProp name="UserParameters.per_iteration">false</boolProp>
-          </UserParameters>
-          <hashTree/>
-        </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days (Claims)" enabled="false">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days (Claims)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">${Query}</stringProp>
@@ -718,71 +288,17 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
             <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;skip&quot;)){
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
 } else {
 	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;ccn&quot;).equals(&quot;skip&quot;)){
+if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;facilityName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_FacilityName&quot;,&quot;AND f.facilityName IN ${facilityName}&quot;);	
-} else {
-	vars.put(&quot;Q_FacilityName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;bundleName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BundleName&quot;,&quot;AND drg.bundleName IN ${bundleName}&quot;);	
-} else{
-	vars.put(&quot;Q_BundleName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;region&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Region&quot;,&quot;AND rm.region IN ${region}&quot;);	
-} else {
-	vars.put(&quot;Q_Region&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;market&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Market&quot;,&quot;AND rm.market IN ${market}&quot;);	
-} else{
-	vars.put(&quot;Q_Market&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerRegion&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;AND rmp.region IN ${partnerRegion}&quot;);	
-} else {
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerMarket&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;AND rmp.market IN ${partnerMarket}&quot;);	
-} else{
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;participantName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;AND e.participantName IN ${participantName}&quot;);	
-} else{
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;drgCode&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_DrgCode&quot;,&quot;AND drg.drgCode IN ${drgCode}&quot;);	
-} else {
-	vars.put(&quot;Q_DrgCode&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;npi&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_NPI&quot;,&quot;AND p.npi IN ${npi}&quot;);	
-} else{
-	vars.put(&quot;Q_NPI&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;physicianName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;AND p.physicianNameInitCap IN ${physicianName}&quot;);	
-} else {
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Model&quot;,&quot;AND c.Model IN ${model}&quot;);	
-} else{
-	vars.put(&quot;Q_Model&quot;,&quot;&quot;);
-}</stringProp>
+</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
@@ -791,8 +307,8 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-1984123472">
-                <stringProp name="-318566188">select round(sum(snfDaysTrimmed)/sum(Episodes),1) as SNFDaysClaims from (select e.bpid, sum(if(c.snfDaysTrimmed,1,0)) as Episodes,  sum(c.snfDaysTrimmed) as snfDaysTrimmed from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${Q_BPID}       ${Q_CCN}        ${Q_FacilityName}     ${Q_BundleName}         ${Q_Region}    ${Q_Market}       ${Q_PartnerRegion}           ${Q_PartnerMarket}           ${Q_ParticipantName}            ${Q_DrgCode}                     ${Q_NPI}            ${Q_PhysicianName}             ${Q_Model}  and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;) and c.targetPrice &lt;&gt; 0) a;</stringProp>
+              <collectionProp name="1152350474">
+                <stringProp name="390362775">select round(sum(snfDaysTrimmed)/sum(Episodes),1) as SNFDaysClaims from (select e.bpid, sum(if(c.snfDaysTrimmed,1,0)) as Episodes,  sum(c.snfDaysTrimmed) as snfDaysTrimmed from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${Q_BPID}       ${Q_CCN}      and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;) and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
@@ -800,105 +316,7 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
           </UserParameters>
           <hashTree/>
         </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days (EC)" enabled="false">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">${Query}</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">SNFDaysEC</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree>
-          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
-            <stringProp name="filename"></stringProp>
-            <stringProp name="parameters"></stringProp>
-            <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BPID&quot;,&quot;AND fp.BPID IN ${bpid}&quot;);	
-} else {
-	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;ccn&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_CCN&quot;,&quot;AND df.CCN IN ${ccn}&quot;);	
-} else{
-	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;facilityName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_FacilityName&quot;,&quot;AND df.facilityName IN ${facilityName}&quot;);	
-} else {
-	vars.put(&quot;Q_FacilityName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;bundleName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BundleName&quot;,&quot;AND d.bundleName IN ${bundleName}&quot;);	
-} else{
-	vars.put(&quot;Q_BundleName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;region&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Region&quot;,&quot;AND rm.region IN ${region}&quot;);	
-} else {
-	vars.put(&quot;Q_Region&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;market&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Market&quot;,&quot;AND rm.market IN ${market}&quot;);	
-} else{
-	vars.put(&quot;Q_Market&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerRegion&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;AND rmp.region IN ${partnerRegion}&quot;);	
-} else {
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerMarket&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;AND rmp.market IN ${partnerMarket}&quot;);	
-} else{
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;participantName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;AND de.participantName IN ${participantName}&quot;);	
-} else{
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;drgCode&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_DrgCode&quot;,&quot;AND d.drgCode IN ${drgCode}&quot;);	
-} else {
-	vars.put(&quot;Q_DrgCode&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;npi&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_NPI&quot;,&quot;AND dpy.npi IN ${npi}&quot;);	
-} else{
-	vars.put(&quot;Q_NPI&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;physicianName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;AND dpy.physicianNameInitCap IN ${physicianName}&quot;);	
-} else {
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Model&quot;,&quot;AND fp.Model IN ${model}&quot;);	
-} else{
-	vars.put(&quot;Q_Model&quot;,&quot;&quot;);
-}</stringProp>
-          </BeanShellPreProcessor>
-          <hashTree/>
-          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
-            <collectionProp name="UserParameters.names">
-              <stringProp name="78391464">Query</stringProp>
-              <stringProp name="0"></stringProp>
-            </collectionProp>
-            <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="1041898416">
-                <stringProp name="-158312603">select round(sum(case when (fp.dataQualityFlag not like &apos;%Invalid%&apos; and fp.totalSNFDays &gt;= 90) then 90 when (fp.dataQualityFlag not like &apos;%Invalid%&apos; ) then fp.totalSNFDays else 0 end ) /(sum(if((fp.totalSNFDays &gt; 0 and fp.dataQualityFlag not like &apos;Invalid%&apos;),fp.currEpiCounts,0))),1)  as SNFDaysEC from warehouse.factPatientEpisode fp  inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName where fp.bundleRisk = 1  and fp.totalSNFDays &gt; 0 and fp.dataQualityFlag not like &apos;%Invalid%&apos; and fp.episodeCountReport = 1 and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos; and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${Q_BPID}       ${Q_CCN}        ${Q_FacilityName}     ${Q_BundleName}         ${Q_Region}    ${Q_Market}       ${Q_PartnerRegion}           ${Q_PartnerMarket}           ${Q_ParticipantName}            ${Q_DrgCode}                     ${Q_NPI}            ${Q_PhysicianName}             ${Q_Model}</stringProp>
-                <stringProp name="0"></stringProp>
-              </collectionProp>
-            </collectionProp>
-            <boolProp name="UserParameters.per_iteration">false</boolProp>
-          </UserParameters>
-          <hashTree/>
-        </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days Benchmark (Claims)" enabled="false">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days Benchmark (Claims)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">${Query}</stringProp>
@@ -914,71 +332,17 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
             <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;skip&quot;)){
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
 } else {
 	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;ccn&quot;).equals(&quot;skip&quot;)){
+if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;facilityName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_FacilityName&quot;,&quot;AND f.facilityName IN ${facilityName}&quot;);	
-} else {
-	vars.put(&quot;Q_FacilityName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;bundleName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BundleName&quot;,&quot;AND drg.bundleName IN ${bundleName}&quot;);	
-} else{
-	vars.put(&quot;Q_BundleName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;region&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Region&quot;,&quot;AND rm.region IN ${region}&quot;);	
-} else {
-	vars.put(&quot;Q_Region&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;market&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Market&quot;,&quot;AND rm.market IN ${market}&quot;);	
-} else{
-	vars.put(&quot;Q_Market&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerRegion&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;AND rmp.region IN ${partnerRegion}&quot;);	
-} else {
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerMarket&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;AND rmp.market IN ${partnerMarket}&quot;);	
-} else{
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;participantName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;AND e.participantName IN ${participantName}&quot;);	
-} else{
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;drgCode&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_DrgCode&quot;,&quot;AND drg.drgCode IN ${drgCode}&quot;);	
-} else {
-	vars.put(&quot;Q_DrgCode&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;npi&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_NPI&quot;,&quot;AND p.npi IN ${npi}&quot;);	
-} else{
-	vars.put(&quot;Q_NPI&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;physicianName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;AND p.physicianNameInitCap IN ${physicianName}&quot;);	
-} else {
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Model&quot;,&quot;AND c.Model IN ${model}&quot;);	
-} else{
-	vars.put(&quot;Q_Model&quot;,&quot;&quot;);
-}</stringProp>
+</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
@@ -987,8 +351,8 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-125163897">
-                <stringProp name="-981090224">select round(sum(baseSNFDays)/sum(baseSNFCount),1) as SNFDaysBenchmarkClaims from (select e.bpid, sum(c.baseSNFDays) as baseSNFDays, sum(c.baseSNFCount) as baseSNFCount from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician p ON c.physicianKey = p.physicianSK where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;)  ${Q_BPID}       ${Q_CCN}        ${Q_FacilityName}     ${Q_BundleName}         ${Q_Region}    ${Q_Market}       ${Q_PartnerRegion}           ${Q_PartnerMarket}           ${Q_ParticipantName}            ${Q_DrgCode}                     ${Q_NPI}            ${Q_PhysicianName}             ${Q_Model} and c.targetPrice &lt;&gt; 0 and c.snfDaysTrimmed &gt; 0) a;</stringProp>
+              <collectionProp name="1649423865">
+                <stringProp name="-2001931743">select round(sum(baseSNFDays)/sum(baseSNFCount),1) as SNFDaysBenchmarkClaims from (select e.bpid, sum(c.baseSNFDays) as baseSNFDays, sum(c.baseSNFCount) as baseSNFCount from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician p ON c.physicianKey = p.physicianSK where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;)  ${Q_BPID}       ${Q_CCN}   and c.targetPrice &lt;&gt; 0 and c.snfDaysTrimmed &gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
@@ -996,105 +360,7 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
           </UserParameters>
           <hashTree/>
         </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SNF Days Benchmark (EC)" enabled="false">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">${Query}</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">SNFDaysBenchmarkEC</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree>
-          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
-            <stringProp name="filename"></stringProp>
-            <stringProp name="parameters"></stringProp>
-            <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BPID&quot;,&quot;AND fp.BPID IN ${bpid}&quot;);	
-} else {
-	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;ccn&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_CCN&quot;,&quot;AND df.CCN IN ${ccn}&quot;);	
-} else{
-	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;facilityName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_FacilityName&quot;,&quot;AND df.facilityName IN ${facilityName}&quot;);	
-} else {
-	vars.put(&quot;Q_FacilityName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;bundleName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BundleName&quot;,&quot;AND d.bundleName IN ${bundleName}&quot;);	
-} else{
-	vars.put(&quot;Q_BundleName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;region&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Region&quot;,&quot;AND rm.region IN ${region}&quot;);	
-} else {
-	vars.put(&quot;Q_Region&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;market&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Market&quot;,&quot;AND rm.market IN ${market}&quot;);	
-} else{
-	vars.put(&quot;Q_Market&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerRegion&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;AND rmp.region IN ${partnerRegion}&quot;);	
-} else {
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerMarket&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;AND rmp.market IN ${partnerMarket}&quot;);	
-} else{
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;participantName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;AND de.participantName IN ${participantName}&quot;);	
-} else{
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;drgCode&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_DrgCode&quot;,&quot;AND d.drgCode IN ${drgCode}&quot;);	
-} else {
-	vars.put(&quot;Q_DrgCode&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;npi&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_NPI&quot;,&quot;AND dpy.npi IN ${npi}&quot;);	
-} else{
-	vars.put(&quot;Q_NPI&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;physicianName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;AND dpy.physicianNameInitCap IN ${physicianName}&quot;);	
-} else {
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Model&quot;,&quot;AND fp.Model IN ${model}&quot;);	
-} else{
-	vars.put(&quot;Q_Model&quot;,&quot;&quot;);
-}</stringProp>
-          </BeanShellPreProcessor>
-          <hashTree/>
-          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
-            <collectionProp name="UserParameters.names">
-              <stringProp name="78391464">Query</stringProp>
-              <stringProp name="0"></stringProp>
-            </collectionProp>
-            <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="941597938">
-                <stringProp name="-358535361">select round(sum(fp.baseSNFDays)/sum(fp.baseEpiCounts),1) as SNFDaysBenchmarkEC from warehouse.factPatientEpisode fp  inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName where fp.bundleRisk = 1  and fp.totalSNFDays &gt; 0  and fp.dataQualityFlag not like &apos;%Invalid%&apos; and fp.episodeCountReport = 1 and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos; and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${Q_BPID}       ${Q_CCN}        ${Q_FacilityName}     ${Q_BundleName}         ${Q_Region}    ${Q_Market}       ${Q_PartnerRegion}           ${Q_PartnerMarket}           ${Q_ParticipantName}            ${Q_DrgCode}                     ${Q_NPI}            ${Q_PhysicianName}             ${Q_Model};</stringProp>
-                <stringProp name="0"></stringProp>
-              </collectionProp>
-            </collectionProp>
-            <boolProp name="UserParameters.per_iteration">false</boolProp>
-          </UserParameters>
-          <hashTree/>
-        </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission (Claims)" enabled="false">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission (Claims)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">${Query}</stringProp>
@@ -1110,71 +376,17 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
             <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;skip&quot;)){
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
 } else {
 	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;ccn&quot;).equals(&quot;skip&quot;)){
+if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;facilityName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_FacilityName&quot;,&quot;AND f.facilityName IN ${facilityName}&quot;);	
-} else {
-	vars.put(&quot;Q_FacilityName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;bundleName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BundleName&quot;,&quot;AND drg.bundleName IN ${bundleName}&quot;);	
-} else{
-	vars.put(&quot;Q_BundleName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;region&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Region&quot;,&quot;AND rm.region IN ${region}&quot;);	
-} else {
-	vars.put(&quot;Q_Region&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;market&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Market&quot;,&quot;AND rm.market IN ${market}&quot;);	
-} else{
-	vars.put(&quot;Q_Market&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerRegion&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;AND rmp.region IN ${partnerRegion}&quot;);	
-} else {
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerMarket&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;AND rmp.market IN ${partnerMarket}&quot;);	
-} else{
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;participantName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;AND e.participantName IN ${participantName}&quot;);	
-} else{
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;drgCode&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_DrgCode&quot;,&quot;AND drg.drgCode IN ${drgCode}&quot;);	
-} else {
-	vars.put(&quot;Q_DrgCode&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;npi&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_NPI&quot;,&quot;AND p.npi IN ${npi}&quot;);	
-} else{
-	vars.put(&quot;Q_NPI&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;physicianName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;AND p.physicianNameInitCap IN ${physicianName}&quot;);	
-} else {
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Model&quot;,&quot;AND c.Model IN ${model}&quot;);	
-} else{
-	vars.put(&quot;Q_Model&quot;,&quot;&quot;);
-}</stringProp>
+</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
@@ -1183,8 +395,8 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-1414247397">
-                <stringProp name="432794251">select round((sum(readmissionCounter)/sum(Episodes))*100, 1) as EpisodesWithReadmissionClaims  from ( select sum(if((c.readmission_flag) = 1,1,0)) as readmissionCounter, sum(c.currEpiCounts) as Episodes from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${Q_BPID}       ${Q_CCN}        ${Q_FacilityName}     ${Q_BundleName}         ${Q_Region}    ${Q_Market}       ${Q_PartnerRegion}           ${Q_PartnerMarket}           ${Q_ParticipantName}            ${Q_DrgCode}                     ${Q_NPI}            ${Q_PhysicianName}             ${Q_Model}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
+              <collectionProp name="1410846427">
+                <stringProp name="-1817562360">select round((sum(readmissionCounter)/sum(Episodes))*100, 1) as EpisodesWithReadmissionClaims  from ( select sum(if((c.readmission_flag) = 1,1,0)) as readmissionCounter, sum(c.currEpiCounts) as Episodes from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${Q_BPID}       ${Q_CCN}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
@@ -1192,105 +404,7 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
           </UserParameters>
           <hashTree/>
         </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission (EC)" enabled="false">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">${Query}</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">EpisodesWithReadmissionEC</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree>
-          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
-            <stringProp name="filename"></stringProp>
-            <stringProp name="parameters"></stringProp>
-            <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BPID&quot;,&quot;AND fp.BPID IN ${bpid}&quot;);	
-} else {
-	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;ccn&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_CCN&quot;,&quot;AND df.CCN IN ${ccn}&quot;);	
-} else{
-	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;facilityName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_FacilityName&quot;,&quot;AND df.facilityName IN ${facilityName}&quot;);	
-} else {
-	vars.put(&quot;Q_FacilityName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;bundleName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BundleName&quot;,&quot;AND d.bundleName IN ${bundleName}&quot;);	
-} else{
-	vars.put(&quot;Q_BundleName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;region&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Region&quot;,&quot;AND rm.region IN ${region}&quot;);	
-} else {
-	vars.put(&quot;Q_Region&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;market&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Market&quot;,&quot;AND rm.market IN ${market}&quot;);	
-} else{
-	vars.put(&quot;Q_Market&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerRegion&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;AND rmp.region IN ${partnerRegion}&quot;);	
-} else {
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerMarket&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;AND rmp.market IN ${partnerMarket}&quot;);	
-} else{
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;participantName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;AND de.participantName IN ${participantName}&quot;);	
-} else{
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;drgCode&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_DrgCode&quot;,&quot;AND d.drgCode IN ${drgCode}&quot;);	
-} else {
-	vars.put(&quot;Q_DrgCode&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;npi&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_NPI&quot;,&quot;AND dpy.npi IN ${npi}&quot;);	
-} else{
-	vars.put(&quot;Q_NPI&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;physicianName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;AND dpy.physicianNameInitCap IN ${physicianName}&quot;);	
-} else {
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Model&quot;,&quot;AND fp.Model IN ${model}&quot;);	
-} else{
-	vars.put(&quot;Q_Model&quot;,&quot;&quot;);
-}</stringProp>
-          </BeanShellPreProcessor>
-          <hashTree/>
-          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
-            <collectionProp name="UserParameters.names">
-              <stringProp name="78391464">Query</stringProp>
-              <stringProp name="0"></stringProp>
-            </collectionProp>
-            <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-1674733585">
-                <stringProp name="-930635856">select round(sum(readmissionCounter)/sum(Episodes)*100, 1) as EpisodesWithReadmissionEC from ( select sum(if((fp.readmissionCounter) &gt;= 1 , 1, 0)) as readmissionCounter, sum(fp.episodeCountReport) as Episodes from warehouse.factPatientEpisode fp  inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName  inner join warehouse.dimDRG drg on drg.drgSK = fp.currDrgKey  where fp.bundleRisk = 1  and fp.episodeCountReport = 1 and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos; and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${Q_BPID}       ${Q_CCN}        ${Q_FacilityName}     ${Q_BundleName}         ${Q_Region}    ${Q_Market}       ${Q_PartnerRegion}           ${Q_PartnerMarket}           ${Q_ParticipantName}            ${Q_DrgCode}                     ${Q_NPI}            ${Q_PhysicianName}             ${Q_Model}  )a;</stringProp>
-                <stringProp name="0"></stringProp>
-              </collectionProp>
-            </collectionProp>
-            <boolProp name="UserParameters.per_iteration">false</boolProp>
-          </UserParameters>
-          <hashTree/>
-        </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission Benchmark (Claims)" enabled="false">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission Benchmark (Claims)" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">${Query}</stringProp>
@@ -1306,71 +420,17 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
             <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;skip&quot;)){
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
 } else {
 	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;ccn&quot;).equals(&quot;skip&quot;)){
+if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;facilityName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_FacilityName&quot;,&quot;AND f.facilityName IN ${facilityName}&quot;);	
-} else {
-	vars.put(&quot;Q_FacilityName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;bundleName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BundleName&quot;,&quot;AND drg.bundleName IN ${bundleName}&quot;);	
-} else{
-	vars.put(&quot;Q_BundleName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;region&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Region&quot;,&quot;AND rm.region IN ${region}&quot;);	
-} else {
-	vars.put(&quot;Q_Region&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;market&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Market&quot;,&quot;AND rm.market IN ${market}&quot;);	
-} else{
-	vars.put(&quot;Q_Market&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerRegion&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;AND rmp.region IN ${partnerRegion}&quot;);	
-} else {
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerMarket&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;AND rmp.market IN ${partnerMarket}&quot;);	
-} else{
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;participantName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;AND e.participantName IN ${participantName}&quot;);	
-} else{
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;drgCode&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_DrgCode&quot;,&quot;AND drg.drgCode IN ${drgCode}&quot;);	
-} else {
-	vars.put(&quot;Q_DrgCode&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;npi&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_NPI&quot;,&quot;AND p.npi IN ${npi}&quot;);	
-} else{
-	vars.put(&quot;Q_NPI&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;physicianName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;AND p.physicianNameInitCap IN ${physicianName}&quot;);	
-} else {
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Model&quot;,&quot;AND c.Model IN ${model}&quot;);	
-} else{
-	vars.put(&quot;Q_Model&quot;,&quot;&quot;);
-}</stringProp>
+</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
@@ -1379,8 +439,8 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-801884534">
-                <stringProp name="408058196">select round((sum(baseEpiReadmissions)/sum(baseEpicounts))*100, 1) as EpisodesWithReadmissionBenchmarkClaims from (select e.bpid, SUM(c.baseEpiReadmissions) as baseEpiReadmissions, sum(c.baseEpiCounts) as baseEpicounts from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey WHERE f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${Q_BPID}       ${Q_CCN}        ${Q_FacilityName}     ${Q_BundleName}         ${Q_Region}    ${Q_Market}       ${Q_PartnerRegion}           ${Q_PartnerMarket}           ${Q_ParticipantName}            ${Q_DrgCode}                     ${Q_NPI}            ${Q_PhysicianName}             ${Q_Model} and c.targetPrice &lt;&gt; 0) a;</stringProp>
+              <collectionProp name="1217677981">
+                <stringProp name="-490959031">select round((sum(baseEpiReadmissions)/sum(baseEpicounts))*100, 1) as EpisodesWithReadmissionBenchmarkClaims from (select e.bpid, SUM(c.baseEpiReadmissions) as baseEpiReadmissions, sum(c.baseEpiCounts) as baseEpicounts from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey WHERE f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${Q_BPID}       ${Q_CCN}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
@@ -1388,105 +448,7 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
           </UserParameters>
           <hashTree/>
         </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Episodes With Readmission Benchmark (EC)" enabled="false">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">${Query}</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">EpisodesWithReadmissionBenchmarkEC</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree>
-          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
-            <stringProp name="filename"></stringProp>
-            <stringProp name="parameters"></stringProp>
-            <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BPID&quot;,&quot;AND fp.BPID IN ${bpid}&quot;);	
-} else {
-	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;ccn&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_CCN&quot;,&quot;AND df.CCN IN ${ccn}&quot;);	
-} else{
-	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;facilityName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_FacilityName&quot;,&quot;AND df.facilityName IN ${facilityName}&quot;);	
-} else {
-	vars.put(&quot;Q_FacilityName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;bundleName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BundleName&quot;,&quot;AND d.bundleName IN ${bundleName}&quot;);	
-} else{
-	vars.put(&quot;Q_BundleName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;region&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Region&quot;,&quot;AND rm.region IN ${region}&quot;);	
-} else {
-	vars.put(&quot;Q_Region&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;market&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Market&quot;,&quot;AND rm.market IN ${market}&quot;);	
-} else{
-	vars.put(&quot;Q_Market&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerRegion&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;AND rmp.region IN ${partnerRegion}&quot;);	
-} else {
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerMarket&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;AND rmp.market IN ${partnerMarket}&quot;);	
-} else{
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;participantName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;AND de.participantName IN ${participantName}&quot;);	
-} else{
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;drgCode&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_DrgCode&quot;,&quot;AND d.drgCode IN ${drgCode}&quot;);	
-} else {
-	vars.put(&quot;Q_DrgCode&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;npi&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_NPI&quot;,&quot;AND dpy.npi IN ${npi}&quot;);	
-} else{
-	vars.put(&quot;Q_NPI&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;physicianName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;AND dpy.physicianNameInitCap IN ${physicianName}&quot;);	
-} else {
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Model&quot;,&quot;AND fp.Model IN ${model}&quot;);	
-} else{
-	vars.put(&quot;Q_Model&quot;,&quot;&quot;);
-}</stringProp>
-          </BeanShellPreProcessor>
-          <hashTree/>
-          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
-            <collectionProp name="UserParameters.names">
-              <stringProp name="78391464">Query</stringProp>
-              <stringProp name="0"></stringProp>
-            </collectionProp>
-            <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-902661755">
-                <stringProp name="1387631564">select round((baseEpiReadmissions)/(baseEpiCounts)*100, 1) as EpisodesWithReadmissionBenchmarkEC from (select SUM(fp.baseEpiReadmissions) as baseEpiReadmissions, sum(fp.baseEpiCounts) as baseEpiCounts from warehouse.factPatientEpisode fp  inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName inner join warehouse.dimDRG drg on drg.drgSK = fp.currDrgKey   where fp.bundleRisk = 1  and fp.episodeCountReport = 1 and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos; and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}       ${Q_CCN}        ${Q_FacilityName}     ${Q_BundleName}         ${Q_Region}    ${Q_Market}       ${Q_PartnerRegion}           ${Q_PartnerMarket}           ${Q_ParticipantName}            ${Q_DrgCode}                     ${Q_NPI}            ${Q_PhysicianName}             ${Q_Model} )a;</stringProp>
-                <stringProp name="0"></stringProp>
-              </collectionProp>
-            </collectionProp>
-            <boolProp name="UserParameters.per_iteration">false</boolProp>
-          </UserParameters>
-          <hashTree/>
-        </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Discharge to SNF Benchmark (Claims)" enabled="false">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Discharge to SNF Benchmark (Claims)" enabled="true">
           <stringProp name="TestPlan.comments">	</stringProp>
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
@@ -1503,71 +465,17 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
             <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;skip&quot;)){
+            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_BPID&quot;,&quot;and e.bpid in  ${bpid}&quot;);	
 } else {
 	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;ccn&quot;).equals(&quot;skip&quot;)){
+if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);	
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;facilityName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_FacilityName&quot;,&quot;AND f.facilityName IN ${facilityName}&quot;);	
-} else {
-	vars.put(&quot;Q_FacilityName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;bundleName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BundleName&quot;,&quot;AND drg.bundleName IN ${bundleName}&quot;);	
-} else{
-	vars.put(&quot;Q_BundleName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;region&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Region&quot;,&quot;AND rm.region IN ${region}&quot;);	
-} else {
-	vars.put(&quot;Q_Region&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;market&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Market&quot;,&quot;AND rm.market IN ${market}&quot;);	
-} else{
-	vars.put(&quot;Q_Market&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerRegion&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;AND rmp.region IN ${partnerRegion}&quot;);	
-} else {
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerMarket&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;AND rmp.market IN ${partnerMarket}&quot;);	
-} else{
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;participantName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;AND e.participantName IN ${participantName}&quot;);	
-} else{
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;drgCode&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_DrgCode&quot;,&quot;AND drg.drgCode IN ${drgCode}&quot;);	
-} else {
-	vars.put(&quot;Q_DrgCode&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;npi&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_NPI&quot;,&quot;AND p.npi IN ${npi}&quot;);	
-} else{
-	vars.put(&quot;Q_NPI&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;physicianName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;AND p.physicianNameInitCap IN ${physicianName}&quot;);	
-} else {
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Model&quot;,&quot;AND c.Model IN ${model}&quot;);	
-} else{
-	vars.put(&quot;Q_Model&quot;,&quot;&quot;);
-}</stringProp>
+</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
@@ -1576,106 +484,8 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-385915221">
-                <stringProp name="-1454092045">select round((baseSNF/baseEpicounts)*100, 1) as dischtoSNFBenchmarkClaims from (select e.bpid, SUM(baseSNF) as baseSNF, sum(baseEpicounts) as baseEpicounts from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${Q_BPID}       ${Q_CCN}        ${Q_FacilityName}     ${Q_BundleName}         ${Q_Region}    ${Q_Market}       ${Q_PartnerRegion}           ${Q_PartnerMarket}           ${Q_ParticipantName}            ${Q_DrgCode}                     ${Q_NPI}            ${Q_PhysicianName}             ${Q_Model}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
-                <stringProp name="0"></stringProp>
-              </collectionProp>
-            </collectionProp>
-            <boolProp name="UserParameters.per_iteration">false</boolProp>
-          </UserParameters>
-          <hashTree/>
-        </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Discharge to SNF Benchmark (EC)" enabled="false">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">${Query}</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">dischtoSNFBenchmarkEC</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree>
-          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
-            <stringProp name="filename"></stringProp>
-            <stringProp name="parameters"></stringProp>
-            <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">if(!vars.get(&quot;bpid&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BPID&quot;,&quot;AND fp.BPID IN ${bpid}&quot;);	
-} else {
-	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;ccn&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_CCN&quot;,&quot;AND df.CCN IN ${ccn}&quot;);	
-} else{
-	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;facilityName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_FacilityName&quot;,&quot;AND df.facilityName IN ${facilityName}&quot;);	
-} else {
-	vars.put(&quot;Q_FacilityName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;bundleName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_BundleName&quot;,&quot;AND d.bundleName IN ${bundleName}&quot;);	
-} else{
-	vars.put(&quot;Q_BundleName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;region&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Region&quot;,&quot;AND rm.region IN ${region}&quot;);	
-} else {
-	vars.put(&quot;Q_Region&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;market&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Market&quot;,&quot;AND rm.market IN ${market}&quot;);	
-} else{
-	vars.put(&quot;Q_Market&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerRegion&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;AND rmp.region IN ${partnerRegion}&quot;);	
-} else {
-	vars.put(&quot;Q_PartnerRegion&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;partnerMarket&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;AND rmp.market IN ${partnerMarket}&quot;);	
-} else{
-	vars.put(&quot;Q_PartnerMarket&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;participantName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;AND de.participantName IN ${participantName}&quot;);	
-} else{
-	vars.put(&quot;Q_ParticipantName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;drgCode&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_DrgCode&quot;,&quot;AND d.drgCode IN ${drgCode}&quot;);	
-} else {
-	vars.put(&quot;Q_DrgCode&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;npi&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_NPI&quot;,&quot;AND dpy.npi IN ${npi}&quot;);	
-} else{
-	vars.put(&quot;Q_NPI&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;physicianName&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;AND dpy.physicianNameInitCap IN ${physicianName}&quot;);	
-} else {
-	vars.put(&quot;Q_PhysicianName&quot;,&quot;&quot;);
-}
-if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
-	vars.put(&quot;Q_Model&quot;,&quot;AND fp.Model IN ${model}&quot;);	
-} else{
-	vars.put(&quot;Q_Model&quot;,&quot;&quot;);
-}</stringProp>
-          </BeanShellPreProcessor>
-          <hashTree/>
-          <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
-            <collectionProp name="UserParameters.names">
-              <stringProp name="78391464">Query</stringProp>
-              <stringProp name="0"></stringProp>
-            </collectionProp>
-            <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-1701984907">
-                <stringProp name="301504349">select round(baseSNF/baseEpicounts*100, 1) dischtoSNFBenchmarkEC from (select fp.BPID, sum(fp.baseSNF) as baseSNF, sum(fp.baseEpiCounts) as baseEpicounts from warehouse.factPatientEpisode fp  inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName  inner join warehouse.dimDRG drg on drg.drgSK = fp.currDrgKey where fp.bundleRisk = 1  and fp.episodeCountReport = 1 and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos; and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;,&apos;IRF&apos;)  ${Q_BPID}       ${Q_CCN}        ${Q_FacilityName}     ${Q_BundleName}         ${Q_Region}    ${Q_Market}       ${Q_PartnerRegion}           ${Q_PartnerMarket}           ${Q_ParticipantName}            ${Q_DrgCode}                     ${Q_NPI}            ${Q_PhysicianName}             ${Q_Model} )a;</stringProp>
+              <collectionProp name="857295384">
+                <stringProp name="1145162144">select round((baseSNF/baseEpicounts)*100, 1) as dischtoSNFBenchmarkClaims from (select e.bpid, SUM(baseSNF) as baseSNF, sum(baseEpicounts) as baseEpicounts from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${Q_BPID}       ${Q_CCN}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
@@ -1702,7 +512,7 @@ if(!vars.get(&quot;model&quot;).equals(&quot;skip&quot;)){
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo ECEpisodeCount=${ECEpisodeCount_1}*claimsEpisodeCount=${claimsEpisodeCount_1}&gt;&gt;dynamicPerformanceDashboardResult.txt</stringProp>
+                <stringProp name="Argument.value">echo KPI_Episode_Claims=${claimsEpisodeCount_1}*Savings Rate_Claims=${savingRate_1}*KPI_NPRA_Claims=${Claims_TotalNPRA_1}*KPI_Program_size_Claims=${Claims_TotalProgram_1}*% SNF Disch Current_Claims=${dischargetoSNFClaims_1}*SNF Days Current_Claims=${SNFDaysClaims_1}*SNF Days Benchmark Variance_Claims=${SNFDaysBenchmarkClaims_1}*Readmissions Current_Claims=${EpisodesWithReadmissionClaims_1}*Readmissions Benchmark Variance_Claims=${EpisodesWithReadmissionBenchmarkClaims_1}*% SNF Disch Benchmark Variance_Claims=${dischtoSNFBenchmarkClaims_1}&gt;&gt;dynamicPerformanceDashboardResult.txt</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
