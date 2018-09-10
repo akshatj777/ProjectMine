@@ -1,6 +1,6 @@
 Feature: Verify Program Performance Dashboard
 
-  Scenario Outline: Verify data filter validations on program overview dashbaord
+  Scenario Outline: Execute Filter combinations to Validate Data Metrics on Front End - For Claims
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login
@@ -40,13 +40,13 @@ Feature: Verify Program Performance Dashboard
       | Qatendashtest@yopmail.com   |   3 | True All    | True Random |
       | Qafivedashtest@yopmail.com  |   4 | True Random | True Random |
 
-  Scenario: Execute JMX file and read Output data for Data Metrics Validation
+  Scenario: Execute JMX file and read Output data for Data Metrics Validation for - CLAIMS
     When I close the file for after writting data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\PerformanceDashboard\\dynamicPerformanceDashboardResult.txt" Output file
     When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\PerformanceDashboard\\TableauTestDynamic.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\PerformanceDashboard\\dynamicPerformanceDashboardResult.txt"
 
-  Scenario Outline: Verify DB and FE values
+  Scenario Outline: Verify DB and FE values feteched from Scenarios(1&2) - Claims (For Metrics Validations & Benchmark Tool Tip)
     And I get the value "<Index>" from Output file of data metric validation
     Then I verify "KPI_Episode" for DB and FE Metrics value at "<Row>" for "Claims"
     Then I verify "Savings Rate" for DB and FE Metrics value at "<Row>" for "Claims"

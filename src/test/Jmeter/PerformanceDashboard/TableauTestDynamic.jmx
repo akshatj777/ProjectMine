@@ -72,7 +72,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
           <stringProp name="filename">dynamic.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">bpid,ccn</stringProp>
+          <stringProp name="variableNames">bpid,ccn,bundle,r_region,r_market,region,market,participantName,drgCode,npi</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -107,7 +107,46 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
-</stringProp>
+if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;and drg.bundleName in ${bundle}&quot;);	
+} else{
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_REGION&quot;,&quot;and rm.region in  ${r_region}&quot;);	
+} else {
+	vars.put(&quot;Q_R_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);	
+} else{
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_REGION&quot;,&quot;and rmp.region in  ${region}&quot;);	
+} else {
+	vars.put(&quot;Q_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_MARKET&quot;,&quot;and rmp.market in ${market}&quot;);	
+} else{
+	vars.put(&quot;Q_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+} else{
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;and drg.drgCode in ${drgCode}&quot;);	
+} else{
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);	
+} else{
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;&quot;);
+}	</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
@@ -116,8 +155,8 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-1148676188">
-                <stringProp name="2088152965">select sum(c.currEpiCounts) as Claims_Episode from warehouse.factClaims c left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK   left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK  where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;=(select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${Q_BPID}  ${Q_CCN}  and c.targetPrice &lt;&gt; 0;</stringProp>
+              <collectionProp name="1642894310">
+                <stringProp name="1981616366">select sum(c.currEpiCounts) as Claims_Episode from warehouse.factClaims c left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK   left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK  where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;=(select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI}  and c.targetPrice &lt;&gt; 0;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
@@ -151,7 +190,46 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
-</stringProp>
+if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;and drg.bundleName in ${bundle}&quot;);	
+} else{
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_REGION&quot;,&quot;and rm.region in  ${r_region}&quot;);	
+} else {
+	vars.put(&quot;Q_R_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);	
+} else{
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_REGION&quot;,&quot;and rmp.region in  ${region}&quot;);	
+} else {
+	vars.put(&quot;Q_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_MARKET&quot;,&quot;and rmp.market in ${market}&quot;);	
+} else{
+	vars.put(&quot;Q_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+} else{
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;and drg.drgCode in ${drgCode}&quot;);	
+} else{
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);	
+} else{
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;&quot;);
+}	</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
@@ -160,8 +238,8 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-1251092965">
-                <stringProp name="-456000673">select (round((sum(NPRA)/sum(Program_size))*100,1)) as Savings_Rate from (select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size  from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK   left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}       ${Q_CCN}    and c.targetPrice &lt;&gt; 0) a;</stringProp>
+              <collectionProp name="-1261535762">
+                <stringProp name="-1703769874">select (round((sum(NPRA)/sum(Program_size))*100,1)) as Savings_Rate from (select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size  from warehouse.factClaims c   left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK  where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;   and c.anchorBeginDateKey &gt;= 20160101   and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)    ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET}  ${Q_PARTICIPANTNAME}  ${Q_DRGCODE}  ${Q_PHY_NPI}   and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
@@ -195,7 +273,46 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
-</stringProp>
+if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;and drg.bundleName in ${bundle}&quot;);	
+} else{
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_REGION&quot;,&quot;and rm.region in  ${r_region}&quot;);	
+} else {
+	vars.put(&quot;Q_R_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);	
+} else{
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_REGION&quot;,&quot;and rmp.region in  ${region}&quot;);	
+} else {
+	vars.put(&quot;Q_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_MARKET&quot;,&quot;and rmp.market in ${market}&quot;);	
+} else{
+	vars.put(&quot;Q_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+} else{
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;and drg.drgCode in ${drgCode}&quot;);	
+} else{
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);	
+} else{
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;&quot;);
+}	</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
@@ -204,8 +321,8 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-1130941114">
-                <stringProp name="868914567">select round(sum(NPRA)) as Claims_NPRA, round(sum(Program_size)) as Claims_ProgramSize from (select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size  from warehouse.factClaims c left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK   left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}       ${Q_CCN}      and c.targetPrice &lt;&gt; 0) a;</stringProp>
+              <collectionProp name="-677782147">
+                <stringProp name="-1509247926">select round(sum(NPRA)) as Claims_NPRA, round(sum(Program_size)) as Claims_ProgramSize from (select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size  from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK  where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;   and c.anchorBeginDateKey &gt;= 20160101   and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI}    and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
@@ -254,7 +371,46 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
-</stringProp>
+if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;and drg.bundleName in ${bundle}&quot;);	
+} else{
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_REGION&quot;,&quot;and rm.region in  ${r_region}&quot;);	
+} else {
+	vars.put(&quot;Q_R_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);	
+} else{
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_REGION&quot;,&quot;and rmp.region in  ${region}&quot;);	
+} else {
+	vars.put(&quot;Q_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_MARKET&quot;,&quot;and rmp.market in ${market}&quot;);	
+} else{
+	vars.put(&quot;Q_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+} else{
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;and drg.drgCode in ${drgCode}&quot;);	
+} else{
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);	
+} else{
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;&quot;);
+}	</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
@@ -263,8 +419,8 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="6059003">
-                <stringProp name="726854912">select round((sum(category)/sum(episodes)) * 100,1) as DischargeToSNFClaims from (select e.bpid, SUM(if( (c.postAcuteCategory) = &quot;SNF&quot;, 1,0) ) as Category, sum(currEpiCounts) as Episodes from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101   and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}       ${Q_CCN}   and c.targetPrice &lt;&gt; 0) a;</stringProp>
+              <collectionProp name="399763582">
+                <stringProp name="1978358689">select round((sum(category)/sum(episodes)) * 100,1) as DischargeToSNFClaims from (select e.bpid, SUM(if( (c.postAcuteCategory) = &quot;SNF&quot;, 1,0) ) as Category, sum(currEpiCounts) as Episodes from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK   where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;   and c.anchorBeginDateKey &gt;= 20160101   and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)    ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
@@ -298,7 +454,46 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
-</stringProp>
+if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;and drg.bundleName in ${bundle}&quot;);	
+} else{
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_REGION&quot;,&quot;and rm.region in  ${r_region}&quot;);	
+} else {
+	vars.put(&quot;Q_R_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);	
+} else{
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_REGION&quot;,&quot;and rmp.region in  ${region}&quot;);	
+} else {
+	vars.put(&quot;Q_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_MARKET&quot;,&quot;and rmp.market in ${market}&quot;);	
+} else{
+	vars.put(&quot;Q_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+} else{
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;and drg.drgCode in ${drgCode}&quot;);	
+} else{
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);	
+} else{
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;&quot;);
+}	</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
@@ -307,8 +502,8 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="1152350474">
-                <stringProp name="390362775">select round(sum(snfDaysTrimmed)/sum(Episodes),1) as SNFDaysClaims from (select e.bpid, sum(if(c.snfDaysTrimmed,1,0)) as Episodes,  sum(c.snfDaysTrimmed) as snfDaysTrimmed from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${Q_BPID}       ${Q_CCN}      and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;) and c.targetPrice &lt;&gt; 0) a;</stringProp>
+              <collectionProp name="373702203">
+                <stringProp name="1211708798">select round(sum(snfDaysTrimmed)/sum(Episodes),1) as SNFDaysClaims from (select e.bpid, sum(if(c.snfDaysTrimmed,1,0)) as Episodes,  sum(c.snfDaysTrimmed) as snfDaysTrimmed from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK   where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;    and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI}      and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;) and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
@@ -342,7 +537,46 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
-</stringProp>
+if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;and drg.bundleName in ${bundle}&quot;);	
+} else{
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_REGION&quot;,&quot;and rm.region in  ${r_region}&quot;);	
+} else {
+	vars.put(&quot;Q_R_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);	
+} else{
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_REGION&quot;,&quot;and rmp.region in  ${region}&quot;);	
+} else {
+	vars.put(&quot;Q_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_MARKET&quot;,&quot;and rmp.market in ${market}&quot;);	
+} else{
+	vars.put(&quot;Q_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+} else{
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;and drg.drgCode in ${drgCode}&quot;);	
+} else{
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);	
+} else{
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;&quot;);
+}	</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
@@ -351,8 +585,8 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="1649423865">
-                <stringProp name="-2001931743">select round(sum(baseSNFDays)/sum(baseSNFCount),1) as SNFDaysBenchmarkClaims from (select e.bpid, sum(c.baseSNFDays) as baseSNFDays, sum(c.baseSNFCount) as baseSNFCount from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician p ON c.physicianKey = p.physicianSK where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;)  ${Q_BPID}       ${Q_CCN}   and c.targetPrice &lt;&gt; 0 and c.snfDaysTrimmed &gt; 0) a;</stringProp>
+              <collectionProp name="-610260177">
+                <stringProp name="-831594852">select round(sum(baseSNFDays)/sum(baseSNFCount),1) as SNFDaysBenchmarkClaims from (select e.bpid, sum(c.baseSNFDays) as baseSNFDays, sum(c.baseSNFCount) as baseSNFCount from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK   where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;    and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;)  ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI}  and c.targetPrice &lt;&gt; 0 and c.snfDaysTrimmed &gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
@@ -386,7 +620,46 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
-</stringProp>
+if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;and drg.bundleName in ${bundle}&quot;);	
+} else{
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_REGION&quot;,&quot;and rm.region in  ${r_region}&quot;);	
+} else {
+	vars.put(&quot;Q_R_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);	
+} else{
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_REGION&quot;,&quot;and rmp.region in  ${region}&quot;);	
+} else {
+	vars.put(&quot;Q_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_MARKET&quot;,&quot;and rmp.market in ${market}&quot;);	
+} else{
+	vars.put(&quot;Q_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+} else{
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;and drg.drgCode in ${drgCode}&quot;);	
+} else{
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);	
+} else{
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;&quot;);
+}	</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
@@ -395,8 +668,8 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="1410846427">
-                <stringProp name="-1817562360">select round((sum(readmissionCounter)/sum(Episodes))*100, 1) as EpisodesWithReadmissionClaims  from ( select sum(if((c.readmission_flag) = 1,1,0)) as readmissionCounter, sum(c.currEpiCounts) as Episodes from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${Q_BPID}       ${Q_CCN}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
+              <collectionProp name="605828809">
+                <stringProp name="-256743313">select round((sum(readmissionCounter)/sum(Episodes))*100, 1) as EpisodesWithReadmissionClaims  from ( select sum(if((c.readmission_flag) = 1,1,0)) as readmissionCounter, sum(c.currEpiCounts) as Episodes from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK   where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos; and c.anchorBeginDateKey &gt;= 20160101   and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
@@ -430,7 +703,46 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
-</stringProp>
+if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;and drg.bundleName in ${bundle}&quot;);	
+} else{
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_REGION&quot;,&quot;and rm.region in  ${r_region}&quot;);	
+} else {
+	vars.put(&quot;Q_R_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);	
+} else{
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_REGION&quot;,&quot;and rmp.region in  ${region}&quot;);	
+} else {
+	vars.put(&quot;Q_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_MARKET&quot;,&quot;and rmp.market in ${market}&quot;);	
+} else{
+	vars.put(&quot;Q_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+} else{
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;and drg.drgCode in ${drgCode}&quot;);	
+} else{
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);	
+} else{
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;&quot;);
+}	</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
@@ -439,8 +751,8 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="1217677981">
-                <stringProp name="-490959031">select round((sum(baseEpiReadmissions)/sum(baseEpicounts))*100, 1) as EpisodesWithReadmissionBenchmarkClaims from (select e.bpid, SUM(c.baseEpiReadmissions) as baseEpiReadmissions, sum(c.baseEpiCounts) as baseEpicounts from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey WHERE f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${Q_BPID}       ${Q_CCN}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
+              <collectionProp name="257906665">
+                <stringProp name="1747036020">select round((sum(baseEpiReadmissions)/sum(baseEpicounts))*100, 1) as EpisodesWithReadmissionBenchmarkClaims from (select e.bpid, SUM(c.baseEpiReadmissions) as baseEpiReadmissions, sum(c.baseEpiCounts) as baseEpicounts from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK   where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;    and c.anchorBeginDateKey &gt;= 20160101   and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI} and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
@@ -475,7 +787,46 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;Q_CCN&quot;,&quot;&quot;);
 }
-</stringProp>
+if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;and drg.bundleName in ${bundle}&quot;);	
+} else{
+	vars.put(&quot;Q_BUNDLE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_REGION&quot;,&quot;and rm.region in  ${r_region}&quot;);	
+} else {
+	vars.put(&quot;Q_R_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);	
+} else{
+	vars.put(&quot;Q_R_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_REGION&quot;,&quot;and rmp.region in  ${region}&quot;);	
+} else {
+	vars.put(&quot;Q_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_MARKET&quot;,&quot;and rmp.market in ${market}&quot;);	
+} else{
+	vars.put(&quot;Q_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+} else{
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;and drg.drgCode in ${drgCode}&quot;);	
+} else{
+	vars.put(&quot;Q_DRGCODE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);	
+} else{
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;&quot;);
+}	</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
@@ -484,8 +835,8 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="857295384">
-                <stringProp name="1145162144">select round((baseSNF/baseEpicounts)*100, 1) as dischtoSNFBenchmarkClaims from (select e.bpid, SUM(baseSNF) as baseSNF, sum(baseEpicounts) as baseEpicounts from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101  and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${Q_BPID}       ${Q_CCN}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
+              <collectionProp name="-952208424">
+                <stringProp name="-1429162473">select round((baseSNF/baseEpicounts)*100, 1) as dischtoSNFBenchmarkClaims from (select e.bpid, SUM(baseSNF) as baseSNF, sum(baseEpicounts) as baseEpicounts from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK   where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;   and c.anchorBeginDateKey &gt;= 20160101   and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
