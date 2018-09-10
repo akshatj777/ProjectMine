@@ -351,6 +351,8 @@ Feature: UI Scenarios - Super Admin User
     Then I select "<Programs1>" programs
     Then I select location by BPID "<Locations_BPID>"
     Then I select location by facility key "<Locations_facility key>"
+    Then I verify that Submit button is "disabled"
+    Then I select location by facility key "<Locations_facility key>"
     Then I verify that Submit button is "enabled"
 
     Examples: 

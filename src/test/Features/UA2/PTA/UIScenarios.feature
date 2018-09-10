@@ -272,6 +272,8 @@ Feature: PTA UI Scenarios
     Then I verify that Submit button is "disabled"
     Then I select "<Programs>" programs
     Then I select location by BPID "<Locations_BPID>" for PTA
+    Then I verify that Submit button is "disabled"
+    Then I select location by BPID "<Locations_BPID>" for PTA
     Then I verify that Submit button is "enabled"
 
     Examples: 
