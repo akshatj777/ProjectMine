@@ -36,8 +36,8 @@ Feature: UI Scenarios - Super Admin User
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | User        | FirstName                                 | LastName                                 | Email                           | Phone | NPI | Role       | RoleID       | Applications                                                                      | LearningPathways                       | Locations             | expStatusCode |
-      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       | NPI | Physicians | 4-Physicians | episode_connect-Episode Connect Classic,reports-Reporting Classic,lessons-Lessons | 3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
+      | User        | FirstName                                 | LastName                                 | Email                           | Phone | NPI | Role       | RoleID       | Applications                                                                                | LearningPathways                       | Locations             | expStatusCode |
+      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       | NPI | Physicians | 4-Physicians | episode_connect-Episode Connect Classic,reports-Reporting Classic,lessons-Remedy University | 3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -101,8 +101,8 @@ Feature: UI Scenarios - Super Admin User
     And I verify No results found under Learning Pathway search box
 
     Examples: 
-      | Role   | Applications                                        | LearningPathwayName |
-      | Leader | Episode Connect Classic, Reporting Classic, Lessons | Test123             |
+      | Role   | Applications                                                  | LearningPathwayName |
+      | Leader | Episode Connect Classic, Reporting Classic, Remedy University | Test123             |
 
   Scenario Outline: Verify auto selected programs in Organizations
     Given I am on the login page
@@ -130,8 +130,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify default program "BPCI Model 2" associated with organization
 
     Examples: 
-      | Role   | Applications                                        | Health System     |
-      | Leader | Episode Connect Classic, Reporting Classic, Lessons | Stamford Hospital |
+      | Role   | Applications                                                  | Health System     |
+      | Leader | Episode Connect Classic, Reporting Classic, Remedy University | Stamford Hospital |
 
   Scenario: Verify the functionality of back/Cancel button and tabs on the left on create user page
     Given I am on the login page
@@ -222,8 +222,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify applications "<Applications2>" are unchecked
 
     Examples: 
-      | Role1                           | Applications1                                                       | Role2                         | Applications2 |
-      | Partner Technical Administrator | Episode Connect Classic, Reporting Classic, Lessons, Administration | Prospective Partner Executive | Lessons       |
+      | Role1                           | Applications1                                                                 | Role2                         | Applications2     |
+      | Partner Technical Administrator | Episode Connect Classic, Reporting Classic, Remedy University, Administration | Prospective Partner Executive | Remedy University |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -267,8 +267,8 @@ Feature: UI Scenarios - Super Admin User
     And I verify Selected Locations section after click on remove link icon
 
     Examples: 
-      | Description                                           | User        | UserName                               | Password | FirstName                                          | LastName                                           | Email                           | Phone | Role   | Applications                                        | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter         | Health System1   | Programs1                  | Locations1                                                                                                   | SelectedLocations                    | LocationsInvalid | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Verify the search functionality in selected locations | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastNameLastNameLN | qaautomation@remedypartners.com |       | Leader | Episode Connect Classic, Reporting Classic, Lessons | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | i am learning path, Learning Pathway 2 | Sound Physicians | BPCI Model 2, BPCI Model 3 | 6005-059--Presence Saint Joseph Medical Center, 6005-059--Evanston Hospital, 3090-068--Mountainview Hospital | Presence Saint Joseph Medical Center | fhdjfs           | No               |                |           |            | No               |                |           |            |
+      | Description                                           | User        | UserName                               | Password | FirstName                                          | LastName                                           | Email                           | Phone | Role   | Applications                                                  | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter         | Health System1   | Programs1                  | Locations1                                                                                                   | SelectedLocations                    | LocationsInvalid | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Verify the search functionality in selected locations | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastNameLastNameLN | qaautomation@remedypartners.com |       | Leader | Episode Connect Classic, Reporting Classic, Remedy University | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | i am learning path, Learning Pathway 2 | Sound Physicians | BPCI Model 2, BPCI Model 3 | 6005-059--Presence Saint Joseph Medical Center, 6005-059--Evanston Hospital, 3090-068--Mountainview Hospital | Presence Saint Joseph Medical Center | fhdjfs           | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -309,8 +309,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the header "Permissions"
 
     Examples: 
-      | Description                                         | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone      | Role              | Applications                                        | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter         | Health System1   | Programs1    | Locations1                                                                  | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Verify successful removal of selected health system | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Advanced Operator | Episode Connect Classic, Reporting Classic, Lessons | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | i am learning path, Learning Pathway 2 | Sound Physicians | BPCI Model 2 | 6005-059--Presence Saint Joseph Medical Center, 6005-059--Evanston Hospital | No               |                |           |            | No               |                |           |            |
+      | Description                                         | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone      | Role              | Applications                                                  | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter         | Health System1   | Programs1    | Locations1                                                                  | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Verify successful removal of selected health system | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Advanced Operator | Episode Connect Classic, Reporting Classic, Remedy University | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | i am learning path, Learning Pathway 2 | Sound Physicians | BPCI Model 2 | 6005-059--Presence Saint Joseph Medical Center, 6005-059--Evanston Hospital | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: Verify that Next button and left side menu is enabled only when mandatory fields are selected
     Given I am on the login page
@@ -560,5 +560,5 @@ Feature: UI Scenarios - Super Admin User
     Then I verify Learning Pathway search box is not available
 
     Examples: 
-      | User        | UserName                               | Password | FirstName | LastName | Email                           | Role1      | Applications               | NPI | LearningPathwaySearchParameter                      | Role2  |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic, Lessons | NPI | Learning Pathway 2, jusUV22erpk1, Remedy University | Leader |
+      | User        | UserName                               | Password | FirstName | LastName | Email                           | Role1      | Applications                         | NPI | LearningPathwaySearchParameter                      | Role2  |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic, Remedy University | NPI | Learning Pathway 2, jusUV22erpk1, Remedy University | Leader |
