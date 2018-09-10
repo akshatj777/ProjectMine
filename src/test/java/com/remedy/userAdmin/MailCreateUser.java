@@ -362,6 +362,7 @@ public class MailCreateUser extends BaseClass{
 	
 	public void verifyAccountUA(String userRole) throws InterruptedException
 	{
+		iWillWaitToSee(By.xpath("//input[@id='gbqfq']"));
 		driver.findElement(By.xpath("//input[@id='gbqfq']")).sendKeys(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim()));
 		delay();
 		driver.findElement(By.xpath("//button[@aria-label='Search Mail']")).click();
