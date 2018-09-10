@@ -106,7 +106,7 @@ Feature: View IRF organization functionality tests
     And I verify "<IRF_Name> - <Has_MO>" name on the header of view profile
     And I verify "Location" tab present under "IRF" Organization
     And I click on "Location" tab on view profile of "IRF" Organization
-    And I verify "1" location count on view "IRF" organization page
+    And I verify "2" location count on view "IRF" organization page
 
     Examples: 
       | Description                                                                             | Has_MO | IRF_Name | Address1 | Short_Name | Address2 | City           | State      | Postal_Code | Loc_Name       | Loc_Address1 | Loc_Type | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN/TIN | NPI | StateVerification | Organization Type        | Message                                |
