@@ -36,7 +36,7 @@ Feature: Verify Program Performance Dashboard
     Examples: 
       | User                        | Row | BPID        | CCN         |
       | Qadashboardtest@yopmail.com |   1 | True All    | True All    |
-      | Qatwodashtest@yopmail.com   |   1 | True Random | True All    |
+      | Qatwodashtest@yopmail.com   |   2 | True Random | True All    |
       | Qatendashtest@yopmail.com   |   3 | True All    | True Random |
       | Qafivedashtest@yopmail.com  |   4 | True Random | True Random |
 
