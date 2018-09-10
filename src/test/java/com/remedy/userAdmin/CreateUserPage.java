@@ -2820,11 +2820,11 @@ public void iUnselectAllSelectedApps(){
 	 else if (user.equalsIgnoreCase("PTA")){
 		 String text;
 		 
-		 int size =driver.findElements(By.xpath("//div[@class='scrolling menu transition']/div[@class='item']/span")).size();
-		 Assert.assertTrue(size==5);
+		 int size =driver.findElements(By.xpath("//span[@class='dropDownOptionValue']")).size();
+		 Assert.assertTrue(size==4);
 		 for(int i=0;i<size;i++){
-			text=driver.findElements(By.xpath("//div[@class='scrolling menu transition']/div[@class='item']/span")).get(i).getAttribute("innerText").toString().trim();
-			 Assert.assertTrue(text.equals("Leader")|| text.equals("Manager") || text.equals("Advanced Operator") ||text.equals("Operator"));
+			text=driver.findElements(By.xpath("//span[@class='dropDownOptionValue']")).get(i).getAttribute("outerText").toString().trim();
+			 Assert.assertTrue(text.contains("Leader")|| text.contains("Manager") || text.contains("Advanced Operator") ||text.contains("Operator"));
 		
 	 }
 		 

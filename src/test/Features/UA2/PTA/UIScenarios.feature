@@ -98,8 +98,6 @@ Feature: PTA UI Scenarios
       | Role   | Applications                                                  | LearningPathwayName |
       | Leader | Episode Connect Classic, Reporting Classic, Remedy University | Test123             |
 
-
-
   Scenario: Verify the functionality of back/Cancel button and tabs on the left on create user page
     Given I am on the login page
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
@@ -135,7 +133,6 @@ Feature: PTA UI Scenarios
     Then I verify the header "Applications"
     Then I click on "Permissions" tab on the left
     Then I verify the header "Permissions"
-    
     Then I click on Cancel button
     Then I should see header text "Users"
 
@@ -277,8 +274,8 @@ Feature: PTA UI Scenarios
     Then I verify that Submit button is "enabled"
 
     Examples: 
-      | FirstName  | LastName  | Email                           | Role   | NPI | Applications      | Locations_BPID                  |Programs|
-      | First'Name | Last'Name | qaautomation@remedypartners.com | Leader |     | Reporting Classic | 3090-068--Mountainview Hospital | BPCI Model 3|
+      | FirstName  | LastName  | Email                           | Role   | NPI | Applications      | Locations_BPID                  | Programs     |
+      | First'Name | Last'Name | qaautomation@remedypartners.com | Leader |     | Reporting Classic | 3090-068--Mountainview Hospital | BPCI Model 3 |
 
   Scenario Outline: Enter invalid location and verify error message
     Given I am on the login page
@@ -308,8 +305,8 @@ Feature: PTA UI Scenarios
     And I verify No results found for invalid Location for "first" in selected organisation for PTA user
 
     Examples: 
-      | FirstName | LastName | Email                           | Phone      | Role              | Applications      | NPI | invalidLocations |Programs|
-      | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Advanced Operator | Reporting Classic |     | hkfj             |BPCI Model 3|
+      | FirstName | LastName | Email                           | Phone      | Role              | Applications      | NPI | invalidLocations | Programs     |
+      | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Advanced Operator | Reporting Classic |     | hkfj             | BPCI Model 3 |
 
   Scenario Outline: Creating user with existing Email and validating error message
     Given I am on the login page
@@ -371,23 +368,6 @@ Feature: PTA UI Scenarios
 
   Scenario: Validating correct Role for PTA user on general information section
     Given I am on the login page
-    When I enter email field lbarinstein+qaadmin@remedypartners.com for login
-    And I enter password field Testing1 for Login
-    Then I click Access button
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I should see header text "Users"
-    When I click on Add User button
-    Then I should see "Add New User" on the user creation page
-    When I click the Organizational Role Field
-    Then I verify that roles are reflected as per the "Super Admin"
-    Then I click on Cross button
-    And I click on the top user account link
-    Then I click on "Log Out" button
-    And I should see Log in widget
-    Given I am on the login page
-    Then I click on "Log Out" button again
-    And I should see Log in widget
     Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
     Then I enter newuser password for login to Remedy
     Then I click Access button
