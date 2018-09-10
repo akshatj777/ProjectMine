@@ -389,8 +389,8 @@ Feature: PTA UI Scenarios
     Then I click on Next button
 
     Examples: 
-      | User                            | FirstName                                          | LastName                                           | Email                                                                        | Phone      | Role       | NPI        |
-      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | TestmailTestmailTestmailTestmailTestmailTestmailTestmailTestmailAA@gmail.com | 9876759231 | Physicians | 1234567890 |
+      | User                            | FirstName                                          | LastName                                           | Email                                                                        | Phone      | Role   | NPI |
+      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | TestmailTestmailTestmailTestmailTestmailTestmailTestmailTestmailAA@gmail.com | 9876759231 | Leader |     |
 
   Scenario: Validating correct Role for PTA user on general information section
     Given I am on the login page
@@ -458,5 +458,5 @@ Feature: PTA UI Scenarios
     Then I verify Learning Pathway search box is not available
 
     Examples: 
-      | User                            | UserName                               | Password | FirstName | LastName | Email                           | Role1      | Applications                         | NPI | LearningPathwaySearchParameter                         | Role2  |
-      | Partner Technical Administrator | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic, Remedy University | NPI | p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81, n9yn5n0Qa581 | Leader |
+      | User                            | UserName                               | Password | FirstName | LastName | Email                           | Role1  | Applications                         | NPI | LearningPathwaySearchParameter                         | Role2   |
+      | Partner Technical Administrator | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Leader | Reporting Classic, Remedy University |     | p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81, n9yn5n0Qa581 | Manager |
