@@ -1,4 +1,4 @@
-Feature: Verify Program Performance Dashboard
+Feature: Program Performance Overview Dashboard
 
   Scenario Outline: Execute Filter combinations to Validate Data Metrics on Front End - For Claims
     Given I am on the login page
@@ -13,14 +13,45 @@ Feature: Verify Program Performance Dashboard
     And I switch to analytics iframe
     Then I verify "Program Performance" text is appearing inside dashboard
     Then I set "Start Date" as "1/1/2016 " in Date field on dashboard
-    Then I set "End Date" as "3/31/2018" in Date field on dashboard
-    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\dynamic.csv" for writting data at "1" to input file
+    Then I set "End Date" as "ClaimsCubeDate" in Date field on dashboard
+    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\dynamic.csv" for writting data at "<Row>" to input file
+    ##BPID
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
     And I select "<BPID>" checkbox in "BPID" filter on "Program overview" dashboard
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
+    ##CCN
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
     And I select "<CCN>" checkbox in "CCN" filter on "Program overview" dashboard
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
+    ##Bundle
+    And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
+    And I select "<Bundle>" checkbox in "Bundle" filter on "Program overview" dashboard
+    And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
+    ##Region-Market
+    And I click "Region - Market" Filter on the "program performance - <Region_Market>" dashboard
+    And I select "<Region_Market>" checkbox in "Region_Market" filter on "Program overview" dashboard
+    And I click "Region - Market" Filter on the "program performance - <Region_Market>" dashboard
+    ##Remedy-RegionMarket
+    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy_Region_Market>" dashboard
+    And I select "<Remedy_Region_Market>" checkbox in "Remedy_Region_Market" filter on "Program overview" dashboard
+    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy_Region_Market>" dashboard
+    ##ParticipantName
+    And I click "Participant" Filter on the "program performance - <ParticipantName>" dashboard
+    And I select "<ParticipantName>" checkbox in "Participant" filter on "Program overview" dashboard
+    And I click "Participant" Filter on the "program performance - <ParticipantName>" dashboard
+    ##DRGCODE
+    And I click "DRG - Fracture" Filter on the "program performance - <DrgCode>" dashboard
+    And I select "<DrgCode>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
+    And I click "DRG - Fracture" Filter on the "program performance - <DrgCode>" dashboard
+    ##NPI
+    And I click "Physician - NPI" Filter on the "program performance - <NPI>" dashboard
+    And I select "<NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
+    And I click "Physician - NPI" Filter on the "program performance - <NPI>" dashboard
+    ##NPI
+    And I click "Model" Filter on the "program performance - <Model>" dashboard
+    And I select "<Model>" checkbox in "Model" filter on "Program overview" dashboard
+    And I click "Model" Filter on the "program performance - <Model>" dashboard
+    ##DataMetricValues
     And I Save "KPI_Episode" data metric FE value on the dashboard for "Claims" with picture resolution "500X500"
     And I Save "Savings Rate" data metric FE value on the dashboard for "Claims" with picture resolution "600X600"
     And I Save "KPI_Program_size" data metric FE value on the dashboard for "Claims" with picture resolution "600X600"
@@ -34,11 +65,11 @@ Feature: Verify Program Performance Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         |
-      | Qadashboardtest@yopmail.com |   1 | True All    | True All    |
-      | Qatwodashtest@yopmail.com   |   2 | True Random | True All    |
-      | Qatendashtest@yopmail.com   |   3 | True All    | True Random |
-      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random |
+      | User                        | Row | BPID        | CCN         | Bundle | Remedy_Region_Market | Region_Market | ParticipantName | DrgCode | NPI  | Model |
+      | Qadashboardtest@yopmail.com |   1 | True All    | True All    | Skip   | Skip                 | Skip          | Skip            | Skip    | Skip | Skip  |
+      | Qatwodashtest@yopmail.com   |   2 | True Random | True All    | Skip   | Skip                 | Skip          | Skip            | Skip    | Skip | Skip  |
+      | Qatendashtest@yopmail.com   |   3 | True All    | True Random | Skip   | Skip                 | Skip          | Skip            | Skip    | Skip | Skip  |
+      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip   | Skip                 | Skip          | Skip            | Skip    | Skip | Skip  |
 
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - CLAIMS
     When I close the file for after writting data to input file

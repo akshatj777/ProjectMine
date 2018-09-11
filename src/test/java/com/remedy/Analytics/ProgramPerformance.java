@@ -844,7 +844,9 @@ public class ProgramPerformance extends BaseClass{
 		 if(field.equals("Start Date")){
 			 if(value.contains("ECStartDate")){
 				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
-				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),outputText.get("ECStartDateDB"));
+//				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),outputText.get("ECStartDateDB"));
+				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),DriverScript.Config.getProperty("ECStartDate"));
+				 
 			 }else {
 				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
 				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), value);
@@ -852,7 +854,8 @@ public class ProgramPerformance extends BaseClass{
 		 }else if (field.equals("End Date")){
 			 if(value.contains("ClaimsCubeDate")){
 				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
-				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), outputText.get("ClaimsCubeDateDB"));
+//				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), outputText.get("ClaimsCubeDateDB"));
+				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), DriverScript.Config.getProperty("ClaimsCubeDate"));
 			 }else if(value.contains("Today")){
 				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
 				 clickElement(driver.findElement(By.xpath("//span[@class='tab-datepicker-today-date']")));
@@ -1488,57 +1491,31 @@ public class ProgramPerformance extends BaseClass{
 			             for (int itr=0;itr<=val.length();itr++) {
 								val=val.substring(val.indexOf("- ")+1).trim();
 							}
-//			             val=val.substring(val.indexOf("- ")+1).trim();
-//			             if(val.contains("\\s+")) {
-//			            	 val=val.substring(val.indexOf("- ")+1).trim();
-//			             }
 			             driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
 			             val="'"+val+"'";
 			             arrayListTexts.add(val);
 			             listItems.remove(randomIndex);}
 			          
-				 
 			 }else if(checkbox.contains("All")){
 				 for(int i =1;i<listItems.size();i++){
 						String val=listItems.get(i).getText();
 						for (int itr=0;itr<=val.length();itr++) {
 							val=val.substring(val.indexOf("- ")+1).trim();
 						}
-//						val=val.substring(val.indexOf("-")+1).trim();
-//						if(val.contains("\\s+")) {
-//			            	 val=val.substring(val.indexOf("- ")+1).trim();
-//			             }
 						driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
 						val="'"+val+"'";
 						arrayListTexts.add(val);
 					}
 			 }
+			 clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+	   		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+	   		 delay(); 
 			 
 		 }
 		 else{
 			 arrayListTexts.add("Skip");
 		 }
 		 writeDataToOutputFile("Path");
-		 
-//		 if(filter.equals("Yes")){
-//			 WebElement elem = driver.findElement(By.xpath("//input[contains(@name,'All')]"));
-//			 act.moveToElement(elem).click().build().perform();
-//			 List<WebElement> listItems = driver.findElements(By.cssSelector(".FIText"));
-//			 listItems.size();
-//				for(int i =1;i<listItems.size();i++){
-//					String val=listItems.get(i).getText();
-//					if(filter.contains("BPID")){
-//						val=val.substring(val.length()-8, val.length());
-//					}else{val=val.substring(val.length()-6, val.length());}
-//					driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
-//					val="'"+val+"'";
-//					arrayListTexts.add(val);
-//				}
-//				writeDataToOutputFile("path");
-//		 }else{
-//			 arrayListTexts.add("Skip");
-//		 }
-		
 	 }
 	 
 	 public void iOpenTheInputFile(String path,String row) throws FileNotFoundException{
