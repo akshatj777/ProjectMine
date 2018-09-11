@@ -497,7 +497,8 @@ public class ProgramPerformanceSteps extends DriverScript{
 	
 	@And("^I select \"([^\"]*)\" checkbox in \"([^\"]*)\" filter on \"([^\"]*)\" dashboard$")
 	public void i_select_checkbox_under_filter_for_dashboard(String checkbox, String filter,String dashboard) throws Throwable{
-		programdashboard.iSelectCheckboxValuesInFilter(checkbox,filter, dashboard);
+		//programdashboard.iSelectCheckboxValuesInFilter(checkbox,filter, dashboard);
+		programdashboard.iSelectCheckboxValuesInFilter1(checkbox,filter, dashboard);
 	}
 	
 	@And("^I verify \"([^\"]*)\" for DB and FE Metrics value at \"([^\"]*)\" for \"([^\"]*)\"$")

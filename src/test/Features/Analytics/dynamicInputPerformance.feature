@@ -28,26 +28,26 @@ Feature: Program Performance Overview Dashboard
     And I select "<Bundle>" checkbox in "Bundle" filter on "Program overview" dashboard
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
     ##Region-Market
-    And I click "Region - Market" Filter on the "program performance - <Region_Market>" dashboard
-    And I select "<Region_Market>" checkbox in "Region_Market" filter on "Program overview" dashboard
-    And I click "Region - Market" Filter on the "program performance - <Region_Market>" dashboard
+    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
+    And I select "<Region - Market>" checkbox in "Region - Market" filter on "Program overview" dashboard
+    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
     ##Remedy-RegionMarket
-    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy_Region_Market>" dashboard
-    And I select "<Remedy_Region_Market>" checkbox in "Remedy_Region_Market" filter on "Program overview" dashboard
-    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy_Region_Market>" dashboard
+    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
+    And I select "<Remedy Region - Market>" checkbox in "Remedy Region - Market" filter on "Program overview" dashboard
+    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
     ##ParticipantName
-    And I click "Participant" Filter on the "program performance - <ParticipantName>" dashboard
-    And I select "<ParticipantName>" checkbox in "Participant" filter on "Program overview" dashboard
-    And I click "Participant" Filter on the "program performance - <ParticipantName>" dashboard
+    And I click "Participant" Filter on the "program performance - <Participant>" dashboard
+    And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
+    And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     ##DRGCODE
-    And I click "DRG - Fracture" Filter on the "program performance - <DrgCode>" dashboard
-    And I select "<DrgCode>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
-    And I click "DRG - Fracture" Filter on the "program performance - <DrgCode>" dashboard
+    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
+    And I select "<DRG - Fracture>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
+    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
     ##NPI
-    And I click "Physician - NPI" Filter on the "program performance - <NPI>" dashboard
-    And I select "<NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
-    And I click "Physician - NPI" Filter on the "program performance - <NPI>" dashboard
-    ##NPI
+    And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
+    And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
+    And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
+    ##MODEL
     And I click "Model" Filter on the "program performance - <Model>" dashboard
     And I select "<Model>" checkbox in "Model" filter on "Program overview" dashboard
     And I click "Model" Filter on the "program performance - <Model>" dashboard
@@ -65,11 +65,11 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle | Remedy_Region_Market | Region_Market | ParticipantName | DrgCode | NPI  | Model |
-      | Qadashboardtest@yopmail.com |   1 | True All    | True All    | Skip   | Skip                 | Skip          | Skip            | Skip    | Skip | Skip  |
-      | Qatwodashtest@yopmail.com   |   2 | True Random | True All    | Skip   | Skip                 | Skip          | Skip            | Skip    | Skip | Skip  |
-      | Qatendashtest@yopmail.com   |   3 | True All    | True Random | Skip   | Skip                 | Skip          | Skip            | Skip    | Skip | Skip  |
-      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip   | Skip                 | Skip          | Skip            | Skip    | Skip | Skip  |
+      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG - Fracture | Physician - NPI | Model |
+      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | True Random     | Skip                   | Skip        | Skip           | Skip            | Skip  |
+      | Qatwodashtest@yopmail.com   |   2 | True Random | True All    | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
+      | Qatendashtest@yopmail.com   |   3 | True All    | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
+      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
 
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - CLAIMS
     When I close the file for after writting data to input file

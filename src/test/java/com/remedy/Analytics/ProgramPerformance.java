@@ -1150,8 +1150,8 @@ public class ProgramPerformance extends BaseClass{
 	 public void iClickOnFilterName(String text,String dashboard){
 		 if(!dashboard.contains("Skip")){
 		 delay();
-		 iWillWaitToSee(By.xpath("//span[contains(text(),'"+text+"')]/../../../../.. //span[@role='combobox']"));
-		 WebElement elem = driver.findElement(By.xpath("//span[contains(text(),'"+text+"')]/../../../../.. //span[@role='combobox']"));
+		 iWillWaitToSee(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']"));
+		 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']"));
 		 act.moveToElement(elem).click().build().perform();
 		 }
 	 }
@@ -1394,7 +1394,7 @@ public class ProgramPerformance extends BaseClass{
 		 iWillWaitToSee(By.xpath("//span[text()='Refresh']"));
 		 clickElement(driver.findElement(By.xpath("//span[text()='Refresh']")));
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='wcGlassPane' and contains(@style,'cursor: wait;')]")));
-		 delay();
+		 longDelay();
 		 scrollIntoViewByJS(driver.findElement(By.xpath("//div[@id='tabZoneId225']")));
 		 driver.switchTo().defaultContent();
 		 scrollToTopOfThePage();
@@ -1517,6 +1517,149 @@ public class ProgramPerformance extends BaseClass{
 		 }
 		 writeDataToOutputFile("Path");
 	 }
+	 
+	 public void iSelectCheckboxValuesInFilter1(String checkbox,String filter,String dashboard) throws FileNotFoundException{
+		 ArrayList<String> arrayListTextsA=new ArrayList<String>();
+		 ArrayList<String> arrayListTextsB=new ArrayList<String>();
+		 if(!checkbox.contains("Skip")){
+			 WebElement elem = driver.findElement(By.xpath("//input[contains(@name,'All')]"));
+			 act.moveToElement(elem).click().build().perform();
+			 List<WebElement> listItems = driver.findElements(By.cssSelector(".FIText"));
+			 Random rand = new Random();
+            if(checkbox.contains("Random")){
+			            int n=listItems.size();
+			            String valA = null;
+						String valB= null;
+			            int random_n=getRandomNumberInRange(1,n);
+			            for (int i = 1; i <= random_n; i++) {
+			             int randomIndex = rand.nextInt(listItems.size());
+			             WebElement randomElement = listItems.get(randomIndex);
+			             String val=randomElement.getText();
+			             String valarr[] = null;
+			            
+			             if(random_n==1 && val.equals("(All)")){
+			            	 listItems.remove(randomIndex); 
+			            	 random_n=getRandomNumberInRange(1,n);
+			            	 continue;
+			             }else if(random_n!=1 && val.equals("(All)")){
+                        	 listItems.remove(randomIndex); 
+                        	 continue;
+                         }
+                         if(filter.equals("BPID") || filter.equals("CCN")){
+//                         val=val.substring(val.indexOf("-")+1).trim();
+                        	 for (int itr=0;itr<=val.length();itr++) {
+                        	        val=val.substring(val.indexOf("- ")+1).trim();
+                        	       }
+                         }
+                         else if(filter.equals("DRG - Fracture")){
+//                           val=val.substring(val.indexOf("-")+1).trim();
+                        	 val=val.substring(val.length() - 4);
+                        	 val=val.replaceAll("[()]","");  
+                         }
+                         
+                          else if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
+                        	  if(val.equals("Null")){
+                        		  driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+                        		  val="'"+val+"'";
+                        		  arrayListTexts.add(val);
+                        		  listItems.remove(randomIndex);
+                        		  continue;
+                              }else{
+                            	  val=val.substring(val.indexOf("-")+1).trim(); 
+                            	  
+                            	  valarr=val.split("-");
+                            	  valA=valarr[0];
+                            	  valB=valarr[1];
+                              }
+			             }
+			             driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+			             if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
+			            	 
+			            	 for(int k=0;k<valarr.length;k++){
+			            		 if(k==0){
+			            			 val="'"+valA+"'"; 
+			            			 arrayListTextsA.add(val);
+			            		 }else{
+			            			 val="'"+valB+"'"; 
+			            			 arrayListTextsB.add(val);
+			            		 }
+			            	 }}else{
+			            	 val="'"+val+"'";
+				             arrayListTexts.add(val);
+				             
+			             }
+			             listItems.remove(randomIndex);
+			            }
+			          
+				 
+			 }else if(checkbox.contains("All")){
+				 for(int i =1;i<listItems.size();i++){
+						String val=listItems.get(i).getText();
+						for (int itr=0;itr<=val.length();itr++) {
+                	        val=val.substring(val.indexOf("- ")+1).trim();
+                	        writeDataToOutputFile("Path");
+                	       }
+						driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+						val="'"+val+"'";
+						arrayListTexts.add(val);
+					}
+			 }
+			 
+		 }
+		 else{
+			 if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
+				 for(int k=0;k<2;k++){
+					 arrayListTexts.add("Skip");
+					 writeDataToOutputFile("Path");
+					 return;
+				}}else{
+			 arrayListTexts.add("Skip");
+			 writeDataToOutputFile("Path");
+			 return;
+					 }
+		 }
+		 if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
+			 for(int k=0;k<2;k++){
+				 if(k==0){
+					 
+				 arrayListTexts.addAll(arrayListTextsA);
+					 writeDataToOutputFile("Path"); }else{
+						 arrayListTexts.addAll(arrayListTextsB);
+					 writeDataToOutputFile("Path"); 
+				 }
+			 }
+		 }else{
+		 writeDataToOutputFile("Path");
+		
+		 }
+		 
+		 clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+		 longDelay();
+		 longDelay();
+	//	 new WebDriverWait(driver,10).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner']")));
+		//*[@id="svg-spinner"]
+//		 if(filter.equals("Yes")){
+//			 WebElement elem = driver.findElement(By.xpath("//input[contains(@name,'All')]"));
+//			 act.moveToElement(elem).click().build().perform();
+//			 List<WebElement> listItems = driver.findElements(By.cssSelector(".FIText"));
+//			 listItems.size();
+//				for(int i =1;i<listItems.size();i++){
+//					String val=listItems.get(i).getText();
+//					if(filter.contains("BPID")){
+//						val=val.substring(val.length()-8, val.length());
+//					}else{val=val.substring(val.length()-6, val.length());}
+//					driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+//					val="'"+val+"'";
+//					arrayListTexts.add(val);
+//				}
+//				writeDataToOutputFile("path");
+//		 }else{
+//			 arrayListTexts.add("Skip");
+//		 }
+		
+	 }
+
+	 
 	 
 	 public void iOpenTheInputFile(String path,String row) throws FileNotFoundException{
 		 if(row.equals("1")){
