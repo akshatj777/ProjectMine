@@ -1522,6 +1522,7 @@ public class ProgramPerformance extends BaseClass{
 		 ArrayList<String> arrayListTextsA=new ArrayList<String>();
 		 ArrayList<String> arrayListTextsB=new ArrayList<String>();
 		 if(!checkbox.contains("Skip")){
+			 delay();
 			 WebElement elem = driver.findElement(By.xpath("//input[contains(@name,'All')]"));
 			 act.moveToElement(elem).click().build().perform();
 			 List<WebElement> listItems = driver.findElements(By.cssSelector(".FIText"));
@@ -1611,8 +1612,7 @@ public class ProgramPerformance extends BaseClass{
 				 for(int k=0;k<2;k++){
 					 arrayListTexts.add("Skip");
 					 writeDataToOutputFile("Path");
-					 return;
-				}}else{
+					}return;}else{
 			 arrayListTexts.add("Skip");
 			 writeDataToOutputFile("Path");
 			 return;

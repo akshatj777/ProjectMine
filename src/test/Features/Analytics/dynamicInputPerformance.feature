@@ -66,11 +66,11 @@ Feature: Program Performance Overview Dashboard
 
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG - Fracture | Physician - NPI | Model |
-      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | True Random     | Skip                   | Skip        | Skip           | Skip            | Skip  |
-      | Qatwodashtest@yopmail.com   |   2 | True Random | True All    | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
-      | Qatendashtest@yopmail.com   |   3 | True All    | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
-      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
+      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
 
+  | Qatwodashtest@yopmail.com   |   2 | True Random | True All    | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
+  | Qatendashtest@yopmail.com   |   3 | True All    | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
+  | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - CLAIMS
     When I close the file for after writting data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\PerformanceDashboard\\dynamicPerformanceDashboardResult.txt" Output file
