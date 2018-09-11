@@ -40,6 +40,7 @@ Feature: Edit page for Downstream provider
     When I click the Organizational Role Field to edit
     Then I pick a Organizational <Role>
     Then I enter NPI field with "<NPI>" for role "<Role>"
+    And I wait for 3000 milli seconds
     Then I click on Next button
     Then I verify the header "Applications"
     Then I verify applications "<ApplicationsUnchecked>" are unchecked
