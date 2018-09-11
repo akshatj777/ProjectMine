@@ -37,7 +37,7 @@ import stepDefination.Hooks.*;
 
 
 
-        features = { "src/test/Features/" }
+        features = { "src/test/Features/UA2/DownstreamProvider/EditUserDP.feature" }
 
 
         //glue = { "./src/test/java/stepDefination" },
