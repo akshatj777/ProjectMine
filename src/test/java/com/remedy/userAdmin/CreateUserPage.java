@@ -638,6 +638,7 @@ public void iUnselectAllSelectedApps(){
 		iWillWaitToSee(By.xpath("//div[@class='ui checked checkbox']"));
 			clickAllElementofAlistbyXpath("//div[@class='ui checked checkbox']");
 	}
+	
 	}
     public void iClickOnContinueToDashboardMessage() {
         clickElement(driver.findElement(By.xpath("//button[text()='Continue to my dashboard']")));
@@ -1294,6 +1295,7 @@ public void iUnselectAllSelectedApps(){
    }
    
    public void clickNextButton() throws Throwable {
+	   delay();
 	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 	   {
 		   iWillWaitToSee(By.xpath("//button[text()='Next ']"));
@@ -1302,6 +1304,7 @@ public void iUnselectAllSelectedApps(){
 	   else
 	   {
 		   iWillWaitToSee(By.xpath("//button[text()='Next ']"));
+		  
 		   clickElement(driver.findElement(By.xpath("//button[text()='Next ']")));
 	   }
    }
@@ -1845,7 +1848,7 @@ public void iUnselectAllSelectedApps(){
 	   if(locationList.equalsIgnoreCase("All Locations")){
 
 
-		   delay();
+		  delay();
 
 
 
