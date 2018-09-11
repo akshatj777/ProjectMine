@@ -21,3 +21,5 @@ auth0.url=AUTH0 URL for PM API Calls
 auth0.grantType=AUTH0 Grant Type for PM API Calls
 contentType = Content Type for PM API Calls
 jmeterPath = jmeterlocation of System till bin
+ClaimsCubeDate= ClaimsCubeDate
+ECStartDate= ClaimsCubeDate+1Day
