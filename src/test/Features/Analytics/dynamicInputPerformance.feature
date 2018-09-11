@@ -52,25 +52,27 @@ Feature: Program Performance Overview Dashboard
     And I select "<Model>" checkbox in "Model" filter on "Program overview" dashboard
     And I click "Model" Filter on the "program performance - <Model>" dashboard
     ##DataMetricValues
-    And I Save "KPI_Episode" data metric FE value on the dashboard for "Claims" with picture resolution "500X500"
-    And I Save "Savings Rate" data metric FE value on the dashboard for "Claims" with picture resolution "600X600"
-    And I Save "KPI_Program_size" data metric FE value on the dashboard for "Claims" with picture resolution "600X600"
-    And I Save "KPI_NPRA" data metric FE value on the dashboard for "Claims" with picture resolution "600X600"
+    And I click on Refresh DB data Icon On dashboard
+    And I switch to analytics iframe
+    And I Save "KPI_Episode" data metric FE value on the dashboard for "Claims" with picture resolution "600X600"
+    And I Save "Savings Rate" data metric FE value on the dashboard for "Claims" with picture resolution "300X300"
+    And I Save "KPI_Program_size" data metric FE value on the dashboard for "Claims" with picture resolution "700X700"
+    And I Save "KPI_NPRA" data metric FE value on the dashboard for "Claims" with picture resolution "700X700"
     And I Save "% SNF Disch Current" data metric FE value on the dashboard for "Claims" with picture resolution "900X900"
     And I Save "% SNF Disch Benchmark Variance" tooltip for "Claims" on the "Performance Overview" dashboard
-    And I Save "SNF Days Current" data metric FE value on the dashboard for "Claims" with picture resolution "700X700"
+    And I Save "SNF Days Current" data metric FE value on the dashboard for "Claims" with picture resolution "800X800"
     And I Save "SNF Days Benchmark Variance" tooltip for "Claims" on the "Performance Overview" dashboard
-    And I Save "Readmissions Current" data metric FE value on the dashboard for "Claims" with picture resolution "700X700"
+    And I Save "Readmissions Current" data metric FE value on the dashboard for "Claims" with picture resolution "800X800"
     And I Save "Readmissions Benchmark Variance" tooltip for "Claims" on the "Performance Overview" dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG - Fracture | Physician - NPI | Model |
-      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
+      | Qadashboardtest@yopmail.com |   1 | True All    | True Random | True Random | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
+      | Qatwodashtest@yopmail.com   |   2 | True Random | True All    | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
+      | Qatendashtest@yopmail.com   |   3 | True All    | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
+      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
 
-  | Qatwodashtest@yopmail.com   |   2 | True Random | True All    | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
-  | Qatendashtest@yopmail.com   |   3 | True All    | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
-  | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - CLAIMS
     When I close the file for after writting data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\PerformanceDashboard\\dynamicPerformanceDashboardResult.txt" Output file

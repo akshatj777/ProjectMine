@@ -45,6 +45,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -786,7 +787,7 @@ public class ProgramPerformance extends BaseClass{
 			 point = point.moveBy(60, -40);
 		 }else{
 			 System.out.println("Value+++++++++"+point.getX()+"YYYYYYYYY"+point.getY());
-			 point = point.moveBy(80, 90);
+			 point = point.moveBy(80, 100);
 		 }
 		 
 		 System.out.println(point);
@@ -841,6 +842,8 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iSetDateInDateFieldAttribute(String field, String value){
 		 longDelay();
+		 longDelay();
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 if(field.equals("Start Date")){
 			 if(value.contains("ECStartDate")){
 				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
@@ -866,11 +869,12 @@ public class ProgramPerformance extends BaseClass{
 				 }
 		 }
 		 longDelay();
-		 WebElement elem = driver.findElement(By.xpath("//span[text()='Bundle']/../../../../.. //span[@role='combobox']"));
+//		 WebElement elem = driver.findElement(By.xpath("//span[text()='Bundle']/../../../../.. //span[@role='combobox']"));
+		 WebElement elem =driver.findElement(By.xpath("//span[text()='Time']"));
 		 act.moveToElement(elem).click().build().perform();
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
-		 longDelay();
-		 act.moveToElement(elem).click().build().perform();
+//		 longDelay();
+//		 act.moveToElement(elem).click().build().perform();
 		 delay();
 	 }
 	 
@@ -1149,10 +1153,11 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iClickOnFilterName(String text,String dashboard){
 		 if(!dashboard.contains("Skip")){
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 delay();
-		 iWillWaitToSee(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']"));
 		 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']"));
 		 act.moveToElement(elem).click().build().perform();
+		 delay();
 		 }
 	 }
 	 
@@ -1392,9 +1397,12 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iClickRefreshDBData(){
 		 iWillWaitToSee(By.xpath("//span[text()='Refresh']"));
+		 longDelay();
+		 waitTo().until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Refresh']")));
 		 clickElement(driver.findElement(By.xpath("//span[text()='Refresh']")));
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='wcGlassPane' and contains(@style,'cursor: wait;')]")));
 		 longDelay();
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 scrollIntoViewByJS(driver.findElement(By.xpath("//div[@id='tabZoneId225']")));
 		 driver.switchTo().defaultContent();
 		 scrollToTopOfThePage();
@@ -1519,10 +1527,11 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iSelectCheckboxValuesInFilter1(String checkbox,String filter,String dashboard) throws FileNotFoundException{
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 ArrayList<String> arrayListTextsA=new ArrayList<String>();
 		 ArrayList<String> arrayListTextsB=new ArrayList<String>();
 		 if(!checkbox.contains("Skip")){
-			 delay();
+			 longDelay();
 			 WebElement elem = driver.findElement(By.xpath("//input[contains(@name,'All')]"));
 			 act.moveToElement(elem).click().build().perform();
 			 List<WebElement> listItems = driver.findElements(By.cssSelector(".FIText"));
@@ -1598,7 +1607,6 @@ public class ProgramPerformance extends BaseClass{
 						String val=listItems.get(i).getText();
 						for (int itr=0;itr<=val.length();itr++) {
                 	        val=val.substring(val.indexOf("- ")+1).trim();
-                	        writeDataToOutputFile("Path");
                 	       }
 						driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
 						val="'"+val+"'";
@@ -1612,7 +1620,9 @@ public class ProgramPerformance extends BaseClass{
 				 for(int k=0;k<2;k++){
 					 arrayListTexts.add("Skip");
 					 writeDataToOutputFile("Path");
-					}return;}else{
+					}return;
+					}
+			 else{
 			 arrayListTexts.add("Skip");
 			 writeDataToOutputFile("Path");
 			 return;
@@ -1630,11 +1640,10 @@ public class ProgramPerformance extends BaseClass{
 			 }
 		 }else{
 		 writeDataToOutputFile("Path");
-		
 		 }
 		 
 		 clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
-		 longDelay();
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 longDelay();
 	//	 new WebDriverWait(driver,10).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner']")));
 		//*[@id="svg-spinner"]
@@ -1671,7 +1680,7 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void writeDataToOutputFile(String path) throws FileNotFoundException {
-		 writer.print("("+arrayListTexts.toString().replace("]", "").replace("[", "").replaceAll("\\s+", "")+")|");
+		 writer.print("("+arrayListTexts.toString().replace("]", "").replace("[", "").trim()+")|");
 		 arrayListTexts.clear();
 		 System.out.println("Values in arrayList"+arrayListTexts.toString());
 	 }
@@ -1685,7 +1694,12 @@ public class ProgramPerformance extends BaseClass{
 
 				 }}
 		 else{
-			 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains(outputText.get(text+"_"+data)));
+			 if(outputText.get(text+"_"+data).contains(data+"_1")){
+				 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains("Not Available"));
+			 }
+			 else{
+				 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains(outputText.get(text+"_"+data)));
+			 }
 		 }
 		 }
 	 
