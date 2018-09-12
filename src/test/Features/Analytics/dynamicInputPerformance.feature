@@ -56,9 +56,9 @@ Feature: Program Performance Overview Dashboard
     And I switch to analytics iframe
     And I Save "KPI_Episode" data metric FE value on the dashboard for "Claims" with picture resolution "600X600"
     And I Save "Savings Rate" data metric FE value on the dashboard for "Claims" with picture resolution "300X300"
-    And I Save "KPI_Program_size" data metric FE value on the dashboard for "Claims" with picture resolution "700X700"
-    And I Save "KPI_NPRA" data metric FE value on the dashboard for "Claims" with picture resolution "700X700"
-    And I Save "% SNF Disch Current" data metric FE value on the dashboard for "Claims" with picture resolution "900X900"
+    And I Save "KPI_Program_size" data metric FE value on the dashboard for "Claims" with picture resolution "500X500"
+    And I Save "KPI_NPRA" data metric FE value on the dashboard for "Claims" with picture resolution "500X500"
+    And I Save "% SNF Disch Current" data metric FE value on the dashboard for "Claims" with picture resolution "700X700"
     And I Save "% SNF Disch Benchmark Variance" tooltip for "Claims" on the "Performance Overview" dashboard
     And I Save "SNF Days Current" data metric FE value on the dashboard for "Claims" with picture resolution "800X800"
     And I Save "SNF Days Benchmark Variance" tooltip for "Claims" on the "Performance Overview" dashboard
