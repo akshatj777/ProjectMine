@@ -1399,6 +1399,7 @@ public class ProgramPerformance extends BaseClass{
 		 iWillWaitToSee(By.xpath("//span[text()='Refresh']"));
 		 longDelay();
 		 waitTo().until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Refresh']")));
+		 scrollIntoViewByJS(driver.findElement(By.xpath("//span[text()='Refresh']")));
 		 clickElement(driver.findElement(By.xpath("//span[text()='Refresh']")));
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='wcGlassPane' and contains(@style,'cursor: wait;')]")));
 		 longDelay();
@@ -1673,10 +1674,11 @@ public class ProgramPerformance extends BaseClass{
 	 public void iOpenTheInputFile(String path,String row) throws FileNotFoundException{
 		 if(row.equals("1")){
 			 writer=new PrintWriter(System.getProperty("user.dir")+path);
-			 imageOutput=new HashMap<String,String>();
+//			 imageOutput=new HashMap<String,String>();
 		 }else{
 			 writer.print(System.lineSeparator());
 		 }
+		 imageOutput=new HashMap<String,String>();
 	 }
 	 
 	 public void writeDataToOutputFile(String path) throws FileNotFoundException {
@@ -1688,6 +1690,7 @@ public class ProgramPerformance extends BaseClass{
 	 public void iVerifyDBandFEForMetrics(String text,String row,String data){
 		 if(!text.contains("Variance")){
 		 if (data.equalsIgnoreCase("Claims")){
+			 System.out.println(mapOfHmImageOuput.toString());
 				 System.out.println("Value Fetched="+mapOfHmImageOuput.get(row).get(text)+"Asserted With ==="+outputText.get(text+"_"+data));
 //				 Assert.assertEquals(outputText.get(text+"_"+data).trim(),mapOfHmImageOuput.get(row).get(text));
 				 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains(outputText.get(text+"_"+data)));

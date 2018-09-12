@@ -62,15 +62,15 @@ Feature: Program Performance Overview Dashboard
     And I Save "% SNF Disch Benchmark Variance" tooltip for "Claims" on the "Performance Overview" dashboard
     And I Save "SNF Days Current" data metric FE value on the dashboard for "Claims" with picture resolution "800X800"
     And I Save "SNF Days Benchmark Variance" tooltip for "Claims" on the "Performance Overview" dashboard
-    And I Save "Readmissions Current" data metric FE value on the dashboard for "Claims" with picture resolution "800X800"
+    And I Save "Readmissions Current" data metric FE value on the dashboard for "Claims" with picture resolution "600X600"
     And I Save "Readmissions Benchmark Variance" tooltip for "Claims" on the "Performance Overview" dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG - Fracture | Physician - NPI | Model |
       | Qadashboardtest@yopmail.com |   1 | True All    | True Random | True Random | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
-      | Qatwodashtest@yopmail.com   |   2 | True Random | True All    | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
-      | Qatendashtest@yopmail.com   |   3 | True All    | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
+      | Qatwodashtest@yopmail.com   |   2 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
+      | Qatendashtest@yopmail.com   |   3 | True Random | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
       | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
 
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - CLAIMS
