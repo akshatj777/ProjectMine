@@ -168,6 +168,7 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the header "Permissions"
     And I search for health system with Stamford Hospital
     And I select a Stamford Hospital
+   
     Then I click on Select All Locations button
     Then I click on Cancel button
     Then I should see header text "Users"

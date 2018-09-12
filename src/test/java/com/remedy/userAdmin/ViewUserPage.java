@@ -262,6 +262,9 @@ public class ViewUserPage extends BaseClass {
 			    		iWillWaitToSee(By.xpath("//div[@class='content active data-permissions-content']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//td[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]"));
 			    		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='content active data-permissions-content']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//td[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")));
 			    		Thread.sleep(3000);
+			    		scrollIntoViewByJS(driver.findElement(By.xpath("//h3[text()='Data Permissions']")));
+			    		driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")).click();
+			
 			    	}
 				}
 			}
@@ -300,7 +303,7 @@ public class ViewUserPage extends BaseClass {
 			    	}
 			    	else
 			    	{
-			    		driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")).click();
+			    		//driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")).click();
 			    		driver.findElement(By.xpath("//span[contains(text(),'"+healthSystem+"')]")).click();
 				    	Thread.sleep(3000);
 				    	if(driver.findElement(By.xpath("//div[@class='content active data-permissions-content']//input")).isDisplayed())

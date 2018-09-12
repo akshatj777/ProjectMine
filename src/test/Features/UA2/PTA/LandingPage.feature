@@ -107,7 +107,7 @@ Feature: Verification of Landing Page for PTA User
     Then I enter newuser email for "<user>-<Role>" login to Remedy
     Then I enter newuser password for login to Remedy
     And I click Access button
-    Then I should see User is Blocked
+     And I should see Log in widget
 
     Examples: 
       | user                            | Role   | Email                           | SearchParameter |
