@@ -67,12 +67,16 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG - Fracture | Physician - NPI | Model |
-      | Qadashboardtest@yopmail.com |   1 | True All    | True Random | True Random | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
-      | Qatwodashtest@yopmail.com   |   2 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
-      | Qatendashtest@yopmail.com   |   3 | True Random | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
-      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
+      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG - Fracture | Physician - NPI | Model       |
+      #     | Qadashboardtest@yopmail.com |   1 | True All | True All | True All | True All        | True All               | True All    | True All       | True All        | True All |
+      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | True Random     | True Random            | True Random | True Random    | True Random     | True Random |
 
+  #Examples:
+  #| User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG - Fracture | Physician - NPI | Model |
+  #| Qadashboardtest@yopmail.com |   1 | True All    | True Random | True Random | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
+  #| Qatwodashtest@yopmail.com   |   2 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
+  #| Qatendashtest@yopmail.com   |   3 | True Random | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
+  #| Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - CLAIMS
     When I close the file for after writting data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\PerformanceDashboard\\dynamicPerformanceDashboardResult.txt" Output file
@@ -95,6 +99,6 @@ Feature: Program Performance Overview Dashboard
     Examples: 
       | Index | Row |
       |     0 |   1 |
-      |     1 |   2 |
-      |     2 |   3 |
-      |     3 |   4 |
+      #|     1 |   2 |
+      #|     2 |   3 |
+      #|     3 |   4 |
