@@ -816,6 +816,9 @@ public class ProgramPerformance extends BaseClass{
 				 System.out.println("Text in image is"+output);
 				 FinalOutput=output.replaceAll("\\s+", "").replace("$","").replaceAll(",", "").trim();
 				 System.out.println(FinalOutput);
+				 if(FinalOutput.isEmpty()){
+					 imageOutput.put(text, FinalOutput);
+				 }
 				 imageOutput.put(text, FinalOutput);
 	 }
 	 
@@ -1280,7 +1283,10 @@ public class ProgramPerformance extends BaseClass{
 		 elem=driver.findElement(By.xpath("//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas"));
 		 act.moveToElement(elem).click().build().perform();
 		 longDelay();
-		 String getText=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+		 String getText = "null";
+		 if(driver.findElements(By.xpath("//div[@class='tab-ubertipTooltip']/span")).size()>0){
+		  getText=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
+		 }
 		 System.out.println(getText);
 		 imageOutput.put(text, getText);
 		 
@@ -1767,16 +1773,29 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iVerifyDBandFEForMetrics(String text,String row,String data){
 		 if(!text.contains("Variance")){
-		 if (data.equalsIgnoreCase("Claims")){
-			 System.out.println(mapOfHmImageOuput.toString());
+//		 if (data.equalsIgnoreCase("Claims")){
+			 System.out.println("Main Hash Map value::: "+mapOfHmImageOuput.toString());
+			 System.out.println("Hash Map"+row+" value::: "+mapOfHmImageOuput.get(row).toString());
 				 System.out.println("Value Fetched="+mapOfHmImageOuput.get(row).get(text)+"Asserted With ==="+outputText.get(text+"_"+data));
 //				 Assert.assertEquals(outputText.get(text+"_"+data).trim(),mapOfHmImageOuput.get(row).get(text));
+				 if(!outputText.get(text+"_"+data).contains(data+"_1")){
 				 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains(outputText.get(text+"_"+data)));
-
-				 }}
+				 }
+				 else{
+					 //Asserted Empty value
+					 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().isEmpty());
+				 }
+				 }
+//		 }
 		 else{
 			 if(outputText.get(text+"_"+data).contains(data+"_1")){
-				 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains("Not Available"));
+				 try{
+					 //Asserted Not Available 
+					 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains("Not Available"));
+				 } catch (Exception e){
+					 //Asserted Null 
+					 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().equals("Null"));
+				 }
 			 }
 			 else{
 				 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains(outputText.get(text+"_"+data)));

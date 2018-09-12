@@ -72,6 +72,7 @@ Feature: Program Performance Overview Dashboard
       | Qatwodashtest@yopmail.com   |   2 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
       | Qatendashtest@yopmail.com   |   3 | True Random | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
       | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
+      | Qatendashtest@yopmail.com   |   5 | True Random | True Random | True Random | True Random     | True Random            | True All    | True All       | True Random     | Skip  |
 
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - CLAIMS
     When I close the file for after writting data to input file
@@ -98,3 +99,4 @@ Feature: Program Performance Overview Dashboard
       |     1 |   2 |
       |     2 |   3 |
       |     3 |   4 |
+      |     4 |   5 |
