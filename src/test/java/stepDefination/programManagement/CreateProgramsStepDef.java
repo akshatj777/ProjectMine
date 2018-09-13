@@ -194,4 +194,19 @@ public class CreateProgramsStepDef extends DriverScript{
 	  public void i_Verify_Auto_Incremented_CID(String text) throws Throwable {
 		 programs.iVerifyAutoIncrementedCID(text);
 	    }
+	 
+	 @And("^I verify the sub headline of \"([^\"]*)\"$")
+	  public void i_Verify_The_SubHeadline_Of_Attribution_Rules_And_ValidationRanks_On_Create_Program_Page(String text) throws Throwable {
+		programs.iVerifyTheSubHeadlineOfAttributionRulesAndValidationRanksOnCreateProgramPage(text);
+	    }
+	 
+	 @And("^I verify \"([^\"]*)\" validation ranks on \"([^\"]*)\" program page$")
+	  public void i_Verify_Validation_Rankss_On_Create_Program_Page(String text, String act) throws Throwable {
+		programs.iVerifyAttributionRulesOnCreateProgramPage(text,act);
+	    }
+	 
+	 @And("^I verify the \"([^\"]*)\" checkbox$")
+	  public void i_Verify_MultipleBundleEpisode_CheckBox(String text) throws Throwable {
+		programs.iVerifyMultipleBundleEpisodeCheckBox(text);
+	    }
 }

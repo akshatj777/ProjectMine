@@ -1086,6 +1086,14 @@ public class CreatePrograms extends BaseClass {
 		iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'80000')]"));
 		isElementPresent(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'80000')]"));
 	}
+	
+	public void iVerifyTheSubHeadlineOfAttributionRulesAndValidationRanksOnCreateProgramPage(String text){
+		verifyTextForElement(driver.findElement(By.xpath("//div[text()='"+text+"']")), text);
+	}
+	
+	public void iVerifyMultipleBundleEpisodeCheckBox(String text){
+		verifyTextForElement(driver.findElement(By.xpath("//label[text()='"+text+"']")), text);
+	}
 }
 
 
