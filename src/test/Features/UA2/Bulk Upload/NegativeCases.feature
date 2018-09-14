@@ -1,4 +1,4 @@
-Feature: Negetive cases from bulk upload
+Feature: Negative cases from bulk upload
 
   Scenario: Bulk Upload User
     Given I am on the login page
@@ -35,7 +35,7 @@ Feature: Negetive cases from bulk upload
       | Invalid Email                                      | Super Admin | Partner Technical Administrator | Contains invalid characters                  |                                                                       |
       | Data Permissions separation by using semicolon (;) | Super Admin | Remedy RN                       | Contains invalid characters                  |                                                                       |
       | create a user with existing NPI                    | Super Admin | Physicians                      | 1 user not added                             | Account with this NPI already exists. Please provide a different NPI. |
-      | When more than 50 users are imported               | Super Admin | Executive                       | You can only import up to 50 users at a time |                                                                       |
+      | When more than 50 users are imported               | Super Admin | Leader                          | You can only import up to 50 users at a time |                                                                       |
 
   Scenario Outline: Scenario to create a user with existing email (deleted user email)
     Given I am on the login page
@@ -66,8 +66,8 @@ Feature: Negetive cases from bulk upload
     Then I verify error message "<ErrorMessage>" in the log file
 
     Examples: 
-      | User        | Role                      | ErrorMessage    |
-      | Super Admin | Transitional Case Manager | Duplicate entry |
+      | User        | Role     | ErrorMessage    |
+      | Super Admin | Operator | Duplicate entry |
 
   Scenario Outline: Scenario to validate error message when user is edited with - 1. only PID 2. only BPID 3. only Facility Key 4. PID and Facility key, blank BPID 5. blank data permissions 6. blank first name/last name 7. blank role 8. Blank NPI for Physicians 9. invalid BPID 10. invalid Facilities 11. Invalid phone number 12. Multiple phone numbers 13. multiple learning pathways having one valid and other invalid learning pathway ID 14. multiple data permissions having one valid and other invalid data permissions
     Given I am on the login page
