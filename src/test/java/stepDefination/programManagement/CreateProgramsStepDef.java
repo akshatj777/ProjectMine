@@ -209,4 +209,14 @@ public class CreateProgramsStepDef extends DriverScript{
 	  public void i_Verify_MultipleBundleEpisode_CheckBox(String text) throws Throwable {
 		programs.iVerifyMultipleBundleEpisodeCheckBox(text);
 	    }
+	 
+	 @And("^I click on checkbox for \"([^\"]*)\"$")
+	  public void i_Click_On_CheckBox_For_MultipleBundleEpisode(String text) throws Throwable {
+		programs.iClickOnCheckBoxForMultipleBundleEpisode(text);
+	    }
+	 
+	 @And("^I uncheck for \"([^\"]*)\" Attribution rule$")
+	  public void i_UnCheck_For_Attribution_Rules_On_Create_Programs(String text) throws Throwable {
+		programs.iUnCheckForAttributionRulesOnCreatePrograms(text);
+	    }
 }
