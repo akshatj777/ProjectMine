@@ -75,15 +75,15 @@ public class ViewUserPage extends BaseClass {
 
 	public void verifyNavigationToViewUserPage() throws Throwable {
 		iWillWaitToSee(By.xpath("//h3[text()='Applications']"));
-		isElementPresentOnPage(By.xpath("//h3[text()='Applications']"));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//h3[text()='Applications']")));
 	}
 
 	public void verifyFirstName(String field) throws Throwable {
-		isElementPresentOnPage(By.xpath("//span[text()=', "+field+"']"));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'"+field.toLowerCase()+"')]")));
 	}
 	
 	public void verifyLastName(String field) throws Throwable {
-		isElementPresentOnPage(By.xpath("//span[text()='"+field+"']"));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'"+field.toLowerCase()+"')]")));
 	}
 	
 	public void verifyPhone(String field) throws Throwable 
@@ -393,12 +393,12 @@ public class ViewUserPage extends BaseClass {
 				   StringTokenizer st = new StringTokenizer(applicationsEnabled, ",");
 				   while(st.hasMoreTokens())
 				   {
-					   isElementPresentOnPage(By.xpath("//tr/td[text()='"+st.nextToken().trim()+"']/parent::tr//span[text()='Enabled']"));   
+					   Assert.assertTrue(isElementPresentOnPage(By.xpath("//tr/td[text()='"+st.nextToken().trim()+"']/parent::tr//span[text()='Enabled']")));   
 				   }
 			}
 			else
 			{
-				isElementPresentOnPage(By.xpath("//tr/td[text()='"+applicationsEnabled+"']/parent::tr//span[text()='Enabled']"));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//tr/td[text()='"+applicationsEnabled+"']/parent::tr//span[text()='Enabled']")));
 			}
 			
 		}
@@ -432,12 +432,12 @@ public class ViewUserPage extends BaseClass {
 				   StringTokenizer st = new StringTokenizer(applicationsDisabled, ",");
 				   while(st.hasMoreTokens())
 				   {
-					   isElementPresentOnPage(By.xpath("//tr/td[text()='"+st.nextToken().trim()+"']/parent::tr/td[text()='Disabled']"));   
+					   Assert.assertTrue(isElementPresentOnPage(By.xpath("//tr/td[text()='"+st.nextToken().trim()+"']/parent::tr/td/span[text()='Disabled']")));   
 				   }
 			}
 			else
 			{
-				isElementPresentOnPage(By.xpath("//tr/td[text()='"+applicationsDisabled+"']/parent::tr/td[text()='Disabled']"));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//tr/td[text()='"+applicationsDisabled+"']/parent::tr/td/span[text()='Disabled']")));
 			}
 		}
 	}

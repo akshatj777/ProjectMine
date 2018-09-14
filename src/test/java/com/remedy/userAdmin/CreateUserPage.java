@@ -1095,7 +1095,7 @@ public void iUnselectAllSelectedApps(){
    
    public void iClickOnRemedyUTileUnderSpecificUserLoginPage(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Lessons")){
+	   if(application.contains("Remedy University")){
 		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='RemedyU']")));
 		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		   {
@@ -1111,7 +1111,7 @@ public void iUnselectAllSelectedApps(){
    public void iVerifyNavigationOnRemedyUHomePage(String role){
 	   driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Lessons")){
+	   if(application.contains("Remedy University")){
 		   String user = role.substring(role.indexOf("-")+1);
 		   if(user.equalsIgnoreCase("Remedy Technical Administrator")||user.equalsIgnoreCase("Partner Program Administrator")||user.equalsIgnoreCase("Remedy Program Administrator")
 				   ||user.equalsIgnoreCase("Partner Technical Administrator")){
@@ -1131,7 +1131,7 @@ public void iUnselectAllSelectedApps(){
    
    public void iVerifyDetailsForUserOnRemedyUDashBoard(String details, String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Lessons")){
+	   if(application.contains("Remedy University")){
 		   
 		   String user = role.substring(role.indexOf("-")+1);
 		   if(user.equalsIgnoreCase("Remedy Technical Administrator")||user.equalsIgnoreCase("Partner Program Administrator")||user.equalsIgnoreCase("Remedy Program Administrator")
@@ -1157,7 +1157,7 @@ public void iUnselectAllSelectedApps(){
 	   if(!(pathway.equals("")))
 	   {
 		   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-		   if(application.contains("Lessons")){
+		   if(application.contains("Remedy University")){
 			   if(pathway.contains(","))
 			   {
 				   String user = role.substring(role.indexOf("-")+1);
@@ -2423,17 +2423,17 @@ public void iUnselectAllSelectedApps(){
 		while (st.hasMoreTokens()) 
 	       {
 			String newToken = st.nextToken().trim();
-			if(newToken.contains("Lessons"))
+			if(newToken.contains("Remedy University"))
 	    	   {
 	    		   token = "RemedyU";
 	    	   }
-	    	   else if(newToken.contains("TCI"))
+	    	   else if(newToken.contains("Episode Connect Classic"))
 	    	   {
-	    		   token = "Institute";
+	    		   token = "Episodes Classic";
 	    	   }
-	    	   else if(newToken.contains("Physician Connect"))
+	    	   else if(newToken.contains("Episode Connect for Post-acute Care"))
 	    	   {
-	    		   token = "Gainsharing Physician Survey";
+	    		   token = "Episodes Post Acute";
 	    	   }
 	    	   else if(newToken.contains("Administration"))
 	    	   {
@@ -2454,17 +2454,17 @@ public void iUnselectAllSelectedApps(){
 	   while (st.hasMoreTokens())
 	   {
 		   String newToken = st.nextToken();
-		   if(newToken.contains("Lessons"))
+		   if(newToken.contains("Remedy University"))
     	   {
     		   token = "RemedyU";
     	   }
-    	   else if(newToken.contains("TCI"))
+    	   else if(newToken.contains("Episode Connect Classic"))
     	   {
-    		   token = "Institute";
+    		   token = "Episodes Classic";
     	   }
-    	   else if(newToken.contains("Physician Connect"))
+    	   else if(newToken.contains("Episode Connect for Post-acute Care"))
     	   {
-    		   token = "Gainsharing Physician Survey";
+    		   token = "Episodes Post Acute";
     	   }
     	   else if(newToken.contains("Administration"))
     	   {
