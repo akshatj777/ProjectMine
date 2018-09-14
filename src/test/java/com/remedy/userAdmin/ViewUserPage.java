@@ -79,11 +79,11 @@ public class ViewUserPage extends BaseClass {
 	}
 
 	public void verifyFirstName(String field) throws Throwable {
-		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'"+field.toLowerCase()+"')]")));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+field.toLowerCase()+"\")]")));
 	}
 	
 	public void verifyLastName(String field) throws Throwable {
-		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'"+field.toLowerCase()+"')]")));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+field.toLowerCase()+"\")]")));
 	}
 	
 	public void verifyPhone(String field) throws Throwable 
