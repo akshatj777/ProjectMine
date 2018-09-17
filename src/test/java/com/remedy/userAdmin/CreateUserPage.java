@@ -632,9 +632,8 @@ public class CreateUserPage extends BaseClass{
     }
 public void iUnselectAllSelectedApps(){
 	
-	if(isElementNotPresentOnPage(By.xpath("//div[@class='ui checked checkbox']"))==false){
-		return;
-	}else{
+	if(isElementPresentOnPage(By.xpath("//div[@class='ui checked checkbox']"))==true){
+	
 		iWillWaitToSee(By.xpath("//div[@class='ui checked checkbox']"));
 			clickAllElementofAlistbyXpath("//div[@class='ui checked checkbox']");
 	}
@@ -1662,7 +1661,7 @@ public void iUnselectAllSelectedApps(){
         		   {
         			   scrollIntoViewByJS(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")));
             		   driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
-            		   iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), searchParam);
+            		   iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), searchParam.trim());
         			   iWillWaitToSee(By.xpath("//section[@class='component-learning-pathway-dropdown']//div[@class='ui checkbox' or @class='ui checked checkbox']/label[contains(text(),\""+searchParam+"\")]"));
             		   clickElement(driver.findElement(By.xpath("//section[@class='component-learning-pathway-dropdown']//div[@class='ui checkbox' or @class='ui checked checkbox']/label[contains(text(),\""+searchParam+"\")]")));
             		   driver.findElement(By.xpath("//a[contains(text(),'Applications')]")).click();
@@ -2703,6 +2702,7 @@ public void iUnselectAllSelectedApps(){
 		 driver.findElement(By.xpath("//i[@class='close icon']")).click();
 	 }
 	 public void iVerifyTheLocationsAreNotPresentInSelectLocationsSection (String text){
+		 delay();
 		 if(!(text.isEmpty())){
 		 if(text.contains(",")){
 			 StringTokenizer st = new StringTokenizer(text, ",");

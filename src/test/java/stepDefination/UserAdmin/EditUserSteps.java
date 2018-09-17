@@ -266,4 +266,8 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	public void verifyAllLocationBoxSelection() {
 		editUser.verifyAllLocationBoxSelection();
 	}
+	@Then("^I enter invalid Learning Pathway \"([^\"]*)\"$")
+	public void enterInvalidLearningPathway(String text){
+		editUser.enterInvalidLearningPathway(text);
+	}
 }

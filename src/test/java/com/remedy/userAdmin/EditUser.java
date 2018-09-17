@@ -250,11 +250,11 @@ public class EditUser extends BaseClass {
 
 	public void iVerifyNextButtonStatus(String text) {
 		
-		WebElement el = driver.findElement(By.xpath("//button[text()='Next ']"));
+		WebElement el = driver.findElement(By.xpath("//button[contains(text(),'Next')]"));
 		if (text.equalsIgnoreCase("enabled")) {
 			Assert.assertTrue(el.isEnabled());
 		} else {
-			longDelay();
+			delay();
 			Assert.assertFalse(el.isEnabled());
 		}
 	}
@@ -775,5 +775,11 @@ public void verifyPaginationForSelectedLoc(){
 }
 public void verifyAllLocationBoxSelection() {
 	Assert.assertTrue(isElementPresent(By.xpath("//div[@class='ui checked checkbox']")));
+}
+public void enterInvalidLearningPathway(String text){
+	if(isElementPresentOnPage(By.cssSelector(".column.padding>.component-learning-pathway-dropdown"))==true){
+    
+	iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), text);
+	   	}
 }
 }
