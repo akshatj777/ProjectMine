@@ -60,6 +60,14 @@ public class CreateUserPage extends BaseClass{
 
     }
     
+    public void verifyRoleDescription(String roleDescription, String role) 
+    {
+    	if(!(roleDescription.isEmpty()))
+    	{
+    		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='"+role+"']/parent::div/span[text()='"+roleDescription+"']")));
+    	}
+    }
+    
     public void iClickAlreadySelectedOrganizationalField() 
     {
         if(DriverScript.Config.getProperty("Browser").equals("ie"))
@@ -1544,7 +1552,7 @@ public void iUnselectAllSelectedApps(){
 	   {
 		   StringTokenizer st = new StringTokenizer(fieldName,",");
 	       while (st.hasMoreTokens()) {  
-	    	   Assert.assertTrue(isElementPresent(By.xpath("//label[text()='"+st.nextToken().trim()+"']/parent::div[@class='ui checked checkbox']")));
+	    	   Assert.assertTrue(isElementPresent(By.xpath("//label[text()='"+st.nextToken().trim()+"']/parent::div[contains(@class,'ui checked')]")));
 	       }  
 	   }
 	   else
