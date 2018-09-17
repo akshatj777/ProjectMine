@@ -33,6 +33,8 @@ Feature: Search SNF organization functionality tests
 
     Examples: 
       | Description                                            | Has_MO | SearchParam    |
+      | Search SNF Organization with Id  - With MO             | YES    | SNF_Id         |
+      | Search SNF Organization with Id  - Without MO          | NO     | SNF_Id         |
       | Search SNF Organization with CCN  - With MO            | YES    | CCN            |
       | Search SNF Organization with CCN  - Without MO         | NO     | CCN            |
       | Search SNF Organization with SNF Org Name - With MO    | YES    | SNFNAME        |

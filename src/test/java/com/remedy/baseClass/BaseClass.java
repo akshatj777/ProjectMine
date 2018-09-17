@@ -20,6 +20,8 @@ import com.remedy.programManagement.CreateACHOrganizationAPI;
 import com.remedy.programManagement.CreateBundleAPI;
 import com.remedy.programManagement.CreateBundlePaymentContractAPI;
 import com.remedy.programManagement.CreateHHAOrganizationAPI;
+import com.remedy.programManagement.CreateHospiceOrganizationAPI;
+import com.remedy.programManagement.CreateIRFOrganizationAPI;
 import com.remedy.programManagement.CreateLTCHOrganizationAPI;
 import com.remedy.programManagement.CreateManagingOrganization;
 import com.remedy.programManagement.CreateManagingOrganizationAPI;
@@ -646,7 +648,19 @@ public class BaseClass {
 			Long a = CreateLTCHOrganizationAPI.idList.get(0);
 			CreateLTCHOrganizationAPI.LTCHcopyIDList.add(a);
 			CreateLTCHOrganizationAPI.idList.clear();
-	 }
+		}
+		else if (type.equals("irf")) {
+			idList.addAll(CreateIRFOrganizationAPI.idList);
+			Long a = CreateIRFOrganizationAPI.idList.get(0);
+			CreateIRFOrganizationAPI.IRFcopyIDList.add(a);
+			CreateIRFOrganizationAPI.idList.clear();
+		}
+		else if (type.equals("hospice")) {
+			idList.addAll(CreateHospiceOrganizationAPI.idList);
+			Long a = CreateHospiceOrganizationAPI.idList.get(0);
+			CreateHospiceOrganizationAPI.HospicecopyIDList.add(a);
+			CreateHospiceOrganizationAPI.idList.clear();
+		}
 		 else if (type.equals("bundle")) {
 			idList.addAll(CreateBundleAPI.idList);
 			CreateBundleAPI.bundleIDList.addAll(CreateBundleAPI.idList);
@@ -733,6 +747,20 @@ public class BaseClass {
 			CreateHHAOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
 			CreateHHAOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
 			CreateHHAOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
+		}
+		else if(type.equals("irf"))
+		{
+			CreateIRFOrganizationAPI.IRFNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+			CreateIRFOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
+			CreateIRFOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
+			CreateIRFOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
+		}
+		else if(type.equals("hospice"))
+		{
+			CreateHospiceOrganizationAPI.HospiceNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+			CreateHospiceOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
+			CreateHospiceOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
+			CreateHospiceOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
 		}
 		else if(type.equals("bundlePayment"))
 		{
@@ -853,6 +881,22 @@ public class BaseClass {
 		{
 			CreatePayorOrganizationAPI.PayorNameList.clear();
 			CreatePayorOrganizationAPI.participantidList.clear();
+		}
+		else if(type.equals("irf"))
+		{
+			CreateIRFOrganizationAPI.IRFNameList.clear();
+			CreateIRFOrganizationAPI.CCNNameList.clear();
+			CreateIRFOrganizationAPI.EINNameList.clear();
+			CreateIRFOrganizationAPI.NPINameList.clear();
+			CreateIRFOrganizationAPI.IRFcopyIDList.clear();
+		}
+		else if(type.equals("Hospice"))
+		{
+			CreateHospiceOrganizationAPI.HospiceNameList.clear();
+			CreateHospiceOrganizationAPI.CCNNameList.clear();
+			CreateHospiceOrganizationAPI.EINNameList.clear();
+			CreateHospiceOrganizationAPI.NPINameList.clear();
+			CreateHospiceOrganizationAPI.HospicecopyIDList.clear();
 		}
 		else if(type.equals("Program"))
 		{

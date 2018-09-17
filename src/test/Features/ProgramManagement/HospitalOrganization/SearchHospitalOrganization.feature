@@ -37,6 +37,8 @@ Feature: Search the Hospital organizations functionality tests
       | Search Hospital Organization with CCN  - Without MO              | NO     | CCN            |
       | Search Hospital Organization with Hospital Org Name - With MO    | YES    | ACHNAME        |
       | Search Hospital Organization with Hospital Org Name - Without MO | NO     | ACHNAME        |
+      | Search Hospital Organization with Hospital Org id - With MO      | YES    | Hosp_Id        |
+      | Search Hospital Organization with Hospital Org id - Without MO   | NO     | Hosp_Id        |
       | Search Hospital Organization with City                           |        | AutomationCity |
       | Search Hospital Organization with State                          |        | NY             |
       | Search Hospital Organization with Postal Code                    |        |          10000 |

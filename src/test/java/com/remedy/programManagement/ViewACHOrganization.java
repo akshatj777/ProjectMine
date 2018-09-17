@@ -94,12 +94,12 @@ public class ViewACHOrganization  extends BaseClass{
 			if (text.contains("YES"))
 			{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ccn"))); 
-				Assert.assertEquals("CCN: "+CreateIRFOrganization.IRFOrg.get("CCN"),actual.replace("|", ""));
+				Assert.assertEquals("CCN: "+CreateIRFOrganizationAPI.CCNNameList.get(0).substring(1, CreateIRFOrganizationAPI.CCNNameList.get(0).length()-1),actual.replace("|", ""));
 			}
 			else if (text.contains("NO"))
 			{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ccn"))); 
-				Assert.assertEquals("CCN: "+CreateIRFOrganization.IRFOrg_noMO.get("CCN"),actual.replace("|", ""));
+				Assert.assertEquals("CCN: "+CreateIRFOrganizationAPI.CCNNameList.get(1).substring(1, CreateIRFOrganizationAPI.CCNNameList.get(1).length()-1),actual.replace("|", ""));
 			}
 		}
 		else
@@ -191,14 +191,13 @@ public class ViewACHOrganization  extends BaseClass{
 			{	
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
 				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
-				Assert.assertEquals(CreateIRFOrganization.IRFOrg.get("EIN"),actual);
-
+				Assert.assertEquals(CreateIRFOrganizationAPI.EINNameList.get(0).substring(1, CreateIRFOrganizationAPI.EINNameList.get(0).length()-1),actual);
 			}
 			else if (text.contains("NO"))
 			{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
 				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
-				Assert.assertEquals(CreateIRFOrganization.IRFOrg_noMO.get("EIN"),actual);
+				Assert.assertEquals(CreateIRFOrganizationAPI.EINNameList.get(1).substring(1, CreateIRFOrganizationAPI.EINNameList.get(1).length()-1),actual);
 			}
 		}
 		else if (org.contains("Hospice"))
@@ -327,13 +326,13 @@ public class ViewACHOrganization  extends BaseClass{
 			{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
 				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
-				Assert.assertEquals(CreateIRFOrganization.IRFOrg.get("NPI"),actual);
+				Assert.assertEquals(CreateIRFOrganizationAPI.NPINameList.get(0).substring(1, CreateIRFOrganizationAPI.NPINameList.get(0).length()-1),actual);
 			}
 			else if(text.contains("NO"))
 			{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
 				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
-				Assert.assertEquals(CreateIRFOrganization.IRFOrg_noMO.get("NPI"),actual);	
+				Assert.assertEquals(CreateIRFOrganizationAPI.NPINameList.get(1).substring(1, CreateIRFOrganizationAPI.NPINameList.get(1).length()-1),actual);	
 			}
 		}
 		else if(org.contains("Hospice"))

@@ -5,30 +5,34 @@ import java.util.HashMap;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
-
-import com.remedy.RestCall.*;
+import com.remedy.RestCall.AddressDataModel;
+import com.remedy.RestCall.GenerateToken;
+import com.remedy.RestCall.InsertDataIntoDataModels;
+import com.remedy.RestCall.LocationsDataModel;
+import com.remedy.RestCall.OrgDataModel;
+import com.remedy.RestCall.RestCallUtil;
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
 
-public class CreateACHOrganizationAPI extends BaseClass{
-	
+public class CreateIRFOrganizationAPI extends BaseClass{
+
 	public InsertDataIntoDataModels insertData = new InsertDataIntoDataModels();
 	public static List<Long> idList = new ArrayList<>();
-	public static List<Long> copyIDList = new ArrayList<>();
-	public static List<String> ACHNameList = new ArrayList<>();
+	public static List<String> IRFNameList = new ArrayList<>();
 	public static List<String> CCNNameList = new ArrayList<>();
 	public static List<String> EINNameList = new ArrayList<>();
 	public static List<String> NPINameList = new ArrayList<>();
-	public static HashMap<String, String> tempAchOrg = new HashMap<String, String>();
-	public static Long oldACH_WithMO = null;
-	public static Long oldACH_WithoutMO = null;
-	public static List<Long> LocIDList = new ArrayList<>();
-
-	public CreateACHOrganizationAPI(WebDriver driver) {
+	public static HashMap<String, String> tempIRFOrg = new HashMap<String, String>();
+	public static Long oldIRF_WithMO = null;
+	public static Long oldIRF_WithoutMO = null;
+	public static List<Long> IRFcopyIDList = new ArrayList<>();
+	
+	
+	public CreateIRFOrganizationAPI(WebDriver driver) {
 		super(driver);
 	}
-
-	public void buildJsonForSnfHospLtch(String cName, String cPid, String shortName, String cMOrgID, String cCcn, String cEin, String cNpi, String cAddr1, String cAddr2, String cCity, String cState, String cZip, String cLocName, String locType, String cMarketId, String locAddr1, String locAddr2, String locCity, String locState, String locZip, String cLocationId) throws Throwable {
+	
+	public void buildJsonForIRF(String cName, String cPid, String shortName, String cMOrgID, String cCcn, String cEin, String cNpi, String cAddr1, String cAddr2, String cCity, String cState, String cZip, String cLocName, String locType, String cMarketId, String locAddr1, String locAddr2, String locCity, String locState, String locZip, String cLocationId) throws Throwable {
         List<LocationsDataModel> locList = new ArrayList<>();
         String name = createRandomName(cName);
         String mOrgID = selectManagingOrg(cMOrgID);
@@ -84,11 +88,11 @@ public class CreateACHOrganizationAPI extends BaseClass{
                locList = null;
             }
         }
-        OrgDataModel hospOrgData = new OrgDataModel(pid, ccn, npi, ein, name, shortName, mOrgID, addrs, locList);
-        CreateACHOrganizationAPI.jsonString = generateJson(hospOrgData);
+        OrgDataModel snfOrgData = new OrgDataModel(pid, ccn, npi, ein, name, shortName, mOrgID, addrs, locList);
+        CreateSNFOrganizationAPI.jsonString = generateJson(snfOrgData);
     }
 	
-	public void createSnfOrgWithThisData(String type) throws Throwable {
+	public void createIRFOrganizationWithThisData(String type) throws Throwable {
         String url = "organization/" + type;
         response = RestCallUtil.post(jsonString, DriverScript.Config.getProperty("contentType"), url, new GenerateToken().getAccessToken());
         if (response.getStatusCode() == 201) 
@@ -104,4 +108,6 @@ public class CreateACHOrganizationAPI extends BaseClass{
         }
         return addrs;
     }
+
+
 }

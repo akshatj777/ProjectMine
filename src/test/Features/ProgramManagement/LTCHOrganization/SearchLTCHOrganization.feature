@@ -33,6 +33,8 @@ Feature: Search the LTCH organizations functionality tests
 
     Examples: 
       | Description                                              | Has_MO | SearchParam    |
+      | Search LTCH Organization with LTCH Org id - With MO      | YES    | LTCH_Id        |
+      | Search LTCH Organization with LTCH Org id - Without MO   | NO     | LTCH_Id        |
       | Search LTCH Organization with CCN  - With MO             | YES    | CCN            |
       | Search LTCH Organization with CCN  - Without MO          | NO     | CCN            |
       | Search LTCH Organization with LTCH Org Name - With MO    | YES    | LTCHNAME       |

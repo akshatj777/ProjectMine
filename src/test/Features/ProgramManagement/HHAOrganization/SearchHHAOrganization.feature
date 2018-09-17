@@ -33,6 +33,8 @@ Feature: Search the HHA organizations functionality tests
 
     Examples: 
       | Description                                            | Has_MO | SearchParam    |
+      | Search HHA Organization with id  - With MO             | YES    | HHA_Id         |
+      | Search HHA Organization with id  - Without MO          | NO     | HHA_Id         |
       | Search HHA Organization with CCN  - With MO            | YES    | CCN            |
       | Search HHA Organization with CCN  - Without MO         | NO     | CCN            |
       | Search HHA Organization with HHA Org Name - With MO    | YES    | HHANAME        |
