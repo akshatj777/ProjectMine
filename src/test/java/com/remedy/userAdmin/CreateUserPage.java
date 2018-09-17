@@ -60,6 +60,14 @@ public class CreateUserPage extends BaseClass{
 
     }
     
+    public void verifyRoleDescription(String roleDescription, String role) 
+    {
+    	if(!(roleDescription.isEmpty()))
+    	{
+    		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='"+role+"']/parent::div/span[text()='"+roleDescription+"']")));
+    	}
+    }
+    
     public void iClickAlreadySelectedOrganizationalField() 
     {
         if(DriverScript.Config.getProperty("Browser").equals("ie"))

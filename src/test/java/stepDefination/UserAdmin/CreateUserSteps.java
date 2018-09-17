@@ -164,6 +164,11 @@ public class CreateUserSteps extends DriverScript {
 		createUser.iClickOrganizationalField();
 	}
 
+	@When("^I verify role description \"([^\"]*)\" for Role \"([^\"]*)\"$")
+	public void verifyRoleDescription(String roleDescription, String role) throws Throwable {
+		createUser.verifyRoleDescription(roleDescription, role);
+	}
+	
 	@When("^I click the already selected Organizational Role Field$")
 	public void IClickAlreadySelectedOrganizationalRoleField() throws Throwable {
 		createUser.iClickAlreadySelectedOrganizationalField();
