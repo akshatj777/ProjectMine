@@ -1545,7 +1545,7 @@ public void iUnselectAllSelectedApps(){
 	   {
 		   StringTokenizer st = new StringTokenizer(fieldName,",");
 	       while (st.hasMoreTokens()) {  
-	    	   Assert.assertTrue(isElementPresent(By.xpath("//label[text()='"+st.nextToken().trim()+"']/parent::div[@class='ui checked checkbox']")));
+	    	   Assert.assertTrue(isElementPresent(By.xpath("//label[text()='"+st.nextToken().trim()+"']/parent::div[contains(@class,'ui checked')]")));
 	       }  
 	   }
 	   else
