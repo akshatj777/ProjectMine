@@ -104,7 +104,7 @@ public class CreateUserThroughAPI extends BaseClass {
 			CreateUserPage.userApplications = applications.substring(0,applications.indexOf("-"));
 			objApplicationEnabled.put("enaled", "true");
 			objApplicationValue.put("value", objApplicationEnabled);
-			objApplication.put(applications.substring(applications.indexOf("-"), applications.length()), objApplicationValue);
+			objApplication.put(CreateUserPage.userApplications, objApplicationValue);
 			objSPOEApps.put("apps", objApplication);
 			objSPOEValue.put("value", objSPOEApps);
 		}
