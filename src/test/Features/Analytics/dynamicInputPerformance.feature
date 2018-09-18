@@ -11,16 +11,22 @@ Feature: Program Performance Overview Dashboard
     And I switch to analytics iframe
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
-    Then I set "Start Date" as "1/1/2016 " in Date field on dashboard
-    Then I set "End Date" as "ClaimsCubeDate" in Date field on dashboard
+    #Then I set "Start Date" as "1/1/2016 " in Date field on dashboard
+    #Then I set "End Date" as "ClaimsCubeDate" in Date field on dashboard
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInput.csv" for writting data at "<Row>" to input file
     And I perform test with "<User>" user in Analytics
+    ##Time
+    And I click "Time" Filter on the "program performance" dashboard
+    And I click "Time" Filter on the "program performance" dashboard
+    And I get the date for Data fetched for dashboard
     ##BPID
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
+    And I fetch and store "Episode Initiator - BPID" filter values on "program performance" dashboard
     And I select "<BPID>" checkbox in "BPID" filter on "Program overview" dashboard
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
     ##CCN
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
+    And I fetch and store "Anchor Facility - CCN" filter values on "program performance" dashboard
     And I select "<CCN>" checkbox in "CCN" filter on "Program overview" dashboard
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
     And I save the values of row filters in "<Row>" index in storage HashMap
@@ -29,6 +35,12 @@ Feature: Program Performance Overview Dashboard
     Examples: 
       | User                       | Row | BPID     | CCN         |
       | Qafivedashtest@yopmail.com |   1 | True All | True Random |
+
+  Scenario: Execute JMX file and read Output data for Data Filter Validations
+    When I close the file for after writting data to input file
+    Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterOutput.txt" Output file
+    When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\PerformanceDashboard\\TableauRowFilter.jmx"
+    Then I read the values from the text file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterOutput.txt"
 
   Scenario Outline: Execute Filter combinations to Validate Data Metrics on Front End - For Claims
     Given I am on the login page
@@ -97,12 +109,17 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG - Fracture | Physician - NPI | Model |
-      | Qadashboardtest@yopmail.com |   1 | True All    | True Random | True Random | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
-      | Qatwodashtest@yopmail.com   |   2 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
-      | Qatendashtest@yopmail.com   |   3 | True Random | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
-      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
-      | Qatendashtest@yopmail.com   |   5 | True Random | True Random | True Random | True Random     | True Random            | True All    | True All       | True Random     | Skip  |
+      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG - Fracture | Physician - NPI | Model       |
+      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | True Random     | True Random            | True Random | True Random    | True Random     | True Random |
+      | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | True All        | True All               | True All    | True All       | True All        | True All    |
+      | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | True Random     | True Random            | True All    | True All       | True All        | True All    |
+      | Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | True All        | True All               | True Random | True Random    | True Random     | True Random |
+      | Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | True Random     | True All               | True Random | True All       | True Random     | True All    |
+      | Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | True All        | True Random            | True All    | True Random    | True All        | True Random |
+      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | True All        | True Random            | True Random | True All       | True All        | Skip        |
+      | Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | True Random     | True All               | True All    | True Random    | True Random     | True All    |
+      | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip            | Skip                   | True Random | True All       | Skip            | Skip        |
+      | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | True All        | True Random            | Skip        | Skip           | True Random     | Skip        |
 
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - CLAIMS
     When I close the file for after writting data to input file
@@ -130,6 +147,11 @@ Feature: Program Performance Overview Dashboard
       |     2 |   3 |
       |     3 |   4 |
       |     4 |   5 |
+      |     5 |   6 |
+      |     6 |   7 |
+      |     7 |   8 |
+      |     8 |   9 |
+      |     9 |  10 |
 
   Scenario Outline: Execute Filter combinations to Validate Data Metrics on Front End - For EC
     Given I am on the login page
@@ -198,12 +220,17 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG - Fracture | Physician - NPI | Model |
-      | Qadashboardtest@yopmail.com |   1 | True All    | True Random | True Random | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
-      | Qatwodashtest@yopmail.com   |   2 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
-      | Qatendashtest@yopmail.com   |   3 | True Random | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
-      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip            | Skip                   | Skip        | Skip           | Skip            | Skip  |
-      | Qatendashtest@yopmail.com   |   5 | True Random | True Random | True Random | True Random     | True Random            | True All    | True All       | True Random     | Skip  |
+      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG - Fracture | Physician - NPI | Model       |
+      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | True Random     | True Random            | True Random | True Random    | True Random     | True Random |
+      | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | True All        | True All               | True All    | True All       | True All        | True All    |
+      | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | True Random     | True Random            | True All    | True All       | True All        | True All    |
+      | Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | True All        | True All               | True Random | True Random    | True Random     | True Random |
+      | Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | True Random     | True All               | True Random | True All       | True Random     | True All    |
+      | Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | True All        | True Random            | True All    | True Random    | True All        | True Random |
+      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | True All        | True Random            | True Random | True All       | True All        | Skip        |
+      | Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | True Random     | True All               | True All    | True Random    | True Random     | True All    |
+      | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip            | Skip                   | True Random | True All       | Skip            | Skip        |
+      | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | True All        | True Random            | Skip        | Skip           | True Random     | Skip        |
 
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - EC
     When I close the file for after writting data to input file
@@ -231,6 +258,11 @@ Feature: Program Performance Overview Dashboard
       |     2 |   3 |
       |     3 |   4 |
       |     4 |   5 |
+      |     5 |   6 |
+      |     6 |   7 |
+      |     7 |   8 |
+      |     8 |   9 |
+      |     9 |  10 |
 
   Scenario Outline: Execute Filter combinations to Validate Data Metrics on Front End - For EC&Claims
     Given I am on the login page

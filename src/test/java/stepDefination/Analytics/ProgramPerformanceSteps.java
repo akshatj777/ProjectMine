@@ -530,4 +530,14 @@ public class ProgramPerformanceSteps extends DriverScript{
 	public void i_save_values_of_row_filters_in_index_in_hashmap(String index) throws Throwable{
 		programdashboard.iSaveAllRowFiltersInIndexInHashMap(index);
 	}
+	
+	@And("^I fetch and store \"([^\"]*)\" filter values on \"([^\"]*)\" dashboard$")
+	public void i_fetch_Store_Filter_Value_On_Dashboard(String filter,String dashboard) throws Throwable{
+		programdashboard.iFetchStoreValuesOnDashboard(filter, dashboard);
+	}
+	
+	@And("^I get the date for Data fetched for dashboard$")
+	public void i_get_the_date_for_data_fetched_for_dashboard() throws Throwable{
+		programdashboard.igetDateForDataFetchedForDashboard();
+	}
 }

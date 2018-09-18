@@ -1157,7 +1157,14 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iClickOnFilterName(String text,String dashboard){
-		 if(!dashboard.contains("Skip")){
+		 if(text.equals("Time")){
+			 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+			 delay();
+			 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. /span//button[@type='button']"));
+			 act.moveToElement(elem).click().build().perform();
+			 delay();
+		 }
+		 else if(!dashboard.contains("Skip")){
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 delay();
 		 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']"));
@@ -1818,6 +1825,7 @@ public class ProgramPerformance extends BaseClass{
 			 writer.print(System.lineSeparator());
 		 }
 		 imageOutput=new HashMap<String,String>();
+		 rowFilters=new HashMap<String,String>();
 	 }
 	 
 	 public void writeDataToOutputFile(String path) throws FileNotFoundException {
@@ -1875,12 +1883,48 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iPerformTestWithUserInAnalytics(String user) throws FileNotFoundException{
-		 arrayListTexts.add(user);
+		 arrayListTexts.add("'"+user+"'");
 		 writeDataToOutputFile("Path");
 	 }
 	 
 	 public void iSaveAllRowFiltersInIndexInHashMap(String index){
 		 mapOfHmFiltersValue.put(index,rowFilters);
 	 }
+	 
+	 public void iFetchStoreValuesOnDashboard(String filter,String dashboard){
+		 List<WebElement> listItems = driver.findElements(By.cssSelector(".FIText"));
+		 List<String> values = new ArrayList<String>();
+		 for(int i =1;i<listItems.size();i++){
+		  values.add(listItems.get(i).getText().trim());
+		  }
+		 rowFilters.put(filter, values.toString());
+	 }
+	 
+	 public void igetDateForDataFetchedForDashboard() throws FileNotFoundException{
+		 String dateFetched = driver.findElement(By.xpath("//span[@dojoattachpoint='domPreview']")).getAttribute("textContent").trim();
+		 System.out.println("Date value fetched"+dateFetched);
+		 getDateFForDB(dateFetched, "StartDate");
+		 getDateFForDB(dateFetched, "EndDate");
+	 }
+	 
+	 public void getDateFForDB(String dat,String range) throws FileNotFoundException{
+		 String dateFE[] = dat.split("to");
+		 System.out.println("Date;;"+dateFE[0]+"==="+dateFE[1]);
+		 String dateToBreak =null; 
+		 if (range.equals("StartDate")){
+			 dateToBreak=dateFE[0].trim();
+		 }else if(range.equals("EndDate")){
+			 dateToBreak=dateFE[1].trim();
+		 }
+			String monthFE= dateToBreak.substring(0, dateToBreak.indexOf("/"));
+			dateToBreak = dateToBreak.substring(dateToBreak.indexOf("/")+1);
+			String dayFE= dateToBreak.substring(0, dateToBreak.indexOf("/"));
+			dateToBreak = dateToBreak.substring(dateToBreak.indexOf("/")+1);
+			String yearFE = dateToBreak;
+			String dbDate= yearFE+monthFE+dayFE;
+			arrayListTexts.add("'"+dbDate+"'");
+			writeDataToOutputFile("Path");
+	 }
+	 
 	 
 }
