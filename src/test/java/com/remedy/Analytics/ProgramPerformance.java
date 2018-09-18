@@ -72,6 +72,8 @@ public class ProgramPerformance extends BaseClass{
 	public static PrintWriter writer = null;
 	public static Map<String,HashMap<String,String>> mapOfHmImageOuput = new HashMap<String,HashMap<String,String>>();
 	public static HashMap<String, String> imageOutput;
+	public static Map<String,HashMap<String,String>> mapOfHmFiltersValue = new HashMap<String,HashMap<String,String>>();
+	public static HashMap<String, String> rowFilters;
 	public ProgramPerformance(WebDriver driver) {
 		super(driver);
 	}
@@ -1557,20 +1559,71 @@ public class ProgramPerformance extends BaseClass{
 			             WebElement randomElement = listItems.get(randomIndex);
 			             String val=randomElement.getText();
 			             String valarr[] = null;
-			            
 			             if(random_n==1 && val.equals("(All)")){
 			            	 listItems.remove(randomIndex); 
 			            	 n=listItems.size();
-			            	 if(n==1){
+			            	if(n==1){
 			            		  val=listItems.get(0).getText();
-			            		 if(filter.equals("BPID")){
-			            			 driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+			            		 if(filter.equals("BPID") || filter.equals("CCN") || filter.equals("Physician - NPI")){
+			            			  driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+			            		 	  for (int itr=0;itr<=val.length();itr++) {
+		                        	        val=val.substring(val.indexOf("- ")+1).trim();
+		                        	       }
 		                       		  val="'"+val+"'";
 		                       		  arrayListTexts.add(val);
 		                       		  writeDataToOutputFile("Path");
 		                       		  return;
 			            		 }
-			            	 }else{
+			            		 else if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
+			            			 if(val.equals("Null")){
+			            				 driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click(); 
+			            				 for(int l=0;l<2;l++){
+		                        		  arrayListTexts.add("'Null'"); 
+		                        		  writeDataToOutputFile("Path");
+		                        		  }
+			            		 }else {
+			            			 val=val.substring(val.indexOf("-")+1).trim(); 
+	                            	 valarr=val.split("-");
+	                            	 valA=valarr[0];
+	                            	 valB=valarr[1];
+	                            	 for(int k=0;k<valarr.length;k++){
+	    			            		 if(k==0){
+	    			            			 val="'"+valA+"'"; 
+	    			            			 arrayListTextsA.add(val);
+	    			            			 arrayListTexts.addAll(arrayListTextsA);
+	    			            			 
+	    			            		 }else{
+	    			            			 val="'"+valB+"'"; 
+	    			            			 arrayListTextsB.add(val);
+	    			            			 arrayListTexts.addAll(arrayListTextsB);
+	    			            		 }   writeDataToOutputFile("Path");
+	    			            		 return;
+	                            	 }
+			            		 
+			            		 
+			            	 }
+			            			 
+			            			 
+			            		 } else if(filter.equals("DRG - Fracture")){
+//		                           val=val.substring(val.indexOf("-")+1).trim();
+		                        	 val=val.substring(val.length() - 4);
+		                        	 val=val.replaceAll("[()]","");  
+		                        	 System.out.println("Drg fracture value is"+val);
+		                        	 val="'"+val+"'";
+		                       		 arrayListTexts.add(val);
+		                       		 writeDataToOutputFile("Path");
+		                       		 return;
+		                         }
+			            		 
+			            		 else{
+	                	    	     val=val.trim();
+				            		 driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+				            		 val="'"+val+"'";
+									 arrayListTexts.add(val);
+	                	       }
+			            		 
+			            	}
+			            	 else{
 			            	 random_n=getRandomNumberInRange(1,n);
 			            	 continue;}
 			            	 
@@ -1604,10 +1657,33 @@ public class ProgramPerformance extends BaseClass{
                         		  val="'"+val+"'";
                         		  arrayListTexts.add(val);
                         		  listItems.remove(randomIndex);
-                        		  continue;
+                        		  if((listItems.get(0).getText().equals("(All)") || listItems.get(0).getText().equals("(All)")) && listItems.size()==1){
+                        			for(int k=0;k<2;k++){
+                        				if(k==0){
+                        				writeDataToOutputFile("Path");}else
+                        				{
+                        					arrayListTexts.add("'Null'");
+                        					writeDataToOutputFile("Path");
+                        					return;
+                        				}
+                        			}
+                        		 }else if(listItems.size()==0){
+                        			 for(int k=0;k<2;k++){
+                         				if(k==0){
+                         				writeDataToOutputFile("Path");}else
+                         				{
+                         					arrayListTexts.add("'Null'");
+                         					writeDataToOutputFile("Path");
+                         					return;
+                         				}
+                         			}
+                        		 }else{
+                        		  continue;}
                               }else{
                             	  val=val.substring(val.indexOf("-")+1).trim(); 
-                            	  
+                            	  for (int itr=0;itr<=val.length();itr++) {
+                          	        val=val.substring(val.indexOf("-")+1).trim();
+                          	       }
                             	  valarr=val.split("-");
                             	  valA=valarr[0];
                             	  valB=valarr[1];
@@ -1615,11 +1691,12 @@ public class ProgramPerformance extends BaseClass{
 			             }
 			             driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
 			             if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
-			            	 if(val.equals("Null")){
-			            		 val=val.trim();
-				            	 val="'"+val+"'";
-					             arrayListTexts.add(val); 
-			            	 }else{
+//			            	 if(val.equals("Null")){
+//			            		 val=val.trim();
+//				            	 val="'"+val+"'";
+//					             arrayListTexts.add(val); 
+//			            	 }else{
+			            	 if(!val.equals("Null")){
 			            	 for(int k=0;k<valarr.length;k++){
 			            		 if(k==0){
 			            			 val="'"+valA+"'"; 
@@ -1732,33 +1809,11 @@ public class ProgramPerformance extends BaseClass{
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 longDelay();
 		
-	//	 new WebDriverWait(driver,10).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner']")));
-		//*[@id="svg-spinner"]
-//		 if(filter.equals("Yes")){
-//			 WebElement elem = driver.findElement(By.xpath("//input[contains(@name,'All')]"));
-//			 act.moveToElement(elem).click().build().perform();
-//			 List<WebElement> listItems = driver.findElements(By.cssSelector(".FIText"));
-//			 listItems.size();
-//				for(int i =1;i<listItems.size();i++){
-//					String val=listItems.get(i).getText();
-//					if(filter.contains("BPID")){
-//						val=val.substring(val.length()-8, val.length());
-//					}else{val=val.substring(val.length()-6, val.length());}
-//					driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
-//					val="'"+val+"'";
-//					arrayListTexts.add(val);
-//				}
-//				writeDataToOutputFile("path");
-//		 }else{
-//			 arrayListTexts.add("Skip");
-//		 }
-		
 	 }
 	 
 	 public void iOpenTheInputFile(String path,String row) throws FileNotFoundException{
 		 if(row.equals("1")){
 			 writer=new PrintWriter(System.getProperty("user.dir")+path);
-//			 imageOutput=new HashMap<String,String>();
 		 }else{
 			 writer.print(System.lineSeparator());
 		 }
@@ -1817,6 +1872,15 @@ public class ProgramPerformance extends BaseClass{
 		  	}
 		  Random r = new Random();
 		  return r.nextInt((max - min) + 1) + min;
+	 }
+	 
+	 public void iPerformTestWithUserInAnalytics(String user) throws FileNotFoundException{
+		 arrayListTexts.add(user);
+		 writeDataToOutputFile("Path");
+	 }
+	 
+	 public void iSaveAllRowFiltersInIndexInHashMap(String index){
+		 mapOfHmFiltersValue.put(index,rowFilters);
 	 }
 	 
 }

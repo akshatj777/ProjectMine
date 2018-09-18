@@ -521,4 +521,13 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iSaveAllOutputImagesInIndexInHashMap(index);
 	}
 	
+	@And("^I perform test with \"([^\"]*)\" user in Analytics$")
+	public void i_Perform_Test_With_User_In_Analytics(String user) throws Throwable{
+		programdashboard.iPerformTestWithUserInAnalytics(user);
+	}
+	
+	@And("^I save the values of row filters in \"([^\"]*)\" index in storage HashMap$")
+	public void i_save_values_of_row_filters_in_index_in_hashmap(String index) throws Throwable{
+		programdashboard.iSaveAllRowFiltersInIndexInHashMap(index);
+	}
 }
