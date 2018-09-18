@@ -14,6 +14,7 @@ import com.remedy.baseClass.BaseClass;
 public class SearchOrganization extends BaseClass{
 	
 	List<Long> orgId= new ArrayList<>();
+	List<String> LocIndexIdList= new ArrayList<>();
 
 	public SearchOrganization(WebDriver driver) {
 		super(driver);
@@ -1038,28 +1039,135 @@ public class SearchOrganization extends BaseClass{
 		String value = searchParam;
 		if(org.equals("ACHNAME - YES"))
 		{
-			iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), value);
-			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+value+"')]")));
+			if(value.equals("LocIndexId")){
+				String query = "select id from program_management.location where organization_id = (select id from program_management.organization where name='"+CreateACHOrganizationAPI.ACHNameList.get(0).substring(1, CreateACHOrganizationAPI.ACHNameList.get(0).length()-1)+"')and address_type_id=2";
+				LocIndexIdList.addAll(fetchLocationIndexID(query));
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), LocIndexIdList.get(0));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+LocIndexIdList.get(0)+"')]")));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), value);
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+value+"')]")));	
+			}
 		}
 		else if(org.equals("ACHNAME - NO"))
 		{
-			iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), value);
-			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+value+"')]")));
+			if(value.equals("LocIndexId")){
+				String query = "select id from program_management.location where organization_id = (select id from program_management.organization where name='"+CreateACHOrganizationAPI.ACHNameList.get(1).substring(1, CreateACHOrganizationAPI.ACHNameList.get(1).length()-1)+"')and address_type_id=2";
+				LocIndexIdList.addAll(fetchLocationIndexID(query));
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), LocIndexIdList.get(0));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+LocIndexIdList.get(0)+"')]")));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), value);
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+value+"')]")));	
+			}
 		}
 		else if(org.equals("SNFNAME - YES"))
 		{
-			iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), value);
-			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+value+"')]")));
+			if(value.equals("LocIndexId")){
+				String query = "select id from program_management.location where organization_id = (select id from program_management.organization where name='"+CreateSNFOrganizationAPI.SNFNameList.get(0).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(0).length()-1)+"')and address_type_id=2";
+				LocIndexIdList.addAll(fetchLocationIndexID(query));
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), LocIndexIdList.get(0));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+LocIndexIdList.get(0)+"')]")));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), value);
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+value+"')]")));	
+			}
 		}
 		else if(org.equals("SNFNAME - NO"))
 		{
-			iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), value);
-			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+value+"')]")));
+			if(value.equals("LocIndexId")){
+				String query = "select id from program_management.location where organization_id = (select id from program_management.organization where name='"+CreateSNFOrganizationAPI.SNFNameList.get(1).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(1).length()-1)+"')and address_type_id=2";
+				LocIndexIdList.addAll(fetchLocationIndexID(query));
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), LocIndexIdList.get(0));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+LocIndexIdList.get(0)+"')]")));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), value);
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+value+"')]")));	
+			}
 		}
+		
+		else if(org.equals("LTCHNAME - YES"))
+		{
+			if(value.equals("LocIndexId")){
+				String query = "select id from program_management.location where organization_id = (select id from program_management.organization where name='"+CreateLTCHOrganizationAPI.LTCHNameList.get(0).substring(1, CreateLTCHOrganizationAPI.LTCHNameList.get(0).length()-1)+"')and address_type_id=2";
+				LocIndexIdList.addAll(fetchLocationIndexID(query));
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), LocIndexIdList.get(0));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+LocIndexIdList.get(0)+"')]")));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), value);
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+value+"')]")));	
+			}
+		}
+		else if(org.equals("LTCHNAME - NO"))
+		{
+			if(value.equals("LocIndexId")){
+				String query = "select id from program_management.location where organization_id = (select id from program_management.organization where name='"+CreateLTCHOrganizationAPI.LTCHNameList.get(1).substring(1, CreateLTCHOrganizationAPI.LTCHNameList.get(1).length()-1)+"')and address_type_id=2";
+				LocIndexIdList.addAll(fetchLocationIndexID(query));
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), LocIndexIdList.get(0));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+LocIndexIdList.get(0)+"')]")));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), value);
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+value+"')]")));	
+			}
+		}
+		
+		else if(org.equals("IRFNAME - YES"))
+		{
+			if(value.equals("LocIndexId")){
+				String query = "select id from program_management.location where organization_id = (select id from program_management.organization where name='"+CreateIRFOrganizationAPI.IRFNameList.get(0).substring(1, CreateIRFOrganizationAPI.IRFNameList.get(0).length()-1)+"')and address_type_id=2";
+				LocIndexIdList.addAll(fetchLocationIndexID(query));
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), LocIndexIdList.get(0));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+LocIndexIdList.get(0)+"')]")));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), value);
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+value+"')]")));	
+			}
+		}
+		else if(org.equals("IRFNAME - NO"))
+		{
+			if(value.equals("LocIndexId")){
+				String query = "select id from program_management.location where organization_id = (select id from program_management.organization where name='"+CreateIRFOrganizationAPI.IRFNameList.get(1).substring(1, CreateIRFOrganizationAPI.IRFNameList.get(1).length()-1)+"')and address_type_id=2";
+				LocIndexIdList.addAll(fetchLocationIndexID(query));
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), LocIndexIdList.get(0));
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+LocIndexIdList.get(0)+"')]")));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), value);
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(),'"+value+"')]")));	
+			}
+		}
+		
 		else
 		{
 			iFillInText(driver.findElement(By.cssSelector(".text-input-field-locationFilterTerm")), value);

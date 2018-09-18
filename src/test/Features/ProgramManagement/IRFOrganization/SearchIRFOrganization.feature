@@ -57,12 +57,14 @@ Feature: Search IRF organization functionality tests
     Then I search "<SearchParam>" and verify with search list options on Location in "<IRF_Name> - <Has_MO>" profile page
 
     Examples: 
-      | Description                                    | Has_MO | IRF_Name | SearchParam  |
-      | Searching Location Name on IRF Profile Page    | YES    | IRFNAME  | Loc_Name     |
-      | Searching Location Address on IRF Profile Page | YES    | IRFNAME  | Loc_Address1 |
-      | Searching Location Type on IRF Profile Page    | NO     | IRFNAME  | IRF          |
-      | Searching Location Region on IRF Profile Page  | NO     | IRFNAME  | Midwest      |
-      | Searching Location Market on IRF Profile Page  | NO     | IRFNAME  | Chicago      |
+      | Description                                     | Has_MO | IRF_Name | SearchParam  |
+      | Searching Location index id on IRF Profile Page | YES    | IRFNAME  | LocIndexId   |
+      | Searching Location index id on IRF Profile Page | NO     | IRFNAME  | LocIndexId   |
+      | Searching Location Name on IRF Profile Page     | YES    | IRFNAME  | Loc_Name     |
+      | Searching Location Address on IRF Profile Page  | YES    | IRFNAME  | Loc_Address1 |
+      | Searching Location Type on IRF Profile Page     | NO     | IRFNAME  | IRF          |
+      | Searching Location Region on IRF Profile Page   | NO     | IRFNAME  | Midwest      |
+      | Searching Location Market on IRF Profile Page   | NO     | IRFNAME  | Chicago      |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -124,5 +126,5 @@ Feature: Search IRF organization functionality tests
     When delete references of the name list type "<type>"
 
     Examples: 
-      | type | type |
-      | MO   | irf  |
+      | type    |
+      | MO, irf |

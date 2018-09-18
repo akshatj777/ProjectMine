@@ -925,5 +925,32 @@ public class BaseClass {
 			
 		}
 	}
+	
+	public List<String> fetchLocationIndexID(String query) throws ClassNotFoundException, SQLException  {
+		HashMap<String, HashMap<String, String>> row = new HashMap<String,HashMap<String,String>>();
+	    Class.forName("com.mysql.jdbc.Driver");
+	    String connectionString = "jdbc:mysql://"+DriverScript.Config.getProperty("MySQLServerName")+":3306"; 
+	    Connection con=DriverManager.getConnection(connectionString,DriverScript.Config.getProperty("MySQLDBUserName"),DriverScript.Config.getProperty("MySQLPassword")); 
+	    Statement stmt=con.createStatement();  
+	    ResultSet rs=stmt.executeQuery(query);
+	    ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
+	    while(rs.next())
+	    {
+	     HashMap<String, String> column = new HashMap<String, String>();
+	        for(int i=1;i<=rsmd.getColumnCount();i++)
+	        {
+	        column.put(rsmd.getColumnName(i),rs.getString(i));
+	        }
+	        String a = Integer.toString(rs.getRow());
+	        row.put(a, column);
+	        }
+	    ArrayList<String> al = new ArrayList<String>();
+	    for(int i=1; i<=row.size();i++)
+	    {
+	    	al.add(row.get(""+i+"").get("id"));
+	    }
+	    con.close();
+	    return al;
+}
 }
 

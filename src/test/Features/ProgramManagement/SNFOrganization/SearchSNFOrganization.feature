@@ -50,6 +50,29 @@ Feature: Search SNF organization functionality tests
     And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
     When I click on "SNF" organization tab on organization dashboard
+    When I search with "<SNF_Name> - <Has_MO>" on organization in search box
+    And I click "<SNF_Name> - <Has_MO>" field in search list on organization page
+    And I verify "Location" tab present under "SNF" Organization
+    And I click on "Location" tab on view profile of "SNF" Organization
+    Then I search "<SearchParam>" and verify with search list options on Location in "<SNF_Name> - <Has_MO>" profile page
+
+    Examples: 
+      | Description                                     | Has_MO | SNF_Name | SearchParam     |
+      | Searching Location index id on SNF Profile Page | YES    | SNFNAME  | LocIndexId      |
+      | Searching Location index id on SNF Profile Page | NO     | SNFNAME  | LocIndexId      |
+      | Searching Location Name on SNF Profile Page     | YES    | SNFNAME  | Loc_Name        |
+      | Searching Location Address on SNF Profile Page  | YES    | SNFNAME  | Loc_Address1    |
+      | Searching Location Type on SNF Profile Page     | NO     | SNFNAME  | Skilled Nursing |
+      | Searching Location Region on SNF Profile Page   | NO     | SNFNAME  | Midwest         |
+      | Searching Location Market on SNF Profile Page   | NO     | SNFNAME  | Chicago         |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "SNF" organization tab on organization dashboard
     Then I search with "<SNF_Name> - <Has_MO>" on organization in search box
     And I verify "<SNF_Name> - <Has_MO>" field in search list on organization page
     And I click "<SNF_Name> - <Has_MO>" field in search list on organization page
@@ -66,27 +89,6 @@ Feature: Search SNF organization functionality tests
       | Description                                                     | Has_MO | SNF_Name | Edited_SNF_Name | Message                                |
       | Search SNF Organization after editing the SNF name - With MO    | YES    | SNFNAME  | SNFNAME         | SNF Organization Successfully Updated. |
       | Search SNF Organization after editing the SNF name - Without MO | NO     | SNFNAME  | SNFNAME         | SNF Organization Successfully Updated. |
-
-  Scenario Outline: <Description>
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-    When I click on "SNF" organization tab on organization dashboard
-    When I search with "<SNF_Name> - <Has_MO>" on organization in search box
-    And I click "<SNF_Name> - <Has_MO>" field in search list on organization page
-    And I verify "Location" tab present under "SNF" Organization
-    And I click on "Location" tab on view profile of "SNF" Organization
-    Then I search "<SearchParam>" and verify with search list options on Location in "<SNF_Name> - <Has_MO>" profile page
-
-    Examples: 
-      | Description                                    | Has_MO | SNF_Name | SearchParam     |
-      | Searching Location Name on SNF Profile Page    | YES    | SNFNAME  | Loc_Name        |
-      | Searching Location Address on SNF Profile Page | YES    | SNFNAME  | Loc_Address1    |
-      | Searching Location Type on SNF Profile Page    | NO     | SNFNAME  | Skilled Nursing |
-      | Searching Location Region on SNF Profile Page  | NO     | SNFNAME  | Midwest         |
-      | Searching Location Market on SNF Profile Page  | NO     | SNFNAME  | Chicago         |
 
   Scenario Outline: <Description>
     Given I am on the login page

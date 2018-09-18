@@ -118,7 +118,7 @@ Feature: Create Programs organization under Payor Organization functionality tes
 
     Examples: 
       | Description                                       | Payor_Name | Program_Name | Message                                                                                                                         |
-      | validation message if did not rank atleast 1 rule | PAYORNAME  | PROGRAMNAME  | Validation errors: Program requires at lease one Validation Rule Ranking - Program requires at lease one Attribute Rule Ranking |
+      | validation message if did not rank atleast 1 rule | PAYORNAME  | PROGRAMNAME  | Validation errors: Program requires at lease one Attribute Rule Ranking - Program requires at lease one Validation Rule Ranking |
 
   Scenario Outline: Create Programs under Payor Organization
     Given I am on the login page
@@ -203,7 +203,7 @@ Feature: Create Programs organization under Payor Organization functionality tes
     And I verify "Create Program" header text on create organization page
     Then I enter <Program_Name> in "Program Name" on create organization page
     Then I click on "Submit" button on "create" organization page
-    Then I verify duplicate "<Message>" after submitting the "create Programs" organization page
+    Then I verify "<Message>" after submitting the "create Programs" on Payor organization page
 
     Examples: 
       | Description                                                 | Payor_Name | Program_Name         | Message                      |
