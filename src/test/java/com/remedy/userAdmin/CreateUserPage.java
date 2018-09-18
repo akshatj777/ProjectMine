@@ -1507,6 +1507,7 @@ public void iUnselectAllSelectedApps(){
 			usersEmailPerRole.put(user.trim()+"-"+userRole.trim(), emailList);
 			usersApplicationsPerRole.put(user.trim()+"-"+userRole.trim(), applicationsList);
 			usersNPIPerRole.put(user.trim()+"-"+userRole.trim(), NPIList);
+			System.out.println(usersEmailPerRole.toString());
 		}
 		else if(user.contains("Remedy Technical Administrator"))
 		{
@@ -1519,6 +1520,7 @@ public void iUnselectAllSelectedApps(){
 			usersEmailPerRole.put(user.trim()+"-"+userRole.trim(), emailList);
 			usersApplicationsPerRole.put(user.trim()+"-"+userRole.trim(), applicationsList);
 			usersNPIPerRole.put(user.trim()+"-"+userRole.trim(), NPIList);
+			System.out.println(usersEmailPerRole.toString());
 		}
 	}
 	public void clickSubmitButton() throws Throwable {
