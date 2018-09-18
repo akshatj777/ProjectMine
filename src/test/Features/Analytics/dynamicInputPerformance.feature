@@ -13,7 +13,7 @@ Feature: Program Performance Overview Dashboard
     And I switch to analytics iframe
     #Then I set "Start Date" as "1/1/2016 " in Date field on dashboard
     #Then I set "End Date" as "ClaimsCubeDate" in Date field on dashboard
-    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInput.csv" for writting data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInputs.csv" for writting data at "<Row>" to input file
     And I perform test with "<User>" user in Analytics
     ##Time
     And I click "Time" Filter on the "program performance" dashboard
@@ -29,12 +29,48 @@ Feature: Program Performance Overview Dashboard
     And I fetch and store "Anchor Facility - CCN" filter values on "program performance" dashboard
     And I select "<CCN>" checkbox in "CCN" filter on "Program overview" dashboard
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
+    ##Bundle
+    And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
+    And I fetch and store "Bundle" filter values on "program performance" dashboard
+    And I select "<Bundle>" checkbox in "Bundle" filter on "Program overview" dashboard
+    And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
+    ##Region-Market
+    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
+    And I fetch and store "Region - Market" filter values on "program performance" dashboard
+    And I select "<Region - Market>" checkbox in "Region - Market" filter on "Program overview" dashboard
+    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
+    ##Remedy-RegionMarket
+    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
+    And I fetch and store "Remedy Region - Market" filter values on "program performance" dashboard
+    And I select "<Remedy Region - Market>" checkbox in "Remedy Region - Market" filter on "Program overview" dashboard
+    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
+    ##ParticipantName
+    And I click "Participant" Filter on the "program performance - <Participant>" dashboard
+    And I fetch and store "Participant" filter values on "program performance" dashboard
+    And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
+    And I click "Participant" Filter on the "program performance - <Participant>" dashboard
+    ##DRGCODE
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    And I fetch and store "DRG" filter values on "program performance" dashboard
+    And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    ##NPI
+    And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
+    And I fetch and store "Physician - NPI" filter values on "program performance" dashboard
+    And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
+    And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
+    ##MODEL
+    And I click "Model" Filter on the "program performance - <Model>" dashboard
+    And I fetch and store "Model" filter values on "program performance" dashboard
+    And I select "<Model>" checkbox in "Model" filter on "Program overview" dashboard
+    And I click "Model" Filter on the "program performance - <Model>" dashboard
     And I save the values of row filters in "<Row>" index in storage HashMap
+    
     When I close the file for after writting data to input file
 
     Examples: 
-      | User                       | Row | BPID     | CCN         |
-      | Qafivedashtest@yopmail.com |   1 | True All | True Random |
+      | User                       | Row | BPID     | CCN         | Bundle     | Region - Market | Remedy Region - Market | Participant | DRG - Fracture | Physician - NPI | Model      |
+      | Qafivedashtest@yopmail.com |   1 | True All | True Random | Click&Skip | Click&Skip      | Click&Skip             | Click&Skip  | Click&Skip     | Click&Skip      | Click&Skip |
 
   Scenario: Execute JMX file and read Output data for Data Filter Validations
     When I close the file for after writting data to input file

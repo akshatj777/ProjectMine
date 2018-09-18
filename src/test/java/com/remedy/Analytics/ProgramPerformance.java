@@ -1164,7 +1164,8 @@ public class ProgramPerformance extends BaseClass{
 			 act.moveToElement(elem).click().build().perform();
 			 delay();
 		 }
-		 else if(!dashboard.contains("Skip")){
+		 
+		 else if(!dashboard.contains("- Skip")){
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
 		 delay();
 		 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']"));
@@ -1889,6 +1890,7 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iSaveAllRowFiltersInIndexInHashMap(String index){
 		 mapOfHmFiltersValue.put(index,rowFilters);
+		 System.out.println(mapOfHmFiltersValue.toString());
 	 }
 	 
 	 public void iFetchStoreValuesOnDashboard(String filter,String dashboard){
