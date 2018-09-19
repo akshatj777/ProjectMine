@@ -47,8 +47,8 @@ public class CreateUserThroughAPI extends BaseClass {
 		if(email.contains("qaautomation"))
 		{
 			String a = RandomStringUtils.randomAlphabetic(8);
-			objEmailValue.put("value", "qaautomation+"+a+"@remedypartners.com");
-			MailCreateUser.email="qaautomation+"+a+"@remedypartners.com";
+			objEmailValue.put("value", "qaautomation+"+a+"@remedysystems.com");
+			MailCreateUser.email="qaautomation+"+a+"@remedysystems.com";
 		}
 		else
 		{
