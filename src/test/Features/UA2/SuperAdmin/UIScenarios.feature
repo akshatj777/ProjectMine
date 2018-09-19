@@ -131,7 +131,7 @@ Feature: UI Scenarios - Super Admin User
 
     Examples: 
       | Role   | Applications                                                  | Health System     |
-      | Leader | Episode Connect Classic, Reporting Classic, Remedy University | Stamford Hospital |
+      | Leader | Episode Connect Classic, Reporting Classic, Remedy University | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network |
 
   Scenario: Verify the functionality of back/Cancel button and tabs on the left on create user page
     Given I am on the login page
@@ -166,8 +166,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the header "Applications"
     Then I click on "Permissions" tab on the left
     Then I verify the header "Permissions"
-    And I search for health system with Stamford Hospital
-    And I select a Stamford Hospital
+    And I search for health system with St. Lukes Health Network, Inc. DBA St. Lukes University Health Network
+    And I select a St. Lukes Health Network, Inc. DBA St. Lukes University Health Network
     Then I click on Select All Locations button
     Then I click on Cancel button
     Then I should see header text "Users"
@@ -268,7 +268,7 @@ Feature: UI Scenarios - Super Admin User
 
     Examples: 
       | Description                                           | User        | UserName                               | Password | FirstName                                          | LastName                                           | Email                          | Phone | Role   | Applications                                                  | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter         | Health System1   | Programs1                  | Locations1                                                                                                   | SelectedLocations                    | LocationsInvalid | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Verify the search functionality in selected locations | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastNameLastNameLN | qaautomation@remedysystems.com |       | Leader | Episode Connect Classic, Reporting Classic, Remedy University | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | i am learning path, Learning Pathway 2 | Sound Physicians | BPCI Model 2, BPCI Model 3 | 6005-059--Presence Saint Joseph Medical Center, 6005-059--Evanston Hospital, 3090-068--Mountainview Hospital | Presence Saint Joseph Medical Center | fhdjfs           | No               |                |           |            | No               |                |           |            |
+      | Verify the search functionality in selected locations | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastNameLastNameLN | qaautomation@remedysystems.com |       | Leader | Episode Connect Classic, Reporting Classic, Remedy University | Episode Connect for Post-acute Care, Administration |     | i am learning path, Learning Pathway 2 | Sound Physicians | BPCI Model 2, BPCI Model 3 | 6005-059--Presence Saint Joseph Medical Center, 6005-059--Evanston Hospital, 3090-068--Mountainview Hospital | Presence Saint Joseph Medical Center | fhdjfs           | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -310,7 +310,7 @@ Feature: UI Scenarios - Super Admin User
 
     Examples: 
       | Description                                         | User        | UserName                               | Password | FirstName | LastName | Email                          | Phone      | Role              | Applications                                                  | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter         | Health System1   | Programs1    | Locations1                                                                  | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Verify successful removal of selected health system | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedysystems.com | 9988776655 | Advanced Operator | Episode Connect Classic, Reporting Classic, Remedy University | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | i am learning path, Learning Pathway 2 | Sound Physicians | BPCI Model 2 | 6005-059--Presence Saint Joseph Medical Center, 6005-059--Evanston Hospital | No               |                |           |            | No               |                |           |            |
+      | Verify successful removal of selected health system | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedysystems.com | 9988776655 | Advanced Operator | Episode Connect Classic, Reporting Classic, Remedy University | Episode Connect for Post-acute Care, Administration |     | i am learning path, Learning Pathway 2 | Sound Physicians | BPCI Model 2 | 6005-059--Presence Saint Joseph Medical Center, 6005-059--Evanston Hospital | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: Verify that Next button and left side menu is enabled only when mandatory fields are selected
     Given I am on the login page

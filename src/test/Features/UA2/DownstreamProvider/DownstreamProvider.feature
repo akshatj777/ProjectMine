@@ -591,7 +591,7 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
 
     Examples: 
       | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Role                | Applications      | ApplicationsNotVisible                                       | NPI | LearningPathwaySearchParameter | Loc | Locations                    |
-      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | Downstream Provider | Community Connect | Administration, Care Innovation Institute, Reporting Classic |     |                                | Bap | Alaris Health at Jersey City |
+      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | Downstream Provider | Community Connect | Administration, Reporting Classic |     |                                | Bap | Alaris Health at Jersey City |
 
   Scenario Outline: Validating Cross(X) icon for Downstream Provider role
     Given I am on the login page
