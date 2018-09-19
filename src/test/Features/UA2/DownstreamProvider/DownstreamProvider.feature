@@ -294,7 +294,7 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I pick a Organizational <Role>
     Then I click on Next button
     Then I verify the header "Applications"
-    Then I verify applications "<Applications>" are unchecked
+    Then I verify applications "<ApplicationsUnchecked>" are unchecked
     Then I select "<Applications>" product
     Then I verify applications "<Applications>" are checked
     Then I click on Select button
@@ -428,7 +428,7 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I pick a Organizational <Role>
     Then I click on Next button
     Then I verify the header "Applications"
-    Then I verify applications "<Applications>" are unchecked
+    Then I verify applications "<ApplicationsUnchecked>" are unchecked
     Then I select "<Applications>" product
     Then I verify applications "<Applications>" are checked
     Then I click on Select button
