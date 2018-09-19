@@ -32,8 +32,8 @@ Feature: Program Performance Overview Dashboard
     When I close the file for after writting data to input file
 
     Examples: 
-      | User                        | Row | BPID     | CCN         | Bundle     | Region - Market | Remedy Region - Market | Participant | DRG        | Physician - NPI | Model      |
-      | Qadashboardtest@yopmail.com |   1 | True All | True Random | Click&Skip | Click&Skip      | Click&Skip             | Click&Skip  | Click&Skip | Click&Skip      | Click&Skip |
+      | User                        | Row | BPID     | CCN         |
+      | Qadashboardtest@yopmail.com |   1 | True All | True Random |
 
   @RowLevelSecurity
   Scenario: Execute JMX file and read Output data for Data Filter Validations

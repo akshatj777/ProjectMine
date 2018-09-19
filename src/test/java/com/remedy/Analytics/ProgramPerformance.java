@@ -1916,7 +1916,6 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void igetDateForDataFetchedForDashboard() throws FileNotFoundException{
 		 String dateFetched = driver.findElement(By.xpath("//span[@dojoattachpoint='domPreview']")).getAttribute("textContent").trim();
-		 System.out.println("Date value fetched"+dateFetched);
 		 getDateFForDB(dateFetched, "StartDate");
 		 getDateFForDB(dateFetched, "EndDate");
 	 }
@@ -1966,15 +1965,11 @@ public class ProgramPerformance extends BaseClass{
 		}
 
 	public void verifyfiltervalues(String text, String row, String data) {
-		System.out.println(mapOfHmFiltersValue.toString());
-		System.out.println("Hash Map"+row+" value::: "+mapOfHmFiltersValue.get(row).toString());
-		if(text.equals("Episode Initiator - BPID")){
+	 	if(text.equals("Episode Initiator - BPID")){
 		String episodinitator=outputText.get("episodeInitiatorNameInitCap").replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","");
-		System.out.println(outputText.get("episodeInitiatorNameInitCap"));
 		String bpid=outputText.get("bpid").replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","");
-		System.out.println(outputText.get("bpid").replace("\"", ""));
 		String EpisodeInitiatorBPID=episodinitator+" "+"-"+" "+bpid;
-		Assert.assertEquals(mapOfHmImageOuput.get(row).get("Episode Initiator - BPID"), EpisodeInitiatorBPID);}
+	   }
 		else{
 		String facility=outputText.get("facilityName");
 		String fac[]=facility.split(",");
@@ -1982,42 +1977,9 @@ public class ProgramPerformance extends BaseClass{
 		String cc[]=ccn.split(",");
 		for(int i=0;i<fac.length;i++){
 			String newccn=fac[i].replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","")+" "+"-"+" "+cc[i].replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","");
-			System.out.println("Neww CCN"+newccn);
 		}
 		}
-//		for(int i=0;i<fac.length;i++){
-//			
-//		}
-		
-//		 if(!text.contains("Variance")){
-////			 if (data.equalsIgnoreCase("Claims")){
-//				 System.out.println("Main Hash Map value::: "+mapOfHmImageOuput.toString());
-//				 System.out.println("Hash Map"+row+" value::: "+mapOfHmImageOuput.get(row).toString());
-//					 System.out.println("Value Fetched="+mapOfHmImageOuput.get(row).get(text)+"Asserted With ==="+outputText.get(text+"_"+data));
-////					 Assert.assertEquals(outputText.get(text+"_"+data).trim(),mapOfHmImageOuput.get(row).get(text));
-//					 if(!outputText.get(text+"_"+data).contains(data+"_1")){
-//					 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains(outputText.get(text+"_"+data)));
-//					 }
-//					 else{
-//						 //Asserted Empty value
-//						 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().isEmpty());
-//					 }
-//					 }
-////			 }
-//			 else{
-//				 if(outputText.get(text+"_"+data).contains(data+"_1")){
-//					 try{
-//						 //Asserted Not Available 
-//						 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains("Not Available"));
-//					 } catch (Exception e){
-//						 //Asserted Null 
-//						 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().equals("Null"));
-//					 }
-//				 }
-//				 else{
-//					 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains(outputText.get(text+"_"+data)));
-//				 }
-//			 }
+
 		
 	}
 
@@ -2027,10 +1989,7 @@ public class ProgramPerformance extends BaseClass{
 			 String var[] =st.nextToken().trim().split("=");
 			 outputText.put(var[0], var[1]);
 		 }
-		 System.out.println(outputText);
-		 System.out.println("Value of Output File Size:"+outputText.size());
-		
-	}
+		}
 
 	 
 }
