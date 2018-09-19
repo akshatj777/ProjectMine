@@ -585,39 +585,17 @@ public class MailCreateUser extends BaseClass{
 	}
 	
 	public void iEnterEmailToCreateUser(String emailName) {
-		if(emailName.equalsIgnoreCase("qaautomation@remedypartners.com"))
+		if(emailName.equalsIgnoreCase("qaautomation@remedysystems.com"))
 			{
 			String emailArr[]=emailName.split("@");
 			String emailPrefix=emailArr[0];
-			email = emailPrefix+"+"+RandomStringUtils.randomAlphabetic(8)+"@remedypartners.com";
+			email = emailPrefix+"+"+RandomStringUtils.randomAlphabetic(8)+"@remedysystems.com";
 			iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
 			driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
 			}
-		else if(emailName.equalsIgnoreCase("qaautomation2@remedypartners.com"))
-		{
-			String emailArr[]=emailName.split("@");
-			String emailPrefix=emailArr[0];
-				email = emailPrefix+"+"+RandomStringUtils.randomAlphabetic(8)+"@remedypartners.com";
-				iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
-				driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
-		}
-		else if(emailName.equalsIgnoreCase("qaautomation3@remedypartners.com"))
-		{
-			String emailArr[]=emailName.split("@");
-			String emailPrefix=emailArr[0];
-				email = emailPrefix+"+"+RandomStringUtils.randomAlphabetic(8)+"@remedypartners.com";
-				iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
-				driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
-		}
-		else if(emailName.contains("qaautomation"))
-		{
-				email = "qaautomation"+"+"+RandomStringUtils.randomAlphabetic(8)+"@remedypartners.com";
-				iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
-				driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
-		}
 		else if(emailName.equals("EqualsTo76Char"))
 		{
-			email = "qaautomation"+"+"+RandomStringUtils.randomAlphabetic(48)+"@remedypartners.com";
+			email = "qaautomation"+"+"+RandomStringUtils.randomAlphabetic(48)+"@remedysystems.com";
 			iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
 			driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
 		}
