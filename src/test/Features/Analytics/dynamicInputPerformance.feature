@@ -1,5 +1,6 @@
 Feature: Program Performance Overview Dashboard
 
+  @RowLevelSecurity
   Scenario Outline: Front end Data Filter
     Given I am on the login page
     When I enter email field <User> for login
@@ -11,8 +12,6 @@ Feature: Program Performance Overview Dashboard
     And I switch to analytics iframe
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
-    #Then I set "Start Date" as "1/1/2016 " in Date field on dashboard
-    #Then I set "End Date" as "ClaimsCubeDate" in Date field on dashboard
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInputs.csv" for writting data at "<Row>" to input file
     And I perform test with "<User>" user in Analytics
     ##Time
@@ -29,55 +28,31 @@ Feature: Program Performance Overview Dashboard
     And I fetch and store "Anchor Facility - CCN" filter values on "program performance" dashboard
     And I select "<CCN>" checkbox in "CCN" filter on "Program overview" dashboard
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
-    ##Bundle
-    And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
-    And I fetch and store "Bundle" filter values on "program performance" dashboard
-    And I select "<Bundle>" checkbox in "Bundle" filter on "Program overview" dashboard
-    And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
-    ##Region-Market
-    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
-    And I fetch and store "Region - Market" filter values on "program performance" dashboard
-    And I select "<Region - Market>" checkbox in "Region - Market" filter on "Program overview" dashboard
-    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
-    ##Remedy-RegionMarket
-    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
-    And I fetch and store "Remedy Region - Market" filter values on "program performance" dashboard
-    And I select "<Remedy Region - Market>" checkbox in "Remedy Region - Market" filter on "Program overview" dashboard
-    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
-    ##ParticipantName
-    And I click "Participant" Filter on the "program performance - <Participant>" dashboard
-    And I fetch and store "Participant" filter values on "program performance" dashboard
-    And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
-    And I click "Participant" Filter on the "program performance - <Participant>" dashboard
-    ##DRGCODE
-    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
-    And I fetch and store "DRG" filter values on "program performance" dashboard
-    And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
-    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
-    ##NPI
-    And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
-    And I fetch and store "Physician - NPI" filter values on "program performance" dashboard
-    And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
-    And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
-    ##MODEL
-    And I click "Model" Filter on the "program performance - <Model>" dashboard
-    And I fetch and store "Model" filter values on "program performance" dashboard
-    And I select "<Model>" checkbox in "Model" filter on "Program overview" dashboard
-    And I click "Model" Filter on the "program performance - <Model>" dashboard
     And I save the values of row filters in "<Row>" index in storage HashMap
-    
     When I close the file for after writting data to input file
 
     Examples: 
-      | User                       | Row | BPID     | CCN         | Bundle     | Region - Market | Remedy Region - Market | Participant | DRG - Fracture | Physician - NPI | Model      |
-      | Qafivedashtest@yopmail.com |   1 | True All | True Random | Click&Skip | Click&Skip      | Click&Skip             | Click&Skip  | Click&Skip     | Click&Skip      | Click&Skip |
+      | User                        | Row | BPID     | CCN         | Bundle     | Region - Market | Remedy Region - Market | Participant | DRG        | Physician - NPI | Model      |
+      | Qadashboardtest@yopmail.com |   1 | True All | True Random | Click&Skip | Click&Skip      | Click&Skip             | Click&Skip  | Click&Skip | Click&Skip      | Click&Skip |
 
+  @RowLevelSecurity
   Scenario: Execute JMX file and read Output data for Data Filter Validations
     When I close the file for after writting data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterOutput.txt" Output file
     When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\PerformanceDashboard\\TableauRowFilter.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterOutput.txt"
 
+  @RowLevelSecurity
+  Scenario Outline: Verify DB and FE values feteched from Scenarios(1&2) - Claims (For Metrics Validations & Benchmark Tool Tip)
+    And I get the value "<Index>" from Output file of data filter validation
+    Then I verify "Episode Initiator - BPID" for DB and FE filter values at "<Row>" for "EC"
+    Then I verify "CCN" for DB and FE filter values at "<Row>" for "EC"
+
+    Examples: 
+      | Index | Row |
+      |     0 |   1 |
+
+  @Claims
   Scenario Outline: Execute Filter combinations to Validate Data Metrics on Front End - For Claims
     Given I am on the login page
     When I enter email field <User> for login
@@ -90,46 +65,47 @@ Feature: Program Performance Overview Dashboard
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
     Then I verify "Program Performance" text is appearing inside dashboard
-    Then I set "Start Date" as "1/1/2016 " in Date field on dashboard
-    Then I set "End Date" as "ClaimsCubeDate" in Date field on dashboard
+    And I click "Time" Filter on the "program performance - <BPID>" dashboard
+    Then I set "Time" as "previous year" in Time field on dashboard
+    And I click "Time" Filter on the "program performance - <BPID>" dashboard
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsMetricsInput.csv" for writting data at "<Row>" to input file
-    ##BPID
+    #BPID
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
     And I select "<BPID>" checkbox in "BPID" filter on "Program overview" dashboard
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
-    ##CCN
+    #CCN
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
     And I select "<CCN>" checkbox in "CCN" filter on "Program overview" dashboard
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
-    ##Bundle
+    #Bundle
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
     And I select "<Bundle>" checkbox in "Bundle" filter on "Program overview" dashboard
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
-    ##Region-Market
+    #Region-Market
     And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
     And I select "<Region - Market>" checkbox in "Region - Market" filter on "Program overview" dashboard
     And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
-    ##Remedy-RegionMarket
+    #Remedy-RegionMarket
     And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
     And I select "<Remedy Region - Market>" checkbox in "Remedy Region - Market" filter on "Program overview" dashboard
     And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
-    ##ParticipantName
+    #ParticipantName
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
-    ##DRGCODE
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
-    And I select "<DRG - Fracture>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
-    ##NPI
+    #DRGCODE
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    #NPI
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
     And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
-    ##MODEL
+    #MODEL
     And I click "Model" Filter on the "program performance - <Model>" dashboard
     And I select "<Model>" checkbox in "Model" filter on "Program overview" dashboard
     And I click "Model" Filter on the "program performance - <Model>" dashboard
-    ##DataMetricValues
+    #DataMetricValues
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
     And I Save "KPI_Episode" data metric FE value on the dashboard for "Claims" with picture resolution "600X600"
@@ -145,24 +121,26 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG - Fracture | Physician - NPI | Model       |
-      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | True Random     | True Random            | True Random | True Random    | True Random     | True Random |
-      | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | True All        | True All               | True All    | True All       | True All        | True All    |
-      | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | True Random     | True Random            | True All    | True All       | True All        | True All    |
-      | Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | True All        | True All               | True Random | True Random    | True Random     | True Random |
-      | Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | True Random     | True All               | True Random | True All       | True Random     | True All    |
-      | Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | True All        | True Random            | True All    | True Random    | True All        | True Random |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | True All        | True Random            | True Random | True All       | True All        | Skip        |
-      | Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | True Random     | True All               | True All    | True Random    | True Random     | True All    |
-      | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip            | Skip                   | True Random | True All       | Skip            | Skip        |
-      | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | True All        | True Random            | Skip        | Skip           | True Random     | Skip        |
+      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG         | Physician - NPI | Model       |
+      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | True Random     | True Random            | True Random | True Random | True Random     | True Random |
+      | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | True All        | True All               | True All    | True All    | True All        | True All    |
+      | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | True Random     | True Random            | True All    | True All    | True All        | True All    |
+      | Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | True All        | True All               | True Random | True Random | True Random     | True Random |
+      | Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | True Random     | True All               | True Random | True All    | True Random     | True All    |
+      | Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | True All        | True Random            | True All    | True Random | True All        | True Random |
+      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | True All        | True Random            | True Random | True All    | True All        | Skip        |
+      | Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | True Random     | True All               | True All    | True Random | True Random     | True All    |
+      | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip            | Skip                   | True Random | True All    | Skip            | Skip        |
+      | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | True All        | True Random            | Skip        | Skip        | True Random     | Skip        |
 
+  @Claims
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - CLAIMS
     When I close the file for after writting data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsMetricsOutput.txt" Output file
     When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsMetricsQuery.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsMetricsOutput.txt"
 
+  @Claims
   Scenario Outline: Verify DB and FE values feteched from Scenarios(1&2) - Claims (For Metrics Validations & Benchmark Tool Tip)
     And I get the value "<Index>" from Output file of data metric validation
     Then I verify "KPI_Episode" for DB and FE Metrics value at "<Row>" for "Claims"
@@ -201,46 +179,47 @@ Feature: Program Performance Overview Dashboard
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
     Then I verify "Program Performance" text is appearing inside dashboard
+    Then I set "Time" as "previous 3 months" in Time field on dashboard
     Then I set "Start Date" as "ECStartDate " in Date field on dashboard
     Then I set "End Date" as "Today" in Date field on dashboard
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ECMetricsInput.csv" for writting data at "<Row>" to input file
-    ##BPID
+    # BPID
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
     And I select "<BPID>" checkbox in "BPID" filter on "Program overview" dashboard
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
-    ##CCN
+    # CCN
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
     And I select "<CCN>" checkbox in "CCN" filter on "Program overview" dashboard
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
-    ##Bundle
+    # Bundle
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
     And I select "<Bundle>" checkbox in "Bundle" filter on "Program overview" dashboard
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
-    ##Region-Market
+    # Region-Market
     And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
     And I select "<Region - Market>" checkbox in "Region - Market" filter on "Program overview" dashboard
     And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
-    ##Remedy-RegionMarket
+    # Remedy-RegionMarket
     And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
     And I select "<Remedy Region - Market>" checkbox in "Remedy Region - Market" filter on "Program overview" dashboard
     And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
-    ##ParticipantName
+    # ParticipantName
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
-    ##DRGCODE
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
-    And I select "<DRG - Fracture>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
-    ##NPI
+    # DRGCODE
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    # NPI
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
     And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
-    ##MODEL
+    # MODEL
     And I click "Model" Filter on the "program performance - <Model>" dashboard
     And I select "<Model>" checkbox in "Model" filter on "Program overview" dashboard
     And I click "Model" Filter on the "program performance - <Model>" dashboard
-    ##DataMetricValues
+    # DataMetricValues
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
     And I Save "KPI_Episode" data metric FE value on the dashboard for "EC" with picture resolution "600X600"
@@ -256,17 +235,17 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG - Fracture | Physician - NPI | Model       |
-      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | True Random     | True Random            | True Random | True Random    | True Random     | True Random |
-      | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | True All        | True All               | True All    | True All       | True All        | True All    |
-      | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | True Random     | True Random            | True All    | True All       | True All        | True All    |
-      | Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | True All        | True All               | True Random | True Random    | True Random     | True Random |
-      | Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | True Random     | True All               | True Random | True All       | True Random     | True All    |
-      | Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | True All        | True Random            | True All    | True Random    | True All        | True Random |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | True All        | True Random            | True Random | True All       | True All        | Skip        |
-      | Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | True Random     | True All               | True All    | True Random    | True Random     | True All    |
-      | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip            | Skip                   | True Random | True All       | Skip            | Skip        |
-      | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | True All        | True Random            | Skip        | Skip           | True Random     | Skip        |
+      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG         | Physician - NPI | Model       |
+      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | True Random     | True Random            | True Random | True Random | True Random     | True Random |
+      | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | True All        | True All               | True All    | True All    | True All        | True All    |
+      | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | True Random     | True Random            | True All    | True All    | True All        | True All    |
+      | Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | True All        | True All               | True Random | True Random | True Random     | True Random |
+      | Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | True Random     | True All               | True Random | True All    | True Random     | True All    |
+      | Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | True All        | True Random            | True All    | True Random | True All        | True Random |
+      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | True All        | True Random            | True Random | True All    | True All        | Skip        |
+      | Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | True Random     | True All               | True All    | True Random | True Random     | True All    |
+      | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip            | Skip                   | True Random | True All    | Skip            | Skip        |
+      | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | True All        | True Random            | Skip        | Skip        | True Random     | Skip        |
 
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - EC
     When I close the file for after writting data to input file
@@ -315,43 +294,43 @@ Feature: Program Performance Overview Dashboard
     Then I set "Start Date" as "ECStartDate " in Date field on dashboard
     Then I set "End Date" as "Today" in Date field on dashboard
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsECMetricsInput.csv" for writting data at "<Row>" to input file
-    ##BPID
+    #BPID
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
     And I select "<BPID>" checkbox in "BPID" filter on "Program overview" dashboard
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
-    ##CCN
+    #CCN
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
     And I select "<CCN>" checkbox in "CCN" filter on "Program overview" dashboard
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
-    ##Bundle
+    #Bundle
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
     And I select "<Bundle>" checkbox in "Bundle" filter on "Program overview" dashboard
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
-    ##Region-Market
+    #Region-Market
     And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
     And I select "<Region - Market>" checkbox in "Region - Market" filter on "Program overview" dashboard
     And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
-    ##Remedy-RegionMarket
+    #Remedy-RegionMarket
     And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
     And I select "<Remedy Region - Market>" checkbox in "Remedy Region - Market" filter on "Program overview" dashboard
     And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
-    ##ParticipantName
+    #ParticipantName
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
-    ##DRGCODE
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
-    And I select "<DRG - Fracture>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
-    ##NPI
+    #DRGCODE
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    #NPI
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
     And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
-    ##MODEL
+    #MODEL
     And I click "Model" Filter on the "program performance - <Model>" dashboard
     And I select "<Model>" checkbox in "Model" filter on "Program overview" dashboard
     And I click "Model" Filter on the "program performance - <Model>" dashboard
-    ##DataMetricValues
+    #DataMetricValues
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
     And I Save "KPI_Episode" data metric FE value on the dashboard for "EC_Claims" with picture resolution "600X600"
@@ -367,17 +346,17 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG - Fracture | Physician - NPI | Model       |
-      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | True Random     | True Random            | True Random | True Random    | True Random     | True Random |
-      | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | True All        | True All               | True All    | True All       | True All        | True All    |
-      | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | True Random     | True Random            | True All    | True All       | True All        | True All    |
-      | Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | True All        | True All               | True Random | True Random    | True Random     | True Random |
-      | Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | True Random     | True All               | True Random | True All       | True Random     | True All    |
-      | Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | True All        | True Random            | True All    | True Random    | True All        | True Random |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | True All        | True Random            | True Random | True All       | True All        | Skip        |
-      | Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | True Random     | True All               | True All    | True Random    | True Random     | True All    |
-      | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip            | Skip                   | True Random | True All       | Skip            | Skip        |
-      | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | True All        | True Random            | Skip        | Skip           | True Random     | Skip        |
+      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG         | Physician - NPI | Model       |
+      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | True Random     | True Random            | True Random | True Random | True Random     | True Random |
+      | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | True All        | True All               | True All    | True All    | True All        | True All    |
+      | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | True Random     | True Random            | True All    | True All    | True All        | True All    |
+      | Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | True All        | True All               | True Random | True Random | True Random     | True Random |
+      | Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | True Random     | True All               | True Random | True All    | True Random     | True All    |
+      | Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | True All        | True Random            | True All    | True Random | True All        | True Random |
+      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | True All        | True Random            | True Random | True All    | True All        | Skip        |
+      | Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | True Random     | True All               | True All    | True Random | True Random     | True All    |
+      | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip            | Skip                   | True Random | True All    | Skip            | Skip        |
+      | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | True All        | True Random            | Skip        | Skip        | True Random     | Skip        |
 
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - EC&Claims
     When I close the file for after writting data to input file

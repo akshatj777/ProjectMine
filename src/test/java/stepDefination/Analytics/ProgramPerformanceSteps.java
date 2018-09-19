@@ -480,10 +480,21 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iSetDateInDateFieldAttribute(field,value);
 	}
 	
+	@Then ("^I set \"([^\"]*)\" as \"([^\"]*)\" in Time field on dashboard$")
+	public void i_Set_Date_In_Time_Field_On_Dashboard(String field, String value) throws Throwable{
+		programdashboard.set_time_in_time_field(value);
+	}
+	
 	@Then("^I get the value \"([^\"]*)\" from Output file of data metric validation$")
 	public void i_Get_the_Value_Of_Row_From_OutputFile_Of_DataMetricValidation(int index) throws Throwable{
 		programdashboard.readDataMetricsValueFromQuery(index);
 	}
+	
+	@Then("^I get the value \"([^\"]*)\" from Output file of data filter validation$")
+	public void i_Get_the_Value_Of_Row_From_OutputFile_Of_FilterValidation(int index) throws Throwable{
+		programdashboard.readFilterValueFromQuery(index);
+	}
+	
 	
 	@Then("^I clear output data for Data metrics from \"([^\"]*)\" Output file$")
 	public void i_Clear_Data_from_Outputfile(String path) throws Throwable{
@@ -499,6 +510,11 @@ public class ProgramPerformanceSteps extends DriverScript{
 	public void i_select_checkbox_under_filter_for_dashboard(String checkbox, String filter,String dashboard) throws Throwable{
 		//programdashboard.iSelectCheckboxValuesInFilter(checkbox,filter, dashboard);
 		programdashboard.iSelectCheckboxValuesInFilter1(checkbox,filter, dashboard);
+	}
+	
+	@Then("^I verify \"([^\"]*)\" for DB and FE filter values at \"([^\"]*)\" for \"([^\"]*)\"$")
+	public void verify_filter_values(String text,String row,String data){
+		programdashboard.verifyfiltervalues(text,row,data);
 	}
 	
 	@And("^I verify \"([^\"]*)\" for DB and FE Metrics value at \"([^\"]*)\" for \"([^\"]*)\"$")

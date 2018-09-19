@@ -70,9 +70,9 @@
           <hashTree/>
         </hashTree>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
-          <stringProp name="filename">RowFilterInput.csv</stringProp>
+          <stringProp name="filename">RowFilterInputs.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">userName,bpid,ccn</stringProp>
+          <stringProp name="variableNames">userName,startdate,enddate,bpid,ccn</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -96,19 +96,19 @@ inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
 Inner JOIN 
     (
  SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID where username = &apos;Qafivedashtest@yopmail.com&apos;
+        from warehouse.tabUserSecurityBPID where username = ${userName}
        GROUP BY bpid
        )tbsBPID ON de.BPID = tbsBPID.bpid
 Inner JOIN 
      (       
         SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN where username = &apos;Qafivedashtest@yopmail.com&apos;
+        from warehouse.tabUserSecurityCCN where username = ${userName}
        GROUP BY ccn
         )tbsCCN on df.ccn=tbsCCN.ccn
 Inner JOIN 
      (       
         SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityFacilityKey where username = &apos;Qafivedashtest@yopmail.com&apos;
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
        GROUP BY facilitykey
         )tbsFacilityKey on df.sourceFacilityKey=tbsFacilityKey.facilitykey      
 where fp.bundleRisk = 1 
@@ -117,7 +117,7 @@ and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (
 and de.bpid not like &apos;%DEMO%&apos;
 and dlk.lookupCategory = &apos;patientRisk&apos;
 and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and fp.anchorAdmitDateKey &lt;= 20180610
+and fp.anchorAdmitDateKey &lt;= ${enddate}
 union
 select distinct 
 e.episodeInitiatorNameInitCap, e.bpid
@@ -128,14 +128,14 @@ from warehouse.factClaims c
     inner JOIN 
     (
  SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID  where username = &apos;Qafivedashtest@yopmail.com&apos;
+        from warehouse.tabUserSecurityBPID  where ${userName}
        GROUP BY bpid
        )tbsBPID ON e.BPID = tbsBPID.bpid
 WHERE c.atRisk=&apos;Y&apos; 
  and f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) 
  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and tbsBPID.username  like &apos;Qafivedashtest@yopmail.com&apos;
-and c.anchorBeginDateKey &gt;= 20160101
+and tbsBPID.username  like ${userName}
+and c.anchorBeginDateKey &gt;= ${startdate}
 and c.anchorBeginDateKey &lt;=  (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 )
 a
@@ -190,19 +190,19 @@ inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
 Inner JOIN 
     (
  SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID where username = &apos;Qafivedashtest@yopmail.com&apos;
+        from warehouse.tabUserSecurityBPID where username = ${userName}
        GROUP BY bpid
        )tbsBPID ON de.BPID = tbsBPID.bpid
 Inner JOIN 
      (       
         SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN where username = &apos;Qafivedashtest@yopmail.com&apos;
+        from warehouse.tabUserSecurityCCN where username = ${userName}
        GROUP BY ccn
         )tbsCCN on df.ccn=tbsCCN.ccn
 Inner JOIN 
      (       
         SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityFacilityKey where username = &apos;Qafivedashtest@yopmail.com&apos;
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
        GROUP BY facilitykey
         )tbsFacilityKey on df.sourceFacilityKey=tbsFacilityKey.facilitykey      
 where fp.bundleRisk = 1 
@@ -211,7 +211,7 @@ and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (
 and de.bpid not like &apos;%DEMO%&apos;
 and dlk.lookupCategory = &apos;patientRisk&apos;
 and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-and fp.anchorAdmitDateKey &lt;= 20180610
+and fp.anchorAdmitDateKey &lt;= ${enddate}
 and de.bpid in ${bpid}
 union
 select distinct 
@@ -223,19 +223,19 @@ from warehouse.factClaims c
     inner JOIN 
     (
  SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID  where username = &apos;Qafivedashtest@yopmail.com&apos;
+        from warehouse.tabUserSecurityBPID  where username = ${userName}
        GROUP BY bpid
        )tbsBPID ON e.BPID = tbsBPID.bpid
 inner JOIN 
      (       
         SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN  where username = &apos;Qafivedashtest@yopmail.com&apos;
+        from warehouse.tabUserSecurityCCN  where username = ${userName}
        GROUP BY ccn
         )tbsCCN on f.ccn=tbsCCN.ccn
 WHERE c.atRisk=&apos;Y&apos; 
 and f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) 
 and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and c.anchorBeginDateKey &gt;= 20160101
+and c.anchorBeginDateKey &gt;= ${startdate}
 -- and c.anchorBeginDateKey &lt;=  (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 and e.bpid in ${bpid})
 a order by facilityName;</stringProp>
@@ -247,7 +247,7 @@ a order by facilityName;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="BundleName" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="BundleName" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct a.bundleName from
@@ -332,7 +332,7 @@ order by a.bundleName;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Remedy Region Market " enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Remedy Region Market " enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct region, market
@@ -420,7 +420,7 @@ order by region, market;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Partner Region Market" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Partner Region Market" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct regionPartner, marketPartner
@@ -512,7 +512,7 @@ order by regionPartner, marketPartner;
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Participant" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Participant" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct a.participantName from 
@@ -604,7 +604,7 @@ order by participantName;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="DRG - Fracture" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="DRG - Fracture" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct a.DRG_Fracture from 
@@ -705,7 +705,7 @@ order by a.DRG_Fracture;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Physician - NPI Filter Validation" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Physician - NPI Filter Validation" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct a.Physician_NPI
@@ -790,7 +790,7 @@ order by a.Physician_NPI;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="MODEL Filter Validation" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="MODEL Filter Validation" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct a.model
@@ -872,7 +872,7 @@ a;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Anchor Facility Details Filter Validation" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Anchor Facility Details Filter Validation" enabled="false">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct a.facilityName, a.facilityNameInitCap, a.facilitySK
@@ -1023,7 +1023,7 @@ and f.ccn =  &apos;390223&apos;
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo episodeInitiatorNameInitCap=${value2}*bpid=${value1}*facilityName=${value3}*ccn=${value4}*bundleName=${value5}*remedyRegion=${value6}*remedyMarket=${value7}*partnerRegion=${value8}*partnerMarket=${value9}*participantName=${value10}*Drg_Fracture=${value11}*Physician_NPI=${value12}*model=${value13}*facilityNameInitCap=${value14}&gt;&gt; RowFilterOutput.txt</stringProp>
+                <stringProp name="Argument.value">echo episodeInitiatorNameInitCap=${value2}*bpid=${value1}*facilityName=${value3}*ccn=${value4}&gt;&gt; RowFilterOutput.txt</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>

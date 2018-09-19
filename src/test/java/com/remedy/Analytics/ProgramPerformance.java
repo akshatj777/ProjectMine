@@ -129,7 +129,7 @@ public class ProgramPerformance extends BaseClass{
 	}
 	
 	public void iValidateTextForDashboard(String text){
-		iWillWaitToSee(By.cssSelector(".QFContent"));
+		iWillWaitToSee(By.xpath("//div[@class='tab-textRegion-content']/span/div/span[text()='"+text+"']"));
 //		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".tabCanvas.tab-widget")));
 //		isElementVisible(driver.findElement(By.xpath("//div[@id='dashboard-viewport']//span[text()='"+text+"']")));
 	}
@@ -1545,7 +1545,7 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iSelectCheckboxValuesInFilter1(String checkbox,String filter,String dashboard) throws FileNotFoundException{
 		 try{
-		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));}
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));}
 		 catch(Exception e){
 			 delay();
 		 }
@@ -1665,7 +1665,7 @@ public class ProgramPerformance extends BaseClass{
                         		  val="'"+val+"'";
                         		  arrayListTexts.add(val);
                         		  listItems.remove(randomIndex);
-                        		  if((listItems.get(0).getText().equals("(All)") || listItems.get(0).getText().equals("(All)")) && listItems.size()==1){
+                        		  if((listItems.get(0).getText().equals("(All)") && listItems.size()==1)){
                         			for(int k=0;k<2;k++){
                         				if(k==0){
                         				writeDataToOutputFile("Path");}else
@@ -1675,7 +1675,19 @@ public class ProgramPerformance extends BaseClass{
                         					return;
                         				}
                         			}
-                        		 }else if(listItems.size()==0){
+                        		 }else if(listItems.get(0).getText().equals("(All)") && listItems.size()!=1){
+                        			 for(int k=0;k<2;k++){
+                         				if(k==0){
+                         				writeDataToOutputFile("Path");}else
+                         				{
+                         					arrayListTexts.add("'Null'");
+                         					writeDataToOutputFile("Path");
+                         					return;
+                         				}
+                         			} 
+                        		 }
+                        		  
+                        		  else if(listItems.size()==0){
                         			 for(int k=0;k<2;k++){
                          				if(k==0){
                          				writeDataToOutputFile("Path");}else
@@ -1689,9 +1701,9 @@ public class ProgramPerformance extends BaseClass{
                         		  continue;}
                               }else{
                             	  val=val.substring(val.indexOf("-")+1).trim(); 
-                            	  for (int itr=0;itr<=val.length();itr++) {
-                          	        val=val.substring(val.indexOf("-")+1).trim();
-                          	       }
+//                            	  for (int itr=0;itr<=val.length();itr++) {
+//                          	        val=val.substring(val.indexOf("-")+1).trim();
+//                          	       }
                             	  valarr=val.split("-");
                             	  valA=valarr[0];
                             	  valB=valarr[1];
@@ -1814,8 +1826,8 @@ public class ProgramPerformance extends BaseClass{
 		 }
 		 
 		 clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
-		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
-		 longDelay();
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+		 delay();
 		
 	 }
 	 
@@ -1919,14 +1931,106 @@ public class ProgramPerformance extends BaseClass{
 			 dateToBreak=dateFE[1].trim();
 		 }
 			String monthFE= dateToBreak.substring(0, dateToBreak.indexOf("/"));
+			if(monthFE.length()==1){
+				monthFE="0"+monthFE;
+			}
 			dateToBreak = dateToBreak.substring(dateToBreak.indexOf("/")+1);
 			String dayFE= dateToBreak.substring(0, dateToBreak.indexOf("/"));
+			if(dayFE.length()==1){
+				dayFE="0"+dayFE;
+			}
 			dateToBreak = dateToBreak.substring(dateToBreak.indexOf("/")+1);
 			String yearFE = dateToBreak;
 			String dbDate= yearFE+monthFE+dayFE;
 			arrayListTexts.add("'"+dbDate+"'");
 			writeDataToOutputFile("Path");
 	 }
-	 
+
+	 public void set_time_in_time_field(String action) {
+			if(action.equals("previous year")){
+				System.out.println("Page html is-------"+driver.findElement(By.xpath("//div[@role='presentation' and contains(@id,'popup') and contains(@class,'dijitPopup') and contains(@style,'visibility: visible')]")).getAttribute("innerHTML")+"-------------");
+				iWillWaitToSee(By.xpath("//span[text()='Years' and contains(@class,'dijitReset dijitInline dijitButtonText')]"));
+				clickElement(driver.findElement(By.xpath("//span[text()='Years' and contains(@class,'dijitReset dijitInline dijitButtonText')]")));
+				delay();
+				iWillWaitToSee(By.xpath("//*[@id='svg-spinner-container']"));
+				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+				delay();
+				clickElement(driver.findElement(By.xpath("//span[text()='Previous year' and contains(@dojoattachpoint,'textLast')]")));
+				iWillWaitToSee(By.xpath("//*[@id='svg-spinner-container']"));
+				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+				delay();
+	          }else if(action.equals("previous year")){
+				
+			}
+			
+		}
+
+	public void verifyfiltervalues(String text, String row, String data) {
+		System.out.println(mapOfHmFiltersValue.toString());
+		System.out.println("Hash Map"+row+" value::: "+mapOfHmFiltersValue.get(row).toString());
+		if(text.equals("Episode Initiator - BPID")){
+		String episodinitator=outputText.get("episodeInitiatorNameInitCap").replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","");
+		System.out.println(outputText.get("episodeInitiatorNameInitCap"));
+		String bpid=outputText.get("bpid").replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","");
+		System.out.println(outputText.get("bpid").replace("\"", ""));
+		String EpisodeInitiatorBPID=episodinitator+" "+"-"+" "+bpid;
+		Assert.assertEquals(mapOfHmImageOuput.get(row).get("Episode Initiator - BPID"), EpisodeInitiatorBPID);}
+		else{
+		String facility=outputText.get("facilityName");
+		String fac[]=facility.split(",");
+		String ccn=outputText.get("facilityName");
+		String cc[]=ccn.split(",");
+		for(int i=0;i<fac.length;i++){
+			String newccn=fac[i].replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","")+" "+"-"+" "+cc[i].replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","");
+			System.out.println("Neww CCN"+newccn);
+		}
+		}
+//		for(int i=0;i<fac.length;i++){
+//			
+//		}
+		
+//		 if(!text.contains("Variance")){
+////			 if (data.equalsIgnoreCase("Claims")){
+//				 System.out.println("Main Hash Map value::: "+mapOfHmImageOuput.toString());
+//				 System.out.println("Hash Map"+row+" value::: "+mapOfHmImageOuput.get(row).toString());
+//					 System.out.println("Value Fetched="+mapOfHmImageOuput.get(row).get(text)+"Asserted With ==="+outputText.get(text+"_"+data));
+////					 Assert.assertEquals(outputText.get(text+"_"+data).trim(),mapOfHmImageOuput.get(row).get(text));
+//					 if(!outputText.get(text+"_"+data).contains(data+"_1")){
+//					 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains(outputText.get(text+"_"+data)));
+//					 }
+//					 else{
+//						 //Asserted Empty value
+//						 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().isEmpty());
+//					 }
+//					 }
+////			 }
+//			 else{
+//				 if(outputText.get(text+"_"+data).contains(data+"_1")){
+//					 try{
+//						 //Asserted Not Available 
+//						 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains("Not Available"));
+//					 } catch (Exception e){
+//						 //Asserted Null 
+//						 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().equals("Null"));
+//					 }
+//				 }
+//				 else{
+//					 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains(outputText.get(text+"_"+data)));
+//				 }
+//			 }
+		
+	}
+
+	public void readFilterValueFromQuery(int index) {
+		 StringTokenizer st = new StringTokenizer(col.get(index), "*");
+		 while(st.hasMoreTokens()){
+			 String var[] =st.nextToken().trim().split("=");
+			 outputText.put(var[0], var[1]);
+		 }
+		 System.out.println(outputText);
+		 System.out.println("Value of Output File Size:"+outputText.size());
+		
+	}
+
 	 
 }
