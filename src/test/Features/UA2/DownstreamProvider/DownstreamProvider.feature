@@ -36,8 +36,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account
-    Then I enter password "1Welcome2" to login mail account
+    Then I enter username "qaautomation@remedysystems.com" to login mail account
+    Then I enter password "9h$00v3T$dF@OPn0" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -45,8 +45,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                           | Phone      | Role                | ApplicationsUnchecked | Applications                                                  | ApplicationsNotVisible                                     | NPI | LearningPathwaySearchParameter              | Locations                                                                                  |
-      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedypartners.com | 9988776655 | Downstream Provider | Remedy University     | Episode Connect, Remedy University, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect |     | HZhmTBQzHtU1, NFdw0Kts2C01, max-test-052417 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital |
+      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Phone      | Role                | ApplicationsUnchecked | Applications                                                  | ApplicationsNotVisible                                     | NPI | LearningPathwaySearchParameter              | Locations                                                                                  |
+      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Downstream Provider | Remedy University     | Episode Connect, Remedy University, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect |     | HZhmTBQzHtU1, NFdw0Kts2C01, max-test-052417 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -176,8 +176,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account
-    Then I enter password "1Welcome2" to login mail account
+    Then I enter username "qaautomation@remedysystems.com" to login mail account
+    Then I enter password "9h$00v3T$dF@OPn0" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -185,8 +185,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                           | Phone      | Role                | ApplicationsUnchecked   | Applications                                                        | ApplicationsNotVisible                                     | NPI | LearningPathwaySearchParameter                                          | Locations                                                                                  |
-      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedypartners.com | 9988776655 | Downstream Provider | Episode Connect Classic | Episode Connect, Episode Connect Classic, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect |     | HZhmTBQzHtU1, NFdw0Kts2C01, 3hSOHNAnvjc1, max-test-052417, n9yn5n0Qa581 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital |
+      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Phone      | Role                | ApplicationsUnchecked   | Applications                                                        | ApplicationsNotVisible                                     | NPI | LearningPathwaySearchParameter                                          | Locations                                                                                  |
+      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Downstream Provider | Episode Connect Classic | Episode Connect, Episode Connect Classic, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect |     | HZhmTBQzHtU1, NFdw0Kts2C01, 3hSOHNAnvjc1, max-test-052417, n9yn5n0Qa581 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -310,8 +310,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account
-    Then I enter password "1Welcome2" to login mail account
+    Then I enter username "qaautomation@remedysystems.com" to login mail account
+    Then I enter password "9h$00v3T$dF@OPn0" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -319,8 +319,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                           | Phone      | Role                | ApplicationsUnchecked                                  | Applications                                                                                       | ApplicationsNotVisible                                     | NPI | LearningPathwaySearchParameter                                          | Locations                                                                                  |
-      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedypartners.com | 9988776655 | Downstream Provider | Episode Connect for Post-acute Care, Community Connect | Episode Connect, Episode Connect for Post-acute Care, Community Connect, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect |     | HZhmTBQzHtU1, NFdw0Kts2C01, 3hSOHNAnvjc1, max-test-052417, n9yn5n0Qa581 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital |
+      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Phone      | Role                | ApplicationsUnchecked                                  | Applications                                                                                       | ApplicationsNotVisible                                     | NPI | LearningPathwaySearchParameter                                          | Locations                                                                                  |
+      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Downstream Provider | Episode Connect for Post-acute Care, Community Connect | Episode Connect, Episode Connect for Post-acute Care, Community Connect, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect |     | HZhmTBQzHtU1, NFdw0Kts2C01, 3hSOHNAnvjc1, max-test-052417, n9yn5n0Qa581 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -444,8 +444,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account
-    Then I enter password "1Welcome2" to login mail account
+    Then I enter username "qaautomation@remedysystems.com" to login mail account
+    Then I enter password "9h$00v3T$dF@OPn0" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -453,8 +453,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                           | Phone      | Role                | ApplicationsUnchecked                                                                              | Applications                                                                                                        | ApplicationsNotVisible                                     | NPI | LearningPathwaySearchParameter                         | Locations                                                                                  | HasHealthSystem1 | Health System1 | Programs1 | Locations1 | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedypartners.com | 9988776655 | Downstream Provider | Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect | Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect | Administration, Reporting Classic, Reporting, Care Connect |     | New learning Path, Learning Pathway 2, max-test-052417 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital | No               |                |           |            | No               |                |           |            | No               |                |           |            |
+      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Phone      | Role                | ApplicationsUnchecked                                                                              | Applications                                                                                                        | ApplicationsNotVisible                                     | NPI | LearningPathwaySearchParameter                         | Locations                                                                                  | HasHealthSystem1 | Health System1 | Programs1 | Locations1 | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Downstream Provider | Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect | Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect | Administration, Reporting Classic, Reporting, Care Connect |     | New learning Path, Learning Pathway 2, max-test-052417 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital | No               |                |           |            | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -590,8 +590,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I should not see any error message on searching any downstream provider location less than 5 alphabets
 
     Examples: 
-      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                           | Role                | Applications      | ApplicationsNotVisible                                       | NPI | LearningPathwaySearchParameter | Loc | Locations                    |
-      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedypartners.com | Downstream Provider | Community Connect | Administration, Care Innovation Institute, Reporting Classic |     |                                | Bap | Alaris Health at Jersey City |
+      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Role                | Applications      | ApplicationsNotVisible                                       | NPI | LearningPathwaySearchParameter | Loc | Locations                    |
+      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | Downstream Provider | Community Connect | Administration, Care Innovation Institute, Reporting Classic |     |                                | Bap | Alaris Health at Jersey City |
 
   Scenario Outline: Validating Cross(X) icon for Downstream Provider role
     Given I am on the login page
@@ -621,5 +621,5 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I should see header text "Users"
 
     Examples: 
-      | User        | UserName                               | Password | FirstName                                 | LastName | Email                           | Phone      | Role                | Applications                        | NPI | Locations                |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedypartners.com | 9988776655 | Downstream Provider | Episode Connect for Post-acute Care |     | Coosa Valley Health Care |
+      | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Phone      | Role                | Applications                        | NPI | Locations                |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Downstream Provider | Episode Connect for Post-acute Care |     | Coosa Valley Health Care |

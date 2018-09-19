@@ -5,8 +5,8 @@ Feature: PTA UI Scenarios
     When Create User with this data for "<User>"
     Then Verify Actual vs expected results "<expStatusCode>" and "<responseMsg>"
     Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account
-    Then I enter password "1Welcome2" to login mail account
+    Then I enter username "qaautomation@remedysystems.com" to login mail account
+    Then I enter password "9h$00v3T$dF@OPn0" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -14,9 +14,9 @@ Feature: PTA UI Scenarios
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | User                            | FirstName | LastName                                 | Email                           | Phone | NPI | Role                            | RoleID                             | Applications                                                                                                                             | LearningPathways                                    | Locations                                                                                                                                                                                                                                                                                                                                                                  | expStatusCode |
-      | Super Admin                     | FirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       |     | Partner Technical Administrator | 20-Partner Technical Administrator | episode_connect-Episode Connect Classic, reports-Reporting Classic, admin-Administration, lessons-Remedy University, analytics-Reporting | NFdw0Kts2C01,HZhmTBQzHtU1,n9yn5n0Qa581              | 441324--6005-059--140007, 441324--3090-068--290039, 441324--3090-191--290039, 441324--3090-068--010118, 441324--3090-068--050113, 441324--3090-068--200018, 441324--3090-068--240093, 441324--3090-068--270049, 441324--3090-068--290012, 441324--3090-068--290021, 441324--3090-068--290022, 441324--3090-068--290041, 441324--3090-068--290045, 441324--3090-068--290046 |           200 |
-      | Partner Technical Administrator | FirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       |     | Leader                          | 1-Leader                           | episode_connect-Episode Connect Classic, reports-Reporting Classic, lessons-Remedy University, analytics-Reporting                       | p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | 441324--6005-059--140007, 441324--3090-068--290039                                                                                                                                                                                                                                                                                                                         |           200 |
+      | User                            | FirstName | LastName                                 | Email                          | Phone | NPI | Role                            | RoleID                             | Applications                                                                                                                             | LearningPathways                                    | Locations                                                                                                                                                                                                                                                                                                                                                                  | expStatusCode |
+      | Super Admin                     | FirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedysystems.com |       |     | Partner Technical Administrator | 20-Partner Technical Administrator | episode_connect-Episode Connect Classic, reports-Reporting Classic, admin-Administration, lessons-Remedy University, analytics-Reporting | NFdw0Kts2C01,HZhmTBQzHtU1,n9yn5n0Qa581              | 441324--6005-059--140007, 441324--3090-068--290039, 441324--3090-191--290039, 441324--3090-068--010118, 441324--3090-068--050113, 441324--3090-068--200018, 441324--3090-068--240093, 441324--3090-068--270049, 441324--3090-068--290012, 441324--3090-068--290021, 441324--3090-068--290022, 441324--3090-068--290041, 441324--3090-068--290045, 441324--3090-068--290046 |           200 |
+      | Partner Technical Administrator | FirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedysystems.com |       |     | Leader                          | 1-Leader                           | episode_connect-Episode Connect Classic, reports-Reporting Classic, lessons-Remedy University, analytics-Reporting                       | p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | 441324--6005-059--140007, 441324--3090-068--290039                                                                                                                                                                                                                                                                                                                         |           200 |
 
   Scenario Outline: Verify that Only name is displayed for Learning Pathway ID's
     Given I am on the login page
@@ -60,14 +60,14 @@ Feature: PTA UI Scenarios
     Then I verify the validation message "<ValidationMsg>" on Create User Page
 
     Examples: 
-      | Description                                      | FirstName   | LastName    | Email                           | Phone      | Role   | NPI | ValidationMsg                     |
-      | Verify validation message for blank First name   |             | Last Name   | qaautomation@remedypartners.com | 9874563210 | Leader |     | First Name is required            |
-      | Verify validation message for blank Last name    | First Name  |             | qaautomation@remedypartners.com | 9874563210 | Leader |     | Last Name is required             |
-      | Verify validation message for blank Email        | First Name  | Last Name   |                                 | 9874563210 | Leader |     | Email is required                 |
-      | Verify validation message for invalid Email      | First Name  | Last Name   | abc                             | 9874563210 | Leader |     | Please enter a valid email        |
-      | Verify validation message for invalid Phone      | First Name  | Last Name   | qaautomation@remedypartners.com |     123564 | Leader |     | Please enter a valid phone number |
-      | Verify validation message for invalid First Name | 84738&27919 | Last Name   | qaautomation@remedypartners.com | 9874563210 | Leader |     | Please enter a valid name         |
-      | Verify validation message for invalid Last name  | First Name  | 847&3827919 | qaautomation@remedypartners.com | 9874563210 | Leader |     | Please enter a valid name         |
+      | Description                                      | FirstName   | LastName    | Email                          | Phone      | Role   | NPI | ValidationMsg                     |
+      | Verify validation message for blank First name   |             | Last Name   | qaautomation@remedysystems.com | 9874563210 | Leader |     | First Name is required            |
+      | Verify validation message for blank Last name    | First Name  |             | qaautomation@remedysystems.com | 9874563210 | Leader |     | Last Name is required             |
+      | Verify validation message for blank Email        | First Name  | Last Name   |                                | 9874563210 | Leader |     | Email is required                 |
+      | Verify validation message for invalid Email      | First Name  | Last Name   | abc                            | 9874563210 | Leader |     | Please enter a valid email        |
+      | Verify validation message for invalid Phone      | First Name  | Last Name   | qaautomation@remedysystems.com |     123564 | Leader |     | Please enter a valid phone number |
+      | Verify validation message for invalid First Name | 84738&27919 | Last Name   | qaautomation@remedysystems.com | 9874563210 | Leader |     | Please enter a valid name         |
+      | Verify validation message for invalid Last name  | First Name  | 847&3827919 | qaautomation@remedysystems.com | 9874563210 | Leader |     | Please enter a valid name         |
 
   Scenario Outline: Verify validation message for invalid lesson name in search box
     Given I am on the login page
@@ -82,7 +82,7 @@ Feature: PTA UI Scenarios
     Then I verify the header "General Information"
     And I fill in First Name with "First Name"
     Then I fill in Last Name with Last Name
-    And I enter Email "qaautomation@remedypartners.com" to Create user
+    And I enter Email "qaautomation@remedysystems.com" to Create user
     When I click the Organizational Role Field
     Then I pick a Organizational <Role>
     Then I click on Next button
@@ -111,7 +111,7 @@ Feature: PTA UI Scenarios
     Then I verify the header "General Information"
     And I fill in First Name with "First Name"
     Then I fill in Last Name with LastName
-    And I enter Email "qaautomation@remedypartners.com" to Create user
+    And I enter Email "qaautomation@remedysystems.com" to Create user
     When I click the Organizational Role Field
     Then I pick a Organizational Leader
     Then I click on Next button
@@ -148,7 +148,7 @@ Feature: PTA UI Scenarios
     Then I should see "Add New User" on the user creation page
     And I fill in First Name with "First Name"
     Then I fill in Last Name with LastName
-    And I enter Email "qaautomation@remedypartners.com" to Create user
+    And I enter Email "qaautomation@remedysystems.com" to Create user
     When I click the Organizational Role Field
     Then I pick a Organizational Leader
     Then I click on Next button
@@ -171,7 +171,7 @@ Feature: PTA UI Scenarios
     Then I verify the header "General Information"
     And I fill in First Name with "FirstName"
     Then I fill in Last Name with LastName
-    And I enter Email "qaautomation@remedypartners.com" to Create user
+    And I enter Email "qaautomation@remedysystems.com" to Create user
     When I click the Organizational Role Field
     Then I pick a Organizational <Role1>
     Then I click on Next button
@@ -230,8 +230,8 @@ Feature: PTA UI Scenarios
     And I verify Selected Locations section after click on remove link icon
 
     Examples: 
-      | Description                                           | User                            | UserName                               | Password | FirstName                                          | LastName                                           | Email                           | Phone | Role   | Applications                                                             | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter                                              | Health System1   | Programs1    | LocationsInvalid | Locations1                      | SelectedLocations     | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Verify the search functionality in selected locations | Partner Technical Administrator | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastNameLastNameLN | qaautomation@remedypartners.com |       | Leader | Episode Connect Classic, Reporting Classic, Remedy University, Reporting | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | Care Coordination External, Clinical Operations Acute Care Hospital Model 2 | Sound Physicians | BPCI Model 3 | hjfd             | 3090-068--Mountainview Hospital | Mountainview Hospital | No               |                |           |            | No               |                |           |            |
+      | Description                                           | User                            | UserName                               | Password | FirstName                                          | LastName                                           | Email                          | Phone | Role   | Applications                                                             | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter                                              | Health System1   | Programs1    | LocationsInvalid | Locations1                      | SelectedLocations     | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Verify the search functionality in selected locations | Partner Technical Administrator | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastNameLastNameLN | qaautomation@remedysystems.com |       | Leader | Episode Connect Classic, Reporting Classic, Remedy University, Reporting | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | Care Coordination External, Clinical Operations Acute Care Hospital Model 2 | Sound Physicians | BPCI Model 3 | hjfd             | 3090-068--Mountainview Hospital | Mountainview Hospital | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: Verify that Next button and left side menu is enabled only when mandatory fields are selected
     Given I am on the login page
@@ -274,8 +274,8 @@ Feature: PTA UI Scenarios
     Then I verify that Submit button is "disabled"
 
     Examples: 
-      | FirstName  | LastName  | Email                           | Role   | NPI | Applications      | Locations_BPID                  | Programs     |
-      | First'Name | Last'Name | qaautomation@remedypartners.com | Leader |     | Reporting Classic | 3090-068--Mountainview Hospital | BPCI Model 3 |
+      | FirstName  | LastName  | Email                          | Role   | NPI | Applications      | Locations_BPID                  | Programs     |
+      | First'Name | Last'Name | qaautomation@remedysystems.com | Leader |     | Reporting Classic | 3090-068--Mountainview Hospital | BPCI Model 3 |
 
   Scenario Outline: Enter invalid location and verify error message
     Given I am on the login page
@@ -305,8 +305,8 @@ Feature: PTA UI Scenarios
     And I verify No results found for invalid Location for "first" in selected organisation for PTA user
 
     Examples: 
-      | FirstName | LastName | Email                           | Phone      | Role              | Applications      | NPI | invalidLocations | Programs     |
-      | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Advanced Operator | Reporting Classic |     | hkfj             | BPCI Model 3 |
+      | FirstName | LastName | Email                          | Phone      | Role              | Applications      | NPI | invalidLocations | Programs     |
+      | FirstName | LastName | qaautomation@remedysystems.com | 9988776655 | Advanced Operator | Reporting Classic |     | hkfj             | BPCI Model 3 |
 
   Scenario Outline: Creating user with existing Email and validating error message
     Given I am on the login page
@@ -339,8 +339,8 @@ Feature: PTA UI Scenarios
     Then I should see error message for duplicate value "Account with this email already exists"
 
     Examples: 
-      | User                            | FirstName | LastName | Email                           | Role   | Applications      | NPI | Programs     | Locations                       |
-      | Partner Technical Administrator | FirstName | LastName | qaautomation@remedypartners.com | Leader | Reporting Classic |     | BPCI Model 3 | 3090-068--Mountainview Hospital |
+      | User                            | FirstName | LastName | Email                          | Role   | Applications      | NPI | Programs     | Locations                       |
+      | Partner Technical Administrator | FirstName | LastName | qaautomation@remedysystems.com | Leader | Reporting Classic |     | BPCI Model 3 | 3090-068--Mountainview Hospital |
 
   Scenario Outline: Validate character limit for all fields in the general information tab
     Given I am on the login page
@@ -415,5 +415,5 @@ Feature: PTA UI Scenarios
     Then I verify Learning Pathway search box is not available
 
     Examples: 
-      | User                            | UserName                               | Password | FirstName | LastName | Email                           | Role1  | Applications                         | NPI | LearningPathwaySearchParameter                         | Role2   |
-      | Partner Technical Administrator | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Leader | Reporting Classic, Remedy University |     | p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81, n9yn5n0Qa581 | Manager |
+      | User                            | UserName                               | Password | FirstName | LastName | Email                          | Role1  | Applications                         | NPI | LearningPathwaySearchParameter                         | Role2   |
+      | Partner Technical Administrator | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedysystems.com | Leader | Reporting Classic, Remedy University |     | p11D0Vl2FSg1, qfy2xp8zSFc1, 18h7phZr1h81, n9yn5n0Qa581 | Manager |

@@ -5,17 +5,17 @@ Feature: Delete a user from PTA
     When Create User with this data for "<User>"
     Then Verify Actual vs expected results "<expStatusCode>" and "<responseMsg>"
     Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account
-    Then I enter password "1Welcome2" to login mail account
+    Then I enter username "qaautomation@remedysystems.com" to login mail account
+    Then I enter password "9h$00v3T$dF@OPn0" to login mail account
     Then I click on Mail icon in my account
     And I wait for 3000 milli seconds
     Then I verify account for user "<User>-<Role>"
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | User                            | FirstName | LastName                                 | Email                           | Phone      | NPI | Role                            | RoleID                             | Applications                                                                                                                             | LearningPathways                                    | Locations                                                                                                                                                                                                                                                                                                                                                                  | expStatusCode |
-      | Super Admin                     | FirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com | 9988776655 |     | Partner Technical Administrator | 20-Partner Technical Administrator | episode_connect-Episode Connect Classic, reports-Reporting Classic, admin-Administration, lessons-Remedy University, analytics-Reporting | 5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1              | 441324--6005-059--140007, 441324--3090-068--290039, 441324--3090-191--290039, 441324--3090-068--010118, 441324--3090-068--050113, 441324--3090-068--200018, 441324--3090-068--240093, 441324--3090-068--270049, 441324--3090-068--290012, 441324--3090-068--290021, 441324--3090-068--290022, 441324--3090-068--290041, 441324--3090-068--290045, 441324--3090-068--290046 |           200 |
-      | Partner Technical Administrator | FirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |            |     | Manager                         | 2-Manager                          | episode_connect-Episode Connect Classic, reports-Reporting Classic, lessons-Remedy University, analytics-Reporting                       | p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | 441324--6005-059--140007, 441324--3090-068--290039                                                                                                                                                                                                                                                                                                                         |           200 |
+      | User                            | FirstName | LastName                                 | Email                          | Phone      | NPI | Role                            | RoleID                             | Applications                                                                                                                             | LearningPathways                                    | Locations                                                                                                                                                                                                                                                                                                                                                                  | expStatusCode |
+      | Super Admin                     | FirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedysystems.com | 9988776655 |     | Partner Technical Administrator | 20-Partner Technical Administrator | episode_connect-Episode Connect Classic, reports-Reporting Classic, admin-Administration, lessons-Remedy University, analytics-Reporting | 5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1              | 441324--6005-059--140007, 441324--3090-068--290039, 441324--3090-191--290039, 441324--3090-068--010118, 441324--3090-068--050113, 441324--3090-068--200018, 441324--3090-068--240093, 441324--3090-068--270049, 441324--3090-068--290012, 441324--3090-068--290021, 441324--3090-068--290022, 441324--3090-068--290041, 441324--3090-068--290045, 441324--3090-068--290046 |           200 |
+      | Partner Technical Administrator | FirstName | LastNameLastNameLastNameLastNameLastName | qaautomation@remedysystems.com |            |     | Manager                         | 2-Manager                          | episode_connect-Episode Connect Classic, reports-Reporting Classic, lessons-Remedy University, analytics-Reporting                       | p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | 441324--6005-059--140007, 441324--3090-068--290039                                                                                                                                                                                                                                                                                                                         |           200 |
 
   Scenario Outline: Login from PTA and delete an existing user and Login with the verified deleted user
     Given I am on the login page
@@ -58,8 +58,8 @@ Feature: Delete a user from PTA
 
   Scenario Outline: <Description> then delete that user and Login with unverified deleted user
     #Given I am on mail login page
-    #Then I enter username "qaautomation@remedypartners.com" to login mail account
-    #Then I enter password "1Welcome2" to login mail account
+    #Then I enter username "qaautomation@remedysystems.com" to login mail account
+    #Then I enter password "9h$00v3T$dF@OPn0" to login mail account
     #Then I click on Mail icon in my account
     #Then I click on Inbox in mail
     #Then I click on delete icon in mail
@@ -121,8 +121,8 @@ Feature: Delete a user from PTA
     Given I am on the login page
     Then I click on "Log Out" button again
     Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account
-    Then I enter password "1Welcome2" to login mail account
+    Then I enter username "qaautomation@remedysystems.com" to login mail account
+    Then I enter password "9h$00v3T$dF@OPn0" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -154,5 +154,5 @@ Feature: Delete a user from PTA
     Then I should see User is Blocked
 
     Examples: 
-      | Description                                                                        | User                            | FirstName                                 | LastName | Email                           | Phone      | Role     | Applications      | ApplicationsNotVisible                                                                   | NPI | LearningPathwaySearchParameter  | Programs1    | Locations1                      | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Login with Partner Technical Administrator User and create user with Operator role | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedypartners.com | 9988776655 | Operator | Reporting Classic | Episode Connect for Post-acute Care, Administration, Care Innovation Institute, Reporting |     | 5HDc3E6aK_E1, Remedy University | BPCI Model 3 | 3090-068--Mountainview Hospital |                  |                |           |            |                  |                |           |            |
+      | Description                                                                        | User                            | FirstName                                 | LastName | Email                          | Phone      | Role     | Applications      | ApplicationsNotVisible                                                                    | NPI | LearningPathwaySearchParameter  | Programs1    | Locations1                      | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Login with Partner Technical Administrator User and create user with Operator role | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Operator | Reporting Classic | Episode Connect for Post-acute Care, Administration, Care Innovation Institute, Reporting |     | 5HDc3E6aK_E1, Remedy University | BPCI Model 3 | 3090-068--Mountainview Hospital |                  |                |           |            |                  |                |           |            |

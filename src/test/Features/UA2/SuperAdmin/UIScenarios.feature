@@ -27,8 +27,8 @@ Feature: UI Scenarios - Super Admin User
     When Create User with this data for "<User>"
     Then Verify Actual vs expected results "<expStatusCode>" and "<responseMsg>"
     Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account
-    Then I enter password "1Welcome2" to login mail account
+    Then I enter username "qaautomation@remedysystems.com" to login mail account
+    Then I enter password "9h$00v3T$dF@OPn0" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -36,8 +36,8 @@ Feature: UI Scenarios - Super Admin User
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | User        | FirstName                                 | LastName                                 | Email                           | Phone | NPI | Role       | RoleID       | Applications                                                                                | LearningPathways                       | Locations             | expStatusCode |
-      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedypartners.com |       | NPI | Physicians | 4-Physicians | episode_connect-Episode Connect Classic,reports-Reporting Classic,lessons-Remedy University | 3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
+      | User        | FirstName                                 | LastName                                 | Email                          | Phone | NPI | Role       | RoleID       | Applications                                                                                | LearningPathways                       | Locations             | expStatusCode |
+      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedysystems.com |       | NPI | Physicians | 4-Physicians | episode_connect-Episode Connect Classic,reports-Reporting Classic,lessons-Remedy University | 3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -61,19 +61,19 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the validation message "<ValidationMsg>" on Create User Page
 
     Examples: 
-      | Description                                           | FirstName   | LastName    | Email                           | Phone      | Role       | NPI        | ValidationMsg                     |
-      | Verify validation message for blank First name        |             | Last Name   | qaautomation@remedypartners.com | 9874563210 | Leader     |            | First Name is required            |
-      | Verify validation message for blank Last name         | First Name  |             | qaautomation@remedypartners.com | 9874563210 | Leader     |            | Last Name is required             |
-      | Verify validation message for blank Email             | First Name  | Last Name   |                                 | 9874563210 | Leader     |            | Email is required                 |
-      | Verify validation message for blank NPI               | First Name  | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians |            | NPI is required                   |
-      | Verify validation message for invalid Email           | First Name  | Last Name   | abc                             | 9874563210 | Physicians | NPI        | Please enter a valid email        |
-      | Verify validation message for invalid Phone           | First Name  | Last Name   | qaautomation@remedypartners.com |     123564 | Physicians | NPI        | Please enter a valid phone number |
-      | Verify validation message for NPI less than 10 digits | First Name  | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians |     123564 | Please enter a valid NPI          |
-      | Verify validation message for NPI as alphabets        | First Name  | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians | abcdefgihj | Please enter a valid NPI          |
-      | Verify validation message for NPI as alphanumeric     | First Name  | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI          |
-      | Verify validation message for invalid First Name      | 84738&27919 | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
-      | Verify validation message for invalid Last name       | First Name  | 84738&27919 | qaautomation@remedypartners.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
-      | Verify validation message for NPI as .                | First Name  | Last Name   | qaautomation@remedypartners.com | 9874563210 | Physicians | .........1 | Please enter a valid NPI          |
+      | Description                                           | FirstName   | LastName    | Email                          | Phone      | Role       | NPI        | ValidationMsg                     |
+      | Verify validation message for blank First name        |             | Last Name   | qaautomation@remedysystems.com | 9874563210 | Leader     |            | First Name is required            |
+      | Verify validation message for blank Last name         | First Name  |             | qaautomation@remedysystems.com | 9874563210 | Leader     |            | Last Name is required             |
+      | Verify validation message for blank Email             | First Name  | Last Name   |                                | 9874563210 | Leader     |            | Email is required                 |
+      | Verify validation message for blank NPI               | First Name  | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians |            | NPI is required                   |
+      | Verify validation message for invalid Email           | First Name  | Last Name   | abc                            | 9874563210 | Physicians | NPI        | Please enter a valid email        |
+      | Verify validation message for invalid Phone           | First Name  | Last Name   | qaautomation@remedysystems.com |     123564 | Physicians | NPI        | Please enter a valid phone number |
+      | Verify validation message for NPI less than 10 digits | First Name  | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians |     123564 | Please enter a valid NPI          |
+      | Verify validation message for NPI as alphabets        | First Name  | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians | abcdefgihj | Please enter a valid NPI          |
+      | Verify validation message for NPI as alphanumeric     | First Name  | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI          |
+      | Verify validation message for invalid First Name      | 84738&27919 | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Verify validation message for invalid Last name       | First Name  | 84738&27919 | qaautomation@remedysystems.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Verify validation message for NPI as .                | First Name  | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians | .........1 | Please enter a valid NPI          |
 
   Scenario Outline: Verify validation message for invalid lesson name in search box
     Given I am on the login page
@@ -88,7 +88,7 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the header "General Information"
     And I fill in First Name with "First Name"
     Then I fill in Last Name with Last Name
-    And I enter Email "qaautomation@remedypartners.com" to Create user
+    And I enter Email "qaautomation@remedysystems.com" to Create user
     When I click the Organizational Role Field
     Then I pick a Organizational <Role>
     Then I click on Next button
@@ -117,7 +117,7 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the header "General Information"
     And I fill in First Name with "FirstName"
     Then I fill in Last Name with LastName
-    And I enter Email "qaautomation@remedypartners.com" to Create user
+    And I enter Email "qaautomation@remedysystems.com" to Create user
     When I click the Organizational Role Field
     Then I pick a Organizational <Role>
     Then I click on Next button
@@ -144,7 +144,7 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the header "General Information"
     And I fill in First Name with "First Name"
     Then I fill in Last Name with LastName
-    And I enter Email "qaautomation@remedypartners.com" to Create user
+    And I enter Email "qaautomation@remedysystems.com" to Create user
     When I click the Organizational Role Field
     Then I pick a Organizational Leader
     Then I click on Next button
@@ -168,7 +168,6 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the header "Permissions"
     And I search for health system with Stamford Hospital
     And I select a Stamford Hospital
-   
     Then I click on Select All Locations button
     Then I click on Cancel button
     Then I should see header text "Users"
@@ -183,7 +182,7 @@ Feature: UI Scenarios - Super Admin User
     Then I should see "Add New User" on the user creation page
     And I fill in First Name with "First Name"
     Then I fill in Last Name with LastName
-    And I enter Email "qaautomation@remedypartners.com" to Create user
+    And I enter Email "qaautomation@remedysystems.com" to Create user
     When I click the Organizational Role Field
     Then I pick a Organizational Leader
     Then I click on Next button
@@ -208,7 +207,7 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the header "General Information"
     And I fill in First Name with "FirstName"
     Then I fill in Last Name with LastName
-    And I enter Email "qaautomation@remedypartners.com" to Create user
+    And I enter Email "qaautomation@remedysystems.com" to Create user
     When I click the Organizational Role Field
     Then I pick a Organizational <Role1>
     Then I click on Next button
@@ -268,8 +267,8 @@ Feature: UI Scenarios - Super Admin User
     And I verify Selected Locations section after click on remove link icon
 
     Examples: 
-      | Description                                           | User        | UserName                               | Password | FirstName                                          | LastName                                           | Email                           | Phone | Role   | Applications                                                  | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter         | Health System1   | Programs1                  | Locations1                                                                                                   | SelectedLocations                    | LocationsInvalid | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Verify the search functionality in selected locations | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastNameLastNameLN | qaautomation@remedypartners.com |       | Leader | Episode Connect Classic, Reporting Classic, Remedy University | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | i am learning path, Learning Pathway 2 | Sound Physicians | BPCI Model 2, BPCI Model 3 | 6005-059--Presence Saint Joseph Medical Center, 6005-059--Evanston Hospital, 3090-068--Mountainview Hospital | Presence Saint Joseph Medical Center | fhdjfs           | No               |                |           |            | No               |                |           |            |
+      | Description                                           | User        | UserName                               | Password | FirstName                                          | LastName                                           | Email                          | Phone | Role   | Applications                                                  | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter         | Health System1   | Programs1                  | Locations1                                                                                                   | SelectedLocations                    | LocationsInvalid | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Verify the search functionality in selected locations | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastNameLastNameLN | qaautomation@remedysystems.com |       | Leader | Episode Connect Classic, Reporting Classic, Remedy University | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | i am learning path, Learning Pathway 2 | Sound Physicians | BPCI Model 2, BPCI Model 3 | 6005-059--Presence Saint Joseph Medical Center, 6005-059--Evanston Hospital, 3090-068--Mountainview Hospital | Presence Saint Joseph Medical Center | fhdjfs           | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -310,8 +309,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the header "Permissions"
 
     Examples: 
-      | Description                                         | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone      | Role              | Applications                                                  | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter         | Health System1   | Programs1    | Locations1                                                                  | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Verify successful removal of selected health system | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Advanced Operator | Episode Connect Classic, Reporting Classic, Remedy University | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | i am learning path, Learning Pathway 2 | Sound Physicians | BPCI Model 2 | 6005-059--Presence Saint Joseph Medical Center, 6005-059--Evanston Hospital | No               |                |           |            | No               |                |           |            |
+      | Description                                         | User        | UserName                               | Password | FirstName | LastName | Email                          | Phone      | Role              | Applications                                                  | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter         | Health System1   | Programs1    | Locations1                                                                  | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Verify successful removal of selected health system | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedysystems.com | 9988776655 | Advanced Operator | Episode Connect Classic, Reporting Classic, Remedy University | Episode Connect for Post-acute Care, Administration, Care Innovation Institute |     | i am learning path, Learning Pathway 2 | Sound Physicians | BPCI Model 2 | 6005-059--Presence Saint Joseph Medical Center, 6005-059--Evanston Hospital | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: Verify that Next button and left side menu is enabled only when mandatory fields are selected
     Given I am on the login page
@@ -357,8 +356,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify that Submit button is "enabled"
 
     Examples: 
-      | FirstName  | LastName  | Email                           | Role       | NPI | Applications      | Health System1    | Programs1    | Locations_BPID              | Locations_facility key |
-      | First'Name | Last'Name | qaautomation@remedypartners.com | Physicians | NPI | Reporting Classic | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital | TSH                    |
+      | FirstName  | LastName  | Email                          | Role       | NPI | Applications      | Health System1    | Programs1    | Locations_BPID              | Locations_facility key |
+      | First'Name | Last'Name | qaautomation@remedysystems.com | Physicians | NPI | Reporting Classic | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital | TSH                    |
 
   Scenario Outline: Enter invalid health system and location and verify error message
     Given I am on the login page
@@ -395,8 +394,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify incomplete status for health system
 
     Examples: 
-      | User        | UserName                               | Password | FirstName | LastName | Email                           | Phone      | Role              | Applications      | NPI | Health System_invalid | Health System     | Programs     | invalidLocations |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | 9988776655 | Advanced Operator | Reporting Classic |     | hkfj                  | Stamford Hospital | BPCI Model 2 | hkfj             |
+      | User        | UserName                               | Password | FirstName | LastName | Email                          | Phone      | Role              | Applications      | NPI | Health System_invalid | Health System     | Programs     | invalidLocations |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedysystems.com | 9988776655 | Advanced Operator | Reporting Classic |     | hkfj                  | Stamford Hospital | BPCI Model 2 | hkfj             |
 
   Scenario Outline: Creating user with existing NPI and validating error message
     Given I am on the login page
@@ -431,8 +430,8 @@ Feature: UI Scenarios - Super Admin User
     Then I should see error message for duplicate value "Account with this NPI already exists"
 
     Examples: 
-      | User        | UserName                               | Password | FirstName | LastName | Email                           | Role       | Applications      | NPI | Health System     | Programs     | Locations                   |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic |     | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital |
+      | User        | UserName                               | Password | FirstName | LastName | Email                          | Role       | Applications      | NPI | Health System     | Programs     | Locations                   |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedysystems.com | Physicians | Reporting Classic |     | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital |
 
   Scenario Outline: Creating user with existing Email and validating error message
     Given I am on the login page
@@ -467,8 +466,8 @@ Feature: UI Scenarios - Super Admin User
     Then I should see error message for duplicate value "Account with this email already exists"
 
     Examples: 
-      | User        | UserName                               | Password | FirstName | LastName | Email                           | Role       | Applications      | NPI | Health System     | Programs     | Locations                   |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic | NPI | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital |
+      | User        | UserName                               | Password | FirstName | LastName | Email                          | Role       | Applications      | NPI | Health System     | Programs     | Locations                   |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedysystems.com | Physicians | Reporting Classic | NPI | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital |
 
   Scenario Outline: Validating that BPID with one location does not have All locations under BPID
     Given I am on the login page
@@ -500,8 +499,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify that "<Locations>" is not present under the bpid
 
     Examples: 
-      | User        | UserName                               | Password | FirstName | LastName | Email                           | Role       | Applications      | NPI | Health System     | Programs     | Locations    |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic | NPI | Stamford Hospital | BPCI Model 2 | All 2070-015 |
+      | User        | UserName                               | Password | FirstName | LastName | Email                          | Role       | Applications      | NPI | Health System     | Programs     | Locations    |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedysystems.com | Physicians | Reporting Classic | NPI | Stamford Hospital | BPCI Model 2 | All 2070-015 |
 
   Scenario Outline: Validating that on removing the organization and selecting it again, "incomplete" error message is not displayed
     Given I am on the login page
@@ -563,5 +562,5 @@ Feature: UI Scenarios - Super Admin User
     Then I verify Learning Pathway search box is not available
 
     Examples: 
-      | User        | UserName                               | Password | FirstName | LastName | Email                           | Role1      | Applications                         | NPI | LearningPathwaySearchParameter                      | Role2  |
-      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedypartners.com | Physicians | Reporting Classic, Remedy University | NPI | Learning Pathway 2, jusUV22erpk1, Remedy University | Leader |
+      | User        | UserName                               | Password | FirstName | LastName | Email                          | Role1      | Applications                         | NPI | LearningPathwaySearchParameter                      | Role2  |
+      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedysystems.com | Physicians | Reporting Classic, Remedy University | NPI | Learning Pathway 2, jusUV22erpk1, Remedy University | Leader |
