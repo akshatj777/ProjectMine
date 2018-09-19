@@ -39,6 +39,11 @@ public class MailCreateUserSteps extends DriverScript {
 		mailcreateuser.iClickOnInboxUnderMail();
 	}
 	
+	@Then("^I enter email for \"([^\"]*)\" in the search box$") 
+	public void enterEmail(String userRole) throws Throwable {
+		mailcreateuser.enterEmail(userRole);
+	}
+	
 	@Then("^I set new password for the user \"([^\"]*)\"$") 
 	public void setNewPassword(String userRole) throws Throwable {
 		mailcreateuser.setNewPassword(userRole);

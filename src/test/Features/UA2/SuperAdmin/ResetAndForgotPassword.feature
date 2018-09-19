@@ -29,7 +29,8 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I enter password "9h$00v3T$dF@OPn0" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
-    Then I verify the unread mail in inbox in my account
+    And I wait for 3000 milli seconds
+    Then I enter email for "<User>-<Role>" in the search box
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
     Then I verify "Change My Password" link in mail content
@@ -63,7 +64,8 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I enter password "9h$00v3T$dF@OPn0" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
-    Then I verify the unread mail in inbox in my account
+    And I wait for 3000 milli seconds
+    Then I enter email for "<User>-<Role>" in the search box
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
     Then I verify "Change My Password" link in mail content
@@ -97,7 +99,8 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I enter password "9h$00v3T$dF@OPn0" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
-    Then I verify the unread mail in inbox in my account
+    And I wait for 3000 milli seconds
+    Then I enter email for "<User>-<Role>" in the search box
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
     Then I verify "Change My Password" link in mail content
