@@ -63,8 +63,8 @@ Feature: Search IRF organization functionality tests
       | Searching Location Name on IRF Profile Page     | YES    | IRFNAME  | Loc_Name     |
       | Searching Location Address on IRF Profile Page  | YES    | IRFNAME  | Loc_Address1 |
       | Searching Location Type on IRF Profile Page     | NO     | IRFNAME  | IRF          |
-      | Searching Location Region on IRF Profile Page   | NO     | IRFNAME  | Midwest      |
-      | Searching Location Market on IRF Profile Page   | NO     | IRFNAME  | Chicago      |
+      | Searching Location Region on IRF Profile Page   | NO     | IRFNAME  | SouthEast      |
+      | Searching Location Market on IRF Profile Page   | NO     | IRFNAME  | South      |
 
   Scenario Outline: <Description>
     Given I am on the login page

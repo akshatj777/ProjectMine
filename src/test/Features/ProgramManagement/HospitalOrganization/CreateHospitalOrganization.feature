@@ -21,6 +21,7 @@ Feature: Create Hospital organization functionality tests
     When I click on "Hospital" organization tab on organization dashboard
     Then I verify "+" button under "Hospital" organization page
     And I verify "CCN" header label under "Hospital" organization
+    And I verify "Database ID" header label under "Hospital" organization
     And I verify "ACH Organization Name" header label under "Hospital" organization
     And I verify "City" header label under "Hospital" organization
     And I verify "State" header label under "Hospital" organization

@@ -33,8 +33,8 @@ Feature: Search Hospice organization functionality tests
 
     Examples: 
       | Description                                                    | Has_MO | SearchParam    |
-      | Search Hospice Organization with Hospice Org id - With MO      | YES    | HOSPICE_Id     |
-      | Search Hospice Organization with Hospice Org id - Without MO   | NO     | HOSPICE_Id     |
+      | Search Hospice Organization with Hospice Org id - With MO      | YES    | Hospice_Id     |
+      | Search Hospice Organization with Hospice Org id - Without MO   | NO     | Hospice_Id     |
       | Search Hospice Organization with CCN  - With MO                | YES    | CCN            |
       | Search Hospice Organization with CCN  - Without MO             | NO     | CCN            |
       | Search Hospice Organization with Hospice Org Name - With MO    | YES    | HOSPICENAME    |

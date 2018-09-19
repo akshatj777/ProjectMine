@@ -60,6 +60,11 @@ Feature: View IRF organization functionality tests
     And I verify header name "Region" under "Location" for "IRF" organization
     And I verify header name "Market" under "Location" for "IRF" organization
     And I verify Location index id "<LID>" on view profile of "<IRF_Name> - <Has_MO>" organization
+    Then I verify Location details of "<Loc_Name>" on view profile of "IRF" organization
+    Then I verify Location details of "<Loc_Address1>" on view profile of "IRF" organization
+    Then I verify Location details of "<Loc_Type>" on view profile of "IRF" organization
+    Then I verify Location details of "<Loc_Region>" on view profile of "IRF" organization
+    Then I verify Location details of "<Loc_Market>" on view profile of "IRF" organization
     And I Verify the "Edit" button on View page
     And I click on "Edit" button on particular organization
     Then I click on "+" button on "Edit IRF" organization page
@@ -84,9 +89,9 @@ Feature: View IRF organization functionality tests
     And I verify Location index id "<LID>" on view profile of "<IRF_Name> - <Has_MO>" organization
 
     Examples: 
-      | Description                                                                             | Has_MO | IRF_Name | Address1 | Short_Name | Address2 | City           | State      | Postal_Code | Loc_Name       | Loc_Address1 | Loc_Type | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN/TIN | NPI | StateVerification | Organization Type        | Message                                |
-      | Verification of IRF details and count of locations displayed under IRF org - with MO    | YES    | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name new2  | Loc_Address1 | IRF      | Loc_Address2 | SouthEast  | Loc_City | South      | California |           10000 | CCN | EIN     | NPI | CA                | Inpatient Rehab Facility | IRF Organization Successfully Updated. |
-      | Verification of IRF details and count of locations displayed under IRF org - without MO | NO     | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name2 new2 | Loc_Address1 | IRF      | Loc_Address2 | SouthEast  | Loc_City | South      | California |           10000 | CCN | EIN     | NPI | CA                | Inpatient Rehab Facility | IRF Organization Successfully Updated. |
+      | Description                                                                             | Has_MO | IRF_Name | Address1 | Short_Name | Address2 | City           | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN/TIN | NPI | StateVerification | Organization Type        | Message                                |
+      | Verification of IRF details and count of locations displayed under IRF org - with MO    | YES    | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name | Loc_Address1 | IRF      | Loc_Address2 | SouthEast  | Loc_City | South      | California |           10000 | CCN | EIN     | NPI | CA                | Inpatient Rehab Facility | IRF Organization Successfully Updated. |
+      | Verification of IRF details and count of locations displayed under IRF org - without MO | NO     | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name | Loc_Address1 | IRF      | Loc_Address2 | SouthEast  | Loc_City | South      | California |           10000 | CCN | EIN     | NPI | CA                | Inpatient Rehab Facility | IRF Organization Successfully Updated. |
 
   Scenario Outline: <Description>
     Given I am on the login page
