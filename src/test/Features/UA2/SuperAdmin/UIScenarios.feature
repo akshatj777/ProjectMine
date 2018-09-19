@@ -130,8 +130,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify default program "BPCI Model 2" associated with organization
 
     Examples: 
-      | Role   | Applications                                                  | Health System     |
-      | Leader | Episode Connect Classic, Reporting Classic, Remedy University | Stamford Hospital |
+      | Role   | Applications                                                  | Health System             |
+      | Leader | Episode Connect Classic, Reporting Classic, Remedy University | Lawrence General Hospital |
 
   Scenario: Verify the functionality of back/Cancel button and tabs on the left on create user page
     Given I am on the login page
@@ -168,6 +168,7 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the header "Permissions"
     And I search for health system with Stamford Hospital
     And I select a Stamford Hospital
+    Then I select "BPCI Model 2" programs
     Then I click on Select All Locations button
     Then I click on Cancel button
     Then I should see header text "Users"
@@ -245,7 +246,6 @@ Feature: UI Scenarios - Super Admin User
     Then I enter NPI field with "<NPI>" for role "<Role>"
     Then I click on Next button
     Then I verify the header "Applications"
-    Then I verify applications "<Applications>" are unchecked
     Then I verify Learning Pathway search box is not available
     Then I select "<Applications>" product
     Then I verify applications "<Applications>" are checked
@@ -290,7 +290,6 @@ Feature: UI Scenarios - Super Admin User
     Then I enter NPI field with "<NPI>" for role "<Role>"
     Then I click on Next button
     Then I verify the header "Applications"
-    Then I verify applications "<Applications>" are unchecked
     Then I verify Learning Pathway search box is not available
     Then I select "<Applications>" product
     Then I verify applications "<Applications>" are checked
@@ -523,8 +522,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify incomplete status is not shown for health system
 
     Examples: 
-      | User        | Role   | Remove HealthSystem | Health System     | Programs     | Locations                   |
-      | Super Admin | Leader | Stamford Hospital   | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital |
+      | User        | Role      | Remove HealthSystem | Health System     | Programs     | Locations                   |
+      | Super Admin | Physician | Stamford Hospital   | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital |
 
   Scenario Outline: validating Learning Pathway on edit role
     Given I am on the login page
