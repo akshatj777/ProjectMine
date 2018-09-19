@@ -1860,10 +1860,18 @@ public void iUnselectAllSelectedApps(){
 		  delay();
 
 
-
-		   iWillWaitToSee(By.xpath("//div[@class='content active']//label[text()='All Locations']"));
-		   clickElement(driver.findElement(By.xpath("//div[@class='content active']//label[text()='All Locations']")));
-		   delay();
+		  if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		   {
+			  iWillWaitToSee(By.xpath("//div[@class='content active']//label[text()='All Locations']"));
+			  ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//label[text()='All Locations']")));
+			  delay();
+		   }
+		  else
+		  {
+			  iWillWaitToSee(By.xpath("//div[@class='content active']//label[text()='All Locations']"));
+			   clickElement(driver.findElement(By.xpath("//div[@class='content active']//label[text()='All Locations']")));
+			   delay();  
+		  }
 	   }
 	   
 	   else if (locationList.contains(","))
