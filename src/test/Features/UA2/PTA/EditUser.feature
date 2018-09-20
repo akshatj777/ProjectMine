@@ -55,7 +55,6 @@ Feature: Edit user scenarios from PTA
     #Then I verify that Next button is "disabled"
     Then I select "<EnableApplications>" product
     Then I unselect "<DisableApplications>" product
-    Then I select "<LearningPathwaySearchParameter>" from the results
     Then I edit learning pathway "<AddLearningPathwaySearchParameter>"
     Then I edit learning pathway "<RemoveLearningPathwaySearchParameter>"
     Then I verify that Learning Pathway ID "<LearningPathwayID>" is not displayed for the enabled Learning Pathway
@@ -181,6 +180,7 @@ Feature: Edit user scenarios from PTA
     Then I verify the header "Permissions"
     Then I select "<Locations>" locations for PTA user
     Then I deselect "<Locations>" locations for PTA user
+    And I wait for 3000 milli seconds
     And I verify Location "<UnSelectedLocations>" are not shown in selected Locations section
     Then I select "<EnableLocations>" locations for PTA user
     Then I verify that pagination is not displayed for selected locations

@@ -2720,8 +2720,9 @@ public void iUnselectAllSelectedApps(){
 		 driver.findElement(By.xpath("//i[@class='close icon']")).click();
 	 }
 	 public void iVerifyTheLocationsAreNotPresentInSelectLocationsSection (String text){
-		 delay();
+	
 		 if(!(text.isEmpty())){
+			 if(isElementPresentOnPage(By.xpath("//h5[text()='Selected Locations:']"))==true){
 		 if(text.contains(",")){
 			 StringTokenizer st = new StringTokenizer(text, ",");
 			   while(st.hasMoreTokens())
@@ -2734,6 +2735,7 @@ public void iUnselectAllSelectedApps(){
 		 	Assert.assertFalse(isElementPresentOnPage(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+text+"\")]")));
 	 } 
 	 }
+		 }
 	 }
 	 public void iVerifyTheSelectedLocationsInTheSelectLocationsSection(String text){
 		 if(text.contains(",")){
