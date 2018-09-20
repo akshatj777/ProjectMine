@@ -104,10 +104,10 @@ DPFirstName | DPLastName | DPMAILM3AndDown | 9998887770| Downstream Provider | N
 
 LeaderFirstName | LeaderLastName | LEADERMAIL1 | | Leader | NA | 439108::| | | True | True | False | True | False |  |  | | False|
 ManagerFirstName | ManagerLastName | MANAGERMAIL1 | 9876545678 | Manager | NA | :CJR-1: | | | True | False | False | True | False |  | False | | False|
-AdvancedOperatorFirstName | AdvancedOperatorLastName | ADVANCEDOPERATORMAIL |9879800980 | Advanced Operator | NA |::390168 | | | True| False | False | False | True |  | False | | False|
+AdvancedOperatorFirstName | AdvancedOperatorLastName | ADVANCEDOPERATORMAIL1 |9879800980 | Advanced Operator | NA |::390168 | | | True| False | False | False | True |  | False | | False|
 PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL1 | | Physicians | NPI | 439108::390168 | | | True | True | False | False | False |  |  | | True|
-RTCSFirstName | RTCSLastName | RTCSMAIL | 5465465655| Remedy TCS | NA | :CJR-1:390168 | | | True | True | True | False | False | True | False | |False| 
-RLPNFirstName | RLPNLastName | RLPNMAIL | 9898989898| Remedy LPN | NA |439108,CJR-1,390168   | | | True | False | True | True | True | False | False | | False|
+RTCSFirstName | RTCSLastName | RTCSMAIL1 | 5465465655| Remedy TCS | NA | :CJR-1:390168 | | | True | True | True | False | False | True | False | |False| 
+RLPNFirstName | RLPNLastName | RLPNMAIL1 | 9898989898| Remedy LPN | NA |439108,CJR-1,390168   | | | True | False | True | True | True | False | False | | False|
 LeaderFirstName | LeaderLastName | LEADERMAIL2 | | Exec | NA | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False|
 LeaderFirstName | LeaderLastName | LEADERMAIL3 |98765456 | Leader | NA | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False|
 PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL2 | | Physicians | qwertyuiop | 514083:2070-015:TSH | | | True | True | False | False | False |  |  | | True|
@@ -117,15 +117,12 @@ LeaderFirstName |  | LEADERMAIL5 | | Leader | 9876543215 | 514083:2070-015:TSH |
 LeaderFirstName123 | LeaderLastName123 | LEADERMAIL6 | | Leader | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False|
 Leader-FirstName | Leader-LastName | LEADERMAIL8 | | Leader | 9876543215 | 514029:ALL_BPIDS:ALL_FACILITIES,fgfgdf | | | True | True | False | True | False |  |  | | False|
 LeaderFirstName | LeaderLastName | LEADERMAIL9 | | Leader | 9876543215 |  | | | True | True | False | True | False |  |  | | False|
-LeaderFirstName | LeaderLastName |  | | Leader | 9876543215 | 514029:ALL_BPIDS:ALL_FACILITIES | | | True | True | False | True | False |  |  | | False|
 LeaderFirstName | LeaderLastName | MANAGERMAIL2 | |  | 9876543215 | 514029:ALL_BPIDS:ALL_FACILITIES | | | True | True | False | True | False |  |  | | False|
- |LeaderLastName  | MANAGERMAIL3 | | Manager | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False|
+LeaderFirstName|LeaderLastName  | MANAGERMAIL3 | | Manager | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False|
 LeaderFirstName | LeaderLastName | LEADERMAIL7 | | Leader | NA | 439108:CJR-1:| | | True | True | False | True | False |  |  | | False|
  LeaderFirstName | LeaderLastName | MANAGERMAIL5 | | Manager | NA | 439108,CJR-1,390168 | | | True | True | False | True | False |  |  | | False|
  LeaderFirstName | LeaderLastName | MANAGERMAIL6 | | Manager | NA | 514083:2070-015:TSH |564231897526  | | True | True | False | True | False |  |  | | False|
  LeaderFirstName | LeaderLastName | MANAGERMAIL7 | | Manager | NA | 514083:2070-015:TSH |3hSOHNAnvjc1 | | False | True | False | False | True | False | False | | False|
- LeaderFirstName | LeaderLastName | MANAGERMAIL8 | | Manager | NA | 514083:2070-015:TSH |564231897526,3hSOHNAnvjc1  | | True | True | False | True | False |  |  | | False|
- LeaderFirstName | LeaderLastName | MANAGERMAIL4 | | Manager | NA | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False|
- LeaderFirstName | LeaderLastName | MANAGERMAIL9 | | Manager | NA | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False|
- LeaderFirstName | LeaderLastName | MANAGERMAIL#10 | | Manager | NA | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False|
- LeaderFirstName | LeaderLastName | MANAGERMAIL#11 | | Manager | NA | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False|
+ LeaderFirstName | LeaderLastName | MANAGERMAIL8 | | Manager | NA | 514083:2070-015:TSH |564231897526  | | True | True | False | True | False |  |  | | False|
+ LeaderFirstName | LeaderLastName | MANAGERMAIL4 | | Manager | NA | 514083:2070-015:TSH |3hSOHNAnvjc1  | | True | True | False | True | False |  |  | | False|
+ LeaderFirstName | LeaderLastName | MANAGERMAIL9 | | Manager | NA | 514083:2070-015:TSH |3hSOHNAnvjc1 | | False | True | False | False | True | False | False | | False|

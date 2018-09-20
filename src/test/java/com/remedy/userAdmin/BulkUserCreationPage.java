@@ -1063,7 +1063,7 @@ public class BulkUserCreationPage extends BaseClass {
 	public void enterInvalidAndValidData() {
 		String strUserData = null;
 		try {
-			strUserData = readContentForBulkUpload(105, 132);
+			strUserData = readContentForBulkUpload(104, 128);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -1074,16 +1074,16 @@ public class BulkUserCreationPage extends BaseClass {
 		strUserData = strUserData.replace("MANAGERMAIL1", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("ADVANCEDOPERATORMAIL", "qaautomation+" + randomString + "@remedysystems.com");
+		strUserData = strUserData.replace("ADVANCEDOPERATORMAIL1", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("PHYSICIANSMAIL1", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RTCSMAIL", "qaautomation+" + randomString + "@remedysystems.com");
+		strUserData = strUserData.replace("RTCSMAIL1", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RLPNMAIL", "qaautomation+" + randomString + "@remedysystems.com");
+		strUserData = strUserData.replace("RLPNMAIL1", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("LEADERMAIL2", "qaautomation+" + randomString + "@remedysystems.com");

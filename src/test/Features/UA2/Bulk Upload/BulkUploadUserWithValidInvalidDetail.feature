@@ -24,8 +24,8 @@ Feature: Bulk upload users with valid and invalid details
 
   Scenario Outline: and <Description>
     Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account
-    Then I enter password "1Welcome2" to login mail account
+    Then I enter username "qaautomation@remedysystems.com" to login mail account
+    Then I enter password "9h$00v3T$dF@OPn0" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds

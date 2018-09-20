@@ -128,6 +128,7 @@ public class MailCreateUser extends BaseClass{
 			Thread.sleep(4000);
 			iWillWaitToSee(By.xpath("//a[contains(text(),'Inbox')]"));
 			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(text(),'Inbox')]")));
+			Thread.sleep(4000);
 			iWillWaitToSee(By.xpath("//a[contains(text(),'Inbox')]"));
 			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(text(),'Inbox')]")));
 		}
@@ -136,6 +137,7 @@ public class MailCreateUser extends BaseClass{
 			Thread.sleep(4000);
 			iWillWaitToSee(By.xpath("//a[contains(text(),'Inbox')]"));
 			clickElement(driver.findElement(By.xpath("//a[contains(text(),'Inbox')]")));
+			Thread.sleep(4000);
 			iWillWaitToSee(By.xpath("//a[contains(text(),'Inbox')]"));
 			clickElement(driver.findElement(By.xpath("//a[contains(text(),'Inbox')]")));
 		}
