@@ -79,6 +79,7 @@ public class ViewUserPage extends BaseClass {
 	}
 
 	public void verifyFirstName(String field) throws Throwable {
+		iWillWaitToSee(By.xpath("//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+field.toLowerCase()+"\")]"));
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+field.toLowerCase()+"\")]")));
 	}
 	

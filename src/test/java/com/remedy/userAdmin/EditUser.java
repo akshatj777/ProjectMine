@@ -152,7 +152,7 @@ public class EditUser extends BaseClass {
 				StringTokenizer st = new StringTokenizer(org, ",");
 				while(st.hasMoreTokens())
 				{
-					String token = st.nextToken();
+					String token = st.nextToken().trim();
 					iWillWaitToSee(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'" + token + "')]/i[contains(@class,'remove link icon')]"));
 					clickElement(driver.findElement(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'"+ token + "')]/i[contains(@class,'remove link icon')]")));
 					
@@ -162,8 +162,8 @@ public class EditUser extends BaseClass {
 			}
 			else
 			{
-				iWillWaitToSee(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'" + org+ "')]/i[contains(@class,'remove link icon')]"));
-				clickElement(driver.findElement(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'"+ org + "')]/i[contains(@class,'remove link icon')]")));
+				iWillWaitToSee(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'" + org.trim()+ "')]/i[contains(@class,'remove link icon')]"));
+				clickElement(driver.findElement(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'"+ org.trim() + "')]/i[contains(@class,'remove link icon')]")));
 			
 				if (isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + "Remove" + "')]"))) == true)
 					
