@@ -56,195 +56,195 @@ public class BulkUserCreationPage extends BaseClass {
 			System.out.println(e);
 		}
 		String randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("LEADERMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("LEADERMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
 		HashMap<String, String> applicationsList = new HashMap<String, String>();
 		HashMap<String, String> bulkNPIPerRole = new HashMap<String, String>();
-		applicationsList.put("Leader", "Episode Connect Classic, Remedy University, Care Innovation Institute");
-		bulkEmailPerRole.put("Leader", "qaautomation+" + randomString + "@remedypartners.com");
+		applicationsList.put("Leader", "Episode Connect, Episode Connect Classic, Remedy University, Care Innovation Institute");
+		bulkEmailPerRole.put("Leader", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Leader", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Leader", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Leader", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("MANAGERMAIL", "qaautomation+-" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("MANAGERMAIL", "qaautomation+-" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Manager", "Reporting Classic, Remedy University, Care Innovation Institute");
+		applicationsList.put("Manager", "Episode Connect, Reporting Classic, Remedy University, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Manager", "qaautomation+-" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Manager", "qaautomation+-" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Manager", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Manager", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Manager", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("ADVANCEDOPERATORMAIL", "qaautomation+_" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("ADVANCEDOPERATORMAIL", "qaautomation+_" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Advanced Operator", "Episode Connect Classic, Remedy University, Reporting, Care Innovation Institute");
+		applicationsList.put("Advanced Operator", "Episode Connect, Episode Connect Classic, Remedy University, Reporting, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Advanced Operator", "qaautomation+_" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Advanced Operator", "qaautomation+_" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Advanced Operator", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Advanced Operator", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Advanced Operator", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("PHYSICIANSMAIL", "qaautomation+." + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("PHYSICIANSMAIL", "qaautomation+." + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Physicians", "Reporting Classic, Reporting, Care Innovation Institute");
+		applicationsList.put("Physicians", "Episode Connect, Reporting Classic, Reporting, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Physicians", "qaautomation+." + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Physicians", "qaautomation+." + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Physicians", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Physicians", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Physicians", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RTCSMAIL", "qaautomation+'" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RTCSMAIL", "qaautomation+'" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy TCS", "Episode Connect for Post-acute Care, Community Connect, Care Connect, Care Innovation Institute");
+		applicationsList.put("Remedy TCS", "Episode Connect, Episode Connect for Post-acute Care, Community Connect, Care Connect, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy TCS", "qaautomation+'" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy TCS", "qaautomation+'" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy TCS", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy TCS", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy TCS", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("RLPNMAIL",
-				"qaautomation+FirstNameeFirstNameeFirstNameeFirstN" + randomString + "@remedypartners.com");
+				"qaautomation+FirstNameeFirstNameeFirstNameeFirstN" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy LPN", "Reporting Classic, Care Innovation Institute, Remedy University");
+		applicationsList.put("Remedy LPN", "Episode Connect, Reporting Classic, Care Innovation Institute, Remedy University");
 		bulkEmailPerRole = new HashMap<String, String>();
 		bulkEmailPerRole.put("Remedy LPN",
-				"qaautomation+FirstNameeFirstNameeFirstNameeFirstN" + randomString + "@remedypartners.com");
+				"qaautomation+FirstNameeFirstNameeFirstNameeFirstN" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy LPN", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy LPN", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy LPN", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("RRNMAIL",
-				("qaautomation+" + randomString + "@remedypartners.com").toUpperCase());
+				("qaautomation+" + randomString + "@remedysystems.com").toUpperCase());
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy RN", "Reporting Classic, Care Innovation Institute, Remedy University, Community Connect, Care Connect");
+		applicationsList.put("Remedy RN", "Episode Connect, Reporting Classic, Care Innovation Institute, Remedy University, Community Connect, Care Connect");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy RN", ("qaautomation+" + randomString + "@remedypartners.com").toUpperCase());
+		bulkEmailPerRole.put("Remedy RN", ("qaautomation+" + randomString + "@remedysystems.com").toUpperCase());
 		bulkUsersEmailPerRole.put("Super Admin-Remedy RN", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy RN", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy RN", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RFRNMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RFRNMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy Field RN", "Episode Connect Classic, Remedy University");
+		applicationsList.put("Remedy Field RN", "Episode Connect, Episode Connect Classic, Remedy University");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy Field RN", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy Field RN", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy Field RN", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Field RN", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Field RN", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RPMMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RPMMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy PM", "Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute");
+		applicationsList.put("Remedy PM", "Episode Connect, Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy PM", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy PM", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy PM", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy PM", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy PM", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RSTMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RSTMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy Sales Team", "Care Innovation Institute, Remedy University");
+		applicationsList.put("Remedy Sales Team", "Episode Connect, Care Innovation Institute, Remedy University");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy Sales Team", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy Sales Team", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy Sales Team", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Sales Team", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Sales Team", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("REMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("REMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy Executive", "Episode Connect Classic, Episode Connect for Post-acute Care, Reporting, Care Innovation Institute");
+		applicationsList.put("Remedy Executive", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Reporting, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy Executive", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy Executive", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Executive", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("PPEMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("PPEMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Prospective Partner Executive", "Remedy University, Care Innovation Institute");
+		applicationsList.put("Prospective Partner Executive", "Episode Connect, Remedy University, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Prospective Partner Executive", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Prospective Partner Executive", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Prospective Partner Executive", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Prospective Partner Executive", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Prospective Partner Executive", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("ROMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("ROMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy Other", "Community Connect, Care Connect, Reporting, Care Innovation Institute");
+		applicationsList.put("Remedy Other", "Episode Connect, Community Connect, Care Connect, Reporting, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy Other", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy Other", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy Other", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Other", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Other", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("PPAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("PPAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Partner Program Administrator", "Remedy University, Episode Connect for Post-acute Care, Care Innovation Institute");
+		applicationsList.put("Partner Program Administrator", "Episode Connect, Remedy University, Episode Connect for Post-acute Care, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Partner Program Administrator", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Partner Program Administrator", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Partner Program Administrator", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Partner Program Administrator", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Partner Program Administrator", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RPAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RPAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy Program Administrator", "Reporting Classic, Care Innovation Institute, Reporting");
+		applicationsList.put("Remedy Program Administrator", "Episode Connect, Reporting Classic, Care Innovation Institute, Reporting");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy Program Administrator", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy Program Administrator", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy Program Administrator", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Program Administrator", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Program Administrator", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("PTAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("PTAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Partner Technical Administrator", "Administration, Remedy University, Reporting, Care Innovation Institute");
+		applicationsList.put("Partner Technical Administrator", "Episode Connect, Administration, Remedy University, Reporting, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Partner Technical Administrator", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Partner Technical Administrator", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Partner Technical Administrator", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Partner Technical Administrator", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Partner Technical Administrator", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RTAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RTAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy Technical Administrator", "Reporting Classic, Administration, Care Innovation Institute");
+		applicationsList.put("Remedy Technical Administrator", "Episode Connect, Reporting Classic, Administration, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy Technical Administrator", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy Technical Administrator", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy Technical Administrator", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Technical Administrator", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Technical Administrator", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("OPERATORMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("OPERATORMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Operator", "Episode Connect Classic, Reporting Classic, Care Innovation Institute");
+		applicationsList.put("Operator", "Episode Connect, Episode Connect Classic, Reporting Classic, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Operator", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Operator", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Operator", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Operator", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Operator", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("DPMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("DPMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Downstream Provider", "Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute");
+		applicationsList.put("Downstream Provider", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Downstream Provider", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Downstream Provider", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
@@ -272,157 +272,157 @@ public class BulkUserCreationPage extends BaseClass {
 				System.out.println(e);
 			}
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("LEADERMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("LEADERMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("MANAGERMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("MANAGERMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("ADVANCEDOPERATORMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("ADVANCEDOPERATORMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("PHYSICIANSMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("PHYSICIANSMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 			strUserData = strUserData.replace("P1NPI1", "12"+RandomStringUtils.randomNumeric(8));
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RTCSMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RTCSMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RLPNMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RLPNMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RRNMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RRNMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RFRNMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RFRNMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RPMMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RPMMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RSTMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RSTMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("REMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("REMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("PPEMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("PPEMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("ROMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("ROMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("PPAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("PPAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RPAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RPAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("PTAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("PTAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RTAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RTAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("OPERATORMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("OPERATORMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("DPMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("DPMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("EXEMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("EXEMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("MANMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("MANMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("CMMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("CMMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("PHYMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("PHYMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 			strUserData = strUserData.replace("P2NPI2", "12"+RandomStringUtils.randomNumeric(8));
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemTCSMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemTCSMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemLPNMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemLPNMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemRNMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemRNMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemFRNMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemFRNMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemPMMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemPMMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemSTMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemSTMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemEid2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemEid2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("ParPEMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("ParPEMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemOMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemOMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("ParPAMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("ParPAMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemPAMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemPAMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("ParTAMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("ParTAMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemTAMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemTAMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("TranCMid2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("TranCMid2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("DownPMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("DownPMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("EMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("EMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("MgMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("MgMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("CaMMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("CaMMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("PMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("PMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 			strUserData = strUserData.replace("P3NPI3", "12"+RandomStringUtils.randomNumeric(8));
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RTranMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RTranMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemedyLPNMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemedyLPNMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemedyRNMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemedyRNMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemedyFRNMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemedyFRNMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemedyPMMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemedyPMMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemedySTMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemedySTMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemedyExMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemedyExMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("abcdtrial3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("abcdtrial3", "qaautomation+" + randomString + "@remedysystems.com");
 
 		}
 
@@ -433,157 +433,157 @@ public class BulkUserCreationPage extends BaseClass {
 				System.out.println(e);
 			}
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("LEADERMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("LEADERMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("MANAGERMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("MANAGERMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("ADVANCEDOPERATORMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("ADVANCEDOPERATORMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("PHYSICIANSMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("PHYSICIANSMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RTCSMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RTCSMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RLPNMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RLPNMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RRNMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RRNMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RFRNMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RFRNMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RPMMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RPMMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RSTMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RSTMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("REMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("REMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("PPEMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("PPEMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("ROMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("ROMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("PPAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("PPAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RPAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RPAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("PTAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("PTAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RTAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RTAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("OPERATORMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("OPERATORMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("DPMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("DPMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("EXEMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("EXEMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("MANMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("MANMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("CMMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("CMMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("PHYMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("PHYMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemTCSMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemTCSMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemLPNMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemLPNMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemRNMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemRNMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemFRNMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemFRNMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemPMMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemPMMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemSTMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemSTMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemEid2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemEid2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("ParPEMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("ParPEMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemOMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemOMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("ParPAMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("ParPAMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemPAMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemPAMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("ParTAMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("ParTAMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemTAMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemTAMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("TranCMid2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("TranCMid2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("DownPMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("DownPMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("EMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("EMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("MgMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("MgMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("CaMMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("CaMMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("PMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("PMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RTranMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RTranMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemedyLPNMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemedyLPNMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemedyRNMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemedyRNMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemedyFRNMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemedyFRNMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemedyPMMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemedyPMMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemedySTMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemedySTMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RemedyExMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RemedyExMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("abcdtrial3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("abcdtrial3", "qaautomation+" + randomString + "@remedysystems.com");
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("abcdUserNeg3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("abcdUserNeg3", "qaautomation+" + randomString + "@remedysystems.com");
 		}
 
 		String randomNPI = RandomStringUtils.randomNumeric(10);
@@ -604,192 +604,192 @@ public class BulkUserCreationPage extends BaseClass {
 			System.out.println(e);
 		}
 		String randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("LEADERMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("LEADERMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
 		HashMap<String, String> applicationsList = new HashMap<String, String>();
 		HashMap<String, String> bulkNPIPerRole = new HashMap<String, String>();
-		applicationsList.put("Leader", "Episode Connect Classic, Reporting Classic, Care Innovation Institute, Remedy University, Reporting");
-		bulkEmailPerRole.put("Leader", "qaautomation+" + randomString + "@remedypartners.com");
+		applicationsList.put("Leader", "Episode Connect, Episode Connect Classic, Reporting Classic, Care Innovation Institute, Remedy University, Reporting");
+		bulkEmailPerRole.put("Leader", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Leader", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Leader", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Leader", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("MANAGERMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("MANAGERMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Manager", "Episode Connect Classic, Reporting Classic, Care Innovation Institute, Remedy University, Reporting");
+		applicationsList.put("Manager", "Episode Connect, Episode Connect Classic, Reporting Classic, Care Innovation Institute, Remedy University, Reporting");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Manager", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Manager", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Manager", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Manager", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Manager", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("ADVANCEDOPERATORMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("ADVANCEDOPERATORMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Advanced Operator", "Episode Connect Classic, Reporting Classic, Care Innovation Institute, Remedy University, Reporting");
+		applicationsList.put("Advanced Operator", "Episode Connect, Episode Connect Classic, Reporting Classic, Care Innovation Institute, Remedy University, Reporting");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Advanced Operator", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Advanced Operator", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Advanced Operator", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Advanced Operator", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Advanced Operator", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("PHYSICIANSMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("PHYSICIANSMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Physicians", "Episode Connect Classic, Reporting Classic, Care Innovation Institute, Remedy University, Reporting");
+		applicationsList.put("Physicians", "Episode Connect, Episode Connect Classic, Reporting Classic, Care Innovation Institute, Remedy University, Reporting");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Physicians", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Physicians", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Physicians", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Physicians", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Physicians", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RTCSMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RTCSMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy TCS", "Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute, Remedy University, Community Connect, Care Connect");
+		applicationsList.put("Remedy TCS", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute, Remedy University, Community Connect, Care Connect");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy TCS", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy TCS", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy TCS", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy TCS", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy TCS", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RLPNMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RLPNMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy LPN", "Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute, Remedy University");
+		applicationsList.put("Remedy LPN", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute, Remedy University");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy LPN", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy LPN", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy LPN", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy LPN", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy LPN", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RRNMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RRNMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy RN", "Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute, Remedy University, Community Connect, Care Connect");
+		applicationsList.put("Remedy RN", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute, Remedy University, Community Connect, Care Connect");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy RN", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy RN", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy RN", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy RN", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy RN", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RFRNMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RFRNMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy Field RN", "Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute, Remedy University");
+		applicationsList.put("Remedy Field RN", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute, Remedy University");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy Field RN", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy Field RN", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy Field RN", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Field RN", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Field RN", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RPMMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RPMMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy PM", "Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute, Remedy University");
+		applicationsList.put("Remedy PM", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute, Remedy University");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy PM", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy PM", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy PM", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy PM", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy PM", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RSTMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RSTMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy Sales Team", "Reporting Classic, Care Innovation Institute, Remedy University");
+		applicationsList.put("Remedy Sales Team", "Episode Connect, Reporting Classic, Care Innovation Institute, Remedy University");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy Sales Team", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy Sales Team", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy Sales Team", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Sales Team", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Sales Team", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("REMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("REMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy Executive", "Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute, Remedy University, Community Connect, Reporting");
+		applicationsList.put("Remedy Executive", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute, Remedy University, Community Connect, Reporting");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy Executive", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy Executive", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Executive", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("PPEMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("PPEMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Prospective Partner Executive", "Remedy University, Care Innovation Institute");
+		applicationsList.put("Prospective Partner Executive", "Episode Connect, Remedy University, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Prospective Partner Executive", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Prospective Partner Executive", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Prospective Partner Executive", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Prospective Partner Executive", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Prospective Partner Executive", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("ROMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("ROMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy Other", "Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute, Remedy University, Reporting Classic, Community Connect, Care Connect, Reporting");
+		applicationsList.put("Remedy Other", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute, Remedy University, Reporting Classic, Community Connect, Care Connect, Reporting");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy Other", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy Other", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy Other", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Other", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Other", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("PPAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("PPAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Partner Program Administrator", "Episode Connect Classic, Reporting Classic, Remedy University, Episode Connect for Post-acute Care, Care Innovation Institute");
+		applicationsList.put("Partner Program Administrator", "Episode Connect, Episode Connect Classic, Reporting Classic, Remedy University, Episode Connect for Post-acute Care, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Partner Program Administrator", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Partner Program Administrator", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Partner Program Administrator", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Partner Program Administrator", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Partner Program Administrator", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RPAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RPAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy Program Administrator","Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute, Remedy University, Reporting");
+		applicationsList.put("Remedy Program Administrator","Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute, Remedy University, Reporting");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy Program Administrator", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy Program Administrator", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy Program Administrator", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Program Administrator", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Program Administrator", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("PTAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("PTAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Partner Technical Administrator","Episode Connect Classic, Reporting Classic, Administration, Remedy University, Reporting, Care Innovation Institute");
+		applicationsList.put("Partner Technical Administrator","Episode Connect, Episode Connect Classic, Reporting Classic, Administration, Remedy University, Reporting, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Partner Technical Administrator", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Partner Technical Administrator", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Partner Technical Administrator", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Partner Technical Administrator", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Partner Technical Administrator", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RTAMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RTAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy Technical Administrator","Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Administration, Care Innovation Institute, Remedy University");
+		applicationsList.put("Remedy Technical Administrator","Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Administration, Care Innovation Institute, Remedy University");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Remedy Technical Administrator", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Remedy Technical Administrator", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy Technical Administrator", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Technical Administrator", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Technical Administrator", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("OPERATORMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("OPERATORMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Operator", "Episode Connect Classic, Reporting Classic, Remedy University, Reporting, Care Innovation Institute");
+		applicationsList.put("Operator", "Episode Connect, Episode Connect Classic, Reporting Classic, Remedy University, Reporting, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Operator", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Operator", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Operator", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Operator", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Operator", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("DPMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("DPMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Downstream Provider", "Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect, Care Innovation Institute");
+		applicationsList.put("Downstream Provider", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
-		bulkEmailPerRole.put("Downstream Provider", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Downstream Provider", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
@@ -886,7 +886,7 @@ public class BulkUserCreationPage extends BaseClass {
 				System.out.println(e);
 			}
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("PTAMAIL", "qaautomation+#$%^i" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("PTAMAIL", "qaautomation+#$%^i" + randomString + "@remedysystems.com");
 			String randomNPI = RandomStringUtils.randomNumeric(10);
 			strUserData = strUserData.replace("NPI", randomNPI);
 			iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
@@ -913,9 +913,9 @@ public class BulkUserCreationPage extends BaseClass {
 			}
 			String userRole = "Super Admin-Physicians";
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("PHYSICIANSMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("PHYSICIANSMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 			applicationsList.put("Physicians", "Episode Connect Classic,Episode Connect for Post-acute Care, Care Innovation Institute");
-			bulkEmailPerRole.put("Physicians", "qaautomation+" + randomString + "@remedypartners.com");
+			bulkEmailPerRole.put("Physicians", "qaautomation+" + randomString + "@remedysystems.com");
 			bulkUsersEmailPerRole.put("Super Admin-Physicians", bulkEmailPerRole);
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Physicians", applicationsList);
 			CreateUserPage.usersEmailPerRole.put("Super Admin-Physicians", bulkEmailPerRole);
@@ -930,7 +930,7 @@ public class BulkUserCreationPage extends BaseClass {
 				System.out.println(e);
 			}
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("RRNMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("RRNMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 			strUserData = strUserData.replace("441348:ALL_BPIDS:ALL_FACILITIES", "439108;CJR-1;390168");
 			String randomNPI = RandomStringUtils.randomNumeric(10);
 			strUserData = strUserData.replace("NPI", randomNPI);
@@ -943,9 +943,9 @@ public class BulkUserCreationPage extends BaseClass {
 				System.out.println(e);
 			}
 			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("DPMAILM3", "qaautomation+" + randomString + "@remedypartners.com");
+			strUserData = strUserData.replace("DPMAILM3", "qaautomation+" + randomString + "@remedysystems.com");
 			applicationsList.put("Downstream Provider", "Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect, Care Innovation Institute");
-			bulkEmailPerRole.put("Downstream Provider", "qaautomation+" + randomString + "@remedypartners.com");
+			bulkEmailPerRole.put("Downstream Provider", "qaautomation+" + randomString + "@remedysystems.com");
 			bulkUsersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
 			CreateUserPage.usersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
@@ -961,9 +961,9 @@ public class BulkUserCreationPage extends BaseClass {
 			}
 			randomString = RandomStringUtils.randomAlphabetic(8);
 			strUserData = strUserData.replace("DPMAILM3AndDown",
-					"qaautomation+" + randomString + "@remedypartners.com");
+					"qaautomation+" + randomString + "@remedysystems.com");
 			applicationsList.put("Downstream Provider", "Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect, Care Innovation Institute");
-			bulkEmailPerRole.put("Downstream Provider", "qaautomation+" + randomString + "@remedypartners.com");
+			bulkEmailPerRole.put("Downstream Provider", "qaautomation+" + randomString + "@remedysystems.com");
 			bulkUsersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
 			CreateUserPage.usersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
@@ -994,40 +994,40 @@ public class BulkUserCreationPage extends BaseClass {
 			System.out.println(e);
 		}
 		String randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("LEADERMAIL1", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("LEADERMAIL1", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("MANAGERMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("MANAGERMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("ADVANCEDOPERATORMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("ADVANCEDOPERATORMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("PHYSICIANSMAIL1", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("PHYSICIANSMAIL1", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RTCSMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RTCSMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RLPNMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RLPNMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("LEADERMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("LEADERMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("LEADERMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("LEADERMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("PHYSICIANSMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("PHYSICIANSMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("LEADERMAIL4", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("LEADERMAIL4", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("LEADERMAIL5", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("LEADERMAIL5", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("LEADERMAIL6", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("LEADERMAIL6", "qaautomation+" + randomString + "@remedysystems.com");
 
 		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
@@ -1068,82 +1068,82 @@ public class BulkUserCreationPage extends BaseClass {
 			System.out.println(e);
 		}
 		String randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("LEADERMAIL1", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("LEADERMAIL1", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("MANAGERMAIL1", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("MANAGERMAIL1", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("ADVANCEDOPERATORMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("ADVANCEDOPERATORMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("PHYSICIANSMAIL1", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("PHYSICIANSMAIL1", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RTCSMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RTCSMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RLPNMAIL", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("RLPNMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("LEADERMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("LEADERMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("LEADERMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("LEADERMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("PHYSICIANSMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("PHYSICIANSMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("PHYSICIANSMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("PHYSICIANSMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("LEADERMAIL4", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("LEADERMAIL4", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("LEADERMAIL5", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("LEADERMAIL5", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("LEADERMAIL6", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("LEADERMAIL6", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("LEADERMAIL8", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("LEADERMAIL8", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("LEADERMAIL9", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("LEADERMAIL9", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("MANAGERMAIL2", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("MANAGERMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("MANAGERMAIL3", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("MANAGERMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("LEADERMAIL7", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("LEADERMAIL7", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("MANAGERMAIL5", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("MANAGERMAIL5", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("MANAGERMAIL6", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("MANAGERMAIL6", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("MANAGERMAIL7", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("MANAGERMAIL7", "qaautomation+" + randomString + "@remedysystems.com");
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("MANAGERMAIL8", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("MANAGERMAIL8", "qaautomation+" + randomString + "@remedysystems.com");
 
 		HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
 		HashMap<String, String> applicationsList = new HashMap<String, String>();
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("MANAGERMAIL4", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("MANAGERMAIL4", "qaautomation+" + randomString + "@remedysystems.com");
 
-		strUserData = strUserData.replace("MANAGERMAIL9", "qaautomation+" + randomString + "@remedypartners.com");
-		strUserData = strUserData.replace("MANAGERMAIL#10", "qaautomation+" + randomString + "@remedypartners.com");
-		strUserData = strUserData.replace("MANAGERMAIL#11", "qaautomation+" + randomString + "@remedypartners.com");
+		strUserData = strUserData.replace("MANAGERMAIL9", "qaautomation+" + randomString + "@remedysystems.com");
+		strUserData = strUserData.replace("MANAGERMAIL#10", "qaautomation+" + randomString + "@remedysystems.com");
+		strUserData = strUserData.replace("MANAGERMAIL#11", "qaautomation+" + randomString + "@remedysystems.com");
 
 		applicationsList.put("Manager", "Episode Connect Classic, Reporting Classic, Care Innovation Institute, Remedy University");
-		bulkEmailPerRole.put("Manager", "qaautomation+" + randomString + "@remedypartners.com");
+		bulkEmailPerRole.put("Manager", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Manager", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Manager", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Manager", bulkEmailPerRole);
