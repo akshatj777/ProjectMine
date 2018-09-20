@@ -1918,6 +1918,8 @@ public class ProgramPerformance extends BaseClass{
 		 String dateFetched = driver.findElement(By.xpath("//span[@dojoattachpoint='domPreview']")).getAttribute("textContent").trim();
 		 getDateFForDB(dateFetched, "StartDate");
 		 getDateFForDB(dateFetched, "EndDate");
+		 arrayListTexts.add("'12'");
+		writeDataToOutputFile("Path");
 	 }
 	 
 	 public void getDateFForDB(String dat,String range) throws FileNotFoundException{
@@ -1965,20 +1967,28 @@ public class ProgramPerformance extends BaseClass{
 		}
 
 	public void verifyfiltervalues(String text, String row, String data) {
-	 	if(text.equals("Episode Initiator - BPID")){
-		String episodinitator=outputText.get("episodeInitiatorNameInitCap").replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","");
-		String bpid=outputText.get("bpid").replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","");
-		String EpisodeInitiatorBPID=episodinitator+" "+"-"+" "+bpid;
-	   }
-		else{
-		String facility=outputText.get("facilityName");
-		String fac[]=facility.split(",");
-		String ccn=outputText.get("facilityName");
-		String cc[]=ccn.split(",");
-		for(int i=0;i<fac.length;i++){
-			String newccn=fac[i].replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","")+" "+"-"+" "+cc[i].replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","");
-		}
-		}
+		ArrayList<String> al_DB = new ArrayList<String>();
+		ArrayList<String> al_FE = new ArrayList<String>();
+		al_DB.add(outputText.get(text).replace("\"[", "").replace("]\"", "").trim());
+		al_FE.add(mapOfHmFiltersValue.get(row).get(text).replace("[", "").replace("]", "").trim());
+		System.out.println("DB Value="+outputText.get(text).replace("\"[", "").replace("]\"", "").trim());
+		System.out.println("FE Value="+mapOfHmFiltersValue.get(row).get(text).trim().replace("[", "").replace("]", ""));
+		Assert.assertTrue(al_DB.containsAll(al_FE));
+		
+//	 	if(text.equals("Episode Initiator - BPID")){
+//		String episodinitator=outputText.get("episodeInitiatorNameInitCap").replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","");
+//		String bpid=outputText.get("bpid").replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","");
+//		String EpisodeInitiatorBPID=episodinitator+" "+"-"+" "+bpid;
+//	   }
+//		else{
+//		String facility=outputText.get("facilityName");
+//		String fac[]=facility.split(",");
+//		String ccn=outputText.get("facilityName");
+//		String cc[]=ccn.split(",");
+//		for(int i=0;i<fac.length;i++){
+//			String newccn=fac[i].replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","")+" "+"-"+" "+cc[i].replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","");
+//		}
+//		}
 
 		
 	}
