@@ -296,6 +296,12 @@ public class CreatePrograms extends BaseClass {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
+	
+	public void iUnCheckForAttributionRulesOnCreatePrograms(String text){
+		WebElement element= driver.findElement(By.xpath("//li[contains(text(),'"+text+"')]/child::input"));
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
 
 	public void iVerifyPGPOrganizationNameOnNetworkContractPage(String text, String page){
 		isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.PGPNameList.get(1).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(1).length()-1)+"'"));
@@ -1085,6 +1091,22 @@ public class CreatePrograms extends BaseClass {
 	public void iVerifyAutoIncrementedCID(String text){
 		iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'80000')]"));
 		isElementPresent(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'80000')]"));
+	}
+	
+	public void iVerifyTheSubHeadlineOfAttributionRulesAndValidationRanksOnCreateProgramPage(String text){
+		verifyTextForElement(driver.findElement(By.xpath("//div[text()='"+text+"']")), text);
+	}
+	
+	public void iVerifyMultipleBundleEpisodeCheckBox(String text){
+		verifyTextForElement(driver.findElement(By.xpath("//label[text()='"+text+"']")), text);
+	}
+	
+	public void iClickOnCheckBoxForMultipleBundleEpisode(String text){
+		//driver.findElement(By.xpath("//input[@name='multipleBundleEpisode']")).click();
+		
+		WebElement element = driver.findElement(By.xpath("//input[@name='multipleBundleEpisode']"));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(element).click().build().perform();
 	}
 }
 

@@ -21,6 +21,7 @@ Feature: Create LTCH organization functionality tests
     When I click on "LTCH" organization tab on organization dashboard
     Then I verify "+" button under "LTCH" organization page
     And I verify "CCN" header label under "LTCH" organization
+    And I verify "Database ID" header label under "LTCH" organization
     And I verify "LTCH Organization Name" header label under "LTCH" organization
     And I verify "City" header label under "LTCH" organization
     And I verify "State" header label under "LTCH" organization

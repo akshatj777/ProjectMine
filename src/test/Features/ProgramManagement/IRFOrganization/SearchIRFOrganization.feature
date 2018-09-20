@@ -10,43 +10,16 @@ Feature: Search IRF organization functionality tests
       | desc      | particpantId | name   | contactPerson | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type       |
       | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
 
-  Scenario Outline: <Description>
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-    When I click on "IRF" organization tab on organization dashboard
-    Then I click on "+" button on "IRF" organization page
-    And I verify "Create Inpatient Rehab Facility Organization" header text on create organization page
-    And I select "<Has_MO>" radio button for managing organization
-    Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
-    Then I enter <IRF_Name> in "Inpatient Rehab Facility Organization Name" on create organization page
-    And I enter <Address1> in "Address 1" on create organization page
-    And I enter <Short_Name> in "Short Name" on create organization page
-    And I enter <Address2> in "Address 2" on create organization page
-    And I enter <City> in "City" on create organization page
-    And I select <State> in State on create organization page
-    And I enter <Postal_Code> in "Postal Code" on create organization page
-    And I provide unique "IRF - <CCN>" in "CCN" on create organization page
-    And I provide unique "IRF - <EIN>" in "EIN" on create organization page
-    And I provide unique "IRF - <NPI>" in "NPI" on create organization page
-    And I enter location name <Loc_Name> for Location "1" on "create" organization page
-    And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
-    And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
-    And I select region <Loc_Region> for Location "1" on "create" organization page
-    And I enter city <Loc_City> for Location "1" on "create" organization page
-    And I select market <Loc_Market> for region "<Loc_Region>" for Location "1" on "create" organization page
-    And I select state <Loc_State> for Location "1" on "create" organization page
-    And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create IRF - <Has_MO>" organization page
+  Scenario Outline: <desc>
+    Given Build Json and pass it to post method with IRF "<name>" and "<participantId>" and "<shortName>" and "<managingOrgId>" and "<ccn>" and "<ein>" and "<npi>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>" and "<locationName>" and "<locationType>" and "<marketId>" and "<locAddr1>" and "<locAddr2>" and "<locCity>" and "<locState>" and "<locZip>" and "<locationId>"
+    When create IRF org with this data "irf"
+    Then verification of Actual vs expected results <expPostCode> and "<errorMsg>"
+    When Get by id <id> and <type>
 
     Examples: 
-      | Description                                                        | Has_MO | Managing_Org | IRF_Name | Address1 | Short_Name | Address2 | City           | State    | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Message                                |
-      | Create IRF Organization with all the available fields - Without MO | NO     |              | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | New York |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | IRF Organization Successfully Created. |
-      | Create IRF Organization with all the available fields - With MO    | YES    | MONAME       | IRFNAME  | Address1 | Short_Name | Address2 | AutomationCity | New York |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | IRF Organization Successfully Created. |
+      | desc                                  | participantId | name    | shortName | managingOrgId | ccn | ein | npi | locationId | locAddr1     | locAddr2     | locCity  | locState | locZip | locationName | locationType | marketId | regionId | address1 | address2 | city           | state | zip   | expPostCode | errorMsg | id | type |
+      | Create IRF using API calls with MO    |               | IRFNAME | shortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | NY       |  10001 | Loc_Name     | [22]         |       10 |      3,2 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |          |  0 | irf  |
+      | Create IRF using API calls without MO |               | IRFNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | NY       |  10001 | Loc_Name     | [22]         |       10 |      3,2 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |          |  0 | irf  |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -60,6 +33,8 @@ Feature: Search IRF organization functionality tests
 
     Examples: 
       | Description                                            | Has_MO | SearchParam    |
+      | Search IRF Organization with id  - With MO             | YES    | IRF_Id         |
+      | Search IRF Organization with id  - Without MO          | NO     | IRF_Id         |
       | Search IRF Organization with CCN  - With MO            | YES    | CCN            |
       | Search IRF Organization with CCN  - Without MO         | NO     | CCN            |
       | Search IRF Organization with IRF Org Name - With MO    | YES    | IRFNAME        |
@@ -82,12 +57,14 @@ Feature: Search IRF organization functionality tests
     Then I search "<SearchParam>" and verify with search list options on Location in "<IRF_Name> - <Has_MO>" profile page
 
     Examples: 
-      | Description                                    | Has_MO | IRF_Name | SearchParam  |
-      | Searching Location Name on IRF Profile Page    | YES    | IRFNAME  | Loc_Name     |
-      | Searching Location Address on IRF Profile Page | YES    | IRFNAME  | Loc_Address1 |
-      | Searching Location Type on IRF Profile Page    | NO     | IRFNAME  | IRF          |
-      | Searching Location Region on IRF Profile Page  | NO     | IRFNAME  | Midwest      |
-      | Searching Location Market on IRF Profile Page  | NO     | IRFNAME  | Chicago      |
+      | Description                                     | Has_MO | IRF_Name | SearchParam  |
+      | Searching Location index id on IRF Profile Page | YES    | IRFNAME  | LocIndexId   |
+      | Searching Location index id on IRF Profile Page | NO     | IRFNAME  | LocIndexId   |
+      | Searching Location Name on IRF Profile Page     | YES    | IRFNAME  | Loc_Name     |
+      | Searching Location Address on IRF Profile Page  | YES    | IRFNAME  | Loc_Address1 |
+      | Searching Location Type on IRF Profile Page     | NO     | IRFNAME  | IRF          |
+      | Searching Location Region on IRF Profile Page   | NO     | IRFNAME  | SouthEast      |
+      | Searching Location Market on IRF Profile Page   | NO     | IRFNAME  | South      |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -101,7 +78,7 @@ Feature: Search IRF organization functionality tests
     And I click on "Edit" button on particular organization
     And I edit "Inpatient Rehab Facility Organization Name" field to "<Edited_IRF_Name> - <Has_MO>" for organization
     Then I click on "Submit" button on "Edit" organization page
-    Then I verify "<Message>" after submitting the "edit IRF - <Has_MO>" organization page
+    Then I verify "<Message>" after submitting the "FETCHFROMAPIForIRFNAME - <Has_MO>" organization page
     Then I search "<Edited_IRF_Name> - <Has_MO>" and verify with search list options on "IRF" organization search box
     Then I search with "<IRF_Name> - <Has_MO>" old name in organization search box
     Then I verify the "No matches" message for invalid search in Organization
@@ -149,5 +126,5 @@ Feature: Search IRF organization functionality tests
     When delete references of the name list type "<type>"
 
     Examples: 
-      | type |
-      | MO   |
+      | type    |
+      | MO, irf |

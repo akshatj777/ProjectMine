@@ -33,6 +33,8 @@ Feature: Search the PGP organizations functionality tests
 
     Examples: 
       | Description                                            | Has_MO | SearchParam    |
+      | Search PGP Organization with PGP orgId  - With MO      | YES    | PGP_Id         |
+      | Search PGP Organization with PGP orgId  - Without MO   | NO     | PGP_Id         |
       | Search PGP Organization with EIN  - With MO            | YES    | EIN            |
       | Search PGP Organization with EIN  - Without MO         | NO     | EIN            |
       | Search PGP Organization with PGP Org Name - With MO    | YES    | PGPNAME        |

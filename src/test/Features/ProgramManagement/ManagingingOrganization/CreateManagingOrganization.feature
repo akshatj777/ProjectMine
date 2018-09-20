@@ -10,6 +10,7 @@ Feature: Create Managing organization functionality tests
     When I click on Organization link on Program Management page
     Then I verify "+" button under "Managing" organization page
     And I verify "Participant ID" header label under "Managing" organization
+    And I verify "Database ID" header label under "Managing" organization
     And I verify "Managing Organization Name" header label under "Managing" organization
     And I verify "City" header label under "Managing" organization
     And I verify "State" header label under "Managing" organization

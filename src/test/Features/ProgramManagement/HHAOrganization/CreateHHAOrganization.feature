@@ -21,6 +21,7 @@ Feature: Create HHA organization functionality tests
     When I click on "HHA" organization tab on organization dashboard
     Then I verify "+" button under "HHA" organization page
     And I verify "CCN" header label under "HHA" organization
+    And I verify "Database ID" header label under "HHA" organization
     And I verify "HHA Organization Name" header label under "HHA" organization
     And I verify "City" header label under "HHA" organization
     And I verify "State" header label under "HHA" organization

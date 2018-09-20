@@ -37,6 +37,8 @@ Feature: Search the Hospital organizations functionality tests
       | Search Hospital Organization with CCN  - Without MO              | NO     | CCN            |
       | Search Hospital Organization with Hospital Org Name - With MO    | YES    | ACHNAME        |
       | Search Hospital Organization with Hospital Org Name - Without MO | NO     | ACHNAME        |
+      | Search Hospital Organization with Hospital Org id - With MO      | YES    | Hosp_Id        |
+      | Search Hospital Organization with Hospital Org id - Without MO   | NO     | Hosp_Id        |
       | Search Hospital Organization with City                           |        | AutomationCity |
       | Search Hospital Organization with State                          |        | NY             |
       | Search Hospital Organization with Postal Code                    |        |          10000 |
@@ -53,12 +55,14 @@ Feature: Search the Hospital organizations functionality tests
     Then I search "<SearchParam>" and verify with search list options on Location in "<Hosp_Name> - <Has_MO>" profile page
 
     Examples: 
-      | Description                                         | Has_MO | Hosp_Name | SearchParam  |
-      | Searching Location Name on Hospital Profile Page    | YES    | ACHNAME   | Loc_Name     |
-      | Searching Location Address on Hospital Profile Page | YES    | ACHNAME   | Loc_Address1 |
-      | Searching Location Type on Hospital Profile Page    | NO     | ACHNAME   | Emergency    |
-      | Searching Location Region on Hospital Profile Page  | NO     | ACHNAME   | Midwest      |
-      | Searching Location Matket on Hospital Profile Page  | NO     | ACHNAME   | Chicago      |
+      | Description                                          | Has_MO | Hosp_Name | SearchParam  |
+      | Searching Location index id on Hospital Profile Page | YES    | ACHNAME   | LocIndexId   |
+      | Searching Location index id on Hospital Profile Page | NO     | ACHNAME   | LocIndexId   |
+      | Searching Location Name on Hospital Profile Page     | YES    | ACHNAME   | Loc_Name     |
+      | Searching Location Address on Hospital Profile Page  | YES    | ACHNAME   | Loc_Address1 |
+      | Searching Location Type on Hospital Profile Page     | NO     | ACHNAME   | Emergency    |
+      | Searching Location Region on Hospital Profile Page   | NO     | ACHNAME   | Midwest      |
+      | Searching Location Matket on Hospital Profile Page   | NO     | ACHNAME   | Chicago      |
 
   Scenario Outline: <Description>
     Given I am on the login page

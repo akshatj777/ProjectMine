@@ -10,36 +10,16 @@ Feature: Edit Hospice organization functionality tests
       | desc      | particpantId | name   | contactPerson | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type       |
       | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
 
-  Scenario Outline: <Description>
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-    When I click on "Hospice" organization tab on organization dashboard
-    Then I click on "+" button on "Hospice" organization page
-    And I verify "Create Hospice Organization" header text on create organization page
-    And I select "<Has_MO>" radio button for managing organization
-    Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
-    Then I enter <Hospice_Name> in "Hospice Organization Name" on create organization page
-    And I enter <Address1> in "Address 1" on create organization page
-    And I enter <Short_Name> in "Short Name" on create organization page
-    And I enter <Address2> in "Address 2" on create organization page
-    And I select region "<Region>" in "create Hospice" organization page
-    And I select market "<Market>" in "create Hospice" organization page
-    And I enter <City> in "City" on create organization page
-    And I select <State> in State on create organization page
-    And I enter <Postal_Code> in "Postal Code" on create organization page
-    And I provide unique "Hospice - <CCN>" in "CCN" on create organization page
-    And I provide unique "Hospice - <EIN>" in "EIN" on create organization page
-    And I provide unique "Hospice - <NPI>" in "NPI" on create organization page
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create Hospice - <Has_MO>" organization page
+  Scenario Outline: <desc>
+    Given Build Json for Hospice "<name>" and "<participantId>" and "<shortName>" and "<managingOrgId>" and "<ein>" and "<npi>" and "<ccn>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>" and "<marketId>"
+    When create hospice org with this data
+    Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
 
     Examples: 
-      | Description                                                            | Has_MO | Managing_Org | Hospice_Name | Address1 | Short_Name | Address2 | City           | State      | Postal_Code | Region  | Market  | CCN | EIN | NPI | Message                                    |
-      | Create Hospice Organization with all the available fields - Without MO | NO     |              | HOSPICENAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Midwest | Chicago | CCN | EIN | NPI | Hospice Organization Successfully Created. |
-      | Create Hospice Organization with all the available fields - With MO    | YES    | MONAME       | HOSPICENAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Midwest | Chicago | CCN | EIN | NPI | Hospice Organization Successfully Created. |
+      | desc                           | name        | shortName  | managingOrgId | participantId | ein | npi | ccn | address1 | address2 | city           | state | zip   | marketId | expStatusCode | responseMsg | type    | id |
+      | Create Hospice using API calls | HOSPICENAME | Short_Name | hasChild      |               | EIN | NPI | CCN | Address1 | Address2 | AutomationCity | NY    | 10000 |        2 |           201 |             | hospice |  0 |
+      | Create Hospice using API calls | HOSPICENAME | Short_Name |               |               | EIN | NPI | CCN | Address1 | Address2 | AutomationCity | NY    | 10000 |        2 |           201 |             | hospice |  0 |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -125,7 +105,7 @@ Feature: Edit Hospice organization functionality tests
     And I edit <State> field for organization
     And I edit "Postal Code" field to "<Postal_Code>" for organization
     Then I click on "Submit" button on "Edit" organization page
-    Then I verify "<Message>" after submitting the "edit Hospice - <Has_MO>" organization page
+    Then I verify "<Message>" after submitting the "FETCHFROMAPIForHOSPICENAME - <Has_MO>" organization page
 
     Examples: 
       | Description                                                                         | Has_MO | Hospice_Name | Edited_Hospice_Name | Address1                                                | Short_Name                                    | Address2                                                | City                                          | State      | Postal_Code | Region  | Market  | Message                                    |
@@ -150,5 +130,5 @@ Feature: Edit Hospice organization functionality tests
     When delete references of the name list type "<type>"
 
     Examples: 
-      | type |
-      | MO   |
+      | type | type    |
+      | MO   | Hospice |
