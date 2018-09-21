@@ -200,7 +200,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;E_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;and e.participantName in ${participantName}&quot;);	
+	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;and de.participantName in ${participantName}&quot;);	
 } else{
 	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
@@ -289,7 +289,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;and de.participantNameInitCap in ${participantName}&quot;);	
 } else{
 	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
@@ -316,7 +316,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="1381665506">
+              <collectionProp name="1568020232">
                 <stringProp name="44569016">select (round((sum(NPRA)/sum(Program_size))*100,1)) as Savings_Rate from (select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size  from warehouse.factClaims c   left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK  where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;   and c.anchorBeginDateKey &gt;= ${STARTDATE}   ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET}  ${Q_PARTICIPANTNAME}  ${Q_DRGCODE}  ${Q_PHY_NPI}  ${Q_Model} and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -377,7 +377,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;and de.participantNameInitCap in ${participantName}&quot;);	
 } else{
 	vars.put(&quot;Q_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
@@ -404,7 +404,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-1099368140">
+              <collectionProp name="-1176354601">
                 <stringProp name="1488556326">select round(sum(NPRA)) as Claims_NPRA, round(sum(Program_size)) as Claims_ProgramSize from (select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size  from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK  where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;   and c.anchorBeginDateKey &gt;= ${STARTDATE}  ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI}  ${Q_Model}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -480,7 +480,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;C_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;and de.participantNameInitCap in ${participantName}&quot;);	
 } else{
 	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
@@ -563,7 +563,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="1064900330">
+              <collectionProp name="-312861319">
                 <stringProp name="-519838544">select round((sum(a.category)/sum(a.episodes)) * 100,1) as DischargeToSNFEC_ClaimsUnion from ( select e.bpid, SUM(if( (c.postAcuteCategory) = &quot;SNF&quot;, 1,0) ) as Category, sum(currEpiCounts) as Episodes from warehouse.factClaims c   left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK   left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK   left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK   left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK   left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK     left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK   left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK    where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)    and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;    and c.anchorBeginDateKey &gt;= ${STARTDATE}    and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)     ${C_BPID}  ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model} and c.targetPrice &lt;&gt; 0  union  select fp.BPID, sum(if((fp.NSOCType) in (&apos;SNF&apos;), 1,0) ) as Category, sum(fp.episodeCountReport) as Episodes from warehouse.factPatientEpisode fp  left join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK  left join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK  left join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK  left join warehouse.dimPatient dp on fp.patientKey = dp.patientSK  left join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName  left join warehouse.dimDRG d on fp.currDrgKey = d.drgSK  left join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey  left join warehouse.dimRegionMarket rmp on rmp.rgSK = fp.rgPartnerKey  left join warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK  where fp.bundleRisk = 1  and fp.episodeCountReport = 1  and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)  and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)  and de.bpid not like &apos;%DEMO%&apos;  and dlk.lookupCategory = &apos;patientRisk&apos;  and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup  where lookupCategory = &apos;ClaimsCubeDate&apos;)  and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;,&apos;IRF&apos;)  ${E_BPID}  ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model}  )a; </stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -625,7 +625,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;C_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;and de.participantNameInitCap in ${participantName}&quot;);	
 } else{
 	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
@@ -708,7 +708,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-1488551396">
+              <collectionProp name="444820623">
                 <stringProp name="-48018626">select round((sum(a.baseSNF)/sum(a.baseEpicounts))*100, 1) as dischtoSNFBenchmarkEC_ClaimsUnion  from ( select e.bpid, SUM(baseSNF) as baseSNF, sum(baseEpicounts) as baseEpicounts  from warehouse.factClaims c   left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK   left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK   left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK   left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK   left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK     left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK   left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK    where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)    and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;    and c.anchorBeginDateKey &gt;= ${STARTDATE}    and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup  where lookupCategory = &apos;ClaimsCubeDate&apos;) ${C_BPID}  ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model} and c.targetPrice &lt;&gt; 0  union  select fp.BPID, sum(fp.baseSNF) as baseSNF, sum(fp.baseEpiCounts) as baseEpicounts  from warehouse.factPatientEpisode fp   left join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK  left join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK  left join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK  left join warehouse.dimPatient dp on fp.patientKey = dp.patientSK  left join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName  left join warehouse.dimDRG d on fp.currDrgKey = d.drgSK  left join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey  left join warehouse.dimRegionMarket rmp on rmp.rgSK = fp.rgPartnerKey  left join warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK  where fp.bundleRisk = 1  and fp.episodeCountReport = 1  and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)  and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)  and de.bpid not like &apos;%DEMO%&apos;  and dlk.lookupCategory = &apos;patientRisk&apos;  and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;,&apos;IRF&apos;)  ${E_BPID}  ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model}  )a;  </stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -769,7 +769,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;C_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;and de.participantNameInitCap in ${participantName}&quot;);	
 } else{
 	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
@@ -852,7 +852,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="1122965244">
+              <collectionProp name="456116648">
                 <stringProp name="-240870818">select round(sum(a.snfDaysTrimmed)/sum(a.Episodes),1) as SNFDaysEC_ClaimsUnion from ( select sum(c.snfDaysTrimmed) as snfDaysTrimmed , sum(if(c.snfDaysTrimmed,1,0)) as Episodes from warehouse.factClaims c   left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK   left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK   left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK   left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK   left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK     left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK   left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK    where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)    and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;     and c.anchorBeginDateKey &gt;= ${STARTDATE}   and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${C_BPID}  ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model}   and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;) and c.targetPrice &lt;&gt; 0    union  select sum(case when (fp.dataQualityFlag not like &apos;%Invalid%&apos; and fp.totalSNFDays &gt;= 90) then 90 when (fp.dataQualityFlag not like &apos;%Invalid%&apos; ) then fp.totalSNFDays else 0 end ) as snfDaysTrimmed, sum(if((fp.totalSNFDays &gt; 0 and fp.dataQualityFlag not like &apos;Invalid%&apos;),fp.currEpiCounts,0)) as Episodes     from warehouse.factPatientEpisode fp   left join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK  left join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK  left join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK  left join warehouse.dimPatient dp on fp.patientKey = dp.patientSK  left join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName  left join warehouse.dimDRG d on fp.currDrgKey = d.drgSK  left join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey  left join warehouse.dimRegionMarket rmp on rmp.rgSK = fp.rgPartnerKey  left join warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK  where fp.bundleRisk = 1   and fp.totalSNFDays &gt; 0  and fp.dataQualityFlag not like &apos;%Invalid%&apos;  and fp.episodeCountReport = 1  and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)  and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)  and de.bpid not like &apos;%DEMO%&apos;  and dlk.lookupCategory = &apos;patientRisk&apos;  and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${E_BPID}  ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model} )a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -913,7 +913,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;C_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;and de.participantNameInitCap in ${participantName}&quot;);	
 } else{
 	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
@@ -996,7 +996,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-154945792">
+              <collectionProp name="-1152361119">
                 <stringProp name="410642906">select round(sum(a.baseSNFDays)/sum(a.baseSNFCount),1) as SNFDaysBenchmarkEC_Claims  from ( select sum(c.baseSNFDays) as baseSNFDays, sum(c.baseSNFCount) as baseSNFCount  from warehouse.factClaims c   left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK   left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK   left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK   left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK   left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK     left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK   left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK    where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)    and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;     and c.anchorBeginDateKey &gt;= ${STARTDATE}   and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;)   ${C_BPID}  ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model}   and c.targetPrice &lt;&gt; 0  and c.snfDaysTrimmed &gt; 0  union  select sum(fp.baseSNFDays) as baseSNFDays, sum(fp.baseEpiCounts) as baseEpiCounts  from warehouse.factPatientEpisode fp   left join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK  left join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK  left join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK  left join warehouse.dimPatient dp on fp.patientKey = dp.patientSK  left join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName  left join warehouse.dimDRG d on fp.currDrgKey = d.drgSK  left join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey  left join warehouse.dimRegionMarket rmp on rmp.rgSK = fp.rgPartnerKey  left join warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK  where fp.bundleRisk = 1  and fp.totalSNFDays &gt; 0   and fp.dataQualityFlag not like &apos;%Invalid%&apos; and fp.episodeCountReport = 1  and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)  and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)  and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos;  and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  ${E_BPID}  ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model}  )a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -1057,7 +1057,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;C_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;and de.participantNameInitCap in ${participantName}&quot;);	
 } else{
 	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
@@ -1140,7 +1140,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="354075248">
+              <collectionProp name="262924703">
                 <stringProp name="-1235505046">select round((sum(a.readmissionCounter)/sum(a.Episodes))*100, 1) as EpisodesWithReadmissionEC_ClaimsUnion   from ( select sum(if((c.readmission_flag) = 1,1,0)) as readmissionCounter, sum(c.currEpiCounts) as Episodes from warehouse.factClaims c   left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK   left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK   left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK   left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK   left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK     left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK   left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK    where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)    and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= ${STARTDATE}    and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) ${C_BPID}  ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model} and c.targetPrice &lt;&gt; 0  union  select sum(if((fp.readmissionCounter) &gt;= 1 , 1, 0)) as readmissionCounter, sum(fp.episodeCountReport) as Episodes  from warehouse.factPatientEpisode fp   left join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK  left join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK  left join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK  left join warehouse.dimPatient dp on fp.patientKey = dp.patientSK  left join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName  left join warehouse.dimDRG d on fp.currDrgKey = d.drgSK  left join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey  left join warehouse.dimRegionMarket rmp on rmp.rgSK = fp.rgPartnerKey  left join warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK  where fp.bundleRisk = 1  and fp.episodeCountReport = 1  and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)  and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)  and de.bpid not like &apos;%DEMO%&apos;  and dlk.lookupCategory = &apos;patientRisk&apos;  and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) ${E_BPID}  ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model}  )a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -1201,7 +1201,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;C_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;and de.participantNameInitCap in ${participantName}&quot;);	
 } else{
 	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;&quot;);
 }

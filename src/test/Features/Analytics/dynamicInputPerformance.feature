@@ -333,6 +333,7 @@ Feature: Program Performance Overview Dashboard
       |     8 |   9 |
       |     9 |  10 |
 
+@ECClaims
   Scenario Outline: Execute Filter combinations to Validate Data Metrics on Front End - For EC&Claims
     Given I am on the login page
     When I enter email field <User> for login
@@ -402,23 +403,25 @@ Feature: Program Performance Overview Dashboard
 
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG         | Physician - NPI | Model       |
-      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | True Random     | True Random            | True Random | True Random | True Random     | True Random |
-      | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | True All        | True All               | True All    | True All    | True All        | True All    |
-      | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | True Random     | True Random            | True All    | True All    | True All        | True All    |
-      | Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | True All        | True All               | True Random | True Random | True Random     | True Random |
-      | Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | True Random     | True All               | True Random | True All    | True Random     | True All    |
-      | Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | True All        | True Random            | True All    | True Random | True All        | True Random |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | True All        | True Random            | True Random | True All    | True All        | Skip        |
-      | Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | True Random     | True All               | True All    | True Random | True Random     | True All    |
-      | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip            | Skip                   | True Random | True All    | Skip            | Skip        |
-      | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | True All        | True Random            | Skip        | Skip        | True Random     | Skip        |
+      #| Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | True Random     | True Random            | True Random | True Random | True Random     | True Random |
+      #| Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | True All        | True All               | True All    | True All    | True All        | True All    |
+      #| Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | True Random     | True Random            | True All    | True All    | True All        | True All    |
+      #| Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | True All        | True All               | True Random | True Random | True Random     | True Random |
+      #| Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | True Random     | True All               | True Random | True All    | True Random     | True All    |
+      #| Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | True All        | True Random            | True All    | True Random | True All        | True Random |
+      #| Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | True All        | True Random            | True Random | True All    | True All        | Skip        |
+      #| Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | True Random     | True All               | True All    | True Random | True Random     | True All    |
+      | Qadashboardtest@yopmail.com |   1 | True All    | True Random | Skip        | Skip            | Skip                   | True Random | True All    | Skip            | Skip        |
+     # | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | True All        | True Random            | Skip        | Skip        | True Random     | Skip        |
 
+@ECClaims
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - EC&Claims
     When I close the file for after writting data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsECMetricsOutput.txt" Output file
     When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsECMetricsQuery.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsECMetricsOutput.txt"
 
+@ECClaims
   Scenario Outline: Verify DB and FE values feteched from Scenarios(7&8) - EC&Claims (For Metrics Validations & Benchmark Tool Tip)
     And I get the value "<Index>" from Output file of data metric validation
     Then I verify "KPI_Episode" for DB and FE Metrics value at "<Row>" for "EC_Claims"
@@ -435,12 +438,12 @@ Feature: Program Performance Overview Dashboard
     Examples: 
       | Index | Row |
       |     0 |   1 |
-      |     1 |   2 |
-      |     2 |   3 |
-      |     3 |   4 |
-      |     4 |   5 |
-      |     5 |   6 |
-      |     6 |   7 |
-      |     7 |   8 |
-      |     8 |   9 |
-      |     9 |  10 |
+      #|     1 |   2 |
+      #|     2 |   3 |
+      #|     3 |   4 |
+      #|     4 |   5 |
+      #|     5 |   6 |
+      #|     6 |   7 |
+      #|     7 |   8 |
+      #|     8 |   9 |
+      #|     9 |  10 |

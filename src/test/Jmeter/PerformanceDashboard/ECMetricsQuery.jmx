@@ -72,7 +72,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
           <stringProp name="filename">ECMetricsInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">startdate,enddate,bpid,ccn,bundle,region,market,r_region,r_market,participantName,drgCode,npi,model</stringProp>
+          <stringProp name="variableNames">startdate,enddate,range,bpid,ccn,bundle,region,market,r_region,r_market,participantName,drgCode,npi,model</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -275,7 +275,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="1667121102">
+              <collectionProp name="910652305">
                 <stringProp name="-1054601396">select round(sum(Category)/sum(episodes)*100,1) as DischargeToSNFEC from (select fp.BPID, sum(if((fp.NSOCType) in (&apos;SNF&apos;), 1,0) ) as Category, sum(fp.episodeCountReport) as Episodes from warehouse.factPatientEpisode fp left join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK left join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK left join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK left join warehouse.dimPatient dp on fp.patientKey = dp.patientSK left join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName left join warehouse.dimDRG d on fp.currDrgKey = d.drgSK left join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey left join warehouse.dimRegionMarket rmp on rmp.rgSK = fp.rgPartnerKey left join warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK where fp.bundleRisk = 1  and fp.episodeCountReport = 1 and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos; and fp.anchorAdmitDateKey  &gt;= ${STARTDATE} and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;,&apos;IRF&apos;) ${Q_BPID} ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} )a; </stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -364,7 +364,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-874300405">
+              <collectionProp name="-231796302">
                 <stringProp name="941627247">select round(baseSNF/baseEpicounts*100, 1) as dischtoSNFBenchmarkEC from (select fp.BPID, sum(fp.baseSNF) as baseSNF, sum(fp.baseEpiCounts) as baseEpicounts from warehouse.factPatientEpisode fp  left join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK left join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK left join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK left join warehouse.dimPatient dp on fp.patientKey = dp.patientSK left join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName left join warehouse.dimDRG d on fp.currDrgKey = d.drgSK left join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey left join warehouse.dimRegionMarket rmp on rmp.rgSK = fp.rgPartnerKey left join warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK where fp.bundleRisk = 1  and fp.episodeCountReport = 1 and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos; and fp.anchorAdmitDateKey  &gt;= ${STARTDATE} and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;,&apos;IRF&apos;) ${Q_BPID} ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} )a;  </stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -452,7 +452,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="1505899513">
+              <collectionProp name="191175267">
                 <stringProp name="464218561">select round(sum(case when (fp.dataQualityFlag not like &apos;%Invalid%&apos; and fp.totalSNFDays &gt;= 90) then 90 when (fp.dataQualityFlag not like &apos;%Invalid%&apos; ) then fp.totalSNFDays else 0 end ) /(sum(if((fp.totalSNFDays &gt; 0 and fp.dataQualityFlag not like &apos;Invalid%&apos;),fp.currEpiCounts,0))),1)  as SNFDays from warehouse.factPatientEpisode fp  left join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK left join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK left join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK left join warehouse.dimPatient dp on fp.patientKey = dp.patientSK left join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName left join warehouse.dimDRG d on fp.currDrgKey = d.drgSK left join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey left join warehouse.dimRegionMarket rmp on rmp.rgSK = fp.rgPartnerKey left join warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK where fp.bundleRisk = 1  and fp.totalSNFDays &gt; 0 and fp.dataQualityFlag not like &apos;%Invalid%&apos; and fp.episodeCountReport = 1 and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos; and fp.anchorAdmitDateKey  &gt;= ${STARTDATE} ${Q_BPID} ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} ;   </stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -540,7 +540,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="429461414">
+              <collectionProp name="139724836">
                 <stringProp name="1122231412">select round(sum(fp.baseSNFDays)/sum(fp.baseEpiCounts),1) as SNFDaysBenchmarkEC from warehouse.factPatientEpisode fp  left join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK left join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK left join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK left join warehouse.dimPatient dp on fp.patientKey = dp.patientSK left join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName left join warehouse.dimDRG d on fp.currDrgKey = d.drgSK left join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey left join warehouse.dimRegionMarket rmp on rmp.rgSK = fp.rgPartnerKey left join warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK where fp.bundleRisk = 1  and fp.totalSNFDays &gt; 0  and fp.dataQualityFlag not like &apos;%Invalid%&apos; and fp.episodeCountReport = 1 and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos; and fp.anchorAdmitDateKey  &gt;= ${STARTDATE}  ${Q_BPID} ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} ;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -628,7 +628,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-135532810">
+              <collectionProp name="-2096656302">
                 <stringProp name="1242553124">select round(sum(readmissionCounter)/sum(Episodes)*100, 1) as EpisodesWithReadmissionEC from ( select sum(if((fp.readmissionCounter) &gt;= 1 , 1, 0)) as readmissionCounter, sum(fp.episodeCountReport) as Episodes from warehouse.factPatientEpisode fp  left join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK left join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK left join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK left join warehouse.dimPatient dp on fp.patientKey = dp.patientSK left join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName left join warehouse.dimDRG d on fp.currDrgKey = d.drgSK left join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey left join warehouse.dimRegionMarket rmp on rmp.rgSK = fp.rgPartnerKey left join warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK where fp.bundleRisk = 1  and fp.episodeCountReport = 1 and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos; and fp.anchorAdmitDateKey  &gt;= ${STARTDATE} ${Q_BPID} ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} )a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>

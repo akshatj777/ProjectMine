@@ -1624,7 +1624,7 @@ public class ProgramPerformance extends BaseClass{
 			            	 }
 			            			 
 			            			 
-			            		 } else if(filter.equals("DRG - Fracture")){
+			            		 } else if(filter.equals("DRG")){
 //		                           val=val.substring(val.indexOf("-")+1).trim();
 		                        	 val=val.substring(val.length() - 4);
 		                        	 val=val.replaceAll("[()]","");  
