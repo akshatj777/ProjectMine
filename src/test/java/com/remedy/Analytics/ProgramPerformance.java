@@ -1,6 +1,7 @@
 package com.remedy.Analytics;
 
 import java.awt.Graphics2D;
+import java.io.*;
 import java.awt.RenderingHints;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
@@ -9,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -521,8 +523,16 @@ public class ProgramPerformance extends BaseClass{
 	 public void executejmeter(String location) throws IOException, InterruptedException
 	    {
 		 File jmx=new File(System.getProperty("user.dir")+location);
-		 Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd "+DriverScript.Config.getProperty("jmeterPath")+" && jmeter -n -t"+" "+jmx+" && exit\"");
-	    Thread.sleep(20000);
+		 final Process process = Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd "+DriverScript.Config.getProperty("jmeterPath")+" && jmeter -n -t"+" "+jmx+" && exit\"");
+//	    Thread.sleep(20000);
+		 BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+		 String line=null;
+
+		 while((line=input.readLine()) != null) {
+		 System.out.println(line);} 
+		 final int exitVal = process.waitFor();
+		 System.out.println("JMeter Execution over #"+exitVal);
 	    }
 	 
 	 public void iClickOnDashboard(String dashboard){
@@ -557,7 +567,7 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iReadTextFromOutputfile(String location) throws IOException, InterruptedException{
-		 Thread.sleep(18000);
+		 Thread.sleep(5000);
 		 BufferedReader br=new BufferedReader(new FileReader(System.getProperty("user.dir")+location));
 				 String names;
 				 System.out.println(br.lines());
@@ -1915,7 +1925,11 @@ public class ProgramPerformance extends BaseClass{
 		 List<WebElement> listItems = driver.findElements(By.cssSelector(".FIText"));
 		 List<String> values = new ArrayList<String>();
 		 for(int i =1;i<listItems.size();i++){
-		  values.add(listItems.get(i).getText().trim());
+			String val=listItems.get(i).getText().trim();
+			if(val.equals("Null")) {
+				val=val.replace("Null", "null");
+			}
+			values.add(val);
 		  }
 		 rowFilters.put(filter, values.toString());
 	 }
@@ -1924,6 +1938,8 @@ public class ProgramPerformance extends BaseClass{
 		 String dateFetched = driver.findElement(By.xpath("//span[@dojoattachpoint='domPreview']")).getAttribute("textContent").trim();
 		 getDateFForDB(dateFetched, "StartDate");
 		 getDateFForDB(dateFetched, "EndDate");
+		 arrayListTexts.add("'12'");
+		writeDataToOutputFile("Path");
 	 }
 	 
 	 public void getDateFForDB(String dat,String range) throws FileNotFoundException{
@@ -1986,26 +2002,18 @@ public class ProgramPerformance extends BaseClass{
 		}
 
 	public void verifyfiltervalues(String text, String row, String data) {
-	 	if(text.equals("Episode Initiator - BPID")){
-		String episodinitator=outputText.get("episodeInitiatorNameInitCap").replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","");
-		String bpid=outputText.get("bpid").replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","");
-		String EpisodeInitiatorBPID=episodinitator+" "+"-"+" "+bpid;
-	   }
-		else{
-		String facility=outputText.get("facilityName");
-		String fac[]=facility.split(",");
-		String ccn=outputText.get("facilityName");
-		String cc[]=ccn.split(",");
-		for(int i=0;i<fac.length;i++){
-			String newccn=fac[i].replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","")+" "+"-"+" "+cc[i].replace("\"", "").replaceAll("\\[", "").replaceAll("\\]","");
-		}
-		}
-
-		
+		ArrayList<String> al_DB = new ArrayList<String>();
+		ArrayList<String> al_FE = new ArrayList<String>();
+		al_DB.add(outputText.get(text).replace("\"[", "").replace("]\"", "").replaceAll("\"", "").trim());
+		al_FE.add(mapOfHmFiltersValue.get(row).get(text).replace("[", "").replace("]", "").trim());
+		System.out.println("DB Value="+outputText.get(text).replace("\"[", "").replace("]\"", "").replaceAll("\"", "").trim());
+		System.out.println("FE Value="+mapOfHmFiltersValue.get(row).get(text).trim().replace("[", "").replace("]", ""));
+		Assert.assertTrue(al_DB.containsAll(al_FE));
 	}
 
-	public void readFilterValueFromQuery(int index) {
-		 StringTokenizer st = new StringTokenizer(col.get(index), "*");
+	public void readFilterValueFromQuery(int index) throws IOException, InterruptedException {
+		System.out.println("Col value: "+col.toString());
+		StringTokenizer st = new StringTokenizer(col.get(index), "*");
 		 while(st.hasMoreTokens()){
 			 String var[] =st.nextToken().trim().split("=");
 			 outputText.put(var[0], var[1]);

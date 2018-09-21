@@ -1,0 +1,1 @@
+KPI_Episode_EC=433*% SNF Disch Current_EC=26.3*SNF Days Current_EC=16.1*SNF Days Benchmark Variance_EC=19.6*Readmissions Current_EC=9.7*Readmissions Benchmark Variance_EC=26.7*% SNF Disch Benchmark Variance_EC=44.0
