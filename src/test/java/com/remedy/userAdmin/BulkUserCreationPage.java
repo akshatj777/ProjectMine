@@ -599,7 +599,7 @@ public class BulkUserCreationPage extends BaseClass {
 	public void enterDataForAllApp() throws IOException {
 		String strUserData = null;
 		try {
-			strUserData = readContentForBulkUpload(2, 3);
+			strUserData = readContentForBulkUpload(2, 21);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
