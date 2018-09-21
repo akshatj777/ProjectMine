@@ -160,7 +160,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-215108265">
+              <collectionProp name="-2017117443">
                 <stringProp name="-1808055133">select sum(c.currEpiCounts) as Claims_Episode from warehouse.factClaims c left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK   left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK  where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;=20171231  ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} and c.targetPrice &lt;&gt; 0;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -248,7 +248,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-670829943">
+              <collectionProp name="1539823100">
                 <stringProp name="-437282511">select (round((sum(NPRA)/sum(Program_size))*100,1)) as Savings_Rate from (select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size  from warehouse.factClaims c   left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK  where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;   and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;=20171231   ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET}  ${Q_PARTICIPANTNAME}  ${Q_DRGCODE}  ${Q_PHY_NPI}  ${Q_Model} and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -336,7 +336,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="158470123">
+              <collectionProp name="-1135996875">
                 <stringProp name="-1518909553">select round(sum(NPRA)) as Claims_NPRA, round(sum(Program_size)) as Claims_ProgramSize from (select e.bpid, sum(NPRA_completed) as NPRA, sum(epi_allowed_completed) as Program_size  from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK  where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;   and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;=20171231  ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI}  ${Q_Model}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -439,7 +439,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-1970003036">
+              <collectionProp name="-1444975272">
                 <stringProp name="-2141759306">select round((sum(category)/sum(episodes)) * 100,1) as DischargeToSNFClaims from (select e.bpid, SUM(if( (c.postAcuteCategory) = &quot;SNF&quot;, 1,0) ) as Category, sum(currEpiCounts) as Episodes from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK   where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;   and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;=20171231  ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI}  ${Q_Model} and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -528,7 +528,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="183709702">
+              <collectionProp name="-724376563">
                 <stringProp name="-409716716">select round((baseSNF/baseEpicounts)*100, 1) as dischtoSNFBenchmarkClaims from (select e.bpid, SUM(baseSNF) as baseSNF, sum(baseEpicounts) as baseEpicounts from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK   where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;   and  c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;=20171231  ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI}  ${Q_Model} and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -616,7 +616,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="1527311243">
+              <collectionProp name="-176807246">
                 <stringProp name="1573287919">select round(sum(snfDaysTrimmed)/sum(Episodes),1) as SNFDaysClaims from (select e.bpid, sum(if(c.snfDaysTrimmed,1,0)) as Episodes,  sum(c.snfDaysTrimmed) as snfDaysTrimmed from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK   where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;    and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;=20171231  ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI}    ${Q_Model}  and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;) and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -704,7 +704,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-1281104321">
+              <collectionProp name="-1366649618">
                 <stringProp name="-179874117">select round(sum(baseSNFDays)/sum(baseSNFCount),1) as SNFDaysBenchmarkClaims from (select e.bpid, sum(c.baseSNFDays) as baseSNFDays, sum(c.baseSNFCount) as baseSNFCount from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK   where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;    and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;=20171231 and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;)  ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} and c.targetPrice &lt;&gt; 0 and c.snfDaysTrimmed &gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -792,7 +792,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="234486626">
+              <collectionProp name="1400182043">
                 <stringProp name="-1793552072">select round((sum(readmissionCounter)/sum(Episodes))*100, 1) as EpisodesWithReadmissionClaims  from ( select sum(if((c.readmission_flag) = 1,1,0)) as readmissionCounter, sum(c.currEpiCounts) as Episodes from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK   where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos; and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;=20171231  ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -968,7 +968,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-648666102">
+              <collectionProp name="1558316284">
                 <stringProp name="-20925552">select sum(fp.episodeCountReport)  as EC_Episode  from warehouse.factPatientEpisode fp  left join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK left join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK left join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK left join warehouse.dimPatient dp on fp.patientKey = dp.patientSK left join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName left join warehouse.dimDRG d on fp.currDrgKey = d.drgSK left join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey left join warehouse.dimRegionMarket rmp on rmp.rgSK = fp.rgPartnerKey left join warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK where fp.bundleRisk = 1  and fp.episodeCountReport = 1 and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos; and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;=20171231 ${Q_BPID} ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} ;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -1056,7 +1056,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="1615126472">
+              <collectionProp name="-1915181612">
                 <stringProp name="-917731310">select round(sum(Category)/sum(episodes)*100,1) as DischargeToSNFEC from (select fp.BPID, sum(if((fp.NSOCType) in (&apos;SNF&apos;), 1,0) ) as Category, sum(fp.episodeCountReport) as Episodes from warehouse.factPatientEpisode fp left join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK left join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK left join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK left join warehouse.dimPatient dp on fp.patientKey = dp.patientSK left join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName left join warehouse.dimDRG d on fp.currDrgKey = d.drgSK left join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey left join warehouse.dimRegionMarket rmp on rmp.rgSK = fp.rgPartnerKey left join warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK where fp.bundleRisk = 1  and fp.episodeCountReport = 1 and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos;  and c.anchorBeginDateKey &lt;=20171231 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;,&apos;IRF&apos;) ${Q_BPID} ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} )a; </stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -1145,7 +1145,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-2116224881">
+              <collectionProp name="-815345874">
                 <stringProp name="763017835">select round(baseSNF/baseEpicounts*100, 1) as dischtoSNFBenchmarkEC from (select fp.BPID, sum(fp.baseSNF) as baseSNF, sum(fp.baseEpiCounts) as baseEpicounts from warehouse.factPatientEpisode fp  left join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK left join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK left join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK left join warehouse.dimPatient dp on fp.patientKey = dp.patientSK left join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName left join warehouse.dimDRG d on fp.currDrgKey = d.drgSK left join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey left join warehouse.dimRegionMarket rmp on rmp.rgSK = fp.rgPartnerKey left join warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK where fp.bundleRisk = 1  and fp.episodeCountReport = 1 and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos; and c.anchorBeginDateKey &lt;=20171231 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;,&apos;IRF&apos;) ${Q_BPID} ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} )a;  </stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -1233,7 +1233,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-1435921361">
+              <collectionProp name="1699865095">
                 <stringProp name="2031889099">select round(sum(case when (fp.dataQualityFlag not like &apos;%Invalid%&apos; and fp.totalSNFDays &gt;= 90) then 90 when (fp.dataQualityFlag not like &apos;%Invalid%&apos; ) then fp.totalSNFDays else 0 end ) /(sum(if((fp.totalSNFDays &gt; 0 and fp.dataQualityFlag not like &apos;Invalid%&apos;),fp.currEpiCounts,0))),1)  as SNFDays from warehouse.factPatientEpisode fp  left join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK left join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK left join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK left join warehouse.dimPatient dp on fp.patientKey = dp.patientSK left join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName left join warehouse.dimDRG d on fp.currDrgKey = d.drgSK left join warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey left join warehouse.dimRegionMarket rmp on rmp.rgSK = fp.rgPartnerKey left join warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK where fp.bundleRisk = 1  and fp.totalSNFDays &gt; 0 and fp.dataQualityFlag not like &apos;%Invalid%&apos; and fp.episodeCountReport = 1 and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and de.bpid not like &apos;%DEMO%&apos; and dlk.lookupCategory = &apos;patientRisk&apos; and c.anchorBeginDateKey &gt;= 20170101  and c.anchorBeginDateKey &lt;=20171231 ${Q_BPID} ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} ;   </stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
@@ -1525,7 +1525,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo KPI_Episode_Claims=${claimsEpisodeCount_1}*Savings Rate_Claims=${savingRate_1}*KPI_NPRA_Claims=${Claims_TotalNPRA_1}*KPI_Program_size_Claims=${Claims_TotalProgram_1}*% SNF Disch Current_Claims=${dischargetoSNFClaims_1}*SNF Days Current_Claims=${SNFDaysClaims_1}*SNF Days Benchmark Variance_Claims=${SNFDaysBenchmarkClaims_1}*Readmissions Current_Claims=${EpisodesWithReadmissionClaims_1}*Readmissions Benchmark Variance_Claims=${EpisodesWithReadmissionBenchmarkClaims_1}*% SNF Disch Benchmark Variance_Claims=${dischtoSNFBenchmarkClaims_1}&gt;&gt;ClaimsMetricsOuput.txt</stringProp>
+                <stringProp name="Argument.value">echo KPI_Episode_Claims=${claimsEpisodeCount_1}*Savings Rate_Claims=${savingRate_1}*KPI_NPRA_Claims=${Claims_TotalNPRA_1}*KPI_Program_size_Claims=${Claims_TotalProgram_1}*% SNF Disch Current_Claims=${dischargetoSNFClaims_1}*SNF Days Current_Claims=${SNFDaysClaims_1}*SNF Days Benchmark Variance_Claims=${SNFDaysBenchmarkClaims_1}*Readmissions Current_Claims=${EpisodesWithReadmissionClaims_1}*Readmissions Benchmark Variance_Claims=${EpisodesWithReadmissionBenchmarkClaims_1}*% SNF Disch Benchmark Variance_Claims=${dischtoSNFBenchmarkClaims_1}&gt;&gt;ClaimsMetricsOutput.txt</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>

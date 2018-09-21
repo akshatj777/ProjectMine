@@ -836,4 +836,11 @@ public class BaseClass {
 			
 		}
 	}
+	
+	public void setAttributevalue(WebElement element, String attName, String attValue) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", 
+                element, attName, attValue);
+    }
+	
 }

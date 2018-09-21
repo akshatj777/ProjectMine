@@ -1158,7 +1158,7 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iClickOnFilterName(String text,String dashboard){
 		 if(text.equals("Time")){
-			 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+			 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 			 delay();
 			 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. /span//button[@type='button']"));
 			 act.moveToElement(elem).click().build().perform();
@@ -1166,7 +1166,7 @@ public class ProgramPerformance extends BaseClass{
 		 }
 		 
 		 else if(!dashboard.contains("- Skip")){
-		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 		 delay();
 		 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']"));
 		 act.moveToElement(elem).click().build().perform();
@@ -1419,7 +1419,7 @@ public class ProgramPerformance extends BaseClass{
 		 clickElement(driver.findElement(By.xpath("//span[text()='Refresh']")));
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='wcGlassPane' and contains(@style,'cursor: wait;')]")));
 		 longDelay();
-		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 		 scrollIntoViewByJS(driver.findElement(By.xpath("//div[@id='tabZoneId225']")));
 		 driver.switchTo().defaultContent();
 		 scrollToTopOfThePage();
@@ -1554,7 +1554,9 @@ public class ProgramPerformance extends BaseClass{
 		 if(!checkbox.contains("Skip")){
 			 delay();
 			 WebElement elem = driver.findElement(By.xpath("//input[contains(@name,'All')]"));
-			 act.moveToElement(elem).click().build().perform();
+			 JavascriptExecutor executor = (JavascriptExecutor)driver;
+			 executor.executeScript("arguments[0].click();", elem);
+			 //		 act.moveToElement(elem).click().build().perform();
 			 List<WebElement> listItems = driver.findElements(By.cssSelector(".FIText"));
 			 Random rand = new Random();
             if(checkbox.contains("Random")){
@@ -1652,7 +1654,7 @@ public class ProgramPerformance extends BaseClass{
                         	        val=val.substring(val.indexOf("- ")+1).trim();
                         	       }System.out.println("Physician - NPI is"+val);}
                          }
-                         else if(filter.equals("DRG - Fracture")){
+                         else if(filter.equals("DRG")){
 //                           val=val.substring(val.indexOf("-")+1).trim();
                         	 val=val.substring(val.length() - 4);
                         	 val=val.replaceAll("[()]","");  
@@ -1665,6 +1667,8 @@ public class ProgramPerformance extends BaseClass{
                         		  val="'"+val+"'";
                         		  arrayListTexts.add(val);
                         		  listItems.remove(randomIndex);
+                        		  System.out.println(listItems.size());
+                        		  
                         		  if((listItems.get(0).getText().equals("(All)") && listItems.size()==1)){
                         			for(int k=0;k<2;k++){
                         				if(k==0){
@@ -1674,20 +1678,20 @@ public class ProgramPerformance extends BaseClass{
                         					writeDataToOutputFile("Path");
                         					return;
                         				}
-                        			}
-                        		 }else if(listItems.get(0).getText().equals("(All)") && listItems.size()!=1){
-                        			 for(int k=0;k<2;k++){
-                         				if(k==0){
-                         				writeDataToOutputFile("Path");}else
-                         				{
-                         					arrayListTexts.add("'Null'");
-                         					writeDataToOutputFile("Path");
-                         					return;
-                         				}
-                         			} 
-                        		 }
+                        			}}
+//                        		 }else if(listItems.get(0).getText().equals("(All)") && listItems.size()!=1){
+//                        			 for(int k=0;k<2;k++){
+//                         				if(k==0){
+//                         				writeDataToOutputFile("Path");}else
+//                         				{
+//                         					arrayListTexts.add("'Null'");
+//                         					writeDataToOutputFile("Path");
+//                         					return;
+//                         				}
+//                         			} 
+//                        		 }
                         		  
-                        		  else if(listItems.size()==0){
+                        		  if(listItems.isEmpty()){
                         			 for(int k=0;k<2;k++){
                          				if(k==0){
                          				writeDataToOutputFile("Path");}else
@@ -1697,7 +1701,8 @@ public class ProgramPerformance extends BaseClass{
                          					return;
                          				}
                          			}
-                        		 }else{
+                        		 }
+                        		  else{
                         		  continue;}
                               }else{
                             	  val=val.substring(val.indexOf("-")+1).trim(); 
@@ -1709,7 +1714,8 @@ public class ProgramPerformance extends BaseClass{
                             	  valB=valarr[1];
                               }
 			             }
-			             driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+                         executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
+			           //  driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
 			             if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
 //			            	 if(val.equals("Null")){
 //			            		 val=val.trim();
@@ -1752,7 +1758,7 @@ public class ProgramPerformance extends BaseClass{
                 	       }driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
                 	       val="'"+val+"'";
    						   arrayListTexts.add(val);}
-						 else if(filter.equals("DRG - Fracture")){
+						 else if(filter.equals("DRG")){
                 	    	 val=val.substring(val.length() - 4);
                           	 val=val.replaceAll("[()]","");  
                           	 driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
@@ -1946,7 +1952,7 @@ public class ProgramPerformance extends BaseClass{
 	 }
 
 	 public void set_time_in_time_field(String action) {
-			if(action.equals("previous year")){
+			if(action.contains("year")){
 				System.out.println("Page html is-------"+driver.findElement(By.xpath("//div[@role='presentation' and contains(@id,'popup') and contains(@class,'dijitPopup') and contains(@style,'visibility: visible')]")).getAttribute("innerHTML")+"-------------");
 				iWillWaitToSee(By.xpath("//span[text()='Years' and contains(@class,'dijitReset dijitInline dijitButtonText')]"));
 				clickElement(driver.findElement(By.xpath("//span[text()='Years' and contains(@class,'dijitReset dijitInline dijitButtonText')]")));
@@ -1954,12 +1960,27 @@ public class ProgramPerformance extends BaseClass{
 				iWillWaitToSee(By.xpath("//*[@id='svg-spinner-container']"));
 				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 				delay();
+				if(action.contains("previous")){
 				clickElement(driver.findElement(By.xpath("//span[text()='Previous year' and contains(@dojoattachpoint,'textLast')]")));
 				iWillWaitToSee(By.xpath("//*[@id='svg-spinner-container']"));
 				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
-				delay();
-	          }else if(action.equals("previous year")){
-				
+				delay();}
+	          }else if(action.contains("month") || action.contains("months")){
+	        	  longDelay();
+	        	  if(action.contains("last")){
+                    longDelay();
+	        		System.out.println(driver.findElement(By.xpath("//input[@dojoattachpoint='inputLastn']")).getAttribute("value"));
+	        	    while(!driver.findElement(By.xpath("//input[@dojoattachpoint='inputLastn']")).getAttribute("value").equals("3")){
+	        	    ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='spinnerElement spinnerDown' and @dojoattachpoint='lastDown']")));
+	        	    driver.findElement(By.xpath("//input[@dojoattachpoint='inputLastn']")).sendKeys(Keys.ENTER);
+	        		delay();
+	        	    iWillWaitToSee(By.xpath("//*[@id='svg-spinner-container']"));
+	  				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+	        	    longDelay();
+	        		System.out.println(driver.findElement(By.xpath("//input[@dojoattachpoint='inputLastn']")).getAttribute("value"));
+	        		}
+	        	
+	  			}
 			}
 			
 		}
