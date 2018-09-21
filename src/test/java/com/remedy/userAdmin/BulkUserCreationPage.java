@@ -1266,8 +1266,7 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("AdvancedOperatorLastName", "LastNameEdited");
 			strUserData = strUserData.replace("9879800980", "9879800978");
 
-			strUserData = strUserData.replace("| True|  |  |  |  |  |  | | |","| | True |  |  |  |  |  | | |");
-			strUserData = strUserData.replace("|3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1  |", "| |");
+			strUserData = strUserData.replace("|3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1  | | True|  |  |  |  |  |  | | |","|  | | | True |  |  |  |  |  | | |");
 
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
 			applicationsList.put("Advanced Operator", "Episode Connect, Episode Connect Classic, Care Innovation Institute");
@@ -1320,8 +1319,8 @@ public class BulkUserCreationPage extends BaseClass {
 			}
 			strUserData = strUserData.replace("RLPNMAIL", email);
 
-			strUserData = strUserData.replace("439245:ALL_BPIDS:ALL_FACILITIES   | |",
-					"514029:ALL_BPIDS:ALL_FACILITIES|3hSOHNAnvjc1,NFdw0Kts2C01|");
+			strUserData = strUserData.replace("|439245:ALL_BPIDS:ALL_FACILITIES   | |",
+					"|514029:ALL_BPIDS:ALL_FACILITIES   | |");
 
 		}
 
@@ -1368,7 +1367,7 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("RPMMAIL", email);
 			strUserData = strUserData.replace(
 					"|NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1 | | False| True | True | True | True | True | False |False | False|True",
-					"|NFdw0Kts2C01 | | False| True | True |  |  |  | False |False | False|False");
+					"|NFdw0Kts2C01 | | False| True | True | False | False | False | False |False | False|False");
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
 			applicationsList.put("Remedy PM", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute");
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy PM", applicationsList);
@@ -1495,7 +1494,7 @@ public class BulkUserCreationPage extends BaseClass {
 		}
 
 		HashMap<String, String> bulkNPIPerRole = new HashMap<String, String>();
-		String randomNPI = RandomStringUtils.randomNumeric(10);
+		String randomNPI = "212"+ RandomStringUtils.randomNumeric(7);
 		strUserData = strUserData.replace("NPI", randomNPI);
 		bulkNPIPerRole.put("Physicians", randomNPI);
 		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
