@@ -599,7 +599,7 @@ public class BulkUserCreationPage extends BaseClass {
 	public void enterDataForAllApp() throws IOException {
 		String strUserData = null;
 		try {
-			strUserData = readContentForBulkUpload(2, 21);
+			strUserData = readContentForBulkUpload(2, 3);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -1221,12 +1221,13 @@ public class BulkUserCreationPage extends BaseClass {
 
 		if (role.equals("Leader")) {
 			String userRole = "Super Admin-" + role;
-			String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole)
-					.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
-			try {
-
+			String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-") + 1)).trim());
+			try 
+			{
 				strUserData = readContentForBulkUpload(2, 3);
-			} catch (Exception e) {
+			} 
+			catch (Exception e) 
+			{
 				System.out.println(e);
 			}
 			strUserData = strUserData.replace("LEADERMAIL", email);
@@ -1261,16 +1262,15 @@ public class BulkUserCreationPage extends BaseClass {
 				System.out.println(e);
 			}
 			strUserData = strUserData.replace("ADVANCEDOPERATORMAIL", email);
-			strUserData = strUserData.replace("CaseManagerFirstName", "FirstNameEdited");
-			strUserData = strUserData.replace("CaseManagerLastName", "LastNameEdited");
+			strUserData = strUserData.replace("AdvancedOperatorFirstName", "FirstNameEdited");
+			strUserData = strUserData.replace("AdvancedOperatorLastName", "LastNameEdited");
 			strUserData = strUserData.replace("9879800980", "9879800978");
 
-			strUserData = strUserData.replace("| True| False | False | False | True |  | False | | False",
-					"| False| True | False | False | False |  | False | | False");
+			strUserData = strUserData.replace("| True|  |  |  |  |  |  | | |","| | True |  |  |  |  |  | | |");
 			strUserData = strUserData.replace("|3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1  |", "| |");
 
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
-			applicationsList.put("Advanced Operator", "Episode Connect Classic, Care Innovation Institute");
+			applicationsList.put("Advanced Operator", "Episode Connect, Episode Connect Classic, Care Innovation Institute");
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Advanced Operator", applicationsList);
 		}
 
@@ -1288,7 +1288,7 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace(" Physicians ", " Manager ");
 			strUserData = strUserData.replace("NPI", "");
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
-			applicationsList.put("Manager", "Episode Connect Classic, Reporting Classic, Care Innovation Institute, Remedy University");
+			applicationsList.put("Manager", "Episode Connect, Episode Connect Classic, Reporting Classic, Remedy University, Reporting, Care Innovation Institute");
 
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Manager", applicationsList);
 
@@ -1304,8 +1304,8 @@ public class BulkUserCreationPage extends BaseClass {
 			}
 			strUserData = strUserData.replace("RTCSMAIL", email);
 			strUserData = strUserData.replace(
-					"514025:2070-047:001 |NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | | True | True | True | False | False | True | False | |False ",
-					"441348:ALL_BPIDS:ALL_FACILITIES  | | | True | True | True | True | True | True | False | |False");
+					"| 514083:2070-015:TSH |NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | | False | True |True  |True  |True  |True  | False | False|True|True ",
+					"| 776109:2070-005:HUMC | | | False | True |True  |True  |True  |True  | False | False|True|True ");
 		}
 
 		else if (role.equals("Remedy LPN")) {
@@ -1321,7 +1321,7 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("RLPNMAIL", email);
 
 			strUserData = strUserData.replace("439245:ALL_BPIDS:ALL_FACILITIES   | |",
-					"441444:3056-q91:181318,441444:2070-g14:100086|3hSOHNAnvjc1,NFdw0Kts2C01|");
+					"514029:ALL_BPIDS:ALL_FACILITIES|3hSOHNAnvjc1,NFdw0Kts2C01|");
 
 		}
 
@@ -1338,7 +1338,7 @@ public class BulkUserCreationPage extends BaseClass {
 			}
 			strUserData = strUserData.replace("RRNMAIL", email);
 			strUserData = strUserData.replace("441348:ALL_BPIDS:ALL_FACILITIES",
-					"441444:3056-q91:181318,441444:3056-q91:441310");
+					"514083:2070-015:TSH");
 		}
 
 		else if (role.equals("Remedy Field RN")) {
@@ -1367,10 +1367,10 @@ public class BulkUserCreationPage extends BaseClass {
 			}
 			strUserData = strUserData.replace("RPMMAIL", email);
 			strUserData = strUserData.replace(
-					"|NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1 | | True| True | False | False | False | True | False | | False",
-					"|NFdw0Kts2C01 | | False| False | True | True | True | True | False | | False");
+					"|NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1 | | False| True | True | True | True | True | False |False | False|True",
+					"|NFdw0Kts2C01 | | False| True | True |  |  |  | False |False | False|False");
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
-			applicationsList.put("Remedy PM", "Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute, Remedy University");
+			applicationsList.put("Remedy PM", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute");
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy PM", applicationsList);
 		}
 
@@ -1389,11 +1389,11 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("ROMAIL", email);
 			strUserData = strUserData.replace(" Remedy Other ", " Downstream Provider ");
 
-			strUserData = strUserData.replace("| 514022:2070-007:J |HZhmTBQzHtU1,18h7phZr1h81 |",
-					"|441369:3056-m03:365402| |");
+			strUserData = strUserData.replace("| 514022:2070-007:310074 |HZhmTBQzHtU1,18h7phZr1h81 |",
+					"| 015174 ||");
 
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
-			applicationsList.put("Downstream Provider", "Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute");
+			applicationsList.put("Downstream Provider", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute");
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
 		}
 
@@ -1424,7 +1424,7 @@ public class BulkUserCreationPage extends BaseClass {
 
 			strUserData = strUserData.replace("PPAMAIL", email);
 
-			strUserData = strUserData.replace("441445:3056-r26:1481",
+			strUserData = strUserData.replace("514083:2070-015:TSH",
 					"807551:3090-209:337181,807551:6005-197:330394-REH,441444:3056-q91:181318,441444:3056-q91:441310,441444:3056-q99:204595837");
 
 		}
@@ -1442,9 +1442,9 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("PTAMAIL", email);
 			strUserData = strUserData.replace(" Partner Technical Administrator ", " Downstream Provider ");
 			strUserData = strUserData.replace("|572091:3056-r30:075278  |NFdw0Kts2C01,HZhmTBQzHtU1,n9yn5n0Qa581    |",
-					"|441369:3056-m03:365402,450306| |");
+					"|015174  | |");
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
-			applicationsList.put("Downstream Provider", "Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute");
+			applicationsList.put("Downstream Provider", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute");
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
 		}
 
@@ -1464,11 +1464,11 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("RTALastName", "LastnameeeLastnameeeLastnameeeLastnameeeLastnameee");
 
 			strUserData = strUserData.replace(
-					"441448:3056-r31:075244,572091:3056-r30:075278,439104:2070-a48:070003 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | True | False | False | False | False | True | True | | True",
-					"441348:ALL_BPIDS:ALL_FACILITIES   | | | False | False | False | False | True | True | False | | True");
+					"| 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False | True | True | True | True | True | True |False | False|False",
+					"| 514026:2070-046:H | | | True |  |  |  |  |  |  | | |");
 
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
-			applicationsList.put("Physicians", "Care Innovation Institute");
+			applicationsList.put("Physicians", "Episode Connect, Episode Connect Classic, Reporting Classic, Remedy University, Reporting, Care Innovation Institute");
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Physicians", applicationsList);
 		}
 
