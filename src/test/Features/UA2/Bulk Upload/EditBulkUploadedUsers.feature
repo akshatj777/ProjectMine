@@ -14,8 +14,8 @@ Feature: Edit bulk uploaded users
 
   Scenario Outline: <Description>
     Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account
-    Then I enter password "1Welcome2" to login mail account
+    Then I enter username "qaautomation@remedysystems.com" to login mail account
+    Then I enter password "9h$00v3T$dF@OPn0" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -27,11 +27,11 @@ Feature: Edit bulk uploaded users
       | Verify email for Leader User                          | Super Admin | Leader                          |
       | Verify email Manager User                             | Super Admin | Manager                         |
       | Verify email for Advanced Operator User               | Super Admin | Advanced Operator               |
-      | Verify eail for Physicians User                       | Super Admin | Physicians                      |
-      | Vrify email for Remedy TCS User                       | Super Admin | Remedy TCS                      |
+      | Verify email for Physicians User                      | Super Admin | Physicians                      |
+      | Verify email for Remedy TCS User                      | Super Admin | Remedy TCS                      |
       | Verify email for Remedy LPN User                      | Super Admin | Remedy LPN                      |
       | Verify email for Remedy RN User                       | Super Admin | Remedy RN                       |
-      | Verify eail for Remedy Field RN User                  | Super Admin | Remedy Field RN                 |
+      | Verify email for Remedy Field RN User                 | Super Admin | Remedy Field RN                 |
       | Verify email for Remedy PM User                       | Super Admin | Remedy PM                       |
       | Verify email for Remedy Sales Team User               | Super Admin | Remedy Sales Team               |
       | Verify email for Remedy Executive User                | Super Admin | Remedy Executive                |
