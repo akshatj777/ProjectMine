@@ -1,7 +1,7 @@
 Feature: Program Performance Overview Dashboard
 
   @RowLevelSecurity
-  Scenario Outline: Front end Data Filter
+  Scenario Outline: Front end Data Filter Validation for last 12 Months
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login
@@ -63,7 +63,7 @@ Feature: Program Performance Overview Dashboard
     And I fetch and store "Model" filter values on "program performance" dashboard
     And I select "<Model>" checkbox in "Model" filter on "Program overview" dashboard
     And I click "Model" Filter on the "program performance - <Model>" dashboard
-    ##MODEL
+    ##Anchor FAcility
     And I click "Anchor Facility Detail" Filter on the "program performance - <Anchor Facility Detail>" dashboard
     And I fetch and store "Anchor Facility Detail" filter values on "program performance" dashboard
     And I select "<Anchor Facility Detail>" checkbox in "Anchor Facility Detail" filter on "Program overview" dashboard
@@ -71,8 +71,9 @@ Feature: Program Performance Overview Dashboard
     And I save the values of row filters in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID     | CCN        | Bundle     | Region - Market | Remedy Region - Market | Participant | DRG        | Physician - NPI | Model      | Anchor Facility Detail |
-      | Qadashboardtest@yopmail.com |   1 | True All | Click&Skip | Click&Skip | Click&Skip      | Click&Skip             | Click&Skip  | Click&Skip | Click&Skip      | Click&Skip | Click&Skip             |
+      | User                          | Row | BPID     | CCN        | Bundle   | Region - Market | Remedy Region - Market | Participant | DRG        | Physician - NPI | Model      | Anchor Facility Detail |
+      | QARemedyOtherTest@yopmail.com |   1 | True All | True All   | True All | True All        | True All               | True All    | True All   | True All        | Click&Skip | Click&Skip             |
+      | QARemedyOtherTest@yopmail.com |   2 | True All | Click&Skip | True All | Click&Skip      | True All               | True All    | Click&Skip | True All        | True All   | True All               |
 
   @RowLevelSecurity
   Scenario: Execute JMX file and read Output data for Data Filter Validations
@@ -87,8 +88,8 @@ Feature: Program Performance Overview Dashboard
     Then I verify "Episode Initiator - BPID" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Anchor Facility - CCN" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Bundle" for DB and FE filter values at "<Row>" for "EC"
-    Then I verify "Region - Market" for DB and FE filter values at "<Row>" for "EC"
-    Then I verify "Remedy Region - Market" for DB and FE filter values at "<Row>" for "EC"
+    #Then I verify "Region - Market" for DB and FE filter values at "<Row>" for "EC"
+    #Then I verify "Remedy Region - Market" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Participant" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "DRG" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Physician - NPI" for DB and FE filter values at "<Row>" for "EC"
@@ -97,6 +98,7 @@ Feature: Program Performance Overview Dashboard
     Examples: 
       | Index | Row |
       |     0 |   1 |
+      |     1 |   2 |
 
   @Claims
   Scenario Outline: Execute Filter combinations to Validate Data Metrics on Front End - For Claims
