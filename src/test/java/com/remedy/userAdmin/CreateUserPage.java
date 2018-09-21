@@ -2720,7 +2720,7 @@ public void iUnselectAllSelectedApps(){
 		 driver.findElement(By.xpath("//i[@class='close icon']")).click();
 	 }
 	 public void iVerifyTheLocationsAreNotPresentInSelectLocationsSection (String text){
-	delay();
+		 longDelay();
 		 if(!(text.isEmpty())){
 			 if(isElementPresentOnPage(By.xpath("//h5[text()='Selected Locations:']"))==true){
 		 if(text.contains(",")){
