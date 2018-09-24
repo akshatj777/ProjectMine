@@ -33,6 +33,8 @@ Feature: Search the LTCH organizations functionality tests
 
     Examples: 
       | Description                                              | Has_MO | SearchParam    |
+      | Search LTCH Organization with LTCH Org id - With MO      | YES    | LTCH_Id        |
+      | Search LTCH Organization with LTCH Org id - Without MO   | NO     | LTCH_Id        |
       | Search LTCH Organization with CCN  - With MO             | YES    | CCN            |
       | Search LTCH Organization with CCN  - Without MO          | NO     | CCN            |
       | Search LTCH Organization with LTCH Org Name - With MO    | YES    | LTCHNAME       |
@@ -53,12 +55,14 @@ Feature: Search the LTCH organizations functionality tests
     Then I search "<SearchParam>" and verify with search list options on Location in "<LTCH_Name> - <Has_MO>" profile page
 
     Examples: 
-      | Description                                     | Has_MO | LTCH_Name | SearchParam             |
-      | Searching Location Name on LTCH Profile Page    | YES    | LTCHNAME  | Loc_Name                |
-      | Searching Location Address on LTCH Profile Page | YES    | LTCHNAME  | Loc_Address1            |
-      | Searching Location Type on LTCH Profile Page    | NO     | LTCHNAME  | Long Term Care Hospital |
-      | Searching Location Region on LTCH Profile Page  | NO     | LTCHNAME  | Midwest                 |
-      | Searching Location Matket on LTCH Profile Page  | NO     | LTCHNAME  | Chicago                 |
+      | Description                                      | Has_MO | LTCH_Name | SearchParam             |
+      | Searching Location index id on LTCH Profile Page | YES    | LTCHNAME  | LocIndexId              |
+      | Searching Location index id on LTCH Profile Page | NO     | LTCHNAME  | LocIndexId              |
+      | Searching Location Name on LTCH Profile Page     | YES    | LTCHNAME  | Loc_Name                |
+      | Searching Location Address on LTCH Profile Page  | YES    | LTCHNAME  | Loc_Address1            |
+      | Searching Location Type on LTCH Profile Page     | NO     | LTCHNAME  | Long Term Care Hospital |
+      | Searching Location Region on LTCH Profile Page   | NO     | LTCHNAME  | Midwest                 |
+      | Searching Location Matket on LTCH Profile Page   | NO     | LTCHNAME  | Chicago                 |
 
   Scenario Outline: <Description>
     Given I am on the login page

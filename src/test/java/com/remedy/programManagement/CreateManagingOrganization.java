@@ -406,6 +406,52 @@ public class CreateManagingOrganization extends BaseClass {
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 		
+		else if(org.equals("FETCHFROMAPIForIRFNAME - YES")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreateIRFOrganization.tempIRFOrg.isEmpty())
+				{
+					CreateIRFOrganizationAPI.IRFNameList.set(0, CreateIRFOrganization.tempIRFOrg.get("IRFNAME"));
+					CreateIRFOrganizationAPI.tempIRFOrg.clear();
+				}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(org.equals("FETCHFROMAPIForIRFNAME - NO")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreateIRFOrganization.tempIRFOrg.isEmpty())
+			{
+				CreateIRFOrganizationAPI.IRFNameList.set(1, CreateIRFOrganization.tempIRFOrg.get("IRFNAME"));
+				CreateIRFOrganizationAPI.tempIRFOrg.clear();
+			}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		
+		else if(org.equals("FETCHFROMAPIForHOSPICENAME - YES")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreateHospiceOrganization.tempHospiceOrg.isEmpty())
+				{
+					CreateHospiceOrganizationAPI.HospiceNameList.set(0, CreateHospiceOrganization.tempHospiceOrg.get("HOSPICENAME"));
+					CreateHospiceOrganizationAPI.tempHospiceOrg.clear();
+				}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(org.equals("FETCHFROMAPIForHOSPICENAME - NO")){
+			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));
+			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>a")), msg);
+			
+			if(!CreateHospiceOrganization.tempHospiceOrg.isEmpty())
+			{
+				CreateHospiceOrganizationAPI.HospiceNameList.set(1, CreateHospiceOrganization.tempHospiceOrg.get("HOSPICENAME"));
+				CreateHospiceOrganizationAPI.tempHospiceOrg.clear();
+			}
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		
 		else if(org.contains("MO"))
 			{
 				iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>a"));

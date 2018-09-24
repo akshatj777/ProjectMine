@@ -26,6 +26,7 @@ Feature: Search the Managing organization functionality test
       | Search Managing Organization with City                  | City        |
       | Search Managing Organization with Managing Organization | MONAME      |
       | Search Managing Organization with Paticipant ID         | PID         |
+      | Search Managing Organization with ID                    | MO_ID       |
 
   Scenario Outline: Search for a managing organization after editing the Managing organization name
     Given I am on the login page

@@ -154,7 +154,7 @@ public class CreatePractictionerAPI extends BaseClass{
 	 
 	 public void getById(Long idToGet, String type) throws Throwable {
 	        String urlExt = "";
-	        if (type.equals("management") || type.equals("hospital") || type.equals("ltch") || type.equals("snf") || type.equals("pgp") || type.equals("payor") || type.equals("hha")) {
+	        if (type.equals("management") || type.equals("hospital") || type.equals("ltch") || type.equals("snf") || type.equals("pgp") || type.equals("payor") || type.equals("hha") || type.equals("irf") || type.equals("hospice")) {
 	            urlExt = "organization/";
 	        } else if (type.equals("bundle")) {
 	            urlExt = "bundle/";

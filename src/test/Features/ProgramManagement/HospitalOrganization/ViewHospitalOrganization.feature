@@ -56,6 +56,12 @@ Feature: Hospital Organization View profile Functionality tests.
     And I verify header name "Type" under "Location" for "Hospital" organization
     And I verify header name "Region" under "Location" for "Hospital" organization
     And I verify header name "Market" under "Location" for "Hospital" organization
+    And I verify Location index id "<LID>" on view profile of "<Hosp_Name> - <Has_MO>" organization
+    Then I verify Location details of "<Loc_Name>" on view profile of "Hospital" organization
+    Then I verify Location details of "<Loc_Address1>" on view profile of "Hospital" organization
+    Then I verify Location details of "<Loc_Type>" on view profile of "Hospital" organization
+    Then I verify Location details of "<Loc_Region>" on view profile of "Hospital" organization
+    Then I verify Location details of "<Loc_Market>" on view profile of "Hospital" organization
     And I Verify the "Edit" button on View page
     And I click on "Edit" button on particular organization
     Then I click on "+" button on "Edit Hospital" organization page
@@ -75,10 +81,11 @@ Feature: Hospital Organization View profile Functionality tests.
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
     And I verify "<Hosp_Name> - <Has_MO>" name on the header of view profile
     And I verify "2" location count on view "Hospital" organization page
+    And I verify Location index id "<LID>" on view profile of "<Hosp_Name> - <Has_MO>" organization
 
     Examples: 
-      | Description                                                                                    | Has_MO | Hosp_Name | Address1 | Short_Name | Address2 | City           | State      | Postal_Code | Loc_Name   | Loc_Address1 | Loc_Type  | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN/TIN | NPI | StateVerification | Organization Type | Message                                     |
-      | Verification of Hospital details and count of locations displayed under Hospital org - with MO | YES    | ACHNAME   | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name21 | Loc_Address1 | Inpatient | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN     | NPI | CA                | ACH               | Hospital Organization Successfully Updated. |
+      | Description                                                                                    | Has_MO | Hosp_Name | Address1 | Short_Name | Address2 | City           | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN/TIN | NPI | StateVerification | Organization Type | LID | Message                                     |
+      | Verification of Hospital details and count of locations displayed under Hospital org - with MO | YES    | ACHNAME   | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name | Loc_Address1 | General  | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN     | NPI | CA                | ACH               |     | Hospital Organization Successfully Updated. |
 
   Scenario Outline: <Description>
     Given I am on the login page

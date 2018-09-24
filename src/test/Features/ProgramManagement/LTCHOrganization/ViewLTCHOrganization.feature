@@ -56,6 +56,7 @@ Feature: LTCH Organization View profile Functionality tests.
     And I verify header name "Type" under "Location" for "LTCH" organization
     And I verify header name "Region" under "Location" for "LTCH" organization
     And I verify header name "Market" under "Location" for "LTCH" organization
+    And I verify Location index id "<LID>" on view profile of "<LTCH_Name> - <Has_MO>" organization
     And I Verify the "Edit" button on View page
     And I click on "Edit" button on particular organization
     Then I click on "+" button on "Edit LTCH" organization page
@@ -75,6 +76,7 @@ Feature: LTCH Organization View profile Functionality tests.
     And I click "<LTCH_Name> - <Has_MO>" field in search list on organization page
     And I verify "<LTCH_Name> - <Has_MO>" name on the header of view profile
     And I verify "2" location count on view "LTCH" organization page
+    And I verify Location index id "<LID>" on view profile of "<LTCH_Name> - <Has_MO>" organization
 
     Examples: 
       | Description                                                                            | Has_MO | LTCH_Name | Address1 | Short_Name | Address2 | City           | State      | Postal_Code | Loc_Name   | Loc_Address1 | Loc_Type                | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN/TIN | NPI | StateVerification | Organization Type       | Message                                 |

@@ -22,6 +22,7 @@ Feature: Create PGP organization functionality tests.
     Then I verify the Search bar on "PGP" organization page
     Then I verify "+" button under "PGP" organization page
     And I verify "TIN/EIN" header label under "PGP" organization
+    And I verify "Database ID" header label under "PGP" organization
     And I verify "PGP Organization Name" header label under "PGP" organization
     And I verify "City" header label under "PGP" organization
     And I verify "State" header label under "PGP" organization

@@ -21,6 +21,7 @@ Feature: Create SNF organization functionality tests
     When I click on "SNF" organization tab on organization dashboard
     Then I verify "+" button under "SNF" organization page
     And I verify "CCN" header label under "SNF" organization
+    And I verify "Database ID" header label under "SNF" organization
     And I verify "SNF Organization Name" header label under "SNF" organization
     And I verify "City" header label under "SNF" organization
     And I verify "State" header label under "SNF" organization

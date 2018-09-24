@@ -21,6 +21,7 @@ Feature: Create IRF Organization functionality tests
     When I click on "IRF" organization tab on organization dashboard
     Then I verify "+" button under "IRF" organization page
     And I verify "CCN" header label under "IRF" organization
+    And I verify "Database ID" header label under "IRF" organization
     And I verify "IRF Organization Name" header label under "IRF" organization
     And I verify "City" header label under "IRF" organization
     And I verify "State" header label under "IRF" organization

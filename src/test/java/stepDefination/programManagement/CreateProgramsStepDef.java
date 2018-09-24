@@ -194,4 +194,29 @@ public class CreateProgramsStepDef extends DriverScript{
 	  public void i_Verify_Auto_Incremented_CID(String text) throws Throwable {
 		 programs.iVerifyAutoIncrementedCID(text);
 	    }
+	 
+	 @And("^I verify the sub headline of \"([^\"]*)\"$")
+	  public void i_Verify_The_SubHeadline_Of_Attribution_Rules_And_ValidationRanks_On_Create_Program_Page(String text) throws Throwable {
+		programs.iVerifyTheSubHeadlineOfAttributionRulesAndValidationRanksOnCreateProgramPage(text);
+	    }
+	 
+	 @And("^I verify \"([^\"]*)\" validation ranks on \"([^\"]*)\" program page$")
+	  public void i_Verify_Validation_Rankss_On_Create_Program_Page(String text, String act) throws Throwable {
+		programs.iVerifyAttributionRulesOnCreateProgramPage(text,act);
+	    }
+	 
+	 @And("^I verify the \"([^\"]*)\" checkbox$")
+	  public void i_Verify_MultipleBundleEpisode_CheckBox(String text) throws Throwable {
+		programs.iVerifyMultipleBundleEpisodeCheckBox(text);
+	    }
+	 
+	 @And("^I click on checkbox for \"([^\"]*)\"$")
+	  public void i_Click_On_CheckBox_For_MultipleBundleEpisode(String text) throws Throwable {
+		programs.iClickOnCheckBoxForMultipleBundleEpisode(text);
+	    }
+	 
+	 @And("^I uncheck for \"([^\"]*)\" Attribution rule$")
+	  public void i_UnCheck_For_Attribution_Rules_On_Create_Programs(String text) throws Throwable {
+		programs.iUnCheckForAttributionRulesOnCreatePrograms(text);
+	    }
 }
