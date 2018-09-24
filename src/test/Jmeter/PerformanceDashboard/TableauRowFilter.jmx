@@ -119,6 +119,7 @@ if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;C_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);		
 } else{
 	vars.put(&quot;EC_R_MARKET&quot;,&quot;&quot;);
+	vars.put(&quot;C_R_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_REGION&quot;,&quot;and prm.region in  ${region}&quot;);
@@ -607,8 +608,8 @@ FROM
 	
 	-- CLAIMS
 	SELECT DISTINCT
-        rmp.region, rmp.market,
-        CONCAT(rmp.region,&apos; - &apos;, rmp.market) as &apos;PartnerRegionMarket&apos;
+        prm.region, prm.market,
+        CONCAT(prm.region,&apos; - &apos;, prm.market) as &apos;PartnerRegionMarket&apos;
     FROM
         warehouse.factClaims c
     LEFT JOIN warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
@@ -774,6 +775,7 @@ FROM
     FROM
         warehouse.factPatientEpisode fp
     LEFT JOIN warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
+    LEFT JOIN warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK 
     LEFT JOIN warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
     LEFT JOIN warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
     LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
@@ -898,6 +900,7 @@ FROM
     LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK
     LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey
     LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey
+    LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
     LEFT JOIN
 		(SELECT f.facilitySK, f.ccn,f.facilityName, 
 				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
@@ -953,6 +956,7 @@ FROM
     LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK
     LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK
     LEFT JOIN warehouse.dimRegionMarket prm ON c.rgPartnerKey = prm.rgSK
+    LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK
      INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM warehouse.tabUserSecurityBPID
 		WHERE username = ${userName} GROUP BY bpid) tbsBPID ON e.BPID = tbsBPID.bpid
@@ -1365,6 +1369,13 @@ System.out.println(&quot;facilityNameInitCap:&quot;+al_facilityNameInitCap.toStr
           </BeanShellPreProcessor>
           <hashTree/>
         </hashTree>
+        <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="false">
+          <boolProp name="resetInterpreter">false</boolProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="script">echo *Episode Initiator - BPID=${value1}*Anchor Facility - CCN=${value2}*Bundle=${value3}*Region - Market=${value5}*Remedy Region - Market=${value4}*Participant=${value6}*DRG=${value7}*Physician - NPI=${value8}*Model=${value9}*Anchor Facility Detail=${value10}&gt;&gt; RowFilterOutput.txt</stringProp>
+        </BeanShellPostProcessor>
+        <hashTree/>
       </hashTree>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>

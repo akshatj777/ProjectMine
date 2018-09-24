@@ -1430,7 +1430,9 @@ public class ProgramPerformance extends BaseClass{
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='wcGlassPane' and contains(@style,'cursor: wait;')]")));
 		 longDelay();
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+		 if(driver.findElements(By.xpath("div[@id='tabZoneId225']")).size()>0) {
 		 scrollIntoViewByJS(driver.findElement(By.xpath("//div[@id='tabZoneId225']")));
+		 }
 		 driver.switchTo().defaultContent();
 		 scrollToTopOfThePage();
 	 }
@@ -1752,12 +1754,13 @@ public class ProgramPerformance extends BaseClass{
 			          
 				 
 			 }else if(checkbox.contains("All")){
+				 executor.executeScript("arguments[0].click();", elem);
 				 for(int i =1;i<listItems.size();i++){
 						String val=listItems.get(i).getText();
 						
 						if(filter.equals("BPID") || filter.equals("CCN") || filter.equals("Physician - NPI")){
 							if(val.equals("Null")){
-	                       		  driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+//	                       		  driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
 	                       		  val="'"+val+"'";
 	                       		  arrayListTexts.add(val);
 	                       		  continue;
@@ -1765,27 +1768,28 @@ public class ProgramPerformance extends BaseClass{
 							for (int itr=0;itr<=val.length();itr++) {
                 	        val=val.substring(val.indexOf("- ")+1).trim();
                 	       // writeDataToOutputFile("Path");
-                	       }driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+                	       }
+//							driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
                 	       val="'"+val+"'";
    						   arrayListTexts.add(val);}
 						 else if(filter.equals("DRG")){
                 	    	 val=val.substring(val.length() - 4);
                           	 val=val.replaceAll("[()]","");  
-                          	 driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+//                          	 driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
                           	 System.out.println("Drg fracture value is"+val);
                           	val="'"+val+"'";
     						arrayListTexts.add(val);
-                	       }else if (filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
+                	       }else if (filter.equals("Region - Market") || filter.equals("Remedy Region - Market") || filter.equals("Region Market") || filter.equals("Remedy Region Market")){
                 	    	   if(val.equals("Null")){
   			            		 val=val.trim();
-  			            		 driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+//  			            		 driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
   			            		 val="'"+val+"'";
   								 arrayListTexts.add(val);
   			            	 }else{
   			            		String valA = null;
   								String valB= null;
   								val=val.substring(val.indexOf("-")+1).trim(); 
-  								driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+//  								driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
   							    String[] valarr=val.split("-");
                            	    valA=valarr[0];
                            	    valB=valarr[1];
@@ -1801,7 +1805,7 @@ public class ProgramPerformance extends BaseClass{
                 	       }
                 	       else{
                 	    	     val=val.trim();
-			            		 driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+//			            		 driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
 			            		 val="'"+val+"'";
 								 arrayListTexts.add(val);
                 	       }
@@ -1811,7 +1815,7 @@ public class ProgramPerformance extends BaseClass{
 			 
 		 }
 		 else{
-			 if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
+			 if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market") || filter.equals("Region Market") || filter.equals("Remedy Region Market")){
 				 for(int k=0;k<2;k++){
 					 arrayListTexts.add("Skip");
 					 writeDataToOutputFile("Path");
@@ -1821,7 +1825,7 @@ public class ProgramPerformance extends BaseClass{
 			 return;
 					 }
 		 }
-		 if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
+		 if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market") || filter.equals("Region Market") || filter.equals("Remedy Region Market")){
 			 if(arrayListTextsA.size()==1 && arrayListTextsA.contains("Null")){
 				 for(int i=0;i<2;i++){
 				 arrayListTexts.add("Null");
@@ -1858,9 +1862,14 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void writeDataToOutputFile(String path) throws FileNotFoundException {
+		 if(!path.equals("Date_Range")) {
 		 writer.print("("+arrayListTexts.toString().replace("]", "").replace("[", "").trim()+")|");
+		 }else {
+			 writer.print(arrayListTexts.toString().replace("]", "").replace("[", "").trim()+"|");
+		 }
+		 System.out.println("Values in arrayList Before Clear"+arrayListTexts.toString());
 		 arrayListTexts.clear();
-		 System.out.println("Values in arrayList"+arrayListTexts.toString());
+		 System.out.println("Values in arrayList After Clear"+arrayListTexts.toString());
 	 }
 	 
 	 public void iVerifyDBandFEForMetrics(String text,String row,String data){
@@ -1934,12 +1943,12 @@ public class ProgramPerformance extends BaseClass{
 		 rowFilters.put(filter, values.toString());
 	 }
 	 
-	 public void igetDateForDataFetchedForDashboard() throws FileNotFoundException{
+	 public void igetDateForDataFetchedForDashboard(String range) throws FileNotFoundException{
 		 String dateFetched = driver.findElement(By.xpath("//span[@dojoattachpoint='domPreview']")).getAttribute("textContent").trim();
 		 getDateFForDB(dateFetched, "StartDate");
 		 getDateFForDB(dateFetched, "EndDate");
-		 arrayListTexts.add("'12'");
-		writeDataToOutputFile("Path");
+		 arrayListTexts.add(range);
+		writeDataToOutputFile("Date_Range");
 	 }
 	 
 	 public void getDateFForDB(String dat,String range) throws FileNotFoundException{
