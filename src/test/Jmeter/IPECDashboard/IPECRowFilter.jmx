@@ -746,34 +746,6 @@ al_participant.add(vars.get(&quot;participantName_&quot;+i));
 }
 vars.put(&quot;value6&quot;,&quot;\&quot;&quot;+al_participant.toString()+&quot;\&quot;&quot;);
 System.out.println(&quot;Participant:&quot;+al_participant.toString());
-
-ArrayList al_DRG_Fracture = new ArrayList();
-for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;DRG_Fracture_#&quot;));i++){
-al_DRG_Fracture.add(vars.get(&quot;DRG_Fracture_&quot;+i));
-}
-vars.put(&quot;value7&quot;,&quot;\&quot;&quot;+al_DRG_Fracture.toString()+&quot;\&quot;&quot;);
-System.out.println(&quot;DRG_Fracture:&quot;+al_DRG_Fracture.toString());
-
-ArrayList al_Physician_NPI = new ArrayList();
-for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;Physician_NPI_#&quot;));i++){
-al_Physician_NPI.add(&quot;\&quot;&quot;+vars.get(&quot;Physician_NPI_&quot;+i)+&quot;\&quot;&quot;);
-}
-vars.put(&quot;value8&quot;,&quot;\&quot;&quot;+al_Physician_NPI.toString()+&quot;\&quot;&quot;);
-System.out.println(&quot;Physician_NPI:&quot;+al_Physician_NPI.toString());
-
-ArrayList al_model = new ArrayList();
-for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;model_#&quot;));i++){
-al_model.add(vars.get(&quot;model_&quot;+i));
-}
-vars.put(&quot;value9&quot;,&quot;\&quot;&quot;+al_model.toString()+&quot;\&quot;&quot;);
-System.out.println(&quot;model:&quot;+al_model.toString());
-
-ArrayList al_facilityNameInitCap = new ArrayList();
-for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;facilityNameInitCap_#&quot;));i++){
-al_facilityNameInitCap.add(&quot;\&quot;&quot;+vars.get(&quot;facilityNameInitCap_&quot;+i)+&quot;\&quot;&quot;);
-}
-vars.put(&quot;value10&quot;,&quot;\&quot;&quot;+al_facilityNameInitCap.toString()+&quot;\&quot;&quot;);
-System.out.println(&quot;facilityNameInitCap:&quot;+al_facilityNameInitCap.toString());
 </stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
