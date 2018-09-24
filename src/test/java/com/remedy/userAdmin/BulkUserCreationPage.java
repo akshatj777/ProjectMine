@@ -1367,7 +1367,7 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("RPMMAIL", email);
 			strUserData = strUserData.replace(
 					"|NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1 | | False| True | True | True | True | True | False |False | False|True",
-					"|NFdw0Kts2C01 | | False| True | True | False | True | False | False |False | False|False");
+					"|NFdw0Kts2C01 | | False| True | True | True | False | False | False |False | False|False");
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
 			applicationsList.put("Remedy PM", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute");
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy PM", applicationsList);
