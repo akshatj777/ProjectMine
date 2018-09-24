@@ -97,7 +97,7 @@ public class BulkUserCreationPage extends BaseClass {
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Physicians", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RTCSMAIL", "qaautomation+'" + randomString + "@remedysystems.com");
+		strUserData = strUserData.replace("RTCSMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
 		applicationsList.put("Remedy TCS", "Episode Connect, Episode Connect for Post-acute Care, Community Connect, Care Connect, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
@@ -1266,7 +1266,7 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("AdvancedOperatorLastName", "LastNameEdited");
 			strUserData = strUserData.replace("9879800980", "9879800978");
 
-			strUserData = strUserData.replace("|3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1  | | True|  |  |  |  |  |  | | |","|  | | | True |  |  |  |  |  | | |");
+			strUserData = strUserData.replace("|3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1  | | True|  |  |  |  |  |  | | |","|  | |False | True |  |  |  |  |  | | |");
 
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
 			applicationsList.put("Advanced Operator", "Episode Connect, Episode Connect Classic, Care Innovation Institute");
@@ -1367,7 +1367,7 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("RPMMAIL", email);
 			strUserData = strUserData.replace(
 					"|NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1 | | False| True | True | True | True | True | False |False | False|True",
-					"|NFdw0Kts2C01 | | False| True | True | False | False | False | False |False | False|False");
+					"|NFdw0Kts2C01 | | False| True | True | False | True | False | False |False | False|False");
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
 			applicationsList.put("Remedy PM", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute");
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy PM", applicationsList);
