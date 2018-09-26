@@ -96,7 +96,7 @@ Feature: PTA UI Scenarios
 
     Examples: 
       | Role   | Applications                                                  | LearningPathwayName |
-      | Leader | Episode Connect Classic, Reporting Classic, Remedy University | Test123             |
+      | Leader | Episode Connect Classic, Reporting Classic, Remedy University | New learning Path             |
 
   Scenario: Verify the functionality of back/Cancel button and tabs on the left on create user page
     Given I am on the login page
