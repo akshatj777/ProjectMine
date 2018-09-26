@@ -124,9 +124,11 @@ Feature: Program Performance Overview Dashboard
     And I switch to analytics iframe
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsMetricsInput.csv" for writing data at "<Row>" to input file
     Then I verify "Program Performance" text is appearing inside dashboard
-    And I click "Time" Filter on the "program performance - <BPID>" dashboard
-    Then I set "Time" as "previous year" in Time field on dashboard
-    And I click "Time" Filter on the "program performance - <BPID>" dashboard
+    Then I set "Start Date" as "1/1/2016 " in Date field on dashboard
+    Then I set "End Date" as "ClaimsCubeDate" in Date field on dashboard
+    #And I click "Time" Filter on the "program performance - <BPID>" dashboard
+    #Then I set "Time" as "previous year" in Time field on dashboard
+    #And I click "Time" Filter on the "program performance - <BPID>" dashboard
     #BPID
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
     And I select "<BPID>" checkbox in "BPID" filter on "Program overview" dashboard
@@ -239,10 +241,12 @@ Feature: Program Performance Overview Dashboard
     And I switch to analytics iframe
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ECMetricsInput.csv" for writing data at "<Row>" to input file
     Then I verify "Program Performance" text is appearing inside dashboard
-    And I click "Time" Filter on the "program performance - <BPID>" dashboard
-    Then I set "Time" as "last 3 months" in Time field on dashboard
-    And I get the date "3 MONTH" for Data fetched for dashboard
-    And I click "Time" Filter on the "program performance - <BPID>" dashboard
+    Then I set "Start Date" as "4/1/2018" in Date field on dashboard
+    Then I set "End Date" as "Today" in Date field on dashboard
+    #And I click "Time" Filter on the "program performance - <BPID>" dashboard
+    #Then I set "Time" as "last 3 months" in Time field on dashboard
+    #And I get the date "3 MONTH" for Data fetched for dashboard
+    #And I click "Time" Filter on the "program performance - <BPID>" dashboard
     # BPID
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
     And I select "<BPID>" checkbox in "BPID" filter on "Program overview" dashboard
@@ -355,9 +359,11 @@ Feature: Program Performance Overview Dashboard
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
     Then I verify "Program Performance" text is appearing inside dashboard
-    And I click "Time" Filter on the "program performance - <BPID>" dashboard
-    And I get the date "12 MONTH" for Data fetched for dashboard
-    And I click "Time" Filter on the "program performance - <BPID>" dashboard
+     Then I set "Start Date" as "ECStartDate " in Date field on dashboard
+    Then I set "End Date" as "Today" in Date field on dashboard
+    #And I click "Time" Filter on the "program performance - <BPID>" dashboard
+    #And I get the date "12 MONTH" for Data fetched for dashboard
+    #And I click "Time" Filter on the "program performance - <BPID>" dashboard
     #BPID
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
     And I select "<BPID>" checkbox in "BPID" filter on "Program overview" dashboard
