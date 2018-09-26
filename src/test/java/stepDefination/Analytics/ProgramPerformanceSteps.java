@@ -522,12 +522,12 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iVerifyDBandFEForMetrics(text,row,data);
 	}
 	
-	@And("^I open file \"([^\"]*)\" for writting data at \"([^\"]*)\" to input file$")
+	@And("^I open file \"([^\"]*)\" for writing data at \"([^\"]*)\" to input file$")
 	public void i_open_file_after_writing_data_to_input_fileInputFile(String path,String row) throws Throwable{
 		programdashboard.iOpenTheInputFile(path,row);
 	}
 	
-	@And("^I close the file for after writting data to input file$")
+	@And("^I close the file for after writing data to input file$")
 	public void i_close_file_after_writing_data_to_input_fileInputFile() throws Throwable{
 		programdashboard.iCloseTheInputFile();
 	}
@@ -552,8 +552,8 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iFetchStoreValuesOnDashboard(filter, dashboard);
 	}
 	
-	@And("^I get the date for Data fetched for dashboard$")
-	public void i_get_the_date_for_data_fetched_for_dashboard() throws Throwable{
-		programdashboard.igetDateForDataFetchedForDashboard();
+	@And("^I get the date \"([^\"]*)\" for Data fetched for dashboard$")
+	public void i_get_the_date_for_data_fetched_for_dashboard(String range) throws Throwable{
+		programdashboard.igetDateForDataFetchedForDashboard(range);
 	}
 }

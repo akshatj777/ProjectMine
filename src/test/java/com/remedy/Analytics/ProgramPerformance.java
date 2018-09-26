@@ -1429,7 +1429,9 @@ public class ProgramPerformance extends BaseClass{
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='wcGlassPane' and contains(@style,'cursor: wait;')]")));
 		 longDelay();
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+		 if(driver.findElements(By.xpath("div[@id='tabZoneId225']")).size()>0) {
 		 scrollIntoViewByJS(driver.findElement(By.xpath("//div[@id='tabZoneId225']")));
+		 }
 		 driver.switchTo().defaultContent();
 		 scrollToTopOfThePage();
 	 }
@@ -1832,6 +1834,7 @@ public class ProgramPerformance extends BaseClass{
 		 delay();
 		
 	 }
+
 	 
 	 public void iOpenTheInputFile(String path,String row) throws FileNotFoundException{
 		 if(row.equals("1")){
@@ -1844,9 +1847,14 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void writeDataToOutputFile(String path) throws FileNotFoundException {
+		 if(!path.equals("Date_Range")) {
 		 writer.print("("+arrayListTexts.toString().replace("]", "").replace("[", "").trim()+")|");
+		 }else {
+			 writer.print(arrayListTexts.toString().replace("]", "").replace("[", "").trim()+"|");
+		 }
+		 System.out.println("Values in arrayList Before Clear"+arrayListTexts.toString());
 		 arrayListTexts.clear();
-		 System.out.println("Values in arrayList"+arrayListTexts.toString());
+		 System.out.println("Values in arrayList After Clear"+arrayListTexts.toString());
 	 }
 	 
 	 public void iVerifyDBandFEForMetrics(String text,String row,String data){
@@ -1923,12 +1931,12 @@ public class ProgramPerformance extends BaseClass{
 		 rowFilters.put(filter, values.toString());
 	 }
 	 
-	 public void igetDateForDataFetchedForDashboard() throws FileNotFoundException{
+	 public void igetDateForDataFetchedForDashboard(String range) throws FileNotFoundException{
 		 String dateFetched = driver.findElement(By.xpath("//span[@dojoattachpoint='domPreview']")).getAttribute("textContent").trim();
 		 getDateFForDB(dateFetched, "StartDate");
 		 getDateFForDB(dateFetched, "EndDate");
-		 arrayListTexts.add("'12'");
-		writeDataToOutputFile("Path");
+		 arrayListTexts.add(range);
+		writeDataToOutputFile("Date_Range");
 	 }
 	 
 	 public void getDateFForDB(String dat,String range) throws FileNotFoundException{

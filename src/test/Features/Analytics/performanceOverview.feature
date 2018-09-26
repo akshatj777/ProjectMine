@@ -12,12 +12,12 @@ Feature: Program Performance Overview Dashboard
     And I switch to analytics iframe
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
-    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInput.csv" for writting data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInput.csv" for writing data at "<Row>" to input file
     And I perform test with "<User>" user in Analytics
     ##Time
     And I click "Time" Filter on the "program performance" dashboard
     And I click "Time" Filter on the "program performance" dashboard
-    And I get the date for Data fetched for dashboard
+    And I get the date "12 MONTH" for Data fetched for dashboard
     ##BPID
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
     And I fetch and store "Episode Initiator - BPID" filter values on "program performance" dashboard
@@ -71,19 +71,24 @@ Feature: Program Performance Overview Dashboard
     And I save the values of row filters in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                          | Row | BPID     | CCN        | Bundle   | Region - Market | Remedy Region - Market | Participant | DRG        | Physician - NPI | Model      | Anchor Facility Detail |
-      | QARemedyOtherTest@yopmail.com |   1 | True All | True All   | True All | True All        | True All               | True All    | True All   | True All        | Click&Skip | Click&Skip             |
-      | QARemedyOtherTest@yopmail.com |   2 | True All | Click&Skip | True All | Click&Skip      | True All               | True All    | Click&Skip | True All        | True All   | True All               |
+      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG         | Physician - NPI | Model      | Anchor Facility Detail |
+      | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Click&Skip      | Click&Skip             | True All    | True All    | True All        | Click&Skip | Click&Skip             |
+      | Qatwodashtest@yopmail.com   |   2 | True All    | Click&Skip  | True All    | Click&Skip      | Click&Skip             | True All    | Click&Skip  | True All        | True All   | True All               |
+      | Qadashboardtest@yopmail.com |   3 | True All    | True All    | Click&Skip  | Click&Skip      | Click&Skip             | Click&Skip  | True All    | True All        | True All   | True All               |
+      | Qafivedashtest@yopmail.com  |   4 | True Random | True All    | True Random | Click&Skip      | Click&Skip             | True All    | True All    | True All        | Click&Skip | Click&Skip             |
+      | Qatwodashtest@yopmail.com   |   5 | True Random | Click&Skip  | True All    | Click&Skip      | Click&Skip             | True All    | True Random | True Random     | True All   | True All               |
+      | Qadashboardtest@yopmail.com |   6 | True Random | True Random | Click&Skip  | Click&Skip      | Click&Skip             | True Random | True All    | True Random     | True All   | True All               |
+      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True Random | Click&Skip      | Click&Skip             | True Random | True Random | True Random     | True All   | True All               |
 
   @RowLevelSecurity
   Scenario: Execute JMX file and read Output data for Data Filter Validations
-    When I close the file for after writting data to input file
+    When I close the file for after writing data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterOutput.txt" Output file
     When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\PerformanceDashboard\\TableauRowFilter.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterOutput.txt"
 
   @RowLevelSecurity
-  Scenario Outline: Verify DB and FE values feteched from Scenarios
+  Scenario Outline: Verify DB and FE values fetched from Scenarios
     And I get the value "<Index>" from Output file of data filter validation
     Then I verify "Episode Initiator - BPID" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Anchor Facility - CCN" for DB and FE filter values at "<Row>" for "EC"
@@ -99,6 +104,11 @@ Feature: Program Performance Overview Dashboard
       | Index | Row |
       |     0 |   1 |
       |     1 |   2 |
+      |     2 |   3 |
+      |     3 |   4 |
+      |     4 |   5 |
+      |     5 |   6 |
+      |     6 |   7 |
 
   @Claims
   Scenario Outline: Execute Filter combinations to Validate Data Metrics on Front End - For Claims
@@ -112,7 +122,7 @@ Feature: Program Performance Overview Dashboard
     And I switch to analytics iframe
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
-    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsMetricsInput.csv" for writting data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsMetricsInput.csv" for writing data at "<Row>" to input file
     Then I verify "Program Performance" text is appearing inside dashboard
     And I click "Time" Filter on the "program performance - <BPID>" dashboard
     Then I set "Time" as "previous year" in Time field on dashboard
@@ -183,13 +193,13 @@ Feature: Program Performance Overview Dashboard
 
   @Claims
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - CLAIMS
-    When I close the file for after writting data to input file
+    When I close the file for after writing data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsMetricsOutput.txt" Output file
     When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsMetricsQuery.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsMetricsOutput.txt"
 
   @Claims
-  Scenario Outline: Verify DB and FE values feteched from Scenarios(1&2) - Claims (For Metrics Validations & Benchmark Tool Tip)
+  Scenario Outline: Verify DB and FE values fetched from Scenarios(1&2) - Claims (For Metrics Validations & Benchmark Tool Tip)
     And I get the value "<Index>" from Output file of data metric validation
     Then I verify "KPI_Episode" for DB and FE Metrics value at "<Row>" for "Claims"
     Then I verify "Savings Rate" for DB and FE Metrics value at "<Row>" for "Claims"
@@ -205,16 +215,16 @@ Feature: Program Performance Overview Dashboard
     Examples: 
       | Index | Row |
       |     0 |   1 |
+      |     1 |   2 |
+      |     2 |   3 |
+      |     3 |   4 |
+      |     4 |   5 |
+      |     5 |   6 |
+      |     6 |   7 |
+      |     7 |   8 |
+      |     8 |   9 |
+      |     9 |  10 |
 
-  |     1 |   2 |
-  |     2 |   3 |
-  |     3 |   4 |
-  |     4 |   5 |
-  |     5 |   6 |
-  |     6 |   7 |
-  |     7 |   8 |
-  |     8 |   9 |
-  |     9 |  10 |
   @EC
   Scenario Outline: Execute Filter combinations to Validate Data Metrics on Front End - For EC
     Given I am on the login page
@@ -227,11 +237,11 @@ Feature: Program Performance Overview Dashboard
     And I switch to analytics iframe
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
-    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ECMetricsInput.csv" for writting data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ECMetricsInput.csv" for writing data at "<Row>" to input file
     Then I verify "Program Performance" text is appearing inside dashboard
     And I click "Time" Filter on the "program performance - <BPID>" dashboard
     Then I set "Time" as "last 3 months" in Time field on dashboard
-    And I get the date for Data fetched for dashboard
+    And I get the date "3 MONTH" for Data fetched for dashboard
     And I click "Time" Filter on the "program performance - <BPID>" dashboard
     # BPID
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
@@ -299,19 +309,19 @@ Feature: Program Performance Overview Dashboard
 
   @EC
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - EC
-    When I close the file for after writting data to input file
+    When I close the file for after writing data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\PerformanceDashboard\\ECMetricsOutput.txt" Output file
     When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\PerformanceDashboard\\ECMetricsQuery.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\PerformanceDashboard\\ECMetricsOutput.txt"
 
   @EC
-  Scenario Outline: Verify DB and FE values feteched from Scenarios(4&5) - EC (For Metrics Validations & Benchmark Tool Tip)
+  Scenario Outline: Verify DB and FE values fetched from Scenarios(4&5) - EC (For Metrics Validations & Benchmark Tool Tip)
     And I get the value "<Index>" from Output file of data metric validation
     Then I verify "KPI_Episode" for DB and FE Metrics value at "<Row>" for "EC"
     # Then I verify "Savings Rate" for DB and FE Metrics value at "<Row>" for "EC"
     # Then I verify "KPI_Program_size" for DB and FE Metrics value at "<Row>" for "EC"
     # Then I verify "KPI_NPRA" for DB and FE Metrics value at "<Row>" for "EC"
- #   Then I verify "% SNF Disch Current" for DB and FE Metrics value at "<Row>" for "EC"
+    Then I verify "% SNF Disch Current" for DB and FE Metrics value at "<Row>" for "EC"
     Then I verify "SNF Days Current" for DB and FE Metrics value at "<Row>" for "EC"
     Then I verify "Readmissions Current" for DB and FE Metrics value at "<Row>" for "EC"
     Then I verify "% SNF Disch Benchmark Variance" for DB and FE Metrics value at "<Row>" for "EC"
@@ -341,12 +351,12 @@ Feature: Program Performance Overview Dashboard
     When I click on the "Reporting" tile
     And I click on "Performance Overview" dashboard
     And I switch to analytics iframe
-    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsECMetricsInput.csv" for writting data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsECMetricsInput.csv" for writing data at "<Row>" to input file
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
     Then I verify "Program Performance" text is appearing inside dashboard
     And I click "Time" Filter on the "program performance - <BPID>" dashboard
-    And I get the date for Data fetched for dashboard
+    And I get the date "12 MONTH" for Data fetched for dashboard
     And I click "Time" Filter on the "program performance - <BPID>" dashboard
     #BPID
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
@@ -412,21 +422,21 @@ Feature: Program Performance Overview Dashboard
       | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip            | Skip                   | True Random | True All    | Skip            | Skip        |
       | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | Skip            | Skip                   | Skip        | Skip        | True Random     | Skip        |
 
- @ECClaims
+  @ECClaims
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - EC&Claims
-    When I close the file for after writting data to input file
+    When I close the file for after writing data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsECMetricsOutput.txt" Output file
     When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsECMetricsQuery.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsECMetricsOutput.txt"
 
   @ECClaims
-  Scenario Outline: Verify DB and FE values feteched from Scenarios(7&8) - EC&Claims (For Metrics Validations & Benchmark Tool Tip)
+  Scenario Outline: Verify DB and FE values fetched from Scenarios(7&8) - EC&Claims (For Metrics Validations & Benchmark Tool Tip)
     And I get the value "<Index>" from Output file of data metric validation
     Then I verify "KPI_Episode" for DB and FE Metrics value at "<Row>" for "EC_Claims"
     Then I verify "Savings Rate" for DB and FE Metrics value at "<Row>" for "EC_Claims"
     Then I verify "KPI_Program_size" for DB and FE Metrics value at "<Row>" for "EC_Claims"
     Then I verify "KPI_NPRA" for DB and FE Metrics value at "<Row>" for "EC_Claims"
- #   Then I verify "% SNF Disch Current" for DB and FE Metrics value at "<Row>" for "EC_Claims"
+    Then I verify "% SNF Disch Current" for DB and FE Metrics value at "<Row>" for "EC_Claims"
     Then I verify "SNF Days Current" for DB and FE Metrics value at "<Row>" for "EC_Claims"
     Then I verify "Readmissions Current" for DB and FE Metrics value at "<Row>" for "EC_Claims"
     Then I verify "% SNF Disch Benchmark Variance" for DB and FE Metrics value at "<Row>" for "EC_Claims"
