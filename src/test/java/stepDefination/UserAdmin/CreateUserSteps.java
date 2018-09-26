@@ -399,6 +399,46 @@ public class CreateUserSteps extends DriverScript {
 		createUser.iClickOnReportsTileUnderSpecificUserLoginPage(role);
 	}
 	
+	@And("^I click on Reporting tile for \"([^\"]*)\" user$")
+	public void clickOnReportingTile(String role) throws Throwable {
+		createUser.clickOnReportingTile(role);
+	}
+	
+	@And("^I verify \"([^\"]*)\" user navigated to Reporting homepage$")
+	public void verifyUserNavigatedToReporting(String role) throws Throwable {
+		createUser.verifyUserNavigatedToReporting(role);
+	}
+	
+	@And("^I click on Program Management tile for \"([^\"]*)\" user$")
+	public void cllickOnPMTile(String role) throws Throwable {
+		createUser.clickOnPMTile(role);
+	}
+	
+	@And("^I verify \"([^\"]*)\" user navigated to Program Management homepage$")
+	public void verifyUserNavigatedToPM(String role) throws Throwable {
+		createUser.verifyUserNavigatedToPM(role);
+	}
+	
+	@And("^I click on Care Connect tile for  \"([^\"]*)\" user$")
+	public void clickOnCareConnectTile(String role) throws Throwable {
+		createUser.clickOnCareConnectTile(role);
+	}
+	
+	@And("^I verify \"([^\"]*)\" user navigated to Care Connect homepage$")
+	public void verifyUserNavigatedToCareConnect(String role) throws Throwable {
+		createUser.verifyUserNavigatedToCareConnect(role);
+	}
+	
+	@And("^I click on Community Connect tile for \"([^\"]*)\" user$")
+	public void cllickOnCommunityConnectTile(String role) throws Throwable {
+		createUser.clickOnCommunityConnectTile(role);
+	}
+	
+	@And("^I verify \"([^\"]*)\" user navigated to Community Connect homepage$")
+	public void verifyUserNavigatedToCommunityConnect(String role) throws Throwable {
+		createUser.verifyUserNavigatedToCommunityConnect(role);
+	}
+	
 	@And("^I verify \"([^\"]*)\" user navigated to Reports homepage$")
 	public void iVerifuUserNavigatedToReports(String role) throws Throwable {
 		createUser.iVerifyNavigationOnReportsHomePage(role);
