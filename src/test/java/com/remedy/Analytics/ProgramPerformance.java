@@ -857,7 +857,7 @@ public class ProgramPerformance extends BaseClass{
 	 public void iSetDateInDateFieldAttribute(String field, String value){
 		 longDelay();
 		 longDelay();
-		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 		 if(field.equals("Start Date")){
 			 if(value.contains("ECStartDate")){
 				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
@@ -876,7 +876,7 @@ public class ProgramPerformance extends BaseClass{
 			 }else if(value.contains("Today")){
 				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
 				 clickElement(driver.findElement(By.xpath("//span[@class='tab-datepicker-today-date']")));
-				 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+				 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 			 }else{
 				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
 				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), value);
@@ -886,7 +886,7 @@ public class ProgramPerformance extends BaseClass{
 //		 WebElement elem = driver.findElement(By.xpath("//span[text()='Bundle']/../../../../.. //span[@role='combobox']"));
 		 WebElement elem =driver.findElement(By.xpath("//span[text()='Time']"));
 		 act.moveToElement(elem).click().build().perform();
-		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@style='transition: opacity 250ms; opacity: 1;']")));
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 //		 longDelay();
 //		 act.moveToElement(elem).click().build().perform();
 		 delay();
