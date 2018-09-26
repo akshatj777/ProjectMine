@@ -30,6 +30,22 @@ Feature: LTCH Organization View profile Functionality tests.
     When I click on "LTCH" organization tab on organization dashboard
     When I search with "<LTCH_Name> - <Has_MO>" on organization in search box
     And I click "<LTCH_Name> - <Has_MO>" field in search list on organization page
+    And I verify the url after creation of an organization on view profile of "LTCH" organization
+
+    Examples: 
+      | Description                                                                     | Has_MO | LTCH_Name |
+      | Verify LTCH org shortName in Url after creating under profile page - with MO    | YES    | LTCHNAME  |
+      | Verify LTCH org shortName in Url after creating under profile page - without MO | NO     | LTCHNAME  |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "LTCH" organization tab on organization dashboard
+    When I search with "<LTCH_Name> - <Has_MO>" on organization in search box
+    And I click "<LTCH_Name> - <Has_MO>" field in search list on organization page
     And I Verify the "x" button on View page
     And I click on "x" button on particular organization
     And User should get redirected to the "LTCH" organization tab page
