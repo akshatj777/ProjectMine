@@ -169,7 +169,7 @@ if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;Q_DRGCODE&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;) &amp;&amp; !vars.get(&quot;npi&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
 	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and dpy.npi in ${npi}&quot;);	
 } else{
 	vars.put(&quot;Q_PHY_NPI&quot;,&quot;&quot;);
@@ -257,7 +257,7 @@ if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;Q_DRGCODE&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;) &amp;&amp; !vars.get(&quot;npi&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
 	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and dpy.npi in ${npi}&quot;);	
 } else{
 	vars.put(&quot;Q_PHY_NPI&quot;,&quot;&quot;);
@@ -346,7 +346,7 @@ if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;Q_DRGCODE&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;) &amp;&amp; !vars.get(&quot;npi&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
 	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and dpy.npi in ${npi}&quot;);	
 } else{
 	vars.put(&quot;Q_PHY_NPI&quot;,&quot;&quot;);
@@ -434,7 +434,7 @@ if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;Q_DRGCODE&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;) &amp;&amp; !vars.get(&quot;npi&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
 	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and dpy.npi in ${npi}&quot;);	
 } else{
 	vars.put(&quot;Q_PHY_NPI&quot;,&quot;&quot;);
@@ -522,7 +522,7 @@ if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;Q_DRGCODE&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;) &amp;&amp; !vars.get(&quot;npi&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
 	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and dpy.npi in ${npi}&quot;);	
 } else{
 	vars.put(&quot;Q_PHY_NPI&quot;,&quot;&quot;);
@@ -610,7 +610,7 @@ if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;Q_DRGCODE&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;) &amp;&amp; !vars.get(&quot;npi&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
 	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and dpy.npi in ${npi}&quot;);	
 } else{
 	vars.put(&quot;Q_PHY_NPI&quot;,&quot;&quot;);
@@ -698,7 +698,7 @@ if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;Q_DRGCODE&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;) &amp;&amp; !vars.get(&quot;npi&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
 	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and dpy.npi in ${npi}&quot;);	
 } else{
 	vars.put(&quot;Q_PHY_NPI&quot;,&quot;&quot;);

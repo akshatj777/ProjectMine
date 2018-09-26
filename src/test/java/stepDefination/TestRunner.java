@@ -37,7 +37,7 @@ import stepDefination.Hooks.*;
         features = { "src/test/Features/Analytics/" },
         monochrome = true,
         //glue = { "./src/test/java/stepDefination" },
-        tags = {"@ECClaims"}
+        tags = {"@EC,@Claims,@ECClaims"}
 )
 public class TestRunner {
 

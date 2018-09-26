@@ -778,7 +778,6 @@ public class ProgramPerformance extends BaseClass{
 	 public void GetTextFromScreenShot(String text,String element,String resolution) throws IOException {
 		 delay();
 		 longDelay();
-		 longDelay();
 //		 scrollToTopOfThePage();
 		 String[] str=resolution.split("X");
 		 String h_value=str[0];
@@ -796,7 +795,7 @@ public class ProgramPerformance extends BaseClass{
 		 Point point = ele.getLocation();
 		 if(text.contains("Readmissions Current")){
 			 System.out.println("VVVV"+point.getX()+"YYYYYYYYY"+point.getY());
-			 point = point.moveBy(60, -40);
+			 point = point.moveBy(60, -60);
 		 }else{
 			 System.out.println("Value+++++++++"+point.getX()+"YYYYYYYYY"+point.getY());
 			 point = point.moveBy(80, 100);
@@ -1555,7 +1554,7 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iSelectCheckboxValuesInFilter1(String checkbox,String filter,String dashboard) throws FileNotFoundException{
 		 try{
-		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));}
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));}
 		 catch(Exception e){
 			 delay();
 		 }
@@ -1585,7 +1584,7 @@ public class ProgramPerformance extends BaseClass{
 			            	if(n==1){
 			            		  val=listItems.get(0).getText();
 			            		 if(filter.equals("BPID") || filter.equals("CCN") || filter.equals("Physician - NPI")){
-			            			  driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+			            			 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
 			            		 	  for (int itr=0;itr<=val.length();itr++) {
 		                        	        val=val.substring(val.indexOf("- ")+1).trim();
 		                        	       }
@@ -1596,12 +1595,13 @@ public class ProgramPerformance extends BaseClass{
 			            		 }
 			            		 else if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
 			            			 if(val.equals("Null")){
-			            				 driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click(); 
+			            				 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
 			            				 for(int l=0;l<2;l++){
 		                        		  arrayListTexts.add("'Null'"); 
 		                        		  writeDataToOutputFile("Path");
 		                        		  }
 			            		 }else {
+			            			 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
 			            			 val=val.substring(val.indexOf("-")+1).trim(); 
 	                            	 valarr=val.split("-");
 	                            	 valA=valarr[0];
@@ -1625,10 +1625,11 @@ public class ProgramPerformance extends BaseClass{
 			            			 
 			            			 
 			            		 } else if(filter.equals("DRG")){
-//		                           val=val.substring(val.indexOf("-")+1).trim();
-		                        	 val=val.substring(val.length() - 4);
+			            			 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
+		                     //   	 val=val.substring(val.length() - 4);
+			            			 val=val.substring(val.lastIndexOf(" ")+1);
 		                        	 val=val.replaceAll("[()]","");  
-		                        	 System.out.println("Drg fracture value is"+val);
+		                        	 System.out.println("DRG"+val);
 		                        	 val="'"+val+"'";
 		                       		 arrayListTexts.add(val);
 		                       		 writeDataToOutputFile("Path");
@@ -1637,9 +1638,11 @@ public class ProgramPerformance extends BaseClass{
 			            		 
 			            		 else{
 	                	    	     val=val.trim();
-				            		 driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+	                	    	     executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
 				            		 val="'"+val+"'";
 									 arrayListTexts.add(val);
+									 writeDataToOutputFile("Path");
+									 return;
 	                	       }
 			            		 
 			            	}
@@ -1654,7 +1657,7 @@ public class ProgramPerformance extends BaseClass{
                          if(filter.equals("BPID") || filter.equals("CCN") || filter.equals("Physician - NPI")){
 //                         val=val.substring(val.indexOf("-")+1).trim();
                         	 if(val.equals("Null")){
-                       		  driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+                             executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
                        		  val="'"+val+"'";
                        		  arrayListTexts.add(val);
                        		  listItems.remove(randomIndex);
@@ -1662,23 +1665,23 @@ public class ProgramPerformance extends BaseClass{
                              }else{
                         	 for (int itr=0;itr<=val.length();itr++) {
                         	        val=val.substring(val.indexOf("- ")+1).trim();
-                        	       }System.out.println("Physician - NPI is"+val);}
+                        	       }}
                          }
                          else if(filter.equals("DRG")){
 //                           val=val.substring(val.indexOf("-")+1).trim();
-                        	 val=val.substring(val.length() - 4);
+                        	 val=val.substring(val.lastIndexOf(" ")+1);
+                        //	 val=val.substring(val.length() - 4);
                         	 val=val.replaceAll("[()]","");  
-                        	 System.out.println("Drg fracture value is"+val);
+                        	 System.out.println("DRG"+val);
+                        	
                          }
                          
                           else if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
                         	  if(val.equals("Null")){
-                        		  driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+                        		  executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
                         		  val="'"+val+"'";
                         		  arrayListTexts.add(val);
                         		  listItems.remove(randomIndex);
-                        		  System.out.println(listItems.size());
-                        		  
                         		  if((listItems.get(0).getText().equals("(All)") && listItems.size()==1)){
                         			for(int k=0;k<2;k++){
                         				if(k==0){
@@ -1689,18 +1692,7 @@ public class ProgramPerformance extends BaseClass{
                         					return;
                         				}
                         			}}
-//                        		 }else if(listItems.get(0).getText().equals("(All)") && listItems.size()!=1){
-//                        			 for(int k=0;k<2;k++){
-//                         				if(k==0){
-//                         				writeDataToOutputFile("Path");}else
-//                         				{
-//                         					arrayListTexts.add("'Null'");
-//                         					writeDataToOutputFile("Path");
-//                         					return;
-//                         				}
-//                         			} 
-//                        		 }
-                        		  
+                        		 
                         		  if(listItems.isEmpty()){
                         			 for(int k=0;k<2;k++){
                          				if(k==0){
@@ -1716,22 +1708,14 @@ public class ProgramPerformance extends BaseClass{
                         		  continue;}
                               }else{
                             	  val=val.substring(val.indexOf("-")+1).trim(); 
-//                            	  for (int itr=0;itr<=val.length();itr++) {
-//                          	        val=val.substring(val.indexOf("-")+1).trim();
-//                          	       }
-                            	  valarr=val.split("-");
+                                  valarr=val.split("-");
                             	  valA=valarr[0];
                             	  valB=valarr[1];
                               }
 			             }
                          executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
-			           //  driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
 			             if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
-//			            	 if(val.equals("Null")){
-//			            		 val=val.trim();
-//				            	 val="'"+val+"'";
-//					             arrayListTexts.add(val); 
-//			            	 }else{
+
 			            	 if(!val.equals("Null")){
 			            	 for(int k=0;k<valarr.length;k++){
 			            		 if(k==0){
@@ -1751,63 +1735,65 @@ public class ProgramPerformance extends BaseClass{
 			            }
 			          
 				 
-			 }else if(checkbox.contains("All")){
-				 for(int i =1;i<listItems.size();i++){
-						String val=listItems.get(i).getText();
-						
-						if(filter.equals("BPID") || filter.equals("CCN") || filter.equals("Physician - NPI")){
-							if(val.equals("Null")){
-	                       		  driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
-	                       		  val="'"+val+"'";
-	                       		  arrayListTexts.add(val);
-	                       		  continue;
-	                             }
-							for (int itr=0;itr<=val.length();itr++) {
-                	        val=val.substring(val.indexOf("- ")+1).trim();
-                	       // writeDataToOutputFile("Path");
-                	       }driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
-                	       val="'"+val+"'";
-   						   arrayListTexts.add(val);}
-						 else if(filter.equals("DRG")){
-                	    	 val=val.substring(val.length() - 4);
-                          	 val=val.replaceAll("[()]","");  
-                          	 driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
-                          	 System.out.println("Drg fracture value is"+val);
-                          	val="'"+val+"'";
-    						arrayListTexts.add(val);
-                	       }else if (filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
-                	    	   if(val.equals("Null")){
-  			            		 val=val.trim();
-  			            		 driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
-  			            		 val="'"+val+"'";
-  								 arrayListTexts.add(val);
-  			            	 }else{
-  			            		String valA = null;
-  								String valB= null;
-  								val=val.substring(val.indexOf("-")+1).trim(); 
-  								driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
-  							    String[] valarr=val.split("-");
-                           	    valA=valarr[0];
-                           	    valB=valarr[1];
-  			            	    for(int k=0;k<valarr.length;k++){
-  			            		 if(k==0){
-  			            			 val="'"+valA+"'"; 
-  			            			 arrayListTextsA.add(val);
-  			            		 }else{
-  			            			 val="'"+valB+"'"; 
-  			            			 arrayListTextsB.add(val);
-  			            		 }
-  			            	 }} 
-                	       }
-                	       else{
-                	    	     val=val.trim();
-			            		 driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
-			            		 val="'"+val+"'";
-								 arrayListTexts.add(val);
-                	       }
-						
-					}
-			 }
+			 }else if(checkbox.contains("All")){ 
+		     delay();
+			 executor.executeScript("arguments[0].click();", elem);
+		     for(int i =1;i<listItems.size();i++){
+		         String val=listItems.get(i).getText();
+		         
+		         if(filter.equals("BPID") || filter.equals("CCN") || filter.equals("Physician - NPI")){
+		          if(val.equals("Null")){
+		                               val="'"+val+"'";
+		                               arrayListTexts.add(val);
+		                               continue;
+		                                 }
+		          for (int itr=0;itr<=val.length();itr++) {
+		                            val=val.substring(val.indexOf("- ")+1).trim();
+		                           // writeDataToOutputFile("Path");
+		                           }
+//		          driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+		                           val="'"+val+"'";
+		               arrayListTexts.add(val);}
+		          else if(filter.equals("DRG")){
+		        	  val=val.substring(val.lastIndexOf(" ")+1);         
+		        	  //   val=val.substring(val.length() - 4);
+		                               val=val.replaceAll("[()]","");  
+//		                            System.out.println("DRG"+val);
+		                  //             driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+		                               val="'"+val+"'";
+		                               arrayListTexts.add(val);
+		                           }else if (filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
+		                            if(val.equals("Null")){
+		                       val=val.trim();
+//		                       driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+		                       val="'"+val+"'";
+		                       arrayListTexts.add(val);
+		                      }else{
+		                      String valA = null;
+		             String valB= null;
+		             val=val.substring(val.indexOf("-")+1).trim(); 
+//		             driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+		                String[] valarr=val.split("-");
+		                                   valA=valarr[0];
+		                                   valB=valarr[1];
+		                         for(int k=0;k<valarr.length;k++){
+		                       if(k==0){
+		                        val="'"+valA+"'"; 
+		                        arrayListTextsA.add(val);
+		                       }else{
+		                        val="'"+valB+"'"; 
+		                        arrayListTextsB.add(val);
+		                       }
+		                      }} 
+		                           }
+		                           else{
+		                              val=val.trim();
+//		                     driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+		                     val="'"+val+"'";
+		            arrayListTexts.add(val);
+		                           }
+		         
+		        }}
 			 
 		 }
 		 else{
@@ -1871,6 +1857,9 @@ public class ProgramPerformance extends BaseClass{
 				 System.out.println("Value Fetched="+mapOfHmImageOuput.get(row).get(text)+"Asserted With ==="+outputText.get(text+"_"+data));
 //				 Assert.assertEquals(outputText.get(text+"_"+data).trim(),mapOfHmImageOuput.get(row).get(text));
 				 if(!outputText.get(text+"_"+data).contains(data+"_1")){
+					 if(text.contains("% SNF Disch Current")){
+					 System.out.println("Actual"+mapOfHmImageOuput.get(row).get(text).trim());
+					 System.out.println("Expected"+outputText.get(text+"_"+data));}
 				 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains(outputText.get(text+"_"+data)));
 				 }
 				 else{
@@ -1886,7 +1875,7 @@ public class ProgramPerformance extends BaseClass{
 					 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains("Not Available"));
 				 } catch (Exception e){
 					 //Asserted Null 
-					 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().equals("Null"));
+					 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().equals("null"));
 				 }
 			 }
 			 else{
