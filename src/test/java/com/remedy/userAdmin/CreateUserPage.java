@@ -1147,9 +1147,11 @@ public void iUnselectAllSelectedApps(){
 			   iWillWaitToSee(By.xpath("//a[contains(text(),'My Profile & Settings')]"));
 			   clickElement(driver.findElement(By.xpath("//a[contains(text(),'My Profile & Settings')]")));
 			   iWillWaitToSee(By.xpath("//li[contains(text(),'My Profile & Settings')]"));
-			   String last = details.substring(details.indexOf(" ")+1);
-			   iWillWaitToSee(By.xpath("//td[text()='"+last+"']"));
-			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//td[text()='"+last+"']")));
+//			   String last = details.substring(details.indexOf(" ")+1);
+			   iWillWaitToSee(By.xpath("//h1[@class='litmos-larger-header' and text()='"+details+"']"));
+//			   iWillWaitToSee(By.xpath("//td[text()='"+last+"']"));
+//			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//td[text()='"+last+"']")));
+			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//h1[@class='litmos-larger-header' and text()='"+details+"']")));
 		   }
 		   else{
 //		   	String user = role.substring(role.indexOf("-")+1);
