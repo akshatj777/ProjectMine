@@ -129,4 +129,21 @@ public class EditHospitalOrganization extends BaseClass{
 	public void iVerifyIdentifierIsNotEditable(String id){
 		Assert.assertEquals("true",driver.findElement(By.cssSelector(".text-input-field-"+id)).getAttribute("disabled"));
 	}
+	
+	public void iEditLocationIDFieldUnderLocationsSection(String field, int num, String org){
+		num= num -1;
+		driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")).clear();
+		
+		if(field.equals("LID")){
+			CreateACHOrganizationAPI.tempAchOrg.put("LID", createRandomNumber(12));
+			iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateACHOrganizationAPI.tempAchOrg.get("LID"));
+		}
+		else if(field.equals("SNFLID")){
+			iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateSNFOrganization.SNFOrg_noMO.get("LID"));
+		}
+		else
+		{
+			iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), field);
+		}
+	}
 }

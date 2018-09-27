@@ -440,7 +440,7 @@ public class CreateACHOrganization extends BaseClass{
     	if (field.contains("Hospital")){
     		if(text.equals("LID"))
         	{
-    			tempAchOrg.put("LID", createRandomNumber(18));
+    			tempAchOrg.put("LID", createRandomNumber(12));
     			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), tempAchOrg.get("LID"));
     		}
     		else if(text.equals("LIDmorethan20characters"))
