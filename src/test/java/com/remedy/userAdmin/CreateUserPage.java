@@ -1477,8 +1477,17 @@ public void iUnselectAllSelectedApps(){
    public void verifyUserNavigatedToCommunityConnect(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   if(application.contains("Community Connect")){
-		   iWillWaitToSee(By.xpath("//h1[text()='Forbidden']"));
-		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//h1[text()='Forbidden']")));
+		   delay();
+		   if(driver.findElements(By.xpath("//h1[text()='Forbidden']")).size()>0)
+		   {
+			   iWillWaitToSee(By.xpath("//h1[text()='Forbidden']"));
+			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//h1[text()='Forbidden']")));  
+		   }
+		   else if(driver.findElements(By.xpath("//img[@alt='Aunt Bertha Home']")).size()>0)
+		   {
+			   iWillWaitToSee(By.xpath("//img[@alt='Aunt Bertha Home']"));
+			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//img[@alt='Aunt Bertha Home']")));
+		   }
 		   
 		   try
 	    	{
