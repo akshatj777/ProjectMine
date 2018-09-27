@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.0 r1840935">
+<jmeterTestPlan version="1.2" properties="4.0" jmeter="4.0 r1823414">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -70,9 +70,9 @@
           <hashTree/>
         </hashTree>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
-          <stringProp name="filename">ECRowFilterInput.csv</stringProp>
+          <stringProp name="filename">RowFilterInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">userName,startdate,enddate,time_range,bpid,ccn,bundle,region,market,r_region,r_market,participantName,drgCode,npi,model</stringProp>
+          <stringProp name="variableNames">userName,bpid,ccn,bundle,region,market,r_region,r_market,participantName,drgCode,npi,model</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -157,10 +157,16 @@ FROM
         CONCAT(de.episodeInitiatorNameInitCap,&apos; - &apos;, de.bpid) as &apos;EpisodeInitiator_BPID&apos;
     FROM
         warehouse.factPatientEpisode fp
-    LEFT JOIN warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
-    LEFT JOIN warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
-    LEFT JOIN warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
-    LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK 
+LEFT JOIN warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK 
+LEFT JOIN warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK 
+LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK 
+LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
+LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
+LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
+LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
     LEFT JOIN
 		(SELECT f.facilitySK, f.ccn,f.facilityName,
 				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
@@ -181,7 +187,19 @@ FROM
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+     --       AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+			
+				${EC_BPID}
+	           	 ${EC_CCN}
+				${EC_BUNDLE} 
+				${EC_R_REGION} 
+				${EC_R_MARKET} 
+				${EC_REGION} 
+				${EC_MARKET} 
+				${EC_PARTICIPANTNAME}  
+				${EC_DRGCODE} 
+				${EC_PHY_NPI} 
+				${EC_Model}
 			) a
 ORDER BY a.episodeInitiatorNameInitCap , a.bpid;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -233,10 +251,16 @@ FROM
          CONCAT(anc.facilityNameInitCap,&apos; - &apos;, anc.ccn) as &apos;AnchorFacility_CCN&apos;
     FROM
         warehouse.factPatientEpisode fp
-    LEFT JOIN warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
-    LEFT JOIN warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
-    LEFT JOIN warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
-    LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK 
+LEFT JOIN warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK 
+LEFT JOIN warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK 
+LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK 
+LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
+LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
+LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
+LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
     LEFT JOIN
 		(SELECT f.facilitySK, f.ccn,f.facilityName, 
 				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
@@ -264,9 +288,19 @@ FROM
             and dlk.lookupCategory = &apos;patientRisk&apos; 
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+            -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
-            	${EC_BPID}
+	            	${EC_BPID}
+		          ${EC_CCN}
+				${EC_BUNDLE} 
+				${EC_R_REGION} 
+				${EC_R_MARKET} 
+				${EC_REGION} 
+				${EC_MARKET} 
+				${EC_PARTICIPANTNAME}  
+				${EC_DRGCODE} 
+				${EC_PHY_NPI} 
+				${EC_Model}
 				) a
 ORDER BY a.facilityNameInitCap, a.ccn;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -290,12 +324,16 @@ FROM
          d.bundleName
     FROM
         warehouse.factPatientEpisode fp
-    LEFT JOIN warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
-    LEFT JOIN warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
-    LEFT JOIN warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
-    LEFT JOIN warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
-    LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
-    LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK
+LEFT JOIN warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK 
+LEFT JOIN warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK 
+LEFT JOIN warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK 
+LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK 
+LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
+LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
+LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
+LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
     LEFT JOIN
 		(SELECT f.facilitySK, f.ccn,f.facilityName, 
 				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
@@ -323,10 +361,19 @@ FROM
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+            -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
-            	${EC_BPID}
-               ${EC_CCN}
+            		${EC_BPID}
+	           	${EC_CCN}
+				${EC_BUNDLE} 
+				${EC_R_REGION} 
+				${EC_R_MARKET} 
+				${EC_REGION} 
+				${EC_MARKET} 
+				${EC_PARTICIPANTNAME}  
+				${EC_DRGCODE} 
+				${EC_PHY_NPI} 
+				${EC_Model}
 			    ) a
 ORDER BY a.bundleName;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -351,14 +398,16 @@ FROM
          CONCAT(prm.region,&apos; - &apos;, prm.market) as &apos;PartnerRegionMarket&apos;
     FROM
         warehouse.factPatientEpisode fp
-    LEFT JOIN warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
-    LEFT JOIN warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
-    LEFT JOIN warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
-    LEFT JOIN warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
-    LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
-    LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK
-    LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey
-    LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey
+    LEFT JOIN warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK 
+LEFT JOIN warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK 
+LEFT JOIN warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK 
+LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK 
+LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
+LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
+LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
+LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
     LEFT JOIN
 		(SELECT f.facilitySK, f.ccn,f.facilityName, 
 				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
@@ -386,13 +435,19 @@ FROM
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL @test_time_rage MONTH) AND NOW()
+            -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL @test_time_rage MONTH) AND NOW()
             -- AND de.bpid = @test_bpid
             	${EC_BPID}
-            	${EC_CCN}
+	            ${EC_CCN}
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
+				${EC_REGION} 
+				${EC_MARKET} 
+				${EC_PARTICIPANTNAME}  
+				${EC_DRGCODE} 
+				${EC_PHY_NPI} 
+				${EC_Model} 
 				) a
 ORDER BY a.PartnerRegionMarket;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -417,13 +472,16 @@ FROM
         CONCAT(rm.region,&apos; - &apos;, rm.market) as &apos;RRegionMarket&apos;
     FROM
         warehouse.factPatientEpisode fp
-    LEFT JOIN warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
-	LEFT JOIN warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK 
-    LEFT JOIN warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
-    LEFT JOIN warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
-    LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
-    LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK
-    LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey
+    LEFT JOIN warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK 
+LEFT JOIN warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK 
+LEFT JOIN warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK 
+LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK 
+LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
+LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
+LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
+LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
     LEFT JOIN
 		(SELECT f.facilitySK, f.ccn,f.facilityName, 
 				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
@@ -436,13 +494,13 @@ FROM
 		) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
     INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM  warehouse.tabUserSecurityBPID
-		WHERE  username = ${time_range} GROUP BY bpid) tbsBPID ON de.BPID = tbsBPID.bpid
+		WHERE  username = ${userName} GROUP BY bpid) tbsBPID ON de.BPID = tbsBPID.bpid
 	INNER JOIN (
 		SELECT  tabUserSecurityCCN.ccn FROM  warehouse.tabUserSecurityCCN
-		WHERE  username = ${time_range} GROUP BY ccn) tbsCCN on anc.ccn=tbsCCN.ccn
+		WHERE  username = ${userName} GROUP BY ccn) tbsCCN on anc.ccn=tbsCCN.ccn
 	INNER JOIN(    
         SELECT tabUserSecurityFacilityKey.facilitykey FROM warehouse.tabUserSecurityFacilityKey 
-        WHERE username = ${time_range} GROUP BY facilitykey
+        WHERE username = ${userName} GROUP BY facilitykey
         )tbsFacilityKey on anc.sourceFacilityKey=tbsFacilityKey.facilitykey 
     WHERE
         fp.bundleRisk = 1
@@ -451,11 +509,19 @@ FROM
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+            -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
-            	${EC_BPID}
-            	${EC_CCN}
-				${EC_BUNDLE}
+            		${EC_BPID}
+	             	${EC_CCN}
+				${EC_BUNDLE} 
+				${EC_R_REGION} 
+				${EC_R_MARKET} 
+				${EC_REGION} 
+				${EC_MARKET} 
+				${EC_PARTICIPANTNAME}  
+				${EC_DRGCODE} 
+				${EC_PHY_NPI} 
+				${EC_Model}
 				) a
 ORDER BY a.RRegionMarket;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -479,14 +545,16 @@ FROM
 		de.participantName as participant
     FROM
         warehouse.factPatientEpisode fp
-    LEFT JOIN warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
-	LEFT JOIN warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK 
-    LEFT JOIN warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
-    LEFT JOIN warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
-    LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
-    LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK
-    LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey
-    LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey
+    LEFT JOIN warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK 
+LEFT JOIN warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK 
+LEFT JOIN warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK 
+LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK 
+LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
+LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
+LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
+LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
     LEFT JOIN
 		(SELECT f.facilitySK, f.ccn,f.facilityName, 
 				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
@@ -514,15 +582,19 @@ FROM
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+            -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
-            	${EC_BPID}
-            	${EC_CCN}
+            		${EC_BPID}
+	            	${EC_CCN}
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
 				${EC_REGION} 
 				${EC_MARKET} 
+				${EC_PARTICIPANTNAME}  
+				${EC_DRGCODE} 
+				${EC_PHY_NPI} 
+				${EC_Model}
 				) a
 ORDER BY a.participant;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -547,14 +619,16 @@ FROM
      case when d.drgCode is null then null else d.drgCode end as drgCode
     FROM
         warehouse.factPatientEpisode fp
-    LEFT JOIN warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
-    LEFT JOIN warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK 
-    LEFT JOIN warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
-    LEFT JOIN warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
-    LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
-    LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK
-    LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey
-    LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey
+    LEFT JOIN warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK 
+LEFT JOIN warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK 
+LEFT JOIN warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK 
+LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK 
+LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
+LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
+LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
+LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
     LEFT JOIN
 		(SELECT f.facilitySK, f.ccn,f.facilityName, 
 				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
@@ -582,16 +656,19 @@ FROM
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+            -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
-            	${EC_BPID}
-            	${EC_CCN}
+            		${EC_BPID}
+	            	${EC_CCN}
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
 				${EC_REGION} 
 				${EC_MARKET} 
-				${EC_PARTICIPANTNAME}
+				${EC_PARTICIPANTNAME}  
+				${EC_DRGCODE} 
+				${EC_PHY_NPI} 
+				${EC_Model}
 ) a
 ORDER BY a.DRG_Fracture;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -617,15 +694,16 @@ FROM
 			CONCAT(dpy.physicianNameInitCap,&apos; - &apos;, dpy.npi) as &apos;Physician_NPI&apos;
     FROM
         warehouse.factPatientEpisode fp
-    LEFT JOIN warehouse.dimEpisodeInitiator de ON fp.episodeInitiatorKey = de.episodeInitiatorSK
-	LEFT JOIN warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK 
-    LEFT JOIN warehouse.dimPatient dp ON fp.patientKey = dp.patientSK
-    LEFT JOIN warehouse.dimLookup dlk ON dp.totalRiskScore = dlk.lookupName
-    LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
-    LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK
-    LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey
-    LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey
-    LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
+    LEFT JOIN warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK 
+LEFT JOIN warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK 
+LEFT JOIN warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK 
+LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK 
+LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
+LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
+LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
+LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
     LEFT JOIN
 		(SELECT f.facilitySK, f.ccn,f.facilityName, 
 				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
@@ -653,17 +731,19 @@ FROM
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+            -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
-            	${EC_BPID}
-            	${EC_CCN}
+            		${EC_BPID}
+	            	${EC_CCN}
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
 				${EC_REGION} 
 				${EC_MARKET} 
 				${EC_PARTICIPANTNAME}  
-				${EC_DRGCODE}
+				${EC_DRGCODE} 
+				${EC_PHY_NPI} 
+				${EC_Model}
 ) a
 ORDER BY a.Physician_NPI;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -687,7 +767,7 @@ FROM
 			fp.model
     FROM
         warehouse.factPatientEpisode fp
-    LEFT JOIN warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK 
+LEFT JOIN warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK 
 LEFT JOIN warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK 
 LEFT JOIN warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK 
 LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK 
@@ -724,10 +804,10 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+            -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
-	            	${EC_BPID}
-	            	${EC_CCN}
+	            ${EC_BPID}
+	            ${EC_CCN}
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
@@ -735,7 +815,8 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_MARKET} 
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
-				${EC_PHY_NPI}
+				${EC_PHY_NPI} 
+				${EC_Model}
 ) a
 ORDER BY a.model;	</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -754,7 +835,7 @@ ORDER BY a.model;	</stringProp>
 			afdetail.facilityNameInitCap
     FROM
         warehouse.factPatientEpisode fp
-		LEFT JOIN warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK 
+LEFT JOIN warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK 
 LEFT JOIN warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK 
 LEFT JOIN warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK 
 LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK 
@@ -792,7 +873,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+            -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
 	            	${EC_BPID}
 	            	${EC_CCN}

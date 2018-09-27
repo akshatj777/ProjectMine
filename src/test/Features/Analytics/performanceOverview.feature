@@ -1,6 +1,6 @@
 Feature: Program Performance Overview Dashboard
 
-  @RowLevelSecurity
+  @RowLevelSecurity1
   Scenario Outline: Front end Data Filter Validation for last 12 Months
     Given I am on the login page
     When I enter email field <User> for login
@@ -15,9 +15,11 @@ Feature: Program Performance Overview Dashboard
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInput.csv" for writing data at "<Row>" to input file
     And I perform test with "<User>" user in Analytics
     ##Time
-    And I click "Time" Filter on the "program performance" dashboard
-    And I click "Time" Filter on the "program performance" dashboard
-    And I get the date "12 MONTH" for Data fetched for dashboard
+    Then I set "Start Date" as "1/1/2016 " in Date field on dashboard
+    Then I set "End Date" as "Today" in Date field on dashboard
+    #And I click "Time" Filter on the "program performance" dashboard
+    #And I click "Time" Filter on the "program performance" dashboard
+    #And I get the date "12 MONTH" for Data fetched for dashboard
     ##BPID
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
     And I fetch and store "Episode Initiator - BPID" filter values on "program performance" dashboard
@@ -69,16 +71,16 @@ Feature: Program Performance Overview Dashboard
     And I select "<Anchor Facility Detail>" checkbox in "Anchor Facility Detail" filter on "Program overview" dashboard
     And I click "Anchor Facility Detail" Filter on the "program performance - <Anchor Facility Detail>" dashboard
     And I save the values of row filters in "<Row>" index in storage HashMap
-
+		And I close the file for after writing data to input file
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG         | Physician - NPI | Model      | Anchor Facility Detail |
       | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Click&Skip      | Click&Skip             | True All    | True All    | True All        | Click&Skip | Click&Skip             |
-      | Qatwodashtest@yopmail.com   |   2 | True All    | Click&Skip  | True All    | Click&Skip      | Click&Skip             | True All    | Click&Skip  | True All        | True All   | True All               |
-      | Qadashboardtest@yopmail.com |   3 | True All    | True All    | Click&Skip  | Click&Skip      | Click&Skip             | Click&Skip  | True All    | True All        | True All   | True All               |
-      | Qafivedashtest@yopmail.com  |   4 | True Random | True All    | True Random | Click&Skip      | Click&Skip             | True All    | True All    | True All        | Click&Skip | Click&Skip             |
-      | Qatwodashtest@yopmail.com   |   5 | True Random | Click&Skip  | True All    | Click&Skip      | Click&Skip             | True All    | True Random | True Random     | True All   | True All               |
-      | Qadashboardtest@yopmail.com |   6 | True Random | True Random | Click&Skip  | Click&Skip      | Click&Skip             | True Random | True All    | True Random     | True All   | True All               |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True Random | Click&Skip      | Click&Skip             | True Random | True Random | True Random     | True All   | True All               |
+      #| Qatwodashtest@yopmail.com   |   2 | True All    | Click&Skip  | True All    | Click&Skip      | Click&Skip             | True All    | Click&Skip  | True All        | True All   | True All               |
+      #| Qadashboardtest@yopmail.com |   3 | True All    | True All    | Click&Skip  | Click&Skip      | Click&Skip             | Click&Skip  | True All    | True All        | True All   | True All               |
+      #| Qafivedashtest@yopmail.com  |   4 | True Random | True All    | True Random | Click&Skip      | Click&Skip             | True All    | True All    | True All        | Click&Skip | Click&Skip             |
+      #| Qatwodashtest@yopmail.com   |   5 | True Random | Click&Skip  | True All    | Click&Skip      | Click&Skip             | True All    | True Random | True Random     | True All   | True All               |
+      #| Qadashboardtest@yopmail.com |   6 | True Random | True Random | Click&Skip  | Click&Skip      | Click&Skip             | True Random | True All    | True Random     | True All   | True All               |
+      #| Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True Random | Click&Skip      | Click&Skip             | True Random | True Random | True Random     | True All   | True All               |
 
   @RowLevelSecurity
   Scenario: Execute JMX file and read Output data for Data Filter Validations
