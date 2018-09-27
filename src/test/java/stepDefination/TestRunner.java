@@ -38,11 +38,7 @@ import stepDefination.Hooks.*;
         monochrome = true,
         //glue = { "./src/test/java/stepDefination" },
 
-<<<<<<< HEAD
-        tags = {"@RowLevelSecurity1"}
-=======
         tags = {"@Claims,@EC,@ECClaims"}
->>>>>>> bae04c7e2a50681064ecc2cea1d349bfb9172cf8
 
 
 )
