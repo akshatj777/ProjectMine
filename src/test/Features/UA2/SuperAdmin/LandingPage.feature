@@ -5,8 +5,8 @@ Feature: Super Admin Landing page verification
     When Create User with this data for "<User>"
     Then Verify Actual vs expected results "<expStatusCode>" and "<responseMsg>"
     Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account
-    Then I enter password "1Welcome2" to login mail account
+    Then I enter username "qaautomation@remedysystems.com" to login mail account
+    Then I enter password "9h$00v3T$dF@OPn0" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -14,8 +14,8 @@ Feature: Super Admin Landing page verification
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | User        | FirstName | LastName                                 | Email                           | Phone | NPI | Role      | RoleID      | Applications                                             | LearningPathways                       | Locations             | expStatusCode |
-      | Super Admin | Firstname | Lastnamelastnamelastnamelastnamelastname | qaautomation@remedypartners.com |       |     | Executive | 1-Executive | episode_connect-Episodes,reports-Reports,lessons-Lessons | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
+      | User        | FirstName                                 | LastName                                 | Email                          | Phone | NPI | Role   | RoleID   | Applications                                                                                                       | LearningPathways                       | Locations             | expStatusCode |
+      | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName | qaautomation@remedysystems.com |       |     | Leader | 1-Leader | episode_connect-Episode Connect Classic, reports-Reporting Classic, lessons-Remedy University, analytics-Reporting | 3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | 514083--2070-015--TSH |           200 |
 
   Scenario: Verification of availability of fields on Super User Landing page
     Given I am on the login page
@@ -77,10 +77,10 @@ Feature: Super Admin Landing page verification
     Then I verify availability of "<SearchParameter>" for "<user>-<Role>"
 
     Examples: 
-      | Description                    | user        | Role      | Email                           | InvalidSearchParameter | SearchParameter                          |
-      | Search a user using First Name | Super Admin | Executive | qaautomation@remedypartners.com |                1768789 | Firstname                                |
-      | Search a user using Last Name  | Super Admin | Executive | qaautomation@remedypartners.com |                1768789 | Lastnamelastnamelastnamelastnamelastname |
-      | Search a user using Email      | Super Admin | Executive | qaautomation@remedypartners.com |                1768789 | FetchFromHM                              |
+      | Description                    | user        | Role   | Email                          | InvalidSearchParameter | SearchParameter                          |
+      | Search a user using First Name | Super Admin | Leader | qaautomation@remedysystems.com |                1768789 | Firstname                                |
+      | Search a user using Last Name  | Super Admin | Leader | qaautomation@remedysystems.com |                1768789 | Lastnamelastnamelastnamelastnamelastname |
+      | Search a user using Email      | Super Admin | Leader | qaautomation@remedysystems.com |                1768789 | FetchFromHM                              |
 
   Scenario Outline: Verify ability of Super Admin user to lock a user
     Given I am on the login page
@@ -103,11 +103,11 @@ Feature: Super Admin Landing page verification
     Then I enter newuser email for "<user>-<Role>" login to Remedy
     Then I enter newuser password for login to Remedy
     And I click Access button
-    Then I should see User is Blocked
+    And I should see Log in widget
 
     Examples: 
-      | user        | Role      | Email                           | SearchParameter |
-      | Super Admin | Executive | qaautomation@remedypartners.com | FetchFromHM     |
+      | user        | Role   | Email                          | SearchParameter |
+      | Super Admin | Leader | qaautomation@remedysystems.com | FetchFromHM     |
 
   Scenario Outline: Verify ability of Super Admin user to unlock a locked user
     Given I am on the login page
@@ -133,22 +133,25 @@ Feature: Super Admin Landing page verification
     Then I verify "<Applications>" product on SPOE page
 
     Examples: 
-      | user        | Role      | Email                           | SearchParameter | Applications               |
-      | Super Admin | Executive | qaautomation@remedypartners.com | FetchFromHM     | Episodes, Reports, Lessons |
+      | user        | Role   | Email                          | SearchParameter | Applications                                                      |
+      | Super Admin | Leader | qaautomation@remedysystems.com | FetchFromHM     | Episodes Classic, Reporting Classic, Remedy University, Reporting |
 
-  Scenario: User should not get error message when he goes back to User Admin page from top navigation Menu
+  Scenario Outline: User should not get error message when he goes back to User Admin page from top navigation Menu
     Given I am on the login page
     When I log in as super user
-    Then I should see Tile text Episodes 2.0
-    And I click on the "Reports" tile
-    Then I verify page tile for reports page
+    And I click on Reports tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on "Users" tile from menu
     Then I should see header text "Users"
-    Then I click on "Reports" from Management dropdown
+    Then I click on "Reporting Classic" from Management dropdown
     And I switch to new window
     Then I verify page tile for reports page
     And I click on "Users" tile from menu
     Then I should see header text "Users"
+
+    Examples: 
+      | User        | Role   |
+      | Super Admin | Leader |
 
   Scenario Outline: Verifying that User is redirected to User admin page although doesn't have access to UA
     Given I am on the login page
@@ -168,5 +171,5 @@ Feature: Super Admin Landing page verification
     Then I verify "<Applications>" product on SPOE page
 
     Examples: 
-      | user        | Role      | Applications               |
-      | Super Admin | Executive | Episodes, Reports, Lessons |
+      | user        | Role   | Applications                                                      |
+      | Super Admin | Leader | Episodes Classic, Reporting Classic, Remedy University, Reporting |

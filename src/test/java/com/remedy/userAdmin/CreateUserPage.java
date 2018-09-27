@@ -60,6 +60,14 @@ public class CreateUserPage extends BaseClass{
 
     }
     
+    public void verifyRoleDescription(String roleDescription, String role) 
+    {
+    	if(!(roleDescription.isEmpty()))
+    	{
+    		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='"+role+"']/parent::div/span[text()='"+roleDescription+"']")));
+    	}
+    }
+    
     public void iClickAlreadySelectedOrganizationalField() 
     {
         if(DriverScript.Config.getProperty("Browser").equals("ie"))
@@ -149,7 +157,7 @@ public class CreateUserPage extends BaseClass{
 		{
 			if(npi.equals("NPI"))
 			{
-				userNPI = RandomStringUtils.randomNumeric(10);
+				userNPI = "213" + RandomStringUtils.randomNumeric(7);
 				if(DriverScript.Config.getProperty("Browser").equals("ie"))
 				{
 					iWillWaitToSee(By.xpath("//input[@placeholder='NPI']"));
@@ -403,14 +411,14 @@ public class CreateUserPage extends BaseClass{
     {
     	if(!(desc.equals("")))
     	{
-    	iWillWaitToSee(By.xpath("//div[contains(@class,'item')]/span[text()='"+desc+"']"));
+    	iWillWaitToSee(By.xpath("//div[contains(@class,'item')]/span[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')='"+desc.toLowerCase()+"']"));
         if(DriverScript.Config.getProperty("Browser").equals("ie"))
         {
-        	((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[contains(@class,'item')]/span[text()='"+desc+"']")));
+        	((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[contains(@class,'item')]/span[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')='"+desc.toLowerCase()+"']")));
         }
         else
         {
-        	clickElement(driver.findElement(By.xpath("//div[contains(@class,'item')]/span[text()='"+desc+"']")));
+        	clickElement(driver.findElement(By.xpath("//div[contains(@class,'item')]/span[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')='"+desc.toLowerCase()+"']")));
         }
         Thread.sleep(3000);
     	}
@@ -631,9 +639,13 @@ public class CreateUserPage extends BaseClass{
     	userApplications = apps;
     }
 public void iUnselectAllSelectedApps(){
-	iWillWaitToSee(By.xpath("//div[@class='ui checked checkbox']"));
+	
+	if(isElementPresentOnPage(By.xpath("//div[@class='ui checked checkbox']"))==true){
+	
+		iWillWaitToSee(By.xpath("//div[@class='ui checked checkbox']"));
 			clickAllElementofAlistbyXpath("//div[@class='ui checked checkbox']");
-		
+	}
+	
 	}
     public void iClickOnContinueToDashboardMessage() {
         clickElement(driver.findElement(By.xpath("//button[text()='Continue to my dashboard']")));
@@ -649,15 +661,15 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes 2.0")){
-			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Episodes 2.0']")));
+		   if(st.nextToken().trim().equals("Episode Connect for Post-acute Care")){
+			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Episodes Post Acute']")));
 			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 			   {
-				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Episodes 2.0']"))); 
+				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Episodes Post Acute']"))); 
 			   }
 			   else
 			   {
-				   clickElement(driver.findElement(By.xpath("//div[text()='Episodes 2.0']")));
+				   clickElement(driver.findElement(By.xpath("//div[text()='Episodes Post Acute']")));
 			   }
 		   }  
 	   }
@@ -668,7 +680,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes 2.0")){
+		   if(st.nextToken().trim().equals("Episode Connect for Post-acute Care")){
 //			   if(role.substring((role.indexOf("-")+1)).equals("Remedy Technical Administrator"))
 //			   {
 //				   iWillWaitToSee(By.xpath("//h2[text()='BPCI Performance']"));
@@ -731,7 +743,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes 2.0")){
+		   if(st.nextToken().trim().equals("Episode Connect for Post-acute Care")){
 //			   if(role.substring((role.indexOf("-")+1)).equals("Remedy Technical Administrator"))
 //			   {
 //				   iWillWaitToSee(By.xpath("//button[contains(text(),'View All Patients')]"));
@@ -763,7 +775,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
 	   iWillWaitToSee(By.cssSelector(".username"));
 	   WebElement element = driver.findElement(By.xpath("//i[@class='fa fa-angle-down']"));
 	   String javaScript = "var evObj = document.createEvent('MouseEvents');" +
@@ -794,17 +806,17 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
-			   iWillWaitToSee(By.xpath("//div[text()='Episodes']"));
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
+			   iWillWaitToSee(By.xpath("//div[text()='Episodes Classic']"));
 			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 			   {
 				   longDelay();
-				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Episodes']")));
+				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Episodes Classic']")));
 			   }
 			   else
 			   {
 				   longDelay();
-				   clickElement(driver.findElement(By.xpath("//div[text()='Episodes']")));  
+				   clickElement(driver.findElement(By.xpath("//div[text()='Episodes Classic']")));  
 			   }
 		   }   
 	   }
@@ -846,7 +858,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
 			   iWillWaitToSee(By.cssSelector(".username"));
 			   isElementPresentOnPage(By.xpath("//h3/span[contains(text(),'Dashboard')]"));
 		   }   
@@ -858,7 +870,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
 			   iWillWaitToSee(By.cssSelector("#patientsListOpenClose"));
 			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 			   {
@@ -881,7 +893,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
 			   if(facility.contains(","))
 			   {
 				   StringTokenizer st1 = new StringTokenizer(facility,",");
@@ -914,7 +926,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
 			   iVerifyTextFromListOfElement(By.xpath("//div[label[text()='Payers']]//li"), payer);
 		   }   
 	   }
@@ -925,7 +937,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
 			   isElementNotPresentOnPage(By.xpath("//div[label[text()='Payers']]//li[text()='"+payer+"']"));
 		   }   
 	   }
@@ -938,7 +950,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Episodes")){
+			   if(st.nextToken().trim().equals("Episode Connect Classic")){
 				   iWillWaitToSee(By.xpath("//div[@class='row body']//a[@class='btn btn-default dropdown-toggle']"));
 				   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 				   {
@@ -978,7 +990,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
 			   waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.id("tblPatients_processing")));
 			   driver.findElement(By.id("filterTab_custom")).click();
 			   waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.id("tblPatients_processing")));
@@ -993,7 +1005,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episodes")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic")){
 			   if(role.substring((role.indexOf("-")+1)).equals("Physicians"))
 			   {
 				   if(DriverScript.Config.getProperty("Browser").equals("ie"))
@@ -1052,7 +1064,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Reports"))
+		   if(st.nextToken().trim().equals("Reporting Classic"))
 		   {
 			   longDelay();
 		       iWillWaitToSee(By.xpath("//iframe[@class='embedded-iframe ng-scope']"));
@@ -1067,30 +1079,30 @@ public void iUnselectAllSelectedApps(){
    
    public void iClickOnReportsTileUnderSpecificUserLoginPage(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Reports")){
-		   iWillWaitToSee(By.xpath("//div[text()='Reports']"));
-		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Reports']")));
+	   if(application.contains("Reporting Classic")){
+		   iWillWaitToSee(By.xpath("//div[text()='Reporting Classic']"));
+		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Reporting Classic']")));
 		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		   {
-			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Reports']")));
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Reporting Classic']")));
 		   }
 		   else
 		   {
-			   clickElement(driver.findElement(By.xpath("//div[text()='Reports']")));  
+			   clickElement(driver.findElement(By.xpath("//div[text()='Reporting Classic']")));  
 		   }
 	   }
     }
    
    public void iVerifyNavigationOnReportsHomePage(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Reports")){
+	   if(application.contains("Reporting Classic")){
 		   iWillWaitToSee(By.cssSelector(".dropdown-tile-label.ng-binding")); 
 	   }
    }
    
    public void iClickOnRemedyUTileUnderSpecificUserLoginPage(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Lessons")){
+	   if(application.contains("Remedy University")){
 		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='RemedyU']")));
 		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		   {
@@ -1106,7 +1118,7 @@ public void iUnselectAllSelectedApps(){
    public void iVerifyNavigationOnRemedyUHomePage(String role){
 	   driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Lessons")){
+	   if(application.contains("Remedy University")){
 		   String user = role.substring(role.indexOf("-")+1);
 		   if(user.equalsIgnoreCase("Remedy Technical Administrator")||user.equalsIgnoreCase("Partner Program Administrator")||user.equalsIgnoreCase("Remedy Program Administrator")
 				   ||user.equalsIgnoreCase("Partner Technical Administrator")){
@@ -1126,7 +1138,7 @@ public void iUnselectAllSelectedApps(){
    
    public void iVerifyDetailsForUserOnRemedyUDashBoard(String details, String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Lessons")){
+	   if(application.contains("Remedy University")){
 		   
 		   String user = role.substring(role.indexOf("-")+1);
 		   if(user.equalsIgnoreCase("Remedy Technical Administrator")||user.equalsIgnoreCase("Partner Program Administrator")||user.equalsIgnoreCase("Remedy Program Administrator")
@@ -1152,7 +1164,7 @@ public void iUnselectAllSelectedApps(){
 	   if(!(pathway.equals("")))
 	   {
 		   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-		   if(application.contains("Lessons")){
+		   if(application.contains("Remedy University")){
 			   if(pathway.contains(","))
 			   {
 				   String user = role.substring(role.indexOf("-")+1);
@@ -1290,6 +1302,7 @@ public void iUnselectAllSelectedApps(){
    }
    
    public void clickNextButton() throws Throwable {
+	   delay();
 	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 	   {
 		   iWillWaitToSee(By.xpath("//button[text()='Next ']"));
@@ -1298,6 +1311,7 @@ public void iUnselectAllSelectedApps(){
 	   else
 	   {
 		   iWillWaitToSee(By.xpath("//button[text()='Next ']"));
+		  
 		   clickElement(driver.findElement(By.xpath("//button[text()='Next ']")));
 	   }
    }
@@ -1492,6 +1506,7 @@ public void iUnselectAllSelectedApps(){
 			usersEmailPerRole.put(user.trim()+"-"+userRole.trim(), emailList);
 			usersApplicationsPerRole.put(user.trim()+"-"+userRole.trim(), applicationsList);
 			usersNPIPerRole.put(user.trim()+"-"+userRole.trim(), NPIList);
+			System.out.println(usersEmailPerRole.toString());
 		}
 		else if(user.contains("Remedy Technical Administrator"))
 		{
@@ -1504,6 +1519,7 @@ public void iUnselectAllSelectedApps(){
 			usersEmailPerRole.put(user.trim()+"-"+userRole.trim(), emailList);
 			usersApplicationsPerRole.put(user.trim()+"-"+userRole.trim(), applicationsList);
 			usersNPIPerRole.put(user.trim()+"-"+userRole.trim(), NPIList);
+			System.out.println(usersEmailPerRole.toString());
 		}
 	}
 	public void clickSubmitButton() throws Throwable {
@@ -1513,7 +1529,10 @@ public void iUnselectAllSelectedApps(){
 	
 	}
    public void verifyAppUnchecked(String fieldName) throws Throwable {
-	   if(fieldName.contains(","))
+	   if(!(fieldName.isEmpty())) {
+		   iWillWaitToSee(By.xpath("//div[@class='ui checkbox']"));
+			   {	   
+			if(fieldName.contains(","))
 	   {
 		   StringTokenizer st = new StringTokenizer(fieldName,",");
 	       while (st.hasMoreTokens()) {  
@@ -1526,18 +1545,23 @@ public void iUnselectAllSelectedApps(){
 	   }
 	    
    }
+   }
+   }
    public void verifyAppChecked(String fieldName) throws Throwable {
+	   if(!(fieldName.isEmpty())){
+		   iWillWaitToSee(By.xpath("//div[@class='ui checked checkbox']"));
 	   if(fieldName.contains(","))
 	   {
 		   StringTokenizer st = new StringTokenizer(fieldName,",");
 	       while (st.hasMoreTokens()) {  
-	    	   Assert.assertTrue(isElementPresent(By.xpath("//label[text()='"+st.nextToken().trim()+"']/parent::div[@class='ui checked checkbox']")));
+	    	   Assert.assertTrue(isElementPresent(By.xpath("//label[text()='"+st.nextToken().trim()+"']/parent::div[contains(@class,'ui checked')]")));
 	       }  
 	   }
 	   else
 	   {
 		   Assert.assertTrue(isElementPresent(By.xpath("//label[text()='"+fieldName+"']/parent::div[@class='ui checked checkbox']")));
 	   }
+   }
    }
    
    public void verifyApplicationList(String appList) throws Throwable {
@@ -1560,11 +1584,14 @@ public void iUnselectAllSelectedApps(){
    }
    
    public void verifyLearningPathwayAvailable() throws Throwable {
+	   if(userApplications.contains("Remedy University"))
+       {
 	   Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".column.padding>.component-learning-pathway-dropdown")));
+       }
    }
    
    public void clickLessonsSelectButton() throws Throwable {
-       if(userApplications.contains("Lessons"))
+       if(userApplications.contains("Remedy University"))
        {
     	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
     	   {
@@ -1582,15 +1609,81 @@ public void iUnselectAllSelectedApps(){
        clickElement(driver.findElement(By.xpath("//button[text()='Cancel']")));
    }
 
-   public void enterTextLearningPathwaySearchBox(String searchParam) throws Throwable {
-       if(!(searchParam.equals("")))
+   public void EditLearningPathway(String searchParam) throws Throwable {
+       if(!(searchParam.isEmpty()))
        {
-    	   iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), searchParam);  
+    	   iWillWaitToSee(By.xpath("//div[@class='ui selection dropdown']"));
+    	   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='ui selection dropdown']")));
+    	   if(!(searchParam.equals("")))
+           {
+        	   if(searchParam.contains(","))
+        	   {
+        		   StringTokenizer st = new StringTokenizer(searchParam, ",");
+        		   while (st.hasMoreTokens()) {
+        			   //delay();
+        			   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']"))));
+        			   scrollIntoViewByJS(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")));
+        			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+        			   {
+            			   String a = st.nextToken().trim();
+            			   //Thread.sleep(3000);
+            			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), a).build().perform();
+            			   delay();
+            			   while(!(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")).getAttribute("value").equals(a)))
+            			   {
+            				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+            				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), a).build().perform();
+            			   }
+            			   iWillWaitToSee(By.xpath("//section[@class='component-learning-pathway-dropdown']//div[@class='ui checkbox' or @class='ui checked checkbox']/label[contains(text(),\""+a+"\")]"));
+            			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//section[@class='component-learning-pathway-dropdown']//div[@class='ui checkbox' or @class='ui checked checkbox']/label[contains(text(),\""+a+"\")]")));
+        			   }
+        			   else
+        			   {
+        				   driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
+            			   String a = st.nextToken().trim();
+            			   //Thread.sleep(3000);
+            			   iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), a);
+            			   //Thread.sleep(3000);
+            			   iWillWaitToSee(By.xpath("//section[@class='component-learning-pathway-dropdown']//div[@class='ui checkbox' or @class='ui checked checkbox']/label[contains(text(),\""+a+"\")]"));
+            			   clickElement(driver.findElement(By.xpath("//section[@class='component-learning-pathway-dropdown']//div[@class='ui checkbox' or @class='ui checked checkbox']/label[contains(text(),\""+a+"\")]"))); 
+        			   }
+        			   
+        			   //Thread.sleep(3000);
+        		   }
+        		   driver.findElement(By.xpath("//a[contains(text(),'Applications')]")).click();
+        	   }
+        	   else
+        	   {
+        		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+        		   {
+        			   scrollIntoViewByJS(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")));
+        			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), searchParam).build().perform();
+        			   delay();
+        			   while(!(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")).getAttribute("value").equals(searchParam)))
+        			   {
+        				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+        				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), searchParam).build().perform();
+        			   }
+        			   iWillWaitToSee(By.xpath("//section[@class='component-learning-pathway-dropdown']//div[@class='ui checkbox' or @class='ui checked checkbox']/label[contains(text(),\""+searchParam+"\")]"));
+        			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//section[@class='component-learning-pathway-dropdown']//div[@class='ui checkbox' or @class='ui checked checkbox']/label[contains(text(),\""+searchParam+"\")]")));
+        		   }
+        		   else
+        		   {
+        			   scrollIntoViewByJS(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")));
+            		   driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
+            		   iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), searchParam.trim());
+        			   iWillWaitToSee(By.xpath("//section[@class='component-learning-pathway-dropdown']//div[@class='ui checkbox' or @class='ui checked checkbox']/label[contains(text(),\""+searchParam+"\")]"));
+            		   clickElement(driver.findElement(By.xpath("//section[@class='component-learning-pathway-dropdown']//div[@class='ui checkbox' or @class='ui checked checkbox']/label[contains(text(),\""+searchParam+"\")]")));
+            		   driver.findElement(By.xpath("//a[contains(text(),'Applications')]")).click();
+        		   }
+        	   }
+           } 
        }
-   }
+       }
+   
 
    public void selectLearningPath(String searchParam) throws Throwable {
-       if(userApplications.contains("Lessons"))
+       if(userApplications.contains("Remedy University"))
        {
     	   if(!(searchParam.equals("")))
            {
@@ -1612,8 +1705,8 @@ public void iUnselectAllSelectedApps(){
             				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
             				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), a).build().perform();
             			   }
-            			   iWillWaitToSee(By.xpath("//label[contains(text(),\""+a+"\")]"));
-            			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//label[contains(text(),\""+a+"\")]")));
+            			   iWillWaitToSee(By.xpath("//div[@class='ui checkbox']/label[contains(text(),\""+a+"\")]"));
+            			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='ui checkbox']/label[contains(text(),\""+a+"\")]")));
         			   }
         			   else
         			   {
@@ -1622,8 +1715,8 @@ public void iUnselectAllSelectedApps(){
             			   //Thread.sleep(3000);
             			   iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), a);
             			   //Thread.sleep(3000);
-            			   iWillWaitToSee(By.xpath("//label[contains(text(),\""+a+"\")]"));
-            			   clickElement(driver.findElement(By.xpath("//label[contains(text(),\""+a+"\")]"))); 
+            			   iWillWaitToSee(By.xpath("//div[@class='ui checkbox']/label[contains(text(),\""+a+"\")]"));
+            			   clickElement(driver.findElement(By.xpath("//div[@class='ui checkbox']/label[contains(text(),\""+a+"\")]"))); 
         			   }
         			   
         			   //Thread.sleep(3000);
@@ -1642,16 +1735,16 @@ public void iUnselectAllSelectedApps(){
         				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
         				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), searchParam).build().perform();
         			   }
-        			   iWillWaitToSee(By.xpath("//label[contains(text(),\""+searchParam+"\")]"));
-        			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//label[contains(text(),\""+searchParam+"\")]")));
+        			   iWillWaitToSee(By.xpath("//div[@class='ui checkbox']/label[contains(text(),\""+searchParam+"\")]"));
+        			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='ui checkbox']/label[contains(text(),\""+searchParam+"\")]")));
         		   }
         		   else
         		   {
         			   scrollIntoViewByJS(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")));
             		   driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
             		   iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), searchParam);
-        			   iWillWaitToSee(By.xpath("//label[contains(text(),\""+searchParam+"\")]"));
-            		   clickElement(driver.findElement(By.xpath("//label[contains(text(),\""+searchParam+"\")]")));
+        			   iWillWaitToSee(By.xpath("//div[@class='ui checkbox']/label[contains(text(),\""+searchParam+"\")]"));
+            		   clickElement(driver.findElement(By.xpath("//div[@class='ui checkbox']/label[contains(text(),\""+searchParam+"\")]")));
             		   driver.findElement(By.xpath("//a[contains(text(),'Applications')]")).click();
         		   }
         	   }
@@ -1764,12 +1857,21 @@ public void iUnselectAllSelectedApps(){
 	   if(locationList.equalsIgnoreCase("All Locations")){
 
 
-		   delay();
+		  delay();
 
 
-		   iWillWaitToSee(By.xpath("//div[@class='content active']//label[text()='All Locations']"));
-		   clickElement(driver.findElement(By.xpath("//div[@class='content active']//label[text()='All Locations']")));
-		   delay();
+		  if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		   {
+			  iWillWaitToSee(By.xpath("//div[@class='content active']//label[text()='All Locations']"));
+			  ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//label[text()='All Locations']")));
+			  delay();
+		   }
+		  else
+		  {
+			  iWillWaitToSee(By.xpath("//div[@class='content active']//label[text()='All Locations']"));
+			   clickElement(driver.findElement(By.xpath("//div[@class='content active']//label[text()='All Locations']")));
+			   delay();  
+		  }
 	   }
 	   
 	   else if (locationList.contains(","))
@@ -1803,15 +1905,15 @@ public void iUnselectAllSelectedApps(){
 	    				   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID);  
 	    			   }
 	    		   }
-		    	   iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
+		    	   iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]"));
 		    	   Thread.sleep(3000);
 		    	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		    	   {
-		    		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"))); 
+		    		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]"))); 
 		    	   }
 		    	   else
 		    	   {
-		    		   driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")).click();  
+		    		   driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")).click();  
 		    	   }
 		    	   Thread.sleep(3000);
 	    	   }
@@ -1844,15 +1946,15 @@ public void iUnselectAllSelectedApps(){
 	    				   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), location); 
 	    			   }
 	    		   }
-		    	   iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
+		    	   iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]"));
 		    	   Thread.sleep(3000);
 		    	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		    	   {
-		    		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")));
+		    		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")));
 		    	   }
 		    	   else
 		    	   {
-		    		   driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")).click();  
+		    		   driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")).click();  
 		    	   }
 		    	   Thread.sleep(3000); 
 	    	   }
@@ -1892,15 +1994,15 @@ public void iUnselectAllSelectedApps(){
     				   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), BPID);
     			   }
     		   }
-        	   iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
+        	   iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]"));
         	   Thread.sleep(3000);
         	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
         	   {
-        		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")));
+        		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")));
         	   }
         	   else
         	   {
-        		   driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")).click();  
+        		   driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")).click();  
         	   }
         	   Thread.sleep(3000);
     	   }
@@ -1928,15 +2030,15 @@ public void iUnselectAllSelectedApps(){
     				   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), location);
     			   }
     		   }
-        	   iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
+        	   iWillWaitToSee(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]"));
         	   Thread.sleep(3000);
         	   if(DriverScript.Config.getProperty("Browser").equals("ie"))
         	   {
-        		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")));
+        		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")));
         	   }
         	   else
         	   {
-        		   driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")).click();  
+        		   driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")).click();  
         	   }
         	   
         	   Thread.sleep(3000);   
@@ -1964,8 +2066,8 @@ public void iUnselectAllSelectedApps(){
 			    		   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
 			    		   new Actions(driver).sendKeys(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), token).build().perform();
 			    	   }
-			    	   iWillWaitToSee(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),\""+token+"\")]"));
-			    	   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),\""+token+"\")]")));
+			    	   iWillWaitToSee(By.xpath("//tr[@class='component-bpid-row']//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+token.toLowerCase()+"\")]"));
+			    	   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//tr[@class='component-bpid-row']//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+token.toLowerCase()+"\")]")));
 		    	   }
 		    	   else
 		    	   {
@@ -1978,9 +2080,9 @@ public void iUnselectAllSelectedApps(){
 			    		   driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")).click();
 			    		   iFillInText(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), token);
 			    	   }
-			    	   iWillWaitToSee(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),\""+token+"\")]"));
+			    	   iWillWaitToSee(By.xpath("//tr[@class='component-bpid-row']//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+token.toLowerCase()+"\")]"));
 			    	   delay();
-			    	   driver.findElement(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),\""+token+"\")]")).click();  
+			    	   driver.findElement(By.xpath("//tr[@class='component-bpid-row']//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+token.toLowerCase()+"\")]")).click();  
 		    	   }
 		   		}
 		   	}
@@ -2043,8 +2145,8 @@ public void iUnselectAllSelectedApps(){
 		    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
 		    				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), BPID).build().perform();
 		    			   }
-		    			   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
-		    			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")));
+		    			   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]"));
+		    			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")));
 		    		   }
 		    		   else
 		    		   {
@@ -2056,8 +2158,8 @@ public void iUnselectAllSelectedApps(){
 		    				   driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")).click();
 		    				   iFillInText(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), BPID);
 		    			   }
-			    		   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
-				    	   driver.findElement(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")).click();  
+			    		   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]"));
+				    	   driver.findElement(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")).click();  
 		    		   }
 		    	   }
 		    	   else
@@ -2071,8 +2173,8 @@ public void iUnselectAllSelectedApps(){
 		    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
 		    				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), location).build().perform();
 		    			   }
-		    			   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
-		    			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")));
+		    			   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]"));
+		    			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")));
 		    		   }
 		    		   else
 		    		   {
@@ -2084,8 +2186,8 @@ public void iUnselectAllSelectedApps(){
 		    				   driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")).click();
 		    				   iFillInText(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), location);
 		    			   }
-			    		   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
-				    	   driver.findElement(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")).click(); 
+			    		   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]"));
+				    	   driver.findElement(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")).click(); 
 		    		   }
 		    	   }
 		       }   
@@ -2106,8 +2208,8 @@ public void iUnselectAllSelectedApps(){
 	    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
 	    				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), location).build().perform();
 	    			   }
-	    			   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
-	    			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")));
+	    			   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]"));
+	    			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")));
 	    		   }
 	    		   else
 	    		   {
@@ -2119,8 +2221,8 @@ public void iUnselectAllSelectedApps(){
 	    				   driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")).click();
 	    				   iFillInText(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), location);
 	    			   }
-		    		   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
-			    	   driver.findElement(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")).click();  
+		    		   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]"));
+			    	   driver.findElement(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")).click();  
 	    		   }
 	    	   }
 	    	   else
@@ -2134,8 +2236,8 @@ public void iUnselectAllSelectedApps(){
 	    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
 	    				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), location).build().perform();
 	    			   }
-	    			   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
-	    			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")));
+	    			   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]"));
+	    			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")));
 	    		   }
 	    		   else
 	    		   {
@@ -2147,8 +2249,8 @@ public void iUnselectAllSelectedApps(){
 	    				   driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")).click();
 	    				   iFillInText(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), location);
 	    			   }
-		    		   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]"));
-			    	   driver.findElement(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(text(),\""+location+"\")]")).click();  
+		    		   iWillWaitToSee(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]"));
+			    	   driver.findElement(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")).click();  
 	    		   }
 	    	   }
 		   	}	
@@ -2184,12 +2286,11 @@ public void iUnselectAllSelectedApps(){
    }
    
    public void verifyDefaultProgramOrganization(String programName) throws Throwable {
+	   
 	   Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='"+programName+"']")));
    }
    
-   public void verifyUnavailabilityOrganizationDropDown() throws Throwable {
-       isElementNotPresentOnPage("");
-   }
+ 
    
    public void searchLocation(String location) throws Throwable {
        iFillInText(driver.findElement(By.xpath("//input[@placeholder='Search']")), location);
@@ -2244,21 +2345,21 @@ public void iUnselectAllSelectedApps(){
 	   String token = null;
        while (st.hasMoreTokens()) {
     	   String newToken = st.nextToken().trim();
-    	   if(newToken.contains("Lessons"))
+    	   if(newToken.contains("Remedy University"))
     	   {
     		   token = "RemedyU";
-    	   }
-    	   else if(newToken.contains("TCI"))
-    	   {
-    		   token = "Institute";
-    	   }
-    	   else if(newToken.contains("Physician Connect"))
-    	   {
-    		   token = "Gainsharing Physician Survey";
     	   }
     	   else if(newToken.contains("Administration"))
     	   {
     		   token = "Users";
+    	   }
+    	   else if(newToken.contains("Episode Connect for Post-acute Care"))
+    	   {
+    		   token = "Episodes Post Acute";
+    	   }
+    	   else if(newToken.contains("Episode Connect Classic"))
+    	   {
+    		   token = "Episodes Classic";
     	   }
     	   else
     	   {
@@ -2267,8 +2368,6 @@ public void iUnselectAllSelectedApps(){
     	   iWillWaitToSee(By.xpath("//div[text()='"+token.trim()+"']"));
     	   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+token.trim()+"']")));
        } 
-	   iWillWaitToSee(By.xpath("//div[text()='Institute']"));
-       Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Institute']")));
    }
    
    public void verifyProductTilesNotPresent(String products) throws Throwable {
@@ -2277,21 +2376,21 @@ public void iUnselectAllSelectedApps(){
        while (st.hasMoreTokens()) 
        {
     	   String newToken = st.nextToken();
-    	   if(newToken.contains("Lessons"))
+    	   if(newToken.contains("Remedy University"))
     	   {
     		   token = "RemedyU";
-    	   }
-    	   else if(newToken.contains("TCI"))
-    	   {
-    		   token = "Institute";
-    	   }
-    	   else if(newToken.contains("Physician Connect"))
-    	   {
-    		   token = "Gainsharing Physician Survey";
     	   }
     	   else if(newToken.contains("Administration"))
     	   {
     		   token = "Users";
+    	   }
+    	   else if(newToken.contains("Episode Connect for Post-acute Care"))
+    	   {
+    		   token = "Episodes Post Acute";
+    	   }
+    	   else if(newToken.contains("Episode Connect Classic"))
+    	   {
+    		   token = "Episodes Classic";
     	   }
     	   else
     	   {
@@ -2341,17 +2440,17 @@ public void iUnselectAllSelectedApps(){
 		while (st.hasMoreTokens()) 
 	       {
 			String newToken = st.nextToken().trim();
-			if(newToken.contains("Lessons"))
+			if(newToken.contains("Remedy University"))
 	    	   {
 	    		   token = "RemedyU";
 	    	   }
-	    	   else if(newToken.contains("TCI"))
+	    	   else if(newToken.contains("Episode Connect Classic"))
 	    	   {
-	    		   token = "Institute";
+	    		   token = "Episodes Classic";
 	    	   }
-	    	   else if(newToken.contains("Physician Connect"))
+	    	   else if(newToken.contains("Episode Connect for Post-acute Care"))
 	    	   {
-	    		   token = "Gainsharing Physician Survey";
+	    		   token = "Episodes Post Acute";
 	    	   }
 	    	   else if(newToken.contains("Administration"))
 	    	   {
@@ -2372,17 +2471,17 @@ public void iUnselectAllSelectedApps(){
 	   while (st.hasMoreTokens())
 	   {
 		   String newToken = st.nextToken();
-		   if(newToken.contains("Lessons"))
+		   if(newToken.contains("Remedy University"))
     	   {
     		   token = "RemedyU";
     	   }
-    	   else if(newToken.contains("TCI"))
+    	   else if(newToken.contains("Episode Connect Classic"))
     	   {
-    		   token = "Institute";
+    		   token = "Episodes Classic";
     	   }
-    	   else if(newToken.contains("Physician Connect"))
+    	   else if(newToken.contains("Episode Connect for Post-acute Care"))
     	   {
-    		   token = "Gainsharing Physician Survey";
+    		   token = "Episodes Post Acute";
     	   }
     	   else if(newToken.contains("Administration"))
     	   {
@@ -2441,7 +2540,7 @@ public void iUnselectAllSelectedApps(){
    
    public void iClickOnFiledInDropdownOnProfileIcon(String text, String role) {
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-		if(application.contains("Episodes"))
+		if(application.contains("Episode Connect Classic"))
 		{
 			if(!(role.substring((role.indexOf("-")+1)).equals("Remedy Sales Team") || role.substring((role.indexOf("-")+1)).equals("Prospective Partner Executive")))
 			   {
@@ -2458,7 +2557,7 @@ public void iUnselectAllSelectedApps(){
    
    public void iVerifyPageHeaderForPageOnRemedyConnect(String title, String role ) throws InterruptedException {
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-		if(application.contains("Episodes"))
+		if(application.contains("Episode Connect Classic"))
 		{
 			try
 			   {
@@ -2490,7 +2589,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Reports"))
+			   if(st.nextToken().trim().equals("Reporting Classic"))
 			   {
 				   iWillWaitToSee(By.xpath("//label[@class='dropdown-tile-label ng-binding'][text()='"+text+"']"));
 				   selectElementByDesc(".dropdown-tile-label.ng-binding", text);
@@ -2504,7 +2603,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Reports"))
+			   if(st.nextToken().trim().equals("Reporting Classic"))
 			   {
 				   if(DriverScript.Config.getProperty("Browser").equals("ie"))
 				   {
@@ -2525,7 +2624,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Reports"))
+			   if(st.nextToken().trim().equals("Reporting Classic"))
 			   {
 				   iWillWaitToSee(By.xpath(".//div[@class='field-panel-icon']"));
 				   clickElement(driver.findElement(By.xpath(".//div[@class='field-panel-icon']")));
@@ -2538,7 +2637,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Reports"))
+			   if(st.nextToken().trim().equals("Reporting Classic"))
 			   {
 				   iWillWaitToSee(By.xpath(".//*[@id='fieldListTreeContent']//div[@formula='["+filterTitle+"].["+filterField+"]']"));
 				   clickElement(driver.findElement(By.xpath(".//*[@id='fieldListTreeContent']//div[@formula='["+filterTitle+"].["+filterField+"]']")));
@@ -2553,7 +2652,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Reports"))
+			   if(st.nextToken().trim().equals("Reporting Classic"))
 			   {
 				   clickElement(driver.findElement(By.xpath(toLocator)));
 			   }
@@ -2565,7 +2664,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Reports"))
+			   if(st.nextToken().trim().equals("Reporting Classic"))
 			   {
 				   if(text.contains(","))
 				   {
@@ -2592,7 +2691,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Reports"))
+			   if(st.nextToken().trim().equals("Reporting Classic"))
 			   {
 				   iWillWaitToSee(By.id("dlgBtnCancel"));
 				   clickElement(driver.findElement(By.id("dlgBtnCancel")));
@@ -2605,7 +2704,7 @@ public void iUnselectAllSelectedApps(){
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
 		   {
-			   if(st.nextToken().trim().equals("Reports"))
+			   if(st.nextToken().trim().equals("Reporting Classic"))
 			   {
 				   iWillWaitToSee(By.xpath("//div[@class='flex-item order-2 btn logo valentino-icon-reports']"));
 				   clickElement(driver.findElement(By.xpath("//div[@class='flex-item order-2 btn logo valentino-icon-reports']")));
@@ -2620,7 +2719,10 @@ public void iUnselectAllSelectedApps(){
 	 public void removeAlreadySelectedRole() throws Throwable {
 		 driver.findElement(By.xpath("//i[@class='close icon']")).click();
 	 }
-	 public void iVerifyTheSelectedLocationsAreNotPresentInSelectLocationsSection (String text){
+	 public void iVerifyTheLocationsAreNotPresentInSelectLocationsSection (String text){
+		 longDelay();
+		 if(!(text.isEmpty())){
+			 if(isElementPresentOnPage(By.xpath("//h5[text()='Selected Locations:']"))==true){
 		 if(text.contains(",")){
 			 StringTokenizer st = new StringTokenizer(text, ",");
 			   while(st.hasMoreTokens())
@@ -2632,6 +2734,8 @@ public void iUnselectAllSelectedApps(){
 
 		 	Assert.assertFalse(isElementPresentOnPage(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+text+"\")]")));
 	 } 
+	 }
+		 }
 	 }
 	 public void iVerifyTheSelectedLocationsInTheSelectLocationsSection(String text){
 		 if(text.contains(",")){
@@ -2656,6 +2760,7 @@ public void iUnselectAllSelectedApps(){
 	 }
 	 
 	 public void iClickOnRemoveLinkIconforSelectedLocationsSelectLocationsSection(){
+		 iWillWaitToSee(By.cssSelector(".remove.link.icon"));
 		 clickElement(driver.findElement(By.cssSelector(".remove.link.icon")));
 	 }
 	 
@@ -2734,19 +2839,25 @@ public void iUnselectAllSelectedApps(){
  }
  public void iVerifyRolesAsPerUser(String user){
 	 if(user.equalsIgnoreCase("Super Admin")){
-		Assert.assertTrue(driver.findElements(By.xpath("//div[@class='scrolling menu transition']/div[@class='item']/span")).size()>=18);
+		Assert.assertTrue(driver.findElements(By.xpath("//div[@class='scrolling menu transition']/div[@class='item']/span")).size()>=10);
 	 }
 	 else if (user.equalsIgnoreCase("PTA")){
 		 String text;
 		 
-		 int size =driver.findElements(By.xpath("//div[@class='scrolling menu transition']/div[@class='item']/span")).size();
-		 Assert.assertTrue(size==5);
+		 int size =driver.findElements(By.xpath("//span[@class='dropDownOptionValue']")).size();
+		 Assert.assertTrue(size==4);
 		 for(int i=0;i<size;i++){
-			text=driver.findElements(By.xpath("//div[@class='scrolling menu transition']/div[@class='item']/span")).get(i).getAttribute("innerText").toString().trim();
-			 Assert.assertTrue(text.equals("Executive")|| text.equals("Manager") || text.equals("Case Manager") ||text.equals("Physicians") ||text.equals("Transitional Case Manager"));
+			text=driver.findElements(By.xpath("//span[@class='dropDownOptionValue']")).get(i).getAttribute("outerText").toString().trim();
+			 Assert.assertTrue(text.contains("Leader")|| text.contains("Manager") || text.contains("Advanced Operator") ||text.contains("Operator"));
 		
 	 }
 		 
 	 }
+ }
+ public void enterTextLearningPathwaySearchBox(String searchParam) throws Throwable {
+     if(!(searchParam.equals("")))
+     {
+  	   iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), searchParam);  
+     }
  }
 }

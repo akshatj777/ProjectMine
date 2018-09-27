@@ -94,7 +94,7 @@ public void verifyBulkNPI(String field) throws Throwable {
 }
 	@Then("^I verify phone \"([^\"]*)\"$")
 	public void i_verify_Phone(String field) throws Throwable {
-		objViewUserPage.verifyRole(field);
+		objViewUserPage.verifyPhone(field);
 	}
 	
 	@Then("^I verify NPI \"([^\"]*)\"$")
