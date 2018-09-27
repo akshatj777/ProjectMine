@@ -1607,14 +1607,12 @@ public void iUnselectAllSelectedApps(){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   if(application.contains("Remedy University")){
 		   String user = role.substring(role.indexOf("-")+1);
-		   if(user.equalsIgnoreCase("Remedy Technical Administrator")||user.equalsIgnoreCase("Partner Program Administrator")||user.equalsIgnoreCase("Remedy Program Administrator")
-				   ||user.equalsIgnoreCase("Partner Technical Administrator")){
+		   if(user.equalsIgnoreCase("Remedy Technical Administrator")||user.equalsIgnoreCase("Partner Program Administrator")||user.equalsIgnoreCase("Remedy Program Administrator"))
+		   {
 			   iWillWaitToSee(By.cssSelector(".col-sm-6.col-md-3"));
 			   Assert.assertTrue(driver.findElement(By.cssSelector(".col-sm-6.col-md-3")).isDisplayed());
 		   }
 		   else{
-//			   iWillWaitToSee(By.cssSelector(".close"));
-//			   Assert.assertTrue(driver.findElement(By.cssSelector(".close")).isDisplayed());
 			   iWillWaitToSee(By.cssSelector(".btn.btn-primary"));
 			   driver.findElement(By.cssSelector(".btn.btn-primary")).click();
 			   Assert.assertTrue(driver.findElement(By.cssSelector(".nav.litmos-sub-nav")).isDisplayed());
@@ -1628,8 +1626,7 @@ public void iUnselectAllSelectedApps(){
 	   if(application.contains("Remedy University")){
 		   
 		   String user = role.substring(role.indexOf("-")+1);
-		   if(user.equalsIgnoreCase("Remedy Technical Administrator")||user.equalsIgnoreCase("Partner Program Administrator")||user.equalsIgnoreCase("Remedy Program Administrator")
-				   ||user.equalsIgnoreCase("Partner Technical Administrator")){
+		   if(user.equalsIgnoreCase("Remedy Technical Administrator")||user.equalsIgnoreCase("Partner Program Administrator")||user.equalsIgnoreCase("Remedy Program Administrator")){
 			   clickElement(driver.findElement(By.cssSelector("li[id='user_dropdown']")));
 			   iWillWaitToSee(By.xpath("//a[contains(text(),'My Profile & Settings')]"));
 			   clickElement(driver.findElement(By.xpath("//a[contains(text(),'My Profile & Settings')]")));
@@ -1657,8 +1654,8 @@ public void iUnselectAllSelectedApps(){
 			   if(pathway.contains(","))
 			   {
 				   String user = role.substring(role.indexOf("-")+1);
-				   if(user.equalsIgnoreCase("Remedy Technical Administrator")||user.equalsIgnoreCase("Partner Program Administrator")||user.equalsIgnoreCase("Remedy Program Administrator")
-						   ||user.equalsIgnoreCase("Partner Technical Administrator")){
+				   if(user.equalsIgnoreCase("Remedy Technical Administrator")||user.equalsIgnoreCase("Partner Program Administrator")||user.equalsIgnoreCase("Remedy Program Administrator"))
+				   {
 					   clickElement(driver.findElement(By.xpath("//span[text()='Courses']")));
 					   iWillWaitToSee(By.xpath("//h1[text()='Courses']"));
 					   clickElement(driver.findElement(By.xpath("//a[text()='Learning Paths']")));
