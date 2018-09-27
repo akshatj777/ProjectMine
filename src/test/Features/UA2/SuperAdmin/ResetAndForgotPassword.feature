@@ -33,8 +33,8 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I enter email for "<User>-<Role>" in the search box
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change My Password" link in mail content
-    Then I click on "Change My Password" link in mail content
+    Then I verify "Reset My Password" link in mail content
+    Then I click on "Reset My Password" link in mail content
     And I switch to new window
     And I enter new password "<NewPassword>" to set new password
     And I enter confirm new password "<ConfirmPass>" to set new password
@@ -68,8 +68,8 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I enter email for "<User>-<Role>" in the search box
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change My Password" link in mail content
-    Then I click on "Change My Password" link in mail content
+    Then I verify "Reset My Password" link in mail content
+    Then I click on "Reset My Password" link in mail content
     And I switch to new window
     And I enter new password "<NewPassword>" to set new password
     And I enter confirm new password "<NewPassword>" to set new password
@@ -103,8 +103,8 @@ Feature: Reset and forgot password functionality from UA2 application
     Then I enter email for "<User>-<Role>" in the search box
     Then I verify Change Password mail in Inbox in my account
     Then I click on Change Password mail in Inbox
-    Then I verify "Change My Password" link in mail content
-    Then I click on "Change My Password" link in mail content
+    Then I verify "Reset My Password" link in mail content
+    Then I click on "Reset My Password" link in mail content
     And I switch to new window
     And I enter new password "<NewPassword>" to set new password
     And I enter confirm new password "<ConfirmPassword>" to set new password

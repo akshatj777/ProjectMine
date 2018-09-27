@@ -14,12 +14,11 @@ Feature: Edit PTA in case of partial application access
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | User                            | FirstName                                 | LastName                                 | Email                          | Phone      | NPI | Role                            | RoleID                             | Applications                                                                                                  | LearningPathways                                       | Locations                                                                                                                                                                                                                                                                                                                                        | expStatusCode |
-      | Super Admin                     | FirstName                                 | LastNameLastNameLastNameLastNameLastName | qaautomation@remedysystems.com |            |     | Partner Technical Administrator | 20-Partner Technical Administrator | episode_connect-Episode Connect Classic, admin-Administration, analytics-Reporting, lessons-Remedy University | HZhmTBQzHtU1, NFdw0Kts2C01, n9yn5n0Qa581               | 441324--6005-059--140007, 441324--3090-191--290039, 441324--3090-068--010118, 441324--3090-068--050113, 441324--3090-068--200018, 441324--3090-068--240093, 441324--3090-068--270049, 441324--3090-068--290012, 441324--3090-068--290021, 441324--3090-068--290022, 441324--3090-068--290041, 441324--3090-068--290045, 441324--3090-068--290046 |           200 |
-      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastNameLastNameLastNameLastNameLastName | qaautomation@remedysystems.com | 9988776655 |     | Leader                          | 1-Leader                           | episode_connect-Episode Connect Classic                                                                       | n9yn5n0Qa581, 5HDc3E6aK_E1, p11D0Vl2FSg1               | 441324--6005-059--140007                                                                                                                                                                                                                                                                                                                         |           200 |
-      | Partner Technical Administrator | FirstName                                 | LastNameLastNameLastNameLastNameLastName | qaautomation@remedysystems.com |            |     | Manager                         | 2-Manager                          | analytics-Reporting                                                                                           | n9yn5n0Qa581, 5HDc3E6aK_E1, p11D0Vl2FSg1               | 441324--3090-191--290039                                                                                                                                                                                                                                                                                                                         |           200 |
-    #  | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastName                                 | qaautomation@remedysystems.com |            |     | Advanced Operator               | 3-Advanced Operator                | lessons-Remedy University                                                                                     | n9yn5n0Qa581, 5HDc3E6aK_E1, p11D0Vl2FSg1, 18h7phZr1h81 | 441324--6005-059--140007, 441324--3090-191--290039, 441324--3090-068--010118, 441324--3090-068--050113, 441324--3090-068--200018, 441324--3090-068--240093, 441324--3090-068--270049, 441324--3090-068--290012, 441324--3090-068--290021, 441324--3090-068--290022, 441324--3090-068--290041, 441324--3090-068--290045, 441324--3090-068--290046 |           200 |
-      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | qaautomation@remedysystems.com | 9988776655 |     | Operator                        | 22-Operator                        | episode_connect-Episode Connect Classic, lessons-Remedy University, analytics-Reporting                       | n9yn5n0Qa581, 5HDc3E6aK_E1, p11D0Vl2FSg1               | 441324--3090-191--290039, 441324--3090-068--010118, 441324--3090-068--050113, 441324--3090-068--200018, 441324--3090-068--240093, 441324--3090-068--270049, 441324--3090-068--290012, 441324--3090-068--290021, 441324--3090-068--290022, 441324--3090-068--290041, 441324--3090-068--290045, 441324--3090-068--290046                           |           200 |
+      | User                            | FirstName                                 | LastName                                 | Email                          | Phone      | NPI | Role                            | RoleID                             | Applications                                                                                                  | LearningPathways                         | Locations                                                                                                                                                                                                                                                                                                                                        | expStatusCode |
+      | Super Admin                     | FirstName                                 | LastNameLastNameLastNameLastNameLastName | qaautomation@remedysystems.com |            |     | Partner Technical Administrator | 20-Partner Technical Administrator | episode_connect-Episode Connect Classic, admin-Administration, analytics-Reporting, lessons-Remedy University | HZhmTBQzHtU1, NFdw0Kts2C01, n9yn5n0Qa581 | 441324--6005-059--140007, 441324--3090-191--290039, 441324--3090-068--010118, 441324--3090-068--050113, 441324--3090-068--200018, 441324--3090-068--240093, 441324--3090-068--270049, 441324--3090-068--290012, 441324--3090-068--290021, 441324--3090-068--290022, 441324--3090-068--290041, 441324--3090-068--290045, 441324--3090-068--290046 |           200 |
+      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstName      | LastNameLastNameLastNameLastNameLastName | qaautomation@remedysystems.com | 9988776655 |     | Leader                          | 1-Leader                           | episode_connect-Episode Connect Classic                                                                       | n9yn5n0Qa581, 5HDc3E6aK_E1, p11D0Vl2FSg1 | 441324--6005-059--140007                                                                                                                                                                                                                                                                                                                         |           200 |
+      | Partner Technical Administrator | FirstName                                 | LastNameLastNameLastNameLastNameLastName | qaautomation@remedysystems.com |            |     | Manager                         | 2-Manager                          | analytics-Reporting                                                                                           | n9yn5n0Qa581, 5HDc3E6aK_E1, p11D0Vl2FSg1 | 441324--3090-191--290039                                                                                                                                                                                                                                                                                                                         |           200 |
+      | Partner Technical Administrator | FirstNameFirstNameFirstNameFirstNameFirst | LastName                                 | qaautomation@remedysystems.com | 9988776655 |     | Operator                        | 22-Operator                        | episode_connect-Episode Connect Classic, lessons-Remedy University, analytics-Reporting                       | n9yn5n0Qa581, 5HDc3E6aK_E1, p11D0Vl2FSg1 | 441324--3090-191--290039, 441324--3090-068--010118, 441324--3090-068--050113, 441324--3090-068--200018, 441324--3090-068--240093, 441324--3090-068--270049, 441324--3090-068--290012, 441324--3090-068--290021, 441324--3090-068--290022, 441324--3090-068--290041, 441324--3090-068--290045, 441324--3090-068--290046                           |           200 |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -88,17 +87,14 @@ Feature: Edit PTA in case of partial application access
     Given I am on the login page
     Then I click on "Log Out" button again
     And I should see Log in widget
+    Given I am on the login page
     Then I enter newuser email for "<User>-<Role>" login to Remedy
     Then I enter newuser password for login to Remedy
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    #Then I click on Hamburger menu on top left of homepage
-    #And I verify "<Applications>" in product menu dropdown
-    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    #And I redirect to Remedy connect page
+    #######Episode Connect Classic Provisioning################
     And I click on Episode1 tile for "<User>-<Role>" user
-    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -108,39 +104,50 @@ Feature: Edit PTA in case of partial application access
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    #And I switch back to old window
     And I redirect to Remedy connect page
+    ###########Reporting Classic Provisioning##############
     And I click on Reports tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reports homepage
     And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
     Then I click on "<ReportName>" report text for Overall Program Reports for "<User>-<Role>" user
     Then I verify "<ReportName>" on the reports main page for "<User>-<Role>" user
-    #When I click on field-panel-icon button for "<User>-<Role>" user
-    #When I click to "BPID" field filter under "Episode Initiator" filter field for "<User>-<Role>" user
-    #And I choose "Filter" option from select options of filter field for "<User>-<Role>" user
-    #And I should see "<BPID>" in the filter value list for "<User>-<Role>" user
-    #And I click on cancel button from filter for "<User>-<Role>" user
     And I redirect to Remedy connect page
+    ###########Episode Connect Post Acute Care Provisioning##############
     And I click on Episodes 2 tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
+    And I redirect to Remedy connect page
+    ############Remedy University Provisioning###############
     And I click on RemedyU tile for "<User>-<Role>" user
-    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
-    And I switch back to old window
     And I redirect to Remedy connect page
-    #And I click on Gainsharing Physician Survey tile for "<User>-<Role>" user
-    #And I verify "<User>-<Role>" user navigated to Gainsharing Physician Survey homepage
-    #And I redirect to Remedy connect page
+    ############User Admin Provisioning###################################
     And I click on User Admin tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to User Admin homepage
     And I redirect to Remedy connect page
+    #############TCI Provisioning####################################
     #And I click on Institute tile for "<User>-<Role>" user
-    #And I switch to new window
     #And I verify "<User>-<Role>" user navigated to Institute homepage
-    #And I switch back to old window
+    #And I redirect to Remedy connect page
+    #################Program Management Tile Provisioning####################
+    And I click on Program Management tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Program Management homepage
+    And I redirect to Remedy connect page
+    #################Care Connect Tile Provisioning####################
+    And I click on Care Connect tile for  "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Care Connect homepage
+    And I redirect to Remedy connect page
+    #################Community Connect Tile Provisioning####################
+    And I click on Community Connect tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Community Connect homepage
+    And I redirect to Remedy connect page
+    ###############Reporting Provisioning###################################
+    And I click on Reporting tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Reporting homepage
+    And I redirect to Remedy connect page
+    #################General Verification################################
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
