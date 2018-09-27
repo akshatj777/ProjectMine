@@ -996,7 +996,7 @@ public void iUnselectAllSelectedApps(){
 		   if(st.nextToken().trim().equals("Episode Connect Classic")){
 			   //waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.id("tblPatients_processing")));
 			   iWillWaitToSee(By.id("filterTab_custom"));
-			   waitTo().until(ExpectedConditions.elementToBeClickable(By.id("tblPatients_processing")));
+//			   waitTo().until(ExpectedConditions.elementToBeClickable(By.id("tblPatients_processing")));
 			   driver.findElement(By.id("filterTab_custom")).click();
 			   waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.id("tblPatients_processing")));
 			   iWillWaitToSee(By.xpath("//div[@ng-repeat='element in patientsList']"));
