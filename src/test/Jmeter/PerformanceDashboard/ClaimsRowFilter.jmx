@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.0 r1840935">
+<jmeterTestPlan version="1.2" properties="4.0" jmeter="4.0 r1823414">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -72,7 +72,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
           <stringProp name="filename">RowFilterInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">userName,startdate,enddate,time_range,bpid,ccn,bundle,region,market,r_region,r_market,participantName,drgCode,npi,model</stringProp>
+          <stringProp name="variableNames">userName,bpid,ccn,bundle,region,market,r_region,r_market,participantName,drgCode,npi,model</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -147,18 +147,22 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">SELECT DISTINCT
-    EpisodeInitiator_BPID
+    a.EpisodeInitiator_BPID
 FROM
     (
 SELECT DISTINCT
         e.episodeInitiatorNameInitCap, e.bpid,
-        CONCAT(e.episodeInitiatorNameInitCap,&apos; - &apos;, e.bpid) as &apos;Episode Initiator_BPID&apos;
+        CONCAT(e.episodeInitiatorNameInitCap,&apos; - &apos;, e.bpid) as &apos;EpisodeInitiator_BPID&apos;
     FROM
         warehouse.factClaims c
     LEFT JOIN warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
     LEFT JOIN warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
     LEFT JOIN warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
     LEFT JOIN warehouse.dimDate dt ON c.anchorBeginDateKey = dt.dateSK
+	LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  
+	LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    
+	LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  
+	LEFT JOIN warehouse.dimRegionMarket prm ON c.rgPartnerKey = prm.rgSK	
     INNER JOIN (SELECT 
         tabUserSecurityBPID.bpid,  username FROM warehouse.tabUserSecurityBPID
 		WHERE username = ${userName} GROUP BY bpid) tbsBPID ON e.BPID = tbsBPID.bpid
@@ -167,11 +171,22 @@ SELECT DISTINCT
             AND f.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND pac.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND c.targetPrice &lt;&gt; 0
+			AND c.anchorBeginDateKey &gt;= 20160101
             AND c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+--			AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
-            
+				${C_BPID}
+	               ${C_CCN}
+				${C_BUNDLE} 
+				${C_R_REGION} 
+				${C_R_MARKET} 
+				${C_REGION} 
+				${C_MARKET} 
+				${C_PARTICIPANTNAME}  
+				${C_DRGCODE} 
+				${C_PHY_NPI} 
+            		${C_Model}
             ) a
 ORDER BY a.episodeInitiatorNameInitCap , a.bpid;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -199,6 +214,10 @@ FROM
     LEFT JOIN warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
     LEFT JOIN warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
     LEFT JOIN warehouse.dimDate dt ON c.anchorBeginDateKey = dt.dateSK
+	LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  
+	LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    
+	LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  
+	LEFT JOIN warehouse.dimRegionMarket prm ON c.rgPartnerKey = prm.rgSK
     INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM warehouse.tabUserSecurityBPID
 		WHERE username = ${userName} GROUP BY bpid) tbsBPID ON e.BPID = tbsBPID.bpid
@@ -210,13 +229,23 @@ FROM
             AND f.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND pac.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND c.targetPrice &lt;&gt; 0
+			AND c.anchorBeginDateKey &gt;= 20160101
             AND c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+--             AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
             	${C_BPID}
-            
+	            ${C_CCN}
+				${C_BUNDLE} 
+				${C_R_REGION} 
+				${C_R_MARKET} 
+				${C_REGION} 
+				${C_MARKET} 
+				${C_PARTICIPANTNAME}  
+				${C_DRGCODE} 
+				${C_PHY_NPI}
+            		${C_Model}
             ) a
 ORDER BY a.facilityNameInitCap, a.ccn;
 </stringProp>
@@ -244,7 +273,10 @@ FROM
     LEFT JOIN warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
     LEFT JOIN warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
     LEFT JOIN warehouse.dimDate dt ON c.anchorBeginDateKey = dt.dateSK
-    LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK
+	LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  
+	LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    
+	LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  
+	LEFT JOIN warehouse.dimRegionMarket prm ON c.rgPartnerKey = prm.rgSK 
     INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM warehouse.tabUserSecurityBPID
 		WHERE username = ${userName} GROUP BY bpid) tbsBPID ON e.BPID = tbsBPID.bpid
@@ -256,14 +288,23 @@ FROM
             AND f.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND pac.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND c.targetPrice &lt;&gt; 0
+			AND c.anchorBeginDateKey &gt;= 20160101
             AND c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+--             AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
             	${C_BPID}
-               ${C_CCN}
-            
+	            ${C_CCN}
+				${C_BUNDLE} 
+				${C_R_REGION} 
+				${C_R_MARKET} 
+				${C_REGION} 
+				${C_MARKET} 
+				${C_PARTICIPANTNAME}  
+				${C_DRGCODE} 
+				${C_PHY_NPI} 
+            		${C_Model}
             ) a
 ORDER BY a.bundleName;
 
@@ -294,7 +335,9 @@ FROM
     LEFT JOIN warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
     LEFT JOIN warehouse.dimDate dt ON c.anchorBeginDateKey = dt.dateSK
     LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK
-    LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK
+    LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    
+	LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  
+	LEFT JOIN warehouse.dimRegionMarket prm ON c.rgPartnerKey = prm.rgSK
     INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM warehouse.tabUserSecurityBPID
 		WHERE username = ${userName} GROUP BY bpid) tbsBPID ON e.BPID = tbsBPID.bpid
@@ -306,15 +349,23 @@ FROM
             AND f.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND pac.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND c.targetPrice &lt;&gt; 0
+			AND c.anchorBeginDateKey &gt;= 20160101
             AND c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+--             AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
             	${C_BPID}
-            	${C_CCN}
-				${C_BUNDLE}
-            
+	            ${C_CCN}
+				${C_BUNDLE} 
+				${C_R_REGION} 
+				${C_R_MARKET} 
+				${C_REGION} 
+				${C_MARKET} 
+				${C_PARTICIPANTNAME}  
+				${C_DRGCODE} 
+				${C_PHY_NPI}
+            		${C_Model}	
             ) a
 ORDER BY a.RRegionMarket;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -346,6 +397,7 @@ FROM
     LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK
     LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK
     LEFT JOIN warehouse.dimRegionMarket prm ON c.rgPartnerKey = prm.rgSK
+	LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK 
     INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM warehouse.tabUserSecurityBPID
 		WHERE username = ${userName} GROUP BY bpid) tbsBPID ON e.BPID = tbsBPID.bpid
@@ -357,17 +409,23 @@ FROM
             AND f.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND pac.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND c.targetPrice &lt;&gt; 0
+            AND c.anchorBeginDateKey &gt;= 20160101
             AND c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+--             AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
             	${C_BPID}
-            	${C_CCN}
+	            ${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
 				${C_R_MARKET} 
-            
+				${C_REGION} 
+				${C_MARKET} 
+				${C_PARTICIPANTNAME}  
+				${C_DRGCODE} 
+				${C_PHY_NPI}
+            		${C_Model}
             ) a
 ORDER BY a.PartnerRegionMarket;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -397,6 +455,7 @@ FROM
     LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK
     LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK
     LEFT JOIN warehouse.dimRegionMarket prm ON c.rgPartnerKey = prm.rgSK
+	LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK 
     INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM warehouse.tabUserSecurityBPID
 		WHERE username = ${userName} GROUP BY bpid) tbsBPID ON e.BPID = tbsBPID.bpid
@@ -408,19 +467,23 @@ FROM
             AND f.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND pac.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND c.targetPrice &lt;&gt; 0
+			AND c.anchorBeginDateKey &gt;= 20160101
             AND c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+--             AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
             	${C_BPID}
-            	${C_CCN}
+	            ${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
 				${C_R_MARKET} 
 				${C_REGION} 
 				${C_MARKET} 
-				
+				${C_PARTICIPANTNAME}  
+				${C_DRGCODE} 
+				${C_PHY_NPI}
+				${C_Model}
             
             ) a
 ORDER BY a.participant;
@@ -458,6 +521,7 @@ FROM
     LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK
     LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK
     LEFT JOIN warehouse.dimRegionMarket prm ON c.rgPartnerKey = prm.rgSK
+	LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK
     INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM warehouse.tabUserSecurityBPID
 		WHERE username = ${userName} GROUP BY bpid) tbsBPID ON e.BPID = tbsBPID.bpid
@@ -469,20 +533,23 @@ FROM
             AND f.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND pac.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND c.targetPrice &lt;&gt; 0
+			AND c.anchorBeginDateKey &gt;= 20160101
             AND c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+--             AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
             	${C_BPID}
-            	${C_CCN}
+	            ${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
 				${C_R_MARKET} 
 				${C_REGION} 
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
-				
+				${C_DRGCODE} 
+				${C_PHY_NPI}  
+				${C_Model}
             
             ) a
 ORDER BY a.DRG_Fracture;
@@ -529,13 +596,14 @@ FROM
             AND f.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND pac.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND c.targetPrice &lt;&gt; 0
+			AND c.anchorBeginDateKey &gt;= 20160101
             AND c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+--             AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
             	${C_BPID}
-            	${C_CCN}
+	            ${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
 				${C_R_MARKET} 
@@ -543,6 +611,8 @@ FROM
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
+				${C_PHY_NPI}
+				${C_Model} 
             
             ) a
 ORDER BY a.Physician_NPI;
@@ -587,8 +657,9 @@ FROM
             AND f.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND pac.dwhSource IN (&apos;Claims&apos; , &apos;ZeroKey&apos;, &apos;emblemClaims&apos;)
             AND c.targetPrice &lt;&gt; 0
+            AND c.anchorBeginDateKey &gt;= 20160101
             AND c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
+--            AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
@@ -601,7 +672,8 @@ FROM
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
-				${C_PHY_NPI} 
+				${C_PHY_NPI}
+				${C_Model}				
             
             ) a
 ORDER BY a.model;</stringProp>
@@ -782,7 +854,7 @@ and f.ccn =  &apos;390223&apos;
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo *Episode Initiator - BPID=${value1}*Anchor Facility - CCN=${value2}*Bundle=${value3}*Region - Market=${value5}*Remedy Region - Market=${value4}*Participant=${value6}*DRG=${value7}*Physician - NPI=${value8}*Model=${value9}&gt;&gt; RowFilterOutput.txt</stringProp>
+                <stringProp name="Argument.value">echo Episode Initiator - BPID=${value1}*Anchor Facility - CCN=${value2}*Bundle=${value3}*Region - Market=${value5}*Remedy Region - Market=${value4}*Participant=${value6}*DRG=${value7}*Physician - NPI=${value8}*Model=${value9}&gt;&gt; RowFilterOutput.txt</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>

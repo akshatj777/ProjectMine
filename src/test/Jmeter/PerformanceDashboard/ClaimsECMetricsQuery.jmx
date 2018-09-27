@@ -188,7 +188,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;E_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;and e.participantName in ${participantName}&quot;);	
+	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;and de.participantName in ${participantName}&quot;);	
 } else{
 	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
@@ -523,7 +523,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;E_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;and e.participantName in ${participantName}&quot;);	
+	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;and de.participantName in ${participantName}&quot;);	
 } else{
 	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
@@ -668,7 +668,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;E_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;and e.participantName in ${participantName}&quot;);	
+	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;and de.participantName in ${participantName}&quot;);	
 } else{
 	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
@@ -812,7 +812,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;E_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;and e.participantName in ${participantName}&quot;);	
+	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;and de.participantName in ${participantName}&quot;);	
 } else{
 	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
@@ -956,7 +956,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;E_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;and e.participantName in ${participantName}&quot;);	
+	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;and de.participantName in ${participantName}&quot;);	
 } else{
 	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
@@ -1100,7 +1100,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;E_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;and e.participantName in ${participantName}&quot;);	
+	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;and de.participantName in ${participantName}&quot;);	
 } else{
 	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
@@ -1244,7 +1244,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;E_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;and e.participantName in ${participantName}&quot;);	
+	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;and de.participantName in ${participantName}&quot;);	
 } else{
 	vars.put(&quot;E_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
@@ -1300,7 +1300,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo KPI_Episode_EC_Claims=${Episode_EC_Claims_1}*Savings Rate_EC_Claims=${savingRate_EC_Claims_1}*KPI_NPRA_EC_Claims=${TotalNPRA_EC_Claims_1}*KPI_Program_size_EC_Claims=${TotalProgram_EC_Claims_1}*% SNF Disch Current_EC_Claims=${DischargeToSNF_EC_Claims_1}*SNF Days Current_EC_Claims=${SNFDays_EC_Claims_1}*SNF Days Benchmark Variance_EC_Claims=${SNFDaysBenchmark_EC_Claims_1}*Readmissions Current_EC_Claims=${EpisodesWithReadmission_EC_Claims_1}*Readmissions Benchmark Variance_EC_Claims=${EpisodesWithReadmissionBenchmark_EC_Claims_1}*% SNF Disch Benchmark Variance_EC_Claims=${dischtoSNFBenchmark_EC_Claims_1}&gt;&gt;ClaimsECMetricsOuput.txt</stringProp>
+                <stringProp name="Argument.value">echo KPI_Episode_EC_Claims=${Episode_EC_Claims_1}*Savings Rate_EC_Claims=${savingRate_EC_Claims_1}*KPI_NPRA_EC_Claims=${TotalNPRA_EC_Claims_1}*KPI_Program_size_EC_Claims=${TotalProgram_EC_Claims_1}*% SNF Disch Current_EC_Claims=${DischargeToSNF_EC_Claims_1}*SNF Days Current_EC_Claims=${SNFDays_EC_Claims_1}*SNF Days Benchmark Variance_EC_Claims=${SNFDaysBenchmark_EC_Claims_1}*Readmissions Current_EC_Claims=${EpisodesWithReadmission_EC_Claims_1}*Readmissions Benchmark Variance_EC_Claims=${EpisodesWithReadmissionBenchmark_EC_Claims_1}*% SNF Disch Benchmark Variance_EC_Claims=${dischtoSNFBenchmark_EC_Claims_1}&gt;&gt;ClaimsECMetricsOutput.txt</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
