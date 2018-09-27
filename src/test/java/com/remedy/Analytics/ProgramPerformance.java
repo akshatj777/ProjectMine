@@ -855,38 +855,50 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iSetDateInDateFieldAttribute(String field, String value){
-		 longDelay();
-		 longDelay();
-		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+		 delay();
+		 try{
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));}
+		 catch(Exception e){
+			 
+		 }
 		 if(field.equals("Start Date")){
 			 if(value.contains("ECStartDate")){
 				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+				 delay();
 //				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),outputText.get("ECStartDateDB"));
 				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),DriverScript.Config.getProperty("ECStartDate"));
-				 
-			 }else {
+				 }else {
 				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+				 delay();
 				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), value);
 			 }
 		 }else if (field.equals("End Date")){
 			 if(value.contains("ClaimsCubeDate")){
-				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
+				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
+				// clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
+				 delay();
 //				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), outputText.get("ClaimsCubeDateDB"));
 				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), DriverScript.Config.getProperty("ClaimsCubeDate"));
-			 }else if(value.contains("Today")){
-				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
+				 }else if(value.contains("Today")){
+				((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
+				 delay();
 				 clickElement(driver.findElement(By.xpath("//span[@class='tab-datepicker-today-date']")));
-				 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
-			 }else{
+				 }else{
 				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
+				 delay();
 				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), value);
 				 }
-		 }
-		 longDelay();
+		          }
+		 delay();
 //		 WebElement elem = driver.findElement(By.xpath("//span[text()='Bundle']/../../../../.. //span[@role='combobox']"));
 		 WebElement elem =driver.findElement(By.xpath("//span[text()='Time']"));
 		 act.moveToElement(elem).click().build().perform();
-		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+		 delay();
+		 try{
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));}
+		 catch(Exception e){
+			 
+		 }
 //		 longDelay();
 //		 act.moveToElement(elem).click().build().perform();
 		 delay();
@@ -1166,8 +1178,13 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iClickOnFilterName(String text,String dashboard){
+		 try{
+		 delay();
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+		 }catch(Exception e){
+			 
+		 }
 		 if(text.equals("Time")){
-			 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 			 delay();
 			 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. /span//button[@type='button']"));
 			 act.moveToElement(elem).click().build().perform();
@@ -1175,7 +1192,6 @@ public class ProgramPerformance extends BaseClass{
 		 }
 		 
 		 else if(!dashboard.contains("- Skip")){
-		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 		 delay();
 		 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']"));
 		 act.moveToElement(elem).click().build().perform();
@@ -1422,14 +1438,14 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iClickRefreshDBData(){
 		 iWillWaitToSee(By.xpath("//span[text()='Refresh']"));
-		 longDelay();
-		 waitTo().until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Refresh']")));
+		 delay();
+	//	 waitTo().until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Refresh']")));
 		 scrollIntoViewByJS(driver.findElement(By.xpath("//span[text()='Refresh']")));
 		 clickElement(driver.findElement(By.xpath("//span[text()='Refresh']")));
-		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='wcGlassPane' and contains(@style,'cursor: wait;')]")));
-		 longDelay();
+		 delay();
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
-		 if(driver.findElements(By.xpath("div[@id='tabZoneId225']")).size()>0) {
+		 delay();
+		 if(driver.findElements(By.xpath("//div[@id='tabZoneId225']")).size()>0) {
 		 scrollIntoViewByJS(driver.findElement(By.xpath("//div[@id='tabZoneId225']")));
 		 }
 		 driver.switchTo().defaultContent();
@@ -1868,6 +1884,9 @@ public class ProgramPerformance extends BaseClass{
 					 if(text.contains("% SNF Disch Current")){
 					 System.out.println("Actual"+mapOfHmImageOuput.get(row).get(text).trim());
 					 System.out.println("Expected"+outputText.get(text+"_"+data));}
+					 if(mapOfHmImageOuput.get(row).get(text).trim().contains("DaysPerformance")){
+						 mapOfHmImageOuput.get(row).get(text).replaceAll("DaysPerformance", ""); 
+					 }
 				 Assert.assertTrue(mapOfHmImageOuput.get(row).get(text).trim().contains(outputText.get(text+"_"+data)));
 				 }
 				 else{

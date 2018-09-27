@@ -126,7 +126,7 @@ Feature: Program Performance Overview Dashboard
     And I switch to analytics iframe
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsMetricsInput.csv" for writing data at "<Row>" to input file
     Then I verify "Program Performance" text is appearing inside dashboard
-    Then I set "Start Date" as "1/1/2016 " in Date field on dashboard
+    Then I set "Start Date" as "ECStartDate" in Date field on dashboard
     Then I set "End Date" as "ClaimsCubeDate" in Date field on dashboard
     #And I click "Time" Filter on the "program performance - <BPID>" dashboard
     #Then I set "Time" as "previous year" in Time field on dashboard
@@ -361,7 +361,7 @@ Feature: Program Performance Overview Dashboard
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
     Then I verify "Program Performance" text is appearing inside dashboard
-     Then I set "Start Date" as "ECStartDate " in Date field on dashboard
+    Then I set "Start Date" as "ECStartDate " in Date field on dashboard
     Then I set "End Date" as "Today" in Date field on dashboard
     #And I click "Time" Filter on the "program performance - <BPID>" dashboard
     #And I get the date "12 MONTH" for Data fetched for dashboard
