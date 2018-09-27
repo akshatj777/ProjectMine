@@ -1205,7 +1205,7 @@ public void iUnselectAllSelectedApps(){
    
    public void clickOnReportingTile(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Reporting")){
+	   if(application.equals("Reporting")){
 		   iWillWaitToSee(By.xpath("//div[text()='Reporting']"));
 		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Reporting']")));
 		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
@@ -1409,7 +1409,7 @@ public void iUnselectAllSelectedApps(){
    
    public void verifyUserNavigatedToReporting(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Reporting")){
+	   if(application.equals("Reporting")){
 		   iWillWaitToSee(By.cssSelector(".report-title"));
 		   isElementPresentOnPage(By.cssSelector(".report-title"));
 	   }
