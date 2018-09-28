@@ -363,6 +363,7 @@ public class ViewUserPage extends BaseClass {
 	}
 	
 	public void verifyDeleteUserButton() throws Throwable {
+		iWillWaitToSee(By.xpath("//a[text()='Delete User']"));
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[text()='Delete User']")));
 	}
 	
