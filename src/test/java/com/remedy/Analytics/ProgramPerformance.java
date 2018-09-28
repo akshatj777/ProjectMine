@@ -1191,7 +1191,7 @@ public class ProgramPerformance extends BaseClass{
 			 delay();
 		 }
 		 
-		 else if(!dashboard.contains("- Skip")){
+		 else if(!dashboard.contains("Skip")){
 		 delay();
 		 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']"));
 		 act.moveToElement(elem).click().build().perform();
@@ -1855,8 +1855,12 @@ public class ProgramPerformance extends BaseClass{
 	 public void iOpenTheInputFile(String path,String row) throws FileNotFoundException{
 		 if(row.equals("1")){
 			 writer=new PrintWriter(System.getProperty("user.dir")+path);
+			 arrayListTexts.add("1");
+			 writeDataToOutputFile("Path");
 		 }else{
 			 writer.print(System.lineSeparator());
+			 arrayListTexts.add("0");
+			 writeDataToOutputFile("Path");
 		 }
 		 imageOutput=new HashMap<String,String>();
 		 rowFilters=new HashMap<String,String>();

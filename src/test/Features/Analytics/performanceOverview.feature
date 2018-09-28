@@ -1,7 +1,7 @@
 Feature: Program Performance Overview Dashboard
 
   @RowLevelSecurity
-  Scenario Outline: Front end Data Filter Validation for last 12 Months
+  Scenario Outline: Front end Data Filter Validation for Claims&EC
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login
@@ -22,65 +22,86 @@ Feature: Program Performance Overview Dashboard
     #And I get the date "12 MONTH" for Data fetched for dashboard
     ##BPID
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
-    And I fetch and store "Episode Initiator - BPID" filter values on "program performance" dashboard
     And I select "<BPID>" checkbox in "BPID" filter on "Program overview" dashboard
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
     ##CCN
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
-    And I fetch and store "Anchor Facility - CCN" filter values on "program performance" dashboard
     And I select "<CCN>" checkbox in "CCN" filter on "Program overview" dashboard
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
     ##Bundle
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
-    And I fetch and store "Bundle" filter values on "program performance" dashboard
     And I select "<Bundle>" checkbox in "Bundle" filter on "Program overview" dashboard
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
     ##Region-Market
-    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
-    And I fetch and store "Region - Market" filter values on "program performance" dashboard
-    And I select "<Region - Market>" checkbox in "Region - Market" filter on "Program overview" dashboard
-    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
+    And I click "Remedy Region Market" Filter on the "program performance - <Remedy Region Market>" dashboard
+    And I select "<Remedy Region Market>" checkbox in "Remedy Region Market" filter on "Program overview" dashboard
+    And I click "Remedy Region Market" Filter on the "program performance - <Remedy Region Market>" dashboard
     ##Remedy-RegionMarket
-    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
-    And I fetch and store "Remedy Region - Market" filter values on "program performance" dashboard
-    And I select "<Remedy Region - Market>" checkbox in "Remedy Region - Market" filter on "Program overview" dashboard
-    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
+    And I click "Partner Region Market" Filter on the "program performance - <Partner Region Market>" dashboard
+    And I select "<Partner Region Market>" checkbox in "Partner Region Market" filter on "Program overview" dashboard
+    And I click "Partner Region Market" Filter on the "program performance - <Partner Region Market>" dashboard
     ##ParticipantName
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
-    And I fetch and store "Participant" filter values on "program performance" dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     ##DRGCODE
-    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
-    And I fetch and store "DRG" filter values on "program performance" dashboard
-    And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
-    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
+    And I select "<DRG - Fracture>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
+    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
     ##NPI
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
-    And I fetch and store "Physician - NPI" filter values on "program performance" dashboard
     And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
     ##MODEL
     And I click "Model" Filter on the "program performance - <Model>" dashboard
-    And I fetch and store "Model" filter values on "program performance" dashboard
     And I select "<Model>" checkbox in "Model" filter on "Program overview" dashboard
     And I click "Model" Filter on the "program performance - <Model>" dashboard
     ##Anchor FAcility
     And I click "Anchor Facility Detail" Filter on the "program performance - <Anchor Facility Detail>" dashboard
-    And I fetch and store "Anchor Facility Detail" filter values on "program performance" dashboard
     And I select "<Anchor Facility Detail>" checkbox in "Anchor Facility Detail" filter on "Program overview" dashboard
     And I click "Anchor Facility Detail" Filter on the "program performance - <Anchor Facility Detail>" dashboard
+    And I click "Episode Initiator - BPID" Filter on the "program performance" dashboard
+    And I fetch and store "Episode Initiator - BPID" filter values on "program performance" dashboard
+    And I click "Episode Initiator - BPID" Filter on the "program performance" dashboard
+    And I click "Anchor Facility - CCN" Filter on the "program performance" dashboard
+    And I fetch and store "Anchor Facility - CCN" filter values on "program performance" dashboard
+    And I click "Anchor Facility - CCN" Filter on the "program performance" dashboard
+    And I click "Bundle" Filter on the "program performance" dashboard
+    And I fetch and store "Bundle" filter values on "program performance" dashboard
+    And I click "Bundle" Filter on the "program performance" dashboard
+    And I click "Remedy Region Market" Filter on the "program performance" dashboard
+    And I fetch and store "Remedy Region Market" filter values on "program performance" dashboard
+    And I click "Remedy Region Market" Filter on the "program performance" dashboard
+    And I click "Partner Region Market" Filter on the "program performance" dashboard
+    And I fetch and store "Partner Region Market" filter values on "program performance" dashboard
+    And I click "Partner Region Market" Filter on the "program performance" dashboard
+    And I click "Participant" Filter on the "program performance" dashboard
+    And I fetch and store "Participant" filter values on "program performance" dashboard
+    And I click "Participant" Filter on the "program performance" dashboard
+    And I click "DRG - Fracture" Filter on the "program performance" dashboard
+    And I fetch and store "DRG - Fracture" filter values on "program performance" dashboard
+    And I click "DRG - Fracture" Filter on the "program performance" dashboard
+    And I click "Physician - NPI" Filter on the "program performance" dashboard
+    And I fetch and store "Physician - NPI" filter values on "program performance" dashboard
+    And I click "Physician - NPI" Filter on the "program performance" dashboard
+    And I click "Model" Filter on the "program performance" dashboard
+    And I fetch and store "Model" filter values on "program performance" dashboard
+    And I click "Model" Filter on the "program performance" dashboard
+    And I click "Anchor Facility Detail" Filter on the "program performance" dashboard
+    And I fetch and store "Anchor Facility Detail" filter values on "program performance" dashboard
+    And I click "Anchor Facility Detail" Filter on the "program performance" dashboard
     And I save the values of row filters in "<Row>" index in storage HashMap
-		And I close the file for after writing data to input file
+    And I close the file for after writing data to input file
+
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG         | Physician - NPI | Model      | Anchor Facility Detail |
-      | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Click&Skip      | Click&Skip             | True All    | True All    | True All        | Click&Skip | Click&Skip             |
-      | Qatwodashtest@yopmail.com   |   2 | True All    | Click&Skip  | True All    | Click&Skip      | Click&Skip             | True All    | Click&Skip  | True All        | True All   | True All               |
-      | Qadashboardtest@yopmail.com |   3 | True All    | True All    | Click&Skip  | Click&Skip      | Click&Skip             | Click&Skip  | True All    | True All        | True All   | True All               |
-      | Qafivedashtest@yopmail.com  |   4 | True Random | True All    | True Random | Click&Skip      | Click&Skip             | True All    | True All    | True All        | Click&Skip | Click&Skip             |
-      | Qatwodashtest@yopmail.com   |   5 | True Random | Click&Skip  | True All    | Click&Skip      | Click&Skip             | True All    | True Random | True Random     | True All   | True All               |
-      | Qadashboardtest@yopmail.com |   6 | True Random | True Random | Click&Skip  | Click&Skip      | Click&Skip             | True Random | True All    | True Random     | True All   | True All               |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True Random | Click&Skip      | Click&Skip             | True Random | True Random | True Random     | True All   | True All               |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG - Fracture | Physician - NPI | Model    | Anchor Facility Detail |
+      | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Skip                 | Skip                  | True All    | True All       | True All        | Skip     | Skip                   |
+      | Qatwodashtest@yopmail.com   |   2 | True All    | Skip        | True All    | Skip                 | Skip                  | True All    | Skip           | True All        | True All | True All               |
+      | Qadashboardtest@yopmail.com |   3 | True All    | True All    | Skip        | Skip                 | Skip                  | Skip        | True All       | True All        | True All | True All               |
+      | Qafivedashtest@yopmail.com  |   4 | True Random | True All    | True Random | Skip                 | Skip                  | True All    | True All       | True All        | Skip     | Skip                   |
+      | Qatwodashtest@yopmail.com   |   5 | True Random | Skip        | True All    | Skip                 | Skip                  | True All    | True Random    | True Random     | True All | True All               |
+      | Qadashboardtest@yopmail.com |   6 | True Random | True Random | Skip        | Skip                 | Skip                  | True Random | True All       | True Random     | True All | True All               |
+      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True Random | Skip                 | Skip                  | True Random | True Random    | True Random     | True All | True All               |
 
   @RowLevelSecurity
   Scenario: Execute JMX file and read Output data for Data Filter Validations
