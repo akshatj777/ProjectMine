@@ -183,6 +183,41 @@ Feature: Edit Hospital organization functionality tests
     Then I should see Tile text Program Management
     And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
+    When I click on "Hospital" organization tab on organization dashboard
+    Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
+    And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
+    And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I edit "Hospital Organization Name" field to "<Edited_Hospital_Name> - <Has_MO>" for organization
+    And I edit "Address 1" field to "<Org_Address1>" for organization
+    And I edit "Short Name" field to "<Short_Name>" for organization
+    And I edit "Address 2" field to "<Org_Address2>" for organization
+    And I edit "City" field to "<City>" for organization
+    And I edit <State> field for organization
+    And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
+    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
+    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
+    And I edit location ID field to "<Loc_ID>" for Location "1" for "Hospital" organization
+    And I edit Location Type dropdown field to <Loc_Type> for Location "1" for organization
+    And I edit "address2" field to <Loc_Address1> for Location "1" for organization
+    And I edit Region dropdown field to <Loc_Region> for Location "1" for organization
+    And I edit "city" field to <Loc_City> for Location "1" for organization
+    And I edit Market dropdown field to <Loc_Market> for Region "<Loc_Region>" for Location "1" for organization
+    And I edit State dropdown field to <Loc_State> for Location "1" for organization
+    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    And I verify "<ValidationMessage>" mandatory field validation message on edit organization page
+
+    Examples: 
+      | Description                                                          | Has_MO | Hosp_Name | Edited_Hospital_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Loc_ID          | ValidationMessage         |
+      | Edit Hospital Organization with duplication Location id - Without MO | NO     | ACHNAME   | ACHNAME              | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | Duplication_LID | This ID is already in use |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "SNF" organization tab on organization dashboard
     Then I click on "+" button on "SNF" organization page
     And I verify "Create SNF Organization" header text on create organization page
@@ -230,11 +265,11 @@ Feature: Edit Hospital organization functionality tests
     And I edit State dropdown field to <Loc_State> for Location "1" for organization
     And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
     Then I click on "Submit" button on "Edit" organization page
-    Then I verify duplicate "<Message1>" after submitting the "edit ACH - <Has_MO>" organization page
+    And I verify "<ValidationMessage>" mandatory field validation message on edit organization page
 
     Examples: 
-      | Description                                                              | Has_MO | Managing_Org | SNF_Name | Hosp_Name | Edited_Hospital_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type        | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Location_ID | Loc_ID | Message                                | Message1                                                                                         |
-      | Validation message when duplicate locationId of the SNF Org - Without MO | NO     |              | SNFNAME  | ACHNAME   | ACHNAME              | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Skilled Nursing | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | LID         | SNFLID | SNF Organization Successfully Created. | There is a conflict error because an entity with similar identifying attributes already existed. |
+      | Description                                                              | Has_MO | Managing_Org | SNF_Name | Hosp_Name | Edited_Hospital_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type        | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Location_ID | Loc_ID | Message                                | ValidationMessage         |
+      | Validation message when duplicate locationId of the SNF Org - Without MO | NO     |              | SNFNAME  | ACHNAME   | ACHNAME              | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Skilled Nursing | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | LID         | SNFLID | SNF Organization Successfully Created. | This ID is already in use |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -289,11 +324,11 @@ Feature: Edit Hospital organization functionality tests
     And I edit State dropdown field to <Loc_State> for Location "1" for organization
     And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
     Then I click on "Submit" button on "Edit" organization page
-    Then I verify duplicate "<Message1>" after submitting the "edit ACH - <Has_MO>" organization page
+    And I verify "<ValidationMessage>" mandatory field validation message on edit organization page
 
     Examples: 
-      | Description                                                               | Has_MO | Managing_Org | LTCH_Name | Hosp_Name | Edited_Hospital_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type                | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Location_ID | Loc_ID  | Message                                 | Message1                                                                                         |
-      | Validation message when duplicate locationId of the LTCH Org - Without MO | NO     |              | LTCHNAME  | ACHNAME   | ACHNAME              | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | LID         | LTCHLID | LTCH Organization Successfully Created. | There is a conflict error because an entity with similar identifying attributes already existed. |
+      | Description                                                               | Has_MO | Managing_Org | LTCH_Name | Hosp_Name | Edited_Hospital_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type                | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Location_ID | Loc_ID  | Message                                 | ValidationMessage         |
+      | Validation message when duplicate locationId of the LTCH Org - Without MO | NO     |              | LTCHNAME  | ACHNAME   | ACHNAME              | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | LID         | LTCHLID | LTCH Organization Successfully Created. | This ID is already in use |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -317,7 +352,7 @@ Feature: Edit Hospital organization functionality tests
     And I verify "Location 1" on "Create IRF" organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I enter Location Id <Location_ID> for Location "1" on "create" organization page
+    And I enter Location Id <Location_ID> for Location "1" on "create IRF" organization page
     And I select location type <Loc_Type> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
@@ -326,7 +361,7 @@ Feature: Edit Hospital organization functionality tests
     And I select state <Loc_State> for Location "1" on "create" organization page
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
-    Then I verify duplicate "<Message>" after submitting the "create IRF" organization page
+    Then I verify "<Message>" after submitting the "create IRF - <Has_MO>" organization page
     When I click on "Hospital" organization tab on organization dashboard
     Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -347,11 +382,11 @@ Feature: Edit Hospital organization functionality tests
     And I edit State dropdown field to <Loc_State> for Location "1" for organization
     And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
     Then I click on "Submit" button on "Edit" organization page
-    Then I verify duplicate "<Message1>" after submitting the "edit ACH - <Has_MO>" organization page
+    And I verify "<ValidationMessage>" mandatory field validation message on edit organization page
 
     Examples: 
-      | Description                                                              | Has_MO | Managing_Org | IRF_Name | Hosp_Name | Edited_Hospital_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Location_ID | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | Loc_Name2 | Loc_ID | Message                                | Message1                                                                                         |
-      | Validation message when duplicate locationId of the IRF Org - Without MO | NO     |              | IRFNAME  | ACHNAME   | ACHNAME              | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | LID         | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | Loc_Name2 | IRFLID | IRF Organization Successfully Created. | There is a conflict error because an entity with similar identifying attributes already existed. |
+      | Description                                                              | Has_MO | Managing_Org | IRF_Name | Hosp_Name | Edited_Hospital_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Location_ID | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | Loc_Name2 | Loc_ID | Message                                | ValidationMessage         |
+      | Validation message when duplicate locationId of the IRF Org - Without MO | NO     |              | IRFNAME  | ACHNAME   | ACHNAME              | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | LID         | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | Loc_Name2 | IRFLID | IRF Organization Successfully Created. | This ID is already in use |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -477,35 +512,6 @@ Feature: Edit Hospital organization functionality tests
     Examples: 
       | Description                                                 | Has_MO | Hosp_Name | Loc_Name      | Loc_Address1  | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2  | Loc_City  | Loc_State  | Loc_Postal_Code | Message                                     |
       | Add one more Location details on Edit Hospital Organization | NO     | ACHNAME   | Loc_Name new1 | Loc_Address14 | Inpatient | Midwest    | Chicago    | Loc_Address24 | Loc_City1 | California |           10001 | Hospital Organization Successfully Updated. |
-
-  Scenario Outline: Edit a Hospital Organization with duplicate Location details
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-    When I click on "Hospital" organization tab on organization dashboard
-    Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
-    And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
-    And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
-    And I verify "2" location count on view "Hospital" organization page
-    And I click on "Edit" button on particular organization
-    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
-    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
-    And I edit Location Type dropdown field to <Loc_Type> for Location "1" for organization
-    And I edit "address2" field to <Loc_Address2> for Location "1" for organization
-    And I edit Region dropdown field to <Loc_Region> for Location "1" for organization
-    And I edit "city" field to <Loc_City> for Location "1" for organization
-    And I edit Market dropdown field to <Loc_Market> for Region "<Loc_Region>" for Location "1" for organization
-    And I edit State dropdown field to <Loc_State> for Location "1" for organization
-    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
-    Then I verify "Location 2" on "Edit" organization page
-    And I edit "Location Name" field to <Loc_Name> for Location "2" for organization
-    Then I click on "Submit" button on "Edit" organization page
-
-    Examples: 
-      | Description                                                  | Has_MO | Hosp_Name | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                     |
-      | Edit a Hospital Organization with duplicate Location details | NO     | ACHNAME   | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | Hospital Organization Successfully Updated. |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"
