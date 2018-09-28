@@ -135,6 +135,7 @@ Feature: Program Performance Overview Dashboard
 
   @Claims
   Scenario Outline: Execute Filter combinations to Validate Data Metrics on Front End - For Claims
+    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsMetricsInput.csv" for writing data at "<Row>" to input file
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login
@@ -145,7 +146,6 @@ Feature: Program Performance Overview Dashboard
     And I switch to analytics iframe
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
-    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsMetricsInput.csv" for writing data at "<Row>" to input file
     Then I verify "Program Performance" text is appearing inside dashboard
     Then I set "Start Date" as "ECStartDate" in Date field on dashboard
     Then I set "End Date" as "ClaimsCubeDate" in Date field on dashboard
@@ -177,9 +177,9 @@ Feature: Program Performance Overview Dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     #DRGCODE
-    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
-    And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
-    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
+    And I select "<DRG - Fracture>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
+    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
     #NPI
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
     And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
@@ -204,7 +204,7 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG         | Physician - NPI | Model       |
+      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG - Fracture        | Physician - NPI | Model       |
       | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | Skip            | Skip                   | True Random | True Random | True Random     | True Random |
       | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | Skip            | Skip                   | True All    | True All    | True All        | True All    |
       | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | Skip            | Skip                   | True All    | True All    | True All        | True All    |

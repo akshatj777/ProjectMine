@@ -1,5 +1,6 @@
 package stepDefination;
 
+import com.remedy.Analytics.ProgramPerformance;
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.Constants;
 import com.remedy.userAdmin.LandingPage;
@@ -44,13 +45,17 @@ public class CommonSteps extends DriverScript {
 
     @Given("I am on the login page$")
     public void setup() throws Throwable {
+    	try{
         driver.navigate().to(Config.getProperty("BaseUrl"));
         driver.manage().timeouts().pageLoadTimeout(240, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         if(DriverScript.Config.getProperty("Browser").equals("ie"))
         {
         	driver.manage().window().maximize();
-        }
+        }}
+    	catch(Exception e){
+    		ProgramPerformance.writer.print(System.lineSeparator());
+    	}
     }
 
     @Then("^I go to mail verification page$")
