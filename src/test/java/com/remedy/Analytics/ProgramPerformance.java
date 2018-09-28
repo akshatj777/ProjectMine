@@ -880,6 +880,11 @@ public class ProgramPerformance extends BaseClass{
 				 delay();
 //				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),outputText.get("ECStartDateDB"));
 				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),DriverScript.Config.getProperty("ECStartDate"));
+				 }else if(value.contains("ClaimsStartDate")){
+				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+				 delay();
+//				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),outputText.get("ECStartDateDB"));
+				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),DriverScript.Config.getProperty("ClaimsStartDate"));
 				 }else {
 				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
 				 delay();
@@ -2080,7 +2085,7 @@ public class ProgramPerformance extends BaseClass{
 		al_FE.add(mapOfHmFiltersValue.get(row).get(text).replace("[", "").replace("]", "").trim());
 		System.out.println("DB Value="+outputText.get(text).replace("\"[", "").replace("]\"", "").replaceAll("\"", "").trim());
 		System.out.println("FE Value="+mapOfHmFiltersValue.get(row).get(text).trim().replace("[", "").replace("]", ""));
-		Assert.assertTrue(al_DB.containsAll(al_FE));
+		Assert.assertTrue(al_DB.equals(al_FE));
 	}
 
 	public void readFilterValueFromQuery(int index) throws IOException, InterruptedException {

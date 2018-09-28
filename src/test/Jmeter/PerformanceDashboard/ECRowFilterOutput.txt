@@ -1,0 +1,1 @@
+Episode Initiator - BPID=[]*Anchor Facility - CCN=[]*Bundle=[]*Remdy Region Market=[]*Partner Region Market=[]*Participant=[]*DRG - Fracture=[]*Physician - NPI=[]*Model=[]*Anchor Facility Detail=[]

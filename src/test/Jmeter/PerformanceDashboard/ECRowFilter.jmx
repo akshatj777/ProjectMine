@@ -72,7 +72,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
           <stringProp name="filename">RowFilterInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">userName,bpid,ccn,bundle,region,market,r_region,r_market,participantName,drgCode,npi,model</stringProp>
+          <stringProp name="variableNames">Flag,userName,bpid,ccn,bundle,r_region,r_market,region,market,participantName,drgCode,npi,model,anch</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -996,7 +996,7 @@ and f.ccn =  &apos;390223&apos;
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo *Episode Initiator - BPID=${value1}*Anchor Facility - CCN=${value2}*Bundle=${value3}*Region - Market=${value5}*Remedy Region - Market=${value4}*Participant=${value6}*DRG=${value7}*Physician - NPI=${value8}*Model=${value9}*Anchor Facility Detail=${value10}&gt;&gt; RowFilterOutput.txt</stringProp>
+                <stringProp name="Argument.value">echo *Episode Initiator - BPID=${value1}*Anchor Facility - CCN=${value2}*Bundle=${value3}*Region - Market=${value5}*Remedy Region - Market=${value4}*Participant=${value6}*DRG=${value7}*Physician - NPI=${value8}*Model=${value9}*Anchor Facility Detail=${value10}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -1064,7 +1064,7 @@ System.out.println(&quot;DRG_Fracture:&quot;+al_DRG_Fracture.toString());
 
 ArrayList al_Physician_NPI = new ArrayList();
 for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;Physician_NPI_#&quot;));i++){
-al_Physician_NPI.add(&quot;\&quot;&quot;+vars.get(&quot;Physician_NPI_&quot;+i)+&quot;\&quot;&quot;);
+al_Physician_NPI.add(vars.get(&quot;Physician_NPI_&quot;+i));
 }
 vars.put(&quot;value8&quot;,&quot;\&quot;&quot;+al_Physician_NPI.toString()+&quot;\&quot;&quot;);
 System.out.println(&quot;Physician_NPI:&quot;+al_Physician_NPI.toString());
@@ -1078,21 +1078,48 @@ System.out.println(&quot;model:&quot;+al_model.toString());
 
 ArrayList al_facilityNameInitCap = new ArrayList();
 for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;facilityNameInitCap_#&quot;));i++){
-al_facilityNameInitCap.add(&quot;\&quot;&quot;+vars.get(&quot;facilityNameInitCap_&quot;+i)+&quot;\&quot;&quot;);
+al_facilityNameInitCap.add(vars.get(&quot;facilityNameInitCap_&quot;+i));
 }
 vars.put(&quot;value10&quot;,&quot;\&quot;&quot;+al_facilityNameInitCap.toString()+&quot;\&quot;&quot;);
 System.out.println(&quot;facilityNameInitCap:&quot;+al_facilityNameInitCap.toString());
 </stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
+          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">import org.apache.jmeter.services.FileServer;
+//get current jmeter script&apos;s directory
+String path = FileServer.getFileServer().getBaseDir();
+ 
+//get the separator
+String separator = File.separator;
+ 
+log.info(&quot;Path: &quot; + path);
+log.info(&quot;Path with separator: &quot; + path + separator);
+System.out.print(path+separator);
+System.out.println(${Flag});
+if(vars.get(&quot;Flag&quot;).equals(&quot;(1)&quot;)){
+	log.info(&quot;Path: 1&quot;);
+	fA = new FileOutputStream(path+separator+&quot;ECRowFilterOutput.txt&quot;);
+	pA = new PrintStream(fA); 
+	pA.print(&quot;&quot;);
+	pA.close();
+	fA.close();
+	}
+log.info(&quot;Path: 7&quot;);
+f= new FileOutputStream(path + separator+&quot;ECRowFilterOutput.txt&quot;,true);
+	p = new PrintStream(f);
+	p.println(&quot;Episode Initiator - BPID=&quot;+${value1}+&quot;*Anchor Facility - CCN=&quot;+${value2}+&quot;*Bundle=&quot;+${value3}+&quot;*Remdy Region Market=&quot;+${value4}+&quot;*Partner Region Market=&quot;+${value5}+&quot;*Participant=&quot;+${value6}+&quot;*DRG - Fracture=&quot;+${value7}+&quot;*Physician - NPI=&quot;+${value8}+&quot;*Model=&quot;+${value9}+&quot;*Anchor Facility Detail=&quot;+${value10});
+
+	p.close();
+	f.close();
+
+</stringProp>
+          </BeanShellPostProcessor>
+          <hashTree/>
         </hashTree>
-        <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="false">
-          <boolProp name="resetInterpreter">false</boolProp>
-          <stringProp name="parameters"></stringProp>
-          <stringProp name="filename"></stringProp>
-          <stringProp name="script">echo *Episode Initiator - BPID=${value1}*Anchor Facility - CCN=${value2}*Bundle=${value3}*Region - Market=${value5}*Remedy Region - Market=${value4}*Participant=${value6}*DRG=${value7}*Physician - NPI=${value8}*Model=${value9}*Anchor Facility Detail=${value10}&gt;&gt; RowFilterOutput.txt</stringProp>
-        </BeanShellPostProcessor>
-        <hashTree/>
       </hashTree>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
