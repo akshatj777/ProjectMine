@@ -51,6 +51,7 @@ Feature: Create user having full application access- Super Admin User
     And I should see Log in widget
     Given I am on the login page
     Then I click on "Log Out" button again
+    And I should see Log in widget
     Given I am on mail login page
     Then I enter username "qaautomation@remedysystems.com" to login mail account
     Then I enter password "9h$00v3T$dF@OPn0" to login mail account
@@ -138,7 +139,7 @@ Feature: Create user having full application access- Super Admin User
     And I click on Community Connect tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Community Connect homepage
     And I redirect to Remedy connect page
-     ###############Reporting Provisioning###################################
+    ###############Reporting Provisioning###################################
     And I click on Reporting tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Reporting homepage
     And I redirect to Remedy connect page

@@ -55,6 +55,7 @@ Feature: Create User - PTA User
     And I should see Log in widget
     Given I am on the login page
     Then I click on "Log Out" button again
+    And I should see Log in widget
     Given I am on mail login page
     Then I enter username "qaautomation@remedysystems.com" to login mail account
     Then I enter password "9h$00v3T$dF@OPn0" to login mail account
@@ -190,6 +191,7 @@ Feature: Create User - PTA User
     And I should see Log in widget
     Given I am on the login page
     Then I click on "Log Out" button again
+    And I should see Log in widget
     Given I am on mail login page
     Then I enter username "qaautomation@remedysystems.com" to login mail account
     Then I enter password "9h$00v3T$dF@OPn0" to login mail account
