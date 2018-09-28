@@ -880,7 +880,12 @@ public class ProgramPerformance extends BaseClass{
 				 delay();
 //				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),outputText.get("ECStartDateDB"));
 				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),DriverScript.Config.getProperty("ECStartDate"));
-				 }else {
+				 }else if(value.contains("ClaimsStartDate")){
+					 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+					 delay();
+//					 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),outputText.get("ECStartDateDB"));
+					 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),DriverScript.Config.getProperty("ClaimsStartDate"));
+					 }else {
 				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
 				 delay();
 				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")), value);

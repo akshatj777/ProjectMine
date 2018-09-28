@@ -72,7 +72,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
           <stringProp name="filename">ClaimsMetricsInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">bpid,ccn,bundle,r_region,r_market,region,market,participantName,drgCode,npi,model</stringProp>
+          <stringProp name="variableNames">Flag,bpid,ccn,bundle,r_region,r_market,region,market,participantName,drgCode,npi,model</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -1525,7 +1525,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo KPI_Episode_Claims=${claimsEpisodeCount_1}*Savings Rate_Claims=${savingRate_1}*KPI_NPRA_Claims=${Claims_TotalNPRA_1}*KPI_Program_size_Claims=${Claims_TotalProgram_1}*% SNF Disch Current_Claims=${dischargetoSNFClaims_1}*SNF Days Current_Claims=${SNFDaysClaims_1}*SNF Days Benchmark Variance_Claims=${SNFDaysBenchmarkClaims_1}*Readmissions Current_Claims=${EpisodesWithReadmissionClaims_1}*Readmissions Benchmark Variance_Claims=${EpisodesWithReadmissionBenchmarkClaims_1}*% SNF Disch Benchmark Variance_Claims=${dischtoSNFBenchmarkClaims_1}&gt;&gt;ClaimsMetricsOutput.txt</stringProp>
+                <stringProp name="Argument.value">echo KPI_Episode_Claims=${claimsEpisodeCount_1}*Savings Rate_Claims=${savingRate_1}*KPI_NPRA_Claims=${Claims_TotalNPRA_1}*KPI_Program_size_Claims=${Claims_TotalProgram_1}*% SNF Disch Current_Claims=${dischargetoSNFClaims_1}*SNF Days Current_Claims=${SNFDaysClaims_1}*SNF Days Benchmark Variance_Claims=${SNFDaysBenchmarkClaims_1}*Readmissions Current_Claims=${EpisodesWithReadmissionClaims_1}*Readmissions Benchmark Variance_Claims=${EpisodesWithReadmissionBenchmarkClaims_1}*% SNF Disch Benchmark Variance_Claims=${dischtoSNFBenchmarkClaims_1}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -1535,7 +1535,42 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
           </elementProp>
           <stringProp name="SystemSampler.directory">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}</stringProp>
         </SystemSampler>
-        <hashTree/>
+        <hashTree>
+          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">import org.apache.jmeter.services.FileServer;
+//get current jmeter script&apos;s directory
+String path = FileServer.getFileServer().getBaseDir();
+ 
+//get the separator
+String separator = File.separator;
+ 
+log.info(&quot;Path: &quot; + path);
+log.info(&quot;Path with separator: &quot; + path + separator);
+System.out.print(path+separator);
+System.out.println(${Flag});
+if(vars.get(&quot;Flag&quot;).equals(&quot;(1)&quot;)){
+	log.info(&quot;Path: 1&quot;);
+	fA = new FileOutputStream(path+separator+&quot;ClaimsMetricsOutput.txt&quot;);
+	pA = new PrintStream(fA); 
+	pA.print(&quot;&quot;);
+	pA.close();
+	fA.close();
+	}
+log.info(&quot;Path: 7&quot;);
+f= new FileOutputStream(path + separator+&quot;ClaimsMetricsOutput.txt&quot;,true);
+	p = new PrintStream(f);
+	p.println(&quot;KPI_Episode_Claims=&quot;+${claimsEpisodeCount_1}+&quot;*Savings Rate_Claims=&quot;+${savingRate_1}+&quot;*KPI_NPRA_Claims=&quot;+${Claims_TotalNPRA_1}+&quot;*KPI_Program_size_Claims=&quot;+${Claims_TotalProgram_1}+&quot;*% SNF Disch Current_Claims=&quot;+${dischargetoSNFClaims_1}+&quot;*SNF Days Current_Claims=&quot;+${SNFDaysClaims_1}+&quot;*SNF Days Benchmark Variance_Claims=&quot;+${SNFDaysBenchmarkClaims_1}+&quot;*Readmissions Current_Claims=&quot;+${EpisodesWithReadmissionClaims_1}+&quot;*Readmissions Benchmark Variance_Claims=&quot;+${EpisodesWithReadmissionBenchmarkClaims_1}+&quot;*% SNF Disch Benchmark Variance_Claims=&quot;+${dischtoSNFBenchmarkClaims_1});
+
+
+
+	p.close();
+	f.close();</stringProp>
+          </BeanShellPostProcessor>
+          <hashTree/>
+        </hashTree>
       </hashTree>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
