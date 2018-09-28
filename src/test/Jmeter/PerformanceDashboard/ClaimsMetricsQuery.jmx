@@ -1563,6 +1563,9 @@ log.info(&quot;Path: 7&quot;);
 f= new FileOutputStream(path + separator+&quot;ClaimsMetricsOutput.txt&quot;,true);
 	p = new PrintStream(f);
 	p.println(&quot;KPI_Episode_Claims=&quot;+${claimsEpisodeCount_1}+&quot;*Savings Rate_Claims=&quot;+${savingRate_1}+&quot;*KPI_NPRA_Claims=&quot;+${Claims_TotalNPRA_1}+&quot;*KPI_Program_size_Claims=&quot;+${Claims_TotalProgram_1}+&quot;*% SNF Disch Current_Claims=&quot;+${dischargetoSNFClaims_1}+&quot;*SNF Days Current_Claims=&quot;+${SNFDaysClaims_1}+&quot;*SNF Days Benchmark Variance_Claims=&quot;+${SNFDaysBenchmarkClaims_1}+&quot;*Readmissions Current_Claims=&quot;+${EpisodesWithReadmissionClaims_1}+&quot;*Readmissions Benchmark Variance_Claims=&quot;+${EpisodesWithReadmissionBenchmarkClaims_1}+&quot;*% SNF Disch Benchmark Variance_Claims=&quot;+${dischtoSNFBenchmarkClaims_1});
+	 p.close();
+      f.close();
+
 
 
 

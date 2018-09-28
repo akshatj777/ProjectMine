@@ -72,7 +72,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
           <stringProp name="filename">ECMetricsInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">bpid,ccn,bundle,r_region,r_market,region,market,participantName,drgCode,npi,model</stringProp>
+          <stringProp name="variableNames">Flag,bpid,ccn,bundle,r_region,r_market,region,market,participantName,drgCode,npi,model</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -732,7 +732,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo KPI_Episode_EC=${ECEpisodeCount_1}*% SNF Disch Current_EC=${dischargetoSNFEC_1}*SNF Days Current_EC=${SNFDaysEC_1}*SNF Days Benchmark Variance_EC=${SNFDaysBenchmarkEC_1}*Readmissions Current_EC=${EpisodesWithReadmissionEC_1}*Readmissions Benchmark Variance_EC=${EpisodesWithReadmissionBenchmarkEC_1}*% SNF Disch Benchmark Variance_EC=${dischtoSNFBenchmarkEC_1}&gt;&gt;ECMetricsOutput.txt</stringProp>
+                <stringProp name="Argument.value">echo KPI_Episode_EC=${ECEpisodeCount_1}*% SNF Disch Current_EC=${dischargetoSNFEC_1}*SNF Days Current_EC=${SNFDaysEC_1}*SNF Days Benchmark Variance_EC=${SNFDaysBenchmarkEC_1}*Readmissions Current_EC=${EpisodesWithReadmissionEC_1}*Readmissions Benchmark Variance_EC=${EpisodesWithReadmissionBenchmarkEC_1}*% SNF Disch Benchmark Variance_EC=${dischtoSNFBenchmarkEC_1}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -742,7 +742,39 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
           </elementProp>
           <stringProp name="SystemSampler.directory">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}</stringProp>
         </SystemSampler>
-        <hashTree/>
+        <hashTree>
+          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">import org.apache.jmeter.services.FileServer;
+//get current jmeter script&apos;s directory
+String path = FileServer.getFileServer().getBaseDir();
+ 
+//get the separator
+String separator = File.separator;
+ 
+log.info(&quot;Path: &quot; + path);
+log.info(&quot;Path with separator: &quot; + path + separator);
+System.out.print(path+separator);
+System.out.println(${Flag});
+if(vars.get(&quot;Flag&quot;).equals(&quot;(1)&quot;)){
+	log.info(&quot;Path: 1&quot;);
+	fA = new FileOutputStream(path+separator+&quot;ECMetricsOutput.txt&quot;);
+	pA = new PrintStream(fA); 
+	pA.print(&quot;&quot;);
+	pA.close();
+	fA.close();
+	}
+log.info(&quot;Path: 7&quot;);
+f= new FileOutputStream(path + separator+&quot;ECMetricsOutput.txt&quot;,true);
+	p = new PrintStream(f);
+	p.println(&quot;KPI_Episode_EC=&quot;+${ECEpisodeCount_1}+&quot;*% SNF Disch Current_EC=&quot;+${dischargetoSNFEC_1}+&quot;*SNF Days Current_EC=&quot;+${SNFDaysEC_1}+&quot;*SNF Days Benchmark Variance_EC=&quot;+${SNFDaysBenchmarkEC_1}+&quot;*Readmissions Current_EC=&quot;+${EpisodesWithReadmissionEC_1}+&quot;*Readmissions Benchmark Variance_EC=&quot;+${EpisodesWithReadmissionBenchmarkEC_1}+&quot;*% SNF Disch Benchmark Variance_EC=&quot;+${dischtoSNFBenchmarkEC_1});
+p.close();
+f.close();</stringProp>
+          </BeanShellPostProcessor>
+          <hashTree/>
+        </hashTree>
       </hashTree>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>

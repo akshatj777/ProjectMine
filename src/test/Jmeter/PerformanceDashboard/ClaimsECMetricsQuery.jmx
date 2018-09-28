@@ -72,7 +72,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
           <stringProp name="filename">ClaimsECMetricsInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">bpid,ccn,bundle,region,market,r_region,r_market,participantName,drgCode,npi,model</stringProp>
+          <stringProp name="variableNames">Flag,bpid,ccn,bundle,region,market,r_region,r_market,participantName,drgCode,npi,model</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -1300,7 +1300,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo KPI_Episode_EC_Claims=${Episode_EC_Claims_1}*Savings Rate_EC_Claims=${savingRate_EC_Claims_1}*KPI_NPRA_EC_Claims=${TotalNPRA_EC_Claims_1}*KPI_Program_size_EC_Claims=${TotalProgram_EC_Claims_1}*% SNF Disch Current_EC_Claims=${DischargeToSNF_EC_Claims_1}*SNF Days Current_EC_Claims=${SNFDays_EC_Claims_1}*SNF Days Benchmark Variance_EC_Claims=${SNFDaysBenchmark_EC_Claims_1}*Readmissions Current_EC_Claims=${EpisodesWithReadmission_EC_Claims_1}*Readmissions Benchmark Variance_EC_Claims=${EpisodesWithReadmissionBenchmark_EC_Claims_1}*% SNF Disch Benchmark Variance_EC_Claims=${dischtoSNFBenchmark_EC_Claims_1}&gt;&gt;ClaimsECMetricsOutput.txt</stringProp>
+                <stringProp name="Argument.value">echo KPI_Episode_EC_Claims=${Episode_EC_Claims_1}*Savings Rate_EC_Claims=${savingRate_EC_Claims_1}*KPI_NPRA_EC_Claims=${TotalNPRA_EC_Claims_1}*KPI_Program_size_EC_Claims=${TotalProgram_EC_Claims_1}*% SNF Disch Current_EC_Claims=${DischargeToSNF_EC_Claims_1}*SNF Days Current_EC_Claims=${SNFDays_EC_Claims_1}*SNF Days Benchmark Variance_EC_Claims=${SNFDaysBenchmark_EC_Claims_1}*Readmissions Current_EC_Claims=${EpisodesWithReadmission_EC_Claims_1}*Readmissions Benchmark Variance_EC_Claims=${EpisodesWithReadmissionBenchmark_EC_Claims_1}*% SNF Disch Benchmark Variance_EC_Claims=${dischtoSNFBenchmark_EC_Claims_1}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -1310,7 +1310,40 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
           </elementProp>
           <stringProp name="SystemSampler.directory">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}</stringProp>
         </SystemSampler>
-        <hashTree/>
+        <hashTree>
+          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">import org.apache.jmeter.services.FileServer;
+//get current jmeter script&apos;s directory
+String path = FileServer.getFileServer().getBaseDir();
+ 
+//get the separator
+String separator = File.separator;
+ 
+log.info(&quot;Path: &quot; + path);
+log.info(&quot;Path with separator: &quot; + path + separator);
+System.out.print(path+separator);
+System.out.println(${Flag});
+if(vars.get(&quot;Flag&quot;).equals(&quot;(1)&quot;)){
+	log.info(&quot;Path: 1&quot;);
+	fA = new FileOutputStream(path+separator+&quot;ClaimsECMetricsOutput.txt&quot;);
+	pA = new PrintStream(fA); 
+	pA.print(&quot;&quot;);
+	pA.close();
+	fA.close();
+	}
+log.info(&quot;Path: 7&quot;);
+f= new FileOutputStream(path + separator+&quot;ClaimsECMetricsOutput.txt&quot;,true);
+	p = new PrintStream(f);
+	p.println(&quot;KPI_Episode_EC_Claims=&quot;+${Episode_EC_Claims_1}+&quot;*Savings Rate_EC_Claims=&quot;+${savingRate_EC_Claims_1}+&quot;*KPI_NPRA_EC_Claims=&quot;+${TotalNPRA_EC_Claims_1}+&quot;*KPI_Program_size_EC_Claims=&quot;+${TotalProgram_EC_Claims_1}+&quot;*% SNF Disch Current_EC_Claims=&quot;+${DischargeToSNF_EC_Claims_1}+&quot;*SNF Days Current_EC_Claims=&quot;+${SNFDays_EC_Claims_1}+&quot;*SNF Days Benchmark Variance_EC_Claims=&quot;+${SNFDaysBenchmark_EC_Claims_1}+&quot;*Readmissions Current_EC_Claims=&quot;+${EpisodesWithReadmission_EC_Claims_1}+&quot;*Readmissions Benchmark Variance_EC_Claims=&quot;+${EpisodesWithReadmissionBenchmark_EC_Claims_1}+&quot;*% SNF Disch Benchmark Variance_EC_Claims=&quot;+${dischtoSNFBenchmark_EC_Claims_1});
+p.close();
+f.close();
+</stringProp>
+          </BeanShellPostProcessor>
+          <hashTree/>
+        </hashTree>
       </hashTree>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
