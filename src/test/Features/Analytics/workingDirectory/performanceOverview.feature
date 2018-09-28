@@ -11,7 +11,7 @@ Feature: Program Performance Overview Dashboard
     When I click on the "Reporting" tile
     And I click on "Performance Overview" dashboard
     And I switch to analytics iframe
-    And I click on Refresh DB data Icon On dashboard
+      And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
     And I perform test with "<User>" user in Analytics
     ##Time
@@ -558,9 +558,9 @@ Feature: Program Performance Overview Dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     # DRGCODE
-    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
-    And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
-    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
+    And I select "<DRG - Fracture>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
+    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
     # NPI
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
     And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
@@ -585,7 +585,7 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG         | Physician - NPI | Model       |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG - Fracture         | Physician - NPI | Model       |
       | AllModel123@yopmail.com     |   1 | True Random | True Random | True Random | Skip                 | Skip                  | True Random | True Random | True Random     | True Random |
       | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | Skip                 | Skip                  | True All    | True All    | True All        | True All    |
       | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | Skip                 | Skip                  | True All    | True All    | True All        | True All    |
@@ -675,9 +675,9 @@ Feature: Program Performance Overview Dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     #DRGCODE
-    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
-    And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
-    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
+    And I select "<DRG - Fracture>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
+    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
     #NPI
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
     And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
@@ -702,7 +702,7 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG         | Physician - NPI | Model       |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG - Fracture         | Physician - NPI | Model       |
       | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | Skip                 | Skip                  | True Random | True Random | True Random     | True Random |
       | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | Skip                 | Skip                  | True All    | True All    | True All        | True All    |
       | AllModel123@yopmail.com     |   3 | True Random | True Random | True Random | Skip                 | Skip                  | True All    | True All    | True All        | True All    |
