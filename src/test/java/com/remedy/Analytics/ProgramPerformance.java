@@ -2085,7 +2085,7 @@ public class ProgramPerformance extends BaseClass{
 		al_FE.add(mapOfHmFiltersValue.get(row).get(text).replace("[", "").replace("]", "").trim());
 		System.out.println("DB Value="+outputText.get(text).replace("\"[", "").replace("]\"", "").replaceAll("\"", "").trim());
 		System.out.println("FE Value="+mapOfHmFiltersValue.get(row).get(text).trim().replace("[", "").replace("]", ""));
-		Assert.assertTrue(al_DB.containsAll(al_FE));
+		Assert.assertTrue(al_DB.equals(al_FE));
 	}
 
 	public void readFilterValueFromQuery(int index) throws IOException, InterruptedException {
