@@ -1639,7 +1639,7 @@ public class ProgramPerformance extends BaseClass{
 		                       		  writeDataToOutputFile("Path");
 		                       		  return;
 			            		 }
-			            		 else if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
+			            		 else if(filter.contains("Market") || filter.contains("Region")){
 			            			 if(val.equals("Null")){
 			            				 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
 			            				 for(int l=0;l<2;l++){
@@ -1722,7 +1722,7 @@ public class ProgramPerformance extends BaseClass{
                         	
                          }
                          
-                          else if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
+                          else if(filter.contains("Market") || filter.contains("Region")){
                         	  if(val.equals("Null")){
                         		  executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
                         		  val="'"+val+"'";
@@ -1760,7 +1760,7 @@ public class ProgramPerformance extends BaseClass{
                               }
 			             }
                          executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
-			             if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
+			             if(filter.contains("Market") || filter.contains("Region")){
 
 			            	 if(!val.equals("Null")){
 			            	 for(int k=0;k<valarr.length;k++){
@@ -1808,7 +1808,7 @@ public class ProgramPerformance extends BaseClass{
 		                  //             driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
 		                               val="'"+val+"'";
 		                               arrayListTexts.add(val);
-		                           }else if (filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
+		                           }else if (filter.contains("Market") || filter.contains("Region")){
 		                            if(val.equals("Null")){
 		                       val=val.trim();
 //		                       driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
@@ -1843,7 +1843,7 @@ public class ProgramPerformance extends BaseClass{
 			 
 		 }
 		 else{
-			 if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
+			 if(filter.contains("Region") || filter.contains("Market")){
 				 for(int k=0;k<2;k++){
 					 arrayListTexts.add("Skip");
 					 writeDataToOutputFile("Path");
@@ -1853,7 +1853,7 @@ public class ProgramPerformance extends BaseClass{
 			 return;
 					 }
 		 }
-		 if(filter.equals("Region - Market") || filter.equals("Remedy Region - Market")){
+		 if(filter.contains("Market") || filter.contains("Region")){
 			 if(arrayListTextsA.size()==1 && arrayListTextsA.contains("Null")){
 				 for(int i=0;i<2;i++){
 				 arrayListTexts.add("Null");

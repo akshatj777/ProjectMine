@@ -1,5 +1,5 @@
 Feature: Program Performance Overview Dashboard
-  
+
   @RowLevelSecurity
   Scenario Outline: Front end Data Filter Validation for Claims
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInput.csv" for writing data at "<Row>" to input file
@@ -131,7 +131,7 @@ Feature: Program Performance Overview Dashboard
       |     4 |   5 |
       |     5 |   6 |
       |     6 |   7 |
-  
+
   @RowLevelSecurity
   Scenario Outline: Front end Data Filter Validation for EC
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInput.csv" for writing data at "<Row>" to input file
@@ -279,7 +279,7 @@ Feature: Program Performance Overview Dashboard
     And I switch to analytics iframe
     And I perform test with "<User>" user in Analytics
     ##Time
-    Then I set "Start Date" as "1/1/2016" in Date field on dashboard
+    Then I set "Start Date" as "ClaimsStartDate" in Date field on dashboard
     Then I set "End Date" as "Today" in Date field on dashboard
     #And I click "Time" Filter on the "program performance" dashboard
     #And I click "Time" Filter on the "program performance" dashboard
@@ -428,13 +428,13 @@ Feature: Program Performance Overview Dashboard
     And I select "<Bundle>" checkbox in "Bundle" filter on "Program overview" dashboard
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
     #Region-Market
-    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
-    And I select "<Region - Market>" checkbox in "Region - Market" filter on "Program overview" dashboard
-    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
+    And I click "Remedy Region Market" Filter on the "program performance - <Remedy Region Market>" dashboard
+    And I select "<Remedy Region Market>" checkbox in "Remedy Region Market" filter on "Program overview" dashboard
+    And I click "Remedy Region Market" Filter on the "program performance - <Remedy Region Market>" dashboard
     #Remedy-RegionMarket
-    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
-    And I select "<Remedy Region - Market>" checkbox in "Remedy Region - Market" filter on "Program overview" dashboard
-    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
+    And I click "Partner Region Market" Filter on the "program performance - <Partner Region Market>" dashboard
+    And I select "<Partner Region Market>" checkbox in "Partner Region Market" filter on "Program overview" dashboard
+    And I click "Partner Region Market" Filter on the "program performance - <Partner Region Market>" dashboard
     #ParticipantName
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
@@ -467,17 +467,17 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG - Fracture        | Physician - NPI | Model       |
-      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | Skip            | Skip                   | True Random | True Random | True Random     | True Random |
-      | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | Skip            | Skip                   | True All    | True All    | True All        | True All    |
-      | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | Skip            | Skip                   | True All    | True All    | True All        | True All    |
-      | Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | Skip            | Skip                   | True Random | True Random | True Random     | True Random |
-      | Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | Skip            | Skip                   | True Random | True All    | True Random     | True All    |
-      | Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | Skip            | Skip                   | True All    | True Random | True All        | True Random |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | Skip            | Skip                   | True Random | True All    | True All        | Skip        |
-      | Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | Skip            | Skip                   | True All    | True Random | True Random     | True All    |
-      | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip            | Skip                   | True Random | True All    | Skip            | Skip        |
-      | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | Skip            | Skip                   | Skip        | Skip        | True Random     | Skip        |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG - Fracture | Physician - NPI | Model       |
+      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | Skip                 | Skip                  | True Random | True Random    | True Random     | True Random |
+      | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | Skip                 | Skip                  | True All    | True All       | True All        | True All    |
+      | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | Skip                 | Skip                  | True All    | True All       | True All        | True All    |
+      | Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | Skip                 | Skip                  | True Random | True Random    | True Random     | True Random |
+      | Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | Skip                 | Skip                  | True Random | True All       | True Random     | True All    |
+      | Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | Skip                 | Skip                  | True All    | True Random    | True All        | True Random |
+      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | Skip                 | Skip                  | True Random | True All       | True All        | Skip        |
+      | Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | Skip                 | Skip                  | True All    | True Random    | True Random     | True All    |
+      | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip                 | Skip                  | True Random | True All       | Skip            | Skip        |
+      | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | Skip                 | Skip                  | Skip        | Skip           | True Random     | Skip        |
 
   @Claims
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - CLAIMS
@@ -515,6 +515,7 @@ Feature: Program Performance Overview Dashboard
 
   @EC
   Scenario Outline: Execute Filter combinations to Validate Data Metrics on Front End - For EC
+    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ECMetricsInput.csv" for writing data at "<Row>" to input file
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login
@@ -525,7 +526,6 @@ Feature: Program Performance Overview Dashboard
     And I switch to analytics iframe
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
-    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ECMetricsInput.csv" for writing data at "<Row>" to input file
     Then I verify "Program Performance" text is appearing inside dashboard
     Then I set "Start Date" as "ECStartDate" in Date field on dashboard
     Then I set "End Date" as "Today" in Date field on dashboard
@@ -546,13 +546,13 @@ Feature: Program Performance Overview Dashboard
     And I select "<Bundle>" checkbox in "Bundle" filter on "Program overview" dashboard
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
     # Region-Market
-    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
-    And I select "<Region - Market>" checkbox in "Region - Market" filter on "Program overview" dashboard
-    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
+    And I click "Remedy Region Market" Filter on the "program performance - <Remedy Region Market>" dashboard
+    And I select "<Remedy Region Market>" checkbox in "Remedy Region Market" filter on "Program overview" dashboard
+    And I click "Remedy Region Market" Filter on the "program performance - <Remedy Region Market>" dashboard
     # Remedy-RegionMarket
-    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
-    And I select "<Remedy Region - Market>" checkbox in "Remedy Region - Market" filter on "Program overview" dashboard
-    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
+    And I click "Partner Region Market" Filter on the "program performance - <Partner Region Market>" dashboard
+    And I select "<Partner Region Market>" checkbox in "Partner Region Market" filter on "Program overview" dashboard
+    And I click "Partner Region Market" Filter on the "program performance - <Partner Region Market>" dashboard
     # ParticipantName
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
@@ -585,17 +585,17 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG         | Physician - NPI | Model       |
-      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | Skip            | Skip                   | True Random | True Random | True Random     | True Random |
-      | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | Skip            | Skip                   | True All    | True All    | True All        | True All    |
-      | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | Skip            | Skip                   | True All    | True All    | True All        | True All    |
-      | Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | Skip            | Skip                   | True Random | True Random | True Random     | True Random |
-      | Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | Skip            | Skip                   | True Random | True All    | True Random     | True All    |
-      | Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | Skip            | Skip                   | True All    | True Random | True All        | True Random |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | Skip            | Skip                   | True Random | True All    | True All        | Skip        |
-      | Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | Skip            | Skip                   | True All    | True Random | True Random     | True All    |
-      | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip            | Skip                   | True Random | True All    | Skip            | Skip        |
-      | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | Skip            | Skip                   | Skip        | Skip        | True Random     | Skip        |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG         | Physician - NPI | Model       |
+      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | Skip                 | Skip                  | True Random | True Random | True Random     | True Random |
+      | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | Skip                 | Skip                  | True All    | True All    | True All        | True All    |
+      | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | Skip                 | Skip                  | True All    | True All    | True All        | True All    |
+      | Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | Skip                 | Skip                  | True Random | True Random | True Random     | True Random |
+      | Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | Skip                 | Skip                  | True Random | True All    | True Random     | True All    |
+      | Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | Skip                 | Skip                  | True All    | True Random | True All        | True Random |
+      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | Skip                 | Skip                  | True Random | True All    | True All        | Skip        |
+      | Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | Skip                 | Skip                  | True All    | True Random | True Random     | True All    |
+      | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip                 | Skip                  | True Random | True All    | Skip            | Skip        |
+      | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | Skip                 | Skip                  | Skip        | Skip        | True Random     | Skip        |
 
   @EC
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - EC
@@ -633,6 +633,7 @@ Feature: Program Performance Overview Dashboard
 
   @ECClaims
   Scenario Outline: Execute Filter combinations to Validate Data Metrics on Front End - For EC&Claims
+    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsECMetricsInput.csv" for writing data at "<Row>" to input file
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login
@@ -641,7 +642,6 @@ Feature: Program Performance Overview Dashboard
     When I click on the "Reporting" tile
     And I click on "Performance Overview" dashboard
     And I switch to analytics iframe
-    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsECMetricsInput.csv" for writing data at "<Row>" to input file
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
     Then I verify "Program Performance" text is appearing inside dashboard
@@ -663,13 +663,13 @@ Feature: Program Performance Overview Dashboard
     And I select "<Bundle>" checkbox in "Bundle" filter on "Program overview" dashboard
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
     #Region-Market
-    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
-    And I select "<Region - Market>" checkbox in "Region - Market" filter on "Program overview" dashboard
-    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
+    And I click "Remedy Region Market" Filter on the "program performance - <Remedy Region Market>" dashboard
+    And I select "<Remedy Region Market>" checkbox in "Remedy Region Market" filter on "Program overview" dashboard
+    And I click "Remedy Region Market" Filter on the "program performance - <Remedy Region Market>" dashboard
     #Remedy-RegionMarket
-    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
-    And I select "<Remedy Region - Market>" checkbox in "Remedy Region - Market" filter on "Program overview" dashboard
-    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
+    And I click "Partner Region Market" Filter on the "program performance - <Partner Region Market>" dashboard
+    And I select "<Partner Region Market>" checkbox in "Partner Region Market" filter on "Program overview" dashboard
+    And I click "Partner Region Market" Filter on the "program performance - <Partner Region Market>" dashboard
     #ParticipantName
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
@@ -702,17 +702,17 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | DRG         | Physician - NPI | Model       |
-      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | Skip            | Skip                   | True Random | True Random | True Random     | True Random |
-      | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | Skip            | Skip                   | True All    | True All    | True All        | True All    |
-      | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | Skip            | Skip                   | True All    | True All    | True All        | True All    |
-      | Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | Skip            | Skip                   | True Random | True Random | True Random     | True Random |
-      | Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | Skip            | Skip                   | True Random | True All    | True Random     | True All    |
-      | Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | Skip            | Skip                   | True All    | True Random | True All        | True Random |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | Skip            | Skip                   | True Random | True All    | True All        | Skip        |
-      | Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | Skip            | Skip                   | True All    | True Random | True Random     | True All    |
-      | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip            | Skip                   | True Random | True All    | Skip            | Skip        |
-      | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | Skip            | Skip                   | Skip        | Skip        | True Random     | Skip        |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG         | Physician - NPI | Model       |
+      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | Skip                 | Skip                  | True Random | True Random | True Random     | True Random |
+      | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | Skip                 | Skip                  | True All    | True All    | True All        | True All    |
+      | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | Skip                 | Skip                  | True All    | True All    | True All        | True All    |
+      | Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | Skip                 | Skip                  | True Random | True Random | True Random     | True Random |
+      | Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | Skip                 | Skip                  | True Random | True All    | True Random     | True All    |
+      | Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | Skip                 | Skip                  | True All    | True Random | True All        | True Random |
+      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | Skip                 | Skip                  | True Random | True All    | True All        | Skip        |
+      | Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | Skip                 | Skip                  | True All    | True Random | True Random     | True All    |
+      | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip                 | Skip                  | True Random | True All    | Skip            | Skip        |
+      | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | Skip                 | Skip                  | Skip        | Skip        | True Random     | Skip        |
 
   @ECClaims
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - EC&Claims
