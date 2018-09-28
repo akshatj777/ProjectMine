@@ -15,7 +15,7 @@ Feature: Program Performance Overview Dashboard
     And I switch to analytics iframe
     And I perform test with "<User>" user in Analytics
     ##Time
-    Then I set "Start Date" as "1/1/2016 " in Date field on dashboard
+    Then I set "Start Date" as "ClaimsStartDate" in Date field on dashboard
     Then I set "End Date" as "ClaimsCubeDate" in Date field on dashboard
     #And I click "Time" Filter on the "program performance" dashboard
     #And I click "Time" Filter on the "program performance" dashboard
