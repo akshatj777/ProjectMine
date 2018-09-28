@@ -11,11 +11,11 @@ Feature: Program Performance Overview Dashboard
     When I click on the "Reporting" tile
     And I click on "Performance Overview" dashboard
     And I switch to analytics iframe
-    And I click on Refresh DB data Icon On dashboard
+      And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
     And I perform test with "<User>" user in Analytics
     ##Time
-    Then I set "Start Date" as "1/1/2016 " in Date field on dashboard
+    Then I set "Start Date" as "ClaimsStartDate" in Date field on dashboard
     Then I set "End Date" as "ClaimsCubeDate" in Date field on dashboard
     #And I click "Time" Filter on the "program performance" dashboard
     #And I click "Time" Filter on the "program performance" dashboard
@@ -558,9 +558,9 @@ Feature: Program Performance Overview Dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     # DRGCODE
-    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
-    And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
-    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
+    And I select "<DRG - Fracture>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
+    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
     # NPI
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
     And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
@@ -585,17 +585,17 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG         | Physician - NPI | Model       |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG - Fracture         | Physician - NPI | Model       |
       | AllModel123@yopmail.com     |   1 | True Random | True Random | True Random | Skip                 | Skip                  | True Random | True Random | True Random     | True Random |
-      | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | Skip                 | Skip                  | True All    | True All    | True All        | True All    |
-      | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | Skip                 | Skip                  | True All    | True All    | True All        | True All    |
-      | Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | Skip                 | Skip                  | True Random | True Random | True Random     | True Random |
-      | Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | Skip                 | Skip                  | True Random | True All    | True Random     | True All    |
-      | Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | Skip                 | Skip                  | True All    | True Random | True All        | True Random |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | Skip                 | Skip                  | True Random | True All    | True All        | Skip        |
-      | AllModel123@yopmail.com     |   8 | True All    | True All    | True Random | Skip                 | Skip                  | True All    | True Random | True Random     | True All    |
-      | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip                 | Skip                  | True Random | True All    | Skip            | Skip        |
-      | Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | Skip                 | Skip                  | Skip        | Skip        | True Random     | Skip        |
+      #| Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | Skip                 | Skip                  | True All    | True All    | True All        | True All    |
+      #| Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | Skip                 | Skip                  | True All    | True All    | True All        | True All    |
+      #| Qatwodashtest@yopmail.com   |   4 | True All    | True All    | True All    | Skip                 | Skip                  | True Random | True Random | True Random     | True Random |
+      #| Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | Skip                 | Skip                  | True Random | True All    | True Random     | True All    |
+      #| Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | Skip                 | Skip                  | True All    | True Random | True All        | True Random |
+      #| Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | Skip                 | Skip                  | True Random | True All    | True All        | Skip        |
+      #| AllModel123@yopmail.com     |   8 | True All    | True All    | True Random | Skip                 | Skip                  | True All    | True Random | True Random     | True All    |
+      #| Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip                 | Skip                  | True Random | True All    | Skip            | Skip        |
+      #| Qadashboardtest@yopmail.com |  10 | True Random | True All    | True Random | Skip                 | Skip                  | Skip        | Skip        | True Random     | Skip        |
 
   @EC
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - EC
@@ -621,15 +621,15 @@ Feature: Program Performance Overview Dashboard
     Examples: 
       | Index | Row |
       |     0 |   1 |
-      |     1 |   2 |
-      |     2 |   3 |
-      |     3 |   4 |
-      |     4 |   5 |
-      |     5 |   6 |
-      |     6 |   7 |
-      |     7 |   8 |
-      |     8 |   9 |
-      |     9 |  10 |
+      #|     1 |   2 |
+      #|     2 |   3 |
+      #|     3 |   4 |
+      #|     4 |   5 |
+      #|     5 |   6 |
+      #|     6 |   7 |
+      #|     7 |   8 |
+      #|     8 |   9 |
+      #|     9 |  10 |
 
   @ECClaims
   Scenario Outline: Execute Filter combinations to Validate Data Metrics on Front End - For EC&Claims
@@ -675,9 +675,9 @@ Feature: Program Performance Overview Dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     #DRGCODE
-    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
-    And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
-    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
+    And I select "<DRG - Fracture>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
+    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
     #NPI
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
     And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
@@ -702,7 +702,7 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG         | Physician - NPI | Model       |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG - Fracture         | Physician - NPI | Model       |
       | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | Skip                 | Skip                  | True Random | True Random | True Random     | True Random |
       | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | Skip                 | Skip                  | True All    | True All    | True All        | True All    |
       | AllModel123@yopmail.com     |   3 | True Random | True Random | True Random | Skip                 | Skip                  | True All    | True All    | True All        | True All    |
