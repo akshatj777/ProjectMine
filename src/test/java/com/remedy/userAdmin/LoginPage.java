@@ -1,6 +1,7 @@
 package com.remedy.userAdmin;
 
 
+import com.remedy.Analytics.ProgramPerformance;
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
 
@@ -105,15 +106,23 @@ public class LoginPage extends BaseClass {
 			iFillInText(driver.findElement(By.name("email")), CreateUserPage.usersEmailPerRole.get("Super Admin-Downstream Provider").get(userName));
 		}
 		else
-		{
+		{ 
+			     try{
 				iWillWaitToSee(By.name("email"));
 				iFillInText(driver.findElement(By.name("email")), userName);
+			     }catch(Exception e){
+			    	 ProgramPerformance.writer.print(System.lineSeparator());
+			     }
 		}
 	}
 
 	public void iEnterPassword(String passWord) {
+		try{
 			iWillWaitToSee(By.name("password"));
 			iFillInText(driver.findElement(By.name("password")), passWord);
+		}catch(Exception e){
+	    	 ProgramPerformance.writer.print(System.lineSeparator());
+	     }
 	}
 
 	public void iEnterPasswordFieldForLoginAfterMailVerification(String passWord) {
@@ -128,8 +137,12 @@ public class LoginPage extends BaseClass {
 		}
 		else
 		{
+			try{
 			iWillWaitToSee(By.xpath("//*[contains(text(),'Log In')]"));
 			clickElement(driver.findElement(By.xpath("//*[contains(text(),'Log In')]")));
+			}catch(Exception e){
+		    	 ProgramPerformance.writer.print(System.lineSeparator());
+		     }
 		}
 	}
 

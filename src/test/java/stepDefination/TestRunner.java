@@ -38,7 +38,7 @@ import stepDefination.Hooks.*;
         monochrome = true,
         //glue = { "./src/test/java/stepDefination" },
 
-        tags = {"@Claims,@EC,@ECClaims"}
+        tags = {"@Claims"}
 
 
 )

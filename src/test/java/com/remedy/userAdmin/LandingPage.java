@@ -1,6 +1,7 @@
 package com.remedy.userAdmin;
 
 
+import com.remedy.Analytics.ProgramPerformance;
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
 
@@ -44,8 +45,12 @@ public class LandingPage extends BaseClass{
         }
         else
         {
+        	try{
         	iWillWaitToSee(By.xpath(tile));
-            clickElement(driver.findElement(By.xpath(tile)));
+            clickElement(driver.findElement(By.xpath(tile)));}
+        	catch(Exception e){
+   	    	 ProgramPerformance.writer.print(System.lineSeparator());
+   	     }
         }
         longDelay();
     }
