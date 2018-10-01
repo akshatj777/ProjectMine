@@ -152,18 +152,21 @@ public class EditUser extends BaseClass {
 				StringTokenizer st = new StringTokenizer(org, ",");
 				while(st.hasMoreTokens())
 				{
-					String token = st.nextToken();
+					String token = st.nextToken().trim();
 					iWillWaitToSee(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'" + token + "')]/i[contains(@class,'remove link icon')]"));
 					clickElement(driver.findElement(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'"+ token + "')]/i[contains(@class,'remove link icon')]")));
+					
 					if (isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + "Remove" + "')]"))) == true)
 						clickElement(driver.findElement(By.xpath("//*[contains(text(),'" + "Remove" + "')]")));
 				}
 			}
 			else
 			{
-				iWillWaitToSee(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'" + org+ "')]/i[contains(@class,'remove link icon')]"));
-				clickElement(driver.findElement(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'"+ org + "')]/i[contains(@class,'remove link icon')]")));
+				iWillWaitToSee(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'" + org.trim()+ "')]/i[contains(@class,'remove link icon')]"));
+				clickElement(driver.findElement(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'"+ org.trim() + "')]/i[contains(@class,'remove link icon')]")));
+			
 				if (isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + "Remove" + "')]"))) == true)
+					
 					clickElement(driver.findElement(By.xpath("//*[contains(text(),'" + "Remove" + "')]")));
 			}
 		}
@@ -218,14 +221,13 @@ public class EditUser extends BaseClass {
 		}
 	}
 
-	public void iVerifyDownstreamProviderPermission(String text, String present) {
-		if (present.equals("Present")) {
+	public void iVerifyDownstreamProviderPermission(String text, String role) {
+		if(role.equals("Downstream Provider")){
 			iWillWaitToSee(By.xpath("//*[contains(text(),'" + text + "')]"));
 			isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]")));
-		} else if (present.equals("Not Present")) {
-			isElementNotPresentOnPage(By.xpath("//*[contains(text(),'" + text + "')]"));
 		}
-	}
+		}
+	
 
 	public void iSeeNoResults(String text) {
 		if (text.contains(".")) {
@@ -247,10 +249,12 @@ public class EditUser extends BaseClass {
 	}
 
 	public void iVerifyNextButtonStatus(String text) {
-		WebElement el = driver.findElement(By.xpath("//button[text()='Next ']"));
+		
+		WebElement el = driver.findElement(By.xpath("//button[contains(text(),'Next')]"));
 		if (text.equalsIgnoreCase("enabled")) {
 			Assert.assertTrue(el.isEnabled());
 		} else {
+			delay();
 			Assert.assertFalse(el.isEnabled());
 		}
 	}
@@ -650,7 +654,7 @@ public class EditUser extends BaseClass {
 		}
 	}
 	
-	public void VerifyMessageForInvalidLocations(String text) throws InterruptedException {
+	public void VerifyMessageForInvalidLocations() throws InterruptedException {
 			iWillWaitToSee(By.xpath("//div[@class='content active']//h3[text()=' No Results Found ']"));
 			Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//div[@class='content active']//h3[text()=' No Results Found ']"))));
 	}
@@ -707,9 +711,11 @@ public void iVerifyIncompleteStatusNotShown() {
 	}
 
 public void iVerifyLearningPathwayIDIsNotDisplayed(String id){
+	if(!(id.isEmpty())){
 
 		Assert.assertFalse(driver.findElements(By.cssSelector("div.ui.label")).get(0).getAttribute("innerText").toString().contains(id));
 	}
+}
 public void iVerifyLocationDisplayedWithFacilityKey(String key, String text){
  	waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+text+"\")]"))));
 // 	String actual = getTextForElement(driver.findElement(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+text+"\")]")));
@@ -769,5 +775,11 @@ public void verifyPaginationForSelectedLoc(){
 }
 public void verifyAllLocationBoxSelection() {
 	Assert.assertTrue(isElementPresent(By.xpath("//div[@class='ui checked checkbox']")));
+}
+public void enterInvalidLearningPathway(String text){
+	if(isElementPresentOnPage(By.cssSelector(".column.padding>.component-learning-pathway-dropdown"))==true){
+    
+	iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), text);
+	   	}
 }
 }

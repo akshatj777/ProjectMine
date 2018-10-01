@@ -23,6 +23,7 @@ public class CreateUserThroughAPI extends BaseClass {
 		super(driver);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void buildJSONForCreateUser(String firstName,String lastName, String email, String phone, String npi, String roleID, String applications, String locations, String learningPathways) throws Throwable {
 		JSONObject objFinal = new JSONObject();
 		JSONObject objFirstNameValue = new JSONObject();
@@ -38,18 +39,16 @@ public class CreateUserThroughAPI extends BaseClass {
 		JSONObject objApplication = new JSONObject();
 		JSONObject objSPOEApps = new JSONObject();
 		JSONObject objSPOEValue = new JSONObject();
-		JSONObject objParticipantListValue = new JSONObject();
-		JSONArray objParticipantListValueArray = new JSONArray();
 		JSONArray objLearningPathwayArray = new JSONArray();
-		JSONObject objParticipantID = new JSONObject();
+		JSONArray objParticipantListArray = new JSONArray();
 
 		objFirstNameValue.put("value", firstName);
 		objLastNameValue.put("value", lastName);
 		if(email.contains("qaautomation"))
 		{
 			String a = RandomStringUtils.randomAlphabetic(8);
-			objEmailValue.put("value", "qaautomation+"+a+"@remedypartners.com");
-			MailCreateUser.email="qaautomation+"+a+"@remedypartners.com";
+			objEmailValue.put("value", "qaautomation+"+a+"@remedysystems.com");
+			MailCreateUser.email="qaautomation+"+a+"@remedysystems.com";
 		}
 		else
 		{
@@ -65,7 +64,7 @@ public class CreateUserThroughAPI extends BaseClass {
 		{
 			if(npi.equals("NPI"))
 			{
-				String newNPI = createRandomNumber(10);
+				String newNPI = "213"+createRandomNumber(7);
 				objNPIValue.put("value", newNPI);
 				CreateUserPage.userNPI = newNPI;
 			}
@@ -105,7 +104,7 @@ public class CreateUserThroughAPI extends BaseClass {
 			CreateUserPage.userApplications = applications.substring(0,applications.indexOf("-"));
 			objApplicationEnabled.put("enaled", "true");
 			objApplicationValue.put("value", objApplicationEnabled);
-			objApplication.put(applications.substring(applications.indexOf("-"), applications.length()), objApplicationValue);
+			objApplication.put(CreateUserPage.userApplications, objApplicationValue);
 			objSPOEApps.put("apps", objApplication);
 			objSPOEValue.put("value", objSPOEApps);
 		}
@@ -144,7 +143,6 @@ public class CreateUserThroughAPI extends BaseClass {
 				String facilityKey = a.substring(a.lastIndexOf("--")+2, a.length());
 				if(dataPermissions.containsKey(participantID))
 				{
-					//String ab = dataPermissions.get(participantID);
 					if(innerHM.containsKey(BPID))
 					{
 						String ab = innerHM.get(BPID);
@@ -167,123 +165,76 @@ public class CreateUserThroughAPI extends BaseClass {
 			
 			for(int i=0;i<dataPermissions.size();i++)
 			{
-				JSONArray objBPIDListArray = new JSONArray();
-				JSONObject objParticipantListValueValue = new JSONObject();
-				JSONObject objBPIDList = new JSONObject();	
 				for(int j=0;j<dataPermissions.get(dataPermissions.keySet().toArray()[i]).size();j++)
 				{
-						
-						JSONObject objFacilityList = new JSONObject();
-						JSONObject objBPID = new JSONObject();
-						JSONArray objFacilityListArray = new JSONArray();
-						JSONObject objBPIDValue = new JSONObject();
-						JSONObject objBPIDListValue = new JSONObject();
+					JSONObject objParticipantID = new JSONObject();
+					JSONArray objBPIDListArray = new JSONArray();
+					JSONObject objBPID = new JSONObject();
+					JSONArray objFacilityListArray = new JSONArray();
+					
+					
 						String BPID = "";
+						String participantID = "";
 						if(dataPermissions.get(dataPermissions.keySet().toArray()[i]).get(dataPermissions.get(dataPermissions.keySet().toArray()[i]).keySet().toArray()[j]).contains(","))
 						{
+							
 							StringTokenizer st1 = new StringTokenizer(dataPermissions.get(dataPermissions.keySet().toArray()[i]).get(dataPermissions.get(dataPermissions.keySet().toArray()[i]).keySet().toArray()[j]),",");
 							while(st1.hasMoreTokens())
 							{
-								JSONObject objFacilityKeyValue = new JSONObject();
-								JSONObject objParticipantIDValue = new JSONObject();
 								JSONObject objFacilityKey = new JSONObject();
-								JSONObject objFacilityListValue = new JSONObject();
 								String newToken = st1.nextToken().trim();
-								String participantID = dataPermissions.keySet().toArray()[i].toString();
+								participantID = dataPermissions.keySet().toArray()[i].toString();
 								BPID = dataPermissions.get(dataPermissions.keySet().toArray()[i]).keySet().toArray()[j].toString();
 								String facilityKey = newToken;
-								objParticipantIDValue.put("value", participantID);
-								objParticipantID.put("participantID", objParticipantIDValue);
-								objFacilityKeyValue.put("value", facilityKey);
-								objFacilityKey.put("facilityKey", objFacilityKeyValue);
-								objFacilityListValue.put("value", objFacilityKey);
-								objFacilityListArray.add(objFacilityListValue);
+								objFacilityKey.put("facilityKey", facilityKey);
+								objFacilityListArray.add(objFacilityKey);
 							}
-							objFacilityList.put("facilityList", objFacilityListArray);
-							objBPIDValue.put("value", BPID);
-							objBPID.put("bpid", objBPIDValue);
-							objBPID.putAll(objFacilityList);
-							objFacilityList.putAll(objBPID);
-							objBPIDListValue.put("value", objFacilityList);
-							objBPIDListArray.add(objBPIDListValue);
+							objBPID.put("bpid", BPID);
+							objBPID.put("facilityList", objFacilityListArray);
+							objBPIDListArray.add(objBPID);
 						}
 						else
 						{
-							String participantID = dataPermissions.keySet().toArray()[i].toString();
+							JSONObject objFacilityKey = new JSONObject();
+							participantID = dataPermissions.keySet().toArray()[i].toString();
 							BPID = dataPermissions.get(dataPermissions.keySet().toArray()[i]).keySet().toArray()[j].toString();
 							String facilityKey = dataPermissions.get(dataPermissions.keySet().toArray()[i]).get(dataPermissions.get(dataPermissions.keySet().toArray()[i]).keySet().toArray()[j]);
-							JSONObject objParticipantIDValue = new JSONObject();
-//							JSONObject objFacilityList = new JSONObject();
-							JSONObject objFacilityListValue = new JSONObject();
-							JSONObject objFacilityKeyValue = new JSONObject();
-							JSONObject objFacilityKey = new JSONObject();
-//							JSONObject objBPID = new JSONObject();
-//							JSONArray objFacilityListArray = new JSONArray();
-//							JSONObject objBPIDValue = new JSONObject();
-//							JSONObject objBPIDListValue = new JSONObject();
-							objParticipantIDValue.put("value", participantID);
-							objParticipantID.put("participantID", objParticipantIDValue);
-							objFacilityKeyValue.put("value", facilityKey);
-							objFacilityKey.put("facilityKey", objFacilityKeyValue);
-							objFacilityListValue.put("value", objFacilityKey);
-							objFacilityListArray.add(objFacilityListValue);
-							objFacilityList.put("facilityList", objFacilityListArray);
-							objBPIDValue.put("value", BPID);
-							objBPID.put("bpid", objBPIDValue);
-							objBPID.putAll(objFacilityList);
-							objFacilityList.putAll(objBPID);
-							objBPIDListValue.put("value", objFacilityList);
-							objBPIDListArray.add(objBPIDListValue);
+							
+							objFacilityKey.put("facilityKey", facilityKey);
+							objFacilityListArray.add(objFacilityKey);
+							objBPID.put("bpid", BPID);
+							objBPID.put("facilityList", objFacilityListArray);
+							objBPIDListArray.add(objBPID);
 						}
+						objParticipantID.put("participantId", participantID);
+						objParticipantID.put("bpidList", objBPIDListArray);
+						objParticipantListArray.add(objParticipantID);
 				}
-				objBPIDList.put("bpidList", objBPIDListArray);
-				objBPIDList.putAll(objParticipantID);
-				objParticipantListValueValue.put("value", objBPIDList);
-//				objParticipantListValueValue.put("participantID", objParticipantIDValue);
-				objParticipantListValueArray.add(objParticipantListValueValue);	
-
+				
 			}
-			objParticipantListValue.put("value", objParticipantListValueArray);
 		}
 		else
 		{
-			JSONObject objFacilityList = new JSONObject();
-			JSONObject objFacilityListValue = new JSONObject();
-			JSONObject objFacilityKeyValue = new JSONObject();
+			JSONObject objParticipantID = new JSONObject();
 			JSONObject objFacilityKey = new JSONObject();
-			JSONObject objParticipantIDValue = new JSONObject();
 			JSONObject objBPID = new JSONObject();
 			JSONArray objFacilityListArray = new JSONArray();
-			JSONObject objBPIDValue = new JSONObject();
-			JSONObject objBPIDListValue = new JSONObject();
 			JSONArray objBPIDListArray = new JSONArray();
-			JSONObject objParticipantListValueValue = new JSONObject();
-			JSONObject objBPIDList = new JSONObject();
 			String participantID = locations.substring(0, locations.indexOf("--"));
 			String BPID = locations.substring(locations.indexOf("--")+2, locations.lastIndexOf("--"));
 			String facilityKey = locations.substring(locations.lastIndexOf("--")+2, locations.length());
-			objParticipantIDValue.put("value", participantID);
-			objParticipantID.put("participantID", objParticipantIDValue);
-			objFacilityKeyValue.put("value", facilityKey);
-			objFacilityKey.put("facilityKey", objFacilityKeyValue);
-			objFacilityListValue.put("value", objFacilityKey);
-			objFacilityListArray.add(objFacilityListValue);
-			objFacilityList.put("facilityList", objFacilityListArray);
-			objBPIDValue.put("value", BPID);
-			objBPID.put("bpid", objBPIDValue);
-			//objBPID.putAll(objFacilityList);
-			objFacilityList.putAll(objBPID);
-			objBPIDListValue.put("value", objFacilityList);
-			objBPIDListArray.add(objBPIDListValue);
-			objBPIDList.put("bpidList", objBPIDListArray);
-			objBPIDList.putAll(objParticipantID);
-			objParticipantListValueValue.put("value", objBPIDList);
-			//objParticipantListValueValue.put("participantID", objParticipantIDValue);
-			objParticipantListValueArray.add(objParticipantListValueValue);
-			objParticipantListValue.put("value", objParticipantListValueArray);
+			
+			objFacilityKey.put("facilityKey", facilityKey);
+			objFacilityListArray.add(objFacilityKey);
+			objBPID.put("bpid", BPID);
+			objBPID.put("facilityList", objFacilityListArray);
+			objBPIDListArray.add(objBPID);
+			objParticipantID.put("participantId", participantID);
+			objParticipantID.put("bpidList", objBPIDListArray);
+			objParticipantListArray.add(objParticipantID);
 		}
 		
-		objFinal.put("participantList", objParticipantListValue);
+		objFinal.put("participantList", objParticipantListArray);
 		objFinal.put("spoeApps", objSPOEValue);
 		objFinal.put("organizationalRole", objRoleValue);
 		objFinal.put("npi", objNPIValue);

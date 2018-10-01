@@ -80,9 +80,9 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	public void i_verify_that_are_in_Applications_tab(String appList, String text) throws Throwable {
 		editUser.iVerifyProductAsPerRole(appList, text);
 	}
-	@Then("^I verify text \"([^\"]*)\" is \"([^\"]*)\" in Permission tab$")
-	public void iVerifyDownstreamProviderPermission(String text, String present){
-		editUser.iVerifyDownstreamProviderPermission(text,present);
+	@Then("^I verify text \"([^\"]*)\" is present for \"([^\"]*)\"$")
+	public void iVerifyDownstreamProviderPermission(String text, String role){
+		editUser.iVerifyDownstreamProviderPermission(text,role);
 	}
 	@Then("^I should see text \"([^\"]*)\"$")
 	public void iSeeNoResults(String text){
@@ -190,9 +190,9 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	public void iVerifyMessageForInvalidLocation(String text) throws InterruptedException{
 		editUser.iVerifyMessageForInvalidLocation(text);
 	}
-	@Then("^I verify No results found for invalid Location for \"([^\"]*)\" in selected organisation$")
-	public void verifyMessageForInvalidLocation(String text) throws InterruptedException{
-		editUser.VerifyMessageForInvalidLocations(text);
+	@Then("^I verify No results found for invalid Location in selected organisation$")
+	public void verifyMessageForInvalidLocation() throws InterruptedException{
+		editUser.VerifyMessageForInvalidLocations();
 	}
 	
 	@Then("^I verify No results found for invalid Location for \"([^\"]*)\" in selected organisation for PTA user$")
@@ -265,5 +265,9 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	@Then("^I verify that All Locations checkbox is checked$")
 	public void verifyAllLocationBoxSelection() {
 		editUser.verifyAllLocationBoxSelection();
+	}
+	@Then("^I enter invalid Learning Pathway \"([^\"]*)\"$")
+	public void enterInvalidLearningPathway(String text){
+		editUser.enterInvalidLearningPathway(text);
 	}
 }

@@ -24,8 +24,8 @@ Feature: Bulk upload users with valid and invalid details
 
   Scenario Outline: and <Description>
     Given I am on mail login page
-    Then I enter username "qaautomation@remedypartners.com" to login mail account
-    Then I enter password "1Welcome2" to login mail account
+    Then I enter username "qaautomation@remedysystems.com" to login mail account
+    Then I enter password "9h$00v3T$dF@OPn0" to login mail account
     Then I click on Mail icon in my account
     Then I click on Inbox in mail
     And I wait for 3000 milli seconds
@@ -72,8 +72,8 @@ Feature: Bulk upload users with valid and invalid details
     Then I verify location "<Locations>"
 
     Examples: 
-      | Description                                     | User        | UserName                               | Password | FirstName          | LastName          | Phone | Role    | ApplicationsEnabled | ApplicationsDisabled | NPI | LearningPathway | HealthSystem      | Programs                        | Locations                                      |
-      | View Manager user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | ExecutiveFirstName | ExecutiveLastName |       | Manager | Episodes, Lessons   | Reports              |     |                 | Stamford Hospital | Stamford Hospital--BPCI Model 2 | Stamford Hospital--2070-015--Stamford Hospital |
+      | Description                                     | User        | UserName                               | Password | FirstName       | LastName       | Phone | Role    | ApplicationsEnabled                                                      | ApplicationsDisabled | NPI | LearningPathway | HealthSystem      | Programs                        | Locations                                      |
+      | View Manager user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | LeaderFirstName | LeaderLastName |       | Manager | Episode Connect Classic, Reporting Classic, Remedy University, Reporting |                      |     |                 | Stamford Hospital | Stamford Hospital--BPCI Model 2 | Stamford Hospital--2070-015--Stamford Hospital |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -143,5 +143,5 @@ Feature: Bulk upload users with valid and invalid details
     And I should see Log in widget
 
     Examples: 
-      | Description                                                        | User        | FirstName          | LastName          | Role    | Applications                    | ApplicationsNotVisible                          | Roletext | ReportCategory | ReportName         | BPID | Facilities        | LearningPathway |  |
-      | Login with Manager and verify Product Tiles and their redirections | Super Admin | ExecutiveFirstName | ExecutiveLastName | Manager | Episodes, Reports, TCI, Lessons | Episodes 2.0, Administration, Physician Connect | ROLE_PRM | Patient ID     | Episode DRG Issues |      | Stamford Hospital |                 |  |
+      | Description                                                        | User        | FirstName       | LastName       | Role    | Applications                                                                                        | ApplicationsNotVisible                                                               | Roletext | ReportCategory | ReportName         | BPID | Facilities        | LearningPathway |  |
+      | Login with Manager and verify Product Tiles and their redirections | Super Admin | LeaderFirstName | LeaderLastName | Manager | Episode Connect Classic, Reporting Classic, Care Innovation Institute, Remedy University, Reporting | Episode Connect for Post-acute Care, Administration, Community Connect, Care Connect | ROLE_PRM | Patient ID     | Episode DRG Issues |      | Stamford Hospital |                 |  |

@@ -164,6 +164,11 @@ public class CreateUserSteps extends DriverScript {
 		createUser.iClickOrganizationalField();
 	}
 
+	@When("^I verify role description \"([^\"]*)\" for Role \"([^\"]*)\"$")
+	public void verifyRoleDescription(String roleDescription, String role) throws Throwable {
+		createUser.verifyRoleDescription(roleDescription, role);
+	}
+	
 	@When("^I click the already selected Organizational Role Field$")
 	public void IClickAlreadySelectedOrganizationalRoleField() throws Throwable {
 		createUser.iClickAlreadySelectedOrganizationalField();
@@ -559,7 +564,7 @@ public class CreateUserSteps extends DriverScript {
 
 	@Then("^I verify Learning Pathway search box is available$")
 	public void verifyLearningPathwayAvailable() throws Throwable {
-		createUser.verifyLearningPathwayNotAvailable();
+		createUser.verifyLearningPathwayAvailable();
 	}
 
 	@Then("^I click on Select button$")
@@ -572,14 +577,11 @@ public class CreateUserSteps extends DriverScript {
 		createUser.clickCancelButton();
 	}
 
-	@Then("^I enter \"([^\"]*)\" in Learning Pathway search box$")
-	public void enterTextLearningPathwaySearchBox(String searchParam) throws Throwable {
-		createUser.enterTextLearningPathwaySearchBox(searchParam);
+	@Then("^I edit learning pathway \"([^\"]*)\"$")
+	public void EditLearningPathway(String searchParam) throws Throwable {
+		createUser.EditLearningPathway(searchParam);
 	}
-	@Then("^I remove \"([^\"]*)\" from the results$")
-	public void removeLearningPath(String searchParam) throws Throwable {
-		createUser.selectLearningPath(searchParam);
-	}
+	
 	@Then("^I select \"([^\"]*)\" from the results$")
 	public void selectLearningPath(String searchParam) throws Throwable {
 		createUser.selectLearningPath(searchParam);
@@ -639,10 +641,7 @@ public class CreateUserSteps extends DriverScript {
 		createUser.verifyDefaultProgramOrganization(programName);
 	}
 
-	@Then("^I verify unavailability of organization drop down$")
-	public void verifyUnavailabilityOrganizationDropDown() throws Throwable {
-		createUser.verifyUnavailabilityOrganizationDropDown();
-	}
+
 
 	@Then("^I search for \"([^\"]*)\"$")
 	public void searchLocation(String location) throws Throwable {
@@ -801,9 +800,9 @@ public class CreateUserSteps extends DriverScript {
 			createUser.selectLocations(locationList);
 		}
 
-	 @And("^I verify selected Location \"([^\"]*)\" are not shown in selected Locations section$")
-	 public void i_verify_The_Selected_Locations_Not_Present_In_The_selectLocations_Section(String text) throws Throwable {
-			createUser.iVerifyTheSelectedLocationsAreNotPresentInSelectLocationsSection(text);
+	 @And("^I verify Location \"([^\"]*)\" are not shown in selected Locations section$")
+	 public void i_verify_The_Locations_Not_Present_In_The_selectLocations_Section(String text) throws Throwable {
+			createUser.iVerifyTheLocationsAreNotPresentInSelectLocationsSection(text);
 		}
 	 
 	 @And("^I verify selected Location \"([^\"]*)\" in the selected Locations section$")
@@ -898,5 +897,8 @@ public class CreateUserSteps extends DriverScript {
 	 public void iVerifyRolesAsPerUser(String user){
 		 createUser.iVerifyRolesAsPerUser(user);
 	 }
-
+	 @Then("^I enter \"([^\"]*)\" in Learning Pathway search box$")
+		public void enterTextLearningPathwaySearchBox(String searchParam) throws Throwable {
+			createUser.enterTextLearningPathwaySearchBox(searchParam);
+		}
 }

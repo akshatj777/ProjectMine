@@ -248,8 +248,8 @@ public void ValidationMsgForRestPass(String text){
     	Assert.assertTrue(driver.findElement(By.cssSelector(".auth0-global-message.auth0-global-message-error")).getAttribute("innerText").toString().trim().contains(text));
 	}
 	else if (text.equals("Remedy Connect")){
-		iWillWaitToSee(By.xpath("//*[contains(text(),'"+text+"')]"));
-		isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+text+"')]")));
+		iWillWaitToSee(By.xpath("//div[@class='remedy-connect-title' and text()='Remedy Connect']"));
+		isElementVisible(driver.findElement(By.xpath("//div[@class='remedy-connect-title' and text()='Remedy Connect']")));
 	}
 	else if (text.equals("Password guidelines")){
 		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-password-strength.animated.fadeIn"))));
