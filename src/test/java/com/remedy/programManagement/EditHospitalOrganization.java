@@ -139,7 +139,7 @@ public class EditHospitalOrganization extends BaseClass{
 				CreateACHOrganizationAPI.tempAchOrg.put("LID", createRandomNumber(12));
 				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateACHOrganizationAPI.tempAchOrg.get("LID"));
 			}
-			else if(field.equals("LIDgreaterthan20")){
+			else if(field.equals("LIDgreaterThan20")){
 				CreateACHOrganizationAPI.tempAchOrg.put("LID", createRandomNumber(21));
 				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateACHOrganizationAPI.tempAchOrg.get("LID"));
 			}

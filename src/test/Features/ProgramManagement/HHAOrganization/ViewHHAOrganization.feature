@@ -30,7 +30,7 @@ Feature: View HHA organization functionality tests
     When I click on "HHA" organization tab on organization dashboard
     When I search with "<HHA_Name> - <Has_MO>" on organization in search box
     And I click "<HHA_Name> - <Has_MO>" field in search list on organization page
-    And I verify the url after creation of an organization on view profile of "SNF" organization
+    And I verify the url after creation of an organization on view profile of "HHA" organization
 
     Examples: 
       | Description                                                                    | Has_MO | HHA_Name |
