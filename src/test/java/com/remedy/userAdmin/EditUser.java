@@ -671,7 +671,7 @@ public class EditUser extends BaseClass {
 	}
 public void iVerifyIncompleteStatusNotShown() {
 		
-		Assert.assertFalse(isElementVisible(driver.findElement(By.cssSelector("span.participant-title-status"))));
+		Assert.assertFalse(isElementPresentOnPage((By.xpath("//span[@class='participant-title-status' and text()='(incomplete)']"))));
 	}
 	public void iClickOnSelectOrgDropdown() {
 		clickElement(driver.findElement(By.cssSelector("div.ui.selection.dropdown")));

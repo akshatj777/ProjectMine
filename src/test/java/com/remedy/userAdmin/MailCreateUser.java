@@ -209,6 +209,11 @@ public class MailCreateUser extends BaseClass{
 			driver.findElement(By.xpath("//a[contains(text(),'Inbox')]")).click();
 			iWillWaitToSee(By.xpath("//input[@aria-label='Search']"));
 			driver.findElement(By.xpath("//input[@aria-label='Search']")).sendKeys(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim()));
+			while(!driver.findElement(By.xpath("//input[@aria-label='Search']")).getAttribute("value").toString().trim().equals(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim())))
+			{
+				driver.findElement(By.xpath("//input[@aria-label='Search']")).clear();
+				driver.findElement(By.xpath("//input[@aria-label='Search']")).sendKeys(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim()));
+			}
 			delay();
 			driver.findElement(By.xpath("//button[@aria-label='Search Mail']")).click();
 			delay();
@@ -376,6 +381,11 @@ public class MailCreateUser extends BaseClass{
 	{
 		iWillWaitToSee(By.xpath("//input[@aria-label='Search']"));
 		driver.findElement(By.xpath("//input[@aria-label='Search']")).sendKeys(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim()));
+		while(!driver.findElement(By.xpath("//input[@aria-label='Search']")).getAttribute("value").toString().trim().equals(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim())))
+		{
+			driver.findElement(By.xpath("//input[@aria-label='Search']")).clear();
+			driver.findElement(By.xpath("//input[@aria-label='Search']")).sendKeys(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim()));
+		}
 		delay();
 		driver.findElement(By.xpath("//button[@aria-label='Search Mail']")).click();
 		delay();
