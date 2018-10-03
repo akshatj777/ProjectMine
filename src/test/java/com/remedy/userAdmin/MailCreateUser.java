@@ -371,6 +371,7 @@ public class MailCreateUser extends BaseClass{
 	    		System.out.println(e.toString());
 	    	}
 			
+			scrollIntoViewByJS(driver.findElement(By.xpath("//div[@data-tooltip='More']")));
 			iWillWaitToSee(By.xpath("//div[@data-tooltip='More']"));
 			driver.findElement(By.xpath("//div[@data-tooltip='More']")).click();
 			iWillWaitToSee(By.xpath("//div[contains(text(),'Delete this message')]"));
@@ -537,6 +538,7 @@ public class MailCreateUser extends BaseClass{
 		}
 		else
 		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//div[@data-tooltip='More']")));
 			iWillWaitToSee(By.xpath("//div[@data-tooltip='More']"));
 			driver.findElement(By.xpath("//div[@data-tooltip='More']")).click();
 			iWillWaitToSee(By.xpath("//div[contains(text(),'Delete this message')]"));

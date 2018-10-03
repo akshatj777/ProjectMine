@@ -632,7 +632,7 @@ public class CreateUserPage extends BaseClass{
     	}
     	for(int i=1; i<=(driver.findElements(By.xpath("//div[@class='column padding']")).size());i++)
     	{
-    		if(driver.findElements(By.xpath("//div[@class='column padding']["+i+"]/div[@class='ui checked checkbox']")).size()>0)
+    		if(driver.findElements(By.xpath("//div[@class='column padding']["+i+"]/div[@class='ui checked checkbox' or @class='ui checked disabled checkbox']")).size()>0)
     		{
     			apps = apps.concat(driver.findElement(By.xpath("//div[@class='column padding']["+i+"]/div[@class='ui checked checkbox']/label")).getText());
     			apps = apps.concat(",");
@@ -703,7 +703,7 @@ public void iUnselectAllSelectedApps(){
 //						   break;
 //					   }
 //				   }
-			   driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
+			   new WebDriverWait(driver, 240).until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
 			   if(!(driver.findElements(By.xpath("//div[text()='Episode Connect']")).size()>0))
 			   {
 				   driver.navigate().refresh();
@@ -998,7 +998,7 @@ public void iUnselectAllSelectedApps(){
 			   iWillWaitToSee(By.id("filterTab_custom"));
 //			   waitTo().until(ExpectedConditions.elementToBeClickable(By.id("tblPatients_processing")));
 			   driver.findElement(By.id("filterTab_custom")).click();
-			   waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.id("tblPatients_processing")));
+			   new WebDriverWait(driver, 240).until(ExpectedConditions.invisibilityOfElementLocated(By.id("tblPatients_processing")));
 			   iWillWaitToSee(By.xpath("//div[@ng-repeat='element in patientsList']"));
 			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@ng-repeat='element in patientsList']")));
 		   } 
@@ -1859,7 +1859,8 @@ public void iUnselectAllSelectedApps(){
 }
    
    public void clickTab(String text) throws Throwable {
-	   	clickElement(driver.findElement(By.xpath("//a[contains(text(),'"+text+"')]")));
+	   iWillWaitToSee(By.xpath("//a[contains(text(),'"+text+"')]"));	
+	   clickElement(driver.findElement(By.xpath("//a[contains(text(),'"+text+"')]")));
 	   }
    
    public void verifyHeader(String text) throws Throwable {

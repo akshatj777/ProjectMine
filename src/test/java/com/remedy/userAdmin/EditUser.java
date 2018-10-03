@@ -588,7 +588,7 @@ public class EditUser extends BaseClass {
 				longDelay();
 				if (programList.contains(",")) {
 					StringTokenizer st = new StringTokenizer(programList, ",");
-					driver.findElement(By.cssSelector(".ui.selection.dropdown")).click();
+					driver.findElement(By.xpath("//span[text()='Select']")).click();
 					while (st.hasMoreTokens()) {
 						String programs = st.nextToken().trim();
 						iWillWaitToSee(By.xpath("//label[text()='" + programs + "']"));
@@ -598,7 +598,7 @@ public class EditUser extends BaseClass {
 				} else {
 
 					longDelay();
-					driver.findElement(By.cssSelector(".ui.selection.dropdown")).click();
+					driver.findElement(By.xpath("//span[text()='Select']")).click();
 					longDelay();
 					driver.findElement(By.xpath("//label[text()='" + programList + "']")).click();
 					longDelay();
