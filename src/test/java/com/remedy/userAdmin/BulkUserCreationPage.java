@@ -1639,8 +1639,7 @@ public class BulkUserCreationPage extends BaseClass {
 		clickElement(driver.findElement(By.xpath("//button[text()='Submit']")));
 		iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
 		WebDriverWait objWait = new WebDriverWait(driver, 300);
-		objWait.until(
-				ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
+		objWait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
 		HashMap<String, String> emailList = new HashMap<String, String>();
 		HashMap<String, String> applicationsList = new HashMap<String, String>();
 		HashMap<String, String> NPIList = new HashMap<String, String>();
