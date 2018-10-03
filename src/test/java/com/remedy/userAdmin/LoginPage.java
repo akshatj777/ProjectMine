@@ -112,6 +112,8 @@ public class LoginPage extends BaseClass {
 				iFillInText(driver.findElement(By.name("email")), userName);
 			     }catch(Exception e){
 			    	 ProgramPerformance.writer.print(System.lineSeparator());
+			    		String flag="1";
+			    		Assert.assertEquals("2", flag);
 			     }
 		}
 	}
@@ -122,6 +124,8 @@ public class LoginPage extends BaseClass {
 			iFillInText(driver.findElement(By.name("password")), passWord);
 		}catch(Exception e){
 	    	 ProgramPerformance.writer.print(System.lineSeparator());
+	    		String flag="1";
+	    		Assert.assertEquals("2", flag);
 	     }
 	}
 
@@ -142,6 +146,8 @@ public class LoginPage extends BaseClass {
 			clickElement(driver.findElement(By.xpath("//*[contains(text(),'Log In')]")));
 			}catch(Exception e){
 		    	 ProgramPerformance.writer.print(System.lineSeparator());
+		    		String flag="1";
+		    		Assert.assertEquals("2", flag);
 		     }
 		}
 	}

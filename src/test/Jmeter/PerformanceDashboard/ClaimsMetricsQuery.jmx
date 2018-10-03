@@ -1525,7 +1525,7 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo KPI_Episode_Claims=${claimsEpisodeCount_1}*Savings Rate_Claims=${savingRate_1}*KPI_NPRA_Claims=${Claims_TotalNPRA_1}*KPI_Program_size_Claims=${Claims_TotalProgram_1}*% SNF Disch Current_Claims=${dischargetoSNFClaims_1}*SNF Days Current_Claims=${SNFDaysClaims_1}*SNF Days Benchmark Variance_Claims=${SNFDaysBenchmarkClaims_1}*Readmissions Current_Claims=${EpisodesWithReadmissionClaims_1}*Readmissions Benchmark Variance_Claims=${EpisodesWithReadmissionBenchmarkClaims_1}*% SNF Disch Benchmark Variance_Claims=${dischtoSNFBenchmarkClaims_1}</stringProp>
+                <stringProp name="Argument.value">echo valueasdvgasdv=${SNFDaysBenchmarkClaims_1}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -1540,7 +1540,8 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
             <boolProp name="resetInterpreter">false</boolProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>
-            <stringProp name="script">import org.apache.jmeter.services.FileServer;
+            <stringProp name="script">debug();
+import org.apache.jmeter.services.FileServer;
 //get current jmeter script&apos;s directory
 String path = FileServer.getFileServer().getBaseDir();
  
@@ -1561,16 +1562,22 @@ if(vars.get(&quot;Flag&quot;).equals(&quot;(1)&quot;)){
 	}
 log.info(&quot;Path: 7&quot;);
 f= new FileOutputStream(path + separator+&quot;ClaimsMetricsOutput.txt&quot;,true);
+log.info(&quot;Path: 8&quot;);
 	p = new PrintStream(f);
-	p.println(&quot;KPI_Episode_Claims=&quot;+${claimsEpisodeCount_1}+&quot;*Savings Rate_Claims=&quot;+${savingRate_1}+&quot;*KPI_NPRA_Claims=&quot;+${Claims_TotalNPRA_1}+&quot;*KPI_Program_size_Claims=&quot;+${Claims_TotalProgram_1}+&quot;*% SNF Disch Current_Claims=&quot;+${dischargetoSNFClaims_1}+&quot;*SNF Days Current_Claims=&quot;+${SNFDaysClaims_1}+&quot;*SNF Days Benchmark Variance_Claims=&quot;+${SNFDaysBenchmarkClaims_1}+&quot;*Readmissions Current_Claims=&quot;+${EpisodesWithReadmissionClaims_1}+&quot;*Readmissions Benchmark Variance_Claims=&quot;+${EpisodesWithReadmissionBenchmarkClaims_1}+&quot;*% SNF Disch Benchmark Variance_Claims=&quot;+${dischtoSNFBenchmarkClaims_1});
+	log.info(&quot;Path: 9&quot;);
+	String claimsEpisodeCount_1=vars.get(&quot;${claimsEpisodeCount_1}&quot;);
+	String savingRate_1=vars.get(&quot;${savingRate_1}&quot;);
+	String Claims_TotalNPRA_1=vars.get(&quot;${Claims_TotalNPRA_1}&quot;);
+	String Claims_TotalProgram_1=vars.get(&quot;${Claims_TotalProgram_1}&quot;);
+	String dischargetoSNFClaims_1=vars.get(&quot;${dischargetoSNFClaims_1}&quot;);
+	String SNFDaysClaims_1=vars.get(&quot;${SNFDaysClaims_1}&quot;);
+	String SNFDaysBenchmarkClaims_1=vars.get(&quot;${SNFDaysBenchmarkClaims_1}&quot;);
+	String EpisodesWithReadmissionClaims_1=vars.get(&quot;${EpisodesWithReadmissionClaims_1}&quot;);
+	String EpisodesWithReadmissionBenchmarkClaims_1=vars.get(&quot;${EpisodesWithReadmissionBenchmarkClaims_1}&quot;);
+	String dischtoSNFBenchmarkClaims_1=vars.get(&quot;${dischtoSNFBenchmarkClaims_1}&quot;);
+	p.println(&quot;KPI_Episode_Claims=&quot;+claimsEpisodeCount_1+&quot;*Savings Rate_Claims=&quot;+savingRate_1+&quot;*KPI_NPRA_Claims=&quot;+Claims_TotalNPRA_1+&quot;*KPI_Program_size_Claims=&quot;+Claims_TotalProgram_1+&quot;*% SNF Disch Current_Claims=&quot;+dischargetoSNFClaims_1+&quot;*SNF Days Current_Claims=&quot;+SNFDaysClaims_1+&quot;*SNF Days Benchmark Variance_Claims=&quot;+SNFDaysBenchmarkClaims_1+&quot;*Readmissions Current_Claims=&quot;+EpisodesWithReadmissionClaims_1+&quot;*Readmissions Benchmark Variance_Claims=&quot;+EpisodesWithReadmissionBenchmarkClaims_1+&quot;*% SNF Disch Benchmark Variance_Claims=&quot;+dischtoSNFBenchmarkClaims_1);
 	 p.close();
-      f.close();
-
-
-
-
-	p.close();
-	f.close();</stringProp>
+      f.close();</stringProp>
           </BeanShellPostProcessor>
           <hashTree/>
         </hashTree>

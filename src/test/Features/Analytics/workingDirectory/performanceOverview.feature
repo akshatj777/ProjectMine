@@ -469,15 +469,15 @@ Feature: Program Performance Overview Dashboard
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG - Fracture | Physician - NPI | Model       |
       | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | Skip                 | Skip                  | True Random | True Random    | True Random     | True Random |
-      | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | Skip                 | Skip                  | True All    | True All       | True All        | True All    |
-      | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | Skip                 | Skip                  | True All    | True All       | True All        | True All    |
-      | AllModel123@yopmail.com     |   4 | True All    | True All    | True All    | Skip                 | Skip                  | True Random | True Random    | True Random     | True Random |
-      | Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | Skip                 | Skip                  | True Random | True All       | True Random     | True All    |
-      | Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | Skip                 | Skip                  | True All    | True Random    | True All        | True Random |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | Skip                 | Skip                  | True Random | True All       | True All        | Skip        |
-      | Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | Skip                 | Skip                  | True All    | True Random    | True Random     | True All    |
-      | Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip                 | Skip                  | True Random | True All       | Skip            | Skip        |
-      | AllModel123@yopmail.com     |  10 | True Random | True All    | True Random | Skip                 | Skip                  | Skip        | Skip           | True Random     | Skip        |
+      #| Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | Skip                 | Skip                  | True All    | True All       | True All        | True All    |
+      #| Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | Skip                 | Skip                  | True All    | True All       | True All        | True All    |
+      #| AllModel123@yopmail.com     |   4 | True All    | True All    | True All    | Skip                 | Skip                  | True Random | True Random    | True Random     | True Random |
+      #| Qatendashtest@yopmail.com   |   5 | True All    | True Random | True All    | Skip                 | Skip                  | True Random | True All       | True Random     | True All    |
+      #| Qatendashtest@yopmail.com   |   6 | True Random | True All    | True Random | Skip                 | Skip                  | True All    | True Random    | True All        | True Random |
+      #| Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True All    | Skip                 | Skip                  | True Random | True All       | True All        | Skip        |
+      #| Qafivedashtest@yopmail.com  |   8 | True All    | True All    | True Random | Skip                 | Skip                  | True All    | True Random    | True Random     | True All    |
+      #| Qadashboardtest@yopmail.com |   9 | True All    | True Random | Skip        | Skip                 | Skip                  | True Random | True All       | Skip            | Skip        |
+      #| AllModel123@yopmail.com     |  10 | True Random | True All    | True Random | Skip                 | Skip                  | Skip        | Skip           | True Random     | Skip        |
 
   @Claims
   Scenario: Execute JMX file and read Output data for Data Metrics Validation for - CLAIMS
@@ -503,15 +503,15 @@ Feature: Program Performance Overview Dashboard
     Examples: 
       | Index | Row |
       |     0 |   1 |
-      |     1 |   2 |
-      |     2 |   3 |
-      |     3 |   4 |
-      |     4 |   5 |
-      |     5 |   6 |
-      |     6 |   7 |
-      |     7 |   8 |
-      |     8 |   9 |
-      |     9 |  10 |
+      #|     1 |   2 |
+      #|     2 |   3 |
+      #|     3 |   4 |
+      #|     4 |   5 |
+      #|     5 |   6 |
+      #|     6 |   7 |
+      #|     7 |   8 |
+      #|     8 |   9 |
+      #|     9 |  10 |
 
   @EC
   Scenario Outline: Execute Filter combinations to Validate Data Metrics on Front End - For EC

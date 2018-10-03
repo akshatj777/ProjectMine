@@ -126,6 +126,8 @@ public class ProgramPerformance extends BaseClass{
         delay();}
 		catch(Exception e){
 	    	 ProgramPerformance.writer.print(System.lineSeparator());
+	    		String flag="1";
+	    		Assert.assertEquals("2", flag);
 	     }
     }
 	
@@ -139,6 +141,8 @@ public class ProgramPerformance extends BaseClass{
 		iWillWaitToSee(By.xpath("//div[@class='tab-textRegion-content']/span/div/span[text()='"+text+"']"));}
 		catch(Exception e){
 	    	 ProgramPerformance.writer.print(System.lineSeparator());
+	    		String flag="1";
+	    		Assert.assertEquals("2", flag);
 	     }
 //		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".tabCanvas.tab-widget")));
 //		isElementVisible(driver.findElement(By.xpath("//div[@id='dashboard-viewport']//span[text()='"+text+"']")));
@@ -552,6 +556,8 @@ public class ProgramPerformance extends BaseClass{
 		 longDelay();}
 		 catch(Exception e){
 	    	 ProgramPerformance.writer.print(System.lineSeparator());
+	    		String flag="1";
+	    		Assert.assertEquals("2", flag);
 	     }
 	 }
 	 
@@ -884,6 +890,7 @@ public class ProgramPerformance extends BaseClass{
 					 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
 					 delay();
 //					 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),outputText.get("ECStartDateDB"));
+					 String date2=DriverScript.Config.getProperty("ClaimsStartDate");
 					 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),DriverScript.Config.getProperty("ClaimsStartDate"));
 					 }else {
 				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
@@ -922,6 +929,8 @@ public class ProgramPerformance extends BaseClass{
 		 delay();
 	 }catch(Exception e){
     	 ProgramPerformance.writer.print(System.lineSeparator());
+    		String flag="1";
+    		Assert.assertEquals("2", flag);
      }}
 	 
 	 public void ReadTextFromSavingsRateField(String text,String element,String resolution) throws IOException {
@@ -1216,9 +1225,8 @@ public class ProgramPerformance extends BaseClass{
 		 delay();
 		 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']"));
 		 act.moveToElement(elem).click().build().perform();
-		 delay();
-		 }}
-         catch(Exception e){
+		 delay();}
+		 }  catch(Exception e){
 	    	 ProgramPerformance.writer.print(System.lineSeparator());
 	     }
 	 }
@@ -1477,6 +1485,8 @@ public class ProgramPerformance extends BaseClass{
 		 scrollToTopOfThePage();}
 		 catch(Exception e){
 	    	 ProgramPerformance.writer.print(System.lineSeparator());
+	    		String flag="1";
+	    		Assert.assertEquals("2", flag);
 	     }
 	 }
 	 

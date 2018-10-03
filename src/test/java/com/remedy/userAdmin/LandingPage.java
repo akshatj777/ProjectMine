@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Assert;
 //import org.apache.commons.collections.set.SynchronizedSet;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -50,6 +51,8 @@ public class LandingPage extends BaseClass{
             clickElement(driver.findElement(By.xpath(tile)));}
         	catch(Exception e){
    	    	 ProgramPerformance.writer.print(System.lineSeparator());
+   	  	     String flag="1";
+		     Assert.assertEquals("2", flag);
    	     }
         }
         longDelay();
