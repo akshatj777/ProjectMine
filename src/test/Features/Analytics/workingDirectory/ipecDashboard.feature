@@ -16,8 +16,9 @@ Feature: Inpatient Episode Clearing Dashboard
     And I perform test with "<User>" user in Analytics
     ##Time
     And I click "Time" Filter on the "IPEC" dashboard
-    And I click "Time" Filter on the "IPEC" dashboard
     And I get the date "30 DAY" for Data fetched for dashboard
+    And I click "Time" Filter on the "IPEC" dashboard
+    
     ##BPID
     And I click "Episode Initiator - BPID" Filter on the "IPEC - <BPID>" dashboard
     And I fetch and store "Episode Initiator - BPID" filter values on "IPEC" dashboard
