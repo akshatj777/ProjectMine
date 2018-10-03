@@ -91,7 +91,6 @@ Feature: Program Performance Overview Dashboard
     And I fetch and store "Anchor Facility Detail" filter values on "program performance" dashboard
     And I click "Anchor Facility Detail" Filter on the "program performance" dashboard
     And I save the values of row filters in "<Row>" index in storage HashMap
-    When I close the file for after writing data to input file
 
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG - Fracture | Physician - NPI | Model       | Anchor Facility Detail |
