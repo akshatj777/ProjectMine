@@ -634,7 +634,7 @@ public class CreateUserPage extends BaseClass{
     	{
     		if(driver.findElements(By.xpath("//div[@class='column padding']["+i+"]/div[@class='ui checked checkbox' or @class='ui checked disabled checkbox']")).size()>0)
     		{
-    			apps = apps.concat(driver.findElement(By.xpath("//div[@class='column padding']["+i+"]/div[@class='ui checked checkbox']/label")).getText());
+    			apps = apps.concat(driver.findElement(By.xpath("//div[@class='column padding']["+i+"]/div[@class='ui checked checkbox' or @class='ui checked disabled checkbox']/label")).getText());
     			apps = apps.concat(",");
     		}
     	}
