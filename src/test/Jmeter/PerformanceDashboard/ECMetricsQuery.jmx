@@ -769,7 +769,14 @@ if(vars.get(&quot;Flag&quot;).equals(&quot;(1)&quot;)){
 log.info(&quot;Path: 7&quot;);
 f= new FileOutputStream(path + separator+&quot;ECMetricsOutput.txt&quot;,true);
 	p = new PrintStream(f);
-	p.println(&quot;KPI_Episode_EC=&quot;+${ECEpisodeCount_1}+&quot;*% SNF Disch Current_EC=&quot;+${dischargetoSNFEC_1}+&quot;*SNF Days Current_EC=&quot;+${SNFDaysEC_1}+&quot;*SNF Days Benchmark Variance_EC=&quot;+${SNFDaysBenchmarkEC_1}+&quot;*Readmissions Current_EC=&quot;+${EpisodesWithReadmissionEC_1}+&quot;*Readmissions Benchmark Variance_EC=&quot;+${EpisodesWithReadmissionBenchmarkEC_1}+&quot;*% SNF Disch Benchmark Variance_EC=&quot;+${dischtoSNFBenchmarkEC_1});
+	String ECEpisodeCount_1=vars.get(&quot;${ECEpisodeCount_1}&quot;);
+	String savingRate_1=vars.get(&quot;${savingRate_1}&quot;);
+	String SNFDaysEC_1=vars.get(&quot;${SNFDaysEC_1}&quot;);
+	String SNFDaysBenchmarkEC_1=vars.get(&quot;${SNFDaysBenchmarkEC_1}&quot;);
+	String EpisodesWithReadmissionEC_1=vars.get(&quot;${EpisodesWithReadmissionEC_1}&quot;);
+	String EpisodesWithReadmissionBenchmarkEC_1=vars.get(&quot;${EpisodesWithReadmissionBenchmarkEC_1}&quot;);
+	String dischtoSNFBenchmarkEC_1=vars.get(&quot;${dischtoSNFBenchmarkEC_1}&quot;);
+     p.println(&quot;KPI_Episode_EC=&quot;+ECEpisodeCount_1+&quot;*% SNF Disch Current_EC=&quot;+dischargetoSNFEC_1+&quot;*SNF Days Current_EC=&quot;+SNFDaysEC_1+&quot;*SNF Days Benchmark Variance_EC=&quot;+SNFDaysBenchmarkEC_1+&quot;*Readmissions Current_EC=&quot;+EpisodesWithReadmissionEC_1+&quot;*Readmissions Benchmark Variance_EC=&quot;+EpisodesWithReadmissionBenchmarkEC_1+&quot;*% SNF Disch Benchmark Variance_EC=&quot;+dischtoSNFBenchmarkEC_1);
 p.close();
 f.close();</stringProp>
           </BeanShellPostProcessor>
