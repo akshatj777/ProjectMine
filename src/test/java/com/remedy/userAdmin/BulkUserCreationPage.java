@@ -1233,6 +1233,12 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("LEADERMAIL", email);
 			strUserData = strUserData.replace(" Leader ", "Remedy Executive");
 			strUserData = strUserData.replace("514083:2070-015:TSH", "441447:3056-r29:075296");
+			HashMap<String, String> applicationsList = new HashMap<String, String>();
+			HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
+			bulkEmailPerRole.put("Remedy Executive", email);
+			applicationsList.put("Remedy Executive", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Reporting Classic, Care Innovation Institute, Remedy University, Community Connect, Reporting");
+			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Executive", applicationsList);
+			CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Executive", bulkEmailPerRole);
 
 		} else if (role.equals("Manager")) {
 			String userRole = "Super Admin-" + role;
@@ -1249,6 +1255,12 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("ManagerFirstName", "FirstNameEdited");
 			strUserData = strUserData.replace("ManagerLastName", "LastNameEdited");
 			strUserData = strUserData.replace("9876545678", "");
+			HashMap<String, String> applicationsList = new HashMap<String, String>();
+			HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
+			bulkEmailPerRole.put("Remedy Sales Team", email);
+			applicationsList.put("Remedy Sales Team", "Episode Connect, Reporting Classic, Care Innovation Institute, Remedy University");
+			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Sales Team", applicationsList);
+			CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Sales Team", bulkEmailPerRole);
 
 		} else if (role.equals("Advanced Operator")) {
 
@@ -1287,9 +1299,11 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace(" Physicians ", " Manager ");
 			strUserData = strUserData.replace("NPI", "");
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
+			HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
 			applicationsList.put("Manager", "Episode Connect, Episode Connect Classic, Reporting Classic, Remedy University, Reporting, Care Innovation Institute");
-
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Manager", applicationsList);
+			bulkEmailPerRole.put("Manager", email);
+			CreateUserPage.usersEmailPerRole.put("Super Admin-Manager", bulkEmailPerRole);
 
 		} else if (role.equals("Remedy TCS")) {
 			String userRole = "Super Admin-" + role;
@@ -1369,31 +1383,33 @@ public class BulkUserCreationPage extends BaseClass {
 					"|NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1 | | False| True | True | True | True | True | False |False | False|True",
 					"|NFdw0Kts2C01 | | False| True | True | True | False | False | False |False | False|False");
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
-			applicationsList.put("Remedy PM", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute");
+			applicationsList.put("Remedy PM", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute, Remedy University");
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy PM", applicationsList);
 		}
 
-		else if (role.equals("Remedy Other")) {
+		else if (role.equals("Remedy Other")) 
+		{
 
 			String userRole = "Super Admin-" + role;
-			String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole)
-					.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
-
-			try {
-
+			String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-") + 1)).trim());
+			try 
+			{
 				strUserData = readContentForBulkUpload(14, 15);
-			} catch (Exception e) {
+			} 
+			catch (Exception e) 
+			{
 				System.out.println(e);
 			}
 			strUserData = strUserData.replace("ROMAIL", email);
 			strUserData = strUserData.replace(" Remedy Other ", " Downstream Provider ");
 
-			strUserData = strUserData.replace("| 514022:2070-007:310074 |HZhmTBQzHtU1,18h7phZr1h81 |",
-					"| 015174 ||");
-
+			strUserData = strUserData.replace("| 514022:2070-007:310074 |HZhmTBQzHtU1,18h7phZr1h81 |","| 015174 ||");
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
-			applicationsList.put("Downstream Provider", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute");
+			HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
+			applicationsList.put("Downstream Provider", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute, Remedy University, Community Connect");
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
+			bulkEmailPerRole.put("Downstream Provider", email);
+			CreateUserPage.usersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
 		}
 
 		else if (role.equals("Prospective Partner Executive")) {
@@ -1443,8 +1459,11 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("|572091:3056-r30:075278  |NFdw0Kts2C01,HZhmTBQzHtU1,n9yn5n0Qa581    |",
 					"|015174  | |");
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
-			applicationsList.put("Downstream Provider", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute");
+			HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
+			applicationsList.put("Downstream Provider", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute, Remedy University, Community Connect");
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
+			bulkEmailPerRole.put("Downstream Provider", email);
+			CreateUserPage.usersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
 		}
 
 		else if (role.equals("Remedy Technical Administrator")) {
@@ -1467,8 +1486,11 @@ public class BulkUserCreationPage extends BaseClass {
 					"| 514026:2070-046:H | | | True |  |  |  |  |  |  | | |");
 
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
+			HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
 			applicationsList.put("Physicians", "Episode Connect, Episode Connect Classic, Reporting Classic, Remedy University, Reporting, Care Innovation Institute");
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Physicians", applicationsList);
+			bulkEmailPerRole.put("Physicians", email);
+			CreateUserPage.usersEmailPerRole.put("Super Admin-Physicians", bulkEmailPerRole);
 		}
 
 		else if (role.equals("Operator")) {
