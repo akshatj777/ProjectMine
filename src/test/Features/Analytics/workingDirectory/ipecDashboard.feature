@@ -67,23 +67,23 @@ Feature: Inpatient Episode Clearing Dashboard
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant |
       | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Skip            | Skip                   | True All    |
-      | Qatwodashtest@yopmail.com   |   2 | True All    | Skip        | True All    | Skip            | Skip                   | True All    |
-      | Qadashboardtest@yopmail.com |   3 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        |
-      | Qafivedashtest@yopmail.com  |   4 | True Random | True All    | True Random | Skip            | Skip                   | True All    |
-      | Qatwodashtest@yopmail.com   |   5 | True Random | Skip        | True All    | Skip            | Skip                   | True All    |
-      | Qadashboardtest@yopmail.com |   6 | True Random | True Random | Skip        | Skip            | Skip                   | True Random |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True Random | Skip            | Skip                   | True Random |
-      | allmodel123@yopmail.com     |   8 | True All    | True All    | Skip        | Skip            | Skip                   | True Random |
+      | Qatwodashtest@yopmail.com   |   2 | True Random | Skip        | Skip        | Skip            | Skip                   | Skip        |
+      | Qadashboardtest@yopmail.com |   3 | Skip        | True Random | Skip        | Skip            | Skip                   | Skip        |
+      | Qafivedashtest@yopmail.com  |   4 | Skip        | Skip        | True Random | Skip            | Skip                   | Skip        |
+      | Qatwodashtest@yopmail.com   |   5 | Skip        | Skip        | Skip        | True Random     | Skip                   | Skip        |
+      | Qadashboardtest@yopmail.com |   6 | Skip        | Skip        | Skip        | Skip            | True Random            | Skip        |
+      | Qafivedashtest@yopmail.com  |   7 | Skip        | Skip        | Skip        | Skip            | Skip                   | True Random |
+      | allmodel123@yopmail.com     |   8 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |
       | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random     | True Random            | True Random |
       | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        |
-      | Qatwodashtest@yopmail.com   |  11 | True Random | True Random | True Random | True Random     | True Random            | True Random |
+      | Qatwodashtest@yopmail.com   |  11 | True Random | Skip        | True Random | Skip            | True Random            | True Random |
 
   @RowLevelSecurity
   Scenario: Execute JMX file and read Output data for Data Filter Validations
     When I close the file for after writing data to input file
-    Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\IPECDashboard\\IPECRowFilterOutput.txt" Output file
+    Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\IPECDashboard\\IPECECRowFilterOutput.txt" Output file
     When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\IPECDashboard\\IPECRowFilter.jmx"
-    Then I read the values from the text file "\\src\\test\\Jmeter\\IPECDashboard\\IPECRowFilterOutput.txt"
+    Then I read the values from the text file "\\src\\test\\Jmeter\\IPECDashboard\\IPECECRowFilterOutput.txt"
 
   @RowLevelSecurity
   Scenario Outline: Verify DB and FE values fetched from Scenarios
@@ -92,7 +92,7 @@ Feature: Inpatient Episode Clearing Dashboard
     Then I verify "Anchor Facility - CCN" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Bundle" for DB and FE filter values at "<Row>" for "EC"
     #Then I verify "Region Market" for DB and FE filter values at "<Row>" for "EC"
-    #Then I verify "Remedy Region Market" for DB and FE filter values at "<Row>" for "EC"
+    Then I verify "Remedy Region - Market" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Participant" for DB and FE filter values at "<Row>" for "EC"
 
     Examples: 
@@ -166,7 +166,7 @@ Feature: Inpatient Episode Clearing Dashboard
 
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG - Fracture | Physician - NPI | Model       |
-      | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | Skip                 | Skip                  | True Random | True Random    | True Random     | True Random |
+      | AllModel123@yopmail.com     |   1 | True Random | True Random | True Random | Skip                 | Skip                  | True Random | True Random    | True Random     | True Random |
       | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | Skip                 | Skip                  | True All    | True All       | True All        | True All    |
       | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | Skip                 | Skip                  | True All    | True All       | True All        | True All    |
       | AllModel123@yopmail.com     |   4 | True All    | True All    | True All    | Skip                 | Skip                  | True Random | True Random    | True Random     | True Random |
