@@ -703,6 +703,10 @@ public void iUnselectAllSelectedApps(){
 //						   break;
 //					   }
 //				   }
+			   if(!isElementPresentOnPage(By.xpath("//div[@class='ui text loader']")));
+			   {
+				   driver.navigate().refresh();
+			   }
 			   new WebDriverWait(driver, 240).until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
 			   if(!(driver.findElements(By.xpath("//div[text()='Episode Connect']")).size()>0))
 			   {
