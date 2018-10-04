@@ -556,4 +556,9 @@ public class ProgramPerformanceSteps extends DriverScript{
 	public void i_get_the_date_for_data_fetched_for_dashboard(String range) throws Throwable{
 		programdashboard.igetDateForDataFetchedForDashboard(range);
 	}
+	
+	@And("^I get and fill days between \"([^\"]*)\" till \"([^\"]*)\" for Time Filter$")
+	public void i_get_and_fill_Days_For_Time_Filter(String startDay, String endDay) throws Throwable{
+		programdashboard.iGetAndFillDaysInTimeFilter(startDay, endDay);
+	}
 }
