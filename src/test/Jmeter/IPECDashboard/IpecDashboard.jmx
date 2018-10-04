@@ -43,7 +43,7 @@
       <hashTree>
         <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Once Only Controller" enabled="true"/>
         <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="IPECUsername" enabled="true">
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="IPEC Data Configuration" enabled="true">
           <stringProp name="delimiter">|</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="filename">IPECRowFilterInput.csv</stringProp>
@@ -60,139 +60,142 @@
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
           <stringProp name="script">if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;C_BPID&quot;,&quot;AND e.bpid in ${bpid}&quot;);	
+	vars.put(&quot;EC_BPID&quot;,&quot;AND de.bpid in ${bpid}&quot;);
 } else {
-	vars.put(&quot;C_BPID&quot;,&quot;&quot;);
+	vars.put(&quot;EC_BPID&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;C_CCN&quot;,&quot;AND f.ccn in ${ccn}&quot;);	
+	vars.put(&quot;EC_CCN&quot;,&quot;AND aaf.ccn in ${ccn}&quot;);	
 } else {
-	vars.put(&quot;C_CCN&quot;,&quot;&quot;);
+	vars.put(&quot;EC_CCN&quot;,&quot;&quot;);
 }
 
-if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){;	
-	vars.put(&quot;C_BUNDLE&quot;,&quot;and drg.bundleName in ${bundle}&quot;);
+if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;EC_BUNDLE&quot;,&quot;and drg.bundleName in ${bundle}&quot;);	
 } else{
-	vars.put(&quot;C_BUNDLE&quot;,&quot;&quot;);
+	vars.put(&quot;EC_BUNDLE&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;r_region&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;C_R_REGION&quot;,&quot;and rm.region in  ${r_region}&quot;);	
+	vars.put(&quot;EC_R_REGION&quot;,&quot;and m.region in  ${r_region}&quot;);	
 } else {
-	vars.put(&quot;C_R_REGION&quot;,&quot;&quot;);
+	vars.put(&quot;EC_R_REGION&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;C_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);		
+	vars.put(&quot;EC_R_MARKET&quot;,&quot;and m.market in ${r_market}&quot;);		
 } else{
-	vars.put(&quot;C_R_MARKET&quot;,&quot;&quot;);
+	vars.put(&quot;EC_R_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;C_REGION&quot;,&quot;and prm.region in  ${region}&quot;);		
+	vars.put(&quot;EC_REGION&quot;,&quot;and rmp.region in  ${region}&quot;);		
 } else {
-	vars.put(&quot;C_REGION&quot;,&quot;&quot;);
+	vars.put(&quot;EC_REGION&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){	
-	vars.put(&quot;C_MARKET&quot;,&quot;and prm.market in ${market}&quot;);
+if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;EC_MARKET&quot;,&quot;and rmp.market in ${market}&quot;);	
 } else{
-	vars.put(&quot;C_MARKET&quot;,&quot;&quot;);
+	vars.put(&quot;EC_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+	vars.put(&quot;EC_PARTICIPANTNAME&quot;,&quot;and de.participantName in ${participantName}&quot;);
 } else{
-	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;&quot;);
-}
-
-}	</stringProp>
+	vars.put(&quot;EC_PARTICIPANTNAME&quot;,&quot;&quot;);
+}</stringProp>
         </BeanShellPreProcessor>
         <hashTree/>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="bpid" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="query">select
-distinct de.episodeInitiatorNameInitCap, f.bpid
+distinct CONCAT(de.episodeInitiatorNameInitCap,&apos; - &apos;, f.bpid) as &apos;EpisodeInitiator_BPID&apos;
 from
-warehouse.factPatientEpisode f
-LEFT JOIN
-warehouse.dimPhysician dph ON f.physicianKey = dph.physicianSK
-LEFT JOIN
-warehouse.dimPatient dp ON f.patientKey = dp.patientSK 
-left join warehouse.dimLookup dloo
-on dp.totalRiskScore = dloo.lookupName
-LEFT JOIN
-warehouse.dimEpisodeInitiator de ON f.episodeInitiatorKey = de.episodeInitiatorSK
-LEFT JOIN
-warehouse.dimCARL dc ON f.carlKey = dc.carlSK
-LEFT JOIN
-warehouse.dimFacility aaf ON f.anchorAdmitFacilityKey = aaf.facilitySK
-LEFT JOIN
-warehouse.dimFacility adf ON f.anchorDischargeFacilityKey = adf.facilitySK
-LEFT JOIN
-warehouse.dimFacility afd ON f.sourceFacilityKey = afd.sourceFacilityKey
-LEFT JOIN
-warehouse.dimDRG drg ON f.currDrgKey = drg.drgSK
-LEFT JOIN
-warehouse.dimDRG d ON f.wDrgKeyMax = d.drgSK
-LEFT JOIN
-warehouse.dimDRG drgpre ON f.predDrgKeyMax = drgpre.drgSK
-LEFT JOIN
-warehouse.dimDRG drgfin ON f.fDrgKeyMax = drgfin.drgSK
-LEFT JOIN
-warehouse.dimNSOCMapping dn ON f.anchorDischCareSettingKey = dn.NSOCMappingSK
-LEFT JOIN
-warehouse.dimDate dt ON f.anchorAdmitDateKey = dt.dateSK
-LEFT JOIN
-warehouse.dimLookup dles ON f.episodeStatus = dles.lookupName AND dles.lookupCategory = &apos;episodeStatus&apos;
-LEFT JOIN
-warehouse.dimLookup dlos ON dp.onboardingStatus = dlos.lookupName AND dlos.lookupCategory = &apos;onboardingStatus&apos;
-LEFT JOIN
-warehouse.dimRegionMarket m ON f.rgRemKey = m.rgSK
-LEFT JOIN
-warehouse.dimRegionMarket rmp ON f.rgPartnerKey = rmp.rgSK
-INNER JOIN 
-warehouse.factAdmission fa ON f.anchorAdmissionKey = fa.anchorAdmissionKey
-LEFT JOIN
-warehouse.dimNSOCMapping dfad ON fa.dischCareSettingKey = dfad.NSOCMappingSK
-INNER JOIN 
-(
-SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-from warehouse.tabUserSecurityBPID where username = ${userName}
-GROUP BY bpid
-)tbsBPID ON f.BPID = tbsBPID.bpid
-INNER JOIN 
-( 
-SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-from warehouse.tabUserSecurityCCN where username = ${userName}
-GROUP BY ccn
-)tbsCCN on aaf.ccn=tbsCCN.ccn
-INNER JOIN 
-( 
-SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-from warehouse.tabUserSecurityFacilityKey where username = ${userName}
-GROUP BY facilitykey
-)tbsFacilityKey on f.sourceFacilityKey=tbsFacilityKey.facilitykey
+    warehouse.factPatientEpisode f
+        LEFT JOIN
+    warehouse.dimPhysician dph ON f.physicianKey = dph.physicianSK
+        LEFT JOIN
+    warehouse.dimPatient dp ON f.patientKey = dp.patientSK	
+    left join warehouse.dimLookup dloo on dp.totalRiskScore = dloo.lookupName
+        LEFT JOIN
+    warehouse.dimEpisodeInitiator de ON f.episodeInitiatorKey = de.episodeInitiatorSK
+        LEFT JOIN
+    warehouse.dimCARL dc ON f.carlKey = dc.carlSK
+        LEFT JOIN
+    warehouse.dimFacility aaf ON f.anchorAdmitFacilityKey = aaf.facilitySK
+        LEFT JOIN
+    warehouse.dimFacility adf ON f.anchorDischargeFacilityKey = adf.facilitySK
+    LEFT JOIN
+    warehouse.dimFacility afd ON f.sourceFacilityKey = afd.facilitySK
+        LEFT JOIN
+    warehouse.dimDRG drg ON f.currDrgKey = drg.drgSK
+        LEFT JOIN
+    warehouse.dimDRG d ON f.wDrgKeyMax = d.drgSK
+        LEFT JOIN
+    warehouse.dimDRG drgpre ON f.predDrgKeyMax = drgpre.drgSK
+        LEFT JOIN
+    warehouse.dimDRG drgfin ON f.fDrgKeyMax = drgfin.drgSK
+        LEFT JOIN
+    warehouse.dimNSOCMapping dn ON f.anchorDischCareSettingKey = dn.NSOCMappingSK
+        LEFT JOIN
+    warehouse.dimDate dt ON f.anchorAdmitDateKey = dt.dateSK
+		LEFT JOIN
+    warehouse.dimLookup dles ON f.episodeStatus = dles.lookupName AND dles.lookupCategory = &apos;episodeStatus&apos;
+		LEFT JOIN
+    warehouse.dimLookup dlos ON dp.onboardingStatus = dlos.lookupName AND dlos.lookupCategory = &apos;onboardingStatus&apos;
+        LEFT JOIN
+    warehouse.dimRegionMarket m ON f.rgRemKey = m.rgSK
+            LEFT JOIN
+    warehouse.dimRegionMarket rmp ON f.rgPartnerKey = rmp.rgSK
+--         INNER JOIN 
+--     warehouse.factAdmission fa ON f.anchorAdmissionKey = fa.anchorAdmissionKey
+		LEFT JOIN
+    warehouse.dimNSOCMapping dfad ON f.anchorDischCareSettingKey = dfad.NSOCMappingSK
+        INNER JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID where username = ${userName}
+       GROUP BY bpid
+       )tbsBPID ON f.BPID = tbsBPID.bpid
+        INNER JOIN 
+     (       
+        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityCCN where username = ${userName}
+       GROUP BY ccn
+        )tbsCCN on aaf.ccn=tbsCCN.ccn
+     INNER JOIN 
+     (       
+        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
+       GROUP BY facilitykey
+        )tbsFacilityKey on f.sourceFacilityKey=tbsFacilityKey.facilitykey
 WHERE f.bundleRisk=1 
-AND f.episodeCountReport=1 
-AND (f.model IN (1,2) OR f.episodeStatus=10) 
-AND adf.dwhSource in (&apos;EC&apos;) 
-AND aaf.dwhSource in (&apos;EC&apos;)
-AND dp.dwhSource = &apos;EC&apos;
-AND dloo.lookupCategory = &apos;patientRisk&apos;
-and tbsBPID.username = ${userName}
--- and f.anchorAdmitDateKey &gt;= 20180515
--- and f.anchorAdmitDateKey &lt;= 20160101
-AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()</stringProp>
+  AND f.episodeCountReport=1 
+  AND (f.model IN (1,2)  OR f.episodeStatus=10) 
+  AND adf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+  AND aaf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+  AND dp.dwhSource = &apos;EC&apos;
+  AND dloo.lookupCategory = &apos;patientRisk&apos;
+-- and tbsBPID.username = @test_user
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()
+${EC_CCN}
+${EC_BUNDLE}
+${EC_R_REGION}
+${EC_R_MARKET}
+${EC_REGION}
+${EC_MARKET}
+${EC_PARTICIPANTNAME}
+order by de.episodeInitiatorNameInitCap;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
           <stringProp name="resultVariable"></stringProp>
-          <stringProp name="variableNames">episodeInitiatorNameInitCap,bpid</stringProp>
+          <stringProp name="variableNames">EpisodeInitiator_BPID</stringProp>
         </JDBCSampler>
         <hashTree/>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="ccn" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select
-distinct aaf.facilityNameInitCap, aaf.ccn
+CONCAT(aaf.facilityNameInitCap,&apos; - &apos;, aaf.ccn) as &apos;AnchorFacility_CCN&apos;
 from
 warehouse.factPatientEpisode f
 LEFT JOIN
@@ -254,19 +257,442 @@ from warehouse.tabUserSecurityFacilityKey where username = ${useremail}
 GROUP BY facilitykey
 )tbsFacilityKey on f.sourceFacilityKey=tbsFacilityKey.facilitykey
 WHERE f.bundleRisk=1 
-AND f.episodeCountReport=1 
-AND (f.model IN (1,2) OR f.episodeStatus=10) 
-AND adf.dwhSource in (&apos;EC&apos;) 
-AND aaf.dwhSource in (&apos;EC&apos;)
-AND dp.dwhSource = &apos;EC&apos;
-AND dloo.lookupCategory = &apos;patientRisk&apos;
-and tbsBPID.username = ${useremail}
--- and f.anchorAdmitDateKey &gt;= 20180515
+AND f.episodeCountReport=1 select
+distinct aaf.facilityNameInitCap, aaf.ccn
+from
+warehouse.factPatientEpisode f
+        LEFT JOIN
+    warehouse.dimPhysician dph ON f.physicianKey = dph.physicianSK
+        LEFT JOIN
+    warehouse.dimPatient dp ON f.patientKey = dp.patientSK	
+    left join warehouse.dimLookup dloo on dp.totalRiskScore = dloo.lookupName
+        LEFT JOIN
+    warehouse.dimEpisodeInitiator de ON f.episodeInitiatorKey = de.episodeInitiatorSK
+        LEFT JOIN
+    warehouse.dimCARL dc ON f.carlKey = dc.carlSK
+        LEFT JOIN
+    warehouse.dimFacility aaf ON f.anchorAdmitFacilityKey = aaf.facilitySK
+        LEFT JOIN
+    warehouse.dimFacility adf ON f.anchorDischargeFacilityKey = adf.facilitySK
+    LEFT JOIN
+    warehouse.dimFacility afd ON f.sourceFacilityKey = afd.facilitySK
+        LEFT JOIN
+    warehouse.dimDRG drg ON f.currDrgKey = drg.drgSK
+        LEFT JOIN
+    warehouse.dimDRG d ON f.wDrgKeyMax = d.drgSK
+        LEFT JOIN
+    warehouse.dimDRG drgpre ON f.predDrgKeyMax = drgpre.drgSK
+        LEFT JOIN
+    warehouse.dimDRG drgfin ON f.fDrgKeyMax = drgfin.drgSK
+        LEFT JOIN
+    warehouse.dimNSOCMapping dn ON f.anchorDischCareSettingKey = dn.NSOCMappingSK
+        LEFT JOIN
+    warehouse.dimDate dt ON f.anchorAdmitDateKey = dt.dateSK
+		LEFT JOIN
+    warehouse.dimLookup dles ON f.episodeStatus = dles.lookupName AND dles.lookupCategory = &apos;episodeStatus&apos;
+		LEFT JOIN
+    warehouse.dimLookup dlos ON dp.onboardingStatus = dlos.lookupName AND dlos.lookupCategory = &apos;onboardingStatus&apos;
+        LEFT JOIN
+    warehouse.dimRegionMarket m ON f.rgRemKey = m.rgSK
+            LEFT JOIN
+    warehouse.dimRegionMarket rmp ON f.rgPartnerKey = rmp.rgSK
+--         INNER JOIN 
+--     warehouse.factAdmission fa ON f.anchorAdmissionKey = fa.anchorAdmissionKey
+		LEFT JOIN
+    warehouse.dimNSOCMapping dfad ON f.anchorDischCareSettingKey = dfad.NSOCMappingSK
+        INNER JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID where username = ${userName}
+       GROUP BY bpid
+       )tbsBPID ON f.BPID = tbsBPID.bpid
+        INNER JOIN 
+     (       
+        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityCCN where username = ${userName}
+       GROUP BY ccn
+        )tbsCCN on aaf.ccn=tbsCCN.ccn
+     INNER JOIN 
+     (       
+        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
+       GROUP BY facilitykey
+        )tbsFacilityKey on f.sourceFacilityKey=tbsFacilityKey.facilitykey
+WHERE f.bundleRisk=1 
+  AND f.episodeCountReport=1 
+  AND (f.model IN (1,2)  OR f.episodeStatus=10) 
+  AND adf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+  AND aaf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+  AND dp.dwhSource = &apos;EC&apos;
+  AND dloo.lookupCategory = &apos;patientRisk&apos;
+-- and tbsBPID.username = @test_user
 AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()
-and f.BPID = &apos;2070-021&apos;;</stringProp>
+${EC_BPID}
+${EC_BUNDLE}
+${EC_R_REGION}
+${EC_R_MARKET}
+${EC_REGION}
+${EC_MARKET}
+${EC_PARTICIPANTNAME}
+order by aaf.facilityNameInitCap;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">facilityName,ccn</stringProp>
+          <stringProp name="variableNames">AnchorFacility_CCN</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="BundleName" enabled="true">
+          <stringProp name="dataSource">MySQLQA</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">select
+distinct drg.bundleName
+from
+warehouse.factPatientEpisode f
+        LEFT JOIN
+    warehouse.dimPhysician dph ON f.physicianKey = dph.physicianSK
+        LEFT JOIN
+    warehouse.dimPatient dp ON f.patientKey = dp.patientSK	
+    left join warehouse.dimLookup dloo on dp.totalRiskScore = dloo.lookupName
+        LEFT JOIN
+    warehouse.dimEpisodeInitiator de ON f.episodeInitiatorKey = de.episodeInitiatorSK
+        LEFT JOIN
+    warehouse.dimCARL dc ON f.carlKey = dc.carlSK
+        LEFT JOIN
+    warehouse.dimFacility aaf ON f.anchorAdmitFacilityKey = aaf.facilitySK
+        LEFT JOIN
+    warehouse.dimFacility adf ON f.anchorDischargeFacilityKey = adf.facilitySK
+    LEFT JOIN
+    warehouse.dimFacility afd ON f.sourceFacilityKey = afd.facilitySK
+        LEFT JOIN
+    warehouse.dimDRG drg ON f.currDrgKey = drg.drgSK
+        LEFT JOIN
+    warehouse.dimDRG d ON f.wDrgKeyMax = d.drgSK
+        LEFT JOIN
+    warehouse.dimDRG drgpre ON f.predDrgKeyMax = drgpre.drgSK
+        LEFT JOIN
+    warehouse.dimDRG drgfin ON f.fDrgKeyMax = drgfin.drgSK
+        LEFT JOIN
+    warehouse.dimNSOCMapping dn ON f.anchorDischCareSettingKey = dn.NSOCMappingSK
+        LEFT JOIN
+    warehouse.dimDate dt ON f.anchorAdmitDateKey = dt.dateSK
+		LEFT JOIN
+    warehouse.dimLookup dles ON f.episodeStatus = dles.lookupName AND dles.lookupCategory = &apos;episodeStatus&apos;
+		LEFT JOIN
+    warehouse.dimLookup dlos ON dp.onboardingStatus = dlos.lookupName AND dlos.lookupCategory = &apos;onboardingStatus&apos;
+        LEFT JOIN
+    warehouse.dimRegionMarket m ON f.rgRemKey = m.rgSK
+            LEFT JOIN
+    warehouse.dimRegionMarket rmp ON f.rgPartnerKey = rmp.rgSK
+--         INNER JOIN 
+--     warehouse.factAdmission fa ON f.anchorAdmissionKey = fa.anchorAdmissionKey
+		LEFT JOIN
+    warehouse.dimNSOCMapping dfad ON f.anchorDischCareSettingKey = dfad.NSOCMappingSK
+        INNER JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID where username = ${userName}
+       GROUP BY bpid
+       )tbsBPID ON f.BPID = tbsBPID.bpid
+        INNER JOIN 
+     (       
+        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityCCN where username = ${userName}
+       GROUP BY ccn
+        )tbsCCN on aaf.ccn=tbsCCN.ccn
+     INNER JOIN 
+     (       
+        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
+       GROUP BY facilitykey
+        )tbsFacilityKey on f.sourceFacilityKey=tbsFacilityKey.facilitykey
+WHERE f.bundleRisk=1 
+  AND f.episodeCountReport=1 
+  AND (f.model IN (1,2)  OR f.episodeStatus=10) 
+  AND adf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+  AND aaf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+  AND dp.dwhSource = &apos;EC&apos;
+  AND dloo.lookupCategory = &apos;patientRisk&apos;
+-- and tbsBPID.username = @test_user
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()
+${EC_BPID}
+${EC_CCN}
+${EC_R_REGION}
+${EC_R_MARKET}
+${EC_REGION}
+${EC_MARKET}
+${EC_PARTICIPANTNAME}
+order by drg.bundleName;
+</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames">bundleName</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Partner Region Market" enabled="true">
+          <stringProp name="dataSource">MySQLQA</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">select
+distinct CONCAT(de.participantShortName, &apos;-&apos;, rmp.region, &apos; &apos;,  rmp.market ) as &apos;Partner Region Market&apos;
+from
+warehouse.factPatientEpisode f
+        LEFT JOIN
+    warehouse.dimPhysician dph ON f.physicianKey = dph.physicianSK
+        LEFT JOIN
+    warehouse.dimPatient dp ON f.patientKey = dp.patientSK	
+    left join warehouse.dimLookup dloo on dp.totalRiskScore = dloo.lookupName
+        LEFT JOIN
+    warehouse.dimEpisodeInitiator de ON f.episodeInitiatorKey = de.episodeInitiatorSK
+        LEFT JOIN
+    warehouse.dimCARL dc ON f.carlKey = dc.carlSK
+        LEFT JOIN
+    warehouse.dimFacility aaf ON f.anchorAdmitFacilityKey = aaf.facilitySK
+        LEFT JOIN
+    warehouse.dimFacility adf ON f.anchorDischargeFacilityKey = adf.facilitySK
+    LEFT JOIN
+    warehouse.dimFacility afd ON f.sourceFacilityKey = afd.facilitySK
+        LEFT JOIN
+    warehouse.dimDRG drg ON f.currDrgKey = drg.drgSK
+        LEFT JOIN
+    warehouse.dimDRG d ON f.wDrgKeyMax = d.drgSK
+        LEFT JOIN
+    warehouse.dimDRG drgpre ON f.predDrgKeyMax = drgpre.drgSK
+        LEFT JOIN
+    warehouse.dimDRG drgfin ON f.fDrgKeyMax = drgfin.drgSK
+        LEFT JOIN
+    warehouse.dimNSOCMapping dn ON f.anchorDischCareSettingKey = dn.NSOCMappingSK
+        LEFT JOIN
+    warehouse.dimDate dt ON f.anchorAdmitDateKey = dt.dateSK
+		LEFT JOIN
+    warehouse.dimLookup dles ON f.episodeStatus = dles.lookupName AND dles.lookupCategory = &apos;episodeStatus&apos;
+		LEFT JOIN
+    warehouse.dimLookup dlos ON dp.onboardingStatus = dlos.lookupName AND dlos.lookupCategory = &apos;onboardingStatus&apos;
+        LEFT JOIN
+    warehouse.dimRegionMarket m ON f.rgRemKey = m.rgSK
+            LEFT JOIN
+    warehouse.dimRegionMarket rmp ON f.rgPartnerKey = rmp.rgSK
+--         INNER JOIN 
+--     warehouse.factAdmission fa ON f.anchorAdmissionKey = fa.anchorAdmissionKey
+		LEFT JOIN
+    warehouse.dimNSOCMapping dfad ON f.anchorDischCareSettingKey = dfad.NSOCMappingSK
+        INNER JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID where username = ${userName}
+       GROUP BY bpid
+       )tbsBPID ON f.BPID = tbsBPID.bpid
+        INNER JOIN 
+     (       
+        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityCCN where username = ${userName}
+       GROUP BY ccn
+        )tbsCCN on aaf.ccn=tbsCCN.ccn
+     INNER JOIN 
+     (       
+        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
+       GROUP BY facilitykey
+        )tbsFacilityKey on f.sourceFacilityKey=tbsFacilityKey.facilitykey
+WHERE f.bundleRisk=1 
+  AND f.episodeCountReport=1 
+  AND (f.model IN (1,2)  OR f.episodeStatus=10) 
+  AND adf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+  AND aaf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+  AND dp.dwhSource = &apos;EC&apos;
+  AND dloo.lookupCategory = &apos;patientRisk&apos;
+-- and tbsBPID.username = @test_user
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()
+${EC_BPID}
+${EC_CCN}
+${EC_BUNDLE}
+${EC_R_REGION}
+${EC_R_MARKET}
+${EC_PARTICIPANTNAME}
+order by CONCAT(de.participantShortName, &apos;-&apos;, rmp.region, &apos; &apos;,  rmp.market );</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames">PartnerRegionMarket</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Remedy Region Market " enabled="true">
+          <stringProp name="dataSource">MySQLQA</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">select
+distinct CONCAT( &apos;Remedy &apos;, m.region , &apos; - &apos;,  m.market ) AS &apos;Remedy Region Market&apos;
+from
+warehouse.factPatientEpisode f
+        LEFT JOIN
+    warehouse.dimPhysician dph ON f.physicianKey = dph.physicianSK
+        LEFT JOIN
+    warehouse.dimPatient dp ON f.patientKey = dp.patientSK	
+    left join warehouse.dimLookup dloo on dp.totalRiskScore = dloo.lookupName
+        LEFT JOIN
+    warehouse.dimEpisodeInitiator de ON f.episodeInitiatorKey = de.episodeInitiatorSK
+        LEFT JOIN
+    warehouse.dimCARL dc ON f.carlKey = dc.carlSK
+        LEFT JOIN
+    warehouse.dimFacility aaf ON f.anchorAdmitFacilityKey = aaf.facilitySK
+        LEFT JOIN
+    warehouse.dimFacility adf ON f.anchorDischargeFacilityKey = adf.facilitySK
+    LEFT JOIN
+    warehouse.dimFacility afd ON f.sourceFacilityKey = afd.facilitySK
+        LEFT JOIN
+    warehouse.dimDRG drg ON f.currDrgKey = drg.drgSK
+        LEFT JOIN
+    warehouse.dimDRG d ON f.wDrgKeyMax = d.drgSK
+        LEFT JOIN
+    warehouse.dimDRG drgpre ON f.predDrgKeyMax = drgpre.drgSK
+        LEFT JOIN
+    warehouse.dimDRG drgfin ON f.fDrgKeyMax = drgfin.drgSK
+        LEFT JOIN
+    warehouse.dimNSOCMapping dn ON f.anchorDischCareSettingKey = dn.NSOCMappingSK
+        LEFT JOIN
+    warehouse.dimDate dt ON f.anchorAdmitDateKey = dt.dateSK
+		LEFT JOIN
+    warehouse.dimLookup dles ON f.episodeStatus = dles.lookupName AND dles.lookupCategory = &apos;episodeStatus&apos;
+		LEFT JOIN
+    warehouse.dimLookup dlos ON dp.onboardingStatus = dlos.lookupName AND dlos.lookupCategory = &apos;onboardingStatus&apos;
+        LEFT JOIN
+    warehouse.dimRegionMarket m ON f.rgRemKey = m.rgSK
+            LEFT JOIN
+    warehouse.dimRegionMarket rmp ON f.rgPartnerKey = rmp.rgSK
+--         INNER JOIN 
+--     warehouse.factAdmission fa ON f.anchorAdmissionKey = fa.anchorAdmissionKey
+		LEFT JOIN
+    warehouse.dimNSOCMapping dfad ON f.anchorDischCareSettingKey = dfad.NSOCMappingSK
+        INNER JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID where username = ${userName}
+       GROUP BY bpid
+       )tbsBPID ON f.BPID = tbsBPID.bpid
+        INNER JOIN 
+     (       
+        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityCCN where username = ${userName}
+       GROUP BY ccn
+        )tbsCCN on aaf.ccn=tbsCCN.ccn
+     INNER JOIN 
+     (       
+        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
+       GROUP BY facilitykey
+        )tbsFacilityKey on f.sourceFacilityKey=tbsFacilityKey.facilitykey
+WHERE f.bundleRisk=1 
+  AND f.episodeCountReport=1 
+  AND (f.model IN (1,2)  OR f.episodeStatus=10) 
+  AND adf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+  AND aaf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+  AND dp.dwhSource = &apos;EC&apos;
+  AND dloo.lookupCategory = &apos;patientRisk&apos;
+-- and tbsBPID.username = @test_user
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()
+${EC_BPID}
+${EC_CCN}
+${EC_BUNDLE}
+${EC_REGION}
+${EC_MARKET}
+${EC_PARTICIPANTNAME}
+order by CONCAT( &apos;Remedy &apos;, m.region , &apos; - &apos;,  m.market );</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames">RRegionMarket</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Participant" enabled="true">
+          <stringProp name="dataSource">MySQLQA</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">select
+distinct de.participantNameInitCap as &apos;Participant Name&apos;
+from
+warehouse.factPatientEpisode f
+        LEFT JOIN
+    warehouse.dimPhysician dph ON f.physicianKey = dph.physicianSK
+        LEFT JOIN
+    warehouse.dimPatient dp ON f.patientKey = dp.patientSK	
+    left join warehouse.dimLookup dloo on dp.totalRiskScore = dloo.lookupName
+        LEFT JOIN
+    warehouse.dimEpisodeInitiator de ON f.episodeInitiatorKey = de.episodeInitiatorSK
+        LEFT JOIN
+    warehouse.dimCARL dc ON f.carlKey = dc.carlSK
+        LEFT JOIN
+    warehouse.dimFacility aaf ON f.anchorAdmitFacilityKey = aaf.facilitySK
+        LEFT JOIN
+    warehouse.dimFacility adf ON f.anchorDischargeFacilityKey = adf.facilitySK
+    LEFT JOIN
+    warehouse.dimFacility afd ON f.sourceFacilityKey = afd.facilitySK
+        LEFT JOIN
+    warehouse.dimDRG drg ON f.currDrgKey = drg.drgSK
+        LEFT JOIN
+    warehouse.dimDRG d ON f.wDrgKeyMax = d.drgSK
+        LEFT JOIN
+    warehouse.dimDRG drgpre ON f.predDrgKeyMax = drgpre.drgSK
+        LEFT JOIN
+    warehouse.dimDRG drgfin ON f.fDrgKeyMax = drgfin.drgSK
+        LEFT JOIN
+    warehouse.dimNSOCMapping dn ON f.anchorDischCareSettingKey = dn.NSOCMappingSK
+        LEFT JOIN
+    warehouse.dimDate dt ON f.anchorAdmitDateKey = dt.dateSK
+		LEFT JOIN
+    warehouse.dimLookup dles ON f.episodeStatus = dles.lookupName AND dles.lookupCategory = &apos;episodeStatus&apos;
+		LEFT JOIN
+    warehouse.dimLookup dlos ON dp.onboardingStatus = dlos.lookupName AND dlos.lookupCategory = &apos;onboardingStatus&apos;
+        LEFT JOIN
+    warehouse.dimRegionMarket m ON f.rgRemKey = m.rgSK
+            LEFT JOIN
+    warehouse.dimRegionMarket rmp ON f.rgPartnerKey = rmp.rgSK
+--         INNER JOIN 
+--     warehouse.factAdmission fa ON f.anchorAdmissionKey = fa.anchorAdmissionKey
+		LEFT JOIN
+    warehouse.dimNSOCMapping dfad ON f.anchorDischCareSettingKey = dfad.NSOCMappingSK
+        INNER JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID where username = ${userName}
+       GROUP BY bpid
+       )tbsBPID ON f.BPID = tbsBPID.bpid
+        INNER JOIN 
+     (       
+        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityCCN where username = ${userName}
+       GROUP BY ccn
+        )tbsCCN on aaf.ccn=tbsCCN.ccn
+     INNER JOIN 
+     (       
+        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
+       GROUP BY facilitykey
+        )tbsFacilityKey on f.sourceFacilityKey=tbsFacilityKey.facilitykey
+WHERE f.bundleRisk=1 
+  AND f.episodeCountReport=1 
+  AND (f.model IN (1,2)  OR f.episodeStatus=10) 
+  AND adf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+  AND aaf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+  AND dp.dwhSource = &apos;EC&apos;
+  AND dloo.lookupCategory = &apos;patientRisk&apos;
+-- and tbsBPID.username = @test_user
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()
+${EC_BPID}
+${EC_CCN}
+${EC_BUNDLE}
+${EC_R_REGION}
+${EC_R_MARKET}
+${EC_REGION}
+${EC_MARKET}
+order by de.participantNameInitCap;</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames">participantName</stringProp>
           <stringProp name="resultVariable"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -289,11 +715,6 @@ and f.BPID = &apos;2070-021&apos;;</stringProp>
                 <stringProp name="Argument.value">/c</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
-              <elementProp name="" elementType="Argument">
-                <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo episodeInitiatorNameInitCap=${episodeInitiatorNameInitCap_1},bpid=${bpid_1},facilityName=${facilityName_1},,ccn=${ccn_1}&gt;IpecDashboardResults.txt</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
             </collectionProp>
           </elementProp>
           <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -301,7 +722,92 @@ and f.BPID = &apos;2070-021&apos;;</stringProp>
           </elementProp>
           <stringProp name="SystemSampler.directory">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}</stringProp>
         </SystemSampler>
-        <hashTree/>
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">import java.util.ArrayList;
+
+ArrayList al_bpid = new ArrayList();
+for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;EpisodeInitiator_BPID_#&quot;));i++){
+al_bpid.add(vars.get(&quot;EpisodeInitiator_BPID_&quot;+i));
+}
+vars.put(&quot;value1&quot;,&quot;\&quot;&quot;+al_bpid.toString()+&quot;\&quot;&quot;);
+System.out.println(&quot;BPID:&quot;+al_bpid.toString());
+
+ArrayList al_facilityName = new ArrayList();
+for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;AnchorFacility_CCN_#&quot;));i++){
+al_facilityName.add(vars.get(&quot;AnchorFacility_CCN_&quot;+i));
+}
+vars.put(&quot;value2&quot;,&quot;\&quot;&quot;+al_facilityName.toString()+&quot;\&quot;&quot;);
+System.out.println(&quot;AnchorFacility_CCN&quot;+al_facilityName);
+
+ArrayList al_bundleName = new ArrayList();
+for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;bundleName_#&quot;));i++){
+al_bundleName.add(vars.get(&quot;bundleName_&quot;+i));
+}
+vars.put(&quot;value3&quot;,&quot;\&quot;&quot;+al_bundleName.toString()+&quot;\&quot;&quot;);
+System.out.println(&quot;bundleName:&quot;+al_bundleName.toString());
+ArrayList al_RRegionMarket = new ArrayList();
+
+for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;RRegionMarket_#&quot;));i++){
+al_RRegionMarket.add(vars.get(&quot;RRegionMarket_&quot;+i));
+}
+vars.put(&quot;value4&quot;,&quot;\&quot;&quot;+al_RRegionMarket.toString()+&quot;\&quot;&quot;);
+System.out.println(&quot;RRegionMarket:&quot;+al_RRegionMarket.toString());
+
+ArrayList al_PartnerRegionMarket = new ArrayList();
+for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;PartnerRegionMarket_#&quot;));i++){
+al_PartnerRegionMarket.add(vars.get(&quot;PartnerRegionMarket_&quot;+i));
+}
+vars.put(&quot;value5&quot;,&quot;\&quot;&quot;+al_PartnerRegionMarket.toString()+&quot;\&quot;&quot;);
+System.out.println(&quot;Partner region:&quot;+al_PartnerRegionMarket.toString());
+
+ArrayList al_participant = new ArrayList();
+for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;participantName_#&quot;));i++){
+al_participant.add(vars.get(&quot;participantName_&quot;+i));
+}
+vars.put(&quot;value6&quot;,&quot;\&quot;&quot;+al_participant.toString()+&quot;\&quot;&quot;);
+System.out.println(&quot;Participant:&quot;+al_participant.toString());
+</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">import org.apache.jmeter.services.FileServer;
+//get current jmeter script&apos;s directory
+String path = FileServer.getFileServer().getBaseDir();
+ 
+//get the separator
+String separator = File.separator;
+ 
+log.info(&quot;Path: &quot; + path);
+log.info(&quot;Path with separator: &quot; + path + separator);
+System.out.print(path+separator);
+System.out.println(${Flag});
+if(vars.get(&quot;Flag&quot;).equals(&quot;(1)&quot;)){
+	log.info(&quot;Path: 1&quot;);
+	fA = new FileOutputStream(path+separator+&quot;IPECECRowFilterOutput.txt&quot;);
+	pA = new PrintStream(fA); 
+	pA.print(&quot;&quot;);
+	pA.close();
+	fA.close();
+	}
+log.info(&quot;Path: 7&quot;);
+f= new FileOutputStream(path + separator+&quot;IPECECRowFilterOutput.txt&quot;,true);
+	p = new PrintStream(f);
+	p.println(&quot;Episode Initiator - BPID=&quot;+${value1}+&quot;*Anchor Facility - CCN=&quot;+${value2}+&quot;*Bundle=&quot;+${value3}+&quot;*Remdy Region Market=&quot;+${value4}+&quot;*Partner Region Market=&quot;+${value5}+&quot;*Participant=&quot;+${value6});
+
+	p.close();
+	f.close();
+
+</stringProp>
+          </BeanShellPostProcessor>
+          <hashTree/>
+        </hashTree>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
