@@ -1,13 +1,4 @@
 package com.remedy.programManagement;
-
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -54,10 +45,18 @@ public class EditPhysicianRoster extends BaseClass {
 		}
 		else if(org.equals("Payor")){
 			iWillWaitToSee(By.xpath("//input[@class='text-input-field-programFilterTerm']"));
-			iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-programFilterTerm']")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
+			//iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-programFilterTerm']")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
+			if(CreateProgramAPI.PROGRAMNameList.get(0).contains("\"")){
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-programFilterTerm']")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-programFilterTerm']")), CreateProgramAPI.PROGRAMNameList.get(0));
+			}
 			delay();
 		}
-		else{
+		else
+		{
 			iWillWaitToSee(By.cssSelector(".text-input-field-organizationFilterTerm"));
 			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), text);
 			delay();
@@ -67,7 +66,13 @@ public class EditPhysicianRoster extends BaseClass {
 	public void iVerifyPhysicianRosterFieldInSearchListOnViewProfileOfOrganizationSearchBox(String text, String org){
 		if(org.equals("Payor")){
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
-			isElementPresentOnPage(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']"));
+			if(CreateProgramAPI.PROGRAMNameList.get(0).contains("\"")){
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']"));
+			}
+			else
+			{
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0)));
+			}
 		}
 		else
 		{
@@ -124,13 +129,31 @@ public class EditPhysicianRoster extends BaseClass {
 		}
 		else if(org.equals("Payor"))
 		{
-			iWillWaitToSee(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']"));
+			//iWillWaitToSee(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']"));
 			//clickElement(driver.findElement(By.xpath("//div[text()='"+CreatePrograms.programs.get(1)+"']")));
-			WebElement element = driver.findElement(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']"));
-			JavascriptExecutor executor = (JavascriptExecutor)driver;
-			executor.executeScript("arguments[0].click();", element);
-			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-			longDelay();
+//			WebElement element = driver.findElement(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']"));
+//			JavascriptExecutor executor = (JavascriptExecutor)driver;
+//			executor.executeScript("arguments[0].click();", element);
+//			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+//			longDelay();
+			
+			if(CreateProgramAPI.PROGRAMNameList.get(0).contains("\"")){
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']"));
+				WebElement element = driver.findElement(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']"));
+				JavascriptExecutor executor = (JavascriptExecutor)driver;
+				executor.executeScript("arguments[0].click();", element);
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				longDelay();
+			}
+			else
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0)+"']"));
+				WebElement element = driver.findElement(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0)+"']"));
+				JavascriptExecutor executor = (JavascriptExecutor)driver;
+				executor.executeScript("arguments[0].click();", element);
+				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+				longDelay();
+			}
 		}
 	}
 	

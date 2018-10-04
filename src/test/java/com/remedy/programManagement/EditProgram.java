@@ -17,6 +17,13 @@ public class EditProgram extends BaseClass{
 	}
 	
 	public void iVerifyTheEditedProgramNameOnEditBPCpage(String text){
-		isElementEnabled(driver.findElement(By.xpath("//span[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']")));
+		if(CreateProgramAPI.PROGRAMNameList.get(0).contains("\"")){
+			isElementEnabled(driver.findElement(By.xpath("//span[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']")));
+		}
+		else
+		{
+			isElementEnabled(driver.findElement(By.xpath("//span[text()='"+CreateProgramAPI.PROGRAMNameList.get(0)+"']")));
+		}
+		//isElementEnabled(driver.findElement(By.xpath("//span[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']")));
 	}
 }

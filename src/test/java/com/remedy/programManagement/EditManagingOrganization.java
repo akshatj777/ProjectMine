@@ -270,8 +270,8 @@ public class EditManagingOrganization extends BaseClass {
 			}
 			else
 			{
-				iWillWaitToSee(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(1)+"']"));
-				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(1)+"']")));
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0)+"']"));
+				clickElement(driver.findElement(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0)+"']")));
 				waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 			}
 		}
@@ -431,11 +431,31 @@ public class EditManagingOrganization extends BaseClass {
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateLTCHOrganizationAPI.LTCHNameList.get(0));
 		}
-		else if(field2.contains("PROGRAMNAME")){
+		else if(field2.equals("PROGRAMNAME")){
 			CreatePrograms.programName = CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1);
 			CreatePrograms.tempPrograms.put(1,createRandomName(field2));
-			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePrograms.tempPrograms.get(1));
+		}
+		else if(field2.contains("equalsTo45Characters")){
+			scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
+			CreatePrograms.tempPrograms.put(1,RandomStringUtils.randomAlphabetic(45));
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePrograms.tempPrograms.get(1));
+		}
+		else if(field2.contains("AllowedCharatcters")){
+			String str="PName~@!#$%^&*()-+_={}|;[]<>,.?/120";
+			scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
+			CreatePrograms.tempPrograms.put(1,str+RandomStringUtils.randomAlphabetic(5));
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreatePrograms.tempPrograms.get(1));
+		}
+		else if(field2.equalsIgnoreCase("DUPLICATE_PROGRAMNAME")){
+			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateProgramAPI.PROGRAMNameList.get(0).substring(0, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
 		}
 		else if(field2.equalsIgnoreCase("equalsTo75Characters - NO")){
 			if(field1.contains("Hospital"))

@@ -1,5 +1,15 @@
 Feature: Edit a Program
 
+  Scenario Outline: Create MO using API calls
+    Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
+    When create org with this data
+    Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
+
+    Examples: 
+      | desc      | particpantId | name   | contactPerson | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type       |
+      | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
+
   Scenario Outline: <desc>
     Given Build Json and pass it to post method with "<name>" and "<participantId>" and "<shortName>" and "<managingOrgId>" and "<ccn>" and "<ein>" and "<npi>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>" and "<locationName>" and "<locationType>" and "<marketId>" and "<locAddr1>" and "<locAddr2>" and "<locCity>" and "<locState>" and "<locZip>" and "<locationId>"
     When create org with this data "hospital"
@@ -8,6 +18,7 @@ Feature: Edit a Program
 
     Examples: 
       | desc                                       | participantId | name    | shortName | managingOrgId | ccn | ein | npi | locationId | locAddr1     | locAddr2     | locCity  | locState | locZip | locationName | locationType | marketId | regionId | address1 | address2 | city           | state | zip   | expPostCode | id | type     | errorMsg |
+      | Create Hospital using API calls with MO    |               | ACHNAME | shortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
       | Create Hospital using API calls without MO |               | ACHNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
 
   Scenario Outline: Create Payor using API calls
@@ -223,32 +234,9 @@ Feature: Edit a Program
       | Description                                        | Payor_Name | Program_Name | Edited_Program_Name | Message                      |
       | Edit Program using Drag and Drop attribution rules | PAYORNAME  | PROGRAMNAME  | PROGRAMNAME         | Program Successfully Updated |
 
-  Scenario Outline: <Description>
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-    When I click on "Payor" organization tab on organization dashboard
-    When I search with "<Payor_Name>" on organization in search box
-    And I click "<Payor_Name>" field in search list on organization page
-    And I verify "<Payor_Name>" name on the header of view profile
-    And I verify "Programs" as default tab selected on view profile of "Payor" Organization
-    When I search with "<Program_Name>" on organization in search box
-    And I click "<Program_Name>" field in search list on organization page
-    And I verify "<Program_Name>" name on the header of view profile
-    And I verify "Edit Program" header text on edit organization page
-    And I edit "Program Name" field to "<Edited_Program_Name>" for organization
-    Then I click on "Submit" button on "edit" organization page
-    Then I verify duplicate "<Message>" after submitting the "edit Programs" organization page
-
-    Examples: 
-      | Description                                 | Payor_Name | Program_Name | Edited_Program_Name   | Message                                                                                          |
-      | Create Program using duplicate program name | PAYORNAME  | PROGRAMNAME  | DUPLICATE_PROGRAMNAME | There is a conflict error because an entity with similar identifying attributes already existed. |
-
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"
 
     Examples: 
-      | type                             |
-      | Payor, Program, Hospital, Bundle |
+      | type                                 |
+      | MO, Payor, Program, Hospital, Bundle |
