@@ -589,7 +589,7 @@ public class EditUser extends BaseClass {
 			if(programList.contains(","))
 			{
 				StringTokenizer st = new StringTokenizer(programList, ",");
-				driver.findElement(By.xpath("//div[@class='content active']//div[@class='ui selection dropdown']")).click();
+				driver.findElement(By.xpath("//div[@class='content active' or @class='content']//div[@class='ui selection dropdown']")).click();
 				while (st.hasMoreTokens()) 
 				{
 					String programs = st.nextToken().trim();
@@ -600,10 +600,11 @@ public class EditUser extends BaseClass {
 			}
 			else
 			{
-				iWillWaitToSee(By.xpath("//div[@class='content active']//div[@class='ui selection dropdown']"));
-				driver.findElement(By.xpath("//div[@class='content active']//div[@class='ui selection dropdown']")).click();
+				iWillWaitToSee(By.xpath("//div[@class='content active' or @class='content']//div[@class='ui selection dropdown']"));
+				driver.findElement(By.xpath("//div[@class='content active' or @class='content']//div[@class='ui selection dropdown']")).click();
 				iWillWaitToSee(By.xpath("//label[text()='" + programList + "']"));
 				driver.findElement(By.xpath("//label[text()='" + programList + "']")).click();
+				iWillWaitToSee(By.xpath("//table[@class='ui table component-bpid-table']"));
 			}
 		}
 	}
@@ -754,7 +755,7 @@ public void verifyPaginationForSelectedLoc(){
 }
 }
 public void verifyAllLocationBoxSelection() {
-	Assert.assertTrue(isElementPresent(By.xpath("//div[@class='ui checked checkbox']")));
+	Assert.assertTrue(isElementPresent(By.xpath("//div[@class='ui checked checkbox']/label[text()='All Locations']")));
 }
 public void enterInvalidLearningPathway(String text){
 	if(isElementPresentOnPage(By.cssSelector(".column.padding>.component-learning-pathway-dropdown"))==true){

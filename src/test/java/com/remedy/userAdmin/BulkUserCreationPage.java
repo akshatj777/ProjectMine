@@ -97,7 +97,7 @@ public class BulkUserCreationPage extends BaseClass {
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Physicians", bulkEmailPerRole);
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("RTCSMAIL", "qaautomation+" + randomString + "@remedysystems.com");
+		strUserData = strUserData.replace("RTCSMAIL", "qaautomation+'" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
 		applicationsList.put("Remedy TCS", "Episode Connect, Episode Connect for Post-acute Care, Community Connect, Care Connect, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
@@ -814,7 +814,7 @@ public class BulkUserCreationPage extends BaseClass {
 		delay();
 		if (driver.findElements(By.xpath("//div[@class='ui text loader']")).size() > 0) {
 			iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
-			WebDriverWait objWait = new WebDriverWait(driver, 500);
+			WebDriverWait objWait = new WebDriverWait(driver, 600);
 			objWait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
 		}
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[@class='successCountLabel'][text()='" + text + "']")));
@@ -1403,7 +1403,7 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("ROMAIL", email);
 			strUserData = strUserData.replace(" Remedy Other ", " Downstream Provider ");
 
-			strUserData = strUserData.replace("| 514022:2070-007:310074 |HZhmTBQzHtU1,18h7phZr1h81 |","| 015174 ||");
+			strUserData = strUserData.replace("| Remedy Other | NA | 439245:ALL_BPIDS:ALL_FACILITIES |HZhmTBQzHtU1,18h7phZr1h81 | |","| Downstream Provider | NA | 015174 | | |");
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
 			HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
 			applicationsList.put("Downstream Provider", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute, Remedy University, Community Connect");
@@ -1637,7 +1637,7 @@ public class BulkUserCreationPage extends BaseClass {
 		iWillWaitToSee(By.xpath("//button[text()='Submit']"));
 		waitTo().until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Submit']")));
 		clickElement(driver.findElement(By.xpath("//button[text()='Submit']")));
-		iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
+//		iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
 		WebDriverWait objWait = new WebDriverWait(driver, 300);
 		objWait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
 		HashMap<String, String> emailList = new HashMap<String, String>();

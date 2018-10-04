@@ -32,7 +32,7 @@ RRNFirstName | RRNLastName | RRNMAIL | 9878909878| Remedy RN | NA | 441444:2070-
 RFRNFirstName | RFRNLastName | RFRNMAIL | | Remedy Field RN | NA | 441321:2070-c80:190064,441321:2070-c80:190065,441321:2070-c80:190266,441321:2070-c80:300003 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1 | | False | True |  |True  |  |  |  | | |
 RPMFirstName | RPMLastName | RPMMAIL | | Remedy PM | NA | 439241:2070-a07:ALL_FACILITIES | | |False  |  | True |  | True |  |  | | |
 RSTFirstName | RSTLastName | RSTMAIL | 8989898787| Remedy Sales Team | NA | 439245:2070-a12:160047,439245:2070-a12:280129,439245:2070-a12:280003,439245:2070-a12:280040 | | | False |  |  | True |  |True  |  | | |
-REFirstName | RELastName | REMAIL | | Remedy Executive | NA | 514022:ALL_BPIDS:ALL_FACILITIES | | | False | True | True |  |  |  |  | True| |
+REFirstName | RELastName | REMAIL | | Remedy Executive | NA | 441447:ALL_BPIDS:ALL_FACILITIES | | | False | True | True |  |  |  |  | True| |
 PPEFirstName | PPELastName | PPEMAIL | | Prospective Partner Executive | NA | 441447:ALL_BPIDS:ALL_FACILITIES | | | False |  |  | True |  |  |  | | |
 ROFirstName | ROLastName | ROMAIL | 7676878998| Remedy Other | NA | 441364:3056-k60:365973,441364:3056-k61:365860 |  | | False |  |  |  |  |  |  |True | True|True
 PPAFirstName | PPALastName | PPAMAIL | | Partner Program Administrator | NA | 809047:2053-000:450058-1,809047:2053-000:450058-2,809047:2053-000:450058 |  | | False |  | True | True |  |  |  | | |

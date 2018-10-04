@@ -678,31 +678,13 @@ public void iUnselectAllSelectedApps(){
 	   }
    }
    
-   public void iVerifyNavigationOnEpisodes2HomePage(String role){
+   public void iVerifyNavigationOnEpisodes2HomePage(String role)
+   {
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
 		   if(st.nextToken().trim().equals("Episode Connect for Post-acute Care")){
-//			   if(role.substring((role.indexOf("-")+1)).equals("Remedy Technical Administrator"))
-//			   {
-//				   iWillWaitToSee(By.xpath("//h2[text()='BPCI Performance']"));
-//				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//h2[text()='BPCI Performance']")));
-//			   }
-//			   else
-//			   {
-
-//				   for(int i=0;i<5;i++)
-//				   {
-//					   driver.navigate().refresh();
-//					   driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
-//					   longDelay();
-//					   if(driver.findElements(By.xpath("//div[@class='patient-card']")).size()>0)
-//					   {
-//						   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
-//						   break;
-//					   }
-//				   }
 			   if(!isElementPresentOnPage(By.xpath("//div[@class='ui text loader']")));
 			   {
 				   driver.navigate().refresh();
@@ -717,10 +699,8 @@ public void iUnselectAllSelectedApps(){
 				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
 				   
 			   }
-
 		   }
 	   }   
-   
    
    public void iVerifyNavigationOnPhysicianHomePage(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
@@ -735,14 +715,11 @@ public void iUnselectAllSelectedApps(){
    
    public void iVerifyNavigationOnUserAdminHomePage(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   StringTokenizer st = new StringTokenizer(application, ",");
-	   while(st.hasMoreTokens())
-	   {
-		   if(st.nextToken().trim().equals("User Admin")){
-			   iWillWaitToSee(By.xpath("//h1[text()='Users']"));
+	   if(application.contains("Administration"))
+		{
+			iWillWaitToSee(By.xpath("//h1[text()='Users']"));
 			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//h1[text()='Users']")));
-		   }
-	   }   
+		}
    }
    
    public void iVerifyPatientCardOnEpisodes2HomePage(String role){
@@ -750,21 +727,11 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episode Connect for Post-acute Care")){
-//			   if(role.substring((role.indexOf("-")+1)).equals("Remedy Technical Administrator"))
-//			   {
-//				   iWillWaitToSee(By.xpath("//button[contains(text(),'View All Patients')]"));
-//				 driver.findElement(By.xpath("//button[contains(text(),'View All Patients')]")).click();
-//				 iWillWaitToSee(By.xpath("//div[@class='patient-card']"));
-//				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
-//				 driver.navigate().back();
-//			   }
-//			   else
-//			   {
+		   if(st.nextToken().trim().equals("Episode Connect for Post-acute Care"))
+		   {
 				   iWillWaitToSee(By.xpath("//div[@class='patient-card']"));
 				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
 				   driver.navigate().back();
-//			   }
 		   }
 	   }   
    }
@@ -782,7 +749,8 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episode Connect Classic")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic"))
+		   {
 	   iWillWaitToSee(By.cssSelector(".username"));
 	   WebElement element = driver.findElement(By.xpath("//i[@class='fa fa-angle-down']"));
 	   String javaScript = "var evObj = document.createEvent('MouseEvents');" +
@@ -841,22 +809,20 @@ public void iUnselectAllSelectedApps(){
 	   }
    }
    
-   public void iClickOnUserAdminTileUnderSpecificUserLoginPage(String role){
+   public void iClickOnUserAdminTileUnderSpecificUserLoginPage(String role)
+   {
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   StringTokenizer st = new StringTokenizer(application, ",");
-	   while(st.hasMoreTokens())
+	   if(application.contains("Administration"))
 	   {
-			   if(st.nextToken().trim().equals("User Admin")){
-				   iWillWaitToSee(By.xpath("//div[text()='Users']"));
-				   if(DriverScript.Config.getProperty("Browser").equals("ie"))
-				   {
-					   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Users']")));
-				   }
-				   else
-				   {
-					   clickElement(driver.findElement(By.xpath("//div[text()='Users']")));  
-				   }
-		   }   
+		   iWillWaitToSee(By.xpath("//div[text()='Users']"));
+		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		   {
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Users']")));
+		   }
+		   else
+		   {
+			   clickElement(driver.findElement(By.xpath("//div[text()='Users']")));  
+		   }
 	   }
    }
    
@@ -1211,7 +1177,18 @@ public void iUnselectAllSelectedApps(){
    
    public void clickOnReportingTile(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.equals("Reporting")){
+	   String[] apps = application.split(",");
+	   boolean flag = false;
+	   for(int i=0;i<apps.length;i++)
+	   {
+		   if(apps[i].trim().equals("Reporting"))
+		   {
+			   flag = true;
+			   break;
+		   }
+	   }
+	   if(flag)
+	   {
 		   iWillWaitToSee(By.xpath("//div[text()='Reporting']"));
 		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Reporting']")));
 		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
@@ -1406,16 +1383,29 @@ public void iUnselectAllSelectedApps(){
 	   }
     }
    
-   public void iVerifyNavigationOnReportsHomePage(String role){
+   public void iVerifyNavigationOnReportsHomePage(String role)
+   {
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Reporting Classic")){
+	   if(application.contains("Reporting Classic"))
+	   {
 		   iWillWaitToSee(By.cssSelector(".dropdown-tile-label.ng-binding")); 
 	   }
    }
    
    public void verifyUserNavigatedToReporting(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.equals("Reporting")){
+	   String[] apps = application.split(",");
+	   boolean flag = false;
+	   for(int i=0;i<apps.length;i++)
+	   {
+		   if(apps[i].trim().equals("Reporting"))
+		   {
+			   flag = true;
+			   break;
+		   }
+	   }
+	   if(flag)
+	   {
 		   iWillWaitToSee(By.cssSelector(".report-title"));
 		   isElementPresentOnPage(By.cssSelector(".report-title"));
 	   }
@@ -3127,7 +3117,8 @@ public void iUnselectAllSelectedApps(){
 		Assert.assertEquals("No results found.",actual.trim());
 	}
    
-	 public void iclickontheReportsTilewithtextforuser(String text, String role) throws Throwable {
+	 public void iclickontheReportsTilewithtextforuser(String text, String role) throws Throwable 
+	 {
 		 String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())

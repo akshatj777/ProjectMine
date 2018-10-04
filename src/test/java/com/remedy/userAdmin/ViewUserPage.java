@@ -74,6 +74,10 @@ public class ViewUserPage extends BaseClass {
 	}
 
 	public void verifyNavigationToViewUserPage() throws Throwable {
+		if(!isElementPresentOnPage(By.xpath("//h3[text()='Applications']")))
+		{
+			driver.navigate().refresh();
+		}
 		iWillWaitToSee(By.xpath("//h3[text()='Applications']"));
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//h3[text()='Applications']")));
 	}
