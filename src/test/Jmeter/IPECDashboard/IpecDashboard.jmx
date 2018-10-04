@@ -46,14 +46,63 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="IPECUsername" enabled="true">
           <stringProp name="delimiter">|</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="filename">IPECUsername.csv</stringProp>
+          <stringProp name="filename">IPECRowFilterInput.csv</stringProp>
           <boolProp name="ignoreFirstLine">false</boolProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
           <stringProp name="shareMode">shareMode.all</stringProp>
           <boolProp name="stopThread">true</boolProp>
-          <stringProp name="variableNames">useremail</stringProp>
+          <stringProp name="variableNames">Flag,userName,time_range,bpid,ccn,bundle,region,market,r_region,r_market,participantName</stringProp>
         </CSVDataSet>
+        <hashTree/>
+        <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+          <boolProp name="resetInterpreter">false</boolProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="script">if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;C_BPID&quot;,&quot;AND e.bpid in ${bpid}&quot;);	
+} else {
+	vars.put(&quot;C_BPID&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;C_CCN&quot;,&quot;AND f.ccn in ${ccn}&quot;);	
+} else {
+	vars.put(&quot;C_CCN&quot;,&quot;&quot;);
+}
+
+if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){;	
+	vars.put(&quot;C_BUNDLE&quot;,&quot;and drg.bundleName in ${bundle}&quot;);
+} else{
+	vars.put(&quot;C_BUNDLE&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;C_R_REGION&quot;,&quot;and rm.region in  ${r_region}&quot;);	
+} else {
+	vars.put(&quot;C_R_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;C_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);		
+} else{
+	vars.put(&quot;C_R_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;C_REGION&quot;,&quot;and prm.region in  ${region}&quot;);		
+} else {
+	vars.put(&quot;C_REGION&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){	
+	vars.put(&quot;C_MARKET&quot;,&quot;and prm.market in ${market}&quot;);
+} else{
+	vars.put(&quot;C_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
+} else{
+	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;&quot;);
+}
+
+}	</stringProp>
+        </BeanShellPreProcessor>
         <hashTree/>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="bpid" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
@@ -104,19 +153,19 @@ warehouse.dimNSOCMapping dfad ON fa.dischCareSettingKey = dfad.NSOCMappingSK
 INNER JOIN 
 (
 SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-from warehouse.tabUserSecurityBPID where username = ${useremail}
+from warehouse.tabUserSecurityBPID where username = ${userName}
 GROUP BY bpid
 )tbsBPID ON f.BPID = tbsBPID.bpid
 INNER JOIN 
 ( 
 SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-from warehouse.tabUserSecurityCCN where username = ${useremail}
+from warehouse.tabUserSecurityCCN where username = ${userName}
 GROUP BY ccn
 )tbsCCN on aaf.ccn=tbsCCN.ccn
 INNER JOIN 
 ( 
 SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-from warehouse.tabUserSecurityFacilityKey where username = ${useremail}
+from warehouse.tabUserSecurityFacilityKey where username = ${userName}
 GROUP BY facilitykey
 )tbsFacilityKey on f.sourceFacilityKey=tbsFacilityKey.facilitykey
 WHERE f.bundleRisk=1 
@@ -126,9 +175,10 @@ AND adf.dwhSource in (&apos;EC&apos;)
 AND aaf.dwhSource in (&apos;EC&apos;)
 AND dp.dwhSource = &apos;EC&apos;
 AND dloo.lookupCategory = &apos;patientRisk&apos;
-and tbsBPID.username = ${useremail}
-and f.anchorAdmitDateKey &gt;= 20180515
-and f.anchorAdmitDateKey &lt;= 20180530</stringProp>
+and tbsBPID.username = ${userName}
+-- and f.anchorAdmitDateKey &gt;= 20180515
+-- and f.anchorAdmitDateKey &lt;= 20160101
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
@@ -211,7 +261,8 @@ AND aaf.dwhSource in (&apos;EC&apos;)
 AND dp.dwhSource = &apos;EC&apos;
 AND dloo.lookupCategory = &apos;patientRisk&apos;
 and tbsBPID.username = ${useremail}
-and f.anchorAdmitDateKey &gt;= 20180515
+-- and f.anchorAdmitDateKey &gt;= 20180515
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()
 and f.BPID = &apos;2070-021&apos;;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>

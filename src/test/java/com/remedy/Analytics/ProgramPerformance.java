@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -2106,6 +2107,40 @@ public class ProgramPerformance extends BaseClass{
 			 outputText.put(var[0], var[1]);
 		 }
 		}
+	
+	public void iGetAndFillDaysInTimeFilter(String startDay, String endDay) throws FileNotFoundException {
+		CalcuateTimeFilterDay(startDay, endDay);
+	}
+	
+	public void CalcuateTimeFilterDay(String startDay, String endDay) throws FileNotFoundException {
+		 SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		 String days = null;
+		 Date date = new Date(); 
+		   String presentDate =formatter.format(date);
+		   if(endDay.equalsIgnoreCase("today")) {
+		 try {
+			 	Date dateBefore = formatter.parse(startDay);
+			 	Date dateAfter = formatter.parse(presentDate);
+		        long difference = (dateAfter.getTime() - dateBefore.getTime())/86400000;
+		        days = String.valueOf(++difference);
+		        System.out.println("Number of Days between dates: "+difference);
+		 } catch (Exception e) {
+		       e.printStackTrace();
+		 }
+		   }
+		   iFillDaysInTimeFilter(days);
+	}
 
-	 
+	public void iFillDaysInTimeFilter(String days) throws FileNotFoundException {
+//		longDelay();
+		 driver.findElement(By.xpath("//input[@dojoattachpoint='inputLastn']")).clear();
+		 delay();
+		 driver.findElement(By.xpath("//input[@dojoattachpoint='inputLastn']")).sendKeys(days);
+//		 String dateFetched = driver.findElement(By.xpath("//span[@dojoattachpoint='domPreview']")).getAttribute("textContent").trim();
+		 arrayListTexts.add(days);
+		writeDataToOutputFile("Date_Range");
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+	    
+	 }
+	
 }
