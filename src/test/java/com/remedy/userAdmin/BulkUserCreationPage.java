@@ -1529,12 +1529,9 @@ public class BulkUserCreationPage extends BaseClass {
 				System.out.println(e);
 			}
 			strUserData = strUserData.replace("SalesAcuteDemoMAIL", email);
-			strUserData = strUserData.replace(" Remedy Sales Acute Demo 2018 ", " Physicians ");
+			strUserData = strUserData.replace(" Remedy Sales Acute Demo 2018 | NA |", " Physicians | NPI |");
 
-			strUserData = strUserData.replace(
-					"| True | True | True | True | True | True | False | | False| False",
-					"| True |  |  |  |  |  |  | | |");
-
+			
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
 			applicationsList.put("Physicians", "Episode Connect, Episode Connect Classic, Reporting Classic, Remedy University, Reporting, Care Innovation Institute");
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Physicians", applicationsList);
@@ -1553,13 +1550,36 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace(" Remedy Sales Commercial Demo 2018 ", " Downstream Provider ");
 
 			strUserData = strUserData.replace(
-					" 514029--2070-025--T, 514029--2070-023--L | | | True |  | True   ",
+					"514029:2070-025:T,514029:2070-023:L | | |True|  |  ",
 					"450306| | |False | True | True  ");
 
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
 			applicationsList.put("Downstream Provider", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute");
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
 		}
+		else if (role.equals("Remedy Sales PAC Demo 2018")) {
+			String userRole = "Super Admin-" + role;
+			String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole)
+					.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
+			try {
+
+				strUserData = readContentForBulkUpload(22, 23);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			strUserData = strUserData.replace("SalesPACDemoMAIL", email);
+			
+			strUserData = strUserData.replace(
+					"514029:2070-025:T,514029:2070-023:L | | | True|  |  |  |  |  |  | | |",
+					"514083:2070-015:TSH| | |False |True  |  |  |  |  |  | | |");
+
+			HashMap<String, String> applicationsList = new HashMap<String, String>();
+			applicationsList.put("Remedy Sales PAC Demo 2018", "Episode Connect, Episode Connect Classic, Care Innovation Institute");
+			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Sales PAC Demo 2018", applicationsList);
+		}
+		
+		
+		
 		HashMap<String, String> bulkNPIPerRole = new HashMap<String, String>();
 		String randomNPI = "212"+ RandomStringUtils.randomNumeric(7);
 		strUserData = strUserData.replace("NPI", randomNPI);

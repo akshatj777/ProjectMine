@@ -19,9 +19,9 @@ PTAFirstName | PTALastName | PTAMAIL | | Partner Technical Administrator | NA |5
 RTAFirstName | RTALastName | RTAMAIL | 3456765432| Remedy Technical Administrator | NA | 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False | True | True | True | True | True | True |False | False|False
 OperatorFirstName | OperatorLastName | OPERATORMAIL | | Operator | NA | 514029:ALL_BPIDS:ALL_FACILITIES |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581  | | True | False | False | True | False | False | False | | False|
 DPFirstName | DPLastName | DPMAIL | 9998887770| Downstream Provider | NA | 015174 |  | | True | True | False | False | False | False | False | | False|
-SalesAcuteDemoFirstName | SalesAcuteDemoLastName | SalesAcuteDemoMAIL | | Remedy Sales Acute Demo 2018 | NA | 514029--2070-025--T | 18h7phZr1h81, n9yn5n0Qa581   | | True | True | True | True | True | True | False | | False| False
-SalesPACDemoFirstName | SalesPACDemoLastName | SalesPACDemoMAIL | | Remedy Sales PAC Demo 2018 | NA | 514029--2070-025--T, 514029--2070-023--L | | | True | True | True |  |  | True |  | | | 
-CommercialFirstName | CommercialLastName | CommercialMAIL | | Remedy Sales Commercial Demo 2018 | NA | 514029--2070-025--T, 514029--2070-023--L | | | True |  | True |  |  | True |  | | | 
+SalesAcuteDemoFirstName | SalesAcuteDemoLastName | SalesAcuteDemoMAIL | | Remedy Sales Acute Demo 2018 | NA | 514029:2070-025:T | 18h7phZr1h81,n9yn5n0Qa581   | | True|  |  |  |  |  |  | | |
+SalesPACDemoFirstName | SalesPACDemoLastName | SalesPACDemoMAIL | | Remedy Sales PAC Demo 2018 | NA | 514029:2070-025:T,514029:2070-023:L | | | True|  |  |  |  |  |  | | |
+CommercialFirstName | CommercialLastName | CommercialMAIL | | Remedy Sales Commercial Demo 2018 | NA | 514029:2070-025:T,514029:2070-023:L | | |True|  |  |  |  |  |  | | |
 
 ####################Data Permissions for Bulk Upload User having limited application Access########################
 
@@ -44,9 +44,9 @@ PTAFirstName | PTALastName | PTAMAIL | | Partner Technical Administrator | NA | 
 RTAFirstName | RTALastName | RTAMAIL | 3456765432| Remedy Technical Administrator | NA | 441372:3056-m78:385072 | | | False |  |  |  |True  | True | True | | |
 OperatorFirstName | OperatorLastName | OPERATORMAIL | | Operator | NA | 441324:6005-080:490005-1 |  | | False | True |  |  |True  |  |  | | |
 DPFirstName | DPLastName | DPMAIL | 9998887770| Downstream Provider | NA | 015174 | | | False |True  |True  |  |  |  |  | | |
-SalesAcuteDemoFirstName | SalesAcuteDemoLastName | SalesAcuteDemoMAIL | | Remedy Sales Acute Demo 2018 | NA | 514029--2070-025--T | 18h7phZr1h81, n9yn5n0Qa581   | | False |  | True | True | True | True | False | | False| False
-SalesPACDemoFirstName | SalesPACDemoLastName | SalesPACDemoMAIL | | Remedy Sales PAC Demo 2018 | NA | 514029--2070-025--T, 514029--2070-023--L | | | False |  | True |  |  | True |  | | | 
-CommercialFirstName | CommercialLastName | CommercialMAIL | | Remedy Sales Commercial Demo 2018 | NA | 514029--2070-025--T, 514029--2070-023--L | | | False |  | True |  |  | True |  | | | 
+SalesAcuteDemoFirstName | SalesAcuteDemoLastName | SalesAcuteDemoMAIL | | Remedy Sales Acute Demo 2018 | NA | 514029:2070-025:T | 18h7phZr1h81,n9yn5n0Qa581   | | False |  | True | True | True | True | False | | False| False
+SalesPACDemoFirstName | SalesPACDemoLastName | SalesPACDemoMAIL | | Remedy Sales PAC Demo 2018 | NA | 514029:2070-025:T,514029:2070-023:L | | | False |  | True |  |  | True |  | | | 
+CommercialFirstName | CommercialLastName | CommercialMAIL | | Remedy Sales Commercial Demo 2018 | NA | 514029:2070-025:T,514029:2070-023:L | | | False |  | True |  |  | True |  | | | 
 
 #################### Multiple users import: 51 users ########################
 
