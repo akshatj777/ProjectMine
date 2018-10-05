@@ -440,7 +440,7 @@ public class CreateACHOrganization extends BaseClass{
     	if (field.contains("Hospital")){
     		if(text.equals("LID"))
         	{
-    			tempAchOrg.put("LID", createRandomNumber(18));
+    			tempAchOrg.put("LID", createRandomNumber(12));
     			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), tempAchOrg.get("LID"));
     		}
     		else if(text.equals("LIDmorethan20characters"))
@@ -450,7 +450,7 @@ public class CreateACHOrganization extends BaseClass{
     		}
         	else if(text.equals("DUPLICATE_LID"))
         	{
-        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), achOrg.get("LID"));
+        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), achOrg_noMO.get("LID"));
         	}
         	else if(text.equals("greaterthan20"))
         	{
@@ -501,13 +501,17 @@ public class CreateACHOrganization extends BaseClass{
     		}
         	else if(text.equals("DUPLICATE_LID"))
         	{
-        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateIRFOrganization.tempIRFOrg.get("LID"));
+        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateIRFOrganization.IRFOrg_noMO.get("LID"));
         	}
         	else if(text.equals("LIDmorethan20characters"))
         	{
     			CreateIRFOrganization.tempIRFOrg.put("LID", createRandomNumber(21));
     			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateIRFOrganization.tempIRFOrg.get("LID"));
     		}
+        	else if(text.equals("Hospital_LID"))
+        	{
+        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), achOrg_noMO.get("LID"));
+        	}
     	}
         else
         {
@@ -540,7 +544,8 @@ public class CreateACHOrganization extends BaseClass{
     
     public void iVerifyLocationIdShouldBeGreater(int value)
     {
-    	location_Id =driver.findElement(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(), '10')]")).getText();
+    	delay();
+    	location_Id =driver.findElement(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(), '100')]")).getText();
     	loc_Id = Integer.parseInt(location_Id);
     	Assert.assertTrue(value<loc_Id);
     }

@@ -204,7 +204,7 @@ Feature: Create IRF Organization functionality tests
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "+" button on "IRF" organization page
     And I verify "Location 2" on "Create IRF" organization page
-    And I enter location name <Loc_Name2> for Location "2" on "create" organization page
+    And I enter location name <Loc_Name> for Location "2" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "create" organization page
     And I enter Location Id <Location_ID> for Location "2" on "create" organization page
     And I select location type <Loc_Type> for Location "2" on "create" organization page
@@ -215,11 +215,11 @@ Feature: Create IRF Organization functionality tests
     And I select state <Loc_State> for Location "2" on "create" organization page
     And I enter zip <Loc_Postal_Code> for Location "2" on "create" organization page
     Then I click on "Submit" button on "create" organization page
-    Then I verify duplicate "<Message>" after submitting the "create IRF" organization page
+    And I verify duplicate Location Message "Duplicate Location"
 
     Examples: 
-      | Description                                                                            | Has_MO | Managing_Org | IRF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Location_ID | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | Loc_Name2 | Message                                                                                          |
-      | Validation message for duplicate Location ID within same IRF organization - Without MO | NO     |              | IRFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 |  1236547890 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | Loc_Name2 | There is a conflict error because an entity with similar identifying attributes already existed. |
+      | Description                                                                       | Has_MO | Managing_Org | IRF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Location_ID | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN |
+      | Validation message for create IRF with 2 locations with same details - Without MO | NO     |              | IRFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 |  1236547890 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN |
 
   Scenario Outline: <Description>
     When I click on "IRF" organization tab on organization dashboard
@@ -281,11 +281,11 @@ Feature: Create IRF Organization functionality tests
     Then I verify "<Message>" after submitting the "create IRF - <Has_MO>" organization page
     When I search with "IRFNAME - <Has_MO>" on "IRF" organization in search box
     And I click "IRFNAME - <Has_MO>" field in search list on "IRF" organization page
-    #And I verify Location ID should be greater than "100000"
+    And I verify Location ID should be greater than "100000"
 
     Examples: 
       | Description                                                                                      | Has_MO | Managing_Org | IRF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Message                                |
-      | Create a IRF Organization with Mandatory Fields and any other identifier except CCN - Without MO | NO     |              | IRFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | IRF Organization Successfully Created. |
+      | Create a IRF Organization with Mandatory Fields and any other identifier except CCN - Without MO | NO     |              | IRFNAME  | Address1 | Short_Name | Address2 | City | California |       12356 | Loc_Name | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           51636 | CCN | EIN | NPI | IRF Organization Successfully Created. |
 
   Scenario Outline: <Description>
     When I click on "IRF" organization tab on organization dashboard
@@ -359,7 +359,7 @@ Feature: Create IRF Organization functionality tests
     Then I verify "IRF Organization Successfully Created." after submitting the "create IRF - <Has_MO>" organization page
     When I search with "IRFNAME - <Has_MO>" on "IRF" organization in search box
     And I click "IRFNAME - <Has_MO>" field in search list on "IRF" organization page
-    #And I verify Location ID should be greater than "100000"
+    And I verify Location ID should be greater than "100000"
     When I click on Organization link on Program Management page
     When I click on "IRF" organization tab on organization dashboard
     Then I click on "+" button on "IRF" organization page
@@ -389,7 +389,7 @@ Feature: Create IRF Organization functionality tests
 
     Examples: 
       | Description                                                                                                                   | Has_MO | Managing_Org | IRF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Location_ID | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Loc_Name      | CCN | NPI | Message                                |
-      | Verify auto generated location ID when CCN of current organization is already used as location Id for some other organization | NO     |              | IRFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | LID         | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10001 | Loc_Name new2 | CCN | NPI | IRF Organization Successfully Created. |
+      | Verify auto generated location ID when CCN of current organization is already used as location Id for some other organization | NO     |              | IRFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | LID         | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           14561 | Loc_Name new2 | CCN | NPI | IRF Organization Successfully Created. |
 
   Scenario Outline: <Description>
     When I click on "IRF" organization tab on organization dashboard
@@ -429,7 +429,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Create Hospital Organization" header text on create organization page
     And I select "<Has_MO>" radio button for managing organization
     Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
-    Then I enter ACHNAME in "Hospital Organization Name" on create organization page
+    Then I enter <Hosp_Name> in "Hospital Organization Name" on create organization page
     And I enter <Address1> in "Address 1" on create organization page
     And I enter <Short_Name> in "Short Name" on create organization page
     And I enter <Address2> in "Address 2" on create organization page
@@ -440,19 +440,13 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 1" on "Create Hospital" organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I enter Location Id <Location_ID> for Location "1" on "create" organization page
-    And I select location type Inpatient for Location "1" on "create" organization page
+    And I enter Location Id <Location_ID> for Location "1" on "create Hospital" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
-    And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
-    And I select market <Loc_Market> for region "<Loc_Region>" for Location "1" on "create" organization page
     And I select state <Loc_State> for Location "1" on "create" organization page
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
     Then I verify "Hospital Organization Successfully Created." after submitting the "create ACH - <Has_MO>" organization page
-    When I search with "ACHNAME - <Has_MO>" on "Hospital" organization in search box
-    And I click "ACHNAME - <Has_MO>" field in search list on "Hospital" organization page
-    #And I verify Location ID should be greater than "100000"
     When I click on Organization link on Program Management page
     When I click on "IRF" organization tab on organization dashboard
     Then I click on "+" button on "IRF" organization page
@@ -469,7 +463,7 @@ Feature: Create IRF Organization functionality tests
     And I provide unique "IRF - <NPI>" in "NPI" on create organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I provide "Location_Id" as last created "Location_Id" on create organization page
+    And I enter Location Id <Loc_ID> for Location "1" on "create IRF" organization page
     And I select location type <Loc_Type> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
@@ -481,8 +475,8 @@ Feature: Create IRF Organization functionality tests
     Then I verify duplicate "<Message>" after submitting the "create IRF" organization page
 
     Examples: 
-      | Description                                                    | Has_MO | Managing_Org | IRF_NAME | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Location_ID | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | NPI | Message                                                                                          |
-      | Validation message using already existing Hospital Location ID | NO     |              | IRFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 |  LID | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10001 | NPI | There is a conflict error because an entity with similar identifying attributes already existed. |
+      | Description                                                    | Has_MO | Hosp_Name | Managing_Org | IRF_NAME | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Location_ID | Loc_ID       | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | NPI | Message                                                                                          |
+      | Validation message using already existing Hospital Location ID | NO     | ACHNAME   |              | IRFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | LID         | Hospital_LID | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10001 | NPI | There is a conflict error because an entity with similar identifying attributes already existed. |
 
   Scenario Outline: <Description>
     When I click on "IRF" organization tab on organization dashboard
