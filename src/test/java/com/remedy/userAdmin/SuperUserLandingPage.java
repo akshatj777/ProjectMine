@@ -261,8 +261,8 @@ public class SuperUserLandingPage extends BaseClass {
 		if(searchParam.equals("FetchFromHM"))
 		{
 			String email = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
-			iWillWaitToSee(By.xpath("//tr[@class='component-user-table-row']/td[contains(text(),'"+email+"')]"));
-			Assert.assertTrue(isElementPresentOnPage(By.xpath("//tr[@class='component-user-table-row']/td[contains(text(),'"+email+"')]")));
+			iWillWaitToSee(By.xpath("//tr[@class='component-user-table-row']/td[contains(text(),'"+email.toLowerCase()+"')]"));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//tr[@class='component-user-table-row']/td[contains(text(),'"+email.toLowerCase()+"')]")));
 		}
 		else
 		{

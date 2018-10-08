@@ -131,7 +131,7 @@ public class ViewUserPage extends BaseClass {
 	}
 	public void verifyEmail(String email, String userRole) throws Throwable {
 		String emailUser = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
-		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[@title='"+emailUser+"']")));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[@title='"+emailUser.toLowerCase()+"']")));
 	}
 	
 	public void verifyBulkEmail(String userRole) throws Throwable {

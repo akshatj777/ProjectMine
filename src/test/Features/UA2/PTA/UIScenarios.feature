@@ -397,7 +397,7 @@ Feature: PTA UI Scenarios
     Then I pick a Organizational <Role>
     Then I click on Next button
     Then I verify the header "Applications"
-    Then I select "<Applications>" product
+    Then I select "Reporting Classic" product
     Then I verify applications "<Applications>" are checked
     Then I click on Next button
     Then I verify the header "Permissions"
