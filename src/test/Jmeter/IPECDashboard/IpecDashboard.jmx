@@ -173,7 +173,10 @@ WHERE f.bundleRisk=1
   AND dp.dwhSource = &apos;EC&apos;
   AND dloo.lookupCategory = &apos;patientRisk&apos;
 -- and tbsBPID.username = @test_user
-AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()-- Use this query logic when filtering by Days
+-- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
+-- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
+and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_CCN}
 ${EC_BUNDLE}
 ${EC_R_REGION}
@@ -195,70 +198,7 @@ order by de.episodeInitiatorNameInitCap;</stringProp>
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select
-CONCAT(aaf.facilityNameInitCap,&apos; - &apos;, aaf.ccn) as &apos;AnchorFacility_CCN&apos;
-from
-warehouse.factPatientEpisode f
-LEFT JOIN
-warehouse.dimPhysician dph ON f.physicianKey = dph.physicianSK
-LEFT JOIN
-warehouse.dimPatient dp ON f.patientKey = dp.patientSK 
-left join warehouse.dimLookup dloo
-on dp.totalRiskScore = dloo.lookupName
-LEFT JOIN
-warehouse.dimEpisodeInitiator de ON f.episodeInitiatorKey = de.episodeInitiatorSK
-LEFT JOIN
-warehouse.dimCARL dc ON f.carlKey = dc.carlSK
-LEFT JOIN
-warehouse.dimFacility aaf ON f.anchorAdmitFacilityKey = aaf.facilitySK
-LEFT JOIN
-warehouse.dimFacility adf ON f.anchorDischargeFacilityKey = adf.facilitySK
-LEFT JOIN
-warehouse.dimFacility afd ON f.sourceFacilityKey = afd.sourceFacilityKey
-LEFT JOIN
-warehouse.dimDRG drg ON f.currDrgKey = drg.drgSK
-LEFT JOIN
-warehouse.dimDRG d ON f.wDrgKeyMax = d.drgSK
-LEFT JOIN
-warehouse.dimDRG drgpre ON f.predDrgKeyMax = drgpre.drgSK
-LEFT JOIN
-warehouse.dimDRG drgfin ON f.fDrgKeyMax = drgfin.drgSK
-LEFT JOIN
-warehouse.dimNSOCMapping dn ON f.anchorDischCareSettingKey = dn.NSOCMappingSK
-LEFT JOIN
-warehouse.dimDate dt ON f.anchorAdmitDateKey = dt.dateSK
-LEFT JOIN
-warehouse.dimLookup dles ON f.episodeStatus = dles.lookupName AND dles.lookupCategory = &apos;episodeStatus&apos;
-LEFT JOIN
-warehouse.dimLookup dlos ON dp.onboardingStatus = dlos.lookupName AND dlos.lookupCategory = &apos;onboardingStatus&apos;
-LEFT JOIN
-warehouse.dimRegionMarket m ON f.rgRemKey = m.rgSK
-LEFT JOIN
-warehouse.dimRegionMarket rmp ON f.rgPartnerKey = rmp.rgSK
-INNER JOIN 
-warehouse.factAdmission fa ON f.anchorAdmissionKey = fa.anchorAdmissionKey
-LEFT JOIN
-warehouse.dimNSOCMapping dfad ON fa.dischCareSettingKey = dfad.NSOCMappingSK
-INNER JOIN 
-(
-SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-from warehouse.tabUserSecurityBPID where username = ${useremail}
-GROUP BY bpid
-)tbsBPID ON f.BPID = tbsBPID.bpid
-INNER JOIN 
-( 
-SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-from warehouse.tabUserSecurityCCN where username = ${useremail}
-GROUP BY ccn
-)tbsCCN on aaf.ccn=tbsCCN.ccn
-INNER JOIN 
-( 
-SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-from warehouse.tabUserSecurityFacilityKey where username = ${useremail}
-GROUP BY facilitykey
-)tbsFacilityKey on f.sourceFacilityKey=tbsFacilityKey.facilitykey
-WHERE f.bundleRisk=1 
-AND f.episodeCountReport=1 select
-distinct aaf.facilityNameInitCap, aaf.ccn
+distinct CONCAT(aaf.facilityNameInitCap,&apos; - &apos;, aaf.ccn) as &apos;AnchorFacility_CCN&apos;
 from
 warehouse.factPatientEpisode f
         LEFT JOIN
@@ -326,7 +266,10 @@ WHERE f.bundleRisk=1
   AND dp.dwhSource = &apos;EC&apos;
   AND dloo.lookupCategory = &apos;patientRisk&apos;
 -- and tbsBPID.username = @test_user
-AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW() -- Use this query logic when filtering by Days
+-- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
+-- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
+and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_BUNDLE}
 ${EC_R_REGION}
@@ -415,7 +358,10 @@ WHERE f.bundleRisk=1
   AND dp.dwhSource = &apos;EC&apos;
   AND dloo.lookupCategory = &apos;patientRisk&apos;
 -- and tbsBPID.username = @test_user
-AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW() -- Use this query logic when filtering by Days
+-- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
+-- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
+and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_CCN}
 ${EC_R_REGION}
@@ -423,8 +369,7 @@ ${EC_R_MARKET}
 ${EC_REGION}
 ${EC_MARKET}
 ${EC_PARTICIPANTNAME}
-order by drg.bundleName;
-</stringProp>
+order by drg.bundleName;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">bundleName</stringProp>
@@ -505,7 +450,10 @@ WHERE f.bundleRisk=1
   AND dp.dwhSource = &apos;EC&apos;
   AND dloo.lookupCategory = &apos;patientRisk&apos;
 -- and tbsBPID.username = @test_user
-AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW() -- Use this query logic when filtering by Days
+-- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
+-- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
+and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_CCN}
 ${EC_BUNDLE}
@@ -593,7 +541,10 @@ WHERE f.bundleRisk=1
   AND dp.dwhSource = &apos;EC&apos;
   AND dloo.lookupCategory = &apos;patientRisk&apos;
 -- and tbsBPID.username = @test_user
-AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW() -- Use this query logic when filtering by Days
+-- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
+-- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
+and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_CCN}
 ${EC_BUNDLE}
@@ -681,7 +632,10 @@ WHERE f.bundleRisk=1
   AND dp.dwhSource = &apos;EC&apos;
   AND dloo.lookupCategory = &apos;patientRisk&apos;
 -- and tbsBPID.username = @test_user
-AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW() -- Use this query logic when filtering by Days
+-- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
+-- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
+and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_CCN}
 ${EC_BUNDLE}
@@ -799,7 +753,14 @@ if(vars.get(&quot;Flag&quot;).equals(&quot;(1)&quot;)){
 log.info(&quot;Path: 7&quot;);
 f= new FileOutputStream(path + separator+&quot;IPECECRowFilterOutput.txt&quot;,true);
 	p = new PrintStream(f);
-	p.println(&quot;Episode Initiator - BPID=&quot;+${value1}+&quot;*Anchor Facility - CCN=&quot;+${value2}+&quot;*Bundle=&quot;+${value3}+&quot;*Remdy Region Market=&quot;+${value4}+&quot;*Partner Region Market=&quot;+${value5}+&quot;*Participant=&quot;+${value6});
+	String vValue1 = vars.get(&quot;value1&quot;);
+	String vValue2 = vars.get(&quot;value2&quot;);
+	String vValue3 = vars.get(&quot;value3&quot;);
+	String vValue4 = vars.get(&quot;value4&quot;);
+	String vValue5 = vars.get(&quot;value5&quot;);
+	String vValue6 = vars.get(&quot;value6&quot;);
+	
+	p.println(&quot;Episode Initiator - BPID=&quot;+vValue1+&quot;*Anchor Facility - CCN=&quot;+vValue2+&quot;*Bundle=&quot;+vValue3+&quot;*Remdy Region Market=&quot;+vValue4+&quot;*Partner Region Market=&quot;+vValue5+&quot;*Participant=&quot;+vValue6);
 
 	p.close();
 	f.close();

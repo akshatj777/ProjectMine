@@ -1,6 +1,6 @@
 Feature: Inpatient Episode Clearing Dashboard
 
-  @RowLevelSecurity
+  @RowLevelSecurity11
   Scenario Outline: Front end Data Filter Validation for EC data for IPEC
     When I open file "\\src\\test\\Jmeter\\IPECDashboard\\IPECRowFilterInput.csv" for writing data at "<Row>" to input file
     Given I am on the login page

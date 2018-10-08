@@ -209,7 +209,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
-				${EC_BPID}
 	            	${EC_CCN}
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
@@ -249,7 +248,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
-				${C_BPID}
 	            	${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
@@ -351,7 +349,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
             		${EC_BPID}
-	            	${EC_CCN}
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
@@ -396,7 +393,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
             		${C_BPID}
-	            	${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
 				${C_R_MARKET} 
@@ -472,7 +468,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 			-- AND e.bpid = @test_bpid
             	${EC_BPID}
 	            ${EC_CCN}
-				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
 				${EC_REGION} 
@@ -516,7 +511,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 			-- AND e.bpid = @test_bpid
             	${C_BPID}
 	            ${C_CCN}
-				${C_BUNDLE} 
 				${C_R_REGION} 
 				${C_R_MARKET} 
 				${C_REGION} 
@@ -594,8 +588,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             	${EC_BPID}
 	            ${EC_CCN}
 				${EC_BUNDLE} 
-				${EC_R_REGION} 
-				${EC_R_MARKET} 
 				${EC_REGION} 
 				${EC_MARKET} 
 				${EC_PARTICIPANTNAME}  
@@ -639,8 +631,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             	${C_BPID}
 	            ${C_CCN}
 				${C_BUNDLE} 
-				${C_R_REGION} 
-				${C_R_MARKET} 
 				${C_REGION} 
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
@@ -716,8 +706,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
-				${EC_REGION} 
-				${EC_MARKET} 
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
@@ -761,8 +749,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${C_BUNDLE} 
 				${C_R_REGION} 
 				${C_R_MARKET} 
-				${C_REGION} 
-				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
 				${C_PHY_NPI}
@@ -837,7 +823,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_R_MARKET} 
 				${EC_REGION} 
 				${EC_MARKET} 
-				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model} 
@@ -882,7 +867,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${C_R_MARKET} 
 				${C_REGION} 
 				${C_MARKET} 
-				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
 				${C_PHY_NPI}
 				${C_Model} 
@@ -960,7 +944,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_REGION} 
 				${EC_MARKET} 
 				${EC_PARTICIPANTNAME}  
-				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}  
 				
@@ -1010,7 +993,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${C_REGION} 
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
-				${C_DRGCODE} 
 				${C_PHY_NPI}
 				${C_Model} 
 				
@@ -1089,7 +1071,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_MARKET} 
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
-				${EC_PHY_NPI} 
 				${EC_Model} 
 				
 
@@ -1135,7 +1116,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
-				${C_PHY_NPI}
 				${C_Model}
             
             ) a
@@ -1211,7 +1191,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
-				${EC_Model}
 
 	UNION 
 	
@@ -1256,7 +1235,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
 				${C_PHY_NPI}
-				${C_Model}
             
             ) a
 ORDER BY a.model;</stringProp>
@@ -1552,7 +1530,19 @@ if(vars.get(&quot;Flag&quot;).equals(&quot;(1)&quot;)){
 log.info(&quot;Path: 7&quot;);
 f= new FileOutputStream(path + separator+&quot;RowFilterOutput.txt&quot;,true);
 	p = new PrintStream(f);
-	p.println(&quot;Episode Initiator - BPID=&quot;+${value1}+&quot;*Anchor Facility - CCN=&quot;+${value2}+&quot;*Bundle=&quot;+${value3}+&quot;*Remdy Region Market=&quot;+${value4}+&quot;*Partner Region Market=&quot;+${value5}+&quot;*Participant=&quot;+${value6}+&quot;*DRG - Fracture=&quot;+${value7}+&quot;*Physician - NPI=&quot;+${value8}+&quot;*Model=&quot;+${value9}+&quot;*Anchor Facility Detail=&quot;+${value10});
+	String vValue1 =  vars.get(&quot;value1&quot;);
+	String vValue2 =  vars.get(&quot;value2&quot;);
+	String vValue3 =  vars.get(&quot;value3&quot;);
+	String vValue4 =  vars.get(&quot;value4&quot;);
+	String vValue5 =  vars.get(&quot;value5&quot;);
+	String vValue6 =  vars.get(&quot;value6&quot;);
+	String vValue7 =  vars.get(&quot;value7&quot;);
+	String vValue8 =  vars.get(&quot;value8&quot;);
+	String vValue9 =  vars.get(&quot;value9&quot;);
+	String vValue10 =  vars.get(&quot;value10&quot;);
+	
+	
+	p.println(&quot;Episode Initiator - BPID=&quot;+vValue1+&quot;*Anchor Facility - CCN=&quot;+vValue2+&quot;*Bundle=&quot;+vValue3+&quot;*Remdy Region Market=&quot;+vValue4+&quot;*Partner Region Market=&quot;+vValue5+&quot;*Participant=&quot;+vValue6+&quot;*DRG - Fracture=&quot;+vValue7+&quot;*Physician - NPI=&quot;+vValue8+&quot;*Model=&quot;+vValue9+&quot;*Anchor Facility Detail=&quot;+vValue10);
 
 	p.close();
 	f.close();
