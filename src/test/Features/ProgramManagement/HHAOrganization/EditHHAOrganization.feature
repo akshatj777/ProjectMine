@@ -33,7 +33,7 @@ Feature: Edit HHA organization functionality tests
     And I click "<HHA_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit HHA Organization" header text on edit organization page
-    And I verify Managing Organization field on "Edit HHA - <Has_MO>" organization page
+    And I verify Managing Organization radio buttons status on "Edit HHA - <Has_MO>" organization page
     And I verify "*HHA Organization Name" field on edit organization page
     And I verify "Short Name" field on edit organization page
     And I verify "*Address 1" field on edit organization page
@@ -66,7 +66,7 @@ Feature: Edit HHA organization functionality tests
     And I click "<HHA_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit HHA Organization" header text on edit organization page
-    And I verify Managing Organization field on "Edit HHA - <Has_MO>" organization page
+    And I verify Managing Organization radio buttons status on "Edit HHA - <Has_MO>" organization page
     And I edit "HHA Organization Name" field to "<Edited_HHA_Name>" for organization
     And I edit "Address 1" field to "<Address1>" for organization
     And I edit "City" field to "<City>" for organization
@@ -95,7 +95,7 @@ Feature: Edit HHA organization functionality tests
     And I click "<HHA_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit HHA Organization" header text on edit organization page
-    And I verify Managing Organization field on "Edit HHA - <Has_MO>" organization page
+    And I verify Managing Organization radio buttons status on "Edit HHA - <Has_MO>" organization page
     And I edit "HHA Organization Name" field to "<Edited_HHA_Name> - <Has_MO>" for organization
     And I edit "Address 1" field to "<Address1>" for organization
     And I edit "Short Name" field to "<Short_Name>" for organization
@@ -127,7 +127,7 @@ Feature: Edit HHA organization functionality tests
     And I click "<HHA_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit HHA Organization" header text on edit organization page
-    And I verify Managing Organization field on "Edit HHA - <Has_MO>" organization page
+    And I verify Managing Organization radio buttons status on "Edit HHA - <Has_MO>" organization page
     And I edit "HHA Organization Name" field to "<Edited_HHA_Name> - <Has_MO>" for organization
     And I edit "Address 1" field to "<Address1>" for organization
     And I edit "Short Name" field to "<Short_Name>" for organization

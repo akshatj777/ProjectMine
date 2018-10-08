@@ -33,7 +33,7 @@ Feature: Edit Hospice organization functionality tests
     And I click "<Hospice_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit Hospice Organization" header text on edit organization page
-    And I verify Managing Organization field on "Edit Hospice - <Has_MO>" organization page
+    And I verify Managing Organization radio buttons status on "Edit Hospice - <Has_MO>" organization page
     And I edit "Hospice Organization Name" field to "<Edited_Hospice_Name>" for organization
     And I edit "Address 1" field to "<Address1>" for organization
     And I edit "City" field to "<City>" for organization
@@ -62,7 +62,7 @@ Feature: Edit Hospice organization functionality tests
     And I click "<Hospice_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit Hospice Organization" header text on edit organization page
-    And I verify Managing Organization field on "Edit Hospice - <Has_MO>" organization page
+    And I verify Managing Organization radio buttons status on "Edit Hospice - <Has_MO>" organization page
     And I edit "Hospice Organization Name" field to "<Edited_Hospice_Name> - <Has_MO>" for organization
     And I edit "Address 1" field to "<Address1>" for organization
     And I edit "Short Name" field to "<Short_Name>" for organization
@@ -94,7 +94,7 @@ Feature: Edit Hospice organization functionality tests
     And I click "<Hospice_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit Hospice Organization" header text on edit organization page
-    And I verify Managing Organization field on "Edit Hospice - <Has_MO>" organization page
+    And I verify Managing Organization radio buttons status on "Edit Hospice - <Has_MO>" organization page
     And I edit "Hospice Organization Name" field to "<Edited_Hospice_Name> - <Has_MO>" for organization
     And I edit "Address 1" field to "<Address1>" for organization
     And I edit "Short Name" field to "<Short_Name>" for organization
@@ -130,5 +130,5 @@ Feature: Edit Hospice organization functionality tests
     When delete references of the name list type "<type>"
 
     Examples: 
-      | type | type    |
-      | MO   | Hospice |
+      | type        |
+      | MO, Hospice |

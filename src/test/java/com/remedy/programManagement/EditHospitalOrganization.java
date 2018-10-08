@@ -1,5 +1,7 @@
 package com.remedy.programManagement;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -128,5 +130,24 @@ public class EditHospitalOrganization extends BaseClass{
 	
 	public void iVerifyIdentifierIsNotEditable(String id){
 		Assert.assertEquals("true",driver.findElement(By.cssSelector(".text-input-field-"+id)).getAttribute("disabled"));
+	}
+	
+	public void iVerifyManagingOrgRadioButtonsStatusOnOrganizationPage(String org){
+		if(org.contains("YES"))
+		{
+			Assert.assertEquals("true",driver.findElement(By.xpath("//input[@name='hasManagementOrg' and @value='true']")).getAttribute("checked"));
+			List<WebElement> listItems = driver.findElements(By.cssSelector("span[aria-selected='true']"));
+			for (WebElement item : listItems) 
+			{
+				  if (item.getText().trim().contains(CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)))
+				  {
+					  Assert.assertTrue(item.getText().trim().contains(CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)));  
+				  } 
+			}
+		}
+		else
+		{
+			Assert.assertEquals("true",driver.findElement(By.xpath("//input[@name='hasManagementOrg' and @value='false']")).getAttribute("checked"));
+		}
 	}
 }

@@ -42,4 +42,9 @@ public class EditHospitalOrganizationStepDef extends DriverScript {
 	  public void i_Verify_Identifier_Is_Not_Editable(String id) throws Throwable {
 		editHospOrg.iVerifyIdentifierIsNotEditable(id);
 		}
+	
+	@And("^I verify Managing Organization radio buttons status on \"([^\"]*)\" organization page$")
+	  public void i_Verify_ManagingOrg_RadioButtons_Status_On_Organization_Page(String org) throws Throwable {
+		editHospOrg.iVerifyManagingOrgRadioButtonsStatusOnOrganizationPage(org);
+	    }
 }

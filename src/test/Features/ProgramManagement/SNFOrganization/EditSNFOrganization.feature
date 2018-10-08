@@ -33,7 +33,7 @@ Feature: Edit SNF organization functionality tests
     And I click "<SNF_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit SNF Organization" header text on edit organization page
-    And I verify Managing Organization field on "Edit SNF - <Has_MO>" organization page
+    And I verify Managing Organization radio buttons status on "Edit SNF - <Has_MO>" organization page
     And I verify "*SNF Organization Name" field on edit organization page
     And I verify "Short Name" field on edit organization page
     And I verify "*Address 1" field on edit organization page
@@ -60,6 +60,7 @@ Feature: Edit SNF organization functionality tests
     Examples: 
       | Description                                                                  | Has_MO | SNF_Name |
       | Verification of availability of all the fields on Edit SNF Organization page | NO     | SNFNAME  |
+      | Verification of availability of all the fields on Edit SNF Organization page | YES    | SNFNAME  |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -73,6 +74,7 @@ Feature: Edit SNF organization functionality tests
     And I click "<SNF_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit SNF Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit SNF - <Has_MO>" organization page
     And I edit "SNF Organization Name" field to "<Edited_SNF_Name>" for organization
     And I edit "Address 1" field to "<Org_Address1>" for organization
     And I edit "City" field to "<Org_City>" for organization
@@ -111,6 +113,7 @@ Feature: Edit SNF organization functionality tests
     And I click "<SNF_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit SNF Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit SNF - <Has_MO>" organization page
     And I edit "SNF Organization Name" field to "<Edited_SNF_Name> - <Has_MO>" for organization
     And I edit "Address 1" field to "<Org_Address1>" for organization
     And I edit "Short Name" field to "<Short_Name>" for organization
@@ -153,6 +156,7 @@ Feature: Edit SNF organization functionality tests
     And I click "<SNF_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit SNF Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit SNF - <Has_MO>" organization page
     And I edit "SNF Organization Name" field to "<Edited_SNF_Name> - <Has_MO>" for organization
     And I edit "Address 1" field to "<Org_Address1>" for organization
     And I edit "Short Name" field to "<Short_Name>" for organization
@@ -216,6 +220,7 @@ Feature: Edit SNF organization functionality tests
     And I click "<SNF_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit SNF Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit SNF - <Has_MO>" organization page
     And I edit "SNF Organization Name" field to "<Edited_SNF_Name>" for organization
     And I edit "Address 1" field to "<Org_Address1>" for organization
     And I edit "City" field to "<City>" for organization
@@ -297,38 +302,6 @@ Feature: Edit SNF organization functionality tests
     Examples: 
       | Description                                                | Has_MO | SNF_Name | Loc_Name   | Loc_Address1 | Loc_Type        | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                |
       | Add one more location Location details on SNF Organization | NO     | SNFNAME  | Loc_Name12 | Loc_Address1 | Skilled Nursing | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | SNF Organization Successfully Updated. |
-
-  Scenario Outline: <Description>
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-    When I click on "SNF" organization tab on organization dashboard
-    When I search with "<SNF_Name> - <Has_MO>" on organization in search box
-    And I verify "<SNF_Name> - <Has_MO>" field in search list on organization page
-    And I click "<SNF_Name> - <Has_MO>" field in search list on organization page
-    And I verify "Location" tab present under "SNF" Organization
-    And I click on "Location" tab on view profile of "SNF" Organization
-    And I verify "2" location count on view "SNF" organization page
-    And I click on "Edit" button on particular organization
-    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
-    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
-    And I edit Location Type dropdown field to <Loc_Type> for Location "1" for organization
-    And I edit "address2" field to <Loc_Address2> for Location "1" for organization
-    And I edit Region dropdown field to <Loc_Region> for Location "1" for organization
-    And I edit "city" field to <Loc_City> for Location "1" for organization
-    And I edit Market dropdown field to <Loc_Market> for Region "<Loc_Region>" for Location "1" for organization
-    And I edit State dropdown field to <Loc_State> for Location "1" for organization
-    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
-    Then I verify "Location 2" on "Edit" organization page
-    And I edit "Location Name" field to <Loc_Name> for Location "2" for organization
-    Then I click on "Submit" button on "Edit" organization page
-
-    #And I verify duplicate Location Message "Duplicate Location"
-    Examples: 
-      | Description                                             | Has_MO | SNF_Name | Loc_Name | Loc_Address1 | Loc_Type        | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                |
-      | Edit a SNF Organization with duplicate Location details | NO     | SNFNAME  | Loc_Name | Loc_Address1 | Skilled Nursing | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | SNF Organization Successfully Updated. |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"

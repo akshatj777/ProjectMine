@@ -33,7 +33,7 @@ Feature: Edit IRF Organization functionality tests
     And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit Inpatient Rehab Facility Organization" header text on edit organization page
-    And I verify Managing Organization field on "Edit IRF - <Has_MO>" organization page
+    And I verify Managing Organization radio buttons status on "Edit IRF - <Has_MO>" organization page
     And I verify "*Inpatient Rehab Facility Organization Name" field on edit organization page
     And I verify "Short Name" field on edit organization page
     And I verify "*Address 1" field on edit organization page
@@ -73,6 +73,7 @@ Feature: Edit IRF Organization functionality tests
     And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit Inpatient Rehab Facility Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit IRF - <Has_MO>" organization page
     And I edit "Inpatient Rehab Facility Organization Name" field to "<Edited_IRF_Name>" for organization
     And I edit "Address 1" field to "<Org_Address1>" for organization
     And I edit "City" field to "<Org_City>" for organization
@@ -153,6 +154,7 @@ Feature: Edit IRF Organization functionality tests
     And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit Inpatient Rehab Facility Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit IRF - <Has_MO>" organization page
     And I edit "Inpatient Rehab Facility Organization Name" field to "<Edited_IRF_Name> - <Has_MO>" for organization
     And I edit "Address 1" field to "<Org_Address1>" for organization
     And I edit "Short Name" field to "<Short_Name>" for organization
@@ -216,6 +218,7 @@ Feature: Edit IRF Organization functionality tests
     And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit Inpatient Rehab Facility Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit IRF - <Has_MO>" organization page
     And I edit "Inpatient Rehab Facility Organization Name" field to "<Edited_IRF_Name>" for organization
     And I edit "Address 1" field to "<Org_Address1>" for organization
     And I edit "City" field to "<City>" for organization

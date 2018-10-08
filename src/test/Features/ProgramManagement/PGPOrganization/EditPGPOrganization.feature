@@ -33,6 +33,7 @@ Feature: Edit PGP organization functionality tests
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit PGP Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit PGP - <Has_MO>" organization page
     And I verify "*PGP Organization Name" field on edit organization page
     And I verify "Short Name" field on edit organization page
     And I verify "Address 1" field on edit organization page
@@ -50,6 +51,7 @@ Feature: Edit PGP organization functionality tests
     Examples: 
       | Description                                                                  | Has_MO | PGP_Name |
       | Verification of availability of all the fields on Edit PGP Organization page | NO     | PGPNAME  |
+      | Verification of availability of all the fields on Edit PGP Organization page | YES     | PGPNAME  |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -63,6 +65,7 @@ Feature: Edit PGP organization functionality tests
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit PGP Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit PGP - <Has_MO>" organization page
     And I edit "PGP Organization Name" field to "<Edited_PGP_Name>" for organization
 
     Examples: 
@@ -81,6 +84,7 @@ Feature: Edit PGP organization functionality tests
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit PGP Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit PGP - <Has_MO>" organization page
     And I edit "PGP Organization Name" field to "<Edited_PGP_Name> - <Has_MO>" for organization
     And I edit "Address 1" field to "<Address1>" for organization
     And I edit "Short Name" field to "<Short_Name>" for organization
@@ -112,6 +116,7 @@ Feature: Edit PGP organization functionality tests
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit PGP Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit PGP - <Has_MO>" organization page
     And I edit "PGP Organization Name" field to "<Edited_PGP_Name> - <Has_MO>" for organization
     And I edit "Address 1" field to "<Address1>" for organization
     And I edit "Short Name" field to "<Short_Name>" for organization
