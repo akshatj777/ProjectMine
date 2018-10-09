@@ -398,7 +398,6 @@ Feature: PTA UI Scenarios
     Then I click on Next button
     Then I verify the header "Applications"
     Then I select "Reporting Classic" product
-    Then I verify applications "<Applications>" are checked
     Then I click on Next button
     Then I verify the header "Permissions"
     Then I select "BPCI Model 2" programs
