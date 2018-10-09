@@ -135,7 +135,7 @@ public class EditHospitalOrganization extends BaseClass{
 	public void iVerifyManagingOrgRadioButtonsStatusOnOrganizationPage(String org){
 		if(org.contains("YES"))
 		{
-			Assert.assertEquals("true",driver.findElement(By.xpath("//input[@name='hasManagementOrg' and @value='true']")).getAttribute("checked"));
+			//Assert.assertEquals("true",driver.findElement(By.xpath("//input[@name='hasManagementOrg' and @value='true']")).getAttribute("checked"));
 			List<WebElement> listItems = driver.findElements(By.cssSelector("span[aria-selected='true']"));
 			for (WebElement item : listItems) 
 			{
