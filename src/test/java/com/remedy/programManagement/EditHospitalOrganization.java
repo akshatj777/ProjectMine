@@ -150,4 +150,122 @@ public class EditHospitalOrganization extends BaseClass{
 			Assert.assertEquals("true",driver.findElement(By.xpath("//input[@name='hasManagementOrg' and @value='false']")).getAttribute("checked"));
 		}
 	}
+
+	public void iEditLocationIDFieldUnderLocationsSection(String field, int num, String org){
+		num= num -1;
+		driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")).clear();
+		delay();
+		if(org.equals("Hospital")){
+			if(field.equals("LID")){
+				CreateACHOrganizationAPI.tempAchOrg.put("LID", createRandomNumber(12));
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateACHOrganizationAPI.tempAchOrg.get("LID"));
+			}
+			else if(field.equals("LIDgreaterThan20")){
+				CreateACHOrganizationAPI.tempAchOrg.put("LID", createRandomNumber(21));
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateACHOrganizationAPI.tempAchOrg.get("LID"));
+			}
+			else if(field.equals("SNFLID")){
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateSNFOrganization.SNFOrg_noMO.get("LID"));
+			}
+			else if(field.equals("LTCHLID")){
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateLTCHOrganization.LTCHOrg_noMO.get("LID"));
+			}
+			else if(field.equals("IRFLID")){
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateIRFOrganization.IRFOrg_noMO.get("LID"));
+			}
+			else if(field.equals("Duplication_LID")){
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateACHOrganization.achOrg_noMO.get("LID"));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), field);
+			}
+		}
+		
+		else if(org.equals("SNF")){
+			if(field.equals("LID")){
+				CreateSNFOrganizationAPI.tempSNFOrg.put("LID", createRandomNumber(12));
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateSNFOrganizationAPI.tempSNFOrg.get("LID"));
+			}
+			else if(field.equals("LIDgreaterthan20")){
+				CreateSNFOrganizationAPI.tempSNFOrg.put("LID", createRandomNumber(21));
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateSNFOrganizationAPI.tempSNFOrg.get("LID"));
+			}
+			else if(field.equals("HospitalLID")){
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateACHOrganization.achOrg_noMO.get("LID"));
+			}
+			else if(field.equals("LTCHLID")){
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateLTCHOrganization.LTCHOrg_noMO.get("LID"));
+			}
+			else if(field.equals("IRFLID")){
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateIRFOrganization.IRFOrg_noMO.get("LID"));
+			}
+			else if(field.equals("Duplication_LID")){
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateSNFOrganization.SNFOrg_noMO.get("LID"));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), field);
+			}
+		}
+		
+		else if(org.equals("LTCH")){
+			if(field.equals("LID")){
+				CreateLTCHOrganizationAPI.tempLTCHOrg.put("LID", createRandomNumber(12));
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateLTCHOrganizationAPI.tempLTCHOrg.get("LID"));
+			}
+			else if(field.equals("LIDgreaterthan20")){
+				CreateLTCHOrganizationAPI.tempLTCHOrg.put("LID", createRandomNumber(21));
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateLTCHOrganizationAPI.tempLTCHOrg.get("LID"));
+			}
+			else if(field.equals("HospitalLID")){
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateACHOrganization.achOrg_noMO.get("LID"));
+			}
+			else if(field.equals("SNFLID")){
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateSNFOrganization.SNFOrg_noMO.get("LID"));
+			}
+			else if(field.equals("IRFLID")){
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateIRFOrganization.IRFOrg_noMO.get("LID"));
+			}
+			else if(field.equals("Duplication_LID")){
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateLTCHOrganization.LTCHOrg_noMO.get("LID"));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), field);
+			}
+		}
+		
+		else if(org.equals("IRF")){
+			if(field.equals("LID")){
+				CreateIRFOrganizationAPI.tempIRFOrg.put("LID", createRandomNumber(12));
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateIRFOrganizationAPI.tempIRFOrg.get("LID"));
+			}
+			else if(field.equals("LIDgreaterthan20")){
+				CreateIRFOrganizationAPI.tempIRFOrg.put("LID", createRandomNumber(21));
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateIRFOrganizationAPI.tempIRFOrg.get("LID"));
+			}
+			else if(field.equals("HospitalLID")){
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateACHOrganization.achOrg_noMO.get("LID"));
+			}
+			else if(field.equals("SNFLID")){
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateSNFOrganization.SNFOrg_noMO.get("LID"));
+			}
+			else if(field.equals("LTCHLID")){
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateLTCHOrganization.tempLTCHOrg.get("LID"));
+			}
+			else if(field.equals("Duplication_LID")){
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), CreateIRFOrganization.IRFOrg_noMO.get("LID"));
+			}
+			else
+			{
+				iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), field);
+			}
+		}
+		
+		else
+		{
+			iFillInText(driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")), field);
+		}
+	}
 }

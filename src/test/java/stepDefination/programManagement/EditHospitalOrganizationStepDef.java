@@ -47,4 +47,9 @@ public class EditHospitalOrganizationStepDef extends DriverScript {
 	  public void i_Verify_ManagingOrg_RadioButtons_Status_On_Organization_Page(String org) throws Throwable {
 		editHospOrg.iVerifyManagingOrgRadioButtonsStatusOnOrganizationPage(org);
 	    }
+
+	@And("^I edit location ID field to \"([^\"]*)\" for Location \"([^\"]*)\" for \"([^\"]*)\" organization$")
+	  public void i_Edit_LocationID_Under_Locations_Section(String field, int num, String org) throws Throwable {
+		editHospOrg.iEditLocationIDFieldUnderLocationsSection(field, num, org);
+		}
 }

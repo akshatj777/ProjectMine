@@ -373,7 +373,8 @@ Feature: Create IRF Organization functionality tests
     And I enter <City> in "City" on create organization page
     And I select <State> in State on create organization page
     And I enter <Postal_Code> in "Postal Code" on create organization page
-    And I provide "CCN" as last created "Location_Id" on create organization page
+    #And I provide "CCN" as last created "Location_Id" on create organization page
+    And I provide unique "IRF - <NPI>" in "NPI" on create organization page
     And I verify "Location 1" on "Create IRF" organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
