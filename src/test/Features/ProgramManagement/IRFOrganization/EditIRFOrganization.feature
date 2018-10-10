@@ -535,6 +535,49 @@ Feature: Edit IRF Organization functionality tests
       | Description                                                | Has_MO | IRF_Name | Loc_Name   | Loc_Address1 | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                |
       | Add one more location Location details on IRF Organization | NO     | IRFNAME  | Loc_Name12 | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | IRF Organization Successfully Updated. |
 
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "IRF" organization tab on organization dashboard
+    Then I search with "<IRF_Name> - <Has_MO>" on organization in search box
+    And I verify "<IRF_Name> - <Has_MO>" field in search list on organization page
+    And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I verify Managing Organization radio buttons status on "Edit IRF - <Has_MO>" organization page
+    And I select "<Has_MO1>" radio button for managing organization
+    Then I select "<Managing_Org>" managing organization name in "<Has_MO1>" Has a Management Organization drop down
+    And I edit "Inpatient Rehab Facility Organization Name" field to "<Edited_IRF_Name> - <Has_MO>" for organization
+    And I edit "Address 1" field to "<Org_Address1>" for organization
+    And I edit "Short Name" field to "<Short_Name>" for organization
+    And I edit "Address 2" field to "<Org_Address2>" for organization
+    And I edit "City" field to "<City>" for organization
+    And I edit <State> field for organization
+    And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
+    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
+    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
+    
+    And I edit "address2" field to <Loc_Address1> for Location "1" for organization
+    
+    And I edit "city" field to <Loc_City> for Location "1" for organization
+    
+    And I edit State dropdown field to <Loc_State> for Location "1" for organization
+    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    Then I verify "<Message>" after submitting the "FETCHFROMAPIForIRFNAME - <Has_MO>" organization page
+    When I search with "<IRF_Name> - <Has_MO>" on organization in search box
+    And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
+    And I verify "<IRF_Name> - <Has_MO>" name on the header of view profile
+    And I verify "Managing Organization - <Has_MO1>" on view profile of "IRF" Organization
+
+    Examples: 
+      | Description                                               | Has_MO | Has_MO1 | IRF_Name | Edited_IRF_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                     |
+      | Edit & verify IRF organization with MO to without MO | YES    | NO      | IRFNAME   | IRFNAME              | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | IRF Organization Successfully Updated. |
+      | Edit & verify IRF organization without MO to with MO | NO     | YES     | IRFNAME   | IRFNAME              | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | IRF Organization Successfully Updated. |
+  
+  
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"
 
