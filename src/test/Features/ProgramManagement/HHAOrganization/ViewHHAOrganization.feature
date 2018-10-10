@@ -30,6 +30,22 @@ Feature: View HHA organization functionality tests
     When I click on "HHA" organization tab on organization dashboard
     When I search with "<HHA_Name> - <Has_MO>" on organization in search box
     And I click "<HHA_Name> - <Has_MO>" field in search list on organization page
+    And I verify the url after creation of an organization on view profile of "HHA" organization
+
+    Examples: 
+      | Description                                                                    | Has_MO | HHA_Name |
+      | Verify HHA org shortName in Url after creating under profile page - with MO    | YES    | HHANAME  |
+      | Verify HHA org shortName in Url after creating under profile page - without MO | NO     | HHANAME  |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "HHA" organization tab on organization dashboard
+    When I search with "<HHA_Name> - <Has_MO>" on organization in search box
+    And I click "<HHA_Name> - <Has_MO>" field in search list on organization page
     And I Verify the "x" button on View page
     And I click on "x" button on particular organization
     And User should get redirected to the "HHA" organization tab page
@@ -99,7 +115,7 @@ Feature: View HHA organization functionality tests
 
     Examples: 
       | Description                                                         | Has_MO | MO_Name | HHA_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Region  | Market  | CCN | EIN | NPI | StateVerification | Organization Type | Message                                |
-      | Verification of HHA details and count on HHA tab under Managing org | YES    | MONAME  | HHANAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | CCN | EIN | NPI | CA                | Hospice               | HHA Organization Successfully Created. |
+      | Verification of HHA details and count on HHA tab under Managing org | YES    | MONAME  | HHANAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | CCN | EIN | NPI | CA                | Hospice           | HHA Organization Successfully Created. |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -116,7 +132,7 @@ Feature: View HHA organization functionality tests
     And I verify the "Create New HHA Organization" link under No matches
 
     Examples: 
-      | Description                                                             | MO_Name | HHA_Name    |
+      | Description                                                                 | MO_Name | HHA_Name     |
       | Searching invalid details on Managing Organization Profile Page for Hospice | MONAME  | NoMatchesOrg |
 
   Scenario Outline: Delete references of the name list

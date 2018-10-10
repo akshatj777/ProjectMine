@@ -180,7 +180,7 @@ Feature: Edit LTCH organization functionality tests
       | Check Character Limit edge condition for Location Address1 field on Edit LTCH Organization - Without MO           | NO     | LTCHNAME  | LTCHNAME             | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | abcdefghijklmnopqrstuvwxyzabcdefgopmailcomabcdefghijklm | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | LTCH Organization Successfully Updated. |
       | Check Character Limit edge condition for Location Address2 field on Edit LTCH Organization - Without MO           | NO     | LTCHNAME  | LTCHNAME             | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | Long Term Care Hospital | Midwest    | Chicago    | abcdefghijklmnopqrstuvwxyzabcdefgopmailcomabcdefghijklm | Loc_City                                      | California |           10000 | LTCH Organization Successfully Updated. |
       | Check Character Limit edge condition for Location City field on Edit LTCH Organization - With MO                  | YES    | LTCHNAME  | LTCHNAME             | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2                                            | abcdefghijklmnopqrstuvwxyzabcdefgopmailcomabc | California |           10000 | LTCH Organization Successfully Updated. |
-      | Check Character Limit edge condition for Location Postal code field on Edit LTCH Organization - With MO           | YES    | LTCHNAME  | LTCHNAME             | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California | 10001-4562      | LTCH Organization Successfully Updated. |
+      #| Check Character Limit edge condition for Location Postal code field on Edit LTCH Organization - With MO           | YES    | LTCHNAME  | LTCHNAME             | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California | 10001-4562      | LTCH Organization Successfully Updated. |
       | Edit LTCH Organization with Mandatory fields - Without MO                                                         | NO     | LTCHNAME  | LTCHNAME             | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |                         |            |            |                                                         | Loc_City                                      | California |           10000 | LTCH Organization Successfully Updated. |
       | Edit LTCH Organization with Mandatory fields + ShortName - Without MO                                             | NO     | LTCHNAME  | LTCHNAME             | Address1                                                | Short_Name                                    |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |                         |            |            |                                                         | Loc_City                                      | California |           10000 | LTCH Organization Successfully Updated. |
       | Edit LTCH Organization with Mandatory fields + Address2 - Without MO                                              | NO     | LTCHNAME  | LTCHNAME             | Address1                                                |                                               | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |                         |            |            |                                                         | Loc_City                                      | California |           10000 | LTCH Organization Successfully Updated. |
@@ -234,6 +234,240 @@ Feature: Edit LTCH organization functionality tests
       | Description                                                | Has_MO | LTCH_Name | Edited_LTCH_Name | Org_Address1 | City | State | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_City | Loc_State | Loc_Postal_Code |
       | Edit a Hospital Organization With Mandatory Fields Missing | NO     | LTCHNAME  |                  |              |      |       |                 |          |              |          |           |                 |
 
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "LTCH" organization tab on organization dashboard
+    Then I search with "<LTCH_Name> - <Has_MO>" on organization in search box
+    And I verify "<LTCH_Name> - <Has_MO>" field in search list on organization page
+    And I click "<LTCH_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I edit "Long-Term Care Hospital Organization Name" field to "<Edited_LTCH_Name> - <Has_MO>" for organization
+    And I edit "Address 1" field to "<Org_Address1>" for organization
+    And I edit "Short Name" field to "<Short_Name>" for organization
+    And I edit "Address 2" field to "<Org_Address2>" for organization
+    And I edit "City" field to "<City>" for organization
+    And I edit <State> field for organization
+    And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
+    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
+    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
+    And I edit location ID field to "<Loc_ID>" for Location "1" for "LTCH" organization
+    And I edit "address2" field to <Loc_Address1> for Location "1" for organization
+    And I edit "city" field to <Loc_City> for Location "1" for organization
+    And I edit State dropdown field to <Loc_State> for Location "1" for organization
+    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    Then I verify "<Message>" after submitting the "FETCHFROMAPIForLTCHNAME - <Has_MO>" organization page
+
+    Examples: 
+      | Description                                          | Has_MO | LTCH_Name | Edited_LTCH_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Loc_ID | Message                                 |
+      | Edit LTCH Organization with Location id - Without MO | NO     | LTCHNAME  | LTCHNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | LID    | LTCH Organization Successfully Updated. |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "LTCH" organization tab on organization dashboard
+    Then I search with "<LTCH_Name> - <Has_MO>" on organization in search box
+    And I verify "<LTCH_Name> - <Has_MO>" field in search list on organization page
+    And I click "<LTCH_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I edit "Long-Term Care Hospital Organization Name" field to "<Edited_LTCH_Name> - <Has_MO>" for organization
+    And I edit "Address 1" field to "<Org_Address1>" for organization
+    And I edit "Short Name" field to "<Short_Name>" for organization
+    And I edit "Address 2" field to "<Org_Address2>" for organization
+    And I edit "City" field to "<City>" for organization
+    And I edit <State> field for organization
+    And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
+    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
+    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
+    And I edit location ID field to "<Loc_ID>" for Location "1" for "LTCH" organization
+    And I edit "address2" field to <Loc_Address1> for Location "1" for organization
+    And I edit "city" field to <Loc_City> for Location "1" for organization
+    And I edit State dropdown field to <Loc_State> for Location "1" for organization
+    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    And I verify "<ValidationMessage>" mandatory field validation message on edit organization page
+
+    Examples: 
+      | Description                                                    | Has_MO | LTCH_Name | Edited_LTCH_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Loc_ID          | ValidationMessage         |
+      | Edit LTCH Organization with duplicate Location id - Without MO | NO     | LTCHNAME  | LTCHNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | Duplication_LID | This ID is already in use |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "Hospital" organization tab on organization dashboard
+    Then I click on "+" button on "Hospital" organization page
+    And I verify "Create Hospital Organization" header text on create organization page
+    And I select "<Has_MO>" radio button for managing organization
+    Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
+    Then I enter <Hosp_Name> in "Hospital Organization Name" on create organization page
+    And I enter <Address1> in "Address 1" on create organization page
+    And I enter <Short_Name> in "Short Name" on create organization page
+    And I enter <Address2> in "Address 2" on create organization page
+    And I enter <City> in "City" on create organization page
+    And I select <State> in State on create organization page
+    And I enter <Postal_Code> in "Postal Code" on create organization page
+    And I provide unique "ACH - <CCN>" in "CCN" on create organization page
+    And I provide unique "ACH - <EIN>" in "EIN" on create organization page
+    And I provide unique "ACH - <NPI>" in "NPI" on create organization page
+    And I enter location name <Loc_Name> for Location "1" on "create" organization page
+    And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
+    And I enter Location Id <Location_ID> for Location "1" on "create Hospital" organization page
+    And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
+    And I enter city <Loc_City> for Location "1" on "create" organization page
+    And I select state <Loc_State> for Location "1" on "create" organization page
+    And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
+    Then I click on "Submit" button on "create" organization page
+    Then I verify "<Message>" after submitting the "create Hospital - <Has_MO>" organization page
+    When I click on "LTCH" organization tab on organization dashboard
+    Then I search with "<LTCH_Name> - <Has_MO>" on organization in search box
+    And I verify "<LTCH_Name> - <Has_MO>" field in search list on organization page
+    And I click "<LTCH_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I edit "Long-Term Care Hospital Organization Name" field to "<Edited_LTCH_Name> - <Has_MO>" for organization
+    And I edit "Address 1" field to "<Org_Address1>" for organization
+    And I edit "Short Name" field to "<Short_Name>" for organization
+    And I edit "Address 2" field to "<Org_Address2>" for organization
+    And I edit "City" field to "<City>" for organization
+    And I edit <State> field for organization
+    And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
+    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
+    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
+    And I edit location ID field to "<Loc_ID>" for Location "1" for "LTCH" organization
+    And I edit "address2" field to <Loc_Address1> for Location "1" for organization
+    And I edit "city" field to <Loc_City> for Location "1" for organization
+    And I edit State dropdown field to <Loc_State> for Location "1" for organization
+    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    And I verify "<ValidationMessage>" mandatory field validation message on edit organization page
+
+    Examples: 
+      | Description                                                                   | Has_MO | Managing_Org | LTCH_Name | Hosp_Name | Edited_LTCH_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type        | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Location_ID | Loc_ID      | Message                                     | ValidationMessage         |
+      | Validation message when duplicate locationId of the Hospital Org - Without MO | NO     |              | LTCHNAME  | ACHNAME   | LTCHNAME         | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Skilled Nursing | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | LID         | HopsitalLID | Hospital Organization Successfully Created. | This ID is already in use |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "LTCH" organization tab on organization dashboard
+    Then I click on "+" button on "LTCH" organization page
+    And I verify "Create SNF Organization" header text on create organization page
+    And I select "<Has_MO>" radio button for managing organization
+    Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
+    Then I enter <SNF_Name> in "SNF Organization Name" on create organization page
+    And I enter <Address1> in "Address 1" on create organization page
+    And I enter <Short_Name> in "Short Name" on create organization page
+    And I enter <Address2> in "Address 2" on create organization page
+    And I enter <City> in "City" on create organization page
+    And I select <State> in State on create organization page
+    And I enter <Postal_Code> in "Postal Code" on create organization page
+    And I provide unique "SNF - <CCN>" in "CCN" on create organization page
+    And I provide unique "SNF - <EIN>" in "EIN" on create organization page
+    And I provide unique "SNF - <NPI>" in "NPI" on create organization page
+    And I enter location name <Loc_Name> for Location "1" on "create" organization page
+    And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
+    And I enter Location Id <Location_ID> for Location "1" on "create SNF" organization page
+    And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
+    And I enter city <Loc_City> for Location "1" on "create" organization page
+    And I select state <Loc_State> for Location "1" on "create" organization page
+    And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
+    Then I click on "Submit" button on "create" organization page
+    Then I verify "<Message>" after submitting the "create SNF - <Has_MO>" organization page
+    When I click on "LTCH" organization tab on organization dashboard
+    Then I search with "<LTCH_Name> - <Has_MO>" on organization in search box
+    And I verify "<LTCH_Name> - <Has_MO>" field in search list on organization page
+    And I click "<LTCH_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I edit "Long-Term Care Hospital Organization Name" field to "<Edited_LTCH_Name> - <Has_MO>" for organization
+    And I edit "Address 1" field to "<Org_Address1>" for organization
+    And I edit "Short Name" field to "<Short_Name>" for organization
+    And I edit "Address 2" field to "<Org_Address2>" for organization
+    And I edit "City" field to "<City>" for organization
+    And I edit <State> field for organization
+    And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
+    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
+    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
+    And I edit location ID field to "<Loc_ID>" for Location "1" for "LTCH" organization
+    And I edit "address2" field to <Loc_Address1> for Location "1" for organization
+    And I edit "city" field to <Loc_City> for Location "1" for organization
+    And I edit State dropdown field to <Loc_State> for Location "1" for organization
+    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    And I verify "<ValidationMessage>" mandatory field validation message on edit organization page
+
+    Examples: 
+      | Description                                                              | Has_MO | Managing_Org | LTCH_Name | SNF_Name | Edited_LTCH_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type                | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Location_ID | Loc_ID | Message                                | ValidationMessage         |
+      | Validation message when duplicate locationId of the SNF Org - Without MO | NO     |              | LTCHNAME  | ACHNAME  | LTCHNAME         | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | LID         | SNFLID | SNF Organization Successfully Created. | This ID is already in use |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "IRF" organization tab on organization dashboard
+    Then I click on "+" button on "IRF" organization page
+    And I verify "Create Inpatient Rehab Facility Organization" header text on create organization page
+    And I select "<Has_MO>" radio button for managing organization
+    Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
+    Then I enter <IRF_Name> in "Inpatient Rehab Facility Organization Name" on create organization page
+    And I enter <Address1> in "Address 1" on create organization page
+    And I enter <Short_Name> in "Short Name" on create organization page
+    And I enter <Address2> in "Address 2" on create organization page
+    And I enter <City> in "City" on create organization page
+    And I select <State> in State on create organization page
+    And I enter <Postal_Code> in "Postal Code" on create organization page
+    And I provide unique "IRF - <CCN>" in "CCN" on create organization page
+    And I verify "Location 1" on "Create IRF" organization page
+    And I enter location name <Loc_Name> for Location "1" on "create" organization page
+    And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
+    And I enter Location Id <Location_ID> for Location "1" on "create" organization page
+    And I select location type <Loc_Type> for Location "1" on "create" organization page
+    And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
+    And I select region <Loc_Region> for Location "1" on "create" organization page
+    And I enter city <Loc_City> for Location "1" on "create" organization page
+    And I select market <Loc_Market> for region "<Loc_Region>" for Location "1" on "create" organization page
+    And I select state <Loc_State> for Location "1" on "create" organization page
+    And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
+    Then I click on "Submit" button on "create" organization page
+    Then I verify "<Message>" after submitting the "create IRF" organization page
+    When I click on "LTCH" organization tab on organization dashboard
+    Then I search with "<LTCH_Name> - <Has_MO>" on organization in search box
+    And I verify "<LTCH_Name> - <Has_MO>" field in search list on organization page
+    And I click "<LTCH_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I edit "Long-Term Care Hospital Organization Name" field to "<Edited_LTCH_Name> - <Has_MO>" for organization
+    And I edit "Address 1" field to "<Org_Address1>" for organization
+    And I edit "Short Name" field to "<Short_Name>" for organization
+    And I edit "Address 2" field to "<Org_Address2>" for organization
+    And I edit "City" field to "<City>" for organization
+    And I edit <State> field for organization
+    And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
+    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
+    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
+    And I edit location ID field to "<Loc_ID>" for Location "1" for "LTCH" organization
+    And I edit "address2" field to <Loc_Address1> for Location "1" for organization
+    And I edit "city" field to <Loc_City> for Location "1" for organization
+    And I edit State dropdown field to <Loc_State> for Location "1" for organization
+    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    And I verify "<ValidationMessage>" mandatory field validation message on edit organization page
+
+    Examples: 
+      | Description                                                              | Has_MO | Managing_Org | IRF_Name | LTCH_Name | Edited_LTCH_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Location_ID | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | Loc_Name2 | Loc_ID | Message                                | ValidationMessage         |
+      | Validation message when duplicate locationId of the IRF Org - Without MO | NO     |              | IRFNAME  | LTCHNAME  | LTCHNAME         | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | LID         | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | Loc_Name2 | IRFLID | IRF Organization Successfully Created. | This ID is already in use |
+
   Scenario Outline: Add one more Location details on Edit Hospital Organization
     Given I am on the login page
     When I log in as super user
@@ -262,35 +496,6 @@ Feature: Edit LTCH organization functionality tests
     Examples: 
       | Description                                             | Has_MO | LTCH_Name | Loc_Name      | Loc_Address1  | Loc_Type                | Loc_Region | Loc_Market | Loc_Address2  | Loc_City  | Loc_State  | Loc_Postal_Code | Message                                 |
       | Add one more Location details on Edit LTCH Organization | YES    | LTCHNAME  | Loc_Name new1 | Loc_Address14 | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address24 | Loc_City1 | California |           10001 | LTCH Organization Successfully Updated. |
-
-  Scenario Outline: Edit a LTCH Organization with duplicate Location details
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-    When I click on "LTCH" organization tab on organization dashboard
-    Then I search with "<LTCH_Name> - <Has_MO>" on organization in search box
-    And I verify "<LTCH_Name> - <Has_MO>" field in search list on organization page
-    And I click "<LTCH_Name> - <Has_MO>" field in search list on organization page
-    And I verify "2" location count on view "LTCH" organization page
-    And I click on "Edit" button on particular organization
-    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
-    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
-    And I edit Location Type dropdown field to <Loc_Type> for Location "1" for organization
-    And I edit "address2" field to <Loc_Address2> for Location "1" for organization
-    And I edit Region dropdown field to <Loc_Region> for Location "1" for organization
-    And I edit "city" field to <Loc_City> for Location "1" for organization
-    And I edit Market dropdown field to <Loc_Market> for Region "<Loc_Region>" for Location "1" for organization
-    And I edit State dropdown field to <Loc_State> for Location "1" for organization
-    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
-    Then I verify "Location 2" on "Edit" organization page
-    And I edit "Location Name" field to <Loc_Name> for Location "2" for organization
-    Then I click on "Submit" button on "Edit" organization page
-
-    Examples: 
-      | Description                                              | Has_MO | LTCH_Name | Loc_Name | Loc_Address1 | Loc_Type                | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                 |
-      | Edit a LTCH Organization with duplicate Location details | YES    | LTCHNAME  | Loc_Name | Loc_Address1 | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | LTCH Organization Successfully Updated. |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"

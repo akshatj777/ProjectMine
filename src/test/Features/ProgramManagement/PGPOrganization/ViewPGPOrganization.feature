@@ -30,6 +30,22 @@ Feature: View Functionality tests for PGP Organization.
     When I click on "PGP" organization tab on organization dashboard
     When I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I verify the url after creation of an organization on view profile of "PGP" organization
+
+    Examples: 
+      | Description                                                                    | Has_MO | PGP_Name |
+      | Verify PGP org shortName in Url after creating under profile page - with MO    | YES    | PGPNAME  |
+      | Verify PGP org shortName in Url after creating under profile page - without MO | NO     | PGPNAME  |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "PGP" organization tab on organization dashboard
+    When I search with "<PGP_Name> - <Has_MO>" on organization in search box
+    And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
     And I Verify the "x" button on View page
     And I click on "x" button on particular organization
     And User should get redirected to the "PGP" organization tab page
