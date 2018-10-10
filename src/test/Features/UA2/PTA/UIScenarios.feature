@@ -96,7 +96,7 @@ Feature: PTA UI Scenarios
 
     Examples: 
       | Role   | Applications                                                  | LearningPathwayName |
-      | Leader | Episode Connect Classic, Reporting Classic, Remedy University | New learning Path             |
+      | Leader | Episode Connect Classic, Reporting Classic, Remedy University | New learning Path   |
 
   Scenario: Verify the functionality of back/Cancel button and tabs on the left on create user page
     Given I am on the login page
@@ -378,6 +378,35 @@ Feature: PTA UI Scenarios
     Then I should see "Add New User" on the user creation page
     When I click the Organizational Role Field
     Then I verify that roles are reflected as per the "PTA"
+
+  Scenario Outline: Validating that "All Locations" checkbox is checked after selecting all the locations under an organization
+    Given I am on the login page
+    Then I enter newuser email for "Super Admin-Partner Technical Administrator" login to Remedy
+    Then I enter newuser password for login to Remedy
+    Then I click Access button
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    When I click on Add User button
+    Then I should see "Add New User" on the user creation page
+    Then I verify the header "General Information"
+    And I fill in First Name with "FirstName"
+    Then I fill in Last Name with LastName
+    And I enter Email "qaautomation@remedysystems.com" to Create user
+    When I click the Organizational Role Field
+    Then I pick a Organizational <Role>
+    Then I click on Next button
+    Then I verify the header "Applications"
+    Then I select "Reporting Classic" product
+    Then I click on Next button
+    Then I verify the header "Permissions"
+    Then I select "BPCI Model 2" programs
+    Then I select "All Locations" locations for PTA user
+    Then I verify that All Locations checkbox is checked
+
+    Examples: 
+      | User                            | Role    | RemovePrograms |
+      | Partner Technical Administrator | Manager | BPCI Model 3   |
 
   Scenario Outline: validating Learning Pathway on edit role
     Given I am on the login page

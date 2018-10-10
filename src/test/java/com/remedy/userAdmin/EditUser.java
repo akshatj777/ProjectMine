@@ -581,53 +581,34 @@ public class EditUser extends BaseClass {
 		}
 	}
 
-	public void selectProgramsForExistingOrg(String programList) throws Throwable {
-		if (!(programList.equals(""))) {
+	public void selectProgramsForExistingOrg(String programList) throws Throwable 
+	{
+		if (!(programList.equals(""))) 
+		{
 			longDelay();
-			if (!(driver.findElements(By.xpath("//span[text()='Select']")).size() > 0)) {
-				longDelay();
-				if (programList.contains(",")) {
-					StringTokenizer st = new StringTokenizer(programList, ",");
-					driver.findElement(By.cssSelector(".ui.selection.dropdown")).click();
-					while (st.hasMoreTokens()) {
-						String programs = st.nextToken().trim();
-						iWillWaitToSee(By.xpath("//label[text()='" + programs + "']"));
-						driver.findElement(By.xpath("//label[text()='" + programs + "']")).click();
-						Thread.sleep(2000);
-					}
-				} else {
-
-					longDelay();
-					driver.findElement(By.cssSelector(".ui.selection.dropdown")).click();
-					longDelay();
-					driver.findElement(By.xpath("//label[text()='" + programList + "']")).click();
-					longDelay();
-
+			if(programList.contains(","))
+			{
+				StringTokenizer st = new StringTokenizer(programList, ",");
+				driver.findElement(By.xpath("//div[@class='content active' or @class='content']//div[@class='ui selection dropdown']")).click();
+				while (st.hasMoreTokens()) 
+				{
+					String programs = st.nextToken().trim();
+					iWillWaitToSee(By.xpath("//label[text()='" + programs + "']"));
+					driver.findElement(By.xpath("//label[text()='" + programs + "']")).click();
+					Thread.sleep(2000);
 				}
-				longDelay();
-			} else {
-				if (programList.contains(",")) {
-					StringTokenizer st = new StringTokenizer(programList, ",");
-					driver.findElement(By.xpath("//span[text()='Select']")).click();
-					while (st.hasMoreTokens()) {
-						String programs = st.nextToken().trim();
-						iWillWaitToSee(By.xpath("//label[text()='" + programs + "']"));
-						driver.findElement(By.xpath("//label[text()='" + programs + "']")).click();
-						Thread.sleep(2000);
-					}
-				} else {
-
-					longDelay();
-					driver.findElement(By.xpath("//span[text()='Select']")).click();
-					longDelay();
-					driver.findElement(By.xpath("//label[text()='" + programList + "']")).click();
-					longDelay();
-
-				}
+			}
+			else
+			{
+				iWillWaitToSee(By.xpath("//div[@class='content active' or @class='content']//div[@class='ui selection dropdown']"));
+				driver.findElement(By.xpath("//div[@class='content active' or @class='content']//div[@class='ui selection dropdown']")).click();
+				iWillWaitToSee(By.xpath("//label[text()='" + programList + "']"));
+				driver.findElement(By.xpath("//label[text()='" + programList + "']")).click();
+				iWillWaitToSee(By.xpath("//table[@class='ui table component-bpid-table']"));
 			}
 		}
 	}
-
+			
 	public void VerifyNPIFieldForPhysicians(String role) {
 		if (role.equals("Physicians"))
 			Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("input[placeholder='NPI']"))));
@@ -774,7 +755,7 @@ public void verifyPaginationForSelectedLoc(){
 }
 }
 public void verifyAllLocationBoxSelection() {
-	Assert.assertTrue(isElementPresent(By.xpath("//div[@class='ui checked checkbox']")));
+	Assert.assertTrue(isElementPresent(By.xpath("//div[@class='ui checked checkbox']/label[text()='All Locations']")));
 }
 public void enterInvalidLearningPathway(String text){
 	if(isElementPresentOnPage(By.cssSelector(".column.padding>.component-learning-pathway-dropdown"))==true){
