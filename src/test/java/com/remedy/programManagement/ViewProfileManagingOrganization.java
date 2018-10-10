@@ -184,4 +184,37 @@ public class ViewProfileManagingOrganization extends BaseClass{
 		iWillWaitToSee(By.xpath("//h3[text()='"+CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"']"));
 		isElementPresentOnPage(By.xpath("//h3[text()='"+CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"']"));
 	}
+	
+	public void iVerifyTheUrlAfterCreatingAnyOrganization(String org){
+		String getUrl;
+		getUrl=driver.getCurrentUrl();
+		System.out.println(getUrl);
+		if(org.equals("Managing")){
+			Assert.assertTrue(getUrl.contains("mo"));
+		}
+		else if(org.equals("Hospital")){
+			Assert.assertTrue(getUrl.contains("ach"));
+		}
+		else if(org.equals("PGP")){
+			Assert.assertTrue(getUrl.contains("pgp"));
+		}
+		else if(org.equals("Payor")){
+			Assert.assertTrue(getUrl.contains("payor"));
+		}
+		else if(org.equals("SNF")){
+			Assert.assertTrue(getUrl.contains("snf"));
+		}
+		else if(org.equals("HHA")){
+			Assert.assertTrue(getUrl.contains("hha"));
+		}
+		else if(org.equals("LTCH")){
+			Assert.assertTrue(getUrl.contains("ltch"));
+		}
+		else if(org.equals("IRF")){
+			Assert.assertTrue(getUrl.contains("irf"));
+		}
+		else if(org.equals("Hospice")){
+			Assert.assertTrue(getUrl.contains("hospice"));
+		}
+	}
 }
