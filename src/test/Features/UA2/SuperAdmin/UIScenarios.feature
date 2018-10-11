@@ -513,7 +513,7 @@ Feature: UI Scenarios - Super Admin User
     And I click on Edit button
     Then I select "Permissions" tab
     Then I remove health system "<Remove HealthSystem>"
-    And I click on "Remove" button on permissions tab
+   
     And I search for health system with <Health System>
     And I select a <Health System>
     Then I select "<Programs>" programs

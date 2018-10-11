@@ -2,9 +2,11 @@ package com.remedy.userAdmin;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
 
@@ -39,6 +41,7 @@ public class CreateUserPage extends BaseClass{
 	public static HashMap<String,HashMap<String,String>> usersApplicationsPerRole=new HashMap<String,HashMap<String,String>>();
 	public static HashMap<String,HashMap<String,String>> usersNPIPerRole=new HashMap<String,HashMap<String,String>>();
 	LandingPage objLandingPage = new LandingPage(driver);
+	Set<String> handles = null;
 	
     public CreateUserPage(WebDriver driver){
         super(driver);
@@ -629,9 +632,9 @@ public class CreateUserPage extends BaseClass{
     	}
     	for(int i=1; i<=(driver.findElements(By.xpath("//div[@class='column padding']")).size());i++)
     	{
-    		if(driver.findElements(By.xpath("//div[@class='column padding']["+i+"]/div[@class='ui checked checkbox']")).size()>0)
+    		if(driver.findElements(By.xpath("//div[@class='column padding']["+i+"]/div[@class='ui checked checkbox' or @class='ui checked disabled checkbox']")).size()>0)
     		{
-    			apps = apps.concat(driver.findElement(By.xpath("//div[@class='column padding']["+i+"]/div[@class='ui checked checkbox']/label")).getText());
+    			apps = apps.concat(driver.findElement(By.xpath("//div[@class='column padding']["+i+"]/div[@class='ui checked checkbox' or @class='ui checked disabled checkbox']/label")).getText());
     			apps = apps.concat(",");
     		}
     	}
@@ -675,32 +678,18 @@ public void iUnselectAllSelectedApps(){
 	   }
    }
    
-   public void iVerifyNavigationOnEpisodes2HomePage(String role){
+   public void iVerifyNavigationOnEpisodes2HomePage(String role)
+   {
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
 		   if(st.nextToken().trim().equals("Episode Connect for Post-acute Care")){
-//			   if(role.substring((role.indexOf("-")+1)).equals("Remedy Technical Administrator"))
-//			   {
-//				   iWillWaitToSee(By.xpath("//h2[text()='BPCI Performance']"));
-//				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//h2[text()='BPCI Performance']")));
-//			   }
-//			   else
-//			   {
-
-//				   for(int i=0;i<5;i++)
-//				   {
-//					   driver.navigate().refresh();
-//					   driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
-//					   longDelay();
-//					   if(driver.findElements(By.xpath("//div[@class='patient-card']")).size()>0)
-//					   {
-//						   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
-//						   break;
-//					   }
-//				   }
-			   driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
+			   if(!isElementPresentOnPage(By.xpath("//div[@class='ui text loader']")));
+			   {
+				   driver.navigate().refresh();
+			   }
+			   new WebDriverWait(driver, 240).until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
 			   if(!(driver.findElements(By.xpath("//div[text()='Episode Connect']")).size()>0))
 			   {
 				   driver.navigate().refresh();
@@ -710,10 +699,8 @@ public void iUnselectAllSelectedApps(){
 				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
 				   
 			   }
-
 		   }
 	   }   
-   
    
    public void iVerifyNavigationOnPhysicianHomePage(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
@@ -728,14 +715,11 @@ public void iUnselectAllSelectedApps(){
    
    public void iVerifyNavigationOnUserAdminHomePage(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   StringTokenizer st = new StringTokenizer(application, ",");
-	   while(st.hasMoreTokens())
-	   {
-		   if(st.nextToken().trim().equals("User Admin")){
-			   iWillWaitToSee(By.xpath("//h1[text()='Users']"));
+	   if(application.contains("Administration"))
+		{
+			iWillWaitToSee(By.xpath("//h1[text()='Users']"));
 			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//h1[text()='Users']")));
-		   }
-	   }   
+		}
    }
    
    public void iVerifyPatientCardOnEpisodes2HomePage(String role){
@@ -743,21 +727,11 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episode Connect for Post-acute Care")){
-//			   if(role.substring((role.indexOf("-")+1)).equals("Remedy Technical Administrator"))
-//			   {
-//				   iWillWaitToSee(By.xpath("//button[contains(text(),'View All Patients')]"));
-//				 driver.findElement(By.xpath("//button[contains(text(),'View All Patients')]")).click();
-//				 iWillWaitToSee(By.xpath("//div[@class='patient-card']"));
-//				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
-//				 driver.navigate().back();
-//			   }
-//			   else
-//			   {
+		   if(st.nextToken().trim().equals("Episode Connect for Post-acute Care"))
+		   {
 				   iWillWaitToSee(By.xpath("//div[@class='patient-card']"));
 				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='patient-card']")));
 				   driver.navigate().back();
-//			   }
 		   }
 	   }   
    }
@@ -775,7 +749,8 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episode Connect Classic")){
+		   if(st.nextToken().trim().equals("Episode Connect Classic"))
+		   {
 	   iWillWaitToSee(By.cssSelector(".username"));
 	   WebElement element = driver.findElement(By.xpath("//i[@class='fa fa-angle-down']"));
 	   String javaScript = "var evObj = document.createEvent('MouseEvents');" +
@@ -834,22 +809,20 @@ public void iUnselectAllSelectedApps(){
 	   }
    }
    
-   public void iClickOnUserAdminTileUnderSpecificUserLoginPage(String role){
+   public void iClickOnUserAdminTileUnderSpecificUserLoginPage(String role)
+   {
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   StringTokenizer st = new StringTokenizer(application, ",");
-	   while(st.hasMoreTokens())
+	   if(application.contains("Administration"))
 	   {
-			   if(st.nextToken().trim().equals("User Admin")){
-				   iWillWaitToSee(By.xpath("//div[text()='Users']"));
-				   if(DriverScript.Config.getProperty("Browser").equals("ie"))
-				   {
-					   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Users']")));
-				   }
-				   else
-				   {
-					   clickElement(driver.findElement(By.xpath("//div[text()='Users']")));  
-				   }
-		   }   
+		   iWillWaitToSee(By.xpath("//div[text()='Users']"));
+		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		   {
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Users']")));
+		   }
+		   else
+		   {
+			   clickElement(driver.findElement(By.xpath("//div[text()='Users']")));  
+		   }
 	   }
    }
    
@@ -991,9 +964,11 @@ public void iUnselectAllSelectedApps(){
 	   while(st.hasMoreTokens())
 	   {
 		   if(st.nextToken().trim().equals("Episode Connect Classic")){
-			   waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.id("tblPatients_processing")));
+			   //waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.id("tblPatients_processing")));
+			   iWillWaitToSee(By.id("filterTab_custom"));
+//			   waitTo().until(ExpectedConditions.elementToBeClickable(By.id("tblPatients_processing")));
 			   driver.findElement(By.id("filterTab_custom")).click();
-			   waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.id("tblPatients_processing")));
+			   new WebDriverWait(driver, 240).until(ExpectedConditions.invisibilityOfElementLocated(By.id("tblPatients_processing")));
 			   iWillWaitToSee(By.xpath("//div[@ng-repeat='element in patientsList']"));
 			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@ng-repeat='element in patientsList']")));
 		   } 
@@ -1052,11 +1027,118 @@ public void iUnselectAllSelectedApps(){
 			clickElement(driver.findElement(By.xpath("//div[text()='Institute']")));
 			delay();
 		}
+		
+		try
+		{
+			if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+			{
+				Thread.sleep(5000);
+				String parentWindow = driver.getWindowHandle();
+				Set<String> handles = driver.getWindowHandles();
+				if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
+				{
+					driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
+				}
+			}
+			else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+			{
+				Thread.sleep(5000);
+				String parentWindow = driver.getWindowHandle();
+				Set<String> handles = driver.getWindowHandles();
+				Object[] array = handles.toArray();
+				Arrays.sort(array);
+				System.out.println("Windows : "+Arrays.toString(array));
+				if(!(array[array.length-1].toString().equals(parentWindow)))
+				{
+					driver.switchTo().window(array[array.length-1].toString());
+					new WebDriverWait(driver, 180).until(
+					          webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+					System.out.println("Hello : "+driver.getTitle());
+					System.out.println("After Switching Window Handle : "+driver.getWindowHandle());
+				}
+			}
+			else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+			{
+				parentWindow = driver.getWindowHandle();
+				if(driver.getWindowHandles().size()==2)
+				{
+					handles = driver.getWindowHandles();
+					handles.remove(parentWindow);
+					driver.switchTo().window((String)handles.toArray()[0]);
+				}
+				else if(driver.getWindowHandles().size()>2)
+				{
+					Set<String> newHandles = driver.getWindowHandles();
+					newHandles.removeAll(handles);
+					driver.switchTo().window((String)newHandles.toArray()[0]);
+				}
+//				Thread.sleep(3000);
+//				if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
+//				{
+//					Thread.sleep(3000);
+//					while(!(driver.getWindowHandle().equals((String)handles.toArray()[handles.size()-1])))
+//					{
+//						Thread.sleep(3000);
+//						driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
+//					}
+//				}
+//				Thread.sleep(3000);
+//				System.out.println(driver.getTitle());
+				handles=driver.getWindowHandles();
+				driver.manage().window().maximize();
+				Thread.sleep(3000);
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.toString());
+		}
    }
    
    public void iVerifyNavigationOnInstituteHomePage(String role){
 	   driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
 	   Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[@href='http://02-wpress-qa-ue1a.remedypartners.com/index.php/contact-us/']")));
+	   
+	   try
+   	{
+   		if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+   		{
+   			String parentWindow = driver.getWindowHandle();
+               Set<String> handles = driver.getWindowHandles();
+               if(!((String)handles.toArray()[0]).equals(parentWindow))
+   			{
+   				driver.switchTo().window((String)handles.toArray()[0]);
+   			}
+               delay();
+   		}
+   		else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+   		{
+   			String parentWindow = driver.getWindowHandle();
+               Set<String> handles = driver.getWindowHandles();
+               Object[] array = handles.toArray();
+				Arrays.sort(array);
+               if(!(array[0].toString().equals(parentWindow)))
+   			{
+   				driver.switchTo().window(array[0].toString());
+   			}
+               delay();
+   		}
+   		else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+   		{
+   			driver.switchTo().window(parentWindow);
+//   			String parentWindow = driver.getWindowHandle();
+//               Set<String> handles = driver.getWindowHandles();
+//               if(!((String)handles.toArray()[0]).equals(parentWindow))
+//   			{
+//   				driver.switchTo().window((String)handles.toArray()[0]);
+//   			}
+//               delay();
+   		}
+   	}
+   	catch(Exception e)
+   	{
+   		System.out.println(e.toString());
+   	}
    }
    
    public void iVerifyRepOnReportsMainPage(String reportName, String role){
@@ -1093,10 +1175,354 @@ public void iUnselectAllSelectedApps(){
 	   }
     }
    
-   public void iVerifyNavigationOnReportsHomePage(String role){
+   public void clickOnReportingTile(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Reporting Classic")){
+	   String[] apps = application.split(",");
+	   boolean flag = false;
+	   for(int i=0;i<apps.length;i++)
+	   {
+		   if(apps[i].trim().equals("Reporting"))
+		   {
+			   flag = true;
+			   break;
+		   }
+	   }
+	   if(flag)
+	   {
+		   iWillWaitToSee(By.xpath("//div[text()='Reporting']"));
+		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Reporting']")));
+		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		   {
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Reporting']")));
+		   }
+		   else
+		   {
+			   clickElement(driver.findElement(By.xpath("//div[text()='Reporting']")));  
+		   }
+	   }
+    }
+   
+   public void clickOnPMTile(String role){
+	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
+	   if(application.contains("Program Management")){
+		   iWillWaitToSee(By.xpath("//div[text()='Program Management']"));
+		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Program Management']")));
+		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		   {
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Program Management']")));
+		   }
+		   else
+		   {
+			   clickElement(driver.findElement(By.xpath("//div[text()='Program Management']")));  
+		   }
+	   }
+    }
+   
+   public void clickOnCareConnectTile(String role)
+   {
+	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
+	   if(application.contains("Care Connect")){
+		   iWillWaitToSee(By.xpath("//div[text()='Care Connect']"));
+		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Care Connect']")));
+		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		   {
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Care Connect']")));
+		   }
+		   else
+		   {
+			   clickElement(driver.findElement(By.xpath("//div[text()='Care Connect']")));  
+		   }
+		   
+		   try
+			{
+				if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+				{
+					Thread.sleep(5000);
+					String parentWindow = driver.getWindowHandle();
+					Set<String> handles = driver.getWindowHandles();
+					if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
+					{
+						driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
+					}
+				}
+				else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+				{
+					Thread.sleep(5000);
+					String parentWindow = driver.getWindowHandle();
+					Set<String> handles = driver.getWindowHandles();
+					Object[] array = handles.toArray();
+					Arrays.sort(array);
+					System.out.println("Windows : "+Arrays.toString(array));
+					if(!(array[array.length-1].toString().equals(parentWindow)))
+					{
+						driver.switchTo().window(array[array.length-1].toString());
+						new WebDriverWait(driver, 180).until(
+						          webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+						System.out.println("Hello : "+driver.getTitle());
+						System.out.println("After Switching Window Handle : "+driver.getWindowHandle());
+					}
+				}
+				else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+				{
+					parentWindow = driver.getWindowHandle();
+					if(driver.getWindowHandles().size()==2)
+					{
+						handles = driver.getWindowHandles();
+						handles.remove(parentWindow);
+						driver.switchTo().window((String)handles.toArray()[0]);
+					}
+					else if(driver.getWindowHandles().size()>2)
+					{
+						Set<String> newHandles = driver.getWindowHandles();
+						newHandles.removeAll(handles);
+						driver.switchTo().window((String)newHandles.toArray()[0]);
+					}
+//					Thread.sleep(3000);
+//					if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
+//					{
+//						Thread.sleep(3000);
+//						while(!(driver.getWindowHandle().equals((String)handles.toArray()[handles.size()-1])))
+//						{
+//							Thread.sleep(3000);
+//							driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
+//						}
+//					}
+//					Thread.sleep(3000);
+//					System.out.println(driver.getTitle());
+					handles=driver.getWindowHandles();
+					driver.manage().window().maximize();
+					Thread.sleep(3000);
+				}
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.toString());
+			}
+	   }
+    }
+   
+   public void clickOnCommunityConnectTile(String role){
+	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
+	   if(application.contains("Community Connect")){
+		   iWillWaitToSee(By.xpath("//div[text()='Community Connect']"));
+		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Community Connect']")));
+		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		   {
+			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Community Connect']")));
+		   }
+		   else
+		   {
+			   clickElement(driver.findElement(By.xpath("//div[text()='Community Connect']")));  
+		   }
+		   
+		   try
+			{
+				if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+				{
+					Thread.sleep(5000);
+					String parentWindow = driver.getWindowHandle();
+					Set<String> handles = driver.getWindowHandles();
+					if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
+					{
+						driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
+					}
+				}
+				else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+				{
+					Thread.sleep(5000);
+					String parentWindow = driver.getWindowHandle();
+					Set<String> handles = driver.getWindowHandles();
+					Object[] array = handles.toArray();
+					Arrays.sort(array);
+					System.out.println("Windows : "+Arrays.toString(array));
+					if(!(array[array.length-1].toString().equals(parentWindow)))
+					{
+						driver.switchTo().window(array[array.length-1].toString());
+						new WebDriverWait(driver, 180).until(
+						          webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+						System.out.println("Hello : "+driver.getTitle());
+						System.out.println("After Switching Window Handle : "+driver.getWindowHandle());
+					}
+				}
+				else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+				{
+					parentWindow = driver.getWindowHandle();
+					if(driver.getWindowHandles().size()==2)
+					{
+						handles = driver.getWindowHandles();
+						handles.remove(parentWindow);
+						driver.switchTo().window((String)handles.toArray()[0]);
+					}
+					else if(driver.getWindowHandles().size()>2)
+					{
+						Set<String> newHandles = driver.getWindowHandles();
+						newHandles.removeAll(handles);
+						driver.switchTo().window((String)newHandles.toArray()[0]);
+					}
+//					Thread.sleep(3000);
+//					if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
+//					{
+//						Thread.sleep(3000);
+//						while(!(driver.getWindowHandle().equals((String)handles.toArray()[handles.size()-1])))
+//						{
+//							Thread.sleep(3000);
+//							driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
+//						}
+//					}
+//					Thread.sleep(3000);
+//					System.out.println(driver.getTitle());
+					handles=driver.getWindowHandles();
+					driver.manage().window().maximize();
+					Thread.sleep(3000);
+				}
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.toString());
+			}
+	   }
+    }
+   
+   public void iVerifyNavigationOnReportsHomePage(String role)
+   {
+	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
+	   if(application.contains("Reporting Classic"))
+	   {
 		   iWillWaitToSee(By.cssSelector(".dropdown-tile-label.ng-binding")); 
+	   }
+   }
+   
+   public void verifyUserNavigatedToReporting(String role){
+	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
+	   String[] apps = application.split(",");
+	   boolean flag = false;
+	   for(int i=0;i<apps.length;i++)
+	   {
+		   if(apps[i].trim().equals("Reporting"))
+		   {
+			   flag = true;
+			   break;
+		   }
+	   }
+	   if(flag)
+	   {
+		   iWillWaitToSee(By.cssSelector(".report-title"));
+		   isElementPresentOnPage(By.cssSelector(".report-title"));
+	   }
+   }
+   
+   public void verifyUserNavigatedToPM(String role){
+	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
+	   if(application.contains("Program Management")){
+		   iWillWaitToSee(By.xpath("//a[text()='Organization']"));
+		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[text()='Organization']")));
+	   }
+   }
+   
+   public void verifyUserNavigatedToCareConnect(String role){
+	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
+	   if(application.contains("Care Connect")){
+		   iWillWaitToSee(By.xpath("//label[contains(text(),'Please enter your ')]/em[text()='client code']"));
+		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//label[contains(text(),'Please enter your ')]/em[text()='client code']")));
+		   
+		   try
+	    	{
+	    		if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+	    		{
+	    			String parentWindow = driver.getWindowHandle();
+	                Set<String> handles = driver.getWindowHandles();
+	                if(!((String)handles.toArray()[0]).equals(parentWindow))
+	    			{
+	    				driver.switchTo().window((String)handles.toArray()[0]);
+	    			}
+	                delay();
+	    		}
+	    		else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+	    		{
+	    			String parentWindow = driver.getWindowHandle();
+	                Set<String> handles = driver.getWindowHandles();
+	                Object[] array = handles.toArray();
+					Arrays.sort(array);
+	                if(!(array[0].toString().equals(parentWindow)))
+	    			{
+	    				driver.switchTo().window(array[0].toString());
+	    			}
+	                delay();
+	    		}
+	    		else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+	    		{
+	    			driver.switchTo().window(parentWindow);
+//	    			String parentWindow = driver.getWindowHandle();
+//	                Set<String> handles = driver.getWindowHandles();
+//	                if(!((String)handles.toArray()[0]).equals(parentWindow))
+//	    			{
+//	    				driver.switchTo().window((String)handles.toArray()[0]);
+//	    			}
+//	                delay();
+	    		}
+	    	}
+	    	catch(Exception e)
+	    	{
+	    		System.out.println(e.toString());
+	    	}
+	   }
+   }
+   
+   public void verifyUserNavigatedToCommunityConnect(String role){
+	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
+	   if(application.contains("Community Connect")){
+		   delay();
+		   if(driver.findElements(By.xpath("//h1[text()='Forbidden']")).size()>0)
+		   {
+			   iWillWaitToSee(By.xpath("//h1[text()='Forbidden']"));
+			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//h1[text()='Forbidden']")));  
+		   }
+		   else if(driver.findElements(By.xpath("//img[@alt='Aunt Bertha Home']")).size()>0)
+		   {
+			   iWillWaitToSee(By.xpath("//img[@alt='Aunt Bertha Home']"));
+			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//img[@alt='Aunt Bertha Home']")));
+		   }
+		   
+		   try
+	    	{
+	    		if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+	    		{
+	    			String parentWindow = driver.getWindowHandle();
+	                Set<String> handles = driver.getWindowHandles();
+	                if(!((String)handles.toArray()[0]).equals(parentWindow))
+	    			{
+	    				driver.switchTo().window((String)handles.toArray()[0]);
+	    			}
+	                delay();
+	    		}
+	    		else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+	    		{
+	    			String parentWindow = driver.getWindowHandle();
+	                Set<String> handles = driver.getWindowHandles();
+	                Object[] array = handles.toArray();
+					Arrays.sort(array);
+	                if(!(array[0].toString().equals(parentWindow)))
+	    			{
+	    				driver.switchTo().window(array[0].toString());
+	    			}
+	                delay();
+	    		}
+	    		else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+	    		{
+	    			driver.switchTo().window(parentWindow);
+//	    			String parentWindow = driver.getWindowHandle();
+//	                Set<String> handles = driver.getWindowHandles();
+//	                if(!((String)handles.toArray()[0]).equals(parentWindow))
+//	    			{
+//	    				driver.switchTo().window((String)handles.toArray()[0]);
+//	    			}
+//	                delay();
+	    		}
+	    	}
+	    	catch(Exception e)
+	    	{
+	    		System.out.println(e.toString());
+	    	}
 	   }
    }
    
@@ -1112,6 +1538,72 @@ public void iUnselectAllSelectedApps(){
 		   {
 			   clickElement(driver.findElement(By.xpath("//div[text()='RemedyU']")));
 		   }
+		   
+		   try
+			{
+				if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+				{
+					Thread.sleep(5000);
+					String parentWindow = driver.getWindowHandle();
+					Set<String> handles = driver.getWindowHandles();
+					if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
+					{
+						driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
+					}
+				}
+				else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+				{
+					Thread.sleep(5000);
+					String parentWindow = driver.getWindowHandle();
+					Set<String> handles = driver.getWindowHandles();
+					Object[] array = handles.toArray();
+					Arrays.sort(array);
+					System.out.println("Windows : "+Arrays.toString(array));
+					if(!(array[array.length-1].toString().equals(parentWindow)))
+					{
+						driver.switchTo().window(array[array.length-1].toString());
+						new WebDriverWait(driver, 180).until(
+						          webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+						System.out.println("Hello : "+driver.getTitle());
+						System.out.println("After Switching Window Handle : "+driver.getWindowHandle());
+					}
+				}
+				else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+				{
+					parentWindow = driver.getWindowHandle();
+					if(driver.getWindowHandles().size()==2)
+					{
+						handles = driver.getWindowHandles();
+						handles.remove(parentWindow);
+						driver.switchTo().window((String)handles.toArray()[0]);
+					}
+					else if(driver.getWindowHandles().size()>2)
+					{
+						Set<String> newHandles = driver.getWindowHandles();
+						newHandles.removeAll(handles);
+						driver.switchTo().window((String)newHandles.toArray()[0]);
+					}
+//					Thread.sleep(3000);
+//					if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
+//					{
+//						Thread.sleep(3000);
+//						while(!(driver.getWindowHandle().equals((String)handles.toArray()[handles.size()-1])))
+//						{
+//							Thread.sleep(3000);
+//							driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
+//						}
+//					}
+//					Thread.sleep(3000);
+//					System.out.println(driver.getTitle());
+					handles=driver.getWindowHandles();
+					driver.manage().window().maximize();
+					Thread.sleep(3000);
+				}
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.toString());
+			}
    	}
    }
    
@@ -1120,14 +1612,12 @@ public void iUnselectAllSelectedApps(){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 	   if(application.contains("Remedy University")){
 		   String user = role.substring(role.indexOf("-")+1);
-		   if(user.equalsIgnoreCase("Remedy Technical Administrator")||user.equalsIgnoreCase("Partner Program Administrator")||user.equalsIgnoreCase("Remedy Program Administrator")
-				   ||user.equalsIgnoreCase("Partner Technical Administrator")){
+		   if(user.equalsIgnoreCase("Remedy Technical Administrator")||user.equalsIgnoreCase("Partner Program Administrator")||user.equalsIgnoreCase("Remedy Program Administrator"))
+		   {
 			   iWillWaitToSee(By.cssSelector(".col-sm-6.col-md-3"));
 			   Assert.assertTrue(driver.findElement(By.cssSelector(".col-sm-6.col-md-3")).isDisplayed());
 		   }
 		   else{
-//			   iWillWaitToSee(By.cssSelector(".close"));
-//			   Assert.assertTrue(driver.findElement(By.cssSelector(".close")).isDisplayed());
 			   iWillWaitToSee(By.cssSelector(".btn.btn-primary"));
 			   driver.findElement(By.cssSelector(".btn.btn-primary")).click();
 			   Assert.assertTrue(driver.findElement(By.cssSelector(".nav.litmos-sub-nav")).isDisplayed());
@@ -1141,15 +1631,16 @@ public void iUnselectAllSelectedApps(){
 	   if(application.contains("Remedy University")){
 		   
 		   String user = role.substring(role.indexOf("-")+1);
-		   if(user.equalsIgnoreCase("Remedy Technical Administrator")||user.equalsIgnoreCase("Partner Program Administrator")||user.equalsIgnoreCase("Remedy Program Administrator")
-				   ||user.equalsIgnoreCase("Partner Technical Administrator")){
+		   if(user.equalsIgnoreCase("Remedy Technical Administrator")||user.equalsIgnoreCase("Partner Program Administrator")||user.equalsIgnoreCase("Remedy Program Administrator")){
 			   clickElement(driver.findElement(By.cssSelector("li[id='user_dropdown']")));
 			   iWillWaitToSee(By.xpath("//a[contains(text(),'My Profile & Settings')]"));
 			   clickElement(driver.findElement(By.xpath("//a[contains(text(),'My Profile & Settings')]")));
 			   iWillWaitToSee(By.xpath("//li[contains(text(),'My Profile & Settings')]"));
-			   String last = details.substring(details.indexOf(" ")+1);
-			   iWillWaitToSee(By.xpath("//td[text()='"+last+"']"));
-			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//td[text()='"+last+"']")));
+//			   String last = details.substring(details.indexOf(" ")+1);
+			   iWillWaitToSee(By.xpath("//h1[@class='litmos-larger-header' and text()='"+details+"']"));
+//			   iWillWaitToSee(By.xpath("//td[text()='"+last+"']"));
+//			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//td[text()='"+last+"']")));
+			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//h1[@class='litmos-larger-header' and text()='"+details+"']")));
 		   }
 		   else{
 //		   	String user = role.substring(role.indexOf("-")+1);
@@ -1168,8 +1659,8 @@ public void iUnselectAllSelectedApps(){
 			   if(pathway.contains(","))
 			   {
 				   String user = role.substring(role.indexOf("-")+1);
-				   if(user.equalsIgnoreCase("Remedy Technical Administrator")||user.equalsIgnoreCase("Partner Program Administrator")||user.equalsIgnoreCase("Remedy Program Administrator")
-						   ||user.equalsIgnoreCase("Partner Technical Administrator")){
+				   if(user.equalsIgnoreCase("Remedy Technical Administrator")||user.equalsIgnoreCase("Partner Program Administrator")||user.equalsIgnoreCase("Remedy Program Administrator"))
+				   {
 					   clickElement(driver.findElement(By.xpath("//span[text()='Courses']")));
 					   iWillWaitToSee(By.xpath("//h1[text()='Courses']"));
 					   clickElement(driver.findElement(By.xpath("//a[text()='Learning Paths']")));
@@ -1195,6 +1686,47 @@ public void iUnselectAllSelectedApps(){
 			   {
 				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[contains(text(),\""+pathway+"\")]")));
 			   }
+			   
+			   try
+		    	{
+		    		if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+		    		{
+		    			String parentWindow = driver.getWindowHandle();
+		                Set<String> handles = driver.getWindowHandles();
+		                if(!((String)handles.toArray()[0]).equals(parentWindow))
+		    			{
+		    				driver.switchTo().window((String)handles.toArray()[0]);
+		    			}
+		                delay();
+		    		}
+		    		else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+		    		{
+		    			String parentWindow = driver.getWindowHandle();
+		                Set<String> handles = driver.getWindowHandles();
+		                Object[] array = handles.toArray();
+						Arrays.sort(array);
+		                if(!(array[0].toString().equals(parentWindow)))
+		    			{
+		    				driver.switchTo().window(array[0].toString());
+		    			}
+		                delay();
+		    		}
+		    		else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		    		{
+		    			driver.switchTo().window(parentWindow);
+//		    			String parentWindow = driver.getWindowHandle();
+//		                Set<String> handles = driver.getWindowHandles();
+//		                if(!((String)handles.toArray()[0]).equals(parentWindow))
+//		    			{
+//		    				driver.switchTo().window((String)handles.toArray()[0]);
+//		    			}
+//		                delay();
+		    		}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.out.println(e.toString());
+		    	}
 		   }  
 	   }
    }
@@ -1321,7 +1853,8 @@ public void iUnselectAllSelectedApps(){
 }
    
    public void clickTab(String text) throws Throwable {
-	   	clickElement(driver.findElement(By.xpath("//a[contains(text(),'"+text+"')]")));
+	   iWillWaitToSee(By.xpath("//a[contains(text(),'"+text+"')]"));	
+	   clickElement(driver.findElement(By.xpath("//a[contains(text(),'"+text+"')]")));
 	   }
    
    public void verifyHeader(String text) throws Throwable {
@@ -2584,7 +3117,8 @@ public void iUnselectAllSelectedApps(){
 		Assert.assertEquals("No results found.",actual.trim());
 	}
    
-	 public void iclickontheReportsTilewithtextforuser(String text, String role) throws Throwable {
+	 public void iclickontheReportsTilewithtextforuser(String text, String role) throws Throwable 
+	 {
 		 String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
 		   StringTokenizer st = new StringTokenizer(application, ",");
 		   while(st.hasMoreTokens())
