@@ -39,7 +39,7 @@ import stepDefination.Hooks.*;
         //glue = { "./src/test/java/stepDefination" },
 
 
-        tags = {"@RowLevelSecurity"}
+        tags = {"@Claims"}
 
 
 

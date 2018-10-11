@@ -79,7 +79,7 @@ public class BaseClass {
 	}
 	public WebDriverWait waitTo()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 300);
+		WebDriverWait wait = new WebDriverWait(driver, 900);
 		return wait;
 	}
 

@@ -123,10 +123,12 @@ public class ProgramPerformance extends BaseClass{
 	public void iSwitchToAnalyticsFrameWithXpath(String frameXpath){
 		try{
 		delay();
+		iWillWaitToSee(By.xpath(frameXpath));
         swithToFrame(frameXpath);
         delay();}
 		catch(Exception e){
-	    	 ProgramPerformance.writer.print(System.lineSeparator());
+			    e.printStackTrace();
+	    	    ProgramPerformance.writer.print(System.lineSeparator());
 	    		String flag="1";
 	    		Assert.assertEquals("2", flag);
 	     }
@@ -551,11 +553,26 @@ public class ProgramPerformance extends BaseClass{
 	 public void iClickOnDashboard(String dashboard){
 		 try{
 		 iWillWaitToSee(By.cssSelector(".report-title"));
-		 selectElementByDesc(".report-title", dashboard);
+		 if(DriverScript.Config.getProperty("Browser").equals("ie"))
+	        {
+			 Thread.sleep(2000);
+			 List<WebElement> listItems = driver.findElements(By.cssSelector(".report-title"));
+				System.out.println("List item is"+listItems);
+				for (WebElement item : listItems) {
+                 if (item.getText().equalsIgnoreCase(dashboard)) {
+                	    ((JavascriptExecutor)driver).executeScript("arguments[0].click();", item);
+					//     Thread.sleep(4000);
+					     break;
+					}
+				}
+			  }
+		 else{
+		 selectElementByDesc(".report-title", dashboard);}
 		 longDelay();
 		 iWillWaitToSee(By.cssSelector(".component-report-header"));
 		 longDelay();}
 		 catch(Exception e){
+			 e.printStackTrace();
 	    	 ProgramPerformance.writer.print(System.lineSeparator());
 	    		String flag="1";
 	    		Assert.assertEquals("2", flag);
@@ -883,12 +900,17 @@ public class ProgramPerformance extends BaseClass{
 		 }
 		 if(field.equals("Start Date")){
 			 if(value.contains("ECStartDate")){
-				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+				 if(DriverScript.Config.getProperty("Browser").equals("ie")){
+					 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']"))); }else{
+				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));}
 				 delay();
 //				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),outputText.get("ECStartDateDB"));
 				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),DriverScript.Config.getProperty("ECStartDate"));
 				 }else if(value.contains("ClaimsStartDate")){
-					 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
+					 if(DriverScript.Config.getProperty("Browser").equals("ie")){
+						 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));  
+					 }else{
+					 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));}
 					 delay();
 //					 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),outputText.get("ECStartDateDB"));
 					 String date2=DriverScript.Config.getProperty("ClaimsStartDate");
@@ -1218,14 +1240,20 @@ public class ProgramPerformance extends BaseClass{
 		 if(text.equals("Time")){
 			 delay();
 			 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. /span//button[@type='button']"));
-			 act.moveToElement(elem).click().build().perform();
+			 if(DriverScript.Config.getProperty("Browser").equals("ie")){
+				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", elem);
+			 }else{
+			  act.moveToElement(elem).click().build().perform();}
 			 delay();
 		 }
 		 
 		 else if(!dashboard.contains("Skip")){
 		 delay();
 		 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']"));
-		 act.moveToElement(elem).click().build().perform();
+		 if(DriverScript.Config.getProperty("Browser").equals("ie")){
+			 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", elem);
+		 }else{
+		 act.moveToElement(elem).click().build().perform();}
 		 delay();}
 		 }  catch(Exception e){
 	    	 ProgramPerformance.writer.print(System.lineSeparator());
@@ -1475,7 +1503,9 @@ public class ProgramPerformance extends BaseClass{
 		 delay();
 	//	 waitTo().until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Refresh']")));
 		 scrollIntoViewByJS(driver.findElement(By.xpath("//span[text()='Refresh']")));
-		 clickElement(driver.findElement(By.xpath("//span[text()='Refresh']")));
+		 if(DriverScript.Config.getProperty("Browser").equals("ie")){
+		 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='Refresh']"))); }else{
+		 clickElement(driver.findElement(By.xpath("//span[text()='Refresh']")));}
 		 delay();
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 		 delay();

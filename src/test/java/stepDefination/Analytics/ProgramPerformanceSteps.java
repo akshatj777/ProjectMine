@@ -65,7 +65,7 @@ public class ProgramPerformanceSteps extends DriverScript{
 	
 	@And("^I switch to analytics iframe$")
 	public void i_switch_to_analytics_iframe() throws Throwable{
-		programdashboard.iSwitchToAnalyticsFrameWithXpath("//iframe[@class='report-iframe']");
+		programdashboard.iSwitchToAnalyticsFrameWithXpath("//iframe[@title='data visualization']");
 	}
 	
 	@Then("^I enter incorrect \"([^\"]*)\" for analytics as \"([^\"]*)\" for login$")
