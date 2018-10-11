@@ -173,7 +173,7 @@ Feature: Edit LTCH organization functionality tests
     Then I verify "<Message>" after submitting the "FETCHFROMAPIForLTCHNAME - <Has_MO>" organization page
 
     Examples: 
-      | Description                                                                                                       | Has_MO | LTCH_Name | Edited_LTCH_Name | Org_Address1                                            | Short_Name                                    | Org_Address2                                            | City                                          | State      | Org_Postal_Code | Loc_Name                                                                    | Loc_Address1                                            | Loc_Type                | Loc_Region | Loc_Market | Loc_Address2                                            | Loc_City                                      | Loc_State  | Loc_Postal_Code | Message                                 |
+      | Description                                                                                                       | Has_MO | LTCH_Name | Edited_LTCH_Name     | Org_Address1                                            | Short_Name                                    | Org_Address2                                            | City                                          | State      | Org_Postal_Code | Loc_Name                                                                    | Loc_Address1                                            | Loc_Type                | Loc_Region | Loc_Market | Loc_Address2                                            | Loc_City                                      | Loc_State  | Loc_Postal_Code | Message                                 |
       #| Check Character Limit edge condition for LTCH Name field on Edit LTCH Organization - Without MO                   | NO     | LTCHNAME  | equalsTo75Characters | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | LTCH Organization Successfully Updated. |
       | Check Character Limit edge condition for Address1 field on Edit LTCH Organization - With MO                       | YES    | LTCHNAME  | LTCHNAME             | abcdefghijklmnopqrstuvwxyzabcdefgopmailcomabcdefghijklm | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | LTCH Organization Successfully Updated. |
       | Check Character Limit edge condition for Short Name field on Edit LTCH Organization - With MO                     | YES    | LTCHNAME  | LTCHNAME             | Address1                                                | abcdefghijklmnopqrstuvwxyzabcdefgopmailcomabc | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | LTCH Organization Successfully Updated. |
@@ -200,7 +200,6 @@ Feature: Edit LTCH organization functionality tests
       | Edit LTCH Organization with all the available fields - With MO                                                    | YES    | LTCHNAME  | LTCHNAME             | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | LTCH Organization Successfully Updated. |
       | Edit duplicate LTCH Organization name with Mandatory fields - Without MO                                          | NO     | LTCHNAME  | DUPLICATE_LTCH       | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |                         |            |            |                                                         | Loc_City                                      | California |           10000 | LTCH Organization Successfully Updated. |
       | Edit duplicate LTCH Organization name with Mandatory fields - With MO                                             | YES    | LTCHNAME  | DUPLICATE_LTCH       | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |                         |            |            |                                                         | Loc_City                                      | California |           10000 | LTCH Organization Successfully Updated. |
-
 
   Scenario Outline: Edit a LTCH Organization With Mandatory Fields Missing
     Given I am on the login page
@@ -502,6 +501,44 @@ Feature: Edit LTCH organization functionality tests
       | Description                                             | Has_MO | LTCH_Name | Loc_Name      | Loc_Address1  | Loc_Type                | Loc_Region | Loc_Market | Loc_Address2  | Loc_City  | Loc_State  | Loc_Postal_Code | Message                                 |
       | Add one more Location details on Edit LTCH Organization | YES    | LTCHNAME  | Loc_Name new1 | Loc_Address14 | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address24 | Loc_City1 | California |           10001 | LTCH Organization Successfully Updated. |
 
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "LTCH" organization tab on organization dashboard
+    Then I search with "<LTCH_Name> - <Has_MO>" on organization in search box
+    And I verify "<LTCH_Name> - <Has_MO>" field in search list on organization page
+    And I click "<LTCH_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I verify Managing Organization radio buttons status on "Edit LTCH - <Has_MO>" organization page
+    And I select "<Has_MO1>" radio button for managing organization
+    Then I select "<Managing_Org>" managing organization name in "<Has_MO1>" Has a Management Organization drop down
+    And I edit "Long-Term Care Hospital Organization Name" field to "<Edited_LTCH_Name> - <Has_MO>" for organization
+    And I edit "Address 1" field to "<Org_Address1>" for organization
+    And I edit "Short Name" field to "<Short_Name>" for organization
+    And I edit "Address 2" field to "<Org_Address2>" for organization
+    And I edit "City" field to "<City>" for organization
+    And I edit <State> field for organization
+    And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
+    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
+    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
+    And I edit "address2" field to <Loc_Address1> for Location "1" for organization
+    And I edit "city" field to <Loc_City> for Location "1" for organization
+    And I edit State dropdown field to <Loc_State> for Location "1" for organization
+    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    Then I verify "<Message>" after submitting the "FETCHFROMAPIForLTCHNAME - <Has_MO>" organization page
+    When I search with "<LTCH_Name> - <Has_MO>" on organization in search box
+    And I click "<LTCH_Name> - <Has_MO>" field in search list on organization page
+    And I verify "<LTCH_Name> - <Has_MO>" name on the header of view profile
+    And I verify "Managing Organization - <Has_MO1>" on view profile of "LTCH" Organization
+
+    Examples: 
+      | Description                                           | Has_MO | Has_MO1 | LTCH_Name | Edited_LTCH_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                 |
+      | Edit & verify LTCH organization with MO to without MO | YES    | NO      | LTCHNAME  | LTCHNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | LTCH Organization Successfully Updated. |
+      | Edit & verify LTCH organization without MO to with MO | NO     | YES     | LTCHNAME  | LTCHNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | LTCH Organization Successfully Updated. |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"
