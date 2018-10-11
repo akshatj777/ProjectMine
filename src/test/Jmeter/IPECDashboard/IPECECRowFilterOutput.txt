@@ -1,0 +1,1 @@
+Episode Initiator - BPID="[Penn Presbyterian Medical Center - 2070-021]"*Anchor Facility - CCN="[Upenn - Penn Presbyterian Hospital - 390223]"*Bundle="[Coronary artery bypass graft, Lower Major joint replacement, Percutaneous coronary intervention, Revision of the hip or knee]"*Remdy Region Market="[Remedy East - Middle States]"*Partner Region Market="[null]"*Participant="[Penn]"
