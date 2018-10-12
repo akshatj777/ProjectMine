@@ -78,4 +78,9 @@ public class ViewProfileManagingOrganizationStepDef extends DriverScript {
 	  public void user_should_get_redirected_to_the_managing_organization_Profile_page() throws Throwable {
 		viewProfileMO.userShouldGetRedirectedToTheManagingOrganizationProfilePage();
 		}
+	
+	@And("^I verify the url after creation of an organization on view profile of \"([^\"]*)\" organization$")
+	  public void i_Verify_The_Url_After_Creating_Any_Organization(String org) throws Throwable {
+		viewProfileMO.iVerifyTheUrlAfterCreatingAnyOrganization(org);
+		}
 }

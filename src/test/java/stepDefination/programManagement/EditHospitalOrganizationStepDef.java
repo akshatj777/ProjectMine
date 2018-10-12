@@ -42,4 +42,9 @@ public class EditHospitalOrganizationStepDef extends DriverScript {
 	  public void i_Verify_Identifier_Is_Not_Editable(String id) throws Throwable {
 		editHospOrg.iVerifyIdentifierIsNotEditable(id);
 		}
+	
+	@And("^I edit location ID field to \"([^\"]*)\" for Location \"([^\"]*)\" for \"([^\"]*)\" organization$")
+	  public void i_Edit_LocationID_Under_Locations_Section(String field, int num, String org) throws Throwable {
+		editHospOrg.iEditLocationIDFieldUnderLocationsSection(field, num, org);
+		}
 }

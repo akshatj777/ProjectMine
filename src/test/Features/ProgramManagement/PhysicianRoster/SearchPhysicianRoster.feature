@@ -97,7 +97,6 @@ Feature: Search Physician Roster functionality tests
       | Description           | firstName | lastName     | npi | gender | enumerationDate | prefix | suffix | npiDeactivationDate | npiDeactivationReasonCode | otherFirstName | otherLastName | otherPrefix | otherSuffix | primaryTaxonomyId    | secondaryTaxonomyId | noOfLicenses | licenseNumber | licenseNumberStateCode | address1 | address2 | city | state | zip | expStatusCode | responseMsg | classificationId | groupingId | specializationId | providerTaxonCode |
       | validPractionerCreate | firstName | testLastName | PC  | f      | 2018-01-01      | ap     | test   | 2018-01-01          | dd                        | otherFirstName | otherLastName | ff          | ff          | generatePrimaryTaxId |                   1 |            2 |           2,5 | NY,NY                  | addr1    | addr2    | city | ny    | zip |           201 |             |                0 |          0 |                0 | CPT               |
       | validPractionerCreate | firstName | testLastName | PC  | f      | 2018-01-01      | ap     | test   | 2018-01-01          | dd                        | otherFirstName | otherLastName | ff          | ff          | generatePrimaryTaxId |                   1 |            2 |           2,5 | NY,NY                  | addr1    | addr2    | city | ny    | zip |           201 |             |                0 |          0 |                0 | CPT               |
-      | validPractionerCreate | firstName | testLastName | PC  | f      | 2018-01-01      | ap     | test   | 2018-01-01          | dd                        | otherFirstName | otherLastName | ff          | ff          | generatePrimaryTaxId |                   1 |            2 |           2,5 | NY,NY                  | addr1    | addr2    | city | ny    | zip |           201 |             |                0 |          0 |                0 | CPT               |
 
   Scenario Outline: <desc>
     Given create physician roster Json "<practitionerContractId>" and "<practionerId>" and "<startDate>" and "<endDate>" and "<noOfRosters>"
@@ -106,8 +105,8 @@ Feature: Search Physician Roster functionality tests
 
     Examples: 
       | desc                                            | noOfRosters | index | practitionerContractId | practionerId         | startDate  | endDate    | expPostCode | respMsg |
-      | createAPhysicianRoster under Hospital has MO    |           1 |     0 | null                   | addPhysicianToRoster | 2019-01-01 | 2020-12-01 |         200 |         |
-      | createAPhysicianRoster under Hospital has no MO |           1 |     1 | null                   | addPhysicianToRoster | 2019-01-30 | 2020-12-01 |         200 |         |
+      | createAPhysicianRoster under Hospital has MO    |           1 |     0 | null                   | addPhysicianToRoster | 2019-01-01 | 2020-01-06 |         200 |         |
+      | createAPhysicianRoster under Hospital has no MO |           1 |     1 | null                   | addPhysicianToRoster | 2019-01-30 | 2020-02-06 |         200 |         |
       | createAPhysicianRoster under PGP has MO         |           1 |     2 | null                   | addPhysicianToRoster | 2019-07-01 | 2020-12-01 |         200 |         |
       | createAPhysicianRoster under PGP has no MO      |           1 |     3 | null                   | addPhysicianToRoster | 2019-01-30 | 2020-06-30 |         200 |         |
 
@@ -178,7 +177,7 @@ Feature: Search Physician Roster functionality tests
       | Search for a Physician by First Name | NO     | ACHNAME   | firstName    |
       | Search for a Physician by Last Name  | NO     | ACHNAME   | testLastName |
       | Search for a Physician by Start Date | NO     | ACHNAME   | 2019-01-30   |
-      | Search for a Physician by End Date   | NO     | ACHNAME   | 2020-12-01   |
+      | Search for a Physician by End Date   | NO     | ACHNAME   | 2020-02-06   |
 
   Scenario Outline: <Description>
     Given I am on the login page
