@@ -482,6 +482,10 @@ public class CreateACHOrganization extends BaseClass{
     			CreateSNFOrganization.tempSNFOrg.put("LID", createRandomNumber(21));
     			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateSNFOrganization.tempSNFOrg.get("LID"));
     		}
+        	else if(text.equals("Hospital_LID"))
+        	{
+        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), achOrg_noMO.get("LID"));
+        	}
     	}
     	else if(field.contains("LTCH"))
     	{
@@ -566,6 +570,11 @@ public class CreateACHOrganization extends BaseClass{
     	else if(id.equalsIgnoreCase("Location_Id")){
     		iFillInText(driver.findElement(By.xpath("//input[@name='locations[0].locationId']")), location_Id);
     	}
+    	else if(id.equals("SNF_LID"))
+    	{
+    		iFillInText(driver.findElement(By.xpath("//input[@placeholder='CCN']")), CreateSNFOrganization.SNFOrg_noMO.get("LID"));
+    	}
+    	
     }
     
     public void iVerifyDuplicateLocationMessage(String text){

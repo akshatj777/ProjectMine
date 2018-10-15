@@ -109,10 +109,10 @@ Feature: Create Programs organization under Payor Organization functionality tes
     And I click on checkbox for "Attribute to the attending physician on the triggering claim" Attribution rule
     And I click on checkbox for "Attribute to the provider with the earliest Bundle start date" Attribution rule
     And I verify the sub headline of "Validate To"
-    And I click on checkbox for "Bundle inclusions" Attribution rule
-    And I click on checkbox for "Bundle exclusion" Attribution rule
-    And I click on checkbox for "Earliest contract start date" Attribution rule
-    And I click on checkbox for "Earliest trigger from date" Attribution rule
+    And I click on checkbox for "Bundle inclusions" validation ranks
+    And I click on checkbox for "Bundle exclusion" validation ranks
+    And I click on checkbox for "Earliest contract start date" validation ranks
+    And I click on checkbox for "Earliest trigger from date" validation ranks
     Then I click on "Submit" button on "create" organization page
     Then I verify duplicate "<Message>" after submitting the "create Programs" organization page
 
@@ -152,6 +152,10 @@ Feature: Create Programs organization under Payor Organization functionality tes
     And I click on checkbox for "Attribute to the physician who has the most claims during the trigger window" Attribution rule
     And I click on checkbox for "Attribute to the attending physician on the triggering claim" Attribution rule
     And I click on checkbox for "Attribute to the provider with the earliest Bundle start date" Attribution rule
+    
+    And I click on checkbox for "Attribute to the Attending Physicians Group" Attribution rule
+    And I click on checkbox for "Attribute to the Operating Physicians Group" Attribution rule
+    
     And I verify the sub headline of "Validate To"
     Then I click on "Submit" button on "create" organization page
     Then I verify duplicate "<Message>" after submitting the "create Programs" organization page
@@ -176,10 +180,10 @@ Feature: Create Programs organization under Payor Organization functionality tes
     And I verify "Create Program" header text on create organization page
     Then I enter <Program_Name> in "Program Name" on create organization page
     And I verify the sub headline of "Validate To"
-    And I click on checkbox for "Bundle inclusions" Attribution rule
-    And I click on checkbox for "Bundle exclusion" Attribution rule
-    And I click on checkbox for "Earliest contract start date" Attribution rule
-    And I click on checkbox for "Earliest trigger from date" Attribution rule
+    And I click on checkbox for "Bundle inclusions" validation ranks
+    And I click on checkbox for "Bundle exclusion" validation ranks
+    And I click on checkbox for "Earliest contract start date" validation ranks
+    And I click on checkbox for "Earliest trigger from date" validation ranks
     Then I click on "Submit" button on "create" organization page
     Then I verify duplicate "<Message>" after submitting the "create Programs" organization page
 
@@ -276,8 +280,8 @@ Feature: Create Programs organization under Payor Organization functionality tes
     And I click on checkbox for "Attribute to the triggering provider id on the triggering claim" Attribution rule
     And I click on checkbox for "Attribute to the physician who has the highest claim allowed amount during the lookForward window" Attribution rule
     And I verify the sub headline of "Validate To"
-    And I click on checkbox for "Bundle inclusions" Attribution rule
-    And I click on checkbox for "Bundle exclusion" Attribution rule
+    And I click on checkbox for "Bundle inclusions" validation ranks
+    And I click on checkbox for "Bundle exclusion" validation ranks
     And I click on checkbox for "Multiple Bundle Episode"
     Then I click on "Submit" button on "create" organization page
     Then I verify "<Message>" after submitting the "create Programs" on Payor organization page
