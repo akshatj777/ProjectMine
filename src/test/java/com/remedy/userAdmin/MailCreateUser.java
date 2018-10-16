@@ -40,7 +40,9 @@ public class MailCreateUser extends BaseClass{
 	}
 
 	public void iAmOnMailLoginPage() throws InterruptedException, AWTException {
+		delay();
 		driver.navigate().to("https://accounts.google.com");
+		delay();
 		if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		{
 			driver.manage().window().maximize();
@@ -207,35 +209,40 @@ public class MailCreateUser extends BaseClass{
 			driver.findElement(By.xpath("//a[contains(text(),'Inbox')]")).click();
 			iWillWaitToSee(By.xpath("//input[@aria-label='Search']"));
 			driver.findElement(By.xpath("//input[@aria-label='Search']")).sendKeys(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim()));
+			while(!driver.findElement(By.xpath("//input[@aria-label='Search']")).getAttribute("value").toString().trim().equals(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim())))
+			{
+				driver.findElement(By.xpath("//input[@aria-label='Search']")).clear();
+				driver.findElement(By.xpath("//input[@aria-label='Search']")).sendKeys(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim()));
+			}
 			delay();
 			driver.findElement(By.xpath("//button[@aria-label='Search Mail']")).click();
 			delay();
-			iWillWaitToSee(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Change Your Password')]"));
-	    	Assert.assertTrue(isElementPresentOnPage((By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Change Your Password')]"))));
-	    	iWillWaitToSee(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Change Your Password')]"));
+			iWillWaitToSee(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Reset Your Password')]"));
+	    	Assert.assertTrue(isElementPresentOnPage((By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Reset Your Password')]"))));
+	    	iWillWaitToSee(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Reset Your Password')]"));
 			Thread.sleep(3000);
-			if(driver.findElement(By.xpath("//div//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Change Your Password')]")).isEnabled())
+			if(driver.findElement(By.xpath("//div//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Reset Your Password')]")).isEnabled())
 			{
 				if(DriverScript.Config.getProperty("Browser").equals("ie"))
 				{
-					((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Change Your Password')]")));
+					((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Reset Your Password')]")));
 				}
 				else
 				{
-					driver.findElement(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Change Your Password')]")).click();
+					driver.findElement(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Reset Your Password')]")).click();
 				}
 			}
-			iWillWaitToSee(By.xpath("//a[contains(text(),'"+"Change My Password"+"')]"));
-			Assert.assertTrue(isElementPresentOnPage((By.xpath("//a[contains(text(),'"+"Change My Password"+"')]"))));
+			iWillWaitToSee(By.xpath("//a[contains(text(),'"+"Reset My Password"+"')]"));
+			Assert.assertTrue(isElementPresentOnPage((By.xpath("//a[contains(text(),'"+"Reset My Password"+"')]"))));
 			if(DriverScript.Config.getProperty("Browser").equals("ie"))
 			{
-				iWillWaitToSee(By.xpath("//a[contains(text(),'"+"Change My Password"+"')]"));
-				((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(text(),'"+"Change My Password"+"')]")));
+				iWillWaitToSee(By.xpath("//a[contains(text(),'"+"Reset My Password"+"')]"));
+				((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(text(),'"+"Reset My Password"+"')]")));
 			}
 			else
 			{
-				iWillWaitToSee(By.xpath("//a[contains(text(),'"+"Change My Password"+"')]"));
-				clickElement(driver.findElement((By.xpath("//a[contains(text(),'"+"Change My Password"+"')]"))));
+				iWillWaitToSee(By.xpath("//a[contains(text(),'"+"Reset My Password"+"')]"));
+				clickElement(driver.findElement((By.xpath("//a[contains(text(),'"+"Reset My Password"+"')]"))));
 			}
 			try
 			{
@@ -364,6 +371,7 @@ public class MailCreateUser extends BaseClass{
 	    		System.out.println(e.toString());
 	    	}
 			
+			scrollIntoViewByJS(driver.findElement(By.xpath("//div[@data-tooltip='More']")));
 			iWillWaitToSee(By.xpath("//div[@data-tooltip='More']"));
 			driver.findElement(By.xpath("//div[@data-tooltip='More']")).click();
 			iWillWaitToSee(By.xpath("//div[contains(text(),'Delete this message')]"));
@@ -374,6 +382,11 @@ public class MailCreateUser extends BaseClass{
 	{
 		iWillWaitToSee(By.xpath("//input[@aria-label='Search']"));
 		driver.findElement(By.xpath("//input[@aria-label='Search']")).sendKeys(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim()));
+		while(!driver.findElement(By.xpath("//input[@aria-label='Search']")).getAttribute("value").toString().trim().equals(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim())))
+		{
+			driver.findElement(By.xpath("//input[@aria-label='Search']")).clear();
+			driver.findElement(By.xpath("//input[@aria-label='Search']")).sendKeys(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim()));
+		}
 		delay();
 		driver.findElement(By.xpath("//button[@aria-label='Search Mail']")).click();
 		delay();
@@ -525,6 +538,7 @@ public class MailCreateUser extends BaseClass{
 		}
 		else
 		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//div[@data-tooltip='More']")));
 			iWillWaitToSee(By.xpath("//div[@data-tooltip='More']"));
 			driver.findElement(By.xpath("//div[@data-tooltip='More']")).click();
 			iWillWaitToSee(By.xpath("//div[contains(text(),'Delete this message')]"));
@@ -739,22 +753,22 @@ public class MailCreateUser extends BaseClass{
 	}
 	
 	public void iVerifyChangePasswordMailinInboxInMyAccount() {
-		iWillWaitToSee(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Change Your Password')]"));
-    	Assert.assertTrue(isElementPresentOnPage((By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Change Your Password')]"))));
+		iWillWaitToSee(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Reset Your Password')]"));
+    	Assert.assertTrue(isElementPresentOnPage((By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Reset Your Password')]"))));
 	}
 	
 	public void iClickOnChangePasswordMailInInboxInMyAccount() throws InterruptedException {
-		iWillWaitToSee(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Change Your Password')]"));
+		iWillWaitToSee(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Reset Your Password')]"));
 		Thread.sleep(3000);
-		if(driver.findElement(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Change Your Password')]")).isEnabled())
+		if(driver.findElement(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Reset Your Password')]")).isEnabled())
 		{
 			if(DriverScript.Config.getProperty("Browser").equals("ie"))
 			{
-				((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Change Your Password')]")));
+				((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Reset Your Password')]")));
 			}
 			else
 			{
-				clickElement(driver.findElement(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Change Your Password')]")));
+				clickElement(driver.findElement(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span/b[contains(text(),'Remedy Partners - Reset Your Password')]")));
 			}
 		}
 	}

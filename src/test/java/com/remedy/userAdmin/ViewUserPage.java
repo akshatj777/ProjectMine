@@ -74,6 +74,10 @@ public class ViewUserPage extends BaseClass {
 	}
 
 	public void verifyNavigationToViewUserPage() throws Throwable {
+		if(!isElementPresentOnPage(By.xpath("//h3[text()='Applications']")))
+		{
+			driver.navigate().refresh();
+		}
 		iWillWaitToSee(By.xpath("//h3[text()='Applications']"));
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//h3[text()='Applications']")));
 	}
@@ -127,12 +131,12 @@ public class ViewUserPage extends BaseClass {
 	}
 	public void verifyEmail(String email, String userRole) throws Throwable {
 		String emailUser = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
-		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[@title='"+emailUser+"']")));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[@title='"+emailUser.toLowerCase()+"']")));
 	}
 	
 	public void verifyBulkEmail(String userRole) throws Throwable {
 		String emailUser = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
-		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[@title=\""+emailUser+"\"]")));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[@title=\""+emailUser.toLowerCase()+"\"]")));
 	}
 
 	public void verifyHealthSystem(String healthSystem) throws Throwable {
@@ -363,6 +367,7 @@ public class ViewUserPage extends BaseClass {
 	}
 	
 	public void verifyDeleteUserButton() throws Throwable {
+		iWillWaitToSee(By.xpath("//a[text()='Delete User']"));
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[text()='Delete User']")));
 	}
 	

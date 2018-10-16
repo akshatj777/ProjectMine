@@ -35,6 +35,7 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I should see Log in widget
     Given I am on the login page
     Then I click on "Log Out" button again
+    And I should see Log in widget
     Given I am on mail login page
     Then I enter username "qaautomation@remedysystems.com" to login mail account
     Then I enter password "9h$00v3T$dF@OPn0" to login mail account
@@ -45,8 +46,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Phone      | Role                | ApplicationsUnchecked | Applications                                                  | ApplicationsNotVisible                                     | NPI | LearningPathwaySearchParameter              | Locations                                                                                  |
-      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Downstream Provider | Remedy University     | Episode Connect, Remedy University, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect |     | HZhmTBQzHtU1, NFdw0Kts2C01, max-test-052417 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital |
+      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Phone      | Role                | ApplicationsUnchecked | Applications                                                  | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter              | Locations                                                                                  |
+      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Downstream Provider | Remedy University     | Episode Connect, Remedy University, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect, Program Management |     | HZhmTBQzHtU1, NFdw0Kts2C01, max-test-052417 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -94,12 +95,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    #Then I click on Hamburger menu on top left of homepage
-    #And I verify "<Applications>" in product menu dropdown
-    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    #And I redirect to Remedy connect page
+    #######Episode Connect Classic Provisioning################
     And I click on Episode1 tile for "<User>-<Role>" user
-    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -109,22 +106,50 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    #And I switch back to old window
     And I redirect to Remedy connect page
+    ###########Reporting Classic Provisioning##############
+    And I click on Reports tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Reports homepage
+    And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
+    Then I click on "<ReportName>" report text for Overall Program Reports for "<User>-<Role>" user
+    Then I verify "<ReportName>" on the reports main page for "<User>-<Role>" user
+    And I redirect to Remedy connect page
+    ###########Episode Connect Post Acute Care Provisioning##############
     And I click on Episodes 2 tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
+    And I redirect to Remedy connect page
+    ############Remedy University Provisioning###############
     And I click on RemedyU tile for "<User>-<Role>" user
-    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
-    And I switch back to old window
     And I redirect to Remedy connect page
+    ############User Admin Provisioning###################################
+    And I click on User Admin tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to User Admin homepage
+    And I redirect to Remedy connect page
+    #############TCI Provisioning####################################
     #And I click on Institute tile for "<User>-<Role>" user
-    #And I switch to new window
     #And I verify "<User>-<Role>" user navigated to Institute homepage
-    #And I switch back to old window
+    #And I redirect to Remedy connect page
+    #################Program Management Tile Provisioning####################
+    And I click on Program Management tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Program Management homepage
+    And I redirect to Remedy connect page
+    #################Care Connect Tile Provisioning####################
+    And I click on Care Connect tile for  "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Care Connect homepage
+    And I redirect to Remedy connect page
+    #################Community Connect Tile Provisioning####################
+    And I click on Community Connect tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Community Connect homepage
+    And I redirect to Remedy connect page
+    ###############Reporting Provisioning###################################
+    And I click on Reporting tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Reporting homepage
+    And I redirect to Remedy connect page
+    #################General Verification################################
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -138,8 +163,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I should see Log in widget
 
     Examples: 
-      | Description                                                                    | User        | FirstName                                 | LastName | Role                | Applications                                                  | ApplicationsNotVisible                                                                                                                      | Roletext | ReportCategory | ReportName         | BPID | LearningPathway                                        | Facilities                                                                                                                          |
-      | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episode Connect, Remedy University, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Community Connect | ROLE_SNF | Patient ID     | Episode DRG Issues |      | New learning Path, Learning Pathway 2, max-test-052417 | Abbeville General Hospital, Litchford Falls Nursing & Rehabilitation Center, Coosa valley health care, Alaris Health at Jersey City |
+      | Description                                                                    | User        | FirstName                                 | LastName | Role                | Applications                                                  | ApplicationsNotVisible                                                                                                                                          | Roletext | ReportCategory | ReportName         | BPID | LearningPathway                                        | Facilities                                                                                                                          |
+      | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episode Connect, Remedy University, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Community Connect, Program Management | ROLE_SNF | Patient ID     | Episode DRG Issues |      | New learning Path, Learning Pathway 2, max-test-052417 | Abbeville General Hospital, Litchford Falls Nursing & Rehabilitation Center, Coosa valley health care, Alaris Health at Jersey City |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -175,6 +200,7 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I should see Log in widget
     Given I am on the login page
     Then I click on "Log Out" button again
+    And I should see Log in widget
     Given I am on mail login page
     Then I enter username "qaautomation@remedysystems.com" to login mail account
     Then I enter password "9h$00v3T$dF@OPn0" to login mail account
@@ -185,8 +211,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Phone      | Role                | ApplicationsUnchecked   | Applications                                                        | ApplicationsNotVisible                                     | NPI | LearningPathwaySearchParameter                                          | Locations                                                                                  |
-      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Downstream Provider | Episode Connect Classic | Episode Connect, Episode Connect Classic, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect |     | HZhmTBQzHtU1, NFdw0Kts2C01, 3hSOHNAnvjc1, max-test-052417, n9yn5n0Qa581 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital |
+      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Phone      | Role                | ApplicationsUnchecked   | Applications                                                        | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter                                          | Locations                                                                                  |
+      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Downstream Provider | Episode Connect Classic | Episode Connect, Episode Connect Classic, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect, Program Management |     | HZhmTBQzHtU1, NFdw0Kts2C01, 3hSOHNAnvjc1, max-test-052417, n9yn5n0Qa581 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -234,12 +260,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    #Then I click on Hamburger menu on top left of homepage
-    #And I verify "<Applications>" in product menu dropdown
-    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    #And I redirect to Remedy connect page
+    #######Episode Connect Classic Provisioning################
     And I click on Episode1 tile for "<User>-<Role>" user
-    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -249,16 +271,50 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    #And I switch back to old window
     And I redirect to Remedy connect page
+    ###########Reporting Classic Provisioning##############
+    And I click on Reports tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Reports homepage
+    And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
+    Then I click on "<ReportName>" report text for Overall Program Reports for "<User>-<Role>" user
+    Then I verify "<ReportName>" on the reports main page for "<User>-<Role>" user
+    And I redirect to Remedy connect page
+    ###########Episode Connect Post Acute Care Provisioning##############
     And I click on Episodes 2 tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I redirect to Remedy connect page
+    ############Remedy University Provisioning###############
+    And I click on RemedyU tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to RemedyU homepage
+    And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
+    And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I redirect to Remedy connect page
+    ############User Admin Provisioning###################################
+    And I click on User Admin tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to User Admin homepage
+    And I redirect to Remedy connect page
+    #############TCI Provisioning####################################
     #And I click on Institute tile for "<User>-<Role>" user
-    #And I switch to new window
     #And I verify "<User>-<Role>" user navigated to Institute homepage
-    #And I switch back to old window
+    #And I redirect to Remedy connect page
+    #################Program Management Tile Provisioning####################
+    And I click on Program Management tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Program Management homepage
+    And I redirect to Remedy connect page
+    #################Care Connect Tile Provisioning####################
+    And I click on Care Connect tile for  "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Care Connect homepage
+    And I redirect to Remedy connect page
+    #################Community Connect Tile Provisioning####################
+    And I click on Community Connect tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Community Connect homepage
+    And I redirect to Remedy connect page
+    ###############Reporting Provisioning###################################
+    And I click on Reporting tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Reporting homepage
+    And I redirect to Remedy connect page
+    #################General Verification################################
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -272,8 +328,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I should see Log in widget
 
     Examples: 
-      | Description                                                                    | User        | FirstName                                 | LastName | Role                | Applications                                                        | ApplicationsNotVisible                                                                                                                | Roletext | ReportCategory | ReportName         | BPID | LearningPathway                                                                               | Facilities                                                                                                                          |
-      | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episode Connect, Episode Connect Classic, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect, Episode Connect for Post-acute Care, Remedy University, Community Connect | ROLE_SNF | Patient ID     | Episode DRG Issues |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Remedy University | Abbeville General Hospital, Litchford Falls Nursing & Rehabilitation Center, Coosa valley health care, Alaris Health at Jersey City |
+      | Description                                                                    | User        | FirstName                                 | LastName | Role                | Applications                                                        | ApplicationsNotVisible                                                                                                                                    | Roletext | ReportCategory | ReportName         | BPID | LearningPathway                                                                               | Facilities                                                                                                                          |
+      | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episode Connect, Episode Connect Classic, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect, Episode Connect for Post-acute Care, Remedy University, Community Connect, Program Management | ROLE_SNF | Patient ID     | Episode DRG Issues |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Remedy University | Abbeville General Hospital, Litchford Falls Nursing & Rehabilitation Center, Coosa valley health care, Alaris Health at Jersey City |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -309,6 +365,7 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I should see Log in widget
     Given I am on the login page
     Then I click on "Log Out" button again
+    And I should see Log in widget
     Given I am on mail login page
     Then I enter username "qaautomation@remedysystems.com" to login mail account
     Then I enter password "9h$00v3T$dF@OPn0" to login mail account
@@ -319,8 +376,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Phone      | Role                | ApplicationsUnchecked                                  | Applications                                                                                       | ApplicationsNotVisible                                     | NPI | LearningPathwaySearchParameter                                          | Locations                                                                                  |
-      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Downstream Provider | Episode Connect for Post-acute Care, Community Connect | Episode Connect, Episode Connect for Post-acute Care, Community Connect, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect |     | HZhmTBQzHtU1, NFdw0Kts2C01, 3hSOHNAnvjc1, max-test-052417, n9yn5n0Qa581 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital |
+      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Phone      | Role                | ApplicationsUnchecked                                  | Applications                                                                                       | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter                                          | Locations                                                                                  |
+      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Downstream Provider | Episode Connect for Post-acute Care, Community Connect | Episode Connect, Episode Connect for Post-acute Care, Community Connect, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect, Program Management |     | HZhmTBQzHtU1, NFdw0Kts2C01, 3hSOHNAnvjc1, max-test-052417, n9yn5n0Qa581 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -368,12 +425,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    #Then I click on Hamburger menu on top left of homepage
-    #And I verify "<Applications>" in product menu dropdown
-    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    #And I redirect to Remedy connect page
+    #######Episode Connect Classic Provisioning################
     And I click on Episode1 tile for "<User>-<Role>" user
-    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -383,16 +436,50 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    #And I switch back to old window
     And I redirect to Remedy connect page
+    ###########Reporting Classic Provisioning##############
+    And I click on Reports tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Reports homepage
+    And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
+    Then I click on "<ReportName>" report text for Overall Program Reports for "<User>-<Role>" user
+    Then I verify "<ReportName>" on the reports main page for "<User>-<Role>" user
+    And I redirect to Remedy connect page
+    ###########Episode Connect Post Acute Care Provisioning##############
     And I click on Episodes 2 tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
     And I redirect to Remedy connect page
+    ############Remedy University Provisioning###############
+    And I click on RemedyU tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to RemedyU homepage
+    And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
+    And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
+    And I redirect to Remedy connect page
+    ############User Admin Provisioning###################################
+    And I click on User Admin tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to User Admin homepage
+    And I redirect to Remedy connect page
+    #############TCI Provisioning####################################
     #And I click on Institute tile for "<User>-<Role>" user
-    #And I switch to new window
     #And I verify "<User>-<Role>" user navigated to Institute homepage
-    #And I switch back to old window
+    #And I redirect to Remedy connect page
+    #################Program Management Tile Provisioning####################
+    And I click on Program Management tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Program Management homepage
+    And I redirect to Remedy connect page
+    #################Care Connect Tile Provisioning####################
+    And I click on Care Connect tile for  "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Care Connect homepage
+    And I redirect to Remedy connect page
+    #################Community Connect Tile Provisioning####################
+    And I click on Community Connect tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Community Connect homepage
+    And I redirect to Remedy connect page
+    ###############Reporting Provisioning###################################
+    And I click on Reporting tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Reporting homepage
+    And I redirect to Remedy connect page
+    #################General Verification################################
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -406,8 +493,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I should see Log in widget
 
     Examples: 
-      | Description                                                                    | User        | FirstName                                 | LastName | Role                | Applications                                                                                       | ApplicationsNotVisible                                                                                 | Roletext | ReportCategory | ReportName         | BPID | LearningPathway                                                                               | Facilities                                                                                                                          |
-      | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episode Connect, Episode Connect for Post-acute Care, Care Innovation Institute, Community Connect | Administration, Reporting Classic, Reporting, Care Connect, Episode Connect Classic, Remedy University | ROLE_SNF | Patient ID     | Episode DRG Issues |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Remedy University | Abbeville General Hospital, Litchford Falls Nursing & Rehabilitation Center, Coosa valley health care, Alaris Health at Jersey City |
+      | Description                                                                    | User        | FirstName                                 | LastName | Role                | Applications                                                                                       | ApplicationsNotVisible                                                                                                     | Roletext | ReportCategory | ReportName         | BPID | LearningPathway                                                                               | Facilities                                                                                                                          |
+      | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episode Connect, Episode Connect for Post-acute Care, Care Innovation Institute, Community Connect | Administration, Reporting Classic, Reporting, Care Connect, Episode Connect Classic, Remedy University, Program Management | ROLE_SNF | Patient ID     | Episode DRG Issues |      | i am learning path, Learning Pathway 2, max-test-052417, New learning Path, Remedy University | Abbeville General Hospital, Litchford Falls Nursing & Rehabilitation Center, Coosa valley health care, Alaris Health at Jersey City |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -443,6 +530,7 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I should see Log in widget
     Given I am on the login page
     Then I click on "Log Out" button again
+    And I should see Log in widget
     Given I am on mail login page
     Then I enter username "qaautomation@remedysystems.com" to login mail account
     Then I enter password "9h$00v3T$dF@OPn0" to login mail account
@@ -453,8 +541,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Phone      | Role                | ApplicationsUnchecked                                                                              | Applications                                                                                                        | ApplicationsNotVisible                                     | NPI | LearningPathwaySearchParameter                         | Locations                                                                                  | HasHealthSystem1 | Health System1 | Programs1 | Locations1 | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
-      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Downstream Provider | Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect | Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect | Administration, Reporting Classic, Reporting, Care Connect |     | New learning Path, Learning Pathway 2, max-test-052417 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital | No               |                |           |            | No               |                |           |            | No               |                |           |            |
+      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Phone      | Role                | ApplicationsUnchecked                                                                              | Applications                                                                                                                                   | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter                         | Locations                                                                                  | HasHealthSystem1 | Health System1 | Programs1 | Locations1 | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
+      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Downstream Provider | Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect | Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect, Program Management |     | New learning Path, Learning Pathway 2, max-test-052417 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital | No               |                |           |            | No               |                |           |            | No               |                |           |            |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -502,12 +590,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I click Access button
     Then I verify "<Applications>" product on SPOE page
     Then I verify "<ApplicationsNotVisible>" product is not visible on SPOE page
-    #Then I click on Hamburger menu on top left of homepage
-    #And I verify "<Applications>" in product menu dropdown
-    #And I verify "<ApplicationsNotVisible>" is not present in product menu dropdown
-    #And I redirect to Remedy connect page
+    #######Episode Connect Classic Provisioning################
     And I click on Episode1 tile for "<User>-<Role>" user
-    #And I switch to new window
     And I verify "Dashboard" after redirection to EC1 for "<User>-<Role>" user
     And I click on username icon on right top corner "<User>-<Role>" and open user profile on EC1
     And I verify "<Facilities>" facility on user profile for "<User>-<Role>" user
@@ -517,22 +601,50 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I click on PatientList on SideMenu bar Episode1 for "<User>-<Role>" user
     And I verify Patient card appearing on Active Patients page for "<User>-<Role>" user
     And I click on gear menu and then click on Add Note and verify user role "<Roletext>" for "<User>-<Role>" user
-    #And I switch back to old window
     And I redirect to Remedy connect page
+    ###########Reporting Classic Provisioning##############
+    And I click on Reports tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Reports homepage
+    And I click on the Reports Tile with text "<ReportCategory>" for "<User>-<Role>" user
+    Then I click on "<ReportName>" report text for Overall Program Reports for "<User>-<Role>" user
+    Then I verify "<ReportName>" on the reports main page for "<User>-<Role>" user
+    And I redirect to Remedy connect page
+    ###########Episode Connect Post Acute Care Provisioning##############
     And I click on Episodes 2 tile for "<User>-<Role>" user
     And I verify "<User>-<Role>" user navigated to Episodes 2 homepage
     And I verify patient card appearing on Episode 2 for "<User>-<Role>" user
+    And I redirect to Remedy connect page
+    ############Remedy University Provisioning###############
     And I click on RemedyU tile for "<User>-<Role>" user
-    And I switch to new window
     And I verify "<User>-<Role>" user navigated to RemedyU homepage
     And I verify details "<FirstName> <LastName>" for "<User>-<Role>" user on RemedyU dashboard
     And I verify learning pathway "<LearningPathway>" appearing for "<User>-<Role>" user on RemedyU dashboard
-    And I switch back to old window
     And I redirect to Remedy connect page
+    ############User Admin Provisioning###################################
+    And I click on User Admin tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to User Admin homepage
+    And I redirect to Remedy connect page
+    #############TCI Provisioning####################################
     #And I click on Institute tile for "<User>-<Role>" user
-    #And I switch to new window
     #And I verify "<User>-<Role>" user navigated to Institute homepage
-    #And I switch back to old window
+    #And I redirect to Remedy connect page
+    #################Program Management Tile Provisioning####################
+    And I click on Program Management tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Program Management homepage
+    And I redirect to Remedy connect page
+    #################Care Connect Tile Provisioning####################
+    And I click on Care Connect tile for  "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Care Connect homepage
+    And I redirect to Remedy connect page
+    #################Community Connect Tile Provisioning####################
+    And I click on Community Connect tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Community Connect homepage
+    And I redirect to Remedy connect page
+    ###############Reporting Provisioning###################################
+    And I click on Reporting tile for "<User>-<Role>" user
+    And I verify "<User>-<Role>" user navigated to Reporting homepage
+    And I redirect to Remedy connect page
+    #################General Verification################################
     And I click on the top user account link on remedy connect page
     And I verify "Support" in dropdown on profile icon for "<User>-<Role>" user
     And I verify "Reset Password" in dropdown on profile icon for "<Role>" user
@@ -546,8 +658,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I should see Log in widget
 
     Examples: 
-      | Description                                                                    | User        | FirstName                                 | LastName | Role                | Applications                                                                                                                  | ApplicationsNotVisible                                     | Roletext | ReportCategory | ReportName         | BPID | LearningPathway                                        | Facilities                                                                                                                          |
-      | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute, Remedy University, Community Connect | Administration, Reporting Classic, Reporting, Care Connect | ROLE_SNF | Patient ID     | Episode DRG Issues |      | New learning Path, Learning Pathway 2, max-test-052417 | Abbeville General Hospital, Litchford Falls Nursing & Rehabilitation Center, Coosa valley health care, Alaris Health at Jersey City |
+      | Description                                                                    | User        | FirstName                                 | LastName | Role                | Applications                                                                                                                                   | ApplicationsNotVisible                                                         | Roletext | ReportCategory | ReportName         | BPID | LearningPathway                                        | Facilities                                                                                                                          |
+      | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute, Remedy University, Community Connect | Administration, Reporting Classic, Reporting, Care Connect, Program Management | ROLE_SNF | Patient ID     | Episode DRG Issues |      | New learning Path, Learning Pathway 2, max-test-052417 | Abbeville General Hospital, Litchford Falls Nursing & Rehabilitation Center, Coosa valley health care, Alaris Health at Jersey City |
 
   Scenario Outline: Validating that Error is getting displayed on searching any downstream provider location less than 5 alphabets and clicking on pagination on creating and editing Downstream Provider role
     Given I am on the login page
