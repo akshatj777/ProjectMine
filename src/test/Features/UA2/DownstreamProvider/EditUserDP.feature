@@ -47,7 +47,6 @@ Feature: Edit page for Downstream provider
     Then I verify applications "<ApplicationsUnchecked>" are unchecked
     Then I verify applications "<ApplicationsChecked>" are checked
     Then I unselect all selected applications
-    Then I verify that Next button is "disabled"
     Then I select "<EnableApplications>" product
     Then I unselect "<DisableApplications>" product
     Then I edit learning pathway "<RemoveLearningPathwaySearchParameter>"

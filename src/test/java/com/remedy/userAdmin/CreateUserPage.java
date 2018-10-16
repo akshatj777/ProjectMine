@@ -917,6 +917,7 @@ public void iUnselectAllSelectedApps(){
    }
    
    public void iClickOnAddNoteAndVerifyRole(String userrole, String role) throws InterruptedException{
+	   if(!(userrole.isEmpty())){
 	   try
 	   {
 		   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
@@ -954,6 +955,7 @@ public void iUnselectAllSelectedApps(){
 	   catch(Exception e)
 	   {
 		   System.out.println(e.toString());
+	   }
 	   }
    }
    
