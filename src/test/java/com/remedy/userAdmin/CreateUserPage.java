@@ -2101,8 +2101,9 @@ public void iUnselectAllSelectedApps(){
 		   {
 		   StringTokenizer st = new StringTokenizer(fieldName,",");
 	       while (st.hasMoreTokens()) { 
-	    	  	   Assert.assertTrue(driver.findElement(By.xpath("//div[contains(@class,'ui checked disabled checkbox')]")).getAttribute("innerText").equalsIgnoreCase(st.nextToken().trim()));
-	    	   	   Assert.assertTrue(isElementPresent(By.xpath("//label[text()='"+st.nextToken().trim()+"']/parent::div[contains(@class,'ui checked')]")));
+	    	   if(st.nextToken().trim().equalsIgnoreCase("Care Innovation Institute")||st.nextToken().trim().equalsIgnoreCase("Episode Connect"))
+	    	   Assert.assertTrue(isElementPresent(By.xpath("//div[contains(@class,'ui checked disabled checkbox')]//label[text()='"+st.nextToken().trim()+"']")));
+	    	  Assert.assertTrue(isElementPresent(By.xpath("//label[text()='"+st.nextToken().trim()+"']/parent::div[contains(@class,'ui checked')]")));
 	    	   }
 	    	   
 	       }  
@@ -2110,8 +2111,9 @@ public void iUnselectAllSelectedApps(){
 		   else
 		   {
 		 
-    		   Assert.assertTrue(driver.findElement(By.xpath("//div[contains(@class,'ui checked disabled checkbox')]")).getAttribute("innerText").equalsIgnoreCase(fieldName));
-    	   	   Assert.assertTrue(isElementPresent(By.xpath("//label[text()='"+fieldName+"']/parent::div[contains(@class,'ui checked')]")));
+			   if(fieldName.equalsIgnoreCase("Care Innovation Institute")||fieldName.equalsIgnoreCase("Episode Connect"))
+		    	   Assert.assertTrue(isElementPresent(By.xpath("//div[contains(@class,'ui checked disabled checkbox')]//label[text()='"+fieldName+"']")));
+		      Assert.assertTrue(isElementPresent(By.xpath("//label[text()='"+fieldName+"']/parent::div[contains(@class,'ui checked')]")));
 		   } 
 	   
    }
