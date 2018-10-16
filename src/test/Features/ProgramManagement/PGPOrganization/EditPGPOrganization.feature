@@ -65,9 +65,32 @@ Feature: Edit PGP organization functionality tests
     And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
+    And I verify "Edit PGP Organization" header text on create organization page
+    And I verify Managing Organization radio buttons status on "Edit PGP - <Has_MO>" organization page
+    And I select "YES" radio button for managing organization
+    Then I select "Invalid_Managing_Org" managing organization name in "YES" Has a Management Organization drop down
+    And I verify "No results found" in Has a Management Organization dropdown
+
+    Examples: 
+      | Description                                                         | Has_MO | PGP_Name |
+      | Check validation for Invalid Managing Organization on edit PGP page | YES    | PGPNAME  |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "PGP" organization tab on organization dashboard
+    Then I search with "<PGP_Name> - <Has_MO>" on organization in search box
+    And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
     And I verify "Edit PGP Organization" header text on edit organization page
     And I verify Managing Organization radio buttons status on "Edit PGP - <Has_MO>" organization page
     And I edit "PGP Organization Name" field to "<Edited_PGP_Name>" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    And I verify "<ValidationMessage>" field validation message on edit organization page
 
     Examples: 
       | Description                         | Has_MO | PGP_Name | Edited_PGP_Name | ValidationMsg                     |

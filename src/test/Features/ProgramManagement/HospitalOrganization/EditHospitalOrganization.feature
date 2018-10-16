@@ -74,6 +74,27 @@ Feature: Edit Hospital organization functionality tests
     And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
+    And I verify "Edit Hospital Organization" header text on create organization page
+    And I verify Managing Organization radio buttons status on "Edit ACH - <Has_MO>" organization page
+    And I select "YES" radio button for managing organization
+    Then I select "Invalid_Managing_Org" managing organization name in "YES" Has a Management Organization drop down
+    And I verify "No results found" in Has a Management Organization dropdown
+
+    Examples: 
+      | Description                                                              | Has_MO | Hosp_Name |
+      | Check validation for Invalid Managing Organization on edit Hospital page | YES    | ACHNAME   |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "Hospital" organization tab on organization dashboard
+    Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
+    And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
+    And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
     And I verify Managing Organization radio buttons status on "Edit ACH - <Has_MO>" organization page
     And I edit "Hospital Organization Name" field to "<Edited_Hospital_Name>" for organization
     And I edit "Address 1" field to "<Address1>" for organization
