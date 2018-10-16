@@ -2082,22 +2082,43 @@ public void iUnselectAllSelectedApps(){
    }
    }
    }
-   public void verifyAppChecked(String fieldName) throws Throwable {
-	   if(!(fieldName.isEmpty())){
-		   iWillWaitToSee(By.xpath("//div[@class='ui checked checkbox']"));
-	   if(fieldName.contains(","))
-	   {
+
+	public void verifyAppChecked(String fieldName) throws Throwable {
+	 if(!(fieldName.isEmpty())){
+		   
+		   iWillWaitToSee(By.xpath("//div[@class='ui checked disabled checkbox']"));
+	  
+		if(fieldName.equals("Care Innovation Institute, Episode Connect")||fieldName.equals("Episode Connect, Care Innovation Institute"))
+		   {
+			   StringTokenizer st = new StringTokenizer(fieldName,",");
+			   while (st.hasMoreTokens()) { 
+				   		     Assert.assertTrue(isElementPresent(By.xpath("//div[contains(@class,'ui checked disabled checkbox')]//label[text()='"+st.nextToken().trim()+"']")));
+		   
+		   }
+		   }
+		else{ 
+		   if(fieldName.contains(","))
+		   {
 		   StringTokenizer st = new StringTokenizer(fieldName,",");
-	       while (st.hasMoreTokens()) {  
-	    	   Assert.assertTrue(isElementPresent(By.xpath("//label[text()='"+st.nextToken().trim()+"']/parent::div[contains(@class,'ui checked')]")));
+	       while (st.hasMoreTokens()) { 
+	    	  	   Assert.assertTrue(driver.findElement(By.xpath("//div[contains(@class,'ui checked disabled checkbox')]")).getAttribute("innerText").equalsIgnoreCase(st.nextToken().trim()));
+	    	   	   Assert.assertTrue(isElementPresent(By.xpath("//label[text()='"+st.nextToken().trim()+"']/parent::div[contains(@class,'ui checked')]")));
+	    	   }
+	    	   
 	       }  
-	   }
-	   else
-	   {
-		   Assert.assertTrue(isElementPresent(By.xpath("//label[text()='"+fieldName+"']/parent::div[@class='ui checked checkbox']")));
-	   }
+		   
+		   else
+		   {
+		 
+    		   Assert.assertTrue(driver.findElement(By.xpath("//div[contains(@class,'ui checked disabled checkbox')]")).getAttribute("innerText").equalsIgnoreCase(fieldName));
+    	   	   Assert.assertTrue(isElementPresent(By.xpath("//label[text()='"+fieldName+"']/parent::div[contains(@class,'ui checked')]")));
+		   } 
+	   
    }
    }
+	}
+
+	
    
    public void verifyApplicationList(String appList) throws Throwable {
        if(appList.contains(","))
