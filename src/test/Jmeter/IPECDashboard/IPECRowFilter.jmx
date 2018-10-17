@@ -4,6 +4,7 @@
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
       <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments"/>
@@ -12,22 +13,22 @@
     </TestPlan>
     <hashTree>
       <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="JDBC Connection Configuration" enabled="true">
-        <stringProp name="dataSource">MySQLQA</stringProp>
-        <stringProp name="poolMax">10</stringProp>
-        <stringProp name="timeout">10000</stringProp>
-        <stringProp name="trimInterval">60000</stringProp>
         <boolProp name="autocommit">true</boolProp>
-        <stringProp name="transactionIsolation">DEFAULT</stringProp>
-        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="checkQuery">select 1</stringProp>
         <stringProp name="connectionAge">5000</stringProp>
-        <stringProp name="checkQuery">Select 1</stringProp>
+        <stringProp name="dataSource">MySQLQA</stringProp>
         <stringProp name="dbUrl">jdbc:mysql://rds-qa.remedypartners.com:3306/warehouse</stringProp>
         <stringProp name="driver">com.mysql.jdbc.Driver</stringProp>
-        <stringProp name="username">salam</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
         <stringProp name="password">1Welcome2</stringProp>
+        <stringProp name="poolMax">10</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <stringProp name="username">pgoel</stringProp>
       </JDBCDataSource>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Performace DashBoard" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="IPEC Dashboard" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -35,50 +36,23 @@
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
-        <longProp name="ThreadGroup.start_time">1511452775000</longProp>
-        <longProp name="ThreadGroup.end_time">1511452775000</longProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
         <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Once Only Controller" enabled="true"/>
-        <hashTree>
-          <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="OS Process Sampler" enabled="false">
-            <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
-            <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
-            <stringProp name="SystemSampler.command">cmd.exe</stringProp>
-            <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="" elementType="Argument">
-                  <stringProp name="Argument.name"></stringProp>
-                  <stringProp name="Argument.value">-c</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                </elementProp>
-                <elementProp name="" elementType="Argument">
-                  <stringProp name="Argument.name"></stringProp>
-                  <stringProp name="Argument.value">echo &quot;ECEpiosdeCount,claimsEpiosdeCount,savingRate,TotalNPRA, TotalProgram&quot; &gt;&gt; PerformanceDashboardResult.txt</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                </elementProp>
-              </collectionProp>
-            </elementProp>
-            <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-              <collectionProp name="Arguments.arguments"/>
-            </elementProp>
-            <stringProp name="SystemSampler.directory">C:\Users\sandeep.singh\Desktop\Tableautestpaln</stringProp>
-          </SystemSampler>
-          <hashTree/>
-        </hashTree>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
-          <stringProp name="filename">IPECRowFilterInput.csv</stringProp>
-          <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">userName,startdate,enddate,time_range,bpid,ccn,bundle,region,market,r_region,r_market,participantName</stringProp>
+        <hashTree/>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="IPEC Data Configuration" enabled="true">
           <stringProp name="delimiter">|</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="filename">IPECRowFilterInput.csv</stringProp>
+          <boolProp name="ignoreFirstLine">false</boolProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
-          <boolProp name="stopThread">true</boolProp>
           <stringProp name="shareMode">shareMode.all</stringProp>
-          <boolProp name="ignoreFirstLine">false</boolProp>
+          <boolProp name="stopThread">true</boolProp>
+          <stringProp name="variableNames">Flag,userName,time_range,bpid,ccn,bundle,region,market,r_region,r_market,participantName</stringProp>
         </CSVDataSet>
         <hashTree/>
         <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
@@ -91,28 +65,28 @@
 	vars.put(&quot;EC_BPID&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_CCN&quot;,&quot;AND aaf.ccn in ${ccn}&quot;);
+	vars.put(&quot;EC_CCN&quot;,&quot;AND aaf.ccn in ${ccn}&quot;);	
 } else {
 	vars.put(&quot;EC_CCN&quot;,&quot;&quot;);
 }
 
 if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_BUNDLE&quot;,&quot;and drg.bundleName in ${bundle}&quot;);
+	vars.put(&quot;EC_BUNDLE&quot;,&quot;and drg.bundleName in ${bundle}&quot;);	
 } else{
 	vars.put(&quot;EC_BUNDLE&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;r_region&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_R_REGION&quot;,&quot;and m.region in  ${r_region}&quot;);
+	vars.put(&quot;EC_R_REGION&quot;,&quot;and m.region in  ${r_region}&quot;);	
 } else {
 	vars.put(&quot;EC_R_REGION&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_R_MARKET&quot;,&quot;and m.market in ${r_market}&quot;);
+	vars.put(&quot;EC_R_MARKET&quot;,&quot;and m.market in ${r_market}&quot;);		
 } else{
 	vars.put(&quot;EC_R_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_REGION&quot;,&quot;and rmp.region in  ${region}&quot;);
+	vars.put(&quot;EC_REGION&quot;,&quot;and rmp.region in  ${region}&quot;);		
 } else {
 	vars.put(&quot;EC_REGION&quot;,&quot;&quot;);
 }
@@ -120,18 +94,18 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_MARKET&quot;,&quot;and rmp.market in ${market}&quot;);	
 } else{
 	vars.put(&quot;EC_MARKET&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;EC_PARTICIPANTNAME&quot;,&quot;and de.participantName in ${participantName}&quot;);
+} else{
+	vars.put(&quot;EC_PARTICIPANTNAME&quot;,&quot;&quot;);
 }</stringProp>
         </BeanShellPreProcessor>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="BPID Filter " enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="bpid" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT distinct EpisodeInitiator_BPID
-from 
-(
-select
-distinct de.episodeInitiatorNameInitCap, f.bpid,
-CONCAT(de.episodeInitiatorNameInitCap,&apos; - &apos;, f.bpid) as &apos;EpisodeInitiator_BPID&apos;
+          <stringProp name="query">select
+distinct CONCAT(de.episodeInitiatorNameInitCap,&apos; - &apos;, f.bpid) as &apos;EpisodeInitiator_BPID&apos;
 from
     warehouse.factPatientEpisode f
         LEFT JOIN
@@ -199,53 +173,32 @@ WHERE f.bundleRisk=1
   AND dp.dwhSource = &apos;EC&apos;
   AND dloo.lookupCategory = &apos;patientRisk&apos;
 -- and tbsBPID.username = @test_user
-AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range}) AND NOW()
-order by de.episodeInitiatorNameInitCap)a;</stringProp>
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()-- Use this query logic when filtering by Days
+-- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
+-- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
+and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
+${EC_CCN}
+${EC_BUNDLE}
+${EC_R_REGION}
+${EC_R_MARKET}
+${EC_REGION}
+${EC_MARKET}
+${EC_PARTICIPANTNAME}
+order by de.episodeInitiatorNameInitCap;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">EpisodeInitiator_BPID</stringProp>
-          <stringProp name="resultVariable"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="variableNames">EpisodeInitiator_BPID</stringProp>
         </JDBCSampler>
-        <hashTree>
-          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="false">
-            <stringProp name="filename"></stringProp>
-            <stringProp name="parameters"></stringProp>
-            <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">System.out.println(&quot;Started BeanShell-------------------&gt;&gt;&gt;&gt;&quot;);
-
-</stringProp>
-          </BeanShellPreProcessor>
-          <hashTree/>
-          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="false">
-            <stringProp name="filename"></stringProp>
-            <stringProp name="parameters"></stringProp>
-            <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="script">import java.util.ArrayList;
-
-System.out.println(&quot;Post Started---Inner&quot;);
-String var = vars.get(&quot;bpid_1&quot;);
-int var1 = Integer.parseInt(vars.get(&quot;bpid_#&quot;));
-ArrayList al = new ArrayList();
-for(int i=1;i&lt;=var1;i++){
-al.add(vars.get(&quot;bpid1_&quot;+i));
-}
-vars.put(&quot;value&quot;,al.toString());
-</stringProp>
-          </BeanShellPostProcessor>
-          <hashTree/>
-        </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Facility Name CCN" enabled="true">
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="ccn" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT DISTINCT
-    AnchorFacility_CCN
-FROM
-    (
-select
-distinct aaf.facilityNameInitCap, aaf.ccn,
-CONCAT(aaf.facilityNameInitCap,&apos; - &apos;, aaf.ccn) as &apos;AnchorFacility_CCN&apos;
+          <stringProp name="query">select
+distinct CONCAT(aaf.facilityNameInitCap,&apos; - &apos;, aaf.ccn) as &apos;AnchorFacility_CCN&apos;
 from
 warehouse.factPatientEpisode f
         LEFT JOIN
@@ -313,9 +266,18 @@ WHERE f.bundleRisk=1
   AND dp.dwhSource = &apos;EC&apos;
   AND dloo.lookupCategory = &apos;patientRisk&apos;
 -- and tbsBPID.username = @test_user
-AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range}) AND NOW()
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW() -- Use this query logic when filtering by Days
+-- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
+-- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
+and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
-order by aaf.facilityNameInitCap)a;</stringProp>
+${EC_BUNDLE}
+${EC_R_REGION}
+${EC_R_MARKET}
+${EC_REGION}
+${EC_MARKET}
+${EC_PARTICIPANTNAME}
+order by aaf.facilityNameInitCap;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">AnchorFacility_CCN</stringProp>
@@ -396,9 +358,17 @@ WHERE f.bundleRisk=1
   AND dp.dwhSource = &apos;EC&apos;
   AND dloo.lookupCategory = &apos;patientRisk&apos;
 -- and tbsBPID.username = @test_user
-AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range}) AND NOW()
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW() -- Use this query logic when filtering by Days
+-- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
+-- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
+and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_CCN}
+${EC_R_REGION}
+${EC_R_MARKET}
+${EC_REGION}
+${EC_MARKET}
+${EC_PARTICIPANTNAME}
 order by drg.bundleName;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
@@ -480,10 +450,16 @@ WHERE f.bundleRisk=1
   AND dp.dwhSource = &apos;EC&apos;
   AND dloo.lookupCategory = &apos;patientRisk&apos;
 -- and tbsBPID.username = @test_user
-AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range}) AND NOW()
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW() -- Use this query logic when filtering by Days
+-- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
+-- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
+and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_CCN}
 ${EC_BUNDLE}
+${EC_R_REGION}
+${EC_R_MARKET}
+${EC_PARTICIPANTNAME}
 order by CONCAT(de.participantShortName, &apos;-&apos;, rmp.region, &apos; &apos;,  rmp.market );</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
@@ -497,7 +473,7 @@ order by CONCAT(de.participantShortName, &apos;-&apos;, rmp.region, &apos; &apos
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select
-distinct CONCAT( &apos;Remedy-&apos;, m.region , &apos; &apos;,  m.market ) AS &apos;Remedy Region Market&apos;
+distinct CONCAT( &apos;Remedy &apos;, m.region , &apos; - &apos;,  m.market ) AS &apos;Remedy Region Market&apos;
 from
 warehouse.factPatientEpisode f
         LEFT JOIN
@@ -565,13 +541,17 @@ WHERE f.bundleRisk=1
   AND dp.dwhSource = &apos;EC&apos;
   AND dloo.lookupCategory = &apos;patientRisk&apos;
 -- and tbsBPID.username = @test_user
-AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range}) AND NOW()
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW() -- Use this query logic when filtering by Days
+-- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
+-- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
+and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_CCN}
 ${EC_BUNDLE}
- -- AND rmp.region in (&apos;Null&apos;)
- -- AND rmp.market in (&apos;Null&apos;)
-order by CONCAT( &apos;Remedy-&apos;, m.region , &apos; &apos;,  m.market );</stringProp>
+${EC_REGION}
+${EC_MARKET}
+${EC_PARTICIPANTNAME}
+order by CONCAT( &apos;Remedy &apos;, m.region , &apos; - &apos;,  m.market );</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">RRegionMarket</stringProp>
@@ -652,14 +632,17 @@ WHERE f.bundleRisk=1
   AND dp.dwhSource = &apos;EC&apos;
   AND dloo.lookupCategory = &apos;patientRisk&apos;
 -- and tbsBPID.username = @test_user
-AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range}) AND NOW()
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW() -- Use this query logic when filtering by Days
+-- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
+-- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
+and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_CCN}
 ${EC_BUNDLE}
- -- AND rmp.region in (&apos;Null&apos;)
--- AND rmp.market in (&apos;Null&apos;)
 ${EC_R_REGION}
 ${EC_R_MARKET}
+${EC_REGION}
+${EC_MARKET}
 order by de.participantNameInitCap;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
@@ -684,11 +667,6 @@ order by de.participantNameInitCap;</stringProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
                 <stringProp name="Argument.value">/c</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-              <elementProp name="" elementType="Argument">
-                <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo *Episode Initiator - BPID=${value1}*Anchor Facility - CCN=${value2}*Bundle=${value3}*Region Market=${value5}*Remedy Region Market=${value4}*Participant=${value6}&gt;&gt; IPECRowFilterOutput.txt</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -749,51 +727,85 @@ System.out.println(&quot;Participant:&quot;+al_participant.toString());
 </stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
+          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">import org.apache.jmeter.services.FileServer;
+//get current jmeter script&apos;s directory
+String path = FileServer.getFileServer().getBaseDir();
+ 
+//get the separator
+String separator = File.separator;
+ 
+log.info(&quot;Path: &quot; + path);
+log.info(&quot;Path with separator: &quot; + path + separator);
+System.out.print(path+separator);
+System.out.println(${Flag});
+if(vars.get(&quot;Flag&quot;).equals(&quot;(1)&quot;)){
+	log.info(&quot;Path: 1&quot;);
+	fA = new FileOutputStream(path+separator+&quot;IPECECRowFilterOutput.txt&quot;);
+	pA = new PrintStream(fA); 
+	pA.print(&quot;&quot;);
+	pA.close();
+	fA.close();
+	}
+log.info(&quot;Path: 7&quot;);
+f= new FileOutputStream(path + separator+&quot;IPECECRowFilterOutput.txt&quot;,true);
+	p = new PrintStream(f);
+	String vValue1 = vars.get(&quot;value1&quot;);
+	String vValue2 = vars.get(&quot;value2&quot;);
+	String vValue3 = vars.get(&quot;value3&quot;);
+	String vValue4 = vars.get(&quot;value4&quot;);
+	String vValue5 = vars.get(&quot;value5&quot;);
+	String vValue6 = vars.get(&quot;value6&quot;);
+	
+	p.println(&quot;Episode Initiator - BPID=&quot;+vValue1+&quot;*Anchor Facility - CCN=&quot;+vValue2+&quot;*Bundle=&quot;+vValue3+&quot;*Remdy Region Market=&quot;+vValue4+&quot;*Partner Region Market=&quot;+vValue5+&quot;*Participant=&quot;+vValue6);
+
+	p.close();
+	f.close();
+
+</stringProp>
+          </BeanShellPostProcessor>
+          <hashTree/>
         </hashTree>
-        <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="false">
-          <boolProp name="resetInterpreter">false</boolProp>
-          <stringProp name="parameters"></stringProp>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
           <stringProp name="filename"></stringProp>
-          <stringProp name="script">echo *Episode Initiator - BPID=${value1}*Anchor Facility - CCN=${value2}*Bundle=${value3}*Region - Market=${value5}*Remedy Region - Market=${value4}*Participant=${value6}*DRG=${value7}*Physician - NPI=${value8}*Model=${value9}*Anchor Facility Detail=${value10}&gt;&gt; RowFilterOutput.txt</stringProp>
-        </BeanShellPostProcessor>
+        </ResultCollector>
         <hashTree/>
       </hashTree>
-      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
-        <boolProp name="ResultCollector.error_logging">false</boolProp>
-        <objProp>
-          <name>saveConfig</name>
-          <value class="SampleSaveConfiguration">
-            <time>true</time>
-            <latency>true</latency>
-            <timestamp>true</timestamp>
-            <success>true</success>
-            <label>true</label>
-            <code>true</code>
-            <message>true</message>
-            <threadName>true</threadName>
-            <dataType>true</dataType>
-            <encoding>false</encoding>
-            <assertions>true</assertions>
-            <subresults>true</subresults>
-            <responseData>false</responseData>
-            <samplerData>false</samplerData>
-            <xml>false</xml>
-            <fieldNames>true</fieldNames>
-            <responseHeaders>false</responseHeaders>
-            <requestHeaders>false</requestHeaders>
-            <responseDataOnError>false</responseDataOnError>
-            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-            <assertionsResultsToSave>0</assertionsResultsToSave>
-            <bytes>true</bytes>
-            <sentBytes>true</sentBytes>
-            <threadCounts>true</threadCounts>
-            <idleTime>true</idleTime>
-            <connectTime>true</connectTime>
-          </value>
-        </objProp>
-        <stringProp name="filename"></stringProp>
-      </ResultCollector>
-      <hashTree/>
     </hashTree>
   </hashTree>
 </jmeterTestPlan>
