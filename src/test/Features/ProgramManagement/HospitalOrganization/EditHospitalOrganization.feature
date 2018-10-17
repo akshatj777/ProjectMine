@@ -47,7 +47,6 @@ Feature: Edit Hospital organization functionality tests
     And I verify "npi" identifier is not editable
     And I verify "*Location Name" field on edit organization page
     And I verify "*Address 1" field on edit organization page
-    And I verify "Location Type" dropdown field on edit organization page
     And I verify "Address 2" field on edit organization page
     And I verify "Region" dropdown field on edit organization page
     And I verify "*City" field on edit organization page
@@ -187,7 +186,6 @@ Feature: Edit Hospital organization functionality tests
     And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
     And I edit "address1" field to <Loc_Address1> for Location "1" for organization
     And I edit location ID field to "<Loc_ID>" for Location "1" for "Hospital" organization
-    And I edit Location Type dropdown field to <Loc_Type> for Location "1" for organization
     And I edit "address2" field to <Loc_Address1> for Location "1" for organization
     And I edit Region dropdown field to <Loc_Region> for Location "1" for organization
     And I edit "city" field to <Loc_City> for Location "1" for organization
@@ -222,7 +220,6 @@ Feature: Edit Hospital organization functionality tests
     And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
     And I edit "address1" field to <Loc_Address1> for Location "1" for organization
     And I edit location ID field to "<Loc_ID>" for Location "1" for "Hospital" organization
-    And I edit Location Type dropdown field to <Loc_Type> for Location "1" for organization
     And I edit "address2" field to <Loc_Address1> for Location "1" for organization
     And I edit Region dropdown field to <Loc_Region> for Location "1" for organization
     And I edit "city" field to <Loc_City> for Location "1" for organization
@@ -260,7 +257,6 @@ Feature: Edit Hospital organization functionality tests
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
     And I enter Location Id <Location_ID> for Location "1" on "create SNF" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -319,7 +315,6 @@ Feature: Edit Hospital organization functionality tests
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
     And I enter Location Id <Location_ID> for Location "1" on "create LTCH" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -377,7 +372,6 @@ Feature: Edit Hospital organization functionality tests
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
     And I enter Location Id <Location_ID> for Location "1" on "create IRF" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -433,7 +427,6 @@ Feature: Edit Hospital organization functionality tests
     And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
     And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
     And I edit "address1" field to <Loc_Address1> for Location "1" for organization
-    And I edit Location Type dropdown field to <Loc_Type> for Location "1" for organization
     And I edit "address2" field to <Loc_Address1> for Location "1" for organization
     And I edit Region dropdown field to <Loc_Region> for Location "1" for organization
     And I edit "city" field to <Loc_City> for Location "1" for organization
@@ -524,7 +517,6 @@ Feature: Edit Hospital organization functionality tests
     Then I verify "Location 2" on "Edit" organization page
     And I enter location name <Loc_Name> for Location "2" on "Edit" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "Edit" organization page
-    And I select location type <Loc_Type> for Location "2" on "Edit" organization page
     And I enter address2 <Loc_Address2> for Location "2" on "Edit" organization page
     And I select region <Loc_Region> for Location "2" on "Edit" organization page
     And I enter city <Loc_City> for Location "2" on "Edit" organization page
@@ -561,7 +553,6 @@ Feature: Edit Hospital organization functionality tests
     And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
     And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
     And I edit "address1" field to <Loc_Address1> for Location "1" for organization
-    And I edit Location Type dropdown field to <Loc_Type> for Location "1" for organization
     And I edit "address2" field to <Loc_Address1> for Location "1" for organization
     And I edit Region dropdown field to <Loc_Region> for Location "1" for organization
     And I edit "city" field to <Loc_City> for Location "1" for organization
@@ -576,9 +567,9 @@ Feature: Edit Hospital organization functionality tests
     And I verify "Managing Organization - <Has_MO1>" on view profile of "Hospital" Organization
 
     Examples: 
-      | Description                                               | Has_MO | Has_MO1 | Hosp_Name | Edited_Hospital_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                     |
-      | Edit & verify Hospital organization with MO to without MO | YES    | NO      | ACHNAME   | ACHNAME              | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | Hospital Organization Successfully Updated. |
-      | Edit & verify Hospital organization without MO to with MO | NO     | YES     | ACHNAME   | ACHNAME              | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | Hospital Organization Successfully Updated. |
+      | Description                                             | Has_MO | Has_MO1 | Hosp_Name | Edited_Hospital_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                     |
+      | Edit Hospital organization with MO to without MO        | YES    | NO      | ACHNAME   | ACHNAME              | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | Hospital Organization Successfully Updated. |
+      | Edit verify Hospital organization without MO to with MO | NO     | YES     | ACHNAME   | ACHNAME              | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | Hospital Organization Successfully Updated. |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -615,8 +606,8 @@ Feature: Edit Hospital organization functionality tests
     And I verify "Managing Organization - <Has_MO>" on view profile of "Hospital" Organization
 
     Examples: 
-      | Description                                          | Has_MO | Has_MO1 | Managing_Org | Hosp_Name | Edited_Hospital_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                     |
-      | Edit Hospital organization with one MO to another MO | YES    | NO      | MO_Name2     | ACHNAME   | ACHNAME              | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | Hospital Organization Successfully Updated. |
+      | Description                                   | Has_MO | Has_MO1 | Managing_Org | Hosp_Name | Edited_Hospital_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                     |
+      | Changing the MO details on edit Hospital page | YES    | NO      | MO_Name2     | ACHNAME   | ACHNAME              | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | Hospital Organization Successfully Updated. |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"

@@ -307,12 +307,12 @@ public class CreateACHOrganization extends BaseClass{
     }
     
     public void iEnterLocationTypeForLocationOnACHOrg(String text, int num) {
-    	if(!text.isEmpty()){
-    		num = num-1;
-    		driver.findElements(By.xpath("//div[text()='Location Type']/preceding-sibling::div//input[@role='combobox']")).get(num).sendKeys(text);
-    		delay();
-    		clickElement(driver.findElement(By.xpath("//div[(contains(@class,'VirtualizedSelectOption')) and text()='"+text+"']")));
-    	}	
+//    	if(!text.isEmpty()){
+//    		num = num-1;
+//    		driver.findElements(By.xpath("//div[text()='Location Type']/preceding-sibling::div//input[@role='combobox']")).get(num).sendKeys(text);
+//    		delay();
+//    		clickElement(driver.findElement(By.xpath("//div[(contains(@class,'VirtualizedSelectOption')) and text()='"+text+"']")));
+//    	}	
     }	
     
     public void iEnterAddress2ForLocationOnACHOrg(String add2, int num) {

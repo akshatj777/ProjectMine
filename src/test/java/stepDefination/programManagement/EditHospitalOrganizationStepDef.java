@@ -25,7 +25,7 @@ public class EditHospitalOrganizationStepDef extends DriverScript {
 	
 	@And("^I edit Location Type dropdown field to ([^\"]*) for Location \"([^\"]*)\" for organization$")
 	  public void i_Edit_LocationType_DropdownField_For_Location(String text, int num) throws Throwable {
-		editHospOrg.iEditLocationTypeForLocation(text, num);
+//		editHospOrg.iEditLocationTypeForLocation(text, num);
 	    }
 	
 	@And("^I edit Region dropdown field to ([^\"]*) for Location \"([^\"]*)\" for organization$")

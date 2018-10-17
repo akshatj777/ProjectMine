@@ -47,7 +47,6 @@ Feature: Edit LTCH organization functionality tests
     And I verify "npi" identifier is not editable
     And I verify "*Location Name" field on edit organization page
     And I verify "*Address 1" field on edit organization page
-    And I verify "Location Type" dropdown field on edit organization page
     And I verify "Address 2" field on edit organization page
     And I verify "Region" dropdown field on edit organization page
     And I verify "*City" field on edit organization page
@@ -184,7 +183,6 @@ Feature: Edit LTCH organization functionality tests
     And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
     And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
     And I edit "address1" field to <Loc_Address1> for Location "1" for organization
-    And I edit Location Type dropdown field to <Loc_Type> for Location "1" for organization
     And I edit "address2" field to <Loc_Address1> for Location "1" for organization
     And I edit Region dropdown field to <Loc_Region> for Location "1" for organization
     And I edit "city" field to <Loc_City> for Location "1" for organization
@@ -459,7 +457,6 @@ Feature: Edit LTCH organization functionality tests
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
     And I enter Location Id <Location_ID> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -509,7 +506,6 @@ Feature: Edit LTCH organization functionality tests
     Then I verify "Location 2" on "Edit" organization page
     And I enter location name <Loc_Name> for Location "2" on "Edit" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "Edit" organization page
-    And I select location type <Loc_Type> for Location "2" on "Edit" organization page
     And I enter address2 <Loc_Address2> for Location "2" on "Edit" organization page
     And I select region <Loc_Region> for Location "2" on "Edit" organization page
     And I enter city <Loc_City> for Location "2" on "Edit" organization page

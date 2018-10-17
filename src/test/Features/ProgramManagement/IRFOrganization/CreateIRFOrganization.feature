@@ -43,7 +43,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "+" button under "Create IRF" organization page
     And I verify "*Location Name" field on create organization page
     And I verify "*Address 1" field on create organization page
-    And I verify "Location Type" dropdown field on create organization page
+    
     And I verify "Address 2" field on create organization page
     And I verify "Region" dropdown field on create organization page
     And I verify "*City" field on create organization page
@@ -195,7 +195,7 @@ Feature: Create IRF Organization functionality tests
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
     And I enter Location Id <Location_ID> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -207,7 +207,7 @@ Feature: Create IRF Organization functionality tests
     And I enter location name <Loc_Name> for Location "2" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "create" organization page
     And I enter Location Id <Location_ID> for Location "2" on "create" organization page
-    And I select location type <Loc_Type> for Location "2" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "2" on "create" organization page
     And I select region <Loc_Region> for Location "2" on "create" organization page
     And I enter city <Loc_City> for Location "2" on "create" organization page
@@ -237,7 +237,7 @@ Feature: Create IRF Organization functionality tests
     And I provide unique "IRF - <CCN>" in "CCN" on create organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -270,7 +270,7 @@ Feature: Create IRF Organization functionality tests
     And I provide unique "IRF - <NPI>" in "NPI" on create organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -304,7 +304,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 1" on "Create IRF" organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -315,7 +315,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 2" on "Create IRF" organization page
     And I enter location name <Loc_Name1> for Location "2" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "create" organization page
-    And I select location type <Loc_Type> for Location "2" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "2" on "create" organization page
     And I select region <Loc_Region> for Location "2" on "create" organization page
     And I enter city <Loc_City> for Location "2" on "create" organization page
@@ -348,7 +348,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 1" on "Create IRF" organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -378,7 +378,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 1" on "Create IRF" organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -410,7 +410,7 @@ Feature: Create IRF Organization functionality tests
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
     And I enter Location Id <Location_ID> for Location "1" on "create IRF" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -465,7 +465,7 @@ Feature: Create IRF Organization functionality tests
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
     And I enter Location Id <Loc_ID> for Location "1" on "create IRF" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -499,7 +499,7 @@ Feature: Create IRF Organization functionality tests
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
     And I enter Location Id <Location_ID> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -511,7 +511,7 @@ Feature: Create IRF Organization functionality tests
     And I enter location name <Loc_Name> for Location "2" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "create" organization page
     And I enter Location Id <Location_ID> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "2" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "2" on "create" organization page
     And I select region <Loc_Region> for Location "2" on "create" organization page
     And I enter city <Loc_City> for Location "2" on "create" organization page
@@ -545,7 +545,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 1" on "Create IRF" organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -556,7 +556,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 2" on "Create IRF" organization page
     And I enter location name <Loc_Name1> for Location "2" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "create" organization page
-    And I select location type <Loc_Type> for Location "2" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "2" on "create" organization page
     And I select region <Loc_Region> for Location "2" on "create" organization page
     And I enter city <Loc_City> for Location "2" on "create" organization page
@@ -590,7 +590,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 1" on "Create IRF" organization page
     And I enter location name <Loc_Name1> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -601,7 +601,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 2" on "Create IRF" organization page
     And I enter location name <Loc_Name2> for Location "2" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "create" organization page
-    And I select location type <Loc_Type> for Location "2" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "2" on "create" organization page
     And I select region <Loc_Region> for Location "2" on "create" organization page
     And I enter city <Loc_City> for Location "2" on "create" organization page
@@ -612,7 +612,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 3" on "Create IRF" organization page
     And I enter location name <Loc_Name3> for Location "3" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "3" on "create" organization page
-    And I select location type <Loc_Type> for Location "3" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "3" on "create" organization page
     And I select region <Loc_Region> for Location "3" on "create" organization page
     And I enter city <Loc_City> for Location "3" on "create" organization page
@@ -623,7 +623,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 4" on "Create IRF" organization page
     And I enter location name <Loc_Name4> for Location "4" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "4" on "create" organization page
-    And I select location type <Loc_Type> for Location "4" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "4" on "create" organization page
     And I select region <Loc_Region> for Location "4" on "create" organization page
     And I enter city <Loc_City> for Location "4" on "create" organization page
@@ -634,7 +634,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 5" on "Create IRF" organization page
     And I enter location name <Loc_Name5> for Location "5" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "5" on "create" organization page
-    And I select location type <Loc_Type> for Location "5" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "5" on "create" organization page
     And I select region <Loc_Region> for Location "5" on "create" organization page
     And I enter city <Loc_City> for Location "5" on "create" organization page
@@ -645,7 +645,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 6" on "Create IRF" organization page
     And I enter location name <Loc_Name6> for Location "6" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "6" on "create" organization page
-    And I select location type <Loc_Type> for Location "6" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "6" on "create" organization page
     And I select region <Loc_Region> for Location "6" on "create" organization page
     And I enter city <Loc_City> for Location "6" on "create" organization page
@@ -656,7 +656,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 7" on "Create IRF" organization page
     And I enter location name <Loc_Name7> for Location "7" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "7" on "create" organization page
-    And I select location type <Loc_Type> for Location "7" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "7" on "create" organization page
     And I select region <Loc_Region> for Location "7" on "create" organization page
     And I enter city <Loc_City> for Location "7" on "create" organization page
@@ -667,7 +667,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 8" on "Create IRF" organization page
     And I enter location name <Loc_Name8> for Location "8" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "8" on "create" organization page
-    And I select location type <Loc_Type> for Location "8" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "8" on "create" organization page
     And I select region <Loc_Region> for Location "8" on "create" organization page
     And I enter city <Loc_City> for Location "8" on "create" organization page
@@ -678,7 +678,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 9" on "Create IRF" organization page
     And I enter location name <Loc_Name9> for Location "9" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "9" on "create" organization page
-    And I select location type <Loc_Type> for Location "9" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "9" on "create" organization page
     And I select region <Loc_Region> for Location "9" on "create" organization page
     And I enter city <Loc_City> for Location "9" on "create" organization page
@@ -689,7 +689,7 @@ Feature: Create IRF Organization functionality tests
     And I verify "Location 10" on "Create IRF" organization page
     And I enter location name <Loc_Name10> for Location "10" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "10" on "create" organization page
-    And I select location type <Loc_Type> for Location "10" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "10" on "create" organization page
     And I select region <Loc_Region> for Location "10" on "create" organization page
     And I enter city <Loc_City> for Location "10" on "create" organization page
@@ -722,7 +722,7 @@ Feature: Create IRF Organization functionality tests
     And I provide unique "IRF - <NPI>" in "NPI" on create organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -781,7 +781,7 @@ Feature: Create IRF Organization functionality tests
     And I provide unique "IRF - <CCN>" in "CCN" on create organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
+    
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
