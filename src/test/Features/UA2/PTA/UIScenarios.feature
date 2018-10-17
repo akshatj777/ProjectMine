@@ -260,9 +260,7 @@ Feature: PTA UI Scenarios
     Then I verify the header "Applications"
     Then I verify that "General Information" menu is "enabled"
     Then I verify that "Permissions" menu is "disabled"
-    
     Then I select "<Applications>" product
-    Then I verify that Next button is "enabled"
     Then I click on Next button
     Then I verify that "General Information" menu is "enabled"
     Then I verify that "Permissions" menu is "enabled"

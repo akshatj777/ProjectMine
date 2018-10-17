@@ -322,7 +322,7 @@ Feature: UI Scenarios - Super Admin User
     When I click on Add User button
     Then I should see "Add New User" on the user creation page
     Then I verify the header "General Information"
-  Then I verify that Next button is "disabled"
+    Then I verify that Next button is "disabled"
     Then I verify that "Applications" menu is "disabled"
     Then I verify that "Permissions" menu is "disabled"
     And I fill in First Name with "<FirstName>"
@@ -338,7 +338,6 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the header "Applications"
     Then I verify that "General Information" menu is "enabled"
     Then I verify that "Permissions" menu is "disabled"
-   
     Then I select "<Applications>" product
     Then I verify that Next button is "enabled"
     Then I click on Next button
@@ -513,7 +512,6 @@ Feature: UI Scenarios - Super Admin User
     And I click on Edit button
     Then I select "Permissions" tab
     Then I remove health system "<Remove HealthSystem>"
-   
     And I search for health system with <Health System>
     And I select a <Health System>
     Then I select "<Programs>" programs
