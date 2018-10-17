@@ -2088,15 +2088,7 @@ public void iUnselectAllSelectedApps(){
 		   
 		   iWillWaitToSee(By.xpath("//div[@class='ui checked disabled checkbox']"));
 	  
-		if(fieldName.equals("Care Innovation Institute, Episode Connect")||fieldName.equals("Episode Connect, Care Innovation Institute"))
-		   {
-			   StringTokenizer st = new StringTokenizer(fieldName,",");
-			   while (st.hasMoreTokens()) { 
-				   		     Assert.assertTrue(isElementPresent(By.xpath("//div[contains(@class,'ui checked disabled checkbox')]//label[text()='"+st.nextToken().trim()+"']")));
-		   
-		   }
-		   }
-		else{ 
+	 
 		   if(fieldName.contains(","))
 		   {
 		   StringTokenizer st = new StringTokenizer(fieldName,",");
@@ -2114,7 +2106,7 @@ public void iUnselectAllSelectedApps(){
 	   
    }
    }
-	}
+	
 
 	
    
