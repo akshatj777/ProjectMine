@@ -30,12 +30,9 @@ public class LandingPage extends BaseClass{
 
         super(driver);}
 
-    public void iVerifyTextforTiles(String text){
-       	if(text.isEmpty()!=true){
-    		verifyTextForElementfromList(".description", text);
-
-    	}
-   
+    public void iVerifyTextforTiles(String text)
+    {
+    	Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+text+"']")));
     }
     public void iClickOnApplicateTile(String tile){
         if(DriverScript.Config.getProperty("Browser").equals("ie"))

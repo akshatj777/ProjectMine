@@ -139,6 +139,7 @@ if(!(userName.isEmpty())){
 		{
 			driver.navigate().refresh();
 			iWillWaitToSee(By.xpath("//div[@class='auth0-lock-body-content']"));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='auth0-lock-body-content']")));
 		}
 	}
 	

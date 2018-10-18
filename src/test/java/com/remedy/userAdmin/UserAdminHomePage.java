@@ -2,7 +2,11 @@ package com.remedy.userAdmin;
 
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
+
+
+
 import org.openqa.selenium.JavascriptExecutor;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -78,6 +82,7 @@ WebDriverWait wait= new WebDriverWait(driver, 30);
 		{
 			driver.navigate().refresh();
 			iWillWaitToSee(By.xpath("//h1[text()='Users']"));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//h1[text()='Users']")));
 		}
 	}
 
