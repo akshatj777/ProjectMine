@@ -2,14 +2,10 @@ package com.remedy.programManagement;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
-
 import com.remedy.RestCall.*;
-
 import org.apache.commons.lang3.StringUtils;
-
 import com.remedy.RestCall.InsertDataIntoDataModels;
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;

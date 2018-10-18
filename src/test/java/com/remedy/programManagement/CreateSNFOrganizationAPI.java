@@ -7,12 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.WebDriver;
-
 import com.remedy.RestCall.*;
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
-import com.remedy.baseClass.BaseClass;
 
 public class CreateSNFOrganizationAPI extends BaseClass {
 

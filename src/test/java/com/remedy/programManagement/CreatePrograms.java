@@ -41,15 +41,6 @@ public class CreatePrograms extends BaseClass {
 	public void iVerifyMessageAfterSubmittingCreateOrganizationPageUnderPayorOrganization(String msg, String org) {
 		if(org.equals("FETCHFROMAPIFORProgramName"))
 		{
-//			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>div"));
-//			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>div")), msg);
-//			if(!CreatePrograms.tempPrograms.isEmpty())
-//			{
-//				CreateProgramAPI.PROGRAMNameList.set(0, CreatePrograms.tempPrograms.get(1));
-//				CreatePrograms.tempPrograms.clear();
-//			}
-//			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-			
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>div"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>div")), msg);
 			CreateProgramAPI.PROGRAMNameList.clear();
