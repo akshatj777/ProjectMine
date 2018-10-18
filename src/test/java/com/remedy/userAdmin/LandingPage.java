@@ -251,10 +251,7 @@ public void ValidationMsgForRestPass(String text){
 		iWillWaitToSee(By.xpath("//div[@class='remedy-connect-title' and text()='Remedy Connect']"));
 		isElementVisible(driver.findElement(By.xpath("//div[@class='remedy-connect-title' and text()='Remedy Connect']")));
 	}
-	else if (text.equals("Password guidelines")){
-		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-password-strength.animated.fadeIn"))));
-
-	}
+	
 	}
 
 public void forgotPasswordLink(){
