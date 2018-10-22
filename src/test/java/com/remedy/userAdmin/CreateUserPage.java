@@ -719,7 +719,7 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(application.contains("Administration"))
+		   if(st.nextToken().trim().equals("Administration"))
 			{
 				iWillWaitToSee(By.xpath("//h1[text()='Users']"));
 				Assert.assertTrue(isElementPresentOnPage(By.xpath("//h1[text()='Users']")));
@@ -1247,165 +1247,151 @@ public void iUnselectAllSelectedApps(){
    public void clickOnCareConnectTile(String role)
    {
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Care Connect")){
-		   iWillWaitToSee(By.xpath("//div[text()='Care Connect']"));
-		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Care Connect']")));
-		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+	   StringTokenizer st = new StringTokenizer(application,",");
+	   while(st.hasMoreTokens())
+	   {
+		   if(st.nextToken().trim().equals("Care Connect"))
 		   {
-			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Care Connect']")));
-		   }
-		   else
-		   {
-			   clickElement(driver.findElement(By.xpath("//div[text()='Care Connect']")));  
-		   }
-		   
-		   try
-			{
-				if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+			   iWillWaitToSee(By.xpath("//div[text()='Care Connect']"));
+			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Care Connect']")));
+			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+			   {
+				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Care Connect']")));
+			   }
+			   else
+			   {
+				   clickElement(driver.findElement(By.xpath("//div[text()='Care Connect']")));  
+			   }
+			   
+			   try
 				{
-					Thread.sleep(5000);
-					String parentWindow = driver.getWindowHandle();
-					Set<String> handles = driver.getWindowHandles();
-					if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
+					if(DriverScript.Config.getProperty("Browser").equals("chrome"))
 					{
-						driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
+						Thread.sleep(5000);
+						String parentWindow = driver.getWindowHandle();
+						Set<String> handles = driver.getWindowHandles();
+						if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
+						{
+							driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
+						}
+					}
+					else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+					{
+						Thread.sleep(5000);
+						String parentWindow = driver.getWindowHandle();
+						Set<String> handles = driver.getWindowHandles();
+						Object[] array = handles.toArray();
+						Arrays.sort(array);
+						System.out.println("Windows : "+Arrays.toString(array));
+						if(!(array[array.length-1].toString().equals(parentWindow)))
+						{
+							driver.switchTo().window(array[array.length-1].toString());
+							new WebDriverWait(driver, 180).until(
+							          webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+							System.out.println("Hello : "+driver.getTitle());
+							System.out.println("After Switching Window Handle : "+driver.getWindowHandle());
+						}
+					}
+					else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+					{
+						parentWindow = driver.getWindowHandle();
+						if(driver.getWindowHandles().size()==2)
+						{
+							handles = driver.getWindowHandles();
+							handles.remove(parentWindow);
+							driver.switchTo().window((String)handles.toArray()[0]);
+						}
+						else if(driver.getWindowHandles().size()>2)
+						{
+							Set<String> newHandles = driver.getWindowHandles();
+							newHandles.removeAll(handles);
+							driver.switchTo().window((String)newHandles.toArray()[0]);
+						}
+						handles=driver.getWindowHandles();
+						driver.manage().window().maximize();
+						Thread.sleep(3000);
 					}
 				}
-				else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+				catch(Exception e)
 				{
-					Thread.sleep(5000);
-					String parentWindow = driver.getWindowHandle();
-					Set<String> handles = driver.getWindowHandles();
-					Object[] array = handles.toArray();
-					Arrays.sort(array);
-					System.out.println("Windows : "+Arrays.toString(array));
-					if(!(array[array.length-1].toString().equals(parentWindow)))
-					{
-						driver.switchTo().window(array[array.length-1].toString());
-						new WebDriverWait(driver, 180).until(
-						          webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
-						System.out.println("Hello : "+driver.getTitle());
-						System.out.println("After Switching Window Handle : "+driver.getWindowHandle());
-					}
+					System.out.println(e.toString());
 				}
-				else if(DriverScript.Config.getProperty("Browser").equals("ie"))
-				{
-					parentWindow = driver.getWindowHandle();
-					if(driver.getWindowHandles().size()==2)
-					{
-						handles = driver.getWindowHandles();
-						handles.remove(parentWindow);
-						driver.switchTo().window((String)handles.toArray()[0]);
-					}
-					else if(driver.getWindowHandles().size()>2)
-					{
-						Set<String> newHandles = driver.getWindowHandles();
-						newHandles.removeAll(handles);
-						driver.switchTo().window((String)newHandles.toArray()[0]);
-					}
-//					Thread.sleep(3000);
-//					if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
-//					{
-//						Thread.sleep(3000);
-//						while(!(driver.getWindowHandle().equals((String)handles.toArray()[handles.size()-1])))
-//						{
-//							Thread.sleep(3000);
-//							driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
-//						}
-//					}
-//					Thread.sleep(3000);
-//					System.out.println(driver.getTitle());
-					handles=driver.getWindowHandles();
-					driver.manage().window().maximize();
-					Thread.sleep(3000);
-				}
-			}
-			catch(Exception e)
-			{
-				System.out.println(e.toString());
-			}
+	   }
 	   }
     }
    
    public void clickOnCommunityConnectTile(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Community Connect")){
-		   iWillWaitToSee(By.xpath("//div[text()='Community Connect']"));
-		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Community Connect']")));
-		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+	   StringTokenizer st = new StringTokenizer(application, ",");
+	   while(st.hasMoreTokens())
+	   {
+		   if(st.nextToken().trim().equals("Community Connect"))
 		   {
-			   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Community Connect']")));
+			   iWillWaitToSee(By.xpath("//div[text()='Community Connect']"));
+			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Community Connect']")));
+			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+			   {
+				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[text()='Community Connect']")));
+			   }
+			   else
+			   {
+				   clickElement(driver.findElement(By.xpath("//div[text()='Community Connect']")));  
+			   }
+			   
+			   try
+				{
+					if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+					{
+						Thread.sleep(5000);
+						String parentWindow = driver.getWindowHandle();
+						Set<String> handles = driver.getWindowHandles();
+						if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
+						{
+							driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
+						}
+					}
+					else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+					{
+						Thread.sleep(5000);
+						String parentWindow = driver.getWindowHandle();
+						Set<String> handles = driver.getWindowHandles();
+						Object[] array = handles.toArray();
+						Arrays.sort(array);
+						System.out.println("Windows : "+Arrays.toString(array));
+						if(!(array[array.length-1].toString().equals(parentWindow)))
+						{
+							driver.switchTo().window(array[array.length-1].toString());
+							new WebDriverWait(driver, 180).until(
+							          webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+							System.out.println("Hello : "+driver.getTitle());
+							System.out.println("After Switching Window Handle : "+driver.getWindowHandle());
+						}
+					}
+					else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+					{
+						parentWindow = driver.getWindowHandle();
+						if(driver.getWindowHandles().size()==2)
+						{
+							handles = driver.getWindowHandles();
+							handles.remove(parentWindow);
+							driver.switchTo().window((String)handles.toArray()[0]);
+						}
+						else if(driver.getWindowHandles().size()>2)
+						{
+							Set<String> newHandles = driver.getWindowHandles();
+							newHandles.removeAll(handles);
+							driver.switchTo().window((String)newHandles.toArray()[0]);
+						}
+						handles=driver.getWindowHandles();
+						driver.manage().window().maximize();
+						Thread.sleep(3000);
+					}
+				}
+				catch(Exception e)
+				{
+					System.out.println(e.toString());
+				}
 		   }
-		   else
-		   {
-			   clickElement(driver.findElement(By.xpath("//div[text()='Community Connect']")));  
-		   }
-		   
-		   try
-			{
-				if(DriverScript.Config.getProperty("Browser").equals("chrome"))
-				{
-					Thread.sleep(5000);
-					String parentWindow = driver.getWindowHandle();
-					Set<String> handles = driver.getWindowHandles();
-					if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
-					{
-						driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
-					}
-				}
-				else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
-				{
-					Thread.sleep(5000);
-					String parentWindow = driver.getWindowHandle();
-					Set<String> handles = driver.getWindowHandles();
-					Object[] array = handles.toArray();
-					Arrays.sort(array);
-					System.out.println("Windows : "+Arrays.toString(array));
-					if(!(array[array.length-1].toString().equals(parentWindow)))
-					{
-						driver.switchTo().window(array[array.length-1].toString());
-						new WebDriverWait(driver, 180).until(
-						          webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
-						System.out.println("Hello : "+driver.getTitle());
-						System.out.println("After Switching Window Handle : "+driver.getWindowHandle());
-					}
-				}
-				else if(DriverScript.Config.getProperty("Browser").equals("ie"))
-				{
-					parentWindow = driver.getWindowHandle();
-					if(driver.getWindowHandles().size()==2)
-					{
-						handles = driver.getWindowHandles();
-						handles.remove(parentWindow);
-						driver.switchTo().window((String)handles.toArray()[0]);
-					}
-					else if(driver.getWindowHandles().size()>2)
-					{
-						Set<String> newHandles = driver.getWindowHandles();
-						newHandles.removeAll(handles);
-						driver.switchTo().window((String)newHandles.toArray()[0]);
-					}
-//					Thread.sleep(3000);
-//					if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
-//					{
-//						Thread.sleep(3000);
-//						while(!(driver.getWindowHandle().equals((String)handles.toArray()[handles.size()-1])))
-//						{
-//							Thread.sleep(3000);
-//							driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
-//						}
-//					}
-//					Thread.sleep(3000);
-//					System.out.println(driver.getTitle());
-					handles=driver.getWindowHandles();
-					driver.manage().window().maximize();
-					Thread.sleep(3000);
-				}
-			}
-			catch(Exception e)
-			{
-				System.out.println(e.toString());
-			}
 	   }
     }
    
@@ -1457,108 +1443,103 @@ public void iUnselectAllSelectedApps(){
    
    public void verifyUserNavigatedToCareConnect(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Care Connect")){
-		   iWillWaitToSee(By.xpath("//label[contains(text(),'Please enter your ')]/em[text()='client code']"));
-		   Assert.assertTrue(isElementPresentOnPage(By.xpath("//label[contains(text(),'Please enter your ')]/em[text()='client code']")));
-		   
-		   try
-	    	{
-	    		if(DriverScript.Config.getProperty("Browser").equals("chrome"))
-	    		{
-	    			String parentWindow = driver.getWindowHandle();
-	                Set<String> handles = driver.getWindowHandles();
-	                if(!((String)handles.toArray()[0]).equals(parentWindow))
-	    			{
-	    				driver.switchTo().window((String)handles.toArray()[0]);
-	    			}
-	                delay();
-	    		}
-	    		else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
-	    		{
-	    			String parentWindow = driver.getWindowHandle();
-	                Set<String> handles = driver.getWindowHandles();
-	                Object[] array = handles.toArray();
-					Arrays.sort(array);
-	                if(!(array[0].toString().equals(parentWindow)))
-	    			{
-	    				driver.switchTo().window(array[0].toString());
-	    			}
-	                delay();
-	    		}
-	    		else if(DriverScript.Config.getProperty("Browser").equals("ie"))
-	    		{
-	    			driver.switchTo().window(parentWindow);
-//	    			String parentWindow = driver.getWindowHandle();
-//	                Set<String> handles = driver.getWindowHandles();
-//	                if(!((String)handles.toArray()[0]).equals(parentWindow))
-//	    			{
-//	    				driver.switchTo().window((String)handles.toArray()[0]);
-//	    			}
-//	                delay();
-	    		}
-	    	}
-	    	catch(Exception e)
-	    	{
-	    		System.out.println(e.toString());
-	    	}
+	   StringTokenizer st = new StringTokenizer(application, ",");
+	   while(st.hasMoreTokens())
+	   {
+		   if(st.nextToken().trim().equals("Care Connect")){
+			   iWillWaitToSee(By.xpath("//label[contains(text(),'Please enter your ')]/em[text()='client code']"));
+			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//label[contains(text(),'Please enter your ')]/em[text()='client code']")));
+			   
+			   try
+		    	{
+		    		if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+		    		{
+		    			String parentWindow = driver.getWindowHandle();
+		                Set<String> handles = driver.getWindowHandles();
+		                if(!((String)handles.toArray()[0]).equals(parentWindow))
+		    			{
+		    				driver.switchTo().window((String)handles.toArray()[0]);
+		    			}
+		                delay();
+		    		}
+		    		else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+		    		{
+		    			String parentWindow = driver.getWindowHandle();
+		                Set<String> handles = driver.getWindowHandles();
+		                Object[] array = handles.toArray();
+						Arrays.sort(array);
+		                if(!(array[0].toString().equals(parentWindow)))
+		    			{
+		    				driver.switchTo().window(array[0].toString());
+		    			}
+		                delay();
+		    		}
+		    		else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		    		{
+		    			driver.switchTo().window(parentWindow);
+		    		}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.out.println(e.toString());
+		    	}
+		   }
 	   }
    }
    
    public void verifyUserNavigatedToCommunityConnect(String role){
 	   String application = CreateUserPage.usersApplicationsPerRole.get(role).get(role.substring((role.indexOf("-")+1)));
-	   if(application.contains("Community Connect")){
-		   delay();
-		   if(driver.findElements(By.xpath("//h1[text()='Forbidden']")).size()>0)
+	   StringTokenizer st = new StringTokenizer(application, ",");
+	   while(st.hasMoreTokens())
+	   {
+		   if(st.nextToken().trim().equals("Community Connect"))
 		   {
-			   iWillWaitToSee(By.xpath("//h1[text()='Forbidden']"));
-			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//h1[text()='Forbidden']")));  
-		   }
-		   else if(driver.findElements(By.xpath("//img[@alt='Aunt Bertha Home']")).size()>0)
-		   {
-			   iWillWaitToSee(By.xpath("//img[@alt='Aunt Bertha Home']"));
-			   Assert.assertTrue(isElementPresentOnPage(By.xpath("//img[@alt='Aunt Bertha Home']")));
-		   }
-		   
-		   try
-	    	{
-	    		if(DriverScript.Config.getProperty("Browser").equals("chrome"))
-	    		{
-	    			String parentWindow = driver.getWindowHandle();
-	                Set<String> handles = driver.getWindowHandles();
-	                if(!((String)handles.toArray()[0]).equals(parentWindow))
-	    			{
-	    				driver.switchTo().window((String)handles.toArray()[0]);
-	    			}
-	                delay();
-	    		}
-	    		else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
-	    		{
-	    			String parentWindow = driver.getWindowHandle();
-	                Set<String> handles = driver.getWindowHandles();
-	                Object[] array = handles.toArray();
-					Arrays.sort(array);
-	                if(!(array[0].toString().equals(parentWindow)))
-	    			{
-	    				driver.switchTo().window(array[0].toString());
-	    			}
-	                delay();
-	    		}
-	    		else if(DriverScript.Config.getProperty("Browser").equals("ie"))
-	    		{
-	    			driver.switchTo().window(parentWindow);
-//	    			String parentWindow = driver.getWindowHandle();
-//	                Set<String> handles = driver.getWindowHandles();
-//	                if(!((String)handles.toArray()[0]).equals(parentWindow))
-//	    			{
-//	    				driver.switchTo().window((String)handles.toArray()[0]);
-//	    			}
-//	                delay();
-	    		}
-	    	}
-	    	catch(Exception e)
-	    	{
-	    		System.out.println(e.toString());
-	    	}
+			   delay();
+			   if(driver.findElements(By.xpath("//h1[text()='Forbidden']")).size()>0)
+			   {
+				   iWillWaitToSee(By.xpath("//h1[text()='Forbidden']"));
+				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//h1[text()='Forbidden']")));  
+			   }
+			   else if(driver.findElements(By.xpath("//img[@alt='Aunt Bertha Home']")).size()>0)
+			   {
+				   iWillWaitToSee(By.xpath("//img[@alt='Aunt Bertha Home']"));
+				   Assert.assertTrue(isElementPresentOnPage(By.xpath("//img[@alt='Aunt Bertha Home']")));
+			   }
+			   
+			   try
+		    	{
+		    		if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+		    		{
+		    			String parentWindow = driver.getWindowHandle();
+		                Set<String> handles = driver.getWindowHandles();
+		                if(!((String)handles.toArray()[0]).equals(parentWindow))
+		    			{
+		    				driver.switchTo().window((String)handles.toArray()[0]);
+		    			}
+		                delay();
+		    		}
+		    		else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+		    		{
+		    			String parentWindow = driver.getWindowHandle();
+		                Set<String> handles = driver.getWindowHandles();
+		                Object[] array = handles.toArray();
+						Arrays.sort(array);
+		                if(!(array[0].toString().equals(parentWindow)))
+		    			{
+		    				driver.switchTo().window(array[0].toString());
+		    			}
+		                delay();
+		    		}
+		    		else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		    		{
+		    			driver.switchTo().window(parentWindow);
+		    		}
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.out.println(e.toString());
+		    	}
+		   } 
 	   }
    }
    
@@ -1726,40 +1707,41 @@ public void iUnselectAllSelectedApps(){
 				   {
 					   Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[contains(text(),\""+pathway+"\")]")));
 				   }
+				   
+				   try
+			    	{
+			    		if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+			    		{
+			    			String parentWindow = driver.getWindowHandle();
+			                Set<String> handles = driver.getWindowHandles();
+			                if(!((String)handles.toArray()[0]).equals(parentWindow))
+			    			{
+			    				driver.switchTo().window((String)handles.toArray()[0]);
+			    			}
+			                delay();
+			    		}
+			    		else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+			    		{
+			    			String parentWindow = driver.getWindowHandle();
+			                Set<String> handles = driver.getWindowHandles();
+			                Object[] array = handles.toArray();
+							Arrays.sort(array);
+			                if(!(array[0].toString().equals(parentWindow)))
+			    			{
+			    				driver.switchTo().window(array[0].toString());
+			    			}
+			                delay();
+			    		}
+			    		else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+			    		{
+			    			driver.switchTo().window(parentWindow);
+			    		}
+			    	}
+			    	catch(Exception e)
+			    	{
+			    		System.out.println(e.toString());
+			    	}
 		   }
-			   try
-		    	{
-		    		if(DriverScript.Config.getProperty("Browser").equals("chrome"))
-		    		{
-		    			String parentWindow = driver.getWindowHandle();
-		                Set<String> handles = driver.getWindowHandles();
-		                if(!((String)handles.toArray()[0]).equals(parentWindow))
-		    			{
-		    				driver.switchTo().window((String)handles.toArray()[0]);
-		    			}
-		                delay();
-		    		}
-		    		else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
-		    		{
-		    			String parentWindow = driver.getWindowHandle();
-		                Set<String> handles = driver.getWindowHandles();
-		                Object[] array = handles.toArray();
-						Arrays.sort(array);
-		                if(!(array[0].toString().equals(parentWindow)))
-		    			{
-		    				driver.switchTo().window(array[0].toString());
-		    			}
-		                delay();
-		    		}
-		    		else if(DriverScript.Config.getProperty("Browser").equals("ie"))
-		    		{
-		    			driver.switchTo().window(parentWindow);
-		    		}
-		    	}
-		    	catch(Exception e)
-		    	{
-		    		System.out.println(e.toString());
-		    	}
 		   }  
 	   }
    }
@@ -3087,7 +3069,8 @@ public void iUnselectAllSelectedApps(){
 			StringTokenizer st = new StringTokenizer(application, ",");
 			while(st.hasMoreTokens())
 			{
-				if(application.equals("Episode Connect Classic") || application.equals("Episode Connect for Post-acute Care"))
+				String a = st.nextToken().trim();
+				if(a.equals("Episode Connect Classic") || a.equals("Episode Connect for Post-acute Care"))
 				{
 					Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Support']")));
 					delay();
@@ -3112,13 +3095,61 @@ public void iUnselectAllSelectedApps(){
 		{
 			if(!(role.substring((role.indexOf("-")+1)).equals("Remedy Sales Team") || role.substring((role.indexOf("-")+1)).equals("Prospective Partner Executive")))
 			   {
-//				   iWillWaitToSee(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']"));
-//				      delay();
-//				    	  driver.findElement(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']")).click();
-//					      iWillWaitToSee(By.xpath("//a[@ng-href='https://jira.remedypartners.com/servicedesk/customer/portal/2/user/login?destination=portal%2F2']"));
-					      driver.findElement(By.xpath("//span[text()='Support']")).click();
+					  driver.findElement(By.xpath("//span[text()='Support']")).click();
 				      delay();
-				      objLandingPage.iSwitchToNewWindow();
+				      try
+						{
+							if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+							{
+								Thread.sleep(5000);
+								String parentWindow = driver.getWindowHandle();
+								Set<String> handles = driver.getWindowHandles();
+								if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
+								{
+									driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
+								}
+							}
+							else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+							{
+								Thread.sleep(5000);
+								String parentWindow = driver.getWindowHandle();
+								Set<String> handles = driver.getWindowHandles();
+								Object[] array = handles.toArray();
+								Arrays.sort(array);
+								System.out.println("Windows : "+Arrays.toString(array));
+								if(!(array[array.length-1].toString().equals(parentWindow)))
+								{
+									driver.switchTo().window(array[array.length-1].toString());
+									new WebDriverWait(driver, 180).until(
+									          webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+									System.out.println("Hello : "+driver.getTitle());
+									System.out.println("After Switching Window Handle : "+driver.getWindowHandle());
+								}
+							}
+							else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+							{
+								parentWindow = driver.getWindowHandle();
+								if(driver.getWindowHandles().size()==2)
+								{
+									handles = driver.getWindowHandles();
+									handles.remove(parentWindow);
+									driver.switchTo().window((String)handles.toArray()[0]);
+								}
+								else if(driver.getWindowHandles().size()>2)
+								{
+									Set<String> newHandles = driver.getWindowHandles();
+									newHandles.removeAll(handles);
+									driver.switchTo().window((String)newHandles.toArray()[0]);
+								}
+								handles=driver.getWindowHandles();
+								driver.manage().window().maximize();
+								Thread.sleep(3000);
+							}
+						}
+						catch(Exception e)
+						{
+							System.out.println(e.toString());
+						}
 			   }
 		}
 	}
@@ -3128,19 +3159,83 @@ public void iUnselectAllSelectedApps(){
 	   StringTokenizer st = new StringTokenizer(application, ",");
 	   while(st.hasMoreTokens())
 	   {
-		   if(st.nextToken().trim().equals("Episode Connect Classic") || st.nextToken().trim().equals("Episode Connect for Post-acute Care"))
+		   String a = st.nextToken().trim();
+		   if(a.equals("Episode Connect Classic") || a.equals("Episode Connect for Post-acute Care"))
 			{
 				try
 				   {
-						   Thread.sleep(2000);
-						      System.out.println(driver.findElement(By.xpath("//h1[text()='Login']")).getText());
-							   Assert.assertTrue(isElementPresentOnPage(By.xpath("//h1[text()='Login']")));
-							   delay();
-							      objLandingPage.iSwitchBackToOldWindow();
-				   }
+					iWillWaitToSee(By.xpath("//h1[text()='Login']"));
+					Assert.assertTrue(isElementPresentOnPage(By.xpath("//h1[text()='Login']")));
+					delay();
+					try
+			    	{
+			    		if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+			    		{
+			    			String parentWindow = driver.getWindowHandle();
+			                Set<String> handles = driver.getWindowHandles();
+			                if(!((String)handles.toArray()[0]).equals(parentWindow))
+			    			{
+			    				driver.switchTo().window((String)handles.toArray()[0]);
+			    			}
+			                delay();
+			    		}
+			    		else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+			    		{
+			    			String parentWindow = driver.getWindowHandle();
+			                Set<String> handles = driver.getWindowHandles();
+			                Object[] array = handles.toArray();
+							Arrays.sort(array);
+			                if(!(array[0].toString().equals(parentWindow)))
+			    			{
+			    				driver.switchTo().window(array[0].toString());
+			    			}
+			                delay();
+			    		}
+			    		else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+			    		{
+			    			driver.switchTo().window(parentWindow);
+			    		}
+			    	}
+			    	catch(Exception e)
+			    	{
+			    		System.out.println(e.toString());
+			    	}
+				   }	
 				   catch(Exception e)
 				   {
-					   objLandingPage.iSwitchBackToOldWindow();
+					   try
+				    	{
+				    		if(DriverScript.Config.getProperty("Browser").equals("chrome"))
+				    		{
+				    			String parentWindow = driver.getWindowHandle();
+				                Set<String> handles = driver.getWindowHandles();
+				                if(!((String)handles.toArray()[0]).equals(parentWindow))
+				    			{
+				    				driver.switchTo().window((String)handles.toArray()[0]);
+				    			}
+				                delay();
+				    		}
+				    		else if(DriverScript.Config.getProperty("Browser").equals("firefox"))
+				    		{
+				    			String parentWindow = driver.getWindowHandle();
+				                Set<String> handles = driver.getWindowHandles();
+				                Object[] array = handles.toArray();
+								Arrays.sort(array);
+				                if(!(array[0].toString().equals(parentWindow)))
+				    			{
+				    				driver.switchTo().window(array[0].toString());
+				    			}
+				                delay();
+				    		}
+				    		else if(DriverScript.Config.getProperty("Browser").equals("ie"))
+				    		{
+				    			driver.switchTo().window(parentWindow);
+				    		}
+				    	}
+				    	catch(Exception e1)
+				    	{
+				    		System.out.println(e1.toString());
+				    	}
 				   }
 			}  
 	   }
