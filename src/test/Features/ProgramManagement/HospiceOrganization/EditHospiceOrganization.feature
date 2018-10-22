@@ -161,6 +161,7 @@ Feature: Edit Hospice organization functionality tests
     And I verify "Edit Hospice Organization" header text on edit organization page
     And I verify Managing Organization radio buttons status on "Edit Hospice - <Has_MO>" organization page
     And I select "<Has_MO1>" radio button for managing organization
+    Then I select "<Managing_Org>" managing organization name in "<Has_MO1>" Has a Management Organization drop down
     And I edit "Hospice Organization Name" field to "<Edited_Hospice_Name> - <Has_MO>" for organization
     And I edit "Address 1" field to "<Address1>" for organization
     And I edit "Short Name" field to "<Short_Name>" for organization
@@ -176,9 +177,9 @@ Feature: Edit Hospice organization functionality tests
     And I verify "Managing Organization - <Has_MO1>" on view profile of "Hospice" Organization
 
     Examples: 
-      | Description                                              | Has_MO | Has_MO1 | Hospice_Name | Edited_Hospice_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Region  | Market  | Message                                    |
-      | Edit & verify Hospice organization with MO to without MO | YES    | NO      | HOSPICENAME  | HOSPICENAME         | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
-      | Edit & verify Hospice organization without MO to with MO | NO     | YES     | HOSPICENAME  | HOSPICENAME         | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
+      | Description                                              | Has_MO | Has_MO1 | Managing_Org | Hospice_Name | Edited_Hospice_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Region  | Market  | Message                                    |
+      | Edit & verify Hospice organization with MO to without MO | YES    | NO      |              | HOSPICENAME  | HOSPICENAME         | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
+      | Edit & verify Hospice organization without MO to with MO | NO     | YES     |              | HOSPICENAME  | HOSPICENAME         | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
 
   Scenario Outline: <Description>
     Given I am on the login page

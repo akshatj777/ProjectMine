@@ -557,6 +557,14 @@ public class EditManagingOrganization extends BaseClass {
 				CreateHospiceOrganization.tempHospiceOrg.put("HOSPICENAME",str+RandomStringUtils.randomAlphabetic(7));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHospiceOrganization.tempHospiceOrg.get("HOSPICENAME"));
 			}
+			else if(field1.contains("IRF"))
+			{
+				scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));
+				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.CONTROL,"a");
+				driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).sendKeys(Keys.DELETE);
+				CreateIRFOrganization.tempIRFOrg.put("IRFNAME",str+RandomStringUtils.randomAlphabetic(7));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateIRFOrganization.tempIRFOrg.get("IRFNAME"));
+			}
 		}
 		else if(field2.contains("equalsTo75Characters")){
 			scrollIntoViewByJS(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")));

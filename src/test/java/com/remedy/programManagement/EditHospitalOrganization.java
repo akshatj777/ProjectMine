@@ -136,6 +136,7 @@ public class EditHospitalOrganization extends BaseClass{
 		if(org.contains("YES"))
 		{
 			//Assert.assertEquals("true",driver.findElement(By.xpath("//input[@name='hasManagementOrg' and @value='true']")).getAttribute("checked"));
+			delay();
 			Assert.assertTrue(driver.findElement(By.xpath("//span[text()='Has a Managing Organization']/parent::div/parent::div//span[@class='Select-value-label']")).getText().trim().contains(CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1).trim()));
 			
 //			List<WebElement> listItems = driver.findElements(By.cssSelector("span[aria-selected='true']"));
