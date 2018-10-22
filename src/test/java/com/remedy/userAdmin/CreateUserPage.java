@@ -1874,6 +1874,7 @@ public void iUnselectAllSelectedApps(){
    
    public void verifyHeader(String text) throws Throwable 
    {
+	   iWillWaitToSee(By.xpath("//h3[text()='"+text+"']"));
 	   	Assert.assertTrue(isElementPresentOnPage(By.xpath("//h3[text()='"+text+"']")));
    }
    
