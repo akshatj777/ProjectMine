@@ -562,4 +562,9 @@ public class ProgramPerformanceSteps extends DriverScript{
 	public void i_get_and_fill_Days_For_Time_Filter(String startDay, String endDay) throws Throwable{
 		programdashboard.iGetAndFillDaysInTimeFilter(startDay, endDay);
 	}
+	
+	@And("^I click on \"([^\"]*)\" tool tip under \"([^\"]*)\" on Performance overview dashboard$")
+	public void i_Click_On_ToolTip_Link_On_PerformnaceOverview_Dashboard(String link, String variance) throws Throwable{
+		programdashboard.ClickOnTillTipLinkOnPerformnaceOverviewDashboard(link, variance);
+	}
 }

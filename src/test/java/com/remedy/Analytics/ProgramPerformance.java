@@ -2222,4 +2222,34 @@ public class ProgramPerformance extends BaseClass{
 	    
 	 }
 	
+	public void ClickOnTillTipLinkOnPerformnaceOverviewDashboard(String link,String text) {
+		WebElement elem = null;
+		 elem=driver.findElement(By.xpath("//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas"));
+		 act.click(elem).build().perform();
+		 delay();
+		 act.moveToElement(driver.findElement(By.cssSelector("body > div.tab-tooltip.tab-widget.tab-tooltipBR > div.tab-tooltipContainer > div > div > div.tab-ubertipContent > div.tab-ubertipActions > ul"))).click().build().perform();
+//		 act.click().build();
+//		 act.perform();
+//		 act.clickAndHold().moveToElement(elem);
+//		 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", elem);
+		 longDelay();
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+		 if(driver.findElements(By.xpath("//div[@class='tab-ubertipTooltip']/span")).size()>0){
+			 isElementPresent(By.xpath("//div[@class='tab-ubertipContent']//div[@class='tab-ubertipActions']"));
+//			 elem = driver.findElement(By.xpath("//div[@class='tab-ubertipContent']"));
+//			 System.out.println(elem.getText());
+//			 driver.findElement(By.linkText("Click here to go to Next Site of Care Dashboard")).click();
+			 driver.findElement(By.cssSelector("body > div.tab-tooltip.tab-widget.tab-tooltipBR > div.tab-tooltipContainer > div > div > div.tab-ubertipContent > div.tab-ubertipActions > ul")).click();
+			 System.out.println(elem.getText());
+			 elem = driver.findElement(By.cssSelector("body > div.tab-tooltip.tab-widget.tab-tooltipBR > div.tab-tooltipContainer > div > div > div.tab-ubertipContent > div.tab-ubertipActions > ul"));					
+//		        act.moveToElement(elem).build().perform(); 
+			 act.moveToElement(elem).build().perform();
+			 act.click(elem).build().perform();
+//			 act.click(elem);
+//			 elem.click();
+//			 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", elem);
+		 }
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+	}
+	
 }
