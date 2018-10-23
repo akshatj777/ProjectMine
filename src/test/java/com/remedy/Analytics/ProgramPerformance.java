@@ -904,8 +904,12 @@ public class ProgramPerformance extends BaseClass{
 					 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']"))); }else{
 				 clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));}
 				 delay();
+				 WebElement element=driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']"));
+				 if(DriverScript.Config.getProperty("Browser").equals("ie")){
+				 ((JavascriptExecutor)driver).executeScript("arguments[1].value = arguments[0];", element, DriverScript.Config.getProperty("ECStartDate"));}
 //				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),outputText.get("ECStartDateDB"));
-				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),DriverScript.Config.getProperty("ECStartDate"));
+				 else{
+				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),DriverScript.Config.getProperty("ECStartDate"));}
 				 }else if(value.contains("ClaimsStartDate")){
 					 if(DriverScript.Config.getProperty("Browser").equals("ie")){
 						 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));  
@@ -914,7 +918,11 @@ public class ProgramPerformance extends BaseClass{
 					 delay();
 //					 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),outputText.get("ECStartDateDB"));
 					 String date2=DriverScript.Config.getProperty("ClaimsStartDate");
-					 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),DriverScript.Config.getProperty("ClaimsStartDate"));
+					 if(DriverScript.Config.getProperty("Browser").equals("ie")){
+						 ((JavascriptExecutor)driver).executeScript("arguments[1].value = arguments[0];", date2,driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")));	 
+						 driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")).sendKeys(Keys.ENTER);
+					 }else{
+			        iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domLowerInput']")),DriverScript.Config.getProperty("ClaimsStartDate"));}
 					 }else {
 				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domLowerText']")));
 				 delay();
@@ -926,7 +934,10 @@ public class ProgramPerformance extends BaseClass{
 				// clickElement(driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
 				 delay();
 //				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), outputText.get("ClaimsCubeDateDB"));
-				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), DriverScript.Config.getProperty("ClaimsCubeDate"));
+				 if(DriverScript.Config.getProperty("Browser").equals("ie")){
+				 ((JavascriptExecutor)driver).executeScript("arguments[1].value = arguments[0];", DriverScript.Config.getProperty("ClaimsCubeDate"), driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")));
+				 }else{
+				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), DriverScript.Config.getProperty("ClaimsCubeDate"));}
 				 }else if(value.contains("Today")){
 				((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
 				 delay();
@@ -934,14 +945,25 @@ public class ProgramPerformance extends BaseClass{
 				 }else{
 				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@dojoattachpoint='domUpperText']")));
 				 delay();
-				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), value);
+				 if(DriverScript.Config.getProperty("Browser").equals("ie")){
+				 ((JavascriptExecutor)driver).executeScript("arguments[1].value = arguments[0];", driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")),value); 
+				 }else{
+				 iFillInText(driver.findElement(By.xpath("//input[@dojoattachpoint='domUpperInput']")), value);}
 				 }
 		          }
 		 delay();
 //		 WebElement elem = driver.findElement(By.xpath("//span[text()='Bundle']/../../../../.. //span[@role='combobox']"));
 		 WebElement elem =driver.findElement(By.xpath("//span[text()='Time']"));
-		 act.moveToElement(elem).click().build().perform();
+		 if(DriverScript.Config.getProperty("Browser").equals("ie")){
+	//		 driver.findElement(By.id("Value")).sendKeys(Keys.ENTER);
+//		 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.cssSelector("td.tab-datepicker-day-cell-selected"))); 
+		 }else{
+		 act.moveToElement(elem).click().build().perform();}
 		 delay();
+		 if(driver.findElements(By.xpath("//div[@data-tb-test-id='Dialog-Provider-Dialog-CloseButton']")).size()==1){
+			 driver.switchTo().defaultContent();
+			 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@data-tb-test-id='Dialog-Provider-Dialog-CloseButton']"))); 
+		 }
 		 try{
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));}
 		 catch(Exception e){
@@ -951,6 +973,7 @@ public class ProgramPerformance extends BaseClass{
 //		 act.moveToElement(elem).click().build().perform();
 		 delay();
 	 }catch(Exception e){
+		 e.printStackTrace();
     	 ProgramPerformance.writer.print(System.lineSeparator());
     		String flag="1";
     		Assert.assertEquals("2", flag);
@@ -1639,6 +1662,28 @@ public class ProgramPerformance extends BaseClass{
 		 writeDataToOutputFile("Path");
 	 }
 	 
+	 public void iselectstaticvalues(){
+		 try{
+				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));}
+			 catch(Exception e){
+				 delay();
+			 }
+		 String question1 ="('6005-160')|('030083', '030043', '030016', '030001', '030085', '030137', '030002', '030030', '030110', '030061', '030011', '030094', '030010', '030089')|('Simple pneumonia and respiratory infections', 'Medical peripheral vascular disorders')|(Skip)|(Skip)|(Skip)|(Skip)|('Sound Physicians')|('194', '177', '179', '299', '301', '300', '193', '178', '195')|('1952663627', '1902028871', '1285642108', '1124316856', '1285675439', '1306072905', '1932390432', '1154633626')|('2')|"; 
+		 String[] question2=question1.split("\\|");
+		 for(int i=0;i<question2.length;i++){
+			 question2[i]= question2[i].replaceAll("//(", "").replaceAll("//)", "");
+			 String[] question3=question2[i].split(",");
+			 for(int j=0;j<question3.length;j++){
+				String value=question3[j].replaceAll("'", "");
+				JavascriptExecutor executor = (JavascriptExecutor)driver;
+				executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+value+"')]/../input")));
+			}
+			 clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+			 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+			 delay();
+		 }
+	 }
+	 
 	 public void iSelectCheckboxValuesInFilter1(String checkbox,String filter,String dashboard) throws FileNotFoundException{
 		 try{
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));}
@@ -1665,6 +1710,7 @@ public class ProgramPerformance extends BaseClass{
 			             WebElement randomElement = listItems.get(randomIndex);
 			             String val=randomElement.getText();
 			             String valarr[] = null;
+			             String valarr1[] = null;
 			             if(random_n==1 && val.equals("(All)")){
 			            	 listItems.remove(randomIndex); 
 			            	 n=listItems.size();
@@ -1714,10 +1760,9 @@ public class ProgramPerformance extends BaseClass{
 			            		 } else if(filter.contains("DRG")){
 			            			 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
 		                     //   	 val=val.substring(val.length() - 4);
-			            			 val=val.substring(val.lastIndexOf(" ")+1);
-		                        	 val=val.replaceAll("[()]","");  
-		                        	 System.out.println("DRG"+val);
-		                        	 val="'"+val+"'";
+			            			valarr1=val.split("-");
+			            			val=valarr1[0].trim();
+		                        	val="'"+val+"'";
 		                       		 arrayListTexts.add(val);
 		                       		 writeDataToOutputFile("Path");
 		                       		 return;
@@ -1756,9 +1801,11 @@ public class ProgramPerformance extends BaseClass{
                          }
                          else if(filter.contains("DRG")){
 //                           val=val.substring(val.indexOf("-")+1).trim();
-                        	 val=val.substring(val.lastIndexOf(" ")+1);
+                        //	 val=val.substring(val.lastIndexOf(" ")+1);
                         //	 val=val.substring(val.length() - 4);
-                        	 val=val.replaceAll("[()]","");  
+                        //	 val=val.replaceAll("[()]","");  
+                        	 valarr1=val.split("-");
+		            		 val=valarr1[0].trim();
                         	 System.out.println("DRG"+val);
                         	
                          }
@@ -1842,9 +1889,11 @@ public class ProgramPerformance extends BaseClass{
 		                           val="'"+val+"'";
 		               arrayListTexts.add(val);}
 		          else if(filter.contains("DRG")){
-		        	  val=val.substring(val.lastIndexOf(" ")+1);         
+		        	     String[] valarr1=val.split("-");
+	            		 val=valarr1[0].trim();
+		        	//  val=val.substring(val.lastIndexOf(" ")+1);         
 		        	  //   val=val.substring(val.length() - 4);
-		                               val=val.replaceAll("[()]","");  
+		              //                 val=val.replaceAll("[()]","");  
 //		                            System.out.println("DRG"+val);
 		                  //             driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
 		                               val="'"+val+"'";

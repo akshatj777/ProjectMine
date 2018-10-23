@@ -863,7 +863,7 @@ if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_DRGCODE&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);	
+	vars.put(&quot;Q_PHY_NPI&quot;,&quot;and dp.npi in ${npi}&quot;);	
 } else{
 	vars.put(&quot;Q_PHY_NPI&quot;,&quot;&quot;);
 }
@@ -880,8 +880,8 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
               <stringProp name="0"></stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-1997571436">
-                <stringProp name="-568714095">select round((sum(baseEpiReadmissions)/sum(baseEpicounts))*100, 1) as EpisodesWithReadmissionBenchmarkClaims from (select e.bpid, SUM(c.baseEpiReadmissions) as baseEpiReadmissions, sum(c.baseEpiCounts) as baseEpicounts from warehouse.factClaims c  left join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  left join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK  left join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK  left JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  left JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    left JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK   where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;    and c.anchorBeginDateKey &gt;= 20160101   and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)   ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} and c.targetPrice &lt;&gt; 0) a;</stringProp>
+              <collectionProp name="-242188141">
+                <stringProp name="1672776911">select round(sum(baseEpiReadmissions)/sum(baseEpicounts), 3) * 100 from (select e.bpid, SUM(c.baseEpiReadmissions) as baseEpiReadmissions,  sum(c.baseEpiCounts) as baseEpicounts from warehouse.factClaims c inner join warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK inner join warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK inner join warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK inner join warehouse.dimPhysician dp on dp.physicianSK = c.physicianKey inner JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  inner JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK   inner JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK WHERE f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  and c.anchorBeginDateKey &gt;= 20160101   and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) ${Q_BPID} ${Q_CCN} ${Q_BUNDLE} ${Q_DRGCODE} ${Q_PARTICIPANTNAME} ${Q_PHY_NPI} ${Q_Model} and c.targetPrice &lt;&gt; 0) a;</stringProp>
                 <stringProp name="0"></stringProp>
               </collectionProp>
             </collectionProp>
@@ -1565,16 +1565,17 @@ f= new FileOutputStream(path + separator+&quot;ClaimsMetricsOutput.txt&quot;,tru
 log.info(&quot;Path: 8&quot;);
 	p = new PrintStream(f);
 	log.info(&quot;Path: 9&quot;);
-	String claimsEpisodeCount_1=vars.get(&quot;${claimsEpisodeCount_1}&quot;);
-	String savingRate_1=vars.get(&quot;${savingRate_1}&quot;);
-	String Claims_TotalNPRA_1=vars.get(&quot;${Claims_TotalNPRA_1}&quot;);
-	String Claims_TotalProgram_1=vars.get(&quot;${Claims_TotalProgram_1}&quot;);
-	String dischargetoSNFClaims_1=vars.get(&quot;${dischargetoSNFClaims_1}&quot;);
-	String SNFDaysClaims_1=vars.get(&quot;${SNFDaysClaims_1}&quot;);
-	String SNFDaysBenchmarkClaims_1=vars.get(&quot;${SNFDaysBenchmarkClaims_1}&quot;);
-	String EpisodesWithReadmissionClaims_1=vars.get(&quot;${EpisodesWithReadmissionClaims_1}&quot;);
-	String EpisodesWithReadmissionBenchmarkClaims_1=vars.get(&quot;${EpisodesWithReadmissionBenchmarkClaims_1}&quot;);
-	String dischtoSNFBenchmarkClaims_1=vars.get(&quot;${dischtoSNFBenchmarkClaims_1}&quot;);
+	String claimsEpisodeCount_1=&quot;${claimsEpisodeCount_1}&quot;;
+	log.info(&quot;claimsEpisodeCount_1&quot;+claimsEpisodeCount_1);
+	String savingRate_1=&quot;${savingRate_1}&quot;;
+	String Claims_TotalNPRA_1=&quot;${Claims_TotalNPRA_1}&quot;;
+	String Claims_TotalProgram_1=&quot;${Claims_TotalProgram_1}&quot;;
+	String dischargetoSNFClaims_1=&quot;${dischargetoSNFClaims_1}&quot;;
+	String SNFDaysClaims_1=&quot;${SNFDaysClaims_1}&quot;;
+	String SNFDaysBenchmarkClaims_1=&quot;${SNFDaysBenchmarkClaims_1}&quot;;
+	String EpisodesWithReadmissionClaims_1=&quot;${EpisodesWithReadmissionClaims_1}&quot;;
+	String EpisodesWithReadmissionBenchmarkClaims_1=&quot;${EpisodesWithReadmissionBenchmarkClaims_1}&quot;;
+	String dischtoSNFBenchmarkClaims_1=&quot;${dischtoSNFBenchmarkClaims_1}&quot;;
 	p.println(&quot;KPI_Episode_Claims=&quot;+claimsEpisodeCount_1+&quot;*Savings Rate_Claims=&quot;+savingRate_1+&quot;*KPI_NPRA_Claims=&quot;+Claims_TotalNPRA_1+&quot;*KPI_Program_size_Claims=&quot;+Claims_TotalProgram_1+&quot;*% SNF Disch Current_Claims=&quot;+dischargetoSNFClaims_1+&quot;*SNF Days Current_Claims=&quot;+SNFDaysClaims_1+&quot;*SNF Days Benchmark Variance_Claims=&quot;+SNFDaysBenchmarkClaims_1+&quot;*Readmissions Current_Claims=&quot;+EpisodesWithReadmissionClaims_1+&quot;*Readmissions Benchmark Variance_Claims=&quot;+EpisodesWithReadmissionBenchmarkClaims_1+&quot;*% SNF Disch Benchmark Variance_Claims=&quot;+dischtoSNFBenchmarkClaims_1);
 	 p.close();
       f.close();</stringProp>

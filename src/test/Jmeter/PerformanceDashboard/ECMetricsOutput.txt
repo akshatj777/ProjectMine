@@ -1,1 +1,1 @@
-KPI_Episode_EC=null*% SNF Disch Current_EC=void*SNF Days Current_EC=null*SNF Days Benchmark Variance_EC=null*Readmissions Current_EC=null*Readmissions Benchmark Variance_EC=null*% SNF Disch Benchmark Variance_EC=null
+KPI_Episode_EC=${ECEpisodeCount_1}*% SNF Disch Current_EC=void*SNF Days Current_EC=${SNFDaysEC_1}*SNF Days Benchmark Variance_EC=${SNFDaysBenchmarkEC_1}*Readmissions Current_EC=${EpisodesWithReadmissionEC_1}*Readmissions Benchmark Variance_EC=${EpisodesWithReadmissionBenchmarkEC_1}*% SNF Disch Benchmark Variance_EC=${dischtoSNFBenchmarkEC_1}

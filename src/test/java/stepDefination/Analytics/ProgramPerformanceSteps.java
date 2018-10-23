@@ -510,6 +510,7 @@ public class ProgramPerformanceSteps extends DriverScript{
 	public void i_select_checkbox_under_filter_for_dashboard(String checkbox, String filter,String dashboard) throws Throwable{
 		//programdashboard.iSelectCheckboxValuesInFilter(checkbox,filter, dashboard);
 		programdashboard.iSelectCheckboxValuesInFilter1(checkbox,filter, dashboard);
+	//	programdashboard.iselectstaticvalues();
 	}
 	
 	@Then("^I verify \"([^\"]*)\" for DB and FE filter values at \"([^\"]*)\" for \"([^\"]*)\"$")
