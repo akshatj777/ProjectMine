@@ -187,9 +187,10 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+		  AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
      --       AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			
-				${EC_BPID}
+--				${EC_BPID}
 	           	 ${EC_CCN}
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
@@ -288,10 +289,11 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             and dlk.lookupCategory = &apos;patientRisk&apos; 
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+              AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
 	            	${EC_BPID}
-		          ${EC_CCN}
+--		          ${EC_CCN}
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
@@ -361,11 +363,12 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+              AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
             		${EC_BPID}
 	           	${EC_CCN}
-				${EC_BUNDLE} 
+--				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
 				${EC_REGION} 
@@ -435,6 +438,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+              AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL @test_time_rage MONTH) AND NOW()
             -- AND de.bpid = @test_bpid
             	${EC_BPID}
@@ -442,8 +446,8 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
-				${EC_REGION} 
-				${EC_MARKET} 
+--				${EC_REGION} 
+--				${EC_MARKET} 
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
@@ -509,13 +513,14 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+              AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
             		${EC_BPID}
 	             	${EC_CCN}
 				${EC_BUNDLE} 
-				${EC_R_REGION} 
-				${EC_R_MARKET} 
+--				${EC_R_REGION} 
+--				${EC_R_MARKET} 
 				${EC_REGION} 
 				${EC_MARKET} 
 				${EC_PARTICIPANTNAME}  
@@ -582,6 +587,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+              AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
             		${EC_BPID}
@@ -591,7 +597,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_R_MARKET} 
 				${EC_REGION} 
 				${EC_MARKET} 
-				${EC_PARTICIPANTNAME}  
+--				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
@@ -656,6 +662,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+              AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
             		${EC_BPID}
@@ -666,7 +673,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_REGION} 
 				${EC_MARKET} 
 				${EC_PARTICIPANTNAME}  
-				${EC_DRGCODE} 
+--				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
 ) a
@@ -731,6 +738,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+              AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
             		${EC_BPID}
@@ -742,7 +750,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_MARKET} 
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
-				${EC_PHY_NPI} 
+--				${EC_PHY_NPI} 
 				${EC_Model}
 ) a
 ORDER BY a.Physician_NPI;</stringProp>
@@ -804,6 +812,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+              AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
 	            ${EC_BPID}
@@ -816,7 +825,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
-				${EC_Model}
+--				${EC_Model}
 ) a
 ORDER BY a.model;	</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -873,6 +882,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             and dlk.lookupCategory = &apos;patientRisk&apos;
             AND anc.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
             AND fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+              AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
 	            	${EC_BPID}
@@ -965,6 +975,7 @@ and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims
 and c.anchorBeginDateKey &gt;= &apos;20170101&apos;
 -- and c.anchorBeginDateKey &lt;=  @test_end_date
 and c.anchorBeginDateKey &lt;=  (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
+  AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
 and e.bpid = ${bpid}
 and f.ccn =  &apos;390223&apos;
 ) a;
@@ -1124,7 +1135,7 @@ f= new FileOutputStream(path + separator+&quot;ECRowFilterOutput.txt&quot;,true)
 	String vValue10 =  vars.get(&quot;value10&quot;);
 	
 	
-	p.println(&quot;Episode Initiator - BPID=&quot;+vValue1+&quot;*Anchor Facility - CCN=&quot;+vValue2+&quot;*Bundle=&quot;+vValue3+&quot;*Remdy Region Market=&quot;+vValue4+&quot;*Partner Region Market=&quot;+vValue5+&quot;*Participant=&quot;+vValue6+&quot;*DRG - Fracture=&quot;+vValue7+&quot;*Physician - NPI=&quot;+vValue8+&quot;*Model=&quot;+vValue9+&quot;*Anchor Facility Detail=&quot;+vValue10);
+	p.println(&quot;Episode Initiator - BPID=&quot;+vValue1+&quot;*Anchor Facility - CCN=&quot;+vValue2+&quot;*Bundle=&quot;+vValue3+&quot;*Remedy Region - Market=&quot;+vValue4+&quot;*Region - Market=&quot;+vValue5+&quot;*Participant=&quot;+vValue6+&quot;*DRG - Fracture=&quot;+vValue7+&quot;*Physician - NPI=&quot;+vValue8+&quot;*Model=&quot;+vValue9+&quot;*Anchor Facility Detail=&quot;+vValue10);
 	
 //	p.println(&quot;Episode Initiator - BPID=&quot;+${value1}+&quot;*Anchor Facility - CCN=&quot;+${value2}+&quot;*Bundle=&quot;+${value3}+&quot;*Remdy Region Market=&quot;+${value4}+&quot;*Partner Region Market=&quot;+${value5}+&quot;*Participant=&quot;+${value6}+&quot;*DRG - Fracture=&quot;+${value7}+&quot;*Physician - NPI=&quot;+${value8}+&quot;*Model=&quot;+${value9}+&quot;*Anchor Facility Detail=&quot;+${value10});
 

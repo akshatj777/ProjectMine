@@ -54,6 +54,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
+import com.sun.mail.imap.Utility.Condition;
 
 
 public class ProgramPerformance extends BaseClass{
@@ -2178,7 +2179,52 @@ public class ProgramPerformance extends BaseClass{
 		 elem=driver.findElement(By.xpath("//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas"));
 		 act.click(elem).build().perform();
 		 delay();
-		 act.moveToElement(driver.findElement(By.cssSelector("body > div.tab-tooltip.tab-widget.tab-tooltipBR > div.tab-tooltipContainer > div > div > div.tab-ubertipContent > div.tab-ubertipActions > ul"))).click().build().perform();
+		 elem=driver.findElement(By.xpath("//a[@href='#']"));
+//		 act.moveToElement(driver.findElement(By.cssSelector(".tab-tooltip.tab-widget.tab-tooltipBR"))).click(elem).build().perform();
+		 JavascriptExecutor executor = (JavascriptExecutor)driver;
+		 executor.executeScript("$('tab-link-button.tab-widget.tab-action').click();");
+		 wait.until(ExpectedConditions.refreshed(
+			        ExpectedConditions.elementToBeClickable(By.cssSelector(".tab-link-button.tab-widget.tab-action"))));
+		 System.out.println(isElementPresent(By.xpath("//a[@href='#']")));
+		 act.moveToElement(driver.findElement(By.xpath("//a[@href='#']"))).click().build().perform();
+//		 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[@href='#']")));
+//		 driver.findElement(By.xpath("//a[@href='#']")).click();
+		 
+		 /**elem=driver.findElement(By.xpath("//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas"));
+		 act.moveToElement(elem).click(elem).build().perform();
+		 longDelay();
+		 
+		 elem=driver.findElement(By.cssSelector(".tab-link-button.tab-widget.tab-action"));
+		 wait.until(ExpectedConditions.refreshed(
+			        ExpectedConditions.elementToBeClickable(By.cssSelector(".tab-link-button.tab-widget.tab-action"))));
+		 System.out.println(driver.findElement(By.cssSelector(".tab-tooltip.tab-widget.tab-tooltipBR")).toString());
+		 act.moveToElement(driver.findElement(By.cssSelector(".tab-tooltip.tab-widget.tab-tooltipBR"))).build().perform();
+		 **/
+		 act.moveToElement(driver.findElement(By.xpath("//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas"))).click(driver.findElement(By.linkText("Click here to go to Next Site of Care Dashboard"))).build().perform();
+		 longDelay();
+		 act.moveToElement(driver.findElement(By.linkText("Click here to go to Next Site of Care Dashboard"))).perform();
+		 act.click().perform();
+//		 act.moveToElement(driver.findElement(By.cssSelector(".tab-tooltipContainer"))).build().perform();
+//		 act.moveToElement(driver.findElement(By.cssSelector(".tab-tooltipConten"))).build().perform();
+//		 act.moveToElement(driver.findElement(By.cssSelector(".tab-ubertipActions"))).build().perform();
+		 act.moveToElement(driver.findElement(By.cssSelector(".tab-tooltip.tab-widget.tab-tooltipBR .tab-link-button.tab-widget.tab-action"))).click().build().perform();
+		 
+		 elem.click();
+		 longDelay();
+		 WebElement elem1=driver.findElement(By.xpath("//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas"));
+		 act.moveToElement(elem1);
+		 longDelay();
+		 act.click(elem).build().perform();
+		 
+//		 act.moveToElement(elem).click(elem).build().perform();
+//		 wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".tab-link-button.tab-widget.tab-action")));
+//		 System.out.println(driver.findElement(By.cssSelector(".tab-link-button.tab-widget.tab-action")).getAttribute("href"));
+//		 driver.findElement(By.cssSelector(".tab-link-button.tab-widget.tab-action")).click();
+//		 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.cssSelector(".tab-link-button.tab-widget.tab-action")));
+		 //		 act.moveToElement(driver.findElement(By.cssSelector(".tab-link-button.tab-widget.tab-action"))).click().build().perform();
+		 delay();
+		 
+//		 act.moveToElement(driver.findElement(By.cssSelector("body > div.tab-tooltip.tab-widget.tab-tooltipBR > div.tab-tooltipContainer > div > div > div.tab-ubertipContent > div.tab-ubertipActions > ul"))).click().build().perform();
 //		 act.click().build();
 //		 act.perform();
 //		 act.clickAndHold().moveToElement(elem);
