@@ -45,9 +45,9 @@ Feature: Program Performance Overview Dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     ##DRGCODE
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
-    And I select "<DRG - Fracture>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
     ##NPI
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
     And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
@@ -78,9 +78,9 @@ Feature: Program Performance Overview Dashboard
     And I click "Participant" Filter on the "program performance" dashboard
     And I fetch and store "Participant" filter values on "program performance" dashboard
     And I click "Participant" Filter on the "program performance" dashboard
-    And I click "DRG - Fracture" Filter on the "program performance" dashboard
-    And I fetch and store "DRG - Fracture" filter values on "program performance" dashboard
-    And I click "DRG - Fracture" Filter on the "program performance" dashboard
+    And I click "DRG" Filter on the "program performance" dashboard
+    And I fetch and store "DRG" filter values on "program performance" dashboard
+    And I click "DRG" Filter on the "program performance" dashboard
     And I click "Physician - NPI" Filter on the "program performance" dashboard
     And I fetch and store "Physician - NPI" filter values on "program performance" dashboard
     And I click "Physician - NPI" Filter on the "program performance" dashboard
@@ -93,7 +93,7 @@ Feature: Program Performance Overview Dashboard
     And I save the values of row filters in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG - Fracture | Physician - NPI | Model       | Anchor Facility Detail |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG | Physician - NPI | Model       | Anchor Facility Detail |
       | Qafivedashtest@yopmail.com  |   1 | True Random | True Random | Skip        | Skip                 | Skip                  | Skip        | Skip           | Skip            | Skip        | Skip                   |
       | Qatwodashtest@yopmail.com   |   2 | True Random | True Random | True Random | Skip                 | Skip                  | Skip        | Skip           | Skip            | Skip        | Skip                   |
       | Qadashboardtest@yopmail.com |   3 | True Random | True Random | Skip        | True Random          | Skip                  | Skip        | Skip           | Skip            | Skip        | Skip                   |
@@ -122,7 +122,7 @@ Feature: Program Performance Overview Dashboard
     #Then I verify "Remedy Region Market" for DB and FE filter values at "<Row>" for "Claims"
     #Then I verify "Partner Region Market" for DB and FE filter values at "<Row>" for "Claims"
     Then I verify "Participant" for DB and FE filter values at "<Row>" for "Claims"
-    Then I verify "DRG - Fracture" for DB and FE filter values at "<Row>" for "Claims"
+    Then I verify "DRG" for DB and FE filter values at "<Row>" for "Claims"
     Then I verify "Physician - NPI" for DB and FE filter values at "<Row>" for "Claims"
     Then I verify "Model" for DB and FE filter values at "<Row>" for "Claims"
 
@@ -185,9 +185,9 @@ Feature: Program Performance Overview Dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     ##DRGCODE
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
-    And I select "<DRG - Fracture>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
     ##NPI
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
     And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
@@ -218,9 +218,9 @@ Feature: Program Performance Overview Dashboard
     And I click "Participant" Filter on the "program performance" dashboard
     And I fetch and store "Participant" filter values on "program performance" dashboard
     And I click "Participant" Filter on the "program performance" dashboard
-    And I click "DRG - Fracture" Filter on the "program performance" dashboard
-    And I fetch and store "DRG - Fracture" filter values on "program performance" dashboard
-    And I click "DRG - Fracture" Filter on the "program performance" dashboard
+    And I click "DRG" Filter on the "program performance" dashboard
+    And I fetch and store "DRG" filter values on "program performance" dashboard
+    And I click "DRG" Filter on the "program performance" dashboard
     And I click "Physician - NPI" Filter on the "program performance" dashboard
     And I fetch and store "Physician - NPI" filter values on "program performance" dashboard
     And I click "Physician - NPI" Filter on the "program performance" dashboard
@@ -233,7 +233,7 @@ Feature: Program Performance Overview Dashboard
     And I save the values of row filters in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG - Fracture | Physician - NPI | Model       | Anchor Facility Detail |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG | Physician - NPI | Model       | Anchor Facility Detail |
       | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Skip                 | Skip                  | True All    | True All       | True All        | Skip        | Skip                   |
       | Qatwodashtest@yopmail.com   |   2 | True All    | Skip        | True All    | Skip                 | Skip                  | True All    | Skip           | True All        | True All    | True All               |
       | Qadashboardtest@yopmail.com |   3 | True All    | True All    | Skip        | Skip                 | Skip                  | Skip        | True All       | True All        | True All    | True All               |
@@ -262,7 +262,7 @@ Feature: Program Performance Overview Dashboard
     #Then I verify "Remedy Region Market" for DB and FE filter values at "<Row>" for "Claims&EC"
     #Then I verify "Partner Region Market" for DB and FE filter values at "<Row>" for "Claims&EC"
     Then I verify "Participant" for DB and FE filter values at "<Row>" for "Claims&EC"
-    Then I verify "DRG - Fracture" for DB and FE filter values at "<Row>" for "Claims&EC"
+    Then I verify "DRG" for DB and FE filter values at "<Row>" for "Claims&EC"
     Then I verify "Physician - NPI" for DB and FE filter values at "<Row>" for "Claims&EC"
     Then I verify "Model" for DB and FE filter values at "<Row>" for "Claims&EC"
 
@@ -325,9 +325,9 @@ Feature: Program Performance Overview Dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     ##DRGCODE
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
-    And I select "<DRG - Fracture>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
     ##NPI
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
     And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
@@ -358,9 +358,9 @@ Feature: Program Performance Overview Dashboard
     And I click "Participant" Filter on the "program performance" dashboard
     And I fetch and store "Participant" filter values on "program performance" dashboard
     And I click "Participant" Filter on the "program performance" dashboard
-    And I click "DRG - Fracture" Filter on the "program performance" dashboard
-    And I fetch and store "DRG - Fracture" filter values on "program performance" dashboard
-    And I click "DRG - Fracture" Filter on the "program performance" dashboard
+    And I click "DRG" Filter on the "program performance" dashboard
+    And I fetch and store "DRG" filter values on "program performance" dashboard
+    And I click "DRG" Filter on the "program performance" dashboard
     And I click "Physician - NPI" Filter on the "program performance" dashboard
     And I fetch and store "Physician - NPI" filter values on "program performance" dashboard
     And I click "Physician - NPI" Filter on the "program performance" dashboard
@@ -373,7 +373,7 @@ Feature: Program Performance Overview Dashboard
     And I save the values of row filters in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG - Fracture | Physician - NPI | Model       | Anchor Facility Detail |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG | Physician - NPI | Model       | Anchor Facility Detail |
       | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Skip                 | Skip                  | True All    | True All       | True All        | Skip        | Skip                   |
       | Qatwodashtest@yopmail.com   |   2 | True All    | Skip        | True All    | Skip                 | Skip                  | True All    | Skip           | True All        | True All    | True All               |
       | Qadashboardtest@yopmail.com |   3 | True All    | True All    | Skip        | Skip                 | Skip                  | Skip        | True All       | True All        | True All    | True All               |
@@ -402,7 +402,7 @@ Feature: Program Performance Overview Dashboard
     #Then I verify "Remedy Region Market" for DB and FE filter values at "<Row>" for "Claims&EC"
     #Then I verify "Partner Region Market" for DB and FE filter values at "<Row>" for "Claims&EC"
     Then I verify "Participant" for DB and FE filter values at "<Row>" for "Claims&EC"
-    Then I verify "DRG - Fracture" for DB and FE filter values at "<Row>" for "Claims&EC"
+    Then I verify "DRG" for DB and FE filter values at "<Row>" for "Claims&EC"
     Then I verify "Physician - NPI" for DB and FE filter values at "<Row>" for "Claims&EC"
     Then I verify "Model" for DB and FE filter values at "<Row>" for "Claims&EC"
 
@@ -464,9 +464,9 @@ Feature: Program Performance Overview Dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     #DRGCODE
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
-    And I select "<DRG - Fracture>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
     #NPI
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
     And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
@@ -491,7 +491,7 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG - Fracture | Physician - NPI | Model       |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG  | Physician - NPI | Model       |
       | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | Skip                 | Skip                  | True Random | True Random    | True Random     | True Random |
       | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | Skip                 | Skip                  | True All    | True All       | True All        | True All    |
       | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | Skip                 | Skip                  | True All    | True All       | True All        | True All    |
@@ -582,9 +582,9 @@ Feature: Program Performance Overview Dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     # DRGCODE
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
-    And I select "<DRG - Fracture>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
     # NPI
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
     And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
@@ -609,7 +609,7 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG - Fracture | Physician - NPI | Model       |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG | Physician - NPI | Model       |
       | AllModel123@yopmail.com     |   1 | True Random | True Random | True Random | Skip                 | Skip                  | True Random | True Random    | True Random     | True Random |
       | Qadashboardtest@yopmail.com |   2 | True All    | True Random | True All    | Skip                 | Skip                  | True All    | True All       | True All        | True All    |
       | Qatwodashtest@yopmail.com   |   3 | True Random | True Random | True Random | Skip                 | Skip                  | True All    | True All       | True All        | True All    |
@@ -699,9 +699,9 @@ Feature: Program Performance Overview Dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     #DRGCODE
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
-    And I select "<DRG - Fracture>" checkbox in "DRG - Fracture" filter on "Program overview" dashboard
-    And I click "DRG - Fracture" Filter on the "program performance - <DRG - Fracture>" dashboard
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
+    And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
+    And I click "DRG" Filter on the "program performance - <DRG>" dashboard
     #NPI
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
     And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
@@ -726,7 +726,7 @@ Feature: Program Performance Overview Dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG - Fracture | Physician - NPI | Model       |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region Market | Partner Region Market | Participant | DRG | Physician - NPI | Model       |
       | Qadashboardtest@yopmail.com |   1 | True Random | True Random | True Random | Skip                 | Skip                  | True Random | True Random    | True Random     | True Random |
       | Qadashboardtest@yopmail.com |   2 | True All    | True All    | True All    | Skip                 | Skip                  | True All    | True All       | True All        | True All    |
       | AllModel123@yopmail.com     |   3 | True Random | True Random | True Random | Skip                 | Skip                  | True All    | True All       | True All        | True All    |
