@@ -196,7 +196,7 @@ Feature: Create LTCH organization functionality tests
     And I verify "Location 1" on "Create LTCH" organization page
     And I enter location name LocationName for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I enter Location Id <Location_ID> for Location "1" on "create LTCH" organization page
+    And I enter Location Id <Location_ID> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -207,7 +207,7 @@ Feature: Create LTCH organization functionality tests
     And I verify "Location 2" on "Create LTCH" organization page
     And I enter location name <Loc_Name> for Location "2" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "create" organization page
-    And I enter Location Id <Location_ID> for Location "2" on "create LTCH" organization page
+    And I enter Location Id <Location_ID> for Location "2" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "2" on "create" organization page
     And I select region <Loc_Region> for Location "2" on "create" organization page
     And I enter city <Loc_City> for Location "2" on "create" organization page
@@ -240,6 +240,7 @@ Feature: Create LTCH organization functionality tests
     And I verify "Location 1" on "Create LTCH" organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
+    And I enter Location Id <Location_ID> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -250,6 +251,7 @@ Feature: Create LTCH organization functionality tests
     And I verify "Location 2" on "Create LTCH" organization page
     And I enter location name <Loc_Name> for Location "2" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "create" organization page
+    And I enter Location Id <Location_ID> for Location "2" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "2" on "create" organization page
     And I select region <Loc_Region> for Location "2" on "create" organization page
     And I enter city <Loc_City> for Location "2" on "create" organization page
@@ -257,11 +259,12 @@ Feature: Create LTCH organization functionality tests
     And I select state <Loc_State> for Location "2" on "create" organization page
     And I enter zip <Loc_Postal_Code> for Location "2" on "create" organization page
     Then I click on "Submit" button on "create" organization page
+    And I verify duplicate Location Message "Duplicate Location"
 
     Examples: 
-      | Description                                                                          | Has_MO | Managing_Org | LTCH_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type                | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Message                                 |
-      | Create and verify LTCH Organization with Same multiple location details - Without MO | NO     |              | LTCHNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | LTCH Organization Successfully Created. |
-      | Create and verify LTCH Organization with Same multiple location - With MO            | YES    | MONAME       | LTCHNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | LTCH Organization Successfully Created. |
+      | Description                                                                          | Has_MO | Managing_Org | LTCH_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type                | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Location_ID | CCN | EIN | NPI | Message                                 |
+      | Create and verify LTCH Organization with Same multiple location details - Without MO | NO     |              | LTCHNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 |  1234567890 | CCN | EIN | NPI | LTCH Organization Successfully Created. |
+      | Create and verify LTCH Organization with Same multiple location - With MO            | YES    | MONAME       | LTCHNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 |  1234567890 | CCN | EIN | NPI | LTCH Organization Successfully Created. |
 
   Scenario Outline: <Description>
     When I click on "LTCH" organization tab on organization dashboard
