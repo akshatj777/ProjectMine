@@ -297,7 +297,6 @@ public class MailCreateUser extends BaseClass{
 			{
 				System.out.println(e.toString());
 			}
-			System.out.println(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim()).toLowerCase());
 			if(driver.findElements(By.xpath("//span[text()='"+CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim()).toLowerCase()+"']")).size()==0)
 			{
 				flag=true;
@@ -308,7 +307,6 @@ public class MailCreateUser extends BaseClass{
 		{
 			Thread.sleep(3000);
 			iWillWaitToSee(By.name("password"));
-			System.out.println("Hello");
 			new Actions(driver).sendKeys(driver.findElement(By.xpath("//input[@placeholder='your new password']")), "Testing1@").build().perform();
 		}
 		else
@@ -747,9 +745,7 @@ public class MailCreateUser extends BaseClass{
 	
 	public void i_Verify_The_Unread_Mail_In_Inbox_In_My_Account(){
 		iWillWaitToSee(By.xpath("//a[contains(text(),'Inbox (')]"));
-
-		isElementPresentOnPage(By.xpath("//a[contains(text(),'Inbox (')]"));
-
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[contains(text(),'Inbox (')]")));
 	}
 	
 	public void iVerifyChangePasswordMailinInboxInMyAccount() {

@@ -279,7 +279,7 @@ public class BulkUserCreationPage extends BaseClass {
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Sales Commercial Demo 2018", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Sales Commercial Demo 2018", bulkEmailPerRole);
 		
-		String randomNPI = "12" + RandomStringUtils.randomNumeric(8);
+		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
 
 		bulkNPIPerRole.put("Physicians", randomNPI);
@@ -312,7 +312,7 @@ public class BulkUserCreationPage extends BaseClass {
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
 			strUserData = strUserData.replace("PHYSICIANSMAIL", "qaautomation+" + randomString + "@remedysystems.com");
-			strUserData = strUserData.replace("P1NPI1", "12"+RandomStringUtils.randomNumeric(8));
+			strUserData = strUserData.replace("P1NPI1", RandomStringUtils.randomNumeric(10));
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
 			strUserData = strUserData.replace("RTCSMAIL", "qaautomation+" + randomString + "@remedysystems.com");
@@ -370,7 +370,7 @@ public class BulkUserCreationPage extends BaseClass {
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
 			strUserData = strUserData.replace("PHYMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
-			strUserData = strUserData.replace("P2NPI2", "12"+RandomStringUtils.randomNumeric(8));
+			strUserData = strUserData.replace("P2NPI2", RandomStringUtils.randomNumeric(10));
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
 			strUserData = strUserData.replace("RemTCSMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
@@ -428,7 +428,7 @@ public class BulkUserCreationPage extends BaseClass {
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
 			strUserData = strUserData.replace("PMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
-			strUserData = strUserData.replace("P3NPI3", "12"+RandomStringUtils.randomNumeric(8));
+			strUserData = strUserData.replace("P3NPI3", RandomStringUtils.randomNumeric(10));
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
 			strUserData = strUserData.replace("RTranMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
@@ -855,7 +855,7 @@ public class BulkUserCreationPage extends BaseClass {
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Sales Commercial Demo 2018", bulkEmailPerRole);
 		
 			
-		String randomNPI = "12" + RandomStringUtils.randomNumeric(8);
+		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
 		bulkNPIPerRole.put("Physicians", randomNPI);
 		bulkUsersNPIPerRole = randomNPI;
@@ -908,19 +908,21 @@ public class BulkUserCreationPage extends BaseClass {
 	}
 
 	public void verifyCrossButton() {
-		Assert.assertTrue(isElementPresentOnPage(
-				By.xpath("//*[name()='svg' and @fill='#48677b']//*[name()='g' and @id='iCons']")));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[name()='svg' and @fill='#48677b']//*[name()='g' and @id='iCons']")));
 	}
 
 	public void verifyDownloadButton() {
+		iWillWaitToSee(By.xpath("//button[text()='Download Log']"));
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//button[text()='Download Log']")));
 	}
 
 	public void verifyTryAgainButton() {
+		iWillWaitToSee(By.xpath("//button[text()='Try Again']"));
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//button[text()='Try Again']")));
 	}
 
 	public void verifyHideButton() {
+		iWillWaitToSee(By.xpath("//button[text()='Hide']"));
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//button[text()='Hide']")));
 	}
 
@@ -931,7 +933,7 @@ public class BulkUserCreationPage extends BaseClass {
 
 	public void iVerifyTestBoxField() {
 		iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
-		isElementPresentOnPage(By.xpath("//div[@class='component-neo-input']//textarea"));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='component-neo-input']//textarea")));
 	}
 
 	public void iEnterDataAllAppPerRole(String role) throws Throwable {
@@ -1080,10 +1082,8 @@ public class BulkUserCreationPage extends BaseClass {
 	}
 
 	public void iVerifyUserIsAdded(String userRole) {
-		String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole)
-				.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
-		Assert.assertTrue(
-				driver.findElement(By.xpath("//td[@class='five wide']")).getText().toString().trim().equals(email));
+		String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-") + 1)).trim());
+		Assert.assertTrue(driver.findElement(By.xpath("//td[@class='five wide']")).getText().toString().trim().equals(email));
 	}
 
 	public void enterInvalidAndValidData() {
@@ -1182,8 +1182,7 @@ public class BulkUserCreationPage extends BaseClass {
 
 	public void validataSuccessAndFailuremsg(String error, String success) {
 		iWillWaitToSee(By.xpath("//p[@class='successCountLabel']"));
-		Assert.assertTrue(
-				isElementPresentOnPage(By.xpath("//p[@class='successCountLabel'][text()='" + success + "']")));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[@class='successCountLabel'][text()='" + success + "']")));
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[@class='errorCountLabel'][text()='" + error + "']")));
 	}
 
@@ -1603,7 +1602,7 @@ public class BulkUserCreationPage extends BaseClass {
 		
 		
 		HashMap<String, String> bulkNPIPerRole = new HashMap<String, String>();
-		String randomNPI = "212"+ RandomStringUtils.randomNumeric(7);
+		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
 		bulkNPIPerRole.put("Physicians", randomNPI);
 		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);

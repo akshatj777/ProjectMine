@@ -7,14 +7,13 @@ import java.util.StringTokenizer;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
 import com.jayway.restassured.response.Response;
 import com.remedy.RestCall.RestCallUtil;
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
-
-import junit.framework.Assert;
 
 public class CreateUserThroughAPI extends BaseClass {
 
@@ -64,7 +63,7 @@ public class CreateUserThroughAPI extends BaseClass {
 		{
 			if(npi.equals("NPI"))
 			{
-				String newNPI = "213"+createRandomNumber(7);
+				String newNPI = createRandomNumber(10);
 				objNPIValue.put("value", newNPI);
 				CreateUserPage.userNPI = newNPI;
 			}

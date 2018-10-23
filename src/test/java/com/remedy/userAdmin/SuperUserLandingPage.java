@@ -43,7 +43,6 @@ public class SuperUserLandingPage extends BaseClass {
 	public void iVerifyLandingPageUI(String text) {
 		driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
 		iWillWaitToSee(By.cssSelector("table.ui.celled.sortable.striped.table tbody"));
-		//iWillWaitToSee(By.cssSelector("div.chevron-group"));
 		if (text.contains("User table"))
 			isElementVisible(driver.findElement(By.cssSelector("table.ui.celled.sortable.striped.table tbody")));
 		else if(text.equals("SearchBox"))
@@ -58,7 +57,6 @@ public class SuperUserLandingPage extends BaseClass {
 		}
 		else if(text.equals("EmailOnTopRight"))
 		{
-			//Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='lbarinstein+qaadmin@remedypartners.com']")));
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Leonid']")));
 		}
 		else if(text.equals("Release version"))
@@ -82,19 +80,18 @@ public class SuperUserLandingPage extends BaseClass {
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='double-chevron left']")));
 		}
 		else if (text.contains("Lock"))
-			isElementVisible(driver.findElement(By.cssSelector("th#auth0State")));
+			Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("th#auth0State"))));
 		else if (text.contains("User Name"))
-			isElementVisible(driver.findElement(By.cssSelector("th#lastName")));
+			Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("th#lastName"))));
 		else if (text.contains("Role"))
-			isElementVisible(driver.findElement(By.cssSelector("th#logicalRoleId")));
+			Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("th#logicalRoleId"))));
 		else if (text.contains("User Email"))
-			isElementVisible(driver.findElement(By.cssSelector("th#email")));
+			Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("th#email"))));
 		else if (text.contains("Date Created Column"))
-			//isElementVisible(driver.findElement(By.cssSelector("th#insertedDate")));
-			isElementPresent(By.cssSelector("th#insertedDate"));
+			Assert.assertTrue(isElementPresent(By.cssSelector("th#insertedDate")));
 		else if (text.contains("Pagination")) {
 			iWillWaitToSee(By.cssSelector("div.paginator-text"));
-			isElementVisible(driver.findElement(By.cssSelector("div.paginator-text")));
+			Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("div.paginator-text"))));
 			verifyTextForElement(driver.findElement(By.cssSelector(".current-page")), "1");
 			Assert.assertTrue(driver.findElement(By.cssSelector(".number-of-pages")).getText().contains("of"));
 		} else if (text.contains("Pagination retention")) {
@@ -111,7 +108,7 @@ public class SuperUserLandingPage extends BaseClass {
 			if (isElementPresentOnPage(By.cssSelector("div.double-chevron.right")) == true) {
 				Assert.assertFalse(isElementNotPresentOnPage(By.cssSelector(".icon.chevron.left")));
 				Assert.assertFalse(isElementNotPresentOnPage(By.cssSelector("div.double-chevron.left")));
-				isElementVisible(driver.findElement(By.cssSelector("div.double-chevron.right")));
+				Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("div.double-chevron.right"))));
 				clickElement(driver.findElement(By.cssSelector("div.double-chevron.right")));
 				iWillWaitToSee(By.cssSelector("div.chevron-group"));
 				String s = driver.findElement(By.cssSelector(".current-page")).getText();
@@ -119,7 +116,7 @@ public class SuperUserLandingPage extends BaseClass {
 				verifyTextForElement(driver.findElement(By.cssSelector(".number-of-pages")), s);
 				Assert.assertFalse(isElementNotPresentOnPage(By.cssSelector(".icon.chevron.right")));
 				Assert.assertFalse(isElementNotPresentOnPage(By.cssSelector("div.double-chevron.right")));
-				isElementVisible(driver.findElement(By.cssSelector(".icon.chevron.left")));
+				Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".icon.chevron.left"))));
 				clickElement(driver.findElement(By.cssSelector("div.double-chevron.left")));
 				iWillWaitToSee(By.cssSelector("div.chevron-group"));
 				verifyTextForElement(driver.findElement(By.cssSelector(".number-of-pages")), s);
@@ -135,7 +132,6 @@ public class SuperUserLandingPage extends BaseClass {
 					verifyElementCount("tr.component-user-table-row", 30);
 					clickElement(driver.findElement(By.cssSelector("div.double-chevron.right")));
 					iWillWaitToSee(By.cssSelector("div.chevron-group"));
-					// System.out.println("count of 30");
 				} else {
 					int size = driver.findElements(By.cssSelector(".five.wide")).size();
 					verifyElementCount("tr.component-user-table-row", size);
@@ -156,7 +152,6 @@ public class SuperUserLandingPage extends BaseClass {
 					for (int j = 0; j < 30; j++) {
 						String mail = driver.findElements(By.cssSelector("td.five.wide")).get(j).getText();
 						Assert.assertTrue(mail.contains(".com"));
-						// System.out.println("email validated" + j);
 					}
 					clickElement(driver.findElement(By.cssSelector("div.double-chevron.right")));
 					iWillWaitToSee(By.cssSelector("div.chevron-group"));
@@ -195,11 +190,11 @@ public class SuperUserLandingPage extends BaseClass {
 			for (int i = 0; i < size; i++) {
 				if (text.contains("Account Status")) 
 				{
-					isElementVisible(driver.findElements(By.cssSelector("td.center.aligned.one.wide")).get(i));
+					Assert.assertTrue(isElementVisible(driver.findElements(By.cssSelector("td.center.aligned.one.wide")).get(i)));
 				}
 				if (text.contains("Email")) 
 				{
-					isElementVisible(driver.findElement(By.cssSelector("td.five.wide")));
+					Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("td.five.wide"))));
 				}
 			}
 			int size1 = driver.findElements(By.cssSelector("td.four.wide")).size();
@@ -207,17 +202,17 @@ public class SuperUserLandingPage extends BaseClass {
 			{
 				if (text.contains("Name")) 
 				{
-					isElementVisible(driver.findElements(By.cssSelector("td.four.wide")).get(n));
+					Assert.assertTrue(isElementVisible(driver.findElements(By.cssSelector("td.four.wide")).get(n)));
 				}
 				n = n + 1;
 				if (text.contains("Role")) 
 				{
-					isElementVisible(driver.findElements(By.cssSelector("td.four.wide")).get(n));
+					Assert.assertTrue(isElementVisible(driver.findElements(By.cssSelector("td.four.wide")).get(n)));
 				}
 				n = n + 1;
 				if (text.contains("Date")) 
 				{
-					isElementVisible(driver.findElements(By.cssSelector("td.four.wide")).get(n));
+					Assert.assertTrue(isElementVisible(driver.findElements(By.cssSelector("td.four.wide")).get(n)));
 				}
 			}
 			if (isElementPresentOnPage(By.cssSelector("div.double-chevron.right")) == true) {
@@ -279,8 +274,7 @@ public class SuperUserLandingPage extends BaseClass {
 		}
 		if (searchBy.contains("Name")) {
 			if (driver.findElements(By.cssSelector("td.four.wide")).get(0).getText().contains(result))
-				Assert.assertTrue(
-						driver.findElements(By.cssSelector("td.four.wide")).get(0).getText().contains(result));
+				Assert.assertTrue(driver.findElements(By.cssSelector("td.four.wide")).get(0).getText().contains(result));
 		} else if (searchBy.equalsIgnoreCase("Email")) {
 			if(result.equals(mail)){
 			String email = CreateUserPage.usersEmailPerRole.get(role).get(role.substring((role.indexOf("-")+1)).trim());
@@ -361,12 +355,12 @@ public class SuperUserLandingPage extends BaseClass {
 
 	public void iverifyAddUserButton() {
 		scrollToTopOfThePage();
-		isElementPresentOnPage(By.xpath("//button[text()='Add User']"));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//button[text()='Add User']")));
 	}
 
 	public void iVerifyAddUserPage() {
 		iWillWaitToSee(By.cssSelector("div.add-user-form-content"));
-		isElementVisible(driver.findElement(By.cssSelector("div.add-user-form-content")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("div.add-user-form-content"))));
 	}
 
 	public void iClickOnCloseIconFromAddUserPage() {
@@ -390,10 +384,11 @@ public class SuperUserLandingPage extends BaseClass {
 		verifyElementCount(".five.wide", 0);
 	}
 	public void iSeeCrossIconForSearch(){
-		isElementVisible(driver.findElement(By.cssSelector(".remove.link.icon.remove-icon")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".remove.link.icon.remove-icon"))));
 	}
 	
 	public void verifyNoResultFoundOnLandingPage(){
+		iWillWaitToSee(By.xpath("//h3[text()=' No Results Found ']"));
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//h3[text()=' No Results Found ']")));
 	}
 	public void iClickCrossIconForSearch(){
@@ -434,7 +429,6 @@ public void verifyRowsAlignmentWhenCountIsNotMultipleOfThree(){
 		
 		int size = driver.findElements(By.cssSelector(".five.wide")).size();
 		if(size%3!=0){
-			System.out.println("if-size%3 "+size%3);
 		verifyElementCount("tr.component-user-table-row", size);
 		}
 		if(isElementVisible(driver.findElement(By.cssSelector("div.double-chevron.left")))==true){
@@ -444,7 +438,6 @@ public void verifyRowsAlignmentWhenCountIsNotMultipleOfThree(){
 	}else{
 		int size = driver.findElements(By.cssSelector(".five.wide")).size();
 		if(size%3!=0){
-			System.out.println("else-size%3 "+size%3);
 		verifyElementCount("tr.component-user-table-row", size);
 		}
 		if(isElementVisible(driver.findElement(By.cssSelector("div.double-chevron.left")))==true){
@@ -466,8 +459,6 @@ public void iVerifyProductListInTopNavigationBarIsClosed(){
 }
 
 public void iVerifyEmailForPTAExecutiveRole(String text, String Role){
-	//String emailVal = CreateUserPage.usersEmailPerRole.get(Role).get(Role.substring((Role.indexOf("-")+1)).trim());
-	//Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+emailVal.toLowerCase()+"']")));
 	Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='FirstName']")));
 }
 public void iVerifyDeleteUserLink(String text){
@@ -480,18 +471,18 @@ public void iClickOnDeleteUser(String text){
 }
 public void iVerifyTextWhileDeletingUser(String text){
 	iWillWaitToSee(By.xpath("//*[contains(text(),'"+text+"')]"));
-	isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+text+"')]")));
+	Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[contains(text(),'"+text+"')]")));
 }
 public void iVerifyCancelButtonWhileDeletingUser(String text){
 	iWillWaitToSee(By.xpath("//a[contains(text(),'"+text+"')]"));
-	isElementVisible(driver.findElement(By.xpath("//a[contains(text(),'"+text+"')]")));
+	Assert.assertTrue(isElementPresentOnPage(By.xpath("//a[contains(text(),'"+text+"')]")));
 }
 public void iClickCancelButtonWhileDeletingUser(String text){
 	clickElement(driver.findElement(By.xpath("//a[contains(text(),'"+text+"')]")));
 }
 public void iVerifyDeleteButtonWhileDeletingUser(String text){
 	iWillWaitToSee(By.xpath("//button[contains(text(),'"+text+"')]"));
-	isElementVisible(driver.findElement(By.xpath("//button[contains(text(),'"+text+"')]")));
+	Assert.assertTrue(isElementPresentOnPage(By.xpath("//button[contains(text(),'"+text+"')]")));
 }
 public void iClickDeleteButtonToDeleteUser(String text){
 	iWillWaitToSee(By.xpath("//button[contains(text(),'"+text+"')]"));
@@ -509,12 +500,10 @@ public void iSelectTileFromManagementDropDown(String text){
 	clickElement(driver.findElement(By.cssSelector(".ui.dropdown.remedy-connect-title"))); 	
 iWillWaitToSee(By.xpath("//span[contains(text(),'"+text+"')]"));
 clickElement(driver.findElement(By.xpath("//span[contains(text(),'"+text+"')]")));
-
 		clickSingleElementFromList(By.xpath("//a"), text);		
 }
 public void iVerifyReportsPage(){
 	iWillWaitToSee(By.cssSelector(".dropdown-tile-head"));
-	System.out.println(driver.getCurrentUrl());
 	Assert.assertTrue(driver.getCurrentUrl().contains("reports"));
 }	
 public void iVerifyEmailCase(String userRole) {

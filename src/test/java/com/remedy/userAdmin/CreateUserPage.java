@@ -146,12 +146,12 @@ public class CreateUserPage extends BaseClass{
     
     public void iVerifyTheFirstPayerFieldAddedUnderPermissionsSection()
     {
-    	isElementVisible(driver.findElement(By.xpath("//label[text()='Stamford Hospital']")));
+    	Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//label[text()='Stamford Hospital']"))));
     }
     
     public void iVerifyTheSecondPayerFieldAddedUnderPermissionsSection()
     {
-    	isElementVisible(driver.findElement(By.xpath("//label[text()='RP Payer Test A']")));
+    	Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//label[text()='RP Payer Test A']"))));
     }
 
     public void iEnterNPI(String npi, String role)
@@ -160,7 +160,7 @@ public class CreateUserPage extends BaseClass{
 		{
 			if(npi.equals("NPI"))
 			{
-				userNPI = "213" + RandomStringUtils.randomNumeric(7);
+				userNPI = RandomStringUtils.randomNumeric(10);
 				if(DriverScript.Config.getProperty("Browser").equals("ie"))
 				{
 					iWillWaitToSee(By.xpath("//input[@placeholder='NPI']"));
@@ -205,7 +205,6 @@ public class CreateUserPage extends BaseClass{
     		if(DriverScript.Config.getProperty("Browser").equals("ie"))
     		{
     			iWillWaitToSee(By.xpath("//input[@placeholder='First Name']"));
-//    			((JavascriptExecutor) driver).executeScript("arguments[0].value=''", driver.findElement(By.xpath("//input[@placeholder='First Name']")));
     			driver.findElement(By.xpath("//input[@placeholder='First Name']")).sendKeys(Keys.CONTROL,"a");
     			driver.findElement(By.xpath("//input[@placeholder='First Name']")).sendKeys(Keys.DELETE);
     			new Actions(driver).sendKeys(driver.findElement(By.xpath("//input[@placeholder='First Name']")), text).build().perform();
@@ -429,7 +428,7 @@ public class CreateUserPage extends BaseClass{
 
     public void iShouldSeeDifferentTilesForDifferentUserRole(String role) 
     {
-        isElementVisible(driver.findElement(By.cssSelector(".title>p")));
+        Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".title>p"))));
     }
 
     public void iClickOnECTwoTileUnderSpecificUserLoginPage(String text,String role)
@@ -515,7 +514,7 @@ public class CreateUserPage extends BaseClass{
 
     public void iVerifyTheDropdownListForUser() 
     {
-        isElementVisible(driver.findElement(By.cssSelector(".align-right>ul")));
+        Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".align-right>ul"))));
     }
 
     public void iEnterProviderSerachText(String text) 
@@ -655,7 +654,7 @@ public void iUnselectAllSelectedApps(){
     }
 
    public void iVerifyTheHeaderAfterClickingTheEpisodesTile(){
-	   isElementVisible(driver.findElement(By.cssSelector(".page-title.row")));
+	   Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".page-title.row"))));
    }
    
    public void iClickOnEpisodesTwoTileUnderSpecificUserLoginPage(String role){
@@ -1089,18 +1088,6 @@ public void iUnselectAllSelectedApps(){
 					newHandles.removeAll(handles);
 					driver.switchTo().window((String)newHandles.toArray()[0]);
 				}
-//				Thread.sleep(3000);
-//				if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
-//				{
-//					Thread.sleep(3000);
-//					while(!(driver.getWindowHandle().equals((String)handles.toArray()[handles.size()-1])))
-//					{
-//						Thread.sleep(3000);
-//						driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
-//					}
-//				}
-//				Thread.sleep(3000);
-//				System.out.println(driver.getTitle());
 				handles=driver.getWindowHandles();
 				driver.manage().window().maximize();
 				Thread.sleep(3000);
@@ -1143,13 +1130,6 @@ public void iUnselectAllSelectedApps(){
    		else if(DriverScript.Config.getProperty("Browser").equals("ie"))
    		{
    			driver.switchTo().window(parentWindow);
-//   			String parentWindow = driver.getWindowHandle();
-//               Set<String> handles = driver.getWindowHandles();
-//               if(!((String)handles.toArray()[0]).equals(parentWindow))
-//   			{
-//   				driver.switchTo().window((String)handles.toArray()[0]);
-//   			}
-//               delay();
    		}
    	}
    	catch(Exception e)
@@ -1424,7 +1404,7 @@ public void iUnselectAllSelectedApps(){
 	   if(flag)
 	   {
 		   iWillWaitToSee(By.cssSelector(".report-title"));
-		   isElementPresentOnPage(By.cssSelector(".report-title"));
+		   Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".report-title")));
 	   }
    }
    
@@ -1765,7 +1745,7 @@ public void iUnselectAllSelectedApps(){
 		   switchToNewWindow();
 		   delay();
 		   iWillWaitToSee(By.cssSelector("#cv-content"));
-		   isElementVisible(driver.findElement(By.cssSelector("#cv-content")));
+		   Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("#cv-content"))));
 		   switchBacktoOldWindow(); 
    	}
    }
@@ -1778,7 +1758,7 @@ public void iUnselectAllSelectedApps(){
 		   switchToNewWindow();
 		   delay();
 		   iWillWaitToSee(By.cssSelector("#cv-content"));
-		   isElementVisible(driver.findElement(By.cssSelector("#cv-content")));
+		   Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("#cv-content"))));
 		   switchBacktoOldWindow(); 
    	}  
    }
@@ -1795,7 +1775,7 @@ public void iUnselectAllSelectedApps(){
   
    
    public void iVerifyTheUserroleUnderEc1DashboardPageAfterSpecificUserLogin(){
-	   isElementPresentOnPage(By.cssSelector(".username"));
+	   Assert.assertTrue(isElementPresentOnPage(By.cssSelector(".username")));
 	   clickElement(driver.findElement(By.cssSelector("#patientsListOpenClose")));
 	   clickElement(driver.findElement(By.xpath("//a[@href='/secure/pn/patientslist']")));
 	   delay();
@@ -1858,7 +1838,6 @@ public void iUnselectAllSelectedApps(){
 	   else
 	   {
 		   iWillWaitToSee(By.xpath("//button[text()='Next ']"));
-		  
 		   clickElement(driver.findElement(By.xpath("//button[text()='Next ']")));
 	   }
    }
@@ -2021,17 +2000,12 @@ public void iUnselectAllSelectedApps(){
 				}
 			} 
 	   }
-	   
-	   
    }
    
    public void clickSubmitButtonToCheckErrorMessage() throws Throwable {
 	   iWillWaitToSee(By.xpath("//button[.='Submit']"));
 		clickElement(driver.findElement(By.xpath("//button[.='Submit']")));
    }
-   
- 
-   
    
 	public void clickSubmitButtonForDifferentUsers(String user) throws Throwable {
 		iWillWaitToSee(By.xpath("//button[.='Submit']"));
@@ -2076,8 +2050,8 @@ public void iUnselectAllSelectedApps(){
 		iWillWaitToSee(By.xpath("//button[.='Submit']"));
 		clickElement(driver.findElement(By.xpath("//button[.='Submit']")));
 		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ui.modal.transition.visible.active.component-add-user-form")));
-	
 	}
+	
    public void verifyAppUnchecked(String fieldName) throws Throwable 
    {
 	 if(!(fieldName.isEmpty())) 
@@ -2175,13 +2149,11 @@ public void iUnselectAllSelectedApps(){
         	   {
         		   StringTokenizer st = new StringTokenizer(searchParam, ",");
         		   while (st.hasMoreTokens()) {
-        			   //delay();
         			   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']"))));
         			   scrollIntoViewByJS(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")));
         			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
         			   {
             			   String a = st.nextToken().trim();
-            			   //Thread.sleep(3000);
             			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), a).build().perform();
             			   delay();
             			   while(!(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")).getAttribute("value").equals(a)))
@@ -2196,14 +2168,10 @@ public void iUnselectAllSelectedApps(){
         			   {
         				   driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
             			   String a = st.nextToken().trim();
-            			   //Thread.sleep(3000);
             			   iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), a);
-            			   //Thread.sleep(3000);
             			   iWillWaitToSee(By.xpath("//section[@class='component-learning-pathway-dropdown']//div[@class='ui checkbox' or @class='ui checked checkbox']/label[contains(text(),\""+a+"\")]"));
             			   clickElement(driver.findElement(By.xpath("//section[@class='component-learning-pathway-dropdown']//div[@class='ui checkbox' or @class='ui checked checkbox']/label[contains(text(),\""+a+"\")]"))); 
         			   }
-        			   
-        			   //Thread.sleep(3000);
         		   }
         		   driver.findElement(By.xpath("//a[contains(text(),'Applications')]")).click();
         	   }
@@ -2246,13 +2214,11 @@ public void iUnselectAllSelectedApps(){
         	   {
         		   StringTokenizer st = new StringTokenizer(searchParam, ",");
         		   while (st.hasMoreTokens()) {
-        			   //delay();
         			   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']"))));
         			   scrollIntoViewByJS(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")));
         			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
         			   {
             			   String a = st.nextToken().trim();
-            			   //Thread.sleep(3000);
             			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), a).build().perform();
             			   delay();
             			   while(!(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")).getAttribute("value").equals(a)))
@@ -2267,14 +2233,10 @@ public void iUnselectAllSelectedApps(){
         			   {
         				   driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
             			   String a = st.nextToken().trim();
-            			   //Thread.sleep(3000);
             			   iFillInText(driver.findElement(By.xpath("//div[@class='select-checkbox-dropdown-menu menu']//input[@placeholder='Search']")), a);
-            			   //Thread.sleep(3000);
             			   iWillWaitToSee(By.xpath("//div[@class='ui checkbox']/label[contains(text(),\""+a+"\")]"));
             			   clickElement(driver.findElement(By.xpath("//div[@class='ui checkbox']/label[contains(text(),\""+a+"\")]"))); 
         			   }
-        			   
-        			   //Thread.sleep(3000);
         		   }
         		   driver.findElement(By.xpath("//a[contains(text(),'Applications')]")).click();
         	   }
@@ -2352,8 +2314,6 @@ public void iUnselectAllSelectedApps(){
 	    	   {
 	    		   driver.findElement(By.xpath("//label[text()='"+programs+"']")).click();
 	    	   }
-	    	   
-	           //Thread.sleep(2000);
 	       }   
 	   }
 	   else
@@ -2410,11 +2370,7 @@ public void iUnselectAllSelectedApps(){
 	   if(!(locationList.equals("")))
 	   	{
 	   if(locationList.equalsIgnoreCase("All Locations")){
-
-
 		  delay();
-
-
 		  if(DriverScript.Config.getProperty("Browser").equals("ie"))
 		   {
 			  iWillWaitToSee(By.xpath("//div[@class='content active']//label[text()='All Locations']"));
@@ -2474,11 +2430,6 @@ public void iUnselectAllSelectedApps(){
 	    	   }
 	    	   else
 	    	   {
-//	    		   delay();
-//	    		   while(!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).getText().equals("")))
-//		    	   {
-//		    		   driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);  
-//		    	   }
 		    	   delay();
 	    		   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))));
 	    		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
@@ -2522,11 +2473,6 @@ public void iUnselectAllSelectedApps(){
     	   String BPID = token.substring(0, token.indexOf("--"));
     	   if(location.contains(BPID))
     	   {
-//    		   delay();
-//    		   while(!(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).getText().equals("")))
-//	    	   {
-//	    		   driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);  
-//	    	   }
         	   delay();
     		   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']"))));
     		   if(DriverScript.Config.getProperty("Browser").equals("ie"))
@@ -2595,7 +2541,6 @@ public void iUnselectAllSelectedApps(){
         	   {
         		   driver.findElement(By.xpath("//div[@class='content active']//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")).click();  
         	   }
-        	   
         	   Thread.sleep(3000);   
     	   }
 	   	    }
@@ -2652,17 +2597,9 @@ public void iUnselectAllSelectedApps(){
 		       while (st.hasMoreTokens()) 
 		       {
 		    	   String token = st.nextToken().trim();
-//		    	   delay();
-//		    	   while(!(driver.findElement(By.xpath("//p[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")).getText().equals("")))
-//			    	   {
-//			    		   driver.findElement(By.xpath("//p[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);  
-//			    	   }
-//		    	   delay();
 		    	   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']"))));
 		    	   driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
 		    	   iFillInText(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), token);
-//		    	   iWillWaitToSee(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),\""+token+"\")]"));
-		    	
 		       }
 		   }
 		   else
@@ -2670,9 +2607,7 @@ public void iUnselectAllSelectedApps(){
 			   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']"))));
 	    	   driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
 	    	   iFillInText(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), locationList);
-//	    	   iWillWaitToSee(By.xpath("//tr[@class='component-bpid-row']//label[contains(text(),\""+locationList+"\")]"));
 		   }
-			   
 	   	}
    }
    public void selectLocationsForPTAUser(String locationList) throws Throwable {
@@ -2842,6 +2777,7 @@ public void iUnselectAllSelectedApps(){
    
    public void verifyDefaultProgramOrganization(String programName) throws Throwable {
 	   
+	   iWillWaitToSee(By.xpath("//span[text()='"+programName+"']"));
 	   Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='"+programName+"']")));
    }
    
@@ -2972,8 +2908,6 @@ public void iUnselectAllSelectedApps(){
 	   if(!text.equalsIgnoreCase("All locations")){
 
 		   iFillInText(driver.findElement(By.xpath("//div[@class='content active']//input[@placeholder='Search']")), text);
-		   //delay();
-
 	   }
    }
    
@@ -3052,7 +2986,6 @@ public void iUnselectAllSelectedApps(){
 	   }
 	}
    
-   //Code
    public void iRedirectToRemedyConnectPage() {
 		driver.get(DriverScript.Config.getProperty("BaseUrl"));
 		delay();
@@ -3409,14 +3342,10 @@ public void iUnselectAllSelectedApps(){
 			   while(st.hasMoreTokens())
 			   {
 				   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+st.nextToken().trim()+"\")]"))));
-//				 	String actual = getTextForElement(driver.findElement(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+text+"\")]")));
-//					Assert.assertEquals(text,actual);
 				 	Assert.assertTrue(isElementPresentOnPage(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+st.nextToken().trim()+"\")]")));   
 		 }}
 		 else{
 		 	waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+text+"\")]"))));
-//		 	String actual = getTextForElement(driver.findElement(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+text+"\")]")));
-//			Assert.assertEquals(text,actual);
 		 	Assert.assertTrue(isElementPresentOnPage(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+text+"\")]")));
 	 }
 	 }
@@ -3431,7 +3360,7 @@ public void iUnselectAllSelectedApps(){
 	 }
 	 
 	 public void iVerifySelectedLocationsSectionAfterClickOnRemoveLinkIcon(){
-		 isElementNotPresentOnPage(By.xpath("//*[text()='Selected Locations:']"));
+		 Assert.assertTrue(isElementNotPresentOnPage(By.xpath("//*[text()='Selected Locations:']")));
 	 }
 	 
 	 public void iVerifyTextonpopupWindowAfterClickonRemovelinkIcon(){
@@ -3447,14 +3376,10 @@ public void iUnselectAllSelectedApps(){
 	 }
 	 
 	 public void iVerifyPagetextOnLandingPage(String text){
-		 System.out.println("jgujhg");
 		 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='paginator-text']/div[text()='"+text+"']/../div[contains(text(),'of ')]")));
 	 }
 	 
 	 public void iClickonArrowButtonsonLandingPage(String text){
-//		 WebElement element = driver.findElement(By.xpath("//div[@class='single-chevron']//i[@class='"+text+"']"));
-//		 JavascriptExecutor executor = (JavascriptExecutor)driver;
-//		 executor.executeScript("arguments[0].click();", element);
 		 iWillWaitToSee(By.xpath("//div[@class='single-chevron']//i[@class='"+text+"']"));
 		 clickElement(driver.findElement(By.xpath("//div[@class='single-chevron']//i[@class='"+text+"']")));
 		 longDelay();
