@@ -369,9 +369,9 @@ public class MailCreateUser extends BaseClass{
 	    		System.out.println(e.toString());
 	    	}
 			
-			scrollIntoViewByJS(driver.findElement(By.xpath("//div[@data-tooltip='More']")));
-			iWillWaitToSee(By.xpath("//div[@data-tooltip='More']"));
-			driver.findElement(By.xpath("//div[@data-tooltip='More']")).click();
+			scrollIntoViewByJS(driver.findElement(By.xpath("//img[@role='menu']")));
+			iWillWaitToSee(By.xpath("//img[@role='menu']"));
+			driver.findElement(By.xpath("//img[@role='menu']")).click();
 			iWillWaitToSee(By.xpath("//div[contains(text(),'Delete this message')]"));
 			driver.findElement(By.xpath("//div[contains(text(),'Delete this message')]")).click();
 		}
@@ -536,9 +536,9 @@ public class MailCreateUser extends BaseClass{
 		}
 		else
 		{
-			scrollIntoViewByJS(driver.findElement(By.xpath("//div[@data-tooltip='More']")));
-			iWillWaitToSee(By.xpath("//div[@data-tooltip='More']"));
-			driver.findElement(By.xpath("//div[@data-tooltip='More']")).click();
+			scrollIntoViewByJS(driver.findElement(By.xpath("//img[@role='menu']")));
+			iWillWaitToSee(By.xpath("//img[@role='menu']"));
+			driver.findElement(By.xpath("//img[@role='menu']")).click();
 			iWillWaitToSee(By.xpath("//div[contains(text(),'Delete this message')]"));
 			driver.findElement(By.xpath("//div[contains(text(),'Delete this message')]")).click();
 			Thread.sleep(4000);
