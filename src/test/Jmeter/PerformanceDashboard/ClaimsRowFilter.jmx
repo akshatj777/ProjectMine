@@ -176,7 +176,7 @@ SELECT DISTINCT
 --			AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
-				${C_BPID}
+--				${C_BPID}
 	               ${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
@@ -236,7 +236,7 @@ FROM
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
             	${C_BPID}
-	            ${C_CCN}
+--	            ${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
 				${C_R_MARKET} 
@@ -296,7 +296,7 @@ FROM
 			-- AND e.bpid = @test_bpid
             	${C_BPID}
 	            ${C_CCN}
-				${C_BUNDLE} 
+--				${C_BUNDLE} 
 				${C_R_REGION} 
 				${C_R_MARKET} 
 				${C_REGION} 
@@ -327,7 +327,7 @@ FROM
 	-- CLAIMS
 	SELECT DISTINCT
         rm.region, rm.market,
-        CONCAT(rm.region,&apos; - &apos;, rm.market) as &apos;RRegionMarket&apos;
+        CONCAT(&apos;Remedy &apos;,rm.region,&apos; - &apos;, rm.market) as &apos;RRegionMarket&apos;
     FROM
         warehouse.factClaims c
     LEFT JOIN warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
@@ -358,8 +358,8 @@ FROM
             	${C_BPID}
 	            ${C_CCN}
 				${C_BUNDLE} 
-				${C_R_REGION} 
-				${C_R_MARKET} 
+--				${C_R_REGION} 
+--				${C_R_MARKET} 
 				${C_REGION} 
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
@@ -420,8 +420,8 @@ FROM
 				${C_BUNDLE} 
 				${C_R_REGION} 
 				${C_R_MARKET} 
-				${C_REGION} 
-				${C_MARKET} 
+--				${C_REGION} 
+--				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
 				${C_PHY_NPI}
@@ -480,7 +480,7 @@ FROM
 				${C_R_MARKET} 
 				${C_REGION} 
 				${C_MARKET} 
-				${C_PARTICIPANTNAME}  
+--				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
 				${C_PHY_NPI}
 				${C_Model}
@@ -505,11 +505,17 @@ FROM
     (
 	
 	-- CLAIMS
+--	SELECT DISTINCT
+--     case when drg.drgcode in (469,470) and drg.drgsubcode=0 then CONCAT(drg.drgName, &apos; - &apos;, drg.drgsubname,&apos; (&apos;,drg.drgcode ,&apos; - NF)&apos;)
+--     when drg.drgcode in (469,470) and drg.drgsubcode=1 then CONCAT(drg.drgName, &apos; - &apos;, drg.drgsubname,&apos; (&apos;,drg.drgcode ,&apos; - F)&apos;)
+--     when drg.drgcode in (469,470) and drg.drgsubcode=-99 then CONCAT( drg.drgName, &apos; - &apos;, drg.drgsubname,&apos; (&apos;, drg.drgcode ,&apos; - U)&apos;)
+--     else CONCAT(drg.drgName,&apos; (&apos;,drg.drgcode ,&apos;)&apos;)
+--    end as &apos;DRG_Fracture&apos;,
 	SELECT DISTINCT
-     case when drg.drgcode in (469,470) and drg.drgsubcode=0 then CONCAT(drg.drgName, &apos; - &apos;, drg.drgsubname,&apos; (&apos;,drg.drgcode ,&apos; - NF)&apos;)
-     when drg.drgcode in (469,470) and drg.drgsubcode=1 then CONCAT(drg.drgName, &apos; - &apos;, drg.drgsubname,&apos; (&apos;,drg.drgcode ,&apos; - F)&apos;)
-     when drg.drgcode in (469,470) and drg.drgsubcode=-99 then CONCAT( drg.drgName, &apos; - &apos;, drg.drgsubname,&apos; (&apos;, drg.drgcode ,&apos; - U)&apos;)
-     else CONCAT(drg.drgName,&apos; (&apos;,drg.drgcode ,&apos;)&apos;)
+     case when drg.drgcode in (469,470) and drg.drgsubcode=0 then CONCAT(drg.drgcode, &apos; - &apos;, drg.drgName,&apos;(NF)&apos;)
+     when drg.drgcode in (469,470) and drg.drgsubcode=1 then CONCAT(drg.drgcode, &apos; - &apos;, drg.drgName,&apos;(F)&apos;)
+     when drg.drgcode in (469,470) and drg.drgsubcode=-99 then CONCAT(drg.drgcode, &apos; - &apos;, drg.drgName,&apos;(U)&apos;)
+     else CONCAT(drg.drgcode, &apos; - &apos;, drg.drgName)
     end as &apos;DRG_Fracture&apos;,
     case when drg.drgCode is null then null else drg.drgCode end as drgCode
     FROM
@@ -547,7 +553,7 @@ FROM
 				${C_REGION} 
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
-				${C_DRGCODE} 
+--				${C_DRGCODE} 
 				${C_PHY_NPI}  
 				${C_Model}
             
@@ -611,7 +617,7 @@ FROM
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
-				${C_PHY_NPI}
+--				${C_PHY_NPI}
 				${C_Model} 
             
             ) a
@@ -673,7 +679,7 @@ FROM
 				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
 				${C_PHY_NPI}
-				${C_Model}				
+--				${C_Model}				
             
             ) a
 ORDER BY a.model;</stringProp>
@@ -982,7 +988,7 @@ f= new FileOutputStream(path + separator+&quot;ClaimsRowFilterOutput.txt&quot;,t
 //	String vValue10 =  vars.get(&quot;value10&quot;);
 	
 	
-	p.println(&quot;Episode Initiator - BPID=&quot;+vValue1+&quot;*Anchor Facility - CCN=&quot;+vValue2+&quot;*Bundle=&quot;+vValue3+&quot;*Remdy Region Market=&quot;+vValue4+&quot;*Partner Region Market=&quot;+vValue5+&quot;*Participant=&quot;+vValue6+&quot;*DRG - Fracture=&quot;+vValue7+&quot;*Physician - NPI=&quot;+vValue8+&quot;*Model=&quot;+vValue9); //+&quot;*Anchor Facility Detail=&quot;+vValue10);
+	p.println(&quot;Episode Initiator - BPID=&quot;+vValue1+&quot;*Anchor Facility - CCN=&quot;+vValue2+&quot;*Bundle=&quot;+vValue3+&quot;*Remedy Region - Market=&quot;+vValue4+&quot;*Region - Market=&quot;+vValue5+&quot;*Participant=&quot;+vValue6+&quot;*DRG=&quot;+vValue7+&quot;*Physician - NPI=&quot;+vValue8+&quot;*Model=&quot;+vValue9); //+&quot;*Anchor Facility Detail=&quot;+vValue10);
 	
 //	p.println(&quot;Episode Initiator - BPID=&quot;+${value1}+&quot;*Anchor Facility - CCN=&quot;+${value2}+&quot;*Bundle=&quot;+${value3}+&quot;*Remdy Region Market=&quot;+${value4}+&quot;*Partner Region Market=&quot;+${value5}+&quot;*Participant=&quot;+${value6}+&quot;*DRG - Fracture=&quot;+${value7}+&quot;*Physician - NPI=&quot;+${value8}+&quot;*Model=&quot;+${value9}); //&quot;*Anchor Facility Detail=&quot;+${value10});
 
