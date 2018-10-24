@@ -215,6 +215,7 @@ public class BaseClass {
 		List<WebElement> listItems = driver.findElements(By.cssSelector(element));
 		for (WebElement item : listItems) {
 			item.getText().equalsIgnoreCase(itemtext);
+			//Assert.assertEquals(item,itemtext);
 		}
 	}
 

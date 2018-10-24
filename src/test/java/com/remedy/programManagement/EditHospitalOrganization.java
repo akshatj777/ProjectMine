@@ -54,7 +54,7 @@ public class EditHospitalOrganization extends BaseClass{
 				driver.findElements(By.xpath("//div[text()='State']/preceding-sibling::div//input[@role='combobox']")).get(num).sendKeys(text);
 		    	clickElement(driver.findElement(By.xpath("//div[(contains(@class,'VirtualizedSelectOption')) and text()='"+text+"']")));
 			}
-			}
+		}
 		else if(!text.isEmpty()){
 //			iFillInText(driver.findElement(By.xpath("//div//input[@name='locations["+num+"].address.stateSelection']/following-sibling::div//input[@role='combobox']")), text);
 	    	driver.findElements(By.xpath("//div[text()='State']/preceding-sibling::div//input[@role='combobox']")).get(num).sendKeys(text);
@@ -63,27 +63,27 @@ public class EditHospitalOrganization extends BaseClass{
 	}
 	
 	public void iEditLocationTypeForLocation(String text, int num) {
-		if(!text.isEmpty())
-		{
-			num = num-1;
-			scrollIntoViewByJS(driver.findElement(By.xpath("//div[input[@name='locations["+num+"].locationTypeSelector']]//span[@class='Select-clear']")));
-			driver.findElement(By.xpath("//div[input[@name='locations["+num+"].locationTypeSelector']]//span[@class='Select-clear']")).click();
-			driver.findElements(By.xpath("//div[text()='Location Type']/preceding-sibling::div//input[@role='combobox']")).get(num).sendKeys(text);
-	    	delay();
-	        WebElement element = driver.findElement(By.xpath("//div[(contains(@class,'VirtualizedSelectOption')) and text()='"+text+"']"));
-	        scrollIntoViewByJS(element);
-	        element.click();
-		}
-		else
-		{
-			num = num-1;
-			delay();
-	        if (isElementPresent(By.xpath("//div[@class='Select Select--single is-clearable is-searchable has-value'][input[@name='locations["+num+"].regionMarket.regionSelector']]"))){
-		        WebElement element = driver.findElement(By.xpath("//div[@class='Select Select--single is-clearable is-searchable has-value'][input[@name='locations["+num+"].regionMarket.regionSelector']]//span[@class='Select-clear']"));
-	        	scrollIntoViewByJS(element);
-				element.click();
-	        }
-		}
+//		if(!text.isEmpty())
+//		{
+//			num = num-1;
+//			scrollIntoViewByJS(driver.findElement(By.xpath("//div[input[@name='locations["+num+"].locationTypeSelector']]//span[@class='Select-clear']")));
+//			driver.findElement(By.xpath("//div[input[@name='locations["+num+"].locationTypeSelector']]//span[@class='Select-clear']")).click();
+//			driver.findElements(By.xpath("//div[text()='Location Type']/preceding-sibling::div//input[@role='combobox']")).get(num).sendKeys(text);
+//	    	delay();
+//	        WebElement element = driver.findElement(By.xpath("//div[(contains(@class,'VirtualizedSelectOption')) and text()='"+text+"']"));
+//	        scrollIntoViewByJS(element);
+//	        element.click();
+//		}
+//		else
+//		{
+//			num = num-1;
+//			delay();
+//	        if (isElementPresent(By.xpath("//div[@class='Select Select--single is-clearable is-searchable has-value'][input[@name='locations["+num+"].regionMarket.regionSelector']]"))){
+//		        WebElement element = driver.findElement(By.xpath("//div[@class='Select Select--single is-clearable is-searchable has-value'][input[@name='locations["+num+"].regionMarket.regionSelector']]//span[@class='Select-clear']"));
+//	        	scrollIntoViewByJS(element);
+//				element.click();
+//	        }
+//		}
 	}
 	
 	public void iEditRegionForLocation(String text, int num) {

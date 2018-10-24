@@ -25,6 +25,7 @@ public class CreateManagingOrganization extends BaseClass {
 	
 	public void iVerifyButtonUnderOrganizationTab(String text) {
 		iWillWaitToSee(By.xpath("//button[text()='"+text+"']"));
+		Assert.assertTrue(isElementPresent(By.xpath("//button[text()='"+text+"']")));
 	}
 	
 	public void iClickOnCreateNewOrgButton() {

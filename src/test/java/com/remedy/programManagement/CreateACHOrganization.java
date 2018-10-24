@@ -31,15 +31,17 @@ public class CreateACHOrganization extends BaseClass{
 	
 	public void iClickOnParticularOrganizationTabOrganizationDashboard(String text) {
 		longDelay();
-		iWillWaitToSee(By.cssSelector(".navLink.noselect"));
-				
-		List<WebElement> element = driver.findElements(By.cssSelector(".navLink.noselect"));
-		for (WebElement ele : element) {
-			if(ele.getText().contains(text)){
-				ele.click();
-				delay();
-			}
-		}
+//		iWillWaitToSee(By.cssSelector(".navLink.noselect"));
+//				
+//		List<WebElement> element = driver.findElements(By.cssSelector(".navLink.noselect"));
+//		for (WebElement ele : element) {
+//			if(ele.getText().equals(text)){
+//				ele.click();
+//				delay();
+//			}
+//		}
+		iWillWaitToSee(By.xpath("//a[text()='"+text+"']"));
+		clickElement(driver.findElement(By.xpath("//a[text()='"+text+"']")));
 		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 	}
 	
@@ -218,7 +220,7 @@ public class CreateACHOrganization extends BaseClass{
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHHAOrganization.HHAOrg_noMO.get("EIN"));
 			}
 			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
-					iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHHAOrganization.HHAOrg_noMO.get("NPI"));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHHAOrganization.HHAOrg_noMO.get("NPI"));
 			}
 			else if(id.contains("lessThan6")){
 				String value = createRandomNumber(5);
@@ -411,7 +413,7 @@ public class CreateACHOrganization extends BaseClass{
 		iWillWaitToSee(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']"));
 		iFillInText(driver.findElement(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']")), CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1));
 		iWillWaitToSee(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption"));
-		isElementPresent(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption"));
+		Assert.assertTrue(isElementPresent(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption")));
 		delay();
 	}
 	
@@ -574,7 +576,6 @@ public class CreateACHOrganization extends BaseClass{
     	{
     		iFillInText(driver.findElement(By.xpath("//input[@placeholder='CCN']")), CreateSNFOrganization.SNFOrg_noMO.get("LID"));
     	}
-    	
     }
     
     public void iVerifyDuplicateLocationMessage(String text){
