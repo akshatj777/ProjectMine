@@ -440,42 +440,42 @@ Feature: Program Performance Overview Dashboard
     #Then I set "Time" as "previous year" in Time field on dashboard
     #And I click "Time" Filter on the "program performance - <BPID>" dashboard
     #BPID
-    And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
+   And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
     And I select "<BPID>" checkbox in "BPID" filter on "Program overview" dashboard
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
-    #CCN
+   # CCN
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
     And I select "<CCN>" checkbox in "CCN" filter on "Program overview" dashboard
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
-    #Bundle
+   # Bundle
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
     And I select "<Bundle>" checkbox in "Bundle" filter on "Program overview" dashboard
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
-    #Region-Market
+   # Region-Market
     And I click "Remedy Region Market" Filter on the "program performance - <Remedy Region Market>" dashboard
     And I select "<Remedy Region Market>" checkbox in "Remedy Region Market" filter on "Program overview" dashboard
     And I click "Remedy Region Market" Filter on the "program performance - <Remedy Region Market>" dashboard
-    #Remedy-RegionMarket
+   # Remedy-RegionMarket
     And I click "Partner Region Market" Filter on the "program performance - <Partner Region Market>" dashboard
     And I select "<Partner Region Market>" checkbox in "Partner Region Market" filter on "Program overview" dashboard
     And I click "Partner Region Market" Filter on the "program performance - <Partner Region Market>" dashboard
-    #ParticipantName
+   # ParticipantName
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
-    #DRGCODE
+   # DRGCODE
     And I click "DRG" Filter on the "program performance - <DRG>" dashboard
     And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
     And I click "DRG" Filter on the "program performance - <DRG>" dashboard
-    #NPI
+   # NPI
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
     And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
-    #MODEL
+  #  MODEL
     And I click "Model" Filter on the "program performance - <Model>" dashboard
     And I select "<Model>" checkbox in "Model" filter on "Program overview" dashboard
     And I click "Model" Filter on the "program performance - <Model>" dashboard
-    #DataMetricValues
+   # DataMetricValues
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
     And I Save "KPI_Episode" data metric FE value on the dashboard for "Claims" with picture resolution "600X600"
