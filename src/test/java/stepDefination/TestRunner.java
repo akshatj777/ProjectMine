@@ -38,7 +38,7 @@ import stepDefination.Hooks.*;
         monochrome = true,
         //glue = { "./src/test/java/stepDefination" },
                                    
-        tags = {"@HHAScorecardRLS"}
+        tags = {"@Claims"}
 
 		)
 public class TestRunner {

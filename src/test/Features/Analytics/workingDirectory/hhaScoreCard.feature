@@ -1,7 +1,7 @@
-Feature: Inpatient Episode Clearing Dashboard
+Feature: HHA Scorecard Dashboard
 
   @HHAScorecardRLS
-  Scenario Outline: Front end Data Filter Validation for EC data for IPEC
+  Scenario Outline: Front end Data Filter Validation for EC data for HHAScoreCard
     When I open file "\\src\\test\\Jmeter\\HHAScoreCard\\RowFilterInput.csv" for writing data at "<Row>" to input file
     Given I am on the login page
     When I enter email field <User> for login
@@ -17,59 +17,57 @@ Feature: Inpatient Episode Clearing Dashboard
     ##Time
     Then I set "Start Date" as "ClaimsStartDate" in Date field on dashboard
     Then I set "End Date" as "Today" in Date field on dashboard
-    #    And I get and fill days between "2016/01/01" till "today" for Time Filter
-    #  And I click "Time" Filter on the "IPEC" dashboard
     ##POST BPID
-    And I click "Post Acute Facility - CCN" Filter on the "IPEC - <POSTCCN>" dashboard
-    And I select "<POSTCCN>" checkbox in "CCN" filter on "IPEC" dashboard
-    And I click "Post Acute Facility - CCN" Filter on the "IPEC - <POSTCCN>" dashboard
+    And I click "Post Acute Facility - CCN" Filter on the "HHAScoreCard - <POSTCCN>" dashboard
+    And I select "<POSTCCN>" checkbox in "CCN" filter on "HHAScoreCard" dashboard
+    And I click "Post Acute Facility - CCN" Filter on the "HHAScoreCard - <POSTCCN>" dashboard
     ##Bundle
-    And I click "Bundle" Filter on the "IPEC - <Bundle>" dashboard
-    And I select "<Bundle>" checkbox in "Bundle" filter on "IPEC" dashboard
-    And I click "Bundle" Filter on the "IPEC - <Bundle>" dashboard
+    And I click "Bundle" Filter on the "HHAScoreCard - <Bundle>" dashboard
+    And I select "<Bundle>" checkbox in "Bundle" filter on "HHAScoreCard" dashboard
+    And I click "Bundle" Filter on the "HHAScoreCard - <Bundle>" dashboard
     ##Region - Market
-    And I click "Region - Market" Filter on the "IPEC - <Region - Market>" dashboard
-    And I select "<Region - Market>" checkbox in "Region - Market" filter on "IPEC" dashboard
-    And I click "Region - Market" Filter on the "IPEC - <Region - Market>" dashboard
+    And I click "Region - Market" Filter on the "HHAScoreCard - <Region - Market>" dashboard
+    And I select "<Region - Market>" checkbox in "Region - Market" filter on "HHAScoreCard" dashboard
+    And I click "Region - Market" Filter on the "HHAScoreCard - <Region - Market>" dashboard
     ##Remedy Region - Market
-    And I click "Remedy Region - Market" Filter on the "IPEC - <Remedy Region - Market>" dashboard
-    And I select "<Remedy Region - Market>" checkbox in "Remedy Region - Market" filter on "IPEC" dashboard
-    And I click "Remedy Region - Market" Filter on the "IPEC - <Remedy Region - Market>" dashboard
+    And I click "Remedy Region - Market" Filter on the "HHAScoreCard - <Remedy Region - Market>" dashboard
+    And I select "<Remedy Region - Market>" checkbox in "Remedy Region - Market" filter on "HHAScoreCard" dashboard
+    And I click "Remedy Region - Market" Filter on the "HHAScoreCard - <Remedy Region - Market>" dashboard
     ##ParticipantName
-    And I click "Participant" Filter on the "IPEC - <Participant>" dashboard
-    And I select "<Participant>" checkbox in "Participant" filter on "IPEC" dashboard
-    And I click "Participant" Filter on the "IPEC - <Participant>" dashboard
+    And I click "Participant" Filter on the "HHAScoreCard - <Participant>" dashboard
+    And I select "<Participant>" checkbox in "Participant" filter on "HHAScoreCard" dashboard
+    And I click "Participant" Filter on the "HHAScoreCard - <Participant>" dashboard
     #BPID
-    And I click "Episode Initiator - BPID" Filter on the "IPEC - <BPID>" dashboard
-    And I select "<BPID>" checkbox in "BPID" filter on "IPEC" dashboard
-    And I click "Episode Initiator - BPID" Filter on the "IPEC - <BPID>" dashboard
+    And I click "Episode Initiator - BPID" Filter on the "HHAScoreCard - <BPID>" dashboard
+    And I select "<BPID>" checkbox in "BPID" filter on "HHAScoreCard" dashboard
+    And I click "Episode Initiator - BPID" Filter on the "HHAScoreCard - <BPID>" dashboard
     ##CCN
-    And I click "Anchor Facility - CCN" Filter on the "IPEC - <CCN>" dashboard
-    And I select "<CCN>" checkbox in "CCN" filter on "IPEC" dashboard
-    And I click "Anchor Facility - CCN" Filter on the "IPEC - <CCN>" dashboard
+    And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard - <CCN>" dashboard
+    And I select "<CCN>" checkbox in "CCN" filter on "HHAScoreCard" dashboard
+    And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard - <CCN>" dashboard
     ##Store Values in Filter
-    And I click "Post Acute Facility - CCN" Filter on the "IPEC" dashboard
-    And I fetch and store "Post Acute Facility - CCN" filter values on "IPEC" dashboard
-    And I click "Post Acute Facility - CCN" Filter on the "IPEC" dashboard
-    And I click "Bundle" Filter on the "IPEC" dashboard
-    And I fetch and store "Bundle" filter values on "IPEC" dashboard
-    And I click "Bundle" Filter on the "IPEC" dashboard
-    And I click "Region - Market" Filter on the "IPEC" dashboard
-    And I fetch and store "Region - Market" filter values on "IPEC" dashboard
-    And I click "Region - Market" Filter on the "IPEC" dashboard
-    And I click "Remedy Region - Market" Filter on the "IPEC" dashboard
-    And I fetch and store "Remedy Region - Market" filter values on "IPEC" dashboard
-    And I click "Remedy Region - Market" Filter on the "IPEC" dashboard
-    And I click "Participant" Filter on the "IPEC" dashboard
-    And I fetch and store "Participant" filter values on "IPEC" dashboard
-    And I click "Participant" Filter on the "IPEC" dashboard
+    And I click "Post Acute Facility - CCN" Filter on the "HHAScoreCard" dashboard
+    And I fetch and store "Post Acute Facility - CCN" filter values on "HHAScoreCard" dashboard
+    And I click "Post Acute Facility - CCN" Filter on the "HHAScoreCard" dashboard
+    And I click "Bundle" Filter on the "HHAScoreCard" dashboard
+    And I fetch and store "Bundle" filter values on "HHAScoreCard" dashboard
+    And I click "Bundle" Filter on the "HHAScoreCard" dashboard
+    And I click "Region - Market" Filter on the "HHAScoreCard" dashboard
+    And I fetch and store "Region - Market" filter values on "HHAScoreCard" dashboard
+    And I click "Region - Market" Filter on the "HHAScoreCard" dashboard
+    And I click "Remedy Region - Market" Filter on the "HHAScoreCard" dashboard
+    And I fetch and store "Remedy Region - Market" filter values on "HHAScoreCard" dashboard
+    And I click "Remedy Region - Market" Filter on the "HHAScoreCard" dashboard
+    And I click "Participant" Filter on the "HHAScoreCard" dashboard
+    And I fetch and store "Participant" filter values on "HHAScoreCard" dashboard
+    And I click "Participant" Filter on the "HHAScoreCard" dashboard
     And I save the values of row filters in "<Row>" index in storage HashMap
-    And I click "Episode Initiator - BPID" Filter on the "IPEC" dashboard
-    And I fetch and store "Episode Initiator - BPID" filter values on "IPEC" dashboard
-    And I click "Episode Initiator - BPID" Filter on the "IPEC" dashboard
-    And I click "Anchor Facility - CCN" Filter on the "IPEC" dashboard
-    And I fetch and store "Anchor Facility - CCN" filter values on "IPEC" dashboard
-    And I click "Anchor Facility - CCN" Filter on the "IPEC" dashboard
+    And I click "Episode Initiator - BPID" Filter on the "HHAScoreCard" dashboard
+    And I fetch and store "Episode Initiator - BPID" filter values on "HHAScoreCard" dashboard
+    And I click "Episode Initiator - BPID" Filter on the "HHAScoreCard" dashboard
+    And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard" dashboard
+    And I fetch and store "Anchor Facility - CCN" filter values on "HHAScoreCard" dashboard
+    And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard" dashboard
 
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | POSTCCN     |
@@ -95,11 +93,11 @@ Feature: Inpatient Episode Clearing Dashboard
   @HHAScorecardRLS
   Scenario Outline: Verify DB and FE values fetched from Scenarios
     And I get the value "<Index>" from Output file of data filter validation
-    Then I verify "POST Acute Facility - BPID" for DB and FE filter values at "<Row>" for "EC"
-    Then I verify "Anchor Facility - CCN" for DB and FE filter values at "<Row>" for "EC"
+    Then I verify "POST Acute Facility - CCN" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Bundle" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Region - Market" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Remedy Region - Market" for DB and FE filter values at "<Row>" for "EC"
+    Then I verify "Anchor Facility - CCN" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Participant" for DB and FE filter values at "<Row>" for "EC"
 
     Examples: 
