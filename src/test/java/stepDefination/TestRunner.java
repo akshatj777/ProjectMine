@@ -39,8 +39,7 @@ import stepDefination.Hooks.*;
         //glue = { "./src/test/java/stepDefination" },
                                    
         tags = {"@Claims"}
-
-		)
+)
 public class TestRunner {
 
         @BeforeSuite

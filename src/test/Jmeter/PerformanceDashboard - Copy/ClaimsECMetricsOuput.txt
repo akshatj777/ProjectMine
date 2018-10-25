@@ -1,1 +1,0 @@
-KPI_Episode_EC_Claims=2550*Savings Rate_EC_Claims=4.5*KPI_NPRA_EC_Claims=2879886*KPI_Program_size_EC_Claims=63669240*% SNF Disch Current_EC_Claims=26.9*SNF Days Current_EC_Claims=22.9*SNF Days Benchmark Variance_EC_Claims=25.2*Readmissions Current_EC_Claims=19.7*Readmissions Benchmark Variance_EC_Claims=26.6*% SNF Disch Benchmark Variance_EC_Claims=43.3

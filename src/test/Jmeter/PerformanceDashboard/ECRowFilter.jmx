@@ -132,16 +132,25 @@ if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;EC_DRGCODE&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+if(vars.get(&quot;npi&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
+	vars.put(&quot;EC_PHY_NPI&quot;,&quot;and dpy.npi is null&quot;);		
+} else if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_PHY_NPI&quot;,&quot;and dpy.npi in ${npi}&quot;);		
-} else{
+}else{
 	vars.put(&quot;EC_PHY_NPI&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_Model&quot;,&quot;and fp.Model in ${model}&quot;);	
 } else{
 	vars.put(&quot;EC_Model&quot;,&quot;&quot;);
-}	</stringProp>
+}	
+if(vars.get(&quot;anch&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
+	vars.put(&quot;EC_AnchorFacility&quot;,&quot;and afdetail.facilityNameInitCap is null&quot;);		
+} else if(!vars.get(&quot;anch&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;EC_AnchorFacility&quot;,&quot;and afdetail.facilityNameInitCap in ${anch}&quot;);		
+}else{
+	vars.put(&quot;EC_AnchorFacility&quot;,&quot;&quot;);
+}</stringProp>
         </BeanShellPreProcessor>
         <hashTree/>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="BPID Filter " enabled="true">
@@ -167,17 +176,18 @@ LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK
 LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
-    LEFT JOIN
-		(SELECT f.facilitySK, f.ccn,f.facilityName,
-				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
-							ELSE df_claims.facilityNameInitCap
-				END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
-		FROM warehouse.dimFacility f
-		LEFT OUTER JOIN 
-			(SELECT * FROM warehouse.dimFacility
-			WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-		) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
-    INNER JOIN (
+   LEFT JOIN
+  (SELECT f.facilitySK, f.ccn,f.facilityName, 
+    CASE  WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
+       ELSE df_claims.facilityNameInitCap
+    END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
+  FROM warehouse.dimFacility f
+  LEFT OUTER JOIN 
+   (SELECT * FROM warehouse.dimFacility
+   WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
+  ) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
+ LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
+		    INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM  warehouse.tabUserSecurityBPID
 		WHERE  username = ${userName} GROUP BY bpid) tbsBPID ON de.BPID = tbsBPID.bpid
     WHERE
@@ -201,6 +211,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
+				${EC_AnchorFacility}
 			) a
 ORDER BY a.episodeInitiatorNameInitCap , a.bpid;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -262,16 +273,17 @@ LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK
 LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
-    LEFT JOIN
-		(SELECT f.facilitySK, f.ccn,f.facilityName, 
-				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
-							ELSE df_claims.facilityNameInitCap
-				END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource          
-		FROM warehouse.dimFacility f
-		LEFT OUTER JOIN 
-			(SELECT * FROM warehouse.dimFacility
-			WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-		) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK 
+   LEFT JOIN
+  (SELECT f.facilitySK, f.ccn,f.facilityName, 
+    CASE  WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
+       ELSE df_claims.facilityNameInitCap
+    END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
+  FROM warehouse.dimFacility f
+  LEFT OUTER JOIN 
+   (SELECT * FROM warehouse.dimFacility
+   WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
+  ) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
+ LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
     INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM  warehouse.tabUserSecurityBPID
 		WHERE  username = ${userName} GROUP BY bpid) tbsBPID ON de.BPID = tbsBPID.bpid
@@ -303,6 +315,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
+				${EC_AnchorFacility}
 				) a
 ORDER BY a.facilityNameInitCap, a.ccn;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -336,16 +349,17 @@ LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK
 LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
-    LEFT JOIN
-		(SELECT f.facilitySK, f.ccn,f.facilityName, 
-				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
-							ELSE df_claims.facilityNameInitCap
-				END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource         
-		FROM warehouse.dimFacility f
-		LEFT OUTER JOIN 
-			(SELECT * FROM warehouse.dimFacility
-			WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-		) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
+   LEFT JOIN
+  (SELECT f.facilitySK, f.ccn,f.facilityName, 
+    CASE  WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
+       ELSE df_claims.facilityNameInitCap
+    END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
+  FROM warehouse.dimFacility f
+  LEFT OUTER JOIN 
+   (SELECT * FROM warehouse.dimFacility
+   WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
+  ) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
+ LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
     INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM  warehouse.tabUserSecurityBPID
 		WHERE  username = ${userName} GROUP BY bpid) tbsBPID ON de.BPID = tbsBPID.bpid
@@ -377,6 +391,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
+				${EC_AnchorFacility}
 			    ) a
 ORDER BY a.bundleName;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -412,15 +427,16 @@ LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
     LEFT JOIN
-		(SELECT f.facilitySK, f.ccn,f.facilityName, 
-				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
-							ELSE df_claims.facilityNameInitCap
-				END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
-		FROM warehouse.dimFacility f
-		LEFT OUTER JOIN 
-			(SELECT * FROM warehouse.dimFacility
-			WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-		) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
+  (SELECT f.facilitySK, f.ccn,f.facilityName, 
+    CASE  WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
+       ELSE df_claims.facilityNameInitCap
+    END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
+  FROM warehouse.dimFacility f
+  LEFT OUTER JOIN 
+   (SELECT * FROM warehouse.dimFacility
+   WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
+  ) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
+ LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
     INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM  warehouse.tabUserSecurityBPID
 		WHERE  username = ${userName} GROUP BY bpid) tbsBPID ON de.BPID = tbsBPID.bpid
@@ -451,7 +467,8 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
-				${EC_Model} 
+				${EC_Model}
+				${EC_AnchorFacility} 
 				) a
 ORDER BY a.PartnerRegionMarket;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -473,7 +490,7 @@ FROM
   -- EC  
     SELECT DISTINCT
         rm.region, rm.market,
-        CONCAT(&apos;Remedy &apos;rm.region,&apos; - &apos;, rm.market) as &apos;RRegionMarket&apos;
+        CONCAT(&apos;Remedy &apos;,rm.region,&apos; - &apos;, rm.market) as &apos;RRegionMarket&apos;
     FROM
         warehouse.factPatientEpisode fp
     LEFT JOIN warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK 
@@ -487,15 +504,16 @@ LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
     LEFT JOIN
-		(SELECT f.facilitySK, f.ccn,f.facilityName, 
-				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
-							ELSE df_claims.facilityNameInitCap
-				END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
-		FROM warehouse.dimFacility f
-		LEFT OUTER JOIN 
-			(SELECT * FROM warehouse.dimFacility
-			WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-		) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
+  (SELECT f.facilitySK, f.ccn,f.facilityName, 
+    CASE  WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
+       ELSE df_claims.facilityNameInitCap
+    END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
+  FROM warehouse.dimFacility f
+  LEFT OUTER JOIN 
+   (SELECT * FROM warehouse.dimFacility
+   WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
+  ) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
+ LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
     INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM  warehouse.tabUserSecurityBPID
 		WHERE  username = ${userName} GROUP BY bpid) tbsBPID ON de.BPID = tbsBPID.bpid
@@ -527,6 +545,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
+				${EC_AnchorFacility}
 				) a
 ORDER BY a.RRegionMarket;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -560,16 +579,17 @@ LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK
 LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
-    LEFT JOIN
-		(SELECT f.facilitySK, f.ccn,f.facilityName, 
-				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
-							ELSE df_claims.facilityNameInitCap
-				END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
-		FROM warehouse.dimFacility f
-		LEFT OUTER JOIN 
-			(SELECT * FROM warehouse.dimFacility
-			WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-		) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
+		LEFT JOIN
+  (SELECT f.facilitySK, f.ccn,f.facilityName, 
+    CASE  WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
+       ELSE df_claims.facilityNameInitCap
+    END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
+  FROM warehouse.dimFacility f
+  LEFT OUTER JOIN 
+   (SELECT * FROM warehouse.dimFacility
+   WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
+  ) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
+ LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
     INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM  warehouse.tabUserSecurityBPID
 		WHERE  username = ${userName} GROUP BY bpid) tbsBPID ON de.BPID = tbsBPID.bpid
@@ -601,6 +621,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
+				${EC_AnchorFacility}
 				) a
 ORDER BY a.participant;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -622,7 +643,7 @@ FROM
   -- EC  
     SELECT DISTINCT
 --     CONCAT(d.drgName ,&apos; (&apos;,d.drgCode,&apos;)&apos;) as &apos;DRG_Fracture&apos;,
-     CONCAT(drg.drgcode, &apos; - &apos;, drg.drgName) as &apos;DRG_Fracture&apos;,
+     CONCAT(d.drgcode, &apos; - &apos;, d.drgName) as &apos;DRG_Fracture&apos;,
      case when d.drgCode is null then null else d.drgCode end as drgCode
     FROM
         warehouse.factPatientEpisode fp
@@ -637,15 +658,16 @@ LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
     LEFT JOIN
-		(SELECT f.facilitySK, f.ccn,f.facilityName, 
-				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
-							ELSE df_claims.facilityNameInitCap
-				END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
-		FROM warehouse.dimFacility f
-		LEFT OUTER JOIN 
-			(SELECT * FROM warehouse.dimFacility
-			WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-		) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
+  (SELECT f.facilitySK, f.ccn,f.facilityName, 
+    CASE  WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
+       ELSE df_claims.facilityNameInitCap
+    END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
+  FROM warehouse.dimFacility f
+  LEFT OUTER JOIN 
+   (SELECT * FROM warehouse.dimFacility
+   WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
+  ) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
+ LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
     INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM  warehouse.tabUserSecurityBPID
 		WHERE  username = ${userName} GROUP BY bpid) tbsBPID ON de.BPID = tbsBPID.bpid
@@ -677,6 +699,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 --				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
+				${EC_AnchorFacility}
 ) a
 ORDER BY a.DRG_Fracture;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -713,15 +736,16 @@ LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
     LEFT JOIN
-		(SELECT f.facilitySK, f.ccn,f.facilityName, 
-				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
-							ELSE df_claims.facilityNameInitCap
-				END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
-		FROM warehouse.dimFacility f
-		LEFT OUTER JOIN 
-			(SELECT * FROM warehouse.dimFacility
-			WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-		) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
+  (SELECT f.facilitySK, f.ccn,f.facilityName, 
+    CASE  WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
+       ELSE df_claims.facilityNameInitCap
+    END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
+  FROM warehouse.dimFacility f
+  LEFT OUTER JOIN 
+   (SELECT * FROM warehouse.dimFacility
+   WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
+  ) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
+ LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
     INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM  warehouse.tabUserSecurityBPID
 		WHERE  username = ${userName} GROUP BY bpid) tbsBPID ON de.BPID = tbsBPID.bpid
@@ -753,6 +777,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 --				${EC_PHY_NPI} 
 				${EC_Model}
+				${EC_AnchorFacility}
 ) a
 ORDER BY a.Physician_NPI;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -787,15 +812,16 @@ LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK 
     LEFT JOIN
-		(SELECT f.facilitySK, f.ccn,f.facilityName, 
-				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
-							ELSE df_claims.facilityNameInitCap
-				END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
-		FROM warehouse.dimFacility f
-		LEFT OUTER JOIN 
-			(SELECT * FROM warehouse.dimFacility
-			WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-		) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
+  (SELECT f.facilitySK, f.ccn,f.facilityName, 
+    CASE  WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
+       ELSE df_claims.facilityNameInitCap
+    END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
+  FROM warehouse.dimFacility f
+  LEFT OUTER JOIN 
+   (SELECT * FROM warehouse.dimFacility
+   WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
+  ) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
+ LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
     INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM  warehouse.tabUserSecurityBPID
 		WHERE  username = ${userName} GROUP BY bpid) tbsBPID ON de.BPID = tbsBPID.bpid
@@ -826,8 +852,8 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
---				${EC_Model}
-) a
+				${EC_AnchorFacility}
+				) a
 ORDER BY a.model;	</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
@@ -855,17 +881,17 @@ LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK
 LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK 
-	    LEFT JOIN
-		(SELECT f.facilitySK, f.ccn,f.facilityName, 
-				CASE 	WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
-							ELSE df_claims.facilityNameInitCap
-				END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
-		FROM warehouse.dimFacility f
-		LEFT OUTER JOIN 
-			(SELECT * FROM warehouse.dimFacility
-			WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
-		) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
-	LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
+LEFT JOIN
+  (SELECT f.facilitySK, f.ccn,f.facilityName, 
+    CASE  WHEN df_claims.facilityNameInitCap IS NULL THEN f.facilityNameInitCap
+       ELSE df_claims.facilityNameInitCap
+    END facilityNameInitCap,f.sourceFacilityKey, f.dwhSource            
+  FROM warehouse.dimFacility f
+  LEFT OUTER JOIN 
+   (SELECT * FROM warehouse.dimFacility
+   WHERE dwhSource = &apos;Claims&apos;) AS df_claims ON f.ccn = df_claims.ccn AND f.dwhSource IN (&apos;EC&apos; , &apos;ZeroKey&apos;)
+  ) anc ON fp.anchorAdmitFacilityKey = anc.facilitySK
+ LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
     INNER JOIN (
 		SELECT  tabUserSecurityBPID.bpid FROM  warehouse.tabUserSecurityBPID
 		WHERE  username = ${userName} GROUP BY bpid) tbsBPID ON de.BPID = tbsBPID.bpid
@@ -900,90 +926,6 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">facilityNameInitCap</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Post Acute Facility CCN Validation" enabled="false">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select distinct facilityName  as &apos;Post Acute Facility&apos;, ccn as &apos;pac_CCN&apos;  from 
-(select
-distinct pac.facilityName , pac.CCN
-from warehouse.factPatientEpisode fp 
-inner join warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK
-inner join warehouse.dimFacility df on fp.anchorAdmitFacilityKey = df.facilitySK
-inner join warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.facilitySK
-inner join warehouse.dimPatient dp on fp.patientKey = dp.patientSK
-inner join warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName
-
--- inner join warehouse.dimFacility dfpac ON fp.postAcuteFacilityKey = dfpac.facilitySK
-Inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON de.BPID = tbsBPID.bpid
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on df.ccn=tbsCCN.ccn
-Inner JOIN 
-     (       
-        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
-       GROUP BY facilitykey
-        )tbsFacilityKey on df.sourceFacilityKey=tbsFacilityKey.facilitykey      
-where fp.bundleRisk = 1 
-and fp.episodeCountReport = 1
-and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
-and de.bpid not like &apos;%DEMO%&apos;
-and dlk.lookupCategory = &apos;patientRisk&apos;
-and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
--- and fp.anchorAdmitDateKey &lt;= &apos;20180827&apos;
-and de.bpid = ${bpid}
-and df.ccn = &apos;390223&apos;
-union
-select distinct 
-pac.facilityName , pac.CCN
-from warehouse.factClaims c
- LEFT JOIN
-warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
-    LEFT JOIN
-warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK       
- LEFT JOIN 
-warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK 
- 
--- left join warehouse.dimFacility dfpac ON c.postAcuteFacilityKey = dfpac.facilitySK     
- inner JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID  where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON e.BPID = tbsBPID.bpid
-inner JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN  where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on f.ccn=tbsCCN.ccn
-WHERE c.atRisk=&apos;Y&apos; 
-and f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;) 
-and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)
-and c.anchorBeginDateKey &gt;= &apos;20170101&apos;
--- and c.anchorBeginDateKey &lt;=  @test_end_date
-and c.anchorBeginDateKey &lt;=  (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-  AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
-and e.bpid = ${bpid}
-and f.ccn =  &apos;390223&apos;
-) a;
-</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">Post Acute Facility,pac_CCN</stringProp>
           <stringProp name="resultVariable"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
