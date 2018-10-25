@@ -451,14 +451,14 @@ Feature: Program Performance Overview Dashboard
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
     And I select "<Bundle>" checkbox in "Bundle" filter on "Program overview" dashboard
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
-    # Region-Market
-    And I click "Remedy Region Market" Filter on the "program performance - <Remedy Region Market>" dashboard
-    And I select "<Remedy Region Market>" checkbox in "Remedy Region Market" filter on "Program overview" dashboard
-    And I click "Remedy Region Market" Filter on the "program performance - <Remedy Region Market>" dashboard
-    # Remedy-RegionMarket
-    And I click "Region - Market" Filter on the "program performance - <Partner Region Market>" dashboard
-    And I select "<Partner Region Market>" checkbox in "Partner Region Market" filter on "Program overview" dashboard
-    And I click "Partner Region Market" Filter on the "program performance - <Partner Region Market>" dashboard
+    ##Region-Market
+    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
+    And I select "<Region - Market>" checkbox in "Region - Market" filter on "Program overview" dashboard
+    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
+    ##Remedy Region - Market
+    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
+    And I select "<Remedy Region - Market>" checkbox in "Remedy Region - Market" filter on "Program overview" dashboard
+    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
     #ParticipantName
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
