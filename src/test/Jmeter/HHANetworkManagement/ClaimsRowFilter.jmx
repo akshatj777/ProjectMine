@@ -512,9 +512,9 @@ FROM
 --     else CONCAT(drg.drgName,&apos; (&apos;,drg.drgcode ,&apos;)&apos;)
 --    end as &apos;DRG_Fracture&apos;,
 	SELECT DISTINCT
-     case when drg.drgcode in (469,470) and drg.drgsubcode=0 then CONCAT(drg.drgcode, &apos; - &apos;, drg.drgName,&apos; (NF)&apos;)
-     when drg.drgcode in (469,470) and drg.drgsubcode=1 then CONCAT(drg.drgcode, &apos; - &apos;, drg.drgName,&apos; (F)&apos;)
-     when drg.drgcode in (469,470) and drg.drgsubcode=-99 then CONCAT(drg.drgcode, &apos; - &apos;, drg.drgName,&apos; (U)&apos;)
+     case when drg.drgcode in (469,470) and drg.drgsubcode=0 then CONCAT(drg.drgcode, &apos; - &apos;, drg.drgName,&apos;(NF)&apos;)
+     when drg.drgcode in (469,470) and drg.drgsubcode=1 then CONCAT(drg.drgcode, &apos; - &apos;, drg.drgName,&apos;(F)&apos;)
+     when drg.drgcode in (469,470) and drg.drgsubcode=-99 then CONCAT(drg.drgcode, &apos; - &apos;, drg.drgName,&apos;(U)&apos;)
      else CONCAT(drg.drgcode, &apos; - &apos;, drg.drgName)
     end as &apos;DRG_Fracture&apos;,
     case when drg.drgCode is null then null else drg.drgCode end as drgCode
