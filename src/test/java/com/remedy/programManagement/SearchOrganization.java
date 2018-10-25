@@ -798,11 +798,11 @@ public class SearchOrganization extends BaseClass{
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
 			if(CreateManagingOrganizationAPI.MONameList.get(0).contains("\""))
 			{
-				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateManagingOrganizationAPI.MONameList.get(0).substring(0, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"']")));
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateManagingOrganizationAPI.MONameList.get(0).substring(0, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)+"']"));
 			}
 			else
 			{
-				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateManagingOrganizationAPI.MONameList.get(0)+"']")));
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateManagingOrganizationAPI.MONameList.get(0)+"']"));
 			}
 		}
 		else if(text.contains("ACHNAME - YES")){
@@ -810,11 +810,11 @@ public class SearchOrganization extends BaseClass{
 			//isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganization.achOrg.get("ACHNAME")+"']"));
 			if(CreateACHOrganizationAPI.ACHNameList.get(0).contains("\""))
 			{
-				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(0).substring(0, CreateACHOrganizationAPI.ACHNameList.get(0).length()-1)+"']")));
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(0).substring(0, CreateACHOrganizationAPI.ACHNameList.get(0).length()-1)+"']"));
 			}
 			else
 			{
-				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(0)+"']")));
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(0)+"']"));
 			}
 		}
 		else if(text.contains("ACHNAME - NO")){
@@ -822,11 +822,11 @@ public class SearchOrganization extends BaseClass{
 			//isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganization.achOrg_noMO.get("ACHNAME")+"']"));
 			if(CreateACHOrganizationAPI.ACHNameList.get(1).contains("\""))
 			{
-				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(1).substring(0, CreateACHOrganizationAPI.ACHNameList.get(1).length()-1)+"']")));
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(1).substring(0, CreateACHOrganizationAPI.ACHNameList.get(1).length()-1)+"']"));
 			}
 			else
 			{
-				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(1)+"']")));
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(1)+"']"));
 			}
 		}
 		else if(text.contains("PAYORNAME"))
@@ -845,22 +845,22 @@ public class SearchOrganization extends BaseClass{
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
 			if(CreateSNFOrganizationAPI.SNFNameList.get(0).contains("\""))
 			{
-				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(0).substring(0, CreateSNFOrganizationAPI.SNFNameList.get(0).length()-1)+"']")));
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(0).substring(0, CreateSNFOrganizationAPI.SNFNameList.get(0).length()-1)+"']"));
 			}
 			else
 			{
-				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(0)+"']")));
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(0)+"']"));
 			}
 		}
 		else if(text.contains("SNFNAME - NO")){
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
 			if(CreateSNFOrganizationAPI.SNFNameList.get(1).contains("\""))
 			{
-				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(1).substring(0, CreateSNFOrganizationAPI.SNFNameList.get(1).length()-1)+"']")));
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(1).substring(0, CreateSNFOrganizationAPI.SNFNameList.get(1).length()-1)+"']"));
 			}
 			else
 			{
-				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(1)+"']")));
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateSNFOrganizationAPI.SNFNameList.get(1)+"']"));
 			}
 		}
 		else if(text.contains("PGPNAME - YES")){
@@ -948,21 +948,21 @@ public class SearchOrganization extends BaseClass{
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
 			if(CreateHospiceOrganizationAPI.HospiceNameList.get(1).contains("\""))
 			{
-				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateHospiceOrganizationAPI.HospiceNameList.get(1).substring(0, CreateHospiceOrganizationAPI.HospiceNameList.get(1).length()-1)+"']")));
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateHospiceOrganizationAPI.HospiceNameList.get(1).substring(0, CreateHospiceOrganizationAPI.HospiceNameList.get(1).length()-1)+"']"));
 			}
 			else
 			{
-				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateHospiceOrganizationAPI.HospiceNameList.get(1)+"']")));
+				isElementPresentOnPage(By.xpath("//div[text()='"+CreateHospiceOrganizationAPI.HospiceNameList.get(1)+"']"));
 			}
 		}
 		else if(text.contains("PROGRAMNAME")){
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
-			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']")));
+			isElementPresentOnPage(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)+"']"));
 		}
 		else
 		{
 			iWillWaitToSee(By.cssSelector(".data-table-cell.link-content"));
-			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+text+"']")));
+			isElementPresentOnPage(By.xpath("//div[text()='"+text+"']"));
 		}	
 	}
 	
