@@ -3,7 +3,7 @@ Feature: Bulk Upload User from SA
   Scenario: Bulk upload users having limited applicatin access
     Given I am on the login page
     Then I log in as super user
-    Then I should see Tile text User Admin
+    Then I should see Tile text Users
     And I click on the "Users" tile
     Then I should see header text "Users"
     Then I click on Import User button
