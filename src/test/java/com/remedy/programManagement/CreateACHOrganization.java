@@ -68,8 +68,8 @@ public class CreateACHOrganization extends BaseClass{
 			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
 					iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), achOrg.get("NPI"));
 			}
-			else if(id.contains("lessThan6")){
-				String value = createRandomNumber(5);
+			else if(id.contains("lessThan4")){
+				String value = createRandomNumber(3);
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
 			}
 			else if(id.contains("greaterThan10")){
@@ -186,8 +186,8 @@ public class CreateACHOrganization extends BaseClass{
 			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
 					iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateIRFOrganization.IRFOrg.get("NPI"));
 			}
-			else if(id.contains("lessThan6")){
-				String value = createRandomNumber(5);
+			else if(id.contains("lessThan4")){
+				String value = createRandomNumber(3);
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
 			}
 			else if(id.contains("greaterThan10")){
@@ -222,8 +222,8 @@ public class CreateACHOrganization extends BaseClass{
 			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHHAOrganization.HHAOrg_noMO.get("NPI"));
 			}
-			else if(id.contains("lessThan6")){
-				String value = createRandomNumber(5);
+			else if(id.contains("lessThan4")){
+				String value = createRandomNumber(3);
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
 			}
 			
@@ -254,8 +254,8 @@ public class CreateACHOrganization extends BaseClass{
 			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
 					iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.HospiceOrg_noMO.get("NPI"));
 			}
-			else if(id.contains("lessThan6")){
-				String value = createRandomNumber(5);
+			else if(id.contains("lessThan4")){
+				String value = createRandomNumber(3);
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
 			}
 			
@@ -286,8 +286,8 @@ public class CreateACHOrganization extends BaseClass{
 			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
 					iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.LTCHOrg_noMO.get("NPI"));
 			}
-			else if(id.contains("lessThan6")){
-				String value = createRandomNumber(5);
+			else if(id.contains("lessThan4")){
+				String value = createRandomNumber(3);
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
 			}
 			

@@ -77,11 +77,11 @@ Feature: Create PGP organization functionality tests.
     And I verify "<ValidationMsg>" mandatory field validation message on create organization page
 
     Examples: 
-      | Description                                      | Has_MO | Managing_Org | PGP_Name | EIN | NPI | ValidationMsg                               |
-      | Check validation for blank Managing Organization | YES    | BLANK        | PGPNAME  | EIN | NPI | A Managing Organization has to be selected. |
-      | Check validation for blank PGP name              | NO     |              |          | EIN | NPI | Please enter an Organization Name           |
-      | Check validation for blank Identifiers           | NO     |              | PGPNAME  |     |     | The EIN field is required                   |
-      | Check validation for blank EIN Identifier        | NO     |              | PGPNAME  |     | NPI | The EIN field is required                   |
+      | Description                                      | Has_MO | Managing_Org | PGP_Name | EIN | NPI | ValidationMsg                     |
+      | Check validation for blank Managing Organization | YES    | BLANK        | PGPNAME  | EIN | NPI | Please select one option          |
+      | Check validation for blank PGP name              | NO     |              |          | EIN | NPI | Please enter an Organization Name |
+      | Check validation for blank Identifiers           | NO     |              | PGPNAME  |     |     | The EIN field is required         |
+      | Check validation for blank EIN Identifier        | NO     |              | PGPNAME  |     | NPI | The EIN field is required         |
 
   Scenario Outline: <Description>
     When I click on "PGP" organization tab on organization dashboard
