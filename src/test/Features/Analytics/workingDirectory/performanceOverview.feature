@@ -95,16 +95,16 @@ Feature: Program Performance Overview Dashboard
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region - Market | Region - Market | Participant | DRG         | Physician - NPI | Model       | Anchor Facility Detail |
       | Qafivedashtest@yopmail.com  |   1 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
-      | Qatwodashtest@yopmail.com   |   2 | True Random | True Random | True Random | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
-      | Qadashboardtest@yopmail.com |   3 | True Random | True Random | Skip        | True Random            | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
-      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip                   | True Random     | Skip        | Skip        | Skip            | Skip        | Skip                   |
-      | Qatwodashtest@yopmail.com   |   5 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | Skip        | Skip            | Skip        | Skip                   |
-      | Qadashboardtest@yopmail.com |   6 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True Random | Skip            | Skip        | Skip                   |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | True Random     | Skip        | True All               |
-      | allmodel123@yopmail.com     |   8 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | True Random | True Random     | True All    | True All               |
-      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random | True Random     | True Random | True Random            |
-      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
-      | Qatwodashtest@yopmail.com   |  11 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random | True Random     | Skip        | True Random            |
+      #| Qatwodashtest@yopmail.com   |   2 | True Random | True Random | True Random | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
+      #| Qadashboardtest@yopmail.com |   3 | True Random | True Random | Skip        | True Random            | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
+      #| Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip                   | True Random     | Skip        | Skip        | Skip            | Skip        | Skip                   |
+      #| Qatwodashtest@yopmail.com   |   5 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | Skip        | Skip            | Skip        | Skip                   |
+      #| Qadashboardtest@yopmail.com |   6 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True Random | Skip            | Skip        | Skip                   |
+      #| Qafivedashtest@yopmail.com  |   7 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | True Random     | Skip        | True All               |
+      #| allmodel123@yopmail.com     |   8 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | True Random | True Random     | True All    | True All               |
+      #| allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random | True Random     | True Random | True Random            |
+      #| Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
+      #| Qatwodashtest@yopmail.com   |  11 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random | True Random     | Skip        | True Random            |
 
   @RowLevelSecurity @PORLS
   Scenario: Execute JMX file and read Output data for Data Filter Validations for Claims
@@ -456,7 +456,7 @@ Feature: Program Performance Overview Dashboard
     And I select "<Remedy Region Market>" checkbox in "Remedy Region Market" filter on "Program overview" dashboard
     And I click "Remedy Region Market" Filter on the "program performance - <Remedy Region Market>" dashboard
     # Remedy-RegionMarket
-    And I click "Partner Region Market" Filter on the "program performance - <Partner Region Market>" dashboard
+    And I click "Region - Market" Filter on the "program performance - <Partner Region Market>" dashboard
     And I select "<Partner Region Market>" checkbox in "Partner Region Market" filter on "Program overview" dashboard
     And I click "Partner Region Market" Filter on the "program performance - <Partner Region Market>" dashboard
     #ParticipantName

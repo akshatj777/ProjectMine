@@ -1752,12 +1752,23 @@ public class ProgramPerformance extends BaseClass{
 			            	 n=listItems.size();
 			            	if(n==1){
 			            		  val=listItems.get(0).getText();
-			            		 if(filter.equals("BPID") || filter.equals("CCN") || filter.equals("Physician - NPI")){
+			            		 if(filter.equals("BPID") || filter.equals("Physician - NPI")){
 			            			 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
+			            			 String val1=val;
 			            		 	  for (int itr=0;itr<=val.length();itr++) {
 		                        	        val=val.substring(val.indexOf("- ")+1).trim();
 		                        	       }
+			            		 	  if(val.equals("0") || val.equals("NO CCN")){
+			            		 		 val=val1;  
+			            		 	  }
 		                       		  val="'"+val+"'";
+		                       		  arrayListTexts.add(val);
+		                       		  writeDataToOutputFile("Path");
+		                       		  return;
+			            		 }else if(filter.contains("CCN")){
+			            			 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
+			            			 String[] val1=val.split("-");
+		                       		  val="'"+val1[0]+"'";
 		                       		  arrayListTexts.add(val);
 		                       		  writeDataToOutputFile("Path");
 		                       		  return;
@@ -1791,9 +1802,7 @@ public class ProgramPerformance extends BaseClass{
 			            		 
 			            		 
 			            	 }
-			            			 
-			            			 
-			            		 } else if(filter.contains("DRG")){
+			            			} else if(filter.contains("DRG")){
 			            			 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
 		                     //   	 val=val.substring(val.length() - 4);
 			            			valarr1=val.split("-");
@@ -1822,7 +1831,7 @@ public class ProgramPerformance extends BaseClass{
                         	 listItems.remove(randomIndex); 
                         	 continue;
                          }
-                         if(filter.equals("BPID") || filter.equals("CCN") || filter.equals("Physician - NPI")){
+                         if(filter.equals("BPID") || filter.equals("Physician - NPI")){
 //                         val=val.substring(val.indexOf("-")+1).trim();
                         	 if(val.equals("Null")){
                              executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
@@ -1831,9 +1840,25 @@ public class ProgramPerformance extends BaseClass{
                        		  listItems.remove(randomIndex);
                        		  continue;
                              }else{
+                            	 String val1=val;
                         	 for (int itr=0;itr<=val.length();itr++) {
                         	        val=val.substring(val.indexOf("- ")+1).trim();
-                        	       }}
+                        	       }
+                        	 if(val.equals("0") || val.equals("NO CCN")){
+                        		 val=val1;
+                        	 }
+                        	 }
+                         }else if(filter.contains("CCN")){
+                        	 if(val.equals("Null")){
+                                 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
+                           		  val="'"+val+"'";
+                           		  arrayListTexts.add(val);
+                           		  listItems.remove(randomIndex);
+                           		  continue;
+                                 }else{
+                                	 String[] va11=val.split("-");
+                                	 val="'"+val1[0]+"'";
+                            	 } 
                          }
                          else if(filter.contains("DRG")){
 //                           val=val.substring(val.indexOf("-")+1).trim();
@@ -1911,16 +1936,20 @@ public class ProgramPerformance extends BaseClass{
 		     for(int i =1;i<listItems.size();i++){
 		         String val=listItems.get(i).getText();
 		         
-		         if(filter.equals("BPID") || filter.equals("CCN") || filter.equals("Physician - NPI")){
+		         if(filter.equals("BPID") || filter.contains("CCN") || filter.equals("Physician - NPI")){
 		          if(val.equals("Null")){
 		                               val="'"+val+"'";
 		                               arrayListTexts.add(val);
 		                               continue;
 		                                 }
+		          String val1=val;
 		          for (int itr=0;itr<=val.length();itr++) {
 		                            val=val.substring(val.indexOf("- ")+1).trim();
 		                           // writeDataToOutputFile("Path");
 		                           }
+		          if(val.equals("0") || val.equals("NO CCN")){
+		        	  val=val1;
+		          }else
 //		          driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
 		                           val="'"+val+"'";
 		               arrayListTexts.add(val);}
