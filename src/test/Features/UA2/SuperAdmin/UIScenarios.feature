@@ -311,7 +311,7 @@ Feature: UI Scenarios - Super Admin User
       | Description                                         | User        | UserName                               | Password | FirstName | LastName | Email                          | Phone      | Role              | Applications                                                  | ApplicationsNotVisible                              | NPI | LearningPathwaySearchParameter         | Health System1   | Programs1    | Locations1                                                                  | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
       | Verify successful removal of selected health system | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedysystems.com | 9988776655 | Advanced Operator | Episode Connect Classic, Reporting Classic, Remedy University | Episode Connect for Post-acute Care, Administration |     | i am learning path, Learning Pathway 2 | Sound Physicians | BPCI Model 2 | 6005-059--Presence Saint Joseph Medical Center, 6005-059--Evanston Hospital | No               |                |           |            | No               |                |           |            |
 
-  Scenario Outline: Verify that Next button and left side menu is enabled only when mandatory fields are selected
+  Scenario Outline: Verify that Next button and left side menu is enabled only when mandatory fields are selected + Searching healthsystem with participantId, location by facility key and bpid
     Given I am on the login page
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
@@ -344,7 +344,7 @@ Feature: UI Scenarios - Super Admin User
     Then I verify that "General Information" menu is "enabled"
     Then I verify that "Permissions" menu is "enabled"
     Then I verify that Submit button is "disabled"
-    And I search for health system with <Health System1>
+    And I search for health system with <ParticipantId>
     And I select a <Health System1>
     Then I select "<Programs1>" programs
     Then I select location by BPID "<Locations_BPID>"
@@ -354,9 +354,9 @@ Feature: UI Scenarios - Super Admin User
     Then I verify that Submit button is "enabled"
 
     Examples: 
-      | FirstName  | LastName  | Email                          | Role       | NPI | Applications      | Health System1    | Programs1    | Locations_BPID              | Locations_facility key |
-      | First'Name | Last'Name | qaautomation@remedysystems.com | Physicians | NPI | Reporting Classic | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital | TSH                    |
-
+      | FirstName  | LastName  | Email                          | Role       | NPI | Applications      |ParticipantId| Health System1    | Programs1    | Locations_BPID              | Locations_facility key |
+      | First'Name | Last'Name | qaautomation@remedysystems.com | Physicians | NPI | Reporting Classic |514083			 | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital | TSH                    |
+ 
   Scenario Outline: Enter invalid health system and location and verify error message
     Given I am on the login page
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
