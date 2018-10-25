@@ -41,7 +41,7 @@ Feature: Bulk upload users with valid and invalid details
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
+    Then I should see Tile text Users
     And I click on the "Users" tile
     Then I should see header text "Users"
     Then I search for bulk user with role "<User>-<Role>"
