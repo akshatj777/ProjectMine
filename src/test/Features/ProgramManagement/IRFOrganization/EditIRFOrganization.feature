@@ -349,7 +349,7 @@ Feature: Edit IRF Organization functionality tests
 
     Examples: 
       | Description                                                   | Has_MO | IRF_Name | Edited_IRF_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Loc_ID          | ValidationMessage         |
-      | Edit IRF Organization with duplicate Location id - Without MO | NO     | IRFNAME  | IRFNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | Duplication_LID | This ID is already in use |
+      | Edit IRF Organization with duplicate Location id - Without MO | NO     | IRFNAME  | IRFNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | 123456789 | This ID is already in use |
 
   Scenario Outline: <Description>
     Given I am on the login page

@@ -581,7 +581,7 @@ Feature: Edit Hospital organization functionality tests
     And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
-    And I verify Managing Organization radio buttons status on "Edit ACH - <Has_MO>" organization page
+    And I verify Managing Organization radio buttons status on "Edit ACH - <Has_MO1>" organization page
     And I select "<Has_MO>" radio button for managing organization
     Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
     And I edit "Hospital Organization Name" field to "<Edited_Hospital_Name> - <Has_MO>" for organization

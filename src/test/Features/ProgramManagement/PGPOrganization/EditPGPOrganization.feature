@@ -92,7 +92,7 @@ Feature: Edit PGP organization functionality tests
     And I verify "<ValidationMessage>" field validation message on edit organization page
 
     Examples: 
-      | Description                         | Has_MO | PGP_Name | Edited_PGP_Name | ValidationMsg                     |
+      | Description                         | Has_MO | PGP_Name | Edited_PGP_Name | ValidationMessage                 |
       | Check validation for blank PGP name | NO     | PGPNAME  |                 | Please enter an Organization Name |
 
   Scenario Outline: <Description>
@@ -168,9 +168,9 @@ Feature: Edit PGP organization functionality tests
       | Edit PGP Organization with Mandatory fields + Address1 + Short Name + Address2 + City + State + postal Code- Without MO                    | YES    |              | PGPNAME  | PGPNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          |         |         | California |       10001 | PGP Organization Successfully Updated. |
       | Edit PGP Organization with all the available fields - Without MO                                                                           | NO     |              | PGPNAME  | PGPNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
       | Edit PGP Organization with all the available fields - With MO                                                                              | YES    | MONAME       | PGPNAME  | PGPNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
-      #| Edit Duplicate PGP Organization with all the available fields - Without MO                                                                 | NO     |              | PGPNAME  | DUPLICATE_PGP   | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
-      #| Edit Duplicate PGP Organization with all the available fields - With MO                                                                    | YES    | MONAME       | PGPNAME  | DUPLICATE_PGP   | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
 
+  #| Edit Duplicate PGP Organization with all the available fields - Without MO                                                                 | NO     |              | PGPNAME  | DUPLICATE_PGP   | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
+  #| Edit Duplicate PGP Organization with all the available fields - With MO                                                                    | YES    | MONAME       | PGPNAME  | DUPLICATE_PGP   | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
   Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
@@ -219,7 +219,7 @@ Feature: Edit PGP organization functionality tests
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit PGP Organization" header text on edit organization page
-    And I verify Managing Organization radio buttons status on "Edit PGP - <Has_MO>" organization page
+    And I verify Managing Organization radio buttons status on "Edit PGP - <Has_MO1>" organization page
     And I select "<Has_MO>" radio button for managing organization
     Then I select "<Managing_Org1>" managing organization name in "<Has_MO>" Has a Management Organization drop down
     And I edit "PGP Organization Name" field to "<Edited_PGP_Name> - <Has_MO>" for organization

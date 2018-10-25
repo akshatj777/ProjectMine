@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.remedy.baseClass.BaseClass;
@@ -810,10 +811,12 @@ public class SearchOrganization extends BaseClass{
 			//isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganization.achOrg.get("ACHNAME")+"']"));
 			if(CreateACHOrganizationAPI.ACHNameList.get(0).contains("\""))
 			{
+				//Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(0).substring(0, CreateACHOrganizationAPI.ACHNameList.get(0).length()-1)+"']")));
 				isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(0).substring(0, CreateACHOrganizationAPI.ACHNameList.get(0).length()-1)+"']"));
 			}
 			else
 			{
+				//Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(0)+"']")));
 				isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(0)+"']"));
 			}
 		}
@@ -822,10 +825,12 @@ public class SearchOrganization extends BaseClass{
 			//isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganization.achOrg_noMO.get("ACHNAME")+"']"));
 			if(CreateACHOrganizationAPI.ACHNameList.get(1).contains("\""))
 			{
+				//Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(1).substring(0, CreateACHOrganizationAPI.ACHNameList.get(1).length()-1)+"']")));
 				isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(1).substring(0, CreateACHOrganizationAPI.ACHNameList.get(1).length()-1)+"']"));
 			}
 			else
 			{
+				//Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(1)+"']")));
 				isElementPresentOnPage(By.xpath("//div[text()='"+CreateACHOrganizationAPI.ACHNameList.get(1)+"']"));
 			}
 		}

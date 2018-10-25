@@ -297,7 +297,7 @@ public class CreatePrograms extends BaseClass {
 	}
 
 	public void iVerifyPGPOrganizationNameOnNetworkContractPage(String text, String page){
-		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.PGPNameList.get(1).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(1).length()-1)+"'")));
+		isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.PGPNameList.get(1).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(1).length()-1)+"'"));
 	}
 	
 	public void iVerifySearchBoxForHospitalOrganizationOnNetworkContractPage(String page){
@@ -864,7 +864,7 @@ public class CreatePrograms extends BaseClass {
 	
 	public void iVerifyTheSelectedHospitalOrganizationShouldNotBeDisplayedInTheSearchBox()
 	{
-		Assert.assertTrue(isElementNotPresentOnPage(By.xpath("//div[@class='react-select-value-row']")));
+		isElementNotPresentOnPage(By.xpath("//div[@class='react-select-value-row']"));
 	}
 	
 	public void iVerifyTheErrorMessageForInvalidSearchInOrganizationNameDropdownBox(String text)

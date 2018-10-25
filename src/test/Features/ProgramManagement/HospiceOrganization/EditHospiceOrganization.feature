@@ -193,7 +193,7 @@ Feature: Edit Hospice organization functionality tests
     And I click "<Hospice_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit Hospice Organization" header text on edit organization page
-    And I verify Managing Organization radio buttons status on "Edit Hospice - <Has_MO>" organization page
+    And I verify Managing Organization radio buttons status on "Edit Hospice - <Has_MO1>" organization page
     And I select "<Has_MO>" radio button for managing organization
     Then I select "<Managing_Org1>" managing organization name in "<Has_MO>" Has a Management Organization drop down
     And I edit "Hospice Organization Name" field to "<Edited_Hospice_Name> - <Has_MO>" for organization

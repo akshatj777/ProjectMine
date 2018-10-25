@@ -200,9 +200,9 @@ Feature: Edit SNF organization functionality tests
       | Edit SNF Organization with Mandatory fields - With MO                                                            | YES    | SNFNAME  | SNFNAME         | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |                 |            |            |                                                         | Loc_City                                      | California |           10000 | SNF Organization Successfully Updated. |
       | Edit SNF Organization with all the available fields - Without MO                                                 | NO     | SNFNAME  | SNFNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | Skilled Nursing | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | SNF Organization Successfully Updated. |
       | Edit SNF Organization with all the available fields - With MO                                                    | YES    | SNFNAME  | SNFNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | Skilled Nursing | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | SNF Organization Successfully Updated. |
-      #| Edit duplicate SNF Organization name with Mandatory fields - Without MO                                          | NO     | SNFNAME  | DUPLICATE_SNF   | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |                 |            |            |                                                         | Loc_City                                      | California |           10000 | SNF Organization Successfully Updated. |
-      #| Edit duplicate SNF Organization name with Mandatory fields - With MO                                             | YES    | SNFNAME  | DUPLICATE_SNF   | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |                 |            |            |                                                         | Loc_City                                      | California |           10000 | SNF Organization Successfully Updated. |
 
+  #| Edit duplicate SNF Organization name with Mandatory fields - Without MO                                          | NO     | SNFNAME  | DUPLICATE_SNF   | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |                 |            |            |                                                         | Loc_City                                      | California |           10000 | SNF Organization Successfully Updated. |
+  #| Edit duplicate SNF Organization name with Mandatory fields - With MO                                             | YES    | SNFNAME  | DUPLICATE_SNF   | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |                 |            |            |                                                         | Loc_City                                      | California |           10000 | SNF Organization Successfully Updated. |
   Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
@@ -444,7 +444,7 @@ Feature: Edit SNF organization functionality tests
 
     Examples: 
       | Description                                                               | Has_MO | Managing_Org | LTCH_Name | SNF_Name | Edited_SNF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type                | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Location_ID | Loc_ID  | Message                                 | ValidationMessage         |
-      | Validation message when duplicate locationId of the LTCH Org - Without MO | NO     |              | LTCHNAME  | ACHNAME  | ACHNAME         | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | LID         | LTCHLID | LTCH Organization Successfully Created. | This ID is already in use |
+      | Validation message when duplicate locationId of the LTCH Org - Without MO | NO     |              | LTCHNAME  | SNFNAME  | SNFNAME         | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Long Term Care Hospital | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI | LID         | LTCHLID | LTCH Organization Successfully Created. | This ID is already in use |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -468,15 +468,13 @@ Feature: Edit SNF organization functionality tests
     And I verify "Location 1" on "Create IRF" organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I enter Location Id <Location_ID> for Location "1" on "create" organization page
+    And I enter Location Id <Location_ID> for Location "1" on "create IRF" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
-    And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
-    And I select market <Loc_Market> for region "<Loc_Region>" for Location "1" on "create" organization page
     And I select state <Loc_State> for Location "1" on "create" organization page
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create IRF" organization page
+    Then I verify "<Message>" after submitting the "create IRF - <Has_MO>" organization page
     When I click on "SNF" organization tab on organization dashboard
     Then I search with "<SNF_Name> - <Has_MO>" on organization in search box
     And I verify "<SNF_Name> - <Has_MO>" field in search list on organization page
@@ -581,7 +579,7 @@ Feature: Edit SNF organization functionality tests
     And I verify "<SNF_Name> - <Has_MO>" field in search list on organization page
     And I click "<SNF_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
-    And I verify Managing Organization radio buttons status on "Edit SNF - <Has_MO>" organization page
+    And I verify Managing Organization radio buttons status on "Edit SNF - <Has_MO1>" organization page
     And I select "<Has_MO>" radio button for managing organization
     Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
     And I edit "SNF Organization Name" field to "<Edited_SNF_Name> - <Has_MO>" for organization

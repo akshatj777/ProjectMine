@@ -89,7 +89,7 @@ Feature: LTCH Organization View profile Functionality tests.
     When I search with "<LTCH_Name> - <Has_MO>" on organization in search box
     And I click "<LTCH_Name> - <Has_MO>" field in search list on organization page
     And I verify "<LTCH_Name> - <Has_MO>" name on the header of view profile
-    And I verify "2" location count on view "LTCH" organization page
+    And I verify "1" location count on view "LTCH" organization page
     And I verify Location index id "<LID>" on view profile of "<LTCH_Name> - <Has_MO>" organization
 
     Examples: 

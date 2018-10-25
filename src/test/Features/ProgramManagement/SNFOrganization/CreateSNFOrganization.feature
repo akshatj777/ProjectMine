@@ -500,7 +500,7 @@ Feature: Create SNF organization functionality tests
     And I verify "Location 2" on "Create SNF" organization page
     And I enter location name <Loc_Name> for Location "2" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "create" organization page
-    And I enter Location Id <Location_ID> for Location "1" on "create" organization page
+    And I enter Location Id <Location_ID> for Location "2" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "2" on "create" organization page
     And I select region <Loc_Region> for Location "2" on "create" organization page
     And I enter city <Loc_City> for Location "2" on "create" organization page
@@ -513,7 +513,6 @@ Feature: Create SNF organization functionality tests
     Examples: 
       | Description                                                                         | Has_MO | Managing_Org | SNF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Location_ID | Loc_Type        | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI |
       | Create and verify SNF Organization with Same multiple location details - Without MO | NO     |              | SNFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 |   123456789 | Skilled Nursing | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI |
-      | Create and verify SNF Organization with Same multiple location - With MO            | YES    | MONAME       | SNFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 |   123456789 | Skilled Nursing | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | CCN | EIN | NPI |
 
   Scenario Outline: <Description>
     When I click on "SNF" organization tab on organization dashboard
