@@ -95,16 +95,16 @@ Feature: Program Performance Overview Dashboard
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region - Market | Region - Market | Participant | DRG         | Physician - NPI | Model       | Anchor Facility Detail |
       | Qafivedashtest@yopmail.com  |   1 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
-      | Qatwodashtest@yopmail.com   |   2 | True Random | True Random | True Random | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
-      | Qadashboardtest@yopmail.com |   3 | True Random | True Random | Skip        | True Random            | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
-      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip                   | True Random     | Skip        | Skip        | Skip            | Skip        | Skip                   |
-      | Qatwodashtest@yopmail.com   |   5 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | Skip        | Skip            | Skip        | Skip                   |
-      | Qadashboardtest@yopmail.com |   6 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True Random | Skip            | Skip        | Skip                   |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | True Random     | Skip        | True All               |
-      | allmodel123@yopmail.com     |   8 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | True Random | True Random     | True All    | True All               |
-      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random | True Random     | True Random | True Random            |
-      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
-      | Qatwodashtest@yopmail.com   |  11 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random | True Random     | Skip        | True Random            |
+      #| Qatwodashtest@yopmail.com   |   2 | True Random | True Random | True Random | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
+      #| Qadashboardtest@yopmail.com |   3 | True Random | True Random | Skip        | True Random            | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
+      #| Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip                   | True Random     | Skip        | Skip        | Skip            | Skip        | Skip                   |
+      #| Qatwodashtest@yopmail.com   |   5 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | Skip        | Skip            | Skip        | Skip                   |
+      #| Qadashboardtest@yopmail.com |   6 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True Random | Skip            | Skip        | Skip                   |
+      #| Qafivedashtest@yopmail.com  |   7 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | True Random     | Skip        | True All               |
+      #| allmodel123@yopmail.com     |   8 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | True Random | True Random     | True All    | True All               |
+      #| allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random | True Random     | True Random | True Random            |
+      #| Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
+      #| Qatwodashtest@yopmail.com   |  11 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random | True Random     | Skip        | True Random            |
 
   @RowLevelSecurity 
   Scenario: Execute JMX file and read Output data for Data Filter Validations for Claims
@@ -443,39 +443,39 @@ Feature: Program Performance Overview Dashboard
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
     And I select "<BPID>" checkbox in "BPID" filter on "Program overview" dashboard
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
-    #CCN
+    # CCN
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
     And I select "<CCN>" checkbox in "CCN" filter on "Program overview" dashboard
     And I click "Anchor Facility - CCN" Filter on the "program performance - <CCN>" dashboard
-    #Bundle
+    # Bundle
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
     And I select "<Bundle>" checkbox in "Bundle" filter on "Program overview" dashboard
     And I click "Bundle" Filter on the "program performance - <Bundle>" dashboard
-    #Region-Market
-    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
-    And I select "<Region - Market>" checkbox in "Region - Market" filter on "Program overview" dashboard
-    And I click "Region - Market" Filter on the "program performance - <Region - Market>" dashboard
-    #Remedy-RegionMarket
-    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
-    And I select "<Remedy Region - Market>" checkbox in "Remedy Region - Market" filter on "Program overview" dashboard
-    And I click "Remedy Region - Market" Filter on the "program performance - <Remedy Region - Market>" dashboard
+    # Region-Market
+    And I click "Remedy Region Market" Filter on the "program performance - <Remedy Region Market>" dashboard
+    And I select "<Remedy Region Market>" checkbox in "Remedy Region Market" filter on "Program overview" dashboard
+    And I click "Remedy Region Market" Filter on the "program performance - <Remedy Region Market>" dashboard
+    # Remedy-RegionMarket
+    And I click "Region - Market" Filter on the "program performance - <Partner Region Market>" dashboard
+    And I select "<Partner Region Market>" checkbox in "Partner Region Market" filter on "Program overview" dashboard
+    And I click "Partner Region Market" Filter on the "program performance - <Partner Region Market>" dashboard
     #ParticipantName
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "Program overview" dashboard
     And I click "Participant" Filter on the "program performance - <Participant>" dashboard
-    #DRGCODE
+    # DRGCODE
     And I click "DRG" Filter on the "program performance - <DRG>" dashboard
     And I select "<DRG>" checkbox in "DRG" filter on "Program overview" dashboard
     And I click "DRG" Filter on the "program performance - <DRG>" dashboard
-    #NPI
+    # NPI
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
     And I select "<Physician - NPI>" checkbox in "Physician - NPI" filter on "Program overview" dashboard
     And I click "Physician - NPI" Filter on the "program performance - <Physician - NPI>" dashboard
-    #MODEL
+    #  MODEL
     And I click "Model" Filter on the "program performance - <Model>" dashboard
     And I select "<Model>" checkbox in "Model" filter on "Program overview" dashboard
     And I click "Model" Filter on the "program performance - <Model>" dashboard
-    #DataMetricValues
+    # DataMetricValues
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
     And I Save "KPI_Episode" data metric FE value on the dashboard for "Claims" with picture resolution "600X600"
