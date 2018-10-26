@@ -627,11 +627,11 @@ public class EditManagingOrganization extends BaseClass {
 		}
 		else if(field2.equalsIgnoreCase("DUPLICATE_HHA - YES")){
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
-			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")),CreateHHAOrganizationAPI.HHANameList.get(1).substring(1, CreateHHAOrganizationAPI.HHANameList.get(1).length()-1));
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")),CreateHHAOrganizationAPI.HHANameList.get(0).substring(1, CreateHHAOrganizationAPI.HHANameList.get(0).length()-1));
 		}
 		else if(field2.equalsIgnoreCase("DUPLICATE_HHA - NO")){
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
-			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHHAOrganizationAPI.HHANameList.get(0).substring(1, CreateHHAOrganizationAPI.HHANameList.get(0).length()-1));
+			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")), CreateHHAOrganizationAPI.HHANameList.get(1).substring(1, CreateHHAOrganizationAPI.HHANameList.get(1).length()-1));
 		}
 		else if(field2.equalsIgnoreCase("DUPLICATE_Hospice - YES")){
 			driver.findElement(By.xpath("//input[@placeholder='"+field1+"']")).clear();
