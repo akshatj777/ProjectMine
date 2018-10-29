@@ -1,11 +1,1 @@
-Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remedy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null
-Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remedy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null
-Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remedy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null
-Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remedy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null
-Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remedy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null
-Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remedy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null
-Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remedy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null
-Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remedy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null
-Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remedy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null
-Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remedy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null
-Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remedy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null
+Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remedy Region - Market=null*Region - Market=null*Participant=null*Post Acute Facility=null

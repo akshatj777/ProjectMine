@@ -2126,6 +2126,7 @@ public class ProgramPerformance extends BaseClass{
 	 public void iFetchStoreValuesOnDashboard(String filter,String dashboard){
 		 List<WebElement> listItems = driver.findElements(By.cssSelector(".FIText"));
 		 List<String> values = new ArrayList<String>();
+		 System.out.println("Size="+listItems);
 		 for(int i =1;i<listItems.size();i++){
 			String val=listItems.get(i).getText().trim();
 			if(val.equals("Null")) {
@@ -2134,6 +2135,7 @@ public class ProgramPerformance extends BaseClass{
 			values.add(val);
 		  }
 		 rowFilters.put(filter, values.toString());
+		 System.out.println("Out"+rowFilters.toString());
 	 }
 	 
 	 public void igetDateForDataFetchedForDashboard(String range) throws FileNotFoundException{
