@@ -72,13 +72,11 @@ Feature: View IRF organization functionality tests
     And I verify header name "ID" under "Location" for "IRF" organization
     And I verify header name "Location Name" under "Location" for "IRF" organization
     And I verify header name "Address" under "Location" for "IRF" organization
-    And I verify header name "Type" under "Location" for "IRF" organization
     And I verify header name "Region" under "Location" for "IRF" organization
     And I verify header name "Market" under "Location" for "IRF" organization
     And I verify Location index id "<LID>" on view profile of "<IRF_Name> - <Has_MO>" organization
     Then I verify Location details of "<Loc_Name>" on view profile of "IRF" organization
     Then I verify Location details of "<Loc_Address1>" on view profile of "IRF" organization
-    Then I verify Location details of "<Loc_Type>" on view profile of "IRF" organization
     Then I verify Location details of "<Loc_Region>" on view profile of "IRF" organization
     Then I verify Location details of "<Loc_Market>" on view profile of "IRF" organization
     And I Verify the "Edit" button on View page
@@ -87,7 +85,6 @@ Feature: View IRF organization functionality tests
     Then I verify "Location 2" on "Edit" organization page
     And I enter location name <Loc_Name> for Location "2" on "Edit" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "Edit" organization page
-    And I select location type <Loc_Type> for Location "2" on "Edit" organization page
     And I enter address2 <Loc_Address2> for Location "2" on "Edit" organization page
     And I select region <Loc_Region> for Location "2" on "Edit" organization page
     And I enter city <Loc_City> for Location "2" on "Edit" organization page
@@ -137,7 +134,6 @@ Feature: View IRF organization functionality tests
     And I provide unique "IRF - <NPI>" in "NPI" on create organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page

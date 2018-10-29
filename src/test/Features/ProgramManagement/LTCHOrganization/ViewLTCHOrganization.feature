@@ -69,7 +69,6 @@ Feature: LTCH Organization View profile Functionality tests.
     And I verify header name "ID" under "Location" for "LTCH" organization
     And I verify header name "Location Name" under "Location" for "LTCH" organization
     And I verify header name "Address" under "Location" for "LTCH" organization
-    And I verify header name "Type" under "Location" for "LTCH" organization
     And I verify header name "Region" under "Location" for "LTCH" organization
     And I verify header name "Market" under "Location" for "LTCH" organization
     And I verify Location index id "<LID>" on view profile of "<LTCH_Name> - <Has_MO>" organization
@@ -79,7 +78,6 @@ Feature: LTCH Organization View profile Functionality tests.
     Then I verify "Location 2" on "Edit" organization page
     And I enter location name <Loc_Name> for Location "2" on "Edit" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "Edit" organization page
-    And I select location type <Loc_Type> for Location "2" on "Edit" organization page
     And I enter address2 <Loc_Address2> for Location "2" on "Edit" organization page
     And I select region <Loc_Region> for Location "2" on "Edit" organization page
     And I enter city <Loc_City> for Location "2" on "Edit" organization page
@@ -91,7 +89,7 @@ Feature: LTCH Organization View profile Functionality tests.
     When I search with "<LTCH_Name> - <Has_MO>" on organization in search box
     And I click "<LTCH_Name> - <Has_MO>" field in search list on organization page
     And I verify "<LTCH_Name> - <Has_MO>" name on the header of view profile
-    And I verify "2" location count on view "LTCH" organization page
+    And I verify "1" location count on view "LTCH" organization page
     And I verify Location index id "<LID>" on view profile of "<LTCH_Name> - <Has_MO>" organization
 
     Examples: 

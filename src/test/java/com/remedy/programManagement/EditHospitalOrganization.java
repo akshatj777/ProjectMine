@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import com.remedy.baseClass.BaseClass;
 
 public class EditHospitalOrganization extends BaseClass{
@@ -52,7 +51,7 @@ public class EditHospitalOrganization extends BaseClass{
 				driver.findElements(By.xpath("//div[text()='State']/preceding-sibling::div//input[@role='combobox']")).get(num).sendKeys(text);
 		    	clickElement(driver.findElement(By.xpath("//div[(contains(@class,'VirtualizedSelectOption')) and text()='"+text+"']")));
 			}
-			}
+		}
 		else if(!text.isEmpty()){
 //			iFillInText(driver.findElement(By.xpath("//div//input[@name='locations["+num+"].address.stateSelection']/following-sibling::div//input[@role='combobox']")), text);
 	    	driver.findElements(By.xpath("//div[text()='State']/preceding-sibling::div//input[@role='combobox']")).get(num).sendKeys(text);
@@ -61,27 +60,27 @@ public class EditHospitalOrganization extends BaseClass{
 	}
 	
 	public void iEditLocationTypeForLocation(String text, int num) {
-		if(!text.isEmpty())
-		{
-			num = num-1;
-			scrollIntoViewByJS(driver.findElement(By.xpath("//div[input[@name='locations["+num+"].locationTypeSelector']]//span[@class='Select-clear']")));
-			driver.findElement(By.xpath("//div[input[@name='locations["+num+"].locationTypeSelector']]//span[@class='Select-clear']")).click();
-			driver.findElements(By.xpath("//div[text()='Location Type']/preceding-sibling::div//input[@role='combobox']")).get(num).sendKeys(text);
-	    	delay();
-	        WebElement element = driver.findElement(By.xpath("//div[(contains(@class,'VirtualizedSelectOption')) and text()='"+text+"']"));
-	        scrollIntoViewByJS(element);
-	        element.click();
-		}
-		else
-		{
-			num = num-1;
-			delay();
-	        if (isElementPresent(By.xpath("//div[@class='Select Select--single is-clearable is-searchable has-value'][input[@name='locations["+num+"].regionMarket.regionSelector']]"))){
-		        WebElement element = driver.findElement(By.xpath("//div[@class='Select Select--single is-clearable is-searchable has-value'][input[@name='locations["+num+"].regionMarket.regionSelector']]//span[@class='Select-clear']"));
-	        	scrollIntoViewByJS(element);
-				element.click();
-	        }
-		}
+//		if(!text.isEmpty())
+//		{
+//			num = num-1;
+//			scrollIntoViewByJS(driver.findElement(By.xpath("//div[input[@name='locations["+num+"].locationTypeSelector']]//span[@class='Select-clear']")));
+//			driver.findElement(By.xpath("//div[input[@name='locations["+num+"].locationTypeSelector']]//span[@class='Select-clear']")).click();
+//			driver.findElements(By.xpath("//div[text()='Location Type']/preceding-sibling::div//input[@role='combobox']")).get(num).sendKeys(text);
+//	    	delay();
+//	        WebElement element = driver.findElement(By.xpath("//div[(contains(@class,'VirtualizedSelectOption')) and text()='"+text+"']"));
+//	        scrollIntoViewByJS(element);
+//	        element.click();
+//		}
+//		else
+//		{
+//			num = num-1;
+//			delay();
+//	        if (isElementPresent(By.xpath("//div[@class='Select Select--single is-clearable is-searchable has-value'][input[@name='locations["+num+"].regionMarket.regionSelector']]"))){
+//		        WebElement element = driver.findElement(By.xpath("//div[@class='Select Select--single is-clearable is-searchable has-value'][input[@name='locations["+num+"].regionMarket.regionSelector']]//span[@class='Select-clear']"));
+//	        	scrollIntoViewByJS(element);
+//				element.click();
+//	        }
+//		}
 	}
 	
 	public void iEditRegionForLocation(String text, int num) {
@@ -130,6 +129,28 @@ public class EditHospitalOrganization extends BaseClass{
 		Assert.assertEquals("true",driver.findElement(By.cssSelector(".text-input-field-"+id)).getAttribute("disabled"));
 	}
 	
+	public void iVerifyManagingOrgRadioButtonsStatusOnOrganizationPage(String org){
+		if(org.contains("YES"))
+		{
+			//Assert.assertEquals("true",driver.findElement(By.xpath("//input[@name='hasManagementOrg' and @value='true']")).getAttribute("checked"));
+			delay();
+			Assert.assertTrue(driver.findElement(By.xpath("//span[text()='Has a Managing Organization']/parent::div/parent::div//span[@class='Select-value-label']")).getText().trim().contains(CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1).trim()));
+			
+//			List<WebElement> listItems = driver.findElements(By.cssSelector("span[aria-selected='true']"));
+//			for (WebElement item : listItems) 
+//			{
+//				  if (item.getText().trim().contains(CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)))
+//				  {
+//					  Assert.assertTrue(item.getText().trim().contains(CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)));  
+//				  } 
+//			}
+		}
+		else
+		{
+			Assert.assertEquals("true",driver.findElement(By.xpath("//input[@name='hasManagementOrg' and @value='false']")).getAttribute("checked"));
+		}
+	}
+
 	public void iEditLocationIDFieldUnderLocationsSection(String field, int num, String org){
 		num= num -1;
 		driver.findElement(By.xpath("//input[@class='text-input-field-locations["+num+"].locationId']")).clear();

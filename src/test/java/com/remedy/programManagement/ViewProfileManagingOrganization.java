@@ -168,7 +168,6 @@ public class ViewProfileManagingOrganization extends BaseClass{
 	public void letnavigate(String url) {
 		driver.navigate().to(url);
 		longDelay();
-		longDelay();
 	}
 	
 	public void iClickOnCreateNewOrganizationlinkunderNoMatches(String link){

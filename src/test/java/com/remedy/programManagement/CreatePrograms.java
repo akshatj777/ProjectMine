@@ -43,14 +43,9 @@ public class CreatePrograms extends BaseClass {
 		{
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>div"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>div")), msg);
-			if(!CreatePrograms.tempPrograms.isEmpty())
-			{
-				CreateProgramAPI.PROGRAMNameList.set(0, CreatePrograms.tempPrograms.get(1));
-				CreatePrograms.tempPrograms.clear();
-			}
-			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			CreateProgramAPI.PROGRAMNameList.clear();
+			CreateProgramAPI.PROGRAMNameList.add(CreatePrograms.tempPrograms.get(1));
 		}
-		
 		else if(org.contains("Programs")){
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>div"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>div")), msg);
@@ -60,7 +55,7 @@ public class CreatePrograms extends BaseClass {
 				CreatePrograms.tempPrograms.clear();
 			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-			}
+		}
 		else if(org.contains("Contracts")){
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>div"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>div")), msg);
@@ -191,6 +186,7 @@ public class CreatePrograms extends BaseClass {
 	{
 		iFillInText(driver.findElement(By.xpath("//input[@placeholder='Price of bundle']")), text);
 	}
+	
 	public void iSelectBundleOnCreateContractsPageUnderPayorOrganization(int bundleNumber, String text, int num, String field)
 	{
 		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
@@ -250,9 +246,6 @@ public class CreatePrograms extends BaseClass {
 			else if(act.equals("Bundle2 Price1")){
 				iFillInText(driver.findElement(By.xpath("//input[@name='contracts[0].contractBundles[1].bundlePrices[0]."+field+"']")), text);
 			}
-			else{
-				//iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), text);
-			}
 		}
 	}
 
@@ -263,13 +256,13 @@ public class CreatePrograms extends BaseClass {
 		  LocalDate b = localDate.minus(Period.ofDays(days));
 		  String date = dtf.format(b);
 		  return date;
-		 }
+	}
 	
 	public void setAttributevalue(WebElement element, String attName, String attValue) {
 		  JavascriptExecutor js = (JavascriptExecutor) driver;
 		  js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", 
 		                element, attName, attValue);
-		    }
+	}
 	
 	public String getLastnCharacters(String inputString, int subStringLength){
 		int length = inputString.length();
@@ -308,19 +301,19 @@ public class CreatePrograms extends BaseClass {
 	}
 	
 	public void iVerifySearchBoxForHospitalOrganizationOnNetworkContractPage(String page){
-		isElementPresent(By.xpath("//div[text()='Search Name or CCN']"));
+		Assert.assertTrue(isElementPresent(By.xpath("//div[text()='Search Name or CCN']")));
 	}
 	
 	public void iVerifyDateFieldOnNetworkContractPage(String field, String page){
-		isElementPresentOnPage(By.xpath("//label[contains(text(),'"+field+"')]"));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//label[contains(text(),'"+field+"')]")));
 	}
 	
 	public void iVerifyDefaultNetworkContractStartDateShouldBeTodayDate(){
-		isElementPresent(By.xpath("//div[@class='react-datepicker-input-field-container start-date-picker ']//div[@class='react-datepicker__input-container']"));
+		Assert.assertTrue(isElementPresent(By.xpath("//div[@class='react-datepicker-input-field-container start-date-picker ']//div[@class='react-datepicker__input-container']")));
 	}
 	
 	public void iVerifyProgramOnCreateNetworkContractPage(String text){
-		isElementPresent(By.xpath("//div[contains(text(),'*')]"));
+		Assert.assertTrue(isElementPresent(By.xpath("//div[contains(text(),'*')]")));
 	}
 	
 	public void iVerifyTheDetailsAfterSelectingContractNameOnCreateNetworkContractPage(String text, String field){
@@ -332,19 +325,19 @@ public class CreatePrograms extends BaseClass {
 			Assert.assertEquals(result,CreatePrograms.programs.get(1));
 		}
 		else if(field.contains("Start Date")){
-			isElementPresent(By.xpath("//div[@class='start-date']"));
+			Assert.assertTrue(isElementPresent(By.xpath("//div[@class='start-date']")));
 		}
 		else if(field.contains("End Date")){
-			isElementPresent(By.xpath("//div[@class='end-date']"));
+			Assert.assertTrue(isElementPresent(By.xpath("//div[@class='end-date']")));
 		}
 	}
 	
 	public void iVerifyDefaultNetworkContractStartDateShouldBeOfBundledPaymentContractStartDate(){
-		isElementPresent(By.xpath("//div[@class='react-datepicker-input-field-container start-date-picker ']//label[@class='date-picker-input-label']"));
+		Assert.assertTrue(isElementPresent(By.xpath("//div[@class='react-datepicker-input-field-container start-date-picker ']//label[@class='date-picker-input-label']")));
 	}
 	
 	public void iVerifyDefaultNetworkContractEndDateShouldBeofBundledPaymentContractEndDate(){
-		isElementPresent(By.xpath("//div[@class='react-datepicker-input-field-container end-date-picker ']//label[@class='date-picker-input-label']"));
+		Assert.assertTrue(isElementPresent(By.xpath("//div[@class='react-datepicker-input-field-container end-date-picker ']//label[@class='date-picker-input-label']")));
 	}
 	
 	public void enterDate(String date, String field, int index) throws ParseException 
@@ -1090,7 +1083,7 @@ public class CreatePrograms extends BaseClass {
 	
 	public void iVerifyAutoIncrementedCID(String text){
 		iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'80000')]"));
-		isElementPresent(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'80000')]"));
+		Assert.assertTrue(isElementPresent(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'80000')]")));
 	}
 	
 	public void iVerifyTheSubHeadlineOfAttributionRulesAndValidationRanksOnCreateProgramPage(String text){

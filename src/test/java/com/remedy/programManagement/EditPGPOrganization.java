@@ -26,7 +26,6 @@ public class EditPGPOrganization extends BaseClass {
     			driver.findElement(By.xpath("//div[text()='Market']/preceding-sibling::div//input[@role='combobox']")).sendKeys(market);
     			delay();
     		    clickSingleElementFromList(By.cssSelector(".VirtualizedSelectOption"),market);
-    			
         	}
         	else
         	{
