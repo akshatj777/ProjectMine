@@ -354,9 +354,9 @@ Feature: UI Scenarios - Super Admin User
     Then I verify that Submit button is "enabled"
 
     Examples: 
-      | FirstName  | LastName  | Email                          | Role       | NPI | Applications      |ParticipantId| Health System1    | Programs1    | Locations_BPID              | Locations_facility key |
-      | First'Name | Last'Name | qaautomation@remedysystems.com | Physicians | NPI | Reporting Classic |514083			 | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital | TSH                    |
- 
+      | FirstName  | LastName  | Email                          | Role       | NPI | Applications      | ParticipantId | Health System1    | Programs1    | Locations_BPID              | Locations_facility key |
+      | First'Name | Last'Name | qaautomation@remedysystems.com | Physicians | NPI | Reporting Classic |        514083 | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital | TSH                    |
+
   Scenario Outline: Enter invalid health system and location and verify error message
     Given I am on the login page
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
@@ -561,3 +561,27 @@ Feature: UI Scenarios - Super Admin User
     Examples: 
       | User        | UserName                               | Password | FirstName | LastName | Email                          | Role1      | Applications                         | NPI | LearningPathwaySearchParameter                      | Role2  |
       | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedysystems.com | Physicians | Reporting Classic, Remedy University | NPI | Learning Pathway 2, jusUV22erpk1, Remedy University | Leader |
+
+  Scenario Outline: Validate character limit for all fields in the general information tab
+    Given I am on the login page
+    When I enter email field lbarinstein+qaadmin@remedypartners.com for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    When I click on Add User button
+    Then I should see "Add New User" on the user creation page
+    Then I verify the header "General Information"
+    And I fill in First Name with "<FirstName>"
+    Then I fill in Last Name with <LastName>
+    And I enter Email "<Email>" to Create user
+    And I enter Phone field with <Phone>
+    When I click the Organizational Role Field
+    Then I pick a Organizational <Role>
+    Then I enter NPI field with "<NPI>" for role "<Role>"
+    Then I click on Next button
+
+    Examples: 
+      | User        | FirstName                                          | LastName                                           | Email                                                                        | Phone          | Role       | NPI |
+      | Super Admin | FirstNameeFirstNameeFirstNameeFirstNameeFirstNamee | FirstNameeFirstNameeFirstNameeFirstNameeFirstNamee | TestmailTestmailTestmailTestmailTestmailTestmailTestmailTestmailAA@gmail.com | 98767592312314 | Physicians | NPI |
