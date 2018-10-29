@@ -17,5 +17,4 @@ public class CreateIRFOrganization extends BaseClass{
 	public CreateIRFOrganization(WebDriver driver) {
 		super(driver);
 	}
-
 }

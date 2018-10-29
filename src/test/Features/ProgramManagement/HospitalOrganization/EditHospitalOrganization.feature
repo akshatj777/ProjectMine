@@ -33,7 +33,7 @@ Feature: Edit Hospital organization functionality tests
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit Hospital Organization" header text on edit organization page
-    And I verify Managing Organization field on "Edit ACH - <Has_MO>" organization page
+    And I verify Managing Organization radio buttons status on "Edit ACH - <Has_MO>" organization page
     And I verify "*Hospital Organization Name" field on edit organization page
     And I verify "*Address 1" field on edit organization page
     And I verify "Short Name" field on edit organization page
@@ -46,7 +46,6 @@ Feature: Edit Hospital organization functionality tests
     And I verify "npi" identifier is not editable
     And I verify "*Location Name" field on edit organization page
     And I verify "*Address 1" field on edit organization page
-    And I verify "Location Type" dropdown field on edit organization page
     And I verify "Address 2" field on edit organization page
     And I verify "Region" dropdown field on edit organization page
     And I verify "*City" field on edit organization page
@@ -60,6 +59,7 @@ Feature: Edit Hospital organization functionality tests
     Examples: 
       | Description                                                                       | Has_MO | Hosp_Name |
       | Verification of availability of all the fields on Edit Hospital Organization page | YES    | ACHNAME   |
+      | Verification of availability of all the fields on Edit Hospital Organization page | NO     | ACHNAME   |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -72,6 +72,28 @@ Feature: Edit Hospital organization functionality tests
     And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
+    And I verify "Edit Hospital Organization" header text on create organization page
+    And I verify Managing Organization radio buttons status on "Edit ACH - <Has_MO>" organization page
+    And I select "YES" radio button for managing organization
+    Then I select "Invalid_Managing_Org" managing organization name in "YES" Has a Management Organization drop down
+    And I verify "No results found" in Has a Management Organization dropdown
+
+    Examples: 
+      | Description                                                              | Has_MO | Hosp_Name |
+      | Check validation for Invalid Managing Organization on edit Hospital page | YES    | ACHNAME   |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "Hospital" organization tab on organization dashboard
+    Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
+    And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
+    And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I verify Managing Organization radio buttons status on "Edit ACH - <Has_MO>" organization page
     And I edit "Hospital Organization Name" field to "<Edited_Hospital_Name>" for organization
     And I edit "Address 1" field to "<Address1>" for organization
     And I edit "City" field to "<City>" for organization
@@ -163,7 +185,6 @@ Feature: Edit Hospital organization functionality tests
     And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
     And I edit "address1" field to <Loc_Address1> for Location "1" for organization
     And I edit location ID field to "<Loc_ID>" for Location "1" for "Hospital" organization
-    And I edit Location Type dropdown field to <Loc_Type> for Location "1" for organization
     And I edit "address2" field to <Loc_Address1> for Location "1" for organization
     And I edit Region dropdown field to <Loc_Region> for Location "1" for organization
     And I edit "city" field to <Loc_City> for Location "1" for organization
@@ -198,7 +219,6 @@ Feature: Edit Hospital organization functionality tests
     And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
     And I edit "address1" field to <Loc_Address1> for Location "1" for organization
     And I edit location ID field to "<Loc_ID>" for Location "1" for "Hospital" organization
-    And I edit Location Type dropdown field to <Loc_Type> for Location "1" for organization
     And I edit "address2" field to <Loc_Address1> for Location "1" for organization
     And I edit Region dropdown field to <Loc_Region> for Location "1" for organization
     And I edit "city" field to <Loc_City> for Location "1" for organization
@@ -236,7 +256,6 @@ Feature: Edit Hospital organization functionality tests
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
     And I enter Location Id <Location_ID> for Location "1" on "create SNF" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -295,7 +314,6 @@ Feature: Edit Hospital organization functionality tests
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
     And I enter Location Id <Location_ID> for Location "1" on "create LTCH" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -353,7 +371,6 @@ Feature: Edit Hospital organization functionality tests
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
     And I enter Location Id <Location_ID> for Location "1" on "create IRF" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -399,6 +416,7 @@ Feature: Edit Hospital organization functionality tests
     And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
+    And I verify Managing Organization radio buttons status on "Edit ACH - <Has_MO>" organization page
     And I edit "Hospital Organization Name" field to "<Edited_Hospital_Name> - <Has_MO>" for organization
     And I edit "Address 1" field to "<Org_Address1>" for organization
     And I edit "Short Name" field to "<Short_Name>" for organization
@@ -408,7 +426,6 @@ Feature: Edit Hospital organization functionality tests
     And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
     And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
     And I edit "address1" field to <Loc_Address1> for Location "1" for organization
-    And I edit Location Type dropdown field to <Loc_Type> for Location "1" for organization
     And I edit "address2" field to <Loc_Address1> for Location "1" for organization
     And I edit Region dropdown field to <Loc_Region> for Location "1" for organization
     And I edit "city" field to <Loc_City> for Location "1" for organization
@@ -420,7 +437,7 @@ Feature: Edit Hospital organization functionality tests
 
     Examples: 
       | Description                                                                                                           | Has_MO | Hosp_Name | Edited_Hospital_Name | Org_Address1                                            | Short_Name                                    | Org_Address2                                            | City                                          | State      | Org_Postal_Code | Loc_Name                                                                    | Loc_Address1                                            | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2                                            | Loc_City                                      | Loc_State  | Loc_Postal_Code | Message                                     |
-      | Check Character Limit edge condition for ACH Name field on Edit Hospital Organization - Without MO                    | NO     | ACHNAME   | equalsTo75Characters | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | Inpatient | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | Hospital Organization Successfully Updated. |
+      #| Check Character Limit edge condition for ACH Name field on Edit Hospital Organization - Without MO                    | NO     | ACHNAME   | equalsTo75Characters | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | Inpatient | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | Hospital Organization Successfully Updated. |
       | Check Character Limit edge condition for Address1 field on Edit Hospital Organization - Without MO                    | YES    | ACHNAME   | ACHNAME              | abcdefghijklmnopqrstuvwxyzabcdefgopmailcomabcdefghijklm | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | Inpatient | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | Hospital Organization Successfully Updated. |
       | Check Character Limit edge condition for Short Name field on Edit Hospital Organization - Without MO                  | YES    | ACHNAME   | ACHNAME              | Address1                                                | abcdefghijklmnopqrstuvwxyzabcdefgopmailcomabc | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | Inpatient | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | Hospital Organization Successfully Updated. |
       | Check Character Limit edge condition for Address2 field on Edit Hospital Organization - Without MO                    | YES    | ACHNAME   | ACHNAME              | Address1                                                | Short_Name                                    | abcdefghijklmnopqrstuvwxyzabcdefgopmailcomabcdefghijklm | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | Inpatient | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | Hospital Organization Successfully Updated. |
@@ -499,7 +516,6 @@ Feature: Edit Hospital organization functionality tests
     Then I verify "Location 2" on "Edit" organization page
     And I enter location name <Loc_Name> for Location "2" on "Edit" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "Edit" organization page
-    And I select location type <Loc_Type> for Location "2" on "Edit" organization page
     And I enter address2 <Loc_Address2> for Location "2" on "Edit" organization page
     And I select region <Loc_Region> for Location "2" on "Edit" organization page
     And I enter city <Loc_City> for Location "2" on "Edit" organization page
@@ -512,6 +528,85 @@ Feature: Edit Hospital organization functionality tests
     Examples: 
       | Description                                                 | Has_MO | Hosp_Name | Loc_Name      | Loc_Address1  | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2  | Loc_City  | Loc_State  | Loc_Postal_Code | Message                                     |
       | Add one more Location details on Edit Hospital Organization | NO     | ACHNAME   | Loc_Name new1 | Loc_Address14 | Inpatient | Midwest    | Chicago    | Loc_Address24 | Loc_City1 | California |           10001 | Hospital Organization Successfully Updated. |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "Hospital" organization tab on organization dashboard
+    Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
+    And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
+    And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I verify Managing Organization radio buttons status on "Edit ACH - <Has_MO>" organization page
+    And I select "<Has_MO1>" radio button for managing organization
+    Then I select "<Managing_Org>" managing organization name in "<Has_MO1>" Has a Management Organization drop down
+    And I edit "Hospital Organization Name" field to "<Edited_Hospital_Name> - <Has_MO>" for organization
+    And I edit "Address 1" field to "<Org_Address1>" for organization
+    And I edit "Short Name" field to "<Short_Name>" for organization
+    And I edit "Address 2" field to "<Org_Address2>" for organization
+    And I edit "City" field to "<City>" for organization
+    And I edit <State> field for organization
+    And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
+    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
+    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
+    And I edit "address2" field to <Loc_Address1> for Location "1" for organization
+    And I edit Region dropdown field to <Loc_Region> for Location "1" for organization
+    And I edit "city" field to <Loc_City> for Location "1" for organization
+    And I edit Market dropdown field to <Loc_Market> for Region "<Loc_Region>" for Location "1" for organization
+    And I edit State dropdown field to <Loc_State> for Location "1" for organization
+    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    Then I verify "<Message>" after submitting the "FETCHFROMAPIForACHNAME - <Has_MO>" organization page
+    When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
+    And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
+    And I verify "<Hosp_Name> - <Has_MO>" name on the header of view profile
+    And I verify "Managing Organization - <Has_MO1>" on view profile of "Hospital" Organization
+
+    Examples: 
+      | Description                                             | Has_MO | Has_MO1 | Managing_Org | Hosp_Name | Edited_Hospital_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                     |
+      | Edit Hospital organization with MO to without MO        | YES    | NO      |              | ACHNAME   | ACHNAME              | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | Hospital Organization Successfully Updated. |
+      | Edit verify Hospital organization without MO to with MO | NO     | YES     |              | ACHNAME   | ACHNAME              | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | Hospital Organization Successfully Updated. |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "Hospital" organization tab on organization dashboard
+    Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
+    And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
+    And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I verify Managing Organization radio buttons status on "Edit ACH - <Has_MO1>" organization page
+    And I select "<Has_MO>" radio button for managing organization
+    Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
+    And I edit "Hospital Organization Name" field to "<Edited_Hospital_Name> - <Has_MO>" for organization
+    And I edit "Address 1" field to "<Org_Address1>" for organization
+    And I edit "Short Name" field to "<Short_Name>" for organization
+    And I edit "Address 2" field to "<Org_Address2>" for organization
+    And I edit "City" field to "<City>" for organization
+    And I edit <State> field for organization
+    And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
+    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
+    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
+    And I edit "address2" field to <Loc_Address1> for Location "1" for organization
+    And I edit "city" field to <Loc_City> for Location "1" for organization
+    And I edit State dropdown field to <Loc_State> for Location "1" for organization
+    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    Then I verify "<Message>" after submitting the "FETCHFROMAPIForACHNAME - <Has_MO>" organization page
+    When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
+    And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
+    And I verify "<Hosp_Name> - <Has_MO>" name on the header of view profile
+    And I verify "Managing Organization - <Has_MO>" on view profile of "Hospital" Organization
+
+    Examples: 
+      | Description                                   | Has_MO | Has_MO1 | Managing_Org | Hosp_Name | Edited_Hospital_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                     |
+      | Changing the MO details on edit Hospital page | YES    | NO      | MO_Name2     | ACHNAME   | ACHNAME              | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | Hospital Organization Successfully Updated. |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"

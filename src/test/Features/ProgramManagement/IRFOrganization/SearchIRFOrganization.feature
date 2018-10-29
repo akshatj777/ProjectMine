@@ -62,7 +62,7 @@ Feature: Search IRF organization functionality tests
       | Searching Location index id on IRF Profile Page | NO     | IRFNAME  | LocIndexId   |
       | Searching Location Name on IRF Profile Page     | YES    | IRFNAME  | Loc_Name     |
       | Searching Location Address on IRF Profile Page  | YES    | IRFNAME  | Loc_Address1 |
-      | Searching Location Type on IRF Profile Page     | NO     | IRFNAME  | IRF          |
+      
       | Searching Location Region on IRF Profile Page   | NO     | IRFNAME  | SouthEast      |
       | Searching Location Market on IRF Profile Page   | NO     | IRFNAME  | South      |
 

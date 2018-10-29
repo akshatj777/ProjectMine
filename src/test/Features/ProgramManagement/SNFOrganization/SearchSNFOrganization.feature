@@ -57,14 +57,13 @@ Feature: Search SNF organization functionality tests
     Then I search "<SearchParam>" and verify with search list options on Location in "<SNF_Name> - <Has_MO>" profile page
 
     Examples: 
-      | Description                                     | Has_MO | SNF_Name | SearchParam     |
-      | Searching Location index id on SNF Profile Page | YES    | SNFNAME  | LocIndexId      |
-      | Searching Location index id on SNF Profile Page | NO     | SNFNAME  | LocIndexId      |
-      | Searching Location Name on SNF Profile Page     | YES    | SNFNAME  | Loc_Name        |
-      | Searching Location Address on SNF Profile Page  | YES    | SNFNAME  | Loc_Address1    |
-      | Searching Location Type on SNF Profile Page     | NO     | SNFNAME  | Skilled Nursing |
-      | Searching Location Region on SNF Profile Page   | NO     | SNFNAME  | Midwest         |
-      | Searching Location Market on SNF Profile Page   | NO     | SNFNAME  | Chicago         |
+      | Description                                     | Has_MO | SNF_Name | SearchParam  |
+      | Searching Location index id on SNF Profile Page | YES    | SNFNAME  | LocIndexId   |
+      | Searching Location index id on SNF Profile Page | NO     | SNFNAME  | LocIndexId   |
+      | Searching Location Name on SNF Profile Page     | YES    | SNFNAME  | Loc_Name     |
+      | Searching Location Address on SNF Profile Page  | YES    | SNFNAME  | Loc_Address1 |
+      | Searching Location Region on SNF Profile Page   | NO     | SNFNAME  | Midwest      |
+      | Searching Location Market on SNF Profile Page   | NO     | SNFNAME  | Chicago      |
 
   Scenario Outline: <Description>
     Given I am on the login page

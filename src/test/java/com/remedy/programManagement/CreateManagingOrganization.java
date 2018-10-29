@@ -25,6 +25,7 @@ public class CreateManagingOrganization extends BaseClass {
 	
 	public void iVerifyButtonUnderOrganizationTab(String text) {
 		iWillWaitToSee(By.xpath("//button[text()='"+text+"']"));
+		Assert.assertTrue(isElementPresent(By.xpath("//button[text()='"+text+"']")));
 	}
 	
 	public void iClickOnCreateNewOrgButton() {
@@ -200,7 +201,7 @@ public class CreateManagingOrganization extends BaseClass {
 				CreateLTCHOrganization.tempLTCHOrg.put("LTCHNAME",RandomStringUtils.randomAlphabetic(75));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.tempLTCHOrg.get("LTCHNAME"));
 			}
-			else if(field.contains("IRF"))
+			else if(field.contains("Inpatient Rehab Facility"))
 			{
 				CreateIRFOrganization.tempIRFOrg.put("IRFNAME",RandomStringUtils.randomAlphabetic(75));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateIRFOrganization.tempIRFOrg.get("IRFNAME"));
@@ -212,7 +213,7 @@ public class CreateManagingOrganization extends BaseClass {
 			}
 		}
 		else if(text.equals("AllowedCharatcters")){
-			String str="a~`@!#$%^&*()-+_={}|;'[]<>,.?/Test120";
+			String str="Org~@!#$%^&*()-+_={}|;[]<>,.?/Test120";
 			if(field.contains("Managing")){
 			CreateManagingOrganization.tempMoOrg.put("MONAME",str+RandomStringUtils.randomAlphabetic(7));
 			iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateManagingOrganization.tempMoOrg.get("MONAME"));
@@ -247,7 +248,7 @@ public class CreateManagingOrganization extends BaseClass {
 				CreateLTCHOrganization.tempLTCHOrg.put("LTCHNAME",str+RandomStringUtils.randomAlphabetic(7));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.tempLTCHOrg.get("LTCHNAME"));
 			}
-			else if(field.contains("IRF"))
+			else if(field.contains("Inpatient Rehab Facility"))
 			{
 				CreateIRFOrganization.tempIRFOrg.put("IRFNAME",str+RandomStringUtils.randomAlphabetic(7));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateIRFOrganization.tempIRFOrg.get("IRFNAME"));

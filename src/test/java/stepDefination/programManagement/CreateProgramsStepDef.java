@@ -219,4 +219,9 @@ public class CreateProgramsStepDef extends DriverScript{
 	  public void i_UnCheck_For_Attribution_Rules_On_Create_Programs(String text) throws Throwable {
 		programs.iUnCheckForAttributionRulesOnCreatePrograms(text);
 	    }
+	 
+	 @And("^I click on checkbox for \"([^\"]*)\" validation ranks$")
+	  public void i_Click_On_Checkboxe_For_Validation_Ranks_On_Create_Programs(String text) throws Throwable {
+		programs.iClickOnCheckboxeForAttributionRulesOnCreatePrograms(text);
+	    }
 }
