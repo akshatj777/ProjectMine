@@ -1,0 +1,1 @@
+KPI_Episode_Claims=101*Savings Rate_Claims=-6.2*KPI_NPRA_Claims=-109350*KPI_Program_size_Claims=1768728*% SNF Disch Current_Claims=12.9*SNF Days Current_Claims=15.1*SNF Days Benchmark Variance_Claims=33.7*Readmissions Current_Claims=39.6*Readmissions Benchmark Variance_Claims=27.500*% SNF Disch Benchmark Variance_Claims=6.0
