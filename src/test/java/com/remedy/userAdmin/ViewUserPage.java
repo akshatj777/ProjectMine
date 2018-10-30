@@ -1,5 +1,9 @@
 package com.remedy.userAdmin;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.StringTokenizer;
 
 import org.junit.Assert;
@@ -131,6 +135,18 @@ public class ViewUserPage extends BaseClass {
 	public void verifyEmail(String email, String userRole) throws Throwable {
 		String emailUser = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[@title='"+emailUser.toLowerCase()+"']")));
+	}
+	
+	public void verifyLastLoginDate() throws Throwable 
+	{
+		DateTimeFormatter globalFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		ZoneId etZoneId = ZoneId.of("America/New_York");
+		ZoneId istZoneId = ZoneId.of("Asia/Kolkata");
+		LocalDateTime currentDateTime = LocalDateTime.now();
+		ZonedDateTime currentISTime = currentDateTime.atZone(istZoneId);
+		ZonedDateTime currentETime = currentISTime.withZoneSameInstant(etZoneId);
+		System.out.println(globalFormat.format(currentETime));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[text()[contains(.,'"+globalFormat.format(currentETime)+"')]]")));
 	}
 	
 	public void verifyBulkEmail(String userRole) throws Throwable {
@@ -404,6 +420,26 @@ public class ViewUserPage extends BaseClass {
 			else
 			{
 				Assert.assertTrue(isElementPresentOnPage(By.xpath("//tr/td[text()='"+applicationsEnabled+"']/parent::tr//span[text()='Enabled']")));
+			}
+			
+		}
+		
+	}
+	
+	public void verifyAppsNotVisibleOnViewUserPage(String applicationsNotVisible) throws Throwable {
+		if(!(applicationsNotVisible.equals("")))
+		{
+			if(applicationsNotVisible.contains(","))
+			{
+				   StringTokenizer st = new StringTokenizer(applicationsNotVisible, ",");
+				   while(st.hasMoreTokens())
+				   {
+					   Assert.assertFalse(isElementNotPresentOnPage(By.xpath("//td[text()='"+st.nextToken().trim()+"']")));   
+				   }
+			}
+			else
+			{
+				Assert.assertFalse(isElementNotPresentOnPage(By.xpath("//td[text()='"+applicationsNotVisible+"']")));
 			}
 			
 		}

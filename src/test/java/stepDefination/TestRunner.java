@@ -37,7 +37,7 @@ import stepDefination.Hooks.*;
 
 
 
-        features = { "src/test/Features/UA2/SuperAdmin/test.feature" }
+        features = { "src/test/Features/UA2/SuperAdmin/ViewUserProfile.feature" }
 
 
         //glue = { "./src/test/java/stepDefination" },
