@@ -37,13 +37,7 @@ import stepDefination.Hooks.*;
         features = { "src/test/Features/Analytics/" },
         monochrome = true,
         //glue = { "./src/test/java/stepDefination" },
-<<<<<<< HEAD
         tags = {"@RR"}
-=======
-        tags = {"@RowLevelSecurity1"}
->>>>>>> 2900f548c12515ef1c4cc369f8520704c3fa033d
-
- 
 )
 public class TestRunner {
 
