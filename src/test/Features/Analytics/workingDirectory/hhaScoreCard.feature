@@ -70,18 +70,18 @@ Feature: HHA Scorecard Dashboard
     And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard" dashboard
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | POSTCCN     |
-      | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Skip            | Skip                   | True All    | Skip |
-      | Qatwodashtest@yopmail.com   |   2 | True Random | Skip        | Skip        | Skip            | Skip                   | Skip        |             |
-      | Qadashboardtest@yopmail.com |   3 | Skip        | True Random | Skip        | Skip            | Skip                   | Skip        |             |
-      | Qafivedashtest@yopmail.com  |   4 | Skip        | Skip        | True Random | Skip            | Skip                   | Skip        |             |
-      | Qatwodashtest@yopmail.com   |   5 | Skip        | Skip        | Skip        | True Random     | Skip                   | Skip        |             |
-      | Qadashboardtest@yopmail.com |   6 | Skip        | Skip        | Skip        | Skip            | True Random            | Skip        |             |
-      | Qafivedashtest@yopmail.com  |   7 | Skip        | Skip        | Skip        | Skip            | Skip                   | True Random |             |
-      | allmodel123@yopmail.com     |   8 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |             |
-      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random     | True Random            | True Random |             |
-      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        |             |
-      | Qatwodashtest@yopmail.com   |  11 | True Random | Skip        | True Random | Skip            | True Random            | True Random |             |
+      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | POSTCCN |
+      | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Skip            | Skip                   | True All    | Skip    |
+      | Qatwodashtest@yopmail.com   |   2 | True Random | Skip        | Skip        | Skip            | Skip                   | Skip        |         |
+      | Qadashboardtest@yopmail.com |   3 | Skip        | True Random | Skip        | Skip            | Skip                   | Skip        |         |
+      | Qafivedashtest@yopmail.com  |   4 | Skip        | Skip        | True Random | Skip            | Skip                   | Skip        |         |
+      | Qatwodashtest@yopmail.com   |   5 | Skip        | Skip        | Skip        | True Random     | Skip                   | Skip        |         |
+      | Qadashboardtest@yopmail.com |   6 | Skip        | Skip        | Skip        | Skip            | True Random            | Skip        |         |
+      | Qafivedashtest@yopmail.com  |   7 | Skip        | Skip        | Skip        | Skip            | Skip                   | True Random |         |
+      | allmodel123@yopmail.com     |   8 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |         |
+      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random     | True Random            | True Random |         |
+      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        |         |
+      | Qatwodashtest@yopmail.com   |  11 | True Random | Skip        | True Random | Skip            | True Random            | True Random |         |
 
   @HHAScorecardRLS
   Scenario: Execute JMX file and read Output data for Data Filter Validations
@@ -100,8 +100,7 @@ Feature: HHA Scorecard Dashboard
     Then I verify "Participant" for DB and FE filter values at "<Row>" for "EC & Claims"
     Then I verify "Episode Initiator - BPID" for DB and FE filter values at "<Row>" for "EC & Claims"
     Then I verify "Anchor Facility - CCN" for DB and FE filter values at "<Row>" for "EC & Claims"
-    
-   
+
     Examples: 
       | Index | Row |
       |     0 |   1 |
@@ -116,8 +115,7 @@ Feature: HHA Scorecard Dashboard
       |     9 |  10 |
       |    10 |  11 |
 
-      
-     @HHAScorecardRLS
+  @HHAScorecardRLS
   Scenario Outline: Front end Data Filter Validation for EC data for HHAScoreCard
     When I open file "\\src\\test\\Jmeter\\HHAScoreCard\\RowFilterInput.csv" for writing data at "<Row>" to input file
     Given I am on the login page
@@ -187,18 +185,18 @@ Feature: HHA Scorecard Dashboard
     And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard" dashboard
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | POSTCCN     |
-      | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Skip            | Skip                   | True All    | Skip |
-      | Qatwodashtest@yopmail.com   |   2 | True Random | Skip        | Skip        | Skip            | Skip                   | Skip        |             |
-      | Qadashboardtest@yopmail.com |   3 | Skip        | True Random | Skip        | Skip            | Skip                   | Skip        |             |
-      | Qafivedashtest@yopmail.com  |   4 | Skip        | Skip        | True Random | Skip            | Skip                   | Skip        |             |
-      | Qatwodashtest@yopmail.com   |   5 | Skip        | Skip        | Skip        | True Random     | Skip                   | Skip        |             |
-      | Qadashboardtest@yopmail.com |   6 | Skip        | Skip        | Skip        | Skip            | True Random            | Skip        |             |
-      | Qafivedashtest@yopmail.com  |   7 | Skip        | Skip        | Skip        | Skip            | Skip                   | True Random |             |
-      | allmodel123@yopmail.com     |   8 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |             |
-      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random     | True Random            | True Random |             |
-      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        |             |
-      | Qatwodashtest@yopmail.com   |  11 | True Random | Skip        | True Random | Skip            | True Random            | True Random |             |
+      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | POSTCCN |
+      | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Skip            | Skip                   | True All    | Skip    |
+      | Qatwodashtest@yopmail.com   |   2 | True Random | Skip        | Skip        | Skip            | Skip                   | Skip        |         |
+      | Qadashboardtest@yopmail.com |   3 | Skip        | True Random | Skip        | Skip            | Skip                   | Skip        |         |
+      | Qafivedashtest@yopmail.com  |   4 | Skip        | Skip        | True Random | Skip            | Skip                   | Skip        |         |
+      | Qatwodashtest@yopmail.com   |   5 | Skip        | Skip        | Skip        | True Random     | Skip                   | Skip        |         |
+      | Qadashboardtest@yopmail.com |   6 | Skip        | Skip        | Skip        | Skip            | True Random            | Skip        |         |
+      | Qafivedashtest@yopmail.com  |   7 | Skip        | Skip        | Skip        | Skip            | Skip                   | True Random |         |
+      | allmodel123@yopmail.com     |   8 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |         |
+      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random     | True Random            | True Random |         |
+      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        |         |
+      | Qatwodashtest@yopmail.com   |  11 | True Random | Skip        | True Random | Skip            | True Random            | True Random |         |
 
   @HHAScorecardRLS
   Scenario: Execute JMX file and read Output data for Data Filter Validations
@@ -217,8 +215,7 @@ Feature: HHA Scorecard Dashboard
     Then I verify "Participant" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Episode Initiator - BPID" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Anchor Facility - CCN" for DB and FE filter values at "<Row>" for "EC"
-    
-   
+
     Examples: 
       | Index | Row |
       |     0 |   1 |
@@ -232,9 +229,8 @@ Feature: HHA Scorecard Dashboard
       |     8 |   9 |
       |     9 |  10 |
       |    10 |  11 |
-    
-    
-     @HHAScorecardRLS
+
+  @HHAScorecardRLS
   Scenario Outline: Front end Data Filter Validation for Claims data for HHAScoreCard
     When I open file "\\src\\test\\Jmeter\\HHAScoreCard\\RowFilterInput.csv" for writing data at "<Row>" to input file
     Given I am on the login page
@@ -304,18 +300,18 @@ Feature: HHA Scorecard Dashboard
     And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard" dashboard
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | POSTCCN     |
-      | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Skip            | Skip                   | True All    | Skip |
-      | Qatwodashtest@yopmail.com   |   2 | True Random | Skip        | Skip        | Skip            | Skip                   | Skip        |             |
-      | Qadashboardtest@yopmail.com |   3 | Skip        | True Random | Skip        | Skip            | Skip                   | Skip        |             |
-      | Qafivedashtest@yopmail.com  |   4 | Skip        | Skip        | True Random | Skip            | Skip                   | Skip        |             |
-      | Qatwodashtest@yopmail.com   |   5 | Skip        | Skip        | Skip        | True Random     | Skip                   | Skip        |             |
-      | Qadashboardtest@yopmail.com |   6 | Skip        | Skip        | Skip        | Skip            | True Random            | Skip        |             |
-      | Qafivedashtest@yopmail.com  |   7 | Skip        | Skip        | Skip        | Skip            | Skip                   | True Random |             |
-      | allmodel123@yopmail.com     |   8 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |             |
-      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random     | True Random            | True Random |             |
-      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        |             |
-      | Qatwodashtest@yopmail.com   |  11 | True Random | Skip        | True Random | Skip            | True Random            | True Random |             |
+      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | POSTCCN |
+      | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Skip            | Skip                   | True All    | Skip    |
+      | Qatwodashtest@yopmail.com   |   2 | True Random | Skip        | Skip        | Skip            | Skip                   | Skip        |         |
+      | Qadashboardtest@yopmail.com |   3 | Skip        | True Random | Skip        | Skip            | Skip                   | Skip        |         |
+      | Qafivedashtest@yopmail.com  |   4 | Skip        | Skip        | True Random | Skip            | Skip                   | Skip        |         |
+      | Qatwodashtest@yopmail.com   |   5 | Skip        | Skip        | Skip        | True Random     | Skip                   | Skip        |         |
+      | Qadashboardtest@yopmail.com |   6 | Skip        | Skip        | Skip        | Skip            | True Random            | Skip        |         |
+      | Qafivedashtest@yopmail.com  |   7 | Skip        | Skip        | Skip        | Skip            | Skip                   | True Random |         |
+      | allmodel123@yopmail.com     |   8 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |         |
+      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random     | True Random            | True Random |         |
+      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        |         |
+      | Qatwodashtest@yopmail.com   |  11 | True Random | Skip        | True Random | Skip            | True Random            | True Random |         |
 
   @HHAScorecardRLS
   Scenario: Execute JMX file and read Output data for Data Filter Validations
@@ -334,8 +330,7 @@ Feature: HHA Scorecard Dashboard
     Then I verify "Participant" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Episode Initiator - BPID" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Anchor Facility - CCN" for DB and FE filter values at "<Row>" for "EC"
-    
-   
+
     Examples: 
       | Index | Row |
       |     0 |   1 |
@@ -349,4 +344,3 @@ Feature: HHA Scorecard Dashboard
       |     8 |   9 |
       |     9 |  10 |
       |    10 |  11 |
-      
