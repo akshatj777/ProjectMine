@@ -70,13 +70,13 @@ Feature: Inpatient Episode Clearing Dashboard
       | Qatwodashtest@yopmail.com   |   2 | True Random | Skip        | Skip        | Skip            | Skip                   | Skip        |
       | Qadashboardtest@yopmail.com |   3 | Skip        | True Random | Skip        | Skip            | Skip                   | Skip        |
       | Qafivedashtest@yopmail.com  |   4 | Skip        | Skip        | True Random | Skip            | Skip                   | Skip        |
-      | Qatwodashtest@yopmail.com   |   5 | Skip        | Skip        | Skip        | True Random     | Skip                   | Skip        |
-      | Qadashboardtest@yopmail.com |   6 | Skip        | Skip        | Skip        | Skip            | True Random            | Skip        |
+      | Qatwodashtest@yopmail.com   |   5 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |
+      | Qadashboardtest@yopmail.com |   6 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |
       | Qafivedashtest@yopmail.com  |   7 | Skip        | Skip        | Skip        | Skip            | Skip                   | True Random |
       | allmodel123@yopmail.com     |   8 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |
-      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random     | True Random            | True Random |
+      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | Skip            | Skip                   | True Random |
       | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        |
-      | Qatwodashtest@yopmail.com   |  11 | True Random | Skip        | True Random | Skip            | True Random            | True Random |
+      | Qatwodashtest@yopmail.com   |  11 | True Random | Skip        | True Random | Skip            | Skip                   | True Random |
 
   @IPECRLS @RowLevelSecurity
   Scenario: Execute JMX file and read Output data for Data Filter Validations
