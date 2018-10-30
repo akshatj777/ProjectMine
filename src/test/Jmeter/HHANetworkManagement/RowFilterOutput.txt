@@ -1,0 +1,10 @@
+Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remdy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null*Anchor Facility Detail=null
+Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remdy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null*Anchor Facility Detail=null
+Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remdy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null*Anchor Facility Detail=null
+Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remdy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null*Anchor Facility Detail=null
+Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remdy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null*Anchor Facility Detail=null
+Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remdy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null*Anchor Facility Detail=null
+Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remdy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null*Anchor Facility Detail=null
+Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remdy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null*Anchor Facility Detail=null
+Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remdy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null*Anchor Facility Detail=null
+Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remdy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null*Anchor Facility Detail=null
