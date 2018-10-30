@@ -72,7 +72,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
           <stringProp name="filename">RowFilterInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">Flag,userName,bpid,ccn,bundle,r_region,r_market,region,market,participantName,drgCode,npi,model,anch</stringProp>
+          <stringProp name="variableNames">Flag,userName,bpid,ccn,bundle,region,market,r_region,r_market,participantName,drgCode,npi,model,anch</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -678,7 +678,7 @@ FROM
   -- EC  
     SELECT DISTINCT
          prm.region, prm.market,
-         CONCAT(prm.region,&apos; - &apos;, prm.market) as &apos;PartnerRegionMarket&apos;
+         CONCAT(de.participantShortName,&apos; &apos;,prm.region,&apos; - &apos;, prm.market) as &apos;PartnerRegionMarket&apos;
     FROM
         warehouse.factPatientEpisode fp
     LEFT JOIN warehouse.dimEpisodeInitiator de on fp.episodeInitiatorKey = de.episodeInitiatorSK 
@@ -737,7 +737,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 	-- CLAIMS
 	SELECT DISTINCT
         prm.region, prm.market,
-        CONCAT(prm.region,&apos; - &apos;, prm.market) as &apos;PartnerRegionMarket&apos;
+        CONCAT(e.participantShortName,&apos; &apos;,prm.region,&apos; - &apos;, prm.market) as &apos;PartnerRegionMarket&apos;
     FROM
         warehouse.factClaims c
 	LEFT JOIN warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK  

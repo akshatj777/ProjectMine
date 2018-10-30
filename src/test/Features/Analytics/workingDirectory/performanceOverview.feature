@@ -1,6 +1,6 @@
 Feature: Program Performance Overview Dashboard
 
-  @RowLevelSecurity
+  @RowLevelSecurity @RR
   Scenario Outline: Front end Data Filter Validation for Claims
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInput.csv" for writing data at "<Row>" to input file
     Given I am on the login page
@@ -57,9 +57,9 @@ Feature: Program Performance Overview Dashboard
     And I select "<Model>" checkbox in "Model" filter on "Program overview" dashboard
     And I click "Model" Filter on the "program performance - <Model>" dashboard
     ##Anchor FAcility
-    And I click "Anchor Facility Detail" Filter on the "program performance - <Anchor Facility Detail>" dashboard
-    And I select "<Anchor Facility Detail>" checkbox in "Anchor Facility Detail" filter on "Program overview" dashboard
-    And I click "Anchor Facility Detail" Filter on the "program performance - <Anchor Facility Detail>" dashboard
+    #And I click "Anchor Facility Detail" Filter on the "program performance - <Anchor Facility Detail>" dashboard
+    #And I select "<Anchor Facility Detail>" checkbox in "Anchor Facility Detail" filter on "Program overview" dashboard
+    #And I click "Anchor Facility Detail" Filter on the "program performance - <Anchor Facility Detail>" dashboard
     And I click "Episode Initiator - BPID" Filter on the "program performance" dashboard
     And I fetch and store "Episode Initiator - BPID" filter values on "program performance" dashboard
     And I click "Episode Initiator - BPID" Filter on the "program performance" dashboard
@@ -87,26 +87,26 @@ Feature: Program Performance Overview Dashboard
     And I click "Model" Filter on the "program performance" dashboard
     And I fetch and store "Model" filter values on "program performance" dashboard
     And I click "Model" Filter on the "program performance" dashboard
-    And I click "Anchor Facility Detail" Filter on the "program performance" dashboard
-    And I fetch and store "Anchor Facility Detail" filter values on "program performance" dashboard
-    And I click "Anchor Facility Detail" Filter on the "program performance" dashboard
+    #And I click "Anchor Facility Detail" Filter on the "program performance" dashboard
+    #And I fetch and store "Anchor Facility Detail" filter values on "program performance" dashboard
+    #And I click "Anchor Facility Detail" Filter on the "program performance" dashboard
     And I save the values of row filters in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region - Market | Region - Market | Participant | DRG         | Physician - NPI | Model       | Anchor Facility Detail |
-      | Qafivedashtest@yopmail.com  |   1 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
-      | Qatwodashtest@yopmail.com   |   2 | True Random | True Random | True Random | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
-      | Qadashboardtest@yopmail.com |   3 | True Random | True Random | Skip        | True Random            | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
-      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip                   | True Random     | Skip        | Skip        | Skip            | Skip        | Skip                   |
-      | Qatwodashtest@yopmail.com   |   5 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | Skip        | Skip            | Skip        | Skip                   |
-      | Qadashboardtest@yopmail.com |   6 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True Random | Skip            | Skip        | Skip                   |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | True Random     | Skip        | True All               |
-      | allmodel123@yopmail.com     |   8 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | True Random | True Random     | True All    | True All               |
-      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random | True Random     | True Random | True Random            |
-      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
-      | Qatwodashtest@yopmail.com   |  11 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random | True Random     | Skip        | True Random            |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region - Market | Region - Market | Participant | DRG  | Physician - NPI | Model       | Anchor Facility Detail |
+      | Qafivedashtest@yopmail.com  |   1 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qatwodashtest@yopmail.com   |   2 | True Random | True Random | True Random | Skip                   | Skip            | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qadashboardtest@yopmail.com |   3 | True Random | True Random | Skip        | True Random            | Skip            | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip                   | True Random     | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qatwodashtest@yopmail.com   |   5 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | Skip | Skip            | Skip        | Skip                   |
+      | Qadashboardtest@yopmail.com |   6 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qafivedashtest@yopmail.com  |   1 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip | True Random     | Skip        | Skip                   |
+      | allmodel123@yopmail.com     |   2 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | Skip | True Random     | True All    | Skip                   |
+      | allmodel123@yopmail.com     |   3 | True Random | True Random | True Random | True Random            | True Random     | True Random | Skip | True Random     | True Random | Skip                   |
+      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qatwodashtest@yopmail.com   |  11 | True Random | True Random | True Random | True Random            | True Random     | True Random | Skip | True Random     | Skip        | Skip                   |
 
-  @RowLevelSecurity
+  @RowLevelSecurity @RR
   Scenario: Execute JMX file and read Output data for Data Filter Validations for Claims
     When I close the file for after writing data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsRowFilterOutput.txt" Output file
@@ -140,7 +140,7 @@ Feature: Program Performance Overview Dashboard
       |     9 |  10 |
       |    10 |  11 |
 
-  @RowLevelSecurity 
+  @RowLevelSecurity
   Scenario Outline: Front end Data Filter Validation for EC
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInput.csv" for writing data at "<Row>" to input file
     Given I am on the login page
@@ -233,18 +233,18 @@ Feature: Program Performance Overview Dashboard
     And I save the values of row filters in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region - Market | Region - Market | Participant | DRG         | Physician - NPI | Model       | Anchor Facility Detail |
-      | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Skip                   | Skip            | True All    | True All    | True All        | Skip        | Skip                   |
-      | Qatwodashtest@yopmail.com   |   2 | True All    | Skip        | True All    | Skip                   | Skip            | True All    | Skip        | True All        | True All    | True All               |
-      | Qadashboardtest@yopmail.com |   3 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | True All    | True All        | True All    | True All               |
-      | Qafivedashtest@yopmail.com  |   4 | True Random | True All    | True Random | Skip                   | Skip            | True All    | True All    | True All        | Skip        | Skip                   |
-      | Qatwodashtest@yopmail.com   |   5 | True Random | Skip        | True All    | Skip                   | Skip            | True All    | True Random | True Random     | True All    | True All               |
-      | Qadashboardtest@yopmail.com |   6 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | True All    | True Random     | True All    | True All               |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True Random | Skip                   | Skip            | True Random | True Random | True Random     | True All    | True All               |
-      | allmodel123@yopmail.com     |   8 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | True Random | True Random     | True All    | True All               |
-      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random | True Random     | True Random | True Random            |
-      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
-      | Qatwodashtest@yopmail.com   |  11 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random | True Random     | Skip        | True Random            |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region - Market | Region - Market | Participant | DRG  | Physician - NPI | Model       | Anchor Facility Detail |
+      | Qafivedashtest@yopmail.com  |   1 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qatwodashtest@yopmail.com   |   2 | True Random | True Random | True Random | Skip                   | Skip            | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qadashboardtest@yopmail.com |   3 | True Random | True Random | Skip        | True Random            | Skip            | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip                   | True Random     | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qatwodashtest@yopmail.com   |   5 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | Skip | Skip            | Skip        | Skip                   |
+      | Qadashboardtest@yopmail.com |   6 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qafivedashtest@yopmail.com  |   1 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip | True Random     | Skip        | Skip                   |
+      | allmodel123@yopmail.com     |   2 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | Skip | True Random     | True All    | Skip                   |
+      | allmodel123@yopmail.com     |   3 | True Random | True Random | True Random | True Random            | True Random     | True Random | Skip | True Random     | True Random | Skip                   |
+      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qatwodashtest@yopmail.com   |  11 | True Random | True Random | True Random | True Random            | True Random     | True Random | Skip | True Random     | Skip        | Skip                   |
 
   @RowLevelSecurity
   Scenario: Execute JMX file and read Output data for Data Filter Validations for EC
@@ -373,18 +373,18 @@ Feature: Program Performance Overview Dashboard
     And I save the values of row filters in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region - Market | Region - Market | Participant | DRG         | Physician - NPI | Model       | Anchor Facility Detail |
-      | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Skip                   | Skip            | True All    | True All    | True All        | Skip        | Skip                   |
-      | Qatwodashtest@yopmail.com   |   2 | True All    | Skip        | True All    | Skip                   | Skip            | True All    | Skip        | True All        | True All    | True All               |
-      | Qadashboardtest@yopmail.com |   3 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | True All    | True All        | True All    | True All               |
-      | Qafivedashtest@yopmail.com  |   4 | True Random | True All    | True Random | Skip                   | Skip            | True All    | True All    | True All        | Skip        | Skip                   |
-      | Qatwodashtest@yopmail.com   |   5 | True Random | Skip        | True All    | Skip                   | Skip            | True All    | True Random | True Random     | True All    | True All               |
-      | Qadashboardtest@yopmail.com |   6 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | True All    | True Random     | True All    | True All               |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True Random | Skip                   | Skip            | True Random | True Random | True Random     | True All    | True All               |
-      | allmodel123@yopmail.com     |   8 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | True Random | True Random     | True All    | True All               |
-      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random | True Random     | True Random | True Random            |
-      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
-      | Qatwodashtest@yopmail.com   |  11 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random | True Random     | Skip        | True Random            |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region - Market | Region - Market | Participant | DRG  | Physician - NPI | Model       | Anchor Facility Detail |
+      | Qafivedashtest@yopmail.com  |   1 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qatwodashtest@yopmail.com   |   2 | True Random | True Random | True Random | Skip                   | Skip            | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qadashboardtest@yopmail.com |   3 | True Random | True Random | Skip        | True Random            | Skip            | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip                   | True Random     | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qatwodashtest@yopmail.com   |   5 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | Skip | Skip            | Skip        | Skip                   |
+      | Qadashboardtest@yopmail.com |   6 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qafivedashtest@yopmail.com  |   1 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip | True Random     | Skip        | Skip                   |
+      | allmodel123@yopmail.com     |   2 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | Skip | True Random     | True All    | Skip                   |
+      | allmodel123@yopmail.com     |   3 | True Random | True Random | True Random | True Random            | True Random     | True Random | Skip | True Random     | True Random | Skip                   |
+      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip | Skip            | Skip        | Skip                   |
+      | Qatwodashtest@yopmail.com   |  11 | True Random | True Random | True Random | True Random            | True Random     | True Random | Skip | True Random     | Skip        | Skip                   |
 
   @RowLevelSecurity
   Scenario: Execute JMX file and read Output data for Data Filter Validations for Claims&EC

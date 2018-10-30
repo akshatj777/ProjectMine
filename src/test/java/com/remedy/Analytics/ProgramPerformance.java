@@ -1757,6 +1757,7 @@ public class ProgramPerformance extends BaseClass{
 			            		 	  for (int itr=0;itr<=val.length();itr++) {
 		                        	        val=val.substring(val.indexOf("- ")+1).trim();
 		                        	       }
+			            		 	 val = val.replaceAll("'","''");
 		                       		  val="'"+val+"'";
 		                       		  arrayListTexts.add(val);
 		                       		  writeDataToOutputFile("Path");
@@ -1777,11 +1778,13 @@ public class ProgramPerformance extends BaseClass{
 	                            	 valB=valarr[1];
 	                            	 for(int k=0;k<valarr.length;k++){
 	    			            		 if(k==0){
+	    			            			 valA = valA.replaceAll("'","''");
 	    			            			 val="'"+valA+"'"; 
 	    			            			 arrayListTextsA.add(val);
 	    			            			 arrayListTexts.addAll(arrayListTextsA);
 	    			            			 
 	    			            		 }else{
+	    			            			 valB = valB.replaceAll("'","''");
 	    			            			 val="'"+valB+"'"; 
 	    			            			 arrayListTextsB.add(val);
 	    			            			 arrayListTexts.addAll(arrayListTextsB);
@@ -1798,6 +1801,7 @@ public class ProgramPerformance extends BaseClass{
 		                     //   	 val=val.substring(val.length() - 4);
 			            			valarr1=val.split("-");
 			            			val=valarr1[0].trim();
+			            			val = val.replaceAll("'","''");
 		                        	val="'"+val+"'";
 		                       		 arrayListTexts.add(val);
 		                       		 writeDataToOutputFile("Path");
@@ -1807,7 +1811,8 @@ public class ProgramPerformance extends BaseClass{
 			            		 else{
 	                	    	     val=val.trim();
 	                	    	     executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
-				            		 val="'"+val+"'";
+	                	    	     val = val.replaceAll("'","''");
+	                	    	     val="'"+val+"'";
 									 arrayListTexts.add(val);
 									 writeDataToOutputFile("Path");
 									 return;
@@ -1826,14 +1831,16 @@ public class ProgramPerformance extends BaseClass{
 //                         val=val.substring(val.indexOf("-")+1).trim();
                         	 if(val.equals("Null")){
                              executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
-                       		  val="'"+val+"'";
+                             val = val.replaceAll("'","''"); 
+                             val="'"+val+"'";
                        		  arrayListTexts.add(val);
                        		  listItems.remove(randomIndex);
                        		  continue;
                              }else{
                         	 for (int itr=0;itr<=val.length();itr++) {
                         	        val=val.substring(val.indexOf("- ")+1).trim();
-                        	       }}
+                        	       }
+                        	 }
                          }
                          else if(filter.contains("DRG")){
 //                           val=val.substring(val.indexOf("-")+1).trim();
@@ -1842,6 +1849,7 @@ public class ProgramPerformance extends BaseClass{
                         //	 val=val.replaceAll("[()]","");  
                         	 valarr1=val.split("-");
 		            		 val=valarr1[0].trim();
+		            		 
                         	 System.out.println("DRG"+val);
                         	
                          }
@@ -1849,6 +1857,7 @@ public class ProgramPerformance extends BaseClass{
                           else if(filter.contains("Market") || filter.contains("Region")){
                         	  if(val.equals("Null")){
                         		  executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
+                        		  val = val.replaceAll("'","''");
                         		  val="'"+val+"'";
                         		  arrayListTexts.add(val);
                         		  listItems.remove(randomIndex);
@@ -1889,14 +1898,17 @@ public class ProgramPerformance extends BaseClass{
 			            	 if(!val.equals("Null")){
 			            	 for(int k=0;k<valarr.length;k++){
 			            		 if(k==0){
+			            			 valA = valA.replaceAll("'","''");
 			            			 val="'"+valA+"'"; 
 			            			 arrayListTextsA.add(val);
 			            		 }else{
+			            			 valB = valB.replaceAll("'","''");
 			            			 val="'"+valB+"'"; 
 			            			 arrayListTextsB.add(val);
 			            		 }
 			            	 }}}else{
 			                 val=val.trim();
+			                 val = val.replaceAll("'","''");
 			            	 val="'"+val+"'";
 				             arrayListTexts.add(val);
 				             
@@ -1913,6 +1925,7 @@ public class ProgramPerformance extends BaseClass{
 		         
 		         if(filter.equals("BPID") || filter.equals("CCN") || filter.equals("Physician - NPI")){
 		          if(val.equals("Null")){
+		        	  val = val.replaceAll("'","''");
 		                               val="'"+val+"'";
 		                               arrayListTexts.add(val);
 		                               continue;
@@ -1922,7 +1935,8 @@ public class ProgramPerformance extends BaseClass{
 		                           // writeDataToOutputFile("Path");
 		                           }
 //		          driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
-		                           val="'"+val+"'";
+		          val = val.replaceAll("'","''");                 
+		          val="'"+val+"'";
 		               arrayListTexts.add(val);}
 		          else if(filter.contains("DRG")){
 		        	     String[] valarr1=val.split("-");
@@ -1932,12 +1946,14 @@ public class ProgramPerformance extends BaseClass{
 		              //                 val=val.replaceAll("[()]","");  
 //		                            System.out.println("DRG"+val);
 		                  //             driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
-		                               val="'"+val+"'";
+	            		 val = val.replaceAll("'","''");              
+	            		 val="'"+val+"'";
 		                               arrayListTexts.add(val);
 		                           }else if (filter.contains("Market") || filter.contains("Region")){
 		                            if(val.equals("Null")){
 		                       val=val.trim();
 //		                       driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
+		                       val = val.replaceAll("'","''");
 		                       val="'"+val+"'";
 		                       arrayListTexts.add(val);
 		                      }else{
@@ -1950,9 +1966,11 @@ public class ProgramPerformance extends BaseClass{
 		                                   valB=valarr[1];
 		                         for(int k=0;k<valarr.length;k++){
 		                       if(k==0){
-		                        val="'"+valA+"'"; 
+		                    	   valA = valA.replaceAll("'","''");
+		                    	   val="'"+valA+"'"; 
 		                        arrayListTextsA.add(val);
 		                       }else{
+		                    	   valB = valB.replaceAll("'","''");
 		                        val="'"+valB+"'"; 
 		                        arrayListTextsB.add(val);
 		                       }
@@ -1961,7 +1979,8 @@ public class ProgramPerformance extends BaseClass{
 		                           else{
 		                              val=val.trim();
 //		                     driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")).click();
-		                     val="'"+val+"'";
+		                              val = val.replaceAll("'","''");
+		                              val="'"+val+"'";
 		            arrayListTexts.add(val);
 		                           }
 		         
@@ -2217,6 +2236,7 @@ public class ProgramPerformance extends BaseClass{
 
 	public void readFilterValueFromQuery(int index) throws IOException, InterruptedException {
 		System.out.println("Col value: "+col.toString());
+		System.out.println("FE HashMap:"+mapOfHmFiltersValue.get(index+1).toString());
 		StringTokenizer st = new StringTokenizer(col.get(index), "*");
 		 while(st.hasMoreTokens()){
 			 String var[] =st.nextToken().trim().split("=");
