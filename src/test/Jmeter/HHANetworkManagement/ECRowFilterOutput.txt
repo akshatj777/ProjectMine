@@ -8,4 +8,7 @@ Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remedy Regi
 Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remedy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null*Anchor Facility Detail=null
 Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remedy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null*Anchor Facility Detail=null
 Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remedy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null*Anchor Facility Detail=null
+<<<<<<< HEAD
+=======
 Episode Initiator - BPID=null*Anchor Facility - CCN=null*Bundle=null*Remedy Region - Market=null*Region - Market=null*Participant=null*DRG=null*Physician - NPI=null*Model=null*Anchor Facility Detail=null
+>>>>>>> c6c77776ace43cb4a248758791c224cd9f06f642

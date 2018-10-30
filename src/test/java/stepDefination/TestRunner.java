@@ -37,8 +37,9 @@ import stepDefination.Hooks.*;
         features = { "src/test/Features/Analytics/" },
         monochrome = true,
         //glue = { "./src/test/java/stepDefination" },
-                                   
-        tags = {"@RowLevelSecurity"}
+        tags = {"@HHAScorecardRLS"}
+
+ 
 )
 public class TestRunner {
 
