@@ -152,10 +152,8 @@ Feature: Create Programs organization under Payor Organization functionality tes
     And I click on checkbox for "Attribute to the physician who has the most claims during the trigger window" Attribution rule
     And I click on checkbox for "Attribute to the attending physician on the triggering claim" Attribution rule
     And I click on checkbox for "Attribute to the provider with the earliest Bundle start date" Attribution rule
-    
     And I click on checkbox for "Attribute to the Attending Physicians Group" Attribution rule
     And I click on checkbox for "Attribute to the Operating Physicians Group" Attribution rule
-    
     And I verify the sub headline of "Validate To"
     Then I click on "Submit" button on "create" organization page
     Then I verify duplicate "<Message>" after submitting the "create Programs" organization page
