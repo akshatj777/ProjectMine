@@ -140,7 +140,7 @@ Feature: Program Performance Overview Dashboard
       |     9 |  10 |
       |    10 |  11 |
 
-  @RowLevelSecurity @PORLS
+  @RowLevelSecurity 
   Scenario Outline: Front end Data Filter Validation for EC
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInput.csv" for writing data at "<Row>" to input file
     Given I am on the login page
@@ -246,14 +246,14 @@ Feature: Program Performance Overview Dashboard
       | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
       | Qatwodashtest@yopmail.com   |  11 | True Random | True Random | True Random | Skip                   | Skip            | True Random | True Random | True Random     | Skip        | True Random            |
 
-  @RowLevelSecurity @PORLS
+  @RowLevelSecurity
   Scenario: Execute JMX file and read Output data for Data Filter Validations for EC
     When I close the file for after writing data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\PerformanceDashboard\\ECRowFilterOutput.txt" Output file
     When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\PerformanceDashboard\\ECRowFilter.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\PerformanceDashboard\\ECRowFilterOutput.txt"
 
-  @RowLevelSecurity @PORLS
+  @RowLevelSecurity
   Scenario Outline: Verify DB and FE values fetched from Claims&EC Scenarios
     And I get the value "<Index>" from Output file of data filter validation
     Then I verify "Episode Initiator - BPID" for DB and FE filter values at "<Row>" for "Claims&EC"
@@ -280,7 +280,7 @@ Feature: Program Performance Overview Dashboard
       |     9 |  10 |
       |    10 |  11 |
 
-  @RowLevelSecurity @PORLS1
+  @RowLevelSecurity
   Scenario Outline: Front end Data Filter Validation for Claims&EC
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInput.csv" for writing data at "<Row>" to input file
     Given I am on the login page
@@ -386,14 +386,14 @@ Feature: Program Performance Overview Dashboard
       | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   |
       | Qatwodashtest@yopmail.com   |  11 | True Random | True Random | True Random | Skip                   | Skip            | True Random | True Random | True Random     | Skip        | True Random            |
 
-  @RowLevelSecurity @PORLS1
+  @RowLevelSecurity
   Scenario: Execute JMX file and read Output data for Data Filter Validations for Claims&EC
     When I close the file for after writing data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterOutput.txt" Output file
     When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\PerformanceDashboard\\TableauRowFilter.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterOutput.txt"
 
-  @RowLevelSecurity @PORLS1
+  @RowLevelSecurity
   Scenario Outline: Verify DB and FE values fetched from Claims&EC Scenarios
     And I get the value "<Index>" from Output file of data filter validation
     Then I verify "Episode Initiator - BPID" for DB and FE filter values at "<Row>" for "Claims&EC"
