@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 (1)|('Qafivedashtest@yopmail.com')|1029|('2070-b72', '2070-f10', '2070-021', '2070-f11')|('340020', '420101', '420089', '420080', '220010', '390223')|('Acute myocardial infarction', 'Amputation', 'Cellulitis', 'Chest pain', 'Congestive heart failure', 'Coronary artery bypass graft', 'Fractures of the femur and hip or pelvis', 'Hip & femur procedures except major joint', 'Lower Major joint replacement', 'Medical non-infectious orthopedic', 'Medical peripheral vascular disorders', 'Nutritional and metabolic disorders', 'Percutaneous coronary intervention', 'Revision of the hip or knee', 'Simple pneumonia and respiratory infections', 'Syncope & collapse', 'Transient ischemia', 'Urinary tract infection')|(Skip)|(Skip)|(Skip)|(Skip)|('Apollo, Md', 'Lawrence General Hospital', 'Penn')|
 (0)|('Qatwodashtest@yopmail.com')|1029|('2070-f14', '6005-160')|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|
 (0)|('Qadashboardtest@yopmail.com')|1029|(Skip)|('030011')|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|
@@ -9,3 +10,17 @@
 (0)|('allmodel123@yopmail.com')|1029|
 (0)|('Qafivedashtest@yopmail.com')|1029|('2070-b72', '2070-f10', '2070-021', '2070-f11')|('340020', '420101', '420089', '420080', '220010', '390223')|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|
 (0)|('Qatwodashtest@yopmail.com')|1029|
+=======
+(1)|('Qafivedashtest@yopmail.com')|1029|
+(0)|('Qatwodashtest@yopmail.com')|1029|('6005-160')|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|
+(0)|
+
+(0)|('Qafivedashtest@yopmail.com')|1029|(Skip)|(Skip)|('Fractures of the femur and hip or pelvis', 'Lower Major joint replacement', 'Chest pain', 'Amputation', 'Urinary tract infection', 'Nutritional and metabolic disorders', 'Cellulitis', 'Hip & femur procedures except major joint', 'Percutaneous coronary intervention', 'Revision of the hip or knee', 'Congestive heart failure', 'Coronary artery bypass graft', 'Transient ischemia')|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|
+(0)|('Qatwodashtest@yopmail.com')|1029|(Skip)|(Skip)|(Skip)|('Null')|('Null')|
+('Null', 0)|('Qadashboardtest@yopmail.com')|1030|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|
+(0)|('Qafivedashtest@yopmail.com')|1030|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|('Apollo, Md')|
+(0)|('allmodel123@yopmail.com')|1030|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|
+(0)|('allmodel123@yopmail.com')|1030|('6005-173', '2070-d11', '6005-182', '3090-123', '2070-c97', '3090-189', '2070-d08', '6005-079', '3090-168', '2070-d20', '6005-193', '6005-115', '6005-330', '6005-078', '6005-197', '6005-179', '2070-d03', 'CJR-10-5', '3090-169', '2070-d28', '2070-025', 'CJR-10-3', '3090-198', 'CJR-10-9', '2070-c90', '6005-167', '2070-d15', '2070-j34', '2070-d22', '2070-d26', '2070-010', '3090-182', '6005-328', '6005-166', '2070-012', '3090-079', '6005-186', '2070-c82', '6005-326', '2070-028', 'CJR-10-7', '6005-188', '6005-331', '2070-d27', '3090-070', '2070-d10', '2070-023', '6005-165', '2070-c83', '6005-322', '6005-162', '2070-c86', '6005-190', '6005-170', '2070-j13', '6005-195', '6005-164', '6005-334', '2070-c91', '2070-d05', '2070-j14', 'CJR-10-1', '6005-160', '6005-333', '6005-324', '3090-173', 'CJR-10-8', '6005-323', '2070-f11', '3090-185', '3090-196', '2070-d24', '2070-c98', '2070-c85', 'CJR-1', '6005-109', '2070-e02', '2070-d19', '2070-009', '6005-080', '6005-176', '2070-d09', '6005-191', '2070-d06', '6005-062', '2070-c94', '2070-c84', '2070-015', '2070-f06', '3090-069', '2070-022', '6005-194', '6005-112', '2070-d16', '3090-066', '2070-d12')|
+(0)|('Qafivedashtest@yopmail.com')|1030|('2070-b72', '2070-f10', '2070-021', '2070-f11')|('340020', '420101', '420089', '420080', '220010', '390223')|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|(Skip)|
+(0)|('Qatwodashtest@yopmail.com')|1030|('2070-f14', '6005-160')|(Skip)|('Acute myocardial infarction', 'Gastrointestinal hemorrhage')|(Skip)|(Skip)|
+>>>>>>> c6c77776ace43cb4a248758791c224cd9f06f642

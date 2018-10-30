@@ -41,7 +41,7 @@ Feature: HHA Network Management Dashboard
     And I click "Participant" Filter on the "HHA Network Management - <Participant>" dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "HHA Network Management" dashboard
     And I click "Participant" Filter on the "HHA Network Management - <Participant>" dashboard
-    ##Anchor FAcility
+    ##Anchor Facility
     And I click "Post Acute Facility" Filter on the "HHA Network Management - <Post Acute Facility>" dashboard
     And I select "<Post Acute Facility>" checkbox in "Anchor Facility Detail" filter on "HHA Network Management" dashboard
     And I click "Post Acute Facility" Filter on the "HHA Network Management - <Post Acute Facility>" dashboard
@@ -70,7 +70,7 @@ Feature: HHA Network Management Dashboard
 
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region - Market | Region - Market | Participant | Post Acute Facility |
-      | allmodel123@yopmail.com     |   1 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | allmodel123@yopmail.com     |   1 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True All                |
       | Qatwodashtest@yopmail.com   |   2 | True Random | True Random | True Random | Skip                   | Skip            | Skip        | Skip                |
       | Qadashboardtest@yopmail.com |   3 | True Random | True Random | Skip        | True Random            | Skip            | Skip        | Skip                |
       | allmodel123@yopmail.com     |   4 | True Random | True Random | Skip        | Skip                   | True Random     | Skip        | Skip                |
