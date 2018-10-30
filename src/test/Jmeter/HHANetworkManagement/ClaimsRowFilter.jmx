@@ -653,7 +653,7 @@ for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;PostAcuteFacility_#&quot;));i+
 al_Post_Acute_Facility.add(vars.get(&quot;PostAcuteFacility_&quot;+i));
 }
 vars.put(&quot;value7&quot;,&quot;\&quot;&quot;+al_Post_Acute_Facility.toString()+&quot;\&quot;&quot;);
-System.out.println(&quot;DRG_Fracture:&quot;+al_Post_Acute_Facility.toString());
+System.out.println(&quot;Post Acute Facility:&quot;+al_Post_Acute_Facility.toString());
 </stringProp>
           </BeanShellPreProcessor>
           <hashTree/>

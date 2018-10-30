@@ -2264,10 +2264,11 @@ public class ProgramPerformance extends BaseClass{
 		 elem=driver.findElement(By.xpath("//div[@tb-test-id='"+text+"']//div[@class='tvimagesContainer']/canvas"));
 		 act.click(elem).build().perform();
 		 delay();
-		 elem=driver.findElement(By.xpath("//a[@href='#']"));
+		 elem=driver.findElement(By.cssSelector(".tab-link-button.tab-widget.tab-action"));
 //		 act.moveToElement(driver.findElement(By.cssSelector(".tab-tooltip.tab-widget.tab-tooltipBR"))).click(elem).build().perform();
 		 JavascriptExecutor executor = (JavascriptExecutor)driver;
-		 executor.executeScript("$('tab-link-button.tab-widget.tab-action').click();");
+		 executor.executeScript("$('.tab-link-button.tab-widget.tab-action').trigger('click');");
+//		 executor.executeScript("arguments[0].click();", elem);
 		 wait.until(ExpectedConditions.refreshed(
 			        ExpectedConditions.elementToBeClickable(By.cssSelector(".tab-link-button.tab-widget.tab-action"))));
 		 System.out.println(isElementPresent(By.xpath("//a[@href='#']")));
