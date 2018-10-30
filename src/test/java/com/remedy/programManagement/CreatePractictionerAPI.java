@@ -20,6 +20,7 @@ public class CreatePractictionerAPI extends BaseClass{
     public static List<Long> idList = new ArrayList<>();
     public static List<Long> idProvidertexnomyList = new ArrayList<>();
     public static List<String> practitionerNameList = new ArrayList<>();
+    public static List<Long> practitionerIDList = new ArrayList<>();
 
 	public CreatePractictionerAPI(WebDriver driver) {
 		super(driver);
@@ -153,13 +154,13 @@ public class CreatePractictionerAPI extends BaseClass{
 	 
 	 public void getById(Long idToGet, String type) throws Throwable {
 	        String urlExt = "";
-	        if (type.equals("management") || type.equals("hospital") || type.equals("ltch") || type.equals("snf") || type.equals("pgp") || type.equals("payor") || type.equals("hha")) {
+	        if (type.equals("management") || type.equals("hospital") || type.equals("ltch") || type.equals("snf") || type.equals("pgp") || type.equals("payor") || type.equals("hha") || type.equals("irf") || type.equals("hospice")) {
 	            urlExt = "organization/";
 	        } else if (type.equals("bundle")) {
 	            urlExt = "bundle/";
 	        } else if (type.equals("program")) {
 	            urlExt = "program/";
-	        } else if (type.equals("contract")) {
+	        } else if (type.equals("bundlePayment")) {
 	            urlExt = "contract/";
 	        } else if (type.equals("attributionrule")) {
 	            urlExt = "program/attributionrule/";

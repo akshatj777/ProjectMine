@@ -1,12 +1,5 @@
 Feature: Search SNF organization functionality tests
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -29,12 +22,19 @@ Feature: Search SNF organization functionality tests
       | Create SNF using API calls without MO |               | SNFNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | NY       |  10001 | Loc_Name     | [17,18,19],[17] |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |          |  0 | snf  |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "SNF" organization tab on organization dashboard
     Then I verify the Search bar on "SNF" organization page
     Then I search "<SearchParam> - <Has_MO>" and verify with search list options on "SNF" organization search box
 
     Examples: 
       | Description                                            | Has_MO | SearchParam    |
+      | Search SNF Organization with Id  - With MO             | YES    | SNF_Id         |
+      | Search SNF Organization with Id  - Without MO          | NO     | SNF_Id         |
       | Search SNF Organization with CCN  - With MO            | YES    | CCN            |
       | Search SNF Organization with CCN  - Without MO         | NO     | CCN            |
       | Search SNF Organization with SNF Org Name - With MO    | YES    | SNFNAME        |
@@ -44,6 +44,33 @@ Feature: Search SNF organization functionality tests
       | Search SNF Organization with Postal Code               |        |          10000 |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "SNF" organization tab on organization dashboard
+    When I search with "<SNF_Name> - <Has_MO>" on organization in search box
+    And I click "<SNF_Name> - <Has_MO>" field in search list on organization page
+    And I verify "Location" tab present under "SNF" Organization
+    And I click on "Location" tab on view profile of "SNF" Organization
+    Then I search "<SearchParam>" and verify with search list options on Location in "<SNF_Name> - <Has_MO>" profile page
+
+    Examples: 
+      | Description                                     | Has_MO | SNF_Name | SearchParam  |
+      | Searching Location index id on SNF Profile Page | YES    | SNFNAME  | LocIndexId   |
+      | Searching Location index id on SNF Profile Page | NO     | SNFNAME  | LocIndexId   |
+      | Searching Location Name on SNF Profile Page     | YES    | SNFNAME  | Loc_Name     |
+      | Searching Location Address on SNF Profile Page  | YES    | SNFNAME  | Loc_Address1 |
+      | Searching Location Region on SNF Profile Page   | NO     | SNFNAME  | Midwest      |
+      | Searching Location Market on SNF Profile Page   | NO     | SNFNAME  | Chicago      |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "SNF" organization tab on organization dashboard
     Then I search with "<SNF_Name> - <Has_MO>" on organization in search box
     And I verify "<SNF_Name> - <Has_MO>" field in search list on organization page
@@ -63,22 +90,11 @@ Feature: Search SNF organization functionality tests
       | Search SNF Organization after editing the SNF name - Without MO | NO     | SNFNAME  | SNFNAME         | SNF Organization Successfully Updated. |
 
   Scenario Outline: <Description>
-    When I click on "SNF" organization tab on organization dashboard
-    When I search with "<SNF_Name> - <Has_MO>" on organization in search box
-    And I click "<SNF_Name> - <Has_MO>" field in search list on organization page
-    And I verify "Location" tab present under "SNF" Organization
-    And I click on "Location" tab on view profile of "SNF" Organization
-    Then I search "<SearchParam>" and verify with search list options on Location in "<SNF_Name> - <Has_MO>" profile page
-
-    Examples: 
-      | Description                                    | Has_MO | SNF_Name | SearchParam     |
-      | Searching Location Name on SNF Profile Page    | YES    | SNFNAME  | Loc_Name        |
-      | Searching Location Address on SNF Profile Page | YES    | SNFNAME  | Loc_Address1    |
-      | Searching Location Type on SNF Profile Page    | NO     | SNFNAME  | Skilled Nursing |
-      | Searching Location Region on SNF Profile Page  | NO     | SNFNAME  | Midwest         |
-      | Searching Location Market on SNF Profile Page  | NO     | SNFNAME  | Chicago         |
-
-  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "SNF" organization tab on organization dashboard
     When I search with "<SNF_Name> - <Has_MO>" on organization in search box
     And I click "<SNF_Name> - <Has_MO>" field in search list on organization page
@@ -92,6 +108,11 @@ Feature: Search SNF organization functionality tests
       | Search SNF Organization with Location Name in SNF view profile page  - With MO | YES    | SNFNAME  | NoMatches |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "SNF" organization tab on organization dashboard
     Then I search with "<SNF_Name>" on organization in search box
     Then I verify the "No matches" message for invalid search in Organization

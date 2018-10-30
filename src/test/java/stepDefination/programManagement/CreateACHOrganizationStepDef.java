@@ -120,4 +120,14 @@ public class CreateACHOrganizationStepDef extends DriverScript {
 	  public void i_Verify_Duplicate_Location_Message(String text) throws Throwable {
 		 createACH.iVerifyDuplicateLocationMessage(text);
 	    }
+	 
+	 @And("^I search and verify \"([^\"]*)\" managing organization name in \"([^\"]*)\" Has a Management Organization drop down box$")
+	  public void i_Searchandverify_ManagingOrg_Name_In_Has_A_Managing_Organization_DropDown(String mo, String text) throws Throwable {
+		 createACH.iSearhandverifyManagingOrgNameInHasAManagingOrganizationDropDown(mo, text);
+	 }
+	 
+	 @And("^I verify the radio buttons should get highlighted as red on create Organization Page$")
+	  public void i_Verify_The_RadioButtons_Should_Get_Highlighted_AsRed_on_Create_Organization_Page() throws Throwable {
+		 createACH.iVerifyTheRadioButtonsShouldGetHighlightedAsRedonCreateOrganizationpage();
+	 }
 }

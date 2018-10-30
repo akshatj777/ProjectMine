@@ -1,12 +1,5 @@
 Feature: Search Physician Roster functionality tests
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -50,14 +43,14 @@ Feature: Search Physician Roster functionality tests
       | Create Payor |               | PAYORNAME | EIN    | ContactPersonTest | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | payor |
 
   Scenario Outline: <desc>
-    And build json for Program with attribution rules "<prgName>" and "<payorOrgId>" and "cId" and "" and "0" and "programID"
+    And build json for Program with attribution rules "<prgName>" and "<payorOrgId>" and "<AttributionRankID>" and "<AttributionRankValue>" and "<noOfAttributionRulesForThisPrg>" and "<ValidationRankID>" and "<ValidationRankValue>" and "<noOfValidationRulesForThisPrg>" and "<multipleBundleEpisode>"
     When create program with this data
     Then verification of Actual vs expected results <expPrgStatusCode> and "<responseMsg>"
     When Get by id <id> and <type>
 
     Examples: 
-      | desc                           | id | programID | prgName     | payorOrgId | expPrgStatusCode | responseMsg | name      | address1 | address2 | city | state | zip   | participantId | tinEin | contactName | contactEmail       | contactPhone | expDelCode | type    |
-      | Create Program using API calls |  0 |           | PROGRAMNAME |            |              201 |             | PAYORNAME | Address1 | Address2 | City | CA    | 10000 |               | EIN    | ContactName | Sample@yopmail.com | 856-890-7890 |        204 | program |
+      | desc               | id | prgName     | payorOrgId | AttributionRankID | AttributionRankValue | noOfAttributionRulesForThisPrg | ValidationRankID | ValidationRankValue | noOfValidationRulesForThisPrg | expPrgStatusCode | multipleBundleEpisode | responseMsg | name        | expDelCode | type    |
+      | CreateValidProgram |  0 | PROGRAMNAME |            |                 2 |                    1 |                              1 |                3 |                   2 |                             1 |              201 | false                 |             | PayorPrgOne |        204 | program |
 
   Scenario Outline: Create Bundle using API calls
     Given create Bundle Json to String and pass it to body with "<name>" and "<content>" and "<bundleCode>"
@@ -69,41 +62,18 @@ Feature: Search Physician Roster functionality tests
       | desc        | bundleCode | name    | content                | expStatusCode | responseMsg |
       | validBundle | BC         | bundle- | create-bundle-content1 |           201 |             |
 
-  Scenario Outline: <Description>
-    When I click on "Payor" organization tab on organization dashboard
-    When I search with "<Payor_Name>" on organization in search box
-    And I click "<Payor_Name>" field in search list on organization page
-    And I verify "<Payor_Name>" name on the header of view profile
-    And I verify "Contracts" tab present under "Payor" Organization
-    And I click on "Contracts" tab on view profile of "Payor" Organization
-    And I verify the "Create New Contract" button on view profile of "Payor" Organization
-    Then I click on "Create New Contract" button on "create" organization page
-    And I verify "Create Contract" header text on create organization page
-    And I select "<Program_Name>" Program name in create Contract page under "Payor" Organization
-    And I select Organization type "<Organization_Type>" for Contract "1" on "create" Contracts page
-    And I select Organization name "<Organization_Name> - <Has_MO>" for Contract "1" on "create" Contracts page
-    And I select "1" Bundle "<Bundle_1>" for Contract "1" on "create" Contracts page
-    And I enter "<Price>" in "price" field for "Bundle1 Price1" on create Contract page
-    Then I enter date "<ContractStartDate>" in "ContractStartDate" field for index "0"
-    Then I enter date "<ContractEndDate>" in "ContractEndDate" field for index "1"
-    Then I enter date "<BundleStartDate>" in "BundleStartDate" field for index "2"
-    Then I enter date "<BundleEndDate>" in "BundleEndDate" field for index "3"
-    Then I enter date "<PriceStartDate>" in "PriceStartDate" field for index "4"
-    Then I enter date "<PriceEndDate>" in "Baseline Date" field for index "5"
-    Then I enter date "<BaselineStartDate>" in "BaselineStartDate" field for index "6"
-    Then I enter date "<BaselineEndDate>" in "BaselineEndDate" field for index "7"
-    And I enter "<Trend_Factor>" in "trendFactor" field for "Bundle1 Price1" on create Contract page
-    And I enter "<Upper_Bound>" in "upperBound" field for "Bundle1 Price1" on create Contract page
-    And I enter "<Lower_Bound>" in "lowerBound" field for "Bundle1 Price1" on create Contract page
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "Create Contracts" on Payor organization page
+  Scenario Outline: <desc>
+    Given build Json for Contract "<contractId>" and "<endDate>" and "<organizationId>" and "<programId>" and "<startDate>" and "<participatingBundleId>" and "<price>" and "<bundleStartDate>" and "<bundleEndDate>" and "<type>" and "<orgType>" and "<priceStartDate>" and "<priceEndDate>" and "<baseLineEndDate>" and "<baseLineStatDate>" and "<trendFactor>" and "<upperBound>" and "<lowerBound>"
+    When create contract with this data
+    Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
 
     Examples: 
-      | Description                                                            | Has_MO | Payor_Name | ContractStartDate | ContractEndDate | BundleStartDate | BundleEndDate | PriceStartDate | PriceEndDate | BaselineStartDate | BaselineEndDate | Program_Name | Organization_Type | Organization_Name | Contract_Id | Bundle_1     | Price | Trend_Factor | Upper_Bound | Lower_Bound | Message                       |
-      | Create Contracts with all available fields using Hospital Organization | NO     | PAYORNAME  | 2017/01/09        | 2019/12/19      | 2017/05/01      | 2019/07/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | CID         | FETCHFROMAPI |    96 |          121 |         135 |         106 | Contract Successfully Created |
-      | Create Contracts with all available fields using Hospital Organization | YES    | PAYORNAME  | 2017/01/15        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | ACH               | ACHNAME           | CID         | FETCHFROMAPI |   103 |           91 |         135 |         106 | Contract Successfully Created |
-      | Create Contracts with all available fields using PGP Organization      | NO     | PAYORNAME  | 2017/01/16        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | PGP               | PGPNAME           | CID         | FETCHFROMAPI |   113 |          121 |         135 |         106 | Contract Successfully Created |
-      | Create Contracts with all available fields using PGP Organization      | YES    | PAYORNAME  | 2017/01/01        | 2019/12/31      | 2019/01/01      | 2019/06/30    | 2019/03/03     | 2019/05/26   | 2019/03/09        | 2019/05/12      | PROGRAMNAME  | PGP               | PGPNAME           | CID         | FETCHFROMAPI |    56 |          121 |         135 |         106 | Contract Successfully Created |
+      | desc                                                    | id | type          | orgType      | contractId | endDate      | organizationId | programId | startDate    | participatingBundleId | bundleStartDate | bundleEndDate | priceStartDate | priceEndDate | price | baseLineEndDate | baseLineStatDate | trendFactor | upperBound | lowerBound | expStatusCode | responseMsg |
+      | Create Contract with Hopsital has MO using API Calls    |  0 | bundlePayment | hospital     | []         | [2020-12-31] |                |           | [2018-01-15] |                       | [2018-05-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract with Hopsital has no MO using API Calls |  0 | bundlePayment | hospitalNOMO | []         | [2020-12-26] |                |           | [2018-01-09] |                       | [2019-01-01]    | [2019-07-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract with PGP using API Calls                |  0 | bundlePayment | pgp          | []         | [2020-12-25] |                |           | [2018-01-01] |                       | [2019-01-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract with PGP has no MO using API Calls      |  0 | bundlePayment | pgpNOMO      | []         | [2020-12-26] |                |           | [2018-01-16] |                       | [2019-01-01]    | [2019-06-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
 
   Scenario Outline: : <Description>
     When create provider taxonomy classification grouping sepecialization Json "classificationForPhysRoster"
@@ -126,64 +96,26 @@ Feature: Search Physician Roster functionality tests
     Examples: 
       | Description           | firstName | lastName     | npi | gender | enumerationDate | prefix | suffix | npiDeactivationDate | npiDeactivationReasonCode | otherFirstName | otherLastName | otherPrefix | otherSuffix | primaryTaxonomyId    | secondaryTaxonomyId | noOfLicenses | licenseNumber | licenseNumberStateCode | address1 | address2 | city | state | zip | expStatusCode | responseMsg | classificationId | groupingId | specializationId | providerTaxonCode |
       | validPractionerCreate | firstName | testLastName | PC  | f      | 2018-01-01      | ap     | test   | 2018-01-01          | dd                        | otherFirstName | otherLastName | ff          | ff          | generatePrimaryTaxId |                   1 |            2 |           2,5 | NY,NY                  | addr1    | addr2    | city | ny    | zip |           201 |             |                0 |          0 |                0 | CPT               |
+      | validPractionerCreate | firstName | testLastName | PC  | f      | 2018-01-01      | ap     | test   | 2018-01-01          | dd                        | otherFirstName | otherLastName | ff          | ff          | generatePrimaryTaxId |                   1 |            2 |           2,5 | NY,NY                  | addr1    | addr2    | city | ny    | zip |           201 |             |                0 |          0 |                0 | CPT               |
 
-  Scenario Outline: <Description>
-    When I click on "PGP" organization tab on organization dashboard
-    When I search with "<PGP_Name> - <Has_MO>" on organization in search box
-    And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
-    And I verify "<PGP_Name> - <Has_MO>" name on the header of view profile
-    And I verify "Bundled Payment Contracts" as default tab selected on view profile of "PGP" Organization
-    And I verify "Network Contracts" tab present under "PGP" Organization
-    And I verify "Physicians" tab present under "PGP" Organization
-    And I click on "Physicians" tab on view profile of "PGP" Organization
-    And I verify the "Add Physician" button on view profile of "PGP" Organization
-    Then I click on "Add Physician" button on "create" organization page
-    And I verify "Add Physician" header text on create organization page
-    And I verify the "<PGP_Organization_Name> - <Has_MO>" on "Create" Physician Roster page
-    And I verify "Program" dropdown is appearing on "Create" Physician Roster page
-    Then I select "<Program_Name>" Program name from program dropdown on "Create" Physician Roster page
-    And I select "1" Physician "<Physician>" on "Create" Physician Roster page
-    And I verify "Add Physician" button on "Create" Physician Roster page
-    And I click on "Add Physician" button on "Create" Physician Roster page
-    Then I enter date "<PhysicianStartDate>" in "PhysicianStartDate" field for index "0"
-    Then I enter date "<PhysicianEndDate>" in "PhysicianEndDate" field for index "1"
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "Create Contracts" on Payor organization page
+  Scenario Outline: <desc>
+    Given create physician roster Json "<practitionerContractId>" and "<practionerId>" and "<startDate>" and "<endDate>" and "<noOfRosters>"
+    When Add a physician "<index>" to a roster
+    Then verification of Actual vs expected results <expPostCode> and "<respMsg>"
 
     Examples: 
-      | Description                                                        | Has_MO | PGP_Name | Program_Name | PGP_Organization_Name | Physician    | PhysicianStartDate | PhysicianEndDate | Message                         |
-      | Add Physician with all the available fields under PGP Organization | NO     | PGPNAME  | PROGRAMNAME  | PGPNAME               | FETCHFROMAPI | 2017/01/30         | 2017/06/30       | Physicians Successfully Updated |
-      | Add Physician with all the available fields under PGP Organization | YES    | PGPNAME  | PROGRAMNAME  | PGPNAME               | FETCHFROMAPI | 2017/07/01         | 2017/12/01       | Physicians Successfully Updated |
+      | desc                                            | noOfRosters | index | practitionerContractId | practionerId         | startDate  | endDate    | expPostCode | respMsg |
+      | createAPhysicianRoster under Hospital has MO    |           1 |     0 | null                   | addPhysicianToRoster | 2019-01-01 | 2020-01-06 |         200 |         |
+      | createAPhysicianRoster under Hospital has no MO |           1 |     1 | null                   | addPhysicianToRoster | 2019-01-30 | 2020-02-06 |         200 |         |
+      | createAPhysicianRoster under PGP has MO         |           1 |     2 | null                   | addPhysicianToRoster | 2019-07-01 | 2020-12-01 |         200 |         |
+      | createAPhysicianRoster under PGP has no MO      |           1 |     3 | null                   | addPhysicianToRoster | 2019-01-30 | 2020-06-30 |         200 |         |
 
   Scenario Outline: <Description>
-    When I click on "Hospital" organization tab on organization dashboard
-    When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
-    And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
-    And I verify "<Hosp_Name> - <Has_MO>" name on the header of view profile
-    And I verify "Location" as default tab selected on view profile of "Hospital" Organization
-    And I verify "Bundled Payment Contracts" tab present under "Hospital" Organization
-    And I verify "Physicians" tab present under "Hospital" Organization
-    And I click on "Physicians" tab on view profile of "Hospital" Organization
-    And I verify the "Add Physician" button on view profile of "Hospital" Organization
-    Then I click on "Add Physician" button on "create" organization page
-    And I verify "Add Physician" header text on create organization page
-    And I verify the "<Hospital_Organization_Name> - <Has_MO>" on "Create" Physician Roster page
-    And I verify "Program" dropdown is appearing on "Create" Physician Roster page
-    Then I select "<Program_Name>" Program name from program dropdown on "Create" Physician Roster page
-    And I select "1" Physician "<Physician>" on "Create" Physician Roster page
-    And I verify "Add Physician" button on "Create" Physician Roster page
-    And I click on "Add Physician" button on "Create" Physician Roster page
-    Then I enter date "<PhysicianStartDate>" in "PhysicianStartDate" field for index "0"
-    Then I enter date "<PhysicianEndDate>" in "PhysicianEndDate" field for index "1"
-    Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "Create Contracts" on Payor organization page
-
-    Examples: 
-      | Description                                                             | Has_MO | Hosp_Name | Program_Name | Hospital_Organization_Name | Physician    | PhysicianStartDate | PhysicianEndDate | Message                         |
-      | Add Physician with all the available fields under Hospital Organization | NO     | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI | 2017/01/30         | 2017/12/01       | Physicians Successfully Updated |
-      | Add Physician with all the available fields under Hospital Organization | YES    | ACHNAME   | PROGRAMNAME  | ACHNAME                    | FETCHFROMAPI | 2018/01/01         | 2018/12/01       | Physicians Successfully Updated |
-
-  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     When I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -196,13 +128,18 @@ Feature: Search Physician Roster functionality tests
 
     Examples: 
       | Description                          | Has_MO | PGP_Name | SearchParam  |
-      | Search for a Physician by NPI        | NO     | PGPNAME  | FETCHFROMAPI |
-      | Search for a Physician by First Name | NO     | PGPNAME  | firstName    |
-      | Search for a Physician by Last Name  | NO     | PGPNAME  | testLastName |
-      | Search for a Physician by Start Date | NO     | PGPNAME  | 2017-01-30   |
-      | Search for a Physician by End Date   | NO     | PGPNAME  | 2017-06-30   |
+      | Search for a Physician by NPI        | YES    | PGPNAME  | FETCHFROMAPI |
+      | Search for a Physician by First Name | YES    | PGPNAME  | firstName    |
+      | Search for a Physician by Last Name  | YES    | PGPNAME  | testLastName |
+      | Search for a Physician by Start Date | YES    | PGPNAME  | 2019-07-01   |
+      | Search for a Physician by End Date   | YES    | PGPNAME  | 2020-12-01   |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     When I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -219,6 +156,11 @@ Feature: Search Physician Roster functionality tests
       | Search for a Physician by invalid details | NO     | PGPNAME  | Invalidsearch    |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -234,10 +176,15 @@ Feature: Search Physician Roster functionality tests
       | Search for a Physician by NPI        | NO     | ACHNAME   | FETCHFROMAPI |
       | Search for a Physician by First Name | NO     | ACHNAME   | firstName    |
       | Search for a Physician by Last Name  | NO     | ACHNAME   | testLastName |
-      | Search for a Physician by Start Date | NO     | ACHNAME   | 2017-01-30   |
-      | Search for a Physician by End Date   | NO     | ACHNAME   | 2017-12-01   |
+      | Search for a Physician by Start Date | NO     | ACHNAME   | 2019-01-30   |
+      | Search for a Physician by End Date   | NO     | ACHNAME   | 2020-02-06   |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -257,5 +204,5 @@ Feature: Search Physician Roster functionality tests
     When delete references of the name list type "<type>"
 
     Examples: 
-      | type                                                  |
-      | MO, Hospital, PGP, Payor, Program, Bundle, Practioner |
+      | type                                                    |
+      | MO, Hospital, PGP, Payor, Program, Bundle, practitioner |

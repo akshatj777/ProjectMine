@@ -3,7 +3,6 @@ package com.remedy.programManagement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 
@@ -23,6 +22,7 @@ public class CreateACHOrganizationAPI extends BaseClass{
 	public static HashMap<String, String> tempAchOrg = new HashMap<String, String>();
 	public static Long oldACH_WithMO = null;
 	public static Long oldACH_WithoutMO = null;
+	public static List<Long> LocIDList = new ArrayList<>();
 
 	public CreateACHOrganizationAPI(WebDriver driver) {
 		super(driver);

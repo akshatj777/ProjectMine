@@ -1,6 +1,7 @@
 package com.remedy.programManagement;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
@@ -14,6 +15,7 @@ import com.remedy.baseClass.BaseClass;
 public class ViewACHOrganization  extends BaseClass{
 
 	public static String orgCount;
+	List<String> LocIndexIdList= new ArrayList<>();
 	
 	public ViewACHOrganization(WebDriver driver) {
 		super(driver);
@@ -49,6 +51,7 @@ public class ViewACHOrganization  extends BaseClass{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ccn"))); 
 				Assert.assertEquals("CCN: "+CreateSNFOrganizationAPI.CCNNameList.get(1).substring(1, CreateSNFOrganizationAPI.CCNNameList.get(1).length()-1),actual.replace("|", ""));
 			}
+		}
 		else if (org.contains("HHA"))
 		{
 			if (text.contains("YES"))
@@ -62,10 +65,49 @@ public class ViewACHOrganization  extends BaseClass{
 				Assert.assertEquals("CCN: "+CreateHHAOrganizationAPI.CCNNameList.get(1).substring(1, CreateHHAOrganizationAPI.CCNNameList.get(1).length()-1),actual.replace("|", ""));
 			}
 		}
-		else{
+		else if (org.contains("Hospice"))
+		{
+			if (text.contains("YES"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ccn"))); 
+				Assert.assertEquals("CCN: "+CreateHospiceOrganizationAPI.CCNNameList.get(0).substring(1, CreateHospiceOrganizationAPI.CCNNameList.get(0).length()-1),actual.replace("|", ""));
+			}
+			else if (text.contains("NO"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ccn"))); 
+				Assert.assertEquals("CCN: "+CreateHospiceOrganizationAPI.CCNNameList.get(1).substring(1, CreateHospiceOrganizationAPI.CCNNameList.get(1).length()-1),actual.replace("|", ""));
+			}
+		}
+		else if (org.contains("LTCH"))
+		{
+			if (text.contains("YES"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ccn"))); 
+				Assert.assertEquals("CCN: "+CreateLTCHOrganizationAPI.CCNNameList.get(0).substring(1, CreateLTCHOrganizationAPI.CCNNameList.get(0).length()-1),actual.replace("|", ""));
+			}
+			else if (text.contains("NO"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ccn"))); 
+				Assert.assertEquals("CCN: "+CreateLTCHOrganizationAPI.CCNNameList.get(1).substring(1, CreateLTCHOrganizationAPI.CCNNameList.get(1).length()-1),actual.replace("|", ""));
+			}
+		}
+		else if (org.contains("IRF"))
+		{
+			if (text.contains("YES"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ccn"))); 
+				Assert.assertEquals("CCN: "+CreateIRFOrganizationAPI.CCNNameList.get(0).substring(1, CreateIRFOrganizationAPI.CCNNameList.get(0).length()-1),actual.replace("|", ""));
+			}
+			else if (text.contains("NO"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ccn"))); 
+				Assert.assertEquals("CCN: "+CreateIRFOrganizationAPI.CCNNameList.get(1).substring(1, CreateIRFOrganizationAPI.CCNNameList.get(1).length()-1),actual.replace("|", ""));
+			}
+		}
+		else
+		{
 			String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ccn"))); 
 		    Assert.assertEquals("CCN: "+text,actual.replace("|", ""));
-			}
 		}
 	}
 	
@@ -128,6 +170,51 @@ public class ViewACHOrganization  extends BaseClass{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
 				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
 				Assert.assertEquals(CreateHHAOrganizationAPI.EINNameList.get(1).substring(1, CreateHHAOrganizationAPI.EINNameList.get(1).length()-1),actual);
+			}
+		}
+		else if (org.contains("LTCH"))
+		{
+			if (text.contains("YES"))
+			{	
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateLTCHOrganizationAPI.EINNameList.get(0).substring(1, CreateLTCHOrganizationAPI.EINNameList.get(0).length()-1),actual);
+			}
+			else if (text.contains("NO"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateLTCHOrganizationAPI.EINNameList.get(1).substring(1, CreateLTCHOrganizationAPI.EINNameList.get(1).length()-1),actual);
+			}
+		}
+		else if (org.contains("IRF"))
+		{
+			if (text.contains("YES"))
+			{	
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateIRFOrganizationAPI.EINNameList.get(0).substring(1, CreateIRFOrganizationAPI.EINNameList.get(0).length()-1),actual);
+			}
+			else if (text.contains("NO"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateIRFOrganizationAPI.EINNameList.get(1).substring(1, CreateIRFOrganizationAPI.EINNameList.get(1).length()-1),actual);
+			}
+		}
+		else if (org.contains("Hospice"))
+		{
+			if (text.contains("YES"))
+			{	
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateHospiceOrganizationAPI.EINNameList.get(0).substring(1, CreateHospiceOrganizationAPI.EINNameList.get(0).length()-1),actual);
+			}
+			else if (text.contains("NO"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateHospiceOrganizationAPI.EINNameList.get(1).substring(1, CreateHospiceOrganizationAPI.EINNameList.get(1).length()-1),actual);
 			}
 		}
 		else 
@@ -217,6 +304,52 @@ public class ViewACHOrganization  extends BaseClass{
 				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
 				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
 				Assert.assertEquals(CreateHHAOrganizationAPI.NPINameList.get(1).substring(1, CreateHHAOrganizationAPI.NPINameList.get(1).length()-1),actual);	
+			}
+		}
+		else if(org.contains("LTCH"))
+		{
+			if(text.contains("YES"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateLTCHOrganizationAPI.NPINameList.get(0).substring(1, CreateLTCHOrganizationAPI.NPINameList.get(0).length()-1),actual);
+			}
+			else if(text.contains("NO"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateLTCHOrganizationAPI.NPINameList.get(1).substring(1, CreateLTCHOrganizationAPI.NPINameList.get(1).length()-1),actual);	
+			}
+		}
+
+		else if(org.contains("IRF"))
+		{
+			if(text.contains("YES"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateIRFOrganizationAPI.NPINameList.get(0).substring(1, CreateIRFOrganizationAPI.NPINameList.get(0).length()-1),actual);
+			}
+			else if(text.contains("NO"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateIRFOrganizationAPI.NPINameList.get(1).substring(1, CreateIRFOrganizationAPI.NPINameList.get(1).length()-1),actual);	
+			}
+		}
+		else if(org.contains("Hospice"))
+		{
+			if(text.contains("YES"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateHospiceOrganizationAPI.NPINameList.get(0).substring(1, CreateHospiceOrganizationAPI.NPINameList.get(0).length()-1),actual);
+			}
+			else if(text.contains("NO"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateHospiceOrganizationAPI.NPINameList.get(1).substring(1, CreateHospiceOrganizationAPI.NPINameList.get(1).length()-1),actual);	
 			}
 		}
 		else
@@ -359,6 +492,32 @@ public class ViewACHOrganization  extends BaseClass{
 				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateHHAOrganization.HHAOrg.get("CCN")+"']")));
 			}
 		}
+		else if(org.contains("IRF"))
+		{
+			if(name.contains("IRFNAME"))
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg.get("IRFNAME")+"']"));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg.get("IRFNAME")+"']")));
+			}
+			else if(name.contains("CCN"))
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg.get("CCN")+"']"));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg.get("CCN")+"']")));
+			}
+		}
+		else if(org.contains("Hospice"))
+		{
+			if(name.contains("HOSPICENAME"))
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateHospiceOrganization.HospiceOrg.get("HOSPICENAME")+"']"));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateHospiceOrganization.HospiceOrg.get("HOSPICENAME")+"']")));
+			}
+			else if(name.contains("CCN"))
+			{
+				iWillWaitToSee(By.xpath("//div[text()='"+CreateHospiceOrganization.HospiceOrg.get("CCN")+"']"));
+				Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+CreateHospiceOrganization.HospiceOrg.get("CCN")+"']")));
+			}
+		}
 		else
 		{
 			iWillWaitToSee(By.xpath("//div[text()='"+name+"']"));
@@ -418,6 +577,95 @@ public class ViewACHOrganization  extends BaseClass{
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHHAOrganization.HHAOrg_noMO.get("HHANAME"));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(text.contains("IRFNAME - YES"))
+		{
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateIRFOrganization.IRFOrg.get("IRFNAME"));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(text.contains("IRFNAME - NO"))
+		{
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateIRFOrganization.IRFOrg_noMO.get("IRFNAME"));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(text.contains("HOSPICENAME - YES"))
+		{
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHospiceOrganization.HospiceOrg.get("HOSPICENAME"));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(text.contains("HOSPICENAME - NO"))
+		{
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHospiceOrganization.HospiceOrg_noMO.get("HOSPICENAME"));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+	}
+	
+	public void iClickOnOrgNameonViewProfileOfManagingOrganizationSearchBox(String text){
+		if(text.contains("ACHNAME - YES"))
+		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//div[text()='"+CreateACHOrganization.achOrg.get("ACHNAME")+"']")));
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateACHOrganization.achOrg.get("ACHNAME")+"']"));
+			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateACHOrganization.achOrg.get("ACHNAME")+"']")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(text.contains("ACHNAME - NO"))
+		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//div[text()='"+CreateACHOrganization.achOrg.get("ACHNAME")+"']")));
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateACHOrganization.achOrg_noMO.get("ACHNAME")+"']"));
+			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateACHOrganization.achOrg_noMO.get("ACHNAME")+"']")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+	}
+	
+	public void iVerifyLocationDetailsonVeiwProfileOfSelectedOrganization(String text, String org){
+		//verifyTextForElement(driver.findElement(By.xpath("//div[contains(text(),'"+text+"')]")), text);
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[contains(text(),'"+text+"')]")));
+	}
+	
+	public void iVerifyLocationIndexIdonVeiwProfileOfSelectedOrganization(String LId, String org) throws ClassNotFoundException, SQLException{
+		if(org.contains("ACHNAME - YES")){
+			String query = "select id from program_management.location where organization_id = (select id from program_management.organization where name='"+CreateACHOrganizationAPI.ACHNameList.get(0).substring(1, CreateACHOrganizationAPI.ACHNameList.get(0).length()-1)+"')and address_type_id=2";
+			LocIndexIdList=fetchLocationIndexID(query);
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+LocIndexIdList.get(0)+"']")));
+		}
+		else if(org.contains("ACHNAME - NO")){
+			String query = "select id from program_management.location where organization_id = (select id from program_management.organization where name='"+CreateACHOrganizationAPI.ACHNameList.get(1).substring(1, CreateACHOrganizationAPI.ACHNameList.get(1).length()-1)+"')and address_type_id=2";
+			LocIndexIdList=fetchLocationIndexID(query);
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+LocIndexIdList.get(0)+"']")));
+		}
+		if(org.contains("SNFNAME - YES")){
+			String query = "select id from program_management.location where organization_id = (select id from program_management.organization where name='"+CreateSNFOrganizationAPI.SNFNameList.get(0).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(0).length()-1)+"')and address_type_id=2";
+			LocIndexIdList=fetchLocationIndexID(query);
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+LocIndexIdList.get(0)+"']")));
+		}
+		else if(org.contains("SNFNAME - NO")){
+			String query = "select id from program_management.location where organization_id = (select id from program_management.organization where name='"+CreateSNFOrganizationAPI.SNFNameList.get(1).substring(1, CreateSNFOrganizationAPI.SNFNameList.get(1).length()-1)+"')and address_type_id=2";
+			LocIndexIdList=fetchLocationIndexID(query);
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+LocIndexIdList.get(0)+"']")));
+		}
+		if(org.contains("LTCHNAME - YES")){
+			String query = "select id from program_management.location where organization_id = (select id from program_management.organization where name='"+CreateLTCHOrganizationAPI.LTCHNameList.get(0).substring(1, CreateLTCHOrganizationAPI.LTCHNameList.get(0).length()-1)+"')and address_type_id=2";
+			LocIndexIdList=fetchLocationIndexID(query);
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+LocIndexIdList.get(0)+"']")));
+		}
+		else if(org.contains("LTCHNAME - NO")){
+			String query = "select id from program_management.location where organization_id = (select id from program_management.organization where name='"+CreateLTCHOrganizationAPI.LTCHNameList.get(1).substring(1, CreateLTCHOrganizationAPI.LTCHNameList.get(1).length()-1)+"')and address_type_id=2";
+			LocIndexIdList=fetchLocationIndexID(query);
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+LocIndexIdList.get(0)+"']")));
+		}
+		if(org.contains("IRFNAME - YES")){
+			String query = "select id from program_management.location where organization_id = (select id from program_management.organization where name='"+CreateIRFOrganizationAPI.IRFNameList.get(0).substring(1, CreateIRFOrganizationAPI.IRFNameList.get(0).length()-1)+"')and address_type_id=2";
+			LocIndexIdList=fetchLocationIndexID(query);
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+LocIndexIdList.get(0)+"']")));
+		}
+		else if(org.contains("IRFNAME - NO")){
+			String query = "select id from program_management.location where organization_id = (select id from program_management.organization where name='"+CreateIRFOrganizationAPI.IRFNameList.get(1).substring(1, CreateIRFOrganizationAPI.IRFNameList.get(1).length()-1)+"')and address_type_id=2";
+			LocIndexIdList=fetchLocationIndexID(query);
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+LocIndexIdList.get(0)+"']")));
 		}
 	}
 }

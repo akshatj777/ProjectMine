@@ -76,20 +76,20 @@ public class LoginPage extends BaseClass {
 
 	public void iVerifyResetPasswordText(String text) {
 
-		iWillWaitToSee(By.xpath("//div[@class='sso-reset-password-text-container']/p[contains(text(),'"+text+"')]"));
-		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='sso-reset-password-text-container']/p[contains(text(),'"+text+"')]")));
+		iWillWaitToSee(By.xpath("//div[text()=\"We've just sent you an email to reset your password.\"]"));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()=\"We've just sent you an email to reset your password.\"]")));
 	}
 
 	public void iClickOkayButtonForResetPasswordPopupFromAccountLink() {
-		iWillWaitToSee(By.cssSelector(".btn.btn-primary.hide-sso-messages"));
+		iWillWaitToSee(By.xpath("//button[text()='Okay']"));
 
-		WebElement element = driver.findElement(By.cssSelector(".btn.btn-primary.hide-sso-messages"));
+		WebElement element = driver.findElement(By.xpath("//button[text()='Okay']"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
 		delay();
 	}
 
 	public void iEnteruserEmail(String userName) {
-
+if(!(userName.isEmpty())){
 		if(userName.equals("Remedy Technical Administrator"))
 		{
 			iWillWaitToSee(By.name("email"));
@@ -117,12 +117,13 @@ public class LoginPage extends BaseClass {
 			     }
 		}
 	}
-
+	}
 	public void iEnterPassword(String passWord) {
 		try{
+		if(!(passWord.isEmpty())){
 			iWillWaitToSee(By.name("password"));
 			iFillInText(driver.findElement(By.name("password")), passWord);
-		}catch(Exception e){
+		}}catch(Exception e){
 	    	 ProgramPerformance.writer.print(System.lineSeparator());
 	    		String flag="1";
 	    		Assert.assertEquals("2", flag);
@@ -153,9 +154,11 @@ public class LoginPage extends BaseClass {
 	}
 
 	public void iVerifyLogInWidget() {
-		iWillWaitToSee(By.cssSelector(".auth0-lock-content"));
-		isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-content")));
-
+		if((isElementNotPresentOnPage(By.xpath("//div[@class='auth0-lock-body-content']"))))
+		{
+			driver.navigate().refresh();
+			iWillWaitToSee(By.xpath("//div[@class='auth0-lock-body-content']"));
+		}
 	}
 	
 	public void iLogInAsRTAUser(String userName, String passWord){
@@ -175,7 +178,7 @@ public class LoginPage extends BaseClass {
 	}
 	
 	public void iShouldVerifyWatermarkTextAppearingUnderEmailTextboxField(){
-		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//input[@placeholder='name@domain.com']"))));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//input[@placeholder='yours@example.com']"))));
 	}
 	
 	public void iShouldSeePasswordTextboxField(){
@@ -195,7 +198,12 @@ public class LoginPage extends BaseClass {
 	}
 	
 	public void iVerifyTheValidationMessage(String text){
+		if(text.equals("Can't be blank"))
 		verifyTextForElement(driver.findElement(By.cssSelector(".auth0-lock-error-msg>span")), text);
+		else if (text.equals("Remedy Connect"))
+			isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+text+"')]")));
+		else if(text.equals("WRONG EMAIL OR PASSWORD"))
+			verifyTextForElement(driver.findElement(By.xpath("//span[@class='animated fadeInUp']")), text);
 	}
 	
 	public void IRefreshThePage(){
@@ -209,3 +217,4 @@ public class LoginPage extends BaseClass {
 		verifyTextForElement(driver.findElement(By.xpath("//span[@class='animated fadeInUp']")), text);
 	}
 }
+

@@ -19,6 +19,16 @@ public class MailCreateUserSteps extends DriverScript {
 		mailcreateuser.iEnterUserNameToLoginMailAccount(username);
 	}
 	
+	@Then("^I enter username \"([^\"]*)\" to login mail account for bulk delete$") 
+	public void i_Enter_UserName_To_LoginMailForBulkDelete(String username) throws Throwable {
+		mailcreateuser.iEnterUserNameToLoginMailAccountForBulkDelete(username);
+	}
+	
+	@Then("^I enter username \"([^\"]*)\" to login bulk mail account$") 
+	public void i_Enter_UserName_To_LoginBulkMail(String username) throws Throwable {
+		mailcreateuser.iEnterUserNameToLoginBulkMailAccount(username);
+	}
+	
 	@Then("^I enter password \"([^\"]*)\" to login mail account$") 
 	public void i_Enter_Password_To_LoginMail(String password) throws Throwable {
 		mailcreateuser.iEnterPasswordToLoginMailAccount(password);
@@ -27,6 +37,16 @@ public class MailCreateUserSteps extends DriverScript {
 	@Then("^I click on Inbox in mail$") 
 	public void i_Click_On_Inbox_In_Mail() throws Throwable {
 		mailcreateuser.iClickOnInboxUnderMail();
+	}
+	
+	@Then("^I enter email for \"([^\"]*)\" in the search box$") 
+	public void enterEmail(String userRole) throws Throwable {
+		mailcreateuser.enterEmail(userRole);
+	}
+	
+	@Then("^I set new password for the user \"([^\"]*)\"$") 
+	public void setNewPassword(String userRole) throws Throwable {
+		mailcreateuser.setNewPassword(userRole);
 	}
 	
 	@Then("^I click on Mail icon in my account$") 
@@ -59,6 +79,11 @@ public class MailCreateUserSteps extends DriverScript {
 		mailcreateuser.iVerifyAccountVerificationMailInInboxInMyAccount();
 	}
 	
+	@Then("^I verify account for user \"([^\"]*)\"$") 
+	public void verifyAccountUA(String role) throws Throwable {
+		mailcreateuser.verifyAccountUA(role);
+	}
+	
 	@Then("^I verify accounts for all the created users$") 
 	public void verifyAccount() throws Throwable {
 		mailcreateuser.verifyAccountForAllCreatedUsers();
@@ -89,14 +114,16 @@ public class MailCreateUserSteps extends DriverScript {
 		mailcreateuser.iClickOnLinkInMailContentInInboxInMyAccount(link);
 	}
 	
-	@Then("^I enter email \"([^\"]*)\" to generate password link for bulk users$") 
-	public void i_Enter_Email_To_GeneratePassword_Link_ForBulkUsers(String bulkUserEmail) throws Throwable {
-		mailcreateuser.iEnterEmailToGeneratePasswordLinkForBulkUsers(bulkUserEmail);
-	}
+	
 	
 	@Then("^I enter email to generate password link$") 
 	public void i_Enter_Email_To_GeneratePassword_Link() throws Throwable {
 		mailcreateuser.iEnterEmailToGeneratePasswordLink();
+	}
+	
+	@Then("^I enter email \"([^\"]*)\" to generate password link for bulk users$") 
+	public void i_Enter_Email_To_GeneratePassword_Link_ForBulkUsers(String bulkUserEmail) throws Throwable {
+		mailcreateuser.iEnterEmailToGeneratePasswordLinkForBulkUsers(bulkUserEmail);
 	}
 	
 	@And("^I click on send mail button$") 
@@ -138,4 +165,8 @@ public class MailCreateUserSteps extends DriverScript {
 	public void i_Open_NewTab_And_Close_The_Last_Tab() throws Throwable {
 		mailcreateuser.iOpenNewTabAndCloseLastTab();
 }
+    @Then("^I enter Email \"([^\"]*)\" with apostrophe and underscore to Create user$") 
+    public void iEnterEmailWithApostropheAndUnderscore(String email){
+    	mailcreateuser.iEnterEmailWithApostropheAndUnderscore(email);
+    }
 }

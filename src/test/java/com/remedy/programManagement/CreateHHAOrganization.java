@@ -17,5 +17,4 @@ public class CreateHHAOrganization extends BaseClass {
 	public CreateHHAOrganization(WebDriver driver) {
 		super(driver);
 	}
-
 }

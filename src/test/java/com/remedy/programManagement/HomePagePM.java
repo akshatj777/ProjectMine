@@ -23,6 +23,12 @@ public class HomePagePM extends BaseClass {
 	 }
 
 	 public void iClickOnOrganizationalLinkOnProgramManagementPage() {
+		 if(!(isElementPresentOnPage(By.xpath("//a[text()='Organization']"))))
+		  {
+		   driver.navigate().refresh();
+		   iWillWaitToSee(By.xpath("//a[text()='Organization']"));
+		  }
+		 
 		 iWillWaitToSee(By.xpath("//a[text()='Organization']"));
 		 WebElement element = driver.findElement(By.xpath("//a[text()='Organization']"));
 		 JavascriptExecutor executor = (JavascriptExecutor)driver;

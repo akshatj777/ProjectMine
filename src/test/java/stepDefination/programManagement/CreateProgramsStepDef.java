@@ -20,9 +20,9 @@ public class CreateProgramsStepDef extends DriverScript{
 		programs.iVerifyHeaderLabelUnderSelectedOrganization(header,org);
 		}
 	
-	@And("^I select \"([^\"]*)\" Program name in create Contract page under \"([^\"]*)\" Organization$")
-	  public void i_select_Program_name_in_create_Contract_page_under_Payor_Organization(String text, String org) throws Throwable {
-		programs.iSelectProgramNameInCreateContractPageUnderPayorOrganization(text,org);
+	@And("^I select \"([^\"]*)\" Program name \"([^\"]*)\" in create Contract page under \"([^\"]*)\" Organization$")
+	  public void i_select_Program_name_in_create_Contract_page_under_Payor_Organization(int index,String text, String org) throws Throwable {
+		programs.iSelectProgramNameInCreateContractPageUnderPayorOrganization(index,text,org);
 		}
 	
 	@And("^I verify \"([^\"]*)\" on \"([^\"]*)\" page under Payor Organization$")
@@ -188,5 +188,40 @@ public class CreateProgramsStepDef extends DriverScript{
 	 @And("^I verify \"([^\"]*)\" header text on \"([^\"]*)\" page$")
 	  public void i_Verify_HeaderText_On_Create_Organization_Page(String text, String action) throws Throwable {
 		 createMO.iVerifyHeaderTextOnCreateOrganizationPage(text);
+	    }
+	 
+	 @And("^I verify auto incremented contract ID should be starts with \"([^\"]*)\"$")
+	  public void i_Verify_Auto_Incremented_CID(String text) throws Throwable {
+		 programs.iVerifyAutoIncrementedCID(text);
+	    }
+	 
+	 @And("^I verify the sub headline of \"([^\"]*)\"$")
+	  public void i_Verify_The_SubHeadline_Of_Attribution_Rules_And_ValidationRanks_On_Create_Program_Page(String text) throws Throwable {
+		programs.iVerifyTheSubHeadlineOfAttributionRulesAndValidationRanksOnCreateProgramPage(text);
+	    }
+	 
+	 @And("^I verify \"([^\"]*)\" validation ranks on \"([^\"]*)\" program page$")
+	  public void i_Verify_Validation_Rankss_On_Create_Program_Page(String text, String act) throws Throwable {
+		programs.iVerifyAttributionRulesOnCreateProgramPage(text,act);
+	    }
+	 
+	 @And("^I verify the \"([^\"]*)\" checkbox$")
+	  public void i_Verify_MultipleBundleEpisode_CheckBox(String text) throws Throwable {
+		programs.iVerifyMultipleBundleEpisodeCheckBox(text);
+	    }
+	 
+	 @And("^I click on checkbox for \"([^\"]*)\"$")
+	  public void i_Click_On_CheckBox_For_MultipleBundleEpisode(String text) throws Throwable {
+		programs.iClickOnCheckBoxForMultipleBundleEpisode(text);
+	    }
+	 
+	 @And("^I uncheck for \"([^\"]*)\" Attribution rule$")
+	  public void i_UnCheck_For_Attribution_Rules_On_Create_Programs(String text) throws Throwable {
+		programs.iUnCheckForAttributionRulesOnCreatePrograms(text);
+	    }
+	 
+	 @And("^I click on checkbox for \"([^\"]*)\" validation ranks$")
+	  public void i_Click_On_Checkboxe_For_Validation_Ranks_On_Create_Programs(String text) throws Throwable {
+		programs.iClickOnCheckboxeForAttributionRulesOnCreatePrograms(text);
 	    }
 }

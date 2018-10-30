@@ -18,7 +18,11 @@ import com.jayway.restassured.response.Response;
 import com.remedy.RestCall.InsertDataIntoDataModels;
 import com.remedy.programManagement.CreateACHOrganizationAPI;
 import com.remedy.programManagement.CreateBundleAPI;
+import com.remedy.programManagement.CreateBundlePaymentContractAPI;
 import com.remedy.programManagement.CreateHHAOrganizationAPI;
+import com.remedy.programManagement.CreateHospiceOrganizationAPI;
+import com.remedy.programManagement.CreateIRFOrganizationAPI;
+import com.remedy.programManagement.CreateLTCHOrganizationAPI;
 import com.remedy.programManagement.CreateManagingOrganization;
 import com.remedy.programManagement.CreateManagingOrganizationAPI;
 import com.remedy.programManagement.CreatePGPOrganization;
@@ -59,7 +63,6 @@ import static stepDefination.CommonSteps.actionEvent;
  * Created by salam on 7/27/15.
  */
 public class BaseClass {
-
 	public WebDriver driver = null;
 	protected static long Wait_Time = 1000L;
 	protected static long delay_Time = 2000L;
@@ -79,7 +82,7 @@ public class BaseClass {
 	}
 	public WebDriverWait waitTo()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 900);
+		WebDriverWait wait = new WebDriverWait(driver, 120);
 		return wait;
 	}
 
@@ -212,6 +215,7 @@ public class BaseClass {
 		List<WebElement> listItems = driver.findElements(By.cssSelector(element));
 		for (WebElement item : listItems) {
 			item.getText().equalsIgnoreCase(itemtext);
+			//Assert.assertEquals(item,itemtext);
 		}
 	}
 
@@ -402,6 +406,7 @@ public class BaseClass {
 		String attr = element.getAttribute(attribute);
 		Assert.assertTrue(attr.contains(contains));
 	}
+	
 	public boolean isElementPresentOnPage(By locatorKey) {
 		boolean value = true;
 		try {
@@ -539,12 +544,14 @@ public class BaseClass {
 	    String pID = row.get("1").get("participant_id");
 	    con.close();
 	    return pID;
-}
+	}
+	
     public void validateDateFormat(String format,String dateToValdate) throws ParseException {
     	SimpleDateFormat formatter = new SimpleDateFormat(format);
 	    formatter.setLenient(false);
 	    formatter.parse(dateToValdate);
-    }	
+    }
+    
 	public void scrollIntoViewByJS(WebElement element){
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 	}
@@ -573,8 +580,13 @@ public class BaseClass {
 		((JavascriptExecutor)driver).executeScript("window.scrollTo(0, -document.body.scrollHeight)");	
 	}
 	
-	public static String generateJson(Object object) {
 
+	void checkHash()
+	{
+		System.out.println("dsdss");
+	}
+
+	public static String generateJson(Object object) {
         return gson.toJson(object).toString();
     }
 	
@@ -608,16 +620,17 @@ public class BaseClass {
 		 else if (type.equals("snf")) 
 		 {
 				idList.addAll(CreateSNFOrganizationAPI.idList);
+				Long s = CreateSNFOrganizationAPI.idList.get(0);
+				CreateSNFOrganizationAPI.SNFcopyIDList.add(s);
 				CreateSNFOrganizationAPI.idList.clear();
 		 }
 		 else if (type.equals("pgp")) 
 		 {
 				idList.addAll(CreatePGPOrganizationAPI.idList);
+				Long p = CreatePGPOrganizationAPI.idList.get(0);
+				CreatePGPOrganizationAPI.PGPcopyIDList.add(p);
 				CreatePGPOrganizationAPI.idList.clear();
 		 }
-		//else if (type.equals("payor")) {
-//			idList.addAll(CreatePayorStepDef.returnIdList());
-//		}
 		else if (type.equals("payor")) {
 			idList.addAll(CreatePayorOrganizationAPI.idList);
 			CreatePayorOrganizationAPI.payorID = CreatePayorOrganizationAPI.idList.get(0);
@@ -625,21 +638,44 @@ public class BaseClass {
 		}
 		else if (type.equals("program")) {
 			idList.addAll(CreateProgramAPI.idList);
+			CreateProgramAPI.PROGRAMIDList.addAll(CreateProgramAPI.idList);
 			CreateProgramAPI.idList.clear();
 		}
 		else if (type.equals("hha")) {
 			idList.addAll(CreateHHAOrganizationAPI.idList);
+			Long h = CreateHHAOrganizationAPI.idList.get(0);
+			CreateHHAOrganizationAPI.HHAcopyIDList.add(h);
 			CreateHHAOrganizationAPI.idList.clear();
+		}
+		else if (type.equals("ltch")) {
+			idList.addAll(CreateLTCHOrganizationAPI.idList);
+			Long a = CreateLTCHOrganizationAPI.idList.get(0);
+			CreateLTCHOrganizationAPI.LTCHcopyIDList.add(a);
+			CreateLTCHOrganizationAPI.idList.clear();
+		}
+		else if (type.equals("irf")) {
+			idList.addAll(CreateIRFOrganizationAPI.idList);
+			Long a = CreateIRFOrganizationAPI.idList.get(0);
+			CreateIRFOrganizationAPI.IRFcopyIDList.add(a);
+			CreateIRFOrganizationAPI.idList.clear();
+		}
+		else if (type.equals("hospice")) {
+			idList.addAll(CreateHospiceOrganizationAPI.idList);
+			Long a = CreateHospiceOrganizationAPI.idList.get(0);
+			CreateHospiceOrganizationAPI.HospicecopyIDList.add(a);
+			CreateHospiceOrganizationAPI.idList.clear();
 		}
 		 else if (type.equals("bundle")) {
 			idList.addAll(CreateBundleAPI.idList);
+			CreateBundleAPI.bundleIDList.addAll(CreateBundleAPI.idList);
 			CreateBundleAPI.idList.clear();
-//		} else if (type.equals("program")) {
-//			idList.addAll(CreateProgramStepDef.returnIdList());
-//		} else if (type.equals("contract")) {
-//			idList.addAll(CreateContractStepDef.returnIdList());
-//		} else if (type.equals("hha")) {
-//			idList.addAll(PM705CreateHHAOrgStepDef.returnIdList());
+		 }
+		else if (type.equals("bundlePayment")) {
+			idList.addAll(CreateBundlePaymentContractAPI.idList);
+			Long b = CreateBundlePaymentContractAPI.idList.get(0);
+			CreateBundlePaymentContractAPI.BPCIDcopyList.add(b);
+			CreateBundlePaymentContractAPI.idList.clear();
+		} 
 //		} else if (type.equals("attributionrule")) {
 //			idList.addAll(PM621PostAttributionRulesStepDef.returnIdList());
 //		} else if (type.equals("classification")) {
@@ -650,8 +686,10 @@ public class BaseClass {
 //			idList.addAll(PM487CreateProviderTaxForClassGroupSpecilizationStepDef.returnSpecializationIdList());
 //		} else if (type.equals("providertaxonomy")) {
 //			idList.addAll(PM429CreateProviderTaxonomyStepDef.returnIdList());
-		} else if (type.equals("practitioner")) {
+		 else if (type.equals("practitioner")) {
 			idList.addAll(CreatePractictionerAPI.idList);
+			Long p = CreatePractictionerAPI.idList.get(0);
+			CreatePractictionerAPI.practitionerIDList.add(p);
 			CreatePractictionerAPI.idList.clear();
 		}
 		return idList;
@@ -677,6 +715,13 @@ public class BaseClass {
 			CreateACHOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
 			CreateACHOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
 			CreateACHOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
+		}
+		else if(type.equals("ltch"))
+		{
+			CreateLTCHOrganizationAPI.LTCHNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+			CreateLTCHOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
+			CreateLTCHOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
+			CreateLTCHOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
 		}
 		else if(type.equals("snf"))
 		{
@@ -707,6 +752,24 @@ public class BaseClass {
 			CreateHHAOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
 			CreateHHAOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
 		}
+		else if(type.equals("irf"))
+		{
+			CreateIRFOrganizationAPI.IRFNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+			CreateIRFOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
+			CreateIRFOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
+			CreateIRFOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
+		}
+		else if(type.equals("hospice"))
+		{
+			CreateHospiceOrganizationAPI.HospiceNameList.add((((JsonObject) jsonObject.get("data")).get("name")).toString());
+			CreateHospiceOrganizationAPI.CCNNameList.add((((JsonObject) jsonObject.get("data")).get("ccn")).toString());
+			CreateHospiceOrganizationAPI.EINNameList.add((((JsonObject) jsonObject.get("data")).get("ein")).toString());
+			CreateHospiceOrganizationAPI.NPINameList.add((((JsonObject) jsonObject.get("data")).get("npi")).toString());
+		}
+		else if(type.equals("bundlePayment"))
+		{
+			CreateBundlePaymentContractAPI.BPCCIDList.add((((JsonObject) jsonObject.get("data")).get("contractId")).toString());
+		}
 	}
 	
 	public static List<String> generateLocationId(String cLocationId, String cCCN){
@@ -727,7 +790,6 @@ public class BaseClass {
     }
 	
 	public static String generateTimeStamp(){
-
         DateFormat df = new SimpleDateFormat("MMddyyyyHHmmss");
         Date date = new Date();
         String timeStamp = df.format(date);
@@ -735,22 +797,23 @@ public class BaseClass {
     }
 	
 	public static Integer generateMarketId(String cMarketId) {
-
         Integer marketId = null;
-        if (StringUtils.isNotBlank(cMarketId)) {
+        if (StringUtils.isNotBlank(cMarketId)) 
+        {
             marketId = Integer.parseInt(cMarketId);
         }
         return marketId;
     }
 	
 	public static String selectManagingOrg(String cMOrgID) {
-
         String mOrgID = null;
-
         if (StringUtils.isNotBlank(cMOrgID)) {
-            if (cMOrgID.equals("hasChild")) {
+            if (cMOrgID.equals("hasChild"))
+            {
                 mOrgID = String.valueOf(CreateManagingOrganizationAPI.managingOrgID);
-            } else {
+            } 
+            else 
+            {
                 mOrgID = cMOrgID;
             }
         }
@@ -760,7 +823,6 @@ public class BaseClass {
 	public static String genearateOrgId(String cOrgId) {
         String orgId = null;
         String timeStamp = generateTimeStamp();
-
         if (StringUtils.isNotBlank(cOrgId)) {
             if (cOrgId.length() > 2 && cOrgId.length() <= 7) {
                 orgId = cOrgId + timeStamp.substring(10, 14);
@@ -786,12 +848,14 @@ public class BaseClass {
 			CreateACHOrganizationAPI.CCNNameList.clear();
 			CreateACHOrganizationAPI.EINNameList.clear();
 			CreateACHOrganizationAPI.NPINameList.clear();
+			CreateACHOrganizationAPI.copyIDList.clear();
 		}
 		else if(type.equals("PGP"))
 		{
 			CreatePGPOrganizationAPI.PGPNameList.clear();
 			CreatePGPOrganizationAPI.EINNameList.clear();
 			CreatePGPOrganizationAPI.NPINameList.clear();
+			CreatePGPOrganizationAPI.PGPcopyIDList.clear();
 		}
 		else if(type.equals("HHA"))
 		{
@@ -799,6 +863,7 @@ public class BaseClass {
 			CreateHHAOrganizationAPI.CCNNameList.clear();
 			CreateHHAOrganizationAPI.EINNameList.clear();
 			CreateHHAOrganizationAPI.NPINameList.clear();
+			CreateHHAOrganizationAPI.HHAcopyIDList.clear();
 		}
 		else if(type.equals("SNF"))
 		{
@@ -806,35 +871,78 @@ public class BaseClass {
 			CreateSNFOrganizationAPI.CCNNameList.clear();
 			CreateSNFOrganizationAPI.EINNameList.clear();
 			CreateSNFOrganizationAPI.NPINameList.clear();
+			CreateSNFOrganizationAPI.SNFcopyIDList.clear();
+		}
+		else if(type.equals("LTCH"))
+		{
+			CreateLTCHOrganizationAPI.LTCHNameList.clear();
+			CreateLTCHOrganizationAPI.CCNNameList.clear();
+			CreateLTCHOrganizationAPI.EINNameList.clear();
+			CreateLTCHOrganizationAPI.NPINameList.clear();
+			CreateLTCHOrganizationAPI.LTCHcopyIDList.clear();
 		}
 		else if(type.equals("Payor"))
 		{
 			CreatePayorOrganizationAPI.PayorNameList.clear();
 			CreatePayorOrganizationAPI.participantidList.clear();
 		}
+		else if(type.equals("irf"))
+		{
+			CreateIRFOrganizationAPI.IRFNameList.clear();
+			CreateIRFOrganizationAPI.CCNNameList.clear();
+			CreateIRFOrganizationAPI.EINNameList.clear();
+			CreateIRFOrganizationAPI.NPINameList.clear();
+			CreateIRFOrganizationAPI.IRFcopyIDList.clear();
+		}
+		else if(type.equals("Hospice"))
+		{
+			CreateHospiceOrganizationAPI.HospiceNameList.clear();
+			CreateHospiceOrganizationAPI.CCNNameList.clear();
+			CreateHospiceOrganizationAPI.EINNameList.clear();
+			CreateHospiceOrganizationAPI.NPINameList.clear();
+			CreateHospiceOrganizationAPI.HospicecopyIDList.clear();
+		}
 		else if(type.equals("Program"))
 		{
 			CreateProgramAPI.PROGRAMNameList.clear();
+			CreateProgramAPI.PROGRAMIDList.clear();
 		}
 		else if(type.equals("Bundle"))
 		{
 			CreateBundleAPI.bundleNameList.clear();
+			CreateBundleAPI.bundleIDList.clear();
 		}
-		else if(type.equals("Contract"))
-		{
-			
-		}
-		else if(type.equals("Network Contract"))
-		{
-			
-		}
-		else if(type.equals("Practioner")){
+		else if(type.equals("practitioner")){
 			CreatePractictionerAPI.practitionerNameList.clear();
+			CreatePractictionerAPI.practitionerIDList.clear();
 		}
-		else if(type.equals("Physician Roster"))
-		{
-			
-		}
+	}
+	
+	public List<String> fetchLocationIndexID(String query) throws ClassNotFoundException, SQLException  {
+		HashMap<String, HashMap<String, String>> row = new HashMap<String,HashMap<String,String>>();
+	    Class.forName("com.mysql.jdbc.Driver");
+	    String connectionString = "jdbc:mysql://"+DriverScript.Config.getProperty("MySQLServerName")+":3306"; 
+	    Connection con=DriverManager.getConnection(connectionString,DriverScript.Config.getProperty("MySQLDBUserName"),DriverScript.Config.getProperty("MySQLPassword")); 
+	    Statement stmt=con.createStatement();  
+	    ResultSet rs=stmt.executeQuery(query);
+	    ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
+	    while(rs.next())
+	    {
+	     HashMap<String, String> column = new HashMap<String, String>();
+	        for(int i=1;i<=rsmd.getColumnCount();i++)
+	        {
+	        column.put(rsmd.getColumnName(i),rs.getString(i));
+	        }
+	        String a = Integer.toString(rs.getRow());
+	        row.put(a, column);
+	        }
+	    ArrayList<String> al = new ArrayList<String>();
+	    for(int i=1; i<=row.size();i++)
+	    {
+	    	al.add(row.get(""+i+"").get("id"));
+	    }
+	    con.close();
+	    return al;
 	}
 	
 	public void setAttributevalue(WebElement element, String attName, String attValue) {
@@ -844,3 +952,4 @@ public class BaseClass {
     }
 	
 }
+

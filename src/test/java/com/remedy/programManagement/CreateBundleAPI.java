@@ -13,6 +13,7 @@ public class CreateBundleAPI extends BaseClass{
 
 	public static List<Long> idList = new ArrayList<>();
 	public static List<String> bundleNameList = new ArrayList<>();
+	public static List<Long> bundleIDList = new ArrayList<>();
 	
 	public CreateBundleAPI(WebDriver driver) {
 		super(driver);
@@ -39,8 +40,4 @@ public class CreateBundleAPI extends BaseClass{
             idList.add(((Integer) response.path("id")).longValue());
         }
     }
-	
-//	public void verifyActualVsExp(Integer expCode, String responseMsg) throws Throwable {
-//		new VerificationMethod().verifyExpectedVsActualResults(response, expCode, responseMsg);
-//	    }
 }

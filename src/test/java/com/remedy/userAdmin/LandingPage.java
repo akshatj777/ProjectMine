@@ -32,10 +32,11 @@ public class LandingPage extends BaseClass{
         super(driver);}
 
     public void iVerifyTextforTiles(String text){
-    	iWillWaitToSee(By.cssSelector(".title>p"));
        	if(text.isEmpty()!=true){
-    		verifyTextForElementfromList(".title>p", text);
+    		verifyTextForElementfromList(".description", text);
+
     	}
+   
     }
        
     public void iClickOnApplicateTile(String tile) throws InterruptedException{
@@ -181,8 +182,8 @@ public class LandingPage extends BaseClass{
     	}
     }
     public void iClickOnTheTopUserAccountIconOnRemedyConnectPage (){
-    		iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
-    		clickElement(driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")));
+    		iWillWaitToSee(By.xpath("//i[@class='dropdown icon']"));
+    		clickElement(driver.findElement(By.xpath("//i[@class='dropdown icon']")));
     }
     
     public void IClickTopUserAccountLink() {
@@ -201,29 +202,29 @@ public class LandingPage extends BaseClass{
     public void iSelectFromTopUserAccountDropDown(String link) throws InterruptedException{
     	driver.navigate().refresh();
     	Thread.sleep(3000);
-    	iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']"));
-	      driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-profile']")).click();
+    	iWillWaitToSee(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']"));
+	      driver.findElement(By.xpath("//div[@class='ui dropdown menu-profile-btn']//i[@class='dropdown icon']")).click();
 	      Thread.sleep(3000);
 	      if(link.equals("Log Out"))
 	      {
 	    	  if(DriverScript.Config.getProperty("Browser").equals("ie"))
 	    	  {
-	    		  ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[@ng-click='user.logout()']")));  
+	    		  ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='Log Out']")));  
 	    	  }
 	    	  else
 	    	  {
-	    		  driver.findElement(By.xpath("//a[@ng-click='user.logout()']")).click();
+	    		  driver.findElement(By.xpath("//span[text()='Log Out']")).click();
 	    	  }
 	      }
 	      else if(link.equals("Reset Password"))
 	      {
 	    	  if(DriverScript.Config.getProperty("Browser").equals("ie"))
 	    	  {
-	    		  ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@ng-click,'valentino.reset-password')]")));
+	    		  ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[text()='Reset Password']")));
 	    	  }
 	    	  else
 	    	  {
-	    		  driver.findElement(By.xpath("//a[contains(@ng-click,'valentino.reset-password')]")).click();
+	    		  driver.findElement(By.xpath("//span[text()='Reset Password']")).click();
 	    	  }
 	      }
     }
@@ -244,4 +245,85 @@ public class LandingPage extends BaseClass{
     		iWillWaitToSee(By.xpath("//i[@class='btn btn-menu valentino-icon-spoe']"));
         	clickElement(driver.findElement(By.xpath("//i[@class='btn btn-menu valentino-icon-spoe']")));
     }
+    public void iConfirmOnResetPasswordBox(){
+    	delay();
+    	iWillWaitToSee(By.xpath("//button[contains(text(),'Okay')]"));
+    	clickElement(driver.findElement(By.xpath("//button[contains(text(),'Okay')]")));
+    	
+    }
+public void ValidationMsgForRestPass(String text){
+	if(text.equals("Please ensure the password and the confirmation are the same")){
+    	iWillWaitToSee(By.cssSelector(".auth0-global-message.auth0-global-message-error"));
+    	Assert.assertTrue(driver.findElement(By.cssSelector(".auth0-global-message.auth0-global-message-error")).getAttribute("innerText").toString().trim().contains(text));
+	}
+	else if (text.equals("Remedy Connect")){
+		iWillWaitToSee(By.xpath("//div[@class='remedy-connect-title' and text()='Remedy Connect']"));
+		isElementVisible(driver.findElement(By.xpath("//div[@class='remedy-connect-title' and text()='Remedy Connect']")));
+	}
+	else if (text.equals("Password guidelines")){
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-password-strength.animated.fadeIn"))));
+
+	}
+	}
+
+public void forgotPasswordLink(){
+	iWillWaitToSee(By.cssSelector("a.auth0-lock-alternative-link"));
+	clickElement(driver.findElement(By.cssSelector("a.auth0-lock-alternative-link")));
+}
+public void resetPasswordMsg(String text){
+	//iWillWaitToSee(By.xpath("//p/span/text()"));
+	//Assert.assertTrue(driver.findElement(By.xpath("//p/span/text()")).getAttribute("data").toString().contains(text));
+	iWillWaitToSee(By.xpath("//*[contains(text(),'"+text+"')]"));
+	isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+text+"')]")));
+}
+
+
+public void EmailFieldVerificationOnForgotPasswordPage(){
+	isElementVisible(driver.findElement(By.xpath("//input[@name='email']")));
+}
+
+
+public void sendEmailButtonVerification(){
+	isElementVisible(driver.findElement(By.xpath("//button[@type='submit']")));
+}
+public void backButtonOnForgotPasswordPageVerification(){
+	isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-back-button")));
+}
+public void iClickOnBackButtonOnForgotPassPage(){
+	clickElement(driver.findElement(By.cssSelector(".auth0-lock-back-button")));
+}
+public void iEnterEmailToCreatePass(String userRole){
+	iWillWaitToSee(By.xpath("//input[@name='email']"));
+	driver.findElement(By.xpath("//input[@name='email']")).clear();
+	if(userRole.contains("Super Admin")){
+	String email = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
+	driver.findElement(By.xpath("//input[@name='email']")).sendKeys(email);
+	}
+	else{
+		driver.findElement(By.xpath("//input[@name='email']")).sendKeys(userRole);
+	}
+}
+public void validationMsgForInvalidEmail() {
+	isElementVisible(driver.findElement(By.xpath("//button[@type='submit']")));
+}
+public void errorMesgValidationForInvalidCreds(String text) {
+	iWillWaitToSee(By.xpath("//*[contains(text(),'"+text+"')]"));
+	isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+text+"')]")));
+	
+}
+public void clickResetPasswordButton(String arg1) throws Throwable {
+	iWillWaitToSee(By.xpath("//i[@class='dropdown icon']"));
+	clickElement(driver.findElement(By.xpath("//i[@class='dropdown icon']")));
+	   iWillWaitToSee(By.xpath("//*[contains(text(),'"+arg1+"')]"));
+	      driver.findElement(By.xpath("//*[contains(text(),'"+arg1+"')]")).click();
+	  
+}
+public void remedyConnectPageVerification(){
+	iWillWaitToSee(By.cssSelector(".flex-item.order-2.btn.logo.valentino-icon-remedy-connect"));
+	isElementVisible(driver.findElement(By.cssSelector(".flex-item.order-2.btn.logo.valentino-icon-remedy-connect")));
+}
+public void verifySearchGhostText(String text){
+	isElementVisible(driver.findElement(By.xpath("//input[@placeholder='Search']")));
+}
+
 }

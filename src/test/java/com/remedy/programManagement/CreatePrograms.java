@@ -43,14 +43,9 @@ public class CreatePrograms extends BaseClass {
 		{
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>div"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>div")), msg);
-			if(!CreatePrograms.tempPrograms.isEmpty())
-			{
-				CreateProgramAPI.PROGRAMNameList.set(0, CreatePrograms.tempPrograms.get(1));
-				CreatePrograms.tempPrograms.clear();
-			}
-			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			CreateProgramAPI.PROGRAMNameList.clear();
+			CreateProgramAPI.PROGRAMNameList.add(CreatePrograms.tempPrograms.get(1));
 		}
-		
 		else if(org.contains("Programs")){
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>div"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>div")), msg);
@@ -60,7 +55,7 @@ public class CreatePrograms extends BaseClass {
 				CreatePrograms.tempPrograms.clear();
 			}
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-			}
+		}
 		else if(org.contains("Contracts")){
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>div"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>div")), msg);
@@ -80,12 +75,12 @@ public class CreatePrograms extends BaseClass {
 		iVerifyTextFromListOfElement(By.cssSelector(".data-table-header-cell>a"), header);
 	}
 
-	public void iSelectProgramNameInCreateContractPageUnderPayorOrganization(String text, String org) 
+	public void iSelectProgramNameInCreateContractPageUnderPayorOrganization(int index, String text, String org) 
 	{
 		if(!text.equals(""))
 		{
 			driver.findElement(By.xpath("//div[text()='Select a Program']")).click();
-			new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[text()='Select a Program']")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1)).build().perform();
+			new Actions(driver).sendKeys(driver.findElement(By.xpath("//div[text()='Select a Program']")), CreateProgramAPI.PROGRAMNameList.get(index-1).substring(1, CreateProgramAPI.PROGRAMNameList.get(index-1).length()-1)).build().perform();
 			driver.findElement(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption")).click();
 			delay();
 		}
@@ -99,6 +94,7 @@ public class CreatePrograms extends BaseClass {
 	{
 		if(!text.equals(""))
 		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//*[contains(@name,'orgType')]/../div")));
 			driver.findElement(By.xpath("//*[contains(@name,'orgType')]/../div")).click();
 			iWillWaitToSee(By.cssSelector(".VirtualizedSelectOption"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+text+"']")));
@@ -110,6 +106,7 @@ public class CreatePrograms extends BaseClass {
 	{
 		if(!text.equals(""))
 		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")));
 			if(text.contains("ACHNAME - NO"))
 			{
 				driver.findElement(By.xpath("//div[text()='Search Name or CCN/EIN']/parent::span/following-sibling::span[@class='Select-arrow-zone']")).click();
@@ -189,6 +186,7 @@ public class CreatePrograms extends BaseClass {
 	{
 		iFillInText(driver.findElement(By.xpath("//input[@placeholder='Price of bundle']")), text);
 	}
+	
 	public void iSelectBundleOnCreateContractsPageUnderPayorOrganization(int bundleNumber, String text, int num, String field)
 	{
 		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
@@ -216,17 +214,22 @@ public class CreatePrograms extends BaseClass {
 		if(field.equals("Contract Id")){
 			if(text.equals("CID"))
 			{
-				tempPrograms.put(1, createRandomNumber(8));
+				tempPrograms.put(1, createRandomNumber(15));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), tempPrograms.get(1));
 			}
 			else if(text.equals("AllAlphabetsCID"))
 			{
-				tempPrograms.put(1, RandomStringUtils.randomAlphabetic(8));
+				tempPrograms.put(1, RandomStringUtils.randomAlphabetic(15));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), tempPrograms.get(1));
+			}
+			else if(text.equals("CID-"))
+			{
+				tempPrograms.put(1, createRandomNumber(11));
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), tempPrograms.get(1));
 			}
 			else if(text.equals("Duplicate_CID"))
 			{
-				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreatePrograms.programs.get(1));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
 			}
 			else{
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), text);
@@ -243,9 +246,6 @@ public class CreatePrograms extends BaseClass {
 			else if(act.equals("Bundle2 Price1")){
 				iFillInText(driver.findElement(By.xpath("//input[@name='contracts[0].contractBundles[1].bundlePrices[0]."+field+"']")), text);
 			}
-			else{
-				//iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), text);
-			}
 		}
 	}
 
@@ -256,13 +256,13 @@ public class CreatePrograms extends BaseClass {
 		  LocalDate b = localDate.minus(Period.ofDays(days));
 		  String date = dtf.format(b);
 		  return date;
-		 }
+	}
 	
 	public void setAttributevalue(WebElement element, String attName, String attValue) {
 		  JavascriptExecutor js = (JavascriptExecutor) driver;
 		  js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", 
 		                element, attName, attValue);
-		    }
+	}
 	
 	public String getLastnCharacters(String inputString, int subStringLength){
 		int length = inputString.length();
@@ -289,25 +289,31 @@ public class CreatePrograms extends BaseClass {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
+	
+	public void iUnCheckForAttributionRulesOnCreatePrograms(String text){
+		WebElement element= driver.findElement(By.xpath("//li[contains(text(),'"+text+"')]/child::input"));
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
 
 	public void iVerifyPGPOrganizationNameOnNetworkContractPage(String text, String page){
 		isElementPresentOnPage(By.xpath("//div[text()='"+CreatePGPOrganizationAPI.PGPNameList.get(1).substring(1, CreatePGPOrganizationAPI.PGPNameList.get(1).length()-1)+"'"));
 	}
 	
 	public void iVerifySearchBoxForHospitalOrganizationOnNetworkContractPage(String page){
-		isElementPresent(By.xpath("//div[text()='Search Name or CCN']"));
+		Assert.assertTrue(isElementPresent(By.xpath("//div[text()='Search Name or CCN']")));
 	}
 	
 	public void iVerifyDateFieldOnNetworkContractPage(String field, String page){
-		isElementPresentOnPage(By.xpath("//label[contains(text(),'"+field+"')]"));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//label[contains(text(),'"+field+"')]")));
 	}
 	
 	public void iVerifyDefaultNetworkContractStartDateShouldBeTodayDate(){
-		isElementPresent(By.xpath("//div[@class='react-datepicker-input-field-container start-date-picker ']//div[@class='react-datepicker__input-container']"));
+		Assert.assertTrue(isElementPresent(By.xpath("//div[@class='react-datepicker-input-field-container start-date-picker ']//div[@class='react-datepicker__input-container']")));
 	}
 	
 	public void iVerifyProgramOnCreateNetworkContractPage(String text){
-		isElementPresent(By.xpath("//div[contains(text(),'*')]"));
+		Assert.assertTrue(isElementPresent(By.xpath("//div[contains(text(),'*')]")));
 	}
 	
 	public void iVerifyTheDetailsAfterSelectingContractNameOnCreateNetworkContractPage(String text, String field){
@@ -319,25 +325,93 @@ public class CreatePrograms extends BaseClass {
 			Assert.assertEquals(result,CreatePrograms.programs.get(1));
 		}
 		else if(field.contains("Start Date")){
-			isElementPresent(By.xpath("//div[@class='start-date']"));
+			Assert.assertTrue(isElementPresent(By.xpath("//div[@class='start-date']")));
 		}
 		else if(field.contains("End Date")){
-			isElementPresent(By.xpath("//div[@class='end-date']"));
+			Assert.assertTrue(isElementPresent(By.xpath("//div[@class='end-date']")));
 		}
 	}
 	
 	public void iVerifyDefaultNetworkContractStartDateShouldBeOfBundledPaymentContractStartDate(){
-		isElementPresent(By.xpath("//div[@class='react-datepicker-input-field-container start-date-picker ']//label[@class='date-picker-input-label']"));
+		Assert.assertTrue(isElementPresent(By.xpath("//div[@class='react-datepicker-input-field-container start-date-picker ']//label[@class='date-picker-input-label']")));
 	}
 	
 	public void iVerifyDefaultNetworkContractEndDateShouldBeofBundledPaymentContractEndDate(){
-		isElementPresent(By.xpath("//div[@class='react-datepicker-input-field-container end-date-picker ']//label[@class='date-picker-input-label']"));
+		Assert.assertTrue(isElementPresent(By.xpath("//div[@class='react-datepicker-input-field-container end-date-picker ']//label[@class='date-picker-input-label']")));
 	}
 	
 	public void enterDate(String date, String field, int index) throws ParseException 
 	{
 		if(!(date.equals("")))
 		{
+			if(date.equals("TodaysDate"))
+			   {
+			    Date todaysDate = new Date();
+			    date= new SimpleDateFormat("yyyy/MM/dd").format(todaysDate);
+			   }
+			else if(date.equals("FutureDate"))
+			   {
+			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			    Date futureDate = new Date();
+			    Calendar c = Calendar.getInstance();
+			    c.setTime(futureDate);
+			    c.add(Calendar.DATE, 365);
+			    date = sdf.format(c.getTime());
+			   }
+			else if(date.equals("BundleStartDate"))
+			   {
+			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			    Date futureDate = new Date();
+			    Calendar c = Calendar.getInstance();
+			    c.setTime(futureDate);
+			    c.add(Calendar.DATE, 50);
+			    date = sdf.format(c.getTime());
+			   }
+			else if(date.equals("BundleEndDate"))
+			   {
+			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			    Date futureDate = new Date();
+			    Calendar c = Calendar.getInstance();
+			    c.setTime(futureDate);
+			    c.add(Calendar.DATE, 280);
+			    date = sdf.format(c.getTime());
+			   }
+			else if(date.equals("PriceStartDate"))
+			   {
+			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			    Date futureDate = new Date();
+			    Calendar c = Calendar.getInstance();
+			    c.setTime(futureDate);
+			    c.add(Calendar.DATE, 90);
+			    date = sdf.format(c.getTime());
+			   }
+			else if(date.equals("PriceEndDate"))
+			   {
+			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			    Date futureDate = new Date();
+			    Calendar c = Calendar.getInstance();
+			    c.setTime(futureDate);
+			    c.add(Calendar.DATE, 200);
+			    date = sdf.format(c.getTime());
+			   }
+			else if(date.equals("BaselineStartDate"))
+			   {
+			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			    Date futureDate = new Date();
+			    Calendar c = Calendar.getInstance();
+			    c.setTime(futureDate);
+			    c.add(Calendar.DATE, 120);
+			    date = sdf.format(c.getTime());
+			   }
+			else if(date.equals("BaselineEndDate"))
+			   {
+			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			    Date futureDate = new Date();
+			    Calendar c = Calendar.getInstance();
+			    c.setTime(futureDate);
+			    c.add(Calendar.DATE, 150);
+			    date = sdf.format(c.getTime());
+			   }
 			String[] arrMonth = new String[]{"January","February","March","April","May","June","July","August","September","October","November","December"};
 			Date date1=new SimpleDateFormat("yyyy/MM/dd").parse(date); 
 			Calendar cal = Calendar.getInstance();
@@ -848,16 +922,16 @@ public class CreatePrograms extends BaseClass {
 				 Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			}
 			 else if (value.equals("ACHNAME")){
-				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreateACHOrganization.achOrg_noMO.get("ACHNAME"));
+				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreateACHOrganizationAPI.ACHNameList.get(0).substring(1, CreateACHOrganizationAPI.ACHNameList.get(0).length()-1));
 				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				  value = CreateACHOrganization.achOrg_noMO.get("ACHNAME");
+				  value = CreateACHOrganizationAPI.ACHNameList.get(0).substring(1, CreateACHOrganizationAPI.ACHNameList.get(0).length()-1);
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
 			  else if (value.equals("CID")){
-				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreatePrograms.programs.get(1));
+				  iFillInText(driver.findElement(By.cssSelector(".text-input-field-programFilterTerm")), CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1));
 				  waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-				  value = CreatePrograms.programs.get(1);
+				  value = CreateProgramAPI.PROGRAMNameList.get(0).substring(1, CreateProgramAPI.PROGRAMNameList.get(0).length()-1);
 				  iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]"));
 				  Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'"+value+"')]")));
 			  }
@@ -1005,6 +1079,27 @@ public class CreatePrograms extends BaseClass {
 	    String pID = row.get("1").get("id");
 	    con.close();
 	    return pID;
+	}
+	
+	public void iVerifyAutoIncrementedCID(String text){
+		iWillWaitToSee(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'80000')]"));
+		Assert.assertTrue(isElementPresent(By.xpath("//div[@class='data-table-cell link-content' and contains(text(),'80000')]")));
+	}
+	
+	public void iVerifyTheSubHeadlineOfAttributionRulesAndValidationRanksOnCreateProgramPage(String text){
+		verifyTextForElement(driver.findElement(By.xpath("//div[text()='"+text+"']")), text);
+	}
+	
+	public void iVerifyMultipleBundleEpisodeCheckBox(String text){
+		verifyTextForElement(driver.findElement(By.xpath("//label[text()='"+text+"']")), text);
+	}
+	
+	public void iClickOnCheckBoxForMultipleBundleEpisode(String text){
+		//driver.findElement(By.xpath("//input[@name='multipleBundleEpisode']")).click();
+		
+		WebElement element = driver.findElement(By.xpath("//input[@name='multipleBundleEpisode']"));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(element).click().build().perform();
 	}
 }
 

@@ -61,6 +61,10 @@ public class SuperUserLandingPage extends BaseClass {
 			//Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='lbarinstein+qaadmin@remedypartners.com']")));
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Leonid']")));
 		}
+		else if(text.equals("Release version"))
+		{
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[contains(text(),'© 2018 Remedy Partners, Inc. All rights reserved.')]")));
+		}
 		else if(text.equals("Next Page Icon"))
 		{
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='single-chevron']")));
@@ -257,8 +261,8 @@ public class SuperUserLandingPage extends BaseClass {
 		if(searchParam.equals("FetchFromHM"))
 		{
 			String email = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
-			iWillWaitToSee(By.xpath("//tr[@class='component-user-table-row']/td[contains(text(),'"+email+"')]"));
-			Assert.assertTrue(isElementPresentOnPage(By.xpath("//tr[@class='component-user-table-row']/td[contains(text(),'"+email+"')]")));
+			iWillWaitToSee(By.xpath("//tr[@class='component-user-table-row']/td[contains(text(),'"+email.toLowerCase()+"')]"));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//tr[@class='component-user-table-row']/td[contains(text(),'"+email.toLowerCase()+"')]")));
 		}
 		else
 		{
@@ -513,4 +517,9 @@ public void iVerifyReportsPage(){
 	System.out.println(driver.getCurrentUrl());
 	Assert.assertTrue(driver.getCurrentUrl().contains("reports"));
 }	
+public void iVerifyEmailCase(String userRole) {
+	String email = CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim());
+	iWillWaitToSee(By.cssSelector(".five.wide"));
+	Assert.assertTrue(driver.findElements(By.cssSelector(".five.wide")).get(0).getAttribute("innerText").toString().trim().equals(email));
+}
 }

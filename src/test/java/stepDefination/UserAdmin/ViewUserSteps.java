@@ -14,6 +14,11 @@ public class ViewUserSteps extends DriverScript{
 		objViewUserPage.searchForUserRole(userRole);
 	}
 
+	@Then("^I search for bulk user with role \"([^\"]*)\"$")
+	public void i_search_for_bulk_user_with_role(String userRole) throws Throwable {
+		objViewUserPage.searchForBulkUserRole(userRole);
+	}
+	
 	@Then("^I select user with role \"([^\"]*)\"$")
 	public void i_select_user_with_role(String userRole) throws Throwable {
 		objViewUserPage.selectUserRole(userRole);
@@ -78,10 +83,18 @@ public class ViewUserSteps extends DriverScript{
 	public void i_verify_Email(String email, String userRole) throws Throwable {
 		objViewUserPage.verifyEmail(email, userRole);
 	}
-
+	
+	@Then("^I verify bulk email for \"([^\"]*)\"$")
+	public void i_verify_Bulk_Email(String userRole) throws Throwable {
+		objViewUserPage.verifyBulkEmail(userRole);
+	}
+	@Then("^I verify bulk NPI \"([^\"]*)\"$")
+public void verifyBulkNPI(String field) throws Throwable {
+	objViewUserPage.verifyBulkNPI(field);
+}
 	@Then("^I verify phone \"([^\"]*)\"$")
 	public void i_verify_Phone(String field) throws Throwable {
-		objViewUserPage.verifyRole(field);
+		objViewUserPage.verifyPhone(field);
 	}
 	
 	@Then("^I verify NPI \"([^\"]*)\"$")
@@ -103,7 +116,10 @@ public class ViewUserSteps extends DriverScript{
 	public void i_verify_HealthSystemLocation(String locations) throws Throwable {
 		objViewUserPage.verifyHealthSystemLocation(locations);
 	}
-	
+	@Then("^I verify location \"([^\"]*)\" is not present on view page$")
+	public void i_verify_HealthSystemLocationNotPresent(String locations) throws Throwable {
+		objViewUserPage.i_verify_HealthSystemLocationNotPresent(locations);
+	}
 	@Then("^I verify enabled \"([^\"]*)\"$")
 	public void i_verify_enabled(String applicationsEnabled) throws Throwable {
 		objViewUserPage.verifyEnabledApplications(applicationsEnabled);
@@ -122,4 +138,20 @@ public class ViewUserSteps extends DriverScript{
 	public void iRefreshViewUserPage() {
 		objViewUserPage.iRefreshViewUserPage();
 	}
+
+	@Then("^I verify Program \"([^\"]*)\" is not present in view user page$")
+	public void iVerifyRemovedProgramInViewPage(String programs){
+		objViewUserPage.iVerifyRemovedProgramInViewPage(programs);
+	}
+
+	@Then("^I click on \"([^\"]*)\" icon on view user page$")
+	public void iClickOnLockUnlockIcon(String text){
+		objViewUserPage.iClickOnLockUnlockIcon(text);
+	}
+	@Then("^I verify that user is \"([^\"]*)\" on view user page$")
+	public void iVerifyLockedAndUnlockedUsers(String text){
+		objViewUserPage.iVerifyLockedAndUnlockedUsers(text);
+	}
+
+
 }

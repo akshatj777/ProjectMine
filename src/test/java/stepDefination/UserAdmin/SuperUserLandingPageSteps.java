@@ -215,4 +215,8 @@ public class SuperUserLandingPageSteps extends DriverScript {
 	public void iVerifyReportsPage(){
 	ua2LandingPage.iVerifyReportsPage();
 	}
+	@Then("^I verify that email for \"([^\"]*)\" is reflected in same case in landing page$")
+	public void iVerifyEmailCase(String userRole) {
+	ua2LandingPage.iVerifyEmailCase(userRole);
+	}
 }

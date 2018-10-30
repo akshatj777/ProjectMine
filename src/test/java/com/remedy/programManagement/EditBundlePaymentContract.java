@@ -21,7 +21,8 @@ public class EditBundlePaymentContract extends BaseClass {
 	
 	public void iVerifyDropdownBoxisnotEditable(String text){
 		if(text.equals("ACHNAME")){
-			isElementEnabled(driver.findElement(By.xpath("//div[contains(text(),'"+CreateACHOrganizationAPI.ACHNameList.get(1).substring(1, CreateACHOrganizationAPI.ACHNameList.get(1).length()-1)+"')]")));
+			//isElementEnabled(driver.findElement(By.xpath("//div[contains(text(),'"+CreateACHOrganizationAPI.ACHNameList.get(1).substring(1, CreateACHOrganizationAPI.ACHNameList.get(1).length()-1)+"')]")));
+			isElementEnabled(driver.findElement(By.xpath("//div[contains(text(),'ACHNAME')]")));
 		}
 		else if(text.equals("FETCHFROMAPI")){
 			isElementEnabled(driver.findElement(By.xpath("//span[contains(text(),'"+CreateBundleAPI.bundleNameList.get(0).substring(1, CreateBundleAPI.bundleNameList.get(0).length()-1)+"')]")));

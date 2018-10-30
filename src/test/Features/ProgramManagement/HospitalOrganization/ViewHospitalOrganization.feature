@@ -1,12 +1,5 @@
 Feature: Hospital Organization View profile Functionality tests.
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -29,6 +22,27 @@ Feature: Hospital Organization View profile Functionality tests.
       | Create Hospital without MO |               | ACHNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "Hospital" organization tab on organization dashboard
+    When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
+    And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
+    And I verify the url after creation of an organization on view profile of "Hospital" organization
+
+    Examples: 
+      | Description                                                                    | Has_MO | Hosp_Name |
+      | Verify ACH org shortName in Url after creating under profile page - with MO    | YES    | ACHNAME   |
+      | Verify ACH org shortName in Url after creating under profile page - without MO | NO     | ACHNAME   |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -55,16 +69,19 @@ Feature: Hospital Organization View profile Functionality tests.
     And I verify header name "ID" under "Location" for "Hospital" organization
     And I verify header name "Location Name" under "Location" for "Hospital" organization
     And I verify header name "Address" under "Location" for "Hospital" organization
-    And I verify header name "Type" under "Location" for "Hospital" organization
     And I verify header name "Region" under "Location" for "Hospital" organization
     And I verify header name "Market" under "Location" for "Hospital" organization
+    And I verify Location index id "<LID>" on view profile of "<Hosp_Name> - <Has_MO>" organization
+    Then I verify Location details of "<Loc_Name>" on view profile of "Hospital" organization
+    Then I verify Location details of "<Loc_Address1>" on view profile of "Hospital" organization
+    Then I verify Location details of "<Loc_Region>" on view profile of "Hospital" organization
+    Then I verify Location details of "<Loc_Market>" on view profile of "Hospital" organization
     And I Verify the "Edit" button on View page
     And I click on "Edit" button on particular organization
     Then I click on "+" button on "Edit Hospital" organization page
     Then I verify "Location 2" on "Edit" organization page
     And I enter location name <Loc_Name> for Location "2" on "Edit" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "Edit" organization page
-    And I select location type <Loc_Type> for Location "2" on "Edit" organization page
     And I enter address2 <Loc_Address2> for Location "2" on "Edit" organization page
     And I select region <Loc_Region> for Location "2" on "Edit" organization page
     And I enter city <Loc_City> for Location "2" on "Edit" organization page
@@ -77,12 +94,18 @@ Feature: Hospital Organization View profile Functionality tests.
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
     And I verify "<Hosp_Name> - <Has_MO>" name on the header of view profile
     And I verify "2" location count on view "Hospital" organization page
+    And I verify Location index id "<LID>" on view profile of "<Hosp_Name> - <Has_MO>" organization
 
     Examples: 
-      | Description                                                                                    | Has_MO | Hosp_Name | Address1 | Short_Name | Address2 | City           | State      | Postal_Code | Loc_Name   | Loc_Address1 | Loc_Type  | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN/TIN | NPI | StateVerification | Organization Type | Message                                     |
-      | Verification of Hospital details and count of locations displayed under Hospital org - with MO | YES    | ACHNAME   | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name21 | Loc_Address1 | Inpatient | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN     | NPI | CA                | ACH               | Hospital Organization Successfully Updated. |
+      | Description                                                                                    | Has_MO | Hosp_Name | Address1 | Short_Name | Address2 | City           | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN/TIN | NPI | StateVerification | Organization Type | LID | Message                                     |
+      | Verification of Hospital details and count of locations displayed under Hospital org - with MO | YES    | ACHNAME   | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Loc_Name | Loc_Address1 | General  | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN     | NPI | CA                | ACH               |     | Hospital Organization Successfully Updated. |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I search with "<MO_Name>" on organization in search box
     And I click "<MO_Name>" field in search list on organization page
     And I verify "ACH" organization tab present under "Managing" Organization
@@ -104,7 +127,6 @@ Feature: Hospital Organization View profile Functionality tests.
     And I provide unique "ACH - <NPI>" in "NPI" on create organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
@@ -130,6 +152,11 @@ Feature: Hospital Organization View profile Functionality tests.
       | Verification of Hospital details and count on Hospital tab under Managing org | YES    | MONAME  | ACHNAME   | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Inpatient | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN | NPI | CA                | ACH               | Hospital Organization Successfully Created. |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I search with "<MO_Name>" on organization in search box
     And I click "<MO_Name>" field in search list on organization page
     And I verify "ACH" organization tab present under "Managing" Organization

@@ -1,11 +1,5 @@
 Feature: Search the Managing organization functionality test
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -17,6 +11,10 @@ Feature: Search the Managing organization functionality test
       | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
     Then I verify the Search bar on "Managing" organization page
     Then I search "<SearchParam>" and verify with search list options on "Managing" organization search box
@@ -28,8 +26,13 @@ Feature: Search the Managing organization functionality test
       | Search Managing Organization with City                  | City        |
       | Search Managing Organization with Managing Organization | MONAME      |
       | Search Managing Organization with Paticipant ID         | PID         |
+      | Search Managing Organization with ID                    | MO_ID       |
 
   Scenario Outline: Search for a managing organization after editing the Managing organization name
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
     Then I search with "<MO_Name>" on organization in search box
     And I verify "<MO_Name>" field in search list on organization page
@@ -48,6 +51,10 @@ Feature: Search the Managing organization functionality test
       | Search for a managing organization after editing the Managing organization name | MONAME  | MONAME         | management |  0 |
 
   Scenario Outline: Verification of error message if an organization is not found in search box
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
     Then I search with "<MO_Name>" on organization in search box
     Then I verify the "No matches" message for invalid search in Organization

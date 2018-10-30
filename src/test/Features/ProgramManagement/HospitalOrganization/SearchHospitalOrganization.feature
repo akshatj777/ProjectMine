@@ -1,12 +1,5 @@
 Feature: Search the Hospital organizations functionality tests
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -25,10 +18,15 @@ Feature: Search the Hospital organizations functionality tests
 
     Examples: 
       | desc                       | participantId | name    | shortName | managingOrgId | ccn | ein | npi | locationId | locAddr1     | locAddr2     | locCity  | locState | locZip | locationName | locationType | marketId | regionId | address1 | address2 | city           | state | zip   | expPostCode | id | type     | errorMsg |
-      | Create Hospital with MO    |               | ACHNAME | shortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
-      | Create Hospital without MO |               | ACHNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | CA    | 10000 |         201 |  0 | hospital |          |
+      | Create Hospital with MO    |               | ACHNAME | shortName | hasChild      | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | NY    | 10000 |         201 |  0 | hospital |          |
+      | Create Hospital without MO |               | ACHNAME | shortName |               | CCN | EIN | NPI | ,          | Loc_Address1 | Loc_Address2 | Loc_City | CA       |  10001 | Loc_Name     | [2,4,3],[5]  |        1 |        1 | Address1 | Address2 | AutomationCity | NY    | 10000 |         201 |  0 | hospital |          |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     Then I verify the Search bar on "Hospital" organization page
     Then I search "<SearchParam> - <Has_MO>" and verify with search list options on "Hospital" organization search box
@@ -39,25 +37,38 @@ Feature: Search the Hospital organizations functionality tests
       | Search Hospital Organization with CCN  - Without MO              | NO     | CCN            |
       | Search Hospital Organization with Hospital Org Name - With MO    | YES    | ACHNAME        |
       | Search Hospital Organization with Hospital Org Name - Without MO | NO     | ACHNAME        |
+      | Search Hospital Organization with Hospital Org id - With MO      | YES    | Hosp_Id        |
+      | Search Hospital Organization with Hospital Org id - Without MO   | NO     | Hosp_Id        |
       | Search Hospital Organization with City                           |        | AutomationCity |
-      | Search Hospital Organization with State                          |        | CA             |
+      | Search Hospital Organization with State                          |        | NY             |
       | Search Hospital Organization with Postal Code                    |        |          10000 |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     When I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I click "<Hosp_Name> - <Has_MO>" field in search list on organization page
     Then I search "<SearchParam>" and verify with search list options on Location in "<Hosp_Name> - <Has_MO>" profile page
 
     Examples: 
-      | Description                                         | Has_MO | Hosp_Name | SearchParam  |
-      | Searching Location Name on Hospital Profile Page    | YES    | ACHNAME   | Loc_Name     |
-      | Searching Location Address on Hospital Profile Page | YES    | ACHNAME   | Loc_Address1 |
-      | Searching Location Type on Hospital Profile Page    | NO     | ACHNAME   | Inpatient    |
-      | Searching Location Region on Hospital Profile Page  | NO     | ACHNAME   | Midwest      |
-      | Searching Location Matket on Hospital Profile Page  | NO     | ACHNAME   | Chicago      |
+      | Description                                          | Has_MO | Hosp_Name | SearchParam  |
+      | Searching Location index id on Hospital Profile Page | YES    | ACHNAME   | LocIndexId   |
+      | Searching Location index id on Hospital Profile Page | NO     | ACHNAME   | LocIndexId   |
+      | Searching Location Name on Hospital Profile Page     | YES    | ACHNAME   | Loc_Name     |
+      | Searching Location Address on Hospital Profile Page  | YES    | ACHNAME   | Loc_Address1 |
+      | Searching Location Region on Hospital Profile Page   | NO     | ACHNAME   | Midwest      |
+      | Searching Location Matket on Hospital Profile Page   | NO     | ACHNAME   | Chicago      |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     Then I search with "<Hosp_Name> - <Has_MO>" on organization in search box
     And I verify "<Hosp_Name> - <Has_MO>" field in search list on organization page
@@ -77,6 +88,11 @@ Feature: Search the Hospital organizations functionality tests
       | Search Hospital Organization after editing the Hospital name - Without MO | NO     | ACHNAME   | ACHNAME              | Hospital Organization Successfully Updated. |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "Hospital" organization tab on organization dashboard
     Then I search with "<Hosp_Name>" on organization in search box
     Then I verify the "No matches" message for invalid search in Organization

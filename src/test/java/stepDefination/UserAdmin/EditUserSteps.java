@@ -80,9 +80,9 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	public void i_verify_that_are_in_Applications_tab(String appList, String text) throws Throwable {
 		editUser.iVerifyProductAsPerRole(appList, text);
 	}
-	@Then("^I verify text \"([^\"]*)\" is \"([^\"]*)\" in Permission tab$")
-	public void iVerifyDownstreamProviderPermission(String text, String present){
-		editUser.iVerifyDownstreamProviderPermission(text,present);
+	@Then("^I verify text \"([^\"]*)\" is present for \"([^\"]*)\"$")
+	public void iVerifyDownstreamProviderPermission(String text, String role){
+		editUser.iVerifyDownstreamProviderPermission(text,role);
 	}
 	@Then("^I should see text \"([^\"]*)\"$")
 	public void iSeeNoResults(String text){
@@ -190,6 +190,15 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	public void iVerifyMessageForInvalidLocation(String text) throws InterruptedException{
 		editUser.iVerifyMessageForInvalidLocation(text);
 	}
+	@Then("^I verify No results found for invalid Location in selected organisation$")
+	public void verifyMessageForInvalidLocation() throws InterruptedException{
+		editUser.VerifyMessageForInvalidLocations();
+	}
+	
+	@Then("^I verify No results found for invalid Location for \"([^\"]*)\" in selected organisation for PTA user$")
+	public void verifyMessageForInvalidLocationForPTAUser(String text) throws InterruptedException{
+		editUser.VerifyMessageForInvalidLocationsPTAUser(text);
+	}
 	@Then("^I click on Select dropdown$")
 	public void iClickOnSelectOrgDropdown(){
 		editUser.iClickOnSelectOrgDropdown();
@@ -206,6 +215,11 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	public void iVerifyIncompleteOrganisation(){
 		editUser.iVerifyIncompleteOrganisation();
 	}
+	@Then("^I verify incomplete status is not shown for health system$")
+	public void iVerifyIncompleteStatusNotShown(){
+		editUser.iVerifyIncompleteStatusNotShown();
+	}
+	
 	
 	@Then("^I verify facility key \"([^\"]*)\" is displayed with location name \"([^\"]*)\"$")
 	public void iVerifyLocationDisplayedWithFacilityKey(String key, String text){
@@ -225,6 +239,35 @@ CreateUserPage createUserPage=new CreateUserPage(driver);
 	}
 	@Then("^I enter \"([^\"]*)\" in Learning Pathway$")
 	public void iEnterLearningPathway(String text){
-		iEnterLearningPathway(text);
+		editUser.iEnterLearningPathway(text);
+	}
+	@Then("^I verify \"([^\"]*)\" while editing the user$")
+	public void validateLearningPathwayWhileEdit(String pathways){
+		editUser.validateLearningPathwayWhileEdit(pathways);
+	}
+	@Then("^I verify cross icon$")
+		public void iVerifyCrossIcon(){
+		editUser.iVerifyCrossIcon();
+		
+	}
+	@Then("^I verify that submit button is disabled when data permission is not selected$")
+	public void verifySubmitButtonStatus() {
+		editUser.verifySubmitButtonStatus();
+	}
+	@Then("^I verify that \"([^\"]*)\" is not reflected as selected in edit user page$")
+	public void iVerifyRemovedProgramInEditPage(String program){
+		editUser.iVerifyRemovedProgramInEditPage(program);
+	}
+	@Then("^I verify that pagination is not displayed for selected locations$")
+	public void verifyPaginationForSelectedLoc(){
+		editUser.verifyPaginationForSelectedLoc();
+	}
+	@Then("^I verify that All Locations checkbox is checked$")
+	public void verifyAllLocationBoxSelection() {
+		editUser.verifyAllLocationBoxSelection();
+	}
+	@Then("^I enter invalid Learning Pathway \"([^\"]*)\"$")
+	public void enterInvalidLearningPathway(String text){
+		editUser.enterInvalidLearningPathway(text);
 	}
 }

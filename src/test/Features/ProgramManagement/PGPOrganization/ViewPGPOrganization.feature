@@ -1,12 +1,5 @@
 Feature: View Functionality tests for PGP Organization.
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -29,6 +22,27 @@ Feature: View Functionality tests for PGP Organization.
       | Create PGP using API calls without MO | PGPNAME | ShortName |               |               | EIN | NPI | Address1 | Address2 | AutomationCity | CA    | 10000 |        1 |        1 |           201 |             |  0 | pgp  |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "PGP" organization tab on organization dashboard
+    When I search with "<PGP_Name> - <Has_MO>" on organization in search box
+    And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I verify the url after creation of an organization on view profile of "PGP" organization
+
+    Examples: 
+      | Description                                                                    | Has_MO | PGP_Name |
+      | Verify PGP org shortName in Url after creating under profile page - with MO    | YES    | PGPNAME  |
+      | Verify PGP org shortName in Url after creating under profile page - without MO | NO     | PGPNAME  |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I click on "PGP" organization tab on organization dashboard
     When I search with "<PGP_Name> - <Has_MO>" on organization in search box
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
@@ -58,6 +72,11 @@ Feature: View Functionality tests for PGP Organization.
       | Verification of PGP Organization details on PGP view page - with MO     | YES    | PGPNAME  | Address1 | Short_Name | Address2 | Midwest | Chicago | AutomationCity | California |       10000 | EIN     | NPI | CA                | PGP               |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I search with "<MO_Name>" on organization in search box
     And I click "<MO_Name>" field in search list on organization page
     And I verify "PGP" organization tab present under "Managing" Organization
@@ -75,6 +94,11 @@ Feature: View Functionality tests for PGP Organization.
       | Searching PGP Organization Details on Managing Profile Page - PGP | YES    | MONAME  | PGPNAME  | City | California |       10000 | EIN     | NPI | CA                |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
     When I search with "<MO_Name>" on organization in search box
     And I click "<MO_Name>" field in search list on organization page
     And I verify "PGP" organization tab present under "Managing" Organization

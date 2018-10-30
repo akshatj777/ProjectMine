@@ -25,7 +25,7 @@ public class CreateUserSteps extends DriverScript {
 
 	@And("^I click on the \"([^\"]*)\" tile$")
 	public void IClickOnApplicatioTile(String tile) throws Throwable {
-		landingPage.iClickOnApplicateTile("//div[text()='" + tile + "']");
+		landingPage.iClickOnApplicateTile("//div[text()='"+tile+"']");
 	}
 
 	@Then("^I click on Add User button$")
@@ -163,6 +163,11 @@ public class CreateUserSteps extends DriverScript {
 		createUser.iClickOrganizationalField();
 	}
 
+	@When("^I verify role description \"([^\"]*)\" for Role \"([^\"]*)\"$")
+	public void verifyRoleDescription(String roleDescription, String role) throws Throwable {
+		createUser.verifyRoleDescription(roleDescription, role);
+	}
+	
 	@When("^I click the already selected Organizational Role Field$")
 	public void IClickAlreadySelectedOrganizationalRoleField() throws Throwable {
 		createUser.iClickAlreadySelectedOrganizationalField();
@@ -242,6 +247,10 @@ public class CreateUserSteps extends DriverScript {
 	@And("^I select \"([^\"]*)\" product$")
 	public void iSelectTileForTheRole(String appList) throws Throwable {
 		createUser.iSelectTileForTheRole(appList);
+	}
+	@Then("^I unselect all selected applications$")
+	public void iUnselectAllSelectedApps(){
+		createUser.iUnselectAllSelectedApps();
 	}
 	
 	@Then("^I verify \"([^\"]*)\" is not visible on Applications tab$")
@@ -389,6 +398,46 @@ public class CreateUserSteps extends DriverScript {
 		createUser.iClickOnReportsTileUnderSpecificUserLoginPage(role);
 	}
 	
+	@And("^I click on Reporting tile for \"([^\"]*)\" user$")
+	public void clickOnReportingTile(String role) throws Throwable {
+		createUser.clickOnReportingTile(role);
+	}
+	
+	@And("^I verify \"([^\"]*)\" user navigated to Reporting homepage$")
+	public void verifyUserNavigatedToReporting(String role) throws Throwable {
+		createUser.verifyUserNavigatedToReporting(role);
+	}
+	
+	@And("^I click on Program Management tile for \"([^\"]*)\" user$")
+	public void cllickOnPMTile(String role) throws Throwable {
+		createUser.clickOnPMTile(role);
+	}
+	
+	@And("^I verify \"([^\"]*)\" user navigated to Program Management homepage$")
+	public void verifyUserNavigatedToPM(String role) throws Throwable {
+		createUser.verifyUserNavigatedToPM(role);
+	}
+	
+	@And("^I click on Care Connect tile for  \"([^\"]*)\" user$")
+	public void clickOnCareConnectTile(String role) throws Throwable {
+		createUser.clickOnCareConnectTile(role);
+	}
+	
+	@And("^I verify \"([^\"]*)\" user navigated to Care Connect homepage$")
+	public void verifyUserNavigatedToCareConnect(String role) throws Throwable {
+		createUser.verifyUserNavigatedToCareConnect(role);
+	}
+	
+	@And("^I click on Community Connect tile for \"([^\"]*)\" user$")
+	public void cllickOnCommunityConnectTile(String role) throws Throwable {
+		createUser.clickOnCommunityConnectTile(role);
+	}
+	
+	@And("^I verify \"([^\"]*)\" user navigated to Community Connect homepage$")
+	public void verifyUserNavigatedToCommunityConnect(String role) throws Throwable {
+		createUser.verifyUserNavigatedToCommunityConnect(role);
+	}
+	
 	@And("^I verify \"([^\"]*)\" user navigated to Reports homepage$")
 	public void iVerifuUserNavigatedToReports(String role) throws Throwable {
 		createUser.iVerifyNavigationOnReportsHomePage(role);
@@ -521,7 +570,10 @@ public class CreateUserSteps extends DriverScript {
 		createUser.clickSubmitButtonForDifferentUsers(user);
 	}
 
-
+	@Then("^I click on Submit button$")
+	public void clickSubmitButton() throws Throwable {
+		createUser.clickSubmitButton();
+	}
 	
 	@Then("^I click on Submit button to check for error message$")
 	public void clickSubmitButtonToCheckError() throws Throwable {
@@ -551,7 +603,7 @@ public class CreateUserSteps extends DriverScript {
 
 	@Then("^I verify Learning Pathway search box is available$")
 	public void verifyLearningPathwayAvailable() throws Throwable {
-		createUser.verifyLearningPathwayNotAvailable();
+		createUser.verifyLearningPathwayAvailable();
 	}
 
 	@Then("^I click on Select button$")
@@ -564,14 +616,11 @@ public class CreateUserSteps extends DriverScript {
 		createUser.clickCancelButton();
 	}
 
-	@Then("^I enter \"([^\"]*)\" in Learning Pathway search box$")
-	public void enterTextLearningPathwaySearchBox(String searchParam) throws Throwable {
-		createUser.enterTextLearningPathwaySearchBox(searchParam);
+	@Then("^I edit learning pathway \"([^\"]*)\"$")
+	public void EditLearningPathway(String searchParam) throws Throwable {
+		createUser.EditLearningPathway(searchParam);
 	}
-	@Then("^I remove \"([^\"]*)\" from the results$")
-	public void removeLearningPath(String searchParam) throws Throwable {
-		createUser.selectLearningPath(searchParam);
-	}
+	
 	@Then("^I select \"([^\"]*)\" from the results$")
 	public void selectLearningPath(String searchParam) throws Throwable {
 		createUser.selectLearningPath(searchParam);
@@ -591,6 +640,10 @@ public class CreateUserSteps extends DriverScript {
 	public void selectPrograms(String programList) throws Throwable {
 		createUser.selectPrograms(programList);
 	}
+	@Then("^I verify that \"([^\"]*)\" model is not present under Programs$")
+		public void iVerifyModel(String text){
+			createUser.iVerifyModel(text);
+		}
 	
 	@Then("^I select \"([^\"]*)\" locations$")
 	public void selectLocations(String locationList) throws Throwable {
@@ -627,10 +680,7 @@ public class CreateUserSteps extends DriverScript {
 		createUser.verifyDefaultProgramOrganization(programName);
 	}
 
-	@Then("^I verify unavailability of organization drop down$")
-	public void verifyUnavailabilityOrganizationDropDown() throws Throwable {
-		createUser.verifyUnavailabilityOrganizationDropDown();
-	}
+
 
 	@Then("^I search for \"([^\"]*)\"$")
 	public void searchLocation(String location) throws Throwable {
@@ -789,9 +839,9 @@ public class CreateUserSteps extends DriverScript {
 			createUser.selectLocations(locationList);
 		}
 
-	 @And("^I verify selected Location \"([^\"]*)\" are not shown in selected Locations section$")
-	 public void i_verify_The_Selected_Locations_Not_Present_In_The_selectLocations_Section(String text) throws Throwable {
-			createUser.iVerifyTheSelectedLocationsAreNotPresentInSelectLocationsSection(text);
+	 @And("^I verify Location \"([^\"]*)\" are not shown in selected Locations section$")
+	 public void i_verify_The_Locations_Not_Present_In_The_selectLocations_Section(String text) throws Throwable {
+			createUser.iVerifyTheLocationsAreNotPresentInSelectLocationsSection(text);
 		}
 	 
 	 @And("^I verify selected Location \"([^\"]*)\" in the selected Locations section$")
@@ -856,8 +906,38 @@ public class CreateUserSteps extends DriverScript {
 	 public void iEnterExistingEmail(String userRole){
 		 createUser.iEnterExistingEmail(userRole);
 	 }
-	 @Then("^I verify that \\\"([^\\\"]*)\\\" is not present under the bpid$")
+	 @Then("^I verify that \"([^\"]*)\" is not present under the bpid$")
 	 public void iVerifyAllLocationsPresence(String text) {
 		 createUser.iVerifyAllLocationsPresence(text);
 	 }
+
+	 @Then("^I click on > to navigate to next page while \"([^\"]*)\" the user$")
+	 public void iNavigateToNextLocationsPage(String text){
+		 createUser.iNavigateToNextLocationsPage(text);
+	 }
+	 @Then("^I search \"([^\"]*)\" locations for Downstream Provider role$")
+	 public void iSearchDPLocations(String locationList){
+		 createUser.iSearchDPLocations(locationList);
+	 }
+	 
+	 @Then("^I should not see any error message on searching any downstream provider location less than 5 alphabets$")
+	 public void iShouldNotSeeAnyErrorMessageForDPLocations(){
+		 createUser.iShouldNotSeeAnyErrorMessageForDPLocations();
+	 }
+	 @Then("^I should not get error message- \"([^\"]*)\"$")
+	 public void validateErrorMsg(String text){
+		 createUser.validateErrorMsg(text);
+	 }
+	 @Then("^I select created user$")
+	 public void iSelectCreatedUser() throws InterruptedException{
+		 createUser.iSelectCreatedUser();
+	 }
+	 @Then("^I verify that roles are reflected as per the \"([^\"]*)\"$")
+	 public void iVerifyRolesAsPerUser(String user){
+		 createUser.iVerifyRolesAsPerUser(user);
+	 }
+	 @Then("^I enter \"([^\"]*)\" in Learning Pathway search box$")
+		public void enterTextLearningPathwaySearchBox(String searchParam) throws Throwable {
+			createUser.enterTextLearningPathwaySearchBox(searchParam);
+		}
 }

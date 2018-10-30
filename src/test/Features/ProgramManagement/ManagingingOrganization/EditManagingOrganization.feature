@@ -1,11 +1,5 @@
 Feature: Edit the Managing organization functionality test
 
-  Background: 
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-
   Scenario Outline: Create MO using API calls
     Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
     When create org with this data
@@ -17,6 +11,10 @@ Feature: Edit the Managing organization functionality test
       | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
     Then I search with "<MO_Name>" on organization in search box
     And I verify "<MO_Name>" field in search list on organization page
@@ -40,6 +38,10 @@ Feature: Edit the Managing organization functionality test
       | Verification of availability of all the fields on Edit Managing Organization page | MONAME  |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
     Then I search with "<MO_Name>" on organization in search box
     And I verify "<MO_Name>" field in search list on organization page
@@ -62,6 +64,10 @@ Feature: Edit the Managing organization functionality test
       | Check validation for blank Postal code field on Edit Managing Organization page | MONAME  | MONAME         | Address1 | City | California |             | Please enter a Postal Code        |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
     Then I search with "<MO_Name>" on organization in search box
     And I verify "<MO_Name>" field in search list on organization page
@@ -94,6 +100,10 @@ Feature: Edit the Managing organization functionality test
       | Check Allowed Characters for PostalCode field on Edit Managing Organization page   | MONAME  |                                                                              |                                                           |                                                |                                                           |                                                                                                                                                                                                                                                                     |                                                |               |       | abcdefgh    | Please enter a valid Postal Code                               |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
     Then I search with "<MO_Name>" on organization in search box
     And I verify "<MO_Name>" field in search list on organization page
@@ -120,6 +130,10 @@ Feature: Edit the Managing organization functionality test
       | Edit a Managing Organization With Mandatory Fields Missing | MONAME  |                |          |                |          |               |      |               |       |             |
 
   Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
     Then I search with "<MO_Name>" on organization in search box
     And I verify "<MO_Name>" field in search list on organization page
@@ -166,6 +180,10 @@ Feature: Edit the Managing organization functionality test
       | Edit a Managing Organization duplicate Managing Organization Name                              | MONAME  | MONAME                            | ContactPersonTest                             | Sample@yopmail.com                                                                                                                                                                                                                                             |     5555599999 | Address1                                                | Address2                                                | City                                          | New York |       10001 | Managing Organization Successfully Updated. |
 
   Scenario Outline: Verification of Cancel Button Functionality on edit a Managing Organization page
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
     Then I search with "<MO_Name>" on organization in search box
     And I verify "<MO_Name>" field in search list on organization page

@@ -93,4 +93,19 @@ public class ViewACHOrganizationStepDef extends DriverScript {
 	  public void i_Search_With_OrgName_on_view_Profile_Of_Managing_Organization_Search_Box(String text) throws Throwable {
 		viewACH.iSearchWithOrgNameonViewProfileOfManagingOrganizationSearchBox(text);
 		}
+	
+	@And("^I click on \"([^\"]*)\" on view profile Managing Organization search box$")
+	  public void i_Click_On_OrgName_on_view_Profile_Of_Managing_Organization_Search_Box(String text) throws Throwable {
+		viewACH.iClickOnOrgNameonViewProfileOfManagingOrganizationSearchBox(text);
+		}
+	
+	@And("^I verify Location details of \"([^\"]*)\" on view profile of \"([^\"]*)\" organization$")
+	  public void i_Verify_LocationDetails_On_ViewProfile_Of_Slecetd_Organization(String text, String org) throws Throwable {
+		viewACH.iVerifyLocationDetailsonVeiwProfileOfSelectedOrganization(text, org);
+	}
+	
+	@And("^I verify Location index id \"([^\"]*)\" on view profile of \"([^\"]*)\" organization$")
+	  public void i_Verify_LocationIndexId_On_ViewProfile_Of_Slecetd_Organization(String LId, String org) throws Throwable {
+		viewACH.iVerifyLocationIndexIdonVeiwProfileOfSelectedOrganization(LId, org);
+	}
 }
