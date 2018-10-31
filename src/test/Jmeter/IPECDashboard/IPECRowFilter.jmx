@@ -52,7 +52,7 @@
           <boolProp name="recycle">false</boolProp>
           <stringProp name="shareMode">shareMode.all</stringProp>
           <boolProp name="stopThread">true</boolProp>
-          <stringProp name="variableNames">Flag,userName,time_range,bpid,ccn,bundle,region,market,r_region,r_market,participantName</stringProp>
+          <stringProp name="variableNames">Flag,userName,time_range,bpid,anchorFacility,ccn,bundle,region,market,r_region,r_market,participantName</stringProp>
         </CSVDataSet>
         <hashTree/>
         <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
@@ -68,6 +68,12 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_CCN&quot;,&quot;AND aaf.ccn in ${ccn}&quot;);	
 } else {
 	vars.put(&quot;EC_CCN&quot;,&quot;&quot;);
+}
+
+if(!vars.get(&quot;anchorFacility&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;EC_AncFacility&quot;,&quot;AND aaf.facilityNameInitCap in ${anchorFacility}&quot;);	
+} else {
+	vars.put(&quot;EC_AncFacility&quot;,&quot;&quot;);
 }
 
 if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){
@@ -177,6 +183,7 @@ AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW(
 -- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
 -- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
 and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
+${EC_AncFacility}
 ${EC_CCN}
 ${EC_BUNDLE}
 ${EC_R_REGION}
@@ -363,6 +370,7 @@ AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW(
 -- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
 and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
+${EC_AncFacility}
 ${EC_CCN}
 ${EC_R_REGION}
 ${EC_R_MARKET}
@@ -455,6 +463,7 @@ AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW(
 -- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
 and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
+${EC_AncFacility}
 ${EC_CCN}
 ${EC_BUNDLE}
 ${EC_R_REGION}
@@ -546,6 +555,7 @@ AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW(
 -- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
 and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
+${EC_AncFacility}
 ${EC_CCN}
 ${EC_BUNDLE}
 ${EC_REGION}
@@ -637,6 +647,7 @@ AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW(
 -- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
 and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
+${EC_AncFacility}
 ${EC_CCN}
 ${EC_BUNDLE}
 ${EC_R_REGION}

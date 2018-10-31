@@ -1,4 +1,0 @@
-claimsEpisodeCount=1717*SpendPerEpisodeClaims=30338*NPRAPerEpisodeClaims=856
-claimsEpisodeCount=2117*SpendPerEpisodeClaims=30075*NPRAPerEpisodeClaims=1360
-claimsEpisodeCount=400*SpendPerEpisodeClaims=28947*NPRAPerEpisodeClaims=3526
-claimsEpisodeCount=2117*SpendPerEpisodeClaims=30075*NPRAPerEpisodeClaims=1360

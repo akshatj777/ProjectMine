@@ -1,1 +1,0 @@
-*Episode Initiator - BPID=${value1}*Anchor Facility - CCN=${value2}*Bundle=${value3}*Region Market=${value5}*Remedy Region Market=${value4}*Participant=${value6}

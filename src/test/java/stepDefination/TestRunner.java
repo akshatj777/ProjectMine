@@ -34,10 +34,10 @@ import stepDefination.Hooks.*;
         plugin = {"html:target/cucumber-results", "usage:target/cucumber-results/cucumber-usage.json",
                 "junit:target/cucumber-results/cucumber-results.xml", "json:target/cucumber-results/cucumber.json"},
 
-        features = { "src/test/Features/Analytics/" },
+        features = { "src/test/Features/" },
         monochrome = true,
         //glue = { "./src/test/java/stepDefination" },
-        tags = {"@RR"}
+        tags = {"@IPECRLS"}
 )
 public class TestRunner {
 

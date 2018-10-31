@@ -1,1 +1,0 @@
-episodeInitiatorNameInitCap=Penn Presbyterian Medical Center,bpid=2070-021,facilityName=Upenn - Penn Presbyterian Hospital,,ccn=390223
