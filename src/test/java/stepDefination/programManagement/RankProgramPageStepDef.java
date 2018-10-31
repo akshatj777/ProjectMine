@@ -49,4 +49,9 @@ public class RankProgramPageStepDef extends DriverScript{
 	public void i_Change_The_Ranking_Values_Using_DragAndDrop_On_Rank_Program_Page(){
 		rankProgram.iChangeTheRankingValuesUsingDragAndDropOnRankProgramPage();
 	}
+	
+	@And("^I verify \"([^\"]*)\" after submitting the \"([^\"]*)\" page$")
+	  public void i_Verify_Message_After_Submitting_Create_Organization_Page(String msg, String org) throws Throwable {
+		rankProgram.iVerifyMessageAfterSubmittingRankProgramsPageUnderPayorOrganization(msg, org);
+	 }
 }

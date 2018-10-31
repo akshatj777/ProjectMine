@@ -151,10 +151,12 @@ Feature: PM-1672-Program Priority Rank
     Then I verify Programs text on Rank program page
     Then I change the ranking values using drag and drop on Rank Program page
     Then I click on "Submit" button on "create" organization page
+    Then I verify "<Message>" after submitting the "Rank Programs" page
+    Then I verify "1" Program Rank for created programs under program tab
 
     Examples: 
-      | Description                                                 | Payor_Name | Program_Name |
-      | Verify that the updated ranking is reflected in Rank column | PAYORNAME  | PROGRAMNAME  |
+      | Description                                                 | Payor_Name | Program_Name | Message                      |
+      | Verify that the updated ranking is reflected in Rank column | PAYORNAME  | PROGRAMNAME  | Program Successfully Updated |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"

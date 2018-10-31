@@ -60,7 +60,7 @@ public class CreatePrograms extends BaseClass {
 			iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-success>div"));
 			verifyTextForElement(driver.findElement(By.cssSelector(".alert.alert-dismissible.alert-success>div")), msg);
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
-		}
+			}
 		else 
 		   {
 		    	iWillWaitToSee(By.cssSelector(".alert.alert-dismissible.alert-danger>div"));
