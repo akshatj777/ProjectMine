@@ -429,14 +429,16 @@ public class ViewACHOrganization  extends BaseClass{
 	
 	public void iVerifyManagingOrganizationOnAutoFilledOnOrganizationPage(String org)
 	{
-		List<WebElement> listItems = driver.findElements(By.cssSelector("span[aria-selected='true']"));
-		for (WebElement item : listItems) 
-		{
-			  if (item.getText().trim().contains(CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)))
-			  {
-				  Assert.assertTrue(item.getText().trim().contains(CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)));  
-			  } 
-		}
+//		List<WebElement> listItems = driver.findElements(By.cssSelector("span[aria-selected='true']"));
+//		for (WebElement item : listItems) 
+//		{
+//			  if (item.getText().trim().contains(CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)))
+//			  {
+//				  Assert.assertTrue(item.getText().trim().contains(CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1)));  
+//			  } 
+//		}
+		Assert.assertTrue(driver.findElement(By.xpath("//span[text()='Has a Managing Organization']/parent::div/parent::div//span[@class='Select-value-label']")).getText().trim().contains(CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1).trim()));
+		
 	}
 	
 	public void iVerifyDetailsOfOrgAssociatedWithMO(String name, String org){
@@ -604,7 +606,7 @@ public class ViewACHOrganization  extends BaseClass{
 		}
 	}
 	
-	public void iClickOnOrgNameonViewProfileOfManagingOrganizationSearchBox(String text){
+	public void iClickOnOrgNameonViewProfileOfManagingOrganizationSearchBox(String text, String org){
 		if(text.contains("ACHNAME - YES"))
 		{
 			scrollIntoViewByJS(driver.findElement(By.xpath("//div[text()='"+CreateACHOrganization.achOrg.get("ACHNAME")+"']")));
@@ -666,6 +668,59 @@ public class ViewACHOrganization  extends BaseClass{
 			String query = "select id from program_management.location where organization_id = (select id from program_management.organization where name='"+CreateIRFOrganizationAPI.IRFNameList.get(1).substring(1, CreateIRFOrganizationAPI.IRFNameList.get(1).length()-1)+"')and address_type_id=2";
 			LocIndexIdList=fetchLocationIndexID(query);
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+LocIndexIdList.get(0)+"']")));
+		}
+	}
+	
+	
+	public void iVerifyCCNIdentifierOnViewProfileOfSelectedOrganization(String text, String org) {
+		if (org.contains("Hospital"))
+		{
+			if (text.contains("YES"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ccn"))); 
+			    Assert.assertEquals("CCN: "+CreateACHOrganization.achOrg.get("CCN"),actual.replace("|", ""));
+			}
+			else if (text.contains("NO"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ccn"))); 
+			    Assert.assertEquals("CCN: "+CreateACHOrganization.achOrg_noMO.get("CCN"),actual.replace("|", ""));
+			}
+		}
+	}
+	
+	public void iVerifyEINIdentifierOnViewProfileOrganization(String text, String org) {
+		if (org.contains("Hospital"))
+		{
+			if (text.contains("YES"))
+			{	
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateACHOrganization.achOrg.get("EIN"),actual);
+			}
+			else if (text.contains("NO"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateACHOrganization.achOrg.get("EIN"),actual);
+			}
+		}
+	}
+	
+	public void iVerifyNPIIdentifierOnViewProfileOrganization(String text, String org) {
+		if(org.contains("Hospital"))
+		{
+			if(text.contains("YES"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateACHOrganization.achOrg.get("NPI"),actual);
+			}
+			else if(text.contains("NO"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreateACHOrganization.achOrg.get("NPI"),actual);	
+			}
 		}
 	}
 }

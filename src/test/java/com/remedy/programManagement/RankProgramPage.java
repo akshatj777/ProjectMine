@@ -49,7 +49,7 @@ public class RankProgramPage extends BaseClass{
 	}
 	
 	public void iVerifyProgramRankForCreatedProgramUnderProgramTab(int index){
-		String rankCount= driver.findElement(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(1).substring(1, CreateProgramAPI.PROGRAMNameList.get(1).length()-1)+"']/parent::a/parent::div/following-sibling::div/a/div[text()='"+index+"']")).getText();
+		String rankCount= driver.findElement(By.xpath("//div[text()='"+CreateProgramAPI.PROGRAMNameList.get(index-1).substring(1, CreateProgramAPI.PROGRAMNameList.get(index-1).length()-1)+"']/parent::a/parent::div/following-sibling::div/a/div[text()='"+index+"']")).getText();
 		Assert.assertTrue(rankCount, true);
 	}
 	
