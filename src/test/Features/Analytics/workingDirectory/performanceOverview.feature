@@ -2,7 +2,7 @@ Feature: Performance Overview Dashboard Validations
 
   @RowLevelSecurity @PORLS
   Scenario Outline: Front end Data Filter Validation for Claims
-    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInput.csv" for writing data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsRowFilterInput.csv" for writing data at "<Row>" to input file
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login
@@ -142,7 +142,7 @@ Feature: Performance Overview Dashboard Validations
 
   @RowLevelSecurity @PORLS
   Scenario Outline: Front end Data Filter Validation for EC
-    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInput.csv" for writing data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ECRowFilterInput.csv" for writing data at "<Row>" to input file
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login

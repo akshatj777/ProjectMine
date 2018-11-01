@@ -70,9 +70,9 @@
           <hashTree/>
         </hashTree>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
-          <stringProp name="filename">RowFilterInput.csv</stringProp>
+          <stringProp name="filename">ECRowFilterInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">Flag,userName,bpid,ccn,bundle,region,market,r_region,r_market,participantName,drgCode,npi,model,anch</stringProp>
+          <stringProp name="variableNames">Flag,userName,bpid,anchorFacility,ccn,bundle,region,market,r_region,r_market,participantName,drgCode,npi,model,anch</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -90,10 +90,17 @@
 } else {
 	vars.put(&quot;EC_BPID&quot;,&quot;&quot;);
 }
+if(!vars.get(&quot;anchorFacility&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;EC_AnchorFacility&quot;,&quot;AND df.facilityNameInitCap in ${anchorFacility}&quot;);	
+} else {
+	vars.put(&quot;EC_AnchorFacility&quot;,&quot;&quot;);
+}
+
 if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_CCN&quot;,&quot;AND df.ccn in ${ccn}&quot;);	
 } else {
 	vars.put(&quot;EC_CCN&quot;,&quot;&quot;);
+	facilityNameInitCap
 }
 
 if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){
@@ -201,7 +208,8 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
      --       AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			
 --				${EC_BPID}
-	           	 ${EC_CCN}
+   				${EC_AnchorFacility}
+	           	${EC_CCN}
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
@@ -354,6 +362,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
             		${EC_BPID}
+            		${EC_AnchorFacility}
 	           	${EC_CCN}
 --				${EC_BUNDLE} 
 				${EC_R_REGION} 
@@ -431,6 +440,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL @test_time_rage MONTH) AND NOW()
             -- AND de.bpid = @test_bpid
             	${EC_BPID}
+            	${EC_AnchorFacility}
 	            ${EC_CCN}
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
@@ -508,6 +518,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
             		${EC_BPID}
+            		${EC_AnchorFacility}
 	             	${EC_CCN}
 				${EC_BUNDLE} 
 --				${EC_R_REGION} 
@@ -584,6 +595,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
             		${EC_BPID}
+            		${EC_AnchorFacility}
 	            	${EC_CCN}
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
@@ -662,6 +674,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
             		${EC_BPID}
+            		${EC_AnchorFacility}
 	            	${EC_CCN}
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
@@ -740,6 +753,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
             		${EC_BPID}
+            		${EC_AnchorFacility}
 	            	${EC_CCN}
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
@@ -816,6 +830,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
 	            ${EC_BPID}
+	            ${EC_AnchorFacility}
 	            ${EC_CCN}
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
@@ -886,6 +901,7 @@ LEFT JOIN
             -- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			-- AND e.bpid = @test_bpid
 	            	${EC_BPID}
+	            	${EC_AnchorFacility}
 	            	${EC_CCN}
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
@@ -923,7 +939,7 @@ LEFT JOIN
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">echo *Episode Initiator - BPID=${value1}*Anchor Facility - CCN=${value2}*Bundle=${value3}*Region - Market=${value5}*Remedy Region - Market=${value4}*Participant=${value6}*DRG=${value7}*Physician - NPI=${value8}*Model=${value9}*Anchor Facility Detail=${value10}</stringProp>
+                <stringProp name="Argument.value">echo Printed</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>

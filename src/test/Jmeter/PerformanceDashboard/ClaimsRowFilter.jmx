@@ -70,9 +70,9 @@
           <hashTree/>
         </hashTree>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
-          <stringProp name="filename">RowFilterInput.csv</stringProp>
+          <stringProp name="filename">ClaimsRowFilterInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">Flag,userName,bpid,ccn,bundle,region,market,r_region,r_market,participantName,drgCode,npi,model,anch</stringProp>
+          <stringProp name="variableNames">Flag,userName,bpid,anchorFacility,ccn,bundle,region,market,r_region,r_market,participantName,drgCode,npi,model,anch</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -89,6 +89,11 @@
 	vars.put(&quot;C_BPID&quot;,&quot;AND e.bpid in ${bpid}&quot;);	
 } else {
 	vars.put(&quot;C_BPID&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;anchorFacility&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;C_AnchorFacility&quot;,&quot;AND f.facilityNameInitCap in ${anchorFacility}&quot;);	
+} else {
+	vars.put(&quot;C_AnchorFacility&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;C_CCN&quot;,&quot;AND f.ccn in ${ccn}&quot;);	
@@ -176,7 +181,7 @@ SELECT DISTINCT
 --			AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
---				${C_BPID}
+				${C_AnchorFacility}
 	               ${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
@@ -235,8 +240,7 @@ FROM
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
-            	${C_BPID}
---	            ${C_CCN}
+            		${C_BPID}
 				${C_BUNDLE} 
 				${C_R_REGION} 
 				${C_R_MARKET} 
@@ -294,9 +298,9 @@ FROM
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
-            	${C_BPID}
-	            ${C_CCN}
---				${C_BUNDLE} 
+            		${C_BPID}
+            		${C_AnchorFacility}
+	            	${C_CCN}
 				${C_R_REGION} 
 				${C_R_MARKET} 
 				${C_REGION} 
@@ -355,11 +359,10 @@ FROM
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
-            	${C_BPID}
-	            ${C_CCN}
+            		${C_BPID}
+            		${C_AnchorFacility}
+	           	${C_CCN}
 				${C_BUNDLE} 
---				${C_R_REGION} 
---				${C_R_MARKET} 
 				${C_REGION} 
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
@@ -415,13 +418,12 @@ FROM
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
-            	${C_BPID}
-	            ${C_CCN}
+            		${C_BPID}
+            		${C_AnchorFacility}
+	            	${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
 				${C_R_MARKET} 
---				${C_REGION} 
---				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
 				${C_PHY_NPI}
@@ -473,14 +475,14 @@ FROM
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
-            	${C_BPID}
-	            ${C_CCN}
+            		${C_BPID}
+            		${C_AnchorFacility}
+	            	${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
 				${C_R_MARKET} 
 				${C_REGION} 
 				${C_MARKET} 
---				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
 				${C_PHY_NPI}
 				${C_Model}
@@ -545,15 +547,15 @@ FROM
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
-            	${C_BPID}
-	            ${C_CCN}
+            		${C_BPID}
+            		${C_AnchorFacility}
+	            	${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
 				${C_R_MARKET} 
 				${C_REGION} 
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
---				${C_DRGCODE} 
 				${C_PHY_NPI}  
 				${C_Model}
             
@@ -608,8 +610,9 @@ FROM
 --             AND c.anchorBeginDateKey &gt;= @test_beg_date
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
-            	${C_BPID}
-	            ${C_CCN}
+            		${C_BPID}
+            		${C_AnchorFacility}
+	            	${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
 				${C_R_MARKET} 
@@ -617,7 +620,6 @@ FROM
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
---				${C_PHY_NPI}
 				${C_Model} 
             
             ) a
@@ -670,6 +672,7 @@ FROM
 --             AND c.anchorBeginDateKey &lt;= @test_end_date
 			-- AND e.bpid = @test_bpid
 	            	${C_BPID}
+	            	${C_AnchorFacility}
 	            	${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
@@ -679,7 +682,6 @@ FROM
 				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
 				${C_PHY_NPI}
---				${C_Model}				
             
             ) a
 ORDER BY a.model;</stringProp>
