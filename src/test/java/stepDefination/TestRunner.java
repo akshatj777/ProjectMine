@@ -37,7 +37,7 @@ import stepDefination.Hooks.*;
 
 
 
-        features = { "src/test/Features/UA2/SuperAdmin/ViewUserProfile.feature" }
+        features = { "src/test/Features/UA2/Bulk Upload/NegativeCases.feature:72" }
 
 
         //glue = { "./src/test/java/stepDefination" },
