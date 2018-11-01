@@ -58,6 +58,7 @@ Feature: Edit user page for SA
       | Verify validation message for NPI as alphanumeric     | Super Admin | First Name | Last Name  | qaautomation@remedysystems.com2 | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI          |
       | Verify validation message for invalid First Name      | Super Admin | 8473827919 | Last Name  | qaautomation@remedysystems.com2 | 9874563210 | Physicians | NPI        | Please enter a valid name         |
       | Verify validation message for invalid Last name       | Super Admin | First Name | 8473827919 | qaautomation@remedysystems.com2 | 9874563210 | Physicians | NPI        | Please enter a valid name         |
+      | Verify validation message for & in FN and LN          | Super Admin | First&Name | Last&Name  | qaautomation@remedysystems.com2 | 9874563210 | Physicians | NPI        | Please enter a valid name         |
 
   Scenario Outline: Verify auto selected programs in Organizations
     Given I am on the login page
@@ -272,7 +273,7 @@ Feature: Edit user page for SA
     Then I select "<Locations3>" locations
     Then I click on Submit button while edit for "<User>-<PreviousRole>-<Role>"
     And I wait for 3000 milli seconds
-     Then I refresh the view user page
+    Then I refresh the view user page
     And I verify that I am navigated to user page
     Then I verify first name "<FirstName>"
     Then I verify last name "<LastName>"
