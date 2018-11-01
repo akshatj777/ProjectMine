@@ -179,9 +179,9 @@ WHERE f.bundleRisk=1
   AND dp.dwhSource = &apos;EC&apos;
   AND dloo.lookupCategory = &apos;patientRisk&apos;
 -- and tbsBPID.username = @test_user
-AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()-- Use this query logic when filtering by Days
--- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
--- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
+-- AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW()-- Use this query logic when filtering by Days
+and f.anchorAdmitDateKey &gt;= &apos;20160101&apos; -- Use this query logic when filtering by Months
+and f.anchorAdmitDateKey &lt;= &apos;20181101&apos; -- Use this query logic when filtering by Months
 and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_AncFacility}
 ${EC_CCN}
@@ -191,7 +191,7 @@ ${EC_R_MARKET}
 ${EC_REGION}
 ${EC_MARKET}
 ${EC_PARTICIPANTNAME}
-order by de.episodeInitiatorNameInitCap;</stringProp>
+order by de.episodeInitiatorNameInitCap, f.bpid;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
