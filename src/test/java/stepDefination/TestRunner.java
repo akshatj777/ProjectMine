@@ -37,7 +37,7 @@ import stepDefination.Hooks.*;
         features = { "src/test/Features/" },
         monochrome = true,
         //glue = { "./src/test/java/stepDefination" },
-        tags = {"@IPECRLS"}
+        tags = {"@tag2"}
 )
 public class TestRunner {
 

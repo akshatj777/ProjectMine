@@ -73,8 +73,8 @@ Feature: Inpatient Episode Clearing Dashboard
       | Qatwodashtest@yopmail.com   |   5 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |
       | Qadashboardtest@yopmail.com |   6 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |
       | Qafivedashtest@yopmail.com  |   7 | Skip        | Skip        | Skip        | Skip            | Skip                   | True Random |
-      | allmodel123@yopmail.com     |   8 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |
-      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | Skip            | Skip                   | True Random |
+      | allmodel123@yopmail.com     |   1 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |
+      | allmodel123@yopmail.com     |   2 | True Random | True Random | True Random | Skip            | Skip                   | True Random |
       | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        |
       | Qatwodashtest@yopmail.com   |  11 | True Random | Skip        | True Random | Skip            | Skip                   | True Random |
 

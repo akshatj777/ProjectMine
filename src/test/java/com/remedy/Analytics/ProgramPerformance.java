@@ -2187,7 +2187,7 @@ public class ProgramPerformance extends BaseClass{
 		 System.out.println(mapOfHmFiltersValue.toString());
 	 }
 	 
-	 public void iFetchStoreValuesOnDashboard(String filter,String dashboard){
+	 public void iFetchStoreValuesOnDashboard(String filter,String dashboard) throws FileNotFoundException{
 		 List<WebElement> listItems = driver.findElements(By.cssSelector(".FIText"));
 		 List<String> values = new ArrayList<String>();
 		 System.out.println("Size="+listItems);
@@ -2200,6 +2200,45 @@ public class ProgramPerformance extends BaseClass{
 		  }
 		 rowFilters.put(filter, values.toString());
 		 System.out.println("Out"+rowFilters.toString());
+		 
+		 /* For Trimming Participant From Region Market*/ 
+		 List<String> RegionMarketArrayList = new ArrayList<String>();;
+		 if(filter.equals("Region - Market")) {
+			 RegionMarketArrayList=values;
+		 }
+		 if(filter.equals("Participant")) {
+			 ArrayList<String> arrayListTextsA=new ArrayList<String>();
+			 ArrayList<String> arrayListTextsB=new ArrayList<String>();
+			 String[] valarr;
+			 String valA = null;
+			 String valB = null;
+			 for(int i =0; i<RegionMarketArrayList.size();i++) {
+				 String tempVar=RegionMarketArrayList.get(i).trim();
+					if(tempVar.equals("Null")) {
+						tempVar=tempVar.replace("Null", "null");
+//						arrayListTextsA.add(tempVar);
+//						arrayListTextsB.add(tempVar);
+					}if (!tempVar.equals("Null")) {
+					
+					valarr=tempVar.split(" - ");
+					valA=valarr[0].trim();
+					valB=valarr[1].trim();
+					valA = valA.replaceAll("'","''");
+					tempVar="'"+valA+"'"; 
+       			 	arrayListTextsA.add(tempVar);
+       			    valB = valB.replaceAll("'","''");
+       			 tempVar="'"+valB+"'"; 
+    			 	arrayListTextsB.add(tempVar);
+		 }}
+			 arrayListTexts.addAll(arrayListTextsA);
+			 System.out.println("Value of A="+arrayListTexts);
+			 writeDataToOutputFile("Path");
+			 arrayListTexts.addAll(arrayListTextsB);
+			 System.out.println("Value of B="+arrayListTexts);
+			 writeDataToOutputFile("Path");
+			 
+			 }
+		 /* ----------------------------------- */
 	 }
 	 
 	 public void igetDateForDataFetchedForDashboard(String range) throws FileNotFoundException{
