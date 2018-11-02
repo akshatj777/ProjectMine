@@ -1,130 +1,130 @@
 ####################Data Permissions for Bulk Upload User having all application Access########################
 
-LeaderFirstName | LeaderLastName | LEADERMAIL | | Leader | NA | 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | | True |  |  |  |  |  |  | | |
-ManagerFirstName | ManagerLastName | MANAGERMAIL | 9876545678 | Manager | NA | 441447:3056-r29:075296 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81 | | True |  |  |  |  |  |  | | |
-AdvancedOperatorFirstName | AdvancedOperatorLastName | ADVANCEDOPERATORMAIL |9879800980 | Advanced Operator | NA |776109:2070-005:HUMC |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1  | | True|  |  |  |  |  |  | | |
-PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL | | Physicians | NPI | 514026:2070-046:H |3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | | True |  |  |  |  |  |  | | |
-RTCSFirstName | RTCSLastName | RTCSMAIL | 5465465655| Remedy TCS | NA | 514083:2070-015:TSH |NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | | False | True |True  |True  |True  |True  | False | False|True|True 
-RLPNFirstName | RLPNLastName | RLPNMAIL | 9898989898| Remedy LPN | NA |439245:ALL_BPIDS:ALL_FACILITIES   | | | False | True | True | True | True |True  |False  |False |False |True
-RRNFirstName | RRNLastName | RRNMAIL | 9878909878| Remedy RN | NA | 441348:ALL_BPIDS:ALL_FACILITIES  |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False | True | True | True | True | True | False |False |True |True
-RFRNFirstName | RFRNLastName | RFRNMAIL | | Remedy Field RN | NA | 441448:3056-r31:075244 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81  | | False | True | True | True | True | True | False |False | False|True
-RPMFirstName | RPMLastName | RPMMAIL | | Remedy PM | NA | 441364:3056-k60:365973,441364:3056-k61:365860 |NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1 | | False| True | True | True | True | True | False |False | False|True
-RSTFirstName | RSTLastName | RSTMAIL | 8989898787| Remedy Sales Team | NA |441371:ALL_BPIDS:ALL_FACILITIES   |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1 | | False | False | False | True | True | True | False |False | False|False
-REFirstName | RELastName | REMAIL | | Remedy Executive | NA | 439108:ALL_BPIDS:ALL_FACILITIES  |jusUV22erpk1,HZhmTBQzHtU1,n9yn5n0Qa581 | | True | True | True | False | False | False | False | | False|
-PPEFirstName | PPELastName | PPEMAIL | | Prospective Partner Executive | NA |442503:ALL_BPIDS:ALL_FACILITIES   | | | True | False | False | True | False | False | False | | False|
-ROFirstName | ROLastName | ROMAIL | 7676878998| Remedy Other | NA | 439245:ALL_BPIDS:ALL_FACILITIES |HZhmTBQzHtU1,18h7phZr1h81 | | True | True | False | False | False | False | False | | False|
-PPAFirstName | PPALastName | PPAMAIL | | Partner Program Administrator | NA |514083:2070-015:TSH  |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,18h7phZr1h81,n9yn5n0Qa581  | | True | True | False | False | False | False | False | | True|
-RPAFirstName | RPALastName | RPAMAIL | 9877766666| Remedy Program Administrator | NA | 441364:3056-k60:365973,441364:3056-k61:365860,441371:ALL_BPIDS:ALL_FACILITIES  | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | True | False | True | False | False | True | False | | False|
-PTAFirstName | PTALastName | PTAMAIL | | Partner Technical Administrator | NA |572091:3056-r30:075278  |NFdw0Kts2C01,HZhmTBQzHtU1,n9yn5n0Qa581    | | True | False | False | True | False | False | True | | False|
-RTAFirstName | RTALastName | RTAMAIL | 3456765432| Remedy Technical Administrator | NA | 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False | True | True | True | True | True | True |False | False|False
-OperatorFirstName | OperatorLastName | OPERATORMAIL | | Operator | NA | 514029:ALL_BPIDS:ALL_FACILITIES |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581  | | True | False | False | True | False | False | False | | False|
-DPFirstName | DPLastName | DPMAIL | 9998887770| Downstream Provider | NA | 015174 |  | | True | True | False | False | False | False | False | | False|
-SalesAcuteDemoFirstName | SalesAcuteDemoLastName | SalesAcuteDemoMAIL | | Remedy Sales Acute Demo 2018 | NA | 514029:2070-025:T | 18h7phZr1h81,n9yn5n0Qa581   | | True|  |  |  |  |  |  | | |
-SalesPACDemoFirstName | SalesPACDemoLastName | SalesPACDemoMAIL | | Remedy Sales PAC Demo 2018 | NA | 514029:2070-025:T,514029:2070-023:L | | | True|  |  |  |  |  |  | | |
-CommercialFirstName | CommercialLastName | CommercialMAIL | | Remedy Sales Commercial Demo 2018 | NA | 514029:2070-025:T,514029:2070-023:L | | |True|  |  |  |  |  |  | | |
+LeaderFirstName | LeaderLastName | LEADERMAIL | | Leader | NA | 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | | True |  |  |  |  |  |  | | ||False
+ManagerFirstName | ManagerLastName | MANAGERMAIL | 9876545678 | Manager | NA | 441447:3056-r29:075296 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81 | | True |  |  |  |  |  |  | | ||False
+AdvancedOperatorFirstName | AdvancedOperatorLastName | ADVANCEDOPERATORMAIL |9879800980 | Advanced Operator | NA |776109:2070-005:HUMC |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1  | | True|  |  |  |  |  |  | | ||False
+PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL | | Physicians | NPI | 514026:2070-046:H |3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | | True |  |  |  |  |  |  | | ||False
+RTCSFirstName | RTCSLastName | RTCSMAIL | 5465465655| Remedy TCS | NA | 514083:2070-015:TSH |NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | | False | True |True  |True  |True  |True  | False | False|True|True |False
+RLPNFirstName | RLPNLastName | RLPNMAIL | 9898989898| Remedy LPN | NA |439245:ALL_BPIDS:ALL_FACILITIES   | | | False | True | True | True | True |True  |False  |False |False |True|False
+RRNFirstName | RRNLastName | RRNMAIL | 9878909878| Remedy RN | NA | 441348:ALL_BPIDS:ALL_FACILITIES  |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False | True | True | True | True | True | False |False |True |True|False
+RFRNFirstName | RFRNLastName | RFRNMAIL | | Remedy Field RN | NA | 441448:3056-r31:075244 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81  | | False | True | True | True | True | True | False |False | False|True|False
+RPMFirstName | RPMLastName | RPMMAIL | | Remedy PM | NA | 441364:3056-k60:365973,441364:3056-k61:365860 |NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1 | | False| True | True | True | True | True | False |False | False|True|False
+RSTFirstName | RSTLastName | RSTMAIL | 8989898787| Remedy Sales Team | NA |441371:ALL_BPIDS:ALL_FACILITIES   |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1 | | False | False | False | True | True | True | False |False | False|False|False
+REFirstName | RELastName | REMAIL | | Remedy Executive | NA | 439108:ALL_BPIDS:ALL_FACILITIES  |jusUV22erpk1,HZhmTBQzHtU1,n9yn5n0Qa581 | | True | True | True | False | False | False | False | | False||False
+PPEFirstName | PPELastName | PPEMAIL | | Prospective Partner Executive | NA |442503:ALL_BPIDS:ALL_FACILITIES   | | | True | False | False | True | False | False | False | | False||False
+ROFirstName | ROLastName | ROMAIL | 7676878998| Remedy Other | NA | 439245:ALL_BPIDS:ALL_FACILITIES |HZhmTBQzHtU1,18h7phZr1h81 | | True | True | False | False | False | False | False | | False||False
+PPAFirstName | PPALastName | PPAMAIL | | Partner Program Administrator | NA |514083:2070-015:TSH  |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,18h7phZr1h81,n9yn5n0Qa581  | | True | True | False | False | False | False | False | | True||False
+RPAFirstName | RPALastName | RPAMAIL | 9877766666| Remedy Program Administrator | NA | 441364:3056-k60:365973,441364:3056-k61:365860,441371:ALL_BPIDS:ALL_FACILITIES  | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | True | False | True | False | False | True | False | | False||False
+PTAFirstName | PTALastName | PTAMAIL | | Partner Technical Administrator | NA |572091:3056-r30:075278  |NFdw0Kts2C01,HZhmTBQzHtU1,n9yn5n0Qa581    | | True | False | False | True | False | False | True | | False||False
+RTAFirstName | RTALastName | RTAMAIL | 3456765432| Remedy Technical Administrator | NA | 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False | True | True | True | True | True | True |False | False|False|False
+OperatorFirstName | OperatorLastName | OPERATORMAIL | | Operator | NA | 514029:ALL_BPIDS:ALL_FACILITIES |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581  | | True | False | False | True | False | False | False | | False||False
+DPFirstName | DPLastName | DPMAIL | 9998887770| Downstream Provider | NA | 015174 |  | | True | True | False | False | False | False | False | | False||False
+SalesAcuteDemoFirstName | SalesAcuteDemoLastName | SalesAcuteDemoMAIL | | Remedy Sales Acute Demo 2018 | NA | 514029:2070-025:T | 18h7phZr1h81,n9yn5n0Qa581   | | True|  |  |  |  |  |  | | ||False
+SalesPACDemoFirstName | SalesPACDemoLastName | SalesPACDemoMAIL | | Remedy Sales PAC Demo 2018 | NA | 514029:2070-025:T,514029:2070-023:L | | | True|  |  |  |  |  |  | | ||False
+CommercialFirstName | CommercialLastName | CommercialMAIL | | Remedy Sales Commercial Demo 2018 | NA | 514029:2070-025:T,514029:2070-023:L | | |True|  |  |  |  |  |  | | ||False
 
 ####################Data Permissions for Bulk Upload User having limited application Access########################
 
-FirstNameeFirstNameeFirstNameeFirstNameeFirstName' | LastNameeeLastNameeeLastNameeeLastNameeeLastNamee' | LEADERMAIL | | Leader | NA | 776109:2070-005:HUMC,441364:3056-k60:365973,441364:3056-k61:365860,439241:2070-a07:ALL_FACILITIES |3hSOHNAnvjc1,NFdw0Kts2C01,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581  | | False| True  | | True | |  | | || 
-ManagerFirstName | ManagerLastName | MANAGERMAIL | 9876545678 | Manager | NA | 626076:3056-x52:315182,439245:2070-a12:160047,439245:2070-a12:280129,439245:2070-a12:280003,439245:2070-a12:280040 | | |False  |  |  | True |True  |  |  | | |
-AdvancedOperatorFirstName | AdvancedOperatorLastName | ADVANCEDOPERATORMAIL |9879800980 | Advanced Operator | NA | 776109:2070-005:HUMC,626076:3056-x52:315182 | | |False  | True |  | True |  |  |  | True| |
-PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL | | Physicians | NPI | 776109:2070-005:HUMC |  | | False |  |  |  | True |  |  |True | |
-RTCSFirstName | RTCSLastName | RTCSMAIL | 5465465655| Remedy TCS | NA | 441364:3056-k60:365973,441364:3056-k61:365860 | | | False |  | True |  |  |  |  | |True|True 
-RLPNFirstName | RLPNLastName | RLPNMAIL | 9898989898| Remedy LPN | NA | 439180:3056-370:525441 | | |False  |  |  | True | True |True |  | | |
-RRNFirstName | RRNLastName | RRNMAIL | 9878909878| Remedy RN | NA | 441444:2070-g15:ALL_FACILITIES,441444:3056-q91:441310,441444:3056-q91:181318 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False |  |  | True | True | True |  | |True |True
-RFRNFirstName | RFRNLastName | RFRNMAIL | | Remedy Field RN | NA | 441321:2070-c80:190064,441321:2070-c80:190065,441321:2070-c80:190266,441321:2070-c80:300003 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1 | | False | True |  |True  |  |  |  | | |
-RPMFirstName | RPMLastName | RPMMAIL | | Remedy PM | NA | 439241:2070-a07:ALL_FACILITIES | | |False  |  | True |  | True |  |  | | |
-RSTFirstName | RSTLastName | RSTMAIL | 8989898787| Remedy Sales Team | NA | 439245:2070-a12:160047,439245:2070-a12:280129,439245:2070-a12:280003,439245:2070-a12:280040 | | | False |  |  | True |  |True  |  | | |
-REFirstName | RELastName | REMAIL | | Remedy Executive | NA | 441447:ALL_BPIDS:ALL_FACILITIES | | | False | True | True |  |  |  |  | True| |
-PPEFirstName | PPELastName | PPEMAIL | | Prospective Partner Executive | NA | 441447:ALL_BPIDS:ALL_FACILITIES | | | False |  |  | True |  |  |  | | |
-ROFirstName | ROLastName | ROMAIL | 7676878998| Remedy Other | NA | 441364:3056-k60:365973,441364:3056-k61:365860 |  | | False |  |  |  |  |  |  |True | True|True
-PPAFirstName | PPALastName | PPAMAIL | | Partner Program Administrator | NA | 514083:2070-015:TSH |  | | False |  | True | True |  |  |  | | |
-RPAFirstName | RPALastName | RPAMAIL | 9877766666| Remedy Program Administrator | NA | 626076:3056-x52:315182 | | | False |  |  |  | True | True |  |True | |
-PTAFirstName | PTALastName | PTAMAIL | | Partner Technical Administrator | NA | 776109:2070-005:HUMC |NFdw0Kts2C01,HZhmTBQzHtU1,18h7phZr1h81,n9yn5n0Qa581 | | False |  |  |True  |  |  | True | True| |
-RTAFirstName | RTALastName | RTAMAIL | 3456765432| Remedy Technical Administrator | NA | 441372:3056-m78:385072 | | | False |  |  |  |True  | True | True | | |
-OperatorFirstName | OperatorLastName | OPERATORMAIL | | Operator | NA | 441324:6005-080:490005-1 |  | | False | True |  |  |True  |  |  | | |
-DPFirstName | DPLastName | DPMAIL | 9998887770| Downstream Provider | NA | 015174 | | | False |True  |True  |  |  |  |  | | |
-SalesAcuteDemoFirstName | SalesAcuteDemoLastName | SalesAcuteDemoMAIL | | Remedy Sales Acute Demo 2018 | NA | 514029:2070-025:T | 18h7phZr1h81,n9yn5n0Qa581   | | False |  | True | True | True | True | False | | False| False
-SalesPACDemoFirstName | SalesPACDemoLastName | SalesPACDemoMAIL | | Remedy Sales PAC Demo 2018 | NA | 514029:2070-025:T,514029:2070-023:L | | | False |  | True |  |  | True |  | | | 
-CommercialFirstName | CommercialLastName | CommercialMAIL | | Remedy Sales Commercial Demo 2018 | NA | 514029:2070-025:T,514029:2070-023:L | | | False |  | True |  |  | True |  | | | 
+FirstNameeFirstNameeFirstNameeFirstNameeFirstName' | LastNameeeLastNameeeLastNameeeLastNameeeLastNamee' | LEADERMAIL | | Leader | NA | 776109:2070-005:HUMC,441364:3056-k60:365973,441364:3056-k61:365860,439241:2070-a07:ALL_FACILITIES |3hSOHNAnvjc1,NFdw0Kts2C01,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581  | | False| True  | | True | |  | | || |False
+ManagerFirstName | ManagerLastName | MANAGERMAIL | 9876545678 | Manager | NA | 626076:3056-x52:315182,439245:2070-a12:160047,439245:2070-a12:280129,439245:2070-a12:280003,439245:2070-a12:280040 | | |False  |  |  | True |True  |  |  | | ||False
+AdvancedOperatorFirstName | AdvancedOperatorLastName | ADVANCEDOPERATORMAIL |9879800980 | Advanced Operator | NA | 776109:2070-005:HUMC,626076:3056-x52:315182 | | |False  | True |  | True |  |  |  | True| ||False
+PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL | | Physicians | NPI | 776109:2070-005:HUMC |  | | False |  |  |  | True |  |  |True | ||False
+RTCSFirstName | RTCSLastName | RTCSMAIL | 5465465655| Remedy TCS | NA | 441364:3056-k60:365973,441364:3056-k61:365860 | | | False |  | True |  |  |  |  | |True|True |False
+RLPNFirstName | RLPNLastName | RLPNMAIL | 9898989898| Remedy LPN | NA | 439180:3056-370:525441 | | |False  |  |  | True | True |True |  | | ||False
+RRNFirstName | RRNLastName | RRNMAIL | 9878909878| Remedy RN | NA | 441444:2070-g15:ALL_FACILITIES,441444:3056-q91:441310,441444:3056-q91:181318 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False |  |  | True | True | True |  | |True |True|False
+RFRNFirstName | RFRNLastName | RFRNMAIL | | Remedy Field RN | NA | 441321:2070-c80:190064,441321:2070-c80:190065,441321:2070-c80:190266,441321:2070-c80:300003 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1 | | False | True |  |True  |  |  |  | | ||False
+RPMFirstName | RPMLastName | RPMMAIL | | Remedy PM | NA | 439241:2070-a07:ALL_FACILITIES | | |False  |  | True |  | True |  |  | | ||False
+RSTFirstName | RSTLastName | RSTMAIL | 8989898787| Remedy Sales Team | NA | 439245:2070-a12:160047,439245:2070-a12:280129,439245:2070-a12:280003,439245:2070-a12:280040 | | | False |  |  | True |  |True  |  | | ||False
+REFirstName | RELastName | REMAIL | | Remedy Executive | NA | 441447:ALL_BPIDS:ALL_FACILITIES | | | False | True | True |  |  |  |  | True| ||False
+PPEFirstName | PPELastName | PPEMAIL | | Prospective Partner Executive | NA | 441447:ALL_BPIDS:ALL_FACILITIES | | | False |  |  | True |  |  |  | | ||False
+ROFirstName | ROLastName | ROMAIL | 7676878998| Remedy Other | NA | 441364:3056-k60:365973,441364:3056-k61:365860 |  | | False |  |  |  |  |  |  |True | True|True|False
+PPAFirstName | PPALastName | PPAMAIL | | Partner Program Administrator | NA | 514083:2070-015:TSH |  | | False |  | True | True |  |  |  | | ||False
+RPAFirstName | RPALastName | RPAMAIL | 9877766666| Remedy Program Administrator | NA | 626076:3056-x52:315182 | | | False |  |  |  | True | True |  |True | ||False
+PTAFirstName | PTALastName | PTAMAIL | | Partner Technical Administrator | NA | 776109:2070-005:HUMC |NFdw0Kts2C01,HZhmTBQzHtU1,18h7phZr1h81,n9yn5n0Qa581 | | False |  |  |True  |  |  | True | True| ||False
+RTAFirstName | RTALastName | RTAMAIL | 3456765432| Remedy Technical Administrator | NA | 441372:3056-m78:385072 | | | False |  |  |  |True  | True | True | | ||False
+OperatorFirstName | OperatorLastName | OPERATORMAIL | | Operator | NA | 441324:6005-080:490005-1 |  | | False | True |  |  |True  |  |  | | ||False
+DPFirstName | DPLastName | DPMAIL | 9998887770| Downstream Provider | NA | 015174 | | | False |True  |True  |  |  |  |  | | ||False
+SalesAcuteDemoFirstName | SalesAcuteDemoLastName | SalesAcuteDemoMAIL | | Remedy Sales Acute Demo 2018 | NA | 514029:2070-025:T | 18h7phZr1h81,n9yn5n0Qa581   | | False |  | True | True | True | True | False | | False| False|False
+SalesPACDemoFirstName | SalesPACDemoLastName | SalesPACDemoMAIL | | Remedy Sales PAC Demo 2018 | NA | 514029:2070-025:T,514029:2070-023:L | | | False |  | True |  |  | True |  | | | |False
+CommercialFirstName | CommercialLastName | CommercialMAIL | | Remedy Sales Commercial Demo 2018 | NA | 514029:2070-025:T,514029:2070-023:L | | | False |  | True |  |  | True |  | | | |False
 
 #################### Multiple users import: 51 users ########################
 
-LeaderFirstName | LeaderLastName | LEADERMAIL | | Leader | NA | 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | | True |  |  |  |  |  |  | | |
-ManagerFirstName | ManagerLastName | MANAGERMAIL | 9876545678 | Manager | NA | 441447:3056-r29:075296 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81 | | True |  |  |  |  |  |  | | |
-AdvancedOperatorFirstName | AdvancedOperatorLastName | ADVANCEDOPERATORMAIL |9879800980 | Advanced Operator | NA |776109:2070-005:HUMC |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1  | | True|  |  |  |  |  |  | | |
-PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL | | Physicians | P1NPI1 | 514026:2070-046:H |3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | | True |  |  |  |  |  |  | | |
-RTCSFirstName | RTCSLastName | RTCSMAIL | 5465465655| Remedy TCS | NA | 514083:2070-015:TSH |NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | | False | True |True  |True  |True  |True  | False | False|True|True 
-RLPNFirstName | RLPNLastName | RLPNMAIL | 9898989898| Remedy LPN | NA |439245:ALL_BPIDS:ALL_FACILITIES   | | | False | True | True | True | True |True  |False  |False |False |True
-RRNFirstName | RRNLastName | RRNMAIL | 9878909878| Remedy RN | NA | 441348:ALL_BPIDS:ALL_FACILITIES  |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False | True | True | True | True | True | False |False |True |True
-RFRNFirstName | RFRNLastName | RFRNMAIL | | Remedy Field RN | NA | 441448:3056-r31:075244 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81  | | False | True | True | True | True | True | False |False | False|True
-RPMFirstName | RPMLastName | RPMMAIL | | Remedy PM | NA | 441364:3056-k60:365973,441364:3056-k61:365860 |NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1 | | False| True | True | True | True | True | False |False | False|True
-RSTFirstName | RSTLastName | RSTMAIL | 8989898787| Remedy Sales Team | NA |441371:ALL_BPIDS:ALL_FACILITIES   |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1 | | False | False | False | True | True | True | False |False | False|False
-REFirstName | RELastName | REMAIL | | Remedy Executive | NA | 439108:ALL_BPIDS:ALL_FACILITIES  |jusUV22erpk1,HZhmTBQzHtU1,n9yn5n0Qa581 | | True | True | True | False | False | False | False | | False|
-PPEFirstName | PPELastName | PPEMAIL | | Prospective Partner Executive | NA |442503:ALL_BPIDS:ALL_FACILITIES   | | | True | False | False | True | False | False | False | | False|
-ROFirstName | ROLastName | ROMAIL | 7676878998| Remedy Other | NA | 514083:2070-015:TSH |HZhmTBQzHtU1,18h7phZr1h81 | | True | True | False | False | False | False | False | | False|
-PPAFirstName | PPALastName | PPAMAIL | | Partner Program Administrator | NA |514083:2070-015:TSH  |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,18h7phZr1h81,n9yn5n0Qa581  | | True | True | False | False | False | False | False | | True|
-RPAFirstName | RPALastName | RPAMAIL | 9877766666| Remedy Program Administrator | NA | 441364:3056-k60:365973,441364:3056-k61:365860,441371:ALL_BPIDS:ALL_FACILITIES  | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | True | False | True | False | False | True | False | | False|
-PTAFirstName | PTALastName | PTAMAIL | | Partner Technical Administrator | NA |572091:3056-r30:075278  |NFdw0Kts2C01,HZhmTBQzHtU1,n9yn5n0Qa581    | | True | False | False | True | False | False | True | | False|
-RTAFirstName | RTALastName | RTAMAIL | 3456765432| Remedy Technical Administrator | NA | 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False | True | True | True | True | True | True |False | False|False
-OperatorFirstName | OperatorLastName | OPERATORMAIL | | Operator | NA | 514029:ALL_BPIDS:ALL_FACILITIES |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581  | | True | False | False | True | False | False | False | | False|
-DPFirstName | DPLastName | DPMAIL | 9998887770| Downstream Provider | NA | 015174 |  | | True | True | False | False | False | False | False | | False|
-LeaderFirstName | LeaderLastName | EXEMAIL2 | | Leader | NA | 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | | True |  |  |  |  |  |  | | |
-ManagerFirstName | ManagerLastName | MANMAIL2 | 9876545678 | Manager | NA | 441447:3056-r29:075296 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81 | | True |  |  |  |  |  |  | | |
-AdvancedOperatorFirstName | AdvancedOperatorLastName | CMMAIL2 |9879800980 | Advanced Operator | NA |776109:2070-005:HUMC |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1  | | True|  |  |  |  |  |  | | |
-PhysiciansFirstName | PhysiciansLastName | PHYMAIL2 | | Physicians | P2NPI2 | 514026:2070-046:H |3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | | True |  |  |  |  |  |  | | |
-RTCSFirstName | RTCSLastName | RemTCSMAIL2 | 5465465655| Remedy TCS | NA | 514083:2070-015:TSH |NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | | False | True |True  |True  |True  |True  | False | False|True|True 
-RLPNFirstName | RLPNLastName | RemLPNMAIL2 | 9898989898| Remedy LPN | NA |439245:ALL_BPIDS:ALL_FACILITIES   | | | False | True | True | True | True |True  |False  |False |False |True
-RRNFirstName | RRNLastName | RemLPNMAIL2 | 9878909878| Remedy RN | NA | 441348:ALL_BPIDS:ALL_FACILITIES  |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False | True | True | True | True | True | False |False |True |True
-RFRNFirstName | RFRNLastName | RemFRNMAIL2 | | Remedy Field RN | NA | 441448:3056-r31:075244 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81  | | False | True | True | True | True | True | False |False | False|True
-RPMFirstName | RPMLastName | RemPMMAIL2 | | Remedy PM | NA | 441364:3056-k60:365973,441364:3056-k61:365860 |NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1 | | False| True | True | True | True | True | False |False | False|True
-RSTFirstName | RSTLastName | RemSTMAIL2 | 8989898787| Remedy Sales Team | NA |441371:ALL_BPIDS:ALL_FACILITIES   |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1 | | False | False | False | True | True | True | False |False | False|False
-REFirstName | RELastName | RemEid2 | | Remedy Executive | NA | 439108:ALL_BPIDS:ALL_FACILITIES  |jusUV22erpk1,HZhmTBQzHtU1,n9yn5n0Qa581 | | True | True | True | False | False | False | False | | False|
-PPEFirstName | PPELastName | ParPEMAIL2 | | Prospective Partner Executive | NA |442503:ALL_BPIDS:ALL_FACILITIES   | | | True | False | False | True | False | False | False | | False|
-ROFirstName | ROLastName | RemOMAIL2 | 7676878998| Remedy Other | NA | 514083:2070-015:TSH |HZhmTBQzHtU1,18h7phZr1h81 | | True | True | False | False | False | False | False | | False|
-PPAFirstName | PPALastName | ParPAMAIL2 | | Partner Program Administrator | NA |514083:2070-015:TSH  |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,18h7phZr1h81,n9yn5n0Qa581  | | True | True | False | False | False | False | False | | True|
-RPAFirstName | RPALastName | RemPAMAIL2 | 9877766666| Remedy Program Administrator | NA | 441364:3056-k60:365973,441364:3056-k61:365860,441371:ALL_BPIDS:ALL_FACILITIES  | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | True | False | True | False | False | True | False | | False|
-PTAFirstName | PTALastName | ParTAMAIL2 | | Partner Technical Administrator | NA |572091:3056-r30:075278  |NFdw0Kts2C01,HZhmTBQzHtU1,n9yn5n0Qa581    | | True | False | False | True | False | False | True | | False|
-RTAFirstName | RTALastName | RemTAMAIL2 | 3456765432| Remedy Technical Administrator | NA | 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False | True | True | True | True | True | True |False | False|False
-OperatorFirstName | OperatorLastName | TranCMid2 | | Operator | NA | 514029:ALL_BPIDS:ALL_FACILITIES |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581  | | True | False | False | True | False | False | False | | False|
-DPFirstName | DPLastName | DownPMAIL2 | 9998887770| Downstream Provider | NA | 015174 |  | | True | True | False | False | False | False | False | | False|
-LeaderFirstName | LeaderLastName | EMAIL3 | | Leader | NA | 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | | True |  |  |  |  |  |  | | |
-ManagerFirstName | ManagerLastName | MgMAIL3 | 9876545678 | Manager | NA | 441447:3056-r29:075296 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81 | | True |  |  |  |  |  |  | | |
-AdvancedOperatorFirstName | AdvancedOperatorLastName | CaMMAIL3 |9879800980 | Advanced Operator | NA |776109:2070-005:HUMC |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1  | | True|  |  |  |  |  |  | | |
-PhysiciansFirstName | PhysiciansLastName | PMAIL3 | | Physicians | P3NPI3 | 514026:2070-046:H |3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | | True |  |  |  |  |  |  | | |
-RTCSFirstName | RTCSLastName | RTranMAIL3 | 5465465655| Remedy TCS | NA | 514083:2070-015:TSH |NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | | False | True |True  |True  |True  |True  | False | False|True|True 
-RLPNFirstName | RLPNLastName | RemedyLPNMAIL3 | 9898989898| Remedy LPN | NA |439245:ALL_BPIDS:ALL_FACILITIES   | | | False | True | True | True | True |True  |False  |False |False |True
-RRNFirstName | RRNLastName | RemedyRNMAIL3 | 9878909878| Remedy RN | NA | 441348:ALL_BPIDS:ALL_FACILITIES  |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False | True | True | True | True | True | False |False |True |True
-RFRNFirstName | RFRNLastName | RemedyFRNMAIL3 | | Remedy Field RN | NA | 441448:3056-r31:075244 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81  | | False | True | True | True | True | True | False |False | False|True
-RPMFirstName | RPMLastName | RemedyPMMAIL3 | | Remedy PM | NA | 441364:3056-k60:365973,441364:3056-k61:365860 |NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1 | | False| True | True | True | True | True | False |False | False|True
-RSTFirstName | RSTLastName | RemedySTMAIL3 | 8989898787| Remedy Sales Team | NA |441371:ALL_BPIDS:ALL_FACILITIES   |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1 | | False | False | False | True | True | True | False |False | False|False
-REFirstName | RELastName | RemedyExMAIL3 | | Remedy Executive | NA | 439108:ALL_BPIDS:ALL_FACILITIES  |jusUV22erpk1,HZhmTBQzHtU1,n9yn5n0Qa581 | | True | True | True | False | False | False | False | | False|
-PPEFirstName | PPELastName | abcdtrial3 | | Prospective Partner Executive | NA |442503:ALL_BPIDS:ALL_FACILITIES   | | | True | False | False | True | False | False | False | | False|
-PPEFirstName | PPELastName | abcdUserNeg3 | | Prospective Partner Executive | NA |442503:ALL_BPIDS:ALL_FACILITIES   | | | True | False | False | True | False | False | False | | False|
+LeaderFirstName | LeaderLastName | LEADERMAIL | | Leader | NA | 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | | True |  |  |  |  |  |  | | ||False
+ManagerFirstName | ManagerLastName | MANAGERMAIL | 9876545678 | Manager | NA | 441447:3056-r29:075296 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81 | | True |  |  |  |  |  |  | | ||False
+AdvancedOperatorFirstName | AdvancedOperatorLastName | ADVANCEDOPERATORMAIL |9879800980 | Advanced Operator | NA |776109:2070-005:HUMC |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1  | | True|  |  |  |  |  |  | | ||False
+PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL | | Physicians | P1NPI1 | 514026:2070-046:H |3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | | True |  |  |  |  |  |  | | ||False
+RTCSFirstName | RTCSLastName | RTCSMAIL | 5465465655| Remedy TCS | NA | 514083:2070-015:TSH |NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | | False | True |True  |True  |True  |True  | False | False|True|True |False
+RLPNFirstName | RLPNLastName | RLPNMAIL | 9898989898| Remedy LPN | NA |439245:ALL_BPIDS:ALL_FACILITIES   | | | False | True | True | True | True |True  |False  |False |False |True|False
+RRNFirstName | RRNLastName | RRNMAIL | 9878909878| Remedy RN | NA | 441348:ALL_BPIDS:ALL_FACILITIES  |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False | True | True | True | True | True | False |False |True |True|False
+RFRNFirstName | RFRNLastName | RFRNMAIL | | Remedy Field RN | NA | 441448:3056-r31:075244 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81  | | False | True | True | True | True | True | False |False | False|True|False
+RPMFirstName | RPMLastName | RPMMAIL | | Remedy PM | NA | 441364:3056-k60:365973,441364:3056-k61:365860 |NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1 | | False| True | True | True | True | True | False |False | False|True|False
+RSTFirstName | RSTLastName | RSTMAIL | 8989898787| Remedy Sales Team | NA |441371:ALL_BPIDS:ALL_FACILITIES   |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1 | | False | False | False | True | True | True | False |False | False|False|False
+REFirstName | RELastName | REMAIL | | Remedy Executive | NA | 439108:ALL_BPIDS:ALL_FACILITIES  |jusUV22erpk1,HZhmTBQzHtU1,n9yn5n0Qa581 | | True | True | True | False | False | False | False | | False||False
+PPEFirstName | PPELastName | PPEMAIL | | Prospective Partner Executive | NA |442503:ALL_BPIDS:ALL_FACILITIES   | | | True | False | False | True | False | False | False | | False||False
+ROFirstName | ROLastName | ROMAIL | 7676878998| Remedy Other | NA | 514083:2070-015:TSH |HZhmTBQzHtU1,18h7phZr1h81 | | True | True | False | False | False | False | False | | False||False
+PPAFirstName | PPALastName | PPAMAIL | | Partner Program Administrator | NA |514083:2070-015:TSH  |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,18h7phZr1h81,n9yn5n0Qa581  | | True | True | False | False | False | False | False | | True||False
+RPAFirstName | RPALastName | RPAMAIL | 9877766666| Remedy Program Administrator | NA | 441364:3056-k60:365973,441364:3056-k61:365860,441371:ALL_BPIDS:ALL_FACILITIES  | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | True | False | True | False | False | True | False | | False||False
+PTAFirstName | PTALastName | PTAMAIL | | Partner Technical Administrator | NA |572091:3056-r30:075278  |NFdw0Kts2C01,HZhmTBQzHtU1,n9yn5n0Qa581    | | True | False | False | True | False | False | True | | False||False
+RTAFirstName | RTALastName | RTAMAIL | 3456765432| Remedy Technical Administrator | NA | 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False | True | True | True | True | True | True |False | False|False|False
+OperatorFirstName | OperatorLastName | OPERATORMAIL | | Operator | NA | 514029:ALL_BPIDS:ALL_FACILITIES |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581  | | True | False | False | True | False | False | False | | False||False
+DPFirstName | DPLastName | DPMAIL | 9998887770| Downstream Provider | NA | 015174 |  | | True | True | False | False | False | False | False | | False||False
+LeaderFirstName | LeaderLastName | EXEMAIL2 | | Leader | NA | 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | | True |  |  |  |  |  |  | | ||False
+ManagerFirstName | ManagerLastName | MANMAIL2 | 9876545678 | Manager | NA | 441447:3056-r29:075296 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81 | | True |  |  |  |  |  |  | | ||False
+AdvancedOperatorFirstName | AdvancedOperatorLastName | CMMAIL2 |9879800980 | Advanced Operator | NA |776109:2070-005:HUMC |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1  | | True|  |  |  |  |  |  | | ||False
+PhysiciansFirstName | PhysiciansLastName | PHYMAIL2 | | Physicians | P2NPI2 | 514026:2070-046:H |3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | | True |  |  |  |  |  |  | | ||False
+RTCSFirstName | RTCSLastName | RemTCSMAIL2 | 5465465655| Remedy TCS | NA | 514083:2070-015:TSH |NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | | False | True |True  |True  |True  |True  | False | False|True|True |False
+RLPNFirstName | RLPNLastName | RemLPNMAIL2 | 9898989898| Remedy LPN | NA |439245:ALL_BPIDS:ALL_FACILITIES   | | | False | True | True | True | True |True  |False  |False |False |True|False
+RRNFirstName | RRNLastName | RemLPNMAIL2 | 9878909878| Remedy RN | NA | 441348:ALL_BPIDS:ALL_FACILITIES  |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False | True | True | True | True | True | False |False |True |True|False
+RFRNFirstName | RFRNLastName | RemFRNMAIL2 | | Remedy Field RN | NA | 441448:3056-r31:075244 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81  | | False | True | True | True | True | True | False |False | False|True|False
+RPMFirstName | RPMLastName | RemPMMAIL2 | | Remedy PM | NA | 441364:3056-k60:365973,441364:3056-k61:365860 |NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1 | | False| True | True | True | True | True | False |False | False|True|False
+RSTFirstName | RSTLastName | RemSTMAIL2 | 8989898787| Remedy Sales Team | NA |441371:ALL_BPIDS:ALL_FACILITIES   |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1 | | False | False | False | True | True | True | False |False | False|False|False
+REFirstName | RELastName | RemEid2 | | Remedy Executive | NA | 439108:ALL_BPIDS:ALL_FACILITIES  |jusUV22erpk1,HZhmTBQzHtU1,n9yn5n0Qa581 | | True | True | True | False | False | False | False | | False||False
+PPEFirstName | PPELastName | ParPEMAIL2 | | Prospective Partner Executive | NA |442503:ALL_BPIDS:ALL_FACILITIES   | | | True | False | False | True | False | False | False | | False||False
+ROFirstName | ROLastName | RemOMAIL2 | 7676878998| Remedy Other | NA | 514083:2070-015:TSH |HZhmTBQzHtU1,18h7phZr1h81 | | True | True | False | False | False | False | False | | False||False
+PPAFirstName | PPALastName | ParPAMAIL2 | | Partner Program Administrator | NA |514083:2070-015:TSH  |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,18h7phZr1h81,n9yn5n0Qa581  | | True | True | False | False | False | False | False | | True||False
+RPAFirstName | RPALastName | RemPAMAIL2 | 9877766666| Remedy Program Administrator | NA | 441364:3056-k60:365973,441364:3056-k61:365860,441371:ALL_BPIDS:ALL_FACILITIES  | 3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | True | False | True | False | False | True | False | | False||False
+PTAFirstName | PTALastName | ParTAMAIL2 | | Partner Technical Administrator | NA |572091:3056-r30:075278  |NFdw0Kts2C01,HZhmTBQzHtU1,n9yn5n0Qa581    | | True | False | False | True | False | False | True | | False||False
+RTAFirstName | RTALastName | RemTAMAIL2 | 3456765432| Remedy Technical Administrator | NA | 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False | True | True | True | True | True | True |False | False|False|False
+OperatorFirstName | OperatorLastName | TranCMid2 | | Operator | NA | 514029:ALL_BPIDS:ALL_FACILITIES |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581  | | True | False | False | True | False | False | False | | False||False
+DPFirstName | DPLastName | DownPMAIL2 | 9998887770| Downstream Provider | NA | 015174 |  | | True | True | False | False | False | False | False | | False||False
+LeaderFirstName | LeaderLastName | EMAIL3 | | Leader | NA | 514083:2070-015:TSH |3hSOHNAnvjc1,NFdw0Kts2C01,n9yn5n0Qa581 | | True |  |  |  |  |  |  | | ||False
+ManagerFirstName | ManagerLastName | MgMAIL3 | 9876545678 | Manager | NA | 441447:3056-r29:075296 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,qfy2xp8zSFc1,18h7phZr1h81 | | True |  |  |  |  |  |  | | ||False
+AdvancedOperatorFirstName | AdvancedOperatorLastName | CaMMAIL3 |9879800980 | Advanced Operator | NA |776109:2070-005:HUMC |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,5HDc3E6aK_E1  | | True|  |  |  |  |  |  | | ||False
+PhysiciansFirstName | PhysiciansLastName | PMAIL3 | | Physicians | P3NPI3 | 514026:2070-046:H |3hSOHNAnvjc1,18h7phZr1h81,n9yn5n0Qa581 | | True |  |  |  |  |  |  | | ||False
+RTCSFirstName | RTCSLastName | RTranMAIL3 | 5465465655| Remedy TCS | NA | 514083:2070-015:TSH |NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1,18h7phZr1h81,n9yn5n0Qa581 | | False | True |True  |True  |True  |True  | False | False|True|True |False
+RLPNFirstName | RLPNLastName | RemedyLPNMAIL3 | 9898989898| Remedy LPN | NA |439245:ALL_BPIDS:ALL_FACILITIES   | | | False | True | True | True | True |True  |False  |False |False |True|False
+RRNFirstName | RRNLastName | RemedyRNMAIL3 | 9878909878| Remedy RN | NA | 441348:ALL_BPIDS:ALL_FACILITIES  |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81,n9yn5n0Qa581 | | False | True | True | True | True | True | False |False |True |True|False
+RFRNFirstName | RFRNLastName | RemedyFRNMAIL3 | | Remedy Field RN | NA | 441448:3056-r31:075244 |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,HZhmTBQzHtU1,5HDc3E6aK_E1,p11D0Vl2FSg1,qfy2xp8zSFc1,18h7phZr1h81  | | False | True | True | True | True | True | False |False | False|True|False
+RPMFirstName | RPMLastName | RemedyPMMAIL3 | | Remedy PM | NA | 441364:3056-k60:365973,441364:3056-k61:365860 |NFdw0Kts2C01,HZhmTBQzHtU1,p11D0Vl2FSg1,qfy2xp8zSFc1 | | False| True | True | True | True | True | False |False | False|True|False
+RSTFirstName | RSTLastName | RemedySTMAIL3 | 8989898787| Remedy Sales Team | NA |441371:ALL_BPIDS:ALL_FACILITIES   |3hSOHNAnvjc1,NFdw0Kts2C01,jusUV22erpk1,p11D0Vl2FSg1 | | False | False | False | True | True | True | False |False | False|False|False
+REFirstName | RELastName | RemedyExMAIL3 | | Remedy Executive | NA | 439108:ALL_BPIDS:ALL_FACILITIES  |jusUV22erpk1,HZhmTBQzHtU1,n9yn5n0Qa581 | | True | True | True | False | False | False | False | | False||False
+PPEFirstName | PPELastName | abcdtrial3 | | Prospective Partner Executive | NA |442503:ALL_BPIDS:ALL_FACILITIES   | | | True | False | False | True | False | False | False | | False||False
+PPEFirstName | PPELastName | abcdUserNeg3 | | Prospective Partner Executive | NA |442503:ALL_BPIDS:ALL_FACILITIES   | | | True | False | False | True | False | False | False | | False||False
 
 ####################Invalid (105-127) and valid data (128), general details and app information for Bulk Upload User########################
 
-LeaderFirstName | LeaderLastName | LEADERMAIL1 | | Leader | NA | 439108::| | | True | True | False | True | False |  |  | | False|
-ManagerFirstName | ManagerLastName | MANAGERMAIL1 | 9876545678 | Manager | NA | :CJR-1: | | | True | False | False | True | False |  | False | | False|
-AdvancedOperatorFirstName | AdvancedOperatorLastName | ADVANCEDOPERATORMAIL1 |9879800980 | Advanced Operator | NA |::390168 | | | True| False | False | False | True |  | False | | False|
-PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL1 | | Physicians | NPI | 439108::390168 | | | True | True | False | False | False |  |  | | True|
-RTCSFirstName | RTCSLastName | RTCSMAIL1 | 5465465655| Remedy TCS | NA | :CJR-1:390168 | | | True | True | True | False | False | True | False | |False| 
-RLPNFirstName | RLPNLastName | RLPNMAIL1 | 9898989898| Remedy LPN | NA |439108,CJR-1,390168   | | | True | False | True | True | True | False | False | | False|
-LeaderFirstName | LeaderLastName | LEADERMAIL2 | | Exec | NA | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False|
-LeaderFirstName | LeaderLastName | LEADERMAIL3 |98765456 | Leader | NA | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False|
-PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL2 | | Physicians | qwertyuiop | 514083:2070-015:TSH | | | True | True | False | False | False |  |  | | True|
-PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL3 | | Physicians | 12345678 | 514083:2070-015:TSH | | | True | True | False | False | False |  |  | | True|
-LeaderFirstName | LeaderLastName | LEADERMAIL4 | | Leader | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False|
-LeaderFirstName |  | LEADERMAIL5 | | Leader | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False|
-LeaderFirstName123 | LeaderLastName123 | LEADERMAIL6 | | Leader | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False|
-Leader-FirstName | Leader-LastName | LEADERMAIL8 | | Leader | 9876543215 | 514029:ALL_BPIDS:ALL_FACILITIES,fgfgdf | | | True | True | False | True | False |  |  | | False|
-LeaderFirstName | LeaderLastName | LEADERMAIL9 | | Leader | 9876543215 |  | | | True | True | False | True | False |  |  | | False|
-LeaderFirstName | LeaderLastName |  | | Leader  | 9876543215 | 514029:ALL_BPIDS:ALL_FACILITIES | | | True | True | False | True | False |  |  | | False|
-LeaderFirstName|LeaderLastName  | MANAGERMAIL3 | |  | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False|
- | LeaderLastName | LEADERMAIL7 | | Leader | NA | 439108:CJR-1:| | | True | True | False | True | False |  |  | | False|
- LeaderFirstName | LeaderLastName | MANAGERMAIL5 | | Manager | NA | 439108,CJR-1,390168 | | | True | True | False | True | False |  |  | | False|
- LeaderFirstName | LeaderLastName | MANAGERMAIL6 | | Manager | NA | abcdefg,CJR-1,390168 | | | True | True | False | True | False |  |  | | False|
- LeaderFirstName | LeaderLastName | MANAGERMAIL8 | | Manager | NA | 514083:2070-015:TSH |564231897526  | | True | True | False | True | False |  |  | | False|
- LeaderFirstName | LeaderLastName | MANAGERMAIL7 | | Manager | NA | 514083:2070-015:TSH |3hSOHNAnvjc1 | | False | True | False | False | True | False | False | | False|
- LeaderFirstName | LeaderLastName | MANAGERMAIL9 | | Manager | NA | 514083:2070-015:TSH |564231897526  | | True | True | False | True | False |  |  | | False|
- LeaderFirstName | LeaderLastName | MANAGERMAIL4 | | Manager | NA | 514083:2070-015:TSH |3hSOHNAnvjc1  | | True | True | False | True | False |  |  | | False|
+LeaderFirstName | LeaderLastName | LEADERMAIL1 | | Leader | NA | 439108::| | | True | True | False | True | False |  |  | | False||False
+ManagerFirstName | ManagerLastName | MANAGERMAIL1 | 9876545678 | Manager | NA | :CJR-1: | | | True | False | False | True | False |  | False | | False||False
+AdvancedOperatorFirstName | AdvancedOperatorLastName | ADVANCEDOPERATORMAIL1 |9879800980 | Advanced Operator | NA |::390168 | | | True| False | False | False | True |  | False | | False||False
+PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL1 | | Physicians | NPI | 439108::390168 | | | True | True | False | False | False |  |  | | True||False
+RTCSFirstName | RTCSLastName | RTCSMAIL1 | 5465465655| Remedy TCS | NA | :CJR-1:390168 | | | True | True | True | False | False | True | False | |False| |False
+RLPNFirstName | RLPNLastName | RLPNMAIL1 | 9898989898| Remedy LPN | NA |439108,CJR-1,390168   | | | True | False | True | True | True | False | False | | False||False
+LeaderFirstName | LeaderLastName | LEADERMAIL2 | | Exec | NA | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False||False
+LeaderFirstName | LeaderLastName | LEADERMAIL3 |98765456 | Leader | NA | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False||False
+PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL2 | | Physicians | qwertyuiop | 514083:2070-015:TSH | | | True | True | False | False | False |  |  | | True||False
+PhysiciansFirstName | PhysiciansLastName | PHYSICIANSMAIL3 | | Physicians | 12345678 | 514083:2070-015:TSH | | | True | True | False | False | False |  |  | | True||False
+LeaderFirstName | LeaderLastName | LEADERMAIL4 | | Leader | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False||False
+LeaderFirstName |  | LEADERMAIL5 | | Leader | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False||False
+LeaderFirstName123 | LeaderLastName123 | LEADERMAIL6 | | Leader | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False||False
+Leader-FirstName | Leader-LastName | LEADERMAIL8 | | Leader | 9876543215 | 514029:ALL_BPIDS:ALL_FACILITIES,fgfgdf | | | True | True | False | True | False |  |  | | False||False
+LeaderFirstName | LeaderLastName | LEADERMAIL9 | | Leader | 9876543215 |  | | | True | True | False | True | False |  |  | | False||False
+LeaderFirstName | LeaderLastName |  | | Leader  | 9876543215 | 514029:ALL_BPIDS:ALL_FACILITIES | | | True | True | False | True | False |  |  | | False||False
+LeaderFirstName|LeaderLastName  | MANAGERMAIL3 | |  | 9876543215 | 514083:2070-015:TSH | | | True | True | False | True | False |  |  | | False||False
+ | LeaderLastName | LEADERMAIL7 | | Leader | NA | 439108:CJR-1:| | | True | True | False | True | False |  |  | | False||False
+ LeaderFirstName | LeaderLastName | MANAGERMAIL5 | | Manager | NA | 439108,CJR-1,390168 | | | True | True | False | True | False |  |  | | False||False
+ LeaderFirstName | LeaderLastName | MANAGERMAIL6 | | Manager | NA | abcdefg,CJR-1,390168 | | | True | True | False | True | False |  |  | | False||False
+ LeaderFirstName | LeaderLastName | MANAGERMAIL8 | | Manager | NA | 514083:2070-015:TSH |564231897526  | | True | True | False | True | False |  |  | | False||False
+ LeaderFirstName | LeaderLastName | MANAGERMAIL7 | | Manager | NA | 514083:2070-015:TSH |3hSOHNAnvjc1 | | False | True | False | False | True | False | False | | False||False
+ LeaderFirstName | LeaderLastName | MANAGERMAIL9 | | Manager | NA | 514083:2070-015:TSH |564231897526  | | True | True | False | True | False |  |  | | False||False
+ LeaderFirstName | LeaderLastName | MANAGERMAIL4 | | Manager | NA | 514083:2070-015:TSH |3hSOHNAnvjc1  | | True | True | False | True | False |  |  | | False||False

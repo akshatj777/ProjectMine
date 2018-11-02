@@ -1428,7 +1428,7 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("ROMAIL", email);
 			strUserData = strUserData.replace(" Remedy Other ", " Downstream Provider ");
 
-			strUserData = strUserData.replace("| Remedy Other | NA | 439245:ALL_BPIDS:ALL_FACILITIES |HZhmTBQzHtU1,18h7phZr1h81 | |","| Downstream Provider | NA | 015174 | | |");
+			strUserData = strUserData.replace("| NA | 439245:ALL_BPIDS:ALL_FACILITIES |HZhmTBQzHtU1,18h7phZr1h81 | |","| NA | 015174 | | |");
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
 			HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
 			applicationsList.put("Downstream Provider", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute, Remedy University, Community Connect");
@@ -1692,7 +1692,7 @@ public class BulkUserCreationPage extends BaseClass {
 								.substring(("Super Admin-Prospective Partner Executive".indexOf("-") + 1)).trim()));
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("ROMAIL | 7676878998|", "ROMAIL |9876543215,8529637415,4567891235|");
+		strUserData = strUserData.replace("ROMAIL | 7676878998 |", "ROMAIL | 9876543215,8529637415,4567891235 |");
 		strUserData = strUserData.replace("ROMAIL",
 				BulkUserCreationPage.bulkUsersEmailPerRole.get("Super Admin-Remedy Other").get(
 						"Super Admin-Remedy Other".substring(("Super Admin-Remedy Other".indexOf("-") + 1)).trim()));
