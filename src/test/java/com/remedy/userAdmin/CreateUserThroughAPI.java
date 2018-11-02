@@ -264,6 +264,8 @@ public class CreateUserThroughAPI extends BaseClass {
     			CreateUserPage.usersEmailPerRole.put(user.trim()+"-"+CreateUserPage.userRole.trim(), emailList);
     			CreateUserPage.usersApplicationsPerRole.put(user.trim()+"-"+CreateUserPage.userRole.trim(), applicationsList);
     			CreateUserPage.usersNPIPerRole.put(user.trim()+"-"+CreateUserPage.userRole.trim(), NPIList);
+    			System.out.println(CreateUserPage.usersEmailPerRole.toString());
+    			System.out.println(CreateUserPage.usersApplicationsPerRole.toString());
     		}
     		else if(user.contains("Remedy Technical Administrator"))
     		{

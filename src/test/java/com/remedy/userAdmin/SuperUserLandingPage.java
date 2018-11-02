@@ -44,7 +44,7 @@ public class SuperUserLandingPage extends BaseClass {
 		driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
 		iWillWaitToSee(By.cssSelector("table.ui.celled.sortable.striped.table tbody"));
 		if (text.contains("User table"))
-			isElementVisible(driver.findElement(By.cssSelector("table.ui.celled.sortable.striped.table tbody")));
+			Assert.assertTrue(isElementPresentOnPage(By.cssSelector("table.ui.celled.sortable.striped.table tbody")));
 		else if(text.equals("SearchBox"))
 		{
 			iWillWaitToSee(By.xpath("//input[@placeholder='Search']"));
@@ -59,13 +59,57 @@ public class SuperUserLandingPage extends BaseClass {
 		{
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Leonid']")));
 		}
-		else if(text.equals("Release version"))
+		else if(text.equals("User Admin Footer"))
 		{
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[contains(text(),'© 2018 Remedy Partners, Inc. All rights reserved.')]")));
 		}
 		else if(text.equals("Next Page Icon"))
 		{
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='single-chevron']")));
+		}
+		else if(text.equals("LoggedInUserNamePTA"))
+		{
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Firstname']")));
+		}
+		else if(text.equals("LoggedInUserOptionsPTA"))
+		{
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Support']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Reset Password']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Log Out']")));
+		}
+		else if(text.equals("UsersApplicationsDropdownPTA"))
+		{
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Users']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Episode Connect']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Episodes Classic']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='RemedyU']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Reporting']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Reporting Classic']")));
+		}
+		else if(text.equals("LoggedInUserNameSA"))
+		{
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Firstname']")));
+		}
+		else if(text.equals("LoggedInUserOptionsSA"))
+		{
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Support']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Internal Support']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Reset Password']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Log Out']")));
+		}
+		else if(text.equals("UsersApplicationsDropdownSA"))
+		{
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Users']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Care Connect']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Care Innovation Institute']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Community Connect']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Episode Connect']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Episodes Classic']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Episodes Post Acute']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Program Management']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='RemedyU']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Reporting']")));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Reporting Classic']")));
 		}
 		else if(text.equals("Last Page Icon"))
 		{
@@ -91,7 +135,7 @@ public class SuperUserLandingPage extends BaseClass {
 			Assert.assertTrue(isElementPresent(By.cssSelector("th#insertedDate")));
 		else if (text.contains("Pagination")) {
 			iWillWaitToSee(By.cssSelector("div.paginator-text"));
-			Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("div.paginator-text"))));
+			Assert.assertTrue(isElementPresentOnPage(By.cssSelector("div.paginator-text")));
 			verifyTextForElement(driver.findElement(By.cssSelector(".current-page")), "1");
 			Assert.assertTrue(driver.findElement(By.cssSelector(".number-of-pages")).getText().contains("of"));
 		} else if (text.contains("Pagination retention")) {
@@ -371,6 +415,11 @@ public class SuperUserLandingPage extends BaseClass {
 	public void verifyUserBlockedMessageOnLandingPage() {
 		iWillWaitToSee(By.xpath("//span[text()='User is blocked']"));
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='User is blocked']")));
+	}
+	
+	public void verifyWrongEmailMessage() {
+		iWillWaitToSee(By.xpath("//span[text()='Wrong email or password.']"));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[text()='Wrong email or password.']")));
 	}
 
 	public void iEnterNewUserName(String text) {
