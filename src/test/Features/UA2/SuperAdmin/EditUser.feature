@@ -59,9 +59,7 @@ Feature: Edit user page for SA
       | Verify validation message for invalid First Name      | Super Admin | 8473827919 | Last Name  | qaautomation@remedysystems.com2 | 9874563210 | Physicians | NPI        | Please enter a valid name         |
       | Verify validation message for invalid Last name       | Super Admin | First Name | 8473827919 | qaautomation@remedysystems.com2 | 9874563210 | Physicians | NPI        | Please enter a valid name         |
       | Verify validation message for & in FN and LN          | Super Admin | First&Name | Last&Name  | qaautomation@remedysystems.com2 | 9874563210 | Physicians | NPI        | Please enter a valid name         |
-
-      | Verify validation message for NPI as .        | Super Admin | First Name | Last Name  | qaautomation@remedysystems.com2 | 9874563210 | Physicians | .          | Please enter a valid NPI          |
-
+      | Verify validation message for NPI as .                | Super Admin | First Name | Last Name  | qaautomation@remedysystems.com2 | 9874563210 | Physicians | .          | Please enter a valid NPI          |
 
   Scenario Outline: Verify auto selected programs in Organizations
     Given I am on the login page
