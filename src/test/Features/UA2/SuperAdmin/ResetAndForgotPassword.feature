@@ -45,7 +45,7 @@ Feature: Reset and forgot password functionality from UA2 application
       | Description                                               | User        | Role   | Password  | NewPassword | ConfirmPass | ValidationMsg                                                |
       | Password reset successful                                 | Super Admin | Leader | Testing1@ | Testing2    | Testing2    | Remedy Connect                                               |
       | when password and the confirmation password are different | Super Admin | Leader | Testing2  | Testing1$   | Test        | Please ensure the password and the confirmation are the same |
-      
+
   Scenario Outline: Forgot Password- Forgot password page validation and putting invalid and valid email and logging in with new password
     Given I am on the login page
     Then I click on forgot password link
@@ -113,4 +113,3 @@ Feature: Reset and forgot password functionality from UA2 application
     Examples: 
       | Description                                               | User        | Role   | NewPassword | ConfirmPassword | ValidationMsg                                                |
       | when password and the confirmation password are different | Super Admin | Leader | Testing3    | Test            | Please ensure the password and the confirmation are the same |
-      | When entered password does not meet guidelines            | Super Admin | Leader | Test        |                 | Password guidelines                                          |
