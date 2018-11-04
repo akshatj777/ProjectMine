@@ -137,16 +137,19 @@ public class ViewUserPage extends BaseClass {
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//span[@title='"+emailUser.toLowerCase()+"']")));
 	}
 	
-	public void verifyLastLoginDate() throws Throwable 
+	public void verifyLastLoginDate(String role) throws Throwable 
 	{
-		DateTimeFormatter globalFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-		ZoneId etZoneId = ZoneId.of("America/New_York");
-		ZoneId istZoneId = ZoneId.of("Asia/Kolkata");
-		LocalDateTime currentDateTime = LocalDateTime.now();
-		ZonedDateTime currentISTime = currentDateTime.atZone(istZoneId);
-		ZonedDateTime currentETime = currentISTime.withZoneSameInstant(etZoneId);
-		System.out.println(globalFormat.format(currentETime));
-		Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[text()[contains(.,'"+globalFormat.format(currentETime)+"')]]")));
+		if(!(role.trim().equals("Prospective Partner Executive")))
+		{
+			DateTimeFormatter globalFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+			ZoneId etZoneId = ZoneId.of("America/New_York");
+			ZoneId istZoneId = ZoneId.of("Asia/Kolkata");
+			LocalDateTime currentDateTime = LocalDateTime.now();
+			ZonedDateTime currentISTime = currentDateTime.atZone(istZoneId);
+			ZonedDateTime currentETime = currentISTime.withZoneSameInstant(etZoneId);
+			System.out.println(globalFormat.format(currentETime));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[text()[contains(.,'"+globalFormat.format(currentETime)+"')]]")));
+		}
 	}
 	
 	public void verifyBulkEmail(String userRole) throws Throwable {

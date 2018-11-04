@@ -51,45 +51,6 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
 
   Scenario Outline: <Description>
     Given I am on the login page
-    When I enter email field lbarinstein+qaadmin@remedypartners.com for login
-    And I enter password field Testing1 for Login
-    Then I click Access button
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    Then I verify All Users button
-    Then I click on All Users button
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    Then I verify Edit Icon
-    Then I click on Edit Icon
-    Then I verify Delete User button
-    Then I click on cross button on Edit User Page
-    Then I verify Lock/Unlock Icon
-    Then I verify first name "<FirstName>"
-    Then I verify last name "<LastName>"
-    Then I verify role "<Role>"
-    Then I verify email "<Email>" for "<User>-<Role>"
-    Then I verify phone "<Phone>"
-    Then I verify NPI "<NPI>"
-    Then I verify enabled "<ApplicationsEnabled>"
-    Then I verify disabled "<ApplicationsDisabled>"
-    Then I verify learning pathway "<LearningPathway>"
-    Then I verify health system "<HealthSystem>"
-    Then I verify programs "<Programs>"
-    Then I verify location "<Locations>"
-
-    Examples: 
-      | Description                                                 | User        | UserName                               | Password | FirstName                                 | LastName | Phone        | Role                | ApplicationsEnabled                                           | ApplicationsDisabled                                                            | ApplicationsNotVisible | NPI | LearningPathway                                        | HealthSystem                       | Programs                                                    | Locations                                                                                                                                                                                                                                                                                                                   |
-      | View Downstream Provider user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | 998-877-6655 | Downstream Provider | Episode Connect, Remedy University, Care Innovation Institute | Episode Connect Classic, Episode Connect for Post-acute Care, Community Connect |                        |     | New learning Path, Learning Pathway 2, max-test-052417 | Healthsystem - Downstream Provider | Healthsystem - Downstream Provider--Downstream Organization | Healthsystem - Downstream Provider--DOWN-ORG--Abbeville General Hospital, Healthsystem - Downstream Provider--DOWN-ORG--Litchford Falls Nursing & Rehabilitation Center, Healthsystem - Downstream Provider--DOWN-ORG--Coosa valley health care, Healthsystem - Downstream Provider--DOWN-ORG--Alaris Health at Jersey City |
-
-  Scenario Outline: <Description>
-    Given I am on the login page
     Then I enter newuser email for "<User>-<Role>" login to Remedy
     Then I enter newuser password for login to Remedy
     And I click Access button
@@ -168,6 +129,49 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
 
   Scenario Outline: <Description>
     Given I am on the login page
+    When I enter email field lbarinstein+qaadmin@remedypartners.com for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    Then I verify All Users button
+    Then I click on All Users button
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    Then I verify Edit Icon
+    Then I click on Edit Icon
+    Then I verify Delete User button
+    Then I click on cross button on Edit User Page
+    Then I verify Lock/Unlock Icon
+    Then I verify first name "<FirstName>"
+    Then I verify last name "<LastName>"
+    Then I verify role "<Role>"
+    Then I verify email "<Email>" for "<User>-<Role>"
+    Then I verify last login date for "<Role>"
+    Then I verify phone "<Phone>"
+    Then I verify NPI "<NPI>"
+    Then I verify enabled "<ApplicationsEnabled>"
+    Then I verify disabled "<ApplicationsDisabled>"
+    Then I verify "<ApplicationsNotVisible>" not visible on view user page
+    Then I verify learning pathway "<LearningPathway>"
+    Then I verify health system "<HealthSystem>"
+    Then I verify programs "<Programs>"
+    Then I verify location "<Locations>"
+    Then I refresh the view user page
+    And I verify that I am navigated to user page
+
+    Examples: 
+      | Description                                                 | User        | UserName                               | Password | FirstName                                 | LastName | Phone        | Role                | ApplicationsEnabled                                           | ApplicationsDisabled                                                            | ApplicationsNotVisible                                                         | NPI | LearningPathway                                        | HealthSystem                       | Programs                                                    | Locations                                                                                                                                                                                                                                                                                                                   |
+      | View Downstream Provider user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | 998-877-6655 | Downstream Provider | Episode Connect, Remedy University, Care Innovation Institute | Episode Connect Classic, Episode Connect for Post-acute Care, Community Connect | Administration, Reporting Classic, Reporting, Care Connect, Program Management |     | New learning Path, Learning Pathway 2, max-test-052417 | Healthsystem - Downstream Provider | Healthsystem - Downstream Provider--Downstream Organization | Healthsystem - Downstream Provider--DOWN-ORG--Abbeville General Hospital, Healthsystem - Downstream Provider--DOWN-ORG--Litchford Falls Nursing & Rehabilitation Center, Healthsystem - Downstream Provider--DOWN-ORG--Coosa valley health care, Healthsystem - Downstream Provider--DOWN-ORG--Alaris Health at Jersey City |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
     Then I click Access button
@@ -211,47 +215,8 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Then I set new password for the user "<User>-<Role>"
 
     Examples: 
-      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Phone      | Role                | ApplicationsUnchecked                      | Applications                               | ApplicationsNotVisible                                                                                  | NPI | LearningPathwaySearchParameter                                          | Locations                                                                                  |
-      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Downstream Provider | Episode Connect Classic, Remedy University | Episode Connect, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect, Program Management |     |  | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital |
-
-  Scenario Outline: <Description>
-    Given I am on the login page
-    When I enter email field lbarinstein+qaadmin@remedypartners.com for login
-    And I enter password field Testing1 for Login
-    Then I click Access button
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    Then I verify All Users button
-    Then I click on All Users button
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    Then I verify Edit Icon
-    Then I click on Edit Icon
-    Then I verify Delete User button
-    Then I click on cross button on Edit User Page
-    Then I verify Lock/Unlock Icon
-    Then I verify first name "<FirstName>"
-    Then I verify last name "<LastName>"
-    Then I verify role "<Role>"
-    Then I verify email "<Email>" for "<User>-<Role>"
-    Then I verify phone "<Phone>"
-    Then I verify NPI "<NPI>"
-    Then I verify enabled "<ApplicationsEnabled>"
-    Then I verify disabled "<ApplicationsDisabled>"
-    Then I verify learning pathway "<LearningPathway>"
-    Then I verify health system "<HealthSystem>"
-    Then I verify programs "<Programs>"
-    Then I verify location "<Locations>"
-
-    Examples: 
-      | Description                                                 | User        | UserName                               | Password | FirstName                                 | LastName | Phone        | Role                | ApplicationsEnabled                        | ApplicationsDisabled                                                                               | ApplicationsNotVisible | NPI | LearningPathway | HealthSystem                       | Programs                                                    | Locations                                                                                                                                                                                                                                                                                                                   |
-      | View Downstream Provider user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | 998-877-6655 | Downstream Provider | Episode Connect, Care Innovation Institute | Episode Connect for Post-acute Care, Remedy University, Community Connect, Episode Connect Classic |                        |     |                 | Healthsystem - Downstream Provider | Healthsystem - Downstream Provider--Downstream Organization | Healthsystem - Downstream Provider--DOWN-ORG--Abbeville General Hospital, Healthsystem - Downstream Provider--DOWN-ORG--Litchford Falls Nursing & Rehabilitation Center, Healthsystem - Downstream Provider--DOWN-ORG--Coosa valley health care, Healthsystem - Downstream Provider--DOWN-ORG--Alaris Health at Jersey City |
+      | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Phone      | Role                | ApplicationsUnchecked                      | Applications                               | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter | Locations                                                                                  |
+      | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Downstream Provider | Episode Connect Classic, Remedy University | Episode Connect, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect, Program Management |     |                                | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -328,8 +293,51 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     And I should see Log in widget
 
     Examples: 
-      | Description                                                                    | User        | FirstName                                 | LastName | Role                | Applications                               | ApplicationsNotVisible                                                                                                                                                             | Roletext | ReportCategory | ReportName         | BPID | LearningPathway                                                                               | Facilities                                                                                                                          |
-      | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episode Connect, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect, Episode Connect for Post-acute Care, Remedy University, Community Connect, Program Management, Episode Connect Classic | ROLE_SNF | Patient ID     | Episode DRG Issues |      | | Abbeville General Hospital, Litchford Falls Nursing & Rehabilitation Center, Coosa valley health care, Alaris Health at Jersey City |
+      | Description                                                                    | User        | FirstName                                 | LastName | Role                | Applications                               | ApplicationsNotVisible                                                                                                                                                             | Roletext | ReportCategory | ReportName         | BPID | LearningPathway | Facilities                                                                                                                          |
+      | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episode Connect, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect, Episode Connect for Post-acute Care, Remedy University, Community Connect, Program Management, Episode Connect Classic | ROLE_SNF | Patient ID     | Episode DRG Issues |      |                 | Abbeville General Hospital, Litchford Falls Nursing & Rehabilitation Center, Coosa valley health care, Alaris Health at Jersey City |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I enter email field lbarinstein+qaadmin@remedypartners.com for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    Then I verify All Users button
+    Then I click on All Users button
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    Then I verify Edit Icon
+    Then I click on Edit Icon
+    Then I verify Delete User button
+    Then I click on cross button on Edit User Page
+    Then I verify Lock/Unlock Icon
+    Then I verify first name "<FirstName>"
+    Then I verify last name "<LastName>"
+    Then I verify role "<Role>"
+    Then I verify email "<Email>" for "<User>-<Role>"
+    Then I verify last login date for "<Role>"
+    Then I verify phone "<Phone>"
+    Then I verify NPI "<NPI>"
+    Then I verify enabled "<ApplicationsEnabled>"
+    Then I verify disabled "<ApplicationsDisabled>"
+    Then I verify "<ApplicationsNotVisible>" not visible on view user page
+    Then I verify learning pathway "<LearningPathway>"
+    Then I verify health system "<HealthSystem>"
+    Then I verify programs "<Programs>"
+    Then I verify location "<Locations>"
+    Then I refresh the view user page
+    And I verify that I am navigated to user page
+
+    Examples: 
+      | Description                                                 | User        | UserName                               | Password | FirstName                                 | LastName | Phone        | Role                | ApplicationsEnabled                        | ApplicationsDisabled                                                                               | ApplicationsNotVisible                                                         | NPI | LearningPathway | HealthSystem                       | Programs                                                    | Locations                                                                                                                                                                                                                                                                                                                   |
+      | View Downstream Provider user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | 998-877-6655 | Downstream Provider | Episode Connect, Care Innovation Institute | Episode Connect for Post-acute Care, Remedy University, Community Connect, Episode Connect Classic | Administration, Reporting Classic, Reporting, Care Connect, Program Management |     |                 | Healthsystem - Downstream Provider | Healthsystem - Downstream Provider--Downstream Organization | Healthsystem - Downstream Provider--DOWN-ORG--Abbeville General Hospital, Healthsystem - Downstream Provider--DOWN-ORG--Litchford Falls Nursing & Rehabilitation Center, Healthsystem - Downstream Provider--DOWN-ORG--Coosa valley health care, Healthsystem - Downstream Provider--DOWN-ORG--Alaris Health at Jersey City |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -378,45 +386,6 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Examples: 
       | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Phone      | Role                | ApplicationsUnchecked                                  | Applications                                                                                       | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter                                          | Locations                                                                                  |
       | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Downstream Provider | Episode Connect for Post-acute Care, Community Connect | Episode Connect, Episode Connect for Post-acute Care, Community Connect, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect, Program Management |     | HZhmTBQzHtU1, NFdw0Kts2C01, 3hSOHNAnvjc1, max-test-052417, n9yn5n0Qa581 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital |
-
-  Scenario Outline: <Description>
-    Given I am on the login page
-    When I enter email field lbarinstein+qaadmin@remedypartners.com for login
-    And I enter password field Testing1 for Login
-    Then I click Access button
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    Then I verify All Users button
-    Then I click on All Users button
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    Then I verify Edit Icon
-    Then I click on Edit Icon
-    Then I verify Delete User button
-    Then I click on cross button on Edit User Page
-    Then I verify Lock/Unlock Icon
-    Then I verify first name "<FirstName>"
-    Then I verify last name "<LastName>"
-    Then I verify role "<Role>"
-    Then I verify email "<Email>" for "<User>-<Role>"
-    Then I verify phone "<Phone>"
-    Then I verify NPI "<NPI>"
-    Then I verify enabled "<ApplicationsEnabled>"
-    Then I verify disabled "<ApplicationsDisabled>"
-    Then I verify learning pathway "<LearningPathway>"
-    Then I verify health system "<HealthSystem>"
-    Then I verify programs "<Programs>"
-    Then I verify location "<Locations>"
-
-    Examples: 
-      | Description                                                 | User        | UserName                               | Password | FirstName                                 | LastName | Phone        | Role                | ApplicationsEnabled                                                                                | ApplicationsDisabled                       | ApplicationsNotVisible | NPI | LearningPathway | HealthSystem                       | Programs                                                    | Locations                                                                                                                                                                                                                                                                                                                   |
-      | View Downstream Provider user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | 998-877-6655 | Downstream Provider | Episode Connect, Episode Connect for Post-acute Care, Community Connect, Care Innovation Institute | Episode Connect Classic, Remedy University |                        |     |                 | Healthsystem - Downstream Provider | Healthsystem - Downstream Provider--Downstream Organization | Healthsystem - Downstream Provider--DOWN-ORG--Abbeville General Hospital, Healthsystem - Downstream Provider--DOWN-ORG--Litchford Falls Nursing & Rehabilitation Center, Healthsystem - Downstream Provider--DOWN-ORG--Coosa valley health care, Healthsystem - Downstream Provider--DOWN-ORG--Alaris Health at Jersey City |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -498,6 +467,49 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
 
   Scenario Outline: <Description>
     Given I am on the login page
+    When I enter email field lbarinstein+qaadmin@remedypartners.com for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    Then I verify All Users button
+    Then I click on All Users button
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    Then I verify Edit Icon
+    Then I click on Edit Icon
+    Then I verify Delete User button
+    Then I click on cross button on Edit User Page
+    Then I verify Lock/Unlock Icon
+    Then I verify first name "<FirstName>"
+    Then I verify last name "<LastName>"
+    Then I verify role "<Role>"
+    Then I verify email "<Email>" for "<User>-<Role>"
+    Then I verify last login date for "<Role>"
+    Then I verify phone "<Phone>"
+    Then I verify NPI "<NPI>"
+    Then I verify enabled "<ApplicationsEnabled>"
+    Then I verify disabled "<ApplicationsDisabled>"
+    Then I verify "<ApplicationsNotVisible>" not visible on view user page
+    Then I verify learning pathway "<LearningPathway>"
+    Then I verify health system "<HealthSystem>"
+    Then I verify programs "<Programs>"
+    Then I verify location "<Locations>"
+    Then I refresh the view user page
+    And I verify that I am navigated to user page
+
+    Examples: 
+      | Description                                                 | User        | UserName                               | Password | FirstName                                 | LastName | Phone        | Role                | ApplicationsEnabled                                                                                | ApplicationsDisabled                       | ApplicationsNotVisible                                                         | NPI | LearningPathway | HealthSystem                       | Programs                                                    | Locations                                                                                                                                                                                                                                                                                                                   |
+      | View Downstream Provider user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | 998-877-6655 | Downstream Provider | Episode Connect, Episode Connect for Post-acute Care, Community Connect, Care Innovation Institute | Episode Connect Classic, Remedy University | Administration, Reporting Classic, Reporting, Care Connect, Program Management |     |                 | Healthsystem - Downstream Provider | Healthsystem - Downstream Provider--Downstream Organization | Healthsystem - Downstream Provider--DOWN-ORG--Abbeville General Hospital, Healthsystem - Downstream Provider--DOWN-ORG--Litchford Falls Nursing & Rehabilitation Center, Healthsystem - Downstream Provider--DOWN-ORG--Coosa valley health care, Healthsystem - Downstream Provider--DOWN-ORG--Alaris Health at Jersey City |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
     When I enter email field <UserName> for login
     And I enter password field <Password> for Login
     Then I click Access button
@@ -543,45 +555,6 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Examples: 
       | Description                                                               | User        | UserName                               | Password | FirstName                                 | LastName | Email                          | Phone      | Role                | ApplicationsUnchecked                                                                              | Applications                                                                                                                                   | ApplicationsNotVisible                                                         | NPI | LearningPathwaySearchParameter                         | Locations                                                                                  | HasHealthSystem1 | Health System1 | Programs1 | Locations1 | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
       | Login with Super Admin User and create user with Downstream Provider role | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | qaautomation@remedysystems.com | 9988776655 | Downstream Provider | Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect | Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect, Care Innovation Institute | Administration, Reporting Classic, Reporting, Care Connect, Program Management |     | New learning Path, Learning Pathway 2, max-test-052417 | 345454, Coosa valley health care, Alaris Health at Jersey City, Abbeville General Hospital | No               |                |           |            | No               |                |           |            | No               |                |           |            |
-
-  Scenario Outline: <Description>
-    Given I am on the login page
-    When I enter email field lbarinstein+qaadmin@remedypartners.com for login
-    And I enter password field Testing1 for Login
-    Then I click Access button
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    Then I verify All Users button
-    Then I click on All Users button
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    Then I verify Edit Icon
-    Then I click on Edit Icon
-    Then I verify Delete User button
-    Then I click on cross button on Edit User Page
-    Then I verify Lock/Unlock Icon
-    Then I verify first name "<FirstName>"
-    Then I verify last name "<LastName>"
-    Then I verify role "<Role>"
-    Then I verify email "<Email>" for "<User>-<Role>"
-    Then I verify phone "<Phone>"
-    Then I verify NPI "<NPI>"
-    Then I verify enabled "<ApplicationsEnabled>"
-    Then I verify disabled "<ApplicationsDisabled>"
-    Then I verify learning pathway "<LearningPathway>"
-    Then I verify health system "<HealthSystem>"
-    Then I verify programs "<Programs>"
-    Then I verify location "<Locations>"
-
-    Examples: 
-      | Description                                                 | User        | UserName                               | Password | FirstName                                 | LastName | Phone        | Role                | ApplicationsEnabled                                                                                                                            | ApplicationsDisabled | ApplicationsNotVisible                                       | NPI | LearningPathway                                        | HealthSystem                       | Programs                                                    | Locations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-      | View Downstream Provider user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | 998-877-6655 | Downstream Provider | Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect, Care Innovation Institute |                      | Administration, Care Innovation Institute, Reporting Classic |     | New learning Path, Learning Pathway 2, max-test-052417 | Healthsystem - Downstream Provider | Healthsystem - Downstream Provider--Downstream Organization | Healthsystem - Downstream Provider--DOWN-ORG--345454, Healthsystem - Downstream Provider--DOWN-ORG--Coosa valley health care, Healthsystem - Downstream Provider--DOWN-ORG--Alaris Health at Jersey City, Healthsystem - Downstream Provider--DOWN-ORG--Abbeville General Hospital, Healthsystem - Downstream Provider--DOWN-ORG--Abbeville General Hospital, Healthsystem - Downstream Provider--DOWN-ORG--Litchford Falls Nursing & Rehabilitation Center, Healthsystem - Downstream Provider--DOWN-ORG--Coosa valley health care, Healthsystem - Downstream Provider--DOWN-ORG--Alaris Health at Jersey City |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -660,6 +633,49 @@ Feature: Create Downstream Provider user from Super Admin and Validate the user 
     Examples: 
       | Description                                                                    | User        | FirstName                                 | LastName | Role                | Applications                                                                                                                                   | ApplicationsNotVisible                                                         | Roletext | ReportCategory | ReportName         | BPID | LearningPathway                                        | Facilities                                                                                                                          |
       | Login with DownStream Provider and verify Product Tiles and their redirections | Super Admin | FirstNameFirstNameFirstNameFirstNameFirst | LastName | Downstream Provider | Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute, Remedy University, Community Connect | Administration, Reporting Classic, Reporting, Care Connect, Program Management | ROLE_SNF | Patient ID     | Episode DRG Issues |      | New learning Path, Learning Pathway 2, max-test-052417 | Abbeville General Hospital, Litchford Falls Nursing & Rehabilitation Center, Coosa valley health care, Alaris Health at Jersey City |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I enter email field lbarinstein+qaadmin@remedypartners.com for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    Then I verify All Users button
+    Then I click on All Users button
+    Then I should see header text "Users"
+    Then I search for user with role "<User>-<Role>"
+    Then I select user with role "<User>-<Role>"
+    And I verify that I am navigated to user page
+    Then I verify Edit Icon
+    Then I click on Edit Icon
+    Then I verify Delete User button
+    Then I click on cross button on Edit User Page
+    Then I verify Lock/Unlock Icon
+    Then I verify first name "<FirstName>"
+    Then I verify last name "<LastName>"
+    Then I verify role "<Role>"
+    Then I verify email "<Email>" for "<User>-<Role>"
+    Then I verify last login date for "<Role>"
+    Then I verify phone "<Phone>"
+    Then I verify NPI "<NPI>"
+    Then I verify enabled "<ApplicationsEnabled>"
+    Then I verify disabled "<ApplicationsDisabled>"
+    Then I verify "<ApplicationsNotVisible>" not visible on view user page
+    Then I verify learning pathway "<LearningPathway>"
+    Then I verify health system "<HealthSystem>"
+    Then I verify programs "<Programs>"
+    Then I verify location "<Locations>"
+    Then I refresh the view user page
+    And I verify that I am navigated to user page
+
+    Examples: 
+      | Description                                                 | User        | UserName                               | Password | FirstName                                 | LastName | Phone        | Role                | ApplicationsEnabled                                                                                                                            | ApplicationsDisabled | ApplicationsNotVisible                                                         | NPI | LearningPathway                                        | HealthSystem                       | Programs                                                    | Locations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+      | View Downstream Provider user created from Super Admin user | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastName | 998-877-6655 | Downstream Provider | Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect, Care Innovation Institute |                      | Administration, Reporting Classic, Reporting, Care Connect, Program Management |     | New learning Path, Learning Pathway 2, max-test-052417 | Healthsystem - Downstream Provider | Healthsystem - Downstream Provider--Downstream Organization | Healthsystem - Downstream Provider--DOWN-ORG--345454, Healthsystem - Downstream Provider--DOWN-ORG--Coosa valley health care, Healthsystem - Downstream Provider--DOWN-ORG--Alaris Health at Jersey City, Healthsystem - Downstream Provider--DOWN-ORG--Abbeville General Hospital, Healthsystem - Downstream Provider--DOWN-ORG--Abbeville General Hospital, Healthsystem - Downstream Provider--DOWN-ORG--Litchford Falls Nursing & Rehabilitation Center, Healthsystem - Downstream Provider--DOWN-ORG--Coosa valley health care, Healthsystem - Downstream Provider--DOWN-ORG--Alaris Health at Jersey City |
 
   Scenario Outline: Validating that Error is getting displayed on searching any downstream provider location less than 5 alphabets and clicking on pagination on creating and editing Downstream Provider role
     Given I am on the login page

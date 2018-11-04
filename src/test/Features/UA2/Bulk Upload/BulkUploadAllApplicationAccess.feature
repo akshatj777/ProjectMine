@@ -171,7 +171,7 @@ Feature: Bulk Upload User from SA
     Then I verify last name "<LastName>"
     Then I verify role "<Role>"
     Then I verify bulk email for "<User>-<Role>"
-    Then I verify last login date
+    Then I verify last login date for "<Role>"
     Then I verify phone "<Phone>"
     Then I verify bulk NPI "<NPI>"
     Then I verify enabled "<ApplicationsEnabled>"

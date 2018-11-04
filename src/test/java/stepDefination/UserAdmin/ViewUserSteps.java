@@ -84,9 +84,9 @@ public class ViewUserSteps extends DriverScript{
 		objViewUserPage.verifyEmail(email, userRole);
 	}
 	
-	@Then("^I verify last login date$")
-	public void verifyLastLoginDate() throws Throwable {
-		objViewUserPage.verifyLastLoginDate();
+	@Then("^I verify last login date for \"([^\"]*)\"$")
+	public void verifyLastLoginDate(String role) throws Throwable {
+		objViewUserPage.verifyLastLoginDate(role);
 	}
 	
 	@Then("^I verify bulk email for \"([^\"]*)\"$")
