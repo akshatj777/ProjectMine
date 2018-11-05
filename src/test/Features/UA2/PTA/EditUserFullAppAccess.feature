@@ -261,7 +261,7 @@ Feature: Edit user scenarios from PTA
 
     Examples: 
       | User                            | Role   | InvalidLearningPathwayName | AddInvalidLocations |
-      | Partner Technical Administrator | Leader | Test123                    | 3090-191--test768   |
+      | Partner Technical Administrator | Leader | Test123                    | test768             |
 
   Scenario Outline: Selected locations for Model-2 are not getting displayed as selected after unchecking Model-2 from program drop down while editing the user
     Given I am on the login page

@@ -2745,7 +2745,31 @@ public void iUnselectAllSelectedApps(){
 			    	   driver.findElement(By.xpath("//th[contains(text(),\""+BPID+"\")]/../../following-sibling::tbody//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+location.toLowerCase()+"\")]")).click();  
 	    		   }
 	    	   }
-		   	}	
+		   	}
+		   else
+		   {
+			   if(DriverScript.Config.getProperty("Browser").equals("ie"))
+    		   {
+				   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']"))));
+    			   new Actions(driver).sendKeys(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), locationList).build().perform();
+    			   while(!(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")).getAttribute("value").equals(locationList)))
+    			   {
+    				   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")));
+    				   new Actions(driver).sendKeys(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), locationList).build().perform();
+    			   }
+    		   }
+			   else
+			   {
+				   waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']"))));
+	    		   driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
+	    		   iFillInText(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), locationList);
+	    		   while(!(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")).getAttribute("value").equals(locationList)))
+    			   {
+    				   driver.findElement(By.xpath("//i[@class='remove link icon remove-icon']")).click();
+    				   iFillInText(driver.findElement(By.xpath("//section[@class='component-remedy-facility-select']/div/div/input[@placeholder='Search']")), locationList);
+    			   }
+			   }
+		   }
 	   	}
 	   	}
 	   
