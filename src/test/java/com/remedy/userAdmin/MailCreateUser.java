@@ -369,11 +369,11 @@ public class MailCreateUser extends BaseClass{
 	    		System.out.println(e.toString());
 	    	}
 			
-			scrollIntoViewByJS(driver.findElement(By.xpath("//img[@role='menu']")));
-			iWillWaitToSee(By.xpath("//img[@role='menu']"));
-			driver.findElement(By.xpath("//img[@role='menu']")).click();
-			iWillWaitToSee(By.xpath("//div[contains(text(),'Delete this message')]"));
-			driver.findElement(By.xpath("//div[contains(text(),'Delete this message')]")).click();
+//			scrollIntoViewByJS(driver.findElement(By.xpath("//img[@role='menu']")));
+//			iWillWaitToSee(By.xpath("//img[@role='menu']"));
+//			driver.findElement(By.xpath("//img[@role='menu']")).click();
+//			iWillWaitToSee(By.xpath("//div[contains(text(),'Delete this message')]"));
+//			driver.findElement(By.xpath("//div[contains(text(),'Delete this message')]")).click();
 		}
 	
 	public void verifyAccountUA(String userRole) throws InterruptedException
@@ -522,31 +522,31 @@ public class MailCreateUser extends BaseClass{
     	{
     		System.out.println(e.toString());
     	}
-		if(DriverScript.Config.getProperty("Browser").equals("ie"))
-		{
-			iWillWaitToSee(By.xpath("//div[@data-tooltip='More']"));
-			driver.findElement(By.xpath("//div[@data-tooltip='More']")).click();
-			iWillWaitToSee(By.xpath("//div[contains(text(),'Delete this message')]"));
-			driver.findElement(By.xpath("//div[contains(text(),'Delete this message')]")).click();
-			Thread.sleep(4000);
-			iWillWaitToSee(By.xpath("//a[contains(text(),'Inbox')]"));
-			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(text(),'Inbox')]")));
-			Thread.sleep(4000);
-			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(text(),'Inbox')]")));
-		}
-		else
-		{
-			scrollIntoViewByJS(driver.findElement(By.xpath("//img[@role='menu']")));
-			iWillWaitToSee(By.xpath("//img[@role='menu']"));
-			driver.findElement(By.xpath("//img[@role='menu']")).click();
-			iWillWaitToSee(By.xpath("//div[contains(text(),'Delete this message')]"));
-			driver.findElement(By.xpath("//div[contains(text(),'Delete this message')]")).click();
-			Thread.sleep(4000);
-			iWillWaitToSee(By.xpath("//a[contains(text(),'Inbox')]"));
-			clickElement(driver.findElement(By.xpath("//a[contains(text(),'Inbox')]")));
-			Thread.sleep(4000);
-			clickElement(driver.findElement(By.xpath("//a[contains(text(),'Inbox')]")));
-		}
+//		if(DriverScript.Config.getProperty("Browser").equals("ie"))
+//		{
+//			iWillWaitToSee(By.xpath("//div[@data-tooltip='More']"));
+//			driver.findElement(By.xpath("//div[@data-tooltip='More']")).click();
+//			iWillWaitToSee(By.xpath("//div[contains(text(),'Delete this message')]"));
+//			driver.findElement(By.xpath("//div[contains(text(),'Delete this message')]")).click();
+//			Thread.sleep(4000);
+//			iWillWaitToSee(By.xpath("//a[contains(text(),'Inbox')]"));
+//			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(text(),'Inbox')]")));
+//			Thread.sleep(4000);
+//			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(text(),'Inbox')]")));
+//		}
+//		else
+//		{
+//			scrollIntoViewByJS(driver.findElement(By.xpath("//img[@role='menu']")));
+//			iWillWaitToSee(By.xpath("//img[@role='menu']"));
+//			driver.findElement(By.xpath("//img[@role='menu']")).click();
+//			iWillWaitToSee(By.xpath("//div[contains(text(),'Delete this message')]"));
+//			driver.findElement(By.xpath("//div[contains(text(),'Delete this message')]")).click();
+//			Thread.sleep(4000);
+//			iWillWaitToSee(By.xpath("//a[contains(text(),'Inbox')]"));
+//			clickElement(driver.findElement(By.xpath("//a[contains(text(),'Inbox')]")));
+//			Thread.sleep(4000);
+//			clickElement(driver.findElement(By.xpath("//a[contains(text(),'Inbox')]")));
+//		}
 	}
 	
 	

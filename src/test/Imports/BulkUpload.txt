@@ -46,7 +46,7 @@ OperatorFirstName | OperatorLastName | OPERATORMAIL | | Operator | NA | 441324:6
 DPFirstName | DPLastName | DPMAIL | 9998887770| Downstream Provider | NA | 015174 | | | False |True  |True  |  |  |  |  | | ||False
 SalesAcuteDemoFirstName | SalesAcuteDemoLastName | SalesAcuteDemoMAIL | | Remedy Sales Acute Demo 2018 | NA | 514029:2070-025:T | 18h7phZr1h81,n9yn5n0Qa581   | | False |  | True | True | True | True | False | | False| False|False
 SalesPACDemoFirstName | SalesPACDemoLastName | SalesPACDemoMAIL | | Remedy Sales PAC Demo 2018 | NA | 514029:2070-025:T,514029:2070-023:L | | | False |  | True |  |  | True |  | | | |False
-CommercialFirstName | CommercialLastName | CommercialMAIL | | Remedy Sales Commercial Demo 2018 | NA | 514029:2070-025:T,514029:2070-023:L | | | False |  | True |  |  | True |  | | | |False
+CommercialFirstName | CommercialLastName | CommercialMAIL | | Remedy Sales Commercial Demo 2018 | NA | 514029:2070-025:T,514029:2070-023:L | | | False | True | False |  |  | True |  | | | |False
 
 #################### Multiple users import: 51 users ########################
 

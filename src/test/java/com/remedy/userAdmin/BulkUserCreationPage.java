@@ -1572,7 +1572,7 @@ public class BulkUserCreationPage extends BaseClass {
 
 			strUserData = strUserData.replace(
 					"514029:2070-025:T,514029:2070-023:L | | |True|  |  ",
-					"450306| | |False | True | True  ");
+					"345454,015174,315083,190034| | |False | True | True  ");
 
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
 			applicationsList.put("Downstream Provider", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute");

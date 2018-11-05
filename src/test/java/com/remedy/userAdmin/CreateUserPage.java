@@ -949,6 +949,7 @@ public void iUnselectAllSelectedApps(){
 					   delay();
 					   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElements(By.xpath("//a[contains(text(),'Add Note')]")).get(0));
 					   delay();
+					   iWillWaitToSee(By.xpath("//textarea[contains(text(),'"+userrole+"')]"));
 					   Assert.assertTrue(isElementPresentOnPage(By.xpath("//textarea[contains(text(),'"+userrole+"')]")));
 					   delay();
 					   ((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//button[@class='close']")));
@@ -960,6 +961,7 @@ public void iUnselectAllSelectedApps(){
 					   delay();
 					   driver.findElements(By.xpath("//a[contains(text(),'Add Note')]")).get(0).click();
 					   delay();
+					   iWillWaitToSee(By.xpath("//textarea[contains(text(),'"+userrole+"')]"));
 					   Assert.assertTrue(isElementPresentOnPage(By.xpath("//textarea[contains(text(),'"+userrole+"')]")));
 					   delay();
 					   driver.findElement(By.xpath("//button[@class='close']")).click();
