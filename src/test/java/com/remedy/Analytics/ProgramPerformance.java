@@ -78,6 +78,7 @@ public class ProgramPerformance extends BaseClass{
 	public static HashMap<String, String> imageOutput;
 	public static Map<String,HashMap<String,String>> mapOfHmFiltersValue = new HashMap<String,HashMap<String,String>>();
 	public static HashMap<String, String> rowFilters;
+	List<String> RegionMarketArrayList = new ArrayList<String>();
 	public ProgramPerformance(WebDriver driver) {
 		super(driver);
 	}
@@ -2202,7 +2203,7 @@ public class ProgramPerformance extends BaseClass{
 		 System.out.println("Out"+rowFilters.toString());
 		 
 		 /* For Trimming Participant From Region Market*/ 
-		 List<String> RegionMarketArrayList = new ArrayList<String>();;
+//		 List<String> RegionMarketArrayList = new ArrayList<String>();
 		 if(filter.equals("Region - Market")) {
 			 RegionMarketArrayList=values;
 		 }
@@ -2214,29 +2215,35 @@ public class ProgramPerformance extends BaseClass{
 			 String valB = null;
 			 for(int i =0; i<RegionMarketArrayList.size();i++) {
 				 String tempVar=RegionMarketArrayList.get(i).trim();
-					if(tempVar.equals("Null")) {
-						tempVar=tempVar.replace("Null", "null");
+//					if(tempVar.equals("null")) {
+//						tempVar=tempVar.replace("Null", "null");
 //						arrayListTextsA.add(tempVar);
 //						arrayListTextsB.add(tempVar);
-					}if (!tempVar.equals("Null")) {
+//					}
+					if (!tempVar.equals("null")) {
 					
 					valarr=tempVar.split(" - ");
 					valA=valarr[0].trim();
 					valB=valarr[1].trim();
+					for(int j=0;j<values.size();j++) {
+						valA=valA.replace(values.get(j), "");
+						valA=valA.trim();
+					}
 					valA = valA.replaceAll("'","''");
 					tempVar="'"+valA+"'"; 
        			 	arrayListTextsA.add(tempVar);
        			    valB = valB.replaceAll("'","''");
        			 tempVar="'"+valB+"'"; 
     			 	arrayListTextsB.add(tempVar);
-		 }}
+		 }
+			 }
 			 arrayListTexts.addAll(arrayListTextsA);
 			 System.out.println("Value of A="+arrayListTexts);
 			 writeDataToOutputFile("Path");
 			 arrayListTexts.addAll(arrayListTextsB);
 			 System.out.println("Value of B="+arrayListTexts);
 			 writeDataToOutputFile("Path");
-			 
+			 RegionMarketArrayList.clear();
 			 }
 		 /* ----------------------------------- */
 	 }

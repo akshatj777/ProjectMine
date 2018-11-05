@@ -52,7 +52,7 @@
           <boolProp name="recycle">false</boolProp>
           <stringProp name="shareMode">shareMode.all</stringProp>
           <boolProp name="stopThread">true</boolProp>
-          <stringProp name="variableNames">Flag,userName,time_range,bpid,anchorFacility,ccn,bundle,region,market,r_region,r_market,participantName</stringProp>
+          <stringProp name="variableNames">Flag,userName,time_range,bpid,anchorFacility,ccn,bundle,dummyregion,dummymarket,r_region,r_market,participantName,region,market</stringProp>
         </CSVDataSet>
         <hashTree/>
         <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
