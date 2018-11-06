@@ -147,8 +147,8 @@ public class ViewUserPage extends BaseClass {
 			LocalDateTime currentDateTime = LocalDateTime.now();
 			ZonedDateTime currentISTime = currentDateTime.atZone(istZoneId);
 			ZonedDateTime currentETime = currentISTime.withZoneSameInstant(etZoneId);
-			System.out.println(globalFormat.format(currentETime));
-			Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[text()[contains(.,'"+globalFormat.format(currentETime)+"')]]")));
+			System.out.println(globalFormat.format(currentISTime));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[text()[contains(.,'"+globalFormat.format(currentISTime)+"')]]")));
 		}
 	}
 	
