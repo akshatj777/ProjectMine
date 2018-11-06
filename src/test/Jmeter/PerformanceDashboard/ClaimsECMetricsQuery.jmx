@@ -72,7 +72,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
           <stringProp name="filename">ClaimsECMetricsInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">Flag,bpid,ccn,bundle,dummyregion,dummymarket,r_region,r_market,participantName,drgCode,npi,model,region,market</stringProp>
+          <stringProp name="variableNames">Flag,bpid,anchorFacility,ccn,bundle,dummyregion,dummymarket,r_region,r_market,participantName,drgCode,npi,model,region,market</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -91,6 +91,13 @@
 } else {
 	vars.put(&quot;C_BPID&quot;,&quot;&quot;);
 	vars.put(&quot;E_BPID&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;anchorFacility&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;C_AnchorFacility&quot;,&quot;AND f.facilityNameInitCap in ${anchorFacility}&quot;);
+	vars.put(&quot;E_AnchorFacility&quot;,&quot;AND df.facilityNameInitCap in ${anchorFacility}&quot;);	
+} else {
+	vars.put(&quot;C_AnchorFacility&quot;,&quot;&quot;);
+	vars.put(&quot;E_AnchorFacility&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;C_CCN&quot;,&quot;and f.ccn in ${ccn}&quot;);
@@ -180,7 +187,7 @@ left JOIN warehouse.dimRegionMarket rmp ON c.rgPartnerKey = rmp.rgSK
 where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  
 and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;   
 and c.anchorBeginDateKey &gt;= 20160101   
-and c.anchorBeginDateKey &lt;=(select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)    ${C_BPID}  ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model}  
+and c.anchorBeginDateKey &lt;=(select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)    ${C_BPID}  ${C_AnchorFacility} ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model}  
 and c.targetPrice &lt;&gt; 0 
  
 union 
@@ -204,7 +211,7 @@ and de.bpid not like &apos;%DEMO%&apos;
 and dlk.lookupCategory = &apos;patientRisk&apos; 
 and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) 
-${E_BPID}  ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model}  )a;</stringProp>
+${E_BPID}  ${E_AnchorFacility} ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model}  )a;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">Episode_EC_Claims</stringProp>
@@ -230,7 +237,7 @@ where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims
 and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)  
 and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;   
 and c.anchorBeginDateKey &gt;= 20160101
-and c.anchorBeginDateKey &lt;=(select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) ${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET}  ${Q_PARTICIPANTNAME}  ${Q_DRGCODE}  ${Q_PHY_NPI}  ${Q_Model} and c.targetPrice &lt;&gt; 0) a;</stringProp>
+and c.anchorBeginDateKey &lt;=(select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) ${C_BPID}  ${C_AnchorFacility} ${C_CCN} ${Q_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET}  ${C_PARTICIPANTNAME}  ${C_DRGCODE}  ${C_PHY_NPI}  ${C_Model} and c.targetPrice &lt;&gt; 0) a;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">savingRate_EC_Claims</stringProp>
@@ -256,7 +263,7 @@ and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims
 and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;   
 and c.anchorBeginDateKey &gt;= 20160101 
 and c.anchorBeginDateKey &lt;=(select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
-${Q_BPID}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET}  ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME}  ${Q_DRGCODE} ${Q_PHY_NPI}  ${Q_Model}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
+${C_BPID}  ${C_AnchorFacility} ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI}  ${C_Model}  and c.targetPrice &lt;&gt; 0) a;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">TotalNPRA_EC_Claims, TotalProgram_EC_Claims</stringProp>
@@ -282,7 +289,7 @@ where f.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims
 and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims&apos;)   
 and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;    
 and c.anchorBeginDateKey &gt;= 20160101    
-and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)     ${C_BPID}  ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model} 
+and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)     ${C_BPID}  ${C_AnchorFacility} ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model} 
 and c.targetPrice &lt;&gt; 0
 
 union
@@ -305,7 +312,7 @@ and dlk.lookupCategory = &apos;patientRisk&apos;
 and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup  where lookupCategory = &apos;ClaimsCubeDate&apos;)
 AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) 
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;,&apos;IRF&apos;)  
-${E_BPID}  ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model}  )a; </stringProp>
+${E_BPID}  ${E_AnchorFacility} ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model}  )a; </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">DischargeToSNF_EC_Claims</stringProp>
@@ -333,7 +340,7 @@ and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims
 and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;    
 and c.anchorBeginDateKey &gt;= 20160101   
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup  where lookupCategory = &apos;ClaimsCubeDate&apos;) 
-${C_BPID}  ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model} 
+${C_BPID}  ${C_AnchorFacility} ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model} 
 and c.targetPrice &lt;&gt; 0  
 
 union  
@@ -357,7 +364,7 @@ and dlk.lookupCategory = &apos;patientRisk&apos;
 and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)  
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;,&apos;IRF&apos;)  
-${E_BPID}  ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model}  )a;  </stringProp>
+${E_BPID}  ${E_AnchorFacility} ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model}  )a;  </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">dischtoSNFBenchmark_EC_Claims</stringProp>
@@ -384,7 +391,7 @@ and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims
 and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;     
 and c.anchorBeginDateKey &gt;= 20160101   
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  
-${C_BPID}  ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model}   
+${C_BPID}  ${C_AnchorFacility} ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model}   
 and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;) 
 and c.targetPrice &lt;&gt; 0    
 
@@ -409,7 +416,7 @@ and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)  and pac.dwhSource in 
 and de.bpid not like &apos;%DEMO%&apos;  and dlk.lookupCategory = &apos;patientRisk&apos;  
 and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  
 AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) 
-${E_BPID}  ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model} )a;</stringProp>
+${E_BPID}  ${E_AnchorFacility} ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model} )a;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">SNFDays_EC_Claims</stringProp>
@@ -436,7 +443,7 @@ and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;
 and c.anchorBeginDateKey &gt;= 20160101   
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  
 and c.postAcuteCategory in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;Other&apos;,&apos;HHA&apos;,&apos;Home&apos;)   
-${C_BPID}  ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model}   
+${C_BPID}  ${C_AnchorFacility} ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model}   
 and c.targetPrice &lt;&gt; 0  
 and c.snfDaysTrimmed &gt; 0  
 
@@ -463,7 +470,7 @@ and de.bpid not like &apos;%DEMO%&apos;
 and dlk.lookupCategory = &apos;patientRisk&apos; 
 and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
 AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)  
-${E_BPID}  ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model}  )a;</stringProp>
+${E_BPID}  ${E_AnchorFacility} ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model}  )a;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">SNFDaysBenchmark_EC_Claims</stringProp>
@@ -491,7 +498,7 @@ and pac.dwhSource in (&apos;Claims&apos;, &apos;ZeroKey&apos;,&apos;emblemClaims
 and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;  
 and c.anchorBeginDateKey &gt;= 20160101    
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
-${C_BPID}  ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model} 
+${C_BPID}  ${C_AnchorFacility} ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model} 
 and c.targetPrice &lt;&gt; 0  
 
 union  
@@ -514,7 +521,7 @@ and de.bpid not like &apos;%DEMO%&apos;
 and dlk.lookupCategory = &apos;patientRisk&apos;  
 and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
 AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) 
-${E_BPID}  ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model}  )a;</stringProp>
+${E_BPID}  ${E_AnchorFacility} ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model}  )a;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">EpisodesWithReadmission_EC_Claims</stringProp>
@@ -542,7 +549,7 @@ and e.bpid not like &apos;%DEMO%&apos;  and c.atRisk=&apos;Y&apos;
 and c.anchorBeginDateKey &gt;= 20160101     
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  
 
-${C_BPID}  ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model}  
+${C_BPID}  ${C_AnchorFacility} ${C_CCN} ${C_BUNDLE} ${C_R_REGION} ${C_R_MARKET}  ${C_REGION} ${C_MARKET} ${C_PARTICIPANTNAME}  ${C_DRGCODE} ${C_PHY_NPI} ${C_Model}  
 and c.targetPrice &lt;&gt; 0   
 
 union    
@@ -563,7 +570,7 @@ and df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and pac.dwhSource in (
 and de.bpid not like &apos;%DEMO%&apos;   and dlk.lookupCategory = &apos;patientRisk&apos;  
 and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  
 AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) 
-${E_BPID}  ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model}   )a;</stringProp>
+${E_BPID}  ${E_AnchorFacility} ${E_CCN} ${E_BUNDLE} ${E_R_REGION} ${E_R_MARKET} ${E_REGION} ${E_MARKET} ${E_PARTICIPANTNAME}  ${E_DRGCODE} ${E_PHY_NPI} ${E_Model}   )a;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">EpisodesWithReadmissionBenchmark_EC_Claims</stringProp>
