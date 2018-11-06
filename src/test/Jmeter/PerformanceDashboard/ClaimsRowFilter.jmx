@@ -258,7 +258,7 @@ ArrayList a22= new ArrayList();
      	if(ww.isEmpty()){
      	}
      	else{
-     	neee=&quot;AND (drg.drgCode in (&quot;+ww+&quot;) and  drg.drgName in (&quot;+ww1+&quot;)&quot;;
+     	neee=&quot;AND (drg.drgCode in (&quot;+ww+&quot;) and  drg.drgName in (&quot;+ww1+&quot;))&quot;;
      	log.info(&quot;470 Nee is&quot;+neee);
      	}
      }else if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.isEmpty()){

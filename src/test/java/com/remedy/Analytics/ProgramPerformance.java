@@ -1765,6 +1765,9 @@ public class ProgramPerformance extends BaseClass{
 		                       		  val="'"+val+"'";
 		                       		  arrayListTexts.add(val);
 		                       		  writeDataToOutputFile("Path");
+		                       		clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+		                   		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+		                   		 delay();
 		                       		  return;
 			            		 }
 			            		 
@@ -1786,6 +1789,9 @@ public class ProgramPerformance extends BaseClass{
 	    			            			 arrayListTextsB.add(val);
 	    			            			 arrayListTexts.addAll(arrayListTextsB);
 	    			            		 }   writeDataToOutputFile("Path");
+	    			            		 clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+	    			            		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+	    			            		 delay();
 	    			            		 return;
 	                            	 }
 			            		 }
@@ -1817,6 +1823,9 @@ public class ProgramPerformance extends BaseClass{
 	    			            			 arrayListTextsB.add(val);
 	    			            			 arrayListTexts.addAll(arrayListTextsB);
 	    			            		 }   writeDataToOutputFile("Path");
+	    			            		 clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+	    			            		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+	    			            		 delay();
 	    			            		 return;
 	                            	 }
 			            		 
@@ -1834,6 +1843,9 @@ public class ProgramPerformance extends BaseClass{
 		                        	val="'"+val+"'";
 		                       		 arrayListTexts.add(val);
 		                       		 writeDataToOutputFile("Path");
+		                       		clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+		                   		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+		                   		 delay();
 		                       		 return;
 		                         }
 			            		 
@@ -1845,6 +1857,9 @@ public class ProgramPerformance extends BaseClass{
 	                	    	     val="'"+val+"'";
 									 arrayListTexts.add(val);
 									 writeDataToOutputFile("Path");
+									 clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+									 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+									 delay();
 									 return;
 	                	       }
 			            		 
@@ -2030,12 +2045,76 @@ public class ProgramPerformance extends BaseClass{
 		          val="'"+val+"'";
 		               arrayListTexts.add(val);}
 		          else if(filter.contains("DRG")){
-		        	     String[] valarr1=val.split("-");
-	            		 val=valarr1[0].trim();
-	            		 val = val.replaceAll("'","''");              
-	            		 val="'"+val+"'";
-		                               arrayListTexts.add(val);
-		                           }
+		        	executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
+		        	 for(int j =1;j<=listItems.size();j++){
+		        		 String[] valarr1=val.split("-");
+		        		 val=valarr1[0].trim();
+		         			val="'"+val+"'";
+		         			arrayListTextsA.add(val);
+		         		    String new1;
+		         		
+		         		   if(j==1){
+		                       ArrayList<String> arrayListTextsD=new ArrayList<String>();
+		                       for(int m=0;m<listItemsText.size();m++){
+		                       	String[] valarr2=listItemsText.get(m).split("-");
+		                       	String var5=valarr2[0].trim();
+		                       	arrayListTextsD.add(var5);
+		                       	
+		           				 }
+		                       if(!arrayListTextsD.contains("469") || !arrayListTextsD.contains("470")){
+		                        	arrayListTexts.add("Skip");
+		                        	writeDataToOutputFile("Path");
+		                        }
+		                        }
+		         		  String[] valarr2=val.split("-");
+		         		  if(val.contains("469") || val.contains("470")){
+		         				
+		         				String val1=valarr2[1].trim();
+		         				if(val1.endsWith(")")){
+		         					String val3=val1;
+				            			String[] val4=val3.split("\\(");
+				            			val3=val4[0].trim();
+				            			val3="'"+val3+"'";
+				            			arrayListTextsB.add(val3);
+				            			new1=val1.substring(val1.indexOf("(")+1,val1.indexOf(")"));
+				            			if(new1.equals("F")){
+			            					new1=new1.replace("F", "1");
+			            				}else if(new1.equals("NF")){
+			            					new1=new1.replace("NF", "0");
+			            				}else if(new1.equals("U")){
+			            					new1=new1.replace("U", "-99");
+			            				}
+				            			new1="'"+new1+"'";
+				            			arrayListTextsC.add(new1);
+				            		    continue;
+		         				}else{
+		         					String val3=val1;
+				            			String[] val4=val3.split("\\(");
+				            			val3=val4[0].trim();
+				            			val3="'"+val3+"'";
+				            			arrayListTextsB.add(val3);	
+				            			arrayListTextsC.add("'Null'");
+				            			continue;
+		         				}}else{
+		         					String val1=valarr2[1].trim();
+		         					String val3=val1;
+		         					val3="'"+val3+"'";
+				            			arrayListTextsB.add(val3);
+				            			arrayListTextsC.add("'Null'");
+				            			if(j==listItemsText.size()){
+				            			arrayListTexts.addAll(arrayListTextsA);
+				            			writeDataToOutputFile("Path");
+				            			arrayListTexts.addAll(arrayListTextsB);
+				            			writeDataToOutputFile("Path");
+				            			arrayListTexts.addAll(arrayListTextsC);
+				            			writeDataToOutputFile("Path");
+				            			}
+				            			continue;
+										}
+		        		 
+		        	 }
+		        	
+           }
 		          else if (filter.equals("CCN")) {
                       String valA = null;
                       String valB= null;
