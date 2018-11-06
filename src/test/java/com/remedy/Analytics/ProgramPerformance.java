@@ -1895,19 +1895,19 @@ public class ProgramPerformance extends BaseClass{
 	            			val="'"+val+"'";
 	            			arrayListTextsA.add(val);
 	                        String new1;
-	                        if(i==1){
-	                        ArrayList<String> arrayListTextsD=new ArrayList<String>();
-	                        for(int m=0;m<listItemsText.size();m++){
-	                        	String[] valarr2=listItemsText.get(m).split("-");
-	                        	String var5=valarr2[0].trim();
-	                        	arrayListTextsD.add(var5);
-	                        	
-	            				 }
-	                        if(!arrayListTextsD.contains("469") || !arrayListTextsD.contains("470")){
-	                        	arrayListTexts.add("Skip");
-	                        	writeDataToOutputFile("Path");
-	                        }
-	                        }
+//	                        if(i==1){
+//	                        ArrayList<String> arrayListTextsD=new ArrayList<String>();
+//	                        for(int m=0;m<listItemsText.size();m++){
+//	                        	String[] valarr2=listItemsText.get(m).split("-");
+//	                        	String var5=valarr2[0].trim();
+//	                        	arrayListTextsD.add(var5);
+//	                        	
+//	            				 }
+//	                        if(!arrayListTextsD.contains("469") || !arrayListTextsD.contains("470")){
+//	                        	arrayListTexts.add("Skip");
+//	                        	writeDataToOutputFile("Path");
+//	                        }
+//	                        }
 	            			
 	            			if(val.contains("469") || val.contains("470")){
 	            				String val1=valarr1[1].trim();
@@ -1949,6 +1949,10 @@ public class ProgramPerformance extends BaseClass{
 			            			writeDataToOutputFile("Path");
 			            			arrayListTexts.addAll(arrayListTextsC);
 			            			writeDataToOutputFile("Path");
+			            			 clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+			            			 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+			            			 delay();
+			            			 return;
 			            			}
 			            			continue;
 									}
@@ -2053,19 +2057,7 @@ public class ProgramPerformance extends BaseClass{
 		         			arrayListTextsA.add(val);
 		         		    String new1;
 		         		
-		         		   if(j==1){
-		                       ArrayList<String> arrayListTextsD=new ArrayList<String>();
-		                       for(int m=0;m<listItemsText.size();m++){
-		                       	String[] valarr2=listItemsText.get(m).split("-");
-		                       	String var5=valarr2[0].trim();
-		                       	arrayListTextsD.add(var5);
-		                       	
-		           				 }
-		                       if(!arrayListTextsD.contains("469") || !arrayListTextsD.contains("470")){
-		                        	arrayListTexts.add("Skip");
-		                        	writeDataToOutputFile("Path");
-		                        }
-		                        }
+		         		   
 		         		  String[] valarr2=val.split("-");
 		         		  if(val.contains("469") || val.contains("470")){
 		         				
@@ -2108,6 +2100,9 @@ public class ProgramPerformance extends BaseClass{
 				            			writeDataToOutputFile("Path");
 				            			arrayListTexts.addAll(arrayListTextsC);
 				            			writeDataToOutputFile("Path");
+				            			clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+				            			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+				            			delay();
 				            			}
 				            			continue;
 										}
