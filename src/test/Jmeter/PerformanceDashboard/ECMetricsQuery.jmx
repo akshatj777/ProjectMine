@@ -72,7 +72,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
           <stringProp name="filename">ECMetricsInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">Flag,bpid,ccn,bundle,dummyregion,dummymarket,r_region,r_market,participantName,drgCode,npi,model,region,market</stringProp>
+          <stringProp name="variableNames">Flag,bpid,anchorFacility,ccn,bundle,dummyregion,dummymarket,r_region,r_market,participantName,drgCode,npi,model,region,market</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -104,6 +104,11 @@ from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;;
 	vars.put(&quot;Q_BPID&quot;,&quot;and fp.BPID in  ${bpid}&quot;);	
 } else {
 	vars.put(&quot;Q_BPID&quot;,&quot;&quot;);
+}
+if(!vars.get(&quot;anchorFacility&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;Q_AnchorFacility&quot;,&quot;AND df.facilityNameInitCap in ${anchorFacility}&quot;);	
+} else {
+	vars.put(&quot;Q_AnchorFacility&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;Q_CCN&quot;,&quot;and df.ccn in ${ccn}&quot;);	
@@ -175,7 +180,8 @@ where fp.bundleRisk = 1  and fp.episodeCountReport = 1 and df.dwhSource in (&apo
 and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)  
 -- AND fp.anchorAdmitDateKey &gt; (SELECT CAST(lookupValue AS UNSIGNED) FROM warehouse.dimLookup WHERE lookupCategory = &apos;ClaimsCubeDate&apos;) 
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) 
-${Q_BPID} 
+${Q_BPID}
+${Q_AnchorFacility} 
 ${Q_CCN} 
 ${Q_BUNDLE} 
 ${Q_R_REGION} 
@@ -214,7 +220,7 @@ and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from wareho
 -- AND fp.anchorAdmitDateKey &gt; (SELECT CAST(lookupValue AS UNSIGNED) FROM warehouse.dimLookup WHERE lookupCategory = &apos;ClaimsCubeDate&apos;) 
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) 
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;,&apos;IRF&apos;) 
-${Q_BPID} ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} )a; </stringProp>
+${Q_BPID} ${Q_AnchorFacility}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} )a; </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">dischargetoSNFEC</stringProp>
@@ -248,7 +254,7 @@ and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from wareho
 -- AND fp.anchorAdmitDateKey &gt; (SELECT CAST(lookupValue AS UNSIGNED) FROM warehouse.dimLookup WHERE lookupCategory = &apos;ClaimsCubeDate&apos;) 
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) 
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;,&apos;IRF&apos;) 
-${Q_BPID} ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} )a;  </stringProp>
+${Q_BPID} ${Q_AnchorFacility}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} )a;  </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">dischtoSNFBenchmarkEC</stringProp>
@@ -279,7 +285,7 @@ and dlk.lookupCategory = &apos;patientRisk&apos;
 and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
 --AND fp.anchorAdmitDateKey &gt; (SELECT CAST(lookupValue AS UNSIGNED) FROM warehouse.dimLookup WHERE lookupCategory = &apos;ClaimsCubeDate&apos;) 
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) 
-${Q_BPID} ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} ;   </stringProp>
+${Q_BPID} ${Q_AnchorFacility}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} ;   </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">SNFDaysEC</stringProp>
@@ -312,7 +318,7 @@ and de.bpid not like &apos;%DEMO%&apos;
 and dlk.lookupCategory = &apos;patientRisk&apos;
 AND fp.anchorAdmitDateKey &gt; (SELECT CAST(lookupValue AS UNSIGNED) FROM warehouse.dimLookup WHERE lookupCategory = &apos;ClaimsCubeDate&apos;) 
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) 
-${Q_BPID} ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} ;</stringProp>
+${Q_BPID}  ${Q_AnchorFacility}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} ;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">SNFDaysBenchmarkEC</stringProp>
@@ -343,7 +349,7 @@ and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
 and de.bpid not like &apos;%DEMO%&apos; 
 and dlk.lookupCategory = &apos;patientRisk&apos; 
 and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
-and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) ${Q_BPID} ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} )a;</stringProp>
+and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) ${Q_BPID}  ${Q_AnchorFacility}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} )a;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">EpisodesWithReadmissionEC</stringProp>
@@ -374,7 +380,7 @@ and pac.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
 and de.bpid not like &apos;%DEMO%&apos; 
 and dlk.lookupCategory = &apos;patientRisk&apos; 
 and fp.anchorAdmitDateKey  &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
-and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) ${Q_BPID} ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} )a;    </stringProp>
+and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) ${Q_BPID} ${Q_AnchorFacility}  ${Q_CCN} ${Q_BUNDLE} ${Q_R_REGION} ${Q_R_MARKET} ${Q_REGION} ${Q_MARKET} ${Q_PARTICIPANTNAME} ${Q_DRGCODE} ${Q_PHY_NPI} ${Q_Model} )a;    </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">EpisodesWithReadmissionBenchmarkEC</stringProp>

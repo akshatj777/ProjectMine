@@ -2594,10 +2594,16 @@ public class ProgramPerformance extends BaseClass{
 				tempVar="'"+valA+"'"; 
 			 	arrayListTextsA.add(tempVar);
 			    valB = valB.replaceAll("'","''");
-			 tempVar="'"+valB+"'"; 
-		 	arrayListTextsB.add(tempVar);
+			    tempVar="'"+valB+"'"; 
+		 		arrayListTextsB.add(tempVar);
 				}
 			 }
+			 if (arrayListTextsA.isEmpty()) {
+				 arrayListTextsA.add("Skip");
+			}
+			 if (arrayListTextsB.isEmpty()) {
+				 arrayListTextsB.add("Skip");
+			}
 			 arrayListTexts.addAll(arrayListTextsA);
 			 System.out.println("Value of A="+arrayListTexts);
 			 writeDataToOutputFile("Path");
