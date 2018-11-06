@@ -2201,51 +2201,6 @@ public class ProgramPerformance extends BaseClass{
 		  }
 		 rowFilters.put(filter, values.toString());
 		 System.out.println("Out"+rowFilters.toString());
-		 
-		 /* For Trimming Participant From Region Market*/ 
-//		 List<String> RegionMarketArrayList = new ArrayList<String>();
-		 if(filter.equals("Region - Market")) {
-			 RegionMarketArrayList=values;
-		 }
-		 if(filter.equals("Participant")) {
-			 ArrayList<String> arrayListTextsA=new ArrayList<String>();
-			 ArrayList<String> arrayListTextsB=new ArrayList<String>();
-			 String[] valarr;
-			 String valA = null;
-			 String valB = null;
-			 for(int i =0; i<RegionMarketArrayList.size();i++) {
-				 String tempVar=RegionMarketArrayList.get(i).trim();
-//					if(tempVar.equals("null")) {
-//						tempVar=tempVar.replace("Null", "null");
-//						arrayListTextsA.add(tempVar);
-//						arrayListTextsB.add(tempVar);
-//					}
-					if (!tempVar.equals("null")) {
-					
-					valarr=tempVar.split(" - ");
-					valA=valarr[0].trim();
-					valB=valarr[1].trim();
-					for(int j=0;j<values.size();j++) {
-						valA=valA.replace(values.get(j), "");
-						valA=valA.trim();
-					}
-					valA = valA.replaceAll("'","''");
-					tempVar="'"+valA+"'"; 
-       			 	arrayListTextsA.add(tempVar);
-       			    valB = valB.replaceAll("'","''");
-       			 tempVar="'"+valB+"'"; 
-    			 	arrayListTextsB.add(tempVar);
-		 }
-			 }
-			 arrayListTexts.addAll(arrayListTextsA);
-			 System.out.println("Value of A="+arrayListTexts);
-			 writeDataToOutputFile("Path");
-			 arrayListTexts.addAll(arrayListTextsB);
-			 System.out.println("Value of B="+arrayListTexts);
-			 writeDataToOutputFile("Path");
-			 RegionMarketArrayList.clear();
-			 }
-		 /* ----------------------------------- */
 	 }
 	 
 	 public void igetDateForDataFetchedForDashboard(String range) throws FileNotFoundException{
@@ -2446,6 +2401,75 @@ public class ProgramPerformance extends BaseClass{
 		 }
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 		
+	}
+	
+	public void IGetRegionMarketWithoutParticipant() throws FileNotFoundException{
+		//Region - Market
+		iClickOnFilterName("Region - Market", "value");
+		List<WebElement> listItems = driver.findElements(By.cssSelector(".FIText"));
+		 List<String> values = new ArrayList<String>();
+		 System.out.println("Size="+listItems);
+		 for(int i =1;i<listItems.size();i++){
+			String val=listItems.get(i).getText().trim();
+			if(val.equals("Null")) {
+				val=val.replace("Null", "null");
+			}
+			values.add(val);
+		  }
+			 RegionMarketArrayList=values;
+			 iClickOnFilterName("Region - Market", "value");
+			 
+			 //Participant
+			 iClickOnFilterName("Participant", "value");
+			 listItems = driver.findElements(By.cssSelector(".FIText"));
+			 values = new ArrayList<String>();
+			 System.out.println("Size="+listItems);
+			 for(int i =1;i<listItems.size();i++){
+				String val=listItems.get(i).getText().trim();
+				if(val.equals("Null")) {
+					val=val.replace("Null", "null");
+				}
+				values.add(val);
+			  }
+			 iClickOnFilterName("Participant", "value");
+			 //Extracting "Region" and "Market" removing Participant
+			 ArrayList<String> arrayListTextsA=new ArrayList<String>();
+			 ArrayList<String> arrayListTextsB=new ArrayList<String>();
+			 String[] valarr;
+			 String valA = null;
+			 String valB = null;
+			 for(int i =0; i<RegionMarketArrayList.size();i++) {
+				 String tempVar=RegionMarketArrayList.get(i).trim();
+//					if(tempVar.equals("null")) {
+//					tempVar=tempVar.replace("Null", "null");
+//					arrayListTextsA.add(tempVar);
+//					arrayListTextsB.add(tempVar);
+//				}
+				if (!tempVar.equals("null")) {
+				
+				valarr=tempVar.split(" - ");
+				valA=valarr[0].trim();
+				valB=valarr[1].trim();
+				for(int j=0;j<values.size();j++) {
+					valA=valA.replace(values.get(j), "");
+					valA=valA.trim();
+				}
+				valA = valA.replaceAll("'","''");
+				tempVar="'"+valA+"'"; 
+			 	arrayListTextsA.add(tempVar);
+			    valB = valB.replaceAll("'","''");
+			 tempVar="'"+valB+"'"; 
+		 	arrayListTextsB.add(tempVar);
+				}
+			 }
+			 arrayListTexts.addAll(arrayListTextsA);
+			 System.out.println("Value of A="+arrayListTexts);
+			 writeDataToOutputFile("Path");
+			 arrayListTexts.addAll(arrayListTextsB);
+			 System.out.println("Value of B="+arrayListTexts);
+			 writeDataToOutputFile("Path");
+			 RegionMarketArrayList.clear();
+			 
 	}
 	
 }

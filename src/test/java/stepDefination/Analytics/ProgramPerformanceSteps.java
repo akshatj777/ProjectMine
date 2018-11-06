@@ -567,4 +567,9 @@ public class ProgramPerformanceSteps extends DriverScript{
 	public void i_Click_On_ToolTip_Link_On_PerformnaceOverview_Dashboard(String link, String variance) throws Throwable{
 		programdashboard.ClickOnTillTipLinkOnPerformnaceOverviewDashboard(link, variance);
 	}
+	
+	@And("^I get Region and Market to input file without Participant form Region-Market dropdown$")
+	public void i_get_Region_and_Market_Without_Participant_From_RegionMarket_DropDown() throws Throwable{
+		programdashboard.IGetRegionMarketWithoutParticipant();
+	}
 }
