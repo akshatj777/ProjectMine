@@ -181,46 +181,45 @@ Feature: Create user having partial application access- Super Admin User
       | Login with Remedy Sales Acute Demo 2018 and verify Product Tiles and their redirections      | Super Admin | FirstName                                 | LastName                                 | Remedy Sales Acute Demo 2018      | Episode Connect, Care Innovation Institute, Episode Connect Classic, Reporting Classic, Remedy University                                 | Community Connect, Care Connect, Administration, Program Management, Reporting, Episode Connect for Post-acute Care                                                                | ROLE_PRM       | Patient ID     | Episode DRG Issues           |      | Physician Acute Care Hospital Model 2, Remedy University                                                                                                                                                                                                 | Anderson                                                                                                                                                                                                                                                                                                                                                                                                               |
       | Login with Remedy Sales PAC Demo 2018 and verify Product Tiles and their redirections        | Super Admin | FirstName                                 | LastName                                 | Remedy Sales PAC Demo 2018        | Episode Connect, Care Innovation Institute, Episode Connect Classic                                                                       | Community Connect, Care Connect, Administration, Program Management, Reporting, Reporting Classic, Remedy University, Episode Connect for Post-acute Care                          | ROLE_SNF       | Patient ID     | Episode DRG Issues           |      |                                                                                                                                                                                                                                                          | Anderson, Bethlehem                                                                                                                                                                                                                                                                                                                                                                                                    |
       | Login with Remedy Sales Commercial Demo 2018 and verify Product Tiles and their redirections | Super Admin | FirstName                                 | LastName                                 | Remedy Sales Commercial Demo 2018 | Episode Connect, Care Innovation Institute                                                                                                | Community Connect, Care Connect, Administration, Program Management, Reporting, Reporting Classic, Remedy University, Episode Connect Classic, Episode Connect for Post-acute Care |                | Patient ID     | Episode DRG Issues           |      |                                                                                                                                                                                                                                                          | Anderson, Bethlehem                                                                                                                                                                                                                                                                                                                                                                                                    |
-
-  Scenario Outline: <Description>
-    Given I am on the login page
-    When I enter email field lbarinstein+qaadmin@remedypartners.com for login
-    And I enter password field Testing1 for Login
-    Then I click Access button
-    Then I should see Tile text Users
-    And I click on the "Users" tile
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    Then I verify All Users button
-    Then I click on All Users button
-    Then I should see header text "Users"
-    Then I search for user with role "<User>-<Role>"
-    Then I select user with role "<User>-<Role>"
-    And I verify that I am navigated to user page
-    Then I verify Edit Icon
-    Then I click on Edit Icon
-    Then I verify Delete User button
-    Then I click on cross button on Edit User Page
-    Then I verify Lock/Unlock Icon
-    Then I verify first name "<FirstName>"
-    Then I verify last name "<LastName>"
-    Then I verify role "<Role>"
-    Then I verify email "Email" for "<User>-<Role>"
-    Then I verify last login date for "<Role>"
-    Then I verify phone "<Phone>"
-    Then I verify NPI "<NPI>"
-    Then I verify enabled "<ApplicationsEnabled>"
-    Then I verify disabled "<ApplicationsDisabled>"
-    Then I verify "<ApplicationsNotVisible>" not visible on view user page
-    Then I verify learning pathway "<LearningPathway>"
-    Then I verify health system "<HealthSystem>"
-    Then I verify programs "<Programs>"
-    Then I verify location "<Locations>"
-
-    Examples: 
-      | Description | User | UserName | Password | FirstName | LastName | Phone | Role | ApplicationsEnabled | ApplicationsDisabled | NPI | LearningPathway | HealthSystem | Programs | Locations |
+  #Scenario Outline: <Description>
+    #Given I am on the login page
+    #When I enter email field lbarinstein+qaadmin@remedypartners.com for login
+    #And I enter password field Testing1 for Login
+    #Then I click Access button
+    #Then I should see Tile text Users
+    #And I click on the "Users" tile
+    #Then I should see header text "Users"
+    #Then I search for user with role "<User>-<Role>"
+    #Then I select user with role "<User>-<Role>"
+    #And I verify that I am navigated to user page
+    #Then I verify All Users button
+    #Then I click on All Users button
+    #Then I should see header text "Users"
+    #Then I search for user with role "<User>-<Role>"
+    #Then I select user with role "<User>-<Role>"
+    #And I verify that I am navigated to user page
+    #Then I verify Edit Icon
+    #Then I click on Edit Icon
+    #Then I verify Delete User button
+    #Then I click on cross button on Edit User Page
+    #Then I verify Lock/Unlock Icon
+    #Then I verify first name "<FirstName>"
+    #Then I verify last name "<LastName>"
+    #Then I verify role "<Role>"
+    #Then I verify email "Email" for "<User>-<Role>"
+    #Then I verify last login date for "<Role>"
+    #Then I verify phone "<Phone>"
+    #Then I verify NPI "<NPI>"
+    #Then I verify enabled "<ApplicationsEnabled>"
+    #Then I verify disabled "<ApplicationsDisabled>"
+    #Then I verify "<ApplicationsNotVisible>" not visible on view user page
+    #Then I verify learning pathway "<LearningPathway>"
+    #Then I verify health system "<HealthSystem>"
+    #Then I verify programs "<Programs>"
+    #Then I verify location "<Locations>"
+#
+    #Examples: 
+      #| Description | User | UserName | Password | FirstName | LastName | Phone | Role | ApplicationsEnabled | ApplicationsDisabled | NPI | LearningPathway | HealthSystem | Programs | Locations |
       #| View Leader user created from Super Admin user                            | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstNameFirstNameFirstNameFirstNameFirst | LastNameLastNameLastNameLastNameLastName |              | Leader                            | Episode Connect, Episode Connect Classic, Reporting Classic, Remedy University, Reporting, Care Innovation Institute                                                                                           |                      |     | i am learning path, Learning Pathway 2, Remedy University                                                                                                                                                                                                | Stamford Hospital                                                      | Stamford Hospital--BPCI Model 2                                                                       | Stamford Hospital--2070-015--Stamford Hospital                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
       #| View Manager user created from Super Admin user                           | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName                                 | LastName                                 |              | Manager                           | Episode Connect, Episode Connect Classic, Reporting Classic, Remedy University, Reporting, Care Innovation Institute                                                                                           |                      |     | i am learning path, Learning Pathway 2, max-test-052417, Executive Acute Care Hospital Model 2, Physician Acute Care Hospital Model 2                                                                                                                    | Sound Physicians                                                       | Sound Physicians--BPCI Model 2, Sound Physicians--BPCI Model 3                                        | Sound Physicians--6005-059--Presence Saint Joseph Medical Center, Sound Physicians--6005-059--Evanston Hospital, Sound Physicians--3090-068--Mountainview Hospital                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
       #| View Advanced Operator user created from Super Admin                      | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName                                 | LastName                                 | 998-877-6655 | Advanced Operator                 | Episode Connect, Episode Connect Classic, Reporting Classic, Remedy University, Reporting, Care Innovation Institute                                                                                           |                      |     | i am learning path, Learning Pathway 2, max-test-052417, Care Coordination External                                                                                                                                                                      | St. Lukes Health Network, Inc. DBA St. Lukes University Health Network | St. Lukes Health Network--BPCI Model 2                                                                | St. Lukes Health Network--2070-025--ST LUKE'S HOSPITAL - ANDERSON CAMPUS, St. Lukes Health Network--2070-028--ST LUKE'S WARREN HOSPITAL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
