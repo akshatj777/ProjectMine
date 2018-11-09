@@ -1,9 +1,11 @@
 package stepDefination;
 
+import com.remedy.Analytics.ProgramPerformance;
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.Constants;
 import com.remedy.userAdmin.LandingPage;
 import com.remedy.resources.DriverScript;
+
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -13,7 +15,10 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.concurrent.TimeUnit;
+
+import javax.imageio.ImageIO;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -40,13 +45,19 @@ public class CommonSteps extends DriverScript {
 
     @Given("I am on the login page$")
     public void setup() throws Throwable {
+    	try{
         driver.navigate().to(Config.getProperty("BaseUrl"));
         driver.manage().timeouts().pageLoadTimeout(240, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         if(DriverScript.Config.getProperty("Browser").equals("ie"))
         {
         	driver.manage().window().maximize();
-        }
+        }}
+    	catch(Exception e){
+    		ProgramPerformance.writer.print(System.lineSeparator());
+    		String flag="1";
+    		Assert.assertEquals("2", flag);
+    	}
     }
 
     @Then("^I go to mail verification page$")
@@ -152,4 +163,15 @@ public class CommonSteps extends DriverScript {
     public void iSwitchBackToOLDWindowInReports(){
     	baseClass.switchBacktoOldWindow();
     }
+    
+    @Given("^I am on Analytics Tableau login page$")
+	public void i_am_on_analytics_tableau_login_page() throws Throwable{
+		driver.navigate().to(Config.getProperty("AnalyticsURL"));
+        driver.manage().timeouts().pageLoadTimeout(240, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        if(DriverScript.Config.getProperty("Browser").equals("ie"))
+        {
+        	driver.manage().window().maximize();
+        }
+	}
 }

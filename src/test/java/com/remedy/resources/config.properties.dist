@@ -7,11 +7,17 @@ EmailUserPwd = UR_GMAIL_PWD
 wantToSendReportViaAutoEmail = UR_BOOLEAN_VALUE
 ProvisioningUsersUrl = provisioningURL
 MongoDB = DBName
+##Analytics
 DBUserName = UserName
 DBPassword = Password
 MySQLServerName = My_SQL_Server_URL
 MySQLDBUserName = My_SQL_UserName
 MySQLPassword = My_SQL_Password
+jmeterPath = jmeterlocation of System till bin
+ClaimsCubeDate = 6/30/2018
+ECStartDate = 7/1/2018
+ClaimsStartDate = 1/1/2016
+##Analytics
 programmanagement.baseURI= Base URI for PM API Calls
 programmanagement.basePath= Base Path for PM API Calls 
 auth0.clientId= AUTH0 Client ID for PM API Calls
@@ -20,6 +26,7 @@ auth0.audience=AUTH0 Audience for PM API Calls
 auth0.url=AUTH0 URL for PM API Calls
 auth0.grantType=AUTH0 Grant Type for PM API Calls
 contentType = Content Type for PM API Calls
+
 useradmin.baseURI=Base URI for UA API Calls 
 useradmin.basePath= Base Path for UA API Calls
 useradmin.username= Username for token generation

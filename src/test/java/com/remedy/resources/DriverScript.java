@@ -138,7 +138,7 @@ public class DriverScript {
 //			caps.setCapability("enablePersistentHover", false);
 //			caps.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, true);
 //			caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-			caps.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+//			caps.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
 			System.setProperty("webdriver.ie.driver",
 					IEDrvrPath + "IEDriverServer_Win32" + File.separator + "IEDriverServer.exe");
 			driver = new InternetExplorerDriver(caps);

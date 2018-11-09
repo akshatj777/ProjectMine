@@ -26,7 +26,6 @@ public class CreateUserSteps extends DriverScript {
 	@And("^I click on the \"([^\"]*)\" tile$")
 	public void IClickOnApplicatioTile(String tile) throws Throwable {
 		landingPage.iClickOnApplicateTile("//div[text()='"+tile+"']");
-
 	}
 
 	@Then("^I click on Add User button$")
