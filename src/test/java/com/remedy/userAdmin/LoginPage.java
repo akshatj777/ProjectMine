@@ -111,9 +111,7 @@ if(!(userName.isEmpty())){
 				iWillWaitToSee(By.name("email"));
 				iFillInText(driver.findElement(By.name("email")), userName);
 			     }catch(Exception e){
-			    	 ProgramPerformance.writer.print(System.lineSeparator());
-			    		String flag="1";
-			    		Assert.assertEquals("2", flag);
+			    	 throw e;
 			     }
 		}
 	}
@@ -124,9 +122,10 @@ if(!(userName.isEmpty())){
 			iWillWaitToSee(By.name("password"));
 			iFillInText(driver.findElement(By.name("password")), passWord);
 		}}catch(Exception e){
-	    	 ProgramPerformance.writer.print(System.lineSeparator());
-	    		String flag="1";
-	    		Assert.assertEquals("2", flag);
+//	    	 ProgramPerformance.writer.print(System.lineSeparator());
+//	    		String flag="1";
+//	    		Assert.assertEquals("2", flag);
+			throw e;
 	     }
 	}
 
@@ -146,9 +145,10 @@ if(!(userName.isEmpty())){
 			iWillWaitToSee(By.xpath("//*[contains(text(),'Log In')]"));
 			clickElement(driver.findElement(By.xpath("//*[contains(text(),'Log In')]")));
 			}catch(Exception e){
-		    	 ProgramPerformance.writer.print(System.lineSeparator());
-		    		String flag="1";
-		    		Assert.assertEquals("2", flag);
+				throw e;
+//		    	 ProgramPerformance.writer.print(System.lineSeparator());
+//		    		String flag="1";
+//		    		Assert.assertEquals("2", flag);
 		     }
 		}
 	}
