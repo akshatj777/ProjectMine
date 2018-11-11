@@ -272,7 +272,7 @@ public class BulkUserCreationPage extends BaseClass {
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("CommercialMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Remedy Sales Commercial Demo 2018", "Episode Connect, Episode Connect for Post-acute Care, Care Innovation Institute");
+		applicationsList.put("Remedy Sales Commercial Demo 2018", "Episode Connect, Care Innovation Institute");
 		bulkEmailPerRole = new HashMap<String, String>();
 		bulkEmailPerRole.put("Remedy Sales Commercial Demo 2018", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Remedy Sales Commercial Demo 2018", bulkEmailPerRole);
@@ -1718,12 +1718,13 @@ public class BulkUserCreationPage extends BaseClass {
 		iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
 	}
 
-	public void clickSubmitForEditBulkUser(String user, String userApplications) {
+	public void clickSubmitForEditBulkUser(String user, String userApplications) throws InterruptedException {
 
 		iWillWaitToSee(By.xpath("//button[text()='Submit']"));
 		waitTo().until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Submit']")));
 		clickElement(driver.findElement(By.xpath("//button[text()='Submit']")));
 //		iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
+		Thread.sleep(2000);
 		WebDriverWait objWait = new WebDriverWait(driver, 300);
 		objWait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
 		HashMap<String, String> emailList = new HashMap<String, String>();
