@@ -57,18 +57,22 @@ public class SuperUserLandingPage extends BaseClass {
 		}
 		else if(text.equals("EmailOnTopRight"))
 		{
+			iWillWaitToSee(By.xpath("//div[text()='Leonid']"));
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Leonid']")));
 		}
 		else if(text.equals("User Admin Footer"))
 		{
+			iWillWaitToSee(By.xpath("//*[contains(text(),'© 2018 Remedy Partners, Inc. All rights reserved.')]"));
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[contains(text(),'© 2018 Remedy Partners, Inc. All rights reserved.')]")));
 		}
 		else if(text.equals("Next Page Icon"))
 		{
+			iWillWaitToSee(By.xpath("//div[@class='single-chevron']"));
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='single-chevron']")));
 		}
 		else if(text.equals("LoggedInUserNamePTA"))
 		{
+			iWillWaitToSee(By.xpath("//div[text()='Firstname']"));
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='Firstname']")));
 		}
 		else if(text.equals("LoggedInUserOptionsPTA"))
@@ -113,26 +117,44 @@ public class SuperUserLandingPage extends BaseClass {
 		}
 		else if(text.equals("Last Page Icon"))
 		{
+			iWillWaitToSee(By.xpath("//div[@class='double-chevron right']"));
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='double-chevron right']")));
 		}
 		else if(text.equals("Previous Page Icon"))
 		{
+			iWillWaitToSee(By.xpath("//div[@class='single-chevron']/i[@class='icon chevron left']"));
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='single-chevron']/i[@class='icon chevron left']")));
 		}
 		else if(text.equals("First Page Icon"))
 		{
+			iWillWaitToSee(By.xpath("//div[@class='double-chevron left']"));
 			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='double-chevron left']")));
 		}
 		else if (text.contains("Lock"))
+		{
+			iWillWaitToSee(By.cssSelector("th#auth0State"));
 			Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("th#auth0State"))));
+		}
 		else if (text.contains("User Name"))
+		{
+			iWillWaitToSee(By.cssSelector("th#lastName"));
 			Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("th#lastName"))));
+		}
 		else if (text.contains("Role"))
+		{
+			iWillWaitToSee(By.cssSelector("th#logicalRoleId"));
 			Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("th#logicalRoleId"))));
+		}
 		else if (text.contains("User Email"))
+		{
+			iWillWaitToSee(By.cssSelector("th#email"));
 			Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("th#email"))));
+		}
 		else if (text.contains("Date Created Column"))
+		{
+			iWillWaitToSee(By.cssSelector("th#insertedDate"));
 			Assert.assertTrue(isElementPresent(By.cssSelector("th#insertedDate")));
+		}
 		else if (text.contains("Pagination")) {
 			iWillWaitToSee(By.cssSelector("div.paginator-text"));
 			Assert.assertTrue(isElementPresentOnPage(By.cssSelector("div.paginator-text")));

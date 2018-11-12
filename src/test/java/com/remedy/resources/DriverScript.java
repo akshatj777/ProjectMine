@@ -15,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.CapabilityType;
@@ -131,17 +132,23 @@ public class DriverScript {
 		case "ie":
 			String IEDrvrPath;
 			IEDrvrPath = directory.getCanonicalPath() + File.separator + "lib" + File.separator;
-			DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
+//			DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
 			//caps.setCapability("nativeEvents", false);
 //			caps.setCapability("nativeEvents", true);
-			caps.setCapability("ignoreZoomSetting", true);
+//			caps.setCapability("ignoreZoomSetting", true);
 //			caps.setCapability("enablePersistentHover", false);
 //			caps.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, true);
 //			caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-			caps.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+//			caps.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+			InternetExplorerOptions ieoptions = new InternetExplorerOptions();
+			ieoptions.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+			ieoptions.setCapability("ignoreZoomSetting", true);
+			ieoptions.ignoreZoomSettings();
+			ieoptions.introduceFlakinessByIgnoringSecurityDomains();
+			ieoptions.withInitialBrowserUrl("http://www.google.com");
 			System.setProperty("webdriver.ie.driver",
 					IEDrvrPath + "IEDriverServer_Win32" + File.separator + "IEDriverServer.exe");
-			driver = new InternetExplorerDriver(caps);
+			driver = new InternetExplorerDriver(ieoptions);
 			break;
 		case "phantomJS":
 			String phantomJSDrvrPath;
@@ -199,6 +206,7 @@ public class DriverScript {
 	public void quitDriver() {
 		if(Config.getProperty("Browser").equals("ie"))
 		{
+			driver.manage().deleteAllCookies();
 			driver.quit();
 			driver = null;
 		}
