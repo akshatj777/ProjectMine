@@ -419,7 +419,7 @@ Feature: Performance Overview Dashboard Validations
       |     9 |  10 |
       |    10 |  11 |
 
-  @Claims1
+  @Claims
   Scenario Outline: Execute Filter combinations to Validate Data Metrics on Front End - For Claims
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsMetricsInput.csv" for writing data at "<Row>" to input file
     Given I am on the login page
@@ -435,9 +435,9 @@ Feature: Performance Overview Dashboard Validations
     Then I verify "Program Performance" text is appearing inside dashboard
     Then I set "Start Date" as "ClaimsStartDate" in Date field on dashboard
     Then I set "End Date" as "ClaimsCubeDate" in Date field on dashboard
-    And I click "Time" Filter on the "program performance - <BPID>" dashboard
-    Then I set "Time" as "previous year" in Time field on dashboard
-    And I click "Time" Filter on the "program performance - <BPID>" dashboard
+    #And I click "Time" Filter on the "program performance - <BPID>" dashboard
+    #Then I set "Time" as "previous year" in Time field on dashboard
+    #And I click "Time" Filter on the "program performance - <BPID>" dashboard
     ##BPID
     And I click "Episode Initiator - BPID" Filter on the "program performance - <BPID>" dashboard
     And I select "<BPID>" checkbox in "BPID" filter on "Program overview" dashboard
@@ -487,7 +487,7 @@ Feature: Performance Overview Dashboard Validations
     And I Save "% SNF Disch Benchmark Variance" tooltip for "Claims" on the "Performance Overview" dashboard
     And I Save "SNF Days Current" data metric FE value on the dashboard for "Claims" with picture resolution "1000X1000"
     And I Save "SNF Days Benchmark Variance" tooltip for "Claims" on the "Performance Overview" dashboard
-    And I Save "Readmissions Current" data metric FE value on the dashboard for "Claims" with picture resolution "500X1000"
+    And I Save "Readmissions Current" data metric FE value on the dashboard for "Claims" with picture resolution "800X800"
     And I Save "Readmissions Benchmark Variance" tooltip for "Claims" on the "Performance Overview" dashboard
     And I save the values of output images in "<Row>" index in storage HashMap
 
