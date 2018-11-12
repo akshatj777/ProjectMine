@@ -1738,7 +1738,7 @@ public class ProgramPerformance extends BaseClass{
 			            String valA = null;
 						String valB= null;
 			            int random_n=getRandomNumberInRange(1,n);
-			            for (int i = 1; i <= random_n; i++) {
+					    for (int i = 1; i <= random_n; i++) {
 			             int randomIndex = rand.nextInt(listItems.size());
 			             WebElement randomElement = listItems.get(randomIndex);
 //			             String val=randomElement.getText();
