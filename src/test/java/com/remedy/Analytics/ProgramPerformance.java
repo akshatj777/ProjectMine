@@ -2164,12 +2164,35 @@ public class ProgramPerformance extends BaseClass{
 				 for(int k=0;k<2;k++){
 					 arrayListTexts.add("Skip");
 					 writeDataToOutputFile("Path");
-					}return;}else{
+					}return;} else if(filter.contains("DRG")){
+						 if(arrayListTextsA.size()==1 && arrayListTextsA.contains("Null")){
+							 for(int i=0;i<3;i++){
+							 arrayListTexts.add("Null");
+							 writeDataToOutputFile("Path"); }
+							 return;
+						 }else{
+						 for(int k=0;k<3;k++){
+							 if(k==0){
+								 arrayListTexts.add("Skip");
+								 writeDataToOutputFile("Path"); }else if(k==1){
+									 arrayListTexts.add("Skip");
+									 writeDataToOutputFile("Path"); }else{
+									 arrayListTexts.add("Skip");
+								 writeDataToOutputFile("Path"); 
+								 return;
+							 }
+						 }}
+					 }else{
 			 arrayListTexts.add("Skip");
 			 writeDataToOutputFile("Path");
 			 return;
 					 }
+			 
+			
 		 }
+		 
+		 
+		 
 		 if(filter.contains("Market") || filter.contains("Region") || filter.equals("CCN")){
 			 if(arrayListTextsA.size()==1 && arrayListTextsA.contains("Null")){
 				 for(int i=0;i<2;i++){
