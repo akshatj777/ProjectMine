@@ -141,6 +141,8 @@ ArrayList a2= new ArrayList();
 ArrayList a3= new ArrayList();
 ArrayList a11= new ArrayList();
 ArrayList a22= new ArrayList();
+ArrayList f= new ArrayList();
+ArrayList g= new ArrayList();
 
 	String code=vars.get(&quot;drgCode&quot;).replace(&quot;(&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;);
 	log.info(&quot;Code is&quot;+code);
@@ -153,16 +155,19 @@ ArrayList a22= new ArrayList();
      log.info(&quot;Array Sub code Code is&quot;+code3);
 	String code4=vars.get(&quot;drgName&quot;);
 	log.info(&quot;Name Code is&quot;+code4);
-	String[] code5=code4.split(&quot;,&quot;);
+	String[] code5=code4.split(&quot;, &apos;&quot;);
 	int n=code1.length-1;
 	
 	for(int i=0;i&lt;code1.length;i++){
        if(!code1[i].equals(&quot;&apos;469&apos;&quot;) ){
        	 if(code1[i].equals(&quot;&apos;470&apos;&quot;)){
-       	 	
-       	 }else{
+       	 	}else{
        	String newcode=code1[i];
-          String newname=code5[i];
+       	String newname;
+       	if(i==0){
+       	newname=code5[i];	
+       	}else{
+           newname=&quot;&apos;&quot;+code5[i];}
            a11.add(newcode);	
            a22.add(newname);}	}
 
@@ -171,14 +176,22 @@ ArrayList a22= new ArrayList();
        	 	
        	 }else{
        	String newcode=code1[i];
-          String newname=code5[i];
+        	String newname;
+        if(i==0){
+       	newname=code5[i];	
+       	}else{
+           newname=&quot;&apos;&quot;+code5[i];}
            a11.add(newcode);	
            a22.add(newname);}	}
 
           if(code1[i].equals(&quot;&apos;469&apos;&quot;)){
           String newcode=code1[i];
           String newsubcode=code3[i];
-          String newname=code5[i];
+         	 String newname;
+         if(i==0){
+       	newname=code5[i];	
+       	}else{
+           newname=&quot;&apos;&quot;+code5[i];}
       	al1.add(newcode);
       	al2.add(newname);	
           al3.add(newsubcode); 
@@ -187,7 +200,11 @@ ArrayList a22= new ArrayList();
      if(code1[i].equals(&quot;&apos;470&apos;&quot;)){
           String newcode=code1[i];
           String newsubcode=code3[i];
-          String newname=code5[i];
+           String newname;
+          	if(i==0){
+       	newname=code5[i];	
+       	}else{
+           newname=&quot;&apos;&quot;+code5[i];}
       	a1.add(newcode);	
       	a2.add(newname);	
       	a3.add(newsubcode); 
@@ -196,29 +213,27 @@ ArrayList a22= new ArrayList();
 	}
            
  if(i==n){
- 	Object[] st = a11.toArray();
-        for (Object s : st) {
-        if (a11.indexOf(s) != a11.lastIndexOf(s)) {
-            a11.remove(a11.lastIndexOf(s));
-         }
-      }
-     
-     
+ 	for(int t=0;t&lt;a11.size();t++){
+       int aa=t%2;
+       log.info(&quot;aa is&quot;+aa);
+       if(aa==0){
+        f.add(a11.get(t));
+        
+       }	}
+    log.info(&quot;f is&quot;+f);
 
-     Object[] st1 = a22.toArray();
-        for (Object s2 : st1) {
-        if (a22.indexOf(s2) != a22.lastIndexOf(s2)) {
-            a22.remove(a22.lastIndexOf(s2));
-         }
-      }
-       log.info(&quot;a11&quot;+a11);
-          log.info(&quot;a1&quot;+a1);
-          log.info(&quot;a2&quot;+a2);
-          log.info(&quot;a3&quot;+a3);
-  	String ww=a11.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;);
-     String ww1=a22.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;).replace(&quot;(&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;);
-    log.info(&quot;ww&quot;+ww);
-          log.info(&quot;ww1&quot;+ww1);
+    for(int t1=0;t1&lt;a22.size();t1++){
+       int aa1=t1%2;
+       log.info(&quot;aa1 is&quot;+aa1);
+       if(aa1==0){
+        g.add(a22.get(t1));
+        
+       }	}
+    log.info(&quot;a44 is&quot;+g);
+     String ww=f.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;);
+     String ww1=g.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;).replace(&quot;(&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;);
+     log.info(&quot;ww&quot;+ww);
+     log.info(&quot;ww1&quot;+ww1);
      
       	
 
@@ -280,6 +295,8 @@ ArrayList a22= new ArrayList();
      }} }
           }
          vars.put(&quot;C_DRGCODE&quot;,neee);
+	}else{
+	    vars.put(&quot;C_DRGCODE&quot;,&quot;&quot;);	
 	}
 	
 if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
