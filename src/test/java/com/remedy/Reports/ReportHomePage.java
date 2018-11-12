@@ -878,9 +878,7 @@ public class ReportHomePage extends BaseClass {
     	try{
     	iWillWaitToSee(By.xpath("//div[text()='"+tile+"']"));
     	}catch(Exception e){
-	    	 ProgramPerformance.writer.print(System.lineSeparator());
-	    		String flag="1";
-	    		Assert.assertEquals("2", flag);
+    		throw e;
 	     }
     }
     

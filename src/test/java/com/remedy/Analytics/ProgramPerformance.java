@@ -552,7 +552,7 @@ public class ProgramPerformance extends BaseClass{
 		 System.out.println("JMeter Execution over #"+exitVal);
 	    }
 	 
-	 public void iClickOnDashboard(String dashboard){
+	 public void iClickOnDashboard(String dashboard) throws Exception{
 		 try{
 		 iWillWaitToSee(By.cssSelector(".report-title"));
 		 if(DriverScript.Config.getProperty("Browser").equals("ie"))
@@ -574,10 +574,7 @@ public class ProgramPerformance extends BaseClass{
 		 iWillWaitToSee(By.cssSelector(".component-report-header"));
 		 longDelay();}
 		 catch(Exception e){
-			 e.printStackTrace();
-	    	 ProgramPerformance.writer.print(System.lineSeparator());
-	    		String flag="1";
-	    		Assert.assertEquals("2", flag);
+			 throw e;
 	     }
 	 }
 	 
@@ -975,10 +972,7 @@ public class ProgramPerformance extends BaseClass{
 //		 act.moveToElement(elem).click().build().perform();
 		 delay();
 	 }catch(Exception e){
-		 e.printStackTrace();
-    	 ProgramPerformance.writer.print(System.lineSeparator());
-    		String flag="1";
-    		Assert.assertEquals("2", flag);
+		 throw e;
      }}
 	 
 	 public void ReadTextFromSavingsRateField(String text,String element,String resolution) throws IOException {
@@ -1280,7 +1274,7 @@ public class ProgramPerformance extends BaseClass{
 		 act.moveToElement(elem).click().build().perform();}
 		 delay();}
 		 }  catch(Exception e){
-	    	 ProgramPerformance.writer.print(System.lineSeparator());
+			 throw e;
 	     }
 	 }
 	 
@@ -1407,6 +1401,7 @@ public class ProgramPerformance extends BaseClass{
 		 if(driver.findElements(By.xpath("//div[@class='tab-ubertipTooltip']/span")).size()>0){
 		  getText=driver.findElement(By.xpath("//div[@class='tab-ubertipTooltip']/span")).getText();
 		 }
+		 //Handle exception in else condition
 		 System.out.println(getText);
 		 imageOutput.put(text, getText);
 		 
@@ -1539,9 +1534,7 @@ public class ProgramPerformance extends BaseClass{
 		 driver.switchTo().defaultContent();
 		 scrollToTopOfThePage();}
 		 catch(Exception e){
-	    	 ProgramPerformance.writer.print(System.lineSeparator());
-	    		String flag="1";
-	    		Assert.assertEquals("2", flag);
+			 throw e;
 	     }
 	 }
 	 

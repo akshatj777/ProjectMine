@@ -52,9 +52,7 @@ public class LandingPage extends BaseClass{
         	iWillWaitToSee(By.xpath(tile));
             clickElement(driver.findElement(By.xpath(tile)));}}
         	catch(Exception e){
-   	    	 ProgramPerformance.writer.print(System.lineSeparator());
-   	  	     String flag="1";
-		     Assert.assertEquals("2", flag);
+        		throw e;
    	     }
         
         longDelay();
