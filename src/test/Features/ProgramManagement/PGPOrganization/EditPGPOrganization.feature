@@ -33,6 +33,7 @@ Feature: Edit PGP organization functionality tests
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit PGP Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit PGP - <Has_MO>" organization page
     And I verify "*PGP Organization Name" field on edit organization page
     And I verify "Short Name" field on edit organization page
     And I verify "Address 1" field on edit organization page
@@ -50,6 +51,28 @@ Feature: Edit PGP organization functionality tests
     Examples: 
       | Description                                                                  | Has_MO | PGP_Name |
       | Verification of availability of all the fields on Edit PGP Organization page | NO     | PGPNAME  |
+      | Verification of availability of all the fields on Edit PGP Organization page | YES    | PGPNAME  |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "PGP" organization tab on organization dashboard
+    Then I search with "<PGP_Name> - <Has_MO>" on organization in search box
+    And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I verify "Edit PGP Organization" header text on create organization page
+    And I verify Managing Organization radio buttons status on "Edit PGP - <Has_MO>" organization page
+    And I select "YES" radio button for managing organization
+    Then I select "Invalid_Managing_Org" managing organization name in "YES" Has a Management Organization drop down
+    And I verify "No results found" in Has a Management Organization dropdown
+
+    Examples: 
+      | Description                                                         | Has_MO | PGP_Name |
+      | Check validation for Invalid Managing Organization on edit PGP page | YES    | PGPNAME  |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -63,10 +86,13 @@ Feature: Edit PGP organization functionality tests
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit PGP Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit PGP - <Has_MO>" organization page
     And I edit "PGP Organization Name" field to "<Edited_PGP_Name>" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    And I verify "<ValidationMessage>" field validation message on edit organization page
 
     Examples: 
-      | Description                         | Has_MO | PGP_Name | Edited_PGP_Name | ValidationMsg                     |
+      | Description                         | Has_MO | PGP_Name | Edited_PGP_Name | ValidationMessage                 |
       | Check validation for blank PGP name | NO     | PGPNAME  |                 | Please enter an Organization Name |
 
   Scenario Outline: <Description>
@@ -81,6 +107,7 @@ Feature: Edit PGP organization functionality tests
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit PGP Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit PGP - <Has_MO>" organization page
     And I edit "PGP Organization Name" field to "<Edited_PGP_Name> - <Has_MO>" for organization
     And I edit "Address 1" field to "<Address1>" for organization
     And I edit "Short Name" field to "<Short_Name>" for organization
@@ -112,6 +139,7 @@ Feature: Edit PGP organization functionality tests
     And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify "Edit PGP Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit PGP - <Has_MO>" organization page
     And I edit "PGP Organization Name" field to "<Edited_PGP_Name> - <Has_MO>" for organization
     And I edit "Address 1" field to "<Address1>" for organization
     And I edit "Short Name" field to "<Short_Name>" for organization
@@ -125,23 +153,94 @@ Feature: Edit PGP organization functionality tests
     Then I verify "<Message>" after submitting the "FETCHFROMAPIForPGPNAME - <Has_MO>" organization page
 
     Examples: 
-      | Description                                                                                                                                | Has_MO | Managing_Org | PGP_Name | Edited_PGP_Name      | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Region  | Market  | State      | Postal_Code | Message                                |
-      | Check Character Limit edge condition for PGP Name field on Edit PGP Organization - Without MO                                              | NO     |              | PGPNAME  | equalsTo75Characters | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
-      | Check Character Limit edge condition for Address1 field on Edit PGP Organization - Without MO                                              | NO     |              | PGPNAME  | PGPNAME              | abcdefghijklmnopqrstuvwxyzabcdefgopmailcomabcdefghijklm | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
-      | Check Character Limit edge condition for Short Name field on Edit PGP Organization - Without MO                                            | NO     |              | PGPNAME  | PGPNAME              | Address1                                                | abcdefghijklmnopqrstuvwxyzabcdefgopmailcomabc | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
-      | Check Character Limit edge condition for Address2 field on Edit PGP Organization - Without MO                                              | NO     |              | PGPNAME  | PGPNAME              | Address1                                                | Short_Name                                    | abcdefghijklmnopqrstuvwxyzabcdefgopmailcomabcdefghijklm | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
-      | Check Character Limit edge condition for City field on Edit PGP Organization - Without MO                                                  | NO     |              | PGPNAME  | PGPNAME              | Address1                                                | Short_Name                                    | Address2                                                | abcdefghijklmnopqrstuvwxyzabcdefgopmailcomabc | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
-      | Check Character Limit edge condition for Postal code field on Edit PGP Organization - Without MO                                           | NO     |              | PGPNAME  | PGPNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California | 10000-6326  | PGP Organization Successfully Updated. |
-      #| To check the Allowed characters for the available fields in Edit PGP Organization - Without MO                                             | NO     |              | PGPNAME  | AllowedCharatcters   | !@$%^&*()_+{}:<>?,./;'[]\\=Address1                     | !@$%^&*()_+{}:<>?,./;'[]\\=Short_Name         | !@$%^&*()_+{}:<>?,./;'[]\\=Address2                     | !@$%^&*()_+{}:<>?,./;'[]\\=City123            | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated.                                                           |
-      | Edit PGP Organization with Mandatory fields - Without MO                                                                                   | NO     |              | PGPNAME  | PGPNAME              |                                                         |                                               |                                                         |                                               |         |         |            |             | PGP Organization Successfully Updated. |
-      | Edit PGP Organization with Mandatory fields - With MO                                                                                      | YES    | MONAME       | PGPNAME  | PGPNAME              |                                                         |                                               |                                                         |                                               |         |         |            |             | PGP Organization Successfully Updated. |
-      | Edit PGP Organization with Mandatory fields + Address1 + Short Name + Address2 + City + State + Region + Market + postal Code - Without MO | YES    |              | PGPNAME  | PGPNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
-      | Edit PGP Organization with Mandatory fields + Address1 + Short Name + City + State + Region + Market + postal Code - With MO               | YES    | MONAME       | PGPNAME  | PGPNAME              | Address1                                                | Short_Name                                    |                                                         | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
-      | Edit PGP Organization with Mandatory fields + Address1 + Short Name + Address2 + City + State + postal Code- Without MO                    | YES    |              | PGPNAME  | PGPNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          |         |         | California |       10001 | PGP Organization Successfully Updated. |
-      | Edit PGP Organization with all the available fields - Without MO                                                                           | NO     |              | PGPNAME  | PGPNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
-      | Edit PGP Organization with all the available fields - With MO                                                                              | YES    | MONAME       | PGPNAME  | PGPNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
-      | Edit Duplicate PGP Organization with all the available fields - Without MO                                                                 | NO     |              | PGPNAME  | DUPLICATE_PGP        | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
-      | Edit Duplicate PGP Organization with all the available fields - With MO                                                                    | YES    | MONAME       | PGPNAME  | DUPLICATE_PGP        | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
+      | Description                                                                                                                                | Has_MO | Managing_Org | PGP_Name | Edited_PGP_Name | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Region  | Market  | State      | Postal_Code | Message                                |
+      #| Check Character Limit edge condition for PGP Name field on Edit PGP Organization - Without MO                                              | NO     |              | PGPNAME  | equalsTo75Characters | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
+      | Check Character Limit edge condition for Address1 field on Edit PGP Organization - Without MO                                              | NO     |              | PGPNAME  | PGPNAME         | abcdefghijklmnopqrstuvwxyzabcdefgopmailcomabcdefghijklm | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
+      | Check Character Limit edge condition for Short Name field on Edit PGP Organization - Without MO                                            | NO     |              | PGPNAME  | PGPNAME         | Address1                                                | abcdefghijklmnopqrstuvwxyzabcdefgopmailcomabc | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
+      | Check Character Limit edge condition for Address2 field on Edit PGP Organization - Without MO                                              | NO     |              | PGPNAME  | PGPNAME         | Address1                                                | Short_Name                                    | abcdefghijklmnopqrstuvwxyzabcdefgopmailcomabcdefghijklm | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
+      | Check Character Limit edge condition for City field on Edit PGP Organization - Without MO                                                  | NO     |              | PGPNAME  | PGPNAME         | Address1                                                | Short_Name                                    | Address2                                                | abcdefghijklmnopqrstuvwxyzabcdefgopmailcomabc | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
+      | Check Character Limit edge condition for Postal code field on Edit PGP Organization - Without MO                                           | NO     |              | PGPNAME  | PGPNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California | 10000-6326  | PGP Organization Successfully Updated. |
+      #| To check the Allowed characters for the available fields in Edit PGP Organization - Without MO                                             | NO     |              | PGPNAME  | AllowedCharatcters   | !@$%^&*()_+{}:<>?,./;'[]\\=Address1                     | !@$%^&*()_+{}:<>?,./;'[]\\=Short_Name         | !@$%^&*()_+{}:<>?,./;'[]\\=Address2                     | !@$%^&*()_+{}:<>?,./;'[]\\=City123            | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
+      | Edit PGP Organization with Mandatory fields - Without MO                                                                                   | NO     |              | PGPNAME  | PGPNAME         |                                                         |                                               |                                                         |                                               |         |         |            |             | PGP Organization Successfully Updated. |
+      | Edit PGP Organization with Mandatory fields - With MO                                                                                      | YES    | MONAME       | PGPNAME  | PGPNAME         |                                                         |                                               |                                                         |                                               |         |         |            |             | PGP Organization Successfully Updated. |
+      | Edit PGP Organization with Mandatory fields + Address1 + Short Name + Address2 + City + State + Region + Market + postal Code - Without MO | YES    |              | PGPNAME  | PGPNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
+      | Edit PGP Organization with Mandatory fields + Address1 + Short Name + City + State + Region + Market + postal Code - With MO               | YES    | MONAME       | PGPNAME  | PGPNAME         | Address1                                                | Short_Name                                    |                                                         | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
+      | Edit PGP Organization with Mandatory fields + Address1 + Short Name + Address2 + City + State + postal Code- Without MO                    | YES    |              | PGPNAME  | PGPNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          |         |         | California |       10001 | PGP Organization Successfully Updated. |
+      | Edit PGP Organization with all the available fields - Without MO                                                                           | NO     |              | PGPNAME  | PGPNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
+      | Edit PGP Organization with all the available fields - With MO                                                                              | YES    | MONAME       | PGPNAME  | PGPNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
+
+  #| Edit Duplicate PGP Organization with all the available fields - Without MO                                                                 | NO     |              | PGPNAME  | DUPLICATE_PGP   | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
+  #| Edit Duplicate PGP Organization with all the available fields - With MO                                                                    | YES    | MONAME       | PGPNAME  | DUPLICATE_PGP   | Address1                                                | Short_Name                                    | Address2                                                | City                                          | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "PGP" organization tab on organization dashboard
+    Then I search with "<PGP_Name> - <Has_MO>" on organization in search box
+    And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I verify "Edit PGP Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit PGP - <Has_MO>" organization page
+    And I select "<Has_MO1>" radio button for managing organization
+    Then I select "<Managing_Org>" managing organization name in "<Has_MO1>" Has a Management Organization drop down
+    And I edit "PGP Organization Name" field to "<Edited_PGP_Name> - <Has_MO>" for organization
+    And I edit "Address 1" field to "<Address1>" for organization
+    And I edit "Short Name" field to "<Short_Name>" for organization
+    And I edit "Address 2" field to "<Address2>" for organization
+    And I edit Region "<Region>" in "edit PGP" organization page
+    And I edit Market dropdown field to "<Market>" for Region "<Region>" for "PGP" organization
+    And I edit "City" field to "<City>" for organization
+    And I edit <State> field for organization
+    And I edit "Postal Code" field to "<Postal_Code>" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    Then I verify "<Message>" after submitting the "FETCHFROMAPIForPGPNAME - <Has_MO>" organization page
+    Then I search with "<PGP_Name> - <Has_MO>" on organization in search box
+    And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I verify "Managing Organization - <Has_MO1>" on view profile of "PGP" Organization
+
+    Examples: 
+      | Description                                          | Has_MO | Has_MO1 | Managing_Org | PGP_Name | Edited_PGP_Name | Address1 | Short_Name | Address2 | City | Region  | Market  | State      | Postal_Code | Message                                |
+      | Edit & verify PGP organization with MO to without MO | YES    | NO      |              | PGPNAME  | PGPNAME         | Address1 | Short_Name | Address2 | City | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
+      | Edit & verify PGP organization without MO to with MO | NO     | YES     |              | PGPNAME  | PGPNAME         | Address1 | Short_Name | Address2 | City | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "PGP" organization tab on organization dashboard
+    Then I search with "<PGP_Name> - <Has_MO>" on organization in search box
+    And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I verify "Edit PGP Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit PGP - <Has_MO1>" organization page
+    And I select "<Has_MO>" radio button for managing organization
+    Then I select "<Managing_Org1>" managing organization name in "<Has_MO>" Has a Management Organization drop down
+    And I edit "PGP Organization Name" field to "<Edited_PGP_Name> - <Has_MO>" for organization
+    And I edit "Address 1" field to "<Address1>" for organization
+    And I edit "Short Name" field to "<Short_Name>" for organization
+    And I edit "Address 2" field to "<Address2>" for organization
+    And I edit Region "<Region>" in "edit PGP" organization page
+    And I edit Market dropdown field to "<Market>" for Region "<Region>" for "PGP" organization
+    And I edit "City" field to "<City>" for organization
+    And I edit <State> field for organization
+    And I edit "Postal Code" field to "<Postal_Code>" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    Then I verify "<Message>" after submitting the "FETCHFROMAPIForPGPNAME - <Has_MO>" organization page
+    Then I search with "<PGP_Name> - <Has_MO>" on organization in search box
+    And I verify "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I click "<PGP_Name> - <Has_MO>" field in search list on organization page
+    And I verify "Managing Organization - <Has_MO>" on view profile of "PGP" Organization
+
+    Examples: 
+      | Description                                     | Has_MO | Has_MO1 | Managing_Org1 | PGP_Name | Edited_PGP_Name | Address1 | Short_Name | Address2 | City | Region  | Market  | State      | Postal_Code | Message                                |
+      | Edit PGP organization with one MO to another MO | YES    | NO      | MO_Name2      | PGPNAME  | PGPNAME         | Address1 | Short_Name | Address2 | City | Midwest | Chicago | California |       10000 | PGP Organization Successfully Updated. |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"

@@ -17,5 +17,4 @@ public class CreateHospiceOrganization extends BaseClass{
 	public CreateHospiceOrganization(WebDriver driver) {
 		super(driver);
 	}
-
 }

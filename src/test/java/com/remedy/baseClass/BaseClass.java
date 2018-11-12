@@ -215,6 +215,7 @@ public class BaseClass {
 		List<WebElement> listItems = driver.findElements(By.cssSelector(element));
 		for (WebElement item : listItems) {
 			item.getText().equalsIgnoreCase(itemtext);
+			//Assert.assertEquals(item,itemtext);
 		}
 	}
 
@@ -405,6 +406,7 @@ public class BaseClass {
 		String attr = element.getAttribute(attribute);
 		Assert.assertTrue(attr.contains(contains));
 	}
+	
 	public boolean isElementPresentOnPage(By locatorKey) {
 		boolean value = true;
 		try {
@@ -542,12 +544,14 @@ public class BaseClass {
 	    String pID = row.get("1").get("participant_id");
 	    con.close();
 	    return pID;
-}
+	}
+	
     public void validateDateFormat(String format,String dateToValdate) throws ParseException {
     	SimpleDateFormat formatter = new SimpleDateFormat(format);
 	    formatter.setLenient(false);
 	    formatter.parse(dateToValdate);
-    }	
+    }
+    
 	public void scrollIntoViewByJS(WebElement element){
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 	}
@@ -908,21 +912,9 @@ public class BaseClass {
 			CreateBundleAPI.bundleNameList.clear();
 			CreateBundleAPI.bundleIDList.clear();
 		}
-		else if(type.equals("Contract"))
-		{
-			
-		}
-		else if(type.equals("Network Contract"))
-		{
-			
-		}
 		else if(type.equals("practitioner")){
 			CreatePractictionerAPI.practitionerNameList.clear();
 			CreatePractictionerAPI.practitionerIDList.clear();
-		}
-		else if(type.equals("Physician Roster"))
-		{
-			
 		}
 	}
 	
@@ -951,6 +943,13 @@ public class BaseClass {
 	    }
 	    con.close();
 	    return al;
-}
+	}
+	
+	public void setAttributevalue(WebElement element, String attName, String attValue) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", 
+                element, attName, attValue);
+    }
+	
 }
 

@@ -16,5 +16,4 @@ public class CreateLTCHOrganization extends BaseClass {
 	public CreateLTCHOrganization(WebDriver driver) {
 		super(driver);
 	}
-
 }

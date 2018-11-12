@@ -1,5 +1,6 @@
 package com.remedy.Reports;
 
+import com.remedy.Analytics.ProgramPerformance;
 import com.remedy.baseClass.BaseClass;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -874,7 +875,13 @@ public class ReportHomePage extends BaseClass {
     }
     
     public void iWaitToseeTile(String tile){
+    	try{
     	iWillWaitToSee(By.xpath("//div[text()='"+tile+"']"));
+    	}catch(Exception e){
+	    	 ProgramPerformance.writer.print(System.lineSeparator());
+	    		String flag="1";
+	    		Assert.assertEquals("2", flag);
+	     }
     }
     
     public void iWaitToSeeUnderReportsTileText(String report){

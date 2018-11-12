@@ -1,6 +1,7 @@
 package com.remedy.userAdmin;
 
 
+import com.remedy.Analytics.ProgramPerformance;
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
 
@@ -35,17 +36,25 @@ public class LandingPage extends BaseClass{
     	iWillWaitToSee(By.xpath("//div[text()='"+text+"']"));
     	Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+text+"']")));
     }
-    public void iClickOnApplicateTile(String tile){
+       
+    public void iClickOnApplicateTile(String tile) throws InterruptedException{
+    	try{
         if(DriverScript.Config.getProperty("Browser").equals("ie"))
         {
         	iWillWaitToSee(By.xpath(tile));
         	((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath(tile)));
+      //  	Thread.sleep(700000);
         }
         else
-        {
+        {   
         	iWillWaitToSee(By.xpath(tile));
-            clickElement(driver.findElement(By.xpath(tile)));
-        }
+            clickElement(driver.findElement(By.xpath(tile)));}}
+        	catch(Exception e){
+   	    	 ProgramPerformance.writer.print(System.lineSeparator());
+   	  	     String flag="1";
+		     Assert.assertEquals("2", flag);
+   	     }
+        
         longDelay();
     }
 

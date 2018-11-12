@@ -72,7 +72,6 @@ Feature: View SNF organization functionality tests
     And I verify header name "ID" under "Location" for "SNF" organization
     And I verify header name "Location Name" under "Location" for "SNF" organization
     And I verify header name "Address" under "Location" for "SNF" organization
-    And I verify header name "Type" under "Location" for "SNF" organization
     And I verify header name "Region" under "Location" for "SNF" organization
     And I verify header name "Market" under "Location" for "SNF" organization
     And I verify Location index id "<LID>" on view profile of "<SNF_Name> - <Has_MO>" organization
@@ -82,7 +81,6 @@ Feature: View SNF organization functionality tests
     Then I verify "Location 2" on "Edit" organization page
     And I enter location name <Loc_Name> for Location "2" on "Edit" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "Edit" organization page
-    And I select location type <Loc_Type> for Location "2" on "Edit" organization page
     And I enter address2 <Loc_Address2> for Location "2" on "Edit" organization page
     And I select region <Loc_Region> for Location "2" on "Edit" organization page
     And I enter city <Loc_City> for Location "2" on "Edit" organization page
@@ -132,7 +130,6 @@ Feature: View SNF organization functionality tests
     And I provide unique "SNF - <NPI>" in "NPI" on create organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page

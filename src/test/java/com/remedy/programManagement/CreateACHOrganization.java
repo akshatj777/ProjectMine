@@ -31,15 +31,17 @@ public class CreateACHOrganization extends BaseClass{
 	
 	public void iClickOnParticularOrganizationTabOrganizationDashboard(String text) {
 		longDelay();
-		iWillWaitToSee(By.cssSelector(".navLink.noselect"));
-				
-		List<WebElement> element = driver.findElements(By.cssSelector(".navLink.noselect"));
-		for (WebElement ele : element) {
-			if(ele.getText().contains(text)){
-				ele.click();
-				delay();
-			}
-		}
+//		iWillWaitToSee(By.cssSelector(".navLink.noselect"));
+//				
+//		List<WebElement> element = driver.findElements(By.cssSelector(".navLink.noselect"));
+//		for (WebElement ele : element) {
+//			if(ele.getText().equals(text)){
+//				ele.click();
+//				delay();
+//			}
+//		}
+		iWillWaitToSee(By.xpath("//a[text()='"+text+"']"));
+		clickElement(driver.findElement(By.xpath("//a[text()='"+text+"']")));
 		waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 	}
 	
@@ -66,8 +68,8 @@ public class CreateACHOrganization extends BaseClass{
 			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
 					iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), achOrg.get("NPI"));
 			}
-			else if(id.contains("lessThan6")){
-				String value = createRandomNumber(5);
+			else if(id.contains("lessThan4")){
+				String value = createRandomNumber(3);
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
 			}
 			else if(id.contains("greaterThan10")){
@@ -147,8 +149,8 @@ public class CreateACHOrganization extends BaseClass{
 			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
 					iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateSNFOrganization.SNFOrg.get("NPI"));
 			}
-			else if(id.contains("lessThan6")){
-				String value = createRandomNumber(5);
+			else if(id.contains("lessThan4")){
+				String value = createRandomNumber(3);
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
 			}
 			else if(id.contains("greaterThan10")){
@@ -184,8 +186,8 @@ public class CreateACHOrganization extends BaseClass{
 			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
 					iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateIRFOrganization.IRFOrg.get("NPI"));
 			}
-			else if(id.contains("lessThan6")){
-				String value = createRandomNumber(5);
+			else if(id.contains("lessThan4")){
+				String value = createRandomNumber(3);
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
 			}
 			else if(id.contains("greaterThan10")){
@@ -218,10 +220,10 @@ public class CreateACHOrganization extends BaseClass{
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHHAOrganization.HHAOrg_noMO.get("EIN"));
 			}
 			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
-					iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHHAOrganization.HHAOrg_noMO.get("NPI"));
+				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHHAOrganization.HHAOrg_noMO.get("NPI"));
 			}
-			else if(id.contains("lessThan6")){
-				String value = createRandomNumber(5);
+			else if(id.contains("lessThan4")){
+				String value = createRandomNumber(3);
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
 			}
 			
@@ -252,8 +254,8 @@ public class CreateACHOrganization extends BaseClass{
 			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
 					iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateHospiceOrganization.HospiceOrg_noMO.get("NPI"));
 			}
-			else if(id.contains("lessThan6")){
-				String value = createRandomNumber(5);
+			else if(id.contains("lessThan4")){
+				String value = createRandomNumber(3);
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
 			}
 			
@@ -284,8 +286,8 @@ public class CreateACHOrganization extends BaseClass{
 			else if((id.substring(id.indexOf("-")+1).trim()).equals("DUPLICATE_NPI")){
 					iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), CreateLTCHOrganization.LTCHOrg_noMO.get("NPI"));
 			}
-			else if(id.contains("lessThan6")){
-				String value = createRandomNumber(5);
+			else if(id.contains("lessThan4")){
+				String value = createRandomNumber(3);
 				iFillInText(driver.findElement(By.xpath("//input[@placeholder='"+field+"']")), value);
 			}
 			
@@ -307,12 +309,12 @@ public class CreateACHOrganization extends BaseClass{
     }
     
     public void iEnterLocationTypeForLocationOnACHOrg(String text, int num) {
-    	if(!text.isEmpty()){
-    		num = num-1;
-    		driver.findElements(By.xpath("//div[text()='Location Type']/preceding-sibling::div//input[@role='combobox']")).get(num).sendKeys(text);
-    		delay();
-    		clickElement(driver.findElement(By.xpath("//div[(contains(@class,'VirtualizedSelectOption')) and text()='"+text+"']")));
-    	}	
+//    	if(!text.isEmpty()){
+//    		num = num-1;
+//    		driver.findElements(By.xpath("//div[text()='Location Type']/preceding-sibling::div//input[@role='combobox']")).get(num).sendKeys(text);
+//    		delay();
+//    		clickElement(driver.findElement(By.xpath("//div[(contains(@class,'VirtualizedSelectOption')) and text()='"+text+"']")));
+//    	}	
     }	
     
     public void iEnterAddress2ForLocationOnACHOrg(String add2, int num) {
@@ -387,6 +389,14 @@ public class CreateACHOrganization extends BaseClass{
 				iFillInText(driver.findElement(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']")), managingOrg);
 				delay();
 			}
+			else if(managingOrg.equals("MO_Name2")){
+				longDelay();
+				iWillWaitToSee(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']"));
+				iFillInText(driver.findElement(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']")), CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1));
+				iWillWaitToSee(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption"));
+				clickElement(driver.findElement(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption")));
+				delay();
+			}
 			else 
 			{
 				iWillWaitToSee(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']"));
@@ -403,7 +413,7 @@ public class CreateACHOrganization extends BaseClass{
 		iWillWaitToSee(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']"));
 		iFillInText(driver.findElement(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']")), CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1));
 		iWillWaitToSee(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption"));
-		isElementPresent(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption"));
+		Assert.assertTrue(isElementPresent(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption")));
 		delay();
 	}
 	
@@ -450,7 +460,7 @@ public class CreateACHOrganization extends BaseClass{
     		}
         	else if(text.equals("DUPLICATE_LID"))
         	{
-        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), achOrg.get("LID"));
+        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), achOrg_noMO.get("LID"));
         	}
         	else if(text.equals("greaterthan20"))
         	{
@@ -474,6 +484,10 @@ public class CreateACHOrganization extends BaseClass{
     			CreateSNFOrganization.tempSNFOrg.put("LID", createRandomNumber(21));
     			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateSNFOrganization.tempSNFOrg.get("LID"));
     		}
+        	else if(text.equals("Hospital_LID"))
+        	{
+        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), achOrg_noMO.get("LID"));
+        	}
     	}
     	else if(field.contains("LTCH"))
     	{
@@ -501,13 +515,17 @@ public class CreateACHOrganization extends BaseClass{
     		}
         	else if(text.equals("DUPLICATE_LID"))
         	{
-        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateIRFOrganization.tempIRFOrg.get("LID"));
+        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateIRFOrganization.IRFOrg_noMO.get("LID"));
         	}
         	else if(text.equals("LIDmorethan20characters"))
         	{
     			CreateIRFOrganization.tempIRFOrg.put("LID", createRandomNumber(21));
     			iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), CreateIRFOrganization.tempIRFOrg.get("LID"));
     		}
+        	else if(text.equals("Hospital_LID"))
+        	{
+        		iFillInText(driver.findElement(By.xpath("//input[@name='locations["+num+"].locationId']")), achOrg_noMO.get("LID"));
+        	}
     	}
         else
         {
@@ -540,7 +558,8 @@ public class CreateACHOrganization extends BaseClass{
     
     public void iVerifyLocationIdShouldBeGreater(int value)
     {
-    	location_Id =driver.findElement(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(), '10')]")).getText();
+    	delay();
+    	location_Id =driver.findElement(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(), '100')]")).getText();
     	loc_Id = Integer.parseInt(location_Id);
     	Assert.assertTrue(value<loc_Id);
     }
@@ -552,6 +571,10 @@ public class CreateACHOrganization extends BaseClass{
     	}
     	else if(id.equalsIgnoreCase("Location_Id")){
     		iFillInText(driver.findElement(By.xpath("//input[@name='locations[0].locationId']")), location_Id);
+    	}
+    	else if(id.equals("SNF_LID"))
+    	{
+    		iFillInText(driver.findElement(By.xpath("//input[@placeholder='CCN']")), CreateSNFOrganization.SNFOrg_noMO.get("LID"));
     	}
     }
     
@@ -565,6 +588,17 @@ public class CreateACHOrganization extends BaseClass{
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].scrollIntoView();", element);
     	String color = driver.findElement(By.xpath("//span[text()='Has a Managing Organization']")).getCssValue("color");
-    	//Assert.assertEquals(color, driver.findElement(By.xpath("//span[text()='Has a Managing Organization']")));
+    	
+    	String[] hexValue = color.replace("rgba(", "").replace(")", "").split(",");
+    	 
+    	int hexValue1=Integer.parseInt(hexValue[0]);
+    	hexValue[1] = hexValue[1].trim();
+    	int hexValue2=Integer.parseInt(hexValue[1]);
+    	hexValue[2] = hexValue[2].trim();
+    	int hexValue3=Integer.parseInt(hexValue[2]);
+    	 
+    	String actualColor = String.format("#%02x%02x%02x", hexValue1, hexValue2, hexValue3);
+    	
+    	Assert.assertEquals("#df3a31", actualColor);
     }
 }

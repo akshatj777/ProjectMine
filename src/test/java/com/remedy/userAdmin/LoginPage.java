@@ -1,6 +1,7 @@
 package com.remedy.userAdmin;
 
 
+import com.remedy.Analytics.ProgramPerformance;
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
 
@@ -105,18 +106,30 @@ if(!(userName.isEmpty())){
 			iFillInText(driver.findElement(By.name("email")), CreateUserPage.usersEmailPerRole.get("Super Admin-Downstream Provider").get(userName));
 		}
 		else
-		{
+		{ 
+			     try{
 				iWillWaitToSee(By.name("email"));
 				iFillInText(driver.findElement(By.name("email")), userName);
+			     }catch(Exception e){
+			    	 ProgramPerformance.writer.print(System.lineSeparator());
+			    		String flag="1";
+			    		Assert.assertEquals("2", flag);
+			     }
 		}
 	}
 	}
 	public void iEnterPassword(String passWord) {
+		try{
 		if(!(passWord.isEmpty())){
 			iWillWaitToSee(By.name("password"));
 			iFillInText(driver.findElement(By.name("password")), passWord);
+		}}catch(Exception e){
+	    	 ProgramPerformance.writer.print(System.lineSeparator());
+	    		String flag="1";
+	    		Assert.assertEquals("2", flag);
+	     }
 	}
-	}
+
 	public void iEnterPasswordFieldForLoginAfterMailVerification(String passWord) {
 		iFillInText(driver.findElement(By.name("password")), passWord);
 	}
@@ -129,8 +142,14 @@ if(!(userName.isEmpty())){
 		}
 		else
 		{
+			try{
 			iWillWaitToSee(By.xpath("//*[contains(text(),'Log In')]"));
 			clickElement(driver.findElement(By.xpath("//*[contains(text(),'Log In')]")));
+			}catch(Exception e){
+		    	 ProgramPerformance.writer.print(System.lineSeparator());
+		    		String flag="1";
+		    		Assert.assertEquals("2", flag);
+		     }
 		}
 	}
 
