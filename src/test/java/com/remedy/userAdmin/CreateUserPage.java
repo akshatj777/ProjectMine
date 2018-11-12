@@ -399,7 +399,8 @@ public class CreateUserPage extends BaseClass{
     		}
     		else
     		{
-    			clickElement(driver.findElement(By.xpath("//div[text()='Select']")));
+    			iWillWaitToSee(By.xpath("//div[text()='Select']"));
+    			driver.findElement(By.xpath("//div[text()='Select']")).click();
     			iWillWaitToSee(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input"));
     			delay();
     			driver.findElement(By.xpath("//div[text()='Select']/parent::div/div[@class='menu transition visible']//input")).sendKeys(text);
