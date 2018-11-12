@@ -862,6 +862,9 @@ public class ProgramPerformance extends BaseClass{
 				 System.out.println("Text in image is"+output);
 				 FinalOutput=output.replaceAll("\\s+", "").replace("$","").replaceAll(",", "").trim();
 				 System.out.println(FinalOutput);
+				 //Replacing l with 1
+				 FinalOutput = FinalOutput.replaceAll("l", "1").trim();
+				 System.out.println("FinalOutput="+FinalOutput);
 				 if(FinalOutput.isEmpty()){
 					 imageOutput.put(text, FinalOutput);
 				 }
