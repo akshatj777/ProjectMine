@@ -61,8 +61,8 @@ Feature: View IRF organization functionality tests
     And I verify CCN "<CCN> - <Has_MO>" on view profile of "IRF" organization
     And I verify EIN/TIN id "<EIN/TIN> - <Has_MO>" on view profile of "IRF" organization
     And I verify NPI number "<NPI> - <Has_MO>" on view profile of "IRF" organization
-    And I verify Region name <Loc_Region> on view profile of "IRF" organization
-    And I verify Market name <Loc_Market> on view profile of "IRF" organization
+    #And I verify Region name <Loc_Region> on view profile of "IRF" organization
+    #And I verify Market name <Loc_Market> on view profile of "IRF" organization
     And I verify "Managing Organization - <Has_MO>" on view profile of "IRF" Organization
     And I verify "Participant Id - <Has_MO>" on view profile of "IRF" Organization
     And I verify "Location" tab present under "IRF" Organization
@@ -72,13 +72,13 @@ Feature: View IRF organization functionality tests
     And I verify header name "ID" under "Location" for "IRF" organization
     And I verify header name "Location Name" under "Location" for "IRF" organization
     And I verify header name "Address" under "Location" for "IRF" organization
-    And I verify header name "Region" under "Location" for "IRF" organization
-    And I verify header name "Market" under "Location" for "IRF" organization
+    #And I verify header name "Region" under "Location" for "IRF" organization
+    #And I verify header name "Market" under "Location" for "IRF" organization
     And I verify Location index id "<LID>" on view profile of "<IRF_Name> - <Has_MO>" organization
     Then I verify Location details of "<Loc_Name>" on view profile of "IRF" organization
     Then I verify Location details of "<Loc_Address1>" on view profile of "IRF" organization
-    Then I verify Location details of "<Loc_Region>" on view profile of "IRF" organization
-    Then I verify Location details of "<Loc_Market>" on view profile of "IRF" organization
+    #Then I verify Location details of "<Loc_Region>" on view profile of "IRF" organization
+    #Then I verify Location details of "<Loc_Market>" on view profile of "IRF" organization
     And I Verify the "Edit" button on View page
     And I click on "Edit" button on particular organization
     Then I click on "+" button on "Edit IRF" organization page
@@ -88,9 +88,9 @@ Feature: View IRF organization functionality tests
     And I enter address2 <Loc_Address2> for Location "2" on "Edit" organization page
     And I select region <Loc_Region> for Location "2" on "Edit" organization page
     And I enter city <Loc_City> for Location "2" on "Edit" organization page
-    And I select market <Loc_Market> for region "<Loc_Region>" for Location "2" on "Edit" organization page
+    #And I select market <Loc_Market> for region "<Loc_Region>" for Location "2" on "Edit" organization page
     And I select state <Loc_State> for Location "2" on "Edit" organization page
-    And I enter zip <Loc_Postal_Code> for Location "2" on "Edit" organization page
+    #And I enter zip <Loc_Postal_Code> for Location "2" on "Edit" organization page
     Then I click on "Submit" button on "Edit" organization page
     Then I verify "<Message>" after submitting the "Edit IRF - <Has_MO>" organization page
     When I search with "<IRF_Name> - <Has_MO>" on organization in search box

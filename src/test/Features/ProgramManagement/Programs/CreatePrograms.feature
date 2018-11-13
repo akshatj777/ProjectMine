@@ -103,6 +103,8 @@ Feature: Create Programs organization under Payor Organization functionality tes
     And I click on checkbox for "Attribute to the physician who has the most claims during the lookBack window" Attribution rule
     And I click on checkbox for "Attribute to the physician who has the most claims during the lookForward window" Attribution rule
     And I click on checkbox for "Attribute to the physician who admitted the patient" Attribution rule
+    And I click on checkbox for "Attribute to the Attending Physicians Group" Attribution rule
+    And I click on checkbox for "Attribute to the Operating Physicians Group" Attribution rule
     And I click on checkbox for "Attribute to the physician who has the highest claim allowed amount during the lookForward window" Attribution rule
     And I uncheck for "Physician Group" Attribution rule
     And I click on checkbox for "Attribute to the physician who has the most claims during the trigger window" Attribution rule
@@ -145,6 +147,8 @@ Feature: Create Programs organization under Payor Organization functionality tes
     And I click on checkbox for "Attribute to the operating physician on the triggering claim" Attribution rule
     And I click on checkbox for "Attribute to the physician who bills the most E&M codes during the trigger window" Attribution rule
     And I click on checkbox for "Attribute to the physician who has the most claims during the lookBack window" Attribution rule
+    And I click on checkbox for "Attribute to the Attending Physicians Group" Attribution rule
+    And I click on checkbox for "Attribute to the Operating Physicians Group" Attribution rule
     And I click on checkbox for "Attribute to the physician who has the most claims during the lookForward window" Attribution rule
     And I click on checkbox for "Attribute to the physician who admitted the patient" Attribution rule
     And I click on checkbox for "Attribute to the physician who has the highest claim allowed amount during the lookForward window" Attribution rule
@@ -152,8 +156,6 @@ Feature: Create Programs organization under Payor Organization functionality tes
     And I click on checkbox for "Attribute to the physician who has the most claims during the trigger window" Attribution rule
     And I click on checkbox for "Attribute to the attending physician on the triggering claim" Attribution rule
     And I click on checkbox for "Attribute to the provider with the earliest Bundle start date" Attribution rule
-    And I click on checkbox for "Attribute to the Attending Physicians Group" Attribution rule
-    And I click on checkbox for "Attribute to the Operating Physicians Group" Attribution rule
     And I verify the sub headline of "Validate To"
     Then I click on "Submit" button on "create" organization page
     Then I verify duplicate "<Message>" after submitting the "create Programs" organization page

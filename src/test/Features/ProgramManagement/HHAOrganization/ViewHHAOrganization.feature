@@ -56,8 +56,8 @@ Feature: View HHA organization functionality tests
     And I verify <Address1> in "address1" on view profile of "HHA" Organization
     And I verify <Address2> in "address2" on view profile of "HHA" Organization
     And I verify <City> in "city" on view profile of "HHA" Organization
-    And I verify Region name <Region> on view profile of "HHA" organization
-    And I verify Market name <Market> on view profile of "HHA" organization
+    #And I verify Region name <Region> on view profile of "HHA" organization
+    #And I verify Market name <Market> on view profile of "HHA" organization
     And I verify <StateVerification> in "state" on view profile of "HHA" Organization
     And I verify <Postal_Code> in "zip" on view profile of "HHA" Organization
     And I verify CCN "<CCN> - <Has_MO>" on view profile of "HHA" organization
