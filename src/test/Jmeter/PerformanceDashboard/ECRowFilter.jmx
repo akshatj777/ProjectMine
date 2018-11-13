@@ -72,7 +72,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
           <stringProp name="filename">ECRowFilterInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">Flag,userName,bpid,anchorFacility,ccn,bundle,dummyregion,dummymarket,r_region,r_market,participantName,drgCode,drgName,drgsubcode,npi,model,anch,region,market</stringProp>
+          <stringProp name="variableNames">Flag,userName,bpid,anchorFacility,ccn,bundle,region,market,r_region,r_market,participantName,drgCode,drgName,drgsubcode,npi,model,anch</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -100,7 +100,7 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_CCN&quot;,&quot;AND df.ccn in ${ccn}&quot;);	
 } else {
 	vars.put(&quot;EC_CCN&quot;,&quot;&quot;);
-	facilityNameInitCap
+	
 }
 
 if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){
@@ -134,11 +134,7 @@ if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;EC_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_DRGCODE&quot;,&quot;and d.drgCode in ${drgCode}&quot;);	
-} else{
-	vars.put(&quot;EC_DRGCODE&quot;,&quot;&quot;);
-}
+
 if(vars.get(&quot;npi&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
 	vars.put(&quot;EC_PHY_NPI&quot;,&quot;and dpy.npi is null&quot;);		
 } else if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
@@ -161,171 +157,45 @@ if(vars.get(&quot;anch&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
 
 if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
 String neee;
-ArrayList al1= new ArrayList();
-ArrayList al2= new ArrayList();
-ArrayList al3= new ArrayList();
-ArrayList a1= new ArrayList();
-ArrayList a2= new ArrayList();
-ArrayList a3= new ArrayList();
 ArrayList a11= new ArrayList();
-ArrayList a22= new ArrayList();
-ArrayList f= new ArrayList();
-ArrayList g= new ArrayList();
+ArrayList a12= new ArrayList();
 
-	String code=vars.get(&quot;drgCode&quot;).replace(&quot;(&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;);
+     String code=vars.get(&quot;drgCode&quot;).replace(&quot;(&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;);
 	log.info(&quot;Code is&quot;+code);
 	String[] code1=code.split(&quot;,&quot;);
 	log.info(&quot;Array Code is&quot;+code1);
 	log.info(&quot;Array Code Value 1 is&quot;+code1[0]);
-     String code2=vars.get(&quot;drgsubcode&quot;);
-	log.info(&quot;Sub Code is&quot;+code2);
-	String[] code3=code2.split(&quot;,&quot;);
-     log.info(&quot;Array Sub code Code is&quot;+code3);
+    
 	String code4=vars.get(&quot;drgName&quot;);
 	log.info(&quot;Name Code is&quot;+code4);
 	String[] code5=code4.split(&quot;, &apos;&quot;);
 	int n=code1.length-1;
-	
+
 	for(int i=0;i&lt;code1.length;i++){
-       if(!code1[i].equals(&quot;&apos;469&apos;&quot;) ){
-       	 if(code1[i].equals(&quot;&apos;470&apos;&quot;)){
-       	 	}else{
-       	String newcode=code1[i];
+
+         String newcode=code1[i];
        	String newname;
+
        	if(i==0){
        	newname=code5[i];	
        	}else{
            newname=&quot;&apos;&quot;+code5[i];}
            a11.add(newcode);	
-           a22.add(newname);}	}
-
-          if(!code1[i].equals(&quot;&apos;470&apos;&quot;) ){
-          	if(code1[i].equals(&quot;&apos;469&apos;&quot;)){
-       	 	
-       	 }else{
-       	String newcode=code1[i];
-        	String newname;
-        if(i==0){
-       	newname=code5[i];	
-       	}else{
-           newname=&quot;&apos;&quot;+code5[i];}
-           a11.add(newcode);	
-           a22.add(newname);}	}
-
-          if(code1[i].equals(&quot;&apos;469&apos;&quot;)){
-          String newcode=code1[i];
-          String newsubcode=code3[i];
-         	 String newname;
-         if(i==0){
-       	newname=code5[i];	
-       	}else{
-           newname=&quot;&apos;&quot;+code5[i];}
-      	al1.add(newcode);
-      	al2.add(newname);	
-          al3.add(newsubcode); 
-          
+           a22.add(newname);
+           if(i==n){
+            String ww=a11.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;);
+            String ww1=a22.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;).replace(&quot;(&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;);
+            neee=&quot;AND (drg.drgCode in (&quot;+ww+&quot;) and  drg.drgName in (&quot;+ww1+&quot;))&quot;;
+     	  log.info(&quot;Nee is&quot;+neee);
+           }}
+           vars.put(&quot;EC_DRGCODE&quot;,neee);
+		} else{
+		vars.put(&quot;EC_DRGCODE&quot;,&quot;&quot;);
 	}
-     if(code1[i].equals(&quot;&apos;470&apos;&quot;)){
-          String newcode=code1[i];
-          String newsubcode=code3[i];
-           String newname;
-          	if(i==0){
-       	newname=code5[i];	
-       	}else{
-           newname=&quot;&apos;&quot;+code5[i];}
-      	a1.add(newcode);	
-      	a2.add(newname);	
-      	a3.add(newsubcode); 
-          
-      	
-	}
-           
- if(i==n){
- 	for(int t=0;t&lt;a11.size();t++){
-       int aa=t%2;
-       log.info(&quot;aa is&quot;+aa);
-       if(aa==0){
-        f.add(a11.get(t));
-        
-       }	}
-    log.info(&quot;f is&quot;+f);
 
-    for(int t1=0;t1&lt;a22.size();t1++){
-       int aa1=t1%2;
-       log.info(&quot;aa1 is&quot;+aa1);
-       if(aa1==0){
-        g.add(a22.get(t1));
-        
-       }	}
-    log.info(&quot;a44 is&quot;+g);
-     String ww=f.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;);
-     String ww1=g.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;).replace(&quot;(&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;);
-     log.info(&quot;ww&quot;+ww);
-     log.info(&quot;ww1&quot;+ww1);
-     
-      	
 
-	String ww2=a1.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;);
-	log.info(&quot;DRGCode 470&quot;+ww2);
-     String ww3=a2.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;).replace(&quot;(&quot;,&quot;&quot;);
-     log.info(&quot;DRGName 470&quot;+ww3);
-     String ww7=a3.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;).replace(&quot;(&quot;,&quot;&quot;);
-     log.info(&quot;DRGSubCode 470&quot;+ww7);
-     String ww4=al1.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;);
-      log.info(&quot;DRGCode 469&quot;+ww4);
-     String ww5=al2.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;).replace(&quot;(&quot;,&quot;&quot;);
-      log.info(&quot;DRGName 469&quot;+ww5);
-     String ww6=al3.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;).replace(&quot;(&quot;,&quot;&quot;);
-     log.info(&quot;DRGSubcode 469&quot;+ww6);
-     log.info(&quot;ww2&quot;+ww2+&quot;ww3&quot;+ww3+&quot;ww4&quot;+ww4+&quot;ww5&quot;+ww5);
 
-     if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.contains(&quot;&apos;470&apos;&quot;)){
-     	if(ww.isEmpty()){
-     	  neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drg.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drg.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
-            neee=neee+neee1;
-            log.info(&quot;Nee is&quot;+neee);
-     	}else{
-     neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drg.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
-      String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drg.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
-      String neee2=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drg.drgName in (&quot;+ww1+&quot;))&quot;;
-      neee=neee+neee1+neee2;
-      log.info(&quot;Nee is&quot;+neee);}
-     } else if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.isEmpty() &amp;&amp; ww.isEmpty()){
-     	neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drg.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;
-     	log.info(&quot;469 Nee is&quot;+neee);
-     }else if(ww4.isEmpty() &amp;&amp; ww2.contains(&quot;&apos;470&apos;&quot;) &amp;&amp; ww.isEmpty()){
-     	neee=&quot;AND (drg.drgCode in (&quot;+ww2+&quot;) and  drg.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
-     	log.info(&quot;470 Nee is&quot;+neee);
-     }else if(ww4.isEmpty() &amp;&amp; ww2.isEmpty()){
-     	if(ww.isEmpty()){
-     	}
-     	else{
-     	neee=&quot;AND (drg.drgCode in (&quot;+ww+&quot;) and  drg.drgName in (&quot;+ww1+&quot;))&quot;;
-     	log.info(&quot;470 Nee is&quot;+neee);
-     	}
-     }else if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.isEmpty()){
-     	if(ww.isEmpty()){
-     		
-     	}else{
-     	  neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drg.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drg.drgName in (&quot;+ww1+&quot;))&quot;;
-           neee=neee+neee1;
-          log.info(&quot;Nee is&quot;+neee);}
-     }else if(ww4.isEmpty() &amp;&amp; ww2.contains(&quot;470&quot;)){
-     	if(ww.isEmpty()){
-     		
-     	}else{
-     	  neee=&quot;AND (drg.drgCode in (&quot;+ww2+&quot;) and  drg.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drg.drgName in (&quot;+ww1+&quot;))&quot;;
-           neee=neee+neee1;
-          log.info(&quot;Nee is&quot;+neee);
-     }} }
-          }
-         vars.put(&quot;C_DRGCODE&quot;,neee);
-	}else{
-	    vars.put(&quot;C_DRGCODE&quot;,&quot;&quot;);	
-	}</stringProp>
+</stringProp>
         </BeanShellPreProcessor>
         <hashTree/>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="BPID Filter " enabled="true">
