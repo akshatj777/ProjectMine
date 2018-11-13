@@ -3,6 +3,7 @@ Feature: Inpatient Episode Clearing Dashboard
   @IPECRLS @RowLevelSecurity
   Scenario Outline: Front end Data Filter Validation for EC data for IPEC
     When I open file "\\src\\test\\Jmeter\\IPECDashboard\\IPECRowFilterInput.csv" for writing data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\IPECDashboard\\logs\\IPECRowFilterInput.csv" for writing data at "<Row>" to log file
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login

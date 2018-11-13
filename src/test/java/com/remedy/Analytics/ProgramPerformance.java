@@ -74,6 +74,7 @@ public class ProgramPerformance extends BaseClass{
 	public static String FinalOutput=null;
 	public static List<String> arrayListTexts=new ArrayList<String>();
 	public static PrintWriter writer = null;
+	public static PrintWriter writerLog = null;
 	public static Map<String,HashMap<String,String>> mapOfHmImageOuput = new HashMap<String,HashMap<String,String>>();
 	public static HashMap<String, String> imageOutput;
 	public static Map<String,HashMap<String,String>> mapOfHmFiltersValue = new HashMap<String,HashMap<String,String>>();
@@ -2234,6 +2235,17 @@ public class ProgramPerformance extends BaseClass{
 		 rowFilters=new HashMap<String,String>();
 	 }
 	 
+	 public void iOpenTheLogFile(String path,String row) throws FileNotFoundException{
+		 if(row.equals("1")){
+			 writerLog=new PrintWriter(System.getProperty("user.dir")+path);
+			 writeDataToLogFile("1"+" Row");
+		 }else{
+			 writerLog.print(System.lineSeparator());
+			 writeDataToLogFile(row+" Row");
+		 }
+	 }
+	 
+	 
 	 public void writeDataToOutputFile(String path) throws FileNotFoundException {
 		 if(!path.equals("Date_Range")) {
 		 writer.print("("+arrayListTexts.toString().replace("]", "").replace("[", "").trim()+")|");
@@ -2243,6 +2255,14 @@ public class ProgramPerformance extends BaseClass{
 		 System.out.println("Values in arrayList Before Clear"+arrayListTexts.toString());
 		 arrayListTexts.clear();
 		 System.out.println("Values in arrayList After Clear"+arrayListTexts.toString());
+	 }
+	 
+	 public void writeDataToLogFile(String frontEndFilterValues) throws FileNotFoundException {
+		 if(frontEndFilterValues.contains("Row")) {
+			 writerLog.print(frontEndFilterValues+"-->");
+		 }else {
+			 writerLog.print("*"+frontEndFilterValues);
+		 }
 	 }
 	 
 	 public void iVerifyDBandFEForMetrics(String text,String row,String data){
@@ -2314,6 +2334,7 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iCloseTheInputFile(){
 		 writer.close();
+		 writerLog.close();
 	 }
 	 
 	 public void iSaveAllOutputImagesInIndexInHashMap(String index){
@@ -2351,6 +2372,7 @@ public class ProgramPerformance extends BaseClass{
 		  }
 		 rowFilters.put(filter, values.toString());
 		 System.out.println("Out"+rowFilters.toString());
+		 writeDataToLogFile(filter+"="+values.toString());
 	 }
 	 
 	 public void igetDateForDataFetchedForDashboard(String range) throws FileNotFoundException{
@@ -2561,9 +2583,9 @@ public class ProgramPerformance extends BaseClass{
 		 System.out.println("Size="+listItems);
 		 for(int i =1;i<listItems.size();i++){
 			String val=listItems.get(i).getText().trim();
-			if(val.equals("Null")) {
-				val=val.replace("Null", "null");
-			}
+//			if(val.equals("Null")) {
+//				val=val.replace("Null", "null");
+//			}
 			values.add(val);
 		  }
 			 RegionMarketArrayList=values;
@@ -2576,9 +2598,9 @@ public class ProgramPerformance extends BaseClass{
 			 System.out.println("Size="+listItems);
 			 for(int i =1;i<listItems.size();i++){
 				String val=listItems.get(i).getText().trim();
-				if(val.equals("Null")) {
-					val=val.replace("Null", "null");
-				}
+//				if(val.equals("Null")) {
+//					val=val.replace("Null", "null");
+//				}
 				values.add(val);
 			  }
 			 iClickOnFilterName("Participant", "value");
@@ -2590,13 +2612,11 @@ public class ProgramPerformance extends BaseClass{
 			 String valB = null;
 			 for(int i =0; i<RegionMarketArrayList.size();i++) {
 				 String tempVar=RegionMarketArrayList.get(i).trim();
-//					if(tempVar.equals("null")) {
-//					tempVar=tempVar.replace("Null", "null");
-//					arrayListTextsA.add(tempVar);
-//					arrayListTextsB.add(tempVar);
-//				}
-				if (!tempVar.equals("null")) {
-				
+					if(tempVar.equals("Not Available")) {
+					tempVar=tempVar.replace("Not Available", "null");
+					arrayListTextsA.add(tempVar);
+					arrayListTextsB.add(tempVar);
+				}else if (!tempVar.equals("Not Available")) {
 				valarr=tempVar.split(" - ");
 				valA=valarr[0].trim();
 				valB=valarr[1].trim();

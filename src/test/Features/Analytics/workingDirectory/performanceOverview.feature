@@ -3,6 +3,7 @@ Feature: Performance Overview Dashboard Validations
   @RowLevelSecurity @PORLS @tag13 @tag2
   Scenario Outline: Front end Data Filter Validation for Claims
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ClaimsRowFilterInput.csv" for writing data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\logs\\ClaimsRowFilterInput.csv" for writing data at "<Row>" to log file
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login
@@ -138,6 +139,7 @@ Feature: Performance Overview Dashboard Validations
   @RowLevelSecurity @PORLS @tag14
   Scenario Outline: Front end Data Filter Validation for EC
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\ECRowFilterInput.csv" for writing data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\logs\\ECRowFilterInput.csv" for writing data at "<Row>" to log file
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login
@@ -196,7 +198,7 @@ Feature: Performance Overview Dashboard Validations
     And I select "<Anchor Facility Detail>" checkbox in "Anchor Facility Detail" filter on "Program overview" dashboard
     And I click "Anchor Facility Detail" Filter on the "program performance - <Anchor Facility Detail>" dashboard
     ##Extract Region Market
-    #   And I get Region and Market to input file without Participant form Region-Market dropdown
+    And I get Region and Market to input file without Participant form Region-Market dropdown
     And I click "Episode Initiator - BPID" Filter on the "program performance" dashboard
     And I fetch and store "Episode Initiator - BPID" filter values on "program performance" dashboard
     And I click "Episode Initiator - BPID" Filter on the "program performance" dashboard
@@ -256,7 +258,7 @@ Feature: Performance Overview Dashboard Validations
     Then I verify "Episode Initiator - BPID" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Anchor Facility - CCN" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Bundle" for DB and FE filter values at "<Row>" for "EC"
-    #   Then I verify "Region - Market" for DB and FE filter values at "<Row>" for "EC"
+    Then I verify "Region - Market" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Remedy Region - Market" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Participant" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "DRG" for DB and FE filter values at "<Row>" for "EC"
@@ -280,6 +282,7 @@ Feature: Performance Overview Dashboard Validations
   @RowLevelSecurity @PORLS @tag111
   Scenario Outline: Front end Data Filter Validation for Claims&EC
     When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInput.csv" for writing data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\logs\\RowFilterInput.csv" for writing data at "<Row>" to log file
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login
