@@ -72,7 +72,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
           <stringProp name="filename">ECRowFilterInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">Flag,userName,bpid,anchorFacility,ccn,bundle,region,market,r_region,r_market,participantName,drgCode,drgName,drgsubcode,npi,model,anch</stringProp>
+          <stringProp name="variableNames">Flag,userName,bpid,anchorFacility,ccn,bundle,dummyregion,dummymarket,r_region,r_market,participantName,drgCode,drgName,drgsubcode,npi,model,anch,region,market</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -157,8 +157,8 @@ if(vars.get(&quot;anch&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
 
 if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
 String neee;
-ArrayList a11= new ArrayList();
-ArrayList a12= new ArrayList();
+ArrayList a= new ArrayList();
+ArrayList b= new ArrayList();
 
      String code=vars.get(&quot;drgCode&quot;).replace(&quot;(&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;);
 	log.info(&quot;Code is&quot;+code);
@@ -180,14 +180,20 @@ ArrayList a12= new ArrayList();
        	newname=code5[i];	
        	}else{
            newname=&quot;&apos;&quot;+code5[i];}
-           a11.add(newcode);	
-           a22.add(newname);
-           if(i==n){
-            String ww=a11.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;);
-            String ww1=a22.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;).replace(&quot;(&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;);
-            neee=&quot;AND (drg.drgCode in (&quot;+ww+&quot;) and  drg.drgName in (&quot;+ww1+&quot;))&quot;;
+           a.add(newcode);	
+           b.add(newname);
+           
+           
+            
+           }
+           log.info(&quot;a11 is&quot;+a);
+           log.info(&quot;a22 is&quot;+b);
+           String ww=a.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;);
+             log.info(&quot;ww is&quot;+ww);
+            String ww1=b.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;).replace(&quot;(&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;);
+            log.info(&quot;ww is&quot;+ww1);
+            neee=&quot;AND (d.drgCode in (&quot;+ww+&quot;) and  d.drgName in (&quot;+ww1+&quot;))&quot;;
      	  log.info(&quot;Nee is&quot;+neee);
-           }}
            vars.put(&quot;EC_DRGCODE&quot;,neee);
 		} else{
 		vars.put(&quot;EC_DRGCODE&quot;,&quot;&quot;);

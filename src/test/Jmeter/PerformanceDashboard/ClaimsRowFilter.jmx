@@ -664,7 +664,8 @@ ORDER BY a.participant;
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="DRG" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT DISTINCT
+          <stringProp name="query">SELECT DISTINCT &apos;Claims&apos; as &apos;D
+    a.DRG_Fractureata Source&apos;,
     a.DRG_Fracture
 FROM
     (
