@@ -43,6 +43,8 @@ Feature: Inpatient Episode Clearing Dashboard
     And I click "Participant" Filter on the "IPEC - <Participant>" dashboard
     And I select "<Participant>" checkbox in "Participant" filter on "IPEC" dashboard
     And I click "Participant" Filter on the "IPEC - <Participant>" dashboard
+    ##Extract Region Market
+    And I get Region and Market to input file without Participant form Region-Market dropdown
     ##Store Values in Filter
     And I click "Episode Initiator - BPID" Filter on the "IPEC" dashboard
     And I fetch and store "Episode Initiator - BPID" filter values on "IPEC" dashboard
