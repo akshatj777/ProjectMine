@@ -528,6 +528,11 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.iOpenTheInputFile(path,row);
 	}
 	
+	@And("^I open file \"([^\"]*)\" for writing data at \"([^\"]*)\" to log file$")
+	public void i_open_file_after_writing_data_to_LogFile(String path,String row) throws Throwable{
+		programdashboard.iOpenTheLogFile(path,row);
+	}
+	
 	@And("^I close the file for after writing data to input file$")
 	public void i_close_file_after_writing_data_to_input_fileInputFile() throws Throwable{
 		programdashboard.iCloseTheInputFile();
