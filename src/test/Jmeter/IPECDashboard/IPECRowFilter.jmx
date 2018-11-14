@@ -91,16 +91,57 @@ if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;EC_R_MARKET&quot;,&quot;&quot;);
 }
+
 if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_REGION&quot;,&quot;and rmp.region in  ${region}&quot;);		
+	if(!vars.get(&quot;region&quot;).equals(&quot;&apos;null&apos;&quot;)){
+		vars.put(&quot;EC_REGION_Null&quot;,&quot;and rmp.region is null&quot;);
+		vars.put(&quot;EC_REGION&quot;,&quot;&quot;);
+	}
+	else if(!vars.get(&quot;region&quot;).contains(&quot;null&quot;)){
+		vars.put(&quot;EC_REGION_Null&quot;,&quot;and rmp.region is null&quot;);
+		String val_region= vars.get(&quot;region&quot;);
+		val_region = val_region.replace(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+		vars.put(&quot;valRegion&quot;,val_region);
+		vars.put(&quot;EC_REGION&quot;,&quot;and rmp.region in ${valRegion}&quot;);
+	} else {
+		vars.put(&quot;EC_REGION_Null&quot;,&quot;&quot;);
+		vars.put(&quot;EC_REGION&quot;,&quot;and rmp.region in ${region}&quot;);
+	}	
 } else {
+	vars.put(&quot;EC_REGION_Null&quot;,&quot;&quot;);
 	vars.put(&quot;EC_REGION&quot;,&quot;&quot;);
 }
+
 if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_MARKET&quot;,&quot;and rmp.market in ${market}&quot;);	
-} else{
+	if(!vars.get(&quot;market&quot;).equals(&quot;&apos;null&apos;&quot;)){
+		vars.put(&quot;EC_MARKET_Null&quot;,&quot;and rmp.market is null&quot;);
+		vars.put(&quot;EC_MARKET&quot;,&quot;&quot;);
+	}
+	else if(!vars.get(&quot;market&quot;).contains(&quot;null&quot;)){
+		vars.put(&quot;EC_MARKET_Null&quot;,&quot;and rmp.market is null&quot;);
+		String val_market = vars.get(&quot;market&quot;);
+		val_market = val_market.replace(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+		vars.put(&quot;valMarket&quot;,val_market);
+		vars.put(&quot;EC_MARKET&quot;,&quot;and rmp.market in ${valMarket}&quot;);
+	} else {
+		vars.put(&quot;EC_MARKET_Null&quot;,&quot;&quot;);
+		vars.put(&quot;EC_MARKET&quot;,&quot;and rmp.region in ${market}&quot;);
+	}	
+} else {
+	vars.put(&quot;EC_MARKET_Null&quot;,&quot;&quot;);
 	vars.put(&quot;EC_MARKET&quot;,&quot;&quot;);
 }
+
+//if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
+//	vars.put(&quot;EC_REGION&quot;,&quot;and rmp.region in  ${region}&quot;);		
+//} else {
+//	vars.put(&quot;EC_REGION&quot;,&quot;&quot;);
+//}
+//if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
+//	vars.put(&quot;EC_MARKET&quot;,&quot;and rmp.market in ${market}&quot;);	
+//} else{
+//	vars.put(&quot;EC_MARKET&quot;,&quot;&quot;);
+//}
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_PARTICIPANTNAME&quot;,&quot;and de.participantName in ${participantName}&quot;);
 } else{
@@ -188,7 +229,9 @@ ${EC_CCN}
 ${EC_BUNDLE}
 ${EC_R_REGION}
 ${EC_R_MARKET}
+${EC_REGION_Null} 
 ${EC_REGION}
+${EC_MARKET_Null}
 ${EC_MARKET}
 ${EC_PARTICIPANTNAME}
 order by de.episodeInitiatorNameInitCap, f.bpid;</stringProp>
@@ -281,7 +324,9 @@ ${EC_BPID}
 ${EC_BUNDLE}
 ${EC_R_REGION}
 ${EC_R_MARKET}
+${EC_REGION_Null} 
 ${EC_REGION}
+${EC_MARKET_Null}
 ${EC_MARKET}
 ${EC_PARTICIPANTNAME}
 order by aaf.facilityNameInitCap;</stringProp>
@@ -374,7 +419,9 @@ ${EC_AncFacility}
 ${EC_CCN}
 ${EC_R_REGION}
 ${EC_R_MARKET}
+${EC_REGION_Null} 
 ${EC_REGION}
+${EC_MARKET_Null}
 ${EC_MARKET}
 ${EC_PARTICIPANTNAME}
 order by drg.bundleName;</stringProp>
@@ -481,7 +528,13 @@ order by CONCAT(de.participantShortName, &apos;-&apos;, rmp.region, &apos; &apos
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Remedy Region Market " enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select
+          <stringProp name="query">${EC_REGION_Null} 
+${EC_REGION}
+${EC_MARKET_Null}
+${EC_MARKET}${EC_REGION_Null} 
+${EC_REGION}
+${EC_MARKET_Null}
+${EC_MARKET}select
 distinct CONCAT( &apos;Remedy &apos;, m.region , &apos; - &apos;,  m.market ) AS &apos;Remedy Region Market&apos;
 from
 warehouse.factPatientEpisode f
@@ -558,7 +611,9 @@ ${EC_BPID}
 ${EC_AncFacility}
 ${EC_CCN}
 ${EC_BUNDLE}
+${EC_REGION_Null} 
 ${EC_REGION}
+${EC_MARKET_Null}
 ${EC_MARKET}
 ${EC_PARTICIPANTNAME}
 order by CONCAT( &apos;Remedy &apos;, m.region , &apos; - &apos;,  m.market );</stringProp>
@@ -652,7 +707,9 @@ ${EC_CCN}
 ${EC_BUNDLE}
 ${EC_R_REGION}
 ${EC_R_MARKET}
+${EC_REGION_Null} 
 ${EC_REGION}
+${EC_MARKET_Null}
 ${EC_MARKET}
 order by de.participantNameInitCap;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -770,6 +827,7 @@ f= new FileOutputStream(path + separator+&quot;IPECECRowFilterOutput.txt&quot;,t
 	String vValue4 = vars.get(&quot;value4&quot;);
 	
 	String vValue5 = vars.get(&quot;value5&quot;);
+	vValue5 = vValue5.replace(&quot;null&quot;,&quot;Not Available&quot;); //Region Market 
 //	if(vValue5.contains(&quot;null&quot;)){
 //		vValue5=vValue5.replace(&quot;n&quot;,&quot;N&quot;);
 //	}

@@ -117,15 +117,50 @@ if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;C_R_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;C_REGION&quot;,&quot;and prm.region in  ${region}&quot;);		
+	if(!vars.get(&quot;region&quot;).equals(&quot;&apos;null&apos;&quot;)){
+		vars.put(&quot;C_REGION_Null&quot;,&quot;and prm.region is null&quot;);
+		vars.put(&quot;C_REGION&quot;,&quot;&quot;);
+	}
+	else if(!vars.get(&quot;region&quot;).contains(&quot;null&quot;)){
+		vars.put(&quot;C_REGION_Null&quot;,&quot;and prm.region is null&quot;);
+		String val_region= vars.get(&quot;region&quot;);
+		val_region = val_region.replace(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+		vars.put(&quot;valRegion&quot;,val_region);
+		vars.put(&quot;C_REGION&quot;,&quot;and prm.region in ${valRegion}&quot;);
+	} else {
+		vars.put(&quot;C_REGION_Null&quot;,&quot;&quot;);
+		vars.put(&quot;C_REGION&quot;,&quot;and prm.region in ${region}&quot;);
+	}	
 } else {
+	vars.put(&quot;C_REGION_Null&quot;,&quot;&quot;);
 	vars.put(&quot;C_REGION&quot;,&quot;&quot;);
 }
-if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){	
-	vars.put(&quot;C_MARKET&quot;,&quot;and prm.market in ${market}&quot;);
-} else{
+
+if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
+	if(!vars.get(&quot;market&quot;).equals(&quot;&apos;null&apos;&quot;)){
+		vars.put(&quot;C_MARKET_Null&quot;,&quot;and prm.market is null&quot;);
+		vars.put(&quot;C_MARKET&quot;,&quot;&quot;);
+	}
+	else if(!vars.get(&quot;market&quot;).contains(&quot;null&quot;)){
+		vars.put(&quot;C_MARKET_Null&quot;,&quot;and prm.market is null&quot;);
+		String val_market = vars.get(&quot;market&quot;);
+		val_market = val_market.replace(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+		vars.put(&quot;valMarket&quot;,val_market);
+		vars.put(&quot;C_MARKET&quot;,&quot;and prm.market in ${valMarket}&quot;);
+	} else {
+		vars.put(&quot;C_MARKET_Null&quot;,&quot;&quot;);
+		vars.put(&quot;C_MARKET&quot;,&quot;and prm.region in ${market}&quot;);
+	}	
+} else {
+	vars.put(&quot;C_MARKET_Null&quot;,&quot;&quot;);
 	vars.put(&quot;C_MARKET&quot;,&quot;&quot;);
 }
+//
+//if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){	
+//	vars.put(&quot;C_MARKET&quot;,&quot;and prm.market in ${market}&quot;);
+//} else{
+//	vars.put(&quot;C_MARKET&quot;,&quot;&quot;);
+//}
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;and e.participantNameInitCap in ${participantName}&quot;);	
 } else{
@@ -348,8 +383,10 @@ SELECT DISTINCT
 	               ${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
-				${C_R_MARKET} 
-				${C_REGION} 
+				${C_R_MARKET}
+				${C_REGION_Null} 
+				${C_REGION}
+				${C_MARKET_Null}  
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
@@ -406,8 +443,10 @@ FROM
             		${C_BPID}
 				${C_BUNDLE} 
 				${C_R_REGION} 
-				${C_R_MARKET} 
-				${C_REGION} 
+				${C_R_MARKET}
+				${C_REGION_Null}  
+				${C_REGION}
+				${C_MARKET_Null}  
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
@@ -465,8 +504,10 @@ FROM
             		${C_AnchorFacility}
 	            	${C_CCN}
 				${C_R_REGION} 
-				${C_R_MARKET} 
-				${C_REGION} 
+				${C_R_MARKET}
+				${C_REGION_Null}  
+				${C_REGION}
+				${C_MARKET_Null}  
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
@@ -525,8 +566,10 @@ FROM
             		${C_BPID}
             		${C_AnchorFacility}
 	           	${C_CCN}
-				${C_BUNDLE} 
-				${C_REGION} 
+				${C_BUNDLE}
+				${C_REGION_Null}  
+				${C_REGION}
+				${C_MARKET_Null}  
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
@@ -643,8 +686,10 @@ FROM
 	            	${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
-				${C_R_MARKET} 
-				${C_REGION} 
+				${C_R_MARKET}
+				${C_REGION_Null}  
+				${C_REGION}
+				${C_MARKET_Null}  
 				${C_MARKET} 
 				${C_DRGCODE} 
 				${C_PHY_NPI}
@@ -716,8 +761,10 @@ FROM
 	            	${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
-				${C_R_MARKET} 
-				${C_REGION} 
+				${C_R_MARKET}
+				${C_REGION_Null}  
+				${C_REGION}
+				${C_MARKET_Null}  
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
 				${C_PHY_NPI}  
@@ -779,8 +826,10 @@ FROM
 	            	${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
-				${C_R_MARKET} 
-				${C_REGION} 
+				${C_R_MARKET}
+				${C_REGION_Null}  
+				${C_REGION}
+				${C_MARKET_Null}  
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
@@ -840,8 +889,10 @@ FROM
 	            	${C_CCN}
 				${C_BUNDLE} 
 				${C_R_REGION} 
-				${C_R_MARKET} 
-				${C_REGION} 
+				${C_R_MARKET}
+				${C_REGION_Null}  
+				${C_REGION}
+				${C_MARKET_Null}  
 				${C_MARKET} 
 				${C_PARTICIPANTNAME}  
 				${C_DRGCODE} 
@@ -1064,6 +1115,7 @@ f= new FileOutputStream(path + separator+&quot;ClaimsRowFilterOutput.txt&quot;,t
 	String vValue3 =  vars.get(&quot;value3&quot;);
 	String vValue4 =  vars.get(&quot;value4&quot;);
 	String vValue5 =  vars.get(&quot;value5&quot;);
+	vValue5 = vValue5.replace(&quot;null&quot;,&quot;Not Available&quot;); //Region Market 
 	String vValue6 =  vars.get(&quot;value6&quot;);
 	String vValue7 =  vars.get(&quot;value7&quot;);
 	String vValue8 =  vars.get(&quot;value8&quot;);
