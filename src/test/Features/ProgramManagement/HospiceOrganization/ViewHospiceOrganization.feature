@@ -113,8 +113,8 @@ Feature: View Hospice organization functionality tests
     And I verify "<StateVerification>" details of "Hospice" associated on Managing Organization page
     And I verify "<Postal_Code>" details of "Hospice" associated on Managing Organization page
     And I search with "<Hospice_Name> - <Has_MO>" on view profile Managing Organization search box
-    And I verify "<Hospice_Name> - <Has_MO>" details of "Hospital" associated on Managing Organization page
-    And I click "<Hospice_Name> - <Has_MO>" for "Hospital" organization under MO profile page
+    And I verify "<Hospice_Name> - <Has_MO>" details of "Hospice" associated on Managing Organization page
+    And I click "<Hospice_Name> - <Has_MO>" for "Hospice" organization under MO profile page
     And I verify "<Hospice_Name> - <Has_MO>" name on the header of view profile
     And I verify <Organization Type> in "type" on view profile of "Hospice" Organization
     And I verify <Address1> in "address1" on view profile of "Hospice" Organization
@@ -173,8 +173,8 @@ Feature: View Hospice organization functionality tests
     And I verify "<StateVerification>" details of "Hospice" associated on Managing Organization page
     And I verify "<Postal_Code>" details of "Hospice" associated on Managing Organization page
     And I search with "<Hospice_Name> - <Has_MO>" on view profile Managing Organization search box
-    And I verify "<Hospice_Name> - <Has_MO>" details of "Hospital" associated on Managing Organization page
-    And I click "<Hospice_Name> - <Has_MO>" for "Hospital" organization under MO profile page
+    And I verify "<Hospice_Name> - <Has_MO>" details of "Hospice" associated on Managing Organization page
+    And I click "<Hospice_Name> - <Has_MO>" for "Hospice" organization under MO profile page
     And I verify "<Hospice_Name> - <Has_MO>" name on the header of view profile
     And I verify <Organization Type> in "type" on view profile of "Hospice" Organization
     And I verify <Address1> in "address1" on view profile of "Hospice" Organization
@@ -213,8 +213,6 @@ Feature: View Hospice organization functionality tests
     And I enter <Address1> in "Address 1" on create organization page
     And I enter <Short_Name> in "Short Name" on create organization page
     And I enter <Address2> in "Address 2" on create organization page
-    And I select region "<Region>" in "create Hospice" organization page
-    And I select market "<Market>" in "create Hospice" organization page
     And I enter <City> in "City" on create organization page
     And I select <State> in State on create organization page
     And I enter <Postal_Code> in "Postal Code" on create organization page

@@ -88,10 +88,43 @@ Feature: View Functionality tests for PGP Organization.
     And I verify "<City>" details of "PGP" associated on Managing Organization page
     And I verify "<StateVerification>" details of "PGP" associated on Managing Organization page
     And I verify "<Postal_Code>" details of "PGP" associated on Managing Organization page
+    Then I click on "+" button on "MO Profile" organization page
+    And I verify "Create PGP Organization" header text on create organization page
+    And I select "<Has_MO>" radio button for managing organization
+    Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
+    Then I enter <PGP_Name> in "PGP Organization Name" on create organization page
+    And I enter <Address1> in "Address 1" on create organization page
+    And I enter <Short_Name> in "Short Name" on create organization page
+    And I enter <Address2> in "Address 2" on create organization page
+    And I enter <City> in "City" on create organization page
+    And I select <State> in State on create organization page
+    And I enter <Postal_Code> in "Postal Code" on create organization page
+    And I provide unique "PGP - <EIN>" in "EIN" on create organization page
+    And I provide unique "PGP - <NPI>" in "NPI" on create organization page
+    Then I click on "Submit" button on "create" organization page
+    Then I verify "<Message>" after submitting the "create PGP - <Has_MO>" organization page
+    When I click on Organization link on Program Management page
+    When I search with "<MO_Name>" on organization in search box
+    And I click "<MO_Name>" field in search list on organization page
+    And I verify "PGP" organization tab present under "Managing" Organization
+    And I click on "PGP" organization under Managing Organization
+    And I search with "<PGP_Name> - <Has_MO>" on view profile Managing Organization search box
+    And I verify "<PGP_Name> - <Has_MO>" details of "Hospice" associated on Managing Organization page
+    And I click "<PGP_Name> - <Has_MO>" for "Hospice" organization under MO profile page
+    And I verify <Organization Type> in "type" on view profile of "PGP" Organization
+    And I verify <Address1> in "address1" on view profile of "PGP" Organization
+    And I verify <Address2> in "address2" on view profile of "PGP" Organization
+    And I verify <City> in "city" on view profile of "PGP" Organization
+    And I verify <StateVerification> in "state" on view profile of "PGP" Organization
+    And I verify <Postal_Code> in "zip" on view profile of "PGP" Organization
+    And I verify EIN/TIN id "<EIN/TIN> - <Has_MO>" on view profile of "PGP" organization
+    And I verify NPI number "<NPI> - <Has_MO>" on view profile of "PGP" organization
+    And I verify "Managing Organization - <Has_MO>" on view profile of "PGP" Organization
+    And I verify "Participant Id - <Has_MO>" on view profile of "PGP" Organization
 
     Examples: 
-      | Description                                                       | Has_MO | MO_Name | PGP_Name | City | State      | Postal_Code | TIN/EIN | NPI | StateVerification |
-      | Searching PGP Organization Details on Managing Profile Page - PGP | YES    | MONAME  | PGPNAME  | City | California |       10000 | EIN     | NPI | CA                |
+      | Description                                                       | Has_MO | MO_Name | PGP_Name | Address1 | Address2 | City | State      | Postal_Code | TIN/EIN | NPI | StateVerification | Organization Type | Message                                |
+      | Searching PGP Organization Details on Managing Profile Page - PGP | YES    | MONAME  | PGPNAME  | Address1 | Address2 | City | California |       10000 | EIN     | NPI | CA                | PGP               | PGP Organization Successfully Created. |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -103,13 +136,28 @@ Feature: View Functionality tests for PGP Organization.
     And I click "<MO_Name>" field in search list on organization page
     And I verify "PGP" organization tab present under "Managing" Organization
     And I click on "PGP" organization under Managing Organization
-    And I search with "<PGP_Name>" on organization in search box
+    And I search with "<PGP_Name1>" on organization in search box
     Then I verify the "No matches" message for invalid search in Organization
     And I verify the "Create New PGP Organization" link under No matches
+    And I click on "Create New PGP Organization" link under No matches
+    And I verify "Create PGP Organization" header text on create organization page
+    And I verify "Has a Management Organization" radio button is checked
+    And I verify Managing Organization is auto filled on "create PGP" Organization page
+    Then I enter <PGP_Name> in "PGP Organization Name" on create organization page
+    And I enter <Address1> in "Address 1" on create organization page
+    And I enter <Short_Name> in "Short Name" on create organization page
+    And I enter <Address2> in "Address 2" on create organization page
+    And I enter <City> in "City" on create organization page
+    And I select <State> in State on create organization page
+    And I enter <Postal_Code> in "Postal Code" on create organization page
+    And I provide unique "PGP - <EIN>" in "EIN" on create organization page
+    And I provide unique "PGP - <NPI>" in "NPI" on create organization page
+    Then I click on "Submit" button on "create" organization page
+    Then I verify "<Message>" after submitting the "create PGP - <Has_MO>" organization page
 
     Examples: 
-      | Description                                                             | MO_Name | PGP_Name         |
-      | Searching invalid details on Managing Organization Profile Page for PGP | MONAME  | NoMatchesPGPNAME |
+      | Description                                                             | Has_MO | Managing_Org | PGP_Name1       | PGP_Name | Address1 | Short_Name | Address2 | City | Region  | Market  | State      | Postal_Code | EIN | NPI | Message                                |
+      | Searching invalid details on Managing Organization Profile Page for PGP | NO     |              | NoMatchesForPGP | PGPNAME  | Address1 | Short_Name | Address2 | City | Midwest | Chicago | California |       10000 | EIN | NPI | PGP Organization Successfully Created. |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"
