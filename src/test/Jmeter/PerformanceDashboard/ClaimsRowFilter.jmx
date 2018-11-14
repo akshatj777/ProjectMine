@@ -72,7 +72,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
           <stringProp name="filename">ClaimsRowFilterInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">Flag,userName,bpid,anchorFacility,ccn,bundle,dummyregion,dummymarket,r_region,r_market,participantName,drgCode,drgName,drgsubcode,npi,model,region,market</stringProp>
+          <stringProp name="variableNames">Flag,userName,bpid,anchorFacility,ccn,bundle,region,market,r_region,r_market,participantName,drgCode,drgName,drgsubcode,npi,model</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -157,10 +157,22 @@ ArrayList g= new ArrayList();
 	log.info(&quot;Name Code is&quot;+code4);
 	String[] code5=code4.split(&quot;, &apos;&quot;);
 	int n=code1.length-1;
-	
+	log.info(&quot;N is&quot;+n);
 	for(int i=0;i&lt;code1.length;i++){
        if(!code1[i].equals(&quot;&apos;469&apos;&quot;) ){
        	 if(code1[i].equals(&quot;&apos;470&apos;&quot;)){
+       	String newcode1=code1[i];
+       	System.out.println(&quot;111111111111111&quot;+newcode1);
+          String newsubcode1=code3[i];
+           String newname1;
+          	if(i==0){
+       	newname1=code5[i];	
+       	}else{
+           newname1=&quot;&apos;&quot;+code5[i];}
+      	a1.add(newcode1);	
+      	a2.add(newname1);	
+      	a3.add(newsubcode1); 
+      	continue;
        	 	}else{
        	String newcode=code1[i];
        	String newname;
@@ -170,10 +182,24 @@ ArrayList g= new ArrayList();
            newname=&quot;&apos;&quot;+code5[i];}
            a11.add(newcode);	
            a22.add(newname);}	}
-
-          if(!code1[i].equals(&quot;&apos;470&apos;&quot;) ){
-          	if(code1[i].equals(&quot;&apos;469&apos;&quot;)){
-       	 	
+            if(!code1[i].trim().equals(&quot;&apos;470&apos;&quot;) ){
+          	System.out.println(&quot;Not equal to 470&quot;);
+          	System.out.println(&quot;Not equal to 470&quot;+i);
+          	System.out.println(&quot;Not equal 470&quot;+code1[i]);
+          	if(code1[i].trim().equals(&quot;&apos;469&apos;&quot;)){
+          		System.out.println(&quot;Not equal to 470 qnd 469&quot;+i);
+          		System.out.println(&quot;Not equal to 470 qnd 469&quot;);
+       	 	  String newcode2=code1[i];
+          String newsubcode2=code3[i];
+         	 String newname2;
+         if(i==0){
+       	newname2=code5[i];	
+       	}else{
+           newname2=&quot;&apos;&quot;+code5[i];}
+      	al1.add(newcode2);
+      	al2.add(newname2);	
+          al3.add(newsubcode2); 
+          continue;
        	 }else{
        	String newcode=code1[i];
         	String newname;
@@ -184,35 +210,50 @@ ArrayList g= new ArrayList();
            a11.add(newcode);	
            a22.add(newname);}	}
 
-          if(code1[i].equals(&quot;&apos;469&apos;&quot;)){
-          String newcode=code1[i];
-          String newsubcode=code3[i];
-         	 String newname;
-         if(i==0){
-       	newname=code5[i];	
-       	}else{
-           newname=&quot;&apos;&quot;+code5[i];}
-      	al1.add(newcode);
-      	al2.add(newname);	
-          al3.add(newsubcode); 
-          
-	}
-     if(code1[i].equals(&quot;&apos;470&apos;&quot;)){
-          String newcode=code1[i];
-          String newsubcode=code3[i];
-           String newname;
-          	if(i==0){
-       	newname=code5[i];	
-       	}else{
-           newname=&quot;&apos;&quot;+code5[i];}
-      	a1.add(newcode);	
-      	a2.add(newname);	
-      	a3.add(newsubcode); 
-          
-      	
-	}
+
+//          if(code1[i].equals(&quot;&apos;469&apos;&quot;)){
+//          String newcode=code1[i];
+//          String newsubcode=code3[i];
+//         	 String newname;
+//         if(i==0){
+//       	newname=code5[i];	
+//       	}else{
+//           newname=&quot;&apos;&quot;+code5[i];}
+//      	al1.add(newcode);
+//      	al2.add(newname);	
+//          al3.add(newsubcode); 
+//          
+//	}
+//     if(code1[i].equals(&quot;&apos;470&apos;&quot;)){
+//          String newcode=code1[i];
+//          String newsubcode=code3[i];
+//           String newname;
+//          	if(i==0){
+//       	newname=code5[i];	
+//       	}else{
+//           newname=&quot;&apos;&quot;+code5[i];}
+//      	a1.add(newcode);	
+//      	a2.add(newname);	
+//      	a3.add(newsubcode); 
+//          
+//      	
+//	}
            
  if(i==n){
+
+
+              log.info(&quot;a11 is&quot;+a11);
+            log.info(&quot;a22 is&quot;+a22);
+            log.info(&quot;a33 is&quot;+a33);
+
+            log.info(&quot;a1 is&quot;+a1);
+            log.info(&quot;a2 is&quot;+a2);
+            log.info(&quot;a3 is&quot;+a3);
+
+            log.info(&quot;al1 is&quot;+al1);
+            log.info(&quot;al2 is&quot;+al2);
+            log.info(&quot;al3 is&quot;+al3);
+ 	
  	for(int t=0;t&lt;a11.size();t++){
        int aa=t%2;
        log.info(&quot;aa is&quot;+aa);
