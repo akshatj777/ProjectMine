@@ -166,6 +166,7 @@ if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
+
 if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
 String neee;
 ArrayList al1= new ArrayList();
@@ -194,10 +195,21 @@ ArrayList g= new ArrayList();
 	int n=code1.length-1;
 	
 	for(int i=0;i&lt;code1.length;i++){
-       if(!code1[i].equals(&quot;&apos;469&apos;&quot;) ){
-       	 if(code1[i].equals(&quot;&apos;470&apos;&quot;)){
-       	 	}else{
-       	String newcode=code1[i];
+       if(!code1[i].trim().equals(&quot;&apos;469&apos;&quot;) ){
+       	 if(code1[i].trim().equals(&quot;&apos;470&apos;&quot;)){
+       	 	String newcode1=code1[i];
+          String newsubcode1=code3[i];
+           String newname1;
+          	if(i==0){
+       	newname1=code5[i];	
+       	}else{
+           newname1=&quot;&apos;&quot;+code5[i];}
+      	a1.add(newcode1);	
+      	a2.add(newname1);	
+      	a3.add(newsubcode1); 
+      	continue;
+       	 	}else if(!code1[i].trim().equals(&quot;&apos;470&apos;&quot;)){
+       	String newcode=code1[i].trim();
        	String newname;
        	if(i==0){
        	newname=code5[i];	
@@ -206,9 +218,19 @@ ArrayList g= new ArrayList();
            a11.add(newcode);	
            a22.add(newname);}	}
 
-          if(!code1[i].equals(&quot;&apos;470&apos;&quot;) ){
-          	if(code1[i].equals(&quot;&apos;469&apos;&quot;)){
-       	 	
+          if(!code1[i].trim().equals(&quot;&apos;470&apos;&quot;) ){
+          	if(code1[i].trim().equals(&quot;&apos;469&apos;&quot;)){
+       	 	 String newcode2=code1[i];
+          String newsubcode2=code3[i];
+         	 String newname2;
+         if(i==0){
+       	newname2=code5[i];	
+       	}else if(!code1[i].trim().equals(&quot;&apos;469&apos;&quot;)){
+          newname2=&quot;&apos;&quot;+code5[i];}
+      	al1.add(newcode2);
+      	al2.add(newname2);	
+          al3.add(newsubcode2); 
+          continue;
        	 }else{
        	String newcode=code1[i];
         	String newname;
@@ -219,33 +241,8 @@ ArrayList g= new ArrayList();
            a11.add(newcode);	
            a22.add(newname);}	}
 
-          if(code1[i].equals(&quot;&apos;469&apos;&quot;)){
-          String newcode=code1[i];
-          String newsubcode=code3[i];
-         	 String newname;
-         if(i==0){
-       	newname=code5[i];	
-       	}else{
-           newname=&quot;&apos;&quot;+code5[i];}
-      	al1.add(newcode);
-      	al2.add(newname);	
-          al3.add(newsubcode); 
-          
-	}
-     if(code1[i].equals(&quot;&apos;470&apos;&quot;)){
-          String newcode=code1[i];
-          String newsubcode=code3[i];
-           String newname;
-          	if(i==0){
-       	newname=code5[i];	
-       	}else{
-           newname=&quot;&apos;&quot;+code5[i];}
-      	a1.add(newcode);	
-      	a2.add(newname);	
-      	a3.add(newsubcode); 
-          
-      	
-	}
+
+  
            
  if(i==n){
  	for(int t=0;t&lt;a11.size();t++){
