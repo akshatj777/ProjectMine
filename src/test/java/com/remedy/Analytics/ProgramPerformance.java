@@ -1717,6 +1717,22 @@ public class ProgramPerformance extends BaseClass{
 		 }
 	 }
 	 
+	 public void testBPID() {
+		 try{
+				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));}
+			 catch(Exception e){
+				 delay();
+			 }
+		 WebElement elem = driver.findElement(By.xpath("//input[contains(@name,'All')]"));
+		 JavascriptExecutor executor = (JavascriptExecutor)driver;
+		 executor.executeScript("arguments[0].click();", elem);
+		 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\"Lawrence General Hospital - 2070-b72\")]/../input")));
+		 clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+		 delay();
+		 
+	 }
+	 
 	 public void iSelectCheckboxValuesInFilter1(String checkbox,String filter,String dashboard) throws FileNotFoundException{
 		 try{
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));}
@@ -2362,9 +2378,10 @@ public class ProgramPerformance extends BaseClass{
 	 public void iFetchStoreValuesOnDashboard(String filter,String dashboard) throws FileNotFoundException{
 		 List<WebElement> listItems = driver.findElements(By.cssSelector(".FIText"));
 		 List<String> values = new ArrayList<String>();
-		 System.out.println("Size="+listItems);
+		 System.out.println("Size="+listItems.size());
 		 for(int i =1;i<listItems.size();i++){
 			String val=listItems.get(i).getText().trim();
+			System.out.print(" "+val);
 			if(val.equals("Null")) {
 				val=val.replace("Null", "null");
 			}

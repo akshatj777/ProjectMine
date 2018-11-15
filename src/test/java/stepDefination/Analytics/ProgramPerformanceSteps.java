@@ -506,6 +506,13 @@ public class ProgramPerformanceSteps extends DriverScript{
 		programdashboard.saveDataMetricValueWithdatabase(text,data,resolution);
 	}
 	
+	@And("^I Test BPID$")
+	public void i_test_BPID() throws Throwable{
+		//programdashboard.iSelectCheckboxValuesInFilter(checkbox,filter, dashboard);
+		programdashboard.testBPID();
+	//	programdashboard.iselectstaticvalues();
+	}
+	
 	@And("^I select \"([^\"]*)\" checkbox in \"([^\"]*)\" filter on \"([^\"]*)\" dashboard$")
 	public void i_select_checkbox_under_filter_for_dashboard(String checkbox, String filter,String dashboard) throws Throwable{
 		//programdashboard.iSelectCheckboxValuesInFilter(checkbox,filter, dashboard);
