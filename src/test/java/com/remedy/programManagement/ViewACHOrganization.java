@@ -621,6 +621,27 @@ public class ViewACHOrganization  extends BaseClass{
 			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateACHOrganization.achOrg_noMO.get("ACHNAME")+"']")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
+		else if(text.contains("IRFNAME - YES"))
+		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg.get("IRFNAME")+"']")));
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg.get("IRFNAME")+"']"));
+			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateIRFOrganization.IRFOrg.get("IRFNAME")+"']")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(text.contains("SNFNAME - YES"))
+		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//div[text()='"+CreateSNFOrganization.SNFOrg.get("SNFNAME")+"']")));
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateSNFOrganization.SNFOrg.get("SNFNAME")+"']"));
+			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateSNFOrganization.SNFOrg.get("SNFNAME")+"']")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		else if(text.contains("LTCHNAME - YES"))
+		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//div[text()='"+CreateLTCHOrganization.LTCHOrg.get("LTCHNAME")+"']")));
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateLTCHOrganization.LTCHOrg.get("LTCHNAME")+"']"));
+			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateLTCHOrganization.LTCHOrg.get("LTCHNAME")+"']")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
 	}
 	
 	public void iVerifyLocationDetailsonVeiwProfileOfSelectedOrganization(String text, String org){
