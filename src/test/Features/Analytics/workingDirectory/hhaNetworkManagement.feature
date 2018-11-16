@@ -3,6 +3,7 @@ Feature: HHA Network Management Dashboard
   @RowLevelSecurity12
   Scenario Outline: Front end Data Filter Validation for Claims
     When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\ClaimsRowFilterInput.csv" for writing data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\logs\\ClaimsRowFilterInput.csv" for writing data at "<Row>" to log file
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login
@@ -118,6 +119,7 @@ Feature: HHA Network Management Dashboard
   @RowLevelSecurity
   Scenario Outline: Front end Data Filter Validation for EC
     When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\ECRowFilterInput.csv" for writing data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\logs\\ECRowFilterInput.csv" for writing data at "<Row>" to log file
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login
@@ -235,7 +237,8 @@ Feature: HHA Network Management Dashboard
 
   @RowLevelSecurity
   Scenario Outline: Front end Data Filter Validation for Claims&EC
-    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInput.csv" for writing data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\RowFilterInput.csv" for writing data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\logs\\RowFilterInput.csv" for writing data at "<Row>" to log file
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login
