@@ -2614,6 +2614,7 @@ public class ProgramPerformance extends BaseClass{
 				 String tempVar=RegionMarketArrayList.get(i).trim();
 					if(tempVar.equals("Not Available")) {
 					tempVar=tempVar.replace("Not Available", "null");
+					tempVar = "'"+tempVar+"'";
 					arrayListTextsA.add(tempVar);
 					arrayListTextsB.add(tempVar);
 				}else if (!tempVar.equals("Not Available")) {
@@ -2646,6 +2647,5 @@ public class ProgramPerformance extends BaseClass{
 			 writeDataToOutputFile("Path");
 			 RegionMarketArrayList.clear();
 			 
-	}
-	
+	}	
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="4.0" jmeter="4.0 r1823414">
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.0 r1840935">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -91,57 +91,41 @@ if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;EC_R_MARKET&quot;,&quot;&quot;);
 }
-
 if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
-	if(!vars.get(&quot;region&quot;).equals(&quot;&apos;null&apos;&quot;)){
-		vars.put(&quot;EC_REGION_Null&quot;,&quot;and rmp.region is null&quot;);
-		vars.put(&quot;EC_REGION&quot;,&quot;&quot;);
+	if(vars.get(&quot;region&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+		vars.put(&quot;EC_Query_REGION&quot;,&quot;and rmp.region is null&quot;);
 	}
-	else if(!vars.get(&quot;region&quot;).contains(&quot;null&quot;)){
-		vars.put(&quot;EC_REGION_Null&quot;,&quot;and rmp.region is null&quot;);
-		String val_region= vars.get(&quot;region&quot;);
-		val_region = val_region.replace(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
-		vars.put(&quot;valRegion&quot;,val_region);
-		vars.put(&quot;EC_REGION&quot;,&quot;and rmp.region in ${valRegion}&quot;);
-	} else {
-		vars.put(&quot;EC_REGION_Null&quot;,&quot;&quot;);
-		vars.put(&quot;EC_REGION&quot;,&quot;and rmp.region in ${region}&quot;);
+	else if(vars.get(&quot;region&quot;).contains(&quot;null&quot;)){
+		String valueReg = &quot;and ( rmp.region is null&quot;;
+		String valueReg1 = vars.get(&quot;region&quot;);
+		valueReg1 = valueReg1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+		valueReg1 = &quot; or rmp.region in &quot;+valueReg1+&quot;)&quot;;
+		vars.put(&quot;EC_Query_REGION&quot;,valueReg+valueReg1);
+		} else {
+		vars.put(&quot;EC_Query_REGION&quot;,&quot;and rmp.region in ${region}&quot;);
 	}	
 } else {
-	vars.put(&quot;EC_REGION_Null&quot;,&quot;&quot;);
-	vars.put(&quot;EC_REGION&quot;,&quot;&quot;);
+	vars.put(&quot;EC_Query_REGION&quot;,&quot;&quot;);
 }
 
 if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
-	if(!vars.get(&quot;market&quot;).equals(&quot;&apos;null&apos;&quot;)){
-		vars.put(&quot;EC_MARKET_Null&quot;,&quot;and rmp.market is null&quot;);
-		vars.put(&quot;EC_MARKET&quot;,&quot;&quot;);
+	if(vars.get(&quot;market&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+		vars.put(&quot;EC_Query_MARKET&quot;,&quot;and rmp.market is null&quot;);
 	}
-	else if(!vars.get(&quot;market&quot;).contains(&quot;null&quot;)){
-		vars.put(&quot;EC_MARKET_Null&quot;,&quot;and rmp.market is null&quot;);
-		String val_market = vars.get(&quot;market&quot;);
-		val_market = val_market.replace(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
-		vars.put(&quot;valMarket&quot;,val_market);
-		vars.put(&quot;EC_MARKET&quot;,&quot;and rmp.market in ${valMarket}&quot;);
-	} else {
-		vars.put(&quot;EC_MARKET_Null&quot;,&quot;&quot;);
-		vars.put(&quot;EC_MARKET&quot;,&quot;and rmp.region in ${market}&quot;);
-	}	
+	else if(vars.get(&quot;market&quot;).contains(&quot;null&quot;)){
+		String valueMar = &quot;and ( rmp.market is null&quot;;
+		String valueMar1 = vars.get(&quot;market&quot;);
+		valueMar1 = valueMar1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+		valueMar1 = &quot; or rmp.market in &quot;+valueMar1+&quot;)&quot;;
+		vars.put(&quot;EC_Query_MARKET&quot;,valueMar+valueMar1);
+		} else {
+		vars.put(&quot;EC_Query_MARKET&quot;,&quot;and rmp.market in ${market}&quot;);
+	}
 } else {
-	vars.put(&quot;EC_MARKET_Null&quot;,&quot;&quot;);
-	vars.put(&quot;EC_MARKET&quot;,&quot;&quot;);
+vars.put(&quot;EC_Query_MARKET&quot;,&quot;&quot;);
 }
 
-//if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
-//	vars.put(&quot;EC_REGION&quot;,&quot;and rmp.region in  ${region}&quot;);		
-//} else {
-//	vars.put(&quot;EC_REGION&quot;,&quot;&quot;);
-//}
-//if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
-//	vars.put(&quot;EC_MARKET&quot;,&quot;and rmp.market in ${market}&quot;);	
-//} else{
-//	vars.put(&quot;EC_MARKET&quot;,&quot;&quot;);
-//}
+
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_PARTICIPANTNAME&quot;,&quot;and de.participantName in ${participantName}&quot;);
 } else{
@@ -224,15 +208,14 @@ WHERE f.bundleRisk=1
 and f.anchorAdmitDateKey &gt;= &apos;20160101&apos; -- Use this query logic when filtering by Months
 and f.anchorAdmitDateKey &lt;= &apos;20181101&apos; -- Use this query logic when filtering by Months
 and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
+
 ${EC_AncFacility}
 ${EC_CCN}
 ${EC_BUNDLE}
 ${EC_R_REGION}
 ${EC_R_MARKET}
-${EC_REGION_Null} 
-${EC_REGION}
-${EC_MARKET_Null}
-${EC_MARKET}
+${EC_Query_REGION}
+${EC_Query_MARKET}
 ${EC_PARTICIPANTNAME}
 order by de.episodeInitiatorNameInitCap, f.bpid;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -324,10 +307,8 @@ ${EC_BPID}
 ${EC_BUNDLE}
 ${EC_R_REGION}
 ${EC_R_MARKET}
-${EC_REGION_Null} 
-${EC_REGION}
-${EC_MARKET_Null}
-${EC_MARKET}
+${EC_Query_REGION}
+${EC_Query_MARKET}
 ${EC_PARTICIPANTNAME}
 order by aaf.facilityNameInitCap;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -419,15 +400,105 @@ ${EC_AncFacility}
 ${EC_CCN}
 ${EC_R_REGION}
 ${EC_R_MARKET}
-${EC_REGION_Null} 
-${EC_REGION}
-${EC_MARKET_Null}
-${EC_MARKET}
+${EC_Query_REGION}
+${EC_Query_MARKET}
 ${EC_PARTICIPANTNAME}
 order by drg.bundleName;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">bundleName</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Remedy Region Market " enabled="true">
+          <stringProp name="dataSource">MySQLQA</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">select
+distinct CONCAT( &apos;Remedy &apos;, m.region , &apos; - &apos;,  m.market ) AS &apos;Remedy Region Market&apos;
+from
+warehouse.factPatientEpisode f
+        LEFT JOIN
+    warehouse.dimPhysician dph ON f.physicianKey = dph.physicianSK
+        LEFT JOIN
+    warehouse.dimPatient dp ON f.patientKey = dp.patientSK	
+    left join warehouse.dimLookup dloo on dp.totalRiskScore = dloo.lookupName
+        LEFT JOIN
+    warehouse.dimEpisodeInitiator de ON f.episodeInitiatorKey = de.episodeInitiatorSK
+        LEFT JOIN
+    warehouse.dimCARL dc ON f.carlKey = dc.carlSK
+        LEFT JOIN
+    warehouse.dimFacility aaf ON f.anchorAdmitFacilityKey = aaf.facilitySK
+        LEFT JOIN
+    warehouse.dimFacility adf ON f.anchorDischargeFacilityKey = adf.facilitySK
+    LEFT JOIN
+    warehouse.dimFacility afd ON f.sourceFacilityKey = afd.facilitySK
+        LEFT JOIN
+    warehouse.dimDRG drg ON f.currDrgKey = drg.drgSK
+        LEFT JOIN
+    warehouse.dimDRG d ON f.wDrgKeyMax = d.drgSK
+        LEFT JOIN
+    warehouse.dimDRG drgpre ON f.predDrgKeyMax = drgpre.drgSK
+        LEFT JOIN
+    warehouse.dimDRG drgfin ON f.fDrgKeyMax = drgfin.drgSK
+        LEFT JOIN
+    warehouse.dimNSOCMapping dn ON f.anchorDischCareSettingKey = dn.NSOCMappingSK
+        LEFT JOIN
+    warehouse.dimDate dt ON f.anchorAdmitDateKey = dt.dateSK
+		LEFT JOIN
+    warehouse.dimLookup dles ON f.episodeStatus = dles.lookupName AND dles.lookupCategory = &apos;episodeStatus&apos;
+		LEFT JOIN
+    warehouse.dimLookup dlos ON dp.onboardingStatus = dlos.lookupName AND dlos.lookupCategory = &apos;onboardingStatus&apos;
+        LEFT JOIN
+    warehouse.dimRegionMarket m ON f.rgRemKey = m.rgSK
+            LEFT JOIN
+    warehouse.dimRegionMarket rmp ON f.rgPartnerKey = rmp.rgSK
+--         INNER JOIN 
+--     warehouse.factAdmission fa ON f.anchorAdmissionKey = fa.anchorAdmissionKey
+		LEFT JOIN
+    warehouse.dimNSOCMapping dfad ON f.anchorDischCareSettingKey = dfad.NSOCMappingSK
+        INNER JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID where username = ${userName}
+       GROUP BY bpid
+       )tbsBPID ON f.BPID = tbsBPID.bpid
+        INNER JOIN 
+     (       
+        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityCCN where username = ${userName}
+       GROUP BY ccn
+        )tbsCCN on aaf.ccn=tbsCCN.ccn
+     INNER JOIN 
+     (       
+        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
+       GROUP BY facilitykey
+        )tbsFacilityKey on f.sourceFacilityKey=tbsFacilityKey.facilitykey
+WHERE f.bundleRisk=1 
+  AND f.episodeCountReport=1 
+  AND (f.model IN (1,2)  OR f.episodeStatus=10) 
+  AND adf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+  AND aaf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+  AND dp.dwhSource = &apos;EC&apos;
+  AND dloo.lookupCategory = &apos;patientRisk&apos;
+-- and tbsBPID.username = @test_user
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW() -- Use this query logic when filtering by Days
+-- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
+-- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
+and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
+${EC_BPID}
+${EC_AncFacility}
+${EC_CCN}
+${EC_BUNDLE}
+${EC_Query_REGION}
+${EC_Query_MARKET}
+${EC_PARTICIPANTNAME}
+order by CONCAT( &apos;Remedy &apos;, m.region , &apos; - &apos;,  m.market );</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames">RRegionMarket</stringProp>
           <stringProp name="resultVariable"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -525,106 +596,6 @@ order by CONCAT(de.participantShortName, &apos;-&apos;, rmp.region, &apos; &apos
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Remedy Region Market " enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">${EC_REGION_Null} 
-${EC_REGION}
-${EC_MARKET_Null}
-${EC_MARKET}${EC_REGION_Null} 
-${EC_REGION}
-${EC_MARKET_Null}
-${EC_MARKET}select
-distinct CONCAT( &apos;Remedy &apos;, m.region , &apos; - &apos;,  m.market ) AS &apos;Remedy Region Market&apos;
-from
-warehouse.factPatientEpisode f
-        LEFT JOIN
-    warehouse.dimPhysician dph ON f.physicianKey = dph.physicianSK
-        LEFT JOIN
-    warehouse.dimPatient dp ON f.patientKey = dp.patientSK	
-    left join warehouse.dimLookup dloo on dp.totalRiskScore = dloo.lookupName
-        LEFT JOIN
-    warehouse.dimEpisodeInitiator de ON f.episodeInitiatorKey = de.episodeInitiatorSK
-        LEFT JOIN
-    warehouse.dimCARL dc ON f.carlKey = dc.carlSK
-        LEFT JOIN
-    warehouse.dimFacility aaf ON f.anchorAdmitFacilityKey = aaf.facilitySK
-        LEFT JOIN
-    warehouse.dimFacility adf ON f.anchorDischargeFacilityKey = adf.facilitySK
-    LEFT JOIN
-    warehouse.dimFacility afd ON f.sourceFacilityKey = afd.facilitySK
-        LEFT JOIN
-    warehouse.dimDRG drg ON f.currDrgKey = drg.drgSK
-        LEFT JOIN
-    warehouse.dimDRG d ON f.wDrgKeyMax = d.drgSK
-        LEFT JOIN
-    warehouse.dimDRG drgpre ON f.predDrgKeyMax = drgpre.drgSK
-        LEFT JOIN
-    warehouse.dimDRG drgfin ON f.fDrgKeyMax = drgfin.drgSK
-        LEFT JOIN
-    warehouse.dimNSOCMapping dn ON f.anchorDischCareSettingKey = dn.NSOCMappingSK
-        LEFT JOIN
-    warehouse.dimDate dt ON f.anchorAdmitDateKey = dt.dateSK
-		LEFT JOIN
-    warehouse.dimLookup dles ON f.episodeStatus = dles.lookupName AND dles.lookupCategory = &apos;episodeStatus&apos;
-		LEFT JOIN
-    warehouse.dimLookup dlos ON dp.onboardingStatus = dlos.lookupName AND dlos.lookupCategory = &apos;onboardingStatus&apos;
-        LEFT JOIN
-    warehouse.dimRegionMarket m ON f.rgRemKey = m.rgSK
-            LEFT JOIN
-    warehouse.dimRegionMarket rmp ON f.rgPartnerKey = rmp.rgSK
---         INNER JOIN 
---     warehouse.factAdmission fa ON f.anchorAdmissionKey = fa.anchorAdmissionKey
-		LEFT JOIN
-    warehouse.dimNSOCMapping dfad ON f.anchorDischCareSettingKey = dfad.NSOCMappingSK
-        INNER JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON f.BPID = tbsBPID.bpid
-        INNER JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on aaf.ccn=tbsCCN.ccn
-     INNER JOIN 
-     (       
-        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
-       GROUP BY facilitykey
-        )tbsFacilityKey on f.sourceFacilityKey=tbsFacilityKey.facilitykey
-WHERE f.bundleRisk=1 
-  AND f.episodeCountReport=1 
-  AND (f.model IN (1,2)  OR f.episodeStatus=10) 
-  AND adf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
-  AND aaf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
-  AND dp.dwhSource = &apos;EC&apos;
-  AND dloo.lookupCategory = &apos;patientRisk&apos;
--- and tbsBPID.username = @test_user
-AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW() -- Use this query logic when filtering by Days
--- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
--- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
-and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
-${EC_BPID}
-${EC_AncFacility}
-${EC_CCN}
-${EC_BUNDLE}
-${EC_REGION_Null} 
-${EC_REGION}
-${EC_MARKET_Null}
-${EC_MARKET}
-${EC_PARTICIPANTNAME}
-order by CONCAT( &apos;Remedy &apos;, m.region , &apos; - &apos;,  m.market );</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">RRegionMarket</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Participant" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
@@ -707,10 +678,8 @@ ${EC_CCN}
 ${EC_BUNDLE}
 ${EC_R_REGION}
 ${EC_R_MARKET}
-${EC_REGION_Null} 
-${EC_REGION}
-${EC_MARKET_Null}
-${EC_MARKET}
+${EC_Query_REGION}
+${EC_Query_MARKET}
 order by de.participantNameInitCap;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
