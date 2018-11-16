@@ -114,9 +114,9 @@ Feature: View SNF organization functionality tests
     And I click on "SNF" organization tab on under Managing Organization
     Then I verify the Search bar on "SNF" organization page
     And I get the count of "SNF" organizations
-    And I search with "<SNF_Name> - <Has_MO>" on view profile Managing Organization search box
-    And I verify "<SNF_Name> - <Has_MO>" details of "SNF" associated on Managing Organization page
-    And I click "<SNF_Name> - <Has_MO>" for "SNF" organization under MO profile page
+    When I search with "<SNF_Name> - <Has_MO>" on organization in search box
+    And I click "<SNF_Name> - <Has_MO>" field in search list on organization page
+    And I verify "<SNF_Name> - <Has_MO>" name on the header of view profile
     And I click on "Edit" button on particular organization
     And I verify "Edit SNF Organization" header text on edit organization page
     And I verify Managing Organization radio buttons status on "Edit SNF - <Has_MO>" organization page
@@ -144,13 +144,13 @@ Feature: View SNF organization functionality tests
     And I verify "Participant Id - <Has_MO>" on view profile of "SNF" Organization
     And I verify "Location" tab present under "SNF" Organization
     And I verify "Bundle Payment Contracts" tab present under "SNF" Organization
-    And I verify Location index id "<LID>" on view profile of "<SNF_Name> - <Has_MO>" organization
+    #Then I verify Location indexID for "<SNF_Name> - <Has_MO>" organization
     Then I verify Location details of "<Loc_Name>" on view profile of "SNF" organization
     Then I verify Location details of "<Loc_Address1>" on view profile of "SNF" organization
 
     Examples: 
-      | Description                                               | Has_MO | MO_Name | SNF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type        | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | StateVerification |
-      | Verification of SNF details through Managing organization | YES    | MONAME  | SNFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Skilled Nursing | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN | NPI | CA                |
+      | Description                                               | Has_MO | MO_Name | SNF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type        | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | StateVerification | Organization Type |
+      | Verification of SNF details through Managing organization | YES    | MONAME  | SNFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Skilled Nursing | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN | NPI | CA                | SNF               |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -212,13 +212,13 @@ Feature: View SNF organization functionality tests
     And I verify NPI id "<NPI> - <Has_MO>" on "SNF" organization profile page
     And I verify "Managing Organization - <Has_MO>" on view profile of "SNF" Organization
     And I verify "Participant Id - <Has_MO>" on view profile of "SNF" Organization
-    And I verify Location index id "<LID>" on view profile of "<SNF_Name> - <Has_MO>" organization
+    #Then I verify Location indexID for "<SNF_Name> - <Has_MO>" organization
     Then I verify Location details of "<Loc_Name>" on view profile of "SNF" organization
     Then I verify Location details of "<Loc_Address1>" on view profile of "SNF" organization
 
     Examples: 
-      | Description                                                         | Has_MO | MO_Name | SNF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type        | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | StateVerification | Message                                |
-      | Verification of SNF details and count on SNF tab under Managing org | YES    | MONAME  | SNFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Skilled Nursing | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN | NPI | CA                | SNF Organization Successfully Created. |
+      | Description                                                         | Has_MO | MO_Name | SNF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type        | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | StateVerification | Organization Type | Message                                |
+      | Verification of SNF details and count on SNF tab under Managing org | YES    | MONAME  | SNFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Skilled Nursing | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN | NPI | CA                | SNF               | SNF Organization Successfully Created. |
 
   Scenario Outline: <Description>
     Given I am on the login page

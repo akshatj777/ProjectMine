@@ -83,9 +83,7 @@ Feature: Hospital Organization View profile Functionality tests.
     And I enter location name <Loc_Name> for Location "2" on "Edit" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "Edit" organization page
     And I enter address2 <Loc_Address2> for Location "2" on "Edit" organization page
-    And I select region <Loc_Region> for Location "2" on "Edit" organization page
     And I enter city <Loc_City> for Location "2" on "Edit" organization page
-    And I select market <Loc_Market> for region "<Loc_Region>" for Location "2" on "Edit" organization page
     And I select state <Loc_State> for Location "2" on "Edit" organization page
     And I enter zip <Loc_Postal_Code> for Location "2" on "Edit" organization page
     Then I click on "Submit" button on "Edit" organization page
@@ -128,9 +126,7 @@ Feature: Hospital Organization View profile Functionality tests.
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
-    #And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
-    #And I select market <Loc_Market> for region "<Loc_Region>" for Location "1" on "create" organization page
     And I select state <Loc_State> for Location "1" on "create" organization page
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
@@ -160,7 +156,7 @@ Feature: Hospital Organization View profile Functionality tests.
     And I verify NPI id "<NPI> - <Has_MO>" on "Hospital" organization profile page
     And I verify "Managing Organization - <Has_MO>" on view profile of "Hospital" Organization
     And I verify "Participant Id - <Has_MO>" on view profile of "Hospital" Organization
-    And I verify Location index id "<LID>" on view profile of "<Hosp_Name> - <Has_MO>" organization
+    #Then I verify Location indexID for "<Hosp_Name> - <Has_MO>" organization
     Then I verify Location details of "<Loc_Name>" on view profile of "Hospital" organization
     Then I verify Location details of "<Loc_Address1>" on view profile of "Hospital" organization
 
@@ -199,11 +195,8 @@ Feature: Hospital Organization View profile Functionality tests.
     And I provide unique "ACH - <NPI>" in "NPI" on create organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I enter Location Id <Location_ID> for Location "1" on "create Hospital" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
-    #And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
-    #And I select market <Loc_Market> for region "<Loc_Region>" for Location "1" on "create" organization page
     And I select state <Loc_State> for Location "1" on "create" organization page
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
@@ -226,7 +219,7 @@ Feature: Hospital Organization View profile Functionality tests.
     And I verify NPI id "<NPI> - <Has_MO>" on "Hospital" organization profile page
     And I verify "Managing Organization - <Has_MO>" on view profile of "Hospital" Organization
     And I verify "Participant Id - <Has_MO>" on view profile of "Hospital" Organization
-    And I verify Location index id "<LID>" on view profile of "<Hosp_Name> - <Has_MO>" organization
+    #Then I verify Location indexID for "<Hosp_Name> - <Has_MO>" organization
     Then I verify Location details of "<Loc_Name>" on view profile of "Hospital" organization
     Then I verify Location details of "<Loc_Address1>" on view profile of "Hospital" organization
 
@@ -267,7 +260,7 @@ Feature: Hospital Organization View profile Functionality tests.
     And I verify NPI id "<NPI> - <Has_MO>" on "Hospital" organization profile page
     And I verify "Managing Organization - <Has_MO>" on view profile of "Hospital" Organization
     And I verify "Participant Id - <Has_MO>" on view profile of "Hospital" Organization
-    And I verify Location index id "<LID>" on view profile of "<Hosp_Name> - <Has_MO>" organization
+    #And I verify Location index id "<LID>" on view profile of "<Hosp_Name> - <Has_MO>" organization
     Then I verify Location details of "<Loc_Name>" on view profile of "Hospital" organization
     Then I verify Location details of "<Loc_Address1>" on view profile of "Hospital" organization
 

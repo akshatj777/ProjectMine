@@ -33,10 +33,10 @@ Feature: View IRF organization functionality tests
     And I verify the url after creation of an organization on view profile of "IRF" organization
 
     Examples: 
-      | Description | Has_MO | IRF_Name |
+      | Description                                                                    | Has_MO | IRF_Name |
+      | Verify IRF org shortName in Url after creating under profile page - with MO    | YES    | IRFNAME  |
+      | Verify IRF org shortName in Url after creating under profile page - without MO | NO     | IRFNAME  |
 
-  #| Verify IRF org shortName in Url after creating under profile page - with MO    | YES    | IRFNAME  |
-  #| Verify IRF org shortName in Url after creating under profile page - without MO | NO     | IRFNAME  |
   Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
@@ -168,13 +168,13 @@ Feature: View IRF organization functionality tests
     And I verify NPI id "<NPI> - <Has_MO>" on "SNF" organization profile page
     And I verify "Managing Organization - <Has_MO>" on view profile of "IRF" Organization
     And I verify "Participant Id - <Has_MO>" on view profile of "IRF" Organization
-    And I verify Location index id "<LID>" on view profile of "<IRF_Name> - <Has_MO>" organization
+    Then I verify Location indexID for "<IRF_Name> - <Has_MO>" organization
     Then I verify Location details of "<Loc_Name>" on view profile of "IRF" organization
     Then I verify Location details of "<Loc_Address1>" on view profile of "IRF" organization
 
     Examples: 
-      | Description                                                         | Has_MO | MO_Name | IRF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | StateVerification | Organization Type        | Message                                |
-      | Verification of IRF details and count on IRF tab under Managing org | YES    | MONAME  | IRFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | IRF      | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN | NPI | CA                | Inpatient Rehab Facility | IRF Organization Successfully Created. |
+      | Description                                                         | Has_MO | MO_Name | IRF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | LID | CCN | EIN | NPI | StateVerification | Organization Type        | Message                                |
+      | Verification of IRF details and count on IRF tab under Managing org | YES    | MONAME  | IRFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | IRF      | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | LID | CCN | EIN | NPI | CA                | Inpatient Rehab Facility | IRF Organization Successfully Created. |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -192,7 +192,7 @@ Feature: View IRF organization functionality tests
     And I verify "<IRF_Name> - <Has_MO>" details of "IRF" associated on Managing Organization page
     And I click "<IRF_Name> - <Has_MO>" for "IRF" organization under MO profile page
     And I click on "Edit" button on particular organization
-    And I verify "Edit IRF Organization" header text on edit organization page
+    And I verify "Edit Inpatient Rehab Facility Organization" header text on edit organization page
     And I verify Managing Organization radio buttons status on "Edit IRF - <Has_MO>" organization page
     Then I click on "Submit" button on "Edit" organization page
     Then I verify "<Message>" after submitting the "Edit IRF - <Has_MO>" organization page
@@ -217,14 +217,13 @@ Feature: View IRF organization functionality tests
     And I verify "Managing Organization - <Has_MO>" on view profile of "IRF" Organization
     And I verify "Participant Id - <Has_MO>" on view profile of "IRF" Organization
     And I verify "Location" tab present under "LTCH" Organization
-    And I verify "Bundle Payment Contracts" tab present under "IRF" Organization
-    And I verify Location index id "<LID>" on view profile of "<IRF_Name> - <Has_MO>" organization
+    Then I verify Location indexID for "<IRF_Name> - <Has_MO>" organization
     Then I verify Location details of "<Loc_Name>" on view profile of "IRF" organization
     Then I verify Location details of "<Loc_Address1>" on view profile of "IRF" organization
 
     Examples: 
-      | Description                                               | Has_MO | MO_Name | IRF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type        | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | StateVerification | Organization Type        |
-      | Verification of IRF details through Managing organization | YES    | MONAME  | IRFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Skilled Nursing | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN | NPI | CA                | Inpatient Rehab Facility |
+      | Description                                               | Has_MO | MO_Name | IRF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type        | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | StateVerification | Organization Type        | Message                                |
+      | Verification of IRF details through Managing organization | YES    | MONAME  | IRFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Skilled Nursing | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN | NPI | CA                | Inpatient Rehab Facility | IRF Organization Successfully Updated. |
 
   Scenario Outline: <Description>
     Given I am on the login page
