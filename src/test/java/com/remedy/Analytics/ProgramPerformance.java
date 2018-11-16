@@ -2664,6 +2664,5 @@ public class ProgramPerformance extends BaseClass{
 			 writeDataToOutputFile("Path");
 			 RegionMarketArrayList.clear();
 			 
-	}
-	
+	}	
 }

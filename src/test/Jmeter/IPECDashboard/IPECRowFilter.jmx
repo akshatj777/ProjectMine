@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="4.0" jmeter="4.0 r1823414">
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.0 r1840935">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -508,7 +508,8 @@ order by CONCAT( &apos;Remedy &apos;, m.region , &apos; - &apos;,  m.market );</
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select
-distinct CONCAT( &apos;Remedy &apos;, m.region , &apos; - &apos;,  m.market ) AS &apos;Remedy Region Market&apos;
+
+distinct CONCAT(de.participantShortName, &apos;-&apos;, rmp.region, &apos; &apos;,  rmp.market ) as &apos;Partner Region Market&apos;
 from
 warehouse.factPatientEpisode f
         LEFT JOIN
@@ -584,8 +585,13 @@ ${EC_BPID}
 ${EC_AncFacility}
 ${EC_CCN}
 ${EC_BUNDLE}
+<<<<<<< HEAD
 ${EC_Query_REGION}
 ${EC_Query_MARKET}
+=======
+${EC_R_REGION}
+${EC_R_MARKET}
+>>>>>>> d7ed1b8d94eef0c7f0ab0ba9c42cc5c606372460
 ${EC_PARTICIPANTNAME}
 order by CONCAT(de.participantShortName, &apos;-&apos;, rmp.region, &apos; &apos;,  rmp.market );</stringProp>
           <stringProp name="queryArguments"></stringProp>

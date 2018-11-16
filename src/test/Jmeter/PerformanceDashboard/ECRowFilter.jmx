@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="4.0" jmeter="4.0 r1823414">
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.0 r1840935">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -119,55 +119,39 @@ if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_R_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
-	if(!vars.get(&quot;region&quot;).equals(&quot;&apos;null&apos;&quot;)){
-		vars.put(&quot;EC_REGION_Null&quot;,&quot;and prm.region is null&quot;);
-		vars.put(&quot;EC_REGION&quot;,&quot;&quot;);
+	if(vars.get(&quot;region&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+		vars.put(&quot;EC_Query_REGION&quot;,&quot;and prm.region is null&quot;);
 	}
-	else if(!vars.get(&quot;region&quot;).contains(&quot;null&quot;)){
-		vars.put(&quot;EC_REGION_Null&quot;,&quot;and prm.region is null&quot;);
-		String val_region= vars.get(&quot;region&quot;);
-		val_region = val_region.replace(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
-		vars.put(&quot;valRegion&quot;,val_region);
-		vars.put(&quot;EC_REGION&quot;,&quot;and prm.region in ${valRegion}&quot;);
-	} else {
-		vars.put(&quot;EC_REGION_Null&quot;,&quot;&quot;);
-		vars.put(&quot;EC_REGION&quot;,&quot;and prm.region in ${region}&quot;);
+	else if(vars.get(&quot;region&quot;).contains(&quot;null&quot;)){
+		String valueReg = &quot;and ( prm.region is null&quot;;
+		String valueReg1 = vars.get(&quot;region&quot;);
+		valueReg1 = valueReg1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+		valueReg1 = &quot; or prm.region in &quot;+valueReg1+&quot;)&quot;;
+		vars.put(&quot;EC_Query_REGION&quot;,valueReg+valueReg1);
+		} else {
+		vars.put(&quot;EC_Query_REGION&quot;,&quot;and prm.region in ${region}&quot;);
 	}	
 } else {
-	vars.put(&quot;EC_REGION_Null&quot;,&quot;&quot;);
-	vars.put(&quot;EC_REGION&quot;,&quot;&quot;);
+	vars.put(&quot;EC_Query_REGION&quot;,&quot;&quot;);
 }
 
 if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
-	if(!vars.get(&quot;market&quot;).equals(&quot;&apos;null&apos;&quot;)){
-		vars.put(&quot;EC_MARKET_Null&quot;,&quot;and prm.market is null&quot;);
-		vars.put(&quot;EC_MARKET&quot;,&quot;&quot;);
+	if(vars.get(&quot;market&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+		vars.put(&quot;EC_Query_MARKET&quot;,&quot;and prm.market is null&quot;);
 	}
-	else if(!vars.get(&quot;market&quot;).contains(&quot;null&quot;)){
-		vars.put(&quot;EC_MARKET_Null&quot;,&quot;and prm.market is null&quot;);
-		String val_market = vars.get(&quot;market&quot;);
-		val_market = val_market.replace(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
-		vars.put(&quot;valMarket&quot;,val_market);
-		vars.put(&quot;EC_MARKET&quot;,&quot;and prm.market in ${valMarket}&quot;);
-	} else {
-		vars.put(&quot;EC_MARKET_Null&quot;,&quot;&quot;);
-		vars.put(&quot;EC_MARKET&quot;,&quot;and prm.region in ${market}&quot;);
-	}	
+	else if(vars.get(&quot;market&quot;).contains(&quot;null&quot;)){
+		String valueMar = &quot;and ( prm.market is null&quot;;
+		String valueMar1 = vars.get(&quot;market&quot;);
+		valueMar1 = valueMar1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+		valueMar1 = &quot; or prm.market in &quot;+valueMar1+&quot;)&quot;;
+		vars.put(&quot;EC_Query_MARKET&quot;,valueMar+valueMar1);
+		} else {
+		vars.put(&quot;EC_Query_MARKET&quot;,&quot;and prm.market in ${market}&quot;);
+	}
 } else {
-	vars.put(&quot;EC_MARKET_Null&quot;,&quot;&quot;);
-	vars.put(&quot;EC_MARKET&quot;,&quot;&quot;);
+vars.put(&quot;EC_Query_MARKET&quot;,&quot;&quot;);
 }
-//if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
-//	vars.put(&quot;EC_REGION&quot;,&quot;and prm.region in  ${region}&quot;);		
-//} else {
-//	vars.put(&quot;EC_REGION&quot;,&quot;&quot;);
-//	vars.put(&quot;C_REGION&quot;,&quot;&quot;);
-//}
-//if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
-//	vars.put(&quot;EC_MARKET&quot;,&quot;and prm.market in ${market}&quot;);	
-//} else{
-//	vars.put(&quot;EC_MARKET&quot;,&quot;&quot;);
-//}
+
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_PARTICIPANTNAME&quot;,&quot;and de.participantName in ${participantName}&quot;);
 } else{
@@ -296,10 +280,8 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET}
-				${EC_REGION_Null} 
-				${EC_REGION}
-				${EC_MARKET_Null}  
-				${EC_MARKET} 
+				${EC_Query_REGION}
+				${EC_Query_MARKET}
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
@@ -375,10 +357,8 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
-				${EC_REGION_Null} 
-				${EC_REGION}
-				${EC_MARKET_Null}  
-				${EC_MARKET} 
+				${EC_Query_REGION}
+				${EC_Query_MARKET} 
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
@@ -454,10 +434,8 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 --				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
-				${EC_REGION_Null} 
-				${EC_REGION}
-				${EC_MARKET_Null}  
-				${EC_MARKET} 
+				${EC_Query_REGION}
+				${EC_Query_MARKET} 
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
@@ -612,10 +590,8 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_BUNDLE} 
 --				${EC_R_REGION} 
 --				${EC_R_MARKET} 
-				${EC_REGION_Null} 
-				${EC_REGION}
-				${EC_MARKET_Null}  
-				${EC_MARKET} 
+				${EC_Query_REGION}
+				${EC_Query_MARKET} 
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
@@ -691,10 +667,8 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
-				${EC_REGION_Null} 
-				${EC_REGION}
-				${EC_MARKET_Null}  
-				${EC_MARKET} 
+				${EC_Query_REGION}
+				${EC_Query_MARKET} 
 --				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
@@ -772,10 +746,8 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
-				${EC_REGION_Null} 
-				${EC_REGION}
-				${EC_MARKET_Null}  
-				${EC_MARKET} 
+				${EC_Query_REGION}
+				${EC_Query_MARKET}
 				${EC_PARTICIPANTNAME}  
 --				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
@@ -853,10 +825,8 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
-				${EC_REGION_Null} 
-				${EC_REGION}
-				${EC_MARKET_Null}  
-				${EC_MARKET} 
+				${EC_Query_REGION}
+				${EC_Query_MARKET} 
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 --				${EC_PHY_NPI} 
@@ -932,10 +902,8 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
-				${EC_REGION_Null} 
-				${EC_REGION}
-				${EC_MARKET_Null}  
-				${EC_MARKET} 
+				${EC_Query_REGION}
+				${EC_Query_MARKET}
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
@@ -1005,10 +973,8 @@ LEFT JOIN
 				${EC_BUNDLE} 
 				${EC_R_REGION} 
 				${EC_R_MARKET} 
-				${EC_REGION_Null} 
-				${EC_REGION}
-				${EC_MARKET_Null}  
-				${EC_MARKET} 
+				${EC_Query_REGION}
+				${EC_Query_MARKET}
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
