@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.0 r1840935">
+<jmeterTestPlan version="1.2" properties="4.0" jmeter="4.0 r1823414">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -508,8 +508,7 @@ order by CONCAT( &apos;Remedy &apos;, m.region , &apos; - &apos;,  m.market );</
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select
-
-distinct CONCAT(de.participantShortName, &apos;-&apos;, rmp.region, &apos; &apos;,  rmp.market ) as &apos;Partner Region Market&apos;
+distinct CONCAT(de.participantShortName, &apos; &apos;, rmp.region, &apos; - &apos;,  rmp.market ) as &apos;Partner Region Market&apos;
 from
 warehouse.factPatientEpisode f
         LEFT JOIN

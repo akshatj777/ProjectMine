@@ -606,7 +606,7 @@ public class ProgramPerformance extends BaseClass{
 		 Thread.sleep(5000);
 		 BufferedReader br=new BufferedReader(new FileReader(System.getProperty("user.dir")+location));
 				 String names;
-				 System.out.println(br.lines());
+				 System.out.println("Read Line "+br.lines());
 //				 ArrayList<String> elements = new ArrayList<String>();
 				 while ((names = br.readLine())!= null) {           
 					 delay();
@@ -2380,13 +2380,20 @@ public class ProgramPerformance extends BaseClass{
 		 List<String> values = new ArrayList<String>();
 		 System.out.println("Size="+listItems.size());
 		 for(int i =1;i<listItems.size();i++){
+<<<<<<< HEAD
 			String val=listItems.get(i).getText().trim();
 			System.out.print(" "+val);
+=======
+			String val=listItems.get(i).getAttribute("title").trim();
+			System.out.println("VAlue  "+val+"===Item "+listItems.get(i).getAttribute("title"));
+>>>>>>> 0df88e597cb4241d93598fa3c1fa843ede568098
 			if(val.equals("Null")) {
 				val=val.replace("Null", "null");
 			}
 			values.add(val);
+			
 		  }
+		 System.out.println("Outside"+values.toString());
 		 rowFilters.put(filter, values.toString());
 		 System.out.println("Out"+rowFilters.toString());
 		 writeDataToLogFile(filter+"="+values.toString());
@@ -2460,12 +2467,14 @@ public class ProgramPerformance extends BaseClass{
 		}
 
 	public void verifyfiltervalues(String text, String row, String data) {
+		System.out.println("Assertion for "+row+"::"+text);
 		ArrayList<String> al_DB = new ArrayList<String>();
 		ArrayList<String> al_FE = new ArrayList<String>();
 		al_DB.add(outputText.get(text).replace("\"[", "").replace("]\"", "").replaceAll("\"", "").trim());
 		al_FE.add(mapOfHmFiltersValue.get(row).get(text).replace("[", "").replace("]", "").trim());
 		System.out.println("DB Value="+outputText.get(text).replace("\"[", "").replace("]\"", "").replaceAll("\"", "").trim());
 		System.out.println("FE Value="+mapOfHmFiltersValue.get(row).get(text).trim().replace("[", "").replace("]", ""));
+		
 		Assert.assertTrue(al_DB.equals(al_FE));
 	}
 
