@@ -2380,13 +2380,8 @@ public class ProgramPerformance extends BaseClass{
 		 List<String> values = new ArrayList<String>();
 		 System.out.println("Size="+listItems.size());
 		 for(int i =1;i<listItems.size();i++){
-<<<<<<< HEAD
-			String val=listItems.get(i).getText().trim();
-			System.out.print(" "+val);
-=======
 			String val=listItems.get(i).getAttribute("title").trim();
-			System.out.println("VAlue  "+val+"===Item "+listItems.get(i).getAttribute("title"));
->>>>>>> 0df88e597cb4241d93598fa3c1fa843ede568098
+			System.out.println("Value fetched "+val);
 			if(val.equals("Null")) {
 				val=val.replace("Null", "null");
 			}
