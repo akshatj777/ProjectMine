@@ -508,7 +508,7 @@ order by CONCAT( &apos;Remedy &apos;, m.region , &apos; - &apos;,  m.market );</
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select
-distinct CONCAT(de.participantShortName, &apos;-&apos;, rmp.region, &apos; &apos;,  rmp.market ) as &apos;Partner Region Market&apos;
+distinct CONCAT(de.participantShortName, &apos; &apos;, rmp.region, &apos; - &apos;,  rmp.market ) as &apos;Partner Region Market&apos;
 from
 warehouse.factPatientEpisode f
         LEFT JOIN
