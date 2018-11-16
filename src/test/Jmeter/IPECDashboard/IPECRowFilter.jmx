@@ -208,6 +208,7 @@ WHERE f.bundleRisk=1
 and f.anchorAdmitDateKey &gt;= &apos;20160101&apos; -- Use this query logic when filtering by Months
 and f.anchorAdmitDateKey &lt;= &apos;20181101&apos; -- Use this query logic when filtering by Months
 and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
+
 ${EC_AncFacility}
 ${EC_CCN}
 ${EC_BUNDLE}
@@ -411,98 +412,6 @@ order by drg.bundleName;</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Partner Region Market" enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select
-distinct CONCAT(de.participantShortName, &apos;-&apos;, rmp.region, &apos; &apos;,  rmp.market ) as &apos;Partner Region Market&apos;
-from
-warehouse.factPatientEpisode f
-        LEFT JOIN
-    warehouse.dimPhysician dph ON f.physicianKey = dph.physicianSK
-        LEFT JOIN
-    warehouse.dimPatient dp ON f.patientKey = dp.patientSK	
-    left join warehouse.dimLookup dloo on dp.totalRiskScore = dloo.lookupName
-        LEFT JOIN
-    warehouse.dimEpisodeInitiator de ON f.episodeInitiatorKey = de.episodeInitiatorSK
-        LEFT JOIN
-    warehouse.dimCARL dc ON f.carlKey = dc.carlSK
-        LEFT JOIN
-    warehouse.dimFacility aaf ON f.anchorAdmitFacilityKey = aaf.facilitySK
-        LEFT JOIN
-    warehouse.dimFacility adf ON f.anchorDischargeFacilityKey = adf.facilitySK
-    LEFT JOIN
-    warehouse.dimFacility afd ON f.sourceFacilityKey = afd.facilitySK
-        LEFT JOIN
-    warehouse.dimDRG drg ON f.currDrgKey = drg.drgSK
-        LEFT JOIN
-    warehouse.dimDRG d ON f.wDrgKeyMax = d.drgSK
-        LEFT JOIN
-    warehouse.dimDRG drgpre ON f.predDrgKeyMax = drgpre.drgSK
-        LEFT JOIN
-    warehouse.dimDRG drgfin ON f.fDrgKeyMax = drgfin.drgSK
-        LEFT JOIN
-    warehouse.dimNSOCMapping dn ON f.anchorDischCareSettingKey = dn.NSOCMappingSK
-        LEFT JOIN
-    warehouse.dimDate dt ON f.anchorAdmitDateKey = dt.dateSK
-		LEFT JOIN
-    warehouse.dimLookup dles ON f.episodeStatus = dles.lookupName AND dles.lookupCategory = &apos;episodeStatus&apos;
-		LEFT JOIN
-    warehouse.dimLookup dlos ON dp.onboardingStatus = dlos.lookupName AND dlos.lookupCategory = &apos;onboardingStatus&apos;
-        LEFT JOIN
-    warehouse.dimRegionMarket m ON f.rgRemKey = m.rgSK
-            LEFT JOIN
-    warehouse.dimRegionMarket rmp ON f.rgPartnerKey = rmp.rgSK
---         INNER JOIN 
---     warehouse.factAdmission fa ON f.anchorAdmissionKey = fa.anchorAdmissionKey
-		LEFT JOIN
-    warehouse.dimNSOCMapping dfad ON f.anchorDischCareSettingKey = dfad.NSOCMappingSK
-        INNER JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON f.BPID = tbsBPID.bpid
-        INNER JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on aaf.ccn=tbsCCN.ccn
-     INNER JOIN 
-     (       
-        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
-       GROUP BY facilitykey
-        )tbsFacilityKey on f.sourceFacilityKey=tbsFacilityKey.facilitykey
-WHERE f.bundleRisk=1 
-  AND f.episodeCountReport=1 
-  AND (f.model IN (1,2)  OR f.episodeStatus=10) 
-  AND adf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
-  AND aaf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
-  AND dp.dwhSource = &apos;EC&apos;
-  AND dloo.lookupCategory = &apos;patientRisk&apos;
--- and tbsBPID.username = @test_user
-AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW() -- Use this query logic when filtering by Days
--- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
--- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
-and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
-${EC_BPID}
-${EC_AncFacility}
-${EC_CCN}
-${EC_BUNDLE}
-${EC_R_REGION}
-${EC_R_MARKET}
-${EC_PARTICIPANTNAME}
-order by CONCAT(de.participantShortName, &apos;-&apos;, rmp.region, &apos; &apos;,  rmp.market );</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">PartnerRegionMarket</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Remedy Region Market " enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
@@ -590,6 +499,98 @@ order by CONCAT( &apos;Remedy &apos;, m.region , &apos; - &apos;,  m.market );</
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">RRegionMarket</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Partner Region Market" enabled="true">
+          <stringProp name="dataSource">MySQLQA</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">select
+distinct CONCAT( &apos;Remedy &apos;, m.region , &apos; - &apos;,  m.market ) AS &apos;Remedy Region Market&apos;
+from
+warehouse.factPatientEpisode f
+        LEFT JOIN
+    warehouse.dimPhysician dph ON f.physicianKey = dph.physicianSK
+        LEFT JOIN
+    warehouse.dimPatient dp ON f.patientKey = dp.patientSK	
+    left join warehouse.dimLookup dloo on dp.totalRiskScore = dloo.lookupName
+        LEFT JOIN
+    warehouse.dimEpisodeInitiator de ON f.episodeInitiatorKey = de.episodeInitiatorSK
+        LEFT JOIN
+    warehouse.dimCARL dc ON f.carlKey = dc.carlSK
+        LEFT JOIN
+    warehouse.dimFacility aaf ON f.anchorAdmitFacilityKey = aaf.facilitySK
+        LEFT JOIN
+    warehouse.dimFacility adf ON f.anchorDischargeFacilityKey = adf.facilitySK
+    LEFT JOIN
+    warehouse.dimFacility afd ON f.sourceFacilityKey = afd.facilitySK
+        LEFT JOIN
+    warehouse.dimDRG drg ON f.currDrgKey = drg.drgSK
+        LEFT JOIN
+    warehouse.dimDRG d ON f.wDrgKeyMax = d.drgSK
+        LEFT JOIN
+    warehouse.dimDRG drgpre ON f.predDrgKeyMax = drgpre.drgSK
+        LEFT JOIN
+    warehouse.dimDRG drgfin ON f.fDrgKeyMax = drgfin.drgSK
+        LEFT JOIN
+    warehouse.dimNSOCMapping dn ON f.anchorDischCareSettingKey = dn.NSOCMappingSK
+        LEFT JOIN
+    warehouse.dimDate dt ON f.anchorAdmitDateKey = dt.dateSK
+		LEFT JOIN
+    warehouse.dimLookup dles ON f.episodeStatus = dles.lookupName AND dles.lookupCategory = &apos;episodeStatus&apos;
+		LEFT JOIN
+    warehouse.dimLookup dlos ON dp.onboardingStatus = dlos.lookupName AND dlos.lookupCategory = &apos;onboardingStatus&apos;
+        LEFT JOIN
+    warehouse.dimRegionMarket m ON f.rgRemKey = m.rgSK
+            LEFT JOIN
+    warehouse.dimRegionMarket rmp ON f.rgPartnerKey = rmp.rgSK
+--         INNER JOIN 
+--     warehouse.factAdmission fa ON f.anchorAdmissionKey = fa.anchorAdmissionKey
+		LEFT JOIN
+    warehouse.dimNSOCMapping dfad ON f.anchorDischCareSettingKey = dfad.NSOCMappingSK
+        INNER JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID where username = ${userName}
+       GROUP BY bpid
+       )tbsBPID ON f.BPID = tbsBPID.bpid
+        INNER JOIN 
+     (       
+        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityCCN where username = ${userName}
+       GROUP BY ccn
+        )tbsCCN on aaf.ccn=tbsCCN.ccn
+     INNER JOIN 
+     (       
+        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
+       GROUP BY facilitykey
+        )tbsFacilityKey on f.sourceFacilityKey=tbsFacilityKey.facilitykey
+WHERE f.bundleRisk=1 
+  AND f.episodeCountReport=1 
+  AND (f.model IN (1,2)  OR f.episodeStatus=10) 
+  AND adf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+  AND aaf.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+  AND dp.dwhSource = &apos;EC&apos;
+  AND dloo.lookupCategory = &apos;patientRisk&apos;
+-- and tbsBPID.username = @test_user
+AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} DAY) AND NOW() -- Use this query logic when filtering by Days
+-- and f.anchorAdmitDateKey &gt;= &apos;20160501&apos; -- Use this query logic when filtering by Months
+-- and f.anchorAdmitDateKey &lt;= &apos;20181031&apos; -- Use this query logic when filtering by Months
+and f.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
+${EC_BPID}
+${EC_AncFacility}
+${EC_CCN}
+${EC_BUNDLE}
+${EC_Query_REGION}
+${EC_Query_MARKET}
+${EC_PARTICIPANTNAME}
+order by CONCAT(de.participantShortName, &apos;-&apos;, rmp.region, &apos; &apos;,  rmp.market );</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames">PartnerRegionMarket</stringProp>
           <stringProp name="resultVariable"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
