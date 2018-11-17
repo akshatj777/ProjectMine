@@ -215,7 +215,14 @@ public class MailCreateUser extends BaseClass{
 				driver.findElement(By.xpath("//input[@aria-label='Search mail']")).sendKeys(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim()));
 			}
 			delay();
-			driver.findElement(By.xpath("//button[@aria-label='Search Mail']")).click();
+			if(DriverScript.Config.getProperty("Browser").equals("ie"))
+			{
+				((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//button[@aria-label='Search Mail']")));
+			}
+			else
+			{
+				driver.findElement(By.xpath("//button[@aria-label='Search Mail']")).click();
+			}
 			delay();
 			iWillWaitToSee(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span[@class='bog']/span[contains(text(),'Remedy Partners - Reset Your Password')]"));
 	    	Assert.assertTrue(isElementPresentOnPage((By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span[@class='bog']/span[contains(text(),'Remedy Partners - Reset Your Password')]"))));
@@ -386,7 +393,14 @@ public class MailCreateUser extends BaseClass{
 			driver.findElement(By.xpath("//input[@aria-label='Search mail']")).sendKeys(CreateUserPage.usersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-")+1)).trim()));
 		}
 		delay();
-		driver.findElement(By.xpath("//button[@aria-label='Search Mail']")).click();
+		if(DriverScript.Config.getProperty("Browser").equals("ie"))
+		{
+			((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//button[@aria-label='Search Mail']")));
+		}
+		else
+		{
+			driver.findElement(By.xpath("//button[@aria-label='Search Mail']")).click();
+		}
 		delay();
 		iWillWaitToSee(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span[@class='bog']/span[contains(text(),'Verify your account')]"));
     	Assert.assertTrue(isElementPresentOnPage((By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//span[@class='bog']/span[contains(text(),'Verify your account')]"))));
@@ -618,6 +632,12 @@ public class MailCreateUser extends BaseClass{
 		else if(emailName.equals("EqualsTo76Char"))
 		{
 			email = "qaautomation"+"+"+RandomStringUtils.randomAlphabetic(48)+"@remedysystems.com";
+			iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
+			driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
+		}
+		else if(emailName.equals("REUSEEMAIL"))
+		{
+			email = CreateUserPage.usersApplicationsPerRole.get("Super Admin-Physicians").get("Physicians");
 			iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
 			driver.findElement(By.xpath("//input[@placeholder='Email']")).sendKeys(email);
 		}

@@ -533,8 +533,8 @@ public void iVerifyEmailForPTAExecutiveRole(String text, String Role){
 	Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='FirstName']")));
 }
 public void iVerifyDeleteUserLink(String text){
-	iWillWaitToSee(By.xpath("//*[contains(text(),'"+text+"')]"));
-	Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[contains(text(),'"+text+"')]")));
+	iWillWaitToSee(By.xpath("//*[contains(text(),'"+text+"')]/parent::div//div[text()='Deleting this user will prevent their email address from being used in the future']"));
+	Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[contains(text(),'"+text+"')]/parent::div//div[text()='Deleting this user will prevent their email address from being used in the future']")));
 }
 public void iClickOnDeleteUser(String text){
 	iWillWaitToSee(By.xpath("//*[contains(text(),'"+text+"')]"));

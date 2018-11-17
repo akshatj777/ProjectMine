@@ -47,8 +47,8 @@ Feature: Delete a user from PTA
     Then I click on "Cancel" button on deletion alert
     Then I verify the header "General Information"
     Then I click on "Delete User" link on general information tab
-    Then I verify availability of "Delete" button on deletion alert
-    Then I click on "Delete" button to delete user
+    Then I verify availability of "Delete User" button on deletion alert
+    Then I click on "Delete User" button to delete user
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I verify No Results Found is displayed
@@ -86,8 +86,8 @@ Feature: Delete a user from PTA
     Then I click on "Cancel" button on deletion alert
     Then I verify the header "General Information"
     Then I click on "Delete User" link on general information tab
-    Then I verify availability of "Delete" button on deletion alert
-    Then I click on "Delete" button to delete user
+    Then I verify availability of "Delete User" button on deletion alert
+    Then I click on "Delete User" button to delete user
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I verify No Results Found is displayed
@@ -137,8 +137,8 @@ Feature: Delete a user from PTA
     Then I click on "Cancel" button on deletion alert
     Then I verify the header "General Information"
     Then I click on "Delete User" link on general information tab
-    Then I verify availability of "Delete" button on deletion alert
-    Then I click on "Delete" button to delete user
+    Then I verify availability of "Delete User" button on deletion alert
+    Then I click on "Delete User" button to delete user
     Then I should see header text "Users"
     Then I search for user with role "<User>-<Role>"
     Then I verify No Results Found is displayed
