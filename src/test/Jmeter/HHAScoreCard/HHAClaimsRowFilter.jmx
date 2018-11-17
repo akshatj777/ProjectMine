@@ -72,7 +72,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
           <stringProp name="filename">RowFilterInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">Flag,userName,postacuteccn,bundle,region,market,r_region,r_market,participantName,bpid,anchorFacility,ccn</stringProp>
+          <stringProp name="variableNames">Flag,userName,postacuteccn,bundle,dummyregion,dummymarket,r_region,r_market,participantName,bpid,anchorFacility,anchorFacility,ccn,region,market</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -130,7 +130,6 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;C_MARKET&quot;,&quot;&quot;);
 }
 
-
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_PARTICIPANTNAME&quot;,&quot;AND ei.participantName in ${participantName}&quot;);
 	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;AND e.participantNameInitCap in ${participantName}&quot;);	
@@ -162,6 +161,14 @@ if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
 } else {
 	vars.put(&quot;EC_CCN&quot;,&quot;&quot;);
 	vars.put(&quot;C_CCN&quot;,&quot;&quot;);
+}
+
+if(!vars.get(&quot;anchorFacility&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;EC_AncFacility&quot;,&quot;AND readmitsrcccn.facilityNameInitCap in ${anchorFacility}&quot;);	
+	vars.put(&quot;C_AncFacility&quot;,&quot;AND readmitsrcccn.facilityNameInitCap in ${anchorFacility}&quot;);
+} else {
+	vars.put(&quot;EC_AncFacility&quot;,&quot;&quot;);
+	vars.put(&quot;C_AncFacility&quot;,&quot;&quot;);
 }
 
 </stringProp>
@@ -250,6 +257,7 @@ and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehou
 		${EC_PARTICIPANTNAME}  
 		${EC_BPID} 
 		${EC_CCN} 
+		${EC_AncFacility}
 
 union
 
@@ -305,6 +313,7 @@ and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehou
 				${C_PARTICIPANTNAME} 
 				${C_BPID} 
 		          ${C_CCN} 
+		          ${C_AncFacility}
  
 			)a  order by concat( `Post Acute Facility`, &apos; - &apos;, `Post Acute CCN`); -- Pass</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -398,6 +407,7 @@ and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehou
 		${EC_PARTICIPANTNAME}  
            ${EC_BPID}
            ${EC_CCN}
+            ${EC_AncFacility}
 union
  
 -- Claims data
@@ -450,6 +460,7 @@ and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehou
 		${C_PARTICIPANTNAME}  
 		${C_BPID}
           ${C_CCN}
+           ${C_AncFacility}
 )a  order by a.Bundle ;
 </stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -545,6 +556,7 @@ and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehou
 		${EC_PARTICIPANTNAME}  
           ${EC_BPID}
           ${EC_CCN}
+          ${EC_AncFacility}
 
 union
 
@@ -599,6 +611,7 @@ and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehou
 		${C_PARTICIPANTNAME}  
           ${C_BPID}
           ${C_CCN}
+           ${C_AncFacility}
 		
 )a
  
@@ -693,6 +706,7 @@ ${EC_POSTCCN}
 		${ECA_PARTICIPANTNAME}  
           ${EC_BPID}
           ${EC_CCN}
+           ${EC_AncFacility}
 union
 
 -- Claims Data
@@ -745,6 +759,7 @@ ${EC_POSTCCN}
 		${C_PARTICIPANTNAME}  
           ${C_BPID}
           ${C_CCN}
+           ${C_AncFacility}
 )a  order by CONCAT( &apos;Remedy-&apos;, a.region, &apos; &apos;,  a.market ); -- Pass</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
@@ -838,6 +853,7 @@ and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehou
 		${EC_MARKET} 
 		${EC_BPID}
           ${EC_CCN}
+           ${EC_AncFacility}
 
 union
 
@@ -891,6 +907,7 @@ and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehou
 		${C_MARKET} 
 		${C_BPID}
           ${C_CCN}
+           ${C_AncFacility}
 
 )a  order by a.Participant ;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -988,6 +1005,7 @@ and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehou
 		
          
 		${EC_CCN} 
+		 ${EC_AncFacility}
  union
 
 -- Query to find out BPID&apos;s with Claims data
@@ -1044,6 +1062,7 @@ INNER JOIN
 		${C_PARTICIPANTNAME}  
 		
 		${C_CCN} 
+		 ${C_AncFacility}
  )  a
 order by concat(`Episode Initiator`,&apos; - &apos;, BPID);
 
@@ -1140,6 +1159,7 @@ and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehou
 		${EC_MARKET} 
 		${EC_PARTICIPANTNAME}  
 		${EC_BPID} 
+		
 
 union
 
@@ -1193,6 +1213,7 @@ and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehou
 		${C_MARKET} 
 		${C_PARTICIPANTNAME}  
 		${C_BPID} 
+		
 )a
  order by concat(`Anchor Facility`, &apos; - &apos;, CCN) ;
 

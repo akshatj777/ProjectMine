@@ -1,6 +1,6 @@
 Feature: HHA Scorecard Dashboard
 
-  @HHAScorecardRLS
+  @HHAScorecardRLS @tt
   Scenario Outline: Front end Data Filter Validation for EC & Claims data for HHAScoreCard
     When I open file "\\src\\test\\Jmeter\\HHAScoreCard\\RowFilterInput.csv" for writing data at "<Row>" to input file
     Given I am on the login page
@@ -45,6 +45,8 @@ Feature: HHA Scorecard Dashboard
     And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard - <CCN>" dashboard
     And I select "<CCN>" checkbox in "CCN" filter on "HHAScoreCard" dashboard
     And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard - <CCN>" dashboard
+    ##Extract Region Market
+    And I get Region and Market to input file without Participant form Region-Market dropdown
     ##Store Values in Filter
     And I click "Post Acute Facility - CCN" Filter on the "HHAScoreCard" dashboard
     And I fetch and store "Post Acute Facility - CCN" filter values on "HHAScoreCard" dashboard
@@ -68,29 +70,30 @@ Feature: HHA Scorecard Dashboard
     And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard" dashboard
     And I fetch and store "Anchor Facility - CCN" filter values on "HHAScoreCard" dashboard
     And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard" dashboard
+    And I save the values of row filters in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | POSTCCN |
-      | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Skip            | Skip                   | True All    | Skip    |
-      | Qatwodashtest@yopmail.com   |   2 | True Random | Skip        | Skip        | Skip            | Skip                   | Skip        |         |
-      | Qadashboardtest@yopmail.com |   3 | Skip        | True Random | Skip        | Skip            | Skip                   | Skip        |         |
-      | Qafivedashtest@yopmail.com  |   4 | Skip        | Skip        | True Random | Skip            | Skip                   | Skip        |         |
-      | Qatwodashtest@yopmail.com   |   5 | Skip        | Skip        | Skip        | True Random     | Skip                   | Skip        |         |
-      | Qadashboardtest@yopmail.com |   6 | Skip        | Skip        | Skip        | Skip            | True Random            | Skip        |         |
-      | Qafivedashtest@yopmail.com  |   7 | Skip        | Skip        | Skip        | Skip            | Skip                   | True Random |         |
-      | allmodel123@yopmail.com     |   8 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |         |
-      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random     | True Random            | True Random |         |
-      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        |         |
-      | Qatwodashtest@yopmail.com   |  11 | True Random | Skip        | True Random | Skip            | True Random            | True Random |         |
+      | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | POSTCCN     |
+      | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Skip            | Skip                   | True All    | Skip        |
+      #| Qatwodashtest@yopmail.com   |   2 | True Random | Skip        | Skip        | Skip            | Skip                   | Skip        | True All    |
+      #| Qadashboardtest@yopmail.com |   3 | Skip        | True Random | Skip        | Skip            | Skip                   | Skip        | True All    |
+      #| Qafivedashtest@yopmail.com  |   4 | Skip        | Skip        | True Random | Skip            | Skip                   | Skip        | Skip        |
+      #| Qatwodashtest@yopmail.com   |   5 | Skip        | Skip        | Skip        | True Random     | Skip                   | Skip        | Skip        |
+      #| Qadashboardtest@yopmail.com |   6 | Skip        | Skip        | Skip        | Skip            | True Random            | Skip        | True Random |
+      #| Qafivedashtest@yopmail.com  |   7 | Skip        | Skip        | Skip        | Skip            | Skip                   | True Random | True Random |
+      #| allmodel123@yopmail.com     |   8 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        | True All    |
+      #| allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random     | True Random            | True Random | True All    |
+      #| Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        | True All    |
+      #| Qatwodashtest@yopmail.com   |  11 | True Random | Skip        | True Random | Skip            | True Random            | True Random | True Random |
 
-  @HHAScorecardRLS
+  @HHAScorecardRLS @tt
   Scenario: Execute JMX file and read Output data for Data Filter Validations
     When I close the file for after writing data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\HHAScoreCard\\ClaimsRowFilterOutput.txt" Output file
     When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\HHAScoreCard\\HHAClaimsRowFilter.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\HHAScoreCard\\ClaimsRowFilterOutput.txt"
 
-  @HHAScorecardRLS
+  @HHAScorecardRLS @tt
   Scenario Outline: Verify DB and FE values fetched from Scenarios
     And I get the value "<Index>" from Output file of data filter validation
     Then I verify "POST Acute Facility - CCN" for DB and FE filter values at "<Row>" for "EC & Claims"
@@ -104,16 +107,16 @@ Feature: HHA Scorecard Dashboard
     Examples: 
       | Index | Row |
       |     0 |   1 |
-      |     1 |   2 |
-      |     2 |   3 |
-      |     3 |   4 |
-      |     4 |   5 |
-      |     5 |   6 |
-      |     6 |   7 |
-      |     7 |   8 |
-      |     8 |   9 |
-      |     9 |  10 |
-      |    10 |  11 |
+      #|     1 |   2 |
+      #|     2 |   3 |
+      #|     3 |   4 |
+      #|     4 |   5 |
+      #|     5 |   6 |
+      #|     6 |   7 |
+      #|     7 |   8 |
+      #|     8 |   9 |
+      #|     9 |  10 |
+      #|    10 |  11 |
 
   @HHAScorecardRLS
   Scenario Outline: Front end Data Filter Validation for EC data for HHAScoreCard
@@ -160,6 +163,8 @@ Feature: HHA Scorecard Dashboard
     And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard - <CCN>" dashboard
     And I select "<CCN>" checkbox in "CCN" filter on "HHAScoreCard" dashboard
     And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard - <CCN>" dashboard
+    ##Extract Region Market
+    And I get Region and Market to input file without Participant form Region-Market dropdown
     ##Store Values in Filter
     And I click "Post Acute Facility - CCN" Filter on the "HHAScoreCard" dashboard
     And I fetch and store "Post Acute Facility - CCN" filter values on "HHAScoreCard" dashboard
@@ -275,6 +280,8 @@ Feature: HHA Scorecard Dashboard
     And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard - <CCN>" dashboard
     And I select "<CCN>" checkbox in "CCN" filter on "HHAScoreCard" dashboard
     And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard - <CCN>" dashboard
+    ##Extract Region Market
+    And I get Region and Market to input file without Participant form Region-Market dropdown
     ##Store Values in Filter
     And I click "Post Acute Facility - CCN" Filter on the "HHAScoreCard" dashboard
     And I fetch and store "Post Acute Facility - CCN" filter values on "HHAScoreCard" dashboard
