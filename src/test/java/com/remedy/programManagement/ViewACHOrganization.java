@@ -632,6 +632,13 @@ public class ViewACHOrganization  extends BaseClass{
 			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreateHospiceOrganization.HospiceOrg_noMO.get("HOSPICENAME"));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
+		
+		else if(text.contains("PGPNAME - YES"))
+		{
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+			iFillInText(driver.findElement(By.cssSelector(".text-input-field-organizationFilterTerm")), CreatePGPOrganization.pgpOrg.get("PGPNAME"));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
 	}
 	
 	public void iClickOnOrgNameonViewProfileOfManagingOrganizationSearchBox(String text, String org){
@@ -668,6 +675,30 @@ public class ViewACHOrganization  extends BaseClass{
 			scrollIntoViewByJS(driver.findElement(By.xpath("//div[text()='"+CreateLTCHOrganization.LTCHOrg.get("LTCHNAME")+"']")));
 			iWillWaitToSee(By.xpath("//div[text()='"+CreateLTCHOrganization.LTCHOrg.get("LTCHNAME")+"']"));
 			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateLTCHOrganization.LTCHOrg.get("LTCHNAME")+"']")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		
+		else if(text.contains("HOSPICENAME - YES"))
+		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//div[text()='"+CreateHospiceOrganization.HospiceOrg.get("HOSPICENAME")+"']")));
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateHospiceOrganization.HospiceOrg.get("HOSPICENAME")+"']"));
+			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateHospiceOrganization.HospiceOrg.get("HOSPICENAME")+"']")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		
+		else if(text.contains("HHANAME - YES"))
+		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//div[text()='"+CreateHHAOrganization.HHAOrg.get("HHANAME")+"']")));
+			iWillWaitToSee(By.xpath("//div[text()='"+CreateHHAOrganization.HHAOrg.get("HHANAME")+"']"));
+			clickElement(driver.findElement(By.xpath("//div[text()='"+CreateHHAOrganization.HHAOrg.get("HHANAME")+"']")));
+			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
+		}
+		
+		else if(text.contains("PGPNAME - YES"))
+		{
+			scrollIntoViewByJS(driver.findElement(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg.get("PGPNAME")+"']")));
+			iWillWaitToSee(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg.get("PGPNAME")+"']"));
+			clickElement(driver.findElement(By.xpath("//div[text()='"+CreatePGPOrganization.pgpOrg.get("PGPNAME")+"']")));
 			waitTo().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='global-spinner-overlay']")));
 		}
 	}

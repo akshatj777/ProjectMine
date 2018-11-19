@@ -94,7 +94,6 @@ Feature: View Functionality tests for PGP Organization.
     Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
     Then I enter <PGP_Name> in "PGP Organization Name" on create organization page
     And I enter <Address1> in "Address 1" on create organization page
-    And I enter <Short_Name> in "Short Name" on create organization page
     And I enter <Address2> in "Address 2" on create organization page
     And I enter <City> in "City" on create organization page
     And I select <State> in State on create organization page
@@ -109,16 +108,15 @@ Feature: View Functionality tests for PGP Organization.
     And I verify "PGP" organization tab present under "Managing" Organization
     And I click on "PGP" organization under Managing Organization
     And I search with "<PGP_Name> - <Has_MO>" on view profile Managing Organization search box
-    And I verify "<PGP_Name> - <Has_MO>" details of "Hospice" associated on Managing Organization page
-    And I click "<PGP_Name> - <Has_MO>" for "Hospice" organization under MO profile page
+    And I click "<PGP_Name> - <Has_MO>" for "PGP" organization under MO profile page
     And I verify <Organization Type> in "type" on view profile of "PGP" Organization
     And I verify <Address1> in "address1" on view profile of "PGP" Organization
     And I verify <Address2> in "address2" on view profile of "PGP" Organization
     And I verify <City> in "city" on view profile of "PGP" Organization
     And I verify <StateVerification> in "state" on view profile of "PGP" Organization
     And I verify <Postal_Code> in "zip" on view profile of "PGP" Organization
-    And I verify EIN/TIN id "<EIN/TIN> - <Has_MO>" on view profile of "PGP" organization
-    And I verify NPI number "<NPI> - <Has_MO>" on view profile of "PGP" organization
+    #And I verify EIN/TIN id "<EIN/TIN> - <Has_MO>" on view profile of "PGP" organization
+    #And I verify NPI number "<NPI> - <Has_MO>" on view profile of "PGP" organization
     And I verify "Managing Organization - <Has_MO>" on view profile of "PGP" Organization
     And I verify "Participant Id - <Has_MO>" on view profile of "PGP" Organization
 

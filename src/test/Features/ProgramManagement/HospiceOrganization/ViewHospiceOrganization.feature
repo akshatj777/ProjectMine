@@ -82,9 +82,8 @@ Feature: View Hospice organization functionality tests
     And I click "<MO_Name>" field in search list on organization page
     And I verify "Hospice" organization tab present under "Managing" Organization
     And I click on "Hospice" organization tab on under Managing Organization
-    And I search with "<Hospice_Name> - <Has_MO>" on view profile Managing Organization search box
-    And I verify "<Hospice_Name> - <Has_MO>" details of "Hospital" associated on Managing Organization page
-    And I click "<Hospice_Name> - <Has_MO>" for "Hospital" organization under MO profile page
+    When I search with "<Hospice_Name> - <Has_MO>" on organization in search box
+    And I click "<Hospice_Name> - <Has_MO>" field in search list on organization page
     And I verify "<Hospice_Name> - <Has_MO>" name on the header of view profile
     And I verify <Organization Type> in "type" on view profile of "Hospice" Organization
     And I verify <Address1> in "address1" on view profile of "Hospice" Organization
