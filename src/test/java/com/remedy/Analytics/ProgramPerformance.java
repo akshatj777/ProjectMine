@@ -1718,7 +1718,7 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iSelectCheckboxValuesInFilter1(String checkbox,String filter,String dashboard) throws FileNotFoundException{ try{
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));}
+ 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));}
 		 catch(Exception e){
 			 delay();
 		 }
@@ -2057,7 +2057,7 @@ public class ProgramPerformance extends BaseClass{
 			        	 
 	        		  String[] valarr1=val.split("-");
 	        		  String val7=valarr1[0].trim();
-	         			 val7="'"+val+"'";
+	         			 val7="'"+val7+"'";
 	         			arrayListTextsA.add(val7);
 	         		    String new1;
 	         		
@@ -2108,7 +2108,7 @@ public class ProgramPerformance extends BaseClass{
 				            			clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
 				            			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 				            			delay();
-						            			
+						            	return;		
 												}
 				        		 
 			            			
