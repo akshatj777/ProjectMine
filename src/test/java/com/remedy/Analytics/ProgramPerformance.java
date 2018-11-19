@@ -1717,9 +1717,9 @@ public class ProgramPerformance extends BaseClass{
 		 }
 	 }
 	 
-	 public void iSelectCheckboxValuesInFilter1(String checkbox,String filter,String dashboard) throws FileNotFoundException{
+	 public void iSelectCheckboxValuesInFilter1(String checkbox,String filter,String dashboard) throws FileNotFoundException{ 
 		 try{
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));}
+ 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));}
 		 catch(Exception e){
 			 delay();
 		 }
@@ -1734,7 +1734,7 @@ public class ProgramPerformance extends BaseClass{
 			 List<WebElement> listItems = driver.findElements(By.cssSelector(".FIText"));
 			 List<String> listItemsText= getTextForElementfromList(".FIText");
 			 Random rand = new Random();
-      if(checkbox.contains("Random")){
+         if(checkbox.contains("Random")){
 			            int n=listItems.size();
 			            String valA = null;
 						String valB= null;
@@ -1874,27 +1874,27 @@ public class ProgramPerformance extends BaseClass{
 			            	 continue;}
 			            	 
 			             }else if(random_n!=1 && val.equals("(All)")){
-                  	 listItems.remove(randomIndex); 
-                  	 continue;
-                   }
-                   if(filter.equals("BPID") || filter.equals("Physician - NPI")){
-                  	 if((val.equals("No Name - No NPI") && filter.equals("Physician - NPI") )|| (val.equals("Not Available") && filter.equals("BPID")) ){
-                  		 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
-                  		 val= "null";
-                       val = val.replaceAll("'","''"); 
-                       val="'"+val+"'";
-                 		  arrayListTexts.add(val);
-                 		  listItems.remove(randomIndex);
-                 		  continue;
-                       }else{
-                  	 for (int itr=0;itr<=val.length();itr++) {
-                  	        val=val.substring(val.indexOf("- ")+1).trim();
-                  	       }
-                  	 }
-                   }
-                   else if(filter.contains("DRG")){
-                  	 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
-                  	 valarr1=val.split("-");
+                     	 listItems.remove(randomIndex); 
+                     	 continue;
+                      }
+                      if(filter.equals("BPID") || filter.equals("Physician - NPI")){
+                     	 if((val.equals("No Name - No NPI") && filter.equals("Physician - NPI") )|| (val.equals("Not Available") && filter.equals("BPID")) ){
+                     		 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
+                     		 val= "null";
+                          val = val.replaceAll("'","''"); 
+                          val="'"+val+"'";
+                    		  arrayListTexts.add(val);
+                    		  listItems.remove(randomIndex);
+                    		  continue;
+                          }else{
+                     	 for (int itr=0;itr<=val.length();itr++) {
+                     	        val=val.substring(val.indexOf("- ")+1).trim();
+                     	       }
+                     	 }
+                      }
+                      else if(filter.contains("DRG")){
+                     	 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
+                     	 valarr1=val.split("-");
 	            			val=valarr1[0].trim();
 	            			val="'"+val+"'";
 	            			arrayListTextsA.add(val);
@@ -1960,55 +1960,55 @@ public class ProgramPerformance extends BaseClass{
 			            			}
 			            			continue;
 									}
-                  	
-                   }
-                   
-                   else if(filter.equals("CCN")) {
-                  	 valA=val.substring(0, val.lastIndexOf("-")).trim();
-                  	 valB=val.substring(val.lastIndexOf("-")+1).trim();
-                   }
-                   
-                    else if(filter.contains("Market") || filter.contains("Region")){
-                  	  if(val.equals("Not Available")){
-                  		  executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
-                  		  val = "null";
-                  		  val = val.replaceAll("'","''");
-                  		  val="'"+val+"'";
-                  		  arrayListTexts.add(val);
-                  		  listItems.remove(randomIndex);
-                  		  if((listItems.get(0).getText().equals("(All)") && listItems.size()==1)){
-                  			for(int k=0;k<2;k++){
-                  				if(k==0){
-                  				writeDataToOutputFile("Path");}else
-                  				{
-                  					arrayListTexts.add("'null'");
-                  					writeDataToOutputFile("Path");
-                  					return;
-                  				}
-                  			}}
-                  		 
-                  		  if(listItems.isEmpty()){
-                  			 for(int k=0;k<2;k++){
-                   				if(k==0){
-                   				writeDataToOutputFile("Path");}else
-                   				{
-                   					arrayListTexts.add("'null'");
-                   					writeDataToOutputFile("Path");
-                   					return;
-                   				}
-                   			}
-                  		 }
-                  		  else{
-                  		  continue;}
-                        }else{
-                      	  val=val.substring(val.indexOf(" ")+1).trim(); 
-                            valarr=val.split("-");
-                      	  valA=valarr[0].trim();
-                      	  valB=valarr[1].trim();
-                        }
+                     	
+                      }
+                      
+                      else if(filter.equals("CCN")) {
+                     	 valA=val.substring(0, val.lastIndexOf("-")).trim();
+                     	 valB=val.substring(val.lastIndexOf("-")+1).trim();
+                      }
+                      
+                       else if(filter.contains("Market") || filter.contains("Region")){
+                     	  if(val.equals("Not Available")){
+                     		  executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
+                     		  val = "null";
+                     		  val = val.replaceAll("'","''");
+                     		  val="'"+val+"'";
+                     		  arrayListTexts.add(val);
+                     		  listItems.remove(randomIndex);
+                     		  if((listItems.get(0).getText().equals("(All)") && listItems.size()==1)){
+                     			for(int k=0;k<2;k++){
+                     				if(k==0){
+                     				writeDataToOutputFile("Path");}else
+                     				{
+                     					arrayListTexts.add("'null'");
+                     					writeDataToOutputFile("Path");
+                     					return;
+                     				}
+                     			}}
+                     		 
+                     		  if(listItems.isEmpty()){
+                     			 for(int k=0;k<2;k++){
+                      				if(k==0){
+                      				writeDataToOutputFile("Path");}else
+                      				{
+                      					arrayListTexts.add("'null'");
+                      					writeDataToOutputFile("Path");
+                      					return;
+                      				}
+                      			}
+                     		 }
+                     		  else{
+                     		  continue;}
+                           }else{
+                         	  val=val.substring(val.indexOf(" ")+1).trim(); 
+                               valarr=val.split("-");
+                         	  valA=valarr[0].trim();
+                         	  valB=valarr[1].trim();
+                           }
 			             }
-//                   executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
-                   executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
+//                      executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
+                      executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
 			             if(filter.contains("Market") || filter.contains("Region")||filter.equals("CCN")){
 
 			            	 if(!val.equals("Null") || !val.equals("Not Available")){
@@ -2041,7 +2041,7 @@ public class ProgramPerformance extends BaseClass{
 		         
 		         if(filter.equals("BPID") || filter.equals("Physician - NPI")){
 		        	 if((val.equals("No Name - No NPI") && filter.equals("Physician - NPI") )|| (val.equals("Not Available") && filter.equals("BPID")) ){
-  				 val= "null";
+     				 val= "null";
 		        	  val = val.replaceAll("'","''");
 		                               val="'"+val+"'";
 		                               arrayListTexts.add(val);
@@ -2058,7 +2058,7 @@ public class ProgramPerformance extends BaseClass{
 			        	 
 	        		  String[] valarr1=val.split("-");
 	        		  String val7=valarr1[0].trim();
-	         			 val7="'"+val+"'";
+	         			 val7="'"+val7+"'";
 	         			arrayListTextsA.add(val7);
 	         		    String new1;
 	         		
@@ -2109,29 +2109,29 @@ public class ProgramPerformance extends BaseClass{
 				            			clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
 				            			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 				            			delay();
-						            			
+						            	return;		
 												}
 				        		 
 			            			
 			            			}continue;}
 		          else if (filter.equals("CCN")) {
-                String valA = null;
-                String valB= null;
-                valA=val.substring(0, val.lastIndexOf("-")).trim();
-           	  valB=val.substring(val.lastIndexOf("-")+1).trim();
-           	 for(int k=0;k<2;k++){
-           		if(k==0){
-              	   valA = valA.replaceAll("'","''");
-              	   val="'"+valA+"'"; 
-                     arrayListTextsA.add(val);
-//                     arrayListTexts.addAll(arrayListTextsA);
-           		}else{
-              	   valB = valB.replaceAll("'","''");
-                     val="'"+valB+"'"; 
-                     arrayListTextsB.add(val);
-//                     arrayListTexts.addAll(arrayListTextsB);
-                 }
-                }
+                   String valA = null;
+                   String valB= null;
+                   valA=val.substring(0, val.lastIndexOf("-")).trim();
+              	  valB=val.substring(val.lastIndexOf("-")+1).trim();
+              	 for(int k=0;k<2;k++){
+              		if(k==0){
+                 	   valA = valA.replaceAll("'","''");
+                 	   val="'"+valA+"'"; 
+                        arrayListTextsA.add(val);
+//                        arrayListTexts.addAll(arrayListTextsA);
+              		}else{
+                 	   valB = valB.replaceAll("'","''");
+                        val="'"+valB+"'"; 
+                        arrayListTextsB.add(val);
+//                        arrayListTexts.addAll(arrayListTextsB);
+                    }
+                   }
 		        	  
 		          }
 		         
@@ -2227,7 +2227,7 @@ public class ProgramPerformance extends BaseClass{
 		 clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 		 delay();
-		 }
+	 }
 	 
 	 public void iOpenTheInputFile(String path,String row) throws FileNotFoundException{
 		 if(row.equals("1")){
