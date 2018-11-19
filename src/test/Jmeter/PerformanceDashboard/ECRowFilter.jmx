@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.0 r1840935">
+<jmeterTestPlan version="1.2" properties="4.0" jmeter="4.0 r1823414">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -171,11 +171,11 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_Model&quot;,&quot;&quot;);
 }	
 if(vars.get(&quot;anch&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
-	vars.put(&quot;EC_AnchorFacility&quot;,&quot;and afdetail.facilityNameInitCap is null&quot;);		
+	vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;and afdetail.facilityNameInitCap is null&quot;);		
 } else if(!vars.get(&quot;anch&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_AnchorFacility&quot;,&quot;and afdetail.facilityNameInitCap in ${anch}&quot;);		
+	vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;and afdetail.facilityNameInitCap in ${anch}&quot;);		
 }else{
-	vars.put(&quot;EC_AnchorFacility&quot;,&quot;&quot;);
+	vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;&quot;);
 }
 
 if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
@@ -286,7 +286,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacility}
+				${EC_AnchorFacilityDetails}
 			) a
 ORDER BY a.episodeInitiatorNameInitCap , a.bpid;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -363,7 +363,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacility}
+				${EC_AnchorFacilityDetails}
 				) a
 ORDER BY a.facilityNameInitCap, a.ccn;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -440,7 +440,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacility}
+				${EC_AnchorFacilityDetails}
 			    ) a
 ORDER BY a.bundleName;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -518,7 +518,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacility} 
+				${EC_AnchorFacilityDetails} 
 				) a
 ORDER BY a.PartnerRegionMarket;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -596,7 +596,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacility}
+				${EC_AnchorFacilityDetails}
 				) a
 ORDER BY a.RRegionMarket;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -673,7 +673,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacility}
+				${EC_AnchorFacilityDetails}
 				) a
 ORDER BY a.participant;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -752,7 +752,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 --				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacility}
+				${EC_AnchorFacilityDetails}
 ) a
 ORDER BY a.DRG_Fracture;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -831,7 +831,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 --				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacility}
+				${EC_AnchorFacilityDetails}
 ) a
 ORDER BY a.Physician_NPI;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -907,7 +907,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
-				${EC_AnchorFacility}
+				${EC_AnchorFacilityDetails}
 				) a
 ORDER BY a.model;	</stringProp>
           <stringProp name="queryArguments"></stringProp>

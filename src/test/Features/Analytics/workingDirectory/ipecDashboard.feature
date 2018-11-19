@@ -18,7 +18,7 @@ Feature: Inpatient Episode Clearing Dashboard
     ##Time
     And I click "Time" Filter on the "IPEC" dashboard
     ##And I get the date "" for Data fetched for dashboard
-    And I get and fill days between "2016/01/01" till "today" for Time Filter
+    And I get and fill days between "ECStartDate" till "today" for Time Filter
     And I click "Time" Filter on the "IPEC" dashboard
     ##BPID
     And I click "Episode Initiator - BPID" Filter on the "IPEC - <BPID>" dashboard
