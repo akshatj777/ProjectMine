@@ -1789,6 +1789,8 @@ public class ProgramPerformance extends BaseClass{
 	    			            			 val="'"+valA+"'"; 
 	    			            			 arrayListTextsA.add(val);
 	    			            			 arrayListTexts.addAll(arrayListTextsA);
+	    			            			 writeDataToOutputFile("Path");
+	    			            			 continue;
 	    			            			 
 	    			            		 }else{
 	    			            			 valB = valB.replaceAll("'","''");
@@ -1821,6 +1823,8 @@ public class ProgramPerformance extends BaseClass{
 	    			            			 val="'"+valA+"'"; 
 	    			            			 arrayListTextsA.add(val);
 	    			            			 arrayListTexts.addAll(arrayListTextsA);
+	    			            			 writeDataToOutputFile("Path");
+	    			            			 continue;
 	    			            			 
 	    			            		 }else{
 	    			            			 valB = valB.replaceAll("'","''");
@@ -2481,7 +2485,7 @@ public class ProgramPerformance extends BaseClass{
 	}
 	
 	public void CalcuateTimeFilterDay(String startDay, String endDay) throws FileNotFoundException {
-		 SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		 SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyy");
 		 String days = null;
 		 Date date = new Date(); 
 		   String presentDate =formatter.format(date);

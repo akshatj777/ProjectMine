@@ -366,7 +366,7 @@ ArrayList b= new ArrayList();
 	}
 
 if(vars.get(&quot;npi&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
-	vars.put(&quot;EC_PHY_NPI&quot;,&quot;and dpy.npi is null&quot;);
+	vars.put(&quot;EC_PHY_NPI&quot;,&quot;and p.npi is null&quot;);
 } else if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);
 } else{
@@ -377,12 +377,22 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
 } else{
 	vars.put(&quot;EC_Model&quot;,&quot;&quot;);
 }
-if(vars.get(&quot;anch&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
-	vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;and afdetail.facilityNameInitCap is null&quot;);		
-} else if(!vars.get(&quot;anch&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;and afdetail.facilityNameInitCap in ${anch}&quot;);		
-}else{
-	vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;&quot;);
+if(!vars.get(&quot;anch&quot;).contains(&quot;Skip&quot;)){
+	if(vars.get(&quot;anch&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+		vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;and afdetail.facilityNameInitCap is null&quot;);
+	}
+	else if(vars.get(&quot;anch&quot;).contains(&quot;null&quot;)){
+		vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;and ( afdetail.facilityNameInitCap is null&quot;);
+		String value91 = vars.get(&quot;anch&quot;);
+		value91 = value91.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+		vars.put(&quot;valAnch&quot;,value91);
+		System.out.println(${valAnch});
+	} else {
+		vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;and afdetail.facilityNameInitCap in ${anch}&quot;);
+	}	
+} else {
+
+vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;&quot;);
 }	</stringProp>
         </BeanShellPreProcessor>
         <hashTree/>
@@ -439,7 +449,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20160101
+and fp.anchorAdmitDateKey &gt;= 20160701
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_AnchorFacility}
 ${EC_CCN}
@@ -543,7 +553,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20160101
+and fp.anchorAdmitDateKey &gt;= 20180701
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_BUNDLE}
@@ -614,7 +624,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20160101
+and fp.anchorAdmitDateKey &gt;= 20180701
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_AnchorFacility}
@@ -628,7 +638,7 @@ ${EC_DRGCODE}
 ${EC_PHY_NPI} 
 ${EC_Model}
 ${EC_AnchorFacilityDetails}
-;</stringProp>
+ORDER BY drg.bundleName;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">bundleName</stringProp>
@@ -691,7 +701,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20160101
+and fp.anchorAdmitDateKey &gt;= 20180701
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_AnchorFacility}
@@ -769,7 +779,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20160101
+and fp.anchorAdmitDateKey &gt;= 20180701
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_AnchorFacility}
@@ -846,7 +856,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20160101
+and fp.anchorAdmitDateKey &gt;= 20180701
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_AnchorFacility}
@@ -922,7 +932,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20160101
+and fp.anchorAdmitDateKey &gt;= 20180701
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_AnchorFacility}
@@ -1000,7 +1010,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20160101
+and fp.anchorAdmitDateKey &gt;= 20180701
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_AnchorFacility}
@@ -1075,7 +1085,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20160101
+and fp.anchorAdmitDateKey &gt;= 20180701
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_AnchorFacility}
@@ -1146,7 +1156,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20160101
+and fp.anchorAdmitDateKey &gt;= 20180701
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_AnchorFacility}
@@ -1315,6 +1325,7 @@ f= new FileOutputStream(path + separator+&quot;RowFilterOutput.txt&quot;,true);
 	vValue8 = vValue8.replace(&quot;null&quot;,&quot;No Name - No NPI&quot;);
 	String vValue9 =  vars.get(&quot;value9&quot;);
 	String vValue10 =  vars.get(&quot;value10&quot;);
+	vValue10 = vValue10.replace(&quot;null&quot;,&quot;Null&quot;);
 	
 	
 	p.println(&quot;Episode Initiator - BPID=&quot;+vValue1+&quot;*Anchor Facility - CCN=&quot;+vValue2+&quot;*Bundle=&quot;+vValue3+&quot;*Remedy Region - Market=&quot;+vValue4+&quot;*Region - Market=&quot;+vValue5+&quot;*Participant=&quot;+vValue6+&quot;*DRG=&quot;+vValue7+&quot;*Physician - NPI=&quot;+vValue8+&quot;*Model=&quot;+vValue9+&quot;*Anchor Facility Detail=&quot;+vValue10);

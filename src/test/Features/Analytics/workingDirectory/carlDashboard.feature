@@ -16,7 +16,7 @@ Feature: CARL Dashboard
     And I switch to analytics iframe
     And I perform test with "<User>" user in Analytics
     ##Time
-    Then I set "Start Date" as "ClaimsStartDate" in Date field on dashboard
+    Then I set "Start Date" as "ECStartDate" in Date field on dashboard
     Then I set "End Date" as "Today" in Date field on dashboard
     ##BPID
     And I click "Episode Initiator - BPID" Filter on the "CARL - <BPID>" dashboard
