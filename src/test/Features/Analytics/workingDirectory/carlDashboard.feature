@@ -1,6 +1,6 @@
 Feature: CARL Dashboard
 
-	@RowLevelSecurity
+	@RowLevelSecurity @CARL
   Scenario Outline: Row Filter Validation for EC data for CARL
     When I open file "\\src\\test\\Jmeter\\CARLDashboard\\RowFilterInput.csv" for writing data at "<Row>" to input file
     When I open file "\\src\\test\\Jmeter\\CARLDashboard\\logs\\RowFilterInput.csv" for writing data at "<Row>" to log file
@@ -16,7 +16,7 @@ Feature: CARL Dashboard
     And I switch to analytics iframe
     And I perform test with "<User>" user in Analytics
     ##Time
-    Then I set "Start Date" as "ECStartDate" in Date field on dashboard
+    Then I set "Start Date" as "ClaimsStartDate" in Date field on dashboard
     Then I set "End Date" as "Today" in Date field on dashboard
     ##BPID
     And I click "Episode Initiator - BPID" Filter on the "CARL - <BPID>" dashboard
@@ -106,14 +106,14 @@ Feature: CARL Dashboard
       | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
       | Qatwodashtest@yopmail.com   |  11 | True Random | True Random | True Random | Skip                   | Skip            | True Random | Skip        | True Random     | Skip        | Skip                   | Skip           |
 
-  @RowLevelSecurity
+  @RowLevelSecurity @CARL
   Scenario: Execute JMX file and read Output data for Data Filter Validations for EC
     When I close the file for after writing data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\CARLDashboard\\RowFilterOutput.txt" Output file
     When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\CARLDashboard\\RowFilter.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\CARLDashboard\\RowFilterOutput.txt"
 
-  @RowLevelSecurity
+  @RowLevelSecurity @CARL
   Scenario Outline: Verify DB and FE values fetched from EC Scenarios
     And I get the value "<Index>" from Output file of data filter validation
     Then I verify "Episode Initiator - BPID" for DB and FE filter values at "<Row>" for "EC"
