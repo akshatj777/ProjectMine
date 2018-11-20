@@ -274,43 +274,43 @@ ArrayList g= new ArrayList();
 
      if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.contains(&quot;&apos;470&apos;&quot;)){
      	if(ww.isEmpty()){
-     	  neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drg.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drg.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
+     	  neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
+            String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
             neee=neee+neee1;
             log.info(&quot;Nee is&quot;+neee);
      	}else{
-     neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drg.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
-      String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drg.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
-      String neee2=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drg.drgName in (&quot;+ww1+&quot;))&quot;;
+     neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
+      String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
+      String neee2=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drgf.drgName in (&quot;+ww1+&quot;))&quot;;
       neee=neee+neee1+neee2;
       log.info(&quot;Nee is&quot;+neee);}
      } else if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.isEmpty() &amp;&amp; ww.isEmpty()){
-     	neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drg.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;
+     	neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;
      	log.info(&quot;469 Nee is&quot;+neee);
      }else if(ww4.isEmpty() &amp;&amp; ww2.contains(&quot;&apos;470&apos;&quot;) &amp;&amp; ww.isEmpty()){
-     	neee=&quot;AND (drg.drgCode in (&quot;+ww2+&quot;) and  drg.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
+     	neee=&quot;AND (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
      	log.info(&quot;470 Nee is&quot;+neee);
      }else if(ww4.isEmpty() &amp;&amp; ww2.isEmpty()){
      	if(ww.isEmpty()){
      	}
      	else{
-     	neee=&quot;AND (drg.drgCode in (&quot;+ww+&quot;) and  drg.drgName in (&quot;+ww1+&quot;))&quot;;
+     	neee=&quot;AND (drg.drgCode in (&quot;+ww+&quot;) and  drgf.drgName in (&quot;+ww1+&quot;))&quot;;
      	log.info(&quot;470 Nee is&quot;+neee);
      	}
      }else if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.isEmpty()){
      	if(ww.isEmpty()){
      		
      	}else{
-     	  neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drg.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drg.drgName in (&quot;+ww1+&quot;))&quot;;
+     	  neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
+            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drgf.drgName in (&quot;+ww1+&quot;))&quot;;
            neee=neee+neee1;
           log.info(&quot;Nee is&quot;+neee);}
      }else if(ww4.isEmpty() &amp;&amp; ww2.contains(&quot;470&quot;)){
      	if(ww.isEmpty()){
      		
      	}else{
-     	  neee=&quot;AND (drg.drgCode in (&quot;+ww2+&quot;) and  drg.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drg.drgName in (&quot;+ww1+&quot;))&quot;;
+     	  neee=&quot;AND (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;	
+            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drgf.drgName in (&quot;+ww1+&quot;))&quot;;
            neee=neee+neee1;
           log.info(&quot;Nee is&quot;+neee);
      }} }
@@ -358,7 +358,7 @@ ArrayList b= new ArrayList();
              log.info(&quot;ww is&quot;+ww);
             String ww1=b.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;).replace(&quot;(&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;);
             log.info(&quot;ww is&quot;+ww1);
-            neee=&quot;AND (drg.drgCode in (&quot;+ww+&quot;) and  drg.drgName in (&quot;+ww1+&quot;))&quot;;
+            neee=&quot;AND (drg.drgCode in (&quot;+ww+&quot;) and  drgf.drgName in (&quot;+ww1+&quot;))&quot;;
      	  log.info(&quot;Nee is&quot;+neee);
            vars.put(&quot;EC_DRGCODE&quot;,neee);
 		} else{
@@ -418,6 +418,10 @@ LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
 LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
  LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
 LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
+
 left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
@@ -449,7 +453,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20160701
+and fp.anchorAdmitDateKey &gt;= 20160101
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_AnchorFacility}
 ${EC_CCN}
@@ -522,6 +526,10 @@ LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
 LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
  LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
 LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
+                    
 left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
@@ -553,7 +561,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20180701
+and fp.anchorAdmitDateKey &gt;= 20160101
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_BUNDLE}
@@ -593,6 +601,10 @@ LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
 LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
  LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
 LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
+
 left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
@@ -624,7 +636,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20180701
+and fp.anchorAdmitDateKey &gt;= 20160101
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_AnchorFacility}
@@ -670,6 +682,10 @@ LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
 LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
  LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
 LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
+
 left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
@@ -701,7 +717,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20180701
+and fp.anchorAdmitDateKey &gt;= 20160101
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_AnchorFacility}
@@ -748,6 +764,10 @@ LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
 LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
  LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
 LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
+
 left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
@@ -779,7 +799,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20180701
+and fp.anchorAdmitDateKey &gt;= 20160101
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_AnchorFacility}
@@ -825,6 +845,10 @@ LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
 LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
  LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
 LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
+
 left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
@@ -856,7 +880,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20180701
+and fp.anchorAdmitDateKey &gt;= 20160101
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_AnchorFacility}
@@ -888,7 +912,7 @@ ORDER BY a.participant;</stringProp>
 FROM
     (
 select distinct
-CONCAT(drg.drgcode, &apos; - &apos;, drg.drgName) as &apos;DRG_Fracture&apos;,
+CONCAT(drg.drgcode, &apos; - &apos;, drgf.drgName) as &apos;DRG_Fracture&apos;,
      case when drg.drgCode is null then null else drg.drgCode end as drgCode
 FROM
 warehouse.factPatientEpisode fp
@@ -901,6 +925,10 @@ LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
 LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
  LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
 LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
+
 left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
@@ -932,7 +960,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20180701
+and fp.anchorAdmitDateKey &gt;= 20160101
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_AnchorFacility}
@@ -979,6 +1007,10 @@ LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
 LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
  LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
 LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
+
 left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
@@ -1010,7 +1042,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20180701
+and fp.anchorAdmitDateKey &gt;= 20160101
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_AnchorFacility}
@@ -1054,6 +1086,10 @@ LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
 LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
  LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
 LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
+
 left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
@@ -1085,7 +1121,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20180701
+and fp.anchorAdmitDateKey &gt;= 20160101
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_AnchorFacility}
@@ -1125,6 +1161,10 @@ LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
 LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
  LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
 LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
+
 left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
@@ -1156,7 +1196,7 @@ and dlkup.lookupCategory = &apos;patientRisk&apos;
 -- and afdetail.ccn  like &apos;%DEMO%&apos; 
 -- and anc.ccn  like &apos;%DEMO%&apos; and post_acute_df.ccn  like &apos;%DEMO%&apos;
 and fp.NSOCType in (&apos;SNF&apos;,&apos;LTCH&apos;,&apos;IRF&apos;,&apos;OTHER&apos;,&apos;HHA&apos;,&apos;HOME&apos;)
-and fp.anchorAdmitDateKey &gt;= 20180701
+and fp.anchorAdmitDateKey &gt;= 20160101
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;) -- This additional condition basically restricts this extract to fetch data only until BPCI 1.0 cut off date - 9/30
 ${EC_BPID}
 ${EC_AnchorFacility}
