@@ -877,6 +877,23 @@ public class ViewACHOrganization  extends BaseClass{
 				Assert.assertEquals(CreateSNFOrganization.SNFOrg_noMO.get("EIN"),actual);
 			}
 		}
+		
+		else if (org.contains("PGP"))
+		{
+			if (text.contains("YES"))
+			{	
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreatePGPOrganization.pgpOrg.get("EIN"),actual);
+			}
+			else if (text.contains("NO"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id-ein"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreatePGPOrganization.pgpOrg_noMO.get("EIN"),actual);
+			}
+		}
+		
 		else if (org.contains("HHA"))
 		{
 			if (text.contains("YES"))
@@ -985,6 +1002,23 @@ public class ViewACHOrganization  extends BaseClass{
 				Assert.assertEquals(CreateSNFOrganization.SNFOrg_noMO.get("NPI"),actual);	
 			}
 		}
+		
+		else if(org.contains("PGP"))
+		{
+			if(text.contains("YES"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreatePGPOrganization.pgpOrg.get("NPI"),actual);
+			}
+			else if(text.contains("NO"))
+			{
+				String actual = getTextForElement(driver.findElement(By.cssSelector(".id.id-npi"))); 
+				actual = actual.substring((actual.indexOf(":"))+1,(actual.indexOf("|"))).trim();
+				Assert.assertEquals(CreatePGPOrganization.pgpOrg_noMO.get("NPI"),actual);	
+			}
+		}
+		
 		else if(org.contains("HHA"))
 		{
 			if(text.contains("YES"))

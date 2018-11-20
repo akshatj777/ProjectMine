@@ -115,6 +115,7 @@ Feature: Create Programs organization under Payor Organization functionality tes
     And I click on checkbox for "Bundle exclusion" validation ranks
     And I click on checkbox for "Earliest contract start date" validation ranks
     And I click on checkbox for "Earliest trigger from date" validation ranks
+    And I click on checkbox for "update validation rules rule nameLilgPPjzne1157" validation ranks
     Then I click on "Submit" button on "create" organization page
     Then I verify duplicate "<Message>" after submitting the "create Programs" organization page
 
@@ -184,6 +185,7 @@ Feature: Create Programs organization under Payor Organization functionality tes
     And I click on checkbox for "Bundle exclusion" validation ranks
     And I click on checkbox for "Earliest contract start date" validation ranks
     And I click on checkbox for "Earliest trigger from date" validation ranks
+    And I click on checkbox for "update validation rules rule nameLilgPPjzne1157" validation ranks
     Then I click on "Submit" button on "create" organization page
     Then I verify duplicate "<Message>" after submitting the "create Programs" organization page
 

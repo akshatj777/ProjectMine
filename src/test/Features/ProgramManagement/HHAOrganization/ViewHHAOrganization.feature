@@ -129,8 +129,8 @@ Feature: View HHA organization functionality tests
     And I verify "Participant Id - <Has_MO>" on view profile of "HHA" Organization
 
     Examples: 
-      | Description                                                         | Has_MO | MO_Name | HHA_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Region  | Market  | CCN | EIN | NPI | StateVerification | Organization Type | Message                                |
-      | Verification of HHA details and count on HHA tab under Managing org | YES    | MONAME  | HHANAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | CCN | EIN | NPI | CA                | HHA               | HHA Organization Successfully Created. |
+      | Description                                                         | Has_MO | MO_Name | HHA_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Region  | Market  | CCN | EIN | NPI | StateVerification | Organization Type  | Message                                |
+      | Verification of HHA details and count on HHA tab under Managing org | YES    | MONAME  | HHANAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | CCN | EIN | NPI | CA                | Home Health Agency | HHA Organization Successfully Created. |
 
   Scenario Outline: <Description>
     Given I am on the login page

@@ -86,9 +86,7 @@ Feature: View IRF organization functionality tests
     And I enter location name <Loc_Name> for Location "2" on "Edit" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "Edit" organization page
     And I enter address2 <Loc_Address2> for Location "2" on "Edit" organization page
-    #And I select region <Loc_Region> for Location "2" on "Edit" organization page
     And I enter city <Loc_City> for Location "2" on "Edit" organization page
-    #And I select market <Loc_Market> for region "<Loc_Region>" for Location "2" on "Edit" organization page
     And I select state <Loc_State> for Location "2" on "Edit" organization page
     And I enter zip <Loc_Postal_Code> for Location "2" on "Edit" organization page
     Then I click on "Submit" button on "Edit" organization page
@@ -135,9 +133,7 @@ Feature: View IRF organization functionality tests
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
-    And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
-    And I select market <Loc_Market> for region "<Loc_Region>" for Location "1" on "create" organization page
     And I select state <Loc_State> for Location "1" on "create" organization page
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
@@ -165,7 +161,7 @@ Feature: View IRF organization functionality tests
     And I verify <Postal_Code> in "zip" on view profile of "IRF" Organization
     And I verify CCN id "<CCN> - <Has_MO>" on "IRF" organization profile page
     And I verify EIN/TIN id "<EIN/TIN> - <Has_MO>" on "IRF" organization profile page
-    And I verify NPI id "<NPI> - <Has_MO>" on "SNF" organization profile page
+    And I verify NPI id "<NPI> - <Has_MO>" on "IRF" organization profile page
     And I verify "Managing Organization - <Has_MO>" on view profile of "IRF" Organization
     And I verify "Participant Id - <Has_MO>" on view profile of "IRF" Organization
     Then I verify Location indexID for "<IRF_Name> - <Has_MO>" organization

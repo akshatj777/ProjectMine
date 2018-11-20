@@ -129,7 +129,7 @@ Feature: View Hospice organization functionality tests
 
     Examples: 
       | Description                                                                           | Has_MO | MO_Name | Hospice_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Region  | Market  | CCN | EIN | NPI | StateVerification | Organization Type | Message                                    |
-      | Verify that all the details are same when Submit is clicked without editing any field | YES    | MONAME  | HOSPICENAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | CCN | EIN | NPI | CA                | Hospice           | Hospice Organization Successfully Updated. |
+      | Verify that all the details are same when Submit is clicked without editing any field | YES    | MONAME  | HOSPICENAME  | Address1 | Short_Name | Address2 | AutomationCity | California |       10000 | Midwest | Chicago | CCN | EIN | NPI | CA                | Hospice           | Hospice Organization Successfully Updated. |
 
   Scenario Outline: <Description>
     Given I am on the login page

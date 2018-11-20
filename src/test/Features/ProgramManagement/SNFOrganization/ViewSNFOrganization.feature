@@ -149,8 +149,8 @@ Feature: View SNF organization functionality tests
     Then I verify Location details of "<Loc_Address1>" on view profile of "SNF" organization
 
     Examples: 
-      | Description                                               | Has_MO | MO_Name | SNF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type        | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | StateVerification | Organization Type |
-      | Verification of SNF details through Managing organization | YES    | MONAME  | SNFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Skilled Nursing | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN | NPI | CA                | SNF               |
+      | Description                                               | Has_MO | MO_Name | SNF_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type        | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | StateVerification | Organization Type | Message                                |
+      | Verification of SNF details through Managing organization | YES    | MONAME  | SNFNAME  | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Skilled Nursing | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN | NPI | CA                | SNF               | SNF Organization Successfully Updated. |
 
   Scenario Outline: <Description>
     Given I am on the login page

@@ -481,5 +481,5 @@ Feature: Edit Bundle Payment Contract functionality tests
     When delete references of the name list type "<type>"
 
     Examples: 
-      | type                                      |
-      | MO, Hospital, PGP, Payor, Program, Bundle |
+      | type                                                             |
+      | MO, Hospital, PGP, Payor, Program, Bundle, BundlePaymentContract |

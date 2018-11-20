@@ -115,14 +115,14 @@ Feature: View Functionality tests for PGP Organization.
     And I verify <City> in "city" on view profile of "PGP" Organization
     And I verify <StateVerification> in "state" on view profile of "PGP" Organization
     And I verify <Postal_Code> in "zip" on view profile of "PGP" Organization
-    #And I verify EIN/TIN id "<EIN/TIN> - <Has_MO>" on view profile of "PGP" organization
-    #And I verify NPI number "<NPI> - <Has_MO>" on view profile of "PGP" organization
+    And I verify EIN/TIN id "<EIN/TIN> - <Has_MO>" on "PGP" organization profile page
+    And I verify NPI id "<NPI> - <Has_MO>" on "PGP" organization profile page
     And I verify "Managing Organization - <Has_MO>" on view profile of "PGP" Organization
     And I verify "Participant Id - <Has_MO>" on view profile of "PGP" Organization
 
     Examples: 
-      | Description                                                       | Has_MO | MO_Name | PGP_Name | Address1 | Address2 | City | State      | Postal_Code | TIN/EIN | NPI | StateVerification | Organization Type | Message                                |
-      | Searching PGP Organization Details on Managing Profile Page - PGP | YES    | MONAME  | PGPNAME  | Address1 | Address2 | City | California |       10000 | EIN     | NPI | CA                | PGP               | PGP Organization Successfully Created. |
+      | Description                                                       | Has_MO | MO_Name | PGP_Name | Address1 | Address2 | City | State      | Postal_Code | TIN/EIN | EIN | NPI | StateVerification | Organization Type | Message                                |
+      | Searching PGP Organization Details on Managing Profile Page - PGP | YES    | MONAME  | PGPNAME  | Address1 | Address2 | City | California |       10000 | EIN     | EIN | NPI | CA                | PGP               | PGP Organization Successfully Created. |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -154,8 +154,8 @@ Feature: View Functionality tests for PGP Organization.
     Then I verify "<Message>" after submitting the "create PGP - <Has_MO>" organization page
 
     Examples: 
-      | Description                                                             | Has_MO | Managing_Org | PGP_Name1       | PGP_Name | Address1 | Short_Name | Address2 | City | Region  | Market  | State      | Postal_Code | EIN | NPI | Message                                |
-      | Searching invalid details on Managing Organization Profile Page for PGP | NO     |              | NoMatchesForPGP | PGPNAME  | Address1 | Short_Name | Address2 | City | Midwest | Chicago | California |       10000 | EIN | NPI | PGP Organization Successfully Created. |
+      | Description                                                             | Has_MO | MO_Name | PGP_Name1       | PGP_Name | Address1 | Short_Name | Address2 | City | Region  | Market  | State      | Postal_Code | EIN | NPI | Message                                |
+      | Searching invalid details on Managing Organization Profile Page for PGP | NO     | MONAME  | NoMatchesForPGP | PGPNAME  | Address1 | Short_Name | Address2 | City | Midwest | Chicago | California |       10000 | EIN | NPI | PGP Organization Successfully Created. |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"
