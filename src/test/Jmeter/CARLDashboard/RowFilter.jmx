@@ -988,14 +988,15 @@ ORDER BY a.DRG_Fracture;
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Physician - NPI Filter Validation" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT DISTINCT
- --   a.physicianNameInitCap, a.npi, a.Physician_NPI
- a.Physician_NPI
+          <stringProp name="query">
+select distinct
+			CONCAT(`Attributed Physician`,&apos; - &apos;, a.npi) as &apos;Physician - NPI&apos;
 FROM
     (
-select distinct
-p.physicianNameInitCap, p.npi,
-			CONCAT(p.physicianNameInitCap,&apos; - &apos;, p.npi) as &apos;Physician_NPI&apos;
+    Select DISTINCT 
+case when p.physicianNameInitCap is null then &apos;No Name&apos; else p.physicianNameInitCap end as &apos;Attributed Physician&apos;,
+case when p.npi is null then &apos;No NPI&apos; else p.npi end as NPI
+
 FROM
 warehouse.factPatientEpisode fp
 left join warehouse. dimFacility anc on fp.anchorAdmitFacilityKey=anc.facilitySK
@@ -1057,7 +1058,7 @@ ${EC_DRGCODE}
 ${EC_Model}
 ${EC_AnchorFacilityDetails}
 ) a
-ORDER BY a.Physician_NPI;</stringProp>
+ORDER BY  `Physician - NPI`;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">Physician_NPI</stringProp>
