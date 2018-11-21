@@ -297,7 +297,7 @@ ArrayList g= new ArrayList();
      	}else{
      neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
       String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
-      String neee2=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drgf.drgName in (&quot;+ww1+&quot;))&quot;;
+      String neee2=&quot;OR (drg.drgCode in (&quot;+ww+&quot;))&quot;;
       neee=neee+neee1+neee2;
       log.info(&quot;Nee is&quot;+neee);}
      } else if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.isEmpty() &amp;&amp; ww.isEmpty()){
@@ -310,7 +310,7 @@ ArrayList g= new ArrayList();
      	if(ww.isEmpty()){
      	}
      	else{
-     	neee=&quot;AND (drg.drgCode in (&quot;+ww+&quot;) and  drgf.drgName in (&quot;+ww1+&quot;))&quot;;
+     	neee=&quot;AND (drg.drgCode in (&quot;+ww+&quot;))&quot;;
      	log.info(&quot;470 Nee is&quot;+neee);
      	}
      }else if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.isEmpty()){
@@ -318,7 +318,7 @@ ArrayList g= new ArrayList();
      		
      	}else{
      	  neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drgf.drgName in (&quot;+ww1+&quot;))&quot;;
+            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;))&quot;;
            neee=neee+neee1;
           log.info(&quot;Nee is&quot;+neee);}
      }else if(ww4.isEmpty() &amp;&amp; ww2.contains(&quot;470&quot;)){
@@ -326,7 +326,7 @@ ArrayList g= new ArrayList();
      		
      	}else{
      	  neee=&quot;AND (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drgf.drgName in (&quot;+ww1+&quot;))&quot;;
+            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;))&quot;;
            neee=neee+neee1;
           log.info(&quot;Nee is&quot;+neee);
      }} }
@@ -374,7 +374,7 @@ ArrayList b= new ArrayList();
              log.info(&quot;ww is&quot;+ww);
             String ww1=b.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;).replace(&quot;(&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;);
             log.info(&quot;ww is&quot;+ww1);
-            neee=&quot;AND (d.drgCode in (&quot;+ww+&quot;) and  drgf.drgName in (&quot;+ww1+&quot;))&quot;;
+            neee=&quot;AND (d.drgCode in (&quot;+ww+&quot;))&quot;;
      	  log.info(&quot;Nee is&quot;+neee);
            vars.put(&quot;EC_DRGCODE&quot;,neee);
 		} else{
@@ -399,11 +399,11 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;C_Model&quot;,&quot;&quot;);
 }
 if(vars.get(&quot;anch&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
-	vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;and afdetail.facilityNameInitCap is null&quot;);		
+	vars.put(&quot;EC_AnchorFacility&quot;,&quot;and afdetail.facilityNameInitCap is null&quot;);		
 } else if(!vars.get(&quot;anch&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;and afdetail.facilityNameInitCap in ${anch}&quot;);		
+	vars.put(&quot;EC_AnchorFacility&quot;,&quot;and afdetail.facilityNameInitCap in ${anch}&quot;);		
 }else{
-	vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;&quot;);
+	vars.put(&quot;EC_AnchorFacility&quot;,&quot;&quot;);
 }	</stringProp>
         </BeanShellPreProcessor>
         <hashTree/>
@@ -507,7 +507,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacilityDetails}
+				${EC_AnchorFacility}
 
 	
 	
@@ -661,7 +661,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacilityDetails}
+				${EC_AnchorFacility}
 
 	
             
@@ -788,7 +788,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacilityDetails}
+				${EC_AnchorFacility}
 
 	 
 	
@@ -919,7 +919,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacilityDetails}
+				${EC_AnchorFacility}
 
 	
             
@@ -1047,7 +1047,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model} 
-				${EC_AnchorFacilityDetails}
+				${EC_AnchorFacility}
 
             
             ) a
@@ -1175,7 +1175,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model} 
-				${EC_AnchorFacilityDetails}
+				${EC_AnchorFacility}
 				
 
 	
@@ -1313,7 +1313,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_PARTICIPANTNAME}  
 				${EC_PHY_NPI} 
 				${EC_Model}  
-				${EC_AnchorFacilityDetails}
+				${EC_AnchorFacility}
 				
 
             
@@ -1446,7 +1446,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_Model} 
-				${EC_AnchorFacilityDetails}
+				${EC_AnchorFacility}
 				
 
             
@@ -1576,7 +1576,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
-				${EC_AnchorFacilityDetails}
+				${EC_AnchorFacility}
 
             
             ) a
