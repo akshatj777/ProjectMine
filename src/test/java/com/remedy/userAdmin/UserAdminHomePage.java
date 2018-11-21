@@ -2,7 +2,11 @@ package com.remedy.userAdmin;
 
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
+
+
+
 import org.openqa.selenium.JavascriptExecutor;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -78,6 +82,7 @@ WebDriverWait wait= new WebDriverWait(driver, 30);
 		{
 			driver.navigate().refresh();
 			iWillWaitToSee(By.xpath("//h1[text()='Users']"));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//h1[text()='Users']")));
 		}
 	}
 
@@ -86,7 +91,7 @@ WebDriverWait wait= new WebDriverWait(driver, 30);
 	}
 	
 	public void iSeeUserAdminPageLogo() {
-		isElementVisible(driver.findElement(By.cssSelector(".flex-item.order-2.btn.logo.valentino-icon-program-admin")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".flex-item.order-2.btn.logo.valentino-icon-program-admin"))));
 	
 	}
 
@@ -100,11 +105,11 @@ WebDriverWait wait= new WebDriverWait(driver, 30);
 	}
 
 	public void iSeeRefreshIcon() {
-		isElementVisible(driver.findElement(By.cssSelector(".btn.btn-reload")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".btn.btn-reload"))));
 	}
 	
 	public void iSeeUsersCount() {
-		isElementVisible(driver.findElement(By.xpath("//strong[@ng-hide='search.total == -1']")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//strong[@ng-hide='search.total == -1']"))));
 	}
 	
 	public void iVerifyUserCardCount(int cardCount) {
@@ -112,35 +117,35 @@ WebDriverWait wait= new WebDriverWait(driver, 30);
 	}
 	
 	public void iSeeUserCards() {
-		isElementVisible(driver.findElement(By.cssSelector(".card-view-body")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".card-view-body"))));
 	}
 	
 	public void iSeeFirstNameOnUserCard() {
-		isElementVisible(driver.findElement(By.cssSelector("span[binding-id$='user.firstName']")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("span[binding-id$='user.firstName']"))));
 	}
 	
 	public void iSeeLastNameOnUserCard() {
-		isElementVisible(driver.findElement(By.cssSelector("span[binding-id$='user.lastName']")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("span[binding-id$='user.lastName']"))));
 	}
 	
 	public void iSeeExpandButtonOnUserCard() {
-		isElementVisible(driver.findElement(By.cssSelector(".btn.btn-quaternary.valentino-icon-expand.pull-right")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".btn.btn-quaternary.valentino-icon-expand.pull-right"))));
 	}
 	
 	public void iSeeRoleOnUserCard() {
-		isElementVisible(driver.findElement(By.cssSelector("div[binding-id$='Role']")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("div[binding-id$='Role']"))));
 	}
 	
 	public void iSeeUserEmailOnUserCard() {
-		isElementVisible(driver.findElement(By.cssSelector("div[binding-id$='user.email']")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("div[binding-id$='user.email']"))));
 	}
 	
 	public void iSeeLockButtonOnUserCard() {
-		isElementVisible(driver.findElement(By.cssSelector("button[ng-click^='lock']")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("button[ng-click^='lock']"))));
 	}
 	
 	public void iSeeUnLockButtonOnUserCard() {
-		isElementVisible(driver.findElement(By.cssSelector("button[ng-click^='unlock']")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("button[ng-click^='unlock']"))));
 	}
 
 	public void iClickLoadMoreButton() {
@@ -169,7 +174,7 @@ WebDriverWait wait= new WebDriverWait(driver, 30);
 	
 	public void iSeePagination() {
 		delay();
-		isElementVisible(driver.findElement(By.cssSelector(".page-selector.ng-binding")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".page-selector.ng-binding"))));
 	}
 	
 	public void iSeeNextButtonAppearingBesidePaginatioN(String text){

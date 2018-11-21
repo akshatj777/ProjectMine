@@ -35,7 +35,7 @@ public class UserAdminSorting extends BaseClass {
 	
     
     public void IVerifyTheFilterForNewestToOldest() throws Throwable{
-    	isElementVisible(driver.findElement(By.cssSelector(".ui-select-choices-group")));
+    	Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".ui-select-choices-group"))));
     }
 	
 	public void IShouldBeAbleToSortTheUsersWithNewestOldestSortingOption(){
@@ -53,7 +53,7 @@ public class UserAdminSorting extends BaseClass {
 	}
 	    
     public void IVerifyTheFilterForOldestToNewest() throws Throwable{
-    	isElementVisible(driver.findElement(By.cssSelector(".ui-select-choices-group")));
+    	Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".ui-select-choices-group"))));
     }
 	
 	public void IShouldBeAbletoSortTheUsersWithOldestNewestSortingOption(){
@@ -67,7 +67,7 @@ public class UserAdminSorting extends BaseClass {
 	}
 	    
     public void IVerifyTheFilterForZToA() throws Throwable{
-    	isElementVisible(driver.findElement(By.cssSelector(".ui-select-choices-group")));
+    	Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".ui-select-choices-group"))));
     }
 	
 	public void IShouldBeAbletoSortTheUsersWithZASortingOption(){
@@ -77,12 +77,12 @@ public class UserAdminSorting extends BaseClass {
 		
 	public void iVerifySortingOptionAppliedShouldWorkForTheUser(){
 		
-		isElementVisible(driver.findElement(By.cssSelector("div:nth-of-type(5)>div:nth-of-type(1)>div>div:nth-of-type(1)>div:nth-of-type(2)")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("div:nth-of-type(5)>div:nth-of-type(1)>div>div:nth-of-type(1)>div:nth-of-type(2)"))));
 	}
 	
 	public void iSeeTheRefreshIconPresentBesidesTheSortingFilter(){
 		
-		isElementVisible(driver.findElement(By.cssSelector(".btn.btn-reload")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".btn.btn-reload"))));
 		
 	}
 	
@@ -94,7 +94,7 @@ public class UserAdminSorting extends BaseClass {
 	
 	public void IVerifythesortfilterforZtoAunderuseradminpage(){
 		
-		isElementVisible(driver.findElement(By.cssSelector(".btn.btn-default.form-control.ui-select-toggle")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".btn.btn-default.form-control.ui-select-toggle"))));
 	}
 	
 	public void IClickedonCreateuserbuttonappearingunderuseradminpage(){
@@ -108,7 +108,7 @@ public class UserAdminSorting extends BaseClass {
 	
 	public void Iverifysortingappliedonuseradminpageisretaining(){
 		
-		isElementVisible(driver.findElement(By.cssSelector(".btn.btn-default.form-control.ui-select-toggle >span:nth-of-type(2)")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".btn.btn-default.form-control.ui-select-toggle >span:nth-of-type(2)"))));
 	}
 	
 	public void Ienteredunderuseradminpage(String Text){
@@ -118,23 +118,23 @@ public class UserAdminSorting extends BaseClass {
 	
 	public void iVerifySortShouldWorkCorrectlyWhenSearchIsMadewithNewesttoOldestSortingIsAppliedOnTheFilteredResults(String Text){
 		
-	isElementVisible(driver.findElement(By.cssSelector("div:nth-of-type(5)>div:nth-of-type(1)>div>div:nth-of-type(1)>div:nth-of-type(2)")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("div:nth-of-type(5)>div:nth-of-type(1)>div>div:nth-of-type(1)>div:nth-of-type(2)"))));
 	
 	}
 	
 	public void iVerifySortShouldWorkCorrectlyWhenSearchIsMadewithOldesttoNewestSortingIsAppliedOnTheFilteredResults(String Text){
 		
-	isElementVisible(driver.findElement(By.cssSelector("div:nth-of-type(5)>div:nth-of-type(1)>div>div:nth-of-type(1)>div:nth-of-type(2)")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("div:nth-of-type(5)>div:nth-of-type(1)>div>div:nth-of-type(1)>div:nth-of-type(2)"))));
 		
 	}
 	
 	public void iVerifySortShouldWorkCorrectlyWhenSearchIsMadewithZtoASortingIsAppliedOnTheFilteredResults(String Text){
 
-	isElementVisible(driver.findElement(By.cssSelector("div:nth-of-type(5)>div:nth-of-type(1)>div>div:nth-of-type(1)>div:nth-of-type(2)")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector("div:nth-of-type(5)>div:nth-of-type(1)>div>div:nth-of-type(1)>div:nth-of-type(2)"))));
 		
 	}
 	
 	public void Iverifythefavicononuseradminpage(){
-		isElementVisible(driver.findElement(By.xpath("//link[@rel='shortcut icon']")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//link[@rel='shortcut icon']"))));
 	}
 }

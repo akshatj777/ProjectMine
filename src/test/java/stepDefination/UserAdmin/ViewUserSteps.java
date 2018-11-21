@@ -84,6 +84,11 @@ public class ViewUserSteps extends DriverScript{
 		objViewUserPage.verifyEmail(email, userRole);
 	}
 	
+	@Then("^I verify last login date for \"([^\"]*)\"$")
+	public void verifyLastLoginDate(String role) throws Throwable {
+		objViewUserPage.verifyLastLoginDate(role);
+	}
+	
 	@Then("^I verify bulk email for \"([^\"]*)\"$")
 	public void i_verify_Bulk_Email(String userRole) throws Throwable {
 		objViewUserPage.verifyBulkEmail(userRole);
@@ -123,6 +128,11 @@ public void verifyBulkNPI(String field) throws Throwable {
 	@Then("^I verify enabled \"([^\"]*)\"$")
 	public void i_verify_enabled(String applicationsEnabled) throws Throwable {
 		objViewUserPage.verifyEnabledApplications(applicationsEnabled);
+	}
+	
+	@Then("^I verify \"([^\"]*)\" not visible on view user page$")
+	public void verifyAppsNotPresentOnViewUserPage(String applicationsNotVisible) throws Throwable {
+		objViewUserPage.verifyAppsNotVisibleOnViewUserPage(applicationsNotVisible);
 	}
 	
 	@Then("^I verify learning pathway \"([^\"]*)\"$")

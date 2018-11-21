@@ -31,12 +31,10 @@ public class LandingPage extends BaseClass{
 
         super(driver);}
 
-    public void iVerifyTextforTiles(String text){
-       	if(text.isEmpty()!=true){
-    		verifyTextForElementfromList(".description", text);
-
-    	}
-   
+    public void iVerifyTextforTiles(String text)
+    {
+    	iWillWaitToSee(By.xpath("//div[text()='"+text+"']"));
+    	Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[text()='"+text+"']")));
     }
        
     public void iClickOnApplicateTile(String tile) throws InterruptedException{
@@ -105,18 +103,6 @@ public class LandingPage extends BaseClass{
 					newHandles.removeAll(handles);
 					driver.switchTo().window((String)newHandles.toArray()[0]);
 				}
-//				Thread.sleep(3000);
-//				if(!((String)handles.toArray()[handles.size()-1]).equals(parentWindow))
-//				{
-//					Thread.sleep(3000);
-//					while(!(driver.getWindowHandle().equals((String)handles.toArray()[handles.size()-1])))
-//					{
-//						Thread.sleep(3000);
-//						driver.switchTo().window((String)handles.toArray()[handles.size()-1]);
-//					}
-//				}
-//				Thread.sleep(3000);
-//				System.out.println(driver.getTitle());
 				handles=driver.getWindowHandles();
 				driver.manage().window().maximize();
 				Thread.sleep(3000);
@@ -156,13 +142,6 @@ public class LandingPage extends BaseClass{
     		else if(DriverScript.Config.getProperty("Browser").equals("ie"))
     		{
     			driver.switchTo().window(parentWindow);
-//    			String parentWindow = driver.getWindowHandle();
-//                Set<String> handles = driver.getWindowHandles();
-//                if(!((String)handles.toArray()[0]).equals(parentWindow))
-//    			{
-//    				driver.switchTo().window((String)handles.toArray()[0]);
-//    			}
-//                delay();
     		}
     	}
     	catch(Exception e)
@@ -258,11 +237,7 @@ public void ValidationMsgForRestPass(String text){
 	}
 	else if (text.equals("Remedy Connect")){
 		iWillWaitToSee(By.xpath("//div[@class='remedy-connect-title' and text()='Remedy Connect']"));
-		isElementVisible(driver.findElement(By.xpath("//div[@class='remedy-connect-title' and text()='Remedy Connect']")));
-	}
-	else if (text.equals("Password guidelines")){
-		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-password-strength.animated.fadeIn"))));
-
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//div[@class='remedy-connect-title' and text()='Remedy Connect']"))));
 	}
 	}
 
@@ -271,23 +246,21 @@ public void forgotPasswordLink(){
 	clickElement(driver.findElement(By.cssSelector("a.auth0-lock-alternative-link")));
 }
 public void resetPasswordMsg(String text){
-	//iWillWaitToSee(By.xpath("//p/span/text()"));
-	//Assert.assertTrue(driver.findElement(By.xpath("//p/span/text()")).getAttribute("data").toString().contains(text));
 	iWillWaitToSee(By.xpath("//*[contains(text(),'"+text+"')]"));
-	isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+text+"')]")));
+	Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+text+"')]"))));
 }
 
 
 public void EmailFieldVerificationOnForgotPasswordPage(){
-	isElementVisible(driver.findElement(By.xpath("//input[@name='email']")));
+	Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//input[@name='email']"))));
 }
 
 
 public void sendEmailButtonVerification(){
-	isElementVisible(driver.findElement(By.xpath("//button[@type='submit']")));
+	Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//button[@type='submit']"))));
 }
 public void backButtonOnForgotPasswordPageVerification(){
-	isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-back-button")));
+	Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-back-button"))));
 }
 public void iClickOnBackButtonOnForgotPassPage(){
 	clickElement(driver.findElement(By.cssSelector(".auth0-lock-back-button")));
@@ -304,11 +277,11 @@ public void iEnterEmailToCreatePass(String userRole){
 	}
 }
 public void validationMsgForInvalidEmail() {
-	isElementVisible(driver.findElement(By.xpath("//button[@type='submit']")));
+	Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//button[@type='submit']"))));
 }
 public void errorMesgValidationForInvalidCreds(String text) {
 	iWillWaitToSee(By.xpath("//*[contains(text(),'"+text+"')]"));
-	isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+text+"')]")));
+	Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+text+"')]"))));
 	
 }
 public void clickResetPasswordButton(String arg1) throws Throwable {
@@ -320,10 +293,10 @@ public void clickResetPasswordButton(String arg1) throws Throwable {
 }
 public void remedyConnectPageVerification(){
 	iWillWaitToSee(By.cssSelector(".flex-item.order-2.btn.logo.valentino-icon-remedy-connect"));
-	isElementVisible(driver.findElement(By.cssSelector(".flex-item.order-2.btn.logo.valentino-icon-remedy-connect")));
+	Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".flex-item.order-2.btn.logo.valentino-icon-remedy-connect"))));
 }
 public void verifySearchGhostText(String text){
-	isElementVisible(driver.findElement(By.xpath("//input[@placeholder='Search']")));
+	Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//input[@placeholder='Search']"))));
 }
 
 }
