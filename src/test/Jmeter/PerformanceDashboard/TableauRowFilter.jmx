@@ -399,11 +399,11 @@ if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;C_Model&quot;,&quot;&quot;);
 }
 if(vars.get(&quot;anch&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
-	vars.put(&quot;EC_AnchorFacility&quot;,&quot;and afdetail.facilityNameInitCap is null&quot;);		
+	vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;and afdetail.facilityNameInitCap is null&quot;);		
 } else if(!vars.get(&quot;anch&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_AnchorFacility&quot;,&quot;and afdetail.facilityNameInitCap in ${anch}&quot;);		
+	vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;and afdetail.facilityNameInitCap in ${anch}&quot;);		
 }else{
-	vars.put(&quot;EC_AnchorFacility&quot;,&quot;&quot;);
+	vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;&quot;);
 }	</stringProp>
         </BeanShellPreProcessor>
         <hashTree/>
@@ -507,7 +507,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacility}
+				${EC_AnchorFacilityDetails}
 
 	
 	
@@ -661,7 +661,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacility}
+				${EC_AnchorFacilityDetails}
 
 	
             
@@ -788,7 +788,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacility}
+				${EC_AnchorFacilityDetails}
 
 	 
 	
@@ -919,7 +919,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacility}
+				${EC_AnchorFacilityDetails}
 
 	
             
@@ -1047,7 +1047,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model} 
-				${EC_AnchorFacility}
+				${EC_AnchorFacilityDetails}
 
             
             ) a
@@ -1175,7 +1175,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model} 
-				${EC_AnchorFacility}
+				${EC_AnchorFacilityDetails}
 				
 
 	
@@ -1313,7 +1313,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_PARTICIPANTNAME}  
 				${EC_PHY_NPI} 
 				${EC_Model}  
-				${EC_AnchorFacility}
+				${EC_AnchorFacilityDetails}
 				
 
             
@@ -1446,7 +1446,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_Model} 
-				${EC_AnchorFacility}
+				${EC_AnchorFacilityDetails}
 				
 
             
@@ -1576,7 +1576,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
-				${EC_AnchorFacility}
+				${EC_AnchorFacilityDetails}
 
             
             ) a

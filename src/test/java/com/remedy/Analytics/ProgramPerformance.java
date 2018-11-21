@@ -2484,13 +2484,14 @@ public class ProgramPerformance extends BaseClass{
 	}
 	
 	public void CalcuateTimeFilterDay(String startDay, String endDay) throws FileNotFoundException {
-		 SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		 String startDate = DriverScript.Config.getProperty(startDay);
+		 SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 		 String days = null;
 		 Date date = new Date(); 
 		   String presentDate =formatter.format(date);
 		   if(endDay.equalsIgnoreCase("today")) {
 		 try {
-			 	Date dateBefore = formatter.parse(startDay);
+			 	Date dateBefore = formatter.parse(startDate);
 			 	Date dateAfter = formatter.parse(presentDate);
 		        long difference = (dateAfter.getTime() - dateBefore.getTime())/86400000;
 		        days = String.valueOf(++difference);
