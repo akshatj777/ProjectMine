@@ -283,7 +283,7 @@ ArrayList g= new ArrayList();
      	}else{
      neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
       String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
-      String neee2=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drgf.drgName in (&quot;+ww1+&quot;))&quot;;
+      String neee2=&quot;OR (drg.drgCode in (&quot;+ww+&quot;))&quot;;
       neee=neee+neee1+neee2;
       log.info(&quot;Nee is&quot;+neee);}
      } else if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.isEmpty() &amp;&amp; ww.isEmpty()){
@@ -296,7 +296,7 @@ ArrayList g= new ArrayList();
      	if(ww.isEmpty()){
      	}
      	else{
-     	neee=&quot;AND (drg.drgCode in (&quot;+ww+&quot;) and  drgf.drgName in (&quot;+ww1+&quot;))&quot;;
+     	neee=&quot;AND (drg.drgCode in (&quot;+ww+&quot;))&quot;;
      	log.info(&quot;470 Nee is&quot;+neee);
      	}
      }else if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.isEmpty()){
@@ -304,7 +304,7 @@ ArrayList g= new ArrayList();
      		
      	}else{
      	  neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drgf.drgName in (&quot;+ww1+&quot;))&quot;;
+            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;))&quot;;
            neee=neee+neee1;
           log.info(&quot;Nee is&quot;+neee);}
      }else if(ww4.isEmpty() &amp;&amp; ww2.contains(&quot;470&quot;)){
@@ -312,7 +312,7 @@ ArrayList g= new ArrayList();
      		
      	}else{
      	  neee=&quot;AND (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drgf.drgName in (&quot;+ww1+&quot;))&quot;;
+            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;))&quot;;
            neee=neee+neee1;
           log.info(&quot;Nee is&quot;+neee);
      }} }
@@ -776,16 +776,13 @@ ORDER BY a.DRG_Fracture;
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Physician - NPI Filter Validation" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT DISTINCT
- --   a.physicianNameInitCap, a.npi, a.Physician_NPI
- a.Physician_NPI
+          <stringProp name="query">select distinct
+   CONCAT(`Attributed Physician`,&apos; - &apos;, a.npi) as &apos;Physician - NPI&apos;
 FROM
-    ( 
-	
-	-- CLAIMS
-	SELECT DISTINCT
-		p.physicianNameInitCap, p.npi, 
-		CONCAT(p.physicianNameInitCap,&apos; - &apos;, p.npi) as &apos;Physician_NPI&apos;
+    (
+    Select DISTINCT 
+case when p.physicianNameInitCap is null then &apos;No Name&apos; else p.physicianNameInitCap end as &apos;Attributed Physician&apos;,
+case when p.npi is null then &apos;No NPI&apos; else p.npi end as NPI
     FROM
         warehouse.factClaims c
     LEFT JOIN warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
@@ -828,7 +825,7 @@ FROM
 				${C_Model} 
             
             ) a
-ORDER BY a.Physician_NPI;
+ORDER BY `Physician - NPI`;
 </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
