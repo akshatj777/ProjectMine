@@ -1742,6 +1742,8 @@ public class ProgramPerformance extends BaseClass{
 					    for (int i = 1; i <= random_n; i++) {
 			             int randomIndex = rand.nextInt(listItems.size());
 			             WebElement randomElement = listItems.get(randomIndex);
+			             System.out.println("ss");
+			             
 //			             String val=randomElement.getText();
 			             String val=randomElement.getAttribute("title");
 			             String valarr[] = null;
@@ -1897,7 +1899,8 @@ public class ProgramPerformance extends BaseClass{
                      	 }
                       }
                       else if(filter.contains("DRG")){
-                     	 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
+                    	  listItems.remove(randomIndex);
+                    	  executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
                      	 valarr1=val.split("-");
 	            			val=valarr1[0].trim();
 	            			val="'"+val+"'";
@@ -1957,6 +1960,7 @@ public class ProgramPerformance extends BaseClass{
 			            			writeDataToOutputFile("Path");
 			            			arrayListTexts.addAll(arrayListTextsC);
 			            			writeDataToOutputFile("Path");
+			            			
 			            			 clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
 			            			 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 			            			 delay();
