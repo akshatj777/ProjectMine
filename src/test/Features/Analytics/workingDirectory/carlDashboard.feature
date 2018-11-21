@@ -1,6 +1,6 @@
 Feature: CARL Dashboard
 
-	@RowLevelSecurity @CARL
+  @RowLevelSecurity @CARL
   Scenario Outline: Row Filter Validation for EC data for CARL
     When I open file "\\src\\test\\Jmeter\\CARLDashboard\\RowFilterInput.csv" for writing data at "<Row>" to input file
     When I open file "\\src\\test\\Jmeter\\CARLDashboard\\logs\\RowFilterInput.csv" for writing data at "<Row>" to log file
@@ -94,13 +94,13 @@ Feature: CARL Dashboard
 
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region - Market | Region - Market | Participant | DRG         | Physician - NPI | Model       | Anchor Facility Detail | Episode Length |
-      | Qafivedashtest@yopmail.com  |   1 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True Random | Skip            | Skip        | Skip                   | Skip           |
-      | Qatwodashtest@yopmail.com   |   2 | True Random | True Random | True Random | Skip                   | Skip            | Skip        | True Random | Skip            | Skip        | Skip                   | Skip           |
-      | Qadashboardtest@yopmail.com |   3 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True All    | Skip            | Skip        | Skip                   | Skip           |
-      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True Random | Skip            | Skip        | Skip                   | Skip           |
+      | Qafivedashtest@yopmail.com  |   1 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
+      | Qatwodashtest@yopmail.com   |   2 | True Random | True Random | True Random | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
+      | Qadashboardtest@yopmail.com |   3 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
+      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
       | Qatwodashtest@yopmail.com   |   5 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | Skip        | Skip            | Skip        | Skip                   | Skip           |
       | Qadashboardtest@yopmail.com |   6 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True Random | True Random     | Skip        | Skip                   | Skip           |
+      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | True Random     | Skip        | Skip                   | Skip           |
       | allmodel123@yopmail.com     |   8 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | True All    | True Random     | True All    | Skip                   | Skip           |
       | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | Skip                   | Skip            | True Random | True Random | True Random     | True Random | Skip                   | Skip           |
       | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
@@ -125,7 +125,7 @@ Feature: CARL Dashboard
     Then I verify "DRG" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Physician - NPI" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Model" for DB and FE filter values at "<Row>" for "EC"
-
+    
     Examples: 
       | Index | Row |
       |     0 |   1 |
