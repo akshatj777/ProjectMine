@@ -564,9 +564,19 @@ Feature: Edit SNF organization functionality tests
     And I verify "Managing Organization - <Has_MO1>" on view profile of "SNF" Organization
 
     Examples: 
-      | Description                                          | Has_MO | Has_MO1 | SNF_Name | Edited_SNF_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                |
-      | Edit & verify SNF organization with MO to without MO | YES    | NO      | SNFNAME  | SNFNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | SNF Organization Successfully Updated. |
-      | Edit & verify SNF organization without MO to with MO | NO     | YES     | SNFNAME  | SNFNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | SNF Organization Successfully Updated. |
+      | Description                                        | Has_MO | Has_MO1 | Managing_Org | SNF_Name | Edited_SNF_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                |
+      | Edit SNF organization with MO to without MO        | YES    | NO      | MO2          | SNFNAME  | SNFNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           12345 | SNF Organization Successfully Updated. |
+      | Edit verify SNF organization without MO to with MO | NO     | YES     | MO2          | SNFNAME  | SNFNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           15623 | SNF Organization Successfully Updated. |
+
+  Scenario Outline: Create another MO for use in while editing SNF organization
+    Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
+    When create org with this data
+    Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
+
+    Examples: 
+      | desc      | particpantId | name   | contactPerson | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type       |
+      | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -575,11 +585,11 @@ Feature: Edit SNF organization functionality tests
     And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
     When I click on "SNF" organization tab on organization dashboard
-    Then I search with "<SNF_Name> - <Has_MO>" on organization in search box
-    And I verify "<SNF_Name> - <Has_MO>" field in search list on organization page
-    And I click "<SNF_Name> - <Has_MO>" field in search list on organization page
+    Then I search with "<SNF_Name> - <Has_MO1>" on organization in search box
+    And I verify "<SNF_Name> - <Has_MO1>" field in search list on organization page
+    And I click "<SNF_Name> - <Has_MO1>" field in search list on organization page
     And I click on "Edit" button on particular organization
-    And I verify Managing Organization radio buttons status on "Edit SNF - <Has_MO1>" organization page
+    And I verify Managing Organization radio buttons status on "Edit SNF - <Has_MO>" organization page
     And I select "<Has_MO>" radio button for managing organization
     Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
     And I edit "SNF Organization Name" field to "<Edited_SNF_Name> - <Has_MO>" for organization
@@ -600,11 +610,11 @@ Feature: Edit SNF organization functionality tests
     When I search with "<SNF_Name> - <Has_MO>" on organization in search box
     And I click "<SNF_Name> - <Has_MO>" field in search list on organization page
     And I verify "<SNF_Name> - <Has_MO>" name on the header of view profile
-    And I verify "Managing Organization - <Has_MO>" on view profile of "SNF" Organization
+    And I verify "Managing Organization2 - <Has_MO>" on view profile of "SNF" Organization
 
     Examples: 
-      | Description                                     | Has_MO | Has_MO1 | Managing_Org | SNF_Name | Edited_SNF_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                |
-      | Edit SNF organization with one MO to another MO | YES    | NO      | MO_Name2     | SNFNAME  | SNFNAME         | Address1     | Short_Name | Address2     | City | California |           10123 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | SNF Organization Successfully Updated. |
+      | Description                              | Has_MO | Has_MO1 | Managing_Org | SNF_Name | Edited_SNF_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                |
+      | Changing the MO details on edit SNF page | YES    | NO      | MO_Name2     | SNFNAME  | SNFNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           45621 | SNF Organization Successfully Updated. |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"

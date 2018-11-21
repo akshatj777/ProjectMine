@@ -390,12 +390,19 @@ public class ViewACHOrganization  extends BaseClass{
 		String result = null;	
 		if(text.contains("YES"))
 			{
-				if(text.contains("Managing Organization"))
+				if(text.equals("Managing Organization - YES"))
 				{
 					delay();
 					result = getTextForElement(driver.findElement(By.xpath("//span[contains(text(),'Managing Organization:')]")));
 					result = result.substring(result.indexOf(":")+1, result.indexOf("|")).trim();
 					Assert.assertEquals(result,CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1));
+				}
+				else if(text.equals("Managing Organization2 - YES"))
+				{
+					delay();
+					result = getTextForElement(driver.findElement(By.xpath("//span[contains(text(),'Managing Organization:')]")));
+					result = result.substring(result.indexOf(":")+1, result.indexOf("|")).trim();
+					Assert.assertEquals(result,CreateManagingOrganizationAPI.MONameList.get(1).substring(1, CreateManagingOrganizationAPI.MONameList.get(1).length()-1));
 				}
 				else if(text.contains("Participant Id"))
 				{
