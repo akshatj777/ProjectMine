@@ -94,17 +94,21 @@ Feature: CARL Dashboard
 
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region - Market | Region - Market | Participant | DRG         | Physician - NPI | Model       | Anchor Facility Detail | Episode Length |
-      | Qafivedashtest@yopmail.com  |   1 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
-      | Qatwodashtest@yopmail.com   |   2 | True Random | True Random | True Random | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
-      | Qadashboardtest@yopmail.com |   3 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
-      | Qafivedashtest@yopmail.com  |   4 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
-      | Qatwodashtest@yopmail.com   |   5 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | Skip        | Skip            | Skip        | Skip                   | Skip           |
-      | Qadashboardtest@yopmail.com |   6 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | True Random     | Skip        | Skip                   | Skip           |
-      | allmodel123@yopmail.com     |   8 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | True All    | True Random     | True All    | Skip                   | Skip           |
-      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | Skip                   | Skip            | True Random | True Random | True Random     | True Random | Skip                   | Skip           |
-      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
-      | Qatwodashtest@yopmail.com   |  11 | True Random | True Random | True Random | Skip                   | Skip            | True Random | Skip        | True Random     | Skip        | Skip                   | Skip           |
+      | Qafivedashtest@yopmail.com  |   1 | Skip        | Skip        | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
+      | Qatwodashtest@yopmail.com   |   2 | Skip        | Skip        | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
+      | Qadashboardtest@yopmail.com |   3 | Skip        | Skip        | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
+      | allmodel123@yopmail.com     |   4 | Skip        | Skip        | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
+      | Qafivedashtest@yopmail.com  |   5 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
+      | Qatwodashtest@yopmail.com   |   6 | True Random | True Random | True Random | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
+      | Qadashboardtest@yopmail.com |   7 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
+      | Qafivedashtest@yopmail.com  |   8 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
+      | Qatwodashtest@yopmail.com   |   9 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | Skip        | Skip            | Skip        | Skip                   | Skip           |
+      | Qadashboardtest@yopmail.com |  10 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
+      | Qafivedashtest@yopmail.com  |  11 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip        | True Random     | Skip        | Skip                   | Skip           |
+      | allmodel123@yopmail.com     |  12 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | True All    | True Random     | True All    | Skip                   | Skip           |
+      | allmodel123@yopmail.com     |  13 | True Random | True Random | True Random | Skip                   | Skip            | True Random | True Random | True Random     | True Random | Skip                   | Skip           |
+      | Qafivedashtest@yopmail.com  |  14 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip        | Skip            | Skip        | Skip                   | Skip           |
+      | Qatwodashtest@yopmail.com   |  15 | True Random | True Random | True Random | Skip                   | Skip            | True Random | Skip        | True Random     | Skip        | Skip                   | Skip           |
 
   @RowLevelSecurity @CARL
   Scenario: Execute JMX file and read Output data for Data Filter Validations for EC
@@ -125,7 +129,7 @@ Feature: CARL Dashboard
     Then I verify "DRG" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Physician - NPI" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Model" for DB and FE filter values at "<Row>" for "EC"
-    
+
     Examples: 
       | Index | Row |
       |     0 |   1 |
@@ -139,3 +143,7 @@ Feature: CARL Dashboard
       |     8 |   9 |
       |     9 |  10 |
       |    10 |  11 |
+      |    11 |  12 |
+      |    12 |  13 |
+      |    13 |  14 |
+      |    14 |  15 |

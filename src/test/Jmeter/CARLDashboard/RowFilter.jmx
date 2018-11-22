@@ -588,7 +588,7 @@ ${EC_PHY_NPI}
 ${EC_Model}
 ${EC_AnchorFacilityDetails}
 ) a
-ORDER BY a.facilityNameInitCap, a.ccn;
+ORDER BY a.facilityNameInitCap, a.ccn; 
 </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
@@ -1001,8 +1001,7 @@ ORDER BY a.DRG_Fracture;
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Physician - NPI Filter Validation" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">
-select distinct
+          <stringProp name="query">select distinct
 			CONCAT(`Attributed Physician`,&apos; - &apos;, a.npi) as &apos;Physician - NPI&apos;
 FROM
     (
