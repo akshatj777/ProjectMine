@@ -381,7 +381,7 @@ ArrayList b= new ArrayList();
 		vars.put(&quot;EC_DRGCODE&quot;,&quot;&quot;);
 	}
 
-if(vars.get(&quot;npi&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
+     if(vars.get(&quot;npi&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
 	vars.put(&quot;EC_PHY_NPI&quot;,&quot;and dpy.npi is null&quot;);
 	vars.put(&quot;C_PHY_NPI&quot;,&quot;and p.npi is null&quot;);	
 } else if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){

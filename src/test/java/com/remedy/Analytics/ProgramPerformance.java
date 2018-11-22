@@ -1843,17 +1843,56 @@ public class ProgramPerformance extends BaseClass{
 //			            			 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
 			            			 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
 		                     //   	 val=val.substring(val.length() - 4);
-			            			valarr1=val.split("-");
-			            			val=valarr1[0].trim();
-			            			val = val.replaceAll("'","''");
-		                        	val="'"+val+"'";
-		                       		 arrayListTexts.add(val);
-		                       		 writeDataToOutputFile("Path");
-		                       		clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+			            			 
+			            			 valarr1=val.split("-");
+				            			val=valarr1[0].trim();
+				            			val="'"+val+"'";
+				            			arrayListTextsA.add(val);
+				            			
+				            			String new1;
+
+		     	            			if(valarr1[0].trim().contains("469") || valarr1[0].trim().contains("470")){
+		            				String val1=valarr1[1].trim();
+		            				if(val1.endsWith(")")){
+		            					String val3=val1;
+				            			String[] val4=val3.split("\\(");
+				            			val3=val4[0].trim();
+				            			val3="'"+val3+"'";
+				            			arrayListTextsB.add(val3);
+				            			new1=val1.substring(val1.indexOf("(")+1,val1.indexOf(")"));
+				            			if(new1.equals("F")){
+			            					new1=new1.replace("F", "1");
+			            				}else if(new1.equals("NF")){
+			            					new1=new1.replace("NF", "0");
+			            				}else if(new1.equals("U")){
+			            					new1=new1.replace("U", "-99");
+			            				}
+				            			new1="'"+new1+"'";
+				            			arrayListTextsC.add(new1);
+				            		    }else{
+		            					String val3=val1;
+				            			String[] val4=val3.split("\\(");
+				            			val3=val4[0].trim();
+				            			val3="'"+val3+"'";
+				            			arrayListTextsB.add(val3);	
+				            			arrayListTextsC.add("'Null'");
+				            			}}else{
+		            					String val1=valarr1[1].trim();
+		            					String val3=val1;
+		            					val3="'"+val3+"'";
+				            			arrayListTextsB.add(val3);
+				            			arrayListTextsC.add("'Null'");
+				            	    	arrayListTexts.addAll(arrayListTextsA);
+				            			writeDataToOutputFile("Path");
+				            			arrayListTexts.addAll(arrayListTextsB);
+				            			writeDataToOutputFile("Path");
+				            			arrayListTexts.addAll(arrayListTextsC);
+				            			writeDataToOutputFile("Path");
+				            	clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
 		                   		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 		                   		 delay();
 		                       		 return;
-		                         }
+		                         }}
 			            		 
 			            		 else{
 	                	    	     val=val.trim();
@@ -1896,26 +1935,13 @@ public class ProgramPerformance extends BaseClass{
                       else if(filter.contains("DRG")){
                     	  listItems.remove(randomIndex);
                     	  executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
-                     	 valarr1=val.split("-");
-	            			val=valarr1[0].trim();
-	            			val="'"+val+"'";
-	            			arrayListTextsA.add(val);
+                     	  valarr1=val.split("-");
+	            			String val9=valarr1[0].trim();
+	            			String val10="'"+val9+"'";
+	            			arrayListTextsA.add(val10);
 	                        String new1;
-//	                        if(i==1){
-//	                        ArrayList<String> arrayListTextsD=new ArrayList<String>();
-//	                        for(int m=0;m<listItemsText.size();m++){
-//	                        	String[] valarr2=listItemsText.get(m).split("-");
-//	                        	String var5=valarr2[0].trim();
-//	                        	arrayListTextsD.add(var5);
-//	                        	
-//	            				 }
-//	                        if(!arrayListTextsD.contains("469") || !arrayListTextsD.contains("470")){
-//	                        	arrayListTexts.add("Skip");
-//	                        	writeDataToOutputFile("Path");
-//	                        }
-//	                        }
-	            			
-	            			if(val.contains("469") || val.contains("470")){
+
+	     	            			if(val9.contains("469") || val9.contains("470")){
 	            				String val1=valarr1[1].trim();
 	            				if(val1.endsWith(")")){
 	            					String val3=val1;

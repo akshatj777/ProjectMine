@@ -161,13 +161,23 @@ if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
 
-if(vars.get(&quot;npi&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
-	vars.put(&quot;EC_PHY_NPI&quot;,&quot;and dpy.npi is null&quot;);		
-} else if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_PHY_NPI&quot;,&quot;and dpy.npi in ${npi}&quot;);		
-}else{
-	vars.put(&quot;EC_PHY_NPI&quot;,&quot;&quot;);
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+ if(vars.get(&quot;npi&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+  vars.put(&quot;C_PHY_NPI&quot;,&quot;and p.npi is null&quot;);
+ }
+ else if(vars.get(&quot;npi&quot;).contains(&quot;null&quot;)){
+  String valueNPI = &quot;and ( dpy.npi is null&quot;;
+  String valueNPI1 = vars.get(&quot;npi&quot;);
+  valueNPI1 = valueNPI1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+  valueNPI1 = &quot; or dpy.npi in &quot;+valueNPI1+&quot;)&quot;;
+  vars.put(&quot;EC_PHY_NPI&quot;,valueNPI+valueNPI1);
+  } else {
+  vars.put(&quot;EC_PHY_NPI&quot;,&quot;and dpy.npi in ${npi}&quot;);
+ }
+} else {
+vars.put(&quot;EC_PHY_NPI&quot;,&quot;&quot;);
 }
+
 if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_Model&quot;,&quot;and fp.Model in ${model}&quot;);	
 } else{

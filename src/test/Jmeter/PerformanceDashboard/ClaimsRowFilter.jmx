@@ -183,6 +183,10 @@ ArrayList g= new ArrayList();
 	String code4=vars.get(&quot;drgName&quot;);
 	log.info(&quot;Name Code is&quot;+code4);
 	String[] code5=code4.split(&quot;, &apos;&quot;);
+for(int i=0;i&lt;code5.length;i++){
+	log.info(&quot;drgName&quot;+i+code5[i]);
+}
+	
 	int n=code1.length-1;
 	
 	for(int i=0;i&lt;code1.length;i++){
@@ -215,14 +219,14 @@ ArrayList g= new ArrayList();
           String newsubcode2=code3[i];
          	 String newname2;
          if(i==0){
-       	newname2=code5[i];	
-       	}else if(!code1[i].trim().equals(&quot;&apos;469&apos;&quot;)){
+       	newname2=code5[i];
+       	}else {
           newname2=&quot;&apos;&quot;+code5[i];}
       	al1.add(newcode2);
       	al2.add(newname2);	
           al3.add(newsubcode2); 
           continue;
-       	 }else{
+       	 }else if(code1[i].trim().equals(&quot;&apos;469&apos;&quot;)){
        	String newcode=code1[i];
         	String newname;
         if(i==0){
@@ -321,12 +325,24 @@ ArrayList g= new ArrayList();
 	}else{
 	    vars.put(&quot;C_DRGCODE&quot;,&quot;&quot;);	
 	}
-	
+
 if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;C_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);		
-} else{
-	vars.put(&quot;C_PHY_NPI&quot;,&quot;&quot;);
+ if(vars.get(&quot;npi&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+  vars.put(&quot;C_PHY_NPI&quot;,&quot;and p.npi is null&quot;);
+ }
+ else if(vars.get(&quot;npi&quot;).contains(&quot;null&quot;)){
+  String valueNPI = &quot;and ( p.npi is null&quot;;
+  String valueNPI1 = vars.get(&quot;npi&quot;);
+  valueNPI1 = valueNPI1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+  valueNPI1 = &quot; or p.npi in &quot;+valueNPI1+&quot;)&quot;;
+  vars.put(&quot;C_PHY_NPI&quot;,valueNPI+valueNPI1);
+  } else {
+  vars.put(&quot;C_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);
+ }
+} else {
+vars.put(&quot;C_PHY_NPI&quot;,&quot;&quot;);
 }
+	
 if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){	
 	vars.put(&quot;C_Model&quot;,&quot;and c.Model in ${model}&quot;);
 } else{
