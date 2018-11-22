@@ -262,11 +262,11 @@ Feature: Edit SNF organization functionality tests
     And I edit State dropdown field to <Loc_State> for Location "1" for organization
     And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
     Then I click on "Submit" button on "Edit" organization page
-    Then I verify "<Message>" after submitting the "edit SNF" organization page
+    Then I verify "<Message>" after submitting the "FETCHFROMAPIForSNFNAME - <Has_MO>" organization page
 
     Examples: 
-      | Description                                                    | Has_MO | SNF_Name | Loc_Name     | Loc_Address1  | Loc_Type        | Loc_Region | Loc_Market | Loc_Address2  | Loc_City    | Loc_State  | Loc_Postal_Code | Message                                |
-      | Edit and Save an existing Location details on SNF Organization | NO     | SNFNAME  | Loc_Name new | Loc_Address12 | Skilled Nursing | Midwest    | Chicago    | Loc_Address22 | Loc_City11S | California |           10001 | SNF Organization Successfully Updated. |
+      | Description                                                    | Has_MO | SNF_Name | Loc_Name     | Loc_Address1  | Loc_Type        | Loc_Region | Loc_Market | Loc_Address2  | Loc_City   | Loc_State  | Loc_Postal_Code | Message                                |
+      | Edit and Save an existing Location details on SNF Organization | NO     | SNFNAME  | Loc_Name new | Loc_Address12 | Skilled Nursing | Midwest    | Chicago    | Loc_Address22 | Loc_City11 | California |           10001 | SNF Organization Successfully Updated. |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -361,7 +361,7 @@ Feature: Edit SNF organization functionality tests
     And I select state <Loc_State> for Location "1" on "create" organization page
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create Hospital - <Has_MO>" organization page
+    Then I verify "<Message>" after submitting the "create ACH - <Has_MO>" organization page
     When I click on "SNF" organization tab on organization dashboard
     Then I search with "<SNF_Name> - <Has_MO>" on organization in search box
     And I verify "<SNF_Name> - <Has_MO>" field in search list on organization page
@@ -413,9 +413,7 @@ Feature: Edit SNF organization functionality tests
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
     And I enter Location Id <Location_ID> for Location "1" on "create LTCH" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
-    And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
-    And I select market <Loc_Market> for region "<Loc_Region>" for Location "1" on "create" organization page
     And I select state <Loc_State> for Location "1" on "create" organization page
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
@@ -517,9 +515,7 @@ Feature: Edit SNF organization functionality tests
     And I enter location name <Loc_Name> for Location "2" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "2" on "create" organization page
-    And I select region <Loc_Region> for Location "2" on "create" organization page
     And I enter city <Loc_City> for Location "2" on "create" organization page
-    And I select market <Loc_Market> for region "<Loc_Region>" for Location "2" on "create" organization page
     And I select state <Loc_State> for Location "2" on "create" organization page
     And I enter zip <Loc_Postal_Code> for Location "2" on "create" organization page
     Then I click on "Submit" button on "create" organization page
