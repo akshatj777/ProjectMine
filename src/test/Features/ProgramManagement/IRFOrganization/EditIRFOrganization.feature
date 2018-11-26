@@ -511,10 +511,18 @@ Feature: Edit IRF Organization functionality tests
     And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
     Then I click on "Submit" button on "Edit" organization page
     Then I verify "<Message>" after submitting the "FETCHFROMAPIForIRFNAME - <Has_MO>" organization page
+    When I search with "<IRF_Name> - <Has_MO>" on organization in search box
+    And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
+    And I verify "<IRF_Name> - <Has_MO>" name on the header of view profile
+    And I verify "Location" tab present under "IRF" Organization
+    And I click on "Location" tab on view profile of "IRF" Organization
+    And I verify Location index id "<LID>" on view profile of "<IRF_Name> - <Has_MO>" organization
+    Then I verify Location details of "<Loc_Name>" on view profile of "IRF" organization
+    Then I verify Location details of "<Loc_Address1>" on view profile of "IRF" organization
 
     Examples: 
-      | Description                                                    | Has_MO | IRF_Name | Loc_Name     | Loc_Address1  | Loc_Type | Loc_Region | Loc_Market | Loc_Address2  | Loc_City    | Loc_State  | Loc_Postal_Code | Message                                |
-      | Edit and Save an existing Location details on IRF Organization | NO     | IRFNAME  | Loc_Name new | Loc_Address12 | IRF      | Midwest    | Chicago    | Loc_Address22 | Loc_City11S | California |           10001 | IRF Organization Successfully Updated. |
+      | Description                                                    | Has_MO | IRF_Name | Loc_Name     | Loc_Address1  | Loc_Type | Loc_Region | Loc_Market | Loc_Address2  | Loc_City   | Loc_State  | Loc_Postal_Code | Message                                |
+      | Edit and Save an existing Location details on IRF Organization | NO     | IRFNAME  | Loc_Name new | Loc_Address12 | IRF      | Midwest    | Chicago    | Loc_Address22 | Loc_City11 | California |           10001 | IRF Organization Successfully Updated. |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -536,11 +544,17 @@ Feature: Edit IRF Organization functionality tests
     And I select state <Loc_State> for Location "2" on "create" organization page
     And I enter zip <Loc_Postal_Code> for Location "2" on "create" organization page
     Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create IRF - <Has_MO>" organization page
+    Then I verify "<Message>" after submitting the "FETCHFROMAPIForIRFNAME - <Has_MO>" organization page
+    When I search with "<IRF_Name> - <Has_MO>" on organization in search box
+    And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
+    And I verify "<IRF_Name> - <Has_MO>" name on the header of view profile
+    And I verify "Location" tab present under "IRF" Organization
+    And I click on "Location" tab on view profile of "IRF" Organization
+    And I verify "2" location count on view "IRF" organization page
 
     Examples: 
-      | Description                                                | Has_MO | IRF_Name | Loc_Name   | Loc_Address1 | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                |
-      | Add one more location Location details on IRF Organization | NO     | IRFNAME  | Loc_Name12 | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | IRF Organization Successfully Updated. |
+      | Description                                                | Has_MO | IRF_Name | Loc_Name | Loc_Address1      | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                |
+      | Add one more location Location details on IRF Organization | NO     | IRFNAME  | Loc2     | Location Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | IRF Organization Successfully Updated. |
 
   Scenario Outline: <Description>
     Given I am on the login page

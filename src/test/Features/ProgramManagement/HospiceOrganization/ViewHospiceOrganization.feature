@@ -181,9 +181,9 @@ Feature: View Hospice organization functionality tests
     And I verify <City> in "city" on view profile of "Hospice" Organization
     And I verify <StateVerification> in "state" on view profile of "Hospice" Organization
     And I verify <Postal_Code> in "zip" on view profile of "Hospice" Organization
-    And I verify CCN "<CCN> - <Has_MO>" on view profile of "Hospice" organization
-    And I verify EIN/TIN id "<EIN/TIN> - <Has_MO>" on view profile of "Hospice" organization
-    And I verify NPI number "<NPI> - <Has_MO>" on view profile of "Hospice" organization
+    And I verify CCN id "<CCN> - <Has_MO>" on "Hospice" organization profile page
+    And I verify EIN/TIN id "<EIN/TIN> - <Has_MO>" on "Hospice" organization profile page
+    And I verify NPI id "<NPI> - <Has_MO>" on "Hospice" organization profile page
     And I verify "Managing Organization - <Has_MO>" on view profile of "Hospice" Organization
     And I verify "Participant Id - <Has_MO>" on view profile of "Hospice" Organization
 

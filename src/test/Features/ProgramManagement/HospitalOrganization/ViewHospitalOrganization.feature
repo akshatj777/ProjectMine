@@ -159,9 +159,9 @@ Feature: Hospital Organization View profile Functionality tests.
     #Then I verify Location indexID for "<Hosp_Name> - <Has_MO>" organization
     Then I verify Location details of "<Loc_Name>" on view profile of "Hospital" organization
     Then I verify Location details of "<Loc_Address1>" on view profile of "Hospital" organization
-
     #Then I verify Location details of "<Loc_Region>" on view profile of "Hospital" organization
     #Then I verify Location details of "<Loc_Market>" on view profile of "Hospital" organization
+    
     Examples: 
       | Description                                                                   | Has_MO | MO_Name | Hosp_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | StateVerification | Organization Type | Message                                     |
       | Verification of Hospital details and count on Hospital tab under Managing org | YES    | MONAME  | ACHNAME   | Address1 | Short_Name | Address2 | City | California |       10000 | Loc_Name | Loc_Address1 | Inpatient | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           10000 | CCN | EIN | NPI | CA                | ACH               | Hospital Organization Successfully Created. |
@@ -222,9 +222,9 @@ Feature: Hospital Organization View profile Functionality tests.
     #Then I verify Location indexID for "<Hosp_Name> - <Has_MO>" organization
     Then I verify Location details of "<Loc_Name>" on view profile of "Hospital" organization
     Then I verify Location details of "<Loc_Address1>" on view profile of "Hospital" organization
-
     #Then I verify Location details of "<Loc_Region>" on view profile of "Hospital" organization
     #Then I verify Location details of "<Loc_Market>" on view profile of "Hospital" organization
+    
     Examples: 
       | Description                                                                                                                  | Has_MO | MO_Name | Hosp_Name1          | Hosp_Name | Address1   | Short_Name   | Address2   | City    | State      | Postal_Code | Loc_Name   | Loc_Address1 | Loc_Type  | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Location_ID | StateVerification | Organization Type | Message                                     |
       | Searching invalid details on Managing Organization Profile Page for ACH and create ACH org and verify the details of ACH org | YES    | MONAME  | NoMatchesForACHNAME | ACHNAME   | Address111 | Short_Name11 | Address222 | City 34 | California |       18965 | Loc_Name11 | Loc_Address1 | Inpatient | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           34000 | CCN | EIN | NPI | LID         | CA                | ACH               | Hospital Organization Successfully Created. |
@@ -263,9 +263,9 @@ Feature: Hospital Organization View profile Functionality tests.
     #And I verify Location index id "<LID>" on view profile of "<Hosp_Name> - <Has_MO>" organization
     Then I verify Location details of "<Loc_Name>" on view profile of "Hospital" organization
     Then I verify Location details of "<Loc_Address1>" on view profile of "Hospital" organization
-
     #Then I verify Location details of "<Loc_Region>" on view profile of "Hospital" organization
     #Then I verify Location details of "<Loc_Market>" on view profile of "Hospital" organization
+    
     Examples: 
       | Description                                                                                                                  | Has_MO | MO_Name | Hosp_Name1          | Hosp_Name | Address1   | Short_Name   | Address2   | City    | State      | Postal_Code | Loc_Name   | Loc_Address1 | Loc_Type  | Loc_Address2 | Loc_Region | Loc_City | Loc_Market | Loc_State  | Loc_Postal_Code | CCN | EIN | NPI | Location_ID | StateVerification | Organization Type | Message                                     |
       | Searching invalid details on Managing Organization Profile Page for ACH and create ACH org and verify the details of ACH org | YES    | MONAME  | NoMatchesForACHNAME | ACHNAME   | Address111 | Short_Name11 | Address222 | City 34 | California |       18965 | Loc_Name11 | Loc_Address1 | Inpatient | Loc_Address2 | Midwest    | Loc_City | Chicago    | California |           34000 | CCN | EIN | NPI | LID         | CA                | ACH               | Hospital Organization Successfully Updated. |

@@ -66,7 +66,6 @@ Feature: View IRF organization functionality tests
     And I verify "Managing Organization - <Has_MO>" on view profile of "IRF" Organization
     And I verify "Participant Id - <Has_MO>" on view profile of "IRF" Organization
     And I verify "Location" tab present under "IRF" Organization
-    #And I verify "Bundle Payment Contracts" tab present under "IRF" Organization
     And I click on "Location" tab on view profile of "IRF" Organization
     And I verify "1" location count on view "IRF" organization page
     And I verify header name "ID" under "Location" for "IRF" organization
