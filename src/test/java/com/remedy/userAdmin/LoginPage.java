@@ -1,6 +1,7 @@
 package com.remedy.userAdmin;
 
 
+import com.remedy.Analytics.ProgramPerformance;
 import com.remedy.baseClass.BaseClass;
 import com.remedy.resources.DriverScript;
 
@@ -105,18 +106,30 @@ if(!(userName.isEmpty())){
 			iFillInText(driver.findElement(By.name("email")), CreateUserPage.usersEmailPerRole.get("Super Admin-Downstream Provider").get(userName));
 		}
 		else
-		{
+		{ 
+			     try{
 				iWillWaitToSee(By.name("email"));
 				iFillInText(driver.findElement(By.name("email")), userName);
+			     }catch(Exception e){
+			    	 ProgramPerformance.writer.print(System.lineSeparator());
+			    		String flag="1";
+			    		Assert.assertEquals("2", flag);
+			     }
 		}
 	}
 	}
 	public void iEnterPassword(String passWord) {
+		try{
 		if(!(passWord.isEmpty())){
 			iWillWaitToSee(By.name("password"));
 			iFillInText(driver.findElement(By.name("password")), passWord);
+		}}catch(Exception e){
+	    	 ProgramPerformance.writer.print(System.lineSeparator());
+	    		String flag="1";
+	    		Assert.assertEquals("2", flag);
+	     }
 	}
-	}
+
 	public void iEnterPasswordFieldForLoginAfterMailVerification(String passWord) {
 		iFillInText(driver.findElement(By.name("password")), passWord);
 	}
@@ -129,8 +142,14 @@ if(!(userName.isEmpty())){
 		}
 		else
 		{
+			try{
 			iWillWaitToSee(By.xpath("//*[contains(text(),'Log In')]"));
 			clickElement(driver.findElement(By.xpath("//*[contains(text(),'Log In')]")));
+			}catch(Exception e){
+		    	 ProgramPerformance.writer.print(System.lineSeparator());
+		    		String flag="1";
+		    		Assert.assertEquals("2", flag);
+		     }
 		}
 	}
 
@@ -139,6 +158,7 @@ if(!(userName.isEmpty())){
 		{
 			driver.navigate().refresh();
 			iWillWaitToSee(By.xpath("//div[@class='auth0-lock-body-content']"));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='auth0-lock-body-content']")));
 		}
 	}
 	
@@ -155,7 +175,7 @@ if(!(userName.isEmpty())){
 	}
 	
 	public void iShouldSeeEmailTextboxField(){
-		isElementVisible(driver.findElement(By.xpath("//input[@name='email']")));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//input[@name='email']")));
 	}
 	
 	public void iShouldVerifyWatermarkTextAppearingUnderEmailTextboxField(){
@@ -163,7 +183,7 @@ if(!(userName.isEmpty())){
 	}
 	
 	public void iShouldSeePasswordTextboxField(){
-		isElementVisible(driver.findElement(By.xpath("//input[@name='password']")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//input[@name='password']"))));
 	}
 	
 	public void iShouldVerifyWatermarkTextAppearingUnderPasswordTextboxField(){
@@ -171,18 +191,18 @@ if(!(userName.isEmpty())){
 	}
 	
 	public void iShouldSeeForgotPasswordLink(){
-		isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-alternative-link")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-alternative-link"))));
 	}
 	
 	public void iShouldSeeLogInButton(){
-		isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-submit")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-submit"))));
 	}
 	
 	public void iVerifyTheValidationMessage(String text){
 		if(text.equals("Can't be blank"))
 		verifyTextForElement(driver.findElement(By.cssSelector(".auth0-lock-error-msg>span")), text);
 		else if (text.equals("Remedy Connect"))
-			isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+text+"')]")));
+			Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+text+"')]"))));
 		else if(text.equals("WRONG EMAIL OR PASSWORD"))
 			verifyTextForElement(driver.findElement(By.xpath("//span[@class='animated fadeInUp']")), text);
 	}
