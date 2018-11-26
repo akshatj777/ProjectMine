@@ -27,7 +27,7 @@
         <stringProp name="password">1Welcome2</stringProp>
       </JDBCDataSource>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Performace DashBoard" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="HHA Network Management DashBoard" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -85,7 +85,9 @@
           <boolProp name="resetInterpreter">false</boolProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
-          <stringProp name="script">if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
+          <stringProp name="script">System.out.println(&quot;market &quot;+vars.get(&quot;market&quot;));
+vars.put(&quot;IterationValue&quot;,vars.get(&quot;market&quot;));
+if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_BPID&quot;,&quot;AND fp.bpid in ${bpid}&quot;);
 	vars.put(&quot;C_BPID&quot;,&quot;AND e.bpid in ${bpid}&quot;);	
 } else {
@@ -218,18 +220,20 @@ and fp.episodeCountReport=1
 and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
 and ei.bpid not like &apos;%DEMO%&apos; and fp.NSOCType  = &apos;HHA&apos;
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
-
+-- and fp.anchorAdmitDateKey &gt;= @test_beg_date
+-- and fp.anchorAdmitDateKey &lt;= @test_end_date
  
  -- And anc.facilityNameInitCap in (&apos;&apos;)
- ${EC_AnchorFacility}
- ${EC_CCN}
- ${EC_BUNDLE} 
- ${EC_R_REGION} 
- ${EC_R_MARKET} 
- ${EC_REGION} 
- ${EC_MARKET} 
- ${EC_PARTICIPANTNAME}  
- ${EC_PAF}
+    	               ${EC_BPID}
+    	               ${EC_AnchorFacility}
+    	               ${EC_CCN}
+				${EC_BUNDLE} 
+				${EC_R_REGION} 
+				${EC_R_MARKET} 
+				${EC_REGION} 
+				${EC_MARKET} 
+				${EC_PARTICIPANTNAME}  
+				${EC_PAF} 
 
 union
 
@@ -272,6 +276,8 @@ and e.bpid  not like &apos;%DEMO%&apos;
 and c.anchorBeginDateKey &gt;= 20160101 
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 and c.postAcuteCategory = &apos;HHA&apos; and c.targetPrice &lt;&gt; 0
+-- AND c.anchorBeginDateKey &gt;= @test_beg_date
+-- AND c.anchorBeginDateKey &lt;= @test_end_date
 
 -- AND f.facilityNameInitCap in (&apos;&apos;)
 ${C_AnchorFacility}
@@ -282,7 +288,7 @@ ${C_R_MARKET}
 ${C_REGION} 
 ${C_MARKET} 
 ${C_PARTICIPANTNAME}  
-${C_PAF}
+${C_PAF} 
 
 )  a
 order by concat(`Episode Initiator`,&apos; - &apos;, BPID); </stringProp>
@@ -380,15 +386,14 @@ and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwh
 and ei.bpid not like &apos;%DEMO%&apos; and fp.NSOCType  = &apos;HHA&apos;
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
   
--- And anc.facilityNameInitCap in (&apos;&apos;)
- ${EC_BPID}
- ${EC_BUNDLE} 
- ${EC_R_REGION} 
- ${EC_R_MARKET} 
- ${EC_REGION} 
- ${EC_MARKET} 
- ${EC_PARTICIPANTNAME}  
- ${EC_PAF}
+				${EC_BPID}
+				${EC_BUNDLE} 
+				${EC_R_REGION} 
+				${EC_R_MARKET} 
+				${EC_REGION} 
+				${EC_MARKET} 
+				${EC_PARTICIPANTNAME}  
+				${EC_PAF} 
   
 
 union
@@ -431,19 +436,19 @@ and c.anchorBeginDateKey &gt;= 20160101
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 and c.postAcuteCategory = &apos;HHA&apos; and c.targetPrice &lt;&gt; 0
 
-AND e.BPID in (&apos;&apos;)
-AND f.facilityNameInitCap in (&apos;&apos;)
-AND drg.bundleName(&apos;&apos;)
-AND rmp.region in (&apos;&apos;)
-AND rmp.market in (&apos;&apos;)
-AND rm.region in (&apos;&apos;)
-AND rm.market in (&apos;&apos;)
-AND e.participantNameInitCap in (&apos;&apos;)
-AND pac.facilityNameInitCap in (&apos;&apos;)
+-- AND f.facilityNameInitCap in (&apos;&apos;)
+${C_BPID}
+${C_BUNDLE} 
+${C_R_REGION} 
+${C_R_MARKET} 
+${C_REGION} 
+${C_MARKET} 
+${C_PARTICIPANTNAME}  
+${C_PAF} 
 
 
 )a
- order by concat(`Anchor Facility`, &apos; - &apos;, CCN) ;</stringProp>
+ order by concat(`Anchor Facility`, &apos; - &apos;, CCN) ; </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">AnchorFacility_CCN</stringProp>
@@ -509,16 +514,15 @@ and fp.episodeCountReport=1
 and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
 and ei.bpid not like &apos;%DEMO%&apos; and fp.NSOCType  = &apos;HHA&apos;
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
-
--- And anc.facilityNameInitCap in (&apos;&apos;)
  ${EC_BPID}
+ ${EC_AnchorFacility}
  ${EC_CCN}
  ${EC_R_REGION} 
  ${EC_R_MARKET} 
  ${EC_REGION} 
  ${EC_MARKET} 
  ${EC_PARTICIPANTNAME}  
- ${EC_PAF}
+ ${EC_PAF} 
 
 union
  
@@ -560,17 +564,17 @@ and c.anchorBeginDateKey &gt;= 20160101
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 and c.postAcuteCategory = &apos;HHA&apos; and c.targetPrice &lt;&gt; 0
 
+-- AND f.facilityNameInitCap in (&apos;&apos;)
 
-AND e.BPID in (&apos;&apos;)
-AND f.facilityNameInitCap in (&apos;&apos;)
-AND f.ccn in (&apos;&apos;)
-AND drg.bundleName(&apos;&apos;)
-AND rmp.region in (&apos;&apos;)
-AND rmp.market in (&apos;&apos;)
-AND rm.region in (&apos;&apos;)
-AND rm.market in (&apos;&apos;)
-AND e.participantNameInitCap in (&apos;&apos;)
-AND pac.facilityNameInitCap in (&apos;&apos;)
+${C_BPID}
+${C_AnchorFacility}
+${C_CCN}
+${C_R_REGION} 
+${C_R_MARKET} 
+${C_REGION} 
+${C_MARKET} 
+${C_PARTICIPANTNAME}  
+${C_PAF} 
 
 )a  order by a.Bundle ; </stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -584,7 +588,7 @@ AND pac.facilityNameInitCap in (&apos;&apos;)
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Remedy Region Market " enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select distinct CONCAT( &apos;Remedy-&apos;, a.region, &apos; &apos;,  a.market ) AS &apos;Remedy Region Market&apos; from
+          <stringProp name="query">select distinct CONCAT( &apos;Remedy &apos;, a.region, &apos; - &apos;,  a.market ) AS &apos;Remedy Region Market&apos; from
 ( 
 -- EC Data
 select 
@@ -638,13 +642,12 @@ and fp.episodeCountReport=1
 and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
 and ei.bpid not like &apos;%DEMO%&apos; and fp.NSOCType  = &apos;HHA&apos;
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
-
--- And anc.facilityNameInitCap in (&apos;&apos;)
+  AND fp.BPID in (&apos;&apos;)
+ -- And anc.facilityNameInitCap in (&apos;&apos;)
  ${EC_BPID}
+ ${EC_AnchorFacility}
  ${EC_CCN}
  ${EC_BUNDLE} 
- ${EC_R_REGION} 
- ${EC_R_MARKET} 
  ${EC_REGION} 
  ${EC_MARKET} 
  ${EC_PARTICIPANTNAME}  
@@ -690,20 +693,17 @@ and c.anchorBeginDateKey &gt;= 20160101
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 and c.postAcuteCategory = &apos;HHA&apos; and c.targetPrice &lt;&gt; 0
 
+-- AND f.facilityNameInitCap in (&apos;&apos;)
+${C_BPID}
+${C_AnchorFacility}
+${C_CCN}
+${C_BUNDLE} 
+${C_REGION} 
+${C_MARKET} 
+${C_PARTICIPANTNAME}  
+${C_PAF} 
 
-AND e.BPID in (&apos;&apos;)
-AND f.facilityNameInitCap in (&apos;&apos;)
-AND f.ccn in (&apos;&apos;)
-AND drg.bundleName(&apos;&apos;)
-AND rmp.region in (&apos;&apos;)
-AND rmp.market in (&apos;&apos;)
-AND rm.region in (&apos;&apos;)
-AND rm.market in (&apos;&apos;)
-AND e.participantNameInitCap in (&apos;&apos;)
-AND pac.facilityNameInitCap in (&apos;&apos;)
-
-)a  order by CONCAT( &apos;Remedy-&apos;, a.region, &apos; &apos;,  a.market ); 
-</stringProp>
+)a  order by CONCAT( &apos;Remedy &apos;, a.region, &apos; - &apos;,  a.market ); </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">RRegionMarket</stringProp>
@@ -715,7 +715,7 @@ AND pac.facilityNameInitCap in (&apos;&apos;)
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Partner Region Market" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select distinct CONCAT( a.participantShortName, a.region, &apos; &apos;,  a.market ) AS &apos;Partner Region Market&apos; from
+          <stringProp name="query">select distinct CONCAT( a.participantShortName,&apos; &apos;, a.region, &apos; - &apos;,  a.market ) AS &apos;Partner Region Market&apos; from
 ( 
 -- EC Data
 select 
@@ -769,15 +769,13 @@ and fp.episodeCountReport=1
 and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
 and ei.bpid not like &apos;%DEMO%&apos; and fp.NSOCType  = &apos;HHA&apos;
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
-
 -- And anc.facilityNameInitCap in (&apos;&apos;)
  ${EC_BPID}
+ ${EC_AnchorFacility}
  ${EC_CCN}
  ${EC_BUNDLE} 
  ${EC_R_REGION} 
  ${EC_R_MARKET} 
- ${EC_REGION} 
- ${EC_MARKET} 
  ${EC_PARTICIPANTNAME}  
  ${EC_PAF}
 
@@ -821,18 +819,17 @@ and c.anchorBeginDateKey &gt;= 20160101
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 and c.postAcuteCategory = &apos;HHA&apos; and c.targetPrice &lt;&gt; 0
 
-AND e.BPID in (&apos;&apos;)
-AND f.facilityNameInitCap in (&apos;&apos;)
-AND f.ccn in (&apos;&apos;)
-AND drg.bundleName(&apos;&apos;)
-AND rmp.region in (&apos;&apos;)
-AND rmp.market in (&apos;&apos;)
-AND rm.region in (&apos;&apos;)
-AND rm.market in (&apos;&apos;)
-AND e.participantNameInitCap in (&apos;&apos;)
-AND pac.facilityNameInitCap in (&apos;&apos;)
+-- AND f.facilityNameInitCap in (&apos;&apos;)
+${C_BPID}
+${C_AnchorFacility}
+${C_CCN}
+${C_BUNDLE} 
+${C_R_REGION} 
+${C_R_MARKET} 
+${C_PARTICIPANTNAME}  
+${C_PAF} 
 
-)a  order by CONCAT( a.participantShortName, a.region, &apos; &apos;,  a.market ); </stringProp>
+)a  order by CONCAT( a.participantShortName,&apos; &apos;, a.region, &apos; - &apos;,  a.market ); </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">PartnerRegionMarket</stringProp>
@@ -898,18 +895,17 @@ and fp.episodeCountReport=1
 and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
 and ei.bpid not like &apos;%DEMO%&apos; and fp.NSOCType  = &apos;HHA&apos;
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
- 
--- And anc.facilityNameInitCap in (&apos;&apos;)
+ -- And anc.facilityNameInitCap in (&apos;&apos;)
  ${EC_BPID}
+ ${EC_AnchorFacility}
  ${EC_CCN}
  ${EC_BUNDLE} 
  ${EC_R_REGION} 
  ${EC_R_MARKET} 
  ${EC_REGION} 
  ${EC_MARKET} 
- ${EC_PARTICIPANTNAME}  
  ${EC_PAF}
-
+ 
 union
 
  -- Claims Data
@@ -950,19 +946,18 @@ and c.anchorBeginDateKey &gt;= 20160101
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 and c.postAcuteCategory = &apos;HHA&apos; and c.targetPrice &lt;&gt; 0
 
-AND e.BPID in (&apos;&apos;)
-AND f.facilityNameInitCap in (&apos;&apos;)
-AND f.ccn in (&apos;&apos;)
-AND drg.bundleName(&apos;&apos;)
-AND rmp.region in (&apos;&apos;)
-AND rmp.market in (&apos;&apos;)
-AND rm.region in (&apos;&apos;)
-AND rm.market in (&apos;&apos;)
-AND e.participantNameInitCap in (&apos;&apos;)
-AND pac.facilityNameInitCap in (&apos;&apos;)
+-- AND f.facilityNameInitCap in (&apos;&apos;)
+${C_BPID}
+${C_AnchorFacility}
+${C_CCN}
+${C_BUNDLE} 
+${C_R_REGION} 
+${C_R_MARKET} 
+${C_REGION} 
+${C_MARKET} 
+${C_PAF} 
 
-)a  order by a.Participant ;
-</stringProp>
+)a  order by a.Participant ;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">participantName</stringProp>
@@ -978,7 +973,9 @@ AND pac.facilityNameInitCap in (&apos;&apos;)
 from
 ( 
 -- EC Data
-select distinct post_acute_df.facilityNameInitCap as &apos;Post Acute Facility&apos;
+select distinct 
+case when post_acute_df.facilityNameInitCap is null then &apos;Not Available&apos; else post_acute_df.facilityNameInitCap end AS &apos;Post Acute Facility&apos;
+-- post_acute_df.facilityNameInitCap as &apos;Post Acute Facility&apos;
 -- post_acute_df.ccn as &apos;Post Acute CCN&apos;
 FROM
 warehouse.factPatientEpisode fp
@@ -1029,22 +1026,24 @@ and fp.episodeCountReport=1
 and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
 and ei.bpid not like &apos;%DEMO%&apos; and fp.NSOCType  = &apos;HHA&apos;
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
- 
--- And anc.facilityNameInitCap in (&apos;&apos;)
+ -- And anc.facilityNameInitCap in (&apos;&apos;)
  ${EC_BPID}
+ ${EC_AnchorFacility}
  ${EC_CCN}
  ${EC_BUNDLE} 
  ${EC_R_REGION} 
  ${EC_R_MARKET} 
  ${EC_REGION} 
  ${EC_MARKET} 
- ${EC_PARTICIPANTNAME}  
- ${EC_PAF}
+ ${EC_PARTICIPANTNAME}
 
 union
 
 -- Claims Data 
-select distinct  pac.facilityNameInitCap AS &apos;Post Acute Facility&apos;
+
+select distinct
+case when pac.facilityNameInitCap is null then &apos;Not Available&apos; else pac.facilityNameInitCap end AS &apos;Post Acute Facility&apos;
+
  -- pac.ccn AS &apos;Post Acute CCN&apos;
 FROM
     warehouse.factClaims c LEFT JOIN
@@ -1081,16 +1080,17 @@ and c.anchorBeginDateKey &gt;= 20160101
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
 and c.postAcuteCategory = &apos;HHA&apos; and c.targetPrice &lt;&gt; 0
 
-AND e.BPID in (&apos;&apos;)
-AND f.facilityNameInitCap in (&apos;&apos;)
-AND f.ccn in (&apos;&apos;)
-AND drg.bundleName(&apos;&apos;)
-AND rmp.region in (&apos;&apos;)
-AND rmp.market in (&apos;&apos;)
-AND rm.region in (&apos;&apos;)
-AND rm.market in (&apos;&apos;)
-AND e.participantNameInitCap in (&apos;&apos;)
-AND pac.facilityNameInitCap in (&apos;&apos;)
+-- AND f.facilityNameInitCap in (&apos;&apos;)
+ ${C_BPID}
+ ${C_AnchorFacility}
+ ${C_CCN}
+ ${C_BUNDLE} 
+ ${C_R_REGION} 
+ ${C_R_MARKET} 
+ ${C_REGION} 
+ ${C_MARKET} 
+${C_PARTICIPANTNAME} 
+ 
 
 )a  order by `Post Acute Facility`; 
 </stringProp>
@@ -1219,7 +1219,9 @@ f= new FileOutputStream(path + separator+&quot;RowFilterOutput.txt&quot;,true);
 	String vValue2 =  vars.get(&quot;value2&quot;);
 	String vValue3 =  vars.get(&quot;value3&quot;);
 	String vValue4 =  vars.get(&quot;value4&quot;);
+	vValue4 = vValue4.replace(&quot;null&quot;,&quot;Not Available&quot;); 
 	String vValue5 =  vars.get(&quot;value5&quot;);
+	vValue5 = vValue5.replace(&quot;null&quot;,&quot;Not Available&quot;);
 	String vValue6 =  vars.get(&quot;value6&quot;);
 	String vValue7 =  vars.get(&quot;value7&quot;);
 	
