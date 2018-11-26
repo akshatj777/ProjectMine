@@ -85,7 +85,10 @@
           <boolProp name="resetInterpreter">false</boolProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
-          <stringProp name="script">if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
+          <stringProp name="script">System.out.println(&quot;market &quot;+vars.get(&quot;market&quot;));
+vars.put(&quot;IterationValue&quot;,vars.get(&quot;market&quot;));
+
+if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;C_BPID&quot;,&quot;AND e.bpid in ${bpid}&quot;);	
 } else {
 	vars.put(&quot;C_BPID&quot;,&quot;&quot;);
@@ -180,6 +183,10 @@ ArrayList g= new ArrayList();
 	String code4=vars.get(&quot;drgName&quot;);
 	log.info(&quot;Name Code is&quot;+code4);
 	String[] code5=code4.split(&quot;, &apos;&quot;);
+for(int i=0;i&lt;code5.length;i++){
+	log.info(&quot;drgName&quot;+i+code5[i]);
+}
+	
 	int n=code1.length-1;
 	
 	for(int i=0;i&lt;code1.length;i++){
@@ -212,14 +219,14 @@ ArrayList g= new ArrayList();
           String newsubcode2=code3[i];
          	 String newname2;
          if(i==0){
-       	newname2=code5[i];	
-       	}else if(!code1[i].trim().equals(&quot;&apos;469&apos;&quot;)){
+       	newname2=code5[i];
+       	}else {
           newname2=&quot;&apos;&quot;+code5[i];}
       	al1.add(newcode2);
       	al2.add(newname2);	
           al3.add(newsubcode2); 
           continue;
-       	 }else{
+       	 }else if(code1[i].trim().equals(&quot;&apos;469&apos;&quot;)){
        	String newcode=code1[i];
         	String newname;
         if(i==0){
@@ -273,43 +280,43 @@ ArrayList g= new ArrayList();
 
      if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.contains(&quot;&apos;470&apos;&quot;)){
      	if(ww.isEmpty()){
-     	  neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drg.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drg.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
+     	  neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
+            String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
             neee=neee+neee1;
             log.info(&quot;Nee is&quot;+neee);
      	}else{
-     neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drg.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
-      String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drg.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
-      String neee2=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drg.drgName in (&quot;+ww1+&quot;))&quot;;
+     neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
+      String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
+      String neee2=&quot;OR (drg.drgCode in (&quot;+ww+&quot;))&quot;;
       neee=neee+neee1+neee2;
       log.info(&quot;Nee is&quot;+neee);}
      } else if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.isEmpty() &amp;&amp; ww.isEmpty()){
-     	neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drg.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;
+     	neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;
      	log.info(&quot;469 Nee is&quot;+neee);
      }else if(ww4.isEmpty() &amp;&amp; ww2.contains(&quot;&apos;470&apos;&quot;) &amp;&amp; ww.isEmpty()){
-     	neee=&quot;AND (drg.drgCode in (&quot;+ww2+&quot;) and  drg.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
+     	neee=&quot;AND (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
      	log.info(&quot;470 Nee is&quot;+neee);
      }else if(ww4.isEmpty() &amp;&amp; ww2.isEmpty()){
      	if(ww.isEmpty()){
      	}
      	else{
-     	neee=&quot;AND (drg.drgCode in (&quot;+ww+&quot;) and  drg.drgName in (&quot;+ww1+&quot;))&quot;;
+     	neee=&quot;AND (drg.drgCode in (&quot;+ww+&quot;))&quot;;
      	log.info(&quot;470 Nee is&quot;+neee);
      	}
      }else if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.isEmpty()){
      	if(ww.isEmpty()){
      		
      	}else{
-     	  neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drg.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drg.drgName in (&quot;+ww1+&quot;))&quot;;
+     	  neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
+            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;))&quot;;
            neee=neee+neee1;
           log.info(&quot;Nee is&quot;+neee);}
      }else if(ww4.isEmpty() &amp;&amp; ww2.contains(&quot;470&quot;)){
      	if(ww.isEmpty()){
      		
      	}else{
-     	  neee=&quot;AND (drg.drgCode in (&quot;+ww2+&quot;) and  drg.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;) and  drg.drgName in (&quot;+ww1+&quot;))&quot;;
+     	  neee=&quot;AND (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;	
+            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;))&quot;;
            neee=neee+neee1;
           log.info(&quot;Nee is&quot;+neee);
      }} }
@@ -318,12 +325,24 @@ ArrayList g= new ArrayList();
 	}else{
 	    vars.put(&quot;C_DRGCODE&quot;,&quot;&quot;);	
 	}
-	
+
 if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;C_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);		
-} else{
-	vars.put(&quot;C_PHY_NPI&quot;,&quot;&quot;);
+ if(vars.get(&quot;npi&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+  vars.put(&quot;C_PHY_NPI&quot;,&quot;and p.npi is null&quot;);
+ }
+ else if(vars.get(&quot;npi&quot;).contains(&quot;null&quot;)){
+  String valueNPI = &quot;and ( p.npi is null&quot;;
+  String valueNPI1 = vars.get(&quot;npi&quot;);
+  valueNPI1 = valueNPI1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+  valueNPI1 = &quot; or p.npi in &quot;+valueNPI1+&quot;)&quot;;
+  vars.put(&quot;C_PHY_NPI&quot;,valueNPI+valueNPI1);
+  } else {
+  vars.put(&quot;C_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);
+ }
+} else {
+vars.put(&quot;C_PHY_NPI&quot;,&quot;&quot;);
 }
+	
 if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){	
 	vars.put(&quot;C_Model&quot;,&quot;and c.Model in ${model}&quot;);
 } else{
@@ -348,6 +367,8 @@ SELECT DISTINCT
     LEFT JOIN warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
     LEFT JOIN warehouse.dimDate dt ON c.anchorBeginDateKey = dt.dateSK
 	LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  
+	LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
 	LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    
 	LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  
 	LEFT JOIN warehouse.dimRegionMarket prm ON c.rgPartnerKey = prm.rgSK	
@@ -403,6 +424,8 @@ FROM
     LEFT JOIN warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
     LEFT JOIN warehouse.dimDate dt ON c.anchorBeginDateKey = dt.dateSK
 	LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  
+	LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
 	LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    
 	LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  
 	LEFT JOIN warehouse.dimRegionMarket prm ON c.rgPartnerKey = prm.rgSK
@@ -460,7 +483,9 @@ FROM
     LEFT JOIN warehouse.dimFacility pac ON c.postAcuteFacilityKey = pac.facilitySK
     LEFT JOIN warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
     LEFT JOIN warehouse.dimDate dt ON c.anchorBeginDateKey = dt.dateSK
-	LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  
+	LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK
+	LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/  
 	LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    
 	LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  
 	LEFT JOIN warehouse.dimRegionMarket prm ON c.rgPartnerKey = prm.rgSK 
@@ -522,6 +547,8 @@ FROM
     LEFT JOIN warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
     LEFT JOIN warehouse.dimDate dt ON c.anchorBeginDateKey = dt.dateSK
     LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK
+    LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
     LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    
 	LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  
 	LEFT JOIN warehouse.dimRegionMarket prm ON c.rgPartnerKey = prm.rgSK
@@ -581,6 +608,8 @@ FROM
     LEFT JOIN warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
     LEFT JOIN warehouse.dimDate dt ON c.anchorBeginDateKey = dt.dateSK
     LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK
+    LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
     LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK
     LEFT JOIN warehouse.dimRegionMarket prm ON c.rgPartnerKey = prm.rgSK
 	LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK 
@@ -638,6 +667,8 @@ FROM
     LEFT JOIN warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
     LEFT JOIN warehouse.dimDate dt ON c.anchorBeginDateKey = dt.dateSK
     LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK
+    LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
     LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK
     LEFT JOIN warehouse.dimRegionMarket prm ON c.rgPartnerKey = prm.rgSK
 	LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK 
@@ -698,10 +729,10 @@ FROM
 --     else CONCAT(drg.drgName,&apos; (&apos;,drg.drgcode ,&apos;)&apos;)
 --    end as &apos;DRG_Fracture&apos;,
 	SELECT DISTINCT
-     case when drg.drgcode in (469,470) and drg.drgsubcode=0 then CONCAT(drg.drgcode, &apos; - &apos;, drg.drgName,&apos; (NF)&apos;)
-     when drg.drgcode in (469,470) and drg.drgsubcode=1 then CONCAT(drg.drgcode, &apos; - &apos;, drg.drgName,&apos; (F)&apos;)
-     when drg.drgcode in (469,470) and drg.drgsubcode=-99 then CONCAT(drg.drgcode, &apos; - &apos;, drg.drgName,&apos; (U)&apos;)
-     else CONCAT(drg.drgcode, &apos; - &apos;, drg.drgName)
+     case when drg.drgcode in (469,470) and drg.drgsubcode=0 then CONCAT(drg.drgcode, &apos; - &apos;, drgf.drgName,&apos; (NF)&apos;)
+     when drg.drgcode in (469,470) and drg.drgsubcode=1 then CONCAT(drg.drgcode, &apos; - &apos;, drgf.drgName,&apos; (F)&apos;)
+     when drg.drgcode in (469,470) and drg.drgsubcode=-99 then CONCAT(drg.drgcode, &apos; - &apos;, drgf.drgName,&apos; (U)&apos;)
+     else CONCAT(drg.drgcode, &apos; - &apos;, drgf.drgName)
     end as &apos;DRG_Fracture&apos;,
     case when drg.drgCode is null then null else drg.drgCode end as drgCode
     FROM
@@ -711,6 +742,10 @@ FROM
     LEFT JOIN warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
     LEFT JOIN warehouse.dimDate dt ON c.anchorBeginDateKey = dt.dateSK
     LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK
+    
+    LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
+  
     LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK
     LEFT JOIN warehouse.dimRegionMarket prm ON c.rgPartnerKey = prm.rgSK
 	LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK
@@ -757,16 +792,13 @@ ORDER BY a.DRG_Fracture;
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Physician - NPI Filter Validation" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT DISTINCT
- --   a.physicianNameInitCap, a.npi, a.Physician_NPI
- a.Physician_NPI
+          <stringProp name="query">select distinct
+   CONCAT(`Attributed Physician`,&apos; - &apos;, a.npi) as &apos;Physician - NPI&apos;
 FROM
-    ( 
-	
-	-- CLAIMS
-	SELECT DISTINCT
-		p.physicianNameInitCap, p.npi, 
-		CONCAT(p.physicianNameInitCap,&apos; - &apos;, p.npi) as &apos;Physician_NPI&apos;
+    (
+    Select DISTINCT 
+case when p.physicianNameInitCap is null then &apos;No Name&apos; else p.physicianNameInitCap end as &apos;Attributed Physician&apos;,
+case when p.npi is null then &apos;No NPI&apos; else p.npi end as NPI
     FROM
         warehouse.factClaims c
     LEFT JOIN warehouse.dimFacility f ON c.anchorFacilityKey = f.facilitySK
@@ -774,6 +806,8 @@ FROM
     LEFT JOIN warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
     LEFT JOIN warehouse.dimDate dt ON c.anchorBeginDateKey = dt.dateSK
     LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK
+    LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
     LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK
     LEFT JOIN warehouse.dimRegionMarket prm ON c.rgPartnerKey = prm.rgSK
     LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK
@@ -807,7 +841,7 @@ FROM
 				${C_Model} 
             
             ) a
-ORDER BY a.Physician_NPI;
+ORDER BY `Physician - NPI`;
 </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
@@ -834,6 +868,8 @@ FROM
 	LEFT JOIN warehouse.dimEpisodeInitiator e ON c.episodeInitiatorKey = e.episodeInitiatorSK
 	LEFT JOIN warehouse.dimDate dt ON c.anchorBeginDateKey = dt.dateSK  
 	LEFT JOIN warehouse.dimDRG drg ON c.anchorDrgKey = drg.drgSK  
+	LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct drg.drgCode as Code1, max(drg.fiscalYear) as fiscalYear1 from warehouse.dimDRG drg group by  drg.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on drg.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
 	LEFT JOIN warehouse.dimPhysician p ON c.physicianKey = p.physicianSK    
 	LEFT JOIN warehouse.dimRegionMarket rm ON c.rgRemKey = rm.rgSK  
 	LEFT JOIN warehouse.dimRegionMarket prm ON c.rgPartnerKey = prm.rgSK 
@@ -1079,6 +1115,11 @@ log.info(&quot;Path: 7&quot;);
 f= new FileOutputStream(path + separator+&quot;ClaimsRowFilterOutput.txt&quot;,true);
 	p = new PrintStream(f);
 
+String itr = vars.get(&quot;IterationValue&quot;);
+ if(itr.isEmpty()){
+  p.println(&quot;Error in creating input data to execute query&quot;);
+ }else {
+
 	String vValue1 =  vars.get(&quot;value1&quot;);
 	String vValue2 =  vars.get(&quot;value2&quot;);
 	String vValue3 =  vars.get(&quot;value3&quot;);
@@ -1095,7 +1136,7 @@ f= new FileOutputStream(path + separator+&quot;ClaimsRowFilterOutput.txt&quot;,t
 	p.println(&quot;Episode Initiator - BPID=&quot;+vValue1+&quot;*Anchor Facility - CCN=&quot;+vValue2+&quot;*Bundle=&quot;+vValue3+&quot;*Remedy Region - Market=&quot;+vValue4+&quot;*Region - Market=&quot;+vValue5+&quot;*Participant=&quot;+vValue6+&quot;*DRG=&quot;+vValue7+&quot;*Physician - NPI=&quot;+vValue8+&quot;*Model=&quot;+vValue9); //+&quot;*Anchor Facility Detail=&quot;+vValue10);
 	
 //	p.println(&quot;Episode Initiator - BPID=&quot;+${value1}+&quot;*Anchor Facility - CCN=&quot;+${value2}+&quot;*Bundle=&quot;+${value3}+&quot;*Remdy Region Market=&quot;+${value4}+&quot;*Partner Region Market=&quot;+${value5}+&quot;*Participant=&quot;+${value6}+&quot;*DRG - Fracture=&quot;+${value7}+&quot;*Physician - NPI=&quot;+${value8}+&quot;*Model=&quot;+${value9}); //&quot;*Anchor Facility Detail=&quot;+${value10});
-
+ }
 	p.close();
 	f.close();
 

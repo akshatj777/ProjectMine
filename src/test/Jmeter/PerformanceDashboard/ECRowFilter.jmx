@@ -85,7 +85,10 @@
           <boolProp name="resetInterpreter">false</boolProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
-          <stringProp name="script">if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
+          <stringProp name="script">System.out.println(&quot;market &quot;+vars.get(&quot;market&quot;));
+vars.put(&quot;IterationValue&quot;,vars.get(&quot;market&quot;));
+
+if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_BPID&quot;,&quot;AND de.bpid in ${bpid}&quot;);
 } else {
 	vars.put(&quot;EC_BPID&quot;,&quot;&quot;);
@@ -158,24 +161,34 @@ if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
 
-if(vars.get(&quot;npi&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
-	vars.put(&quot;EC_PHY_NPI&quot;,&quot;and dpy.npi is null&quot;);		
-} else if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_PHY_NPI&quot;,&quot;and dpy.npi in ${npi}&quot;);		
-}else{
-	vars.put(&quot;EC_PHY_NPI&quot;,&quot;&quot;);
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+ if(vars.get(&quot;npi&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+  vars.put(&quot;C_PHY_NPI&quot;,&quot;and p.npi is null&quot;);
+ }
+ else if(vars.get(&quot;npi&quot;).contains(&quot;null&quot;)){
+  String valueNPI = &quot;and ( dpy.npi is null&quot;;
+  String valueNPI1 = vars.get(&quot;npi&quot;);
+  valueNPI1 = valueNPI1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+  valueNPI1 = &quot; or dpy.npi in &quot;+valueNPI1+&quot;)&quot;;
+  vars.put(&quot;EC_PHY_NPI&quot;,valueNPI+valueNPI1);
+  } else {
+  vars.put(&quot;EC_PHY_NPI&quot;,&quot;and dpy.npi in ${npi}&quot;);
+ }
+} else {
+vars.put(&quot;EC_PHY_NPI&quot;,&quot;&quot;);
 }
+
 if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_Model&quot;,&quot;and fp.Model in ${model}&quot;);	
 } else{
 	vars.put(&quot;EC_Model&quot;,&quot;&quot;);
 }	
 if(vars.get(&quot;anch&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
-	vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;and afdetail.facilityNameInitCap is null&quot;);		
+	vars.put(&quot;EC_AnchorFacility&quot;,&quot;and afdetail.facilityNameInitCap is null&quot;);		
 } else if(!vars.get(&quot;anch&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;and afdetail.facilityNameInitCap in ${anch}&quot;);		
+	vars.put(&quot;EC_AnchorFacility&quot;,&quot;and afdetail.facilityNameInitCap in ${anch}&quot;);		
 }else{
-	vars.put(&quot;EC_AnchorFacilityDetails&quot;,&quot;&quot;);
+	vars.put(&quot;EC_AnchorFacility&quot;,&quot;&quot;);
 }
 
 if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
@@ -215,7 +228,7 @@ ArrayList b= new ArrayList();
              log.info(&quot;ww is&quot;+ww);
             String ww1=b.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;).replace(&quot;(&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;);
             log.info(&quot;ww is&quot;+ww1);
-            neee=&quot;AND (d.drgCode in (&quot;+ww+&quot;) and  d.drgName in (&quot;+ww1+&quot;))&quot;;
+            neee=&quot;AND (d.drgCode in (&quot;+ww+&quot;))&quot;;
      	  log.info(&quot;Nee is&quot;+neee);
            vars.put(&quot;EC_DRGCODE&quot;,neee);
 		} else{
@@ -247,6 +260,8 @@ LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
 LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct d.drgCode as Code1, max(d.fiscalYear) as fiscalYear1 from warehouse.dimDRG d group by  d.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on d.drgCode = drgf.drgCode  /*This join was added to handle change REP-6448*/
 LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
@@ -286,7 +301,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacilityDetails}
+				${EC_AnchorFacility}
 			) a
 ORDER BY a.episodeInitiatorNameInitCap , a.bpid;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -318,6 +333,8 @@ LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
 LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct d.drgCode as Code1, max(d.fiscalYear) as fiscalYear1 from warehouse.dimDRG d group by  d.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on d.drgCode = drgf.drgCode  /
 LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
@@ -363,7 +380,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacilityDetails}
+				${EC_AnchorFacility}
 				) a
 ORDER BY a.facilityNameInitCap, a.ccn;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -394,6 +411,8 @@ LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
 LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct d.drgCode as Code1, max(d.fiscalYear) as fiscalYear1 from warehouse.dimDRG d group by  d.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on d.drgCode = drgf.drgCode  /
 LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
@@ -440,7 +459,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacilityDetails}
+				${EC_AnchorFacility}
 			    ) a
 ORDER BY a.bundleName;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -472,6 +491,8 @@ LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
 LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct d.drgCode as Code1, max(d.fiscalYear) as fiscalYear1 from warehouse.dimDRG d group by  d.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on d.drgCode = drgf.drgCode  /
 LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
@@ -518,7 +539,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacilityDetails} 
+				${EC_AnchorFacility} 
 				) a
 ORDER BY a.PartnerRegionMarket;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -550,6 +571,8 @@ LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
 LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct d.drgCode as Code1, max(d.fiscalYear) as fiscalYear1 from warehouse.dimDRG d group by  d.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on d.drgCode = drgf.drgCode  /
 LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
@@ -596,7 +619,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacilityDetails}
+				${EC_AnchorFacility}
 				) a
 ORDER BY a.RRegionMarket;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -627,6 +650,8 @@ LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
 LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct d.drgCode as Code1, max(d.fiscalYear) as fiscalYear1 from warehouse.dimDRG d group by  d.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on d.drgCode = drgf.drgCode  /
 LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
@@ -673,7 +698,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacilityDetails}
+				${EC_AnchorFacility}
 				) a
 ORDER BY a.participant;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -695,7 +720,7 @@ FROM
   -- EC  
     SELECT DISTINCT
 --     CONCAT(d.drgName ,&apos; (&apos;,d.drgCode,&apos;)&apos;) as &apos;DRG_Fracture&apos;,
-     CONCAT(d.drgcode, &apos; - &apos;, d.drgName) as &apos;DRG_Fracture&apos;,
+     CONCAT(d.drgcode, &apos; - &apos;, drgf.drgName) as &apos;DRG_Fracture&apos;,
      case when d.drgCode is null then null else d.drgCode end as drgCode
     FROM
         warehouse.factPatientEpisode fp
@@ -706,6 +731,8 @@ LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
 LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct d.drgCode as Code1, max(d.fiscalYear) as fiscalYear1 from warehouse.dimDRG d group by  d.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on d.drgCode = drgf.drgCode  /
 LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
@@ -752,7 +779,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 --				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacilityDetails}
+				${EC_AnchorFacility}
 ) a
 ORDER BY a.DRG_Fracture;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -785,6 +812,8 @@ LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
 LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct d.drgCode as Code1, max(d.fiscalYear) as fiscalYear1 from warehouse.dimDRG d group by  d.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on d.drgCode = drgf.drgCode  /
 LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
@@ -831,7 +860,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_DRGCODE} 
 --				${EC_PHY_NPI} 
 				${EC_Model}
-				${EC_AnchorFacilityDetails}
+				${EC_AnchorFacility}
 ) a
 ORDER BY a.Physician_NPI;</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -861,7 +890,9 @@ LEFT JOIN warehouse.dimFacility pac on fp.anchorPostAcuteAdmitFacilityKey = pac.
 LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK 
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
-LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct d.drgCode as Code1, max(d.fiscalYear) as fiscalYear1 from warehouse.dimDRG d group by  d.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on d.drgCode = drgf.drgCode  / 
 LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK 
@@ -907,7 +938,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 				${EC_PARTICIPANTNAME}  
 				${EC_DRGCODE} 
 				${EC_PHY_NPI} 
-				${EC_AnchorFacilityDetails}
+				${EC_AnchorFacility}
 				) a
 ORDER BY a.model;	</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -933,6 +964,8 @@ LEFT JOIN warehouse.dimPatient dp on fp.patientKey = dp.patientSK
 LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
 LEFT JOIN warehouse.dimLookup dlk on dp.totalRiskScore = dlk.lookupName 
 LEFT JOIN warehouse.dimDRG d on fp.currDrgKey = d.drgSK 
+LEFT JOIN (select distinct drg1.drgCode, drg1.drgName from warehouse.dimDRG drg1 inner join (select distinct d.drgCode as Code1, max(d.fiscalYear) as fiscalYear1 from warehouse.dimDRG d group by  d.drgCode) drg2
+                    on  drg1.drgCode =  drg2.Code1 and  drg1.fiscalYear =  drg2.fiscalYear1) drgf on d.drgCode = drgf.drgCode  /
 LEFT JOIN warehouse.dimRegionMarket rm on rm.rgSK = fp.rgRemKey 
 LEFT JOIN warehouse.dimRegionMarket prm on prm.rgSK = fp.rgPartnerKey 
 LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK 
@@ -1121,7 +1154,10 @@ if(vars.get(&quot;Flag&quot;).equals(&quot;(1)&quot;)){
 log.info(&quot;Path: 7&quot;);
 f= new FileOutputStream(path + separator+&quot;ECRowFilterOutput.txt&quot;,true);
 	p = new PrintStream(f);
-
+String itr = vars.get(&quot;IterationValue&quot;);
+ if(itr.isEmpty()){
+  p.println(&quot;Error in creating input data to execute query&quot;);
+ }else {
 	String vValue1 =  vars.get(&quot;value1&quot;);
 	String vValue2 =  vars.get(&quot;value2&quot;);
 	String vValue3 =  vars.get(&quot;value3&quot;);
@@ -1136,7 +1172,7 @@ f= new FileOutputStream(path + separator+&quot;ECRowFilterOutput.txt&quot;,true)
 	
 	
 	p.println(&quot;Episode Initiator - BPID=&quot;+vValue1+&quot;*Anchor Facility - CCN=&quot;+vValue2+&quot;*Bundle=&quot;+vValue3+&quot;*Remedy Region - Market=&quot;+vValue4+&quot;*Region - Market=&quot;+vValue5+&quot;*Participant=&quot;+vValue6+&quot;*DRG=&quot;+vValue7+&quot;*Physician - NPI=&quot;+vValue8+&quot;*Model=&quot;+vValue9+&quot;*Anchor Facility Detail=&quot;+vValue10);
-	
+ }
 //	p.println(&quot;Episode Initiator - BPID=&quot;+${value1}+&quot;*Anchor Facility - CCN=&quot;+${value2}+&quot;*Bundle=&quot;+${value3}+&quot;*Remdy Region Market=&quot;+${value4}+&quot;*Partner Region Market=&quot;+${value5}+&quot;*Participant=&quot;+${value6}+&quot;*DRG - Fracture=&quot;+${value7}+&quot;*Physician - NPI=&quot;+${value8}+&quot;*Model=&quot;+${value9}+&quot;*Anchor Facility Detail=&quot;+${value10});
 
 	p.close();
