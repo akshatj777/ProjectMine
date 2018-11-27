@@ -3,6 +3,7 @@ Feature: HHA Network Management Dashboard
   @RowLevelSecurity12
   Scenario Outline: Front end Data Filter Validation for Claims
     When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\ClaimsRowFilterInput.csv" for writing data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\logs\\ClaimsRowFilterInput.csv" for writing data at "<Row>" to log file
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login
@@ -72,17 +73,21 @@ Feature: HHA Network Management Dashboard
 
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region - Market | Region - Market | Participant | Post Acute Facility |
-      | allmodel123@yopmail.com     |   1 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True All                |
-      | Qatwodashtest@yopmail.com   |   2 | True Random | True Random | True Random | Skip                   | Skip            | Skip        | Skip                |
-      | Qadashboardtest@yopmail.com |   3 | True Random | True Random | Skip        | True Random            | Skip            | Skip        | Skip                |
-      | allmodel123@yopmail.com     |   4 | True Random | True Random | Skip        | Skip                   | True Random     | Skip        | Skip                |
-      | Qatwodashtest@yopmail.com   |   5 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | Skip                |
-      | Qadashboardtest@yopmail.com |   6 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip                |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True All            |
-      | allmodel123@yopmail.com     |   8 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | True All            |
-      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random         |
-      | allmodel123@yopmail.com     |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip                |
-      | Qatwodashtest@yopmail.com   |  11 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random         |
+      | Qafivedashtest@yopmail.com  |   1 | Skip        | Skip        | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | Qatwodashtest@yopmail.com   |   2 | Skip        | Skip        | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | Qadashboardtest@yopmail.com |   3 | Skip        | Skip        | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | allmodel123@yopmail.com     |   4 | Skip        | Skip        | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | allmodel123@yopmail.com     |   5 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True All            |
+      | Qatwodashtest@yopmail.com   |   6 | True Random | True Random | True Random | Skip                   | Skip            | Skip        | Skip                |
+      | Qadashboardtest@yopmail.com |   7 | True Random | True Random | Skip        | True Random            | Skip            | Skip        | Skip                |
+      | allmodel123@yopmail.com     |   8 | True Random | True Random | Skip        | Skip                   | True Random     | Skip        | Skip                |
+      | Qatwodashtest@yopmail.com   |   9 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | Skip                |
+      | Qadashboardtest@yopmail.com |  10 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | Qafivedashtest@yopmail.com  |  11 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True All            |
+      | allmodel123@yopmail.com     |  12 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | True All            |
+      | allmodel123@yopmail.com     |  13 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random         |
+      | allmodel123@yopmail.com     |  14 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | Qatwodashtest@yopmail.com   |  15 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random         |
 
   @RowLevelSecurity
   Scenario: Execute JMX file and read Output data for Data Filter Validations for Claims
@@ -114,10 +119,15 @@ Feature: HHA Network Management Dashboard
       |     8 |   9 |
       |     9 |  10 |
       |    10 |  11 |
+      |    11 |  12 |
+      |    12 |  13 |
+      |    13 |  14 |
+      |    14 |  15 |
 
   @RowLevelSecurity
   Scenario Outline: Front end Data Filter Validation for EC
     When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\ECRowFilterInput.csv" for writing data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\logs\\ECRowFilterInput.csv" for writing data at "<Row>" to log file
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login
@@ -130,8 +140,8 @@ Feature: HHA Network Management Dashboard
     And I switch to analytics iframe
     And I perform test with "<User>" user in Analytics
     ##Time
-    Then I set "Start Date" as "ClaimsStartDate" in Date field on dashboard
-    Then I set "End Date" as "ClaimsCubeDate" in Date field on dashboard
+    Then I set "Start Date" as "ECStartDate" in Date field on dashboard
+    Then I set "End Date" as "Today" in Date field on dashboard
     ##BPID
     And I click "Episode Initiator - BPID" Filter on the "HHA Network Management - <BPID>" dashboard
     And I select "<BPID>" checkbox in "BPID" filter on "HHA Network Management" dashboard
@@ -186,18 +196,22 @@ Feature: HHA Network Management Dashboard
     And I save the values of row filters in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region - Market | Region - Market | Participant | Post Facility |
-      | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Skip                   | Skip            | True All    | Skip          |
-      | allmodel123@yopmail.com     |   2 | True All    | Skip        | True All    | Skip                   | Skip            | True All    | True All      |
-      | Qadashboardtest@yopmail.com |   3 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | True All      |
-      | allmodel123@yopmail.com     |   4 | True Random | True All    | True Random | Skip                   | Skip            | True All    | Skip          |
-      | Qatwodashtest@yopmail.com   |   5 | True Random | Skip        | True All    | Skip                   | Skip            | True All    | True All      |
-      | Qadashboardtest@yopmail.com |   6 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | True All      |
-      | Qafivedashtest@yopmail.com  |   7 | True Random | True Random | True Random | Skip                   | Skip            | True Random | True All      |
-      | allmodel123@yopmail.com     |   8 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | True All      |
-      | allmodel123@yopmail.com     |   9 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random   |
-      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip          |
-      | allmodel123@yopmail.com     |  11 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random   |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region - Market | Region - Market | Participant | Post Acute Facility |
+      | Qafivedashtest@yopmail.com  |   1 | Skip        | Skip        | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | Qatwodashtest@yopmail.com   |   2 | Skip        | Skip        | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | Qadashboardtest@yopmail.com |   3 | Skip        | Skip        | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | allmodel123@yopmail.com     |   4 | Skip        | Skip        | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | allmodel123@yopmail.com     |   5 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True All            |
+      | Qatwodashtest@yopmail.com   |   6 | True Random | True Random | True Random | Skip                   | Skip            | Skip        | Skip                |
+      | Qadashboardtest@yopmail.com |   7 | True Random | True Random | Skip        | True Random            | Skip            | Skip        | Skip                |
+      | allmodel123@yopmail.com     |   8 | True Random | True Random | Skip        | Skip                   | True Random     | Skip        | Skip                |
+      | Qatwodashtest@yopmail.com   |   9 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | Skip                |
+      | Qadashboardtest@yopmail.com |  10 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | Qafivedashtest@yopmail.com  |  11 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True All            |
+      | allmodel123@yopmail.com     |  12 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | True All            |
+      | allmodel123@yopmail.com     |  13 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random         |
+      | allmodel123@yopmail.com     |  14 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | Qatwodashtest@yopmail.com   |  15 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random         |
 
   @RowLevelSecurity
   Scenario: Execute JMX file and read Output data for Data Filter Validations for EC
@@ -232,10 +246,15 @@ Feature: HHA Network Management Dashboard
       |     8 |   9 |
       |     9 |  10 |
       |    10 |  11 |
+      |    11 |  12 |
+      |    12 |  13 |
+      |    13 |  14 |
+      |    14 |  15 |
 
   @RowLevelSecurity
   Scenario Outline: Front end Data Filter Validation for Claims&EC
-    When I open file "\\src\\test\\Jmeter\\PerformanceDashboard\\RowFilterInput.csv" for writing data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\RowFilterInput.csv" for writing data at "<Row>" to input file
+    When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\logs\\RowFilterInput.csv" for writing data at "<Row>" to log file
     Given I am on the login page
     When I enter email field <User> for login
     And I enter password field Testing123 for Login
@@ -249,7 +268,7 @@ Feature: HHA Network Management Dashboard
     And I perform test with "<User>" user in Analytics
     ##Time
     Then I set "Start Date" as "ClaimsStartDate" in Date field on dashboard
-    Then I set "End Date" as "ClaimsCubeDate" in Date field on dashboard
+    Then I set "End Date" as "Today" in Date field on dashboard
     ##BPID
     And I click "Episode Initiator - BPID" Filter on the "HHA Network Management - <BPID>" dashboard
     And I select "<BPID>" checkbox in "BPID" filter on "HHA Network Management" dashboard
@@ -278,7 +297,7 @@ Feature: HHA Network Management Dashboard
     And I click "Post Acute Facility" Filter on the "HHA Network Management - <Post Acute Facility>" dashboard
     And I select "<Post Acute Facility>" checkbox in "Anchor Facility Detail" filter on "HHA Network Management" dashboard
     And I click "Post Acute Facility" Filter on the "HHA Network Management - <Post Acute Facility>" dashboard
-     ##Extract Region Market
+    ##Extract Region Market
     And I get Region and Market to input file without Participant form Region-Market dropdown
     And I click "Episode Initiator - BPID" Filter on the "HHA Network Management" dashboard
     And I fetch and store "Episode Initiator - BPID" filter values on "HHA Network Management" dashboard
@@ -304,18 +323,22 @@ Feature: HHA Network Management Dashboard
     And I save the values of row filters in "<Row>" index in storage HashMap
 
     Examples: 
-      | User                       | Row | BPID        | CCN         | Bundle      | Remedy Region - Market | Region - Market | Participant | Post Acute Facility |
-      | Qafivedashtest@yopmail.com |   1 | True All    | True All    | True All    | Skip                   | Skip            | Skip        | Skip                |
-      | Qatwodashtest@yopmail.com  |   2 | True All    | Skip        | True All    | Skip                   | Skip            | True All    | True All            |
-      | allmodel123@yopmail.com    |   3 | True All    | True All    | Skip        | Skip                   | Skip            | True All    | True All            |
-      | Qafivedashtest@yopmail.com |   4 | True Random | True All    | True Random | Skip                   | Skip            | Skip        | Skip                |
-      | Qatwodashtest@yopmail.com  |   5 | True Random | Skip        | True All    | Skip                   | Skip            | True All    | True All            |
-      | allmodel123@yopmail.com    |   6 | True Random | True Random | Skip        | Skip                   | Skip            | True All    | True All            |
-      | Qafivedashtest@yopmail.com |   7 | True Random | True Random | True Random | Skip                   | Skip            | True All    | True All            |
-      | allmodel123@yopmail.com    |   8 | True All    | True All    | Skip        | Skip                   | Skip            | True All    | True All            |
-      | allmodel123@yopmail.com    |   9 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random         |
-      | Qafivedashtest@yopmail.com |  10 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip                |
-      | allmodel123@yopmail.com    |  11 | True Random | True Random | True Random | True Random            | True Random     | Skip        | True Random         |
+      | User                        | Row | BPID        | CCN         | Bundle      | Remedy Region - Market | Region - Market | Participant | Post Acute Facility |
+      | Qafivedashtest@yopmail.com  |   1 | Skip        | Skip        | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | Qatwodashtest@yopmail.com   |   2 | Skip        | Skip        | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | Qadashboardtest@yopmail.com |   3 | Skip        | Skip        | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | allmodel123@yopmail.com     |   4 | Skip        | Skip        | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | allmodel123@yopmail.com     |   5 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True All            |
+      | Qatwodashtest@yopmail.com   |   6 | True Random | True Random | True Random | Skip                   | Skip            | Skip        | Skip                |
+      | Qadashboardtest@yopmail.com |   7 | True Random | True Random | Skip        | True Random            | Skip            | Skip        | Skip                |
+      | allmodel123@yopmail.com     |   8 | True Random | True Random | Skip        | Skip                   | True Random     | Skip        | Skip                |
+      | Qatwodashtest@yopmail.com   |   9 | True Random | True Random | Skip        | Skip                   | Skip            | True Random | Skip                |
+      | Qadashboardtest@yopmail.com |  10 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | Qafivedashtest@yopmail.com  |  11 | True Random | True Random | Skip        | Skip                   | Skip            | Skip        | True All            |
+      | allmodel123@yopmail.com     |  12 | True All    | True All    | Skip        | Skip                   | Skip            | True Random | True All            |
+      | allmodel123@yopmail.com     |  13 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random         |
+      | allmodel123@yopmail.com     |  14 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip                |
+      | Qatwodashtest@yopmail.com   |  15 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random         |
 
   @RowLevelSecurity
   Scenario: Execute JMX file and read Output data for Data Filter Validations for Claims&EC
@@ -350,3 +373,7 @@ Feature: HHA Network Management Dashboard
       |     8 |   9 |
       |     9 |  10 |
       |    10 |  11 |
+      |    11 |  12 |
+      |    12 |  13 |
+      |    13 |  14 |
+      |    14 |  15 |

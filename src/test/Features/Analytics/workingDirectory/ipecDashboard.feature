@@ -18,7 +18,7 @@ Feature: Inpatient Episode Clearing Dashboard
     ##Time
     And I click "Time" Filter on the "IPEC" dashboard
     ##And I get the date "" for Data fetched for dashboard
-    And I get and fill days between "2016/01/01" till "today" for Time Filter
+    And I get and fill days between "ECStartDate" till "today" for Time Filter
     And I click "Time" Filter on the "IPEC" dashboard
     ##BPID
     And I click "Episode Initiator - BPID" Filter on the "IPEC - <BPID>" dashboard
@@ -69,26 +69,30 @@ Feature: Inpatient Episode Clearing Dashboard
 
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant |
-      | Qafivedashtest@yopmail.com  |   1 | True All    | True All    | True All    | Skip            | Skip                   | True All    |
-      | Qatwodashtest@yopmail.com   |   2 | True Random | Skip        | Skip        | Skip            | Skip                   | Skip        |
-      | Qadashboardtest@yopmail.com |   3 | Skip        | True Random | Skip        | Skip            | Skip                   | Skip        |
-      | Qafivedashtest@yopmail.com  |   4 | Skip        | Skip        | True Random | Skip            | Skip                   | Skip        |
-      | Qatwodashtest@yopmail.com   |   5 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |
-      | Qadashboardtest@yopmail.com |   6 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |
-      | Qafivedashtest@yopmail.com  |   7 | Skip        | Skip        | Skip        | Skip            | Skip                   | True Random |
-      | allmodel123@yopmail.com     |   1 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |
-      | allmodel123@yopmail.com     |   2 | True Random | True Random | True Random | Skip            | Skip                   | True Random |
-      | Qafivedashtest@yopmail.com  |  10 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        |
-      | Qatwodashtest@yopmail.com   |  11 | True Random | Skip        | True Random | Skip            | Skip                   | True Random |
+      | Qafivedashtest@yopmail.com  |   1 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |
+      | Qatwodashtest@yopmail.com   |   2 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |
+      | Qadashboardtest@yopmail.com |   3 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |
+      | allmodel123@yopmail.com     |   4 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |
+      | Qafivedashtest@yopmail.com  |   5 | True All    | True All    | True All    | Skip            | Skip                   | True All    |
+      | Qatwodashtest@yopmail.com   |   6 | True Random | Skip        | Skip        | Skip            | Skip                   | Skip        |
+      | Qadashboardtest@yopmail.com |   7 | Skip        | True Random | Skip        | Skip            | Skip                   | Skip        |
+      | Qafivedashtest@yopmail.com  |   8 | Skip        | Skip        | True Random | Skip            | Skip                   | Skip        |
+      | Qatwodashtest@yopmail.com   |   9 | Skip        | Skip        | Skip        | True Random     | Skip                   | Skip        |
+      | Qadashboardtest@yopmail.com |  10 | Skip        | Skip        | Skip        | Skip            | True Random            | Skip        |
+      | Qafivedashtest@yopmail.com  |  11 | Skip        | Skip        | Skip        | Skip            | Skip                   | True Random |
+      | allmodel123@yopmail.com     |  12 | Skip        | Skip        | Skip        | Skip            | Skip                   | Skip        |
+      | allmodel123@yopmail.com     |  13 | True Random | True Random | True Random | Skip            | Skip                   | True Random |
+      | Qafivedashtest@yopmail.com  |  14 | True All    | True All    | Skip        | Skip            | Skip                   | Skip        |
+      | Qatwodashtest@yopmail.com   |  15 | True Random | Skip        | True Random | Skip            | True Random            | True Random |
 
-  @IPECRLS @RowLevelSecurity 
+  @IPECRLS @RowLevelSecurity
   Scenario: Execute JMX file and read Output data for Data Filter Validations
     When I close the file for after writing data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\IPECDashboard\\IPECECRowFilterOutput.txt" Output file
     When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\IPECDashboard\\IPECRowFilter.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\IPECDashboard\\IPECECRowFilterOutput.txt"
 
-  @IPECRLS @RowLevelSecurity 
+  @IPECRLS @RowLevelSecurity
   Scenario Outline: Verify DB and FE values fetched from Scenarios
     And I get the value "<Index>" from Output file of data filter validation
     Then I verify "Episode Initiator - BPID" for DB and FE filter values at "<Row>" for "EC"
@@ -111,4 +115,7 @@ Feature: Inpatient Episode Clearing Dashboard
       |     8 |   9 |
       |     9 |  10 |
       |    10 |  11 |
-
+      |    11 |  12 |
+      |    12 |  13 |
+      |    13 |  14 |
+      |    14 |  15 |
