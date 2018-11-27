@@ -642,7 +642,6 @@ and fp.episodeCountReport=1
 and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
 and ei.bpid not like &apos;%DEMO%&apos; and fp.NSOCType  = &apos;HHA&apos;
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
-  AND fp.BPID in (&apos;&apos;)
  -- And anc.facilityNameInitCap in (&apos;&apos;)
  ${EC_BPID}
  ${EC_AnchorFacility}
@@ -1215,6 +1214,13 @@ if(vars.get(&quot;Flag&quot;).equals(&quot;(1)&quot;)){
 log.info(&quot;Path: 7&quot;);
 f= new FileOutputStream(path + separator+&quot;RowFilterOutput.txt&quot;,true);
 	p = new PrintStream(f);
+
+	String itr = vars.get(&quot;IterationValue&quot;);
+
+ if(itr==null){
+  p.println(&quot;Error in creating input data to execute query&quot;);
+ }else {
+ 	
 	String vValue1 =  vars.get(&quot;value1&quot;);
 	String vValue2 =  vars.get(&quot;value2&quot;);
 	String vValue3 =  vars.get(&quot;value3&quot;);
@@ -1227,7 +1233,7 @@ f= new FileOutputStream(path + separator+&quot;RowFilterOutput.txt&quot;,true);
 	
 	
 	p.println(&quot;Episode Initiator - BPID=&quot;+vValue1+&quot;*Anchor Facility - CCN=&quot;+vValue2+&quot;*Bundle=&quot;+vValue3+&quot;*Remdy Region - Market=&quot;+vValue4+&quot;*Region - Market=&quot;+vValue5+&quot;*Participant=&quot;+vValue6+&quot;*Post Acute Facility=&quot;+vValue7);
-
+ }
 	p.close();
 	f.close();
 

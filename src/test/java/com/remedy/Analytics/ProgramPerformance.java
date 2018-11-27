@@ -1254,13 +1254,13 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iClickOnFilterName(String text,String dashboard){
          try{
+        	 if(text.equals("Time")) {
 		 try{
 		 longDelay();
 		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 		 }catch(Exception e){
 		 }
-		 if(text.equals("Time")){
-			 delay();
+		 	 delay();
 			 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. /span//button[@type='button']"));
 			 if(DriverScript.Config.getProperty("Browser").equals("ie")){
 				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", elem);
@@ -1270,6 +1270,11 @@ public class ProgramPerformance extends BaseClass{
 		 }
 		 
 		 else if(!dashboard.contains("Skip")){
+			 try{
+				 longDelay();
+				 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+				 }catch(Exception e){
+				 }
 		 delay();
 		 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']"));
 		 if(DriverScript.Config.getProperty("Browser").equals("ie")){

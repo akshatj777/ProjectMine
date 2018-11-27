@@ -1,6 +1,6 @@
 Feature: HHA Network Management Dashboard
 
-  @RowLevelSecurity12 @Test1
+  @RowLevelSecurity12 @Test1 @RowLevelSecurity
   Scenario Outline: Front end Data Filter Validation for EC
     When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\ECRowFilterInput.csv" for writing data at "<Row>" to input file
     When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\logs\\ECRowFilterInput.csv" for writing data at "<Row>" to log file
@@ -15,9 +15,9 @@ Feature: HHA Network Management Dashboard
     And I click on Refresh DB data Icon On dashboard
     And I switch to analytics iframe
     And I perform test with "<User>" user in Analytics
-    ##Time
-    Then I set "Start Date" as "ClaimsStartDate" in Date field on dashboard
-    Then I set "End Date" as "ClaimsCubeDate" in Date field on dashboard
+    ##TimeECStartDate
+    Then I set "Start Date" as "ECStartDate" in Date field on dashboard
+    Then I set "End Date" as "Today" in Date field on dashboard
     ##BPID
     And I click "Episode Initiator - BPID" Filter on the "HHA Network Management - <BPID>" dashboard
     And I select "<BPID>" checkbox in "BPID" filter on "HHA Network Management" dashboard
@@ -76,22 +76,25 @@ Feature: HHA Network Management Dashboard
       | Qafivedashtest@yopmail.com |   1 | Skip | Skip | Skip   | Skip                   | Skip            | Skip        | Skip                |
       | Qatwodashtest@yopmail.com  |   2 | Skip | Skip | Skip   | Skip                   | Skip            | Skip        | Skip                |
 
-  @RowLevelSecurity @Test1
-  Scenario: Execute JMX file and read Output data for Data Filter Validations for Claims
+  @RowLevelSecurity
+  Scenario: Execute JMX file and read Output data for Data Filter Validations for EC
     When I close the file for after writing data to input file
-    Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\HHANetworkManagement\\ClaimsRowFilterOutput.txt" Output file
-    When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\HHANetworkManagement\\ClaimsRowFilter.jmx"
-    Then I read the values from the text file "\\src\\test\\Jmeter\\HHANetworkManagement\\ClaimsRowFilterOutput.txt"
+    Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\HHANetworkManagement\\ECRowFilterOutput.txt" Output file
+    When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\HHANetworkManagement\\ECRowFilter.jmx"
+    Then I read the values from the text file "\\src\\test\\Jmeter\\HHANetworkManagement\\ECRowFilterOutput.txt"
 
-  @RowLevelSecurity @Test1
-  Scenario Outline: Verify DB and FE values fetched from Claims Scenarios
+  @RowLevelSecurity
+  Scenario Outline: Verify DB and FE values fetched from Claims&EC Scenarios
     And I get the value "<Index>" from Output file of data filter validation
-    Then I verify "Episode Initiator - BPID" for DB and FE filter values at "<Row>" for "Claims"
-    Then I verify "Anchor Facility - CCN" for DB and FE filter values at "<Row>" for "Claims"
-    Then I verify "Bundle" for DB and FE filter values at "<Row>" for "Claims"
-    Then I verify "Region - Market" for DB and FE filter values at "<Row>" for "Claims"
-    Then I verify "Remedy Region - Market" for DB and FE filter values at "<Row>" for "Claims"
-    Then I verify "Post Acute Facility" for DB and FE filter values at "<Row>" for "Claims"
+    Then I verify "Episode Initiator - BPID" for DB and FE filter values at "<Row>" for "EC"
+    Then I verify "Anchor Facility - CCN" for DB and FE filter values at "<Row>" for "EC"
+    Then I verify "Bundle" for DB and FE filter values at "<Row>" for "EC"
+    Then I verify "Region - Market" for DB and FE filter values at "<Row>" for "EC"
+    Then I verify "Remedy Region - Market" for DB and FE filter values at "<Row>" for "EC"
+    Then I verify "Participant" for DB and FE filter values at "<Row>" for "EC"
+    Then I verify "DRG" for DB and FE filter values at "<Row>" for "EC"
+    Then I verify "Physician - NPI" for DB and FE filter values at "<Row>" for "EC"
+    Then I verify "Model" for DB and FE filter values at "<Row>" for "EC"
 
     Examples: 
       | Index | Row |

@@ -795,14 +795,14 @@ log.info(&quot;Path: 7&quot;);
 f= new FileOutputStream(path + separator+&quot;IPECECRowFilterOutput.txt&quot;,true);
 	p = new PrintStream(f);
 	String itr = vars.get(&quot;IterationValue&quot;);
- if(itr.isEmpty()){
+ if(itr==null)){
   p.println(&quot;Error in creating input data to execute query&quot;);
  }else {
 	String vValue1 = vars.get(&quot;value1&quot;);
 	String vValue2 = vars.get(&quot;value2&quot;);
 	String vValue3 = vars.get(&quot;value3&quot;);
 	String vValue4 = vars.get(&quot;value4&quot;);
-	
+	vValue4 = vValue4.replace(&quot;null&quot;,&quot;Not Available&quot;);
 	String vValue5 = vars.get(&quot;value5&quot;);
 	vValue5 = vValue5.replace(&quot;null&quot;,&quot;Not Available&quot;); //Region Market 
 	String vValue6 = vars.get(&quot;value6&quot;);

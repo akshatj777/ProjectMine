@@ -583,7 +583,6 @@ and fp.episodeCountReport=1
 and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
 and ei.bpid not like &apos;%DEMO%&apos; and fp.NSOCType  = &apos;HHA&apos;
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
-  AND fp.BPID in (&apos;&apos;)
  -- And anc.facilityNameInitCap in (&apos;&apos;)
  ${EC_BPID}
  ${EC_AnchorFacility}
@@ -868,7 +867,8 @@ f= new FileOutputStream(path + separator+&quot;ECRowFilterOutput.txt&quot;,true)
 	p = new PrintStream(f);
 	
 String itr = vars.get(&quot;IterationValue&quot;);
- if(itr.isEmpty()){
+
+ if(itr==null){
   p.println(&quot;Error in creating input data to execute query&quot;);
  }else {
  	
