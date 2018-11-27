@@ -69,7 +69,7 @@
           </SystemSampler>
           <hashTree/>
         </hashTree>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Claims Data CSV Configuration" enabled="true">
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="NumberOfEppisode" enabled="true">
           <stringProp name="filename">RowFilterInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">Flag,userName,postacuteccn,bundle,dummyregion,dummymarket,r_region,r_market,participantName,bpid,anchorFacility,anchorFacility,ccn,region,market</stringProp>
@@ -179,6 +179,88 @@ if(!vars.get(&quot;anchorFacility&quot;).contains(&quot;Skip&quot;)){
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct concat( `Post Acute Facility`, &apos; - &apos;, `Post Acute CCN`) as Pac_ccn from
 ( 
+-- EC Data
+select 
+distinct  case when post_acute_df.facilityNameInitCap is null then null else post_acute_df.facilityNameInitCap end as &apos;Post Acute Facility&apos;,
+case when post_acute_df.ccn is null then null else post_acute_df.ccn end as &apos;Post Acute CCN&apos;
+FROM
+warehouse.factPatientEpisode fp
+LEFT JOIN  (select f.facilitySK,f.ccn,f.facilityName,
+    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
+    else df_claims.facilityNameInitCap end facilityNameInitCap,
+    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
+    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
+    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
+    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
+    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
+    from warehouse.dimFacility f
+    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
+    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+    ) anc ON fp.anchorAdmitFacilityKey=anc.facilitySK
+LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK
+LEFT JOIN warehouse.dimEpisodeInitiator ei ON fp.episodeInitiatorKey=ei.episodeInitiatorSK
+LEFT JOIN (select f.facilitySK,f.ccn,f.facilityName,
+    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
+    else df_claims.facilityNameInitCap end facilityNameInitCap,
+    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
+    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
+    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
+    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
+    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
+    from warehouse.dimFacility f
+    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
+    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+    ) post_acute_df ON fp.anchorDischargeFacilityKey=post_acute_df.facilitySK
+LEFT JOIN warehouse.dimCARL c ON fp.carlKey=c.carlSK
+LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
+LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
+ LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
+LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
+LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
+LEFT JOIN warehouse.dimFacility readmitsrcccn ON fp.readmitfacilityKey1 = readmitsrcccn.facilitySK
+LEFT JOIN warehouse.dimDRG readmitDRG ON fp.readmissionDrgKey1=readmitDRG.drgSK
+LEFT JOIN (
+select distinct provider_ccn ,quality_of_patient_care_star_rating,number_of_completed_surveys, max(file_date) from warehouse.ops_hha_home_health_compare group by provider_ccn)hhc on post_acute_df.CCN =hhc.provider_ccn
+INNER JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID where username = ${userName}
+       GROUP BY bpid
+       )tbsBPID ON fp.BPID = tbsBPID.bpid
+INNER JOIN 
+     (       
+        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityCCN where username = ${userName}
+       GROUP BY ccn
+        )tbsCCN on anc.ccn=tbsCCN.ccn
+INNER JOIN 
+     (       
+        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
+       GROUP BY facilitykey
+        )tbsFacilityKey on fp.sourceFacilityKey=tbsFacilityKey.facilitykey
+WHERE fp.NSOCType=&apos;HHA&apos;
+and fp.bundleRisk=1 and fp.episodeCountReport=1
+and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
+and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+and ei.bpid not like &apos;%DEMO%&apos;
+and  fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
+-- and fp.anchorAdmitDateKey &gt;= &apos;&apos;
+          ${EC_BUNDLE} 
+		${EC_R_REGION} 
+		${EC_R_MARKET} 
+		${EC_REGION} 
+		${EC_MARKET} 
+		${EC_PARTICIPANTNAME}  
+		${EC_BPID} 
+		${EC_CCN} 
+		${EC_AncFacility}
+
+union
+
 -- Claims Data 
 select 
 distinct  case when pac.facilityNameInitCap is null then null else pac.facilityNameInitCap end AS &apos;Post Acute Facility&apos;,
@@ -247,6 +329,87 @@ and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehou
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct a.Bundle  from
 ( 
+-- EC Data
+select 
+distinct drg.bundleName as Bundle
+FROM
+warehouse.factPatientEpisode fp
+LEFT JOIN  (select f.facilitySK,f.ccn,f.facilityName,
+    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
+    else df_claims.facilityNameInitCap end facilityNameInitCap,
+    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
+    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
+    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
+    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
+    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
+    from warehouse.dimFacility f
+    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
+    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+    ) anc ON fp.anchorAdmitFacilityKey=anc.facilitySK
+LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK
+LEFT JOIN warehouse.dimEpisodeInitiator ei ON fp.episodeInitiatorKey=ei.episodeInitiatorSK
+LEFT JOIN (select f.facilitySK,f.ccn,f.facilityName,
+    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
+    else df_claims.facilityNameInitCap end facilityNameInitCap,
+    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
+    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
+    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
+    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
+    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
+    from warehouse.dimFacility f
+    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
+    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+    ) post_acute_df ON fp.anchorDischargeFacilityKey=post_acute_df.facilitySK
+LEFT JOIN warehouse.dimCARL c ON fp.carlKey=c.carlSK
+LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
+LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
+ LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
+LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
+LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
+LEFT JOIN warehouse.dimFacility readmitsrcccn ON fp.readmitfacilityKey1 = readmitsrcccn.facilitySK
+LEFT JOIN warehouse.dimDRG readmitDRG ON fp.readmissionDrgKey1=readmitDRG.drgSK
+LEFT JOIN (
+select distinct provider_ccn ,quality_of_patient_care_star_rating,number_of_completed_surveys, max(file_date) from warehouse.ops_hha_home_health_compare group by provider_ccn)hhc on post_acute_df.CCN =hhc.provider_ccn
+INNER JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID where username = ${userName}
+       GROUP BY bpid
+       )tbsBPID ON fp.BPID = tbsBPID.bpid
+INNER JOIN 
+     (       
+        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityCCN where username = ${userName}
+       GROUP BY ccn
+        )tbsCCN on anc.ccn=tbsCCN.ccn
+INNER JOIN 
+     (       
+        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
+       GROUP BY facilitykey
+        )tbsFacilityKey on fp.sourceFacilityKey=tbsFacilityKey.facilitykey
+WHERE fp.NSOCType=&apos;HHA&apos;
+and fp.bundleRisk=1 and fp.episodeCountReport=1
+and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
+and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+and ei.bpid not like &apos;%DEMO%&apos;
+and  fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
+--  and fp.anchorAdmitDateKey &gt;= &apos;&apos;
+          
+          ${EC_POSTCCN} 
+		${EC_R_REGION} 
+		${EC_R_MARKET} 
+		${EC_REGION} 
+		${EC_MARKET} 
+		${EC_PARTICIPANTNAME}  
+           ${EC_BPID}
+           ${EC_CCN}
+            ${EC_AncFacility}
+union
+ 
 -- Claims data
 select 
 distinct  drg.bundleName AS Bundle
@@ -313,6 +476,89 @@ and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehou
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct CONCAT( a.participantShortName, a.region, &apos; &apos;,  a.market ) AS &apos;Partner Region Market&apos; from
 ( 
+-- EC Data
+select 
+distinct  ei.participantShortName, rmp.region, rmp.market
+FROM
+warehouse.factPatientEpisode fp
+LEFT JOIN  (select f.facilitySK,f.ccn,f.facilityName,
+    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
+    else df_claims.facilityNameInitCap end facilityNameInitCap,
+    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
+    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
+    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
+    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
+    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
+    from warehouse.dimFacility f
+    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
+    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+    ) anc ON fp.anchorAdmitFacilityKey=anc.facilitySK
+LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK
+LEFT JOIN warehouse.dimEpisodeInitiator ei ON fp.episodeInitiatorKey=ei.episodeInitiatorSK
+LEFT JOIN (select f.facilitySK,f.ccn,f.facilityName,
+    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
+    else df_claims.facilityNameInitCap end facilityNameInitCap,
+    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
+    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
+    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
+    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
+    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
+    from warehouse.dimFacility f
+    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
+    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+    ) post_acute_df ON fp.anchorDischargeFacilityKey=post_acute_df.facilitySK
+LEFT JOIN warehouse.dimCARL c ON fp.carlKey=c.carlSK
+LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
+LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
+ LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
+LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
+LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
+LEFT JOIN warehouse.dimFacility readmitsrcccn ON fp.readmitfacilityKey1 = readmitsrcccn.facilitySK
+LEFT JOIN warehouse.dimDRG readmitDRG ON fp.readmissionDrgKey1=readmitDRG.drgSK
+LEFT JOIN (
+select distinct provider_ccn ,quality_of_patient_care_star_rating,number_of_completed_surveys, max(file_date) from warehouse.ops_hha_home_health_compare group by provider_ccn)hhc on post_acute_df.CCN =hhc.provider_ccn
+INNER JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID where username = ${userName}
+       GROUP BY bpid
+       )tbsBPID ON fp.BPID = tbsBPID.bpid
+INNER JOIN 
+     (       
+        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityCCN where username = ${userName}
+       GROUP BY ccn
+        )tbsCCN on anc.ccn=tbsCCN.ccn
+INNER JOIN 
+     (       
+        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
+       GROUP BY facilitykey
+        )tbsFacilityKey on fp.sourceFacilityKey=tbsFacilityKey.facilitykey
+WHERE fp.NSOCType=&apos;HHA&apos;
+and fp.bundleRisk=1 and fp.episodeCountReport=1
+and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
+and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+and ei.bpid not like &apos;%DEMO%&apos;
+and  fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
+-- and fp.anchorAdmitDateKey &gt;= &apos;&apos;
+
+ and drg.bundleName in (&apos;Acute myocardial infarction&apos;, &apos;Amputation&apos;, &apos;Congestive heart failure&apos;, &apos;Coronary artery bypass graft&apos;, &apos;Hip &amp; femur procedures except major joint&apos;, &apos;Lower Major joint replacement&apos;, &apos;Medical non-infectious orthopedic&apos;, &apos;Medical peripheral vascular disorders&apos;, &apos;Nutritional and metabolic disorders&apos;, &apos;Other knee procedures&apos;, &apos;Percutaneous coronary intervention&apos;, &apos;Revision of the hip or knee&apos;, &apos;Simple pneumonia and respiratory infections&apos;, &apos;Transient ischemia&apos;, &apos;Urinary tract infection&apos;) 
+		 
+		 
+		 ${EC_POSTCCN} 
+          ${EC_BUNDLE} 
+		${EC_R_REGION} 
+		${EC_R_MARKET} 
+		${EC_PARTICIPANTNAME}  
+          ${EC_BPID}
+          ${EC_CCN}
+          ${EC_AncFacility}
+
+union
 
 -- Claims data
 select 
@@ -356,6 +602,7 @@ INNER JOIN
   and c.atRisk=&apos;Y&apos;  
 and c.anchorBeginDateKey &gt;= &apos;20160101&apos; /*change back to 2016*/
 and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;)
+ and drg.bundleName in (&apos;Acute myocardial infarction&apos;, &apos;Amputation&apos;, &apos;Congestive heart failure&apos;, &apos;Coronary artery bypass graft&apos;, &apos;Hip &amp; femur procedures except major joint&apos;, &apos;Lower Major joint replacement&apos;, &apos;Medical non-infectious orthopedic&apos;, &apos;Medical peripheral vascular disorders&apos;, &apos;Nutritional and metabolic disorders&apos;, &apos;Other knee procedures&apos;, &apos;Percutaneous coronary intervention&apos;, &apos;Revision of the hip or knee&apos;, &apos;Simple pneumonia and respiratory infections&apos;, &apos;Transient ischemia&apos;, &apos;Urinary tract infection&apos;) 
 		 
 		  ${C_POSTCCN} 
           ${C_BUNDLE} 
@@ -382,6 +629,86 @@ and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehou
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct CONCAT( &apos;Remedy-&apos;, a.region, &apos; &apos;,  a.market ) AS &apos;Remedy Region Market&apos; from
 ( 
+-- EC Data
+select 
+distinct  rm.region, rm.market
+FROM
+warehouse.factPatientEpisode fp
+LEFT JOIN  (select f.facilitySK,f.ccn,f.facilityName,
+    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
+    else df_claims.facilityNameInitCap end facilityNameInitCap,
+    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
+    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
+    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
+    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
+    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
+    from warehouse.dimFacility f
+    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
+    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+    ) anc ON fp.anchorAdmitFacilityKey=anc.facilitySK
+LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK
+LEFT JOIN warehouse.dimEpisodeInitiator ei ON fp.episodeInitiatorKey=ei.episodeInitiatorSK
+LEFT JOIN (select f.facilitySK,f.ccn,f.facilityName,
+    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
+    else df_claims.facilityNameInitCap end facilityNameInitCap,
+    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
+    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
+    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
+    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
+    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
+    from warehouse.dimFacility f
+    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
+    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+    ) post_acute_df ON fp.anchorDischargeFacilityKey=post_acute_df.facilitySK
+LEFT JOIN warehouse.dimCARL c ON fp.carlKey=c.carlSK
+LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
+LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
+ LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
+LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
+LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
+LEFT JOIN warehouse.dimFacility readmitsrcccn ON fp.readmitfacilityKey1 = readmitsrcccn.facilitySK
+LEFT JOIN warehouse.dimDRG readmitDRG ON fp.readmissionDrgKey1=readmitDRG.drgSK
+LEFT JOIN (
+select distinct provider_ccn ,quality_of_patient_care_star_rating,number_of_completed_surveys, max(file_date) from warehouse.ops_hha_home_health_compare group by provider_ccn)hhc on post_acute_df.CCN =hhc.provider_ccn
+INNER JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID where username = ${userName}
+       GROUP BY bpid
+       )tbsBPID ON fp.BPID = tbsBPID.bpid
+INNER JOIN 
+     (       
+        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityCCN where username = ${userName}
+       GROUP BY ccn
+        )tbsCCN on anc.ccn=tbsCCN.ccn
+INNER JOIN 
+     (       
+        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
+       GROUP BY facilitykey
+        )tbsFacilityKey on fp.sourceFacilityKey=tbsFacilityKey.facilitykey
+WHERE fp.NSOCType=&apos;HHA&apos;
+and fp.bundleRisk=1 and fp.episodeCountReport=1
+and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
+and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+and ei.bpid not like &apos;%DEMO%&apos;
+and  fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
+-- and fp.anchorAdmitDateKey &gt;= &apos;&apos;
+
+${EC_POSTCCN} 
+          ${EC_BUNDLE} 
+		${EC_REGION} 
+		${EC_MARKET} 
+		${ECA_PARTICIPANTNAME}  
+          ${EC_BPID}
+          ${EC_CCN}
+           ${EC_AncFacility}
+union
+
 -- Claims Data
 select 
 distinct  rm.region, rm.market
@@ -447,6 +774,89 @@ ${EC_POSTCCN}
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">select distinct a.Participant  from
 ( 
+-- EC Data
+select 
+distinct ei.participantNameInitCap AS Participant
+FROM
+warehouse.factPatientEpisode fp
+LEFT JOIN  (select f.facilitySK,f.ccn,f.facilityName,
+    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
+    else df_claims.facilityNameInitCap end facilityNameInitCap,
+    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
+    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
+    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
+    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
+    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
+    from warehouse.dimFacility f
+    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
+    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+    ) anc ON fp.anchorAdmitFacilityKey=anc.facilitySK
+LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK
+LEFT JOIN warehouse.dimEpisodeInitiator ei ON fp.episodeInitiatorKey=ei.episodeInitiatorSK
+LEFT JOIN (select f.facilitySK,f.ccn,f.facilityName,
+    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
+    else df_claims.facilityNameInitCap end facilityNameInitCap,
+    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
+    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
+    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
+    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
+    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
+    from warehouse.dimFacility f
+    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
+    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+    ) post_acute_df ON fp.anchorDischargeFacilityKey=post_acute_df.facilitySK
+LEFT JOIN warehouse.dimCARL c ON fp.carlKey=c.carlSK
+LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
+LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
+ LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
+LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
+LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
+LEFT JOIN warehouse.dimFacility readmitsrcccn ON fp.readmitfacilityKey1 = readmitsrcccn.facilitySK
+LEFT JOIN warehouse.dimDRG readmitDRG ON fp.readmissionDrgKey1=readmitDRG.drgSK
+LEFT JOIN (
+select distinct provider_ccn ,quality_of_patient_care_star_rating,number_of_completed_surveys, max(file_date) from warehouse.ops_hha_home_health_compare group by provider_ccn)hhc on post_acute_df.CCN =hhc.provider_ccn
+INNER JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID where username = ${userName}
+       GROUP BY bpid
+       )tbsBPID ON fp.BPID = tbsBPID.bpid
+INNER JOIN 
+     (       
+        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityCCN where username = ${userName}
+       GROUP BY ccn
+        )tbsCCN on anc.ccn=tbsCCN.ccn
+INNER JOIN 
+     (       
+        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
+       GROUP BY facilitykey
+        )tbsFacilityKey on fp.sourceFacilityKey=tbsFacilityKey.facilitykey
+WHERE fp.NSOCType=&apos;HHA&apos;
+and fp.bundleRisk=1 and fp.episodeCountReport=1
+and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
+and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+and ei.bpid not like &apos;%DEMO%&apos;
+and  fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
+-- and fp.anchorAdmitDateKey &gt;= &apos;&apos;
+
+    
+          ${EC_POSTCCN} 
+          ${EC_BUNDLE}
+		${EC_R_REGION} 
+		${EC_R_MARKET} 
+		${EC_REGION} 
+		${EC_MARKET} 
+		${EC_BPID}
+          ${EC_CCN}
+           ${EC_AncFacility}
+
+union
+
  -- Claims Data
 select
 distinct  e.participantNameInitCap AS Participant
@@ -514,6 +924,90 @@ and c.anchorBeginDateKey &lt;= (select CAST(lookupValue AS UNSIGNED)from warehou
           <stringProp name="query">select concat( `Episode Initiator`, &apos; - &apos;, BPID)
 from
 ( 
+-- EC Data
+select 
+distinct fp.BPID,
+case when ei.episodeInitiatorNameInitCap is null then null else ei.episodeInitiatorNameInitCap end AS &apos;Episode Initiator&apos;
+FROM
+warehouse.factPatientEpisode fp
+LEFT JOIN  (select f.facilitySK,f.ccn,f.facilityName,
+    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
+    else df_claims.facilityNameInitCap end facilityNameInitCap,
+    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
+    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
+    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
+    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
+    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
+    from warehouse.dimFacility f
+    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
+    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+    ) anc ON fp.anchorAdmitFacilityKey=anc.facilitySK
+LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK
+LEFT JOIN warehouse.dimEpisodeInitiator ei ON fp.episodeInitiatorKey=ei.episodeInitiatorSK
+LEFT JOIN (select f.facilitySK,f.ccn,f.facilityName,
+    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
+    else df_claims.facilityNameInitCap end facilityNameInitCap,
+    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
+    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
+    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
+    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
+    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
+    from warehouse.dimFacility f
+    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
+    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+    ) post_acute_df ON fp.anchorDischargeFacilityKey=post_acute_df.facilitySK
+LEFT JOIN warehouse.dimCARL c ON fp.carlKey=c.carlSK
+LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
+LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
+ LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
+LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
+LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
+LEFT JOIN warehouse.dimFacility readmitsrcccn ON fp.readmitfacilityKey1 = readmitsrcccn.facilitySK
+LEFT JOIN warehouse.dimDRG readmitDRG ON fp.readmissionDrgKey1=readmitDRG.drgSK
+LEFT JOIN (
+select distinct provider_ccn ,quality_of_patient_care_star_rating,number_of_completed_surveys, max(file_date) from warehouse.ops_hha_home_health_compare group by provider_ccn)hhc on post_acute_df.CCN =hhc.provider_ccn
+INNER JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID where username = ${userName}
+       GROUP BY bpid
+       )tbsBPID ON fp.BPID = tbsBPID.bpid
+INNER JOIN 
+     (       
+        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityCCN where username = ${userName}
+       GROUP BY ccn
+        )tbsCCN on anc.ccn=tbsCCN.ccn
+INNER JOIN 
+     (       
+        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
+       GROUP BY facilitykey
+        )tbsFacilityKey on fp.sourceFacilityKey=tbsFacilityKey.facilitykey
+WHERE fp.NSOCType=&apos;HHA&apos;
+and fp.bundleRisk=1 and fp.episodeCountReport=1
+and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
+and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+and
+ei.bpid not like &apos;%DEMO%&apos;
+and  fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
+-- and fp.anchorAdmitDateKey &gt;= &apos;&apos;
+ ${EC_POSTCCN} 
+ ${EC_BUNDLE} 
+		${EC_R_REGION} 
+		${EC_R_MARKET} 
+		${EC_REGION} 
+		${EC_MARKET} 
+		${EC_PARTICIPANTNAME}  
+		
+         
+		${EC_CCN} 
+		 ${EC_AncFacility}
+ union
+
 -- Query to find out BPID&apos;s with Claims data
  
 select
@@ -587,6 +1081,88 @@ order by concat(`Episode Initiator`,&apos; - &apos;, BPID);
           <stringProp name="query">select  concat(`Anchor Facility`, &apos; - &apos;, CCN)
 from
 ( 
+-- EC Data
+select 
+distinct anc.facilityNameInitCap AS &apos;Anchor Facility&apos;, anc.ccn AS CCN
+FROM
+warehouse.factPatientEpisode fp
+LEFT JOIN  (select f.facilitySK,f.ccn,f.facilityName,
+    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
+    else df_claims.facilityNameInitCap end facilityNameInitCap,
+    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
+    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
+    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
+    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
+    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
+    from warehouse.dimFacility f
+    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
+    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+    ) anc ON fp.anchorAdmitFacilityKey=anc.facilitySK
+LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK
+LEFT JOIN warehouse.dimEpisodeInitiator ei ON fp.episodeInitiatorKey=ei.episodeInitiatorSK
+LEFT JOIN (select f.facilitySK,f.ccn,f.facilityName,
+    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
+    else df_claims.facilityNameInitCap end facilityNameInitCap,
+    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
+    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
+    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
+    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
+    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
+    from warehouse.dimFacility f
+    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
+    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+    ) post_acute_df ON fp.anchorDischargeFacilityKey=post_acute_df.facilitySK
+LEFT JOIN warehouse.dimCARL c ON fp.carlKey=c.carlSK
+LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
+LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
+ LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
+LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
+LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
+LEFT JOIN warehouse.dimFacility readmitsrcccn ON fp.readmitfacilityKey1 = readmitsrcccn.facilitySK
+LEFT JOIN warehouse.dimDRG readmitDRG ON fp.readmissionDrgKey1=readmitDRG.drgSK
+LEFT JOIN (
+select distinct provider_ccn ,quality_of_patient_care_star_rating,number_of_completed_surveys, max(file_date) from warehouse.ops_hha_home_health_compare group by provider_ccn)hhc on post_acute_df.CCN =hhc.provider_ccn
+INNER JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID where username = ${userName}
+       GROUP BY bpid
+       )tbsBPID ON fp.BPID = tbsBPID.bpid
+INNER JOIN 
+     (       
+        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityCCN where username = ${userName}
+       GROUP BY ccn
+        )tbsCCN on anc.ccn=tbsCCN.ccn
+INNER JOIN 
+     (       
+        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
+       GROUP BY facilitykey
+        )tbsFacilityKey on fp.sourceFacilityKey=tbsFacilityKey.facilitykey
+WHERE fp.NSOCType=&apos;HHA&apos;
+and fp.bundleRisk=1 and fp.episodeCountReport=1
+and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
+and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+and ei.bpid not like &apos;%DEMO%&apos;
+and  fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
+-- and fp.anchorAdmitDateKey &gt;= &apos;&apos;
+
+          ${EC_POSTCCN} 
+          ${EC_BUNDLE} 
+		${EC_R_REGION} 
+		${EC_R_MARKET} 
+		${EC_REGION} 
+		${EC_MARKET} 
+		${EC_PARTICIPANTNAME}  
+		${EC_BPID} 
+		
+
+union
+
 -- Claims Data
 select
 distinct  f.facilityNameInitCap as &apos;Anchor Facility&apos;, f.ccn  AS CCN

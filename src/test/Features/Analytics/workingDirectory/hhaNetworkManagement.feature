@@ -1,6 +1,6 @@
 Feature: HHA Network Management Dashboard
 
-  @RowLevelSecurity12
+  @RowLevelSecurity12 @HHA
   Scenario Outline: Front end Data Filter Validation for Claims
     When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\ClaimsRowFilterInput.csv" for writing data at "<Row>" to input file
     When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\logs\\ClaimsRowFilterInput.csv" for writing data at "<Row>" to log file
@@ -89,14 +89,14 @@ Feature: HHA Network Management Dashboard
       | allmodel123@yopmail.com     |  14 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip                |
       | Qatwodashtest@yopmail.com   |  15 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random         |
 
-  @RowLevelSecurity
+  @RowLevelSecurity @HHA
   Scenario: Execute JMX file and read Output data for Data Filter Validations for Claims
     When I close the file for after writing data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\HHANetworkManagement\\ClaimsRowFilterOutput.txt" Output file
     When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\HHANetworkManagement\\ClaimsRowFilter.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\HHANetworkManagement\\ClaimsRowFilterOutput.txt"
 
-  @RowLevelSecurity
+  @RowLevelSecurity @HHA
   Scenario Outline: Verify DB and FE values fetched from Claims Scenarios
     And I get the value "<Index>" from Output file of data filter validation
     Then I verify "Episode Initiator - BPID" for DB and FE filter values at "<Row>" for "Claims"
@@ -124,7 +124,7 @@ Feature: HHA Network Management Dashboard
       |    13 |  14 |
       |    14 |  15 |
 
-  @RowLevelSecurity
+  @RowLevelSecurity @HHA
   Scenario Outline: Front end Data Filter Validation for EC
     When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\ECRowFilterInput.csv" for writing data at "<Row>" to input file
     When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\logs\\ECRowFilterInput.csv" for writing data at "<Row>" to log file
@@ -213,14 +213,14 @@ Feature: HHA Network Management Dashboard
       | allmodel123@yopmail.com     |  14 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip                |
       | Qatwodashtest@yopmail.com   |  15 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random         |
 
-  @RowLevelSecurity
+  @RowLevelSecurity @HHA
   Scenario: Execute JMX file and read Output data for Data Filter Validations for EC
     When I close the file for after writing data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\HHANetworkManagement\\ECRowFilterOutput.txt" Output file
     When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\HHANetworkManagement\\ECRowFilter.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\HHANetworkManagement\\ECRowFilterOutput.txt"
 
-  @RowLevelSecurity
+  @RowLevelSecurity @HHA
   Scenario Outline: Verify DB and FE values fetched from Claims&EC Scenarios
     And I get the value "<Index>" from Output file of data filter validation
     Then I verify "Episode Initiator - BPID" for DB and FE filter values at "<Row>" for "EC"
@@ -251,7 +251,7 @@ Feature: HHA Network Management Dashboard
       |    13 |  14 |
       |    14 |  15 |
 
-  @RowLevelSecurity
+  @RowLevelSecurity @HHA
   Scenario Outline: Front end Data Filter Validation for Claims&EC
     When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\RowFilterInput.csv" for writing data at "<Row>" to input file
     When I open file "\\src\\test\\Jmeter\\HHANetworkManagement\\logs\\RowFilterInput.csv" for writing data at "<Row>" to log file
@@ -340,14 +340,14 @@ Feature: HHA Network Management Dashboard
       | allmodel123@yopmail.com     |  14 | True All    | True All    | Skip        | Skip                   | Skip            | Skip        | Skip                |
       | Qatwodashtest@yopmail.com   |  15 | True Random | True Random | True Random | True Random            | True Random     | True Random | True Random         |
 
-  @RowLevelSecurity
+  @RowLevelSecurity @HHA
   Scenario: Execute JMX file and read Output data for Data Filter Validations for Claims&EC
     When I close the file for after writing data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\HHANetworkManagement\\RowFilterOutput.txt" Output file
     When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\HHANetworkManagement\\TableauRowFilter.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\HHANetworkManagement\\RowFilterOutput.txt"
 
-  @RowLevelSecurity
+  @RowLevelSecurity @HHA
   Scenario Outline: Verify DB and FE values fetched from Claims&EC Scenarios
     And I get the value "<Index>" from Output file of data filter validation
     Then I verify "Episode Initiator - BPID" for DB and FE filter values at "<Row>" for "Claims&EC"
