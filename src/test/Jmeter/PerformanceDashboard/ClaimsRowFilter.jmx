@@ -240,22 +240,29 @@ for(int i=0;i&lt;code5.length;i++){
   
            
  if(i==n){
+ 	 log.info(&quot;a11 new is&quot;+a11);
  	for(int t=0;t&lt;a11.size();t++){
-       int aa=t%2;
-       log.info(&quot;aa is&quot;+aa);
-       if(aa==0){
-        f.add(a11.get(t));
-        
-       }	}
+ 		 f.add(a11.get(t));
+ 	}
+//       int aa=t%2;
+//       log.info(&quot;aa is&quot;+aa);
+//       if(aa==0){
+//        f.add(a11.get(t));
+//        
+//        
+//       }	}
     log.info(&quot;f is&quot;+f);
 
     for(int t1=0;t1&lt;a22.size();t1++){
-       int aa1=t1%2;
-       log.info(&quot;aa1 is&quot;+aa1);
-       if(aa1==0){
-        g.add(a22.get(t1));
-        
-       }	}
+    	g.add(a22.get(t1));
+    }
+//       int aa1=t1%2;
+//       log.info(&quot;aa1 is&quot;+aa1);
+//       if(aa1==0){
+//        g.add(a22.get(t1));
+//        
+//       }	}
+       
     log.info(&quot;a44 is&quot;+g);
      String ww=f.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;);
      String ww1=g.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;).replace(&quot;(&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;);
@@ -280,14 +287,14 @@ for(int i=0;i&lt;code5.length;i++){
 
      if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.contains(&quot;&apos;470&apos;&quot;)){
      	if(ww.isEmpty()){
-     	  neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
+     	  neee=&quot;AND ((drg.drgCode in (&quot;+ww4+&quot;) and  drf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
+            String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;)))&quot;;
             neee=neee+neee1;
             log.info(&quot;Nee is&quot;+neee);
      	}else{
-     neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
+     neee=&quot;AND ((drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
       String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
-      String neee2=&quot;OR (drg.drgCode in (&quot;+ww+&quot;))&quot;;
+      String neee2=&quot;OR (drg.drgCode in (&quot;+ww+&quot;)))&quot;;
       neee=neee+neee1+neee2;
       log.info(&quot;Nee is&quot;+neee);}
      } else if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.isEmpty() &amp;&amp; ww.isEmpty()){
@@ -307,16 +314,16 @@ for(int i=0;i&lt;code5.length;i++){
      	if(ww.isEmpty()){
      		
      	}else{
-     	  neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;))&quot;;
+     	  neee=&quot;AND ((drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
+            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;)))&quot;;
            neee=neee+neee1;
           log.info(&quot;Nee is&quot;+neee);}
      }else if(ww4.isEmpty() &amp;&amp; ww2.contains(&quot;470&quot;)){
      	if(ww.isEmpty()){
      		
      	}else{
-     	  neee=&quot;AND (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;))&quot;;
+     	  neee=&quot;AND ((drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;	
+            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;)))&quot;;
            neee=neee+neee1;
           log.info(&quot;Nee is&quot;+neee);
      }} }
@@ -1116,7 +1123,7 @@ f= new FileOutputStream(path + separator+&quot;ClaimsRowFilterOutput.txt&quot;,t
 	p = new PrintStream(f);
 
 String itr = vars.get(&quot;IterationValue&quot;);
- if(itr.isEmpty()){
+ if(itr==null){
   p.println(&quot;Error in creating input data to execute query&quot;);
  }else {
 

@@ -1737,7 +1737,8 @@ public class ProgramPerformance extends BaseClass{
 			            int n=listItems.size();
 			            String valA = null;
 						String valB= null;
-			            int random_n=getRandomNumberInRange(1,n);
+			          //  int random_n=getRandomNumberInRange(1,n);
+						int random_n=1;
 					    for (int i = 1; i <= random_n; i++) {
 			             int randomIndex = rand.nextInt(listItems.size());
 			             WebElement randomElement = listItems.get(randomIndex);
@@ -1844,10 +1845,10 @@ public class ProgramPerformance extends BaseClass{
 			            			 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
 		                     //   	 val=val.substring(val.length() - 4);
 			            			 
-			            			 valarr1=val.split("-");
-				            			val=valarr1[0].trim();
-				            			val="'"+val+"'";
-				            			arrayListTextsA.add(val);
+			            			    valarr1=val.split("-");
+				            			String val12=valarr1[0].trim();
+				            			val="'"+val12+"'";
+				            			arrayListTextsA.add(val12);
 				            			
 				            			String new1;
 
@@ -1895,9 +1896,12 @@ public class ProgramPerformance extends BaseClass{
 		                         }}
 			            		 
 			            		 else{
-	                	    	     val=val.trim();
+			            			 val=val.trim();
 //	                	    	     executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
 	                	    	     executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
+	                	    	     if(val.equals("Not Available")){
+	                	    	    	 val="null"; 
+	                	    	     }
 	                	    	     val = val.replaceAll("'","''");
 	                	    	     val="'"+val+"'";
 									 arrayListTexts.add(val);
@@ -2052,6 +2056,9 @@ public class ProgramPerformance extends BaseClass{
 			            			 arrayListTextsB.add(val);
 			            		 }
 			            	 }}}else{
+			            		 if(val.equals("Not Available")){
+                	    	    	 val="null"; 
+                	    	     }
 			                 val=val.trim();
 			                 val = val.replaceAll("'","''");
 			            	 val="'"+val+"'";
@@ -2191,6 +2198,9 @@ public class ProgramPerformance extends BaseClass{
 		                      }} 
 		                           }
 		                           else{
+		                        	   if(val.equals("Not Available")){
+		                	    	    	 val="null"; 
+		                	    	     }
 		                              val=val.trim();
 		                              val = val.replaceAll("'","''");
 		                              val="'"+val+"'";
@@ -2397,6 +2407,9 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iFetchStoreValuesOnDashboard(String filter,String dashboard) throws FileNotFoundException{
+		 if(filter.contains("Physician - NPI")){
+			 longDelay();
+		 }
 		 List<WebElement> listItems = driver.findElements(By.cssSelector(".FIText"));
 		 List<String> values = new ArrayList<String>();
 		 System.out.println("Size="+listItems);
