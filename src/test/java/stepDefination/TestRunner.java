@@ -35,11 +35,11 @@ import stepDefination.Hooks.*;
                 "junit:target/cucumber-results/cucumber-results.xml", "json:target/cucumber-results/cucumber.json"},
         
         features = { "src/test/Features/Analytics/workingDirectory/Test.feature" },
-        monochrome = true, 
+        monochrome = true 
         
         //glue = { "./src/test/java/stepDefination" },
 
-        tags = {"@tt"}
+//        tags = {"@tt"}
 
 )
 public class TestRunner {

@@ -64,13 +64,13 @@ Feature: HHA Scorecard Dashboard
     And I click "Participant" Filter on the "HHAScoreCard" dashboard
     And I fetch and store "Participant" filter values on "HHAScoreCard" dashboard
     And I click "Participant" Filter on the "HHAScoreCard" dashboard
-    And I save the values of row filters in "<Row>" index in storage HashMap
     And I click "Episode Initiator - BPID" Filter on the "HHAScoreCard" dashboard
     And I fetch and store "Episode Initiator - BPID" filter values on "HHAScoreCard" dashboard
     And I click "Episode Initiator - BPID" Filter on the "HHAScoreCard" dashboard
     And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard" dashboard
     And I fetch and store "Anchor Facility - CCN" filter values on "HHAScoreCard" dashboard
     And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard" dashboard
+    And I save the values of row filters in "<Row>" index in storage HashMap
 
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | POSTCCN     |
@@ -100,7 +100,7 @@ Feature: HHA Scorecard Dashboard
   @HHAScorecardRLS @HHA
   Scenario Outline: Verify DB and FE values fetched from Scenarios
     And I get the value "<Index>" from Output file of data filter validation
-    Then I verify "POST Acute Facility - CCN" for DB and FE filter values at "<Row>" for "Claims"
+    Then I verify "Post Acute Facility - CCN" for DB and FE filter values at "<Row>" for "Claims"
     Then I verify "Bundle" for DB and FE filter values at "<Row>" for "Claims"
     Then I verify "Region - Market" for DB and FE filter values at "<Row>" for "Claims"
     Then I verify "Remedy Region - Market" for DB and FE filter values at "<Row>" for "Claims"
@@ -190,13 +190,13 @@ Feature: HHA Scorecard Dashboard
     And I click "Participant" Filter on the "HHAScoreCard" dashboard
     And I fetch and store "Participant" filter values on "HHAScoreCard" dashboard
     And I click "Participant" Filter on the "HHAScoreCard" dashboard
-    And I save the values of row filters in "<Row>" index in storage HashMap
     And I click "Episode Initiator - BPID" Filter on the "HHAScoreCard" dashboard
     And I fetch and store "Episode Initiator - BPID" filter values on "HHAScoreCard" dashboard
     And I click "Episode Initiator - BPID" Filter on the "HHAScoreCard" dashboard
     And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard" dashboard
     And I fetch and store "Anchor Facility - CCN" filter values on "HHAScoreCard" dashboard
     And I click "Anchor Facility - CCN" Filter on the "HHAScoreCard" dashboard
+    And I save the values of row filters in "<Row>" index in storage HashMap
 
     Examples: 
       | User                        | Row | BPID        | CCN         | Bundle      | Region - Market | Remedy Region - Market | Participant | POSTCCN     |
@@ -226,7 +226,7 @@ Feature: HHA Scorecard Dashboard
   @HHAScorecardRLS @HHA
   Scenario Outline: Verify DB and FE values fetched from Scenarios
     And I get the value "<Index>" from Output file of data filter validation
-    Then I verify "POST Acute Facility - CCN" for DB and FE filter values at "<Row>" for "EC"
+    Then I verify "Post Acute Facility - CCN" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Bundle" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Region - Market" for DB and FE filter values at "<Row>" for "EC"
     Then I verify "Remedy Region - Market" for DB and FE filter values at "<Row>" for "EC"
@@ -316,7 +316,6 @@ Feature: HHA Scorecard Dashboard
     And I click "Participant" Filter on the "HHAScoreCard" dashboard
     And I fetch and store "Participant" filter values on "HHAScoreCard" dashboard
     And I click "Participant" Filter on the "HHAScoreCard" dashboard
-    And I save the values of row filters in "<Row>" index in storage HashMap
     And I click "Episode Initiator - BPID" Filter on the "HHAScoreCard" dashboard
     And I fetch and store "Episode Initiator - BPID" filter values on "HHAScoreCard" dashboard
     And I click "Episode Initiator - BPID" Filter on the "HHAScoreCard" dashboard
@@ -353,7 +352,7 @@ Feature: HHA Scorecard Dashboard
   @HHAScorecardRLS @HHA
   Scenario Outline: Verify DB and FE values fetched from Scenarios
     And I get the value "<Index>" from Output file of data filter validation
-    Then I verify "POST Acute Facility - CCN" for DB and FE filter values at "<Row>" for "EC & Claims"
+    Then I verify "Post Acute Facility - CCN" for DB and FE filter values at "<Row>" for "EC & Claims"
     Then I verify "Bundle" for DB and FE filter values at "<Row>" for "EC & Claims"
     Then I verify "Region - Market" for DB and FE filter values at "<Row>" for "EC & Claims"
     Then I verify "Remedy Region - Market" for DB and FE filter values at "<Row>" for "EC & Claims"

@@ -72,7 +72,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="EC Data CSV Configuration" enabled="true">
           <stringProp name="filename">RowFilterInput.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">Flag,userName,postacuteccn,bundle,dummyregion,dummymarket,r_region,r_market,participantName,bpid,anchorFacility,anchorFacility,ccn,region,market</stringProp>
+          <stringProp name="variableNames">Flag,userName,postacutefacility,postacuteccn,bundle,dummyregion,dummymarket,r_region,r_market,participantName,bpid,anchorFacility,ccn,region,market</stringProp>
           <stringProp name="delimiter">|</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
@@ -85,93 +85,138 @@
           <boolProp name="resetInterpreter">false</boolProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
-          <stringProp name="script">if(!vars.get(&quot;postacuteccn&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_POSTCCN&quot;,&quot;AND pac.bpid in ${postacuteccn}&quot;);
-	vars.put(&quot;C_POSTCCN&quot;,&quot;AND pac.bpid in ${postacuteccn}&quot;);	
+          <stringProp name="script">System.out.println(&quot;market &quot;+vars.get(&quot;market&quot;));
+vars.put(&quot;IterationValue&quot;,vars.get(&quot;market&quot;));
+
+if(!vars.get(&quot;postacutefacility&quot;).contains(&quot;Skip&quot;)){
+	if(vars.get(&quot;postacutefacility&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+		vars.put(&quot;EC_Post_Acute_Facility&quot;,&quot;and post_acute_df.facilityNameInitCap is null&quot;);
+	}
+	else if(vars.get(&quot;postacutefacility&quot;).contains(&quot;null&quot;)){
+		String valuePostAcuteFacility = &quot;and ( post_acute_df.facilityNameInitCap is null&quot;;
+		String valuePostAcuteFacility1 = vars.get(&quot;postacutefacility&quot;);
+		valuePostAcuteFacility1 = valuePostAcuteFacility1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
+		valuePostAcuteFacility1 = &quot; or post_acute_df.facilityNameInitCap in &quot;+valuePostAcuteFacility1+&quot;)&quot;;
+		vars.put(&quot;EC_Post_Acute_Facility&quot;,valuePostAcuteFacility+valuePostAcuteFacility1);
+		} else {
+		vars.put(&quot;EC_Post_Acute_Facility&quot;,&quot;and post_acute_df.facilityNameInitCap in ${postacutefacility}&quot;);
+	}	
 } else {
-	vars.put(&quot;EC_POSTCCN&quot;,&quot;&quot;);
-	vars.put(&quot;C_POSTCCN&quot;,&quot;&quot;);	
+	vars.put(&quot;EC_Post_Acute_Facility&quot;,&quot;&quot;);
+}
+
+if(!vars.get(&quot;postacuteccn&quot;).contains(&quot;Skip&quot;)){
+	if(vars.get(&quot;postacuteccn&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+		vars.put(&quot;EC_Post_Acute_CCN&quot;,&quot;and post_acute_df.ccn is null&quot;);
+	}
+	else if(vars.get(&quot;postacuteccn&quot;).contains(&quot;null&quot;)){
+		String valuePostAcuteCCN = &quot;and ( post_acute_df.ccn is null&quot;;
+		String valuePostAcuteCCN1 = vars.get(&quot;postacuteccn&quot;);
+		valuePostAcuteCCN1 = valuePostAcuteCCN1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
+		valuePostAcuteCCN1 = &quot; or post_acute_df.ccn in &quot;+valuePostAcuteCCN1+&quot;)&quot;;
+		vars.put(&quot;EC_Post_Acute_CCN&quot;,valuePostAcuteCCN+valuePostAcuteCCN1);
+		} else {
+		vars.put(&quot;EC_Post_Acute_CCN&quot;,&quot;and post_acute_df.ccn in ${postacuteccn}&quot;);
+	}	
+} else {
+	vars.put(&quot;EC_Post_Acute_CCN&quot;,&quot;&quot;);
 }
 
 if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_BUNDLE&quot;,&quot;AND drg.bundleName in ${bundle}&quot;);	
-	vars.put(&quot;C_BUNDLE&quot;,&quot;AND drg.bundleName in ${bundle}&quot;);
+	vars.put(&quot;EC_BUNDLE&quot;,&quot;AND drg.bundleName in ${bundle}&quot;);
 } else{
 	vars.put(&quot;EC_BUNDLE&quot;,&quot;&quot;);
-	vars.put(&quot;C_BUNDLE&quot;,&quot;&quot;);
 }
 
 if(!vars.get(&quot;r_region&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_R_REGION&quot;,&quot;AND rm.region in  ${r_region}&quot;);
-	vars.put(&quot;C_R_REGION&quot;,&quot;AND rm.region in  ${r_region}&quot;);	
+	if(vars.get(&quot;r_region&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+		vars.put(&quot;EC_R_REGION&quot;,&quot;and rm.region is null&quot;);
+	}
+	else if(vars.get(&quot;r_region&quot;).contains(&quot;null&quot;)){
+		String valueRReg = &quot;and ( rm.region is null&quot;;
+		String valueRReg1 = vars.get(&quot;r_region&quot;);
+		valueRReg1 = valueRReg1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
+		valueRReg1 = &quot; or rm.region in &quot;+valueRReg1+&quot;)&quot;;
+		vars.put(&quot;EC_R_REGION&quot;,valueRReg+valueRReg1);
+		} else {
+		vars.put(&quot;EC_R_REGION&quot;,&quot;and rm.region in ${r_region}&quot;);
+	}	
 } else {
 	vars.put(&quot;EC_R_REGION&quot;,&quot;&quot;);
-	vars.put(&quot;C_R_REGION&quot;,&quot;&quot;);
 }
+
 if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_R_MARKET&quot;,&quot;AND rm.market in ${r_market}&quot;);
-	vars.put(&quot;C_R_MARKET&quot;,&quot;AND rm.market in ${r_market}&quot;);		
-} else{
-	vars.put(&quot;EC_R_MARKET&quot;,&quot;&quot;);
-	vars.put(&quot;C_R_MARKET&quot;,&quot;&quot;);
+	if(vars.get(&quot;r_market&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+		vars.put(&quot;EC_R_MARKET&quot;,&quot;and rm.market is null&quot;);
+	}
+	else if(vars.get(&quot;r_market&quot;).contains(&quot;null&quot;)){
+		String valueRMar = &quot;and ( rm.market is null&quot;;
+		String valueRMar1 = vars.get(&quot;r_market&quot;);
+		valueRMar1 = valueRMar1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
+		valueRMar1 = &quot; or rm.market in &quot;+valueRMar1+&quot;)&quot;;
+		vars.put(&quot;EC_R_MARKET&quot;,valueRMar+valueRMar1);
+		} else {
+		vars.put(&quot;EC_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);
+	}
+} else {
+vars.put(&quot;EC_R_MARKET&quot;,&quot;&quot;);
 }
+
 if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_REGION&quot;,&quot;AND prm.region in  ${region}&quot;);
-	vars.put(&quot;C_REGION&quot;,&quot;AND prm.region in  ${region}&quot;);		
+	if(vars.get(&quot;region&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+		vars.put(&quot;EC_REGION&quot;,&quot;and rmp.region is null&quot;);
+	}
+	else if(vars.get(&quot;region&quot;).contains(&quot;null&quot;)){
+		String valueReg = &quot;and ( rmp.region is null&quot;;
+		String valueReg1 = vars.get(&quot;region&quot;);
+		valueReg1 = valueReg1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
+		valueReg1 = &quot; or rmp.region in &quot;+valueReg1+&quot;)&quot;;
+		vars.put(&quot;EC_REGION&quot;,valueReg+valueReg1);
+		} else {
+		vars.put(&quot;EC_REGION&quot;,&quot;and rmp.region in ${region}&quot;);
+	}	
 } else {
 	vars.put(&quot;EC_REGION&quot;,&quot;&quot;);
-	vars.put(&quot;C_REGION&quot;,&quot;&quot;);
 }
+
 if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_MARKET&quot;,&quot;AND prm.market in ${market}&quot;);	
-	vars.put(&quot;C_MARKET&quot;,&quot;AND prm.market in ${market}&quot;);
-} else{
-	vars.put(&quot;EC_MARKET&quot;,&quot;&quot;);
-	vars.put(&quot;C_MARKET&quot;,&quot;&quot;);
+	if(vars.get(&quot;market&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+		vars.put(&quot;EC_MARKET&quot;,&quot;and rmp.market is null&quot;);
+	}
+	else if(vars.get(&quot;market&quot;).contains(&quot;null&quot;)){
+		String valueMar = &quot;and ( rmp.market is null&quot;;
+		String valueMar1 = vars.get(&quot;market&quot;);
+		valueMar1 = valueMar1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
+		valueMar1 = &quot; or rmp.market in &quot;+valueMar1+&quot;)&quot;;
+		vars.put(&quot;EC_MARKET&quot;,valueMar+valueMar1);
+		} else {
+		vars.put(&quot;EC_MARKET&quot;,&quot;and rmp.market in ${market}&quot;);
+	}
+} else {
+vars.put(&quot;EC_MARKET&quot;,&quot;&quot;);
 }
 
 if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_PARTICIPANTNAME&quot;,&quot;AND ei.participantName in ${participantName}&quot;);
-	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;AND e.participantNameInitCap in ${participantName}&quot;);	
+	vars.put(&quot;EC_PARTICIPANTNAME&quot;,&quot;and ei.participantNameInitCap in ${participantName}&quot;);	
 } else{
 	vars.put(&quot;EC_PARTICIPANTNAME&quot;,&quot;&quot;);
-	vars.put(&quot;C_PARTICIPANTNAME&quot;,&quot;&quot;);
 }
-
-if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;ECA_PARTICIPANTNAME&quot;,&quot;AND ei.participantNameInitCap in ${participantName}&quot;);
-	vars.put(&quot;CA_PARTICIPANTNAME&quot;,&quot;AND e.participantNameInitCap in ${participantName}&quot;);	
-} else{
-	vars.put(&quot;ECA_PARTICIPANTNAME&quot;,&quot;&quot;);
-	vars.put(&quot;CA_PARTICIPANTNAME&quot;,&quot;&quot;);
-}
-
 
 if(!vars.get(&quot;bpid&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_BPID&quot;,&quot;AND ei.bpid in ${bpid}&quot;);
-	vars.put(&quot;C_BPID&quot;,&quot;AND e.bpid in ${bpid}&quot;);	
+	vars.put(&quot;EC_BPID&quot;,&quot;AND fp.bpid in ${bpid}&quot;);	
 } else {
 	vars.put(&quot;EC_BPID&quot;,&quot;&quot;);
-	vars.put(&quot;C_BPID&quot;,&quot;&quot;);
 }
-
+if(!vars.get(&quot;anchorFacility&quot;).contains(&quot;Skip&quot;)){
+	vars.put(&quot;EC_AnchorFacility&quot;,&quot;AND anc.facilityNameInitCap in ${anchorFacility}&quot;);	
+} else {
+	vars.put(&quot;EC_AnchorFacility&quot;,&quot;&quot;);
+}
 if(!vars.get(&quot;ccn&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_CCN&quot;,&quot;AND anc.CCN in ${ccn}&quot;);
-	vars.put(&quot;C_CCN&quot;,&quot;AND f.ccn in ${ccn}&quot;);	
+	vars.put(&quot;EC_CCN&quot;,&quot;AND anc.ccn in ${ccn}&quot;);	
 } else {
 	vars.put(&quot;EC_CCN&quot;,&quot;&quot;);
-	vars.put(&quot;C_CCN&quot;,&quot;&quot;);
-}
-
-if(!vars.get(&quot;anchorFacility&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_AncFacility&quot;,&quot;AND readmitsrcccn.facilityNameInitCap in ${anchorFacility}&quot;);	
-	vars.put(&quot;C_AncFacility&quot;,&quot;AND readmitsrcccn.facilityNameInitCap in ${anchorFacility}&quot;);
-} else {
-	vars.put(&quot;EC_AncFacility&quot;,&quot;&quot;);
-	vars.put(&quot;C_AncFacility&quot;,&quot;&quot;);
-}
-
-</stringProp>
+}</stringProp>
         </BeanShellPreProcessor>
         <hashTree/>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="POSTAcuteFacilityCCN" enabled="true">
@@ -181,8 +226,8 @@ if(!vars.get(&quot;anchorFacility&quot;).contains(&quot;Skip&quot;)){
 ( 
 -- EC Data
 select 
-distinct  case when post_acute_df.facilityNameInitCap is null then null else post_acute_df.facilityNameInitCap end as &apos;Post Acute Facility&apos;,
-case when post_acute_df.ccn is null then null else post_acute_df.ccn end as &apos;Post Acute CCN&apos;
+distinct  case when post_acute_df.facilityNameInitCap is null then &apos;No Name&apos; else post_acute_df.facilityNameInitCap end as &apos;Post Acute Facility&apos;,
+case when post_acute_df.ccn is null then &apos;No CCN&apos; else post_acute_df.ccn end as &apos;Post Acute CCN&apos;
 FROM
 warehouse.factPatientEpisode fp
 LEFT JOIN  (select f.facilitySK,f.ccn,f.facilityName,
@@ -257,7 +302,7 @@ and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehou
 		${EC_PARTICIPANTNAME}  
 		${EC_BPID} 
 		${EC_CCN} 
-		${EC_AncFacility}
+		${EC_AnchorFacility}
 
 			)a  order by concat( `Post Acute Facility`, &apos; - &apos;, `Post Acute CCN`); -- Pass</stringProp>
           <stringProp name="queryArguments"></stringProp>
@@ -343,15 +388,16 @@ and  fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from wareho
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
 --  and fp.anchorAdmitDateKey &gt;= &apos;&apos;
           
-          ${EC_POSTCCN} 
+          ${EC_Post_Acute_Facility} 
+          ${EC_Post_Acute_CCN} 
 		${EC_R_REGION} 
 		${EC_R_MARKET} 
 		${EC_REGION} 
 		${EC_MARKET} 
 		${EC_PARTICIPANTNAME}  
            ${EC_BPID}
-           ${EC_CCN}
-            ${EC_AncFacility}
+           ${EC_CCN} 
+		${EC_AnchorFacility}
 
 )a  order by a.Bundle ;
 </stringProp>
@@ -363,10 +409,103 @@ and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehou
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Remedy Region Market " enabled="true">
+          <stringProp name="dataSource">MySQLQA</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">select distinct CONCAT( &apos;Remedy &apos;, a.region, &apos; - &apos;,  a.market ) AS &apos;Remedy Region Market&apos; from
+( 
+-- EC Data
+select 
+distinct  rm.region, rm.market
+FROM
+warehouse.factPatientEpisode fp
+LEFT JOIN  (select f.facilitySK,f.ccn,f.facilityName,
+    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
+    else df_claims.facilityNameInitCap end facilityNameInitCap,
+    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
+    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
+    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
+    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
+    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
+    from warehouse.dimFacility f
+    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
+    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+    ) anc ON fp.anchorAdmitFacilityKey=anc.facilitySK
+LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK
+LEFT JOIN warehouse.dimEpisodeInitiator ei ON fp.episodeInitiatorKey=ei.episodeInitiatorSK
+LEFT JOIN (select f.facilitySK,f.ccn,f.facilityName,
+    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
+    else df_claims.facilityNameInitCap end facilityNameInitCap,
+    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
+    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
+    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
+    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
+    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
+    from warehouse.dimFacility f
+    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
+    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+    ) post_acute_df ON fp.anchorDischargeFacilityKey=post_acute_df.facilitySK
+LEFT JOIN warehouse.dimCARL c ON fp.carlKey=c.carlSK
+LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
+LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
+ LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
+LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
+left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
+LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
+LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
+LEFT JOIN warehouse.dimFacility readmitsrcccn ON fp.readmitfacilityKey1 = readmitsrcccn.facilitySK
+LEFT JOIN warehouse.dimDRG readmitDRG ON fp.readmissionDrgKey1=readmitDRG.drgSK
+LEFT JOIN (
+select distinct provider_ccn ,quality_of_patient_care_star_rating,number_of_completed_surveys, max(file_date) from warehouse.ops_hha_home_health_compare group by provider_ccn)hhc on post_acute_df.CCN =hhc.provider_ccn
+INNER JOIN 
+    (
+ SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityBPID where username = ${userName}
+       GROUP BY bpid
+       )tbsBPID ON fp.BPID = tbsBPID.bpid
+INNER JOIN 
+     (       
+        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityCCN where username = ${userName}
+       GROUP BY ccn
+        )tbsCCN on anc.ccn=tbsCCN.ccn
+INNER JOIN 
+     (       
+        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
+        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
+       GROUP BY facilitykey
+        )tbsFacilityKey on fp.sourceFacilityKey=tbsFacilityKey.facilitykey
+WHERE fp.NSOCType=&apos;HHA&apos;
+and fp.bundleRisk=1 and fp.episodeCountReport=1
+and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
+and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
+and ei.bpid not like &apos;%DEMO%&apos;
+and  fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
+and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
+-- and fp.anchorAdmitDateKey &gt;= &apos;&apos;
+
+		${EC_Post_Acute_Facility} 
+          ${EC_Post_Acute_CCN} 
+          ${EC_BUNDLE} 
+		${EC_REGION} 
+		${EC_MARKET} 
+		${EC_PARTICIPANTNAME}  
+          ${EC_BPID}
+          ${EC_CCN} 
+		${EC_AnchorFacility}
+)a  order by CONCAT( &apos;Remedy &apos;, a.region, &apos; - &apos;,  a.market ); -- Pass</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames">RRegionMarket</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Partner Region Market" enabled="true">
           <stringProp name="dataSource">MySQLQA</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select distinct CONCAT( a.participantShortName, a.region, &apos; &apos;,  a.market ) AS &apos;Partner Region Market&apos; from
+          <stringProp name="query">select distinct CONCAT( a.participantShortName,&apos; &apos;, a.region, &apos; - &apos;,  a.market ) AS &apos;Partner Region Market&apos; from
 ( 
 -- EC Data
 select 
@@ -439,113 +578,22 @@ and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehou
 -- and fp.anchorAdmitDateKey &gt;= &apos;&apos;
 		 
 		 
-		 ${EC_POSTCCN} 
+		${EC_Post_Acute_Facility} 
+          ${EC_Post_Acute_CCN}
           ${EC_BUNDLE} 
 		${EC_R_REGION} 
 		${EC_R_MARKET} 
 		${EC_PARTICIPANTNAME}  
           ${EC_BPID}
-          ${EC_CCN}
-          ${EC_AncFacility}
+          ${EC_CCN} 
+		${EC_AnchorFacility}
 
 )a
  
-  order by CONCAT( a.participantShortName, a.region, &apos; &apos;,  a.market ); -- Pass</stringProp>
+  order by CONCAT( a.participantShortName,&apos; &apos;, a.region, &apos; - &apos;,  a.market ); -- Pass</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">PartnerRegionMarket</stringProp>
-          <stringProp name="resultVariable"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Remedy Region Market " enabled="true">
-          <stringProp name="dataSource">MySQLQA</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select distinct CONCAT( &apos;Remedy-&apos;, a.region, &apos; &apos;,  a.market ) AS &apos;Remedy Region Market&apos; from
-( 
--- EC Data
-select 
-distinct  rm.region, rm.market
-FROM
-warehouse.factPatientEpisode fp
-LEFT JOIN  (select f.facilitySK,f.ccn,f.facilityName,
-    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
-    else df_claims.facilityNameInitCap end facilityNameInitCap,
-    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
-    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
-    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
-    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
-    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
-    from warehouse.dimFacility f
-    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
-    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
-    ) anc ON fp.anchorAdmitFacilityKey=anc.facilitySK
-LEFT JOIN warehouse.dimFacility afdetail ON anc.sourceFacilityKey = afdetail.facilitySK
-LEFT JOIN warehouse.dimEpisodeInitiator ei ON fp.episodeInitiatorKey=ei.episodeInitiatorSK
-LEFT JOIN (select f.facilitySK,f.ccn,f.facilityName,
-    case when df_claims.facilityNameInitCap is null then f.facilityNameInitCap
-    else df_claims.facilityNameInitCap end facilityNameInitCap,
-    f.facilityType,f.facilitySubtype,f.address1,f.address2,f.city,f.state,f.zip,f.contactName,f.contactEmail,
-    f.contactPhone1,f.contactPhone2,f.contactRole,f.lat,f.lon,f.fips,f.confirmed,f.dataSource,f.description,
-    f.excludedFromRiskScore,f.sourceFacilityKey,f.fgroup,f.id,f.isFeatured,f.medicareId,f.mongoId,f.outboundBpciParticipant,
-    f.participantId,f.participating,f.bpid,f.careType,f.categorySpecificFields,f.dwhIsActive,f.dwhIsDeleted,f.dwhSource,
-    f.dwhVersion,f.dwhStartDate,f.dwhEndDate,f.dwhMD5Checksum
-    from warehouse.dimFacility f
-    left outer join (select * from warehouse.dimFacility where dwhSource=&apos;Claims&apos;) as df_claims
-    on f.ccn = df_claims.ccn and f.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
-    ) post_acute_df ON fp.anchorDischargeFacilityKey=post_acute_df.facilitySK
-LEFT JOIN warehouse.dimCARL c ON fp.carlKey=c.carlSK
-LEFT JOIN warehouse.dimPhysician p on fp.physicianKey=p.physicianSK
-LEFT JOIN warehouse.dimRegionMarket rm ON fp.rgRemKey = rm.rgSK
- LEFT JOIN warehouse.dimRegionMarket rmp ON fp.rgPartnerKey = rmp.rgSK
-LEFT JOIN warehouse.dimDRG drg on fp.currDrgKey = drg.drgSK
-left join warehouse.ref_operational_targets ot on ei.bpid=ot.BPID and anc.ccn=ot.CCN and drg.bundleShortName=ot.Clinical_Episode
-LEFT JOIN warehouse.dimDate dt ON fp.anchorAdmitDateKey = dt.dateSK
-LEFT JOIN warehouse.dimPatient pat ON fp.patientKey=pat.patientSK
-LEFT JOIN warehouse.dimFacility readmitsrcccn ON fp.readmitfacilityKey1 = readmitsrcccn.facilitySK
-LEFT JOIN warehouse.dimDRG readmitDRG ON fp.readmissionDrgKey1=readmitDRG.drgSK
-LEFT JOIN (
-select distinct provider_ccn ,quality_of_patient_care_star_rating,number_of_completed_surveys, max(file_date) from warehouse.ops_hha_home_health_compare group by provider_ccn)hhc on post_acute_df.CCN =hhc.provider_ccn
-INNER JOIN 
-    (
- SELECT tabUserSecurityBPID.bpid, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityBPID where username = ${userName}
-       GROUP BY bpid
-       )tbsBPID ON fp.BPID = tbsBPID.bpid
-INNER JOIN 
-     (       
-        SELECT tabUserSecurityCCN.ccn, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityCCN where username = ${userName}
-       GROUP BY ccn
-        )tbsCCN on anc.ccn=tbsCCN.ccn
-INNER JOIN 
-     (       
-        SELECT tabUserSecurityFacilityKey.facilitykey, GROUP_CONCAT(username) AS username
-        from warehouse.tabUserSecurityFacilityKey where username = ${userName}
-       GROUP BY facilitykey
-        )tbsFacilityKey on fp.sourceFacilityKey=tbsFacilityKey.facilitykey
-WHERE fp.NSOCType=&apos;HHA&apos;
-and fp.bundleRisk=1 and fp.episodeCountReport=1
-and anc.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) and post_acute_df.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;)
-and afdetail.dwhSource in (&apos;EC&apos;, &apos;ZeroKey&apos;) 
-and ei.bpid not like &apos;%DEMO%&apos;
-and  fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
-and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
--- and fp.anchorAdmitDateKey &gt;= &apos;&apos;
-
-${EC_POSTCCN} 
-          ${EC_BUNDLE} 
-		${EC_REGION} 
-		${EC_MARKET} 
-		${ECA_PARTICIPANTNAME}  
-          ${EC_BPID}
-          ${EC_CCN}
-           ${EC_AncFacility}
-)a  order by CONCAT( &apos;Remedy-&apos;, a.region, &apos; &apos;,  a.market ); -- Pass</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames">RRegionMarket</stringProp>
           <stringProp name="resultVariable"></stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -627,15 +675,16 @@ and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehou
 -- and fp.anchorAdmitDateKey &gt;= &apos;&apos;
 
     
-          ${EC_POSTCCN} 
+          ${EC_Post_Acute_Facility} 
+          ${EC_Post_Acute_CCN}
           ${EC_BUNDLE}
 		${EC_R_REGION} 
 		${EC_R_MARKET} 
 		${EC_REGION} 
 		${EC_MARKET} 
 		${EC_BPID}
-          ${EC_CCN}
-           ${EC_AncFacility}
+          ${EC_CCN} 
+		${EC_AnchorFacility}
 
 
 )a  order by a.Participant ;</stringProp>
@@ -724,17 +773,16 @@ ei.bpid not like &apos;%DEMO%&apos;
 and  fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;ClaimsCubeDate&apos;) 
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
 -- and fp.anchorAdmitDateKey &gt;= &apos;&apos;
- ${EC_POSTCCN} 
- ${EC_BUNDLE} 
+ 		${EC_Post_Acute_Facility} 
+          ${EC_Post_Acute_CCN}
+ 		${EC_BUNDLE} 
 		${EC_R_REGION} 
 		${EC_R_MARKET} 
 		${EC_REGION} 
 		${EC_MARKET} 
 		${EC_PARTICIPANTNAME}  
-		
-         
 		${EC_CCN} 
-		 ${EC_AncFacility}
+		${EC_AnchorFacility}
  )  a
 order by concat(`Episode Initiator`,&apos; - &apos;, BPID);
 
@@ -823,7 +871,8 @@ and  fp.anchorAdmitDateKey &gt; (select CAST(lookupValue AS UNSIGNED)from wareho
 and fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
 -- and fp.anchorAdmitDateKey &gt;= &apos;&apos;
 
-          ${EC_POSTCCN} 
+          ${EC_Post_Acute_Facility} 
+          ${EC_Post_Acute_CCN}
           ${EC_BUNDLE} 
 		${EC_R_REGION} 
 		${EC_R_MARKET} 
@@ -886,7 +935,7 @@ ArrayList post_ccn = new ArrayList();
 for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;POST_CCN_#&quot;));i++){
 post_ccn.add(vars.get(&quot;POST_CCN_&quot;+i));
 }
-vars.put(&quot;value11&quot;,&quot;\&quot;&quot;+post_ccn.toString()+&quot;\&quot;&quot;);
+vars.put(&quot;value1&quot;,&quot;\&quot;&quot;+post_ccn.toString()+&quot;\&quot;&quot;);
 System.out.println(&quot;POST CCN:&quot;+post_ccn.toString());
 log.info(&quot;POST CCN&quot;+post_ccn.toString());
 
@@ -895,22 +944,22 @@ ArrayList al_bundleName = new ArrayList();
 for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;bundleName_#&quot;));i++){
 al_bundleName.add(vars.get(&quot;bundleName_&quot;+i));
 }
-vars.put(&quot;value3&quot;,&quot;\&quot;&quot;+al_bundleName.toString()+&quot;\&quot;&quot;);
+vars.put(&quot;value2&quot;,&quot;\&quot;&quot;+al_bundleName.toString()+&quot;\&quot;&quot;);
 System.out.println(&quot;bundleName:&quot;+al_bundleName.toString());
 
 ArrayList al_PartnerRegionMarket = new ArrayList();
 for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;PartnerRegionMarket_#&quot;));i++){
 al_PartnerRegionMarket.add(vars.get(&quot;PartnerRegionMarket_&quot;+i));
 }
-vars.put(&quot;value4&quot;,&quot;\&quot;&quot;+al_PartnerRegionMarket.toString()+&quot;\&quot;&quot;);
+vars.put(&quot;value3&quot;,&quot;\&quot;&quot;+al_PartnerRegionMarket.toString()+&quot;\&quot;&quot;);
 System.out.println(&quot;Partner region:&quot;+al_PartnerRegionMarket.toString());
 
 
-
+ArrayList al_RRegionMarket = new ArrayList();
 for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;RRegionMarket_#&quot;));i++){
 al_RRegionMarket.add(vars.get(&quot;RRegionMarket_&quot;+i));
 }
-vars.put(&quot;value5&quot;,&quot;\&quot;&quot;+al_RRegionMarket.toString()+&quot;\&quot;&quot;);
+vars.put(&quot;value4&quot;,&quot;\&quot;&quot;+al_RRegionMarket.toString()+&quot;\&quot;&quot;);
 System.out.println(&quot;RRegionMarket:&quot;+al_RRegionMarket.toString());
 
 
@@ -918,7 +967,7 @@ ArrayList al_participant = new ArrayList();
 for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;participantName_#&quot;));i++){
 al_participant.add(vars.get(&quot;participantName_&quot;+i));
 }
-vars.put(&quot;value6&quot;,&quot;\&quot;&quot;+al_participant.toString()+&quot;\&quot;&quot;);
+vars.put(&quot;value5&quot;,&quot;\&quot;&quot;+al_participant.toString()+&quot;\&quot;&quot;);
 System.out.println(&quot;Participant:&quot;+al_participant.toString());
 
 
@@ -927,46 +976,16 @@ ArrayList al_bpid = new ArrayList();
 for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;EpisodeInitiator_BPID_#&quot;));i++){
 al_bpid.add(vars.get(&quot;EpisodeInitiator_BPID_&quot;+i));
 }
-vars.put(&quot;value7&quot;,&quot;\&quot;&quot;+al_bpid.toString()+&quot;\&quot;&quot;);
+vars.put(&quot;value6&quot;,&quot;\&quot;&quot;+al_bpid.toString()+&quot;\&quot;&quot;);
 System.out.println(&quot;BPID:&quot;+al_bpid.toString());
 
 ArrayList al_facilityName = new ArrayList();
 for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;AnchorFacility_CCN_#&quot;));i++){
 al_facilityName.add(vars.get(&quot;AnchorFacility_CCN_&quot;+i));
 }
-vars.put(&quot;value8&quot;,&quot;\&quot;&quot;+al_facilityName.toString()+&quot;\&quot;&quot;);
+vars.put(&quot;value7&quot;,&quot;\&quot;&quot;+al_facilityName.toString()+&quot;\&quot;&quot;);
 System.out.println(&quot;AnchorFacility_CCN&quot;+al_facilityName);
 
-
-
-
-//ArrayList al_DRG_Fracture = new ArrayList();
-//for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;DRG_Fracture_#&quot;));i++){
-//al_DRG_Fracture.add(vars.get(&quot;DRG_Fracture_&quot;+i));
-//}
-//vars.put(&quot;value7&quot;,&quot;\&quot;&quot;+al_DRG_Fracture.toString()+&quot;\&quot;&quot;);
-//System.out.println(&quot;DRG_Fracture:&quot;+al_DRG_Fracture.toString());
-//
-//ArrayList al_Physician_NPI = new ArrayList();
-//for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;Physician_NPI_#&quot;));i++){
-//al_Physician_NPI.add(vars.get(&quot;Physician_NPI_&quot;+i));
-//}
-//vars.put(&quot;value8&quot;,&quot;\&quot;&quot;+al_Physician_NPI.toString()+&quot;\&quot;&quot;);
-//System.out.println(&quot;Physician_NPI:&quot;+al_Physician_NPI.toString());
-//
-//ArrayList al_model = new ArrayList();
-//for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;model_#&quot;));i++){
-//al_model.add(vars.get(&quot;model_&quot;+i));
-//}
-//vars.put(&quot;value9&quot;,&quot;\&quot;&quot;+al_model.toString()+&quot;\&quot;&quot;);
-//System.out.println(&quot;model:&quot;+al_model.toString());
-
-//ArrayList al_facilityNameInitCap = new ArrayList();
-//for(int i=1;i&lt;=Integer.parseInt(vars.get(&quot;facilityNameInitCap_#&quot;));i++){
-//al_facilityNameInitCap.add(vars.get(&quot;facilityNameInitCap_&quot;+i));
-//}
-//vars.put(&quot;value10&quot;,&quot;\&quot;&quot;+al_facilityNameInitCap.toString()+&quot;\&quot;&quot;);
-//System.out.println(&quot;facilityNameInitCap:&quot;+al_facilityNameInitCap.toString());
 </stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
@@ -996,23 +1015,24 @@ if(vars.get(&quot;Flag&quot;).equals(&quot;(1)&quot;)){
 log.info(&quot;Path: 7&quot;);
 f= new FileOutputStream(path + separator+&quot;ClaimsRowFilterOutput.txt&quot;,true);
 	p = new PrintStream(f);
+	String itr = vars.get(&quot;IterationValue&quot;);
+ if(itr.isEmpty()){
+  p.println(&quot;Error in creating input data to execute query&quot;);
+ }else {
 
-	String vValue1 =  vars.get(&quot;value11&quot;);
-     String vValue2 =  vars.get(&quot;value3&quot;);
- 	String vValue3 =  vars.get(&quot;value4&quot;);
-	String vValue4 =  vars.get(&quot;value5&quot;);
-	String vValue5 =  vars.get(&quot;value6&quot;);
-	String vValue6 =  vars.get(&quot;value7&quot;);
-	String vValue7 =  vars.get(&quot;value8&quot;);
-	
-//	String vValue9 =  vars.get(&quot;value9&quot;);
-//	String vValue10 =  vars.get(&quot;value10&quot;);
-//	p.println(&quot;Episode Initiator - BPID=&quot;+vValue1+&quot;*Anchor Facility - CCN=&quot;+vValue2+&quot;*Bundle=&quot;+vValue3+&quot;*Remdy Region Market=&quot;+vValue4+&quot;*Partner Region Market=&quot;+vValue5+&quot;*Participant=&quot;+vValue6+&quot;*DRG - Fracture=&quot;+vValue7+&quot;*Physician - NPI=&quot;+vValue8+&quot;*Model=&quot;+vValue9); //+&quot;*Anchor Facility Detail=&quot;+vValue10);
-	
-//	p.println(&quot;Episode Initiator - BPID=&quot;+${value1}+&quot;*Anchor Facility - CCN=&quot;+${value2}+&quot;*Bundle=&quot;+${value3}+&quot;*Remdy Region Market=&quot;+${value4}+&quot;*Partner Region Market=&quot;+${value5}+&quot;*Participant=&quot;+${value6}+&quot;*DRG - Fracture=&quot;+${value7}+&quot;*Physician - NPI=&quot;+${value8}+&quot;*Model=&quot;+${value9}); //&quot;*Anchor Facility Detail=&quot;+${value10});
+	String vValue1 =  vars.get(&quot;value1&quot;);
+     String vValue2 =  vars.get(&quot;value2&quot;);
+ 	String vValue3 =  vars.get(&quot;value3&quot;);
+ 	vValue3 = vValue3.replace(&quot;null&quot;,&quot;Not Available&quot;); 
+	String vValue4 =  vars.get(&quot;value4&quot;);
+	vValue4 = vValue4.replace(&quot;null&quot;,&quot;Not Available&quot;); 
+	String vValue5 =  vars.get(&quot;value5&quot;);
+	String vValue6 =  vars.get(&quot;value6&quot;);
+	String vValue7 =  vars.get(&quot;value7&quot;);
 
 
-	p.println(&quot;POST Acute Facility - CCN=&quot;+vValue1+&quot;*Bundle=&quot;+vValue2+&quot;*Region - Market=&quot;+vValue3+&quot;*Remedy Region - Market=&quot;+vValue4+&quot;*Participant=&quot;+vValue5+&quot;*Episode Initiator - BPID=&quot;+vValue6+&quot;*Anchor Facility - CCN=&quot;+vValue7);
+	p.println(&quot;Post Acute Facility - CCN=&quot;+vValue1+&quot;*Bundle=&quot;+vValue2+&quot;*Region - Market=&quot;+vValue3+&quot;*Remedy Region - Market=&quot;+vValue4+&quot;*Participant=&quot;+vValue5+&quot;*Episode Initiator - BPID=&quot;+vValue6+&quot;*Anchor Facility - CCN=&quot;+vValue7);
+ }
 	p.close();
 	f.close();
 
