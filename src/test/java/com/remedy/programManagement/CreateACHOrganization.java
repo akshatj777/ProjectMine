@@ -392,7 +392,7 @@ public class CreateACHOrganization extends BaseClass{
 			else if(managingOrg.equals("MO_Name2")){
 				longDelay();
 				iWillWaitToSee(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']"));
-				iFillInText(driver.findElement(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']")), CreateManagingOrganizationAPI.MONameList.get(0).substring(1, CreateManagingOrganizationAPI.MONameList.get(0).length()-1));
+				iFillInText(driver.findElement(By.xpath("//div[@class='radio-button-']/following-sibling::div//input[@role='combobox']")), CreateManagingOrganizationAPI.MONameList.get(1).substring(1, CreateManagingOrganizationAPI.MONameList.get(1).length()-1));
 				iWillWaitToSee(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption"));
 				clickElement(driver.findElement(By.cssSelector(".VirtualizedSelectOption.VirtualizedSelectFocusedOption")));
 				delay();
@@ -559,7 +559,7 @@ public class CreateACHOrganization extends BaseClass{
     public void iVerifyLocationIdShouldBeGreater(int value)
     {
     	delay();
-    	location_Id =driver.findElement(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(), '100')]")).getText();
+    	location_Id =driver.findElement(By.xpath("//div[@class='public_fixedDataTableCell_cellContent' and contains(text(), '10')]")).getText();
     	loc_Id = Integer.parseInt(location_Id);
     	Assert.assertTrue(value<loc_Id);
     }

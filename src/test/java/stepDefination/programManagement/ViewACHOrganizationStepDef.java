@@ -94,9 +94,9 @@ public class ViewACHOrganizationStepDef extends DriverScript {
 		viewACH.iSearchWithOrgNameonViewProfileOfManagingOrganizationSearchBox(text);
 		}
 	
-	@And("^I click on \"([^\"]*)\" on view profile Managing Organization search box$")
-	  public void i_Click_On_OrgName_on_view_Profile_Of_Managing_Organization_Search_Box(String text) throws Throwable {
-		viewACH.iClickOnOrgNameonViewProfileOfManagingOrganizationSearchBox(text);
+	@And("^I click \"([^\"]*)\" for \"([^\"]*)\" organization under MO profile page$")
+	  public void i_Click_On_OrgName_on_view_Profile_Of_Managing_Organization_Search_Box(String text, String org) throws Throwable {
+		viewACH.iClickOnOrgNameonViewProfileOfManagingOrganizationSearchBox(text, org);
 		}
 	
 	@And("^I verify Location details of \"([^\"]*)\" on view profile of \"([^\"]*)\" organization$")
@@ -108,4 +108,26 @@ public class ViewACHOrganizationStepDef extends DriverScript {
 	  public void i_Verify_LocationIndexId_On_ViewProfile_Of_Slecetd_Organization(String LId, String org) throws Throwable {
 		viewACH.iVerifyLocationIndexIdonVeiwProfileOfSelectedOrganization(LId, org);
 	}
+	
+	@And("^I verify CCN id \"([^\"]*)\" on \"([^\"]*)\" organization profile page$")
+	  public void i_Verify_CCN_Identifier_On_ViewProfile_Of_Selected_Organization(String text, String org) throws Throwable {
+		viewACH.iVerifyCCNIdentifierOnViewProfileOfSelectedOrganization(text, org);
+	}
+
+	@And("^I verify EIN/TIN id \"([^\"]*)\" on \"([^\"]*)\" organization profile page$")
+	  public void i_Verify_EIN_Identifier_Id_On_View_Profile_Of_Organization(String text, String org) throws Throwable {
+		viewACH.iVerifyEINIdentifierOnViewProfileOrganization(text, org);
+	}
+	
+	@And("^I verify NPI id \"([^\"]*)\" on \"([^\"]*)\" organization profile page$")
+	  public void i_Verify_NPI_Idetifier_On_View_Profile_Of_Organization(String text, String org) throws Throwable {
+		viewACH.iVerifyNPIIdentifierOnViewProfileOrganization(text, org);
+	}
+	
+	
+	@Then("^I verify Location indexID for \"([^\"]*)\" organization$")
+	  public void i_Verify_LocationIndexId_For_Selected_Organization(String org) throws Throwable {
+		viewACH.iVerifyLocationIndexIdForSelectedOrganization(org);
+	}
+	
 }

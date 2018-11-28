@@ -916,6 +916,10 @@ public class BaseClass {
 			CreatePractictionerAPI.practitionerNameList.clear();
 			CreatePractictionerAPI.practitionerIDList.clear();
 		}
+		else if(type.equals("BundlePaymentContract")){
+			CreateBundlePaymentContractAPI.BPCCIDList.clear();
+			CreateBundlePaymentContractAPI.BPCIDcopyList.clear();
+		}
 	}
 	
 	public List<String> fetchLocationIndexID(String query) throws ClassNotFoundException, SQLException  {

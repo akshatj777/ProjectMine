@@ -128,11 +128,11 @@ Feature: Search Physician Roster functionality tests
 
     Examples: 
       | Description                          | Has_MO | PGP_Name | SearchParam  |
-      | Search for a Physician by NPI        | YES    | PGPNAME  | FETCHFROMAPI |
-      | Search for a Physician by First Name | YES    | PGPNAME  | firstName    |
-      | Search for a Physician by Last Name  | YES    | PGPNAME  | testLastName |
-      | Search for a Physician by Start Date | YES    | PGPNAME  | 2019-07-01   |
-      | Search for a Physician by End Date   | YES    | PGPNAME  | 2020-12-01   |
+      | Search for a Physician by NPI        | NO     | PGPNAME  | FETCHFROMAPI |
+      | Search for a Physician by First Name | NO     | PGPNAME  | firstName    |
+      | Search for a Physician by Last Name  | NO     | PGPNAME  | testLastName |
+      | Search for a Physician by Start Date | NO     | PGPNAME  | 2019-01-30   |
+      | Search for a Physician by End Date   | NO     | PGPNAME  | 2020-06-30   |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -205,4 +205,4 @@ Feature: Search Physician Roster functionality tests
 
     Examples: 
       | type                                                    |
-      | MO, Hospital, PGP, Payor, Program, Bundle, practitioner |
+      | MO, Hospital, PGP, Payor, Program, Bundle, BundlePaymentContract, practitioner |

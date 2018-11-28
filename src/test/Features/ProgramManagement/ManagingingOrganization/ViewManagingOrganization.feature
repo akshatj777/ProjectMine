@@ -135,11 +135,8 @@ Feature: Verification of Managing Organization details with no ACH/PGP/HHA/SNF a
     And I provide unique "ACH - <NPI>" in "NPI" on create organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I select location type <Loc_Type> for Location "1" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
-    And I select region <Loc_Region> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
-    And I select market <Loc_Market> for region "<Loc_Region>" for Location "1" on "create" organization page
     And I select state <Loc_State> for Location "1" on "create" organization page
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
@@ -150,7 +147,7 @@ Feature: Verification of Managing Organization details with no ACH/PGP/HHA/SNF a
     And I verify "ACH" organization tab present under "Managing" Organization
     And I verify count of "ACH" organizations is increased by 2
     And I search with "<Hosp_Name> - <Has_MO>" on view profile Managing Organization search box
-    And I click on "<Hosp_Name> - <Has_MO>" on view profile Managing Organization search box
+    And I click "<Hosp_Name> - <Has_MO>" for "Hospital" organization under MO profile page
     And I Verify the "x" button on View page
     And I click on "x" button on particular organization
 
