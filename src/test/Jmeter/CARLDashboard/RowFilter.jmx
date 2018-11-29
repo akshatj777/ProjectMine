@@ -111,15 +111,39 @@ if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;C_BUNDLE&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;r_region&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_R_REGION&quot;,&quot;and rm.region in  ${r_region}&quot;);
+	if(vars.get(&quot;r_region&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+		vars.put(&quot;EC_R_REGION&quot;,&quot;and rm.region is null&quot;);
+	}
+	else if(vars.get(&quot;r_region&quot;).contains(&quot;null&quot;)){
+		String valueRReg = &quot;and ( rm.region is null&quot;;
+		String valueRReg1 = vars.get(&quot;r_region&quot;);
+		valueRReg1 = valueRReg1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
+		valueRReg1 = &quot; or rm.region in &quot;+valueRReg1+&quot;)&quot;;
+		vars.put(&quot;EC_R_REGION&quot;,valueRReg+valueRReg1);
+		} else {
+		vars.put(&quot;EC_R_REGION&quot;,&quot;and rm.region in ${r_region}&quot;);
+	}	
 } else {
 	vars.put(&quot;EC_R_REGION&quot;,&quot;&quot;);
 }
+
 if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);
-} else{
-	vars.put(&quot;EC_R_MARKET&quot;,&quot;&quot;);
+	if(vars.get(&quot;r_market&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+		vars.put(&quot;EC_R_MARKET&quot;,&quot;and rm.market is null&quot;);
+	}
+	else if(vars.get(&quot;r_market&quot;).contains(&quot;null&quot;)){
+		String valueRMar = &quot;and ( rm.market is null&quot;;
+		String valueRMar1 = vars.get(&quot;r_market&quot;);
+		valueRMar1 = valueRMar1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
+		valueRMar1 = &quot; or rm.market in &quot;+valueRMar1+&quot;)&quot;;
+		vars.put(&quot;EC_R_MARKET&quot;,valueRMar+valueRMar1);
+		} else {
+		vars.put(&quot;EC_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);
+	}
+} else {
+vars.put(&quot;EC_R_MARKET&quot;,&quot;&quot;);
 }
+
 if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
 	if(vars.get(&quot;region&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
 		vars.put(&quot;Query_REGION&quot;,&quot;and rmp.region is null&quot;);
@@ -127,7 +151,7 @@ if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
 	else if(vars.get(&quot;region&quot;).contains(&quot;null&quot;)){
 		String valueReg = &quot;and ( rmp.region is null&quot;;
 		String valueReg1 = vars.get(&quot;region&quot;);
-		valueReg1 = valueReg1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+		valueReg1 = valueReg1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
 		valueReg1 = &quot; or rmp.region in &quot;+valueReg1+&quot;)&quot;;
 		vars.put(&quot;Query_REGION&quot;,valueReg+valueReg1);
 		} else {
@@ -144,7 +168,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	else if(vars.get(&quot;market&quot;).contains(&quot;null&quot;)){
 		String valueMar = &quot;and ( rmp.market is null&quot;;
 		String valueMar1 = vars.get(&quot;market&quot;);
-		valueMar1 = valueMar1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+		valueMar1 = valueMar1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
 		valueMar1 = &quot; or rmp.market in &quot;+valueMar1+&quot;)&quot;;
 		vars.put(&quot;Query_MARKET&quot;,valueMar+valueMar1);
 		} else {
@@ -381,6 +405,24 @@ if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
 		} else {
 		vars.put(&quot;EC_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);
 	}
+} else {
+vars.put(&quot;EC_PHY_NPI&quot;,&quot;&quot;);
+}
+
+
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+ if(vars.get(&quot;npi&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+  vars.put(&quot;EC_PHY_NPI&quot;,&quot;and p.npi is null&quot;);
+ }
+ else if(vars.get(&quot;npi&quot;).contains(&quot;null&quot;)){
+  String valueNPI = &quot;and ( p.npi is null&quot;;
+  String valueNPI1 = vars.get(&quot;npi&quot;);
+  valueNPI1 = valueNPI1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
+  valueNPI1 = &quot; or p.npi in &quot;+valueNPI1+&quot;)&quot;;
+  vars.put(&quot;EC_PHY_NPI&quot;,valueNPI+valueNPI1);  
+  } else {
+  vars.put(&quot;EC_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);
+ }
 } else {
 vars.put(&quot;EC_PHY_NPI&quot;,&quot;&quot;);
 }
@@ -1368,7 +1410,7 @@ f= new FileOutputStream(path + separator+&quot;RowFilterOutput.txt&quot;,true);
 	p = new PrintStream(f);
 
 	String itr = vars.get(&quot;IterationValue&quot;);
-	if(itr.isEmpty()){
+	if(itr=null){
 		p.println(&quot;Error in creating input data to execute query&quot;);
 	}else {
 		
@@ -1376,6 +1418,7 @@ f= new FileOutputStream(path + separator+&quot;RowFilterOutput.txt&quot;,true);
 	String vValue2 =  vars.get(&quot;value2&quot;);
 	String vValue3 =  vars.get(&quot;value3&quot;);
 	String vValue4 =  vars.get(&quot;value4&quot;);
+	vValue4 = vValue4.replace(&quot;null&quot;,&quot;Not Available&quot;);
 	String vValue5 =  vars.get(&quot;value5&quot;);
 	vValue5 = vValue5.replace(&quot;null&quot;,&quot;Not Available&quot;); //Region Market 
 	String vValue6 =  vars.get(&quot;value6&quot;);
@@ -1398,6 +1441,13 @@ f= new FileOutputStream(path + separator+&quot;RowFilterOutput.txt&quot;,true);
           </BeanShellPostProcessor>
           <hashTree/>
         </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+          <stringProp name="IfController.condition">if control me daal de
+${__BeanShell(vars.remove(&quot;market&quot;); &quot;false&quot;;)}</stringProp>
+          <boolProp name="IfController.evaluateAll">true</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree/>
       </hashTree>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>

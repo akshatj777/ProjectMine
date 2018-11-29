@@ -187,7 +187,7 @@ if(!vars.get(&quot;participantName&quot;).contains(&quot;Skip&quot;)){
 
 if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
  if(vars.get(&quot;npi&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
-  vars.put(&quot;C_PHY_NPI&quot;,&quot;and p.npi is null&quot;);
+  vars.put(&quot;EC_PHY_NPI&quot;,&quot;and p.npi is null&quot;);
  }
  else if(vars.get(&quot;npi&quot;).contains(&quot;null&quot;)){
   String valueNPI = &quot;and ( dpy.npi is null&quot;;
