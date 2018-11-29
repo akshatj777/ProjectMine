@@ -117,20 +117,49 @@ if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_BUNDLE&quot;,&quot;&quot;);
 	vars.put(&quot;C_BUNDLE&quot;,&quot;&quot;);
 }
+
 if(!vars.get(&quot;r_region&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_R_REGION&quot;,&quot;and rm.region in  ${r_region}&quot;);
-	vars.put(&quot;C_R_REGION&quot;,&quot;and rm.region in  ${r_region}&quot;);	
+	if(vars.get(&quot;r_region&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+		vars.put(&quot;EC_R_REGION&quot;,&quot;and rm.region is null&quot;);
+		vars.put(&quot;C_R_REGION&quot;,&quot;and rm.region is null&quot;);
+	}
+	else if(vars.get(&quot;r_region&quot;).contains(&quot;null&quot;)){
+		String valueRReg = &quot;and ( rm.region is null&quot;;
+		String valueRReg1 = vars.get(&quot;r_region&quot;);
+		valueRReg1 = valueRReg1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
+		valueRReg1 = &quot; or rm.region in &quot;+valueRReg1+&quot;)&quot;;
+		vars.put(&quot;EC_R_REGION&quot;,valueRReg+valueRReg1);
+		vars.put(&quot;C_R_REGION&quot;,valueRReg+valueRReg1);
+		} else {
+		vars.put(&quot;EC_R_REGION&quot;,&quot;and rm.region in ${r_region}&quot;);
+		vars.put(&quot;C_R_REGION&quot;,&quot;and rm.region in ${r_region}&quot;);
+	}	
 } else {
 	vars.put(&quot;EC_R_REGION&quot;,&quot;&quot;);
 	vars.put(&quot;C_R_REGION&quot;,&quot;&quot;);
 }
+
 if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);
-	vars.put(&quot;C_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);		
-} else{
-	vars.put(&quot;EC_R_MARKET&quot;,&quot;&quot;);
-	vars.put(&quot;C_R_MARKET&quot;,&quot;&quot;);
+	if(vars.get(&quot;r_market&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+		vars.put(&quot;EC_R_MARKET&quot;,&quot;and rm.market is null&quot;);
+		vars.put(&quot;C_R_MARKET&quot;,&quot;and rm.market is null&quot;);
+	}
+	else if(vars.get(&quot;r_market&quot;).contains(&quot;null&quot;)){
+		String valueRMar = &quot;and ( rm.market is null&quot;;
+		String valueRMar1 = vars.get(&quot;r_market&quot;);
+		valueRMar1 = valueRMar1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
+		valueRMar1 = &quot; or rm.market in &quot;+valueRMar1+&quot;)&quot;;
+		vars.put(&quot;EC_R_MARKET&quot;,valueRMar+valueRMar1);
+		vars.put(&quot;C_R_MARKET&quot;,valueRMar+valueRMar1);
+		} else {
+		vars.put(&quot;EC_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);
+		vars.put(&quot;C_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);
+	}
+} else {
+vars.put(&quot;EC_R_MARKET&quot;,&quot;&quot;);
+vars.put(&quot;C_R_MARKET&quot;,&quot;&quot;);
 }
+
 if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
 	if(vars.get(&quot;region&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
 		vars.put(&quot;Query_REGION&quot;,&quot;and prm.region is null&quot;);
@@ -138,7 +167,7 @@ if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
 	else if(vars.get(&quot;region&quot;).contains(&quot;null&quot;)){
 		String valueReg = &quot;and ( prm.region is null&quot;;
 		String valueReg1 = vars.get(&quot;region&quot;);
-		valueReg1 = valueReg1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+		valueReg1 = valueReg1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
 		valueReg1 = &quot; or prm.region in &quot;+valueReg1+&quot;)&quot;;
 		vars.put(&quot;Query_REGION&quot;,valueReg+valueReg1);
 		} else {
@@ -155,7 +184,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	else if(vars.get(&quot;market&quot;).contains(&quot;null&quot;)){
 		String valueMar = &quot;and ( prm.market is null&quot;;
 		String valueMar1 = vars.get(&quot;market&quot;);
-		valueMar1 = valueMar1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+		valueMar1 = valueMar1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
 		valueMar1 = &quot; or prm.market in &quot;+valueMar1+&quot;)&quot;;
 		vars.put(&quot;Query_MARKET&quot;,valueMar+valueMar1);
 		} else {
@@ -391,16 +420,33 @@ ArrayList b= new ArrayList();
 		vars.put(&quot;EC_DRGCODE&quot;,&quot;&quot;);
 	}
 
-     if(vars.get(&quot;npi&quot;).equals(&quot;(&apos;Null&apos;)&quot;)){
-	vars.put(&quot;EC_PHY_NPI&quot;,&quot;and dpy.npi is null&quot;);
-	vars.put(&quot;C_PHY_NPI&quot;,&quot;and p.npi is null&quot;);	
-} else if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;EC_PHY_NPI&quot;,&quot;and dpy.npi in ${npi}&quot;);
-	vars.put(&quot;C_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);		
-} else{
-	vars.put(&quot;EC_PHY_NPI&quot;,&quot;&quot;);
-	vars.put(&quot;C_PHY_NPI&quot;,&quot;&quot;);
+if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
+ if(vars.get(&quot;npi&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+  vars.put(&quot;EC_PHY_NPI&quot;,&quot;and dpy.npi is null&quot;);
+  vars.put(&quot;C_PHY_NPI&quot;,&quot;and p.npi is null&quot;);
+ }
+ else if(vars.get(&quot;npi&quot;).contains(&quot;null&quot;)){
+  String valueNPI = &quot;and ( p.npi is null&quot;;
+  String valueNPI1 = vars.get(&quot;npi&quot;);
+  valueNPI1 = valueNPI1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
+  valueNPI1 = &quot; or p.npi in &quot;+valueNPI1+&quot;)&quot;;
+  vars.put(&quot;C_PHY_NPI&quot;,valueNPI+valueNPI1);
+  
+  String valueNPIEC = &quot;and ( dpy.npi is null&quot;;
+  String valueNPIEC1 = vars.get(&quot;npi&quot;);
+  valueNPIEC1 = valueNPIEC1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
+  valueNPIEC1 = &quot; or dpy.npi in &quot;+valueNPIEC1+&quot;)&quot;;
+  vars.put(&quot;EC_PHY_NPI&quot;,valueNPIEC+valueNPIEC1);
+  
+  } else {
+  vars.put(&quot;C_PHY_NPI&quot;,&quot;and p.npi in ${npi}&quot;);
+  vars.put(&quot;EC_PHY_NPI&quot;,&quot;and dpy.npi in ${npi}&quot;);
+ }
+} else {
+vars.put(&quot;EC_PHY_NPI&quot;,&quot;&quot;);
+vars.put(&quot;C_PHY_NPI&quot;,&quot;&quot;);
 }
+
 if(!vars.get(&quot;model&quot;).contains(&quot;Skip&quot;)){
 	vars.put(&quot;EC_Model&quot;,&quot;and fp.Model in ${model}&quot;);	
 	vars.put(&quot;C_Model&quot;,&quot;and c.Model in ${model}&quot;);
@@ -415,8 +461,8 @@ if(!vars.get(&quot;anch&quot;).contains(&quot;Skip&quot;)){
 	else if(vars.get(&quot;anch&quot;).contains(&quot;null&quot;)){
 		String valueAnch = &quot;and ( afdetail.facilityNameInitCap is null&quot;;
 		String valueAnch1  = vars.get(&quot;anch&quot;);
-		valueAnch1 = valueMar1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
-		valueAnch1 = &quot; or afdetail.facilityNameInitCap in &quot;+valueMar1+&quot;)&quot;;
+		valueAnch1 = valueAnch1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
+		valueAnch1 = &quot; or afdetail.facilityNameInitCap in &quot;+valueAnch1+&quot;)&quot;;
 		vars.put(&quot;EC_AnchorFacility&quot;,valueAnch+valueAnch1);
 		} else {
 		vars.put(&quot;EC_AnchorFacility&quot;,&quot;and afdetail.facilityNameInitCap in ${anch}&quot;);
@@ -1819,6 +1865,7 @@ f= new FileOutputStream(path + separator+&quot;RowFilterOutput.txt&quot;,true);
 	String vValue2 =  vars.get(&quot;value2&quot;);
 	String vValue3 =  vars.get(&quot;value3&quot;);
 	String vValue4 =  vars.get(&quot;value4&quot;);
+	vValue4 = vValue4.replace(&quot;null&quot;,&quot;Not Available&quot;);
 	String vValue5 =  vars.get(&quot;value5&quot;);
 	vValue5 = vValue5.replace(&quot;null&quot;,&quot;Not Available&quot;); //Region Market 
 	String vValue6 =  vars.get(&quot;value6&quot;);
