@@ -94,7 +94,7 @@ Feature: HHA Scorecard Dashboard
   Scenario: Execute JMX file and read Output data for Data Filter Validations
     When I close the file for after writing data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\HHAScoreCard\\ClaimsRowFilterOutput.txt" Output file
-    When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\HHAScoreCard\\HHAClaimsRowFilter.jmx"
+    When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\HHAScoreCard\\ClaimsRowFilter.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\HHAScoreCard\\ClaimsRowFilterOutput.txt"
 
   @HHAScorecardRLS @HHA
@@ -220,7 +220,7 @@ Feature: HHA Scorecard Dashboard
   Scenario: Execute JMX file and read Output data for Data Filter Validations
     When I close the file for after writing data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\HHAScoreCard\\ECRowFilterOutput.txt" Output file
-    When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\HHAScoreCard\\HHAClaimsRowFilter.jmx"
+    When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\HHAScoreCard\\ECRowFilter.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\HHAScoreCard\\ECRowFilterOutput.txt"
 
   @HHAScorecardRLS @HHA
@@ -346,7 +346,7 @@ Feature: HHA Scorecard Dashboard
   Scenario: Execute JMX file and read Output data for Data Filter Validations
     When I close the file for after writing data to input file
     Given I clear output data for Data metrics from "\\src\\test\\Jmeter\\HHAScoreCard\\RowFilterOutput.txt" Output file
-    When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\HHAScoreCard\\HHAClaimsRowFilter.jmx"
+    When I execute the jmeter application and execute jmx file "\\src\\test\\Jmeter\\HHAScoreCard\\RowFilter.jmx"
     Then I read the values from the text file "\\src\\test\\Jmeter\\HHAScoreCard\\RowFilterOutput.txt"
 
   @HHAScorecardRLS @HHA

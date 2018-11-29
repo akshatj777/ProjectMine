@@ -1820,6 +1820,10 @@ public class ProgramPerformance extends BaseClass{
 		                        		  arrayListTexts.add("'null'"); 
 		                        		  writeDataToOutputFile("Path");
 		                        		  }
+			            				 clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+	    			            		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+	    			            		 delay();
+	    			            		 return;
 			            		 }else {
 			            			 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
 			            			 val=val.substring(val.indexOf(" ")+1).trim(); 
@@ -2028,6 +2032,9 @@ public class ProgramPerformance extends BaseClass{
                      				{
                      					arrayListTexts.add("'null'");
                      					writeDataToOutputFile("Path");
+    		                       		clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+    		                   		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+    		                   		 delay();
                      					return;
                      				}
                      			}}
@@ -2039,6 +2046,9 @@ public class ProgramPerformance extends BaseClass{
                       				{
                       					arrayListTexts.add("'null'");
                       					writeDataToOutputFile("Path");
+    		                       		clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+    		                   		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+    		                   		 delay();
                       					return;
                       				}
                       			}
@@ -2283,10 +2293,12 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iOpenTheInputFile(String path,String row) throws FileNotFoundException{
 		 if(row.equals("1")){
+			 arrayListTexts.clear();
 			 writer=new PrintWriter(System.getProperty("user.dir")+path);
 			 arrayListTexts.add("1");
 			 writeDataToOutputFile("Path");
 		 }else{
+			 arrayListTexts.clear();
 			 writer.print(System.lineSeparator());
 			 arrayListTexts.add("0");
 			 writeDataToOutputFile("Path");
@@ -2416,7 +2428,7 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iSaveAllRowFiltersInIndexInHashMap(String index){
 		 mapOfHmFiltersValue.put(index,rowFilters);
-		 System.out.println(mapOfHmFiltersValue.toString());
+		 System.out.println("FE HashMap Saved values"+mapOfHmFiltersValue.toString());
 	 }
 	 
 	 public void iFetchStoreValuesOnDashboard(String filter,String dashboard) throws FileNotFoundException{
@@ -2522,6 +2534,7 @@ public class ProgramPerformance extends BaseClass{
 		System.out.println("Col value: "+col.toString());
 //		System.out.println("FE HashMap:"+mapOfHmFiltersValue.get(indexIncrement).toString());
 		StringTokenizer st = new StringTokenizer(col.get(index), "*");
+		System.out.println("<<<<<<<<<<<>>>>>>>>>>>>>>>>>"+outputText.toString());
 		 while(st.hasMoreTokens()){
 			 String var[] =st.nextToken().trim().split("=");
 			 outputText.put(var[0], var[1]);
