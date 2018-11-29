@@ -59,9 +59,7 @@ public class EditUser extends BaseClass {
 
 	public void iVerifyThatEmailIsNonEditable() {
 		iWillWaitToSee(By.xpath("//input[@placeholder='Email']"));
-		// driver.findElement(By.xpath("//input[@placeholder='Email']"));
 		Assert.assertFalse(driver.findElement(By.cssSelector("input[placeholder='Email']")).isEnabled());
-
 	}
 
 	public void iClickOnRoleFieldToEdit() {
@@ -138,9 +136,7 @@ public class EditUser extends BaseClass {
 		if(!(text.equals("")))
 		{
 			iWillWaitToSee(By.xpath("//*[contains(text(),'" + text + "')]"));
-
-			clickElement(driver.findElement(By
-					.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'" + text + "')]")));
+			clickElement(driver.findElement(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'" + text + "')]")));
 		}
 	}
 
@@ -164,10 +160,10 @@ public class EditUser extends BaseClass {
 			{
 				iWillWaitToSee(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'" + org.trim()+ "')]/i[contains(@class,'remove link icon')]"));
 				clickElement(driver.findElement(By.xpath("//span[contains(@class, 'component-participant-title') and contains(text(),'"+ org.trim() + "')]/i[contains(@class,'remove link icon')]")));
-			
 				if (isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + "Remove" + "')]"))) == true)
-					
+				{
 					clickElement(driver.findElement(By.xpath("//*[contains(text(),'" + "Remove" + "')]")));
+				}
 			}
 		}
 	}
@@ -175,14 +171,12 @@ public class EditUser extends BaseClass {
 	public void clickAllLocationsButton(String arg) throws Throwable {
 
 		if (arg.equals("Second")) {
-			System.out.println("Secondffgfd");
 			delay();
 			clickElement(driver.findElements(By.xpath("//label[.='All Locations']")).get(1));
 		} else if (arg.equals("Third")) {
 			delay();
 			clickElement(driver.findElements(By.xpath("//label[.='All Locations']")).get(2));
 		}
-
 		else {
 			iWillWaitToSee(By.xpath("//label[.='All Locations']"));
 			clickElement(driver.findElement(By.xpath("//label[.='All Locations']")));
@@ -198,12 +192,12 @@ public class EditUser extends BaseClass {
 				String[] app = appList.split(",\\s+");
 
 				for (int i = 0; i < app.length; i++) {
-					isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + app[i] + "')]")));
+					Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + app[i] + "')]"))));
 				}
 			}
 
 			else {
-				isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + appList + "')]")));
+				Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + appList + "')]"))));
 			}
 		} else if (text.contains("Not Present")) {
 
@@ -211,12 +205,12 @@ public class EditUser extends BaseClass {
 				String[] app = appList.split(",\\s+");
 
 				for (int i = 0; i < app.length; i++) {
-					isElementNotPresentOnPage(By.xpath("//*[contains(text(),'" + app[i] + "')]"));
+					Assert.assertTrue(isElementNotPresentOnPage(By.xpath("//*[contains(text(),'" + app[i] + "')]")));
 				}
 			}
 
 			else {
-				isElementNotPresentOnPage(By.xpath("//*[contains(text(),'" + appList + "')]"));
+				Assert.assertTrue(isElementNotPresentOnPage(By.xpath("//*[contains(text(),'" + appList + "')]")));
 			}
 		}
 	}
@@ -224,32 +218,30 @@ public class EditUser extends BaseClass {
 	public void iVerifyDownstreamProviderPermission(String text, String role) {
 		if(role.equals("Downstream Provider")){
 			iWillWaitToSee(By.xpath("//*[contains(text(),'" + text + "')]"));
-			isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]")));
+			Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]"))));
 		}
 		}
 	
 
 	public void iSeeNoResults(String text) {
 		if (text.contains(".")) {
-			isElementVisible(driver.findElements(By.cssSelector(".header")).get(1));
+			Assert.assertTrue(isElementVisible(driver.findElements(By.cssSelector(".header")).get(1)));
 			clickElement(driver.findElement(By.xpath("//div[text()='Select']")));
 		} else {
 			iWillWaitToSee(By.xpath("//*[contains(text(),'" + text + "')]"));
-			isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]")));
+			Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]"))));
 			clickElement(driver.findElement(By.cssSelector(".remove.link.icon.remove-icon")));
 			delay();
 		}
-
 	}
 
 	public void iVerifyDisabledNextButton(String text) {
 		WebElement el = driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]"));
 		Assert.assertFalse(el.isEnabled());
-
 	}
 
-	public void iVerifyNextButtonStatus(String text) {
-		
+	public void iVerifyNextButtonStatus(String text) 
+	{
 		WebElement el = driver.findElement(By.xpath("//button[contains(text(),'Next')]"));
 		if (text.equalsIgnoreCase("enabled")) {
 			Assert.assertTrue(el.isEnabled());
@@ -268,26 +260,25 @@ public class EditUser extends BaseClass {
 		}
 	}
 
-	public void iVerifyleftMenuStatus(String text1, String text2) {
+	public void iVerifyleftMenuStatus(String text1, String text2) 
+	{
 		iWillWaitToSee(By.xpath("//a[contains(text(),'" + text1 + "')]"));
 		WebElement el = driver.findElement(By.xpath("//a[contains(text(),'" + text1 + "')]"));
 		
 
 			if (text2.equalsIgnoreCase("enabled"))
-				//Assert.assertTrue(el.isEnabled());
+			{
 				Assert.assertFalse(el.getAttribute("className").toString().contains("disabled"));
-
-			else {
-				System.out.println("Apps - el.isEnabled()" + el.getAttribute("className").toString());
-				//Assert.assertFalse(el.isEnabled());
+			}
+			else 
+			{
 				Assert.assertTrue(el.getAttribute("className").toString().contains("disabled"));
 			}
-
 	}
 
 	public void iVerifyErrorMessage(String text) {
 		iWillWaitToSee(By.xpath("//*[contains(text(),'" + text + "')]"));
-		isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]"))));
 	}
 
 	public void iClickOnCloseIcon() {
@@ -305,18 +296,18 @@ public class EditUser extends BaseClass {
 
 	public void iValidateAlertText(String text) {
 		iWillWaitToSee(By.xpath("//*[contains(text(),'" + text + "')]"));
-		isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]"))));
 	}
 
-	public void iValidateCancelButton(String text) {
-
-		isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]")));
+	public void iValidateCancelButton(String text) 
+	{
+		iWillWaitToSee(By.xpath("//*[contains(text(),'" + text + "')]"));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]"))));
 	}
 
 	public void iVerifyProductsCount(String text, int count) {
 		iWillWaitToSee(By.cssSelector(".ui.checkbox"));
 		int countActual = getElementCount(".ui.checkbox");
-		System.out.println("Actual count " + countActual);
 		if (text.contains("Less")) {
 			Assert.assertTrue(countActual < count);
 		} else {
@@ -325,7 +316,6 @@ public class EditUser extends BaseClass {
 	}
 
 	public void iClickOnAddAnotherOrganisation(String text) {
-		// iWillWaitToSee(By.xpath("//*[contains(text(),'"+text+"')]"));
 		if (isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]"))) == true)
 			clickElement(driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]")));
 	}
@@ -478,12 +468,12 @@ public class EditUser extends BaseClass {
 				String tok = st.nextToken().trim();
 				String token = "(" + tok + ")";
 				iWillWaitToSee(By.xpath("//*[contains(text(),'" + token + "')]"));
-				isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + token + "')]")));
+				Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + token + "')]"))));
 			}
 		} else {
 			String token = "(" + key + ")";
 			iWillWaitToSee(By.xpath("//*[contains(text(),'" + token + "')]"));
-			isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + token + "')]")));
+			Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + token + "')]"))));
 		}
 	}
 
@@ -557,7 +547,7 @@ public class EditUser extends BaseClass {
 	public void iVerifyPTAProvisionedRoleOnEditPage() {
 		String[] Roles = { "Executive", "Manager", "Case Manager", "Physicians", "Transitional Case Manager" };
 		for (int i = 0; i < Roles.length; i++) {
-			isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + Roles[i] + "')]")));
+			Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + Roles[i] + "')]"))));
 		}
 	}
 
@@ -573,11 +563,11 @@ public class EditUser extends BaseClass {
 			while (st.hasMoreTokens()) {
 				String token = st.nextToken().trim();
 				iWillWaitToSee(By.xpath("//*[contains(text(),'" + token + "')]"));
-				isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + token + "')]")));
+				Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + token + "')]"))));
 			}
 		} else {
 			iWillWaitToSee(By.xpath("//*[contains(text(),'" + field + "')]"));
-			isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + field + "')]")));
+			Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'" + field + "')]"))));
 		}
 	}
 
@@ -674,19 +664,11 @@ public void iVerifyIncompleteStatusNotShown() {
 	public void iSelectInvalidLocForPTA(String location) throws InterruptedException {
 
 		delay();
-		while (!(driver
-				.findElement(By
-						.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']"))
-				.getText().equals(""))) {
-			driver.findElement(By
-					.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']"))
-					.clear();
+		while (!(driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")).getText().equals(""))) {
+			driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")).clear();
 		}
 		delay();
-		iFillInText(
-				driver.findElement(By
-						.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")),
-				location);
+		iFillInText(driver.findElement(By.xpath("//h5[text()='Which location(s) does this user have access to?']//../..//input[@placeholder='Search']")),location);
 		Thread.sleep(3000);
 
 	}
@@ -699,16 +681,10 @@ public void iVerifyLearningPathwayIDIsNotDisplayed(String id){
 }
 public void iVerifyLocationDisplayedWithFacilityKey(String key, String text){
  	waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+text+"\")]"))));
-// 	String actual = getTextForElement(driver.findElement(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+text+"\")]")));
-//	Assert.assertEquals(text,actual);
- 	
  	Assert.assertTrue(driver.findElement(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+text+"\")]")).getText().contains(key));
 }
 public void iVerifyLocationNotDisplayedWithFacilityKey(String key, String text){
  	waitTo().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+text+"\")]"))));
-// 	String actual = getTextForElement(driver.findElement(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+text+"\")]")));
-//	Assert.assertEquals(text,actual);
- 	
  	Assert.assertFalse(driver.findElement(By.xpath("//h5[text()='Selected Locations:']/..//td[contains(text(),\""+text+"\")]")).getText().contains(key));
 }
 public void iCheckErrMsgIsNotShown(String text){
@@ -725,16 +701,16 @@ public void validateLearningPathwayWhileEdit(String pathways){
 		{
 			String pathway = st.nextToken().trim();
 			iWillWaitToSee(By.xpath("//span[contains(text(),'"+pathway+"')]"));
-		isElementVisible(driver.findElement(By.xpath("//span[contains(text(),'"+pathway+"')]")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//span[contains(text(),'"+pathway+"')]"))));
 		}
 	}
 	else{
 		iWillWaitToSee(By.xpath("//span[contains(text(),'"+pathways+"')]"));
-		isElementVisible(driver.findElement(By.xpath("//span[contains(text(),'"+pathways+"')]")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//span[contains(text(),'"+pathways+"')]"))));
 	}
 }
 public void iVerifyCrossIcon(){
-	isElementVisible(driver.findElement(By.xpath("//*[name()='svg' and @fill='#48677b']//*[name()='g' and @id='iCons']")));
+	Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//*[name()='svg' and @fill='#48677b']//*[name()='g' and @id='iCons']"))));
 	
 }
 public void verifySubmitButtonStatus() {

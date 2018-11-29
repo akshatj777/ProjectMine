@@ -79,6 +79,7 @@ public class ProgramPerformance extends BaseClass{
 	public static HashMap<String, String> imageOutput;
 	public static Map<String,HashMap<String,String>> mapOfHmFiltersValue = new HashMap<String,HashMap<String,String>>();
 	public static HashMap<String, String> rowFilters;
+	public static String rowFilterIndex;
 	List<String> RegionMarketArrayList = new ArrayList<String>();
 	public ProgramPerformance(WebDriver driver) {
 		super(driver);
@@ -130,6 +131,8 @@ public class ProgramPerformance extends BaseClass{
         swithToFrame(frameXpath);
         delay();}
 		catch(Exception e){
+    	    	ProgramPerformance.rowFilters.put("SwitchFrame","Failed on Switch Frame");
+        	    ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);
 			    e.printStackTrace();
 	    	    ProgramPerformance.writer.print(System.lineSeparator());
 	    		String flag="1";
@@ -575,6 +578,8 @@ public class ProgramPerformance extends BaseClass{
 		 iWillWaitToSee(By.cssSelector(".component-report-header"));
 		 longDelay();}
 		 catch(Exception e){
+        		ProgramPerformance.rowFilters.put("ClickDashboard","Failed on ClickDashboard");
+	    	 ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);
 			 throw e;
 	     }
 	 }
@@ -976,6 +981,13 @@ public class ProgramPerformance extends BaseClass{
 //		 act.moveToElement(elem).click().build().perform();
 		 delay();
 	 }catch(Exception e){
+		 if(field.equals("Start Date")){
+		 ProgramPerformance.rowFilters.put("Set Start Time","Enter Set Start Time");
+  	    ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);}
+		 else{
+			 ProgramPerformance.rowFilters.put("Set End Time","Enter Set End Time");
+		  	    ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);
+		 }
 		 throw e;
      }}
 	 
@@ -1254,33 +1266,37 @@ public class ProgramPerformance extends BaseClass{
 	 
 	 public void iClickOnFilterName(String text,String dashboard){
          try{
-		 try{
-		 longDelay();
-		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
-		 }catch(Exception e){
-		 }
-		 if(text.equals("Time")){
-			 delay();
-			 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. /span//button[@type='button']"));
-			 if(DriverScript.Config.getProperty("Browser").equals("ie")){
-				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", elem);
-			 }else{
-			  act.moveToElement(elem).click().build().perform();}
-			 delay();
-		 }
-		 
-		 else if(!dashboard.contains("Skip")){
-		 delay();
-		 WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']"));
-		 if(DriverScript.Config.getProperty("Browser").equals("ie")){
-			 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", elem);
-		 }else{
-		 act.moveToElement(elem).click().build().perform();}
-		 delay();}
-		 }  catch(Exception e){
-			 throw e;
-	     }
-	 }
+          if(text.equals("Time")) {
+             try{
+               longDelay();
+          wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+             }catch(Exception e){
+             }
+          delay();
+         WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. /span//button[@type='button']"));
+         if(DriverScript.Config.getProperty("Browser").equals("ie")){
+         ((JavascriptExecutor)driver).executeScript("arguments[0].click();", elem);
+         }else{
+         act.moveToElement(elem).click().build().perform();}
+         delay();
+          }
+       else if(!dashboard.contains("Skip")){
+        try{
+        longDelay();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+        }catch(Exception e){
+        }
+        delay();
+        WebElement elem = driver.findElement(By.xpath("//span[text()='"+text+"']/../../../../.. //span[@role='combobox']"));
+        if(DriverScript.Config.getProperty("Browser").equals("ie")){
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();", elem);
+         }else{
+        act.moveToElement(elem).click().build().perform();}
+      delay();}
+     }  catch(Exception e){
+        throw e;
+      }
+  }
 	 
 	 public void iValidateTitleNameOnDashbaord(String text){
 		 isElementVisible(driver.findElement(By.xpath("//span[text()='"+text+"']")));
@@ -1538,6 +1554,8 @@ public class ProgramPerformance extends BaseClass{
 		 driver.switchTo().defaultContent();
 		 scrollToTopOfThePage();}
 		 catch(Exception e){
+			 ProgramPerformance.rowFilters.put("ClickRefresh","Failed on ClickRefresh");
+     	    ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);
 			 throw e;
 	     }
 	 }
@@ -1739,13 +1757,10 @@ public class ProgramPerformance extends BaseClass{
 			            String valA = null;
 						String valB= null;
 			            int random_n=getRandomNumberInRange(1,n);
-					    for (int i = 1; i <= random_n; i++) {
-			             int randomIndex = rand.nextInt(listItems.size());
-			             WebElement randomElement = listItems.get(randomIndex);
-			             System.out.println("ss");
-			             
-//			             String val=randomElement.getText();
-			             String val=randomElement.getAttribute("title");
+		                 for (int i = 1; i <= random_n; i++) {
+    		             int randomIndex = rand.nextInt(listItems.size());
+					     WebElement randomElement = listItems.get(randomIndex);
+			          	 String val=randomElement.getAttribute("title");
 			             String valarr[] = null;
 			             String valarr1[] = null;
 			             if(random_n==1 && val.equals("(All)")){
@@ -1799,12 +1814,13 @@ public class ProgramPerformance extends BaseClass{
 	    			            			 val="'"+valB+"'"; 
 	    			            			 arrayListTextsB.add(val);
 	    			            			 arrayListTexts.addAll(arrayListTextsB);
-	    			            		 }   writeDataToOutputFile("Path");
+	    			            			 
+	    			            		 }writeDataToOutputFile("Path");}   
 	    			            		 clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
 	    			            		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 	    			            		 delay();
 	    			            		 return;
-	                            	 }
+	                            	 
 			            		 }
 			            		 else if(filter.contains("Market") || filter.contains("Region")){
 			            			 if(val.equals("Not Available")){
@@ -1848,22 +1864,64 @@ public class ProgramPerformance extends BaseClass{
 //			            			 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
 			            			 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
 		                     //   	 val=val.substring(val.length() - 4);
-			            			valarr1=val.split("-");
-			            			val=valarr1[0].trim();
-			            			val = val.replaceAll("'","''");
-		                        	val="'"+val+"'";
-		                       		 arrayListTexts.add(val);
-		                       		 writeDataToOutputFile("Path");
-		                       		clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+			            			 
+			            			    valarr1=val.split("-");
+				            			String val12=valarr1[0].trim();
+				            			val="'"+val12+"'";
+				            			arrayListTextsA.add(val12);
+				            			
+				            			String new1;
+
+		     	            			if(valarr1[0].trim().contains("469") || valarr1[0].trim().contains("470")){
+		            				String val1=valarr1[1].trim();
+		            				if(val1.endsWith(")")){
+		            					String val3=val1;
+				            			String[] val4=val3.split("\\(");
+				            			val3=val4[0].trim();
+				            			val3="'"+val3+"'";
+				            			arrayListTextsB.add(val3);
+				            			new1=val1.substring(val1.indexOf("(")+1,val1.indexOf(")"));
+				            			if(new1.equals("F")){
+			            					new1=new1.replace("F", "1");
+			            				}else if(new1.equals("NF")){
+			            					new1=new1.replace("NF", "0");
+			            				}else if(new1.equals("U")){
+			            					new1=new1.replace("U", "-99");
+			            				}
+				            			new1="'"+new1+"'";
+				            			arrayListTextsC.add(new1);
+				            		    }else{
+		            					String val3=val1;
+				            			String[] val4=val3.split("\\(");
+				            			val3=val4[0].trim();
+				            			val3="'"+val3+"'";
+				            			arrayListTextsB.add(val3);	
+				            			arrayListTextsC.add("'Null'");
+				            			}}else{
+		            					String val1=valarr1[1].trim();
+		            					String val3=val1;
+		            					val3="'"+val3+"'";
+				            			arrayListTextsB.add(val3);
+				            			arrayListTextsC.add("'Null'");
+				            	    	arrayListTexts.addAll(arrayListTextsA);
+				            			writeDataToOutputFile("Path");
+				            			arrayListTexts.addAll(arrayListTextsB);
+				            			writeDataToOutputFile("Path");
+				            			arrayListTexts.addAll(arrayListTextsC);
+				            			writeDataToOutputFile("Path");
+				            	clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
 		                   		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
 		                   		 delay();
 		                       		 return;
-		                         }
+		                         }}
 			            		 
 			            		 else{
-	                	    	     val=val.trim();
+			            			 val=val.trim();
 //	                	    	     executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,'"+val+"')]/../input")));
 	                	    	     executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
+	                	    	     if(val.equals("Not Available")){
+	                	    	    	 val="null"; 
+	                	    	     }
 	                	    	     val = val.replaceAll("'","''");
 	                	    	     val="'"+val+"'";
 									 arrayListTexts.add(val);
@@ -1877,11 +1935,13 @@ public class ProgramPerformance extends BaseClass{
 			            	}
 			            	 else{
 			            	 random_n=getRandomNumberInRange(1,n);
-			            	 continue;}
+			            	 i=0;
+			            	 continue;
+			            	 }
 			            	 
 			             }else if(random_n!=1 && val.equals("(All)")){
-                     	 listItems.remove(randomIndex); 
-                     	 continue;
+			             listItems.remove(randomIndex);
+			             continue;
                       }
                       if(filter.equals("BPID") || filter.equals("Physician - NPI")){
                      	 if((val.equals("No Name - No NPI") && filter.equals("Physician - NPI") )|| (val.equals("Not Available") && filter.equals("BPID")) ){
@@ -1901,26 +1961,13 @@ public class ProgramPerformance extends BaseClass{
                       else if(filter.contains("DRG")){
                     	  listItems.remove(randomIndex);
                     	  executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
-                     	 valarr1=val.split("-");
-	            			val=valarr1[0].trim();
-	            			val="'"+val+"'";
-	            			arrayListTextsA.add(val);
+                     	  valarr1=val.split("-");
+	            			String val9=valarr1[0].trim();
+	            			String val10="'"+val9+"'";
+	            			arrayListTextsA.add(val10);
 	                        String new1;
-//	                        if(i==1){
-//	                        ArrayList<String> arrayListTextsD=new ArrayList<String>();
-//	                        for(int m=0;m<listItemsText.size();m++){
-//	                        	String[] valarr2=listItemsText.get(m).split("-");
-//	                        	String var5=valarr2[0].trim();
-//	                        	arrayListTextsD.add(var5);
-//	                        	
-//	            				 }
-//	                        if(!arrayListTextsD.contains("469") || !arrayListTextsD.contains("470")){
-//	                        	arrayListTexts.add("Skip");
-//	                        	writeDataToOutputFile("Path");
-//	                        }
-//	                        }
-	            			
-	            			if(val.contains("469") || val.contains("470")){
+
+	     	            			if(val9.contains("469") || val9.contains("470")){
 	            				String val1=valarr1[1].trim();
 	            				if(val1.endsWith(")")){
 	            					String val3=val1;
@@ -2031,6 +2078,9 @@ public class ProgramPerformance extends BaseClass{
 			            			 arrayListTextsB.add(val);
 			            		 }
 			            	 }}}else{
+			            		 if(val.equals("Not Available")){
+                	    	    	 val="null"; 
+                	    	     }
 			                 val=val.trim();
 			                 val = val.replaceAll("'","''");
 			            	 val="'"+val+"'";
@@ -2170,6 +2220,9 @@ public class ProgramPerformance extends BaseClass{
 		                      }} 
 		                           }
 		                           else{
+		                        	   if(val.equals("Not Available")){
+		                	    	    	 val="null"; 
+		                	    	     }
 		                              val=val.trim();
 		                              val = val.replaceAll("'","''");
 		                              val="'"+val+"'";
@@ -2238,6 +2291,8 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iOpenTheInputFile(String path,String row) throws FileNotFoundException{
+		 try{
+			 rowFilterIndex=row;
 		 if(row.equals("1")){
 			 writer=new PrintWriter(System.getProperty("user.dir")+path);
 			 arrayListTexts.add("1");
@@ -2248,16 +2303,24 @@ public class ProgramPerformance extends BaseClass{
 			 writeDataToOutputFile("Path");
 		 }
 		 imageOutput=new HashMap<String,String>();
-		 rowFilters=new HashMap<String,String>();
+		 rowFilters=new HashMap<String,String>();}
+		 catch(Exception e){
+			 rowFilters.put("OpenOutputFile","Failed on Opening Output File");
+			 mapOfHmFiltersValue.put(rowFilterIndex,rowFilters);
+		 }
 	 }
 	 
 	 public void iOpenTheLogFile(String path,String row) throws FileNotFoundException{
+		 try{
 		 if(row.equals("1")){
 			 writerLog=new PrintWriter(System.getProperty("user.dir")+path);
 			 writeDataToLogFile("1"+" Row");
 		 }else{
 			 writerLog.print(System.lineSeparator());
 			 writeDataToLogFile(row+" Row");
+		 }}catch(Exception e){
+			 rowFilters.put("OpenOutputFileLogs","Failed on Opening Output File log");
+			 mapOfHmFiltersValue.put(rowFilterIndex,rowFilters);
 		 }
 	 }
 	 
@@ -2366,8 +2429,13 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iPerformTestWithUserInAnalytics(String user) throws FileNotFoundException{
+		 try{
 		 arrayListTexts.add("'"+user+"'");
-		 writeDataToOutputFile("Path");
+		 writeDataToOutputFile("Path");}
+		 catch(Exception e){
+			 ProgramPerformance.rowFilters.put("TestUser","Perform TestUser");
+	     	    ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);
+		 }
 	 }
 	 
 	 public void iSaveAllRowFiltersInIndexInHashMap(String index){
@@ -2376,7 +2444,7 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iFetchStoreValuesOnDashboard(String filter,String dashboard) throws FileNotFoundException{
-		 List<WebElement> listItems = driver.findElements(By.cssSelector(".FIText"));
+	     List<WebElement> listItems = driver.findElements(By.cssSelector(".FIText"));
 		 List<String> values = new ArrayList<String>();
 		 System.out.println("Size="+listItems);
 		 for(int i =1;i<listItems.size();i++){
@@ -2482,6 +2550,7 @@ public class ProgramPerformance extends BaseClass{
 			 String var[] =st.nextToken().trim().split("=");
 			 outputText.put(var[0], var[1]);
 		 }
+		 System.out.println("^^^^^^^^^^"+outputText.toString());
 		}
 	
 	public void iGetAndFillDaysInTimeFilter(String startDay, String endDay) throws FileNotFoundException {

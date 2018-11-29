@@ -112,6 +112,11 @@ public class SuperUserLandingPageSteps extends DriverScript {
 	public void verifyUserBlockedMessage() throws Throwable {
 		ua2LandingPage.verifyUserBlockedMessageOnLandingPage();
 	}
+	
+	@Then("^I should see Wrong Email or Password$")
+	public void verifyWrongEmailMessage() throws Throwable {
+		ua2LandingPage.verifyWrongEmailMessage();
+	}
 
 	@Then("^I should not see search results")
 	public void i_should_see_error_message() throws Throwable {

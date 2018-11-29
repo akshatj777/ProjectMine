@@ -61,19 +61,20 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the validation message "<ValidationMsg>" on Create User Page
 
     Examples: 
-      | Description                                           | FirstName   | LastName    | Email                          | Phone      | Role       | NPI        | ValidationMsg                     |
-      | Verify validation message for blank First name        |             | Last Name   | qaautomation@remedysystems.com | 9874563210 | Leader     |            | First Name is required            |
-      | Verify validation message for blank Last name         | First Name  |             | qaautomation@remedysystems.com | 9874563210 | Leader     |            | Last Name is required             |
-      | Verify validation message for blank Email             | First Name  | Last Name   |                                | 9874563210 | Leader     |            | Email is required                 |
-      | Verify validation message for blank NPI               | First Name  | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians |            | NPI is required                   |
-      | Verify validation message for invalid Email           | First Name  | Last Name   | abc                            | 9874563210 | Physicians | NPI        | Please enter a valid email        |
-      | Verify validation message for invalid Phone           | First Name  | Last Name   | qaautomation@remedysystems.com |     123564 | Physicians | NPI        | Please enter a valid phone number |
-      | Verify validation message for NPI less than 10 digits | First Name  | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians |     123564 | Please enter a valid NPI          |
-      | Verify validation message for NPI as alphabets        | First Name  | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians | abcdefgihj | Please enter a valid NPI          |
-      | Verify validation message for NPI as alphanumeric     | First Name  | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI          |
-      | Verify validation message for invalid First Name      | 84738&27919 | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
-      | Verify validation message for invalid Last name       | First Name  | 84738&27919 | qaautomation@remedysystems.com | 9874563210 | Physicians | NPI        | Please enter a valid name         |
-      | Verify validation message for NPI as .                | First Name  | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians | .........1 | Please enter a valid NPI          |
+      | Description                                                      | FirstName   | LastName    | Email                          | Phone      | Role       | NPI        | ValidationMsg                                             |
+      | Verify validation message for blank First name                   |             | Last Name   | qaautomation@remedysystems.com | 9874563210 | Leader     |            | First Name is required                                    |
+      | Verify validation message for blank Last name                    | First Name  |             | qaautomation@remedysystems.com | 9874563210 | Leader     |            | Last Name is required                                     |
+      | Verify validation message for blank Email                        | First Name  | Last Name   |                                | 9874563210 | Leader     |            | Email is required                                         |
+      | Verify validation message for blank NPI                          | First Name  | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians |            | NPI is required                                           |
+      | Verify validation message for invalid Email                      | First Name  | Last Name   | abc                            | 9874563210 | Physicians | NPI        | Please enter a valid email                                |
+      | Verify validation message for invalid Phone                      | First Name  | Last Name   | qaautomation@remedysystems.com |     123564 | Physicians | NPI        | Please enter a valid phone number                         |
+      | Verify validation message for NPI less than 10 digits            | First Name  | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians |     123564 | Please enter a valid NPI                                  |
+      | Verify validation message for NPI as alphabets                   | First Name  | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians | abcdefgihj | Please enter a valid NPI                                  |
+      | Verify validation message for NPI as alphanumeric                | First Name  | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians | abcde12345 | Please enter a valid NPI                                  |
+      | Verify validation message for invalid First Name                 | 84738&27919 | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians | NPI        | Please enter a valid name                                 |
+      | Verify validation message for invalid Last name                  | First Name  | 84738&27919 | qaautomation@remedysystems.com | 9874563210 | Physicians | NPI        | Please enter a valid name                                 |
+      | Verify validation message for NPI as .                           | First Name  | Last Name   | qaautomation@remedysystems.com | 9874563210 | Physicians | .........1 | Please enter a valid NPI                                  |
+      | Verify validation message for re-using the already used email ID | First Name  | Last Name   | REUSEEMAIL                     | 9874563210 | Physicians | NPI        | This email has already been used. Please contact support. |
 
   Scenario Outline: Verify validation message for invalid lesson name in search box
     Given I am on the login page
@@ -311,7 +312,7 @@ Feature: UI Scenarios - Super Admin User
       | Description                                         | User        | UserName                               | Password | FirstName | LastName | Email                          | Phone      | Role              | Applications                                                  | ApplicationsNotVisible                              | NPI | LearningPathwaySearchParameter         | Health System1   | Programs1    | Locations1                                                                  | HasHealthSystem2 | Health System2 | Programs2 | Locations2 | HasHealthSystem3 | Health System3 | Programs3 | Locations3 |
       | Verify successful removal of selected health system | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedysystems.com | 9988776655 | Advanced Operator | Episode Connect Classic, Reporting Classic, Remedy University | Episode Connect for Post-acute Care, Administration |     | i am learning path, Learning Pathway 2 | Sound Physicians | BPCI Model 2 | 6005-059--Presence Saint Joseph Medical Center, 6005-059--Evanston Hospital | No               |                |           |            | No               |                |           |            |
 
-  Scenario Outline: Verify that Next button and left side menu is enabled only when mandatory fields are selected
+  Scenario Outline: Verify that Next button and left side menu is enabled only when mandatory fields are selected + Searching healthsystem with participantId, location by facility key and bpid
     Given I am on the login page
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
@@ -338,14 +339,13 @@ Feature: UI Scenarios - Super Admin User
     Then I verify the header "Applications"
     Then I verify that "General Information" menu is "enabled"
     Then I verify that "Permissions" menu is "disabled"
-    Then I verify that Next button is "disabled"
     Then I select "<Applications>" product
     Then I verify that Next button is "enabled"
     Then I click on Next button
     Then I verify that "General Information" menu is "enabled"
     Then I verify that "Permissions" menu is "enabled"
     Then I verify that Submit button is "disabled"
-    And I search for health system with <Health System1>
+    And I search for health system with <ParticipantId>
     And I select a <Health System1>
     Then I select "<Programs1>" programs
     Then I select location by BPID "<Locations_BPID>"
@@ -355,8 +355,8 @@ Feature: UI Scenarios - Super Admin User
     Then I verify that Submit button is "enabled"
 
     Examples: 
-      | FirstName  | LastName  | Email                          | Role       | NPI | Applications      | Health System1    | Programs1    | Locations_BPID              | Locations_facility key |
-      | First'Name | Last'Name | qaautomation@remedysystems.com | Physicians | NPI | Reporting Classic | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital | TSH                    |
+      | FirstName  | LastName  | Email                          | Role       | NPI | Applications      | ParticipantId | Health System1    | Programs1    | Locations_BPID              | Locations_facility key |
+      | First'Name | Last'Name | qaautomation@remedysystems.com | Physicians | NPI | Reporting Classic |        514083 | Stamford Hospital | BPCI Model 2 | 2070-015--Stamford Hospital | TSH                    |
 
   Scenario Outline: Enter invalid health system and location and verify error message
     Given I am on the login page
@@ -513,7 +513,6 @@ Feature: UI Scenarios - Super Admin User
     And I click on Edit button
     Then I select "Permissions" tab
     Then I remove health system "<Remove HealthSystem>"
-   
     And I search for health system with <Health System>
     And I select a <Health System>
     Then I select "<Programs>" programs
@@ -563,3 +562,27 @@ Feature: UI Scenarios - Super Admin User
     Examples: 
       | User        | UserName                               | Password | FirstName | LastName | Email                          | Role1      | Applications                         | NPI | LearningPathwaySearchParameter                      | Role2  |
       | Super Admin | lbarinstein+qaadmin@remedypartners.com | Testing1 | FirstName | LastName | qaautomation@remedysystems.com | Physicians | Reporting Classic, Remedy University | NPI | Learning Pathway 2, jusUV22erpk1, Remedy University | Leader |
+
+  Scenario Outline: Validate character limit for all fields in the general information tab
+    Given I am on the login page
+    When I enter email field lbarinstein+qaadmin@remedypartners.com for login
+    And I enter password field Testing1 for Login
+    Then I click Access button
+    Then I should see Tile text Users
+    And I click on the "Users" tile
+    Then I should see header text "Users"
+    When I click on Add User button
+    Then I should see "Add New User" on the user creation page
+    Then I verify the header "General Information"
+    And I fill in First Name with "<FirstName>"
+    Then I fill in Last Name with <LastName>
+    And I enter Email "<Email>" to Create user
+    And I enter Phone field with <Phone>
+    When I click the Organizational Role Field
+    Then I pick a Organizational <Role>
+    Then I enter NPI field with "<NPI>" for role "<Role>"
+    Then I click on Next button
+
+    Examples: 
+      | User        | FirstName                                          | LastName                                           | Email                                                                        | Phone          | Role       | NPI |
+      | Super Admin | FirstNameeFirstNameeFirstNameeFirstNameeFirstNamee | FirstNameeFirstNameeFirstNameeFirstNameeFirstNamee | TestmailTestmailTestmailTestmailTestmailTestmailTestmailTestmailAA@gmail.com | 98767592312314 | Physicians | NPI |

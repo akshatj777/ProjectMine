@@ -285,17 +285,17 @@ public class CreateUserSteps extends DriverScript {
 
 	@And("^I click on Episodes 2 tile for \"([^\"]*)\" user$")
 	public void iClickOnEpisodesTwoTileUnderSpecificUserLoginPage(String role) throws Throwable {
-		createUser.iClickOnEpisodesTwoTileUnderSpecificUserLoginPage(role);
+//		createUser.iClickOnEpisodesTwoTileUnderSpecificUserLoginPage(role);
 	}
 	
 	@And("^I verify \"([^\"]*)\" user navigated to Episodes 2 homepage$")
 	public void iVerifyUserNavigatedToEpisodes2(String role) throws Throwable {
-		createUser.iVerifyNavigationOnEpisodes2HomePage(role);
+//		createUser.iVerifyNavigationOnEpisodes2HomePage(role);
 	}
 	
 	@And("^I verify patient card appearing on Episode 2 for \"([^\"]*)\" user$")
 	public void iVerifyPatientCardOnEpisodes2(String role) throws Throwable {
-		createUser.iVerifyPatientCardOnEpisodes2HomePage(role);
+//		createUser.iVerifyPatientCardOnEpisodes2HomePage(role);
 	}
 
 	@And("^I Verify the header after clicking the episodes 2 tile$")
@@ -400,12 +400,12 @@ public class CreateUserSteps extends DriverScript {
 	
 	@And("^I click on Reporting tile for \"([^\"]*)\" user$")
 	public void clickOnReportingTile(String role) throws Throwable {
-		createUser.clickOnReportingTile(role);
+//		createUser.clickOnReportingTile(role);
 	}
 	
 	@And("^I verify \"([^\"]*)\" user navigated to Reporting homepage$")
 	public void verifyUserNavigatedToReporting(String role) throws Throwable {
-		createUser.verifyUserNavigatedToReporting(role);
+//		createUser.verifyUserNavigatedToReporting(role);
 	}
 	
 	@And("^I click on Program Management tile for \"([^\"]*)\" user$")

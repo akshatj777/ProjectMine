@@ -5,7 +5,7 @@ Feature: Bulk Upload User from SA
     When I enter email field lbarinstein+qaadmin@remedypartners.com for login
     And I enter password field Testing1 for Login
     Then I click Access button
-    Then I should see Tile text User Admin
+    Then I should see Tile text Users
     And I click on the "Users" tile
     Then I should see header text "Users"
     Then I click on Import User button
@@ -31,7 +31,7 @@ Feature: Bulk Upload User from SA
   Scenario: Scenario to check multiple success test cases at once
     Given I am on the login page
     Then I log in as super user
-    Then I should see Tile text User Admin
+    Then I should see Tile text Users
     And I click on the "Users" tile
     Then I should see header text "Users"
     Then I click on Import User button
