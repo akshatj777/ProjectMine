@@ -1151,6 +1151,12 @@ String itr = vars.get(&quot;IterationValue&quot;);
           </BeanShellPostProcessor>
           <hashTree/>
         </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+          <stringProp name="IfController.condition">${__BeanShell(vars.remove(&quot;market&quot;); &quot;false&quot;;)}</stringProp>
+          <boolProp name="IfController.evaluateAll">true</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree/>
       </hashTree>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>

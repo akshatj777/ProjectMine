@@ -795,7 +795,7 @@ log.info(&quot;Path: 7&quot;);
 f= new FileOutputStream(path + separator+&quot;IPECECRowFilterOutput.txt&quot;,true);
 	p = new PrintStream(f);
 	String itr = vars.get(&quot;IterationValue&quot;);
- if(itr.isEmpty()){
+ if(itr==null){
   p.println(&quot;Error in creating input data to execute query&quot;);
  }else {
 	String vValue1 = vars.get(&quot;value1&quot;);
@@ -851,6 +851,12 @@ f= new FileOutputStream(path + separator+&quot;IPECECRowFilterOutput.txt&quot;,t
           </objProp>
           <stringProp name="filename"></stringProp>
         </ResultCollector>
+        <hashTree/>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+          <stringProp name="IfController.condition">${__BeanShell(vars.remove(&quot;market&quot;); &quot;false&quot;;)}</stringProp>
+          <boolProp name="IfController.evaluateAll">true</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
         <hashTree/>
       </hashTree>
     </hashTree>

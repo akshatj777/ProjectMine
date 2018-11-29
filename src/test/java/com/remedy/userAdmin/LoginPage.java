@@ -111,6 +111,8 @@ if(!(userName.isEmpty())){
 				iWillWaitToSee(By.name("email"));
 				iFillInText(driver.findElement(By.name("email")), userName);
 			     }catch(Exception e){
+			    	 ProgramPerformance.rowFilters.put("UserNameEnter","Failed on Username Enter");
+			    	 ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);
 			    	 throw e;
 			     }
 		}
@@ -125,6 +127,8 @@ if(!(userName.isEmpty())){
 //	    	 ProgramPerformance.writer.print(System.lineSeparator());
 //	    		String flag="1";
 //	    		Assert.assertEquals("2", flag);
+			 ProgramPerformance.rowFilters.put("PasswordFill","Failed on Password Fill");
+	    	 ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);
 			throw e;
 	     }
 	}
@@ -145,6 +149,8 @@ if(!(userName.isEmpty())){
 			iWillWaitToSee(By.xpath("//*[contains(text(),'Log In')]"));
 			clickElement(driver.findElement(By.xpath("//*[contains(text(),'Log In')]")));
 			}catch(Exception e){
+				 ProgramPerformance.rowFilters.put("ClickLogin","Failed on Click Login");
+		    	 ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);
 				throw e;
 //		    	 ProgramPerformance.writer.print(System.lineSeparator());
 //		    		String flag="1";

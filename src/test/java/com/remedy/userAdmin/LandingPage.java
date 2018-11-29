@@ -52,6 +52,8 @@ public class LandingPage extends BaseClass{
         	iWillWaitToSee(By.xpath(tile));
             clickElement(driver.findElement(By.xpath(tile)));}}
         	catch(Exception e){
+        		ProgramPerformance.rowFilters.put("ClickTile","Failed on ClickTile");
+   	    	 ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);
         		throw e;
    	     }
         

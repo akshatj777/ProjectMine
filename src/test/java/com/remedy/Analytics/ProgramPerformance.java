@@ -79,6 +79,7 @@ public class ProgramPerformance extends BaseClass{
 	public static HashMap<String, String> imageOutput;
 	public static Map<String,HashMap<String,String>> mapOfHmFiltersValue = new HashMap<String,HashMap<String,String>>();
 	public static HashMap<String, String> rowFilters;
+	public static String rowFilterIndex;
 	List<String> RegionMarketArrayList = new ArrayList<String>();
 	public ProgramPerformance(WebDriver driver) {
 		super(driver);
@@ -130,6 +131,8 @@ public class ProgramPerformance extends BaseClass{
         swithToFrame(frameXpath);
         delay();}
 		catch(Exception e){
+    	    	ProgramPerformance.rowFilters.put("SwitchFrame","Failed on Switch Frame");
+        	    ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);
 			    e.printStackTrace();
 	    	    ProgramPerformance.writer.print(System.lineSeparator());
 	    		String flag="1";
@@ -575,6 +578,8 @@ public class ProgramPerformance extends BaseClass{
 		 iWillWaitToSee(By.cssSelector(".component-report-header"));
 		 longDelay();}
 		 catch(Exception e){
+        		ProgramPerformance.rowFilters.put("ClickDashboard","Failed on ClickDashboard");
+	    	 ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);
 			 throw e;
 	     }
 	 }
@@ -976,6 +981,13 @@ public class ProgramPerformance extends BaseClass{
 //		 act.moveToElement(elem).click().build().perform();
 		 delay();
 	 }catch(Exception e){
+		 if(field.equals("Start Date")){
+		 ProgramPerformance.rowFilters.put("Set Start Time","Enter Set Start Time");
+  	    ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);}
+		 else{
+			 ProgramPerformance.rowFilters.put("Set End Time","Enter Set End Time");
+		  	    ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);
+		 }
 		 throw e;
      }}
 	 
@@ -1542,6 +1554,8 @@ public class ProgramPerformance extends BaseClass{
 		 driver.switchTo().defaultContent();
 		 scrollToTopOfThePage();}
 		 catch(Exception e){
+			 ProgramPerformance.rowFilters.put("ClickRefresh","Failed on ClickRefresh");
+     	    ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);
 			 throw e;
 	     }
 	 }
@@ -2271,6 +2285,8 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iOpenTheInputFile(String path,String row) throws FileNotFoundException{
+		 try{
+			 rowFilterIndex=row;
 		 if(row.equals("1")){
 			 writer=new PrintWriter(System.getProperty("user.dir")+path);
 			 arrayListTexts.add("1");
@@ -2281,16 +2297,24 @@ public class ProgramPerformance extends BaseClass{
 			 writeDataToOutputFile("Path");
 		 }
 		 imageOutput=new HashMap<String,String>();
-		 rowFilters=new HashMap<String,String>();
+		 rowFilters=new HashMap<String,String>();}
+		 catch(Exception e){
+			 rowFilters.put("OpenOutputFile","Failed on Opening Output File");
+			 mapOfHmFiltersValue.put(rowFilterIndex,rowFilters);
+		 }
 	 }
 	 
 	 public void iOpenTheLogFile(String path,String row) throws FileNotFoundException{
+		 try{
 		 if(row.equals("1")){
 			 writerLog=new PrintWriter(System.getProperty("user.dir")+path);
 			 writeDataToLogFile("1"+" Row");
 		 }else{
 			 writerLog.print(System.lineSeparator());
 			 writeDataToLogFile(row+" Row");
+		 }}catch(Exception e){
+			 rowFilters.put("OpenOutputFileLogs","Failed on Opening Output File log");
+			 mapOfHmFiltersValue.put(rowFilterIndex,rowFilters);
 		 }
 	 }
 	 
@@ -2399,8 +2423,13 @@ public class ProgramPerformance extends BaseClass{
 	 }
 	 
 	 public void iPerformTestWithUserInAnalytics(String user) throws FileNotFoundException{
+		 try{
 		 arrayListTexts.add("'"+user+"'");
-		 writeDataToOutputFile("Path");
+		 writeDataToOutputFile("Path");}
+		 catch(Exception e){
+			 ProgramPerformance.rowFilters.put("TestUser","Perform TestUser");
+	     	    ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);
+		 }
 	 }
 	 
 	 public void iSaveAllRowFiltersInIndexInHashMap(String index){
