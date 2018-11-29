@@ -60,8 +60,8 @@ Feature: Search the Hospital organizations functionality tests
       | Searching Location index id on Hospital Profile Page | NO     | ACHNAME   | LocIndexId   |
       | Searching Location Name on Hospital Profile Page     | YES    | ACHNAME   | Loc_Name     |
       | Searching Location Address on Hospital Profile Page  | YES    | ACHNAME   | Loc_Address1 |
-      | Searching Location Region on Hospital Profile Page   | NO     | ACHNAME   | Midwest      |
-      | Searching Location Matket on Hospital Profile Page   | NO     | ACHNAME   | Chicago      |
+      #| Searching Location Region on Hospital Profile Page   | NO     | ACHNAME   | Midwest      |
+      #| Searching Location Matket on Hospital Profile Page   | NO     | ACHNAME   | Chicago      |
 
   Scenario Outline: <Description>
     Given I am on the login page

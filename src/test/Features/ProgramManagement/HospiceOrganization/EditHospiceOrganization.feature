@@ -144,9 +144,9 @@ Feature: Edit Hospice organization functionality tests
       | Edit Hospice Organization with Mandatory fields - With MO                           | YES    | HOSPICENAME  | HOSPICENAME         | Address1                                                |                                               |                                                         | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
       | Edit Hospice Organization with all the available fields - Without MO                | NO     | HOSPICENAME  | HOSPICENAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
       | Edit Hospice Organization with all the available fields - With MO                   | YES    | HOSPICENAME  | HOSPICENAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
-      #| Edit Duplicate Hospice Organization with Mandatory fields - Without MO              | NO     | HOSPICENAME  | DUPLICATE_Hospice   | Address1                                                |                                               |                                                         | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
-      #| Edit Duplicate Hospice Organization with Mandatory fields - With MO                 | YES    | HOSPICENAME  | DUPLICATE_Hospice   | Address1                                                |                                               |                                                         | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
-
+  	  #| Edit Duplicate Hospice Organization with Mandatory fields - Without MO              | NO     | HOSPICENAME  | DUPLICATE_Hospice   | Address1                                                |                                               |                                                         | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
+  	  #| Edit Duplicate Hospice Organization with Mandatory fields - With MO                 | YES    | HOSPICENAME  | DUPLICATE_Hospice   | Address1                                                |                                               |                                                         | City                                          | California |       10000 |         |         | Hospice Organization Successfully Updated. |
+  	  
   Scenario Outline: <Description>
     Given I am on the login page
     When I log in as super user
@@ -154,32 +154,41 @@ Feature: Edit Hospice organization functionality tests
     And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
     When I click on "Hospice" organization tab on organization dashboard
-    When I search with "<Hospice_Name> - <Has_MO>" on organization in search box
-    And I verify "<Hospice_Name> - <Has_MO>" name on the header of view profile
+    Then I search with "<Hospice_Name> - <Has_MO>" on organization in search box
+    And I verify "<Hospice_Name> - <Has_MO>" field in search list on organization page
     And I click "<Hospice_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
-    And I verify "Edit Hospice Organization" header text on edit organization page
     And I verify Managing Organization radio buttons status on "Edit Hospice - <Has_MO>" organization page
     And I select "<Has_MO1>" radio button for managing organization
     Then I select "<Managing_Org>" managing organization name in "<Has_MO1>" Has a Management Organization drop down
     And I edit "Hospice Organization Name" field to "<Edited_Hospice_Name> - <Has_MO>" for organization
-    And I edit "Address 1" field to "<Address1>" for organization
+    And I edit "Address 1" field to "<Org_Address1>" for organization
     And I edit "Short Name" field to "<Short_Name>" for organization
-    And I edit "Address 2" field to "<Address2>" for organization
+    And I edit "Address 2" field to "<Org_Address2>" for organization
     And I edit "City" field to "<City>" for organization
     And I edit <State> field for organization
-    And I edit "Postal Code" field to "<Postal_Code>" for organization
+    And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
     Then I click on "Submit" button on "Edit" organization page
     Then I verify "<Message>" after submitting the "FETCHFROMAPIForHOSPICENAME - <Has_MO>" organization page
     When I search with "<Hospice_Name> - <Has_MO>" on organization in search box
-    And I verify "<Hospice_Name> - <Has_MO>" name on the header of view profile
     And I click "<Hospice_Name> - <Has_MO>" field in search list on organization page
+    And I verify "<Hospice_Name> - <Has_MO>" name on the header of view profile
     And I verify "Managing Organization - <Has_MO1>" on view profile of "Hospice" Organization
 
     Examples: 
-      | Description                                              | Has_MO | Has_MO1 | Managing_Org | Hospice_Name | Edited_Hospice_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Region  | Market  | Message                                    |
-      | Edit & verify Hospice organization with MO to without MO | YES    | NO      |              | HOSPICENAME  | HOSPICENAME         | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
-      | Edit & verify Hospice organization without MO to with MO | NO     | YES     |              | HOSPICENAME  | HOSPICENAME         | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
+      | Description                                            | Has_MO | Has_MO1 | Managing_Org | Hospice_Name | Edited_Hospice_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Message                                    |
+      | Edit Hospice organization with MO to without MO        | YES    | NO      | MO2          | HOSPICENAME  | HOSPICENAME         | Address1     | Short_Name | Address2     | City | California |           14314 | Hospice Organization Successfully Updated. |
+      | Edit verify Hospice organization without MO to with MO | NO     | YES     | MO2          | HOSPICENAME  | HOSPICENAME         | Address1     | Short_Name | Address2     | City | California |           14314 | Hospice Organization Successfully Updated. |
+
+  Scenario Outline: Create another MO for use in while editing HHA organization
+    Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
+    When create org with this data
+    Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
+
+    Examples: 
+      | desc      | particpantId | name   | contactPerson | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type       |
+      | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -188,31 +197,30 @@ Feature: Edit Hospice organization functionality tests
     And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
     When I click on "Hospice" organization tab on organization dashboard
-    When I search with "<Hospice_Name> - <Has_MO>" on organization in search box
-    And I verify "<Hospice_Name> - <Has_MO>" name on the header of view profile
-    And I click "<Hospice_Name> - <Has_MO>" field in search list on organization page
+    Then I search with "<Hospice_Name> - <Has_MO1>" on organization in search box
+    And I verify "<Hospice_Name> - <Has_MO1>" field in search list on organization page
+    And I click "<Hospice_Name> - <Has_MO1>" field in search list on organization page
     And I click on "Edit" button on particular organization
-    And I verify "Edit Hospice Organization" header text on edit organization page
-    And I verify Managing Organization radio buttons status on "Edit Hospice - <Has_MO1>" organization page
+    And I verify Managing Organization radio buttons status on "Edit Hospice - <Has_MO>" organization page
     And I select "<Has_MO>" radio button for managing organization
-    Then I select "<Managing_Org1>" managing organization name in "<Has_MO>" Has a Management Organization drop down
+    Then I select "<Managing_Org>" managing organization name in "<Has_MO>" Has a Management Organization drop down
     And I edit "Hospice Organization Name" field to "<Edited_Hospice_Name> - <Has_MO>" for organization
-    And I edit "Address 1" field to "<Address1>" for organization
+    And I edit "Address 1" field to "<Org_Address1>" for organization
     And I edit "Short Name" field to "<Short_Name>" for organization
-    And I edit "Address 2" field to "<Address2>" for organization
+    And I edit "Address 2" field to "<Org_Address2>" for organization
     And I edit "City" field to "<City>" for organization
     And I edit <State> field for organization
-    And I edit "Postal Code" field to "<Postal_Code>" for organization
+    And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
     Then I click on "Submit" button on "Edit" organization page
     Then I verify "<Message>" after submitting the "FETCHFROMAPIForHOSPICENAME - <Has_MO>" organization page
     When I search with "<Hospice_Name> - <Has_MO>" on organization in search box
-    And I verify "<Hospice_Name> - <Has_MO>" name on the header of view profile
     And I click "<Hospice_Name> - <Has_MO>" field in search list on organization page
-    And I verify "Managing Organization - <Has_MO>" on view profile of "Hospice" Organization
+    And I verify "<Hospice_Name> - <Has_MO>" name on the header of view profile
+    And I verify "Managing Organization2 - <Has_MO>" on view profile of "Hospice" Organization
 
     Examples: 
-      | Description                                     | Has_MO | Has_MO1 | Managing_Org1 | Hospice_Name | Edited_Hospice_Name | Address1 | Short_Name | Address2 | City | State      | Postal_Code | Region  | Market  | Message                                    |
-      | Edit Hospice organization with MO to another MO | YES    | NO      | MO_Name2      | HOSPICENAME  | HOSPICENAME         | Address1 | Short_Name | Address2 | City | California |       10000 | Midwest | Chicago | Hospice Organization Successfully Updated. |
+      | Description                                  | Has_MO | Has_MO1 | Managing_Org | Hospice_Name | Edited_Hospice_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Message                                    |
+      | Changing the MO details on edit Hospice page | YES    | NO      | MO_Name2     | HOSPICENAME  | HOSPICENAME         | Address1     | Short_Name | Address2     | City | California |           78852 | Hospice Organization Successfully Updated. |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"

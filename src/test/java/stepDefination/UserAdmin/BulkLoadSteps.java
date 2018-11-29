@@ -140,7 +140,7 @@ public class BulkLoadSteps extends DriverScript {
 	}
 
 	@Then("^I click on submit button on edit bulk user page for role \"([^\"]*)\" and applications \"([^\"]*)\"$")
-	public void clickSubmitButtonForEditUser(String role, String apps) {
+	public void clickSubmitButtonForEditUser(String role, String apps) throws InterruptedException {
 		bulkUser.clickSubmitForEditBulkUser(role, apps);
 	}
 

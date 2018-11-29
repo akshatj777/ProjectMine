@@ -51,7 +51,7 @@ public class BulkUserCreationPage extends BaseClass {
 	public void enterData() throws IOException {
 		String strUserData = null;
 		try {
-			strUserData = readContentForBulkUpload(24, 43);
+			strUserData = readContentForBulkUpload(27, 49);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -60,7 +60,7 @@ public class BulkUserCreationPage extends BaseClass {
 		HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
 		HashMap<String, String> applicationsList = new HashMap<String, String>();
 		HashMap<String, String> bulkNPIPerRole = new HashMap<String, String>();
-		applicationsList.put("Leader", "Episode Connect, Episode Connect Classic, Remedy University, Care Innovation Institute");
+		applicationsList.put("Leader", "Episode Connect, Episode Connect Classic, Remedy University, Care Innovation Institute, Community Connect");
 		bulkEmailPerRole.put("Leader", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Leader", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Leader", applicationsList);
@@ -212,7 +212,7 @@ public class BulkUserCreationPage extends BaseClass {
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("PTAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Partner Technical Administrator", "Episode Connect, Administration, Remedy University, Reporting, Care Innovation Institute");
+		applicationsList.put("Partner Technical Administrator", "Episode Connect, Administration, Remedy University, Reporting, Care Innovation Institute, Community Connect");
 		bulkEmailPerRole = new HashMap<String, String>();
 		bulkEmailPerRole.put("Partner Technical Administrator", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Partner Technical Administrator", bulkEmailPerRole);
@@ -232,7 +232,7 @@ public class BulkUserCreationPage extends BaseClass {
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("OPERATORMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Operator", "Episode Connect, Episode Connect Classic, Reporting Classic, Care Innovation Institute");
+		applicationsList.put("Operator", "Episode Connect, Episode Connect Classic, Reporting Classic, Care Innovation Institute, Community Connect");
 		bulkEmailPerRole = new HashMap<String, String>();
 		bulkEmailPerRole.put("Operator", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Operator", bulkEmailPerRole);
@@ -249,7 +249,37 @@ public class BulkUserCreationPage extends BaseClass {
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
 
-		String randomNPI = "12" + RandomStringUtils.randomNumeric(8);
+		randomString = RandomStringUtils.randomAlphabetic(8);
+		strUserData = strUserData.replace("SalesAcuteDemoMAIL", "qaautomation+" + randomString + "@remedysystems.com");
+		applicationsList = new HashMap<String, String>();
+		applicationsList.put("Remedy Sales Acute Demo 2018", "Episode Connect, Care Innovation Institute, Reporting Classic, Remedy University, Episode Connect for Post-acute Care");
+		bulkEmailPerRole = new HashMap<String, String>();
+		bulkEmailPerRole.put("Remedy Sales Acute Demo 2018", "qaautomation+" + randomString + "@remedysystems.com");
+		bulkUsersEmailPerRole.put("Super Admin-Remedy Sales Acute Demo 2018", bulkEmailPerRole);
+		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Sales Acute Demo 2018", applicationsList);
+		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Sales Acute Demo 2018", bulkEmailPerRole);
+		
+		randomString = RandomStringUtils.randomAlphabetic(8);
+		strUserData = strUserData.replace("SalesPACDemoMAIL", "qaautomation+" + randomString + "@remedysystems.com");
+		applicationsList = new HashMap<String, String>();
+		applicationsList.put("Remedy Sales PAC Demo 2018", "Episode Connect, Care Innovation Institute, Episode Connect for Post-acute Care");
+		bulkEmailPerRole = new HashMap<String, String>();
+		bulkEmailPerRole.put("Remedy Sales PAC Demo 2018", "qaautomation+" + randomString + "@remedysystems.com");
+		bulkUsersEmailPerRole.put("Super Admin-Remedy Sales PAC Demo 2018", bulkEmailPerRole);
+		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Sales PAC Demo 2018", applicationsList);
+		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Sales PAC Demo 2018", bulkEmailPerRole);
+		
+		randomString = RandomStringUtils.randomAlphabetic(8);
+		strUserData = strUserData.replace("CommercialMAIL", "qaautomation+" + randomString + "@remedysystems.com");
+		applicationsList = new HashMap<String, String>();
+		applicationsList.put("Remedy Sales Commercial Demo 2018", "Episode Connect, Care Innovation Institute");
+		bulkEmailPerRole = new HashMap<String, String>();
+		bulkEmailPerRole.put("Remedy Sales Commercial Demo 2018", "qaautomation+" + randomString + "@remedysystems.com");
+		bulkUsersEmailPerRole.put("Super Admin-Remedy Sales Commercial Demo 2018", bulkEmailPerRole);
+		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Sales Commercial Demo 2018", applicationsList);
+		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Sales Commercial Demo 2018", bulkEmailPerRole);
+		
+		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
 
 		bulkNPIPerRole.put("Physicians", randomNPI);
@@ -267,7 +297,7 @@ public class BulkUserCreationPage extends BaseClass {
 		String randomString = null;
 		if (userCount == 50) {
 			try {
-				strUserData = readContentForBulkUpload(46, 96);
+				strUserData = readContentForBulkUpload(52, 102);
 			} catch (Exception e) {
 				System.out.println(e);
 			}
@@ -282,7 +312,7 @@ public class BulkUserCreationPage extends BaseClass {
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
 			strUserData = strUserData.replace("PHYSICIANSMAIL", "qaautomation+" + randomString + "@remedysystems.com");
-			strUserData = strUserData.replace("P1NPI1", "12"+RandomStringUtils.randomNumeric(8));
+			strUserData = strUserData.replace("P1NPI1", RandomStringUtils.randomNumeric(10));
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
 			strUserData = strUserData.replace("RTCSMAIL", "qaautomation+" + randomString + "@remedysystems.com");
@@ -340,7 +370,7 @@ public class BulkUserCreationPage extends BaseClass {
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
 			strUserData = strUserData.replace("PHYMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
-			strUserData = strUserData.replace("P2NPI2", "12"+RandomStringUtils.randomNumeric(8));
+			strUserData = strUserData.replace("P2NPI2", RandomStringUtils.randomNumeric(10));
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
 			strUserData = strUserData.replace("RemTCSMAIL2", "qaautomation+" + randomString + "@remedysystems.com");
@@ -398,7 +428,7 @@ public class BulkUserCreationPage extends BaseClass {
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
 			strUserData = strUserData.replace("PMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
-			strUserData = strUserData.replace("P3NPI3", "12"+RandomStringUtils.randomNumeric(8));
+			strUserData = strUserData.replace("P3NPI3", RandomStringUtils.randomNumeric(10));
 
 			randomString = RandomStringUtils.randomAlphabetic(8);
 			strUserData = strUserData.replace("RTranMAIL3", "qaautomation+" + randomString + "@remedysystems.com");
@@ -428,7 +458,7 @@ public class BulkUserCreationPage extends BaseClass {
 
 		if (userCount > 50) {
 			try {
-				strUserData = readContentForBulkUpload(46, 97);
+				strUserData = readContentForBulkUpload(52, 103);
 			} catch (Exception e) {
 				System.out.println(e);
 			}
@@ -599,7 +629,7 @@ public class BulkUserCreationPage extends BaseClass {
 	public void enterDataForAllApp() throws IOException {
 		String strUserData = null;
 		try {
-			strUserData = readContentForBulkUpload(2, 21);
+			strUserData = readContentForBulkUpload(2, 24);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -608,7 +638,7 @@ public class BulkUserCreationPage extends BaseClass {
 		HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
 		HashMap<String, String> applicationsList = new HashMap<String, String>();
 		HashMap<String, String> bulkNPIPerRole = new HashMap<String, String>();
-		applicationsList.put("Leader", "Episode Connect, Episode Connect Classic, Reporting Classic, Care Innovation Institute, Remedy University, Reporting");
+		applicationsList.put("Leader", "Episode Connect, Episode Connect Classic, Reporting Classic, Care Innovation Institute, Remedy University, Reporting, Community Connect");
 		bulkEmailPerRole.put("Leader", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Leader", bulkEmailPerRole);
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Leader", applicationsList);
@@ -617,7 +647,7 @@ public class BulkUserCreationPage extends BaseClass {
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("MANAGERMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Manager", "Episode Connect, Episode Connect Classic, Reporting Classic, Care Innovation Institute, Remedy University, Reporting");
+		applicationsList.put("Manager", "Episode Connect, Episode Connect Classic, Reporting Classic, Care Innovation Institute, Remedy University, Reporting, Community Connect");
 		bulkEmailPerRole = new HashMap<String, String>();
 		bulkEmailPerRole.put("Manager", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Manager", bulkEmailPerRole);
@@ -627,7 +657,7 @@ public class BulkUserCreationPage extends BaseClass {
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("ADVANCEDOPERATORMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Advanced Operator", "Episode Connect, Episode Connect Classic, Reporting Classic, Care Innovation Institute, Remedy University, Reporting");
+		applicationsList.put("Advanced Operator", "Episode Connect, Episode Connect Classic, Reporting Classic, Care Innovation Institute, Remedy University, Reporting, Community Connect");
 		bulkEmailPerRole = new HashMap<String, String>();
 		bulkEmailPerRole.put("Advanced Operator", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Advanced Operator", bulkEmailPerRole);
@@ -757,7 +787,7 @@ public class BulkUserCreationPage extends BaseClass {
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("PTAMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Partner Technical Administrator","Episode Connect, Episode Connect Classic, Reporting Classic, Administration, Remedy University, Reporting, Care Innovation Institute");
+		applicationsList.put("Partner Technical Administrator","Episode Connect, Episode Connect Classic, Reporting Classic, Administration, Remedy University, Reporting, Care Innovation Institute, Community Connect");
 		bulkEmailPerRole = new HashMap<String, String>();
 		bulkEmailPerRole.put("Partner Technical Administrator", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Partner Technical Administrator", bulkEmailPerRole);
@@ -777,7 +807,7 @@ public class BulkUserCreationPage extends BaseClass {
 		randomString = RandomStringUtils.randomAlphabetic(8);
 		strUserData = strUserData.replace("OPERATORMAIL", "qaautomation+" + randomString + "@remedysystems.com");
 		applicationsList = new HashMap<String, String>();
-		applicationsList.put("Operator", "Episode Connect, Episode Connect Classic, Reporting Classic, Remedy University, Reporting, Care Innovation Institute");
+		applicationsList.put("Operator", "Episode Connect, Episode Connect Classic, Reporting Classic, Remedy University, Reporting, Care Innovation Institute, Community Connect");
 		bulkEmailPerRole = new HashMap<String, String>();
 		bulkEmailPerRole.put("Operator", "qaautomation+" + randomString + "@remedysystems.com");
 		bulkUsersEmailPerRole.put("Super Admin-Operator", bulkEmailPerRole);
@@ -794,7 +824,38 @@ public class BulkUserCreationPage extends BaseClass {
 		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
 		CreateUserPage.usersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
 
-		String randomNPI = "12" + RandomStringUtils.randomNumeric(8);
+		randomString = RandomStringUtils.randomAlphabetic(8);
+		strUserData = strUserData.replace("SalesAcuteDemoMAIL", "qaautomation+" + randomString + "@remedysystems.com");
+		applicationsList = new HashMap<String, String>();
+		applicationsList.put("Remedy Sales Acute Demo 2018", "Episode Connect, Care Innovation Institute, Episode Connect Classic, Reporting Classic, Remedy University, Episode Connect for Post-acute Care");
+		bulkEmailPerRole = new HashMap<String, String>();
+		bulkEmailPerRole.put("Remedy Sales Acute Demo 2018", "qaautomation+" + randomString + "@remedysystems.com");
+		bulkUsersEmailPerRole.put("Super Admin-Remedy Sales Acute Demo 2018", bulkEmailPerRole);
+		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Sales Acute Demo 2018", applicationsList);
+		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Sales Acute Demo 2018", bulkEmailPerRole);
+		
+		randomString = RandomStringUtils.randomAlphabetic(8);
+		strUserData = strUserData.replace("SalesPACDemoMAIL", "qaautomation+" + randomString + "@remedysystems.com");
+		applicationsList = new HashMap<String, String>();
+		applicationsList.put("Remedy Sales PAC Demo 2018", "Episode Connect, Care Innovation Institute, Episode Connect Classic, Episode Connect for Post-acute Care");
+		bulkEmailPerRole = new HashMap<String, String>();
+		bulkEmailPerRole.put("Remedy Sales PAC Demo 2018", "qaautomation+" + randomString + "@remedysystems.com");
+		bulkUsersEmailPerRole.put("Super Admin-Remedy Sales PAC Demo 2018", bulkEmailPerRole);
+		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Sales PAC Demo 2018", applicationsList);
+		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Sales PAC Demo 2018", bulkEmailPerRole);
+		
+		randomString = RandomStringUtils.randomAlphabetic(8);
+		strUserData = strUserData.replace("CommercialMAIL", "qaautomation+" + randomString + "@remedysystems.com");
+		applicationsList = new HashMap<String, String>();
+		applicationsList.put("Remedy Sales Commercial Demo 2018", "Episode Connect, Episode Connect for Post-acute Care, Care Innovation Institute");
+		bulkEmailPerRole = new HashMap<String, String>();
+		bulkEmailPerRole.put("Remedy Sales Commercial Demo 2018", "qaautomation+" + randomString + "@remedysystems.com");
+		bulkUsersEmailPerRole.put("Super Admin-Remedy Sales Commercial Demo 2018", bulkEmailPerRole);
+		CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Sales Commercial Demo 2018", applicationsList);
+		CreateUserPage.usersEmailPerRole.put("Super Admin-Remedy Sales Commercial Demo 2018", bulkEmailPerRole);
+		
+			
+		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
 		bulkNPIPerRole.put("Physicians", randomNPI);
 		bulkUsersNPIPerRole = randomNPI;
@@ -847,19 +908,21 @@ public class BulkUserCreationPage extends BaseClass {
 	}
 
 	public void verifyCrossButton() {
-		Assert.assertTrue(isElementPresentOnPage(
-				By.xpath("//*[name()='svg' and @fill='#48677b']//*[name()='g' and @id='iCons']")));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//*[name()='svg' and @fill='#48677b']//*[name()='g' and @id='iCons']")));
 	}
 
 	public void verifyDownloadButton() {
+		iWillWaitToSee(By.xpath("//button[text()='Download Log']"));
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//button[text()='Download Log']")));
 	}
 
 	public void verifyTryAgainButton() {
+		iWillWaitToSee(By.xpath("//button[text()='Try Again']"));
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//button[text()='Try Again']")));
 	}
 
 	public void verifyHideButton() {
+		iWillWaitToSee(By.xpath("//button[text()='Hide']"));
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//button[text()='Hide']")));
 	}
 
@@ -870,7 +933,7 @@ public class BulkUserCreationPage extends BaseClass {
 
 	public void iVerifyTestBoxField() {
 		iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
-		isElementPresentOnPage(By.xpath("//div[@class='component-neo-input']//textarea"));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='component-neo-input']//textarea")));
 	}
 
 	public void iEnterDataAllAppPerRole(String role) throws Throwable {
@@ -893,7 +956,7 @@ public class BulkUserCreationPage extends BaseClass {
 			iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
 		} else if (role.equals("Operator")) {
 			try {
-				strUserData = readContentForBulkUpload(41, 42);
+				strUserData = readContentForBulkUpload(44, 45);
 			} catch (Exception e) {
 				System.out.println(e);
 			}
@@ -907,7 +970,7 @@ public class BulkUserCreationPage extends BaseClass {
 			iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
 		} else if (role.equals("Physicians")) {
 			try {
-				strUserData = readContentForBulkUpload(27, 28);
+				strUserData = readContentForBulkUpload(30, 31);
 			} catch (Exception e) {
 				System.out.println(e);
 			}
@@ -936,42 +999,7 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("NPI", randomNPI);
 			iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
 			iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
-		} else if (role.equals("Downstream Provider M3")) {
-			try {
-				strUserData = readContentForBulkUpload(100, 101);
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("DPMAILM3", "qaautomation+" + randomString + "@remedysystems.com");
-			applicationsList.put("Downstream Provider", "Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect, Care Innovation Institute");
-			bulkEmailPerRole.put("Downstream Provider", "qaautomation+" + randomString + "@remedysystems.com");
-			bulkUsersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
-			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
-			CreateUserPage.usersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
-			String randomNPI = RandomStringUtils.randomNumeric(10);
-			strUserData = strUserData.replace("NPI", randomNPI);
-			iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
-			iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
-		} else if (role.equals("Downstream Provider M3AndDown")) {
-			try {
-				strUserData = readContentForBulkUpload(101, 102);
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-			randomString = RandomStringUtils.randomAlphabetic(8);
-			strUserData = strUserData.replace("DPMAILM3AndDown",
-					"qaautomation+" + randomString + "@remedysystems.com");
-			applicationsList.put("Downstream Provider", "Episode Connect Classic, Episode Connect for Post-acute Care, Remedy University, Community Connect, Care Innovation Institute");
-			bulkEmailPerRole.put("Downstream Provider", "qaautomation+" + randomString + "@remedysystems.com");
-			bulkUsersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
-			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
-			CreateUserPage.usersEmailPerRole.put("Super Admin-Downstream Provider", bulkEmailPerRole);
-			String randomNPI = RandomStringUtils.randomNumeric(10);
-			strUserData = strUserData.replace("NPI", randomNPI);
-			iWillWaitToSee(By.xpath("//div[@class='component-neo-input']//textarea"));
-			iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
-		} else if (role.equals("Leader")) {
+		}  else if (role.equals("Leader")) {
 			enterMultipleUserData(51);
 		}
 	}
@@ -1054,16 +1082,14 @@ public class BulkUserCreationPage extends BaseClass {
 	}
 
 	public void iVerifyUserIsAdded(String userRole) {
-		String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole)
-				.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
-		Assert.assertTrue(
-				driver.findElement(By.xpath("//td[@class='five wide']")).getText().toString().trim().equals(email));
+		String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole).get(userRole.substring((userRole.indexOf("-") + 1)).trim());
+		Assert.assertTrue(driver.findElement(By.xpath("//td[@class='five wide']")).getText().toString().trim().equals(email));
 	}
 
 	public void enterInvalidAndValidData() {
 		String strUserData = null;
 		try {
-			strUserData = readContentForBulkUpload(104, 128);
+			strUserData = readContentForBulkUpload(106, 130);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -1156,8 +1182,7 @@ public class BulkUserCreationPage extends BaseClass {
 
 	public void validataSuccessAndFailuremsg(String error, String success) {
 		iWillWaitToSee(By.xpath("//p[@class='successCountLabel']"));
-		Assert.assertTrue(
-				isElementPresentOnPage(By.xpath("//p[@class='successCountLabel'][text()='" + success + "']")));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[@class='successCountLabel'][text()='" + success + "']")));
 		Assert.assertTrue(isElementPresentOnPage(By.xpath("//p[@class='errorCountLabel'][text()='" + error + "']")));
 	}
 
@@ -1403,7 +1428,7 @@ public class BulkUserCreationPage extends BaseClass {
 			strUserData = strUserData.replace("ROMAIL", email);
 			strUserData = strUserData.replace(" Remedy Other ", " Downstream Provider ");
 
-			strUserData = strUserData.replace("| Remedy Other | NA | 439245:ALL_BPIDS:ALL_FACILITIES |HZhmTBQzHtU1,18h7phZr1h81 | |","| Downstream Provider | NA | 015174 | | |");
+			strUserData = strUserData.replace("| NA | 439245:ALL_BPIDS:ALL_FACILITIES |HZhmTBQzHtU1,18h7phZr1h81 | |","| NA | 015174 | | |");
 			HashMap<String, String> applicationsList = new HashMap<String, String>();
 			HashMap<String, String> bulkEmailPerRole = new HashMap<String, String>();
 			applicationsList.put("Downstream Provider", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute, Remedy University, Community Connect");
@@ -1514,9 +1539,70 @@ public class BulkUserCreationPage extends BaseClass {
 			applicationsList.put("Downstream Provider", "Episode Connect Classic, Care Innovation Institute");
 			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
 		}
+		else if (role.equals("Remedy Sales Acute Demo 2018")) {
+			String userRole = "Super Admin-" + role;
+			String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole)
+					.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
+			try {
 
+				strUserData = readContentForBulkUpload(21, 22);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			strUserData = strUserData.replace("SalesAcuteDemoMAIL", email);
+			strUserData = strUserData.replace(" Remedy Sales Acute Demo 2018 | NA |", " Physicians | NPI |");
+
+			
+			HashMap<String, String> applicationsList = new HashMap<String, String>();
+			applicationsList.put("Physicians", "Episode Connect, Episode Connect Classic, Reporting Classic, Remedy University, Reporting, Care Innovation Institute");
+			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Physicians", applicationsList);
+		}
+		else if (role.equals("Remedy Sales Commercial Demo 2018")) {
+			String userRole = "Super Admin-" + role;
+			String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole)
+					.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
+			try {
+
+				strUserData = readContentForBulkUpload(23, 24);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			strUserData = strUserData.replace("CommercialMAIL", email);
+			strUserData = strUserData.replace(" Remedy Sales Commercial Demo 2018 ", " Downstream Provider ");
+
+			strUserData = strUserData.replace(
+					"514029:2070-025:T,514029:2070-023:L | | |True|  |  ",
+					"345454,015174,315083,190034| | |False | True | True  ");
+
+			HashMap<String, String> applicationsList = new HashMap<String, String>();
+			applicationsList.put("Downstream Provider", "Episode Connect, Episode Connect Classic, Episode Connect for Post-acute Care, Care Innovation Institute");
+			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Downstream Provider", applicationsList);
+		}
+		else if (role.equals("Remedy Sales PAC Demo 2018")) {
+			String userRole = "Super Admin-" + role;
+			String email = BulkUserCreationPage.bulkUsersEmailPerRole.get(userRole)
+					.get(userRole.substring((userRole.indexOf("-") + 1)).trim());
+			try {
+
+				strUserData = readContentForBulkUpload(22, 23);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			strUserData = strUserData.replace("SalesPACDemoMAIL", email);
+			
+			strUserData = strUserData.replace(
+					"514029:2070-025:T,514029:2070-023:L | | | True|  |  |  |  |  |  | | |",
+					"514083:2070-015:TSH| | |False |True  |  |  |  |  |  | | |");
+
+			HashMap<String, String> applicationsList = new HashMap<String, String>();
+			applicationsList.put("Remedy Sales PAC Demo 2018", "Episode Connect, Episode Connect Classic, Care Innovation Institute");
+			CreateUserPage.usersApplicationsPerRole.put("Super Admin-Remedy Sales PAC Demo 2018", applicationsList);
+		}
+		
+		
+		
 		HashMap<String, String> bulkNPIPerRole = new HashMap<String, String>();
-		String randomNPI = "212"+ RandomStringUtils.randomNumeric(7);
+		String randomNPI = RandomStringUtils.randomNumeric(10);
 		strUserData = strUserData.replace("NPI", randomNPI);
 		bulkNPIPerRole.put("Physicians", randomNPI);
 		CreateUserPage.usersNPIPerRole.put("Super Admin-Physicians", bulkNPIPerRole);
@@ -1606,7 +1692,7 @@ public class BulkUserCreationPage extends BaseClass {
 								.substring(("Super Admin-Prospective Partner Executive".indexOf("-") + 1)).trim()));
 
 		randomString = RandomStringUtils.randomAlphabetic(8);
-		strUserData = strUserData.replace("ROMAIL | 7676878998|", "ROMAIL |9876543215,8529637415,4567891235|");
+		strUserData = strUserData.replace("ROMAIL | 7676878998 |", "ROMAIL | 9876543215,8529637415,4567891235 |");
 		strUserData = strUserData.replace("ROMAIL",
 				BulkUserCreationPage.bulkUsersEmailPerRole.get("Super Admin-Remedy Other").get(
 						"Super Admin-Remedy Other".substring(("Super Admin-Remedy Other".indexOf("-") + 1)).trim()));
@@ -1632,12 +1718,13 @@ public class BulkUserCreationPage extends BaseClass {
 		iFillInText(driver.findElement(By.xpath("//div[@class='component-neo-input']//textarea")), strUserData);
 	}
 
-	public void clickSubmitForEditBulkUser(String user, String userApplications) {
+	public void clickSubmitForEditBulkUser(String user, String userApplications) throws InterruptedException {
 
 		iWillWaitToSee(By.xpath("//button[text()='Submit']"));
 		waitTo().until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Submit']")));
 		clickElement(driver.findElement(By.xpath("//button[text()='Submit']")));
 //		iWillWaitToSee(By.xpath("//div[@class='ui text loader']"));
+		Thread.sleep(2000);
 		WebDriverWait objWait = new WebDriverWait(driver, 300);
 		objWait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//div[@class='ui text loader']"))));
 		HashMap<String, String> emailList = new HashMap<String, String>();

@@ -164,6 +164,7 @@ if(!(userName.isEmpty())){
 		{
 			driver.navigate().refresh();
 			iWillWaitToSee(By.xpath("//div[@class='auth0-lock-body-content']"));
+			Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='auth0-lock-body-content']")));
 		}
 	}
 	
@@ -180,7 +181,7 @@ if(!(userName.isEmpty())){
 	}
 	
 	public void iShouldSeeEmailTextboxField(){
-		isElementVisible(driver.findElement(By.xpath("//input[@name='email']")));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//input[@name='email']")));
 	}
 	
 	public void iShouldVerifyWatermarkTextAppearingUnderEmailTextboxField(){
@@ -188,7 +189,7 @@ if(!(userName.isEmpty())){
 	}
 	
 	public void iShouldSeePasswordTextboxField(){
-		isElementVisible(driver.findElement(By.xpath("//input[@name='password']")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//input[@name='password']"))));
 	}
 	
 	public void iShouldVerifyWatermarkTextAppearingUnderPasswordTextboxField(){
@@ -196,18 +197,18 @@ if(!(userName.isEmpty())){
 	}
 	
 	public void iShouldSeeForgotPasswordLink(){
-		isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-alternative-link")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-alternative-link"))));
 	}
 	
 	public void iShouldSeeLogInButton(){
-		isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-submit")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".auth0-lock-submit"))));
 	}
 	
 	public void iVerifyTheValidationMessage(String text){
 		if(text.equals("Can't be blank"))
 		verifyTextForElement(driver.findElement(By.cssSelector(".auth0-lock-error-msg>span")), text);
 		else if (text.equals("Remedy Connect"))
-			isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+text+"')]")));
+			Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//*[contains(text(),'"+text+"')]"))));
 		else if(text.equals("WRONG EMAIL OR PASSWORD"))
 			verifyTextForElement(driver.findElement(By.xpath("//span[@class='animated fadeInUp']")), text);
 	}

@@ -60,8 +60,8 @@ Feature: Search the LTCH organizations functionality tests
       | Searching Location index id on LTCH Profile Page | NO     | LTCHNAME  | LocIndexId   |
       | Searching Location Name on LTCH Profile Page     | YES    | LTCHNAME  | Loc_Name     |
       | Searching Location Address on LTCH Profile Page  | YES    | LTCHNAME  | Loc_Address1 |
-      | Searching Location Region on LTCH Profile Page   | NO     | LTCHNAME  | Midwest      |
-      | Searching Location Matket on LTCH Profile Page   | NO     | LTCHNAME  | Chicago      |
+      #| Searching Location Region on LTCH Profile Page   | NO     | LTCHNAME  | Midwest      |
+      #| Searching Location Matket on LTCH Profile Page   | NO     | LTCHNAME  | Chicago      |
 
   Scenario Outline: <Description>
     Given I am on the login page
