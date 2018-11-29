@@ -1829,6 +1829,10 @@ public class ProgramPerformance extends BaseClass{
 		                        		  arrayListTexts.add("'null'"); 
 		                        		  writeDataToOutputFile("Path");
 		                        		  }
+			            				 clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+				                   		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+				                   		 delay();
+				                   		 return;
 			            		 }else {
 			            			 executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
 			            			 val=val.substring(val.indexOf(" ")+1).trim(); 
@@ -2024,35 +2028,41 @@ public class ProgramPerformance extends BaseClass{
                       }
                       
                        else if(filter.contains("Market") || filter.contains("Region")){
-                     	  if(val.equals("Not Available")){
-                     		  executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
-                     		  val = "null";
-                     		  val = val.replaceAll("'","''");
-                     		  val="'"+val+"'";
-                     		  arrayListTexts.add(val);
-                     		  listItems.remove(randomIndex);
-                     		  if((listItems.get(0).getText().equals("(All)") && listItems.size()==1)){
-                     			for(int k=0;k<2;k++){
-                     				if(k==0){
-                     				writeDataToOutputFile("Path");}else
-                     				{
-                     					arrayListTexts.add("'null'");
-                     					writeDataToOutputFile("Path");
-                     					return;
-                     				}
-                     			}}
-                     		 
-                     		  if(listItems.isEmpty()){
-                     			 for(int k=0;k<2;k++){
-                      				if(k==0){
-                      				writeDataToOutputFile("Path");}else
-                      				{
-                      					arrayListTexts.add("'null'");
-                      					writeDataToOutputFile("Path");
-                      					return;
-                      				}
-                      			}
-                     		 }
+                    	   if(val.equals("Not Available")){
+                               executor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[contains(@title,\""+val+"\")]/../input")));
+                               val = "null";
+                               val = val.replaceAll("'","''");
+                               val="'"+val+"'";
+                               arrayListTexts.add(val);
+                               listItems.remove(randomIndex);
+                               if((listItems.get(0).getText().equals("(All)") && listItems.size()==1)){
+                              for(int k=0;k<2;k++){
+                               if(k==0){
+                               writeDataToOutputFile("Path");}else
+                               {
+                                arrayListTexts.add("'null'");
+                                writeDataToOutputFile("Path");
+                                     clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+                                  wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+                                  delay();
+                                return;
+                               }
+                              }}
+                              
+                               if(listItems.isEmpty()){
+                               for(int k=0;k<2;k++){
+                                if(k==0){
+                                writeDataToOutputFile("Path");}else
+                                {
+                                 arrayListTexts.add("'null'");
+                                 writeDataToOutputFile("Path");
+                                     clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+                                  wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+                                  delay();
+                                 return;
+                                }
+                               }
+                              }
                      		  else{
                      		  continue;}
                            }else{
@@ -2294,10 +2304,12 @@ public class ProgramPerformance extends BaseClass{
 		 try{
 			 rowFilterIndex=row;
 		 if(row.equals("1")){
+			 arrayListTexts.clear();
 			 writer=new PrintWriter(System.getProperty("user.dir")+path);
 			 arrayListTexts.add("1");
 			 writeDataToOutputFile("Path");
 		 }else{
+			 arrayListTexts.clear();
 			 writer.print(System.lineSeparator());
 			 arrayListTexts.add("0");
 			 writeDataToOutputFile("Path");
