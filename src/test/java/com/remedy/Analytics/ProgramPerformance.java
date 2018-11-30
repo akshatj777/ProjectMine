@@ -545,7 +545,7 @@ public class ProgramPerformance extends BaseClass{
 	    {
 		 File jmx=new File(System.getProperty("user.dir")+location);
 		 final Process process = Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd "+DriverScript.Config.getProperty("jmeterPath")+" && jmeter -n -t"+" "+jmx+" && exit\"");
-//	    Thread.sleep(20000);
+	   
 		 BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
 		 String line=null;
@@ -554,6 +554,7 @@ public class ProgramPerformance extends BaseClass{
 		 System.out.println(line);} 
 		 final int exitVal = process.waitFor();
 		 System.out.println("JMeter Execution over #"+exitVal);
+		 Thread.sleep(5000);
 	    }
 	 
 	 public void iClickOnDashboard(String dashboard) throws Exception{
