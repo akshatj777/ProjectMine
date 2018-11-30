@@ -1410,7 +1410,7 @@ f= new FileOutputStream(path + separator+&quot;RowFilterOutput.txt&quot;,true);
 	p = new PrintStream(f);
 
 	String itr = vars.get(&quot;IterationValue&quot;);
-	if(itr=null){
+	if(itr==null){
 		p.println(&quot;Error in creating input data to execute query&quot;);
 	}else {
 		
