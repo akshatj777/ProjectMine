@@ -228,8 +228,7 @@ if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
 String neee;
 ArrayList a= new ArrayList();
 ArrayList b= new ArrayList();
-
-     String code=vars.get(&quot;drgCode&quot;).replace(&quot;(&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;);
+    String code=vars.get(&quot;drgCode&quot;).replace(&quot;(&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;);
 	log.info(&quot;Code is&quot;+code);
 	String[] code1=code.split(&quot;,&quot;);
 	log.info(&quot;Array Code is&quot;+code1);
@@ -322,7 +321,7 @@ LEFT JOIN warehouse.dimPhysician dpy on fp.physicianKey = dpy.physicianSK
 		  AND fp.anchorAdmitDateKey &lt; (select CAST(lookupValue AS UNSIGNED)from warehouse.dimLookup where lookupCategory = &apos;BPCIAStartDate&apos;)
      --       AND dt.calendarDate BETWEEN DATE_SUB(NOW(), INTERVAL ${time_range} MONTH) AND NOW()
 			
---				${EC_BPID}
+
    				${EC_AnchorFacility}
 	           	${EC_CCN}
 				${EC_BUNDLE} 
@@ -1217,7 +1216,9 @@ String itr = vars.get(&quot;IterationValue&quot;);
           <hashTree/>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
-          <stringProp name="IfController.condition">${__BeanShell(vars.remove(&quot;market&quot;); &quot;false&quot;;)}</stringProp>
+          <stringProp name="IfController.condition">${__BeanShell(vars.remove(&quot;market&quot;); &quot;false&quot;;)}
+
+</stringProp>
           <boolProp name="IfController.evaluateAll">true</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>

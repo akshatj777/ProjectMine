@@ -1878,8 +1878,8 @@ public class ProgramPerformance extends BaseClass{
 				            			String new1;
 
 		     	            			if(valarr1[0].trim().contains("469") || valarr1[0].trim().contains("470")){
-		            				String val1=valarr1[1].trim();
-		            				if(val1.endsWith(")")){
+		            				    String val1=valarr1[1].trim();
+		            				    if(val1.endsWith(")")){
 		            					String val3=val1;
 				            			String[] val4=val3.split("\\(");
 				            			val3=val4[0].trim();
@@ -1895,6 +1895,16 @@ public class ProgramPerformance extends BaseClass{
 			            				}
 				            			new1="'"+new1+"'";
 				            			arrayListTextsC.add(new1);
+				            			arrayListTexts.addAll(arrayListTextsA);
+				            			writeDataToOutputFile("Path");
+				            			arrayListTexts.addAll(arrayListTextsB);
+				            			writeDataToOutputFile("Path");
+				            			arrayListTexts.addAll(arrayListTextsC);
+				            			writeDataToOutputFile("Path");
+				            	clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+		                   		 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+		                   		 delay();
+		                       		 return;
 				            		    }else{
 		            					String val3=val1;
 				            			String[] val4=val3.split("\\(");
@@ -1902,6 +1912,16 @@ public class ProgramPerformance extends BaseClass{
 				            			val3="'"+val3+"'";
 				            			arrayListTextsB.add(val3);	
 				            			arrayListTextsC.add("'Null'");
+				            			arrayListTexts.addAll(arrayListTextsA);
+				            			writeDataToOutputFile("Path");
+				            			arrayListTexts.addAll(arrayListTextsB);
+				            			writeDataToOutputFile("Path");
+				            			arrayListTexts.addAll(arrayListTextsC);
+				            			writeDataToOutputFile("Path");
+				            	        clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+		                   		        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+		                   		        delay();
+		                       		    return;
 				            			}}else{
 		            					String val1=valarr1[1].trim();
 		            					String val3=val1;
@@ -1990,6 +2010,19 @@ public class ProgramPerformance extends BaseClass{
 		            				}
 			            			new1="'"+new1+"'";
 			            			arrayListTextsC.add(new1);
+			            			if(i==random_n){
+				            			arrayListTexts.addAll(arrayListTextsA);
+				            			writeDataToOutputFile("Path");
+				            			arrayListTexts.addAll(arrayListTextsB);
+				            			writeDataToOutputFile("Path");
+				            			arrayListTexts.addAll(arrayListTextsC);
+				            			writeDataToOutputFile("Path");
+				            			
+				            			 clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+				            			 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+				            			 delay();
+				            			 return;
+				            			}
 			            		    continue;
 	            				}else{
 	            					String val3=val1;
@@ -1998,6 +2031,19 @@ public class ProgramPerformance extends BaseClass{
 			            			val3="'"+val3+"'";
 			            			arrayListTextsB.add(val3);	
 			            			arrayListTextsC.add("'Null'");
+			            			if(i==random_n){
+				            			arrayListTexts.addAll(arrayListTextsA);
+				            			writeDataToOutputFile("Path");
+				            			arrayListTexts.addAll(arrayListTextsB);
+				            			writeDataToOutputFile("Path");
+				            			arrayListTexts.addAll(arrayListTextsC);
+				            			writeDataToOutputFile("Path");
+				            			
+				            			 clickElement(driver.findElement(By.xpath("//span[text()='Apply']")));
+				            			 wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='svg-spinner-container']")));
+				            			 delay();
+				            			 return;
+				            			}
 			            			continue;
 	            				}}else{
 	            					String val1=valarr1[1].trim();
