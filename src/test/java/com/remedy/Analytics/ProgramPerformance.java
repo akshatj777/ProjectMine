@@ -617,6 +617,7 @@ public class ProgramPerformance extends BaseClass{
 				 while ((names = br.readLine())!= null) {           
 					 delay();
 				     col.add(names);
+				     System.out.println("Vivek Col"+col.toString());
 //					 StringTokenizer st = new StringTokenizer(names, "*");     
 					
 					
@@ -2355,6 +2356,7 @@ public class ProgramPerformance extends BaseClass{
 			 writer=new PrintWriter(System.getProperty("user.dir")+path);
 			 arrayListTexts.add("1");
 			 writeDataToOutputFile("Path");
+			 col.clear();
 		 }else{
 			 arrayListTexts.clear();
 			 writer.print(System.lineSeparator());
@@ -2390,9 +2392,9 @@ public class ProgramPerformance extends BaseClass{
 		 }else {
 			 writer.print(arrayListTexts.toString().replace("]", "").replace("[", "").trim()+"|");
 		 }
-		 System.out.println("Values in arrayList Before Clear"+arrayListTexts.toString());
-		 arrayListTexts.clear();
-		 System.out.println("Values in arrayList After Clear"+arrayListTexts.toString());
+//		 System.out.println("Values in arrayList Before Clear"+arrayListTexts.toString());
+//		 arrayListTexts.clear();
+//		 System.out.println("Values in arrayList After Clear"+arrayListTexts.toString());
 	 }
 	 
 	 public void writeDataToLogFile(String frontEndFilterValues) throws FileNotFoundException {
@@ -2508,16 +2510,16 @@ public class ProgramPerformance extends BaseClass{
 		 System.out.println("Size="+listItems);
 		 for(int i =1;i<listItems.size();i++){
 			String val=listItems.get(i).getAttribute("title").trim();
-			System.out.println("VAlue  "+val+"===Item "+listItems.get(i).getAttribute("title"));
+//			System.out.println("VAlue  "+val+"===Item "+listItems.get(i).getAttribute("title"));
 			if(val.equals("Null")) {
 				val=val.replace("Null", "null");
 			}
 			values.add(val);
 			
 		  }
-		 System.out.println("Outside"+values.toString());
+		 System.out.println("Filter Values to string"+values.toString());
 		 rowFilters.put(filter, values.toString());
-		 System.out.println("Out"+rowFilters.toString());
+		 System.out.println("Hashmap row filter values "+rowFilters.toString());
 		 writeDataToLogFile(filter+"="+values.toString());
 	 }
 	 
@@ -2601,6 +2603,7 @@ public class ProgramPerformance extends BaseClass{
 	}
 
 	public void readFilterValueFromQuery(int index) throws IOException, InterruptedException {
+		outputText.clear();
 		int indexIncrement = index+1;
 		System.out.println("Col value: "+col.toString());
 //		System.out.println("FE HashMap:"+mapOfHmFiltersValue.get(indexIncrement).toString());
