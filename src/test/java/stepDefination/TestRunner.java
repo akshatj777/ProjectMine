@@ -32,15 +32,11 @@ import stepDefination.Hooks.*;
 @RunWith(ExtendedCucumberRunner.class)
 @CucumberOptions(
         plugin = {"html:target/cucumber-results", "usage:target/cucumber-results/cucumber-usage.json",
-                "junit:target/cucumber-results/cucumber-results.xml", "json:target/cucumber-results/cucumber.json"},
+                  "junit:target/cucumber-results/cucumber-results.xml", "json:target/cucumber-results/cucumber.json"},
         
-        features = { "src/test/Features/Analytics/workingDirectory/Test.feature" },
-        monochrome = true 
-        
-        //glue = { "./src/test/java/stepDefination" },
-
-//        tags = {"@tt"}
-
+        features = { "src/test/Features/" },
+        monochrome = true,
+        tags = {"@CARL"}
 )
 public class TestRunner {
 

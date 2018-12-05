@@ -27,11 +27,11 @@ public class UserAdminEdit extends BaseClass {
 	}
 	
 	public void i_Wait_For_Popup_To_Remove_Stamford_Hospital_Under_Permission_Field(){
-		isElementVisible(driver.findElement(By.xpath("//ul/li[1]/div/div/div/div[@group-close='remove-participant']")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//ul/li[1]/div/div/div/div[@group-close='remove-participant']"))));
 	}
 	
 	public void i_Wait_For_Popup_To_Remove_Mountainside_Hospital_Under_Permission_Field(){
-		isElementVisible(driver.findElement(By.xpath("//div[label[text()='Mountainside Hospital']]//div[@title='Warning']")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//div[label[text()='Mountainside Hospital']]//div[@title='Warning']"))));
 	}
 		
 	public void i_Clicked_On_Remove_Button_Appearing_On_Popup(){
@@ -50,7 +50,7 @@ public class UserAdminEdit extends BaseClass {
 
 	public void iVerifyTheUserDetailsPageForEditing() {
 		iWillWaitToSee(By.cssSelector(".page-summary-directive.valentino-image.valentino-noise"));
-		isElementVisible(driver.findElement(By.cssSelector(".page-summary-directive.valentino-image.valentino-noise")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.cssSelector(".page-summary-directive.valentino-image.valentino-noise"))));
 	}
 	
 	public void i_Verify_The_User_Email_Address(String email){
@@ -72,7 +72,7 @@ public class UserAdminEdit extends BaseClass {
 
 	public void i_Should_See_Dropdown_List_To_Select_Role() {
 		iWillWaitToSee(By.xpath("(//form/div[2]/div[1]/div[1]/ul/li)[1]"));
-		isElementVisible(driver.findElement(By.xpath("(//form/div[2]/div[1]/div[1]/ul/li)[1]")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("(//form/div[2]/div[1]/div[1]/ul/li)[1]"))));
 	}
 
 	public void i_Clicked_Under_Edit_User_Role_Tab(String Text) {
@@ -89,7 +89,7 @@ public class UserAdminEdit extends BaseClass {
 	public void i_Verify_The_User_Role_Again() {
 		delay();
 		iWillWaitToSee(By.xpath("(//span[@class='binding-viewer ng-scope'])[3]"));
-		isElementVisible(driver.findElement(By.xpath("(//span[@class='binding-viewer ng-scope'])[3]")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("(//span[@class='binding-viewer ng-scope'])[3]"))));
 	}
 	
 	public void i_Verify_Product_Tiles_Appear_For_User_Under_User_Edit_Details_Page() {
@@ -128,7 +128,7 @@ public class UserAdminEdit extends BaseClass {
 	public void i_Verify_The_Permissions_Field() {
 		delay();
 		iWillWaitToSee(By.xpath("//div[@class='layout-area']"));
-		isElementPresentOnPage(By.xpath("//div[@class='layout-area']"));
+		Assert.assertTrue(isElementPresentOnPage(By.xpath("//div[@class='layout-area']")));
 	}
 
 	public void i_Clicked_On_Edit_Button_Under_Permissions_Data_Field() {
@@ -187,7 +187,7 @@ public class UserAdminEdit extends BaseClass {
 
 	public void i_Verify_The_Text_Under_Permissions_Data_Section() {
 		iWillWaitToSee(By.xpath("//label[text()='RP Payer Test A']"));
-		isElementVisible(driver.findElement(By.xpath("//label[text()='RP Payer Test A']")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//label[text()='RP Payer Test A']"))));
 	}
 
 	public void i_Clicked_On_Stamford_Hospital_From_Dropdown_List_Of_Health_System_Name() {
@@ -225,7 +225,7 @@ public class UserAdminEdit extends BaseClass {
 	
 	public void iWaitForPopupToRemoveRPPayerTestAUnderPermissionField(){
 		iWillWaitToSee(By.xpath("//ul/li[2]/div/div/div/div[@group-close='remove-participant']"));
-		isElementVisible(driver.findElement(By.xpath("//ul/li[2]/div/div/div/div[@group-close='remove-participant']")));
+		Assert.assertTrue(isElementVisible(driver.findElement(By.xpath("//ul/li[2]/div/div/div/div[@group-close='remove-participant']"))));
 	}
 	
 	public void iClickedOnRemoveButtonAppearingOnPopupForRPPayerTestA(){

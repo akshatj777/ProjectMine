@@ -169,131 +169,6 @@ Feature: Edit IRF Organization functionality tests
     And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
     When I click on "IRF" organization tab on organization dashboard
-    When I search with "<IRF_Name> - <Has_MO>" on organization in search box
-    And I verify "<IRF_Name> - <Has_MO>" field in search list on organization page
-    And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
-    And I click on "Edit" button on particular organization
-    And I verify "Edit Inpatient Rehab Facility Organization" header text on edit organization page
-    And I verify Managing Organization radio buttons status on "Edit IRF - <Has_MO>" organization page
-    And I edit "Inpatient Rehab Facility Organization Name" field to "<Edited_IRF_Name> - <Has_MO>" for organization
-    And I edit "Address 1" field to "<Org_Address1>" for organization
-    And I edit "Short Name" field to "<Short_Name>" for organization
-    And I edit "Address 2" field to "<Org_Address2>" for organization
-    And I edit "City" field to "<City>" for organization
-    And I edit <State> field for organization
-    And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
-    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
-    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
-    And I edit "address2" field to <Loc_Address1> for Location "1" for organization
-    And I edit Region dropdown field to <Loc_Region> for Location "1" for organization
-    And I edit "city" field to <Loc_City> for Location "1" for organization
-    And I edit Market dropdown field to <Loc_Market> for Region "<Loc_Region>" for Location "1" for organization
-    And I edit State dropdown field to <Loc_State> for Location "1" for organization
-    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
-    Then I click on "Submit" button on "Edit" organization page
-    Then I verify "<Message>" after submitting the "FETCHFROMAPIForIRFNAME - <Has_MO>" organization page
-
-    Examples: 
-      | Description                                                                                                      | Has_MO | IRF_Name | Edited_IRF_Name | Org_Address1                                            | Short_Name                                    | Org_Address2                                            | City                                          | State      | Org_Postal_Code | Loc_Name                                                                    | Loc_Address1                                            | Loc_Type | Loc_Region | Loc_Market | Loc_Address2                                            | Loc_City                                      | Loc_State  | Loc_Postal_Code | Message                                |
-      #| Check Character Limit edge condition for IRF Organization Name field on Edit IRF Organization page - Without MO  | NO     | IRFNAME  | equalsTo75Characters | add1                                                    | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Check Character Limit edge condition for Address1 field on Edit IRF Organization page - Without MO               | NO     | IRFNAME  | IRFNAME         | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrsjklmnopqrs | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Check Character Limit edge condition for Short Name field on Edit IRF Organization page - Without MO             | NO     | IRFNAME  | IRFNAME         | Address1                                                | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrs | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Check Character Limit edge condition for Address2 field on Edit IRF Organization page - Without MO               | NO     | IRFNAME  | IRFNAME         | Address1                                                | Short_Name                                    | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrsjklmnopqrs | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Check Character Limit edge condition for City field on Edit IRF Organization page - Without MO                   | NO     | IRFNAME  | IRFNAME         | Address1                                                | Short_Name                                    | Address2                                                | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrs | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Check Character Limit edge condition for Postal code field on Edit IRF Organization page - Without MO            | NO     | IRFNAME  | IRFNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California | 10000-0000      | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Check Character Limit edge condition for Location Name field on Edit IRF Organization page - Without MO          | NO     | IRFNAME  | IRFNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrszabcdefghijklmnopqrsjklmnopqrs | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Check Character Limit edge condition for Location Address1 field on Edit IRF Organization page - Without MO      | NO     | IRFNAME  | IRFNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrszabcdefghi | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Check Character Limit edge condition for Location Address2 field on Edit IRF Organization page - Without MO      | NO     | IRFNAME  | IRFNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrszabcdefghi | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Check Character Limit edge condition for Location city field on Edit IRF Organization page - Without MO          | NO     | IRFNAME  | IRFNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqsd | California |           10000 | IRF Organization Successfully Updated. |
-      | Check Character Limit edge condition for Location postal code field on Edit IRF Organization page - Without MO   | NO     | IRFNAME  | IRFNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California | 10000-2345      | IRF Organization Successfully Updated. |
-      #| To check the Allowed characters for the available fields in Edit IRF Organization - Without MO                   | NO     | IRFNAME  | AllowedCharatcters   | a!@$%^&*()_+{}:<>?,./;'[]/\\=Address1                   | !@$%^&*()_+{}:<>?,./;'[]/\\=Short_Name        | !@$%^&*()_+{}:<>?,./;'[]/\\=Address2                    | !@$%^&*()_+{}:<>?,./;'[]/\\=City123           | California |           10000 | !@$%^&*()_+{}:<>?,./;'[]/\\=Loc_Name123                                     | !@$%^&*()_+{}:<>?,./;'[]/\\=Loc_Address1                | IRF      | Midwest    | Chicago    | !@$%^&*()_+{}:<>?,./;'[]/\\=Loc_Address2                | !@$%^&*()_+{}:<>?,./;'[]/\\=Loc_City123       | California |           10000 | IRF Organization Successfully Updated. |
-      | Edit IRF Organization with Mandatory fields - Without MO                                                         | NO     | IRFNAME  | IRFNAME         | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          |            |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Edit IRF Organization with Mandatory fields + ShortName - Without MO                                             | NO     | IRFNAME  | IRFNAME         | Address1                                                | Short_Name                                    |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          |            |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Edit IRF Organization with Mandatory fields + Address2 - Without MO                                              | NO     | IRFNAME  | IRFNAME         | Address1                                                |                                               | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          |            |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Edit IRF Organization with Mandatory fields + Location Address2 - Without MO                                     | NO     | IRFNAME  | IRFNAME         | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          |            |            | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Edit IRF Organization with Mandatory fields + Location Region - With MO                                          | YES    | IRFNAME  | IRFNAME         | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          | Midwest    |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Edit IRF Organization with Mandatory fields + ShortName + Location Type - With MO                                | YES    | IRFNAME  | IRFNAME         | Address1                                                | Short_Name                                    |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      |            |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Edit IRF Organization with Mandatory fields + ShortName + Address2 + Location Type - With MO                     | YES    | IRFNAME  | IRFNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      |            |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Edit IRF Organization with Mandatory fields + ShortName + Address2 + Location Region + Location Market - With MO | YES    | IRFNAME  | IRFNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          | Midwest    | Chicago    |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Edit IRF Organization with Mandatory fields + Address2 + Location Type + Location Address2 - Without MO          | NO     | IRFNAME  | IRFNAME         | Address1                                                |                                               | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      |            |            | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Edit IRF Organization with Mandatory fields - With MO                                                            | YES    | IRFNAME  | IRFNAME         | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          |            |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Edit IRF Organization with all the available fields - Without MO                                                 | NO     | IRFNAME  | IRFNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      | Edit IRF Organization with all the available fields - With MO                                                    | YES    | IRFNAME  | IRFNAME         | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      #| Edit duplicate IRF Organization name with Mandatory fields - Without MO                                          | NO     | IRFNAME  | DUPLICATE_IRF   | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          |            |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-      #| Edit duplicate IRF Organization name with Mandatory fields - With MO                                             | YES    | IRFNAME  | DUPLICATE_IRF   | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          |            |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
-
-  Scenario Outline: <Description>
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-    When I click on "IRF" organization tab on organization dashboard
-    When I search with "<IRF_Name> - <Has_MO>" on organization in search box
-    And I verify "<IRF_Name> - <Has_MO>" field in search list on organization page
-    And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
-    And I click on "Edit" button on particular organization
-    And I verify "Edit Inpatient Rehab Facility Organization" header text on edit organization page
-    And I verify Managing Organization radio buttons status on "Edit IRF - <Has_MO>" organization page
-    And I edit "Inpatient Rehab Facility Organization Name" field to "<Edited_IRF_Name>" for organization
-    And I edit "Address 1" field to "<Org_Address1>" for organization
-    And I edit "City" field to "<City>" for organization
-    And I edit <State> field for organization
-    And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
-    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
-    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
-    And I edit "city" field to <Loc_City> for Location "1" for organization
-    And I edit State dropdown field to <Loc_State> for Location "1" for organization
-    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
-    Then I click on "Submit" button on "Edit" organization page
-    And I verify "Please enter an Organization Name" mandatory field validation message on edit organization page
-    And I verify "Please enter an Address" mandatory field validation message on edit organization page
-    And I verify "Please enter a City" mandatory field validation message on edit organization page
-    And I verify "Please select a State" mandatory field validation message on edit organization page
-    And I verify "Please enter a Postal Code" mandatory field validation message on edit organization page
-    And I verify "Please enter a Location Name" mandatory field validation message on edit organization page
-    And I verify "Please enter an Address" mandatory field validation message on edit organization page
-    And I verify "Please enter a City" mandatory field validation message on edit organization page
-    And I verify "Please select a State" mandatory field validation message on edit organization page
-    And I verify "Please enter a Postal Code" mandatory field validation message on edit organization page
-
-    Examples: 
-      | Description                                           | Has_MO | IRF_Name | Edited_IRF_Name | Org_Address1 | City | State | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_City | Loc_State | Loc_Postal_Code |
-      | Edit a IRF Organization With Mandatory Fields Missing | NO     | IRFNAME  |                 |              |      |       |                 |          |              |          |           |                 |
-
-  Scenario Outline: <Description>
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-    When I click on "IRF" organization tab on organization dashboard
-    When I search with "<IRF_Name> - <Has_MO>" on organization in search box
-    And I verify "<IRF_Name> - <Has_MO>" field in search list on organization page
-    And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
-    And I click on "Edit" button on particular organization
-    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
-    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
-    And I edit "address2" field to <Loc_Address2> for Location "1" for organization
-    And I edit Region dropdown field to <Loc_Region> for Location "1" for organization
-    And I edit "city" field to <Loc_City> for Location "1" for organization
-    And I edit Market dropdown field to <Loc_Market> for Region "<Loc_Region>" for Location "1" for organization
-    And I edit State dropdown field to <Loc_State> for Location "1" for organization
-    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
-    Then I click on "Submit" button on "Edit" organization page
-    Then I verify "<Message>" after submitting the "FETCHFROMAPIForIRFNAME - <Has_MO>" organization page
-
-    Examples: 
-      | Description                                                    | Has_MO | IRF_Name | Loc_Name     | Loc_Address1  | Loc_Type | Loc_Region | Loc_Market | Loc_Address2  | Loc_City    | Loc_State  | Loc_Postal_Code | Message                                |
-      | Edit and Save an existing Location details on IRF Organization | NO     | IRFNAME  | Loc_Name new | Loc_Address12 | IRF      | Midwest    | Chicago    | Loc_Address22 | Loc_City11S | California |           10001 | IRF Organization Successfully Updated. |
-
-  Scenario Outline: <Description>
-    Given I am on the login page
-    When I log in as super user
-    Then I should see Tile text Program Management
-    And I click on the "Program Management" tile
-    When I click on Organization link on Program Management page
-    When I click on "IRF" organization tab on organization dashboard
     Then I search with "<IRF_Name> - <Has_MO>" on organization in search box
     And I verify "<IRF_Name> - <Has_MO>" field in search list on organization page
     And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
@@ -348,7 +223,7 @@ Feature: Edit IRF Organization functionality tests
     And I verify "<ValidationMessage>" mandatory field validation message on edit organization page
 
     Examples: 
-      | Description                                                   | Has_MO | IRF_Name | Edited_IRF_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Loc_ID          | ValidationMessage         |
+      | Description                                                   | Has_MO | IRF_Name | Edited_IRF_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Loc_ID    | ValidationMessage         |
       | Edit IRF Organization with duplicate Location id - Without MO | NO     | IRFNAME  | IRFNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | 123456789 | This ID is already in use |
 
   Scenario Outline: <Description>
@@ -380,7 +255,7 @@ Feature: Edit IRF Organization functionality tests
     And I select state <Loc_State> for Location "1" on "create" organization page
     And I enter zip <Loc_Postal_Code> for Location "1" on "create" organization page
     Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create Hospital - <Has_MO>" organization page
+    Then I verify "<Message>" after submitting the "create ACH - <Has_MO>" organization page
     When I click on "IRF" organization tab on organization dashboard
     Then I search with "<IRF_Name> - <Has_MO>" on organization in search box
     And I verify "<IRF_Name> - <Has_MO>" field in search list on organization page
@@ -487,7 +362,7 @@ Feature: Edit IRF Organization functionality tests
     And I verify "Location 1" on "Create SNF" organization page
     And I enter location name <Loc_Name> for Location "1" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "1" on "create" organization page
-    And I enter Location Id <Location_ID> for Location "1" on "create" organization page
+    And I enter Location Id <Location_ID> for Location "1" on "create SNF" organization page
     And I enter address2 <Loc_Address2> for Location "1" on "create" organization page
     And I enter city <Loc_City> for Location "1" on "create" organization page
     And I select state <Loc_State> for Location "1" on "create" organization page
@@ -531,22 +406,147 @@ Feature: Edit IRF Organization functionality tests
     And I verify "<IRF_Name> - <Has_MO>" field in search list on organization page
     And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
     And I click on "Edit" button on particular organization
+    And I verify "Edit Inpatient Rehab Facility Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit IRF - <Has_MO>" organization page
+    And I edit "Inpatient Rehab Facility Organization Name" field to "<Edited_IRF_Name> - <Has_MO>" for organization
+    And I edit "Address 1" field to "<Org_Address1>" for organization
+    And I edit "Short Name" field to "<Short_Name>" for organization
+    And I edit "Address 2" field to "<Org_Address2>" for organization
+    And I edit "City" field to "<City>" for organization
+    And I edit <State> field for organization
+    And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
+    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
+    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
+    And I edit "address2" field to <Loc_Address1> for Location "1" for organization
+    And I edit "city" field to <Loc_City> for Location "1" for organization
+    And I edit State dropdown field to <Loc_State> for Location "1" for organization
+    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    Then I verify "<Message>" after submitting the "FETCHFROMAPIForIRFNAME - <Has_MO>" organization page
+
+    Examples: 
+      | Description                                                                                                      | Has_MO | IRF_Name | Edited_IRF_Name      | Org_Address1                                            | Short_Name                                    | Org_Address2                                            | City                                          | State      | Org_Postal_Code | Loc_Name                                                                    | Loc_Address1                                            | Loc_Type | Loc_Region | Loc_Market | Loc_Address2                                            | Loc_City                                      | Loc_State  | Loc_Postal_Code | Message                                |
+      #| Check Character Limit edge condition for IRF Organization Name field on Edit IRF Organization page - Without MO  | NO     | IRFNAME  | equalsTo75Characters | add1                                                    | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Check Character Limit edge condition for Address1 field on Edit IRF Organization page - Without MO               | NO     | IRFNAME  | IRFNAME              | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrsjklmnopqrs | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Check Character Limit edge condition for Short Name field on Edit IRF Organization page - Without MO             | NO     | IRFNAME  | IRFNAME              | Address1                                                | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrs | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Check Character Limit edge condition for Address2 field on Edit IRF Organization page - Without MO               | NO     | IRFNAME  | IRFNAME              | Address1                                                | Short_Name                                    | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrsjklmnopqrs | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Check Character Limit edge condition for City field on Edit IRF Organization page - Without MO                   | NO     | IRFNAME  | IRFNAME              | Address1                                                | Short_Name                                    | Address2                                                | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrs | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Check Character Limit edge condition for Postal code field on Edit IRF Organization page - Without MO            | NO     | IRFNAME  | IRFNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California | 10000-0000      | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Check Character Limit edge condition for Location Name field on Edit IRF Organization page - Without MO          | NO     | IRFNAME  | IRFNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrszabcdefghijklmnopqrsjklmnopqrs | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Check Character Limit edge condition for Location Address1 field on Edit IRF Organization page - Without MO      | NO     | IRFNAME  | IRFNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrszabcdefghi | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Check Character Limit edge condition for Location Address2 field on Edit IRF Organization page - Without MO      | NO     | IRFNAME  | IRFNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrszabcdefghi | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Check Character Limit edge condition for Location city field on Edit IRF Organization page - Without MO          | NO     | IRFNAME  | IRFNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqsd | California |           10000 | IRF Organization Successfully Updated. |
+      | Check Character Limit edge condition for Location postal code field on Edit IRF Organization page - Without MO   | NO     | IRFNAME  | IRFNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California | 10000-2345      | IRF Organization Successfully Updated. |
+      #| To check the Allowed characters for the available fields in Edit IRF Organization - Without MO                   | NO     | IRFNAME  | AllowedCharatcters   | a!@$%^&*()_+{}:<>?,./;'[]/\\=Address1                   | !@$%^&*()_+{}:<>?,./;'[]/\\=Short_Name        | !@$%^&*()_+{}:<>?,./;'[]/\\=Address2                    | !@$%^&*()_+{}:<>?,./;'[]/\\=City123           | California |           10000 | !@$%^&*()_+{}:<>?,./;'[]/\\=Loc_Name123                                     | !@$%^&*()_+{}:<>?,./;'[]/\\=Loc_Address1                | IRF      | Midwest    | Chicago    | !@$%^&*()_+{}:<>?,./;'[]/\\=Loc_Address2                | !@$%^&*()_+{}:<>?,./;'[]/\\=Loc_City123       | California |           10000 | IRF Organization Successfully Updated. |
+      | Edit IRF Organization with Mandatory fields - Without MO                                                         | NO     | IRFNAME  | IRFNAME              | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          |            |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Edit IRF Organization with Mandatory fields + ShortName - Without MO                                             | NO     | IRFNAME  | IRFNAME              | Address1                                                | Short_Name                                    |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          |            |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Edit IRF Organization with Mandatory fields + Address2 - Without MO                                              | NO     | IRFNAME  | IRFNAME              | Address1                                                |                                               | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          |            |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Edit IRF Organization with Mandatory fields + Location Address2 - Without MO                                     | NO     | IRFNAME  | IRFNAME              | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          |            |            | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Edit IRF Organization with Mandatory fields + Location Region - With MO                                          | YES    | IRFNAME  | IRFNAME              | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          | Midwest    |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Edit IRF Organization with Mandatory fields + ShortName + Location Type - With MO                                | YES    | IRFNAME  | IRFNAME              | Address1                                                | Short_Name                                    |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      |            |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Edit IRF Organization with Mandatory fields + ShortName + Address2 + Location Type - With MO                     | YES    | IRFNAME  | IRFNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      |            |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Edit IRF Organization with Mandatory fields + ShortName + Address2 + Location Region + Location Market - With MO | YES    | IRFNAME  | IRFNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          | Midwest    | Chicago    |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Edit IRF Organization with Mandatory fields + Address2 + Location Type + Location Address2 - Without MO          | NO     | IRFNAME  | IRFNAME              | Address1                                                |                                               | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      |            |            | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Edit IRF Organization with Mandatory fields - With MO                                                            | YES    | IRFNAME  | IRFNAME              | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          |            |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Edit IRF Organization with all the available fields - Without MO                                                 | NO     | IRFNAME  | IRFNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      | Edit IRF Organization with all the available fields - With MO                                                    | YES    | IRFNAME  | IRFNAME              | Address1                                                | Short_Name                                    | Address2                                                | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            | IRF      | Midwest    | Chicago    | Loc_Address2                                            | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      #| Edit duplicate IRF Organization name with Mandatory fields - Without MO                                          | NO     | IRFNAME  | DUPLICATE_IRF        | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          |            |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+      #| Edit duplicate IRF Organization name with Mandatory fields - With MO                                             | YES    | IRFNAME  | DUPLICATE_IRF        | Address1                                                |                                               |                                                         | City                                          | California |           10000 | Loc_Name                                                                    | Loc_Address1                                            |          |            |            |                                                         | Loc_City                                      | California |           10000 | IRF Organization Successfully Updated. |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "IRF" organization tab on organization dashboard
+    When I search with "<IRF_Name> - <Has_MO>" on organization in search box
+    And I verify "<IRF_Name> - <Has_MO>" field in search list on organization page
+    And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I verify "Edit Inpatient Rehab Facility Organization" header text on edit organization page
+    And I verify Managing Organization radio buttons status on "Edit IRF - <Has_MO>" organization page
+    And I edit "Inpatient Rehab Facility Organization Name" field to "<Edited_IRF_Name>" for organization
+    And I edit "Address 1" field to "<Org_Address1>" for organization
+    And I edit "City" field to "<City>" for organization
+    And I edit <State> field for organization
+    And I edit "Postal Code" field to "<Org_Postal_Code>" for organization
+    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
+    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
+    And I edit "city" field to <Loc_City> for Location "1" for organization
+    And I edit State dropdown field to <Loc_State> for Location "1" for organization
+    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    And I verify "Please enter an Organization Name" mandatory field validation message on edit organization page
+    And I verify "Please enter an Address" mandatory field validation message on edit organization page
+    And I verify "Please enter a City" mandatory field validation message on edit organization page
+    And I verify "Please select a State" mandatory field validation message on edit organization page
+    And I verify "Please enter a Postal Code" mandatory field validation message on edit organization page
+    And I verify "Please enter a Location Name" mandatory field validation message on edit organization page
+    And I verify "Please enter an Address" mandatory field validation message on edit organization page
+    And I verify "Please enter a City" mandatory field validation message on edit organization page
+    And I verify "Please select a State" mandatory field validation message on edit organization page
+    And I verify "Please enter a Postal Code" mandatory field validation message on edit organization page
+
+    Examples: 
+      | Description                                           | Has_MO | IRF_Name | Edited_IRF_Name | Org_Address1 | City | State | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_City | Loc_State | Loc_Postal_Code |
+      | Edit a IRF Organization With Mandatory Fields Missing | NO     | IRFNAME  |                 |              |      |       |                 |          |              |          |           |                 |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "IRF" organization tab on organization dashboard
+    When I search with "<IRF_Name> - <Has_MO>" on organization in search box
+    And I verify "<IRF_Name> - <Has_MO>" field in search list on organization page
+    And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
+    And I edit "Location Name" field to <Loc_Name> for Location "1" for organization
+    And I edit "address1" field to <Loc_Address1> for Location "1" for organization
+    And I edit "address2" field to <Loc_Address2> for Location "1" for organization
+    And I edit "city" field to <Loc_City> for Location "1" for organization
+    And I edit State dropdown field to <Loc_State> for Location "1" for organization
+    And I edit "postalCode" field to <Loc_Postal_Code> for Location "1" for organization
+    Then I click on "Submit" button on "Edit" organization page
+    Then I verify "<Message>" after submitting the "edit IRF - <Has_MO>" organization page
+
+    Examples: 
+      | Description                                                    | Has_MO | IRF_Name | Loc_Name     | Loc_Address1  | Loc_Type | Loc_Region | Loc_Market | Loc_Address2  | Loc_City   | Loc_State  | Loc_Postal_Code | Message                                |
+      | Edit and Save an existing Location details on IRF Organization | NO     | IRFNAME  | Loc_Name new | Loc_Address12 | IRF      | Midwest    | Chicago    | Loc_Address22 | Loc_City11 | California |           10001 | IRF Organization Successfully Updated. |
+
+  Scenario Outline: <Description>
+    Given I am on the login page
+    When I log in as super user
+    Then I should see Tile text Program Management
+    And I click on the "Program Management" tile
+    When I click on Organization link on Program Management page
+    When I click on "IRF" organization tab on organization dashboard
+    When I search with "<IRF_Name> - <Has_MO>" on organization in search box
+    And I verify "<IRF_Name> - <Has_MO>" field in search list on organization page
+    And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
+    And I click on "Edit" button on particular organization
     Then I click on "+" button on "IRF" organization page
     And I verify "Location 2" on "Create IRF" organization page
     And I enter location name <Loc_Name> for Location "2" on "create" organization page
     And I enter address1 <Loc_Address1> for Location "2" on "create" organization page
     And I enter address2 <Loc_Address2> for Location "2" on "create" organization page
-    And I select region <Loc_Region> for Location "2" on "create" organization page
     And I enter city <Loc_City> for Location "2" on "create" organization page
-    And I select market <Loc_Market> for region "<Loc_Region>" for Location "2" on "create" organization page
     And I select state <Loc_State> for Location "2" on "create" organization page
     And I enter zip <Loc_Postal_Code> for Location "2" on "create" organization page
     Then I click on "Submit" button on "create" organization page
-    Then I verify "<Message>" after submitting the "create IRF - <Has_MO>" organization page
+    Then I verify "<Message>" after submitting the "FETCHFROMAPIForIRFNAME - <Has_MO>" organization page
+    When I search with "<IRF_Name> - <Has_MO>" on organization in search box
+    And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
+    And I verify "<IRF_Name> - <Has_MO>" name on the header of view profile
+    And I verify "Location" tab present under "IRF" Organization
+    And I click on "Location" tab on view profile of "IRF" Organization
+    And I verify "2" location count on view "IRF" organization page
 
     Examples: 
-      | Description                                                | Has_MO | IRF_Name | Loc_Name   | Loc_Address1 | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                |
-      | Add one more location Location details on IRF Organization | NO     | IRFNAME  | Loc_Name12 | Loc_Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | IRF Organization Successfully Updated. |
+      | Description                                                | Has_MO | IRF_Name | Loc_Name | Loc_Address1      | Loc_Type | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                |
+      | Add one more location Location details on IRF Organization | NO     | IRFNAME  | Loc2     | Location Address1 | IRF      | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | IRF Organization Successfully Updated. |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -583,9 +583,19 @@ Feature: Edit IRF Organization functionality tests
     And I verify "Managing Organization - <Has_MO1>" on view profile of "IRF" Organization
 
     Examples: 
-      | Description                                          | Has_MO | Has_MO1 | IRF_Name | Edited_IRF_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                |
-      | Edit & verify IRF organization with MO to without MO | YES    | NO      | IRFNAME  | IRFNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | IRF Organization Successfully Updated. |
-      | Edit & verify IRF organization without MO to with MO | NO     | YES     | IRFNAME  | IRFNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | IRF Organization Successfully Updated. |
+      | Description                                        | Has_MO | Has_MO1 | Managing_Org | IRF_Name | Edited_IRF_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                |
+      | Edit IRF organization with MO to without MO        | YES    | NO      | MO2          | IRFNAME  | IRFNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           12345 | IRF Organization Successfully Updated. |
+      | Edit verify IRF organization without MO to with MO | NO     | YES     | MO2          | IRFNAME  | IRFNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           15623 | IRF Organization Successfully Updated. |
+
+  Scenario Outline: Create another MO for use in while editing SNF organization
+    Given build json for Managing org "<name>" and "<particpantId>" and "<contactPerson>" and "<contactEmail>" and "<contactPhone>" and "<address1>" and "<address2>" and "<city>" and "<state>" and "<zip>"
+    When create org with this data
+    Then verification of Actual vs expected results <expStatusCode> and "<responseMsg>"
+    When Get by id <id> and <type>
+
+    Examples: 
+      | desc      | particpantId | name   | contactPerson | contactEmail       | contactPhone | address1 | address2 | city | state | zip   | expStatusCode | responseMsg | id | type       |
+      | Create MO |              | MONAME | contactPerson | Sample@yopmail.com | 212-567-8970 | Address1 | Address2 | City | NY    | 10001 |           201 |             |  0 | management |
 
   Scenario Outline: <Description>
     Given I am on the login page
@@ -594,9 +604,9 @@ Feature: Edit IRF Organization functionality tests
     And I click on the "Program Management" tile
     When I click on Organization link on Program Management page
     When I click on "IRF" organization tab on organization dashboard
-    Then I search with "<IRF_Name> - <Has_MO>" on organization in search box
-    And I verify "<IRF_Name> - <Has_MO>" field in search list on organization page
-    And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
+    Then I search with "<IRF_Name> - <Has_MO1>" on organization in search box
+    And I verify "<IRF_Name> - <Has_MO1>" field in search list on organization page
+    And I click "<IRF_Name> - <Has_MO1>" field in search list on organization page
     And I click on "Edit" button on particular organization
     And I verify Managing Organization radio buttons status on "Edit IRF - <Has_MO>" organization page
     And I select "<Has_MO>" radio button for managing organization
@@ -619,11 +629,11 @@ Feature: Edit IRF Organization functionality tests
     When I search with "<IRF_Name> - <Has_MO>" on organization in search box
     And I click "<IRF_Name> - <Has_MO>" field in search list on organization page
     And I verify "<IRF_Name> - <Has_MO>" name on the header of view profile
-    And I verify "Managing Organization - <Has_MO>" on view profile of "IRF" Organization
+    And I verify "Managing Organization2 - <Has_MO>" on view profile of "IRF" Organization
 
     Examples: 
-      | Description                                     | Has_MO | Has_MO1 | Managing_Org | IRF_Name | Edited_IRF_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                |
-      | Edit IRF organization with one MO to another MO | YES    | NO      | MO_Name2     | IRFNAME  | IRFNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           10000 | IRF Organization Successfully Updated. |
+      | Description                              | Has_MO | Has_MO1 | Managing_Org | IRF_Name | Edited_IRF_Name | Org_Address1 | Short_Name | Org_Address2 | City | State      | Org_Postal_Code | Loc_Name | Loc_Address1 | Loc_Type  | Loc_Region | Loc_Market | Loc_Address2 | Loc_City | Loc_State  | Loc_Postal_Code | Message                                |
+      | Changing the MO details on edit IRF page | YES    | NO      | MO_Name2     | IRFNAME  | IRFNAME         | Address1     | Short_Name | Address2     | City | California |           10000 | Loc_Name | Loc_Address1 | Inpatient | Midwest    | Chicago    | Loc_Address2 | Loc_City | California |           45621 | IRF Organization Successfully Updated. |
 
   Scenario Outline: Delete references of the name list
     When delete references of the name list type "<type>"

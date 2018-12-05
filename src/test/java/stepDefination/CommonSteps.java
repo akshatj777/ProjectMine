@@ -54,6 +54,8 @@ public class CommonSteps extends DriverScript {
         	driver.manage().window().maximize();
         }}
     	catch(Exception e){
+    		ProgramPerformance.rowFilters.put("LoginClick","Failed on Login Click");
+    		ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);
     		throw e;
     	}
     }

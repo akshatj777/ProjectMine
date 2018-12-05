@@ -58,7 +58,7 @@ Feature: Edit a Program
 
     Examples: 
       | desc                            | id | type          | orgType      | contractId | endDate      | organizationId | programId | startDate    | participatingBundleId | bundleStartDate | bundleEndDate | priceStartDate | priceEndDate | price | baseLineEndDate | baseLineStatDate | trendFactor | upperBound | lowerBound | expStatusCode | responseMsg |
-      | Create Contract using API Calls |  0 | bundlePayment | hospitalNOMO | []         | [2019-12-19] |                |           | [2017-02-09] |                       | [2017-05-01]    | [2019-07-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
+      | Create Contract using API Calls |  0 | bundlePayment | hospitalNOMO | []         | [2020-12-19] |                |           | [2017-02-09] |                       | [2017-05-01]    | [2019-07-30]  | [2019-03-03]   | [2019-05-26] | [121] | []              | []               | [10]        | [50.89]    | [20.89]    |           201 |             |
 
   Scenario Outline: <Description>
     Given I am on the login page

@@ -62,8 +62,8 @@ Feature: Search SNF organization functionality tests
       | Searching Location index id on SNF Profile Page | NO     | SNFNAME  | LocIndexId   |
       | Searching Location Name on SNF Profile Page     | YES    | SNFNAME  | Loc_Name     |
       | Searching Location Address on SNF Profile Page  | YES    | SNFNAME  | Loc_Address1 |
-      | Searching Location Region on SNF Profile Page   | NO     | SNFNAME  | Midwest      |
-      | Searching Location Market on SNF Profile Page   | NO     | SNFNAME  | Chicago      |
+      #| Searching Location Region on SNF Profile Page   | NO     | SNFNAME  | Midwest      |
+      #| Searching Location Market on SNF Profile Page   | NO     | SNFNAME  | Chicago      |
 
   Scenario Outline: <Description>
     Given I am on the login page

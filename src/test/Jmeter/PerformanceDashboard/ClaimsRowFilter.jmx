@@ -110,14 +110,37 @@ if(!vars.get(&quot;bundle&quot;).contains(&quot;Skip&quot;)){;
 	vars.put(&quot;C_BUNDLE&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;r_region&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;C_R_REGION&quot;,&quot;and rm.region in  ${r_region}&quot;);	
+	if(vars.get(&quot;r_region&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+		vars.put(&quot;C_R_REGION&quot;,&quot;and rm.region is null&quot;);
+	}
+	else if(vars.get(&quot;r_region&quot;).contains(&quot;null&quot;)){
+		String valueRReg = &quot;and ( rm.region is null&quot;;
+		String valueRReg1 = vars.get(&quot;r_region&quot;);
+		valueRReg1 = valueRReg1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
+		valueRReg1 = &quot; or rm.region in &quot;+valueRReg1+&quot;)&quot;;
+		vars.put(&quot;C_R_REGION&quot;,valueRReg+valueRReg1);
+		} else {
+		vars.put(&quot;C_R_REGION&quot;,&quot;and rm.region in ${r_region}&quot;);
+	}	
 } else {
 	vars.put(&quot;C_R_REGION&quot;,&quot;&quot;);
 }
+
 if(!vars.get(&quot;r_market&quot;).contains(&quot;Skip&quot;)){
-	vars.put(&quot;C_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);		
-} else{
-	vars.put(&quot;C_R_MARKET&quot;,&quot;&quot;);
+	if(vars.get(&quot;r_market&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
+		vars.put(&quot;C_R_MARKET&quot;,&quot;and rm.market is null&quot;);
+	}
+	else if(vars.get(&quot;r_market&quot;).contains(&quot;null&quot;)){
+		String valueRMar = &quot;and ( rm.market is null&quot;;
+		String valueRMar1 = vars.get(&quot;r_market&quot;);
+		valueRMar1 = valueRMar1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
+		valueRMar1 = &quot; or rm.market in &quot;+valueRMar1+&quot;)&quot;;
+		vars.put(&quot;C_R_MARKET&quot;,valueRMar+valueRMar1);
+		} else {
+		vars.put(&quot;C_R_MARKET&quot;,&quot;and rm.market in ${r_market}&quot;);
+	}
+} else {
+vars.put(&quot;C_R_MARKET&quot;,&quot;&quot;);
 }
 if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
 	if(vars.get(&quot;region&quot;).equals(&quot;(&apos;null&apos;)&quot;)){
@@ -126,7 +149,7 @@ if(!vars.get(&quot;region&quot;).contains(&quot;Skip&quot;)){
 	else if(vars.get(&quot;region&quot;).contains(&quot;null&quot;)){
 		String valueReg = &quot;and ( prm.region is null&quot;;
 		String valueReg1 = vars.get(&quot;region&quot;);
-		valueReg1 = valueReg1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+		valueReg1 = valueReg1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
 		valueReg1 = &quot; or prm.region in &quot;+valueReg1+&quot;)&quot;;
 		vars.put(&quot;C_Query_REGION&quot;,valueReg+valueReg1);
 		} else {
@@ -143,7 +166,7 @@ if(!vars.get(&quot;market&quot;).contains(&quot;Skip&quot;)){
 	else if(vars.get(&quot;market&quot;).contains(&quot;null&quot;)){
 		String valueMar = &quot;and ( prm.market is null&quot;;
 		String valueMar1 = vars.get(&quot;market&quot;);
-		valueMar1 = valueMar1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+		valueMar1 = valueMar1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
 		valueMar1 = &quot; or prm.market in &quot;+valueMar1+&quot;)&quot;;
 		vars.put(&quot;C_Query_MARKET&quot;,valueMar+valueMar1);
 		} else {
@@ -240,22 +263,29 @@ for(int i=0;i&lt;code5.length;i++){
   
            
  if(i==n){
+ 	 log.info(&quot;a11 new is&quot;+a11);
  	for(int t=0;t&lt;a11.size();t++){
-       int aa=t%2;
-       log.info(&quot;aa is&quot;+aa);
-       if(aa==0){
-        f.add(a11.get(t));
-        
-       }	}
+ 		 f.add(a11.get(t));
+ 	}
+//       int aa=t%2;
+//       log.info(&quot;aa is&quot;+aa);
+//       if(aa==0){
+//        f.add(a11.get(t));
+//        
+//        
+//       }	}
     log.info(&quot;f is&quot;+f);
 
     for(int t1=0;t1&lt;a22.size();t1++){
-       int aa1=t1%2;
-       log.info(&quot;aa1 is&quot;+aa1);
-       if(aa1==0){
-        g.add(a22.get(t1));
-        
-       }	}
+    	g.add(a22.get(t1));
+    }
+//       int aa1=t1%2;
+//       log.info(&quot;aa1 is&quot;+aa1);
+//       if(aa1==0){
+//        g.add(a22.get(t1));
+//        
+//       }	}
+       
     log.info(&quot;a44 is&quot;+g);
      String ww=f.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;);
      String ww1=g.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;).replace(&quot;(&quot;,&quot;&quot;).replace(&quot;)&quot;,&quot;&quot;);
@@ -280,14 +310,14 @@ for(int i=0;i&lt;code5.length;i++){
 
      if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.contains(&quot;&apos;470&apos;&quot;)){
      	if(ww.isEmpty()){
-     	  neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
+     	  neee=&quot;AND ((drg.drgCode in (&quot;+ww4+&quot;) and  drf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
+            String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;)))&quot;;
             neee=neee+neee1;
             log.info(&quot;Nee is&quot;+neee);
      	}else{
-     neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
+     neee=&quot;AND ((drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
       String neee1=&quot;OR (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;
-      String neee2=&quot;OR (drg.drgCode in (&quot;+ww+&quot;))&quot;;
+      String neee2=&quot;OR (drg.drgCode in (&quot;+ww+&quot;)))&quot;;
       neee=neee+neee1+neee2;
       log.info(&quot;Nee is&quot;+neee);}
      } else if(ww4.contains(&quot;&apos;469&apos;&quot;) &amp;&amp; ww2.isEmpty() &amp;&amp; ww.isEmpty()){
@@ -307,16 +337,16 @@ for(int i=0;i&lt;code5.length;i++){
      	if(ww.isEmpty()){
      		
      	}else{
-     	  neee=&quot;AND (drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;))&quot;;
+     	  neee=&quot;AND ((drg.drgCode in (&quot;+ww4+&quot;) and  drgf.drgName in (&quot;+ww5+&quot;) and drg.drgsubcode in (&quot;+ww6+&quot;))&quot;;	
+            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;)))&quot;;
            neee=neee+neee1;
           log.info(&quot;Nee is&quot;+neee);}
      }else if(ww4.isEmpty() &amp;&amp; ww2.contains(&quot;470&quot;)){
      	if(ww.isEmpty()){
      		
      	}else{
-     	  neee=&quot;AND (drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;	
-            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;))&quot;;
+     	  neee=&quot;AND ((drg.drgCode in (&quot;+ww2+&quot;) and  drgf.drgName in (&quot;+ww3+&quot;) and drg.drgsubcode in (&quot;+ww7+&quot;))&quot;;	
+            String neee1=&quot;OR (drg.drgCode in (&quot;+ww+&quot;)))&quot;;
            neee=neee+neee1;
           log.info(&quot;Nee is&quot;+neee);
      }} }
@@ -333,7 +363,7 @@ if(!vars.get(&quot;npi&quot;).contains(&quot;Skip&quot;)){
  else if(vars.get(&quot;npi&quot;).contains(&quot;null&quot;)){
   String valueNPI = &quot;and ( p.npi is null&quot;;
   String valueNPI1 = vars.get(&quot;npi&quot;);
-  valueNPI1 = valueNPI1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;);
+  valueNPI1 = valueNPI1.replaceAll(&quot;&apos;null&apos;,&quot;,&quot;&quot;).replaceAll(&quot;,&apos;null&apos;&quot;,&quot;&quot;);
   valueNPI1 = &quot; or p.npi in &quot;+valueNPI1+&quot;)&quot;;
   vars.put(&quot;C_PHY_NPI&quot;,valueNPI+valueNPI1);
   } else {
@@ -1116,7 +1146,7 @@ f= new FileOutputStream(path + separator+&quot;ClaimsRowFilterOutput.txt&quot;,t
 	p = new PrintStream(f);
 
 String itr = vars.get(&quot;IterationValue&quot;);
- if(itr.isEmpty()){
+ if(itr==null){
   p.println(&quot;Error in creating input data to execute query&quot;);
  }else {
 
@@ -1144,6 +1174,12 @@ String itr = vars.get(&quot;IterationValue&quot;);
           </BeanShellPostProcessor>
           <hashTree/>
         </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+          <stringProp name="IfController.condition">${__BeanShell(vars.remove(&quot;market&quot;); &quot;false&quot;;)}</stringProp>
+          <boolProp name="IfController.evaluateAll">true</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree/>
       </hashTree>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>

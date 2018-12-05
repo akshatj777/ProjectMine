@@ -13,7 +13,7 @@ Feature: Negative cases from bulk upload
     Then I enter user data for all application access
     Then I click on submit button on bulk user upload page
     And I wait for 3000 milli seconds
-    Then I verify "19 users added" message
+    Then I verify "22 users added" message
 
   Scenario Outline: Scenario to Create user with Invalid data and validate error message-<Description>
     Given I am on the login page
