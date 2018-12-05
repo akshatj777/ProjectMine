@@ -617,7 +617,7 @@ public class ProgramPerformance extends BaseClass{
 				 while ((names = br.readLine())!= null) {           
 					 delay();
 				     col.add(names);
-				     System.out.println("Vivek Col"+col.toString());
+				     System.out.println("Read line Col"+col.toString());
 //					 StringTokenizer st = new StringTokenizer(names, "*");     
 					
 					
@@ -2392,9 +2392,7 @@ public class ProgramPerformance extends BaseClass{
 		 }else {
 			 writer.print(arrayListTexts.toString().replace("]", "").replace("[", "").trim()+"|");
 		 }
-//		 System.out.println("Values in arrayList Before Clear"+arrayListTexts.toString());
-//		 arrayListTexts.clear();
-//		 System.out.println("Values in arrayList After Clear"+arrayListTexts.toString());
+		 arrayListTexts.clear();
 	 }
 	 
 	 public void writeDataToLogFile(String frontEndFilterValues) throws FileNotFoundException {
@@ -2612,7 +2610,7 @@ public class ProgramPerformance extends BaseClass{
 			 String var[] =st.nextToken().trim().split("=");
 			 outputText.put(var[0], var[1]);
 		 }
-		 System.out.println("^^^^^^^^^^"+outputText.toString());
+		 System.out.println("Fetched from col value"+outputText.toString());
 		}
 	
 	public void iGetAndFillDaysInTimeFilter(String startDay, String endDay) throws FileNotFoundException {

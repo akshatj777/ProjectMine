@@ -36,7 +36,7 @@ import stepDefination.Hooks.*;
         
         features = { "src/test/Features/" },
         monochrome = true,
-        tags = {"@PORLS"}
+        tags = {"@CARL"}
 )
 public class TestRunner {
 
