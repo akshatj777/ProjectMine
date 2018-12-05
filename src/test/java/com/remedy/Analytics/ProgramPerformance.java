@@ -2392,8 +2392,9 @@ public class ProgramPerformance extends BaseClass{
 		 }else {
 			 writer.print(arrayListTexts.toString().replace("]", "").replace("[", "").trim()+"|");
 		 }
+//		 System.out.println("Values in arrayList Before Clear"+arrayListTexts.toString());
 		 arrayListTexts.clear();
-	 }
+}
 	 
 	 public void writeDataToLogFile(String frontEndFilterValues) throws FileNotFoundException {
 		 if(frontEndFilterValues.contains("Row")) {

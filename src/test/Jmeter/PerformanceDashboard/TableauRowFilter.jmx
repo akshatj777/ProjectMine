@@ -226,11 +226,13 @@ ArrayList g= new ArrayList();
 	String code4=vars.get(&quot;drgName&quot;);
 	log.info(&quot;Name Code is&quot;+code4);
 	String[] code5=code4.split(&quot;, &apos;&quot;);
+	int n=code1.length-1;
 for(int i=0;i&lt;code5.length;i++){
 	log.info(&quot;drgName&quot;+i+code5[i]);
 }
 	
-	int n=code1.length-1;
+	
+	log.info(&quot;n is&quot;+n);
 	
 	for(int i=0;i&lt;code1.length;i++){
        if(!code1[i].trim().equals(&quot;&apos;469&apos;&quot;) ){
@@ -245,7 +247,11 @@ for(int i=0;i&lt;code5.length;i++){
       	a1.add(newcode1);	
       	a2.add(newname1);	
       	a3.add(newsubcode1); 
-      	continue;
+      	 log.info(&quot;DRG 470 a1&quot;+a1);
+      	log.info(&quot;DRG 470 a2&quot;+a2);
+      	log.info(&quot;DRG 470 a3&quot;+a3);
+      	
+      	
        	 	}else if(!code1[i].trim().equals(&quot;&apos;470&apos;&quot;)){
        	String newcode=code1[i].trim();
        	String newname;
@@ -254,7 +260,9 @@ for(int i=0;i&lt;code5.length;i++){
        	}else{
            newname=&quot;&apos;&quot;+code5[i];}
            a11.add(newcode);	
-           a22.add(newname);}	}
+           a22.add(newname);
+            log.info(&quot;NOT DRG 470 &amp; 469 a11&quot;+a11);
+      	log.info(&quot;NOT DRG 470 &amp; 469 a22&quot;+a22);}	}
 
           if(!code1[i].trim().equals(&quot;&apos;470&apos;&quot;) ){
           	if(code1[i].trim().equals(&quot;&apos;469&apos;&quot;)){
@@ -268,8 +276,11 @@ for(int i=0;i&lt;code5.length;i++){
       	al1.add(newcode2);
       	al2.add(newname2);	
           al3.add(newsubcode2); 
-          continue;
-       	 }else if(code1[i].trim().equals(&quot;&apos;469&apos;&quot;)){
+            	log.info(&quot;DRG 469 al1&quot;+al1);
+      	log.info(&quot;DRG 469 al2&quot;+al2);
+      	log.info(&quot;DRG 469 al3&quot;+al3);
+          
+       	 }else if(!code1[i].trim().equals(&quot;&apos;469&apos;&quot;)){
        	String newcode=code1[i];
         	String newname;
         if(i==0){
@@ -277,34 +288,39 @@ for(int i=0;i&lt;code5.length;i++){
        	}else{
            newname=&quot;&apos;&quot;+code5[i];}
            a11.add(newcode);	
-           a22.add(newname);}	}
+           a22.add(newname);
+             log.info(&quot;NOT DRG 470 &amp; 469 a11&quot;+a11);
+      	log.info(&quot;NOT DRG 470 &amp; 469 a22&quot;+a22);}	}
 
 
   
            
  if(i==n){
  	 log.info(&quot;a11 new is&quot;+a11);
+ 	
+      	
+
+    
+      	
  	for(int t=0;t&lt;a11.size();t++){
- 		 f.add(a11.get(t));
- 	}
-//       int aa=t%2;
-//       log.info(&quot;aa is&quot;+aa);
-//       if(aa==0){
-//        f.add(a11.get(t));
-//        
-//        
-//       }	}
+ 		
+       int aa=t%2;
+       log.info(&quot;aa is&quot;+aa);
+       if(aa==0){
+        f.add(a11.get(t));
+       }
+        
+       }
     log.info(&quot;f is&quot;+f);
 
     for(int t1=0;t1&lt;a22.size();t1++){
-    	g.add(a22.get(t1));
-    }
-//       int aa1=t1%2;
-//       log.info(&quot;aa1 is&quot;+aa1);
-//       if(aa1==0){
-//        g.add(a22.get(t1));
-//        
-//       }	}
+    	
+       int aa1=t1%2;
+       log.info(&quot;aa1 is&quot;+aa1);
+       if(aa1==0){
+        g.add(a22.get(t1));
+        
+       }	}
        
     log.info(&quot;a44 is&quot;+g);
      String ww=f.toString().replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;);
@@ -375,6 +391,7 @@ for(int i=0;i&lt;code5.length;i++){
 	}else{
 	    vars.put(&quot;C_DRGCODE&quot;,&quot;&quot;);	
 	}
+
 
 if(!vars.get(&quot;drgCode&quot;).contains(&quot;Skip&quot;)){
 String neee;
