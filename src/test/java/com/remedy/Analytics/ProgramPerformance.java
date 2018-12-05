@@ -2393,7 +2393,7 @@ public class ProgramPerformance extends BaseClass{
 			 writer.print(arrayListTexts.toString().replace("]", "").replace("[", "").trim()+"|");
 		 }
 //		 System.out.println("Values in arrayList Before Clear"+arrayListTexts.toString());
-//		 arrayListTexts.clear();
+		 arrayListTexts.clear();
 //		 System.out.println("Values in arrayList After Clear"+arrayListTexts.toString());
 	 }
 	 
