@@ -878,6 +878,8 @@ public class ReportHomePage extends BaseClass {
     	try{
     	iWillWaitToSee(By.xpath("//div[text()='"+tile+"']"));
     	}catch(Exception e){
+    		 ProgramPerformance.rowFilters.put("WaitToSeeTile","Failed on WaitToSeeTile");
+	    	 ProgramPerformance.mapOfHmFiltersValue.put(ProgramPerformance.rowFilterIndex,ProgramPerformance.rowFilters);
     		throw e;
 	     }
     }
